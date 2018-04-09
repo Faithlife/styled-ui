@@ -1,3 +1,5 @@
 cache: yarn
 language: node_js
 script: yarn lint
+node_js:
+  - "8"
