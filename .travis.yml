@@ -1,0 +1,3 @@
+cache: yarn
+language: node_js
+script: yarn lint
