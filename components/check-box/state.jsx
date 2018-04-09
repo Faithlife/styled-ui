@@ -5,18 +5,18 @@ export default class State extends React.Component {
 	static propTypes = {
 		render: PropTypes.func.isRequired,
 		initialState: PropTypes.object,
-	}
+	};
 
 	state = {
 		childProps: this.props.initialState,
-	}
+	};
 
-	updateState = (state) => {
+	updateState = state => {
 		this.setState(({ childProps }) => ({
 			childProps: {
 				...childProps,
 				...state,
-			}
+			},
 		}));
 	};
 
