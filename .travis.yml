@@ -2,6 +2,6 @@ cache: yarn
 language: node_js
 script:
   - yarn lint
-  - yarn deploy-storybook
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then yarn deploy-storybook; fi'
 node_js:
   - "8"
