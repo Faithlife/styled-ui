@@ -32,6 +32,7 @@
 			"disableFix": true
 		}],
 		"order/properties-order": [[
+			"composes",
 			"display",
 			"visibility",
 			"content",
@@ -157,7 +158,7 @@
 		], {"unspecified": "bottomAlphabetical"}],
 		"property-no-vendor-prefix": true,
 		"property-no-unknown": [true, {
-			"ignoreProperties": ["appearance"]
+			"ignoreProperties": ["appearance", "composes", "compose-with"]
 		}],
 		"rule-empty-line-before": [ "always", {
 			"except": ["first-nested"],
