@@ -1,11 +1,70 @@
+// Ported from https://git/Logos/Faithlife/blob/4947324240126070a754c95c160e61382b9e887b/src/Faithlife.Web/Content/Styles/common/common.mixins.less#L16
+@shade0: #ffffff;
+@dark-blue: #0f78c0;
+@blue: #2f8fd1;
+@light-blue: #81878b;
+
+@primary-default: @blue;
+@primary-hover: @dark-blue;
+@primary-active: @light-blue;
+
 :local {
 	.demoButton {
-		margin: 8px;
-		background: #62BB46;
-		font-family: Helvetica;
+		.button-primary();
+		padding: 4px 8px;
 	}
 
 	.clicked {
-		background: white;
+		box-shadow: 0 4px 10px 0 #aaa;
+	}
+}
+
+.button-mixin() {
+	box-shadow: none;
+	border: none;
+	border-radius: 2px;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+
+	&:focus {
+		outline: none;
+	}
+}
+
+.button-primary() {
+	.button-mixin();
+	border: 1px solid @primary-default;
+	background-color: @primary-default;
+	color: @shade0;
+
+	&:hover {
+		border-color: @primary-hover;
+		background-color: @primary-hover;
+		color: @shade0;
+	}
+
+	&:active {
+		border-color: @primary-active;
+		background-color: @primary-active;
+		color: @shade0;
+	}
+}
+
+.button-secondary() {
+	.button-mixin();
+	border: 1px solid @primary-default;
+	background: none;
+	color: @primary-default;
+	cursor: pointer;
+
+	&:hover {
+		border-color: @primary-hover;
+		color: @primary-hover;
+	}
+
+	&:active {
+		border-color: @primary-active;
+		color: @primary-active;
 	}
 }
