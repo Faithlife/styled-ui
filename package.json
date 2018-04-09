@@ -1,0 +1,50 @@
+{
+  "name": "storybook-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:dustinsoftware/storybook-demo.git",
+  "author": "Dustin Masters <dustin.masters@faithlife.com>",
+  "license": "MIT",
+  "scripts": {
+    "eslint": "eslint ./components --ext .js --ext .jsx",
+    "lint": "npm run eslint && npm run stylelint && npm run prettier-check",
+    "prettier-check": "prettier --list-different \"./components/**/*.{js,jsx}\"",
+    "stylelint": "stylelint ./components/**/*.less",
+    "storybook": "start-storybook -p 9001 -c .storybook"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "dependencies": {
+    "@storybook/addon-actions": "^3.4.0",
+    "@storybook/react": "^3.4.0",
+    "autoprefixer": "^8.2.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-runtime": "^6.26.0",
+    "classnames": "^2.2.5",
+    "eslint": "^4.19.1",
+    "eslint-config-faithlife": "^3.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-import-resolver-webpack": "^0.9.0",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.7.0",
+    "less": "^3.0.1",
+    "less-loader": "^4.1.0",
+    "postcss-loader": "^2.1.3",
+    "prettier": "^1.11.1",
+    "prop-types": "^15.6.1",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "style-loader": "^0.20.3",
+    "stylelint": "^9.2.0",
+    "stylelint-order": "^0.8.1",
+    "webpack": "^4.5.0"
+  }
+}

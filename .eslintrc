@@ -1,0 +1,17 @@
+{
+	"extends": [
+		"faithlife",
+		"plugin:import/errors",
+		"prettier"
+	],
+	"plugins": [
+		"import"
+	],
+	"settings": {
+		"import/ignore": [
+			"node_modules",
+			".(less|css)$"
+		],
+		"import/resolver": "webpack"
+	}
+}
