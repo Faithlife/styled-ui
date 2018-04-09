@@ -1,6 +1,8 @@
 # Engagement Products UI
 
-UI components designed to be shared between multiple products. This repo focuses on component styles and states, but does not prescribe how your application should consume these components
+UI components designed to be shared between multiple products. This repo focuses on component styles and states, but does not prescribe how your application should consume these components.
+
+### [View Demos Here](https://faithlife.github.io/engagement-products-ui/)
 
 ### Why?
 This project addresses problems introduced by creating components from scratch. Often a spec gets ported multiple times, either from Zeplin or forked from an existing control. Each time a port happens, inconcistencies are introduced. It's also harder to introduce animations and shadows after the prototype has been built. By using reference components instead,  there's a much higher chance the final products will the contain all margins, animations, and hover states the design calls for.
