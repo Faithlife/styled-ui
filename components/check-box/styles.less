@@ -6,19 +6,19 @@
 @input-focused-shadow-color: #d0e6f6;
 
 :local {
-	.buttonReset {
+	.button-reset {
 		border: none;
 	}
 
 	.container {
 		display: flex;
-		background: transparent;
 		align-items: center;
-		min-height: 16px;
+		position: relative;
+		padding: 0;
 		height: 16px;
 		min-width: 0;
-		padding: 0;
-		position: relative;
+		min-height: 16px;
+		background: transparent;
 
 		&:hover, &:focus {
 			.checkbox {
@@ -36,30 +36,31 @@
 	}
 
 	.checkbox {
-		width: 14px;
-		height: 14px;
 		position: absolute;
-		background: transparent;
 		border: solid 1px @input-dark-border-color;
 		border-radius: 3px;
+		width: 14px;
+		height: 14px;
+		background: transparent;
 	}
 
 	.round-checkbox {
 		composes: checkbox;
+
+		border-radius: 50%;
+		padding: 0;
 		width: 16px;
 		height: 16px;
-		border-radius: 50%;
 		min-width: 0;
-		padding: 0;
 	}
 
 	.indicator {
-		width: 14px;
-		height: 14px;	
-		cursor: pointer;
 		position: absolute;
 		top: 0;
 		left: 0;
+		width: 14px;
+		height: 14px;
+		cursor: pointer;
 
 		&:after {
 			content: '';
@@ -71,22 +72,22 @@
 		}
 	}
 
-	.checkIndicator {
+	.check-indicator {
 		composes: indicator;
 
 		&:after {
-			width: 7px;
-			height: 3px;
+			transform: rotate(-45deg);
 			border: 2px solid @input-checked-color;
 			border-top: none;
 			border-right: none;
+			width: 7px;
+			height: 3px;
 			background: transparent;
-			transform: rotate(-45deg);
 		}
 	}
 
-	.checkedIndicator {
-		composes: checkIndicator;
+	.checked-indicator {
+		composes: check-indicator;
 
 		&:after {
 			opacity: 1;
