@@ -1,5 +1,7 @@
 cache: yarn
 language: node_js
-script: yarn lint
+script:
+  - yarn lint
+  - yarn deploy-storybook
 node_js:
   - "8"

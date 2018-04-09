@@ -6,6 +6,8 @@
   "author": "Dustin Masters <dustin.masters@faithlife.com>",
   "license": "MIT",
   "scripts": {
+    "build-storybook": "build-storybook",
+    "deploy-storybook": "storybook-to-ghpages --ci",
     "eslint": "eslint ./components --ext .js --ext .jsx",
     "lint": "npm run eslint && npm run stylelint && npm run prettier-check",
     "prettier-check": "prettier --list-different \"./components/**/*.{js,jsx}\"",
@@ -19,6 +21,7 @@
   "dependencies": {
     "@storybook/addon-actions": "^3.4.0",
     "@storybook/react": "^3.4.0",
+    "@storybook/storybook-deployer": "^2.3.0",
     "autoprefixer": "^8.2.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",
