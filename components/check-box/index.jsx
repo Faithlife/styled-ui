@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import State from './state.jsx';
 import styles from './styles.less';
 
 const Checkbox = ({ onChange, title, isChecked, labelClassName, className }) => (
 	<button
-		className={`${styles.container} ${styles.buttonReset} ${className}`}
+		className={classNames(styles.container, styles.buttonReset, className)}
 		onClick={() => onChange(!isChecked)}
 	>
 		<div className={styles.checkbox}>
 			<div className={`${isChecked ? styles.checkedIndicator : styles.checkIndicator}`} />
 		</div>
-		{title && <div className={`${styles.label} ${labelClassName}`}>{title}</div>}
+		{title && <div className={classNames(styles.label, labelClassName)}>{title}</div>}
 	</button>
 );
 
