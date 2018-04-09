@@ -1,0 +1,95 @@
+@input-focused-border-color: #1E91D6;
+@input-dark-border-color: #95908f;
+@input-border-color: #F4F4F4;
+@input-dark-border-color: #95908f;
+@input-checked-color: @input-focused-border-color;
+@input-focused-shadow-color: #d0e6f6;
+
+:local {
+	.buttonReset {
+		border: none;
+	}
+
+	.container {
+		display: flex;
+		background: transparent;
+		align-items: center;
+		min-height: 16px;
+		height: 16px;
+		min-width: 0;
+		padding: 0;
+		position: relative;
+
+		&:hover, &:focus {
+			.checkbox {
+				border: solid 1px @input-focused-border-color;
+			}
+		}
+	}
+
+	.label {
+		margin-left: 22px;
+	}
+
+	.disabled {
+		cursor: default;
+	}
+
+	.checkbox {
+		width: 14px;
+		height: 14px;
+		position: absolute;
+		background: transparent;
+		border: solid 1px @input-dark-border-color;
+		border-radius: 3px;
+	}
+
+	.round-checkbox {
+		composes: checkbox;
+		width: 16px;
+		height: 16px;
+		border-radius: 50%;
+		min-width: 0;
+		padding: 0;
+	}
+
+	.indicator {
+		width: 14px;
+		height: 14px;	
+		cursor: pointer;
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		&:after {
+			content: '';
+			position: absolute;
+			top: 3px;
+			left: 3px;
+			background: @input-checked-color;
+			opacity: 0;
+		}
+	}
+
+	.checkIndicator {
+		composes: indicator;
+
+		&:after {
+			width: 7px;
+			height: 3px;
+			border: 2px solid @input-checked-color;
+			border-top: none;
+			border-right: none;
+			background: transparent;
+			transform: rotate(-45deg);
+		}
+	}
+
+	.checkedIndicator {
+		composes: checkIndicator;
+
+		&:after {
+			opacity: 1;
+		}
+	}
+}
