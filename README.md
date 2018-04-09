@@ -1,5 +1,7 @@
 # Engagement Products UI
 
+[![Build Status](https://travis-ci.org/Faithlife/engagement-products-ui.svg?branch=master)](https://travis-ci.org/Faithlife/engagement-products-ui)
+
 UI components designed to be shared between multiple products. This repo focuses on component styles and states, but does not prescribe how your application should consume these components.
 
 ### [View Demos Here](https://faithlife.github.io/engagement-products-ui/)
