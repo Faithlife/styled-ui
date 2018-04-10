@@ -4,13 +4,14 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Button from '../components/demo-button/container.jsx';
-import secondary from '../components/demo-button/secondary-theme.less';
-import Checkbox from '../components/check-box/index.jsx';
+import secondaryButtonTheme from '../components/demo-button/secondary-theme.less';
+import Checkbox from '../components/check-box/container.jsx';
+import secondaryCheckboxTheme from '../components/check-box/secondary-theme.less';
 
 storiesOf('Button', module)
 	.add('primary with text', () => <Button onClick={action('clicked')}>Toggle shadow</Button>)
 	.add('secondary with text', () => (
-		<Button onClick={action('clicked')} theme={secondary}>
+		<Button onClick={action('clicked')} theme={secondaryButtonTheme}>
 			Toggle shadow
 		</Button>
 	))
@@ -22,4 +23,6 @@ storiesOf('Button', module)
 		</Button>
 	));
 
-storiesOf('Checkbox', module).add('with text', () => <Checkbox />);
+storiesOf('Checkbox', module)
+	.add('primary with text', () => <Checkbox />)
+	.add('secondary with text', () => <Checkbox theme={secondaryCheckboxTheme} />);
