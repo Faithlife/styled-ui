@@ -7,7 +7,7 @@ module.exports = {
 				test: /\.less$/,
 				use: [
 					'style-loader',
-					'css-loader?modules&camelCase=dashes',
+					'css-loader',
 					'less-loader'
 				],
 				include: path.resolve(__dirname, '../'),
