@@ -4,30 +4,9 @@
 @primary-active: #81878b;
 
 .demoButton {
-	.button-primary();
-	padding: 4px 8px;
-}
-
-.clicked {
-	box-shadow: 0 4px 10px 0 #aaa;
-}
-
-.button-mixin() {
-	box-shadow: none;
-	border: none;
-	border-radius: 2px;
-	margin: 0;
-	padding: 0;
-	cursor: pointer;
-
-	&:focus {
-		outline: none;
-	}
-}
-
-.button-primary() {
 	.button-mixin();
 	border: 1px solid @primary-default;
+	padding: 4px 8px;
 	background-color: @primary-default;
 	color: #fff;
 
@@ -44,20 +23,19 @@
 	}
 }
 
-.button-secondary() {
-	.button-mixin();
-	border: 1px solid @primary-default;
-	background: none;
-	color: @primary-default;
+.clicked {
+	box-shadow: 0 4px 10px 0 #aaa;
+}
+
+.button-mixin() {
+	box-shadow: none;
+	border: none;
+	border-radius: 2px;
+	margin: 0;
+	padding: 0;
 	cursor: pointer;
 
-	&:hover {
-		border-color: @primary-hover;
-		color: @primary-hover;
-	}
-
-	&:active {
-		border-color: @primary-active;
-		color: @primary-active;
+	&:focus {
+		outline: none;
 	}
 }
