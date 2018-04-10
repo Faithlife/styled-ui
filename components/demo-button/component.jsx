@@ -1,22 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.less';
-import classNames from 'classnames';
-
-function getStyles(baseTheme, overridenTheme, propertyNames) {
-	return classNames(
-		propertyNames.reduce(
-			(accumulator, currentValue) =>
-				accumulator.concat([baseTheme[currentValue], (overridenTheme || {})[currentValue]]),
-			[],
-		),
-	);
-}
+import { themeClassNames } from '../utils';
 
 export default function DemoComponent(props) {
 	return (
 		<button
-			className={getStyles(styles, props.theme, ['demoButton', props.clicked && 'clicked'])}
+			className={themeClassNames(styles, props.theme, ['demoButton', props.clicked && 'clicked'])}
 			onClick={() => props.onChange({ clicked: !props.clicked })}
 		>
 			{props.children}
