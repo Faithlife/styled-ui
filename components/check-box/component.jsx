@@ -13,11 +13,7 @@ export default function Checkbox({ onChange, title, isChecked, theme }) {
 			onClick={() => onChange(!isChecked)}
 		>
 			<div className={getClassName('checkbox')}>
-				<div
-					className={getClassName(
-						isChecked ? 'checkedIndicator' : 'checkIndicator',
-					)}
-				/>
+				<div className={getClassName(isChecked ? 'checkedIndicator' : 'checkIndicator')} />
 			</div>
 			{title && <div className={getClassName('label')}>{title}</div>}
 		</button>

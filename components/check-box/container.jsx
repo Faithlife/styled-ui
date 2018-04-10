@@ -46,4 +46,4 @@ export default function Container({ theme }) {
 
 Container.propTypes = {
 	theme: PropTypes.object,
-}
+};
