@@ -1,12 +1,7 @@
 // Ported from https://git/Logos/Faithlife/blob/4947324240126070a754c95c160e61382b9e887b/src/Faithlife.Web/Content/Styles/common/common.mixins.less#L16
-@shade0: #ffffff;
-@dark-blue: #0f78c0;
-@blue: #2f8fd1;
-@light-blue: #81878b;
-
-@primary-default: @blue;
-@primary-hover: @dark-blue;
-@primary-active: @light-blue;
+@primary-default: #2f8fd1;
+@primary-hover: #0f78c0;
+@primary-active: #81878b;
 
 .demoButton {
 	.button-primary();
@@ -34,18 +29,18 @@
 	.button-mixin();
 	border: 1px solid @primary-default;
 	background-color: @primary-default;
-	color: @shade0;
+	color: #fff;
 
 	&:hover {
 		border-color: @primary-hover;
 		background-color: @primary-hover;
-		color: @shade0;
+		color: #fff;
 	}
 
 	&:active {
 		border-color: @primary-active;
 		background-color: @primary-active;
-		color: @shade0;
+		color: #fff;
 	}
 }
 

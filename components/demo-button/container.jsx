@@ -6,6 +6,7 @@ export default class DemoContainer extends Component {
 	propTypes = {
 		children: PropTypes.node.isRequired,
 		onClick: PropTypes.func,
+		theme: PropTypes.object,
 	};
 
 	state = {
@@ -23,7 +24,7 @@ export default class DemoContainer extends Component {
 
 	render() {
 		return (
-			<DemoComponent clicked={this.state.clicked} onChange={this.onChange}>
+			<DemoComponent clicked={this.state.clicked} onChange={this.onChange} theme={this.props.theme}>
 				{this.props.children}
 			</DemoComponent>
 		);
