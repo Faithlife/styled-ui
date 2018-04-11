@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import DemoComponent from './component.jsx';
 
 export default class DemoContainer extends Component {
-	propTypes = {
+	static propTypes = {
 		children: PropTypes.node.isRequired,
 		onClick: PropTypes.func,
 		theme: PropTypes.object,

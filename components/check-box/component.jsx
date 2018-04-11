@@ -24,5 +24,5 @@ Checkbox.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	title: PropTypes.string,
 	isChecked: PropTypes.bool,
-	theme: PropTypes.string,
+	theme: PropTypes.object,
 };
