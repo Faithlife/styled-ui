@@ -5,9 +5,11 @@
 		"prettier"
 	],
 	"plugins": [
-		"import"
+		"import",
+		"prettier"
 	],
 	"rules": {
+		"prettier/prettier": 2,
 		"jsx-a11y/label-has-for": 0,
 		"react/jsx-filename-extension": 0,
 		"import/named": 2,

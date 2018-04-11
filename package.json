@@ -9,8 +9,7 @@
     "build-storybook": "build-storybook",
     "deploy-storybook": "storybook-to-ghpages --ci",
     "eslint": "eslint ./components --ext .js --ext .jsx",
-    "lint": "npm run eslint && npm run stylelint && npm run prettier-check",
-    "prettier-check": "prettier --list-different \"./components/**/*.{js,jsx}\"",
+    "lint": "npm run eslint && npm run stylelint",
     "stylelint": "stylelint ./components/**/*.less",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
