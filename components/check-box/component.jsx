@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { themeClassNames } from '../utils';
-import styles from './styles.less';
+import baseTheme from './base-theme.less';
 
 export default function Checkbox({ onChange, title, isChecked, theme }) {
-	const getClassName = (...classNames) => themeClassNames(styles, theme, classNames);
+	const getClassName = (...classNames) => themeClassNames(baseTheme, theme, classNames);
 
 	return (
 		<button

@@ -5,6 +5,7 @@ import Input from './component.jsx';
 export default class Container extends Component {
 	static propTypes = {
 		theme: PropTypes.object,
+		validationDelay: PropTypes.number,
 	};
 
 	state = {
@@ -21,21 +22,19 @@ export default class Container extends Component {
 		}
 	};
 
-	renderSubText = title => `You are also editing your Faithlife Group's ${title}`;
-
 	render() {
 		return (
-			<div style={{ width: '300px' }}>
+			<div style={{ width: '300px', fontFamily: 'sans-serif' }}>
 				<Input
 					{...this.state}
 					onChange={this.onChange}
 					getIsValidInput={value => value !== 'error'}
-					renderSubText={this.renderSubText}
-					title="location"
+					title="Location"
+					help={<span>Try typing 'error'</span>}
 					autoFocus
 					theme={this.props.theme}
 					isRequiredField
-					validationDelay={100}
+					validationDelay={this.props.validationDelay}
 					showNegativeValidationIcon
 					showPositiveValidationIcon
 				/>

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import { themeClassNames } from '../utils';
 import { Exclamation, Check } from '../icons';
-import styles from './styles.less';
+import baseTheme from './base-theme.less';
 
 export default class Input extends React.PureComponent {
 	static propTypes = {
@@ -20,8 +20,6 @@ export default class Input extends React.PureComponent {
 		onEnter: PropTypes.func,
 		onFocus: PropTypes.func,
 		placeholder: PropTypes.string,
-		showNegativeValidationIcon: PropTypes.bool,
-		showPositiveValidationIcon: PropTypes.bool,
 		title: PropTypes.string,
 		validationDelay: PropTypes.number,
 		isDisabled: PropTypes.bool,
@@ -91,8 +89,6 @@ export default class Input extends React.PureComponent {
 			errorString,
 			help,
 			isRequiredField,
-			showNegativeValidationIcon,
-			showPositiveValidationIcon,
 			isDisabled,
 			onFocus,
 			hasError,
@@ -102,7 +98,7 @@ export default class Input extends React.PureComponent {
 
 		const { showValidationIndicators } = this.state;
 
-		const getClassName = (...classNames) => themeClassNames(styles, theme, classNames);
+		const getClassName = (...classNames) => themeClassNames(baseTheme, theme, classNames);
 
 		return (
 			<label className={getClassName('input')}>
@@ -133,11 +129,9 @@ export default class Input extends React.PureComponent {
 					/>
 
 					{showValidationIndicators &&
-						showNegativeValidationIcon &&
 						hasError && <Exclamation className={getClassName('errorIcon')} />}
 
 					{showValidationIndicators &&
-						showPositiveValidationIcon &&
 						!hasError &&
 						inputValue && <Check className={getClassName('successIcon')} />}
 				</div>
