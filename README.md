@@ -13,8 +13,8 @@ This project addresses problems introduced by creating components from scratch. 
 
 ### Goals
 - No breaking changes between published versions of this project. Bug fixes to components are OK, but additional component features that are not opt-in should not be added. If a new version of a component needs to be released, a version suffix should be added to the exported component name (e.g. demo-button-v2).
-- Components are built with CSS modules + React. No additional runtime libraries should be added (such as moment).
-- Components contain a `theme.less`, which can be overridden by the consumer (see storybook for examples).
+- Components are built with CSS modules + React. No large additional runtime libraries should be added (such as moment, lodash.debounce is OK).
+- Components contain a `base-theme.less`, which can be overridden by the consumer (see storybook for examples).
 - Minimal complexity. For complex components (such as a sortable list control with inline search), consider creating a reusable component in a separate project
 - All UI is approved by the design team before it is merged into this project
 - Components have a prose description and live demo of different component states (using real data)

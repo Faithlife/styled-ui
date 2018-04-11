@@ -1,28 +1,33 @@
-/* eslint-disable react/jsx-filename-extension */
-
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import Button from '../components/demo-button/container.jsx';
-import secondaryButtonTheme from '../components/demo-button/secondary-theme.less';
+import DemoButton from '../components/demo-button/container.jsx';
+import demoButtonTheme from '../components/demo-button/secondary-theme.less';
 import Checkbox from '../components/check-box/container.jsx';
-import secondaryCheckboxTheme from '../components/check-box/secondary-theme.less';
+import checkboxTheme from '../components/check-box/secondary-theme.less';
+import DemoInput from '../components/demo-input/container.jsx';
+import demoInputTheme from '../components/demo-input/secondary-theme.less';
 
 storiesOf('Button', module)
-	.add('primary with text', () => <Button onClick={action('clicked')}>Toggle shadow</Button>)
-	.add('secondary with text', () => (
-		<Button onClick={action('clicked')} theme={secondaryButtonTheme}>
+	.add('with text', () => <DemoButton onClick={action('clicked')}>Toggle shadow</DemoButton>)
+	.add('with alternate theme', () => (
+		<DemoButton onClick={action('clicked')} theme={demoButtonTheme}>
 			Toggle shadow
-		</Button>
+		</DemoButton>
 	))
 	.add('with some emoji', () => (
-		<Button onClick={action('clicked')}>
+		<DemoButton onClick={action('clicked')}>
 			<span role="img" aria-label="so cool">
 				😀 😎 👍 💯
 			</span>
-		</Button>
+		</DemoButton>
 	));
 
 storiesOf('Checkbox', module)
-	.add('primary with text', () => <Checkbox />)
-	.add('secondary with text', () => <Checkbox theme={secondaryCheckboxTheme} />);
+	.add('with text', () => <Checkbox />)
+	.add('with alternate theme', () => <Checkbox theme={checkboxTheme} />);
+
+storiesOf('Input', module)
+	.add('with instant validation', () => <DemoInput />)
+	.add('with delayed validation', () => <DemoInput validationDelay={100} />)
+	.add('with alternate theme', () => <DemoInput theme={demoInputTheme} />);
