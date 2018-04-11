@@ -7,7 +7,7 @@ export default function DemoComponent(props) {
 	return (
 		<button
 			className={themeClassNames(baseTheme, props.theme, [
-				'demoButton',
+				'button',
 				props.clicked && 'clicked',
 				...(props.variations || []),
 			])}

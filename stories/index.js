@@ -1,12 +1,12 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import DemoButton from '../components/demo-button/container.jsx';
-import demoButtonTheme from '../components/demo-button/secondary-theme.less';
 import Checkbox from '../components/check-box/container.jsx';
 import checkboxTheme from '../components/check-box/secondary-theme.less';
 import DemoInput from '../components/demo-input/container.jsx';
 import demoInputTheme from '../components/demo-input/secondary-theme.less';
+import DemoButton from './button/container.jsx';
+import demoButtonTheme from './button/alternate-theme.less';
 
 storiesOf('Button', module)
 	.add('with text', () => <DemoButton onClick={action('clicked')}>Toggle shadow</DemoButton>)
