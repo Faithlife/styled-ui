@@ -1,12 +1,14 @@
 // Ported from https://git/Logos/Faithlife/blob/4947324240126070a754c95c160e61382b9e887b/src/Faithlife.Web/Content/Styles/common/common.mixins.less#L16
-@primary-default: #2f8fd1;
-@primary-hover: #0f78c0;
-@primary-active: #81878b;
+@import '../shared-styles/thickness.less';
+
+@primary-default: #278ED4;
+@primary-hover: #6DB3E2;
+@primary-active: #1D6CA1;
 
 .demoButton {
 	.button-mixin();
 	border: 1px solid @primary-default;
-	padding: 4px 8px;
+	padding: @thickness-3 @thickness-4;
 	background-color: @primary-default;
 	color: #fff;
 
@@ -21,6 +23,16 @@
 		background-color: @primary-active;
 		color: #fff;
 	}
+}
+
+.primarySmall {
+	padding: @thickness-2 @thickness-3;
+}
+.primaryLarge {
+	padding: @thickness-4 @thickness-5;
+}
+.primaryExtraLarge {
+	padding: @thickness-5 @thickness-6;
 }
 
 .clicked {

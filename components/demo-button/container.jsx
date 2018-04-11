@@ -24,9 +24,20 @@ export default class DemoContainer extends Component {
 
 	render() {
 		return (
-			<DemoComponent clicked={this.state.clicked} onChange={this.onChange} theme={this.props.theme}>
-				{this.props.children}
-			</DemoComponent>
+			<div>
+				<DemoComponent clicked={this.state.clicked} onChange={this.onChange} theme={this.props.theme} variations={['clicked']}>
+					{this.props.children}
+				</DemoComponent>
+				<DemoComponent clicked={this.state.clicked} onChange={this.onChange} theme={this.props.theme} variations={['primarySmall']}>
+					{this.props.children}
+				</DemoComponent>
+				<DemoComponent clicked={this.state.clicked} onChange={this.onChange} theme={this.props.theme} variations={['primaryLarge']}>
+					{this.props.children}
+				</DemoComponent>
+				<DemoComponent clicked={this.state.clicked} onChange={this.onChange} theme={this.props.theme} variations={['primaryExtraLarge']}>
+					{this.props.children}
+				</DemoComponent>
+			</div>
 		);
 	}
 }

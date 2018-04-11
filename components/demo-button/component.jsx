@@ -9,6 +9,7 @@ export default function DemoComponent(props) {
 			className={themeClassNames(baseTheme, props.theme, [
 				'demoButton',
 				props.clicked && 'clicked',
+				...(props.variations || [])
 			])}
 			onClick={() => props.onChange({ clicked: !props.clicked })}
 		>
@@ -22,4 +23,5 @@ DemoComponent.propTypes = {
 	onChange: PropTypes.func,
 	clicked: PropTypes.bool,
 	theme: PropTypes.object,
+	variations: PropTypes.array,
 };
