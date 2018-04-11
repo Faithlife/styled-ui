@@ -5,7 +5,7 @@ import Button from '../components/demo-button/container.jsx';
 import secondaryButtonTheme from '../components/demo-button/secondary-theme.less';
 import Checkbox from '../components/check-box/container.jsx';
 import secondaryCheckboxTheme from '../components/check-box/secondary-theme.less';
-import DemoInput from '../components/demo-input/component.jsx';
+import DemoInput from '../components/demo-input/container.jsx';
 
 storiesOf('Button', module)
 	.add('primary with text', () => <Button onClick={action('clicked')}>Toggle shadow</Button>)

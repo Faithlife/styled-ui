@@ -7,64 +7,15 @@ import styles from './styles.less';
 
 import { Exclamation, Check } from '../icons';
 
-export default class Container extends Component {
-	static propTypes = {
-		theme: PropTypes.object,
-	};
-
-	state = {
-		inputValue: '',
-		hasError: false,
-		showValidationIndicators: false,
-	};
-
-	onChange = newState => {
-		if (newState.inputValue != null) {
-			this.setState({ inputValue: newState.inputValue });
-		}
-		if (newState.hasError != null) {
-			this.setState({ hasError: newState.hasError });
-		}
-		if (newState.showValidationIndicators != null) {
-			this.setState({ showValidationIndicators: newState.showValidationIndicators });
-		}
-	};
-
-	renderSubText = title => `You are also editing your Faithlife Group's ${title}`;
-
-	render() {
-		return (
-			<div style={{ width: '300px' }}>
-				<Input
-					{...this.state}
-					onChange={this.onChange}
-					getIsValidInput={value => value !== 'error'}
-					renderSubText={this.renderSubText}
-					title="location"
-					autoFocus
-					theme={this.props.theme}
-					isRequiredField
-					validationDelay={100}
-					showNegativeValidationIcon
-					showPositiveValidationIcon
-				/>
-			</div>
-		);
-	}
-}
-
-class Input extends React.PureComponent {
+export default class Input extends React.PureComponent {
 	static propTypes = {
 		autoFocus: PropTypes.bool,
-		className: PropTypes.string,
 		errorString: PropTypes.string,
 		getIsValidInput: PropTypes.func,
 		hasError: PropTypes.bool,
 		help: PropTypes.node,
-		inputClass: PropTypes.string,
 		inputValue: PropTypes.string,
 		isRequiredField: PropTypes.bool,
-		renderSubText: PropTypes.func,
 		onBlur: PropTypes.func,
 		onChange: PropTypes.func,
 		onEnter: PropTypes.func,
@@ -133,7 +84,6 @@ class Input extends React.PureComponent {
 			title,
 			autoFocus,
 			placeholder,
-			renderSubText,
 			errorString,
 			help,
 			isRequiredField,
@@ -150,7 +100,7 @@ class Input extends React.PureComponent {
 		const getClassName = (...classNames) => themeClassNames(styles, theme, classNames);
 
 		return (
-			<label className={getClassName('input', renderSubText ? 'inputShared' : '')}>
+			<label className={getClassName('input')}>
 				{title && (
 					<div className={getClassName('title')}>
 						<div>
@@ -176,11 +126,6 @@ class Input extends React.PureComponent {
 						onFocus={onFocus}
 						disabled={isDisabled}
 					/>
-					{this.props.renderSubText && (
-						<div className={getClassName('faithlifeTag', 'b6')}>
-							{this.props.renderSubText(title)}
-						</div>
-					)}
 
 					{showValidationIndicators &&
 						showNegativeValidationIcon &&
