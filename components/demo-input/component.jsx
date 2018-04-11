@@ -3,9 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import { themeClassNames } from '../utils';
-import styles from './styles.less';
-
 import { Exclamation, Check } from '../icons';
+import styles from './styles.less';
 
 export default class Input extends React.PureComponent {
 	static propTypes = {

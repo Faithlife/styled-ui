@@ -9,7 +9,18 @@
 	],
 	"rules": {
 		"jsx-a11y/label-has-for": 0,
-		"react/jsx-filename-extension": 0
+		"react/jsx-filename-extension": 0,
+		"import/named": 2,
+		"import/order": 2,
+		"object-curly-spacing": [2, "always"],
+		"object-curly-newline": [2, { "consistent": true }],
+		"react/jsx-key": 2,
+		"react/no-danger": 2,
+		"react/no-direct-mutation-state": 2,
+		"react/no-unused-state": 2,
+		"react/no-string-refs": 2,
+		"react/no-unused-prop-types": 2,
+		"react/prop-types": 2
 	},
 	"settings": {
 		"import/ignore": [

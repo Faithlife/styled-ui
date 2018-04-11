@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './styles.less';
 import { themeClassNames } from '../utils';
+import styles from './styles.less';
 
 export default function DemoComponent(props) {
 	return (

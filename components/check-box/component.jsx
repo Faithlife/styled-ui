@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { themeClassNames } from '../utils';
-
 import styles from './styles.less';
 
 export default function Checkbox({ onChange, title, isChecked, theme }) {
