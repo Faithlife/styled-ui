@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Checkbox from './component.jsx';
+import Checkbox from '../../components/check-box/component.jsx';
+import styles from './story-styles.less';
 
 class State extends React.Component {
 	static propTypes = {
@@ -28,19 +29,21 @@ class State extends React.Component {
 
 export default function Container({ theme }) {
 	return (
-		<State
-			initialState={{ isChecked: false, title: 'Check this' }}
-			render={({ isChecked, title }, updateState) => (
-				<Checkbox
-					onChange={checked => {
-						updateState({ isChecked: checked });
-					}}
-					isChecked={isChecked}
-					title={title}
-					theme={theme}
-				/>
-			)}
-		/>
+		<div className={styles.demos}>
+			<State
+				initialState={{ isChecked: false, title: 'Check this' }}
+				render={({ isChecked, title }, updateState) => (
+					<Checkbox
+						onChange={checked => {
+							updateState({ isChecked: checked });
+						}}
+						isChecked={isChecked}
+						title={title}
+						theme={theme}
+					/>
+				)}
+			/>
+		</div>
 	);
 }
 

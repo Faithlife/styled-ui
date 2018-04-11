@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Input from './component.jsx';
+import Input from '../../components/demo-input/component.jsx';
+import styles from './story-styles.less';
 
 export default class Container extends Component {
 	static propTypes = {
@@ -24,7 +25,7 @@ export default class Container extends Component {
 
 	render() {
 		return (
-			<div style={{ width: '300px', fontFamily: 'sans-serif' }}>
+			<div className={styles.demos}>
 				<Input
 					{...this.state}
 					onChange={this.onChange}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DemoComponent from '../../components/demo-button/component.jsx';
-import styles from './story-theme.less';
+import styles from './story-styles.less';
 
 export default class DemoContainer extends Component {
 	static propTypes = {
