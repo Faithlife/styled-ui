@@ -10,6 +10,7 @@
     "deploy-storybook": "storybook-to-ghpages --ci",
     "eslint": "eslint ./components --ext .js --ext .jsx",
     "lint": "npm run eslint && npm run stylelint",
+    "precommit": "npm run stylelint -- --fix && prettier --write \"./components/**/*.{js,jsx}\"",
     "stylelint": "stylelint ./components/**/*.less",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
