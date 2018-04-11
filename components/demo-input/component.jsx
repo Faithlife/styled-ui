@@ -1,4 +1,3 @@
-/* eslint-disable react/no-multi-comp */
 import React from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
@@ -6,6 +5,7 @@ import { themeClassNames } from '../utils';
 import { Exclamation, Check } from '../icons';
 import baseTheme from './base-theme.less';
 
+// Ported from https://git/Logos/Sites.Admin/blob/db17162da13a47c82eea000cfdd6384e8a174874/src/Sites.Admin/Private/scripts/components/input/index.jsx
 export default class Input extends React.PureComponent {
 	static propTypes = {
 		autoFocus: PropTypes.bool,
