@@ -31,7 +31,7 @@ export default class Input extends React.PureComponent {
 
 	state = {
 		showValidationIndicators: false,
-	}
+	};
 
 	componentDidUpdate(prevProps) {
 		const { shouldFocus } = this.props;
