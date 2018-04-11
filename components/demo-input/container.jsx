@@ -10,7 +10,6 @@ export default class Container extends Component {
 	state = {
 		inputValue: '',
 		hasError: false,
-		showValidationIndicators: false,
 	};
 
 	onChange = newState => {
@@ -19,9 +18,6 @@ export default class Container extends Component {
 		}
 		if (newState.hasError != null) {
 			this.setState({ hasError: newState.hasError });
-		}
-		if (newState.showValidationIndicators != null) {
-			this.setState({ showValidationIndicators: newState.showValidationIndicators });
 		}
 	};
 

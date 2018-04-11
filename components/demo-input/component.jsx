@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import { themeClassNames } from '../utils';
@@ -27,9 +27,12 @@ export default class Input extends React.PureComponent {
 		validationDelay: PropTypes.number,
 		isDisabled: PropTypes.bool,
 		shouldFocus: PropTypes.bool,
-		showValidationIndicators: PropTypes.bool,
 		theme: PropTypes.object,
 	};
+
+	state = {
+		showValidationIndicators: false,
+	}
 
 	componentDidUpdate(prevProps) {
 		const { shouldFocus } = this.props;
@@ -41,22 +44,24 @@ export default class Input extends React.PureComponent {
 	}
 
 	componentWillUnmount() {
-		this.showValidationIndicators.cancel();
+		this.handleShowValidationIndicators.cancel();
 	}
 
 	validateInput = (getIsValidInput, inputValue) => {
 		const { validationDelay } = this.props;
 		const hasError = inputValue && !getIsValidInput(inputValue);
 		if (validationDelay) {
-			this.props.onChange({ hasError, showValidationIndicators: false });
-			this.showValidationIndicators();
+			this.props.onChange({ hasError });
+			this.setState({ showValidationIndicators: false });
+			this.handleShowValidationIndicators();
 		} else {
-			this.props.onChange({ hasError, showValidationIndicators: true });
+			this.props.onChange({ hasError });
+			this.setState({ showValidationIndicators: true });
 		}
 	};
 
-	showValidationIndicators = debounce(() => {
-		this.props.onChange({ showValidationIndicators: true });
+	handleShowValidationIndicators = debounce(() => {
+		this.setState({ showValidationIndicators: true });
 	}, this.props.validationDelay);
 
 	handleChange = event => {
@@ -93,9 +98,10 @@ export default class Input extends React.PureComponent {
 			onFocus,
 			hasError,
 			inputValue,
-			showValidationIndicators,
 			theme,
 		} = this.props;
+
+		const { showValidationIndicators } = this.state;
 
 		const getClassName = (...classNames) => themeClassNames(styles, theme, classNames);
 
