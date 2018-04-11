@@ -31,6 +31,14 @@ export default class Input extends React.PureComponent {
 		showValidationIndicators: false,
 	};
 
+	componentWillReceiveProps(nextProps) {
+		const { getIsValidInput, inputValue } = nextProps;
+
+		if (nextProps.inputValue !== this.props.inputValue && getIsValidInput) {
+			this.validateInput(getIsValidInput, inputValue);
+		}
+	}
+
 	componentDidUpdate(prevProps) {
 		const { shouldFocus } = this.props;
 		const { shouldFocus: hadFocus } = prevProps;
