@@ -9,15 +9,15 @@ import baseTheme from './base-theme.less';
 // Ported from https://git/Logos/Sites.Admin/blob/db17162da13a47c82eea000cfdd6384e8a174874/src/Sites.Admin/Private/scripts/components/input/index.jsx
 export default class Input extends React.PureComponent {
 	static propTypes = forbidExtraProps({
+		inputValue: PropTypes.string.isRequired,
+		onChange: PropTypes.func.isRequired,
 		autoFocus: PropTypes.bool,
 		errorString: PropTypes.string,
 		getIsValidInput: PropTypes.func,
 		hasError: PropTypes.bool,
 		help: PropTypes.node,
-		inputValue: PropTypes.string,
 		isRequiredField: PropTypes.bool,
 		onBlur: PropTypes.func,
-		onChange: PropTypes.func,
 		onEnter: PropTypes.func,
 		onFocus: PropTypes.func,
 		placeholder: PropTypes.string,
@@ -33,10 +33,10 @@ export default class Input extends React.PureComponent {
 	};
 
 	componentWillReceiveProps(nextProps) {
-		const { getIsValidInput, inputValue } = nextProps;
+		const { inputValue } = nextProps;
 
-		if (nextProps.inputValue !== this.props.inputValue && getIsValidInput) {
-			this.validateInput(getIsValidInput, inputValue);
+		if (nextProps.inputValue !== this.props.inputValue) {
+			this.validateInput(inputValue);
 		}
 	}
 
@@ -53,8 +53,12 @@ export default class Input extends React.PureComponent {
 		this.handleShowValidationIndicators.cancel();
 	}
 
-	validateInput = (getIsValidInput, inputValue) => {
-		const { validationDelay } = this.props;
+	validateInput = inputValue => {
+		if (this.props.getIsValidInput == null) {
+			return;
+		}
+
+		const { validationDelay, getIsValidInput } = this.props;
 		const hasError = inputValue !== '' && !getIsValidInput(inputValue);
 		if (validationDelay) {
 			this.props.onChange({ hasError });
@@ -72,7 +76,8 @@ export default class Input extends React.PureComponent {
 
 	handleChange = event => {
 		const inputValue = event.target.value;
-		this.validateInput(this.props.getIsValidInput, inputValue);
+
+		this.validateInput(inputValue);
 		this.props.onChange({ inputValue });
 	};
 

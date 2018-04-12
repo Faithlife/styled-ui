@@ -7,6 +7,7 @@ export default class Container extends Component {
 	static propTypes = {
 		theme: PropTypes.object,
 		validationDelay: PropTypes.number,
+		demoValidation: PropTypes.bool,
 	};
 
 	state = {
@@ -29,7 +30,7 @@ export default class Container extends Component {
 				<Input
 					{...this.state}
 					onChange={this.onChange}
-					getIsValidInput={value => value !== 'error'}
+					getIsValidInput={this.props.demoValidation ? value => value !== 'error' : null}
 					title="Location"
 					help={<span>Try typing 'error'</span>}
 					autoFocus

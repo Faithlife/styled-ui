@@ -28,6 +28,7 @@ storiesOf('Checkbox', module)
 	.add('with alternate theme', () => <Checkbox theme={checkboxTheme} />);
 
 storiesOf('Input', module)
-	.add('with instant validation', () => <DemoInput />)
-	.add('with delayed validation', () => <DemoInput validationDelay={100} />)
-	.add('with alternate theme', () => <DemoInput theme={demoInputTheme} />);
+	.add('with no validation', () => <DemoInput />)
+	.add('with instant validation', () => <DemoInput demoValidation />)
+	.add('with delayed validation', () => <DemoInput demoValidation validationDelay={100} />)
+	.add('with alternate theme', () => <DemoInput demoValidation theme={demoInputTheme} />);
