@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { forbidExtraProps } from 'airbnb-prop-types';
 import { themeClassNames } from '../utils';
 import baseTheme from './base-theme.less';
 
@@ -17,9 +18,9 @@ export default function Checkbox({ onClick, title, isChecked, theme }) {
 	);
 }
 
-Checkbox.propTypes = {
+Checkbox.propTypes = forbidExtraProps({
 	onClick: PropTypes.func.isRequired,
 	title: PropTypes.string,
 	isChecked: PropTypes.bool,
 	theme: PropTypes.object,
-};
+});

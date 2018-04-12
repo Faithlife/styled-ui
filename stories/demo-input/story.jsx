@@ -36,8 +36,6 @@ export default class Container extends Component {
 					theme={this.props.theme}
 					isRequiredField
 					validationDelay={this.props.validationDelay}
-					showNegativeValidationIcon
-					showPositiveValidationIcon
 					errorString="Sorry, that location could not be validated."
 				/>
 			</div>
