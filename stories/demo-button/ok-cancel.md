@@ -1,4 +1,4 @@
-! Okay Cancel Buttons
+# Okay Cancel Buttons
 
 It's common to need both a commit action ("OK", "Done", "Save") right next to a cancel action. Faithlife house style is:
 

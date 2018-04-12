@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../../components';
 import styles from './story-styles.less';
+import docs from './demo-button.md';
 
 export default class DemoContainer extends Component {
 	static propTypes = {
@@ -33,19 +34,21 @@ export default class DemoContainer extends Component {
 		];
 
 		return (
-			<div className={styles.demos}>
+			<div>
+				<div className={styles.demos}>
 				{variationExamples.map((variation, index) => (
-					<div key={index} className={styles.demoRow}>
-						<Button
-							onClick={this.onClick}
-							theme={this.props.theme}
-							variations={[...variation, this.state.clicked && 'clicked']}
-						>
-							{this.props.children}
-						</Button>
-					</div>
-				))}
-				<p>Hello, world!</p>
+						<div key={index} className={styles.demoRow}>
+							<Button
+								onClick={this.onClick}
+								theme={this.props.theme}
+								variations={[...variation, this.state.clicked && 'clicked']}
+							>
+								{this.props.children}
+							</Button>
+						</div>
+					))}
+				</div>
+				<div className={styles.documentation} dangerouslySetInnerHTML={{ __html: docs }} />
 			</div>
 		);
 	}
