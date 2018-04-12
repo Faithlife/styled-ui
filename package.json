@@ -13,7 +13,7 @@
 		"test": "npm run eslint && npm run stylelint",
 		"precommit": "npm run stylelint -- --fix && prettier --write \"./components/**/*.{js,jsx}\"",
 		"build": "rimraf dist && webpack -p",
-		"prepublish": "npm test && npm run build",
+		"prepare": "npm test && npm run build",
 		"stylelint": "stylelint ./components/**/*.less",
 		"storybook": "start-storybook -p 9001 -c .storybook"
 	},
