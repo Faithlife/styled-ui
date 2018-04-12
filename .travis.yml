@@ -3,7 +3,7 @@ cache:
     - node_modules
 language: node_js
 script:
-  - npm run prepublish
+  - npm run prepublishOnly
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" = "master" ]; then npm run deploy-storybook; fi'
 node_js:
   - "8"
