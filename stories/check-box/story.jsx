@@ -34,9 +34,7 @@ export default function Container({ theme }) {
 				initialState={{ isChecked: false, title: 'Check this' }}
 				render={({ isChecked, title }, updateState) => (
 					<Checkbox
-						onChange={checked => {
-							updateState({ isChecked: checked });
-						}}
+						onClick={() => updateState({ isChecked: !isChecked })}
 						isChecked={isChecked}
 						title={title}
 						theme={theme}
