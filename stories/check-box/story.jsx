@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Checkbox from '../../components/check-box/component.jsx';
+import { Checkbox } from '../../components';
 import styles from './story-styles.less';
 
 class State extends React.Component {

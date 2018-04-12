@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import DemoComponent from '../../components/demo-button/component.jsx';
+import { Button } from '../../components';
 import styles from './story-styles.less';
 
 export default class DemoContainer extends Component {
@@ -37,14 +37,14 @@ export default class DemoContainer extends Component {
 			<div className={styles.demos}>
 				{variationExamples.map((variation, index) => (
 					<div key={index} className={styles.demoRow}>
-						<DemoComponent
+						<Button
 							clicked={this.state.clicked}
 							onChange={this.onChange}
 							theme={this.props.theme}
 							variations={[...variation, this.state.clicked && 'clicked']}
 						>
 							{this.props.children}
-						</DemoComponent>
+						</Button>
 					</div>
 				))}
 			</div>

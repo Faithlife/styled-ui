@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Input from '../../components/demo-input/component.jsx';
+import { Input } from '../../components';
 import styles from './story-styles.less';
 
 export default class Container extends Component {
