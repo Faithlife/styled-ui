@@ -7,12 +7,8 @@ import baseTheme from './base-theme.less';
 export default function DemoComponent(props) {
 	return (
 		<button
-			className={themeClassNames(baseTheme, props.theme, [
-				'button',
-				props.clicked && 'clicked',
-				...(props.variations || []),
-			])}
-			onClick={() => props.onChange({ clicked: !props.clicked })}
+			className={themeClassNames(baseTheme, props.theme, props.variations || ['primary'])}
+			onClick={props.onClick}
 		>
 			{props.children}
 		</button>
@@ -21,8 +17,7 @@ export default function DemoComponent(props) {
 
 DemoComponent.propTypes = forbidExtraProps({
 	children: PropTypes.node.isRequired,
-	onChange: PropTypes.func,
-	clicked: PropTypes.bool,
+	onClick: PropTypes.func.isRequired,
 	theme: PropTypes.object,
 	variations: PropTypes.array,
 });

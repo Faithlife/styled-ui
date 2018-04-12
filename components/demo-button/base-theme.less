@@ -9,7 +9,7 @@
 	box-shadow: none;
 	border-radius: 2px;
 	margin: 0;
-	padding: 0;
+	padding: @thickness-3 @thickness-4;
 	cursor: pointer;
 
 	&:focus {
@@ -18,8 +18,8 @@
 }
 
 .primary {
+	.button();
 	border: 1px solid @primary-default;
-	padding: @thickness-3 @thickness-4;
 	background-color: @primary-default;
 	color: #fff;
 
@@ -37,6 +37,7 @@
 }
 
 .secondary {
+	.button();
 	border: 1px solid @primary-default;
 	background: none;
 	color: @primary-default;

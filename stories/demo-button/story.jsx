@@ -6,7 +6,7 @@ import styles from './story-styles.less';
 export default class DemoContainer extends Component {
 	static propTypes = {
 		children: PropTypes.node.isRequired,
-		onClick: PropTypes.func,
+		onClick: PropTypes.func.isRequired,
 		theme: PropTypes.object,
 	};
 
@@ -14,13 +14,12 @@ export default class DemoContainer extends Component {
 		clicked: false,
 	};
 
-	onChange = newState => {
-		this.setState(
-			{
-				...newState,
-			},
-			this.props.onClick,
-		);
+	onClick = () => {
+		this.setState(state => ({
+			clicked: !state.clicked,
+		}));
+
+		this.props.onClick();
 	};
 
 	render() {
@@ -38,8 +37,7 @@ export default class DemoContainer extends Component {
 				{variationExamples.map((variation, index) => (
 					<div key={index} className={styles.demoRow}>
 						<Button
-							clicked={this.state.clicked}
-							onChange={this.onChange}
+							onClick={this.onClick}
 							theme={this.props.theme}
 							variations={[...variation, this.state.clicked && 'clicked']}
 						>
