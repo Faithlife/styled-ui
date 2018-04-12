@@ -26,7 +26,7 @@ export default class DemoContainer extends Component {
 						<Button
 							onClick={this.onClick}
 							theme={this.props.theme}
-							variations={['secondary', 'large']}
+							variations={['outlinePrimary', 'medium']}
 						>
 							Cancel
 						</Button>
@@ -35,7 +35,7 @@ export default class DemoContainer extends Component {
 						<Button
 							onClick={this.onClick}
 							theme={this.props.theme}
-							variations={['primary', 'large']}
+							variations={['primary', 'medium']}
 						>
 							Okay
 						</Button>

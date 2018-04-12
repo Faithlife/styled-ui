@@ -26,11 +26,28 @@ export default class DemoContainer extends Component {
 	render() {
 		const variationExamples = [
 			['primary', 'small'],
-			['primary', 'large'],
-			['primary', 'extraLarge'],
+			['outlinePrimary', 'small'],
 			['secondary', 'small'],
+			['outlineSecondary', 'small'],
+			['minor', 'small'],
+
+			['primary', 'medium'],
+			['outlinePrimary', 'medium'],
+			['secondary', 'medium'],
+			['outlineSecondary', 'medium'],
+			['minor', 'medium'],
+			
+			['primary', 'large'],
+			['outlinePrimary', 'large'],
 			['secondary', 'large'],
-			['secondary', 'extraLarge'],
+			['outlineSecondary', 'large'],
+			['minor', 'large'],
+
+			['primary', 'super'],
+			['outlinePrimary', 'super'],
+			['secondary', 'super'],
+			['outlineSecondary', 'super'],
+			['minor', 'super'],		
 		];
 
 		return (
