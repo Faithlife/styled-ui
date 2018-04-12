@@ -16,6 +16,9 @@
 		"stylelint": "stylelint ./components/**/*.less",
 		"storybook": "start-storybook -p 9001 -c .storybook"
 	},
+	"files": [
+		"dist/**"
+	],
 	"browserslist": [
 		"> 1%",
 		"last 2 versions"
