@@ -1,5 +1,6 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
 	entry: './components/index.js',
@@ -8,6 +9,7 @@ module.exports = {
 		path: path.resolve('./dist'),
 		libraryTarget: 'commonjs-module',
 	},
+	externals: [nodeExternals()],
 	module: {
 		rules: [
 			{
