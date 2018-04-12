@@ -28,6 +28,7 @@
 		"react-dom": "16"
 	},
 	"dependencies": {
+		"airbnb-prop-types": "^2.9.0",
 		"classnames": "^2.2.5",
 		"lodash.debounce": "^4.0.8",
 		"prop-types": "^15.6.1",

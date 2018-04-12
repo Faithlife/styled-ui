@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { forbidExtraProps } from 'airbnb-prop-types';
 import { themeClassNames } from '../utils';
 import baseTheme from './base-theme.less';
 
@@ -18,10 +19,10 @@ export default function DemoComponent(props) {
 	);
 }
 
-DemoComponent.propTypes = {
+DemoComponent.propTypes = forbidExtraProps({
 	children: PropTypes.node.isRequired,
 	onChange: PropTypes.func,
 	clicked: PropTypes.bool,
 	theme: PropTypes.object,
 	variations: PropTypes.array,
-};
+});

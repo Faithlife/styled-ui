@@ -29,6 +29,7 @@
 			"node_modules",
 			".(less|css)$"
 		],
-		"import/resolver": "webpack"
+		"import/resolver": "webpack",
+		"propWrapperFunctions": ["forbidExtraProps"]
 	}
 }
