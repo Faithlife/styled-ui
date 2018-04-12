@@ -6,6 +6,7 @@ import checkboxTheme from './check-box/alternate-theme.less';
 import DemoInput from './demo-input/story.jsx';
 import demoInputTheme from './demo-input/alternate-theme.less';
 import DemoButton from './demo-button/story.jsx';
+import OkCancelStory from './demo-button/ok-cancel.jsx';
 import demoButtonTheme from './demo-button/alternate-theme.less';
 
 storiesOf('Button', module)
@@ -21,7 +22,8 @@ storiesOf('Button', module)
 				😀 😎 👍 💯
 			</span>
 		</DemoButton>
-	));
+	))
+	.add('ok cancel', () => <OkCancelStory>TODO</OkCancelStory>)
 
 storiesOf('Checkbox', module)
 	.add('with text', () => <Checkbox />)
