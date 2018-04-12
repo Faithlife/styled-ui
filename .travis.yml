@@ -1,7 +1,9 @@
-cache: yarn
+cache:
+  directories:
+    - node_modules
 language: node_js
 script:
-  - yarn lint
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" = "master" ]; then yarn deploy-storybook; fi'
+  - npm run prepublish
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" = "master" ]; then npm run deploy-storybook; fi'
 node_js:
   - "8"
