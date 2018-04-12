@@ -23,30 +23,29 @@ export default class DemoContainer extends Component {
 	};
 
 	render() {
-		const variationExamples = [
-			['primary', 'small'],
-			['primary', 'large'],
-			['primary', 'extraLarge'],
-			['secondary', 'small'],
-			['secondary', 'large'],
-			['secondary', 'extraLarge'],
-		];
+
 
 		return (
 			<div className={styles.demos}>
-				{variationExamples.map((variation, index) => (
-					<div key={index} className={styles.demoRow}>
-						<Button
-							onClick={this.onClick}
-							theme={this.props.theme}
-							variations={[...variation, this.state.clicked && 'clicked']}
-						>
-							{this.props.children}
-						</Button>
-					</div>
-				))}
-				<p>Hello, world!</p>
-			</div>
+				<div className={styles.demoRow}>
+					<Button
+						onClick={this.onClick}
+						theme={this.props.theme}
+						variations={['secondary', 'large']}
+					>
+						Cancel
+				</Button>
+				</div>
+				<div className={styles.demoRow}>
+					<Button
+						onClick={this.onClick}
+						theme={this.props.theme}
+						variations={['primary', 'large']}
+					>
+						Okay
+				</Button>
+				</div>
+			</div >
 		);
 	}
 }
