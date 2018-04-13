@@ -10,20 +10,11 @@ import OkCancelStory from './demo-button/ok-cancel.jsx';
 import demoButtonTheme from './demo-button/alternate-theme.less';
 
 storiesOf('Button', module)
-	.add('with text', () => <DemoButton onClick={action('clicked')}>Toggle shadow</DemoButton>)
+	.add('with text', () => <DemoButton onClick={action('clicked')} />)
 	.add('with alternate theme', () => (
-		<DemoButton onClick={action('clicked')} theme={demoButtonTheme}>
-			Toggle shadow
-		</DemoButton>
+		<DemoButton onClick={action('clicked')} theme={demoButtonTheme} />
 	))
-	.add('with some emoji', () => (
-		<DemoButton onClick={action('clicked')}>
-			<span role="img" aria-label="so cool">
-				😀 😎 👍 💯
-			</span>
-		</DemoButton>
-	))
-	.add('ok cancel', () => <OkCancelStory>TODO</OkCancelStory>)
+	.add('ok cancel', () => <OkCancelStory />);
 
 storiesOf('Checkbox', module)
 	.add('with text', () => <Checkbox />)

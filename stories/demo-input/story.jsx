@@ -42,11 +42,7 @@ export default class Container extends Component {
 					/>
 				</div>
 				<div className={styles.demoRow}>
-					<Button
-						variations={['primary', this.state.hasError && 'primaryDisabled']}
-						buttonProps={{ disabled: this.state.hasError }}
-						onClick={() => {}}
-					>
+					<Button buttonProps={{ disabled: this.state.hasError }} onClick={() => {}}>
 						Save
 					</Button>
 				</div>

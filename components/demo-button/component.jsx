@@ -1,25 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { forbidExtraProps } from 'airbnb-prop-types';
 import { themeClassNames } from '../utils';
 import baseTheme from './base-theme.less';
 
-export default function DemoComponent({ theme, variations, onClick, children, buttonProps = {} }) {
+export default function DemoComponent({ theme, variations, children, ...props }) {
 	return (
-		<button
-			className={themeClassNames(baseTheme, theme, variations || ['primary'])}
-			onClick={onClick}
-			{...buttonProps}
-		>
+		<button className={themeClassNames(baseTheme, theme, variations || ['primary'])} {...props}>
 			{children}
 		</button>
 	);
 }
 
-DemoComponent.propTypes = forbidExtraProps({
+DemoComponent.propTypes = {
 	children: PropTypes.node.isRequired,
-	onClick: PropTypes.func.isRequired,
 	theme: PropTypes.object,
 	variations: PropTypes.array,
-	buttonProps: PropTypes.object,
-});
+};

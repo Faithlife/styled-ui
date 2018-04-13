@@ -36,7 +36,7 @@
 		color: #fff;
 	}
 
-	&Disabled, &Disabled:hover, &Disabled:active {
+	&:disabled {
 		border-color: @primary-disabled;
 		background-color: @primary-disabled;
 		cursor: default;
@@ -72,8 +72,4 @@
 
 .extraLarge {
 	padding: @thickness-5 @thickness-6;
-}
-
-.clicked {
-	box-shadow: 0 4px 10px 0 #aaa;
 }

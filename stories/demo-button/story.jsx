@@ -1,54 +1,61 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 import { Button } from '../../components';
 import styles from './story-styles.less';
+import docs from './demo-button.md';
 
 export default class DemoContainer extends Component {
 	static propTypes = {
-		children: PropTypes.node.isRequired,
 		onClick: PropTypes.func.isRequired,
 		theme: PropTypes.object,
 	};
 
-	state = {
-		clicked: false,
-	};
-
-	onClick = () => {
-		this.setState(state => ({
-			clicked: !state.clicked,
-		}));
-
-		this.props.onClick();
+	renderButtonsRow = renderButton => {
+		const buttonMargins = ['small', '', 'large', 'extraLarge'];
+		return (
+			<div className={styles.demoRow}>
+				{buttonMargins.map(buttonMargin => (
+					<div key={buttonMargin} className={cn(styles.buttonWrapper, styles.buttonFlex)}>
+						{renderButton(buttonMargin)}
+					</div>
+				))}
+			</div>
+		);
 	};
 
 	render() {
-		const variationExamples = [
-			['primary', 'small'],
-			['primary', 'large'],
-			['primary', 'extraLarge'],
-			['primary', 'primaryDisabled', 'small'],
-			['primary', 'primaryDisabled', 'large'],
-			['primary', 'primaryDisabled', 'extraLarge'],
-			['secondary', 'small'],
-			['secondary', 'large'],
-			['secondary', 'extraLarge'],
-		];
-
 		return (
 			<div className={styles.demos}>
-				{variationExamples.map((variation, index) => (
-					<div key={index} className={styles.demoRow}>
-						<Button
-							onClick={this.onClick}
-							theme={this.props.theme}
-							variations={[...variation, this.state.clicked && 'clicked']}
-						>
-							{this.props.children}
-						</Button>
-					</div>
+				{this.renderButtonsRow(marginVariation => (
+					<Button
+						onClick={this.props.onClick}
+						theme={this.props.theme}
+						variations={['primary', marginVariation]}
+					>
+						Primary
+					</Button>
 				))}
-				<p>Hello, world!</p>
+				{this.renderButtonsRow(marginVariation => (
+					<Button
+						onClick={this.props.onClick}
+						theme={this.props.theme}
+						disabled
+						variations={['primary', marginVariation]}
+					>
+						Disabled
+					</Button>
+				))}
+				{this.renderButtonsRow(marginVariation => (
+					<Button
+						onClick={this.props.onClick}
+						theme={this.props.theme}
+						variations={['secondary', marginVariation]}
+					>
+						Secondary
+					</Button>
+				))}
+				<div className={styles.documentation} dangerouslySetInnerHTML={{ __html: docs }} />
 			</div>
 		);
 	}
