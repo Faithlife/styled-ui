@@ -4,6 +4,7 @@
 @primary-default: #278ED4;
 @primary-hover: #6DB3E2;
 @primary-active: #1D6CA1;
+@primary-disabled: #bedcf2;
 
 .button {
 	box-shadow: none;
@@ -33,6 +34,12 @@
 		border-color: @primary-active;
 		background-color: @primary-active;
 		color: #fff;
+	}
+
+	&Disabled, &Disabled:hover, &Disabled:active {
+		border-color: @primary-disabled;
+		background-color: @primary-disabled;
+		cursor: default;
 	}
 }
 

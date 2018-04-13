@@ -4,13 +4,14 @@ import { forbidExtraProps } from 'airbnb-prop-types';
 import { themeClassNames } from '../utils';
 import baseTheme from './base-theme.less';
 
-export default function DemoComponent(props) {
+export default function DemoComponent({ theme, variations, onClick, children, buttonProps = {} }) {
 	return (
 		<button
-			className={themeClassNames(baseTheme, props.theme, props.variations || ['primary'])}
-			onClick={props.onClick}
+			className={themeClassNames(baseTheme, theme, variations || ['primary'])}
+			onClick={onClick}
+			{...buttonProps}
 		>
-			{props.children}
+			{children}
 		</button>
 	);
 }
@@ -20,4 +21,5 @@ DemoComponent.propTypes = forbidExtraProps({
 	onClick: PropTypes.func.isRequired,
 	theme: PropTypes.object,
 	variations: PropTypes.array,
+	buttonProps: PropTypes.object,
 });
