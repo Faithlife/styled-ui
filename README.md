@@ -4,9 +4,9 @@
 
 ### [View Demos Here](https://faithlife.github.io/engagement-products-ui/)
 
-### How to use
+### :warning: This library is currently experimental :warning:
 
-In the future this will be published as a module you can import into your project, with overridable styles.
+This is a proof of concept. Breaking changes are likely until components have gone through design and implementation review.
 
 ### How to contribute
 
