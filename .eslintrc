@@ -17,7 +17,7 @@
 		"object-curly-spacing": [2, "always"],
 		"object-curly-newline": [2, { "consistent": true }],
 		"react/jsx-key": 2,
-		"react/no-danger": 2,
+		"react/no-danger": 0,
 		"react/no-direct-mutation-state": 2,
 		"react/no-unused-state": 2,
 		"react/no-string-refs": 2,

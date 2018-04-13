@@ -48,6 +48,7 @@ export default class DemoContainer extends Component {
 						</Button>
 					</div>
 				))}
+				<p>Hello, world!</p>
 			</div>
 		);
 	}
