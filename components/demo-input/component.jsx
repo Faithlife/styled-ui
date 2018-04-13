@@ -9,22 +9,18 @@ import baseTheme from './base-theme.less';
 // Ported from https://git/Logos/Sites.Admin/blob/db17162da13a47c82eea000cfdd6384e8a174874/src/Sites.Admin/Private/scripts/components/input/index.jsx
 export default class Input extends React.PureComponent {
 	static propTypes = forbidExtraProps({
-		inputValue: PropTypes.string.isRequired,
-		onChange: PropTypes.func.isRequired,
-		autoFocus: PropTypes.bool,
 		errorString: PropTypes.string,
 		getIsValidInput: PropTypes.func,
 		help: PropTypes.node,
 		isRequiredField: PropTypes.bool,
-		onBlur: PropTypes.func,
+		onChange: PropTypes.func.isRequired,
 		onEnter: PropTypes.func,
-		onFocus: PropTypes.func,
-		placeholder: PropTypes.string,
-		title: PropTypes.string,
-		validationDelay: PropTypes.number,
-		isDisabled: PropTypes.bool,
 		shouldFocus: PropTypes.bool,
 		theme: PropTypes.object,
+		title: PropTypes.string,
+		validationDelay: PropTypes.number,
+		value: PropTypes.string.isRequired,
+		inputProps: PropTypes.object,
 	});
 
 	state = {
@@ -74,26 +70,8 @@ export default class Input extends React.PureComponent {
 		}
 	};
 
-	handleOnBlur = event => {
-		const { onBlur } = this.props;
-		if (onBlur) {
-			onBlur(event.target.value);
-		}
-	};
-
 	render() {
-		const {
-			title,
-			autoFocus,
-			placeholder,
-			errorString,
-			help,
-			isRequiredField,
-			isDisabled,
-			onFocus,
-			inputValue,
-			theme,
-		} = this.props;
+		const { errorString, help, isRequiredField, theme, title, value, inputProps } = this.props;
 
 		const { showValidationIndicators, hasError } = this.state;
 
@@ -115,16 +93,12 @@ export default class Input extends React.PureComponent {
 						ref={input => {
 							this.input = input;
 						}}
-						autoFocus={autoFocus}
 						className={getClassName('text', hasError ? 'textError' : 'textSuccess')}
 						type="text"
-						placeholder={placeholder || ''}
-						value={inputValue || ''}
+						value={value || ''}
 						onChange={this.handleChange}
 						onKeyPress={this.handleKeyPress}
-						onBlur={this.handleOnBlur}
-						onFocus={onFocus}
-						disabled={isDisabled}
+						{...inputProps || {}}
 					/>
 
 					{showValidationIndicators &&
@@ -132,7 +106,7 @@ export default class Input extends React.PureComponent {
 
 					{showValidationIndicators &&
 						!hasError &&
-						inputValue && <Check className={getClassName('successIcon')} />}
+						value && <Check className={getClassName('successIcon')} />}
 				</div>
 				{showValidationIndicators &&
 					hasError && <div className={getClassName('errorTag', 'b4')}>{errorString}</div>}

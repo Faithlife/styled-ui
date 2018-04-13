@@ -40,7 +40,7 @@ export default class DemoContainer extends Component {
 					<Button
 						onClick={this.props.onClick}
 						theme={this.props.theme}
-						disabled
+						buttonProps={{ disabled: true }}
 						variations={['primary', marginVariation]}
 					>
 						Disabled
