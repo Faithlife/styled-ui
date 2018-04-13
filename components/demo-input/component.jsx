@@ -14,7 +14,6 @@ export default class Input extends React.PureComponent {
 		autoFocus: PropTypes.bool,
 		errorString: PropTypes.string,
 		getIsValidInput: PropTypes.func,
-		hasError: PropTypes.bool,
 		help: PropTypes.node,
 		isRequiredField: PropTypes.bool,
 		onBlur: PropTypes.func,
@@ -29,16 +28,9 @@ export default class Input extends React.PureComponent {
 	});
 
 	state = {
+		hasError: false,
 		showValidationIndicators: false,
 	};
-
-	componentWillReceiveProps(nextProps) {
-		const { inputValue } = nextProps;
-
-		if (nextProps.inputValue !== this.props.inputValue) {
-			this.validateInput(inputValue);
-		}
-	}
 
 	componentDidUpdate(prevProps) {
 		const { shouldFocus } = this.props;
@@ -53,23 +45,6 @@ export default class Input extends React.PureComponent {
 		this.handleShowValidationIndicators.cancel();
 	}
 
-	validateInput = inputValue => {
-		if (this.props.getIsValidInput == null) {
-			return;
-		}
-
-		const { validationDelay, getIsValidInput } = this.props;
-		const hasError = inputValue !== '' && !getIsValidInput(inputValue);
-		if (validationDelay) {
-			this.props.onChange({ hasError });
-			this.setState({ showValidationIndicators: false });
-			this.handleShowValidationIndicators();
-		} else {
-			this.props.onChange({ hasError });
-			this.setState({ showValidationIndicators: true });
-		}
-	};
-
 	handleShowValidationIndicators = debounce(() => {
 		this.setState({ showValidationIndicators: true });
 	}, this.props.validationDelay);
@@ -77,8 +52,19 @@ export default class Input extends React.PureComponent {
 	handleChange = event => {
 		const inputValue = event.target.value;
 
-		this.validateInput(inputValue);
-		this.props.onChange({ inputValue });
+		if (this.props.getIsValidInput != null) {
+			const hasError = inputValue !== '' && !this.props.getIsValidInput(inputValue);
+			this.props.onChange({ hasError, inputValue });
+
+			if (this.props.validationDelay) {
+				this.setState({ hasError, showValidationIndicators: false });
+				this.handleShowValidationIndicators();
+			} else {
+				this.setState({ hasError, showValidationIndicators: true });
+			}
+		} else {
+			this.props.onChange({ inputValue });
+		}
 	};
 
 	handleKeyPress = e => {
@@ -105,12 +91,11 @@ export default class Input extends React.PureComponent {
 			isRequiredField,
 			isDisabled,
 			onFocus,
-			hasError,
 			inputValue,
 			theme,
 		} = this.props;
 
-		const { showValidationIndicators } = this.state;
+		const { showValidationIndicators, hasError } = this.state;
 
 		const getClassName = (...classNames) => themeClassNames(baseTheme, theme, classNames);
 
