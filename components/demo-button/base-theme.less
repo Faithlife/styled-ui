@@ -1,8 +1,7 @@
-// Ported from https://git/Logos/Faithlife/blob/4947324240126070a754c95c160e61382b9e887b/src/Faithlife.Web/Content/Styles/common/common.mixins.less#L16 
+// Ported from https://git/Logos/Faithlife/blob/4947324240126070a754c95c160e61382b9e887b/src/Faithlife.Web/Content/Styles/common/common.mixins.less#L16
 
 @import '../shared-styles/thickness.less';
 @import '../shared-styles/colors.less';
-
 
 @primary-hover: #6db3e2;
 @primary-active: #1D6CA1;
@@ -11,12 +10,11 @@
 .button {
 	box-shadow: none;
 	border-radius: 3px;
-    font-size: 14px;
 	margin: 0;
 	padding: @thickness-3 10px;
 	cursor: pointer;
-    transition: all 0.25s ease 0s;
-
+	font-size: 14px;
+	transition: all 0.25s ease 0s;
 
 	&:focus {
 		outline: none;
@@ -54,10 +52,10 @@
 	background: none;
 	color: @primary-default;
 
-    &:hover {
-        border-color: @primary-hover;
-        background-color: @primary-hover;
-	   color: #fff;
+	&:hover {
+		border-color: @primary-hover;
+		background-color: @primary-hover;
+		color: #fff;
 	}
 
 	&:active {
@@ -65,13 +63,15 @@
 		background-color: @primary-active;
 		color: #fff;
 	}
-    &:disabled {
+
+	&:disabled {
 		border-color: @primary-disabled;
-        background: none;
-        color: @primary-disabled;
+		background: none;
+		color: @primary-disabled;
 		cursor: default;
 	}
 }
+
 .minor {
 	.button();
 	border: 1px solid @gray14;
@@ -98,17 +98,16 @@
 	}
 }
 
-
 .small {
 	padding: 6px @thickness-3;
 }
 
 .large {
 	padding: @thickness-35 @thickness-4;
-        font-size: 16px;
+	font-size: 16px;
 }
 
 .extraLarge {
 	padding: @thickness-4 @thickness-5;
-        font-size: 24px;
+	font-size: 24px;
 }
