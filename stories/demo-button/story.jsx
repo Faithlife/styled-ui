@@ -55,17 +55,17 @@ export default class DemoContainer extends Component {
 						Outline
 					</Button>
 				))}
-                {this.renderButtonsRow(marginVariation => (
+				{this.renderButtonsRow(marginVariation => (
 					<Button
 						onClick={this.props.onClick}
 						theme={this.props.theme}
-                        buttonProps={{ disabled: true }}
+						buttonProps={{ disabled: true }}
 						variations={['secondary', marginVariation]}
 					>
 						Disabled
 					</Button>
 				))}
-                {this.renderButtonsRow(marginVariation => (
+				{this.renderButtonsRow(marginVariation => (
 					<Button
 						onClick={this.props.onClick}
 						theme={this.props.theme}
@@ -73,15 +73,16 @@ export default class DemoContainer extends Component {
 					>
 						Minor
 					</Button>
-				))}   {this.renderButtonsRow(marginVariation => (
+				))}
+				{this.renderButtonsRow(marginVariation => (
 					<Button
 						onClick={this.props.onClick}
 						theme={this.props.theme}
-                        buttonProps={{ disabled: true }}
+						buttonProps={{ disabled: true }}
 						variations={['minor', marginVariation]}
 					>
 						Disabled
-                    
+
 					</Button>
 				))}
 				<div className={styles.documentation} dangerouslySetInnerHTML={{ __html: docs }} />
