@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { TextInput, Button } from '../../components';
-import styles from './story-styles.less';
 
+const Demos = styled.div`
+	width: 300px;
+	font-family: 'sans-serif';
+`;
+
+const DemoRow = styled.div`
+	padding: 8px;
+`;
 export default class Container extends Component {
 	static propTypes = {
 		theme: PropTypes.object,
@@ -21,8 +29,8 @@ export default class Container extends Component {
 
 	render() {
 		return (
-			<div className={styles.demos}>
-				<div className={styles.demoRow}>
+			<Demos>
+				<DemoRow>
 					<TextInput
 						value={this.state.inputValue}
 						onChange={this.onChange}
@@ -35,16 +43,16 @@ export default class Container extends Component {
 						validationDelay={this.props.validationDelay}
 						errorString="Sorry, that location could not be validated."
 					/>
-				</div>
-				<div className={styles.demoRow}>
+				</DemoRow>
+				<DemoRow>
 					<Button
 						buttonProps={{ disabled: this.state.hasError }}
 						variations={[Button.variations.primary, Button.variations.medium]}
 					>
 						Save
 					</Button>
-				</div>
-			</div>
+				</DemoRow>
+			</Demos>
 		);
 	}
 }

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import cn from 'classnames';
 import { Button } from '../../components';
-import styles from './story-styles.less';
 import docs from './demo-button.md';
+import * as Styled from './styled.jsx';
 
 export default class DemoContainer extends Component {
 	static propTypes = {
@@ -21,20 +20,18 @@ export default class DemoContainer extends Component {
 			variations.extraLarge,
 		];
 		return (
-			<div className={styles.demoRow}>
+			<Styled.DemoRow>
 				{buttonMargins.map((buttonMargin, i) => (
-					<div key={i} className={cn(styles.buttonWrapper, styles.buttonFlex)}>
-						{renderButton(buttonMargin)}
-					</div>
+					<Styled.ButtonWrapperFlex key={i}>{renderButton(buttonMargin)}</Styled.ButtonWrapperFlex>
 				))}
-			</div>
+			</Styled.DemoRow>
 		);
 	};
 
 	render() {
 		const { variations } = Button;
 		return (
-			<div className={styles.demos}>
+			<Styled.Demos>
 				{this.renderButtonsRow(marginVariation => (
 					<Button
 						buttonProps={{ onClick: this.props.onClick }}
@@ -62,8 +59,8 @@ export default class DemoContainer extends Component {
 						Secondary
 					</Button>
 				))}
-				<div className={styles.documentation} dangerouslySetInnerHTML={{ __html: docs }} />
-			</div>
+				<Styled.Documentation dangerouslySetInnerHTML={{ __html: docs }} />
+			</Styled.Demos>
 		);
 	}
 }

@@ -1,30 +1,30 @@
 import React from 'react';
 import { Button } from '../../components';
-import styles from './story-styles.less';
 import docs from './ok-cancel.md';
+import * as Styled from './styled.jsx';
 
 export default function DemoContainer() {
 	return (
-		<div className={styles.demos}>
-			<div className={styles.demoRow}>
-				<div className={styles.buttonWrapper}>
+		<Styled.Demos>
+			<Styled.DemoRow>
+				<Styled.ButtonWrapper>
 					<Button
 						onClick={() => {}}
 						variations={[Button.variations.primaryOutline, Button.variations.medium]}
 					>
 						Cancel
 					</Button>
-				</div>
-				<div className={styles.buttonWrapper}>
+				</Styled.ButtonWrapper>
+				<Styled.ButtonWrapper>
 					<Button
 						onClick={() => {}}
 						variations={[Button.variations.primary, Button.variations.medium]}
 					>
 						Okay
 					</Button>
-				</div>
-			</div>
-			<div className={styles.documentation} dangerouslySetInnerHTML={{ __html: docs }} />
-		</div>
+				</Styled.ButtonWrapper>
+			</Styled.DemoRow>
+			<Styled.Documentation dangerouslySetInnerHTML={{ __html: docs }} />
+		</Styled.Demos>
 	);
 }
