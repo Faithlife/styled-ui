@@ -11,7 +11,15 @@ import OkCancelStory from './demo-button/ok-cancel.jsx';
 storiesOf('Button', module)
 	.add('with text', () => <DemoButton onClick={action('clicked')} />)
 	.add('with alternate theme', () => (
-		<DemoButton onClick={action('clicked')} theme={{ default: 'rebeccapurple' }} />
+		<DemoButton
+			onClick={action('clicked')}
+			theme={{
+				default: '#D94848',
+				hover: '#EE7878',
+				active: '#BD2929',
+				disabled: '#aaa',
+			}}
+		/>
 	))
 	.add('ok cancel', () => <OkCancelStory />);
 
