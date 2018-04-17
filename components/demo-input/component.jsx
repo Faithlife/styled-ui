@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import { forbidExtraProps } from 'airbnb-prop-types';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { Exclamation, Check } from '../icons';
 import { thickness, fonts, colors, inputColors } from '../shared-styles';
 
@@ -43,7 +43,8 @@ const TextInput = styled.input`
 	border-radius: 3px;
 	padding: ${thickness.two};
 	width: 100%;
-	background-color: ${colors.shade0};
+	color: ${props => props.theme.text};
+	background-color: ${props => props.theme.background};
 
 	&:focus {
 		box-shadow: 0px 0px 0px 2px ${inputColors.inputFocusedShadowColor};
@@ -100,6 +101,13 @@ export default class Input extends React.PureComponent {
 		inputProps: PropTypes.object,
 	});
 
+	static defaultProps = {
+		theme: {
+			background: 'white',
+			text: 'black',
+		},
+	};
+
 	state = {
 		hasError: false,
 		showValidationIndicators: false,
@@ -153,45 +161,47 @@ export default class Input extends React.PureComponent {
 		const { showValidationIndicators, hasError } = this.state;
 
 		return (
-			<Label>
-				{title && (
-					<Title>
-						<div>
-							<span>{title}</span>
-							{isRequiredField ? <Required>*</Required> : null}
-						</div>
-						{help && <div>{help}</div>}
-					</Title>
-				)}
-				<InputContainer>
-					<TextInput
-						ref={input => {
-							this.input = input;
-						}}
-						type="text"
-						value={value || ''}
-						onChange={this.handleChange}
-						onKeyPress={this.handleKeyPress}
-						{...inputProps || {}}
-					/>
+			<ThemeProvider theme={theme}>
+				<Label>
+					{title && (
+						<Title>
+							<div>
+								<span>{title}</span>
+								{isRequiredField ? <Required>*</Required> : null}
+							</div>
+							{help && <div>{help}</div>}
+						</Title>
+					)}
+					<InputContainer>
+						<TextInput
+							ref={input => {
+								this.input = input;
+							}}
+							type="text"
+							value={value || ''}
+							onChange={this.handleChange}
+							onKeyPress={this.handleKeyPress}
+							{...inputProps || {}}
+						/>
 
-					{showValidationIndicators &&
-						hasError && (
-							<StyledIcon>
-								<Exclamation />
-							</StyledIcon>
-						)}
+						{showValidationIndicators &&
+							hasError && (
+								<StyledIcon>
+									<Exclamation />
+								</StyledIcon>
+							)}
 
-					{showValidationIndicators &&
-						!hasError &&
-						value && (
-							<StyledIcon>
-								<Check />
-							</StyledIcon>
-						)}
-				</InputContainer>
-				{showValidationIndicators && hasError && <ErrorTag>{errorString}</ErrorTag>}
-			</Label>
+						{showValidationIndicators &&
+							!hasError &&
+							value && (
+								<StyledIcon>
+									<Check />
+								</StyledIcon>
+							)}
+					</InputContainer>
+					{showValidationIndicators && hasError && <ErrorTag>{errorString}</ErrorTag>}
+				</Label>
+			</ThemeProvider>
 		);
 	}
 }

@@ -3,7 +3,6 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Checkbox from './check-box/story.jsx';
 import DemoInput from './demo-input/story.jsx';
-import demoInputTheme from './demo-input/alternate-theme.less';
 import DemoButton from './demo-button/story.jsx';
 import OkCancelStory from './demo-button/ok-cancel.jsx';
 
@@ -32,4 +31,6 @@ storiesOf('Input', module)
 	.add('with no validation', () => <DemoInput />)
 	.add('with instant validation', () => <DemoInput demoValidation />)
 	.add('with delayed validation', () => <DemoInput demoValidation validationDelay={100} />)
-	.add('with alternate theme', () => <DemoInput demoValidation theme={demoInputTheme} />);
+	.add('with alternate theme', () => (
+		<DemoInput demoValidation theme={{ background: '#393939', text: 'white' }} />
+	));

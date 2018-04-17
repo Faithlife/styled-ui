@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { forbidExtraProps } from 'airbnb-prop-types';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
 const CheckboxDiv = styled.div`
 	position: absolute;
@@ -68,12 +68,14 @@ const Label = styled.div`
 // Ported from https://git/Logos/Sites.Admin/blob/db17162da13a47c82eea000cfdd6384e8a174874/src/Sites.Admin/Private/scripts/components/checkbox/checkbox.jsx
 export default function Checkbox({ onClick, title, isChecked, theme }) {
 	return (
-		<CheckboxContainer theme={theme} onClick={onClick}>
-			<CheckboxDiv theme={theme}>
-				<CheckedIndicator theme={theme} isChecked={isChecked} />
-			</CheckboxDiv>
-			{title && <Label theme={theme}>{title}</Label>}
-		</CheckboxContainer>
+		<ThemeProvider theme={theme}>
+			<CheckboxContainer onClick={onClick}>
+				<CheckboxDiv>
+					<CheckedIndicator isChecked={isChecked} />
+				</CheckboxDiv>
+				{title && <Label>{title}</Label>}
+			</CheckboxContainer>
+		</ThemeProvider>
 	);
 }
 
