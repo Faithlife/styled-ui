@@ -43,19 +43,19 @@ export const variationMap = {
 
 		&:hover {
 			border-color: ${props => props.theme.hover};
-			background-color: background: none;
+			background-color: none;
 			color: ${props => props.theme.default};
 		}
 
 		&:active {
 			border-color: ${props => props.theme.active};
-			background-color: background: none;
+			background-color: none;
 			color: ${props => props.theme.default};
 		}
 
 		&:disabled {
 			border-color: ${props => props.theme.disabled};
-			background-color: background: none;
+			background-color: none;
 			cursor: default;
 		}
 `,

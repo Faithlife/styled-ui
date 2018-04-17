@@ -46,10 +46,6 @@ export const TextInput = styled.input`
 		border-color: ${inputColors.inputFocusedBorderColor};
 		outline: none;
 		margin-bottom: 0px;
-
-		& + .input__faithlife-tag {
-			visibility: visible;
-		}
 	}
 
 	&:disabled {
@@ -74,7 +70,7 @@ export const StyledIcon = styled.div`
 `;
 
 export const ErrorTag = styled.div`
-	margin-top: ${thickness.two}
+	margin-top: ${thickness.two};
 	color: ${colors.red};
 	${fonts.b4};
 `;
