@@ -27,6 +27,7 @@ export default class DemoContainer extends Component {
 	render() {
 		return (
 			<div className={styles.demos}>
+			<h1>Hello there</h1>
 				{this.renderButtonsRow(marginVariation => (
 					<Button
 						onClick={this.props.onClick}
@@ -43,7 +44,7 @@ export default class DemoContainer extends Component {
 						buttonProps={{ disabled: true }}
 						variations={['primary', marginVariation]}
 					>
-						Disabled
+						Primary Disabled
 					</Button>
 				))}
 				{this.renderButtonsRow(marginVariation => (
@@ -52,7 +53,37 @@ export default class DemoContainer extends Component {
 						theme={this.props.theme}
 						variations={['secondary', marginVariation]}
 					>
-						Secondary
+						Outline
+					</Button>
+				))}
+				{this.renderButtonsRow(marginVariation => (
+					<Button
+						onClick={this.props.onClick}
+						theme={this.props.theme}
+						buttonProps={{ disabled: true }}
+						variations={['secondary', marginVariation]}
+					>
+						Outline Disabled
+					</Button>
+				))}
+				{this.renderButtonsRow(marginVariation => (
+					<Button
+						onClick={this.props.onClick}
+						theme={this.props.theme}
+						variations={['minor', marginVariation]}
+					>
+						Minor
+					</Button>
+				))}
+				{this.renderButtonsRow(marginVariation => (
+					<Button
+						onClick={this.props.onClick}
+						theme={this.props.theme}
+						buttonProps={{ disabled: true }}
+						variations={['minor', marginVariation]}
+					>
+						Minor Disabled
+
 					</Button>
 				))}
 				<div className={styles.documentation} dangerouslySetInnerHTML={{ __html: docs }} />
