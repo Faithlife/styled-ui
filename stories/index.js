@@ -2,7 +2,6 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Checkbox from './check-box/story.jsx';
-import checkboxTheme from './check-box/alternate-theme.less';
 import DemoInput from './demo-input/story.jsx';
 import demoInputTheme from './demo-input/alternate-theme.less';
 import DemoButton from './demo-button/story.jsx';
@@ -25,7 +24,9 @@ storiesOf('Button', module)
 
 storiesOf('Checkbox', module)
 	.add('with text', () => <Checkbox />)
-	.add('with alternate theme', () => <Checkbox theme={checkboxTheme} />);
+	.add('with alternate theme', () => (
+		<Checkbox theme={{ primary: 'plum', border: 'rebeccapurple' }} />
+	));
 
 storiesOf('Input', module)
 	.add('with no validation', () => <DemoInput />)
