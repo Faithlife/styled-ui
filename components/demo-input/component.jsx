@@ -2,9 +2,86 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import { forbidExtraProps } from 'airbnb-prop-types';
-import { themeClassNames } from '../utils';
+import styled from 'styled-components';
 import { Exclamation, Check } from '../icons';
-import baseTheme from './base-theme.less';
+import { thickness, fonts, colors, inputColors } from '../shared-styles';
+
+const Label = styled.label`
+	display: block;
+	margin-bottom: ${thickness.four}
+	width: 100%;
+`;
+
+const Title = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: ${thickness.two};
+`;
+
+const Required = styled.span`
+	margin-left: ${thickness.two};
+`;
+
+const InputContainer = styled.div`
+	position: relative;
+`;
+
+const textWithError = `
+	border-color: ${colors.red};
+	padding-right: ${thickness.five};
+`;
+
+const textWithSuccess = `
+	padding-right: ${thickness.five};
+`;
+
+const TextInput = styled.input`
+	display: flex;
+	box-sizing: border-box;
+	border: solid 1px ${colors.borderColor};
+	border-radius: 3px;
+	padding: ${thickness.two};
+	width: 100%;
+	background-color: ${colors.shade0};
+
+	&:focus {
+		box-shadow: 0px 0px 0px 2px ${inputColors.inputFocusedShadowColor};
+		border-color: ${inputColors.inputFocusedBorderColor};
+		outline: none;
+		margin-bottom: 0px;
+
+		& + .input__faithlife-tag {
+			visibility: visible;
+		}
+	}
+
+	&:disabled {
+		opacity: 0.5;
+	}
+
+	&::placeholder {
+		color: ${colors.shade35};
+		font-style: italic;
+	}
+
+	${props => (props.hasError ? textWithError : textWithSuccess)};
+`;
+
+const StyledIcon = styled.div`
+	& svg {
+		position: absolute;
+		top: 50%;
+		right: 4px;
+		transform: translateY(-50%);
+	}
+`;
+
+const ErrorTag = styled.div`
+	margin-top: ${thickness.two}
+	color: ${colors.red};
+	${fonts.b4};
+`;
 
 // Ported from https://git/Logos/Sites.Admin/blob/db17162da13a47c82eea000cfdd6384e8a174874/src/Sites.Admin/Private/scripts/components/input/index.jsx
 export default class Input extends React.PureComponent {
@@ -75,25 +152,22 @@ export default class Input extends React.PureComponent {
 
 		const { showValidationIndicators, hasError } = this.state;
 
-		const getClassName = (...classNames) => themeClassNames(baseTheme, theme, classNames);
-
 		return (
-			<label className={getClassName('input')}>
+			<Label>
 				{title && (
-					<div className={getClassName('title')}>
+					<Title>
 						<div>
 							<span>{title}</span>
-							{isRequiredField ? <span className={getClassName('required')}>*</span> : null}
+							{isRequiredField ? <Required>*</Required> : null}
 						</div>
 						{help && <div>{help}</div>}
-					</div>
+					</Title>
 				)}
-				<div className={getClassName('inputContainer')}>
-					<input
+				<InputContainer>
+					<TextInput
 						ref={input => {
 							this.input = input;
 						}}
-						className={getClassName('text', hasError ? 'textError' : 'textSuccess')}
 						type="text"
 						value={value || ''}
 						onChange={this.handleChange}
@@ -102,15 +176,22 @@ export default class Input extends React.PureComponent {
 					/>
 
 					{showValidationIndicators &&
-						hasError && <Exclamation className={getClassName('errorIcon')} />}
+						hasError && (
+							<StyledIcon>
+								<Exclamation />
+							</StyledIcon>
+						)}
 
 					{showValidationIndicators &&
 						!hasError &&
-						value && <Check className={getClassName('successIcon')} />}
-				</div>
-				{showValidationIndicators &&
-					hasError && <div className={getClassName('errorTag', 'b4')}>{errorString}</div>}
-			</label>
+						value && (
+							<StyledIcon>
+								<Check />
+							</StyledIcon>
+						)}
+				</InputContainer>
+				{showValidationIndicators && hasError && <ErrorTag>{errorString}</ErrorTag>}
+			</Label>
 		);
 	}
 }

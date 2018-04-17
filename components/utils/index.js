@@ -13,7 +13,7 @@ export function themeClassNames(baseTheme, overridingTheme, propertyNames) {
 export function applyVariations(component, variationMap, variations) {
 	let wrappedComponent = component;
 
-	for (const variation of variations) {
+	for (const variation of variations || []) {
 		const mappedVariation = variationMap[variation];
 		if (!mappedVariation) {
 			throw new Error(`Unknown variation: ${variation}`);
