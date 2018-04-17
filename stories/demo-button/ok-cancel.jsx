@@ -8,12 +8,18 @@ export default function DemoContainer() {
 		<div className={styles.demos}>
 			<div className={styles.demoRow}>
 				<div className={styles.buttonWrapper}>
-					<Button onClick={() => {}} variations={['primaryOutline', 'medium']}>
+					<Button
+						onClick={() => {}}
+						variations={[Button.variations.primaryOutline, Button.variations.medium]}
+					>
 						Cancel
 					</Button>
 				</div>
 				<div className={styles.buttonWrapper}>
-					<Button onClick={() => {}} variations={['primary', 'medium']}>
+					<Button
+						onClick={() => {}}
+						variations={[Button.variations.primary, Button.variations.medium]}
+					>
 						Okay
 					</Button>
 				</div>

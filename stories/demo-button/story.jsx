@@ -12,11 +12,18 @@ export default class DemoContainer extends Component {
 	};
 
 	renderButtonsRow = renderButton => {
-		const buttonMargins = ['small', 'medium', 'large', 'extraLarge'];
+		const { variations } = Button;
+
+		const buttonMargins = [
+			variations.small,
+			variations.medium,
+			variations.large,
+			variations.extraLarge,
+		];
 		return (
 			<div className={styles.demoRow}>
-				{buttonMargins.map(buttonMargin => (
-					<div key={buttonMargin} className={cn(styles.buttonWrapper, styles.buttonFlex)}>
+				{buttonMargins.map((buttonMargin, i) => (
+					<div key={i} className={cn(styles.buttonWrapper, styles.buttonFlex)}>
 						{renderButton(buttonMargin)}
 					</div>
 				))}
@@ -25,13 +32,14 @@ export default class DemoContainer extends Component {
 	};
 
 	render() {
+		const { variations } = Button;
 		return (
 			<div className={styles.demos}>
 				{this.renderButtonsRow(marginVariation => (
 					<Button
 						buttonProps={{ onClick: this.props.onClick }}
 						theme={this.props.theme}
-						variations={['primary', marginVariation]}
+						variations={[variations.primary, marginVariation]}
 					>
 						Primary
 					</Button>
@@ -40,7 +48,7 @@ export default class DemoContainer extends Component {
 					<Button
 						buttonProps={{ onClick: this.props.onClick, disabled: true }}
 						theme={this.props.theme}
-						variations={['primary', marginVariation]}
+						variations={[variations.primary, marginVariation]}
 					>
 						Disabled
 					</Button>
@@ -49,7 +57,7 @@ export default class DemoContainer extends Component {
 					<Button
 						buttonProps={{ onClick: this.props.onClick }}
 						theme={this.props.theme}
-						variations={['primaryOutline', marginVariation]}
+						variations={[variations.primaryOutline, marginVariation]}
 					>
 						Secondary
 					</Button>

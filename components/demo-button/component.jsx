@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { forbidExtraProps } from 'airbnb-prop-types';
-import { applyVariations } from '../utils';
+import { applyVariations, getVariations } from '../utils';
 import * as Styled from './styled.jsx';
 
 function DemoComponent({ children, variations, buttonProps, theme }) {
@@ -29,5 +29,7 @@ DemoComponent.defaultProps = {
 		disabled: '#bedcf2',
 	},
 };
+
+DemoComponent.variations = getVariations(Styled.variationMap);
 
 export default DemoComponent;
