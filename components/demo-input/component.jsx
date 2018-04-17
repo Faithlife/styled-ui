@@ -2,87 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import { forbidExtraProps } from 'airbnb-prop-types';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import { Exclamation, Check } from '../icons';
-import { thickness, fonts, colors, inputColors } from '../shared-styles';
-
-const Label = styled.label`
-	display: block;
-	margin-bottom: ${thickness.four}
-	width: 100%;
-`;
-
-const Title = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: ${thickness.two};
-`;
-
-const Required = styled.span`
-	margin-left: ${thickness.two};
-`;
-
-const InputContainer = styled.div`
-	position: relative;
-`;
-
-const textWithError = `
-	border-color: ${colors.red};
-	padding-right: ${thickness.five};
-`;
-
-const textWithSuccess = `
-	padding-right: ${thickness.five};
-`;
-
-const TextInput = styled.input`
-	display: flex;
-	box-sizing: border-box;
-	border: solid 1px ${colors.borderColor};
-	border-radius: 3px;
-	padding: ${thickness.two};
-	width: 100%;
-	color: ${props => props.theme.text};
-	background-color: ${props => props.theme.background};
-
-	&:focus {
-		box-shadow: 0px 0px 0px 2px ${inputColors.inputFocusedShadowColor};
-		border-color: ${inputColors.inputFocusedBorderColor};
-		outline: none;
-		margin-bottom: 0px;
-
-		& + .input__faithlife-tag {
-			visibility: visible;
-		}
-	}
-
-	&:disabled {
-		opacity: 0.5;
-	}
-
-	&::placeholder {
-		color: ${colors.shade35};
-		font-style: italic;
-	}
-
-	${props => (props.hasError ? textWithError : textWithSuccess)};
-`;
-
-const StyledIcon = styled.div`
-	& svg {
-		position: absolute;
-		top: 50%;
-		right: 4px;
-		transform: translateY(-50%);
-	}
-`;
-
-const ErrorTag = styled.div`
-	margin-top: ${thickness.two}
-	color: ${colors.red};
-	${fonts.b4};
-`;
+import * as Styled from './styled.jsx';
 
 // Ported from https://git/Logos/Sites.Admin/blob/db17162da13a47c82eea000cfdd6384e8a174874/src/Sites.Admin/Private/scripts/components/input/index.jsx
 export default class Input extends React.PureComponent {
@@ -162,18 +84,18 @@ export default class Input extends React.PureComponent {
 
 		return (
 			<ThemeProvider theme={theme}>
-				<Label>
+				<Styled.Label>
 					{title && (
-						<Title>
+						<Styled.Title>
 							<div>
 								<span>{title}</span>
-								{isRequiredField ? <Required>*</Required> : null}
+								{isRequiredField ? <Styled.Required>*</Styled.Required> : null}
 							</div>
 							{help && <div>{help}</div>}
-						</Title>
+						</Styled.Title>
 					)}
-					<InputContainer>
-						<TextInput
+					<Styled.InputContainer>
+						<Styled.TextInput
 							ref={input => {
 								this.input = input;
 							}}
@@ -186,21 +108,21 @@ export default class Input extends React.PureComponent {
 
 						{showValidationIndicators &&
 							hasError && (
-								<StyledIcon>
+								<Styled.StyledIcon>
 									<Exclamation />
-								</StyledIcon>
+								</Styled.StyledIcon>
 							)}
 
 						{showValidationIndicators &&
 							!hasError &&
 							value && (
-								<StyledIcon>
+								<Styled.StyledIcon>
 									<Check />
-								</StyledIcon>
+								</Styled.StyledIcon>
 							)}
-					</InputContainer>
-					{showValidationIndicators && hasError && <ErrorTag>{errorString}</ErrorTag>}
-				</Label>
+					</Styled.InputContainer>
+					{showValidationIndicators && hasError && <Styled.ErrorTag>{errorString}</Styled.ErrorTag>}
+				</Styled.Label>
 			</ThemeProvider>
 		);
 	}
