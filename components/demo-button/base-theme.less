@@ -1,17 +1,22 @@
-// Ported from https://git/Logos/Faithlife/blob/4947324240126070a754c95c160e61382b9e887b/src/Faithlife.Web/Content/Styles/common/common.mixins.less#L16
-@import '../shared-styles/thickness.less';
+// Ported from https://git/Logos/Faithlife/blob/4947324240126070a754c95c160e61382b9e887b/src/Faithlife.Web/Content/Styles/common/common.mixins.less#L16 
 
-@primary-default: #278ED4;
-@primary-hover: #6DB3E2;
+@import '../shared-styles/thickness.less';
+@import '../shared-styles/colors.less';
+
+
+@primary-hover: #6db3e2;
 @primary-active: #1D6CA1;
 @primary-disabled: #bedcf2;
 
 .button {
 	box-shadow: none;
-	border-radius: 2px;
+	border-radius: 3px;
+    font-size: 14px;
 	margin: 0;
-	padding: @thickness-3 @thickness-4;
+	padding: @thickness-3 10px;
 	cursor: pointer;
+    transition: all 0.25s ease 0s;
+
 
 	&:focus {
 		outline: none;
@@ -49,27 +54,61 @@
 	background: none;
 	color: @primary-default;
 
-	&:hover {
-		border-color: @primary-hover;
-		background: none;
-		color: @primary-hover;
+    &:hover {
+        border-color: @primary-hover;
+        background-color: @primary-hover;
+	   color: #fff;
 	}
 
 	&:active {
 		border-color: @primary-active;
-		background: none;
-		color: @primary-active;
+		background-color: @primary-active;
+		color: #fff;
+	}
+    &:disabled {
+		border-color: @primary-disabled;
+        background: none;
+        color: @primary-disabled;
+		cursor: default;
+	}
+}
+.minor {
+	.button();
+	border: 1px solid @gray14;
+	background-color: @gray4;
+	color: @fl-gray;
+
+	&:hover {
+		border-color: @gray14;
+		background-color: @gray14;
+		color: @fl-gray;
+	}
+
+	&:active {
+		border-color: @gray22;
+		background-color: @gray22;
+		color: @fl-gray;
+	}
+
+	&:disabled {
+		border-color: @gray8;
+		background-color: @white;
+		color: @gray22;
+		cursor: default;
 	}
 }
 
+
 .small {
-	padding: @thickness-2 @thickness-3;
+	padding: 6px @thickness-3;
 }
 
 .large {
-	padding: @thickness-4 @thickness-5;
+	padding: @thickness-35 @thickness-4;
+        font-size: 16px;
 }
 
 .extraLarge {
-	padding: @thickness-5 @thickness-6;
+	padding: @thickness-4 @thickness-5;
+        font-size: 24px;
 }
