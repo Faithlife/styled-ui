@@ -7,12 +7,11 @@ import DemoInput from './demo-input/story.jsx';
 import demoInputTheme from './demo-input/alternate-theme.less';
 import DemoButton from './demo-button/story.jsx';
 import OkCancelStory from './demo-button/ok-cancel.jsx';
-import demoButtonTheme from './demo-button/alternate-theme.less';
 
 storiesOf('Button', module)
 	.add('with text', () => <DemoButton onClick={action('clicked')} />)
 	.add('with alternate theme', () => (
-		<DemoButton onClick={action('clicked')} theme={demoButtonTheme} />
+		<DemoButton onClick={action('clicked')} theme={{ default: 'rebeccapurple' }} />
 	))
 	.add('ok cancel', () => <OkCancelStory />);
 
