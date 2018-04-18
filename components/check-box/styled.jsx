@@ -20,11 +20,8 @@ export const CheckboxContainer = styled.button`
 	min-height: 16px;
 	background: transparent;
 
-	&:hover,
-	&:focus {
-		${CheckboxDiv} {
-			border: solid 1px ${props => props.theme.primary};
-		}
+	&:hover > ${CheckboxDiv}, &:focus > ${CheckboxDiv} {
+		border: solid 1px ${props => props.theme.primary};
 	}
 `;
 

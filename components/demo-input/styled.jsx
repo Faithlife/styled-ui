@@ -3,7 +3,7 @@ import { thickness, fonts, colors, inputColors } from '../shared-styles';
 
 export const Label = styled.label`
 	display: block;
-	margin-bottom: ${thickness.four}
+	margin-bottom: ${thickness.four};
 	width: 100%;
 `;
 

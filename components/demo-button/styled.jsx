@@ -59,8 +59,16 @@ export const variationMap = {
 			cursor: default;
 		}
 `,
-	small: component => component.extend`padding: ${thickness.two} ${thickness.three}`,
-	medium: component => component.extend`padding: ${thickness.three} ${thickness.four}`,
-	large: component => component.extend`padding: ${thickness.four} ${thickness.five}`,
-	extraLarge: component => component.extend`padding: ${thickness.five} ${thickness.six}`,
+	small: component => component.extend`
+		padding: ${thickness.two} ${thickness.three};
+`,
+	medium: component => component.extend`
+		padding: ${thickness.three} ${thickness.four};
+`,
+	large: component => component.extend`
+		padding: ${thickness.four} ${thickness.five};
+`,
+	extraLarge: component => component.extend`
+		padding: ${thickness.five} ${thickness.six};
+`,
 };
