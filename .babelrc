@@ -1,4 +1,12 @@
 {
 	"presets": ["react", "env", "stage-0"],
-	"plugins": ["add-module-exports"]
+	"plugins": [
+		[
+			"babel-plugin-styled-components",
+			{
+				"ssr": true
+			}
+		],
+		"add-module-exports"
+	]
 }
