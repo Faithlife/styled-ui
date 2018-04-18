@@ -38,7 +38,7 @@ export default class Container extends Component {
 						title="Location"
 						help={<span>Try typing 'error'</span>}
 						theme={this.props.theme}
-						inputProps={{ placeholder: 'Bellingham' }}
+						placeholder="Bellingham"
 						isRequiredField
 						validationDelay={this.props.validationDelay}
 						errorString="Sorry, that location could not be validated."
@@ -46,7 +46,7 @@ export default class Container extends Component {
 				</DemoRow>
 				<DemoRow>
 					<Button
-						buttonProps={{ disabled: this.state.hasError }}
+						disabled={this.state.hasError}
 						variations={[Button.variations.primary, Button.variations.medium]}
 					>
 						Save

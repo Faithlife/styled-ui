@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
-import { forbidExtraProps } from 'airbnb-prop-types';
 import { ThemeProvider } from 'styled-components';
 import { Exclamation, Check } from '../icons';
 import * as Styled from './styled.jsx';
 
 // Ported from https://git/Logos/Sites.Admin/blob/db17162da13a47c82eea000cfdd6384e8a174874/src/Sites.Admin/Private/scripts/components/input/index.jsx
 export default class Input extends React.PureComponent {
-	static propTypes = forbidExtraProps({
+	static propTypes = {
 		errorString: PropTypes.string,
 		getIsValidInput: PropTypes.func,
 		help: PropTypes.node,
@@ -20,8 +19,7 @@ export default class Input extends React.PureComponent {
 		title: PropTypes.string,
 		validationDelay: PropTypes.number,
 		value: PropTypes.string.isRequired,
-		inputProps: PropTypes.object,
-	});
+	};
 
 	static defaultProps = {
 		theme: {
@@ -78,7 +76,7 @@ export default class Input extends React.PureComponent {
 	};
 
 	render() {
-		const { errorString, help, isRequiredField, theme, title, value, inputProps } = this.props;
+		const { errorString, help, isRequiredField, theme, title, value, ...inputProps } = this.props;
 
 		const { showValidationIndicators, hasError } = this.state;
 
@@ -96,6 +94,7 @@ export default class Input extends React.PureComponent {
 					)}
 					<Styled.InputContainer>
 						<Styled.TextInput
+							{...inputProps}
 							ref={input => {
 								this.input = input;
 							}}
@@ -103,7 +102,6 @@ export default class Input extends React.PureComponent {
 							value={value || ''}
 							onChange={this.handleChange}
 							onKeyPress={this.handleKeyPress}
-							{...inputProps || {}}
 						/>
 
 						{showValidationIndicators &&

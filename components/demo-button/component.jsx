@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { forbidExtraProps } from 'airbnb-prop-types';
 import { applyVariations, getVariations } from '../utils';
 import * as Styled from './styled.jsx';
 
-function DemoComponent({ children, variations, buttonProps, theme }) {
+function DemoComponent({ children, variations, theme, ...buttonProps }) {
 	const MappedStyledComponent = applyVariations(Styled.Button, Styled.variationMap, variations);
 
 	return (
@@ -14,12 +13,11 @@ function DemoComponent({ children, variations, buttonProps, theme }) {
 	);
 }
 
-DemoComponent.propTypes = forbidExtraProps({
+DemoComponent.propTypes = {
 	children: PropTypes.node.isRequired,
 	theme: PropTypes.object,
 	variations: PropTypes.array,
-	buttonProps: PropTypes.object,
-});
+};
 
 DemoComponent.defaultProps = {
 	theme: {
@@ -28,6 +26,7 @@ DemoComponent.defaultProps = {
 		active: '#1d6ca1',
 		disabled: '#bedcf2',
 	},
+	type: 'button',
 };
 
 DemoComponent.variations = getVariations(Styled.variationMap);

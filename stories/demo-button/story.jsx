@@ -34,7 +34,7 @@ export default class DemoContainer extends Component {
 			<Styled.Demos>
 				{this.renderButtonsRow(marginVariation => (
 					<Button
-						buttonProps={{ onClick: this.props.onClick }}
+						onClick={this.props.onClick}
 						theme={this.props.theme}
 						variations={[variations.primary, marginVariation]}
 					>
@@ -43,7 +43,8 @@ export default class DemoContainer extends Component {
 				))}
 				{this.renderButtonsRow(marginVariation => (
 					<Button
-						buttonProps={{ onClick: this.props.onClick, disabled: true }}
+						onClick={this.props.onClick}
+						disabled
 						theme={this.props.theme}
 						variations={[variations.primary, marginVariation]}
 					>
@@ -52,7 +53,7 @@ export default class DemoContainer extends Component {
 				))}
 				{this.renderButtonsRow(marginVariation => (
 					<Button
-						buttonProps={{ onClick: this.props.onClick }}
+						onClick={this.props.onClick}
 						theme={this.props.theme}
 						variations={[variations.primaryOutline, marginVariation]}
 					>
