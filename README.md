@@ -1,6 +1,8 @@
 # Engagement Products UI
 
 [![Build Status](https://travis-ci.org/Faithlife/engagement-products-ui.svg?branch=master)](https://travis-ci.org/Faithlife/engagement-products-ui)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![style: styled-components](https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg?colorB=daa357&colorA=db748e)](https://github.com/styled-components/styled-components)
 
 ### [View Demos Here](https://faithlife.github.io/engagement-products-ui/)
 
@@ -24,12 +26,11 @@ This project addresses problems introduced by creating components from scratch. 
 
 ### Goals
 - No breaking changes between published versions of this project. Bug fixes to components are OK, but additional component features that are not opt-in should not be added. If a new version of a component needs to be released, a version suffix should be added to the exported component name (e.g. demo-button-v2).
-- Components are built with CSS modules + React. No large additional runtime libraries should be added (such as moment, lodash.debounce is OK).
-- Components contain a `base-theme.less`, which can be overridden by the consumer (see storybook for examples).
+- Components are built with Styled Components + React. No large additional runtime libraries should be added (such as moment, lodash.debounce is OK). All components support basic color theming and should have a matching story that demos an alternate theme.
 - Minimal complexity. For complex components (such as a sortable list control with inline search), consider creating a reusable component in a separate project
 - All UI is approved by the design team before it is merged into this project
 - Components have a prose description and live demo of different component states (using real data)
-- Component directories have a container component that handles state to show how the component should be used within a real app. The presentational components may contain some local state to handle UI-specific concerns (such the location of a popup)
+- Story directories have a component that handles state to show how the component should be used within a real app. The presentational components may contain some local state to handle UI-specific concerns (such the location of a popup)
 
 ### Non-goals
 - Components that live here should be considered "final art", any changes will need to be ported manually over to existing apps
