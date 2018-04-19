@@ -1,21 +1,11 @@
-export function applyVariations(component, variationMap, variations) {
+export function applyVariations(component, variationMap, props) {
 	let wrappedComponent = component;
 
-	for (const variation of variations || []) {
-		const mappedVariation = typeof variation === 'symbol' && variationMap[Symbol.keyFor(variation)];
-		if (!mappedVariation) {
-			throw new Error(`Unknown variation: ${variation}`);
+	for (const variation of Object.keys(variationMap) || []) {
+		if (props.hasOwnProperty(variation)) {
+			wrappedComponent = variationMap[variation](wrappedComponent);
 		}
-
-		wrappedComponent = mappedVariation(wrappedComponent);
 	}
 
-	return wrappedComponent;
-}
-
-export function getVariations(variationMap) {
-	return Object.keys(variationMap).reduce(
-		(prev, curr) => ({ ...prev, [curr]: Symbol.for(curr) }),
-		{},
-	);
+	return { component: wrappedComponent, props };
 }

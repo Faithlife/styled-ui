@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { applyVariations, getVariations } from '../utils';
+import { applyVariations } from '../utils';
 import * as Styled from './styled.jsx';
 
-function DemoComponent({ children, variations, theme, ...buttonProps }) {
-	const MappedStyledComponent = applyVariations(Styled.Button, Styled.variationMap, variations);
+function DemoComponent({ children, theme, ...buttonProps }) {
+	const { component: MappedStyledComponent, props: filteredProps } = applyVariations(
+		Styled.Button,
+		Styled.variationMap,
+		buttonProps,
+	);
 
 	return (
-		<MappedStyledComponent theme={theme} {...buttonProps || {}}>
+		<MappedStyledComponent theme={theme} {...filteredProps || {}}>
 			{children}
 		</MappedStyledComponent>
 	);
@@ -16,7 +20,12 @@ function DemoComponent({ children, variations, theme, ...buttonProps }) {
 DemoComponent.propTypes = {
 	children: PropTypes.node.isRequired,
 	theme: PropTypes.object,
-	variations: PropTypes.array,
+	primary: PropTypes.bool,
+	primaryOutline: PropTypes.bool,
+	medium: PropTypes.bool,
+	small: PropTypes.bool,
+	large: PropTypes.bool,
+	extraLarge: PropTypes.bool,
 };
 
 DemoComponent.defaultProps = {
@@ -28,7 +37,5 @@ DemoComponent.defaultProps = {
 	},
 	type: 'button',
 };
-
-DemoComponent.variations = getVariations(Styled.variationMap);
 
 export default DemoComponent;

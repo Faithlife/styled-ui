@@ -8,18 +8,12 @@ export default function DemoContainer() {
 		<Styled.Demos>
 			<Styled.DemoRow>
 				<Styled.ButtonWrapper>
-					<Button
-						onClick={() => {}}
-						variations={[Button.variations.primaryOutline, Button.variations.medium]}
-					>
+					<Button onClick={() => {}} primaryOutline medium>
 						Cancel
 					</Button>
 				</Styled.ButtonWrapper>
 				<Styled.ButtonWrapper>
-					<Button
-						onClick={() => {}}
-						variations={[Button.variations.primary, Button.variations.medium]}
-					>
+					<Button onClick={() => {}} primary medium>
 						Okay
 					</Button>
 				</Styled.ButtonWrapper>

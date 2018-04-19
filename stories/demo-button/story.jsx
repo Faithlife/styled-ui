@@ -11,14 +11,7 @@ export default class DemoContainer extends Component {
 	};
 
 	renderButtonsRow = renderButton => {
-		const { variations } = Button;
-
-		const buttonMargins = [
-			variations.small,
-			variations.medium,
-			variations.large,
-			variations.extraLarge,
-		];
+		const buttonMargins = ['small', 'medium', 'large', 'extraLarge'];
 		return (
 			<Styled.DemoRow>
 				{buttonMargins.map((buttonMargin, i) => (
@@ -29,33 +22,35 @@ export default class DemoContainer extends Component {
 	};
 
 	render() {
-		const { variations } = Button;
 		return (
 			<Styled.Demos>
 				{this.renderButtonsRow(marginVariation => (
 					<Button
+						primary
 						onClick={this.props.onClick}
 						theme={this.props.theme}
-						variations={[variations.primary, marginVariation]}
+						{...{ [marginVariation]: true }}
 					>
 						Primary
 					</Button>
 				))}
 				{this.renderButtonsRow(marginVariation => (
 					<Button
+						primary
 						onClick={this.props.onClick}
 						disabled
 						theme={this.props.theme}
-						variations={[variations.primary, marginVariation]}
+						{...{ [marginVariation]: true }}
 					>
 						Disabled
 					</Button>
 				))}
 				{this.renderButtonsRow(marginVariation => (
 					<Button
+						primaryOutline
 						onClick={this.props.onClick}
 						theme={this.props.theme}
-						variations={[variations.primaryOutline, marginVariation]}
+						{...{ [marginVariation]: true }}
 					>
 						Secondary
 					</Button>

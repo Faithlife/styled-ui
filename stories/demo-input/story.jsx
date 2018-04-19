@@ -45,10 +45,7 @@ export default class Container extends Component {
 					/>
 				</DemoRow>
 				<DemoRow>
-					<Button
-						disabled={this.state.hasError}
-						variations={[Button.variations.primary, Button.variations.medium]}
-					>
+					<Button disabled={this.state.hasError} primary medium>
 						Save
 					</Button>
 				</DemoRow>
