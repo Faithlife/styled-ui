@@ -1,11 +1,14 @@
 import styled from 'styled-components';
-import { thickness } from '../shared-styles';
+import { thickness, colors } from '../shared-styles';
 
 export const Button = styled.button`
 	box-shadow: none;
-	border-radius: 2px;
+	border-radius: 3px;
 	margin: 0;
 	cursor: pointer;
+	font-size: 14px;
+	transition: all 0.25s ease 0s;
+	white-space: nowrap;
 
 	&:focus {
 		outline: none;
@@ -42,33 +45,60 @@ export const variationMap = {
 		color: ${props => props.theme.default};
 
 		&:hover {
+			background-color: ${props => props.theme.hover};
 			border-color: ${props => props.theme.hover};
-			background-color: none;
-			color: ${props => props.theme.default};
+			color: #fff;
 		}
 
 		&:active {
+			background-color: ${props => props.theme.active};
 			border-color: ${props => props.theme.active};
-			background-color: none;
-			color: ${props => props.theme.default};
+			color: #fff;
 		}
 
 		&:disabled {
+			background: none;
 			border-color: ${props => props.theme.disabled};
-			background-color: none;
+			color: ${props => props.theme.disabled};
+			cursor: default;
+		}
+`,
+	minor: component => component.extend`
+		border: 1px solid ${colors.gray14};
+		background: ${colors.gray4};
+		color: ${colors.flGray};
+
+		&:hover {
+			background-color: ${colors.gray14};
+			border: 1px solid ${colors.gray14};
+			color: ${colors.flGray};
+		}
+
+		&:active {
+			background-color: ${colors.gray22};
+			border: 1px solid ${colors.gray22};
+			color: ${colors.flGray};
+		}
+
+		&:disabled {
+			background-color: #fff;
+			border-color: ${colors.gray8};
+			color: ${colors.gray22};
 			cursor: default;
 		}
 `,
 	small: component => component.extend`
-		padding: ${thickness.two} ${thickness.three};
+		padding: 6px ${thickness.three};
 `,
 	medium: component => component.extend`
-		padding: ${thickness.three} ${thickness.four};
+		padding: ${thickness.three} 10px;
 `,
 	large: component => component.extend`
-		padding: ${thickness.four} ${thickness.five};
+		padding: ${thickness.threePointFive} ${thickness.four};
+		font-size: 16px;
 `,
 	extraLarge: component => component.extend`
-		padding: ${thickness.five} ${thickness.six};
+		padding: ${thickness.four} ${thickness.five};
+		font-size: 24px;
 `,
 };

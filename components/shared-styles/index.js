@@ -1,6 +1,7 @@
 export const thickness = {
 	two: '4px',
 	three: '8px',
+	threePointFive: '12px',
 	four: '16px',
 	five: '24px',
 	six: '32px',
@@ -22,6 +23,11 @@ export const colors = {
 	shade35: '#D4D0CF',
 	shade50: '#95908F',
 	shade75: '#585250',
+	gray4: '#f5f5f5',
+	gray8: '#EBEBEB',
+	gray14: '#DBDBDB',
+	gray22: '#C7C7C7',
+	flGray: '#575251',
 };
 
 export const inputColors = {
