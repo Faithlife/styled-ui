@@ -1,23 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { forbidExtraProps } from 'airbnb-prop-types';
-import { themeClassNames } from '../utils';
-import baseTheme from './base-theme.less';
+import { applyVariations } from '../utils';
+import * as Styled from './styled.jsx';
 
-export default function DemoComponent({ theme, variations, children, buttonProps }) {
+function DemoComponent({ children, theme, ...buttonProps }) {
+	const { component: MappedStyledComponent, props: filteredProps } = applyVariations(
+		Styled.Button,
+		Styled.variationMap,
+		buttonProps,
+	);
+
 	return (
-		<button
-			className={themeClassNames(baseTheme, theme, variations || ['primary'])}
-			{...buttonProps || {}}
-		>
+		<MappedStyledComponent theme={theme} {...filteredProps || {}}>
 			{children}
-		</button>
+		</MappedStyledComponent>
 	);
 }
 
-DemoComponent.propTypes = forbidExtraProps({
+DemoComponent.propTypes = {
 	children: PropTypes.node.isRequired,
 	theme: PropTypes.object,
-	variations: PropTypes.array,
-	buttonProps: PropTypes.object,
-});
+	primary: PropTypes.bool,
+	primaryOutline: PropTypes.bool,
+	medium: PropTypes.bool,
+	small: PropTypes.bool,
+	large: PropTypes.bool,
+	extraLarge: PropTypes.bool,
+};
+
+DemoComponent.defaultProps = {
+	theme: {
+		default: '#278ed4',
+		hover: '#6db3e2',
+		active: '#1d6ca1',
+		disabled: '#bedcf2',
+	},
+	type: 'button',
+};
+
+export default DemoComponent;

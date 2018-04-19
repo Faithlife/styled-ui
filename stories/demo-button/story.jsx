@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import cn from 'classnames';
 import { Button } from '../../components';
-import styles from './story-styles.less';
 import docs from './demo-button.md';
+import * as Styled from './styled.jsx';
 
 export default class DemoContainer extends Component {
 	static propTypes = {
@@ -12,81 +11,85 @@ export default class DemoContainer extends Component {
 	};
 
 	renderButtonsRow = renderButton => {
-		const buttonMargins = ['small', '', 'large', 'extraLarge'];
+		const buttonMargins = ['small', 'medium', 'large', 'extraLarge'];
 		return (
-			<div className={styles.demoRow}>
-				{buttonMargins.map(buttonMargin => (
-					<div key={buttonMargin} className={cn(styles.buttonWrapper, styles.buttonFlex)}>
-						{renderButton(buttonMargin)}
-					</div>
+			<Styled.DemoRow>
+				{buttonMargins.map((buttonMargin, i) => (
+					<Styled.ButtonWrapperFlex key={i}>{renderButton(buttonMargin)}</Styled.ButtonWrapperFlex>
 				))}
-			</div>
+			</Styled.DemoRow>
 		);
 	};
 
 	render() {
 		return (
-			<div className={styles.demos}>
+			<Styled.Demos>
 				{this.renderButtonsRow(marginVariation => (
 					<Button
+						primary
 						onClick={this.props.onClick}
 						theme={this.props.theme}
-						variations={['primary', marginVariation]}
+						{...{ [marginVariation]: true }}
 					>
 						Primary
 					</Button>
 				))}
 				{this.renderButtonsRow(marginVariation => (
 					<Button
+						primary
+						disabled
 						onClick={this.props.onClick}
 						theme={this.props.theme}
-						buttonProps={{ disabled: true }}
-						variations={['primary', marginVariation]}
+						{...{ [marginVariation]: true }}
 					>
 						Primary Disabled
 					</Button>
 				))}
 				{this.renderButtonsRow(marginVariation => (
 					<Button
+						primaryOutline
 						onClick={this.props.onClick}
 						theme={this.props.theme}
-						variations={['secondary', marginVariation]}
+						{...{ [marginVariation]: true }}
 					>
 						Outline
 					</Button>
 				))}
 				{this.renderButtonsRow(marginVariation => (
 					<Button
+						primaryOutline
+						disabled
 						onClick={this.props.onClick}
 						theme={this.props.theme}
-						buttonProps={{ disabled: true }}
-						variations={['secondary', marginVariation]}
+						{...{ [marginVariation]: true }}
 					>
 						Outline Disabled
 					</Button>
 				))}
 				{this.renderButtonsRow(marginVariation => (
 					<Button
+						minor
 						onClick={this.props.onClick}
 						theme={this.props.theme}
-						variations={['minor', marginVariation]}
+						{...{ [marginVariation]: true }}
 					>
 						Minor
 					</Button>
 				))}
 				{this.renderButtonsRow(marginVariation => (
 					<Button
+						minor
+						disabled
 						onClick={this.props.onClick}
 						theme={this.props.theme}
-						buttonProps={{ disabled: true }}
-						variations={['minor', marginVariation]}
+						{...{ [marginVariation]: true }}
 					>
 						Minor Disabled
 
 					</Button>
 				))}
-				<div className={styles.documentation} dangerouslySetInnerHTML={{ __html: docs }} />
-			</div>
+				<Styled.Documentation dangerouslySetInnerHTML={{ __html: docs }} />
+			</Styled.Demos>
 		);
 	}
 }

@@ -1,11 +1,11 @@
-import classNames from 'classnames';
+export function applyVariations(component, variationMap, props) {
+	let wrappedComponent = component;
 
-export function themeClassNames(baseTheme, overridingTheme, propertyNames) {
-	return classNames(
-		propertyNames.reduce(
-			(accumulator, currentValue) =>
-				accumulator.concat([baseTheme[currentValue], (overridingTheme || {})[currentValue]]),
-			[],
-		),
-	);
+	for (const variation of Object.keys(variationMap) || []) {
+		if (props.hasOwnProperty(variation)) {
+			wrappedComponent = variationMap[variation](wrappedComponent);
+		}
+	}
+
+	return { component: wrappedComponent, props };
 }

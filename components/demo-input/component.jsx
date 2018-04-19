@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
-import { forbidExtraProps } from 'airbnb-prop-types';
-import { themeClassNames } from '../utils';
+import { ThemeProvider } from 'styled-components';
 import { Exclamation, Check } from '../icons';
-import baseTheme from './base-theme.less';
+import * as Styled from './styled.jsx';
 
 // Ported from https://git/Logos/Sites.Admin/blob/db17162da13a47c82eea000cfdd6384e8a174874/src/Sites.Admin/Private/scripts/components/input/index.jsx
 export default class Input extends React.PureComponent {
-	static propTypes = forbidExtraProps({
+	static propTypes = {
 		errorString: PropTypes.string,
 		getIsValidInput: PropTypes.func,
 		help: PropTypes.node,
@@ -20,8 +19,14 @@ export default class Input extends React.PureComponent {
 		title: PropTypes.string,
 		validationDelay: PropTypes.number,
 		value: PropTypes.string.isRequired,
-		inputProps: PropTypes.object,
-	});
+	};
+
+	static defaultProps = {
+		theme: {
+			background: 'white',
+			text: 'black',
+		},
+	};
 
 	state = {
 		hasError: false,
@@ -71,46 +76,52 @@ export default class Input extends React.PureComponent {
 	};
 
 	render() {
-		const { errorString, help, isRequiredField, theme, title, value, inputProps } = this.props;
+		const { errorString, help, isRequiredField, theme, title, value, ...inputProps } = this.props;
 
 		const { showValidationIndicators, hasError } = this.state;
 
-		const getClassName = (...classNames) => themeClassNames(baseTheme, theme, classNames);
-
 		return (
-			<label className={getClassName('input')}>
-				{title && (
-					<div className={getClassName('title')}>
-						<div>
-							<span>{title}</span>
-							{isRequiredField ? <span className={getClassName('required')}>*</span> : null}
-						</div>
-						{help && <div>{help}</div>}
-					</div>
-				)}
-				<div className={getClassName('inputContainer')}>
-					<input
-						ref={input => {
-							this.input = input;
-						}}
-						className={getClassName('text', hasError ? 'textError' : 'textSuccess')}
-						type="text"
-						value={value || ''}
-						onChange={this.handleChange}
-						onKeyPress={this.handleKeyPress}
-						{...inputProps || {}}
-					/>
+			<ThemeProvider theme={theme}>
+				<Styled.Label>
+					{title && (
+						<Styled.Title>
+							<div>
+								<span>{title}</span>
+								{isRequiredField ? <Styled.Required>*</Styled.Required> : null}
+							</div>
+							{help && <div>{help}</div>}
+						</Styled.Title>
+					)}
+					<Styled.InputContainer>
+						<Styled.TextInput
+							{...inputProps}
+							ref={input => {
+								this.input = input;
+							}}
+							type="text"
+							value={value || ''}
+							onChange={this.handleChange}
+							onKeyPress={this.handleKeyPress}
+						/>
 
-					{showValidationIndicators &&
-						hasError && <Exclamation className={getClassName('errorIcon')} />}
+						{showValidationIndicators &&
+							hasError && (
+								<Styled.StyledIcon>
+									<Exclamation />
+								</Styled.StyledIcon>
+							)}
 
-					{showValidationIndicators &&
-						!hasError &&
-						value && <Check className={getClassName('successIcon')} />}
-				</div>
-				{showValidationIndicators &&
-					hasError && <div className={getClassName('errorTag', 'b4')}>{errorString}</div>}
-			</label>
+						{showValidationIndicators &&
+							!hasError &&
+							value && (
+								<Styled.StyledIcon>
+									<Check />
+								</Styled.StyledIcon>
+							)}
+					</Styled.InputContainer>
+					{showValidationIndicators && hasError && <Styled.ErrorTag>{errorString}</Styled.ErrorTag>}
+				</Styled.Label>
+			</ThemeProvider>
 		);
 	}
 }
