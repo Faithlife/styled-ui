@@ -4,7 +4,7 @@ import { applyVariations } from '../utils';
 import * as Styled from './styled.jsx';
 
 function DemoComponent({ children, theme, ...buttonProps }) {
-	const { component: MappedStyledComponent, props: filteredProps } = applyVariations(
+	const { component: MappedStyledComponent, filteredProps } = applyVariations(
 		Styled.Button,
 		Styled.variationMap,
 		buttonProps,
