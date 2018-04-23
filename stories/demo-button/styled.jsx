@@ -14,8 +14,6 @@ export const ButtonWrapper = styled.div`
 	padding: 8px;
 `;
 
-export const ButtonWrapperFlex = ButtonWrapper;
-
 export const Documentation = styled.div`
 	font-family: sans-serif;
 `;
