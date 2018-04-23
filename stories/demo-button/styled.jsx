@@ -7,15 +7,14 @@ export const Demos = styled.div`
 
 export const DemoRow = styled.div`
 	display: flex;
+	align-items: center;
 `;
 
 export const ButtonWrapper = styled.div`
 	padding: 8px;
 `;
 
-export const ButtonWrapperFlex = ButtonWrapper.extend`
-	flex: 1;
-`;
+export const ButtonWrapperFlex = ButtonWrapper;
 
 export const Documentation = styled.div`
 	font-family: sans-serif;

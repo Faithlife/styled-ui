@@ -15,7 +15,7 @@ export default class DemoContainer extends Component {
 		return (
 			<Styled.DemoRow>
 				{buttonMargins.map((buttonMargin, i) => (
-					<Styled.ButtonWrapperFlex key={i}>{renderButton(buttonMargin)}</Styled.ButtonWrapperFlex>
+					<Styled.ButtonWrapper key={i}>{renderButton(buttonMargin)}</Styled.ButtonWrapper>
 				))}
 			</Styled.DemoRow>
 		);
@@ -31,7 +31,7 @@ export default class DemoContainer extends Component {
 						theme={this.props.theme}
 						{...{ [marginVariation]: true }}
 					>
-						Primary
+						Invite Friends
 					</Button>
 				))}
 				{this.renderButtonsRow(marginVariation => (
@@ -42,7 +42,7 @@ export default class DemoContainer extends Component {
 						theme={this.props.theme}
 						{...{ [marginVariation]: true }}
 					>
-						Primary Disabled
+						Invite Friends
 					</Button>
 				))}
 				{this.renderButtonsRow(marginVariation => (
@@ -52,7 +52,7 @@ export default class DemoContainer extends Component {
 						theme={this.props.theme}
 						{...{ [marginVariation]: true }}
 					>
-						Outline
+						Invite Friends
 					</Button>
 				))}
 				{this.renderButtonsRow(marginVariation => (
@@ -63,7 +63,7 @@ export default class DemoContainer extends Component {
 						theme={this.props.theme}
 						{...{ [marginVariation]: true }}
 					>
-						Outline Disabled
+						Invite Friends
 					</Button>
 				))}
 				{this.renderButtonsRow(marginVariation => (
@@ -73,7 +73,7 @@ export default class DemoContainer extends Component {
 						theme={this.props.theme}
 						{...{ [marginVariation]: true }}
 					>
-						Minor
+						Invite Friends
 					</Button>
 				))}
 				{this.renderButtonsRow(marginVariation => (
@@ -84,8 +84,7 @@ export default class DemoContainer extends Component {
 						theme={this.props.theme}
 						{...{ [marginVariation]: true }}
 					>
-						Minor Disabled
-
+						Invite Friends
 					</Button>
 				))}
 				<Styled.Documentation dangerouslySetInnerHTML={{ __html: docs }} />
