@@ -11,3 +11,7 @@ export function applyVariations(component, variationMap, props) {
 
 	return { component: wrappedComponent, filteredProps };
 }
+
+export const localization = {
+	validationError: 'Sorry, there was an error. Please try again.',
+};

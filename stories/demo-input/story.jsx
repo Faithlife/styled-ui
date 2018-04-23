@@ -5,17 +5,24 @@ import { TextInput, Button } from '../../components';
 
 const Demos = styled.div`
 	width: 300px;
-	font-family: 'sans-serif';
+	font-family: sans-serif;
 `;
 
 const DemoRow = styled.div`
 	padding: 8px;
 `;
+
+function delayPromise(duration) {
+	return new Promise(resolve => setTimeout(resolve, duration));
+}
+
 export default class Container extends Component {
 	static propTypes = {
 		theme: PropTypes.object,
 		validationDelay: PropTypes.number,
 		demoValidation: PropTypes.bool,
+		demoSlowNetwork: PropTypes.bool,
+		demoFailedApiValidation: PropTypes.bool,
 	};
 
 	state = {
@@ -24,7 +31,12 @@ export default class Container extends Component {
 	};
 
 	onChange = newState => {
-		this.setState({ inputValue: newState.inputValue, hasError: newState.hasError });
+		if (newState.hasError != null) {
+			this.setState({ hasError: newState.hasError });
+		}
+		if (newState.inputValue != null) {
+			this.setState({ inputValue: newState.inputValue });
+		}
 	};
 
 	render() {
@@ -34,7 +46,17 @@ export default class Container extends Component {
 					<TextInput
 						value={this.state.inputValue}
 						onChange={this.onChange}
-						getIsValidInput={this.props.demoValidation ? value => value !== 'error' : null}
+						getIsValidInput={
+							this.props.demoValidation
+								? value =>
+										delayPromise(this.props.demoSlowNetwork ? 500 : 1).then(
+											() =>
+												this.props.demoFailedApiValidation
+													? Promise.reject()
+													: Promise.resolve(value !== 'error'),
+										)
+								: null
+						}
 						title="Location"
 						help={<span>Try typing 'error'</span>}
 						theme={this.props.theme}
