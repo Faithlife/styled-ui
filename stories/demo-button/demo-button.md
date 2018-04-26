@@ -15,17 +15,14 @@ Buttons allow users to command the computer to take some action. Buttons, like a
 
 * `primary` -- for the most important or most common action for a user to take in a given context/scope. This button variant grabs the user's attention. In marketing pages, this style is for the "call to action" on a page.
 * `primaryOutline` -- for actions related to, or nearby the primary button in terms of visual hieararchy that are less common or less critical. Use this button when you want the user's casual attention.
-* `secondary` -- not for apps. This variant is used for marketing pages when there are actions the user can take that are not the primary call to action.
 * `minor` -- for apps, not marketing pages. When there are a lot of common actions that are all of equal weight, consider using minor buttons.
 * `link` -- for situations where a hyperlink is indicated, but must be aligned with a row of buttons. Is very lightweight in terms of visual attention.
 * `overlay` -- specifically for overlaying action buttons on graphics, videos, or other graphically rich elements. Comes with a transparent black background that allows some of the content to peek through. Usually icon-only with no text.
 
-
-
 ## Button Text
 
 * Button text should be as concise as possible, but as long as necessary (for clarity).
-* Buttons are usually (but not always) verbs.
+* Buttons are usually verbs (or short phrases that begin with a verb).
 
 Buttons are generally interpreted as imperatives, with the computer as agent ("hey computer, do the thing"), the text of the thing to be done as a verb ("frob"), and a direct object to take the action on if needed ("frob widgets"). Thus a button that reads "frob widgets" will normally be interpreted by the user as them issuing the command: "Hey computer, frob the widgets!"
 
