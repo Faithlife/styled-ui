@@ -5,7 +5,7 @@ import { Exclamation, Check } from '../icons';
 import * as Styled from './styled.jsx';
 
 // Ported from https://git/Logos/Sites.Admin/blob/db17162da13a47c82eea000cfdd6384e8a174874/src/Sites.Admin/Private/scripts/components/input/index.jsx
-export default class Input extends React.PureComponent {
+export default class TextInput extends React.PureComponent {
 	static propTypes = {
 		help: PropTypes.node,
 		isRequiredField: PropTypes.bool,

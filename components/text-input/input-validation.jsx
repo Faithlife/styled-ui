@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import { forbidExtraProps } from 'airbnb-prop-types';
 
-export default class ValidatedInput extends Component {
+export default class InputValidation extends Component {
 	static propTypes = forbidExtraProps({
 		getIsValidInput: PropTypes.func,
 		help: PropTypes.node,

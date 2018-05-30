@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button, TextInput } from '../../components';
-import ValidatedInput from './validated-input.jsx';
 
 const Demos = styled.div`
 	width: 300px;
@@ -53,7 +52,7 @@ export default class Container extends Component {
 		return (
 			<Demos>
 				<DemoRow>
-					<ValidatedInput
+					<TextInput.Validation
 						value={this.state.inputValue}
 						onChange={this.onChange}
 						getIsValidInput={
@@ -71,7 +70,7 @@ export default class Container extends Component {
 						validationDelay={this.props.validationDelay}
 						validationErrorString="Sorry, that location could not be validated."
 						renderInput={props => (
-							<TextInput
+							<TextInput.Input
 								{...props}
 								placeholder="Bellingham"
 								title="Location"
@@ -94,7 +93,7 @@ export default class Container extends Component {
 						<Button
 							primaryOutline
 							medium
-							onClick={() => this.setState({ inputValue: Math.random() })}
+							onClick={() => this.setState({ inputValue: Math.random().toString() })}
 						>
 							Random input value
 						</Button>
