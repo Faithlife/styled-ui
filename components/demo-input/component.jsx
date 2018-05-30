@@ -24,6 +24,10 @@ export default class Input extends React.PureComponent {
 		},
 	};
 
+	focus = () => {
+		this.input.focus();
+	};
+
 	render() {
 		const {
 			help,

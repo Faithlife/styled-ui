@@ -12,7 +12,6 @@ export default class ValidatedInput extends Component {
 		onChange: PropTypes.func.isRequired,
 		onEnter: PropTypes.func,
 		placeholder: PropTypes.string,
-		shouldFocus: PropTypes.bool,
 		theme: PropTypes.object,
 		title: PropTypes.string,
 		validationDelay: PropTypes.number,
@@ -31,15 +30,6 @@ export default class ValidatedInput extends Component {
 		hasError: false,
 		showValidationIndicators: false,
 	};
-
-	componentDidUpdate(prevProps) {
-		const { shouldFocus } = this.props;
-		const { shouldFocus: hadFocus } = prevProps;
-
-		if (!hadFocus && shouldFocus) {
-			this.input.focus();
-		}
-	}
 
 	componentWillUnmount() {
 		this.debouncedHandleChange.cancel();
@@ -72,6 +62,10 @@ export default class ValidatedInput extends Component {
 			);
 		}
 	}, this.props.validationDelay);
+
+	focus = () => {
+		this.input.focus();
+	};
 
 	handleChange = event => {
 		this.props.onChange({ inputValue: event.target.value });
@@ -113,6 +107,9 @@ export default class ValidatedInput extends Component {
 				title={this.props.title}
 				validationErrorString={validationErrorString}
 				value={this.props.value}
+				ref={input => {
+					this.input = input;
+				}}
 			/>
 		);
 	}
