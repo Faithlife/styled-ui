@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import { forbidExtraProps } from 'airbnb-prop-types';
-import Input from '../../components/demo-input/component.jsx';
 
 export default class ValidatedInput extends Component {
 	static propTypes = forbidExtraProps({
@@ -11,9 +10,7 @@ export default class ValidatedInput extends Component {
 		isRequiredField: PropTypes.bool,
 		onChange: PropTypes.func.isRequired,
 		onEnter: PropTypes.func,
-		placeholder: PropTypes.string,
-		theme: PropTypes.object,
-		title: PropTypes.string,
+		renderInput: PropTypes.func.isRequired,
 		validationDelay: PropTypes.number,
 		validationErrorString: PropTypes.string,
 		validationFailureString: PropTypes.string,
@@ -25,6 +22,12 @@ export default class ValidatedInput extends Component {
 		validationErrorString: "Sorry, this isn't a valid entry. Please try again.",
 		validationFailureString: 'Sorry, there was a network problem. Please try again.',
 	};
+
+	componentWillReceiveProps(props) {
+		if (props.value !== this.props.value) {
+			this.setState({ hasError: false, showValidationIndicators: false });
+		}
+	}
 
 	state = {
 		hasError: false,
@@ -46,7 +49,7 @@ export default class ValidatedInput extends Component {
 						return;
 					}
 
-					const hasError = inputValue !== '' && !isValid;
+					const hasError = (this.props.isRequiredField || inputValue !== '') && !isValid;
 
 					this.props.onChange({ hasError });
 					this.setState({ hasError, showValidationIndicators: true, validationFailure: false });
@@ -62,10 +65,6 @@ export default class ValidatedInput extends Component {
 			);
 		}
 	}, this.props.validationDelay);
-
-	focus = () => {
-		this.input.focus();
-	};
 
 	handleChange = event => {
 		this.props.onChange({ inputValue: event.target.value });
@@ -94,23 +93,15 @@ export default class ValidatedInput extends Component {
 				: this.props.validationErrorString
 			: null;
 
-		return (
-			<Input
-				help={this.props.help}
-				isRequiredField={this.props.isRequiredField}
-				onChange={this.handleChange}
-				onKeyPress={this.handleKeyPress}
-				placeholder={this.props.placeholder}
-				showValidationError={showValidationError}
-				showValidationSuccess={showValidationSuccess}
-				theme={this.props.theme}
-				title={this.props.title}
-				validationErrorString={validationErrorString}
-				value={this.props.value}
-				ref={input => {
-					this.input = input;
-				}}
-			/>
-		);
+		return this.props.renderInput({
+			help: this.props.help,
+			isRequiredField: this.props.isRequiredField,
+			onChange: this.handleChange,
+			onKeyPress: this.handleKeyPress,
+			showValidationError,
+			showValidationSuccess,
+			validationErrorString,
+			value: this.props.value,
+		});
 	}
 }

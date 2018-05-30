@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button } from '../../components';
+import { Button, TextInput } from '../../components';
 import ValidatedInput from './validated-input.jsx';
 
 const Demos = styled.div`
@@ -11,6 +11,15 @@ const Demos = styled.div`
 
 const DemoRow = styled.div`
 	padding: 8px;
+`;
+
+const ButtonPadding = styled.div`
+	display: inline-block;
+	padding: 0 8px 8px 0;
+
+	:last-child {
+		padding: 0;
+	}
 `;
 
 function delayPromise(duration) {
@@ -58,19 +67,49 @@ export default class Container extends Component {
 										)
 								: null
 						}
-						title="Location"
-						help={<span>Try typing 'error'</span>}
-						theme={this.props.theme}
-						placeholder="Bellingham"
 						isRequiredField
 						validationDelay={this.props.validationDelay}
 						validationErrorString="Sorry, that location could not be validated."
+						renderInput={props => (
+							<TextInput
+								{...props}
+								placeholder="Bellingham"
+								title="Location"
+								help={<span>Try typing 'error'</span>}
+								theme={this.props.theme}
+								ref={input => {
+									this.input = input;
+								}}
+							/>
+						)}
 					/>
 				</DemoRow>
 				<DemoRow>
-					<Button disabled={this.state.hasError} primary medium>
-						Save
-					</Button>
+					<ButtonPadding>
+						<Button disabled={this.state.hasError} primary medium>
+							Save
+						</Button>
+					</ButtonPadding>
+					<ButtonPadding>
+						<Button
+							primaryOutline
+							medium
+							onClick={() => this.setState({ inputValue: Math.random() })}
+						>
+							Random input value
+						</Button>
+					</ButtonPadding>
+					<ButtonPadding>
+						<Button
+							primaryOutline
+							medium
+							onClick={() => {
+								this.input.focus();
+							}}
+						>
+							Set focus
+						</Button>
+					</ButtonPadding>
 				</DemoRow>
 			</Demos>
 		);

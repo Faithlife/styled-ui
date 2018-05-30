@@ -56,7 +56,7 @@ export default class Input extends React.PureComponent {
 					<Styled.InputContainer>
 						<Styled.TextInput
 							{...inputProps}
-							ref={input => {
+							innerRef={input => {
 								this.input = input;
 							}}
 							type="text"
