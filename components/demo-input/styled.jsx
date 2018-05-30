@@ -23,7 +23,7 @@ export const InputContainer = styled.div`
 `;
 
 export const textWithError = `
-	border-color: ${colors.red};
+	border-color: ${colors.redBase};
 	padding-right: ${thickness.five};
 `;
 
@@ -53,7 +53,7 @@ export const TextInput = styled.input`
 	}
 
 	&::placeholder {
-		color: ${colors.shade35};
+		color: ${colors.gray35};
 		font-style: italic;
 	}
 
@@ -71,6 +71,6 @@ export const StyledIcon = styled.div`
 
 export const ErrorTag = styled.div`
 	margin-top: ${thickness.two};
-	color: ${colors.red};
+	color: ${colors.redBase};
 	${fonts.b4};
 `;

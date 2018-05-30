@@ -88,17 +88,17 @@ export const variationMap = {
 		}
 `,
 	small: component => component.extend`
-		padding: 6px ${thickness.three};
+		padding: 6px ${thickness.eight};
 `,
 	medium: component => component.extend`
-		padding: ${thickness.three} 10px;
+		padding: ${thickness.eight} 10px;
 `,
 	large: component => component.extend`
-		padding: ${thickness.threePointFive} ${thickness.four};
+		padding: ${thickness.twelve} ${thickness.sixteen};
 		font-size: 16px;
 `,
 	extraLarge: component => component.extend`
-		padding: ${thickness.four} ${thickness.five};
+		padding: ${thickness.sixteen} ${thickness.twentyfour};
 		font-size: 24px;
 `,
 };
