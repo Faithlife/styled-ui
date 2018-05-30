@@ -28,9 +28,9 @@ storiesOf('Checkbox', module)
 	));
 
 storiesOf('Input', module)
-	.add('with no validation', () => <DemoInput />)
 	.add('with debounced validation', () => <DemoInput demoValidation validationDelay={200} />)
-	.add('with failed API validation', () => (
+	.add('with no validation', () => <DemoInput />)
+	.add('with offline network', () => (
 		<DemoInput demoValidation demoFailedApiValidation validationDelay={200} />
 	))
 	.add('with slow API validation', () => (

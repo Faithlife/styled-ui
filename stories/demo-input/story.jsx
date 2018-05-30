@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { TextInput, Button } from '../../components';
+import { Button } from '../../components';
+import ValidatedInput from './validated-input.jsx';
 
 const Demos = styled.div`
 	width: 300px;
@@ -43,7 +44,7 @@ export default class Container extends Component {
 		return (
 			<Demos>
 				<DemoRow>
-					<TextInput
+					<ValidatedInput
 						value={this.state.inputValue}
 						onChange={this.onChange}
 						getIsValidInput={
@@ -63,7 +64,7 @@ export default class Container extends Component {
 						placeholder="Bellingham"
 						isRequiredField
 						validationDelay={this.props.validationDelay}
-						errorString="Sorry, that location could not be validated."
+						validationErrorString="Sorry, that location could not be validated."
 					/>
 				</DemoRow>
 				<DemoRow>
