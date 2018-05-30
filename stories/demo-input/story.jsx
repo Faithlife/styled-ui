@@ -52,36 +52,53 @@ export default class Container extends Component {
 		return (
 			<Demos>
 				<DemoRow>
-					<TextInput.Validation
-						value={this.state.inputValue}
-						onChange={this.onChange}
-						getIsValidInput={
-							this.props.demoValidation
-								? value =>
-										delayPromise(this.props.demoSlowNetwork ? 500 : 1).then(
-											() =>
-												this.props.demoFailedApiValidation
-													? Promise.reject()
-													: Promise.resolve(value !== 'error'),
-										)
-								: null
-						}
-						isRequiredField
-						validationDelay={this.props.validationDelay}
-						validationErrorString="Sorry, that location could not be validated."
-						renderInput={props => (
-							<TextInput.Input
-								{...props}
-								placeholder="Bellingham"
-								title="Location"
-								help={<span>Try typing 'error'</span>}
-								theme={this.props.theme}
-								ref={input => {
-									this.input = input;
-								}}
-							/>
-						)}
-					/>
+					{this.props.demoValidation ? (
+						<TextInput.Validation
+							value={this.state.inputValue}
+							onChange={this.onChange}
+							getIsValidInput={
+								this.props.demoValidation
+									? value =>
+											delayPromise(this.props.demoSlowNetwork ? 500 : 1).then(
+												() =>
+													this.props.demoFailedApiValidation
+														? Promise.reject()
+														: Promise.resolve({
+																isValid: value !== 'error',
+																validationErrorString: 'This is a custom error message',
+														  }),
+											)
+									: null
+							}
+							isRequiredField
+							validationDelay={this.props.validationDelay}
+							renderInput={props => (
+								<TextInput.Input
+									{...props}
+									placeholder="Bellingham"
+									title="Location"
+									help={<span>Try typing 'error'</span>}
+									theme={this.props.theme}
+									ref={input => {
+										this.input = input;
+									}}
+								/>
+							)}
+						/>
+					) : (
+						<TextInput.Input
+							value={this.state.inputValue}
+							onChange={event => this.setState({ inputValue: event.target.value })}
+							isRequiredField
+							placeholder="Bellingham"
+							title="Location"
+							help={<span>Try typing 'error'</span>}
+							theme={this.props.theme}
+							ref={input => {
+								this.input = input;
+							}}
+						/>
+					)}
 				</DemoRow>
 				<DemoRow>
 					<ButtonPadding>
