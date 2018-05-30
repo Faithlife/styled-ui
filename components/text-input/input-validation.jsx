@@ -12,15 +12,13 @@ export default class InputValidation extends Component {
 		onEnter: PropTypes.func,
 		renderInput: PropTypes.func.isRequired,
 		validationDelay: PropTypes.number,
-		validationErrorString: PropTypes.string,
 		validationFailureString: PropTypes.string,
 		value: PropTypes.string,
 	});
 
 	static defaultProps = {
 		validationDelay: 0,
-		validationErrorString: "Sorry, this isn't a valid entry. Please try again.",
-		validationFailureString: 'Sorry, there was a network problem. Please try again.',
+		validationFailureString: 'Sorry, there a problem. Please try again.',
 	};
 
 	componentWillReceiveProps(props) {
@@ -44,7 +42,7 @@ export default class InputValidation extends Component {
 		this.setState({ showValidationIndicators: false });
 		if (this.props.getIsValidInput != null) {
 			this.props.getIsValidInput(inputValue).then(
-				isValid => {
+				({ isValid, validationErrorString }) => {
 					if (this._inputValue !== inputValue) {
 						return;
 					}
@@ -52,7 +50,12 @@ export default class InputValidation extends Component {
 					const hasError = (this.props.isRequiredField || inputValue !== '') && !isValid;
 
 					this.props.onChange({ hasError });
-					this.setState({ hasError, showValidationIndicators: true, validationFailure: false });
+					this.setState({
+						hasError,
+						showValidationIndicators: true,
+						validationFailure: false,
+						validationErrorString,
+					});
 				},
 				() => {
 					this.props.onChange({ hasError: true });
@@ -90,7 +93,7 @@ export default class InputValidation extends Component {
 		const validationErrorString = showValidationError
 			? this.state.validationFailure
 				? this.props.validationFailureString
-				: this.props.validationErrorString
+				: this.state.validationErrorString
 			: null;
 
 		return this.props.renderInput({
