@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Checkbox from './check-box/story.jsx';
-import DemoInput from './demo-input/story.jsx';
+import TextInput from './text-input/story.jsx';
 import DemoButton from './demo-button/story.jsx';
 import OkCancelStory from './demo-button/ok-cancel.jsx';
 
@@ -27,15 +27,15 @@ storiesOf('Checkbox', module)
 		<Checkbox theme={{ primary: 'plum', border: 'rebeccapurple' }} />
 	));
 
-storiesOf('Input', module)
-	.add('with debounced validation', () => <DemoInput demoValidation validationDelay={200} />)
-	.add('with no validation', () => <DemoInput />)
+storiesOf('Text input', module)
+	.add('with debounced validation', () => <TextInput demoValidation validationDelay={200} />)
+	.add('with no validation', () => <TextInput />)
 	.add('with offline network', () => (
-		<DemoInput demoValidation demoFailedApiValidation validationDelay={200} />
+		<TextInput demoValidation demoFailedApiValidation validationDelay={200} />
 	))
 	.add('with slow API validation', () => (
-		<DemoInput demoValidation demoSlowNetwork validationDelay={200} />
+		<TextInput demoValidation demoSlowNetwork validationDelay={200} />
 	))
 	.add('with alternate theme', () => (
-		<DemoInput demoValidation theme={{ background: '#393939', text: 'white' }} />
+		<TextInput demoValidation theme={{ background: '#393939', text: 'white' }} />
 	));
