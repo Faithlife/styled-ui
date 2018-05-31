@@ -11,11 +11,11 @@ export const Title = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: ${thickness.two};
+	margin-bottom: ${thickness.four};
 `;
 
 export const Required = styled.span`
-	margin-left: ${thickness.two};
+	margin-left: ${thickness.four};
 `;
 
 export const InputContainer = styled.div`
@@ -24,11 +24,11 @@ export const InputContainer = styled.div`
 
 export const textWithError = `
 	border-color: ${colors.redBase};
-	padding-right: ${thickness.five};
+	padding-right: ${thickness.twentyfour};
 `;
 
 export const textWithSuccess = `
-	padding-right: ${thickness.five};
+	padding-right: ${thickness.twentyfour};
 `;
 
 export const TextInput = styled.input`
@@ -36,7 +36,7 @@ export const TextInput = styled.input`
 	box-sizing: border-box;
 	border: solid 1px ${colors.borderColor};
 	border-radius: 3px;
-	padding: ${thickness.two};
+	padding: ${thickness.four};
 	width: 100%;
 	color: ${props => props.theme.text};
 	background-color: ${props => props.theme.background};
@@ -70,7 +70,7 @@ export const StyledIcon = styled.div`
 `;
 
 export const ErrorTag = styled.div`
-	margin-top: ${thickness.two};
+	margin-top: ${thickness.four};
 	color: ${colors.redBase};
 	${fonts.b4};
 `;
