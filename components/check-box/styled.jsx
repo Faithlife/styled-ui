@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
 export const CheckboxDiv = styled.div`
+	*,
+	*:after,
+	*:before {
+		box-sizing: border-box;
+	}
+
 	position: absolute;
 	border: solid 1px ${props => props.theme.border};
 	border-radius: 3px;
@@ -47,8 +53,8 @@ export const CheckedIndicator = styled.div`
 		border: 2px solid ${props => props.theme.primary};
 		border-top: none;
 		border-right: none;
-		width: 7px;
-		height: 3px;
+		width: 9px;
+		height: 5px;
 		background: transparent;
 	}
 
