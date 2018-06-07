@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
 import { Button, TextInput } from '../../components';
 
 const Demos = styled.div`
@@ -25,7 +27,65 @@ function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
 }
 
-export default class Container extends Component {
+export default function() {
+	storiesOf('Text input', module)
+		.add(
+			'with debounced validation',
+			withInfo({
+				propTables: [TextInput.Validation, TextInput.Input],
+				propTablesExclude: [DemoContainer],
+				source: false,
+				inline: true,
+				text: `
+#### With validation:
+
+~~~jsx
+<TextInput.Validation
+	value={this.state.inputValue}
+	onChange={this.onChange}
+	getIsValidInput={this.getIsValidInput}
+	validationDelay={200}
+	renderInput={props => (
+		<TextInput.Input
+			{...props}
+			placeholder="Bellingham"
+			title="Location"
+			help={<span>Try typing 'error'</span>}
+		/>
+	)}
+/>
+~~~
+
+#### Without validation:
+
+~~~js
+<TextInput.Input
+	value={this.state.inputValue}
+	onChange={this.onChange}
+	placeholder="Bellingham"
+	title="Location"
+	help={<span>Try typing 'error'</span>}
+/>
+~~~`,
+			})(() => (
+				<div>
+					<DemoContainer demoValidation validationDelay={200} />
+				</div>
+			)),
+		)
+		.add('with no validation', () => <DemoContainer />)
+		.add('with offline network', () => (
+			<DemoContainer demoValidation demoFailedApiValidation validationDelay={200} />
+		))
+		.add('with slow API validation', () => (
+			<DemoContainer demoValidation demoSlowNetwork validationDelay={200} />
+		))
+		.add('with alternate theme', () => (
+			<DemoContainer demoValidation theme={{ background: '#393939', text: 'white' }} />
+		));
+}
+
+class DemoContainer extends Component {
 	static propTypes = {
 		theme: PropTypes.object,
 		validationDelay: PropTypes.number,
@@ -48,6 +108,25 @@ export default class Container extends Component {
 		}
 	};
 
+	getIsValidInput = () =>
+		this.props.demoValidation
+			? value =>
+					this.props.demoSlowNetwork
+						? delayPromise(500).then(
+								() =>
+									this.props.demoFailedApiValidation
+										? Promise.reject()
+										: Promise.resolve({
+												isValid: value !== 'error',
+												validationErrorString: 'This is a custom error message',
+										  }),
+						  )
+						: {
+								isValid: value !== 'error',
+								validationErrorString: 'This is a custom error message',
+						  }
+			: null;
+
 	render() {
 		return (
 			<Demos>
@@ -56,25 +135,7 @@ export default class Container extends Component {
 						<TextInput.Validation
 							value={this.state.inputValue}
 							onChange={this.onChange}
-							getIsValidInput={
-								this.props.demoValidation
-									? value =>
-											this.props.demoSlowNetwork
-												? delayPromise(500).then(
-														() =>
-															this.props.demoFailedApiValidation
-																? Promise.reject()
-																: Promise.resolve({
-																		isValid: value !== 'error',
-																		validationErrorString: 'This is a custom error message',
-																  }),
-												  )
-												: {
-														isValid: value !== 'error',
-														validationErrorString: 'This is a custom error message',
-												  }
-									: null
-							}
+							getIsValidInput={this.getIsValidInput}
 							validationDelay={this.props.validationDelay}
 							renderInput={props => (
 								<TextInput.Input

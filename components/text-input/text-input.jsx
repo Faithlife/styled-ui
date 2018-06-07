@@ -4,15 +4,26 @@ import { ThemeProvider } from 'styled-components';
 import { Exclamation, Check } from '../icons';
 import * as Styled from './styled.jsx';
 
-// Ported from https://git/Logos/Sites.Admin/blob/db17162da13a47c82eea000cfdd6384e8a174874/src/Sites.Admin/Private/scripts/components/input/index.jsx
+/**
+ * Text input control with validation indicators
+ * Intended to be used with <TextInput.Validation />, but can also be used by itself.
+ * Any extra props will be passed along to the underlying `input` (eg placeholder)
+ */
 export default class TextInput extends React.PureComponent {
 	static propTypes = {
+		/** Inline help text to display next to the title */
 		help: PropTypes.node,
+		/** Show the validation error icon */
 		showValidationError: PropTypes.bool,
+		/** Show the validation success icon */
 		showValidationSuccess: PropTypes.bool,
+		/** Customizable theme properties */
 		theme: PropTypes.object,
+		/** Title string, appears above the input */
 		title: PropTypes.string,
+		/** An error message to show when validation fails */
 		validationErrorString: PropTypes.string,
+		/** The input value, converts to empty string if null or undefined */
 		value: PropTypes.string.isRequired,
 	};
 

@@ -3,15 +3,33 @@ import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import { forbidExtraProps } from 'airbnb-prop-types';
 
+/**
+ * A valided input component, which uses <TextInput.Input /> a render prop.
+ */
 export default class InputValidation extends Component {
 	static propTypes = forbidExtraProps({
+		/** Function that returns a validation result, or a Promise for the validation result, in the shape of:
+		 * {
+		 *   isValid: (true|false),
+		 *   validationErrorString: (string), // Error message to show if validation failed
+		 */
 		getIsValidInput: PropTypes.func,
-		help: PropTypes.node,
+		/** Function that returns an object. isValid and inputValue won't be set at the same time, because of input debouncing
+		 * {
+		 *   isValid: (true|false),
+		 *   inputValue: (string),
+		 * }
+		 */
 		onChange: PropTypes.func.isRequired,
+		/** Called if the 'Enter' key is pressed */
 		onEnter: PropTypes.func,
+		/** Function that returns <TextInput.Input {...props} /> with the provided props, combined with any input-specific props */
 		renderInput: PropTypes.func.isRequired,
+		/** Milliseconds to wait before validating the changed input. Defaults to 0 */
 		validationDelay: PropTypes.number,
+		/** A generic error to display if the validation promise was rejected. */
 		validationFailureString: PropTypes.string,
+		/** The controlled input value. */
 		value: PropTypes.string,
 	});
 
@@ -100,7 +118,6 @@ export default class InputValidation extends Component {
 			: null;
 
 		return this.props.renderInput({
-			help: this.props.help,
 			onChange: this.handleChange,
 			onKeyPress: this.handleKeyPress,
 			showValidationSuccess,
