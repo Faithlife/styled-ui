@@ -14,10 +14,6 @@ export const Title = styled.div`
 	margin-bottom: ${thickness.four};
 `;
 
-export const Required = styled.span`
-	margin-left: ${thickness.four};
-`;
-
 export const InputContainer = styled.div`
 	position: relative;
 `;

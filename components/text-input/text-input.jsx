@@ -8,7 +8,6 @@ import * as Styled from './styled.jsx';
 export default class TextInput extends React.PureComponent {
 	static propTypes = {
 		help: PropTypes.node,
-		isRequiredField: PropTypes.bool,
 		showValidationError: PropTypes.bool,
 		showValidationSuccess: PropTypes.bool,
 		theme: PropTypes.object,
@@ -31,7 +30,6 @@ export default class TextInput extends React.PureComponent {
 	render() {
 		const {
 			help,
-			isRequiredField,
 			theme,
 			title,
 			value,
@@ -48,7 +46,6 @@ export default class TextInput extends React.PureComponent {
 						<Styled.Title>
 							<div>
 								<span>{title}</span>
-								{isRequiredField ? <Styled.Required>*</Styled.Required> : null}
 							</div>
 							{help && <div>{help}</div>}
 						</Styled.Title>
