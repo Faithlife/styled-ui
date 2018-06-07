@@ -36,12 +36,12 @@ export default class Container extends Component {
 
 	state = {
 		inputValue: '',
-		hasError: false,
+		isValid: false,
 	};
 
 	onChange = newState => {
-		if (newState.hasError != null) {
-			this.setState({ hasError: newState.hasError });
+		if (newState.isValid != null) {
+			this.setState({ isValid: newState.isValid });
 		}
 		if (newState.inputValue != null) {
 			this.setState({ inputValue: newState.inputValue });
@@ -88,7 +88,7 @@ export default class Container extends Component {
 					) : (
 						<TextInput.Input
 							value={this.state.inputValue}
-							onChange={event => this.setState({ inputValue: event.target.value })}
+							onChange={event => this.setState({ inputValue: event.target.value, isValid: true })}
 							isRequiredField
 							placeholder="Bellingham"
 							title="Location"
@@ -102,7 +102,7 @@ export default class Container extends Component {
 				</DemoRow>
 				<DemoRow>
 					<ButtonPadding>
-						<Button disabled={this.state.hasError} primary medium>
+						<Button disabled={!this.state.isValid} primary medium>
 							Save
 						</Button>
 					</ButtonPadding>

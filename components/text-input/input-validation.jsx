@@ -7,7 +7,6 @@ export default class InputValidation extends Component {
 	static propTypes = forbidExtraProps({
 		getIsValidInput: PropTypes.func,
 		help: PropTypes.node,
-		isRequiredField: PropTypes.bool,
 		onChange: PropTypes.func.isRequired,
 		onEnter: PropTypes.func,
 		renderInput: PropTypes.func.isRequired,
@@ -23,12 +22,12 @@ export default class InputValidation extends Component {
 
 	componentWillReceiveProps(props) {
 		if (props.value !== this.props.value) {
-			this.setState({ hasError: false, showValidationIndicators: false });
+			this.setState({ showValidationIndicators: false, validationFailure: false });
 		}
 	}
 
 	state = {
-		hasError: false,
+		isValid: false,
 		showValidationIndicators: false,
 	};
 
@@ -47,20 +46,18 @@ export default class InputValidation extends Component {
 						return;
 					}
 
-					const hasError = (this.props.isRequiredField || inputValue !== '') && !isValid;
-
-					this.props.onChange({ hasError });
+					this.props.onChange({ isValid });
 					this.setState({
-						hasError,
-						showValidationIndicators: true,
+						isValid,
+						showValidationIndicators: inputValue !== '' || !isValid,
 						validationFailure: false,
 						validationErrorString,
 					});
 				},
 				() => {
-					this.props.onChange({ hasError: true });
+					this.props.onChange({ isValid: false });
 					this.setState({
-						hasError: true,
+						isValid: false,
 						showValidationIndicators: true,
 						validationFailure: true,
 					});
@@ -82,12 +79,12 @@ export default class InputValidation extends Component {
 	};
 
 	render() {
-		let showValidationError = false;
 		let showValidationSuccess = false;
+		let showValidationError = false;
 
 		if (this.state.showValidationIndicators) {
-			showValidationError = this.state.hasError;
-			showValidationSuccess = !this.state.hasError;
+			showValidationSuccess = this.state.isValid;
+			showValidationError = !this.state.isValid;
 		}
 
 		const validationErrorString = showValidationError
@@ -98,11 +95,10 @@ export default class InputValidation extends Component {
 
 		return this.props.renderInput({
 			help: this.props.help,
-			isRequiredField: this.props.isRequiredField,
 			onChange: this.handleChange,
 			onKeyPress: this.handleKeyPress,
-			showValidationError,
 			showValidationSuccess,
+			showValidationError,
 			validationErrorString,
 			value: this.props.value,
 		});
