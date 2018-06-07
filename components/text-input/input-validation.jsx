@@ -40,7 +40,13 @@ export default class InputValidation extends Component {
 
 		this.setState({ showValidationIndicators: false });
 		if (this.props.getIsValidInput != null) {
-			this.props.getIsValidInput(inputValue).then(
+			const valdiationResult = this.props.getIsValidInput(inputValue);
+			const validationPromise =
+				typeof valdiationResult.then === 'function'
+					? valdiationResult
+					: Promise.resolve(valdiationResult);
+
+			validationPromise.then(
 				({ isValid, validationErrorString }) => {
 					if (this._inputValue !== inputValue) {
 						return;

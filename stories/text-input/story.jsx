@@ -59,18 +59,22 @@ export default class Container extends Component {
 							getIsValidInput={
 								this.props.demoValidation
 									? value =>
-											delayPromise(this.props.demoSlowNetwork ? 500 : 1).then(
-												() =>
-													this.props.demoFailedApiValidation
-														? Promise.reject()
-														: Promise.resolve({
-																isValid: value !== 'error',
-																validationErrorString: 'This is a custom error message',
-														  }),
-											)
+											this.props.demoSlowNetwork
+												? delayPromise(500).then(
+														() =>
+															this.props.demoFailedApiValidation
+																? Promise.reject()
+																: Promise.resolve({
+																		isValid: value !== 'error',
+																		validationErrorString: 'This is a custom error message',
+																  }),
+												  )
+												: {
+														isValid: value !== 'error',
+														validationErrorString: 'This is a custom error message',
+												  }
 									: null
 							}
-							isRequiredField
 							validationDelay={this.props.validationDelay}
 							renderInput={props => (
 								<TextInput.Input
@@ -89,7 +93,6 @@ export default class Container extends Component {
 						<TextInput.Input
 							value={this.state.inputValue}
 							onChange={event => this.setState({ inputValue: event.target.value, isValid: true })}
-							isRequiredField
 							placeholder="Bellingham"
 							title="Location"
 							help={<span>Try typing 'error'</span>}
