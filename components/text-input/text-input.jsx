@@ -9,7 +9,7 @@ import * as Styled from './styled.jsx';
  * Intended to be used with <TextInput.Validation />, but can also be used by itself.
  * Any extra props will be passed along to the underlying `input` (eg placeholder)
  */
-export default class TextInput extends React.PureComponent {
+export default class Input extends React.Component {
 	static propTypes = {
 		/** Inline help text to display next to the title */
 		help: PropTypes.node,

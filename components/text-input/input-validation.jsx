@@ -1,13 +1,12 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
-import { forbidExtraProps } from 'airbnb-prop-types';
 
 /**
  * A valided input component, which uses <TextInput.Input /> a render prop.
  */
-export default class InputValidation extends Component {
-	static propTypes = forbidExtraProps({
+export default class Validation extends Component {
+	static propTypes = {
 		/** Function that returns a validation result, or a Promise for the validation result, in the shape of:
 		 * {
 		 *   isValid: (true|false),
@@ -31,7 +30,7 @@ export default class InputValidation extends Component {
 		validationFailureString: PropTypes.string,
 		/** The controlled input value. */
 		value: PropTypes.string,
-	});
+	};
 
 	static defaultProps = {
 		validationDelay: 0,

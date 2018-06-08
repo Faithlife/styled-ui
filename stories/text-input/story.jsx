@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
+import { State, Store } from '@sambego/storybook-state';
 import { Button, TextInput } from '../../components';
 
 const Demos = styled.div`
@@ -10,17 +10,8 @@ const Demos = styled.div`
 	font-family: sans-serif;
 `;
 
-const DemoRow = styled.div`
-	padding: 8px;
-`;
-
-const ButtonPadding = styled.div`
-	display: inline-block;
-	padding: 0 8px 8px 0;
-
-	:last-child {
-		padding: 0;
-	}
+const ButtonMargin = styled.div`
+	margin-top: 8px;
 `;
 
 function delayPromise(duration) {
@@ -28,170 +19,231 @@ function delayPromise(duration) {
 }
 
 export default function() {
+	const info = {
+		propTables: [TextInput.Validation, TextInput.Input],
+		propTablesExclude: [State, Demos, Button, ButtonMargin],
+		inline: true,
+	};
+	const store = new Store({
+		value: '',
+		isValid: false,
+	});
+
 	storiesOf('Text input', module)
 		.add(
-			'with debounced validation',
+			'with debounce',
 			withInfo({
-				propTables: [TextInput.Validation, TextInput.Input],
-				propTablesExclude: [DemoContainer],
-				source: false,
-				inline: true,
+				...info,
 				text: `
-#### With validation:
-
-~~~jsx
-<TextInput.Validation
-	value={this.state.inputValue}
-	onChange={this.onChange}
-	getIsValidInput={this.getIsValidInput}
-	validationDelay={200}
-	renderInput={props => (
-		<TextInput.Input
-			{...props}
-			placeholder="Bellingham"
-			title="Location"
-			help={<span>Try typing 'error'</span>}
-		/>
-	)}
-/>
+A standard text input control with local validation. \`TextInput.Input\` is used as a render prop so that additional input properties can be set, such as \`placeholder\`.
 ~~~
-
-#### Without validation:
-
-~~~js
-<TextInput.Input
-	value={this.state.inputValue}
-	onChange={this.onChange}
-	placeholder="Bellingham"
-	title="Location"
-	help={<span>Try typing 'error'</span>}
-/>
+renderInput={props => (
+	<TextInput.Input
+		{...props}
+		placeholder="Bellingham"
+		title="Location"
+		help={<span>Try typing 'error'</span>}
+	/>
+)}
 ~~~`,
 			})(() => (
-				<div>
-					<DemoContainer demoValidation validationDelay={200} />
-				</div>
-			)),
-		)
-		.add('with no validation', () => <DemoContainer />)
-		.add('with offline network', () => (
-			<DemoContainer demoValidation demoFailedApiValidation validationDelay={200} />
-		))
-		.add('with slow API validation', () => (
-			<DemoContainer demoValidation demoSlowNetwork validationDelay={200} />
-		))
-		.add('with alternate theme', () => (
-			<DemoContainer demoValidation theme={{ background: '#393939', text: 'white' }} />
-		));
-}
-
-class DemoContainer extends Component {
-	static propTypes = {
-		theme: PropTypes.object,
-		validationDelay: PropTypes.number,
-		demoValidation: PropTypes.bool,
-		demoSlowNetwork: PropTypes.bool,
-		demoFailedApiValidation: PropTypes.bool,
-	};
-
-	state = {
-		inputValue: '',
-		isValid: false,
-	};
-
-	onChange = newState => {
-		if (newState.isValid != null) {
-			this.setState({ isValid: newState.isValid });
-		}
-		if (newState.inputValue != null) {
-			this.setState({ inputValue: newState.inputValue });
-		}
-	};
-
-	getIsValidInput = () =>
-		this.props.demoValidation
-			? value =>
-					this.props.demoSlowNetwork
-						? delayPromise(500).then(
-								() =>
-									this.props.demoFailedApiValidation
-										? Promise.reject()
-										: Promise.resolve({
-												isValid: value !== 'error',
-												validationErrorString: 'This is a custom error message',
-										  }),
-						  )
-						: {
+				<Demos>
+					<State store={store} parseState={state => ({ value: state.value })}>
+						<TextInput.Validation
+							onChange={newState => {
+								if (newState.isValid != null) {
+									store.set({ isValid: newState.isValid });
+								}
+								if (newState.inputValue != null) {
+									store.set({ value: newState.inputValue });
+								}
+							}}
+							getIsValidInput={value => ({
 								isValid: value !== 'error',
 								validationErrorString: 'This is a custom error message',
-						  }
-			: null;
-
-	render() {
-		return (
-			<Demos>
-				<DemoRow>
-					{this.props.demoValidation ? (
-						<TextInput.Validation
-							value={this.state.inputValue}
-							onChange={this.onChange}
-							getIsValidInput={this.getIsValidInput}
-							validationDelay={this.props.validationDelay}
+							})}
+							validationDelay={200}
 							renderInput={props => (
 								<TextInput.Input
 									{...props}
 									placeholder="Bellingham"
 									title="Location"
 									help={<span>Try typing 'error'</span>}
-									theme={this.props.theme}
-									ref={input => {
-										this.input = input;
-									}}
 								/>
 							)}
 						/>
-					) : (
+					</State>
+					<ButtonMargin>
+						<State store={store} parseState={state => ({ disabled: !state.isValid })}>
+							<Button primary medium>
+								Save
+							</Button>
+						</State>
+					</ButtonMargin>
+				</Demos>
+			)),
+		)
+		.add(
+			'with offline network',
+			withInfo({
+				...info,
+				text: `
+Simulates a rejected promise due to an offline network connection
+~~~
+getIsValidInput={() => delayPromise(500).then(Promise.reject)}
+~~~
+`,
+			})(() => (
+				<Demos>
+					<State store={store} parseState={state => ({ value: state.value })}>
+						<TextInput.Validation
+							onChange={newState => {
+								if (newState.isValid != null) {
+									store.set({ isValid: newState.isValid });
+								}
+								if (newState.inputValue != null) {
+									store.set({ value: newState.inputValue });
+								}
+							}}
+							getIsValidInput={() => delayPromise(500).then(Promise.reject)}
+							validationDelay={200}
+							renderInput={props => (
+								<TextInput.Input
+									{...props}
+									placeholder="Bellingham"
+									title="Location"
+									help={<span>Try typing 'error'</span>}
+								/>
+							)}
+						/>
+					</State>
+					<ButtonMargin>
+						<State store={store} parseState={state => ({ disabled: !state.isValid })}>
+							<Button primary medium>
+								Save
+							</Button>
+						</State>
+					</ButtonMargin>
+				</Demos>
+			)),
+		)
+		.add(
+			'with slow API validation',
+			withInfo({
+				...info,
+				text: `
+~~~
+getIsValidInput={value =>
+	delayPromise(500).then(
+		Promise.resolve({
+			isValid: value !== 'error',
+			validationErrorString: 'This is a custom error message',
+		}),
+	)
+}
+~~~`,
+			})(() => (
+				<Demos>
+					<State store={store} parseState={state => ({ value: state.value })}>
+						<TextInput.Validation
+							onChange={newState => {
+								if (newState.isValid != null) {
+									store.set({ isValid: newState.isValid });
+								}
+								if (newState.inputValue != null) {
+									store.set({ value: newState.inputValue });
+								}
+							}}
+							getIsValidInput={value =>
+								delayPromise(500).then(() =>
+									Promise.resolve({
+										isValid: value !== 'error',
+										validationErrorString: 'This is a custom error message',
+									}),
+								)
+							}
+							validationDelay={100}
+							renderInput={props => (
+								<TextInput.Input
+									{...props}
+									placeholder="Bellingham"
+									title="Location"
+									help={<span>Try typing 'error'</span>}
+								/>
+							)}
+						/>
+					</State>
+					<ButtonMargin>
+						<State store={store} parseState={state => ({ disabled: !state.isValid })}>
+							<Button primary medium>
+								Save
+							</Button>
+						</State>
+					</ButtonMargin>
+				</Demos>
+			)),
+		);
+
+	storiesOf('Text input', module)
+		.add(
+			'with no validation',
+			withInfo({
+				...info,
+				text: `
+~~~
+getIsValidInput={value =>
+delayPromise(500).then(
+	Promise.resolve({
+		isValid: value !== 'error',
+		validationErrorString: 'This is a custom error message',
+	}),
+)
+}
+~~~`,
+			})(() => (
+				<Demos>
+					<State store={store} parseState={state => ({ value: state.value })}>
 						<TextInput.Input
-							value={this.state.inputValue}
-							onChange={event => this.setState({ inputValue: event.target.value, isValid: true })}
+							onChange={event => store.set({ value: event.target.value, isValid: true })}
 							placeholder="Bellingham"
 							title="Location"
-							help={<span>Try typing 'error'</span>}
-							theme={this.props.theme}
-							ref={input => {
-								this.input = input;
-							}}
 						/>
-					)}
-				</DemoRow>
-				<DemoRow>
-					<ButtonPadding>
-						<Button disabled={!this.state.isValid} primary medium>
-							Save
-						</Button>
-					</ButtonPadding>
-					<ButtonPadding>
-						<Button
-							primaryOutline
-							medium
-							onClick={() => this.setState({ inputValue: Math.random().toString() })}
-						>
-							Random input value
-						</Button>
-					</ButtonPadding>
-					<ButtonPadding>
-						<Button
-							primaryOutline
-							medium
-							onClick={() => {
-								this.input.focus();
-							}}
-						>
-							Set focus
-						</Button>
-					</ButtonPadding>
-				</DemoRow>
-			</Demos>
+					</State>
+					<ButtonMargin>
+						<State store={store} parseState={state => ({ disabled: !state.isValid })}>
+							<Button primary medium>
+								Save
+							</Button>
+						</State>
+					</ButtonMargin>
+				</Demos>
+			)),
+		)
+		.add(
+			'with alternate theme',
+			withInfo({
+				...info,
+				text: `
+Theme properties are expected to be valid CSS color names
+`,
+			})(() => (
+				<Demos>
+					<State store={store} parseState={state => ({ value: state.value })}>
+						<TextInput.Input
+							onChange={event => store.set({ value: event.target.value, isValid: true })}
+							placeholder="Bellingham"
+							title="Location"
+							theme={{ background: '#393939', text: 'white' }}
+						/>
+					</State>
+					<ButtonMargin>
+						<State store={store} parseState={state => ({ disabled: !state.isValid })}>
+							<Button primary medium>
+								Save
+							</Button>
+						</State>
+					</ButtonMargin>
+				</Demos>
+			)),
 		);
-	}
 }

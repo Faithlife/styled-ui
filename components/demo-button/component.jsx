@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { applyVariations } from '../utils';
 import * as Styled from './styled.jsx';
 
-function DemoComponent({ children, theme, ...buttonProps }) {
+function Button({ children, theme, ...buttonProps }) {
 	const { component: MappedStyledComponent, filteredProps } = applyVariations(
 		Styled.Button,
 		Styled.variationMap,
@@ -17,7 +17,7 @@ function DemoComponent({ children, theme, ...buttonProps }) {
 	);
 }
 
-DemoComponent.propTypes = {
+Button.propTypes = {
 	children: PropTypes.node.isRequired,
 	theme: PropTypes.object,
 	primary: PropTypes.bool,
@@ -28,7 +28,7 @@ DemoComponent.propTypes = {
 	extraLarge: PropTypes.bool,
 };
 
-DemoComponent.defaultProps = {
+Button.defaultProps = {
 	theme: {
 		default: '#278ed4',
 		hover: '#6db3e2',
@@ -38,4 +38,4 @@ DemoComponent.defaultProps = {
 	type: 'button',
 };
 
-export default DemoComponent;
+export default Button;
