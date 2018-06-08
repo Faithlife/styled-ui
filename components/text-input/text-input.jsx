@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
+import debounce from 'lodash.debounce';
 import { Exclamation, Check } from '../icons';
 import * as Styled from './styled.jsx';
 
@@ -25,6 +26,10 @@ export default class Input extends React.Component {
 		validationErrorString: PropTypes.string,
 		/** The input value, converts to empty string if null or undefined */
 		value: PropTypes.string.isRequired,
+		/** Returns a string with the current input value */
+		onChange: PropTypes.func.isRequired,
+		/** Milliseconds to wait before validating the changed input. Defaults to 0 */
+		debounce: PropTypes.number,
 	};
 
 	static defaultProps = {
@@ -32,10 +37,28 @@ export default class Input extends React.Component {
 			background: 'white',
 			text: 'black',
 		},
+		debounce: 0,
 	};
+
+	state = {
+		value: this.props.value || '',
+	};
+
+	componentWillUnmount() {
+		this.debouncedHandleChange.cancel();
+	}
+
+	debouncedHandleChange = debounce(inputValue => {
+		this.props.onChange(inputValue);
+	}, this.props.debounce);
 
 	focus = () => {
 		this.input.focus();
+	};
+
+	handleChange = event => {
+		this.setState({ value: event.target.value });
+		this.debouncedHandleChange(event.target.value);
 	};
 
 	render() {
@@ -43,7 +66,6 @@ export default class Input extends React.Component {
 			help,
 			theme,
 			title,
-			value,
 			validationErrorString,
 			showValidationSuccess,
 			showValidationError,
@@ -64,11 +86,12 @@ export default class Input extends React.Component {
 					<Styled.InputContainer>
 						<Styled.TextInput
 							{...inputProps}
+							onChange={this.handleChange}
 							innerRef={input => {
 								this.input = input;
 							}}
 							type="text"
-							value={value || ''}
+							value={this.state.value || ''}
 						/>
 
 						{showValidationError && (
@@ -83,7 +106,8 @@ export default class Input extends React.Component {
 							</Styled.StyledIcon>
 						)}
 					</Styled.InputContainer>
-					{validationErrorString && <Styled.ErrorTag>{validationErrorString}</Styled.ErrorTag>}
+					{showValidationError &&
+						validationErrorString && <Styled.ErrorTag>{validationErrorString}</Styled.ErrorTag>}
 				</Styled.Label>
 			</ThemeProvider>
 		);
