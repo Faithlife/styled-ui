@@ -5,6 +5,7 @@
 A standard text input control with local validation. \`TextInput.Input\` is used as a render prop so that additional input properties can be set, such as \`placeholder\`.
 
 ```react
+showSource: true
 state: { isValid: false, value: 'Type here' }
 ---
 <div class="container">
@@ -50,6 +51,7 @@ state: { isValid: false, value: 'Type here' }
 ### No validation
 
 ```react
+showSource: true
 state: { isValid: false, value: '' }
 ---
 <div class="container">
@@ -85,6 +87,7 @@ state: { isValid: false, value: '' }
 Simulates making a network call to validate the field, using a Promise which takes 500 ms to resolve.
 
 ```react
+showSource: true
 state: { isValid: false, value: '' }
 ---
 <div class="container">
@@ -134,6 +137,7 @@ state: { isValid: false, value: '' }
 API calls can sometimes fail. When this happens, the control will show a generic error message.
 
 ```react
+showSource: true
 state: { isValid: false, value: '' }
 ---
 <div class="container">

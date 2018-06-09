@@ -15,21 +15,32 @@ const pages = [
 		content: pageLoader(() => import('./WELCOME.md')),
 	},
 	{
-		path: '/button',
 		title: 'Button',
-		content: pageLoader(() => import('./button.md')),
-		imports: { Button },
+		pages: [
+			{
+				path: '/buttons/variations',
+				title: 'Variations',
+				content: pageLoader(() => import('./button/variations.md')),
+				imports: { Button },
+			},
+			{
+				path: '/buttons/ok-cancel',
+				title: 'OK Cancel',
+				content: pageLoader(() => import('./button/ok-cancel.md')),
+				imports: { Button },
+			},
+		],
 	},
 	{
 		path: '/checkbox',
 		title: 'Check box',
-		content: pageLoader(() => import('./checkbox.md')),
+		content: pageLoader(() => import('./checkbox/variations.md')),
 		imports: { Checkbox },
 	},
 	{
 		path: '/text-input',
 		title: 'Text input',
-		content: pageLoader(() => import('./textinput.md')),
+		content: pageLoader(() => import('./text-input/variations.md')),
 		imports: { ...TextInput, Button, delayPromise },
 	},
 ];

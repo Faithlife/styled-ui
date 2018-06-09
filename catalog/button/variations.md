@@ -5,12 +5,9 @@ Buttons allow users to command the computer to take some action. Buttons, like a
 ### Scale Factor
 
 ```react
-<div class="container">
-	<style>{`
-.container > * {
-	margin: 8px;
-}
-`}</style>
+showSource: true
+---
+<div class="container"><style>{`.container > * { margin: 8px; }`}</style>
 	<Button primary small>
 		Small
 	</Button>
@@ -35,12 +32,9 @@ Buttons allow users to command the computer to take some action. Buttons, like a
 
 
 ```react
-<div class="container">
-	<style>{`
-.container > * {
-	margin: 8px;
-}
-`}</style>
+showSource: true
+---
+<div class="container"><style>{`.container > * { margin: 8px; }`}</style>
 	<Button primary medium>
 		Primary
 	</Button>
@@ -83,12 +77,9 @@ A product sales page enables three possible user actions: Buy the product, rent 
 
 
 ```react
-<div class="container">
-	<style>{`
-.container > * {
-	margin: 8px;
-}
-`}</style>
+showSource: true
+---
+<div class="container"><style>{`.container > * { margin: 8px; }`}</style>
 	<Button primary medium>
 		Buy now
 	</Button>
