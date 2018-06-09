@@ -7,14 +7,12 @@
   "license": "UNLICENSED",
   "description": "UI components for use in Faithlife applications.",
   "scripts": {
-    "build-storybook": "build-storybook",
-    "deploy-storybook": "storybook-to-ghpages --ci",
     "eslint": "eslint ./components --ext .js --ext .jsx",
     "test": "npm run unit-test && npm run eslint && npm run stylelint",
     "precommit": "prettier --write \"./components/**/*.{js,jsx}\" && npm run stylelint",
     "build": "rimraf dist && webpack -p",
     "prepublishOnly": "npm test && npm run build",
-    "stylelint": "stylelint ./components/**/*.jsx ./stories/**/*.jsx",
+    "stylelint": "stylelint ./components/**/*.jsx",
     "unit-test": "mocha -r esm ./tests/**/*.js",
     "catalog-start": "catalog start",
     "catalog-build": "catalog build"
@@ -36,11 +34,6 @@
     "prop-types": "^15.6.1"
   },
   "devDependencies": {
-    "@sambego/storybook-state": "^1.0.7",
-    "@storybook/addon-actions": "^3.4.0",
-    "@storybook/addon-info": "^3.4.6",
-    "@storybook/react": "^3.4.0",
-    "@storybook/storybook-deployer": "^2.3.0",
     "assert": "^1.4.1",
     "autoprefixer": "^8.2.0",
     "babel-core": "^6.26.0",
