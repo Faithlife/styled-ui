@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Catalog, pageLoader } from 'catalog';
 import { Button, Checkbox, TextInput } from '../components';
+import DocgenTable from './docgen-table.jsx';
 
 function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
@@ -17,6 +18,12 @@ const pages = [
 	{
 		title: 'Button',
 		pages: [
+			{
+				path: '/buttons/documentation',
+				title: 'Documentation',
+				content: pageLoader(() => import('./button/documentation.md')),
+				imports: { Button, DocgenTable },
+			},
 			{
 				path: '/buttons/variations',
 				title: 'Variations',
