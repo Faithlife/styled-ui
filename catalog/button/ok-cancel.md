@@ -1,7 +1,7 @@
 ```react
 showSource: true
 ---
-<div class="container"><style>{`.container > * { margin: 8px; }`}</style>
+<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
 	<Button primaryOutline medium>
 		Cancel
 	</Button>

@@ -7,7 +7,7 @@ Buttons allow users to command the computer to take some action. Buttons, like a
 ```react
 showSource: true
 ---
-<div class="container"><style>{`.container > * { margin: 8px; }`}</style>
+<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
 	<Button primary small>
 		Small
 	</Button>
@@ -34,7 +34,7 @@ showSource: true
 ```react
 showSource: true
 ---
-<div class="container"><style>{`.container > * { margin: 8px; }`}</style>
+<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
 	<Button primary medium>
 		Primary
 	</Button>
@@ -79,7 +79,7 @@ A product sales page enables three possible user actions: Buy the product, rent 
 ```react
 showSource: true
 ---
-<div class="container"><style>{`.container > * { margin: 8px; }`}</style>
+<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
 	<Button primary medium>
 		Buy now
 	</Button>

@@ -8,7 +8,7 @@ A standard text input control with local validation. \`TextInput.Input\` is used
 showSource: true
 state: { isValid: false, value: 'Type here' }
 ---
-<div class="container">
+<div className="container">
 	<style>{`
 .container {
 	font-family: 'Roboto';
@@ -21,7 +21,7 @@ state: { isValid: false, value: 'Type here' }
 	margin: 8px;
 }
 `}</style>
-	<div class="inputWrapper">
+	<div className="inputWrapper">
 		<ValidatedInput
 			value={state.value}
 			onValidationChange={newState => {
@@ -54,7 +54,7 @@ state: { isValid: false, value: 'Type here' }
 showSource: true
 state: { isValid: false, value: '' }
 ---
-<div class="container">
+<div className="container">
 	<style>{`
 .container {
 	font-family: 'Roboto';
@@ -67,7 +67,7 @@ state: { isValid: false, value: '' }
 	margin: 8px;
 }
 `}</style>
-	<div class="inputWrapper">
+	<div className="inputWrapper">
 		<Input
 			value={state.value}
 			onChange={value => setState({ value: value, isValid: value !== '' })}
@@ -90,7 +90,7 @@ Simulates making a network call to validate the field, using a Promise which tak
 showSource: true
 state: { isValid: false, value: '' }
 ---
-<div class="container">
+<div className="container">
 	<style>{`
 .container {
 	font-family: 'Roboto';
@@ -103,7 +103,7 @@ state: { isValid: false, value: '' }
 	margin: 8px;
 }
 `}</style>
-	<div class="inputWrapper">
+	<div className="inputWrapper">
 		<ValidatedInput
 			value={state.value}
 			onValidationChange={newState => {
@@ -140,7 +140,7 @@ API calls can sometimes fail. When this happens, the control will show a generic
 showSource: true
 state: { isValid: false, value: '' }
 ---
-<div class="container">
+<div className="container">
 	<style>{`
 .container {
 	font-family: 'Roboto';
@@ -153,7 +153,7 @@ state: { isValid: false, value: '' }
 	margin: 8px;
 }
 `}</style>
-	<div class="inputWrapper">
+	<div className="inputWrapper">
 		<ValidatedInput
 			value={state.value}
 			onValidationChange={newState => {
