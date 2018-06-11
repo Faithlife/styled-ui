@@ -72,6 +72,16 @@ const pages = [
 			},
 		],
 	},
+	{
+		title: 'Design Styles',
+		pages: [
+			{
+				path: '/design-styles/colors',
+				title: 'Colors',
+				content: pageLoader(() => import('./design-styles/colors.md')),
+			},
+		],
+	},
 ];
 
 ReactDOM.render(<Catalog title="Catalog" pages={pages} />, document.getElementById('catalog'));
