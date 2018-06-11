@@ -16,7 +16,7 @@
 		"stylelint": "stylelint ./components/**/*.jsx",
 		"unit-test": "mocha -r esm ./tests/**/*.js",
 		"catalog-start": "catalog start",
-		"catalog-build": "catalog build"
+		"catalog-build": "catalog build --public-url /engagement-products-ui"
 	},
 	"files": [
 		"dist/**"
