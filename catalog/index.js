@@ -19,19 +19,19 @@ const pages = [
 		title: 'Button',
 		pages: [
 			{
-				path: '/buttons/documentation',
+				path: '/button/documentation',
 				title: 'Documentation',
 				content: pageLoader(() => import('./button/documentation.md')),
 				imports: { Button, DocgenTable },
 			},
 			{
-				path: '/buttons/variations',
+				path: '/button/variations',
 				title: 'Variations',
 				content: pageLoader(() => import('./button/variations.md')),
 				imports: { Button },
 			},
 			{
-				path: '/buttons/ok-cancel',
+				path: '/button/ok-cancel',
 				title: 'OK Cancel',
 				content: pageLoader(() => import('./button/ok-cancel.md')),
 				imports: { Button },
@@ -39,16 +39,38 @@ const pages = [
 		],
 	},
 	{
-		path: '/checkbox',
-		title: 'Check box',
-		content: pageLoader(() => import('./checkbox/variations.md')),
-		imports: { Checkbox },
+		title: 'Checkbox',
+		pages: [
+			{
+				path: '/checkbox/documentation',
+				title: 'Documentation',
+				content: pageLoader(() => import('./checkbox/documentation.md')),
+				imports: { Checkbox, DocgenTable },
+			},
+			{
+				path: '/checkbox/variations',
+				title: 'Variations',
+				content: pageLoader(() => import('./checkbox/variations.md')),
+				imports: { Checkbox },
+			},
+		],
 	},
 	{
-		path: '/text-input',
 		title: 'Text input',
-		content: pageLoader(() => import('./text-input/variations.md')),
-		imports: { ...TextInput, Button, delayPromise },
+		pages: [
+			{
+				path: '/text-input/documentation',
+				title: 'Documentation',
+				content: pageLoader(() => import('./text-input/documentation.md')),
+				imports: { ...TextInput, DocgenTable },
+			},
+			{
+				path: '/text-input/variations',
+				title: 'Variations',
+				content: pageLoader(() => import('./text-input/variations.md')),
+				imports: { ...TextInput, Button, delayPromise },
+			},
+		],
 	},
 ];
 

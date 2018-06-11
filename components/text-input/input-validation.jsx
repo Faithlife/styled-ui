@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Input } from '.';
+import Input from './text-input.jsx';
 
 /**
- * A valided input component, which uses <TextInput.Input /> a render prop.
+ * Text input with validation logic
+ * Extra props are passed to the wrapped <TextInput.Input /> component.
  */
 export default class ValidatedInput extends Component {
 	static propTypes = {

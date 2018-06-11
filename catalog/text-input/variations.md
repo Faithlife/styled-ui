@@ -1,5 +1,3 @@
-# Code samples
-
 ### Validated input
 
 A standard text input control with local validation. \`TextInput.Input\` is used as a render prop so that additional input properties can be set, such as \`placeholder\`.
@@ -9,18 +7,20 @@ showSource: true
 state: { isValid: false, value: 'Type here' }
 ---
 <div className="container">
-	<style>{`
-.container {
-	font-family: 'Roboto';
-	color: #333333;
-}
-.inputWrapper {
-	max-width: 300px;
-}
-.container > * {
-	margin: 8px;
-}
-`}</style>
+	<style>
+	{`
+		.container {
+			font-family: 'Roboto';
+			color: #333333;
+		}
+		.inputWrapper {
+			max-width: 300px;
+		}
+		.container > * {
+			margin: 8px;
+		}
+	`}
+	</style>
 	<div className="inputWrapper">
 		<ValidatedInput
 			value={state.value}
@@ -55,18 +55,20 @@ showSource: true
 state: { isValid: false, value: '' }
 ---
 <div className="container">
-	<style>{`
-.container {
-	font-family: 'Roboto';
-	color: #333333;
-}
-.inputWrapper {
-	max-width: 300px;
-}
-.container > * {
-	margin: 8px;
-}
-`}</style>
+	<style>
+	{`
+		.container {
+			font-family: 'Roboto';
+			color: #333333;
+		}
+		.inputWrapper {
+			max-width: 300px;
+		}
+		.container > * {
+			margin: 8px;
+		}
+	`}
+	</style>
 	<div className="inputWrapper">
 		<Input
 			value={state.value}
@@ -91,18 +93,20 @@ showSource: true
 state: { isValid: false, value: '' }
 ---
 <div className="container">
-	<style>{`
-.container {
-	font-family: 'Roboto';
-	color: #333333;
-}
-.inputWrapper {
-	max-width: 300px;
-}
-.container > * {
-	margin: 8px;
-}
-`}</style>
+	<style>
+	{`
+		.container {
+			font-family: 'Roboto';
+			color: #333333;
+		}
+		.inputWrapper {
+			max-width: 300px;
+		}
+		.container > * {
+			margin: 8px;
+		}
+	`}
+	</style>
 	<div className="inputWrapper">
 		<ValidatedInput
 			value={state.value}
@@ -141,18 +145,20 @@ showSource: true
 state: { isValid: false, value: '' }
 ---
 <div className="container">
-	<style>{`
-.container {
-	font-family: 'Roboto';
-	color: #333333;
-}
-.inputWrapper {
-	max-width: 300px;
-}
-.container > * {
-	margin: 8px;
-}
-`}</style>
+	<style>
+	{`
+		.container {
+			font-family: 'Roboto';
+			color: #333333;
+		}
+		.inputWrapper {
+			max-width: 300px;
+		}
+		.container > * {
+			margin: 8px;
+		}
+	`}
+	</style>
 	<div className="inputWrapper">
 		<ValidatedInput
 			value={state.value}
