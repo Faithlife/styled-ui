@@ -1,23 +1,64 @@
-# Buttons
-
 Buttons allow users to command the computer to take some action. Buttons, like all standard form components, usually have 16 px space between them.
 
 ## Component Variations
 
 ### Scale Factor
 
+```react
+showSource: true
+---
+<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
+	<Button primary small>
+		Small
+	</Button>
+	<Button primary medium>
+		Medium
+	</Button>
+	<Button primary large>
+		Large
+	</Button>
+	<Button primary extraLarge>
+		Extra Large
+	</Button>
+</div>
+```
+
 * `small` -- used for apps with tight spacing, never for marketing pages.
 * `medium` -- this is the default size for web applications.
 * `large` -- this is the default scale for marketing web pages.
-* `super` -- extra large inputs and call-to-action buttons for marketing page use.
+* `extraLarge` -- extra large inputs and call-to-action buttons for marketing page use.
 
 ### Relative Emphasis
+
+
+```react
+showSource: true
+---
+<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
+	<Button primary medium>
+		Primary
+	</Button>
+	<Button primary medium disabled>
+		Primary
+	</Button>
+	<Button primaryOutline medium>
+		Primary Outline
+	</Button>
+	<Button primaryOutline medium disabled>
+		Primary Outline
+	</Button>
+	<Button minor medium>
+		Minor
+	</Button>
+	<Button minor medium disabled>
+		Minor
+	</Button>
+</div>
+```
 
 * `primary` -- for the most important or most common action for a user to take in a given context/scope. This button variant grabs the user's attention. In marketing pages, this style is for the "call to action" on a page.
 * `primaryOutline` -- for actions related to, or nearby the primary button in terms of visual hieararchy that are less common or less critical. Use this button when you want the user's casual attention.
 * `minor` -- for apps, not marketing pages. When there are a lot of common actions that are all of equal weight, consider using minor buttons.
-* `link` -- for situations where a hyperlink is indicated, but must be aligned with a row of buttons. Is very lightweight in terms of visual attention.
-* `overlay` -- specifically for overlaying action buttons on graphics, videos, or other graphically rich elements. Comes with a transparent black background that allows some of the content to peek through. Usually icon-only with no text.
 
 ## Button Text
 
@@ -32,5 +73,21 @@ Some buttons are noun phrases, but there should always be an implied verb. For e
 
 ## Examples
 
-A product sales page enables three possible suer actions: Buy the product, rent the product, or learn more about the product. Appropriate button styles and text would be: "Buy now" (primary), "Rent" (primaryOutline), and "Learn more" (secondary). If they are all in a row, they would come in the order: "Learn more", "Rent", and "Buy now" on the right.
+A product sales page enables three possible user actions: Buy the product, rent the product, or learn more about the product. Appropriate button styles and text would be: "Buy now" (primary), "Rent" (primaryOutline), and "Learn more" (minor). If they are all in a row, they would come in the order: "Learn more", "Rent", and "Buy now" on the right.
 
+
+```react
+showSource: true
+---
+<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
+	<Button primary medium>
+		Buy now
+	</Button>
+	<Button primaryOutline medium>
+		Rent
+	</Button>
+	<Button minor medium>
+		Learn more
+	</Button>
+</div>
+```

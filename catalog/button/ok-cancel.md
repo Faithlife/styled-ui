@@ -1,4 +1,15 @@
-# Okay Cancel Buttons
+```react
+showSource: true
+---
+<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
+	<Button primaryOutline medium>
+		Cancel
+	</Button>
+	<Button primary medium>
+		OK
+	</Button>
+</div>
+```
 
 It's common to need both a commit action ("OK", "Done", "Save") right next to a cancel action. Faithlife house style is:
 

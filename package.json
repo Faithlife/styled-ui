@@ -7,16 +7,16 @@
 	"license": "UNLICENSED",
 	"description": "UI components for use in Faithlife applications.",
 	"scripts": {
-		"build-storybook": "build-storybook",
-		"deploy-storybook": "storybook-to-ghpages --ci",
+		"deploy-site": "storybook-to-ghpages --ci --existing-output-dir=catalog/build",
 		"eslint": "eslint ./components --ext .js --ext .jsx",
 		"test": "npm run unit-test && npm run eslint && npm run stylelint",
 		"precommit": "prettier --write \"./components/**/*.{js,jsx}\" && npm run stylelint",
 		"build": "rimraf dist && webpack -p",
 		"prepublishOnly": "npm test && npm run build",
-		"stylelint": "stylelint ./components/**/*.jsx ./stories/**/*.jsx",
+		"stylelint": "stylelint ./components/**/*.jsx",
 		"unit-test": "mocha -r esm ./tests/**/*.js",
-		"storybook": "start-storybook -p 9001 -c .storybook"
+		"catalog-start": "catalog start",
+		"catalog-build": "catalog build --public-url /engagement-products-ui"
 	},
 	"files": [
 		"dist/**"
@@ -31,24 +31,23 @@
 		"styled-components": "^3.2.5"
 	},
 	"dependencies": {
-		"airbnb-prop-types": "^2.9.0",
 		"lodash.debounce": "^4.0.8",
 		"prop-types": "^15.6.1"
 	},
 	"devDependencies": {
-		"@storybook/addon-actions": "^3.4.0",
-		"@storybook/react": "^3.4.0",
 		"@storybook/storybook-deployer": "^2.3.0",
 		"assert": "^1.4.1",
 		"autoprefixer": "^8.2.0",
 		"babel-core": "^6.26.0",
 		"babel-eslint": "^8.2.2",
 		"babel-plugin-add-module-exports": "^0.2.1",
+		"babel-plugin-react-docgen": "^1.9.0",
 		"babel-plugin-styled-components": "^1.5.1",
 		"babel-preset-env": "^1.6.1",
 		"babel-preset-react": "^6.24.1",
 		"babel-preset-stage-0": "^6.24.1",
 		"babel-runtime": "^6.26.0",
+		"catalog": "^3.5.4",
 		"eslint": "^4.19.1",
 		"eslint-config-faithlife": "^3.1.0",
 		"eslint-config-prettier": "^2.9.0",
@@ -59,8 +58,8 @@
 		"esm": "^3.0.24",
 		"mocha": "^5.1.1",
 		"prettier": "^1.11.1",
-		"react": "^16.3.1",
-		"react-dom": "^16.3.1",
+		"react": "^16.4.0",
+		"react-dom": "^16.4.0",
 		"rimraf": "^2.6.2",
 		"styled-components": "^3.2.5",
 		"stylelint": "^9.1.3",
