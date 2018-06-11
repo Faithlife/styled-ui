@@ -7,7 +7,7 @@
 	"license": "UNLICENSED",
 	"description": "UI components for use in Faithlife applications.",
 	"scripts": {
-		"deploy-site": "storybook-to-ghpages --ci --existing-output-dir=catalog/build",
+		"deploy-site": "catalog-build && storybook-to-ghpages --ci --existing-output-dir=catalog/build",
 		"eslint": "eslint ./components --ext .js --ext .jsx",
 		"test": "npm run unit-test && npm run eslint && npm run stylelint",
 		"precommit": "prettier --write \"./components/**/*.{js,jsx}\" && npm run stylelint",
