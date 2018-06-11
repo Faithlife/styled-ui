@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Catalog, pageLoader } from 'catalog';
 import { Button, Checkbox, TextInput } from '../components';
+import { colors } from '../components/shared-styles';
 import DocgenTable from './docgen-table.jsx';
 
 function delayPromise(duration) {
@@ -84,4 +85,15 @@ const pages = [
 	},
 ];
 
-ReactDOM.render(<Catalog title="Catalog" pages={pages} />, document.getElementById('catalog'));
+ReactDOM.render(
+	<Catalog
+		title="Catalog"
+		pages={pages}
+		logoSrc="faithlife-logo.svg"
+		theme={{
+			fontFamily: 'Source Sans Pro',
+			pageHeadingBackground: colors.flGray,
+		}}
+	/>,
+	document.getElementById('catalog'),
+);
