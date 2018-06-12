@@ -1,8 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Button } from '../components';
+import Tooltip from './utils/tooltip.jsx';
 
 const Container = styled.div`
 	font-family: 'Roboto';
@@ -28,11 +30,32 @@ const Cell = styled.td`
 	padding: 16px 16px 16px 0;
 	line-height: 1.44;
 	vertical-align: top;
+	white-space: pre-wrap;
 `;
 
 const Row = styled.tr`
 	border-bottom: 1px solid #d6d6d6;
 `;
+
+class CollapsableText extends Component {
+	static propTypes = {
+		children: PropTypes.node.isRequired,
+	};
+
+	render() {
+		return (
+			<Tooltip
+				renderButton={props => (
+					<Button primaryOutline small onClick={props.handleButtonClick}>
+						Reveal
+					</Button>
+				)}
+			>
+				{this.props.children}
+			</Tooltip>
+		);
+	}
+}
 
 export default function DocgenTable(props) {
 	const docgen = props.component.__docgenInfo;
@@ -53,6 +76,7 @@ export default function DocgenTable(props) {
 					<tr>
 						<HeadingCell>prop</HeadingCell>
 						<HeadingCell>type</HeadingCell>
+						<HeadingCell>shape</HeadingCell>
 						<HeadingCell>default</HeadingCell>
 						<HeadingCell>required</HeadingCell>
 						<HeadingCell>description</HeadingCell>
@@ -63,7 +87,24 @@ export default function DocgenTable(props) {
 						<Row key={componentProp.name}>
 							<Cell>{componentProp.name}</Cell>
 							<Cell>{componentProp.type && componentProp.type.name}</Cell>
-							<Cell>{componentProp.defaultValue && componentProp.defaultValue.value}</Cell>
+							<Cell>
+								{componentProp.type &&
+									componentProp.type.value &&
+									componentProp.type.name === 'shape' && (
+										<CollapsableText>
+											{JSON.stringify(componentProp.type.value, null, 2)}
+										</CollapsableText>
+									)}
+							</Cell>
+							<Cell>
+								{componentProp.defaultValue &&
+								componentProp.type &&
+								componentProp.type.name === 'shape' ? (
+									<CollapsableText>{componentProp.defaultValue.value}</CollapsableText>
+								) : componentProp.defaultValue ? (
+									componentProp.defaultValue.value
+								) : null}
+							</Cell>
 							<Cell>{componentProp.required && 'yes'}</Cell>
 							<Cell>{componentProp.description}</Cell>
 						</Row>
