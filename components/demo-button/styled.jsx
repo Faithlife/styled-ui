@@ -95,6 +95,25 @@ export const variationMap = {
 			cursor: default;
 		}
 `,
+	link: component => component.extend`
+		border: none;
+		background: none;
+		color: ${props => props.theme.defaultColor || buttonColors.default};
+		padding: 0;
+
+		&:hover {
+			color: ${props => props.theme.hoverColor || buttonColors.hover};
+		}
+
+		&:active {
+			color: ${props => props.theme.activeColor || buttonColors.active};
+		}
+
+		&:disabled {
+			color: ${props => props.theme.disabledColor || buttonColors.disabled};
+			cursor: default;
+		}
+`,
 	small: component => component.extend`
 		padding: 6px ${thickness.eight};
 `,

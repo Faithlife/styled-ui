@@ -54,7 +54,7 @@ showSource: true
 ```react
 showSource: true
 ---
-<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
+<div className="container"><style>{`.container > * { margin: 8px; font-family: 'Source Sans Pro' }`}</style>
 	<Button primary medium>
 		Primary
 	</Button>
@@ -64,12 +64,19 @@ showSource: true
 	<Button minor medium>
 		Minor
 	</Button>
+	<Button link medium>
+		Link
+	</Button>
+	<div>
+		Here is some text with an inline <Button link>link button</Button>.
+	</div>
 </div>
 ```
 
 * `primary` -- for the most important or most common action for a user to take in a given context/scope. This button variant grabs the user's attention. In marketing pages, this style is for the "call to action" on a page.
 * `primaryOutline` -- for actions related to, or nearby the primary button in terms of visual hieararchy that are less common or less critical. Use this button when you want the user's casual attention.
 * `minor` -- for apps, not marketing pages. When there are a lot of common actions that are all of equal weight, consider using minor buttons.
+* `link` -- for situations where a hyperlink is indicated, but must be aligned with a row of buttons. Is very lightweight in terms of visual attention.
 
 ## Disabled states
 
