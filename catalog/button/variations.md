@@ -30,7 +30,7 @@ Do not use the `style` prop to style this component (it will be ignored). Instea
 showSource: true
 ---
 <div className="container"><style>{`.container > * { margin: 8px; }`}</style>
-	<Button primary large theme={{ default: 'plum', hover: 'darkslateblue' }}>
+	<Button primary large theme={{ defaultColor: 'plum', hoverColor: 'darkslateblue' }}>
 		Plum
 	</Button>
 	<Button primary large theme={{ width: '200px' }}>

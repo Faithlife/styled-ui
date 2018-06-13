@@ -25,49 +25,49 @@ export const Button = styled.button`
 
 export const variationMap = {
 	primary: component => component.extend`
-		border: 1px solid ${props => props.theme.default || buttonColors.default};
-		background-color: ${props => props.theme.default || buttonColors.default};
+		border: 1px solid ${props => props.theme.defaultColor || buttonColors.default};
+		background-color: ${props => props.theme.defaultColor || buttonColors.default};
 		color: #fff;
 
 		&:hover {
-			border-color: ${props => props.theme.hover || buttonColors.hover};
-			background-color: ${props => props.theme.hover || buttonColors.hover};
+			border-color: ${props => props.theme.hoverColor || buttonColors.hover};
+			background-color: ${props => props.theme.hoverColor || buttonColors.hover};
 			color: #fff;
 		}
 
 		&:active {
-			border-color: ${props => props.theme.active || buttonColors.active};
-			background-color: ${props => props.theme.active || buttonColors.active};
+			border-color: ${props => props.theme.activeColor || buttonColors.active};
+			background-color: ${props => props.theme.activeColor || buttonColors.active};
 			color: #fff;
 		}
 
 		&:disabled {
-			border-color: ${props => props.theme.disabled || buttonColors.disabled};
-			background-color: ${props => props.theme.disabled || buttonColors.disabled};
+			border-color: ${props => props.theme.disabledColor || buttonColors.disabled};
+			background-color: ${props => props.theme.disabledColor || buttonColors.disabled};
 			cursor: default;
 		}
 `,
 	primaryOutline: component => component.extend`
-		border: 1px solid ${props => props.theme.default || buttonColors.default};
+		border: 1px solid ${props => props.theme.defaultColor || buttonColors.default};
 		background: none;
-		color: ${props => props.theme.default || buttonColors.default};
+		color: ${props => props.theme.defaultColor || buttonColors.default};
 
 		&:hover {
-			background-color: ${props => props.theme.hover || buttonColors.hover};
-			border-color: ${props => props.theme.hover || buttonColors.hover};
+			background-color: ${props => props.theme.hoverColor || buttonColors.hover};
+			border-color: ${props => props.theme.hoverColor || buttonColors.hover};
 			color: #fff;
 		}
 
 		&:active {
-			background-color: ${props => props.theme.active || buttonColors.active};
-			border-color: ${props => props.theme.active || buttonColors.active};
+			background-color: ${props => props.theme.activeColor || buttonColors.active};
+			border-color: ${props => props.theme.activeColor || buttonColors.active};
 			color: #fff;
 		}
 
 		&:disabled {
 			background: none;
-			border-color: ${props => props.theme.disabled || buttonColors.disabled};
-			color: ${props => props.theme.disabled || buttonColors.disabled};
+			border-color: ${props => props.theme.disabledColor || buttonColors.disabled};
+			color: ${props => props.theme.disabledColor || buttonColors.disabled};
 			cursor: default;
 		}
 `,

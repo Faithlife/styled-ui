@@ -10,10 +10,10 @@ export default class Button extends PureComponent {
 		children: PropTypes.node.isRequired,
 		/** An optional theme */
 		theme: PropTypes.shape({
-			default: PropTypes.string,
-			hover: PropTypes.string,
-			active: PropTypes.string,
-			disabled: PropTypes.string,
+			defaultColor: PropTypes.string,
+			hoverColor: PropTypes.string,
+			activeColor: PropTypes.string,
+			disabledColor: PropTypes.string,
 			width: PropTypes.string,
 			fontSize: PropTypes.string,
 		}),
