@@ -2,10 +2,10 @@
 showSource: true
 ---
 <div className="container"><style>{`.container > * { margin: 8px; }`}</style>
-	<Button primaryOutline medium>
+	<Button primaryOutline medium theme={{ width: '80px' }}>
 		Cancel
 	</Button>
-	<Button primary medium>
+	<Button primary medium theme={{ width: '80px' }}>
 		OK
 	</Button>
 </div>
