@@ -15,7 +15,7 @@ export default class ValidatedInput extends Component {
 		 */
 		getIsValidInput: PropTypes.func,
 		/** Function that returns the value without waiting for validation. */
-		onChange: PropTypes.func.isRequired,
+		onChange: PropTypes.func,
 		/** Function that returns an object with the validated input. isValid and inputValue won't be set at the same time, because of input debouncing
 		 * {
 		 *   isValid: (true|false),
