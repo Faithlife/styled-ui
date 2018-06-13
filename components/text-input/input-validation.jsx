@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Input from './text-input.jsx';
 
 /**
- * Text input with validation logic
+ * Text input with validation logic.
  * Extra props are passed to the wrapped <TextInput.Input /> component.
  */
 export default class ValidatedInput extends Component {

@@ -4,7 +4,7 @@ A standard text input control with local validation. \`TextInput.Input\` is used
 
 ```react
 showSource: true
-state: { isValid: false, value: 'Type here' }
+state: { isValid: false, value: '' }
 ---
 <div className="container">
 	<style>

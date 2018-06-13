@@ -6,7 +6,7 @@ import { Exclamation, Check } from '../icons';
 import * as Styled from './styled.jsx';
 
 /**
- * Text input control with validation indicators
+ * Text input control with validation indicators.
  * Any extra props will be passed along to the underlying `input` (eg placeholder)
  */
 export default class Input extends React.Component {
