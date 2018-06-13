@@ -89,10 +89,10 @@ export default class ValidatedInput extends Component {
 		let showValidationError = false;
 
 		const {
-			getIsValidInput /* eslint-disable-line no-unused-vars */,
-			onChange /* eslint-disable-line no-unused-vars */,
-			validationFailureString /* eslint-disable-line no-unused-vars */,
-			onValidationChange /* eslint-disable-line no-unused-vars */,
+			getIsValidInput,
+			onChange,
+			validationFailureString,
+			onValidationChange,
 			...inputProps
 		} = this.props;
 
