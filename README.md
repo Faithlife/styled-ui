@@ -1,14 +1,10 @@
-# Engagement Products UI
+# Styled UI
 
-[![Build Status](https://travis-ci.org/Faithlife/engagement-products-ui.svg?branch=master)](https://travis-ci.org/Faithlife/engagement-products-ui)
+[![Build Status](https://travis-ci.org/Faithlife/styled-ui.svg?branch=master)](https://travis-ci.org/Faithlife/styled-ui)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![style: styled-components](https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg?colorB=daa357&colorA=db748e)](https://github.com/styled-components/styled-components)
 
-### [View Demos Here](https://faithlife.github.io/engagement-products-ui/)
-
-### :warning: This library is currently experimental :warning:
-
-This is a proof of concept. Breaking changes are likely until components have gone through design and implementation review.
+### [View Demos Here](https://faithlife.github.io/styled-ui/)
 
 ### How to contribute
 
@@ -31,8 +27,7 @@ This project addresses problems introduced by creating components from scratch. 
 - Style modifications should be approved by the design team before they are merged into this project
 - Components should have a prose description and live demo of different component states (using real data)
 - UI components are accompanied by documentation to show how the component should be used within a real app. The UI components should rely on a parent component to contain state, however in some cases local state may be used to handle UI-specific concerns (such the location of a popup or visibility)
-- Breaking changes to either styles or props must not be added between published versions of this project once a component is marked `stable`. Bug fixes to components are OK, but additional component features that are not opt-in should not be added. If a new version of a component needs to be released with breaking changes, a version suffix should be added to the exported component name (e.g. DemoInputV2).
+- Semantic versioning / version history updates when making releases
 
 ### Non-goals
 - Use across teams other than Engagement Products (future goal?)
-- Semantic versioning

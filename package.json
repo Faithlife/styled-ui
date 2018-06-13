@@ -1,8 +1,8 @@
 {
-	"name": "@faithlife/engagement-products-ui",
+	"name": "@faithlife/styled-ui",
 	"version": "0.0.16",
 	"main": "index.js",
-	"repository": "git@github.com:Faithlife/engagement-products-ui.git",
+	"repository": "git@github.com:Faithlife/styled-ui.git",
 	"author": "Dustin Masters <dustin.masters@faithlife.com>",
 	"license": "UNLICENSED",
 	"description": "UI components for use in Faithlife applications.",
@@ -16,7 +16,7 @@
 		"stylelint": "stylelint ./components/**/*.jsx",
 		"unit-test": "mocha -r esm ./tests/**/*.js",
 		"catalog-start": "catalog start",
-		"catalog-build": "catalog build --public-url /engagement-products-ui"
+		"catalog-build": "catalog build --public-url /styled-ui"
 	},
 	"files": [
 		"dist/**"
