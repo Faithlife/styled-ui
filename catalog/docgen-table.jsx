@@ -92,7 +92,11 @@ export default function DocgenTable(props) {
 									componentProp.type.value &&
 									componentProp.type.name === 'shape' && (
 										<CollapsableText>
-											{JSON.stringify(componentProp.type.value, null, 2)}
+											{Object.keys(componentProp.type.value).map(propName => (
+												<div key={propName}>
+													{propName}: {componentProp.type.value[propName].name} {componentProp.type.value[propName].required && '(required)'}
+												</div>
+											))}
 										</CollapsableText>
 									)}
 							</Cell>
