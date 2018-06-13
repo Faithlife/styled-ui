@@ -39,6 +39,12 @@ export default class Input extends React.Component {
 		debounce: 0,
 	};
 
+	componentWillReceiveProps(props) {
+		if (props.value !== this.state.value) {
+			this.setState({ value: props.value });
+		}
+	}
+
 	state = {
 		value: this.props.value || '',
 	};
