@@ -14,6 +14,8 @@ export default class Button extends PureComponent {
 			hover: PropTypes.string,
 			active: PropTypes.string,
 			disabled: PropTypes.string,
+			width: PropTypes.string,
+			fontSize: PropTypes.string,
 		}),
 		/** Primary button variation */
 		primary: PropTypes.bool,
@@ -29,24 +31,14 @@ export default class Button extends PureComponent {
 		extraLarge: PropTypes.bool,
 		/** The type of button (for instance, submit) */
 		type: PropTypes.string,
-		/** Whitelisted styles. */
-		style: PropTypes.shape({
-			width: PropTypes.string,
-		}),
 	};
 
 	static defaultProps = {
-		theme: {
-			default: '#278ed4',
-			hover: '#6db3e2',
-			active: '#1d6ca1',
-			disabled: '#bedcf2',
-		},
 		type: 'button',
 	};
 
 	render() {
-		const { children, theme, ...buttonProps } = this.props;
+		const { children, theme, style, ...buttonProps } = this.props; // eslint-disable-line react/prop-types
 
 		const { component: MappedStyledComponent, filteredProps } = applyVariations(
 			Styled.Button,

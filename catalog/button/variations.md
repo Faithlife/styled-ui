@@ -23,6 +23,26 @@ showSource: true
 </div>
 ```
 
+### Supported style customizations
+Do not use the `style` prop to style this component (it will be ignored). Instead, if there is missing customization that you need for this component, ask to have it added to the theme prop.
+
+```react
+showSource: true
+---
+<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
+	<Button primary large theme={{ default: 'plum', hover: 'darkslateblue' }}>
+		Plum
+	</Button>
+	<Button primary large theme={{ width: '200px' }}>
+		200px Wide
+	</Button>
+	<Button primary theme={{ fontSize: '12px', padding: '8px' }}>
+		12px Font, 8px Padding
+	</Button>
+</div>
+```
+
+
 * `small` -- used for apps with tight spacing, never for marketing pages.
 * `medium` -- this is the default size for web applications.
 * `large` -- this is the default scale for marketing web pages.
@@ -38,19 +58,10 @@ showSource: true
 	<Button primary medium>
 		Primary
 	</Button>
-	<Button primary medium disabled>
-		Primary
-	</Button>
 	<Button primaryOutline medium>
 		Primary Outline
 	</Button>
-	<Button primaryOutline medium disabled>
-		Primary Outline
-	</Button>
 	<Button minor medium>
-		Minor
-	</Button>
-	<Button minor medium disabled>
 		Minor
 	</Button>
 </div>
@@ -59,6 +70,24 @@ showSource: true
 * `primary` -- for the most important or most common action for a user to take in a given context/scope. This button variant grabs the user's attention. In marketing pages, this style is for the "call to action" on a page.
 * `primaryOutline` -- for actions related to, or nearby the primary button in terms of visual hieararchy that are less common or less critical. Use this button when you want the user's casual attention.
 * `minor` -- for apps, not marketing pages. When there are a lot of common actions that are all of equal weight, consider using minor buttons.
+
+## Disabled states
+
+```react
+showSource: true
+---
+<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
+	<Button primary medium disabled>
+		Primary
+	</Button>
+	<Button primaryOutline medium disabled>
+		Primary Outline
+	</Button>
+	<Button minor medium disabled>
+		Minor
+	</Button>
+</div>
+```
 
 ## Button Text
 
