@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Catalog, pageLoader } from 'catalog';
-import { Button, Checkbox, TextInput } from '../components';
+import { Button, Checkbox, TextInput, Bootstrap } from '../components';
 import { colors } from '../components/shared-styles';
 import DocgenTable from './docgen-table.jsx';
 
@@ -80,6 +80,17 @@ const pages = [
 				path: '/design-styles/colors',
 				title: 'Colors',
 				content: pageLoader(() => import('./design-styles/colors.md')),
+			},
+		],
+	},
+	{
+		title: 'Bootstrap',
+		pages: [
+			{
+				path: '/bootstrap/components',
+				title: 'Components',
+				content: pageLoader(() => import('./bootstrap/components.md')),
+				imports: { ...Bootstrap },
 			},
 		],
 	},
