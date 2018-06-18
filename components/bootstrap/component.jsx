@@ -16,4 +16,5 @@ export default {
 	Button: wrapBootstrap(_Bootstrap.Button, true),
 	Modal: wrapBootstrap(_Bootstrap.Modal),
 	Navbar: wrapBootstrap(_Bootstrap.Navbar),
+	InputGroup: wrapBootstrap(_Bootstrap.InputGroup),
 };

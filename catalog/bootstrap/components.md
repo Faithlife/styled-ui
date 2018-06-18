@@ -3,7 +3,7 @@ This is a demo of using bootstrap components.
 Powered by [Reactstrap](https://reactstrap.github.io/)
 
 ```react
-showSource: true
+showSource: false
 ---
 <div className="container"><style>{`.container > * { margin: 8px; }`}</style>
 	<Button color="primary">primary</Button>{' '}
@@ -17,7 +17,7 @@ showSource: true
 ```
 
 ```react
-showSource: true
+showSource: false
 state: { modal: false }
 ---
 <div className="container"><style>{`.container > * { margin: 8px; }`}</style>
@@ -36,7 +36,7 @@ state: { modal: false }
 ```
 
 ```react
-showSource: true
+showSource: false
 ---
 <div>
 	<Alert color="primary">
@@ -67,7 +67,7 @@ showSource: true
 ```
 
 ```react
-showSource: true
+showSource: false
 state: { isOpen: false }
 ---
  <div>
@@ -103,4 +103,86 @@ state: { isOpen: false }
 		</Collapse>
 	</Navbar>
 </div>
+```
+
+```react
+showSource: false
+state: { isOpen: false }
+---
+ <div>
+	<InputGroup>
+		<InputGroupAddon addonType="prepend">@</InputGroupAddon>
+		<Input placeholder="username" />
+	</InputGroup>
+	<br />
+	<InputGroup>
+		<InputGroupAddon addonType="prepend">
+			<InputGroupText>
+				<Input addon type="checkbox" aria-label="Checkbox for following text input" />
+			</InputGroupText>
+		</InputGroupAddon>
+		<Input placeholder="Check it out" />
+	</InputGroup>
+	<br />
+	<InputGroup>
+		<Input placeholder="username" />
+		<InputGroupAddon addonType="append">@example.com</InputGroupAddon>
+	</InputGroup>
+	<br />
+	<InputGroup>
+		<InputGroupAddon addonType="prepend">
+			<InputGroupText>$</InputGroupText>
+			<InputGroupText>$</InputGroupText>
+		</InputGroupAddon>
+		<Input placeholder="Dolla dolla billz yo!" />
+		<InputGroupAddon addonType="append">
+			<InputGroupText>$</InputGroupText>
+			<InputGroupText>$</InputGroupText>
+		</InputGroupAddon>
+	</InputGroup>
+	<br />
+	<InputGroup>
+		<InputGroupAddon addonType="prepend">$</InputGroupAddon>
+		<Input placeholder="Amount" type="number" step="1" />
+		<InputGroupAddon addonType="append">.00</InputGroupAddon>
+	</InputGroup>
+        <br />
+        <InputGroup>
+          <InputGroupAddon addonType="prepend"><Button>I'm a button</Button></InputGroupAddon>
+          <Input />
+        </InputGroup>
+        <br />
+        <InputGroup>
+          <Input />
+          <InputGroupButtonDropdown addonType="append" isOpen={state.dropdownOpen} toggle={() => setState({ dropdownOpen: !state.dropdownOpen})}>
+            <DropdownToggle caret>
+              Button Dropdown
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem header>Header</DropdownItem>
+              <DropdownItem disabled>Action</DropdownItem>
+              <DropdownItem>Another Action</DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem>Another Action</DropdownItem>
+            </DropdownMenu>
+          </InputGroupButtonDropdown>
+        </InputGroup>
+        <br />
+        <InputGroup>
+          <InputGroupButtonDropdown addonType="prepend" isOpen={state.splitButtonOpen} toggle={() => setState({ splitButtonOpen: !state.splitButtonOpen}) }>
+            <Button outline>Split Button</Button>
+            <DropdownToggle split outline />
+            <DropdownMenu>
+              <DropdownItem header>Header</DropdownItem>
+              <DropdownItem disabled>Action</DropdownItem>
+              <DropdownItem>Another Action</DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem>Another Action</DropdownItem>
+            </DropdownMenu>
+          </InputGroupButtonDropdown>
+          <Input placeholder="and..." />
+          <InputGroupAddon addonType="append"><Button color="secondary">I'm a button</Button></InputGroupAddon>
+        </InputGroup>
+</div>
+
 ```
