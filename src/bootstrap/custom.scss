@@ -9,6 +9,12 @@ $purple: #6f4a97;
 
 $font-family-base: 'Source Sans Pro', sans-serif;
 
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+
 // The kitchen sink, except reboot and typography
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
@@ -49,7 +55,6 @@ $font-family-base: 'Source Sans Pro', sans-serif;
 // Because of CSS specificity rules this might break some third party components that want to override these styles.
 .fl-wrapper,
 .modal {
-  display: inline;
   font-family: $font-family-base;
 
   @import "bootstrap/scss/reboot";
@@ -57,4 +62,7 @@ $font-family-base: 'Source Sans Pro', sans-serif;
   @import "bootstrap/scss/type";
   @import "bootstrap/scss/close";
   @import "bootstrap/scss/modal";
+  @import "bootstrap/scss/utilities";
+  @import "bootstrap/scss/nav";
+  @import "bootstrap/scss/navbar";
 }

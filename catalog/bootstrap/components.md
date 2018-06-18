@@ -65,3 +65,42 @@ showSource: true
 	</Alert>
 </div>
 ```
+
+```react
+showSource: true
+state: { isOpen: false }
+---
+ <div>
+	<Navbar color="light" light expand="md">
+		<NavbarBrand href="/">reactstrap</NavbarBrand>
+		<NavbarToggler onClick={() => setState({ isOpen: !state.isOpen})} />
+		<Collapse isOpen={state.isOpen} navbar>
+		<Nav className="ml-auto" navbar>
+			<NavItem>
+			<NavLink href="/components/">Components</NavLink>
+			</NavItem>
+			<NavItem>
+			<NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+			</NavItem>
+			<UncontrolledDropdown nav inNavbar>
+			<DropdownToggle nav caret>
+				Options
+			</DropdownToggle>
+			<DropdownMenu right>
+				<DropdownItem>
+				Option 1
+				</DropdownItem>
+				<DropdownItem>
+				Option 2
+				</DropdownItem>
+				<DropdownItem divider />
+				<DropdownItem>
+				Reset
+				</DropdownItem>
+			</DropdownMenu>
+			</UncontrolledDropdown>
+		</Nav>
+		</Collapse>
+	</Navbar>
+</div>
+```

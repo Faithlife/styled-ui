@@ -103,7 +103,7 @@ ReactDOM.render(
 		pages={pages}
 		logoSrc="faithlife-logo.svg"
 		theme={{
-			fontFamily: 'Source Sans Pro',
+			fontFamily: 'Roboto',
 			pageHeadingBackground: colors.flGray,
 		}}
 	/>,
