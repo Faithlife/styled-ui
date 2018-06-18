@@ -1,12 +1,5 @@
 import React from 'react';
 import * as _Bootstrap from 'reactstrap';
-import styled from 'styled-components';
-
-const ButtonStyled = styled(_Bootstrap.Button)`
-	&& {
-		color: #ddd;
-	}
-`;
 
 function wrapBootstrap(Component) {
 	return props => (
@@ -16,8 +9,7 @@ function wrapBootstrap(Component) {
 	);
 }
 
-export default {
-	..._Bootstrap,
-	Button: wrapBootstrap(_Bootstrap.Button),
-	ButtonStyled,
-};
+export default Object.keys(_Bootstrap).reduce(
+	(prev, curr) => ({ ...prev, [curr]: wrapBootstrap(_Bootstrap[curr]) }),
+	{},
+);
