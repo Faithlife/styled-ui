@@ -8,12 +8,12 @@ $green: #62bb46;
 $purple: #6f4a97;
 
 $font-family-base: 'Source Sans Pro', sans-serif;
-$font-size-base: 0.875rem;
 
-// The kitchen sink, with custom typography.
+// The kitchen sink, except reboot and typography
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/mixins";
+@import "bootstrap/scss/modal";
 @import "bootstrap/scss/root";
 @import "bootstrap/scss/images";
 @import "bootstrap/scss/code";
@@ -44,14 +44,17 @@ $font-size-base: 0.875rem;
 @import "bootstrap/scss/carousel";
 @import "bootstrap/scss/utilities";
 @import "bootstrap/scss/print";
-@import "_type";
 
-// Assume it's safe to apply standard typography styles inside bootstrap-themed parent elements
+// Import reboot and re-declare any styles that the more-specific reboot may have broken
 // Because of CSS specificity rules this might break some third party components that want to override these styles.
+.fl-wrapper,
+.modal {
+  display: inline;
+  font-family: $font-family-base;
 
-.alert,
-.modal,
-.bs-component {
-  @import "bootstrap/scss/type";
   @import "bootstrap/scss/reboot";
+  @import "bootstrap/scss/buttons";
+  @import "bootstrap/scss/type";
+  @import "bootstrap/scss/close";
+  @import "bootstrap/scss/modal";
 }

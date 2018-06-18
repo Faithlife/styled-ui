@@ -5,6 +5,7 @@ import { Catalog, pageLoader } from 'catalog';
 import { Button, Checkbox, TextInput, Bootstrap } from '../components';
 import { colors } from '../components/shared-styles';
 import DocgenTable from './docgen-table.jsx';
+import '../dist/bootstrap-custom.css';
 
 function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));

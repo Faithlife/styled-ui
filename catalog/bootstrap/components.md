@@ -6,6 +6,31 @@ Powered by [Reactstrap](https://reactstrap.github.io/)
 showSource: true
 ---
 <div className="container"><style>{`.container > * { margin: 8px; }`}</style>
-	<Button color="danger">Danger!</Button>
+	<Button color="primary">primary</Button>{' '}
+	<Button color="secondary">secondary</Button>{' '}
+	<Button color="success">success</Button>{' '}
+	<Button color="info">info</Button>{' '}
+	<Button color="warning">warning</Button>{' '}
+	<Button color="danger">danger</Button>{' '}
+	<Button color="link">link</Button>
+</div>
+```
+
+```react
+showSource: true
+state: { modal: false }
+---
+<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
+	<Button color="danger" onClick={() => setState({ modal: !state.modal })}>CLICK ME</Button>
+	<Modal isOpen={state.modal} toggle={() => setState({ modal: !state.modal })}>
+		<ModalHeader toggle={() => setState({ modal: !state.modal })}>Modal title</ModalHeader>
+		<ModalBody>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</ModalBody>
+		<ModalFooter>
+		<Button color="primary" onClick={() => setState({ modal: !state.modal })}>Do Something</Button>{' '}
+		<Button color="secondary" onClick={() => setState({ modal: !state.modal })}>Cancel</Button>
+		</ModalFooter>
+	</Modal>
 </div>
 ```

@@ -17,7 +17,7 @@
 		"unit-test": "mocha -r esm ./tests/**/*.js",
 		"catalog-start": "catalog start",
 		"catalog-build": "catalog build --public-url /styled-ui",
-		"build-bootstrap": "scss-powertools src/bootstrap/custom.scss public/bootstrap-custom.css"
+		"build-bootstrap": "scss-powertools src/bootstrap/custom.scss dist/bootstrap-custom.css"
 	},
 	"files": [
 		"dist/**"
