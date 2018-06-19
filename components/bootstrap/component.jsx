@@ -1,31 +1,33 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import * as _Bootstrap from 'reactstrap';
+
+const { Provider, Consumer } = React.createContext({});
 
 function wrapBootstrap(Component, inline) {
 	const styles = inline ? { display: 'inline-block' } : {};
 	return props => (
-		<div className="fl-wrapper" style={styles}>
-			<Component {...props} />
-		</div>
+		<Consumer>
+			{value =>
+				value.inCssResetScope ? (
+					<Component {...props} />
+				) : (
+					<Provider value={{ inCssResetScope: true }}>
+						<div className="fl-wrapper" style={styles}>
+							<Component {...props} />
+						</div>
+					</Provider>
+				)
+			}
+		</Consumer>
 	);
 }
 
-const StyledContainer = props => {
-	const styles = props.inline ? { display: 'inline-block' } : {};
-	return (
-		<div className="fl-wrapper" style={styles}>
-			{props.children}
-		</div>
-	);
-};
+const inlineComponents = ['Button'];
 
-StyledContainer.propTypes = {
-	inline: PropTypes.bool,
-	children: PropTypes.node,
-};
-
-export default {
-	..._Bootstrap,
-	StyledContainer,
-};
+export default Object.keys(_Bootstrap).reduce(
+	(prev, curr) => ({
+		...prev,
+		[curr]: wrapBootstrap(_Bootstrap[curr], inlineComponents.includes(curr)),
+	}),
+	{},
+);

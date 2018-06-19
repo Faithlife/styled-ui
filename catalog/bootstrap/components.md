@@ -1,9 +1,9 @@
-Most Bootstrap 4 components can be used in existing projects, courtesy of [Reactstrap](https://reactstrap.github.io/). However, Bootstrap 4 components expect an opinionated CSS reset to be loaded on the page. Because of this, components must first be wrapped in a StyledContainer element, which contains the scoped CSS reset needed.
+Most Bootstrap 4 components can be used in existing projects, courtesy of [Reactstrap](https://reactstrap.github.io/). The Bootstrap CSS reset (named reboot) is scoped to a div,which is automatically rendered when using a Bootstrap component. If the reset div is already present in a parent component, it won't be rendered twice (React Context is used to detect this condition).
 
 ```react
 showSource: false
 ---
-<StyledContainer>
+<div>
 	<Button color="primary">primary</Button>{' '}
 	<Button color="secondary">secondary</Button>{' '}
 	<Button color="success">success</Button>{' '}
@@ -11,14 +11,14 @@ showSource: false
 	<Button color="warning">warning</Button>{' '}
 	<Button color="danger">danger</Button>{' '}
 	<Button color="link">link</Button>
-	</StyledContainer>
+	</div>
 ```
 
 ```react
 showSource: false
 state: { isOpen: false }
 ---
-<StyledContainer>
+<div>
 <ButtonDropdown isOpen={state.isOpen} toggle={() => setState({ isOpen: !state.isOpen })}>
   <Button id="caret" color="primary">Split Button</Button>
   <DropdownToggle caret color="primary" />
@@ -30,14 +30,14 @@ state: { isOpen: false }
     <DropdownItem>Another Action</DropdownItem>
   </DropdownMenu>
 </ButtonDropdown>
-</StyledContainer>
+</div>
 ```
 
 ```react
 showSource: false
 state: { modal: false }
 ---
-<StyledContainer>
+<div>
 	<Button color="danger" onClick={() => setState({ modal: !state.modal })}>CLICK ME</Button>
 	<Modal isOpen={state.modal} toggle={() => setState({ modal: !state.modal })}>
 		<ModalHeader toggle={() => setState({ modal: !state.modal })}>Modal title</ModalHeader>
@@ -49,13 +49,13 @@ state: { modal: false }
 		<Button color="secondary" onClick={() => setState({ modal: !state.modal })}>Cancel</Button>
 		</ModalFooter>
 	</Modal>
-</StyledContainer>
+</div>
 ```
 
 ```react
 showSource: false
 ---
-<StyledContainer>
+<div>
 	<Alert color="primary">
 		This is a primary alert — check it out!
 	</Alert>
@@ -80,14 +80,14 @@ showSource: false
 	<Alert color="dark">
 		This is a dark alert — check it out!
 	</Alert>
-</StyledContainer>
+</div>
 ```
 
 ```react
 showSource: false
 state: { isOpen: false }
 ---
- <StyledContainer>
+ <div>
 	<Navbar color="light" light expand="md">
 		<NavbarBrand href="/">reactstrap</NavbarBrand>
 		<NavbarToggler onClick={() => setState({ isOpen: !state.isOpen})} />
@@ -119,14 +119,14 @@ state: { isOpen: false }
 		</Nav>
 		</Collapse>
 	</Navbar>
-</StyledContainer>
+</div>
 ```
 
 ```react
 showSource: false
 state: { isOpen: false }
 ---
- <StyledContainer>
+ <div>
 	<InputGroup>
 		<InputGroupAddon addonType="prepend">@</InputGroupAddon>
 		<Input placeholder="username" />
@@ -200,22 +200,22 @@ state: { isOpen: false }
           <Input placeholder="and..." />
           <InputGroupAddon addonType="append"><Button color="secondary">I'm a button</Button></InputGroupAddon>
         </InputGroup>
-</StyledContainer>
+</div>
 
 ```
 
 ```react
 showSource: false
 ---
-<StyledContainer>
+<div>
 	<CarouselDemo />
-</StyledContainer>
+</div>
 ```
 
 ```react
 showSource: flase
 ---
-<StyledContainer>
+<div>
 	<div className="text-center">0%</div>
 	<Progress />
 	<div className="text-center">25%</div>
@@ -234,13 +234,13 @@ showSource: flase
 		<Progress bar color="warning" value="20" />
 		<Progress bar color="danger" value="5" />
 	</Progress>
-</StyledContainer>
+</div>
 ```
 
 ```react
 showSource: false
 ---
-<StyledContainer>
+<div>
 	<ListGroup>
 		<ListGroupItem>Cras justo odio</ListGroupItem>
 		<ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
@@ -248,13 +248,13 @@ showSource: false
 		<ListGroupItem>Porta ac consectetur ac</ListGroupItem>
 		<ListGroupItem>Vestibulum at eros</ListGroupItem>
 	</ListGroup>
-</StyledContainer>
+</div>
 ```
 
 ```react
 showSource: false
 ---
-<StyledContainer>
+<div>
 	<Form>
 		<FormGroup>
 			<Label for="exampleCheckbox">Checkboxes</Label>
@@ -354,5 +354,5 @@ showSource: false
 			<FormText>Example help text that remains unchanged.</FormText>
 		</FormGroup>
 	</Form>
-</StyledContainer>
+</div>
 ```
