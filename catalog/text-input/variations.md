@@ -10,7 +10,7 @@ state: { isValid: false, value: '' }
 	<style>
 	{`
 		.container {
-			font-family: 'Roboto';
+			font-family: 'Source Sans Pro';
 			color: #333333;
 		}
 		.inputWrapper {
@@ -58,7 +58,7 @@ state: { isValid: false, value: '' }
 	<style>
 	{`
 		.container {
-			font-family: 'Roboto';
+			font-family: 'Source Sans Pro';
 			color: #333333;
 		}
 		.inputWrapper {
@@ -96,7 +96,7 @@ state: { isValid: false, value: '' }
 	<style>
 	{`
 		.container {
-			font-family: 'Roboto';
+			font-family: 'Source Sans Pro';
 			color: #333333;
 		}
 		.inputWrapper {
@@ -148,7 +148,7 @@ state: { isValid: false, value: '' }
 	<style>
 	{`
 		.container {
-			font-family: 'Roboto';
+			font-family: 'Source Sans Pro';
 			color: #333333;
 		}
 		.inputWrapper {

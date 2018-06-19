@@ -7,7 +7,7 @@ import { Button } from '../components';
 import Tooltip from './utils/tooltip.jsx';
 
 const Container = styled.div`
-	font-family: 'Roboto';
+	font-family: 'Source Sans Pro';
 `;
 
 const Table = styled.table`

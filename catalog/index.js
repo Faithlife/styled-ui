@@ -2,9 +2,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Catalog, pageLoader } from 'catalog';
-import { Button, Checkbox, TextInput } from '../components';
+import { Button, Checkbox, TextInput, Bootstrap } from '../components';
 import { colors } from '../components/shared-styles';
+import CarouselDemo from './bootstrap/carousel-demo.jsx';
 import DocgenTable from './docgen-table.jsx';
+import '../dist/styles.css';
 
 function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
@@ -74,6 +76,23 @@ const pages = [
 		],
 	},
 	{
+		title: 'Bootstrap',
+		pages: [
+			{
+				path: '/bootstrap/components',
+				title: 'Standard Components',
+				content: pageLoader(() => import('./bootstrap/components.md')),
+				imports: { ...Bootstrap, CarouselDemo },
+			},
+			{
+				path: '/bootstrap/typeahead',
+				title: 'Typeahead',
+				content: pageLoader(() => import('./bootstrap/typeahead.md')),
+				imports: { ...Bootstrap },
+			},
+		],
+	},
+	{
 		title: 'Design Styles',
 		pages: [
 			{
@@ -91,7 +110,7 @@ ReactDOM.render(
 		pages={pages}
 		logoSrc="faithlife-logo.svg"
 		theme={{
-			fontFamily: 'Source Sans Pro',
+			fontFamily: 'Roboto',
 			pageHeadingBackground: colors.flGray,
 		}}
 	/>,

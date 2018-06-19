@@ -1,0 +1,49 @@
+$body-bg: #fff;
+$body-color: #111;
+$blue: rgb(39, 142, 212);
+$red: #d94848;
+$orange: #e97732;
+$yellow:#fedb62;
+$green: #62bb46;
+$purple: #6f4a97;
+
+$font-family-base: 'Source Sans Pro', sans-serif;
+
+// The kitchen sink, except reboot and typography
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+
+// Modals need these styles re-imported on the global scope
+@import "bootstrap/scss/modal";
+@import "bootstrap/scss/transitions";
+
+// Import reboot and the remaining bootstrap styles
+.fl-wrapper,
+.modal {
+  font-family: $font-family-base;
+
+  @import "bootstrap/scss/reboot";
+  @import "bootstrap/scss/type";
+  @import "bootstrap/scss/button-group";
+  @import "bootstrap/scss/buttons";
+  @import "bootstrap/scss/close";
+  @import "bootstrap/scss/utilities";
+  @import "bootstrap/scss/modal";
+  @import "bootstrap/scss/nav";
+  @import "bootstrap/scss/navbar";
+  @import "bootstrap/scss/dropdown";
+  @import "bootstrap/scss/forms";
+  @import "bootstrap/scss/custom-forms";
+  @import "bootstrap/scss/transitions";
+  @import "bootstrap/scss/input-group";
+  @import "bootstrap/scss/alert";
+  @import "bootstrap/scss/progress";
+  @import "bootstrap/scss/media";
+  @import "bootstrap/scss/list-group";
+  @import "bootstrap/scss/tooltip";
+  @import "bootstrap/scss/popover";
+  @import "bootstrap/scss/carousel";
+
+  @import "react-bootstrap-typeahead/css/typeahead-bs4";
+}
