@@ -6,7 +6,7 @@ import { Button, Checkbox, TextInput, Bootstrap } from '../components';
 import { colors } from '../components/shared-styles';
 import CarouselDemo from './bootstrap/carousel-demo.jsx';
 import DocgenTable from './docgen-table.jsx';
-import '../dist/bootstrap-custom.css';
+import '../dist/styles.css';
 
 function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
