@@ -1,6 +1,27 @@
-Most Bootstrap 4 components can be used in existing projects, courtesy of [Reactstrap](https://reactstrap.github.io/).
+Most Bootstrap 4 components can be used in existing projects, powered by Reactstrap.
 
-Note: Bootstrap components expect an opinionated CSS reset to be present. When using a component from this library, it will be automatically wrapped in an outer container element with the CSS reset styles applied to it. If the component contains other Bootstrap components (e.g. a group of form elements), only the outer-most component will be wrapped.
+Bootstrap components expect an opinionated CSS reset to be present. When using a component from this library, it will be automatically wrapped in an outer container element with the CSS reset styles applied to it. If the component contains other Bootstrap components (e.g. a group of form elements), only the outer-most component will be wrapped.
+
+## How to use
+
+Import the scoped Bootstrap stylesheet into your application:
+```
+import { Bootstrap } from '@faithlife/styled-ui';
+import '@faithlife/styled-ui/dist/styles.css';
+
+const MyComponent = props => <Button color="primary">primary</Button>;
+
+```
+
+See the [Reactstrap](https://reactstrap.github.io/) documentation for the component documentation.
+
+## Examples
+
+```hint
+Click the <> on the right to view the sample source.
+```
+
+### Buttons
 
 ```react
 showSource: false
@@ -15,6 +36,8 @@ showSource: false
 	<Button color="link">link</Button>
 	</div>
 ```
+
+### Button with Dropdown
 
 ```react
 showSource: false
@@ -35,6 +58,8 @@ state: { isOpen: false }
 </div>
 ```
 
+## Modal
+
 ```react
 showSource: false
 state: { modal: false }
@@ -53,6 +78,8 @@ state: { modal: false }
 	</Modal>
 </div>
 ```
+
+## Alerts
 
 ```react
 showSource: false
@@ -84,6 +111,8 @@ showSource: false
 	</Alert>
 </div>
 ```
+
+## Navbar
 
 ```react
 showSource: false
@@ -123,6 +152,59 @@ state: { isOpen: false }
 	</Navbar>
 </div>
 ```
+
+## Carousel
+
+```react
+showSource: false
+---
+<div>
+	<CarouselDemo />
+</div>
+```
+
+```react
+showSource: flase
+---
+<Row>
+	<div className="text-center">0%</div>
+	<Progress />
+	<div className="text-center">25%</div>
+	<Progress value="25" />
+	<div className="text-center">50%</div>
+	<Progress value={50} />
+	<div className="text-center">75%</div>
+	<Progress value={75} />
+	<div className="text-center">100%</div>
+	<Progress value="100" />
+	<div className="text-center">Multiple bars</div>
+	<Progress multi>
+		<Progress bar value="15" />
+		<Progress bar color="success" value="30" />
+		<Progress bar color="info" value="25" />
+		<Progress bar color="warning" value="20" />
+		<Progress bar color="danger" value="5" />
+	</Progress>
+</Row>
+```
+
+## List group
+
+```react
+showSource: false
+---
+<div>
+	<ListGroup>
+		<ListGroupItem>Cras justo odio</ListGroupItem>
+		<ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
+		<ListGroupItem>Morbi leo risus</ListGroupItem>
+		<ListGroupItem>Porta ac consectetur ac</ListGroupItem>
+		<ListGroupItem>Vestibulum at eros</ListGroupItem>
+	</ListGroup>
+</div>
+```
+
+## Input Groups
 
 ```react
 showSource: false
@@ -203,55 +285,9 @@ state: { isOpen: false }
 					<InputGroupAddon addonType="append"><Button color="secondary">I'm a button</Button></InputGroupAddon>
 				</InputGroup>
 </div>
-
 ```
 
-```react
-showSource: false
----
-<div>
-	<CarouselDemo />
-</div>
-```
-
-```react
-showSource: flase
----
-<div>
-	<div className="text-center">0%</div>
-	<Progress />
-	<div className="text-center">25%</div>
-	<Progress value="25" />
-	<div className="text-center">50%</div>
-	<Progress value={50} />
-	<div className="text-center">75%</div>
-	<Progress value={75} />
-	<div className="text-center">100%</div>
-	<Progress value="100" />
-	<div className="text-center">Multiple bars</div>
-	<Progress multi>
-		<Progress bar value="15" />
-		<Progress bar color="success" value="30" />
-		<Progress bar color="info" value="25" />
-		<Progress bar color="warning" value="20" />
-		<Progress bar color="danger" value="5" />
-	</Progress>
-</div>
-```
-
-```react
-showSource: false
----
-<div>
-	<ListGroup>
-		<ListGroupItem>Cras justo odio</ListGroupItem>
-		<ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-		<ListGroupItem>Morbi leo risus</ListGroupItem>
-		<ListGroupItem>Porta ac consectetur ac</ListGroupItem>
-		<ListGroupItem>Vestibulum at eros</ListGroupItem>
-	</ListGroup>
-</div>
-```
+## Forms
 
 ```react
 showSource: false
@@ -355,13 +391,7 @@ showSource: false
 			<FormFeedback>Oh noes! that name is already taken</FormFeedback>
 			<FormText>Example help text that remains unchanged.</FormText>
 		</FormGroup>
-		<div>
-			<Typeahead
-					onChange={() => {}}
-					options={['Washington','California','Texas']}
-					placeholder="Choose a state..."
-				/>
-		</div>
 	</Form>
 </div>
 ```
+

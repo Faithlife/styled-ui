@@ -76,23 +76,29 @@ const pages = [
 		],
 	},
 	{
+		title: 'Bootstrap',
+		pages: [
+			{
+				path: '/bootstrap/components',
+				title: 'Standard Components',
+				content: pageLoader(() => import('./bootstrap/components.md')),
+				imports: { ...Bootstrap, CarouselDemo },
+			},
+			{
+				path: '/bootstrap/typeahead',
+				title: 'Typeahead',
+				content: pageLoader(() => import('./bootstrap/typeahead.md')),
+				imports: { ...Bootstrap },
+			},
+		],
+	},
+	{
 		title: 'Design Styles',
 		pages: [
 			{
 				path: '/design-styles/colors',
 				title: 'Colors',
 				content: pageLoader(() => import('./design-styles/colors.md')),
-			},
-		],
-	},
-	{
-		title: 'Bootstrap',
-		pages: [
-			{
-				path: '/bootstrap/components',
-				title: 'Components',
-				content: pageLoader(() => import('./bootstrap/components.md')),
-				imports: { ...Bootstrap, CarouselDemo },
 			},
 		],
 	},
