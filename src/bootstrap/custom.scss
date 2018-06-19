@@ -9,12 +9,6 @@ $purple: #6f4a97;
 
 $font-family-base: 'Source Sans Pro', sans-serif;
 
-*,
-::after,
-::before {
-  box-sizing: border-box;
-}
-
 // The kitchen sink, except reboot and typography
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";

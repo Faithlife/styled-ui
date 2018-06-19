@@ -1,7 +1,5 @@
 Most Bootstrap 4 components can be used in existing projects, courtesy of [Reactstrap](https://reactstrap.github.io/). However, Bootstrap 4 components expect an opinionated CSS reset to be loaded on the page. Because of this, components must first be wrapped in a StyledContainer element, which contains the scoped CSS reset needed.
 
-Powered by [Reactstrap](https://reactstrap.github.io/)
-
 ```react
 showSource: false
 ---
