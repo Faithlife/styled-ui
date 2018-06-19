@@ -1,4 +1,6 @@
-Most Bootstrap 4 components can be used in existing projects, courtesy of [Reactstrap](https://reactstrap.github.io/). The Bootstrap CSS reset (named reboot) is scoped to a div,which is automatically rendered when using a Bootstrap component. If the reset div is already present in a parent component, it won't be rendered twice (React Context is used to detect this condition).
+Most Bootstrap 4 components can be used in existing projects, courtesy of [Reactstrap](https://reactstrap.github.io/).
+
+Note: Bootstrap components expect an opinionated CSS reset to be present. When using a component from this library, it will be automatically wrapped in an outer container element with the CSS reset styles applied to it. If the component contains other Bootstrap components (e.g. a group of form elements), only the outer-most component will be wrapped.
 
 ```react
 showSource: false
