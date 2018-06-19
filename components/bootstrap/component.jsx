@@ -1,5 +1,6 @@
 import React from 'react';
 import * as _Bootstrap from 'reactstrap';
+import styled from 'styled-components';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
 const { Provider, Consumer } = React.createContext({});
@@ -35,5 +36,11 @@ const bootstrapComponents = Object.keys(_Bootstrap).reduce(
 
 export default {
 	...bootstrapComponents,
-	Typeahead: wrapBootstrap(Typeahead),
+	Typeahead: styled(wrapBootstrap(Typeahead))`
+		.rbt-highlight-text {
+			padding: 0;
+			font-weight: bold;
+			background-color: inherit;
+		}
+	`,
 };
