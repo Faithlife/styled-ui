@@ -39,7 +39,7 @@ state: { isOpen: false }
 showSource: false
 state: { modal: false }
 ---
-<div>
+<StyledContainer>
 	<Button color="danger" onClick={() => setState({ modal: !state.modal })}>CLICK ME</Button>
 	<Modal isOpen={state.modal} toggle={() => setState({ modal: !state.modal })}>
 		<ModalHeader toggle={() => setState({ modal: !state.modal })}>Modal title</ModalHeader>
@@ -51,7 +51,7 @@ state: { modal: false }
 		<Button color="secondary" onClick={() => setState({ modal: !state.modal })}>Cancel</Button>
 		</ModalFooter>
 	</Modal>
-</div>
+</StyledContainer>
 ```
 
 ```react
@@ -217,7 +217,7 @@ showSource: false
 ```react
 showSource: flase
 ---
-<div className="fl-wrapper">
+<StyledContainer>
 	<div className="text-center">0%</div>
 	<Progress />
 	<div className="text-center">25%</div>
@@ -236,7 +236,7 @@ showSource: flase
 		<Progress bar color="warning" value="20" />
 		<Progress bar color="danger" value="5" />
 	</Progress>
-</div>
+</StyledContainer>
 ```
 
 ```react

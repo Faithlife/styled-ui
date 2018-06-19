@@ -10,8 +10,8 @@ $purple: #6f4a97;
 $font-family-base: 'Source Sans Pro', sans-serif;
 
 *,
-:after,
-:before {
+::after,
+::before {
   box-sizing: border-box;
 }
 
@@ -19,51 +19,35 @@ $font-family-base: 'Source Sans Pro', sans-serif;
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/mixins";
-@import "bootstrap/scss/modal";
-@import "bootstrap/scss/root";
-@import "bootstrap/scss/images";
-@import "bootstrap/scss/code";
-@import "bootstrap/scss/grid";
-@import "bootstrap/scss/tables";
-@import "bootstrap/scss/forms";
-@import "bootstrap/scss/buttons";
-@import "bootstrap/scss/transitions";
-@import "bootstrap/scss/dropdown";
-@import "bootstrap/scss/button-group";
-@import "bootstrap/scss/input-group";
-@import "bootstrap/scss/custom-forms";
-@import "bootstrap/scss/nav";
-@import "bootstrap/scss/navbar";
-@import "bootstrap/scss/card";
-@import "bootstrap/scss/breadcrumb";
-@import "bootstrap/scss/pagination";
-@import "bootstrap/scss/badge";
-@import "bootstrap/scss/jumbotron";
-@import "bootstrap/scss/alert";
-@import "bootstrap/scss/progress";
-@import "bootstrap/scss/media";
-@import "bootstrap/scss/list-group";
-@import "bootstrap/scss/close";
-@import "bootstrap/scss/modal";
-@import "bootstrap/scss/tooltip";
-@import "bootstrap/scss/popover";
-@import "bootstrap/scss/carousel";
-@import "bootstrap/scss/utilities";
-@import "bootstrap/scss/print";
 
-// Import reboot and re-declare any styles that the more-specific reboot may have broken
-// Because of CSS specificity rules this might break some third party components that want to override these styles.
+// Modals need these styles re-imported on the global scope
+@import "bootstrap/scss/modal";
+@import "bootstrap/scss/transitions";
+
+// Import reboot and the remaining bootstrap styles
 .fl-wrapper,
 .modal {
   font-family: $font-family-base;
 
   @import "bootstrap/scss/reboot";
-  @import "bootstrap/scss/buttons";
   @import "bootstrap/scss/type";
+  @import "bootstrap/scss/button-group";
+  @import "bootstrap/scss/buttons";
   @import "bootstrap/scss/close";
-  @import "bootstrap/scss/modal";
   @import "bootstrap/scss/utilities";
+  @import "bootstrap/scss/modal";
   @import "bootstrap/scss/nav";
   @import "bootstrap/scss/navbar";
   @import "bootstrap/scss/dropdown";
+  @import "bootstrap/scss/forms";
+  @import "bootstrap/scss/custom-forms";
+  @import "bootstrap/scss/transitions";
+  @import "bootstrap/scss/input-group";
+  @import "bootstrap/scss/alert";
+  @import "bootstrap/scss/progress";
+  @import "bootstrap/scss/media";
+  @import "bootstrap/scss/list-group";
+  @import "bootstrap/scss/tooltip";
+  @import "bootstrap/scss/popover";
+  @import "bootstrap/scss/carousel";
 }
