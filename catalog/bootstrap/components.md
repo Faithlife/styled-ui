@@ -353,6 +353,13 @@ showSource: false
 			<FormFeedback>Oh noes! that name is already taken</FormFeedback>
 			<FormText>Example help text that remains unchanged.</FormText>
 		</FormGroup>
+		<div>
+			<Typeahead
+					onChange={() => {}}
+					options={['Washington','California','Texas']}
+					placeholder="Choose a state..."
+				/>
+		</div>
 	</Form>
 </div>
 ```

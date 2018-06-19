@@ -44,4 +44,6 @@ $font-family-base: 'Source Sans Pro', sans-serif;
   @import "bootstrap/scss/tooltip";
   @import "bootstrap/scss/popover";
   @import "bootstrap/scss/carousel";
+
+  @import "react-bootstrap-typeahead/css/typeahead-bs4";
 }
