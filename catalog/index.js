@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { Catalog, pageLoader } from 'catalog';
 import { Button, Checkbox, TextInput, Bootstrap } from '../components';
 import { colors } from '../components/shared-styles';
+import CarouselDemo from './bootstrap/carousel-demo.jsx';
 import DocgenTable from './docgen-table.jsx';
 import '../dist/bootstrap-custom.css';
 
@@ -91,7 +92,7 @@ const pages = [
 				path: '/bootstrap/components',
 				title: 'Components',
 				content: pageLoader(() => import('./bootstrap/components.md')),
-				imports: { ...Bootstrap },
+				imports: { ...Bootstrap, CarouselDemo },
 			},
 		],
 	},

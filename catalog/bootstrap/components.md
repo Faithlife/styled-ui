@@ -1,11 +1,11 @@
-This is a demo of using bootstrap components.
+Most Bootstrap 4 components can be used in existing projects, courtesy of [Reactstrap](https://reactstrap.github.io/). However, Bootstrap 4 components expect an opinionated CSS reset to be loaded on the page. Because of this, components must first be wrapped in a StyledContainer element, which contains the scoped CSS reset needed.
 
 Powered by [Reactstrap](https://reactstrap.github.io/)
 
 ```react
 showSource: false
 ---
-<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
+<StyledContainer>
 	<Button color="primary">primary</Button>{' '}
 	<Button color="secondary">secondary</Button>{' '}
 	<Button color="success">success</Button>{' '}
@@ -13,14 +13,33 @@ showSource: false
 	<Button color="warning">warning</Button>{' '}
 	<Button color="danger">danger</Button>{' '}
 	<Button color="link">link</Button>
-</div>
+	</StyledContainer>
+```
+
+```react
+showSource: false
+state: { isOpen: false }
+---
+<StyledContainer>
+<ButtonDropdown isOpen={state.isOpen} toggle={() => setState({ isOpen: !state.isOpen })}>
+  <Button id="caret" color="primary">Split Button</Button>
+  <DropdownToggle caret color="primary" />
+  <DropdownMenu>
+    <DropdownItem header>Header</DropdownItem>
+    <DropdownItem disabled>Action</DropdownItem>
+    <DropdownItem>Another Action</DropdownItem>
+    <DropdownItem divider/>
+    <DropdownItem>Another Action</DropdownItem>
+  </DropdownMenu>
+</ButtonDropdown>
+</StyledContainer>
 ```
 
 ```react
 showSource: false
 state: { modal: false }
 ---
-<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
+<div>
 	<Button color="danger" onClick={() => setState({ modal: !state.modal })}>CLICK ME</Button>
 	<Modal isOpen={state.modal} toggle={() => setState({ modal: !state.modal })}>
 		<ModalHeader toggle={() => setState({ modal: !state.modal })}>Modal title</ModalHeader>
@@ -38,7 +57,7 @@ state: { modal: false }
 ```react
 showSource: false
 ---
-<div>
+<StyledContainer>
 	<Alert color="primary">
 		This is a primary alert — check it out!
 	</Alert>
@@ -63,14 +82,14 @@ showSource: false
 	<Alert color="dark">
 		This is a dark alert — check it out!
 	</Alert>
-</div>
+</StyledContainer>
 ```
 
 ```react
 showSource: false
 state: { isOpen: false }
 ---
- <div>
+ <StyledContainer>
 	<Navbar color="light" light expand="md">
 		<NavbarBrand href="/">reactstrap</NavbarBrand>
 		<NavbarToggler onClick={() => setState({ isOpen: !state.isOpen})} />
@@ -102,14 +121,14 @@ state: { isOpen: false }
 		</Nav>
 		</Collapse>
 	</Navbar>
-</div>
+</StyledContainer>
 ```
 
 ```react
 showSource: false
 state: { isOpen: false }
 ---
- <div>
+ <StyledContainer>
 	<InputGroup>
 		<InputGroupAddon addonType="prepend">@</InputGroupAddon>
 		<Input placeholder="username" />
@@ -183,6 +202,159 @@ state: { isOpen: false }
           <Input placeholder="and..." />
           <InputGroupAddon addonType="append"><Button color="secondary">I'm a button</Button></InputGroupAddon>
         </InputGroup>
-</div>
+</StyledContainer>
 
+```
+
+```react
+showSource: false
+---
+<StyledContainer>
+	<CarouselDemo />
+</StyledContainer>
+```
+
+```react
+showSource: flase
+---
+<div className="fl-wrapper">
+	<div className="text-center">0%</div>
+	<Progress />
+	<div className="text-center">25%</div>
+	<Progress value="25" />
+	<div className="text-center">50%</div>
+	<Progress value={50} />
+	<div className="text-center">75%</div>
+	<Progress value={75} />
+	<div className="text-center">100%</div>
+	<Progress value="100" />
+	<div className="text-center">Multiple bars</div>
+	<Progress multi>
+		<Progress bar value="15" />
+		<Progress bar color="success" value="30" />
+		<Progress bar color="info" value="25" />
+		<Progress bar color="warning" value="20" />
+		<Progress bar color="danger" value="5" />
+	</Progress>
+</div>
+```
+
+```react
+showSource: false
+---
+<StyledContainer>
+	<ListGroup>
+		<ListGroupItem>Cras justo odio</ListGroupItem>
+		<ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
+		<ListGroupItem>Morbi leo risus</ListGroupItem>
+		<ListGroupItem>Porta ac consectetur ac</ListGroupItem>
+		<ListGroupItem>Vestibulum at eros</ListGroupItem>
+	</ListGroup>
+</StyledContainer>
+```
+
+```react
+showSource: false
+---
+<StyledContainer>
+	<Form>
+		<FormGroup>
+			<Label for="exampleCheckbox">Checkboxes</Label>
+			<div>
+				<CustomInput type="checkbox" id="exampleCustomCheckbox" label="Check this custom checkbox" />
+				<CustomInput type="checkbox" id="exampleCustomCheckbox2" label="Or this one" />
+				<CustomInput type="checkbox" id="exampleCustomCheckbox3" label="But not this disabled one" disabled />
+			</div>
+		</FormGroup>
+		<FormGroup>
+			<Label for="exampleCheckbox">Radios</Label>
+			<div>
+				<CustomInput type="radio" id="exampleCustomRadio" name="customRadio" label="Select this custom radio" />
+				<CustomInput type="radio" id="exampleCustomRadio2" name="customRadio" label="Or this one" />
+				<CustomInput type="radio" id="exampleCustomRadio3" label="But not this disabled one" disabled />
+			</div>
+		</FormGroup>
+		<FormGroup>
+			<Label for="exampleCheckbox">Inline</Label>
+			<div>
+				<CustomInput type="checkbox" id="exampleCustomInline" label="An inline custom input" inline />
+				<CustomInput type="checkbox" id="exampleCustomInline2" label="and another one" inline />
+			</div>
+		</FormGroup>
+		<FormGroup>
+			<Label for="exampleCustomSelect">Custom Select</Label>
+			<CustomInput type="select" id="exampleCustomSelect" name="customSelect">
+				<option value="">Select</option>
+				<option>Value 1</option>
+				<option>Value 2</option>
+				<option>Value 3</option>
+				<option>Value 4</option>
+				<option>Value 5</option>
+			</CustomInput>
+		</FormGroup>
+		<FormGroup>
+			<Label for="exampleCustomMutlipleSelect">Custom Multiple Select</Label>
+			<CustomInput type="select" id="exampleCustomMutlipleSelect" name="customSelect" multiple>
+				<option value="">Select</option>
+				<option>Value 1</option>
+				<option>Value 2</option>
+				<option>Value 3</option>
+				<option>Value 4</option>
+				<option>Value 5</option>
+			</CustomInput>
+		</FormGroup>
+		<FormGroup>
+			<Label for="exampleCustomSelectDisabled">Custom Select Disabled</Label>
+			<CustomInput type="select" id="exampleCustomSelectDisabled" name="customSelect" disabled>
+				<option value="">Select</option>
+				<option>Value 1</option>
+				<option>Value 2</option>
+				<option>Value 3</option>
+				<option>Value 4</option>
+				<option>Value 5</option>
+			</CustomInput>
+		</FormGroup>
+		<FormGroup>
+			<Label for="exampleCustomMutlipleSelectDisabled">Custom Multiple Select Disabled</Label>
+			<CustomInput type="select" id="exampleCustomMutlipleSelectDisabled" name="customSelect" multiple disabled>
+				<option value="">Select</option>
+				<option>Value 1</option>
+				<option>Value 2</option>
+				<option>Value 3</option>
+				<option>Value 4</option>
+				<option>Value 5</option>
+			</CustomInput>
+		</FormGroup>
+		<FormGroup>
+			<Label for="exampleCustomFileBrowser">File Browser</Label>
+			<CustomInput type="file" id="exampleCustomFileBrowser" name="customFile" />
+		</FormGroup>
+		<FormGroup>
+			<Label for="exampleCustomFileBrowser">File Browser with Custom Label</Label>
+			<CustomInput type="file" id="exampleCustomFileBrowser" name="customFile" label="Yo, pick a file!" />
+		</FormGroup>
+		<FormGroup>
+			<Label for="exampleCustomFileBrowser">File Browser Disabled</Label>
+			<CustomInput type="file" id="exampleCustomFileBrowser" name="customFile" disabled />
+		</FormGroup>
+		<FormGroup>
+			<Label for="exampleEmail">Input without validation</Label>
+			<Input />
+			<FormFeedback>You will not be able to see this</FormFeedback>
+			<FormText>Example help text that remains unchanged.</FormText>
+		</FormGroup>
+		<FormGroup>
+			<Label for="exampleEmail">Valid input</Label>
+			<Input valid />
+			<FormFeedback valid>Sweet! that name is available</FormFeedback>
+			<FormText>Example help text that remains unchanged.</FormText>
+		</FormGroup>
+		<FormGroup>
+			<Label for="examplePassword">Invalid input</Label>
+			<Input invalid />
+			<FormFeedback>Oh noes! that name is already taken</FormFeedback>
+			<FormText>Example help text that remains unchanged.</FormText>
+		</FormGroup>
+	</Form>
+</StyledContainer>
 ```

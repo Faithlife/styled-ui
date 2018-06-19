@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as _Bootstrap from 'reactstrap';
 
 function wrapBootstrap(Component, inline) {
@@ -10,11 +11,21 @@ function wrapBootstrap(Component, inline) {
 	);
 }
 
+const StyledContainer = props => {
+	const styles = props.inline ? { display: 'inline-block' } : {};
+	return (
+		<div className="fl-wrapper" style={styles}>
+			{props.children}
+		</div>
+	);
+};
+
+StyledContainer.propTypes = {
+	inline: PropTypes.bool,
+	children: PropTypes.node,
+};
+
 export default {
 	..._Bootstrap,
-	Alert: wrapBootstrap(_Bootstrap.Alert),
-	Button: wrapBootstrap(_Bootstrap.Button, true),
-	Modal: wrapBootstrap(_Bootstrap.Modal),
-	Navbar: wrapBootstrap(_Bootstrap.Navbar),
-	InputGroup: wrapBootstrap(_Bootstrap.InputGroup),
+	StyledContainer,
 };
