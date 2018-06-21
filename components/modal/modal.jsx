@@ -72,7 +72,7 @@ export default class Modal extends React.Component {
 		return (
 			<ThemeProvider theme={theme}>
 				<Styled.Backdrop
-					ref={backdrop => {
+					innerRef={backdrop => {
 						this.backdrop = backdrop;
 					}}
 					onClick={this.handleBackdropClick}
