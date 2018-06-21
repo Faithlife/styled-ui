@@ -15,6 +15,16 @@ export const fonts = {
 		font-size: 12px;
 		font-weight: normal;
 		line-height: 18px;`,
+	ui14: `
+		font-size: 14px;
+		font-weight: normal;
+		line-height: 14px;
+	`,
+	h4: `
+		font-size: 22px;
+		font-weight: bold;
+		line-height: 28px;
+	`,
 };
 
 export const colors = {

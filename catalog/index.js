@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Catalog, pageLoader } from 'catalog';
-import { Button, Checkbox, TextInput, Bootstrap } from '../components';
+import { Button, Checkbox, TextInput, Bootstrap, Modal } from '../components';
 import { colors } from '../components/shared-styles';
 import CarouselDemo from './bootstrap/carousel-demo.jsx';
 import DocgenTable from './docgen-table.jsx';
@@ -79,6 +79,12 @@ const pages = [
 				title: 'Text input Documentation',
 				content: pageLoader(() => import('./text-input/documentation.md')),
 				imports: { ...TextInput, DocgenTable },
+			},
+			{
+				path: '/modal/example',
+				title: 'Modal Example',
+				content: pageLoader(() => import('./modal/modal.md')),
+				imports: { ...TextInput, ...Modal, Button, delayPromise },
 			},
 		],
 	},
