@@ -5,10 +5,10 @@ import { colors } from '../shared-styles';
 import ModalFooter from './modal-footer.jsx';
 import * as Styled from './styled.jsx';
 
-const DefaultModalFooter = ({ commit, cancel, ...props }) => (
+const DefaultModalFooter = ({ commitButton, cancelButton, deleteButton }) => (
 	<ModalFooter>
 		<Styled.FooterContainer>
-			{props.delete && (
+			{deleteButton && (
 				<Styled.DeleteContainer>
 					<Button
 						primaryOutline
@@ -19,22 +19,22 @@ const DefaultModalFooter = ({ commit, cancel, ...props }) => (
 							activeColor: colors.redDark,
 							disabledColor: colors.redTint,
 						}}
-						onClick={props.delete.onClick}
+						onClick={deleteButton.onClick}
 					>
-						{props.delete.text}
+						{deleteButton.text}
 					</Button>
 				</Styled.DeleteContainer>
 			)}
-			{cancel && (
+			{cancelButton && (
 				<Styled.CancelContainer>
-					<Button primaryOutline medium onClick={cancel.onClick}>
-						{cancel.text}
+					<Button primaryOutline medium onClick={cancelButton.onClick}>
+						{cancelButton.text}
 					</Button>
 				</Styled.CancelContainer>
 			)}
-			{commit && (
-				<Button primary medium onClick={commit.onClick}>
-					{commit.text}
+			{commitButton && (
+				<Button primary medium onClick={commitButton.onClick}>
+					{commitButton.text}
 				</Button>
 			)}
 		</Styled.FooterContainer>
@@ -43,17 +43,19 @@ const DefaultModalFooter = ({ commit, cancel, ...props }) => (
 
 export default DefaultModalFooter;
 
+/* eslint-disable react/no-unused-prop-types */
 DefaultModalFooter.propTypes = {
-	commit: PropTypes.shape({
+	commitButton: PropTypes.shape({
 		onClick: PropTypes.func.isRequired,
 		text: PropTypes.string.isRequired,
 	}),
-	cancel: PropTypes.shape({
+	cancelButton: PropTypes.shape({
 		onClick: PropTypes.func.isRequired,
 		text: PropTypes.string.isRequired,
 	}),
-	delete: PropTypes.shape({
+	deleteButton: PropTypes.shape({
 		onClick: PropTypes.func.isRequired,
 		text: PropTypes.string.isRequired,
 	}),
 };
+/* eslint-enable react/no-unused-prop-types */

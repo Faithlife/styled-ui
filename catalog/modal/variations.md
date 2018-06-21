@@ -26,9 +26,9 @@ state: { modal: false }
 		title="Location"
 		subtitle="Help us locate you"
 		footerProps={{
-			commit: { text: 'Save', onClick: () => alert('Saved') },
-			cancel: { text: 'Cancel', onClick: () => setState({ modal: !state.modal })},
-			delete: { text: 'Delete Forever', onClick: () => alert('Deleted') }
+			commitButton: { text: 'Save', onClick: () => alert('Saved') },
+			cancelButton: { text: 'Cancel', onClick: () => setState({ modal: !state.modal })},
+			deleteButton: { text: 'Delete Forever', onClick: () => alert('Deleted') }
 		}}
 	>
 		<div className="wide-content">
@@ -72,8 +72,8 @@ state: { modal: false }
 		title="Location"
 		subtitle="Help us locate you"
 		footerProps={{
-			commit: { text: 'Save', onClick: () => alert('Saved') },
-			cancel: { text: 'Cancel', onClick: () => setState({ modal: !state.modal })}
+			commitButton: { text: 'Save', onClick: () => alert('Saved') },
+			cancelButton: { text: 'Cancel', onClick: () => setState({ modal: !state.modal })}
 		}}
 	>
 		<div className="wide-content">
@@ -117,7 +117,7 @@ state: { modal: false }
 		title="Location"
 		subtitle="Help us locate you"
 		footerProps={{
-			delete: { text: 'Delete Forever', onClick: () => alert('Deleted') }
+			deleteButton: { text: 'Delete Forever', onClick: () => alert('Deleted') }
 		}}
 	>
 		<div className="wide-content">

@@ -24,15 +24,15 @@ export default class Modal extends React.Component {
 		theme: PropTypes.object,
 		/** values for rendering an FL standard footer */
 		footerProps: PropTypes.shape({
-			commit: PropTypes.shape({
+			commitButton: PropTypes.shape({
 				onClick: PropTypes.func.isRequired,
 				text: PropTypes.string.isRequired,
 			}),
-			cancel: PropTypes.shape({
+			cancelButton: PropTypes.shape({
 				onClick: PropTypes.func.isRequired,
 				text: PropTypes.string.isRequired,
 			}),
-			delete: PropTypes.shape({
+			deleteButton: PropTypes.shape({
 				onClick: PropTypes.func.isRequired,
 				text: PropTypes.string.isRequired,
 			}),
