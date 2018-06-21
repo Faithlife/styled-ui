@@ -81,9 +81,9 @@ const pages = [
 				imports: { ...TextInput, DocgenTable },
 			},
 			{
-				path: '/modal/example',
-				title: 'Modal Example',
-				content: pageLoader(() => import('./modal/modal.md')),
+				path: '/modal/variations',
+				title: 'Modal Variations',
+				content: pageLoader(() => import('./modal/variations.md')),
 				imports: { ...TextInput, ...Modal, Button, delayPromise },
 			},
 		],

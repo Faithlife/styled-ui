@@ -74,3 +74,19 @@ export const ModalFooter = styled.div`
 	margin-top: ${thickness.twentyfour};
 	width: 100%;
 `;
+
+export const FooterContainer = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+`;
+
+export const CancelContainer = styled.div`
+	margin-right: ${thickness.sixteen};
+`;
+
+export const DeleteContainer = styled.div`
+	margin-right: auto;
+`;

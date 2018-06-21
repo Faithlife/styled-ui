@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import ModalHeader from './modal-header.jsx';
+import DefaultModalFooter from './default-modal-footer.jsx';
 import * as Styled from './styled.jsx';
 
 /**
@@ -21,6 +22,23 @@ export default class Modal extends React.Component {
 		children: PropTypes.node.isRequired,
 		/** Customizable theme properties */
 		theme: PropTypes.object,
+		/** values for rendering an FL standard footer */
+		footerProps: PropTypes.shape({
+			commit: PropTypes.shape({
+				onClick: PropTypes.func.isRequired,
+				text: PropTypes.string.isRequired,
+			}),
+			cancel: PropTypes.shape({
+				onClick: PropTypes.func.isRequired,
+				text: PropTypes.string.isRequired,
+			}),
+			delete: PropTypes.shape({
+				onClick: PropTypes.func.isRequired,
+				text: PropTypes.string.isRequired,
+			}),
+		}),
+		/**  */
+		renderFooter: PropTypes.func,
 	};
 
 	static defaultProps = {
@@ -36,7 +54,16 @@ export default class Modal extends React.Component {
 	};
 
 	render() {
-		const { theme, title, subtitle, onClose, isOpen, children } = this.props;
+		const {
+			theme,
+			title,
+			subtitle,
+			onClose,
+			isOpen,
+			children,
+			renderFooter,
+			footerProps,
+		} = this.props;
 
 		if (!isOpen) {
 			return null;
@@ -53,6 +80,7 @@ export default class Modal extends React.Component {
 					<Styled.Modal>
 						<ModalHeader title={title} subtitle={subtitle} onClose={onClose} />
 						{children}
+						{renderFooter ? renderFooter() : <DefaultModalFooter {...footerProps} />}
 					</Styled.Modal>
 				</Styled.Backdrop>
 			</ThemeProvider>
