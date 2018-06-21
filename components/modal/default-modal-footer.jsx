@@ -5,43 +5,41 @@ import { colors } from '../shared-styles';
 import ModalFooter from './modal-footer.jsx';
 import * as Styled from './styled.jsx';
 
-const DefaultModalFooter = ({ commit, cancel, delete: deletion }) => {
-	return (
-		<ModalFooter>
-			<Styled.FooterContainer>
-				{deletion && (
-					<Styled.DeleteContainer>
-						<Button
-							primaryOutline
-							medium
-							theme={{
-								defaultColor: colors.redBase,
-								hoverColor: colors.redLight,
-								activeColor: colors.redDark,
-								disabledColor: colors.redTint,
-							}}
-							onClick={deletion.onClick}
-						>
-							{deletion.text}
-						</Button>
-					</Styled.DeleteContainer>
-				)}
-				{cancel && (
-					<Styled.CancelContainer>
-						<Button primaryOutline medium onClick={cancel.onClick}>
-							{cancel.text}
-						</Button>
-					</Styled.CancelContainer>
-				)}
-				{commit && (
-					<Button primary medium onClick={commit.onClick}>
-						{commit.text}
+const DefaultModalFooter = ({ commit, cancel, ...props }) => (
+	<ModalFooter>
+		<Styled.FooterContainer>
+			{props.delete && (
+				<Styled.DeleteContainer>
+					<Button
+						primaryOutline
+						medium
+						theme={{
+							defaultColor: colors.redBase,
+							hoverColor: colors.redLight,
+							activeColor: colors.redDark,
+							disabledColor: colors.redTint,
+						}}
+						onClick={props.delete.onClick}
+					>
+						{props.delete.text}
 					</Button>
-				)}
-			</Styled.FooterContainer>
-		</ModalFooter>
-	);
-};
+				</Styled.DeleteContainer>
+			)}
+			{cancel && (
+				<Styled.CancelContainer>
+					<Button primaryOutline medium onClick={cancel.onClick}>
+						{cancel.text}
+					</Button>
+				</Styled.CancelContainer>
+			)}
+			{commit && (
+				<Button primary medium onClick={commit.onClick}>
+					{commit.text}
+				</Button>
+			)}
+		</Styled.FooterContainer>
+	</ModalFooter>
+);
 
 export default DefaultModalFooter;
 
