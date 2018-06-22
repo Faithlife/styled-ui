@@ -38,7 +38,6 @@ export default class Modal extends React.Component {
 				text: PropTypes.string.isRequired,
 			}),
 		}),
-		/**  */
 		renderFooter: PropTypes.func,
 	};
 
