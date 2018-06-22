@@ -70,5 +70,6 @@ DefaultModalFooter.propTypes = {
 		onClick: PropTypes.func.isRequired,
 		text: PropTypes.string.isRequired,
 	}),
+	useFullWidthButtons: PropTypes.bool,
 };
 /* eslint-enable react/no-unused-prop-types */
