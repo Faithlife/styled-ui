@@ -164,7 +164,7 @@ showSource: false
 ```
 
 ```react
-showSource: flase
+showSource: false
 ---
 <Row>
 	<div className="text-center">0%</div>
