@@ -11,3 +11,12 @@ export function applyVariations(component, variationMap, props) {
 
 	return { component: wrappedComponent, filteredProps };
 }
+
+export const debouncedResize = callback => {
+	let frame;
+	return window.addEventListener('resize', () => {
+		if (frame) window.cancelAnimationFrame(frame);
+
+		frame = window.requestAnimationFrame(callback);
+	});
+};
