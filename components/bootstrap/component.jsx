@@ -24,6 +24,10 @@ function wrapBootstrap(Component, inline) {
 	));
 }
 
+function forwardStyledComponentRefs(Component) {
+	return React.forwardRef((props, ref) => <Component {...props} innerRef={ref} />);
+}
+
 const inlineComponents = ['Button'];
 
 const bootstrapComponents = Object.keys(_Bootstrap).reduce(
@@ -36,11 +40,11 @@ const bootstrapComponents = Object.keys(_Bootstrap).reduce(
 
 export default {
 	...bootstrapComponents,
-	Typeahead: styled(wrapBootstrap(Typeahead))`
+	Typeahead: forwardStyledComponentRefs(styled(wrapBootstrap(Typeahead))`
 		.rbt-highlight-text {
 			padding: 0;
 			font-weight: bold;
 			background-color: inherit;
 		}
-	`,
+	`),
 };
