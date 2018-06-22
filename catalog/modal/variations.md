@@ -133,6 +133,54 @@ state: { modal: false }
 </div>
 ```
 
+## Modal with stacked buttons
+
+Modal buttons stack at 320px for 3 buttons configurations and 220px for 1 or 2 button configurations.
+
+```react
+showSource: true
+state: { modal: false }
+---
+<div  className="container">
+	<style>
+	{`
+		.container {
+			font-family: 'Source Sans Pro';
+			color: #333333;
+		}
+		.stacked-content {
+			width: 240px;
+		}
+		.button-container {
+			margin-right: 16px;
+		}
+	`}
+	</style>
+	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Modal
+		isOpen={state.modal}
+		onClose={() => setState({ modal: false })}
+		title="Location"
+		subtitle="Help us locate you"
+		footerProps={{
+			commitButton: { text: 'Save', onClick: () => alert('Saved') },
+			cancelButton: { text: 'Cancel', onClick: () => setState({ modal: !state.modal })},
+			deleteButton: { text: 'Delete Forever', onClick: () => alert('Deleted') }
+		}}
+	>
+		<div className="stacked-content">
+			<Input
+				value={state.value}
+				onChange={value => setState({ value: value, isValid: value !== '' })}
+				placeholder="Bellingham"
+				title="Location"
+				debounce={200}
+			/>
+		</div>
+	</Modal>
+</div>
+```
+
 ## Modal with custom footer
 
 ```react

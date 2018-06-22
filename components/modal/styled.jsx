@@ -28,7 +28,6 @@ export const Modal = styled.div`
 	padding: ${thickness.twentyfour};
 	background-color: ${props => props.theme.background};
 	border-radius: 3px;
-	min-width: 280px;
 
 	display: flex;
 	flex-direction: column;
@@ -77,16 +76,20 @@ export const ModalFooter = styled.div`
 
 export const FooterContainer = styled.div`
 	display: flex;
-	flex-direction: row;
+	flex-direction: ${props => (props.theme.verticalButtons ? 'column' : 'row')};
 	justify-content: flex-end;
 	align-items: center;
 	width: 100%;
 `;
 
 export const CancelContainer = styled.div`
-	margin-right: ${thickness.sixteen};
+	${props =>
+		props.theme.verticalButtons ? 'margin-bottom' : 'margin-right'}: ${thickness.sixteen};
+	${props => (props.theme.verticalButtons ? 'width: 100%' : null)};
 `;
 
 export const DeleteContainer = styled.div`
-	margin-right: auto;
+	${props =>
+		props.theme.verticalButtons ? `margin-bottom: ${thickness.sixteen}` : 'margin-right: auto'};
+	${props => (props.theme.verticalButtons ? 'width: 100%' : null)};
 `;

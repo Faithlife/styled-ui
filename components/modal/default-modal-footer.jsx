@@ -5,41 +5,54 @@ import { colors } from '../shared-styles';
 import ModalFooter from './modal-footer.jsx';
 import * as Styled from './styled.jsx';
 
-const DefaultModalFooter = ({ commitButton, cancelButton, deleteButton }) => (
-	<ModalFooter>
-		<Styled.FooterContainer>
-			{deleteButton && (
-				<Styled.DeleteContainer>
+const DefaultModalFooter = ({ commitButton, cancelButton, deleteButton, useFullWidthButtons }) => {
+	return (
+		<ModalFooter>
+			<Styled.FooterContainer>
+				{deleteButton && (
+					<Styled.DeleteContainer>
+						<Button
+							primaryOutline
+							medium
+							theme={{
+								defaultColor: colors.redBase,
+								hoverColor: colors.redLight,
+								activeColor: colors.redDark,
+								disabledColor: colors.redTint,
+								width: useFullWidthButtons ? '100%' : null,
+							}}
+							onClick={deleteButton.onClick}
+						>
+							{deleteButton.text}
+						</Button>
+					</Styled.DeleteContainer>
+				)}
+				{cancelButton && (
+					<Styled.CancelContainer>
+						<Button
+							primaryOutline
+							medium
+							theme={{ width: useFullWidthButtons ? '100%' : null }}
+							onClick={cancelButton.onClick}
+						>
+							{cancelButton.text}
+						</Button>
+					</Styled.CancelContainer>
+				)}
+				{commitButton && (
 					<Button
-						primaryOutline
+						primary
 						medium
-						theme={{
-							defaultColor: colors.redBase,
-							hoverColor: colors.redLight,
-							activeColor: colors.redDark,
-							disabledColor: colors.redTint,
-						}}
-						onClick={deleteButton.onClick}
+						theme={{ width: useFullWidthButtons ? '100%' : null }}
+						onClick={commitButton.onClick}
 					>
-						{deleteButton.text}
+						{commitButton.text}
 					</Button>
-				</Styled.DeleteContainer>
-			)}
-			{cancelButton && (
-				<Styled.CancelContainer>
-					<Button primaryOutline medium onClick={cancelButton.onClick}>
-						{cancelButton.text}
-					</Button>
-				</Styled.CancelContainer>
-			)}
-			{commitButton && (
-				<Button primary medium onClick={commitButton.onClick}>
-					{commitButton.text}
-				</Button>
-			)}
-		</Styled.FooterContainer>
-	</ModalFooter>
-);
+				)}
+			</Styled.FooterContainer>
+		</ModalFooter>
+	);
+};
 
 export default DefaultModalFooter;
 
