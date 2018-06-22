@@ -7,21 +7,21 @@ const { Provider, Consumer } = React.createContext({});
 
 function wrapBootstrap(Component, inline) {
 	const styles = inline ? { display: 'inline-block' } : {};
-	return props => (
+	return React.forwardRef((props, ref) => (
 		<Consumer>
 			{value =>
 				value.inCssResetScope ? (
-					<Component {...props} />
+					<Component ref={ref} {...props} />
 				) : (
 					<Provider value={{ inCssResetScope: true }}>
 						<div className="fl-wrapper" style={styles}>
-							<Component {...props} />
+							<Component ref={ref} {...props} />
 						</div>
 					</Provider>
 				)
 			}
 		</Consumer>
-	);
+	));
 }
 
 const inlineComponents = ['Button'];
