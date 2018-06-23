@@ -50,11 +50,12 @@ export default class Modal extends React.Component {
 	state = {};
 
 	componentDidMount() {
-		this.resizeListener = debouncedResize(this.handleResize);
+		const { cancel } = debouncedResize(this.handleResize);
+		this.cancelResizeListener = cancel;
 	}
 
 	componentWillUnmount() {
-		window.removeEventListener('resize', this.resizeListener);
+		if (this.cancelResizeListener) this.cancelResizeListener();
 	}
 
 	handleResize = () => {

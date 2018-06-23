@@ -14,9 +14,15 @@ export function applyVariations(component, variationMap, props) {
 
 export const debouncedResize = callback => {
 	let frame;
-	return window.addEventListener('resize', () => {
+	const listener = () => {
 		if (frame) window.cancelAnimationFrame(frame);
 
 		frame = window.requestAnimationFrame(callback);
-	});
+	};
+
+	window.addEventListener('resize', listener);
+
+	return {
+		cancel: () => window.removeListener('resize', listener),
+	};
 };
