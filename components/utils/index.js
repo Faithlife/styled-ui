@@ -23,6 +23,6 @@ export const debouncedResize = callback => {
 	window.addEventListener('resize', listener);
 
 	return {
-		cancel: () => window.removeListener('resize', listener),
+		cancel: () => window.removeEventListener('resize', listener),
 	};
 };

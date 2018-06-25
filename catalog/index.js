@@ -86,6 +86,12 @@ const pages = [
 				content: pageLoader(() => import('./modal/variations.md')),
 				imports: { ...TextInput, ...Modal, Button, delayPromise },
 			},
+			{
+				path: '/modal/documentation',
+				title: 'Modal Documentation',
+				content: pageLoader(() => import('./modal/documentation.md')),
+				imports: { ...Modal, DocgenTable },
+			},
 		],
 	},
 	{
