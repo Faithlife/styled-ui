@@ -16,9 +16,8 @@ state: { value: 'This value was guessed', confirmed: false }
 	<FormGroup>
 		<Label>High Confidence</Label>
 		<InferredText
-			label="No confidence"
-			confidence={state.confirmed ? null : 'high'}
-			onChange={e => setState({ value: e.target.value })}
+			confidence={state.confirmed ? null : 0.9}
+			onChange={e => setState({ value: e.target.value, confirmed: true })}
 			onConfirm={() => setState({ confirmed: true })}
 			value={state.value}
 		/>
@@ -34,9 +33,8 @@ state: { value: 'This value was guessed', confirmed: false }
 	<FormGroup>
 		<Label>Medium Confidence</Label>
 		<InferredText
-			label="No confidence"
-			confidence={state.confirmed ? null : 'medium'}
-			onChange={e => setState({ value: e.target.value })}
+			confidence={state.confirmed ? null : 0.7}
+			onChange={e => setState({ value: e.target.value, confirmed: true })}
 			onConfirm={() => setState({ confirmed: true })}
 			value={state.value}
 		/>
@@ -52,9 +50,8 @@ state: { value: 'This value was guessed', confirmed: false }
 	<FormGroup>
 		<Label>Low Confidence</Label>
 		<InferredText
-			label="No confidence"
-			confidence={state.confirmed ? null : 'low'}
-			onChange={e => setState({ value: e.target.value })}
+			confidence={state.confirmed ? null : 0.6}
+			onChange={e => setState({ value: e.target.value, confirmed: true })}
 			onConfirm={() => setState({ confirmed: true })}
 			value={state.value}
 		/>

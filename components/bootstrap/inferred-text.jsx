@@ -90,8 +90,8 @@ const StyledInput = styled(Input)`
 /** Text input control with a clickable inline confidence indicator. Extra props are passed to the wrapped input.*/
 export default class InferredText extends Component {
 	static propTypes = {
-		/** Controls the inline confidence indicator */
-		confidence: PropTypes.oneOf(['', 'low', 'medium', 'high']),
+		/** Decimal percent value for the confidence value. E.g. 0.75 */
+		confidence: PropTypes.number,
 		/** Function called when the input is changed */
 		onChange: PropTypes.func,
 		/** The controlled input value */
@@ -106,27 +106,26 @@ export default class InferredText extends Component {
 
 	render() {
 		const { confidence, className, onConfirm, ...inputProps } = this.props;
-		const isInferred = confidence !== '' && confidence != null;
+		const ConfidenceIcon =
+			confidence >= 0.9 ? (
+				<LightBulbH />
+			) : confidence >= 0.7 ? (
+				<LightBulbM />
+			) : confidence >= 0.6 ? (
+				<LightBulbL />
+			) : null;
 
 		return (
 			<RelativeContainer>
 				<InputGroup>
-					<StyledInput inferred={isInferred} {...inputProps} />
+					<StyledInput inferred={ConfidenceIcon != null} {...inputProps} />
 				</InputGroup>
 				<IndicatorContainer
 					onMouseEnter={() => this.setState({ isMouseOver: true })}
 					onMouseLeave={() => this.setState({ isMouseOver: false })}
 					onClick={() => this.props.onConfirm()}
 				>
-					{this.state.isMouseOver && isInferred ? (
-						<OK />
-					) : confidence === 'high' ? (
-						<LightBulbH />
-					) : confidence === 'medium' ? (
-						<LightBulbM />
-					) : confidence === 'low' ? (
-						<LightBulbL />
-					) : null}
+					{this.state.isMouseOver && ConfidenceIcon != null ? <OK /> : ConfidenceIcon}
 				</IndicatorContainer>
 			</RelativeContainer>
 		);
