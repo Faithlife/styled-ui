@@ -17,11 +17,13 @@ showSource: true
 state: { selection: '' }
 ---
 <Row>
-	Current selection: {state.selection}
-	<Typeahead
+	<FormGroup>
+		<Label>Current selection: {state.selection}</Label>
+		<Typeahead
 			onChange={value => { setState({ selection: value })}}
 			options={['Washington','California','Texas']}
 			placeholder="Choose a state..."
 		/>
+	</FormGroup>
 </Row>
 ```
