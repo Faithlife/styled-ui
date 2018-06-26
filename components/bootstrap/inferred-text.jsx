@@ -79,6 +79,14 @@ const IndicatorContainer = styled.div`
 	}
 `;
 
+const StyledInput = styled(Input)`
+	&&&,
+	&&&:focus,
+	&&&:hover {
+		${props => (props.inferred ? 'color: #006099' : '')};
+	}
+`;
+
 /** Text input control with a clickable inline confidence indicator. Extra props are passed to the wrapped input.*/
 export default class InferredText extends Component {
 	static propTypes = {
@@ -98,18 +106,19 @@ export default class InferredText extends Component {
 
 	render() {
 		const { confidence, className, onConfirm, ...inputProps } = this.props;
+		const isInferred = confidence !== '' && confidence != null;
 
 		return (
 			<RelativeContainer>
 				<InputGroup>
-					<Input {...inputProps} />
+					<StyledInput inferred={isInferred} {...inputProps} />
 				</InputGroup>
 				<IndicatorContainer
 					onMouseEnter={() => this.setState({ isMouseOver: true })}
 					onMouseLeave={() => this.setState({ isMouseOver: false })}
 					onClick={() => this.props.onConfirm()}
 				>
-					{this.state.isMouseOver && confidence != null ? (
+					{this.state.isMouseOver && isInferred ? (
 						<OK />
 					) : confidence === 'high' ? (
 						<LightBulbH />
