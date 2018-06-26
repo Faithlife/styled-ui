@@ -29,13 +29,13 @@ $gray-700: #3d3d3d;
 $gray-800: #3f3f3f;
 $gray-900: #222;
 $line-height-sm: 1.4;
-$border-radius: .1875rem;
+$border-radius: 0.1875rem;
 $input-placeholder-color: $gray-400;
-$input-btn-padding-y-lg: .5rem;
-$input-btn-padding-y: .1875rem;
-$input-btn-padding-y-sm: .1875rem;
-$border-radius-lg: .1875rem;
-$table-cell-padding: .5rem;
+$input-btn-padding-y-lg: 0.5rem;
+$input-btn-padding-y: 0.1875rem;
+$input-btn-padding-y-sm: 0.1875rem;
+$border-radius-lg: 0.1875rem;
+$table-cell-padding: 0.5rem;
 $card-border-radius: $border-radius-lg;
 
 // The kitchen sink, except reboot and typography
@@ -58,13 +58,13 @@ $card-border-radius: $border-radius-lg;
   @import "bootstrap/scss/buttons";
   @import "bootstrap/scss/close";
   @import "bootstrap/scss/utilities";
-  @import "bootstrap/scss/modal";
+  @import "bootstrap/scss/modal";  /* stylelint-disable-line */
   @import "bootstrap/scss/nav";
   @import "bootstrap/scss/navbar";
   @import "bootstrap/scss/dropdown";
   @import "bootstrap/scss/forms";
   @import "bootstrap/scss/custom-forms";
-  @import "bootstrap/scss/transitions";
+  @import "bootstrap/scss/transitions";  /* stylelint-disable-line */
   @import "bootstrap/scss/input-group";
   @import "bootstrap/scss/alert";
   @import "bootstrap/scss/progress";
@@ -73,6 +73,5 @@ $card-border-radius: $border-radius-lg;
   @import "bootstrap/scss/tooltip";
   @import "bootstrap/scss/popover";
   @import "bootstrap/scss/carousel";
-
   @import "react-bootstrap-typeahead/css/Typeahead-bs4";
 }

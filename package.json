@@ -11,7 +11,7 @@
 		"eslint": "eslint ./components --ext .js --ext .jsx",
 		"test": "npm run unit-test && npm run eslint && npm run stylelint",
 		"precommit": "prettier --write \"./components/**/*.{js,jsx}\" && npm run stylelint",
-		"build": "rimraf dist && webpack -p && npm run build-bootstrap",
+		"build": "rimraf dist && webpack -p && npm run build-bootstrap -- -p",
 		"prepublishOnly": "npm test && npm run build",
 		"stylelint": "stylelint ./components/**/*.jsx",
 		"unit-test": "mocha -r esm ./tests/**/*.js",
