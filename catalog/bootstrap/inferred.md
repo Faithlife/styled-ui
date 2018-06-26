@@ -1,4 +1,12 @@
-### Inferred inputs
+A text input control with a clickable inline confidence indicator.
+
+## How to use
+See the [standard components](/bootstrap/components) page for details on how to import the stylesheet into your project.
+
+```
+import { Bootstrap } from '@faithlife/styled-ui';
+const { InferredText } = Bootstrap;
+```
 
 ```react
 showSource: false
@@ -52,4 +60,11 @@ state: { value: 'This value was guessed', confirmed: false }
 		/>
 	</FormGroup>
 </Row>
+```
+
+## Component PropTypes
+```react
+noSource: true
+---
+<DocgenTable component={InferredText} />
 ```

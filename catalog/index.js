@@ -37,7 +37,7 @@ const pages = [
 				path: '/bootstrap/inferred',
 				title: 'Inferred Inputs',
 				content: pageLoader(() => import('./bootstrap/inferred.md')),
-				imports: { ...Bootstrap },
+				imports: { ...Bootstrap, DocgenTable },
 			},
 		],
 	},

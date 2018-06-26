@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Row, InputGroup, FormGroup, Label, Input } from './base-components.jsx';
+import { InputGroup, Input } from './base-components.jsx';
 
 const LightBulbL = () => (
 	<svg xmlns="http://www.w3.org/2000/svg" width="17" height="18">
@@ -79,14 +79,18 @@ const IndicatorContainer = styled.div`
 	}
 `;
 
-export default class Inferred extends Component {
+/** Text input control with a clickable inline confidence indicator. Extra props are passed to the wrapped input.*/
+export default class InferredText extends Component {
 	static propTypes = {
+		/** Controls the inline confidence indicator */
 		confidence: PropTypes.oneOf(['', 'low', 'medium', 'high']),
+		/** Function called when the input is changed */
 		onChange: PropTypes.func,
+		/** The controlled input value */
 		value: PropTypes.string.isRequired,
-		label: PropTypes.string,
+		/** Function called when the OK button is clicked. Confidence should be set to null to clear the lightbulb indicator. */
 		onConfirm: PropTypes.func.isRequired,
-		/* Ignored */
+		/** Ignored */
 		className: PropTypes.string,
 	};
 
