@@ -14,7 +14,7 @@ export default class Modal extends React.Component {
 		/** controls state of modal */
 		isOpen: PropTypes.bool.isRequired,
 		/** Title of the modal */
-		title: PropTypes.oneOfType(PropTypes.string, PropTypes.node).isRequired,
+		title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 		/** Any explaining text to include in the modal header */
 		subtitle: PropTypes.string,
 		/** Callback function for when the modal is close  */

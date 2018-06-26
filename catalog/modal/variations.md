@@ -2,7 +2,7 @@
 
 ```react
 showSource: true
-state: { modal: false }
+state: { modal: false, value: '' }
 ---
 <div  className="container">
 	<style>
@@ -48,7 +48,7 @@ state: { modal: false }
 
 ```react
 showSource: true
-state: { modal: false }
+state: { modal: false, value: '' }
 ---
 <div  className="container">
 	<style>
@@ -93,7 +93,7 @@ state: { modal: false }
 
 ```react
 showSource: true
-state: { modal: false }
+state: { modal: false, value: '' }
 ---
 <div  className="container">
 	<style>
@@ -139,7 +139,7 @@ Modal buttons stack at 320px for 3 buttons configurations and 220px for 1 or 2 b
 
 ```react
 showSource: true
-state: { modal: false }
+state: { modal: false, value: '' }
 ---
 <div  className="container">
 	<style>
@@ -185,7 +185,7 @@ state: { modal: false }
 
 ```react
 showSource: true
-state: { modal: false }
+state: { modal: false, value: '' }
 ---
 <div  className="container">
 	<style>
