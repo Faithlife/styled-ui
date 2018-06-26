@@ -1,6 +1,6 @@
 import * as _TextInput from './text-input';
 import * as _Modal from './modal';
-import _Bootstrap from './bootstrap/component.jsx';
+import _Bootstrap from './bootstrap';
 
 export { default as Checkbox } from './check-box/component.jsx';
 export { default as Button } from './demo-button/component.jsx';

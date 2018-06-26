@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Row, InputGroup, FormGroup, Label, Input } from '../../components/bootstrap/component.jsx';
+import { Row, InputGroup, FormGroup, Label, Input } from './base-components.jsx';
 
 const LightBulbL = () => (
 	<svg xmlns="http://www.w3.org/2000/svg" width="17" height="18">
@@ -74,51 +74,48 @@ const IndicatorContainer = styled.div`
 	top: 7px;
 	z-index: 3;
 
-	svg:hover {
+	&:hover {
 		cursor: pointer;
 	}
 `;
 
 export default class Inferred extends Component {
 	static propTypes = {
-		confidence: PropTypes.oneOf(['low', 'medium', 'high']),
+		confidence: PropTypes.oneOf(['', 'low', 'medium', 'high']),
 		onChange: PropTypes.func,
 		value: PropTypes.string.isRequired,
 		label: PropTypes.string,
 		onConfirm: PropTypes.func.isRequired,
+		/* Ignored */
+		className: PropTypes.string,
 	};
 
 	state = { isMouseOver: false };
 
 	render() {
-		const { confidence, ...inputProps } = this.props;
+		const { confidence, className, onConfirm, ...inputProps } = this.props;
 
 		return (
-			<Row>
-				<FormGroup>
-					<Label>{this.props.label}</Label>
-					<RelativeContainer>
-						<InputGroup>
-							<Input {...inputProps} />
-						</InputGroup>
-						<IndicatorContainer
-							onMouseEnter={() => this.setState({ isMouseOver: true })}
-							onMouseLeave={() => this.setState({ isMouseOver: false })}
-							onClick={() => this.onConfirm()}
-						>
-							{this.state.isMouseOver ? (
-								<OK />
-							) : confidence === 'high' ? (
-								<LightBulbH />
-							) : confidence === 'medium' ? (
-								<LightBulbM />
-							) : confidence === 'low' ? (
-								<LightBulbL />
-							) : null}
-						</IndicatorContainer>
-					</RelativeContainer>
-				</FormGroup>
-			</Row>
+			<RelativeContainer>
+				<InputGroup>
+					<Input {...inputProps} />
+				</InputGroup>
+				<IndicatorContainer
+					onMouseEnter={() => this.setState({ isMouseOver: true })}
+					onMouseLeave={() => this.setState({ isMouseOver: false })}
+					onClick={() => this.props.onConfirm()}
+				>
+					{this.state.isMouseOver && confidence != null ? (
+						<OK />
+					) : confidence === 'high' ? (
+						<LightBulbH />
+					) : confidence === 'medium' ? (
+						<LightBulbM />
+					) : confidence === 'low' ? (
+						<LightBulbL />
+					) : null}
+				</IndicatorContainer>
+			</RelativeContainer>
 		);
 	}
 }

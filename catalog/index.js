@@ -33,6 +33,12 @@ const pages = [
 				content: pageLoader(() => import('./bootstrap/typeahead.md')),
 				imports: { ...Bootstrap },
 			},
+			{
+				path: '/bootstrap/inferred',
+				title: 'Inferred Inputs',
+				content: pageLoader(() => import('./bootstrap/inferred.md')),
+				imports: { ...Bootstrap },
+			},
 		],
 	},
 	{
