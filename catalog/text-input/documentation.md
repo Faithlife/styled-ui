@@ -11,3 +11,9 @@ noSource: true
 ---
 <DocgenTable component={Input} />
 ```
+
+```react
+noSource: true
+---
+<DocgenTable component={Inferred} />
+```

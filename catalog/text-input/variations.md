@@ -1,3 +1,44 @@
+### Inferred input
+
+```react
+showSource: false
+state: { value: 'test' }
+---
+<div>
+	<Inferred
+		label="No confidence"
+		onChange={e => setState({ value: e.target.value })}
+		onConfirm={() => {}}
+		value={state.value}
+	/>
+	<Inferred
+		label="Low confidence"
+		confidence="low"
+		onChange={e => setState({ value: e.target.value })}
+		onConfirm={() => {}}
+		value={state.value}
+	/>
+	<Inferred
+		label="Medium confidence"
+		confidence="medium"
+		onChange={e => setState({ value: e.target.value })}
+		onConfirm={() => {}}
+		value={state.value}
+	/>
+	<Inferred
+		label="High confidence"
+		confidence="high"
+		onChange={e => setState({ value: e.target.value })}
+		onConfirm={() => {}}
+		value={state.value}
+	/>
+</div>
+```
+
+```hint
+Experimental warning: The styled inputs below are based off of Faithlife Sites and may not be consistent with the new styled controls, prefer to use Bootstrap components where possible.
+```
+
 ### Validated input
 
 A standard text input control with local validation. \`TextInput.Input\` is used as a render prop so that additional input properties can be set, such as \`placeholder\`.
