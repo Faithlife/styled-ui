@@ -14,17 +14,18 @@ export const Backdrop = styled.div`
 	right: 0;
 	bottom: 0;
 	background: rgba(0, 0, 0, 0.7);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	z-index: 1050;
 `;
 
 export const Modal = styled.div`
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
 	margin: auto;
 	width: fit-content;
 	height: fit-content;
+	max-height: 80%;
 	padding: ${thickness.twentyfour};
 	background-color: ${props => props.theme.background};
 	border-radius: 3px;
@@ -33,6 +34,12 @@ export const Modal = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+`;
+
+export const ModalContent = styled.div`
+	max-height: 80%;
+	overflow-x: hidden;
+	overflow-y: auto;
 `;
 
 export const ModalHeader = styled.div`
