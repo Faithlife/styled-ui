@@ -2,7 +2,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { InputGroup, Input } from './base-components.jsx';
+import { InputGroup, Input, Tooltip } from './base-components.jsx';
+
+let uniqueId = 0;
 
 const LightBulbL = () => (
 	<svg xmlns="http://www.w3.org/2000/svg" width="17" height="18">
@@ -79,7 +81,7 @@ const IndicatorContainer = styled.div`
 	}
 `;
 
-const StyledInput = styled(Input)`
+const StyledInput = styled(({ inferred, ...props }) => <Input {...props} />)`
 	&&&,
 	&&&:focus,
 	&&&:hover {
@@ -102,7 +104,15 @@ export default class InferredText extends Component {
 		className: PropTypes.string,
 	};
 
-	state = { isMouseOver: false };
+	id = uniqueId++;
+
+	state = { isMouseOver: false, tooltipOpen: false };
+
+	toggle = () => {
+		this.setState({
+			tooltipOpen: !this.state.tooltipOpen,
+		});
+	};
 
 	render() {
 		const { confidence, className, onConfirm, ...inputProps } = this.props;
@@ -124,9 +134,17 @@ export default class InferredText extends Component {
 					onMouseEnter={() => this.setState({ isMouseOver: true })}
 					onMouseLeave={() => this.setState({ isMouseOver: false })}
 					onClick={() => this.props.onConfirm()}
+					id={`fl-inferredtext-${this.id}`}
 				>
 					{this.state.isMouseOver && ConfidenceIcon != null ? <OK /> : ConfidenceIcon}
 				</IndicatorContainer>
+				<Tooltip
+					isOpen={this.state.tooltipOpen}
+					target={`fl-inferredtext-${this.id}`}
+					toggle={this.toggle}
+				>
+					Value guessed with {Math.round(this.props.confidence * 100)}% confidence
+				</Tooltip>
 			</RelativeContainer>
 		);
 	}
