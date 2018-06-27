@@ -89,11 +89,25 @@ const StyledInput = styled(({ inferred, ...props }) => <Input {...props} />)`
 	}
 `;
 
+const StyledParagraph = styled.p`
+	&& {
+		margin-bottom: 4px;
+		line-height: 1.14em;
+		color: #575251;
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+`;
+
 /** Text input control with a clickable inline confidence indicator. Extra props are passed to the wrapped input.*/
 export default class InferredText extends Component {
 	static propTypes = {
 		/** Decimal percent value for the confidence value. E.g. 0.75 */
 		confidence: PropTypes.number,
+		/** String to display in the confidence tooltip. Defaults to Heuristic algorithm */
+		confidenceSource: PropTypes.string,
 		/** Function called when the input is changed */
 		onChange: PropTypes.func,
 		/** The controlled input value */
@@ -102,6 +116,10 @@ export default class InferredText extends Component {
 		onConfirm: PropTypes.func.isRequired,
 		/** Ignored */
 		className: PropTypes.string,
+	};
+
+	static defaultProps = {
+		confidenceSource: 'Heuristic Algorithm',
 	};
 
 	id = uniqueId++;
@@ -127,7 +145,10 @@ export default class InferredText extends Component {
 				<IndicatorContainer
 					onMouseEnter={() => this.setState({ isMouseOver: true })}
 					onMouseLeave={() => this.setState({ isMouseOver: false })}
-					onClick={() => this.props.onConfirm()}
+					onClick={() => {
+						this.setState({ isMouseOver: false });
+						this.props.onConfirm();
+					}}
 					id={`fl-inferredtext-${this.id}`}
 				>
 					{this.state.isMouseOver && ConfidenceIcon != null ? <OK /> : ConfidenceIcon}
@@ -139,7 +160,11 @@ export default class InferredText extends Component {
 					toggle={() => this.setState({ isMouseOver: false })}
 				>
 					<PopoverBody>
-						Value guessed with {Math.round(this.props.confidence * 100)}% confidence
+						<StyledParagraph>
+							Value guessed with {Math.round(this.props.confidence * 100)}% confidence.<br />
+							Click OK if you can confirm value is correct, or delete or change the value.
+						</StyledParagraph>
+						<StyledParagraph>Source: {this.props.confidenceSource}</StyledParagraph>
 					</PopoverBody>
 				</Popover>
 			</RelativeContainer>
