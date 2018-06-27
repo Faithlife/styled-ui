@@ -151,7 +151,13 @@ export default class InferredText extends Component {
 				<IndicatorContainer
 					onMouseEnter={() => this.setState({ isPopoverOpen: true })}
 					onMouseLeave={() => this.setState({ isPopoverOpen: false })}
-					onClick={() => onConfirm()}
+					onClick={() => {
+						if (this.state.isPopoverOpen) {
+							onConfirm();
+						} else {
+							this.setState({ isPopoverOpen: true });
+						}
+					}}
 					id={`fl-inferredtext-${this.id}`}
 				>
 					{this.state.isPopoverOpen && ConfidenceIcon != null ? <OK /> : ConfidenceIcon}
