@@ -43,8 +43,6 @@ $input-padding-y-lg: 0.25rem;
 $border-radius-lg: 0.1875rem;
 $table-cell-padding: 0.5rem;
 $card-border-radius: $border-radius-lg;
-$tooltip-bg: $light;
-$tooltip-color: $dark;
 
 // The kitchen sink, except reboot and typography
 @import "bootstrap/scss/functions";
@@ -55,6 +53,7 @@ $tooltip-color: $dark;
 @import "bootstrap/scss/modal";
 @import "bootstrap/scss/transitions";
 @import "bootstrap/scss/tooltip";
+@import "bootstrap/scss/popover";
 
 // Import reboot and the remaining bootstrap styles
 .fl-wrapper,
@@ -80,7 +79,7 @@ $tooltip-color: $dark;
   @import "bootstrap/scss/media";
   @import "bootstrap/scss/list-group";
   @import "bootstrap/scss/tooltip"; /* stylelint-disable-line */
-  @import "bootstrap/scss/popover";
+  @import "bootstrap/scss/popover";  /* stylelint-disable-line */
   @import "bootstrap/scss/carousel";
   @import "react-bootstrap-typeahead/css/Typeahead-bs4";
 }

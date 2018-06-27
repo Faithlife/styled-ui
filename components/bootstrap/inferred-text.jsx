@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { InputGroup, Input, Tooltip } from './base-components.jsx';
+import { InputGroup, Input, Popover, PopoverBody } from './base-components.jsx';
 
 let uniqueId = 0;
 
@@ -106,13 +106,7 @@ export default class InferredText extends Component {
 
 	id = uniqueId++;
 
-	state = { isMouseOver: false, tooltipOpen: false };
-
-	toggle = () => {
-		this.setState({
-			tooltipOpen: !this.state.tooltipOpen,
-		});
-	};
+	state = { isMouseOver: false };
 
 	render() {
 		const { confidence, className, onConfirm, ...inputProps } = this.props;
@@ -138,13 +132,16 @@ export default class InferredText extends Component {
 				>
 					{this.state.isMouseOver && ConfidenceIcon != null ? <OK /> : ConfidenceIcon}
 				</IndicatorContainer>
-				<Tooltip
-					isOpen={this.state.tooltipOpen}
+				<Popover
+					placement="top"
+					isOpen={this.state.isMouseOver}
 					target={`fl-inferredtext-${this.id}`}
-					toggle={this.toggle}
+					toggle={() => this.setState({ isMouseOver: false })}
 				>
-					Value guessed with {Math.round(this.props.confidence * 100)}% confidence
-				</Tooltip>
+					<PopoverBody>
+						Value guessed with {Math.round(this.props.confidence * 100)}% confidence
+					</PopoverBody>
+				</Popover>
 			</RelativeContainer>
 		);
 	}
