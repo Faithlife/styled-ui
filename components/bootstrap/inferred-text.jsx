@@ -122,9 +122,15 @@ export default class InferredText extends Component {
 		confidenceSource: 'Heuristic Algorithm',
 	};
 
+	componentWillReceiveProps(props) {
+		if (props.confidence !== this.props.confidence) {
+			this.setState({ isPopoverOpen: false });
+		}
+	}
+
 	id = uniqueId++;
 
-	state = { isMouseOver: false };
+	state = { isPopoverOpen: false };
 
 	render() {
 		const { confidence, className, onConfirm, ...inputProps } = this.props;
@@ -143,21 +149,18 @@ export default class InferredText extends Component {
 					<StyledInput inferred={ConfidenceIcon != null} {...inputProps} />
 				</InputGroup>
 				<IndicatorContainer
-					onMouseEnter={() => this.setState({ isMouseOver: true })}
-					onMouseLeave={() => this.setState({ isMouseOver: false })}
-					onClick={() => {
-						this.setState({ isMouseOver: false });
-						this.props.onConfirm();
-					}}
+					onMouseEnter={() => this.setState({ isPopoverOpen: true })}
+					onMouseLeave={() => this.setState({ isPopoverOpen: false })}
+					onClick={() => this.props.onConfirm()}
 					id={`fl-inferredtext-${this.id}`}
 				>
-					{this.state.isMouseOver && ConfidenceIcon != null ? <OK /> : ConfidenceIcon}
+					{this.state.isPopoverOpen && ConfidenceIcon != null ? <OK /> : ConfidenceIcon}
 				</IndicatorContainer>
 				<Popover
 					placement="top"
-					isOpen={this.state.isMouseOver}
+					isOpen={this.state.isPopoverOpen}
 					target={`fl-inferredtext-${this.id}`}
-					toggle={() => this.setState({ isMouseOver: false })}
+					toggle={() => this.setState({ isPopoverOpen: false })}
 				>
 					<PopoverBody>
 						<StyledParagraph>
