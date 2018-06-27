@@ -133,7 +133,7 @@ export default class InferredText extends Component {
 	state = { isPopoverOpen: false };
 
 	render() {
-		const { confidence, className, onConfirm, ...inputProps } = this.props;
+		const { confidence, confidenceSource, className, onConfirm, ...inputProps } = this.props;
 		const ConfidenceIcon =
 			confidence >= 0.9 ? (
 				<LightBulbH />
@@ -151,7 +151,7 @@ export default class InferredText extends Component {
 				<IndicatorContainer
 					onMouseEnter={() => this.setState({ isPopoverOpen: true })}
 					onMouseLeave={() => this.setState({ isPopoverOpen: false })}
-					onClick={() => this.props.onConfirm()}
+					onClick={() => onConfirm()}
 					id={`fl-inferredtext-${this.id}`}
 				>
 					{this.state.isPopoverOpen && ConfidenceIcon != null ? <OK /> : ConfidenceIcon}
@@ -164,10 +164,10 @@ export default class InferredText extends Component {
 				>
 					<PopoverBody>
 						<StyledParagraph>
-							Value guessed with {Math.round(this.props.confidence * 100)}% confidence.<br />
+							Value guessed with {Math.round(confidence * 100)}% confidence.<br />
 							Click OK if you can confirm value is correct, or delete or change the value.
 						</StyledParagraph>
-						<StyledParagraph>Source: {this.props.confidenceSource}</StyledParagraph>
+						<StyledParagraph>Source: {confidenceSource}</StyledParagraph>
 					</PopoverBody>
 				</Popover>
 			</RelativeContainer>
