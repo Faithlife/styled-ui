@@ -3,6 +3,34 @@ A text input control with a clickable inline confidence indicator.
 ## How to use
 See the [standard components](/bootstrap/components) page for details on how to import the stylesheet into your project.
 
+### Inferred typeahead
+
+```
+import { Bootstrap } from '@faithlife/styled-ui';
+const { InferredTypeahead } = Bootstrap;
+```
+
+```react
+showSource: false
+state: { value: 'Washington', confirmed: false }
+---
+<Row>
+	<FormGroup>
+		<Label>Current selection: {state.value}</Label>
+		<InferredTypeahead
+			confidence={state.confirmed ? null : 0.9}
+			onChange={value => { setState({ value, confirmed: true })}}
+			onConfirm={value => { setState({ confirmed: true })}}
+			options={['Washington','California','Texas']}
+			placeholder="Choose a state..."
+			defaultInputValue={state.value}
+		/>
+	</FormGroup>
+</Row>
+```
+
+### Inferred text input
+
 ```
 import { Bootstrap } from '@faithlife/styled-ui';
 const { InferredText } = Bootstrap;
@@ -63,5 +91,8 @@ state: { value: 'This value was guessed', confirmed: false }
 ```react
 noSource: true
 ---
-<DocgenTable component={InferredText} />
+<div>
+	<DocgenTable component={InferredTypeahead} />
+	<DocgenTable component={InferredText} />
+</div>
 ```
