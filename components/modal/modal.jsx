@@ -47,7 +47,9 @@ export default class Modal extends React.Component {
 		},
 	};
 
-	state = {};
+	state = {
+		modalWidth: null,
+	};
 
 	componentDidMount() {
 		const { cancel } = debouncedResize(this.handleResize);
@@ -104,7 +106,7 @@ export default class Modal extends React.Component {
 					<Styled.Modal
 						innerRef={modal => {
 							this._modal = modal;
-							if (modal && !modalWidth) this.setState({ modalWidth: modal.clientWidth });
+							if (modal && modalWidth === null) this.setState({ modalWidth: modal.clientWidth });
 						}}
 					>
 						<ModalHeader title={title} subtitle={subtitle} onClose={onClose} />
