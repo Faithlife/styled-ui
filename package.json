@@ -32,7 +32,7 @@
 		"styled-components": "^3.2.5"
 	},
 	"dependencies": {
-		"bootstrap": "^4.1.1",
+	"bootstrap": "^4.1.1",
 		"lodash.debounce": "^4.0.8",
 		"prop-types": "^15.6.1",
 		"react-bootstrap-typeahead": "^3.1.4",
@@ -40,6 +40,9 @@
 	},
 	"devDependencies": {
 		"@storybook/storybook-deployer": "^2.3.0",
+		"ag-grid": "^18.0.1",
+		"ag-grid-enterprise": "^18.1.0",
+		"ag-grid-react": "^18.0.0",
 		"assert": "^1.4.1",
 		"autoprefixer": "^8.2.0",
 		"babel-core": "^6.26.0",
@@ -64,6 +67,7 @@
 		"prettier": "^1.11.1",
 		"react": "^16.4.0",
 		"react-dom": "^16.4.0",
+		"react-dom-factories": "^1.0.2",
 		"rimraf": "^2.6.2",
 		"scss-powertools": "^1.0.1",
 		"styled-components": "^3.2.5",

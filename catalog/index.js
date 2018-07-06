@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Catalog, pageLoader } from 'catalog';
-import { Button, Checkbox, TextInput, Bootstrap, Modal, ModalFooter } from '../components';
+import { Button, Checkbox, TextInput, Bootstrap, Modal, ModalFooter, Grid } from '../components';
 import { colors } from '../components/shared-styles';
 import CarouselDemo from './bootstrap/carousel-demo.jsx';
 import DocgenTable from './docgen-table.jsx';
@@ -97,6 +97,12 @@ const pages = [
 				title: 'Modal Documentation',
 				content: pageLoader(() => import('./modal/documentation.md')),
 				imports: { Modal, DocgenTable },
+			},
+			{
+				title: 'Grid',
+				path: '/grid/documentation',
+				content: pageLoader(() => import('./flexgrid/documentation.md')),
+				imports: { Grid },
 			},
 		],
 	},
