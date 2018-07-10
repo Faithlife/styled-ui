@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { AgGridReact } from 'ag-grid-react';
+import { Button, Container } from '../../components/bootstrap';
 
 import 'ag-grid-enterprise';
 
@@ -378,20 +379,24 @@ export default class GridDemo extends Component {
 
 	render() {
 		return (
-			<div style={{ height: 525, width: '100%' }} className="ag-theme-balham">
-				<button onClick={this.updateGrid}>Update grid</button>
-				<AgGridReact
-					columnDefs={this.state.columnDefs}
-					getRowNodeId={this.getRowNodeId}
-					onCellValueChanged={this.onCellValueChanged}
-					onGridReady={this.onGridReady}
-					groupRowInnerRendererFramework={VolunteerGroupRenderer}
-					enableColResize
-					enableFilter
-					deltaRowDataMode
-					suppressAggFuncInHeader
-				/>
-			</div>
+			<Container>
+				<div style={{ height: 525, width: '100%' }} className="ag-theme-bootstrap">
+					<Button size="sm" outline color="primary" onClick={this.updateGrid}>
+						Update grid
+					</Button>
+					<AgGridReact
+						columnDefs={this.state.columnDefs}
+						getRowNodeId={this.getRowNodeId}
+						onCellValueChanged={this.onCellValueChanged}
+						onGridReady={this.onGridReady}
+						groupRowInnerRendererFramework={VolunteerGroupRenderer}
+						enableColResize
+						enableFilter
+						deltaRowDataMode
+						suppressAggFuncInHeader
+					/>
+				</div>
+			</Container>
 		);
 	}
 }
