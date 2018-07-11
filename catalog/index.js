@@ -2,12 +2,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Catalog, pageLoader } from 'catalog';
-import { Button, Checkbox, TextInput, Bootstrap, Modal, ModalFooter } from '../components';
+import { Button, Checkbox, TextInput, Modal, ModalFooter } from '../dist/main.js';
+import Bootstrap from '../dist/bootstrap.js';
 import { colors } from '../components/shared-styles';
 import CarouselDemo from './bootstrap/carousel-demo.jsx';
 import DocgenTable from './docgen-table.jsx';
 import Grid from './flexgrid/component.jsx';
-import '../dist/styles.css';
+import '../dist/bootstrap.css';
 
 function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));

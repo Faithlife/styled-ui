@@ -1,13 +1,9 @@
 /* eslint-disable prefer-template */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { AgGridReact } from 'ag-grid-react';
-import { Button, Container } from '../../components/bootstrap';
-
-import 'ag-grid-enterprise';
-
-import 'ag-grid/dist/styles/ag-grid.css';
-import 'ag-grid/dist/styles/ag-theme-balham.css';
+import { Button, Container, Row, Col } from '../../dist/bootstrap.js';
+import AgGridReact from '../../dist/grid.js';
+import '../../dist/grid.css';
 
 let uniqueId = 0;
 
@@ -381,9 +377,13 @@ export default class GridDemo extends Component {
 		return (
 			<Container>
 				<div style={{ height: 525, width: '100%' }} className="ag-theme-bootstrap">
-					<Button size="sm" outline color="primary" onClick={this.updateGrid}>
-						Update grid
-					</Button>
+					<Row>
+						<Col>
+							<Button size="sm" outline color="primary" onClick={this.updateGrid}>
+								Update grid
+							</Button>
+						</Col>
+					</Row>
 					<AgGridReact
 						columnDefs={this.state.columnDefs}
 						getRowNodeId={this.getRowNodeId}

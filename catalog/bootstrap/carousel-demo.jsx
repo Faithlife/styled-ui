@@ -5,7 +5,7 @@ import {
 	CarouselControl,
 	CarouselIndicators,
 	CarouselCaption,
-} from '../../components/bootstrap';
+} from '../../dist/bootstrap.js';
 
 const items = [
 	{
