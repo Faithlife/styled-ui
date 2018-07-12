@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button } from '../dist/bootstrap.js';
+import { Button } from '../components/main.js';
 import Tooltip from './utils/tooltip.jsx';
 
 const Container = styled.div`

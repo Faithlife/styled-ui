@@ -5,8 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
 	entry: {
 		main: './components/main.js',
-		bootstrap: './components/bootstrap/index.js',
-		grid: './components/flexgrid/index.js',
+		grid: './components/grid/index.js',
 	},
 	devtool: 'sourcemap',
 	output: {

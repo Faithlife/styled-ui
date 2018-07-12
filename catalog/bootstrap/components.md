@@ -7,7 +7,7 @@ Bootstrap components expect an opinionated CSS reset to be present. When using a
 Import the scoped Bootstrap stylesheet into your application:
 ```
 import { Bootstrap } from '@faithlife/styled-ui';
-import '@faithlife/styled-ui/dist/styles.css';
+import '@faithlife/styled-ui/dist/main.css';
 
 const MyComponent = props => <Button color="primary">primary</Button>;
 

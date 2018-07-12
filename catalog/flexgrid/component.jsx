@@ -1,10 +1,10 @@
 /* eslint-disable prefer-template */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Container, Row, Col } from '../../dist/bootstrap.js';
-import AgGridReact from '../../dist/grid.js';
-import '../../dist/grid.css';
+import { Bootstrap } from '../../components/main.js';
+import AgGridReact from '../../components/grid';
 
+const { Button, Container, Row, Col } = Bootstrap;
 let uniqueId = 0;
 
 const availability = {
@@ -299,7 +299,7 @@ class VolunteerEditor extends Component {
 	}
 }
 
-export default class GridDemo extends Component {
+class GridDemo extends Component {
 	state = {
 		rowData: schedule.roles.map(role => ({
 			role,
@@ -376,14 +376,14 @@ export default class GridDemo extends Component {
 	render() {
 		return (
 			<Container>
+				<Row>
+					<Col>
+						<Button size="sm" outline color="primary" onClick={this.updateGrid}>
+							Update grid
+						</Button>
+					</Col>
+				</Row>
 				<div style={{ height: 525, width: '100%' }} className="ag-theme-bootstrap">
-					<Row>
-						<Col>
-							<Button size="sm" outline color="primary" onClick={this.updateGrid}>
-								Update grid
-							</Button>
-						</Col>
-					</Row>
 					<AgGridReact
 						columnDefs={this.state.columnDefs}
 						getRowNodeId={this.getRowNodeId}
@@ -394,8 +394,25 @@ export default class GridDemo extends Component {
 						enableFilter
 						deltaRowDataMode
 						suppressAggFuncInHeader
+						headerHeight="36"
+						rowHeight="36"
+						rowStyle={{ 'border-bottom': '1px solid #dbdbdb' }}
 					/>
 				</div>
+			</Container>
+		);
+	}
+}
+
+export default class DemoWrapper extends Component {
+	render() {
+		return (
+			<Container>
+				<Row>
+					<Col>
+						<GridDemo />
+					</Col>
+				</Row>
 			</Container>
 		);
 	}

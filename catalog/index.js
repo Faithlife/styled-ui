@@ -2,13 +2,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Catalog, pageLoader } from 'catalog';
-import { Button, Checkbox, TextInput, Modal, ModalFooter } from '../dist/main.js';
-import Bootstrap from '../dist/bootstrap.js';
+import { Bootstrap, Button, Checkbox, TextInput, Modal, ModalFooter } from '../components/main.js';
 import { colors } from '../components/shared-styles';
 import CarouselDemo from './bootstrap/carousel-demo.jsx';
 import DocgenTable from './docgen-table.jsx';
 import Grid from './flexgrid/component.jsx';
-import '../dist/bootstrap.css';
+
+// SVG icons embedded in SASS stylesheets do not work properly with catalog,
+// so the stylesheets must be built by a separate webpack build.
+import '../dist/main.css';
+import '../dist/grid.css';
 
 function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
