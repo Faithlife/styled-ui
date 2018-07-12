@@ -285,7 +285,7 @@ class VolunteerEditor extends Component {
 	}
 
 	state = {
-		volunteer: { ...getNextVolunteer(), status: availability.maybe },
+		volunteer: { ...getNextVolunteer(), status: getRandomStatus() },
 	};
 
 	getValue = () => this.state.volunteer;
@@ -366,7 +366,11 @@ class GridDemo extends Component {
 
 		rowData[0] = {
 			...rowData[0],
-			[schedule.events[0].id]: { ...rowData[0][schedule.events[0].id], ...getNextVolunteer() },
+			[schedule.events[0].id]: {
+				...rowData[0][schedule.events[0].id],
+				...getNextVolunteer(),
+				status: getRandomStatus(),
+			},
 		};
 		this.setState({
 			rowData,

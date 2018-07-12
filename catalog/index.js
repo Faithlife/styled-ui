@@ -6,7 +6,7 @@ import { Bootstrap, Button, Checkbox, TextInput, Modal, ModalFooter } from '../c
 import { colors } from '../components/shared-styles';
 import CarouselDemo from './bootstrap/carousel-demo.jsx';
 import DocgenTable from './docgen-table.jsx';
-import Grid from './flexgrid/component.jsx';
+import { MemberDirectory, VolunteerScheduling } from './grid';
 
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
@@ -43,6 +43,17 @@ const pages = [
 				title: 'Inferred Inputs',
 				content: pageLoader(() => import('./bootstrap/inferred.md')),
 				imports: { ...Bootstrap, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Grid',
+		pages: [
+			{
+				title: 'Grid Variations',
+				path: '/grid/variations',
+				content: pageLoader(() => import('./grid/variations.md')),
+				imports: { MemberDirectory, VolunteerScheduling },
 			},
 		],
 	},
@@ -102,12 +113,6 @@ const pages = [
 				title: 'Modal Documentation',
 				content: pageLoader(() => import('./modal/documentation.md')),
 				imports: { Modal, DocgenTable },
-			},
-			{
-				title: 'Grid',
-				path: '/grid/documentation',
-				content: pageLoader(() => import('./flexgrid/documentation.md')),
-				imports: { Grid },
 			},
 		],
 	},
