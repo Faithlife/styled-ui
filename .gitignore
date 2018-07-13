@@ -4,5 +4,5 @@ out*/
 dist/
 .DS_Store
 *.*DS_Store
-yarn.lock
+package-lock.json
 catalog/build/
