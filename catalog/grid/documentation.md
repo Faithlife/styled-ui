@@ -56,3 +56,4 @@ class MyTable extends React.Component {
 		</div>
 	}
 }
+```
