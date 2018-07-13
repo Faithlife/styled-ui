@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-import {
-	Carousel,
-	CarouselItem,
-	CarouselControl,
-	CarouselIndicators,
-	CarouselCaption,
-} from '../../components/main.js';
+import { Bootstrap } from '../../components/main.js';
 
+const { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption } = Bootstrap;
 const items = [
 	{
 		src:
