@@ -1,5 +1,7 @@
+@import '~ag-grid/dist/styles/ag-grid.css';
 @import '~ag-grid/src/styles/ag-theme-classic-common';
 @import '~ag-grid/src/styles/ag-theme-classic-vars';
+
 $icons-path: '~ag-grid/src/styles/balham-icons/';
 
 $secondary-font-family: 'Source Sans Pro';
@@ -130,7 +132,7 @@ $params: (
   row-stub-background-color: $row-stub-background-color,
 );
 
-.ag-theme-bootstrap {
+.ag-theme-faithlife {
   @include ag-theme-classic($params);
 
   %card {

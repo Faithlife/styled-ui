@@ -11,7 +11,7 @@ import { MemberDirectory, VolunteerScheduling } from './grid';
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
 import '../dist/main.css';
-import '../dist/grid.css';
+import '../dist/ag-grid.css';
 
 function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
@@ -50,10 +50,15 @@ const pages = [
 		title: 'Grid',
 		pages: [
 			{
-				title: 'Grid Variations',
+				title: 'Variations',
 				path: '/grid/variations',
 				content: pageLoader(() => import('./grid/variations.md')),
 				imports: { MemberDirectory, VolunteerScheduling },
+			},
+			{
+				title: 'Documentation',
+				path: '/grid/documentation',
+				content: pageLoader(() => import('./grid/documentation.md')),
 			},
 		],
 	},

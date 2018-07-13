@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
 	entry: {
 		main: './components/main.js',
-		grid: './components/grid/index.js',
+		'ag-grid': './components/grid/index.js',
 	},
 	devtool: 'sourcemap',
 	output: {

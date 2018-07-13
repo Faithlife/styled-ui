@@ -1,8 +1,9 @@
 /* eslint-disable prefer-template */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-enterprise';
 import { Bootstrap } from '../../components/main.js';
-import AgGridReact from '../../components/grid';
 
 const { Button, Container, Row, Col } = Bootstrap;
 let uniqueId = 0;
@@ -387,7 +388,7 @@ class GridDemo extends Component {
 						</Button>
 					</Col>
 				</Row>
-				<div style={{ height: 525, width: '100%' }} className="ag-theme-bootstrap">
+				<div style={{ height: 525, width: '100%' }} className="ag-theme-faithlife">
 					<AgGridReact
 						columnDefs={this.state.columnDefs}
 						getRowNodeId={this.getRowNodeId}

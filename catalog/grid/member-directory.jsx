@@ -1,7 +1,8 @@
 /* eslint-disable prefer-template */
 import React, { Component } from 'react';
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-enterprise';
 import { Bootstrap } from '../../components/main.js';
-import AgGridReact from '../../components/grid';
 import members from './members.json';
 
 const { Button, Container, Row, Col } = Bootstrap;
@@ -52,7 +53,6 @@ export default class GridDemo extends Component {
 
 	onGridReady = params => {
 		this.api = params.api;
-		this.columnApi = params.columnApi;
 		this.api.setRowData(this.state.rowData);
 		this.api.sizeColumnsToFit();
 	};
@@ -79,7 +79,7 @@ export default class GridDemo extends Component {
 						</Button>
 					</Col>
 				</Row>
-				<div style={{ height: 525, width: '100%' }} className="ag-theme-bootstrap">
+				<div style={{ height: 525, width: '100%' }} className="ag-theme-faithlife">
 					<AgGridReact
 						columnDefs={this.state.columnDefs}
 						getRowNodeId={this.getRowNodeId}
