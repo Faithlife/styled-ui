@@ -4,7 +4,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button } from '../components/main.js';
-import Tooltip from './utils/tooltip.jsx';
+import { Popover, PopoverBody } from '../components/bootstrap';
+
+let uniqueId = 0;
 
 const Container = styled.div`
 	font-family: 'Source Sans Pro';
@@ -42,17 +44,29 @@ class CollapsableText extends Component {
 		children: PropTypes.node.isRequired,
 	};
 
+	state = { isPopoverOpen: false };
+
+	id = uniqueId++;
+
 	render() {
 		return (
-			<Tooltip
-				renderButton={props => (
-					<Button primaryOutline small onClick={props.handleButtonClick}>
-						Reveal
-					</Button>
-				)}
-			>
-				{this.props.children}
-			</Tooltip>
+			<div id={`fl-inferredbase-${this.id}`}>
+				<Button
+					primaryOutline
+					small
+					onClick={state => this.setState({ isPopoverOpen: !state.isPopoverOpen })}
+				>
+					Reveal
+				</Button>
+				<Popover
+					placement="top"
+					isOpen={this.state.isPopoverOpen}
+					target={`fl-inferredbase-${this.id}`}
+					toggle={() => this.setState({ isPopoverOpen: false })}
+				>
+					<PopoverBody>{this.props.children}</PopoverBody>
+				</Popover>
+			</div>
 		);
 	}
 }
@@ -94,7 +108,8 @@ export default function DocgenTable(props) {
 										<CollapsableText>
 											{Object.keys(componentProp.type.value).map(propName => (
 												<div key={propName}>
-													{propName}: {componentProp.type.value[propName].name} {componentProp.type.value[propName].required && '(required)'}
+													{propName}: {componentProp.type.value[propName].name}{' '}
+													{componentProp.type.value[propName].required && '(required)'}
 												</div>
 											))}
 										</CollapsableText>
