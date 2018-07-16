@@ -9,3 +9,4 @@ export { default as Bootstrap } from './bootstrap';
 export { default as TextInput } from './text-input';
 export { Modal } from './modal';
 export { ModalFooter } from './modal';
+export { default as LoadingSpinner } from './loading-spinner/component.jsx';

@@ -2,7 +2,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Catalog, pageLoader } from 'catalog';
-import { Bootstrap, Button, Checkbox, TextInput, Modal, ModalFooter } from '../components/main.js';
+import {
+	Bootstrap,
+	Button,
+	Checkbox,
+	TextInput,
+	Modal,
+	ModalFooter,
+	LoadingSpinner,
+} from '../components/main.js';
 import { colors } from '../components/shared-styles';
 import CarouselDemo from './bootstrap/carousel-demo.jsx';
 import DocgenTable from './docgen-table.jsx';
@@ -118,6 +126,18 @@ const pages = [
 				title: 'Modal Documentation',
 				content: pageLoader(() => import('./modal/documentation.md')),
 				imports: { Modal, DocgenTable },
+			},
+			{
+				path: '/loading-spinner/variations',
+				title: 'Loading Spinner Variations',
+				content: pageLoader(() => import('./loading-spinner/variations.md')),
+				imports: { LoadingSpinner },
+			},
+			{
+				path: '/loading-spinner/documentation',
+				title: 'Loading Spinner Documentation',
+				content: pageLoader(() => import('./loading-spinner/documentation.md')),
+				imports: { LoadingSpinner, DocgenTable },
 			},
 		],
 	},
