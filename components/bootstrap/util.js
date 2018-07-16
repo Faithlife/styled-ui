@@ -20,7 +20,7 @@ export const BootstrapContainer = ({ children, styles }) => (
 			) : (
 				<Provider value={{ inCssResetScope: true }}>
 					<BootstrapContainer styles={styles}>
-						<div className="fl-wrapper" style={styles}>
+						<div className="fl-b" style={styles}>
 							{children}
 						</div>
 					</BootstrapContainer>
