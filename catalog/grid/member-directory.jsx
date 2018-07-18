@@ -32,7 +32,9 @@ export default class GridDemo extends Component {
 	};
 
 	componentDidUpdate() {
-		this.api.setRowData(this.state.rowData);
+		if (this.api) {
+			this.api.setRowData(this.state.rowData);
+		}
 	}
 
 	getRowNodeId = data => data.guid;
