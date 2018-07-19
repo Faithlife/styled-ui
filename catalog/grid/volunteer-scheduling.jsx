@@ -17,7 +17,7 @@ const availability = {
 const getRandomStatus = () =>
 	Object.values(availability)[Math.floor(Math.random() * Object.values(availability).length)];
 
-class VolunteerCellRenderer extends React.Component {
+class VolunteerCellRenderer extends Component {
 	static propTypes = {
 		value: PropTypes.object,
 	};
@@ -45,7 +45,7 @@ class VolunteerCellRenderer extends React.Component {
 	}
 }
 
-class VolunteerGroupRenderer extends React.Component {
+class VolunteerGroupRenderer extends Component {
 	static propTypes = {
 		node: PropTypes.object,
 		reactContainer: PropTypes.object.isRequired,

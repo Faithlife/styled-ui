@@ -2,10 +2,69 @@
 import React, { Component } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-enterprise';
+import styled from 'styled-components';
 import { Bootstrap } from '../../components/main.js';
+import { KebabVertical } from '../../components/icons';
+import { colors } from '../../components/shared-styles';
 import members from './members.json';
 
-const { Button, Container, Row, Col } = Bootstrap;
+const { Button, Container, Row, Col, Popover, ListGroup, ListGroupItem } = Bootstrap;
+
+let uniqueId = 0;
+
+const IconContainer = styled.div`
+	display: flex;
+`;
+const IconButton = styled.button`
+	background: none;
+	border: 0;
+	flex: 1;
+
+	svg {
+		height: 18px;
+		color: ${colors.gray52};
+		vertical-align: middle;
+		margin-top: -4px;
+	}
+`;
+
+class KebabCell extends Component {
+	state = { dropDownOpen: false };
+
+	toggle = () => {
+		this.setState(state => ({ dropDownOpen: !state.dropDownOpen }));
+	};
+
+	id = uniqueId++;
+
+	render() {
+		return (
+			<IconContainer>
+				<IconButton onClick={this.toggle} type="button" id={'kebab-cell-' + this.id}>
+					<KebabVertical />
+				</IconButton>
+				{this.state.dropDownOpen && (
+					<Popover
+						target={'kebab-cell-' + this.id}
+						isOpen={this.state.dropDownOpen}
+						toggle={this.toggle}
+						placement="bottom-end"
+						hideArrow
+					>
+						<ListGroup flush>
+							<ListGroupItem active tag="button" action>
+								Send Message
+							</ListGroupItem>
+							<ListGroupItem tag="button" action>
+								View Details
+							</ListGroupItem>
+						</ListGroup>
+					</Popover>
+				)}
+			</IconContainer>
+		);
+	}
+}
 
 export default class GridDemo extends Component {
 	state = {
@@ -27,6 +86,14 @@ export default class GridDemo extends Component {
 				headerName: 'Phone',
 				field: 'phone',
 				editable: true,
+			},
+			{
+				headerName: '',
+				field: '',
+				cellRendererFramework: KebabCell,
+				width: 60,
+				suppressCellSelection: true,
+				cellStyle: { border: 'none' },
 			},
 		],
 	};
