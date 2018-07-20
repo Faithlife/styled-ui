@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Typeahead } from 'react-bootstrap-typeahead';
-import { BootstrapContainer } from './util';
+import { Typeahead } from '../typeahead';
+import { BootstrapContainer } from '../bootstrap/util';
 import InferredBase from './inferred-base.jsx';
 
 const StyledTypeahead = styled(({ inferred, ...props }) => <Typeahead {...props} />)`
-	.rbt-highlight-text {
-		padding: 0;
-		font-weight: bold;
-		background-color: inherit;
-	}
-
 	&& .rbt-input,
 	&& .rbt-input:focus {
 		${props => (props.inferred ? 'color: #006099' : '')};

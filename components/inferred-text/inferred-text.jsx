@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { InputGroup, Input } from '../bootstrap';
 import InferredBase from './inferred-base.jsx';
-import { InputGroup, Input } from './base-components.jsx';
 
 const StyledInput = styled(({ inferred, ...props }) => <Input {...props} />)`
 	&&&,
