@@ -83,7 +83,6 @@ export default class InferredBase extends Component {
 						}
 					}}
 					innerRef={this.containerRef}
-					id={`fl-inferredbase-${this.id}`}
 				>
 					{this.state.isPopoverOpen && ConfidenceIcon != null ? <OKCircle /> : ConfidenceIcon}
 				</IndicatorContainer>
