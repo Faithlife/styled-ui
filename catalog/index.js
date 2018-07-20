@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-indent */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import styled from 'styled-components';
 import { Catalog, pageLoader } from 'catalog';
 import {
 	Bootstrap,
@@ -38,7 +39,13 @@ const pages = [
 				path: '/bootstrap/components',
 				title: 'Standard Components',
 				content: pageLoader(() => import('./bootstrap/components.md')),
-				imports: { ...Bootstrap, CarouselDemo },
+				imports: {
+					...Bootstrap,
+					CarouselDemo,
+					RowWithMargin: styled(Bootstrap.Row)`
+						margin-bottom: 1rem;
+					`,
+				},
 			},
 			{
 				path: '/bootstrap/typeahead',

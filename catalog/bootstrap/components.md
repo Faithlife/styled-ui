@@ -26,15 +26,18 @@ Click the <> on the right to view the sample source.
 ```react
 showSource: false
 ---
-<div>
-	<Button color="primary">primary</Button>{' '}
-	<Button color="secondary">secondary</Button>{' '}
-	<Button color="success">success</Button>{' '}
-	<Button color="info">info</Button>{' '}
-	<Button color="warning">warning</Button>{' '}
-	<Button color="danger">danger</Button>{' '}
-	<Button color="link">link</Button>
-	</div>
+<Container>
+	<RowWithMargin>
+		<Button color="primary">Primary</Button>{' '}
+		<Button color="primary" outline>Outline</Button>{' '}
+		<Button color="link">link</Button>
+	</RowWithMargin>
+	<RowWithMargin>
+		<Button color="primary" size="sm">Small</Button>{' '}
+		<Button color="primary" size="md">Medium</Button>{' '}
+		<Button color="primary" size="lg">Large</Button>{' '}
+	</RowWithMargin>
+</Container>
 ```
 
 ### Button with Dropdown
