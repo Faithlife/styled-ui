@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { thickness, colors } from '../shared-styles';
+import { colors } from '../shared-styles';
 
 const buttonColors = {
 	default: '#278ed4',
