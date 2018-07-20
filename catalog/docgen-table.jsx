@@ -6,8 +6,6 @@ import styled from 'styled-components';
 import { Button } from '../components/main.js';
 import { Popover, PopoverBody } from '../components/bootstrap';
 
-let uniqueId = 0;
-
 const Container = styled.div`
 	font-family: 'Source Sans Pro';
 `;
@@ -44,13 +42,13 @@ class CollapsableText extends Component {
 		children: PropTypes.node.isRequired,
 	};
 
-	state = { isPopoverOpen: false };
+	buttonRef = React.createRef();
 
-	id = uniqueId++;
+	state = { isPopoverOpen: false };
 
 	render() {
 		return (
-			<div id={`fl-inferredbase-${this.id}`}>
+			<div id={`fl-inferredbase-${this.id}`} ref={this.buttonRef}>
 				<Button
 					primaryOutline
 					small
@@ -58,14 +56,16 @@ class CollapsableText extends Component {
 				>
 					Reveal
 				</Button>
-				<Popover
-					placement="top"
-					isOpen={this.state.isPopoverOpen}
-					target={`fl-inferredbase-${this.id}`}
-					toggle={() => this.setState({ isPopoverOpen: false })}
-				>
-					<PopoverBody>{this.props.children}</PopoverBody>
-				</Popover>
+				{this.state.isPopoverOpen && (
+					<Popover
+						placement="top"
+						isOpen={this.state.isPopoverOpen}
+						target={this.buttonRef.current}
+						toggle={() => this.setState({ isPopoverOpen: false })}
+					>
+						<PopoverBody>{this.props.children}</PopoverBody>
+					</Popover>
+				)}
 			</div>
 		);
 	}

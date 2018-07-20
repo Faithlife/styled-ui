@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import { LightBulbH, LightBulbM, LightBulbL, OKCircle } from '../icons';
 import { Popover, PopoverBody } from './base-components.jsx';
 
-let uniqueId = 0;
-
 const RelativeContainer = styled.div`
 	position: relative;
 `;
@@ -56,9 +54,9 @@ export default class InferredBase extends Component {
 		}
 	}
 
-	id = uniqueId++;
-
 	state = { isPopoverOpen: false };
+
+	containerRef = React.createRef();
 
 	render() {
 		const { confidence, confidenceSource, onConfirm } = this.props;
@@ -84,24 +82,27 @@ export default class InferredBase extends Component {
 							this.setState({ isPopoverOpen: true });
 						}
 					}}
+					innerRef={this.containerRef}
 					id={`fl-inferredbase-${this.id}`}
 				>
 					{this.state.isPopoverOpen && ConfidenceIcon != null ? <OKCircle /> : ConfidenceIcon}
 				</IndicatorContainer>
-				<Popover
-					placement="top"
-					isOpen={this.state.isPopoverOpen}
-					target={`fl-inferredbase-${this.id}`}
-					toggle={() => this.setState({ isPopoverOpen: false })}
-				>
-					<PopoverBody>
-						<StyledParagraph>
-							Value guessed with {Math.round(confidence * 100)}% confidence.<br />
-							Click OK if you can confirm value is correct, or delete or change the value.
-						</StyledParagraph>
-						<StyledParagraph>Source: {confidenceSource}</StyledParagraph>
-					</PopoverBody>
-				</Popover>
+				{this.state.isPopoverOpen && (
+					<Popover
+						placement="top"
+						isOpen={this.state.isPopoverOpen}
+						target={this.containerRef.current}
+						toggle={() => this.setState({ isPopoverOpen: false })}
+					>
+						<PopoverBody>
+							<StyledParagraph>
+								Value guessed with {Math.round(confidence * 100)}% confidence.<br />
+								Click OK if you can confirm value is correct, or delete or change the value.
+							</StyledParagraph>
+							<StyledParagraph>Source: {confidenceSource}</StyledParagraph>
+						</PopoverBody>
+					</Popover>
+				)}
 			</RelativeContainer>
 		);
 	}

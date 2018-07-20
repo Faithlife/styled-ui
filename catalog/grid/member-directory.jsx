@@ -10,8 +10,6 @@ import members from './members.json';
 
 const { Button, Container, Row, Col, Popover, ListGroup, ListGroupItem } = Bootstrap;
 
-let uniqueId = 0;
-
 const IconContainer = styled.div`
 	display: flex;
 `;
@@ -31,21 +29,21 @@ const IconButton = styled.button`
 class KebabCell extends Component {
 	state = { dropDownOpen: false };
 
+	buttonRef = React.createRef();
+
 	toggle = () => {
 		this.setState(state => ({ dropDownOpen: !state.dropDownOpen }));
 	};
 
-	id = uniqueId++;
-
 	render() {
 		return (
 			<IconContainer>
-				<IconButton onClick={this.toggle} type="button" id={'kebab-cell-' + this.id}>
+				<IconButton onClick={this.toggle} type="button" innerRef={this.buttonRef}>
 					<KebabVertical />
 				</IconButton>
 				{this.state.dropDownOpen && (
 					<Popover
-						target={'kebab-cell-' + this.id}
+						target={this.buttonRef.current}
 						isOpen={this.state.dropDownOpen}
 						toggle={this.toggle}
 						placement="bottom-end"
