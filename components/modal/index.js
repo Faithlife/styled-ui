@@ -1,2 +1,2 @@
-export { default as ModalFooter } from './modal-footer.jsx';
-export { default as Modal } from './modal.jsx';
+export { ModalFooter } from './modal-footer.jsx';
+export { Modal } from './modal.jsx';

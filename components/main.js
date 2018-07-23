@@ -3,10 +3,11 @@
 // We could use tree-shaking in the future to prune out unused exports,
 // but not all projects are able to use that right now.
 
-export { default as Checkbox } from './check-box/component.jsx';
-export { default as Button } from './demo-button/component.jsx';
-export { default as Bootstrap } from './bootstrap';
-export { default as TextInput } from './text-input';
-export { Modal } from './modal';
-export { ModalFooter } from './modal';
-export { default as LoadingSpinner } from './loading-spinner/component.jsx';
+export { Checkbox } from './check-box/component.jsx';
+export { Button } from './demo-button/component.jsx';
+export { Bootstrap } from './bootstrap';
+export { LoadingSpinner } from './loading-spinner/component.jsx';
+export * as TextInput from './text-input';
+export * as InferredText from './inferred-text';
+export { Modal, ModalFooter } from './modal';
+export { Typeahead } from './typeahead';

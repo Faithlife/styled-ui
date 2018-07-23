@@ -1,2 +1,2 @@
-export { default as InferredText } from './inferred-text.jsx';
-export { default as InferredTypeahead } from './inferred-typeahead.jsx';
+export { InferredText } from './inferred-text.jsx';
+export { InferredTypeahead } from './inferred-typeahead.jsx';

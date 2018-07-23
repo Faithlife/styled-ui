@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { InputGroup, Input } from '../bootstrap';
-import InferredBase from './inferred-base.jsx';
+import { Bootstrap } from '../main';
+import { InferredBase } from './inferred-base.jsx';
+
+const { InputGroup, Input } = Bootstrap;
 
 const StyledInput = styled(({ inferred, ...props }) => <Input {...props} />)`
 	&&&,
@@ -13,7 +15,7 @@ const StyledInput = styled(({ inferred, ...props }) => <Input {...props} />)`
 `;
 
 /** Text input control with a clickable inline confidence indicator. Extra props are passed to the wrapped input.*/
-export default class InferredText extends Component {
+export class InferredText extends Component {
 	static propTypes = {
 		/** Decimal percent value for the confidence value. E.g. 0.75 */
 		confidence: PropTypes.number,

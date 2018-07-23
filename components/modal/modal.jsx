@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import { debouncedResize } from '../utils';
-import ModalHeader from './modal-header.jsx';
-import DefaultModalFooter from './default-modal-footer.jsx';
+import { ModalHeader } from './modal-header.jsx';
+import { DefaultModalFooter } from './default-modal-footer.jsx';
 import * as Styled from './styled.jsx';
 
 /**
  * Modal
  */
-export default class Modal extends React.Component {
+export class Modal extends React.Component {
 	static propTypes = {
 		/** controls state of modal */
 		isOpen: PropTypes.bool.isRequired,

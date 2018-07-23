@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Close } from '../icons';
 import * as Styled from './styled.jsx';
 
-const ModalHeader = ({ title, subtitle, onClose }) => (
+export const ModalHeader = ({ title, subtitle, onClose }) => (
 	<Styled.ModalHeader>
 		<Styled.ModalTitleBar>
 			<Styled.ModalTitle>{title}</Styled.ModalTitle>
@@ -14,7 +14,6 @@ const ModalHeader = ({ title, subtitle, onClose }) => (
 		{subtitle && <Styled.ModalSubtitle>{subtitle}</Styled.ModalSubtitle>}
 	</Styled.ModalHeader>
 );
-export default ModalHeader;
 
 ModalHeader.propTypes = {
 	title: PropTypes.string.isRequired,

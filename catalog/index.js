@@ -11,19 +11,18 @@ import {
 	Modal,
 	ModalFooter,
 	LoadingSpinner,
+	InferredText,
+	Typeahead,
 } from '../components/main.js';
-import { InferredText, InferredTypeahead } from '../components/inferred-text';
-import { Typeahead } from '../components/typeahead';
 import { colors } from '../components/shared-styles';
-import CarouselDemo from './bootstrap/carousel-demo.jsx';
-import DocgenTable from './docgen-table.jsx';
+import { CarouselDemo } from './bootstrap/carousel-demo.jsx';
+import { DocgenTable } from './docgen-table.jsx';
 import { MemberDirectory, VolunteerScheduling } from './grid';
 
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
 import '../dist/main.css';
 import '../dist/ag-grid.css';
-import '../dist/typeahead.css';
 
 function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
@@ -60,7 +59,7 @@ const pages = [
 				path: '/bootstrap/inferred',
 				title: 'Inferred Inputs',
 				content: pageLoader(() => import('./bootstrap/inferred.md')),
-				imports: { InferredText, InferredTypeahead, ...Bootstrap, DocgenTable },
+				imports: { ...InferredText, ...Bootstrap, DocgenTable },
 			},
 		],
 	},

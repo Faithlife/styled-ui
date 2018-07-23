@@ -5,7 +5,7 @@ import { colors } from '../shared-styles';
 import * as Styled from './styled.jsx';
 
 /** Loading spinner, frequently displayed as a placeholder when loading data */
-export default function LoadingSpinner({ style, ...restProps }) {
+export function LoadingSpinner({ style, ...restProps }) {
 	const { component: MappedStyledComponent, filteredProps } = applyVariations(
 		Styled.Spinner,
 		Styled.variationMap,

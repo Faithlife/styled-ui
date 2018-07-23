@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Input from './text-input.jsx';
+import { Input } from './text-input.jsx';
 
 /**
  * Text input with validation logic.
  * Extra props are passed to the wrapped <TextInput.Input /> component.
  */
-export default class ValidatedInput extends Component {
+export class ValidatedInput extends Component {
 	static propTypes = {
 		/** Function that returns a validation result, or a Promise for the validation result, in the shape of:
 		 * {

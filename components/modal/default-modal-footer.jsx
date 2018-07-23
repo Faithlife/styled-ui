@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../demo-button/component.jsx';
+import { Button } from '../demo-button/component.jsx';
 import { colors } from '../shared-styles';
-import ModalFooter from './modal-footer.jsx';
+import { ModalFooter } from './modal-footer.jsx';
 import * as Styled from './styled.jsx';
 
-const DefaultModalFooter = ({ commitButton, cancelButton, deleteButton, useFullWidthButtons }) => (
+export const DefaultModalFooter = props => (
 	<ModalFooter>
 		<Styled.FooterContainer>
-			{deleteButton && (
+			{props.deleteButton && (
 				<Styled.DeleteContainer>
 					<Button
 						primaryOutline
@@ -18,43 +18,40 @@ const DefaultModalFooter = ({ commitButton, cancelButton, deleteButton, useFullW
 							hoverColor: colors.redLight,
 							activeColor: colors.redDark,
 							disabledColor: colors.redTint,
-							width: useFullWidthButtons ? '100%' : null,
+							width: props.useFullWidthButtons ? '100%' : null,
 						}}
-						onClick={deleteButton.onClick}
+						onClick={props.deleteButton.onClick}
 					>
-						{deleteButton.text}
+						{props.deleteButton.text}
 					</Button>
 				</Styled.DeleteContainer>
 			)}
-			{cancelButton && (
+			{props.cancelButton && (
 				<Styled.CancelContainer>
 					<Button
 						primaryOutline
 						medium
-						theme={{ width: useFullWidthButtons ? '100%' : null }}
-						onClick={cancelButton.onClick}
+						theme={{ width: props.useFullWidthButtons ? '100%' : null }}
+						onClick={props.cancelButton.onClick}
 					>
-						{cancelButton.text}
+						{props.cancelButton.text}
 					</Button>
 				</Styled.CancelContainer>
 			)}
-			{commitButton && (
+			{props.commitButton && (
 				<Button
 					primary
 					medium
-					theme={{ width: useFullWidthButtons ? '100%' : null }}
-					onClick={commitButton.onClick}
+					theme={{ width: props.useFullWidthButtons ? '100%' : null }}
+					onClick={props.commitButton.onClick}
 				>
-					{commitButton.text}
+					{props.commitButton.text}
 				</Button>
 			)}
 		</Styled.FooterContainer>
 	</ModalFooter>
 );
 
-export default DefaultModalFooter;
-
-/* eslint-disable react/no-unused-prop-types */
 DefaultModalFooter.propTypes = {
 	commitButton: PropTypes.shape({
 		onClick: PropTypes.func.isRequired,
@@ -70,4 +67,3 @@ DefaultModalFooter.propTypes = {
 	}),
 	useFullWidthButtons: PropTypes.bool,
 };
-/* eslint-enable react/no-unused-prop-types */

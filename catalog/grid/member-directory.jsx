@@ -64,7 +64,7 @@ class KebabCell extends Component {
 	}
 }
 
-export default class GridDemo extends Component {
+export class MemberDirectory extends Component {
 	state = {
 		rowData: [...members],
 		columnDefs: [

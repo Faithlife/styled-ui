@@ -4,7 +4,7 @@ import { applyVariations } from '../utils';
 import * as Styled from './styled.jsx';
 
 /** Standard button with transition styles */
-export default class Button extends PureComponent {
+export class Button extends PureComponent {
 	static propTypes = {
 		/** The contents of the button (can be text, svg, or other element) */
 		children: PropTypes.node.isRequired,

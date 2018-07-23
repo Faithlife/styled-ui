@@ -1,1 +1,1 @@
-export { default as Typeahead } from './typeahead.jsx';
+export { Typeahead } from './typeahead.jsx';

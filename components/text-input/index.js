@@ -1,4 +1,2 @@
-import ValidatedInput from './input-validation.jsx';
-import Input from './text-input.jsx';
-
-export default { ValidatedInput, Input };
+export { ValidatedInput } from './input-validation.jsx';
+export { Input } from './text-input.jsx';

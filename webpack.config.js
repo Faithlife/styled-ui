@@ -6,8 +6,6 @@ module.exports = {
 	entry: {
 		main: './components/main.js',
 		'ag-grid': './components/grid/index.js',
-		'inferred-text': './components/inferred-text/index.js',
-		typeahead: './components/typeahead/index.js',
 	},
 	devtool: 'sourcemap',
 	output: {

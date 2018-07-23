@@ -71,7 +71,7 @@ class CollapsableText extends Component {
 	}
 }
 
-export default function DocgenTable(props) {
+export function DocgenTable(props) {
 	const docgen = props.component.__docgenInfo;
 
 	const componentProps = Object.keys(docgen.props).map(name => ({

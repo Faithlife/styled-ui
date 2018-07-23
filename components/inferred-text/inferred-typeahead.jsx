@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Typeahead } from '../typeahead';
 import { BootstrapContainer } from '../bootstrap/util';
-import InferredBase from './inferred-base.jsx';
+import { InferredBase } from './inferred-base.jsx';
 
 const StyledTypeahead = styled(({ inferred, ...props }) => <Typeahead {...props} />)`
 	&& .rbt-input,
@@ -12,7 +12,7 @@ const StyledTypeahead = styled(({ inferred, ...props }) => <Typeahead {...props}
 	}
 `;
 
-export default class InferredTypeahead extends Component {
+export class InferredTypeahead extends Component {
 	static propTypes = {
 		/** Decimal percent value for the confidence value. E.g. 0.75 */
 		confidence: PropTypes.number,

@@ -213,7 +213,7 @@ class GridDemo extends Component {
 	}
 }
 
-export default class DemoWrapper extends Component {
+export class VolunteerScheduling extends Component {
 	render() {
 		return (
 			<Container>

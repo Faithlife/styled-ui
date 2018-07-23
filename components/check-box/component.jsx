@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import * as Styled from './styled.jsx';
 
 /** Styled checkbox control (uses a button instead of an input) */
-export default function Checkbox({ onClick, title, isChecked, theme }) {
+export function Checkbox({ onClick, title, isChecked, theme }) {
 	return (
 		<ThemeProvider theme={theme}>
 			<Styled.CheckboxContainer onClick={onClick}>

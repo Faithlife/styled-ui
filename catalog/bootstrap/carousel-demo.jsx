@@ -23,7 +23,7 @@ const items = [
 	},
 ];
 
-class Example extends Component {
+export class CarouselDemo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { activeIndex: 0 };
@@ -62,14 +62,12 @@ class Example extends Component {
 	render() {
 		const { activeIndex } = this.state;
 
-		const slides = items.map(item => {
-			return (
-				<CarouselItem onExiting={this.onExiting} onExited={this.onExited} key={item.src}>
-					<img src={item.src} alt={item.altText} />
-					<CarouselCaption captionText={item.caption} captionHeader={item.caption} />
-				</CarouselItem>
-			);
-		});
+		const slides = items.map(item => (
+			<CarouselItem onExiting={this.onExiting} onExited={this.onExited} key={item.src}>
+				<img src={item.src} alt={item.altText} />
+				<CarouselCaption captionText={item.caption} captionHeader={item.caption} />
+			</CarouselItem>
+		));
 
 		return (
 			<Carousel activeIndex={activeIndex} next={this.next} previous={this.previous}>
@@ -85,5 +83,3 @@ class Example extends Component {
 		);
 	}
 }
-
-export default Example;

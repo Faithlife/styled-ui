@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { LightBulbH, LightBulbM, LightBulbL, OKCircle } from '../icons';
-import { Popover, PopoverBody } from '../bootstrap';
+import { Bootstrap } from '../main';
+
+const { Popover, PopoverBody } = Bootstrap;
 
 const RelativeContainer = styled.div`
 	position: relative;
@@ -32,7 +34,7 @@ const StyledParagraph = styled.p`
 `;
 
 /** Internal component. Contains common UI logic that is then used by inferred controls. */
-export default class InferredBase extends Component {
+export class InferredBase extends Component {
 	static propTypes = {
 		/** Decimal percent value for the confidence value. E.g. 0.75 */
 		confidence: PropTypes.number,
