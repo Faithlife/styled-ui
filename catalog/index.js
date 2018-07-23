@@ -12,6 +12,7 @@ import {
 	LoadingSpinner,
 	HelpBox,
 	Collapse,
+	GroupSelector,
 } from '../components/main.js';
 import { BootstrapContainer } from '../components/utils';
 import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
@@ -23,7 +24,6 @@ import { MemberDirectory, VolunteerScheduling } from './grid';
 // so the stylesheets must be built by a separate webpack build.
 import '../dist/main.css';
 import '../dist/ag-grid.css';
-import '../dist/text-input.css';
 
 function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
@@ -140,6 +140,18 @@ const pages = [
 				title: 'Collapse Documentation',
 				content: pageLoader(() => import('./collapse/documentation.md')),
 				imports: { Collapse, DocgenTable },
+			},
+			{
+				path: '/group-selector/variations',
+				title: 'Group Selector Variations',
+				content: pageLoader(() => import('./group-selector/variations.md')),
+				imports: { GroupSelector },
+			},
+			{
+				path: '/group-selector/documentation',
+				title: 'Group Selector Documentation',
+				content: pageLoader(() => import('./group-selector/documentation.md')),
+				imports: { GroupSelector, DocgenTable },
 			},
 		],
 	},
