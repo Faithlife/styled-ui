@@ -28,6 +28,7 @@ import {
 	YouthGroup,
 } from './church-group-kinds-icons.g.jsx';
 
+/* eslint-disable */
 export default {
 	Band,
 	BibleReading,

@@ -5,10 +5,9 @@ import * as Styled from '../styled.jsx';
 
 const { Button, Input } = Bootstrap;
 
-export default class CreateGroup extends React.PureComponent {
+export class CreateGroup extends React.PureComponent {
 	static propTypes = {
 		isCreateGroupFocused: PropTypes.bool.isRequired,
-		changeCreateGroupFocused: PropTypes.func.isRequired,
 		setCreateGroupFocused: PropTypes.func.isRequired,
 		searchInputValue: PropTypes.string.isRequired,
 		handleCreateGroup: PropTypes.func.isRequired,

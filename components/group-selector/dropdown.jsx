@@ -2,28 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Bootstrap } from '../../components/main.js';
 import * as Styled from './styled.jsx';
-import SimpleGroup from './simple-group.jsx';
+import { SimpleGroup } from './simple-group.jsx';
 import icons from './icons';
 
 const { Button } = Bootstrap;
 const storedIcons = new Map();
 
-export default class GroupDropdown extends React.PureComponent {
+export class GroupDropdown extends React.PureComponent {
 	static propTypes = {
-		groups: PropTypes.arrayOf(
-			PropTypes.shape({
-				name: PropTypes.string.isRequired,
-				groupId: PropTypes.number.isRequired,
-				kind: PropTypes.string.isRequired,
-				avatarUrl: PropTypes.string,
-			}),
-		).isRequired,
-		selectedGroup: PropTypes.shape({
-			name: PropTypes.string.isRequired,
-			groupId: PropTypes.number.isRequired,
-			kind: PropTypes.string.isRequired,
-			avatarUrl: PropTypes.string,
-		}),
+		// groups: PropTypes.arrayOf(
+		// 	PropTypes.shape({
+		// 		name: PropTypes.string.isRequired,
+		// 		groupId: PropTypes.number.isRequired,
+		// 		kind: PropTypes.string.isRequired,
+		// 		avatarUrl: PropTypes.string,
+		// 	}),
+		// ).isRequired,
+		// selectedGroup: PropTypes.shape({
+		// 	name: PropTypes.string.isRequired,
+		// 	groupId: PropTypes.number.isRequired,
+		// 	kind: PropTypes.string.isRequired,
+		// 	avatarUrl: PropTypes.string,
+		// }),
+		groups: PropTypes.array.isRequired,
+		selectedGroup: PropTypes.object.isRequired,
 		handleSelectionChange: PropTypes.func.isRequired,
 		handleFindChurchButtonClick: PropTypes.func.isRequired,
 	};
@@ -66,6 +68,11 @@ export default class GroupDropdown extends React.PureComponent {
 		this.setState({ isDropdownOpen: false });
 	};
 
+	handleDropdownButtonClick = () => {
+		this.handleDropdownToggle();
+		this.props.handleFindChurchButtonClick();
+	};
+
 	render() {
 		const groups = this.props.groups.map(group => (
 			<SimpleGroup
@@ -90,7 +97,7 @@ export default class GroupDropdown extends React.PureComponent {
 						<Styled.DropdownWrapper>
 							<Styled.DropdownGroupsContainer>{groups}</Styled.DropdownGroupsContainer>
 							<Styled.DropdownButtonContainer>
-								<Button outline color="primary" onClick={this.props.handleFindChurchButtonClick}>
+								<Button outline color="primary" onClick={this.handleDropdownButtonClick}>
 									Find or Add Church
 								</Button>
 							</Styled.DropdownButtonContainer>

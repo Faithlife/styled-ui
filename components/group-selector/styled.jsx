@@ -34,8 +34,6 @@ export const GroupSelectorSignInButton = styled.div`
 
 export const GroupSelectorInputContainer = styled.input`
 	font-size: 12px;
-	font-style: italic;
-	color: gray;
 	line-height: 44px;
 	margin-left: 16px;
 	width: 100%;
@@ -140,6 +138,8 @@ export const LoadingText = styled.div`
 `;
 
 export const DropdownGroupsContainer = styled.div`
+	max-height: 210px;
+	overflow: auto;
 	padding-top: 6px;
 	padding-bottom: 6px;
 	background-color: white;
@@ -257,7 +257,7 @@ export const SearchResultsContainer = styled.div`
 	height: 60%;
 	max-height: 1000px;
 	overflow-y: auto;
-	padding-bottom: 32px;
+	padding-bottom: 85px;
 `;
 
 export const SearchInput = styled(Input)`

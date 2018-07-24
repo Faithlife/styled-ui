@@ -3,38 +3,39 @@ import PropTypes from 'prop-types';
 import { Bootstrap } from '../../../components/main.js';
 import * as Styled from '../styled.jsx';
 import icons from '../icons';
-import SearchResult from './search-result.jsx';
-import CreateGroup from './create-group.jsx';
+import { SearchResult } from './search-result.jsx';
+import { CreateGroup } from './create-group.jsx';
 
 const { Modal, ModalBody, Button } = Bootstrap;
 const storedIcons = new Map();
 
-export default class GroupSelectorModal extends React.Component {
+export class GroupSelectorModal extends React.Component {
 	static propTypes = {
 		changeModalState: PropTypes.func.isRequired,
 		isOpen: PropTypes.bool.isRequired,
 		executeSearch: PropTypes.func.isRequired,
-		onCreateGroup: PropTypes.func.isRequired,
-		groups: PropTypes.arrayOf(
-			PropTypes.shape({
-				name: PropTypes.string.isRequired,
-				groupId: PropTypes.number.isRequired,
-				kind: PropTypes.string.isRequired,
-				avatarUrl: PropTypes.string,
-				membershipKind: PropTypes.string,
-				relationshipKind: PropTypes.string,
-			}),
-		).isRequired,
-		searchedGroups: PropTypes.arrayOf(
-			PropTypes.shape({
-				name: PropTypes.string.isRequired,
-				groupId: PropTypes.number.isRequired,
-				kind: PropTypes.string.isRequired,
-				avatarUrl: PropTypes.string,
-				membershipKind: PropTypes.string,
-				relationshipKind: PropTypes.string,
-			}),
-		),
+		// groups: PropTypes.arrayOf(
+		// 	PropTypes.shape({
+		// 		name: PropTypes.string.isRequired,
+		// 		groupId: PropTypes.number.isRequired,
+		// 		kind: PropTypes.string.isRequired,
+		// 		avatarUrl: PropTypes.string,
+		// 		membershipKind: PropTypes.string,
+		// 		relationshipKind: PropTypes.string,
+		// 	}),
+		// ).isRequired,
+		groups: PropTypes.array.isRequired,
+		// searchedGroups: PropTypes.arrayOf(
+		// 	PropTypes.shape({
+		// 		name: PropTypes.string.isRequired,
+		// 		groupId: PropTypes.number.isRequired,
+		// 		kind: PropTypes.string.isRequired,
+		// 		avatarUrl: PropTypes.string,
+		// 		membershipKind: PropTypes.string,
+		// 		relationshipKind: PropTypes.string,
+		// 	}),
+		// ),
+		searchedGroups: PropTypes.array,
 		handleCreateGroup: PropTypes.func.isRequired,
 		handleGetStartedClick: PropTypes.func.isRequired,
 		handleRequestClick: PropTypes.func.isRequired,
@@ -52,7 +53,7 @@ export default class GroupSelectorModal extends React.Component {
 		this.setState({
 			searchInputValue: '',
 		});
-		this.executeSearch(this.state.searchInputValue);
+		this.props.executeSearch(this.state.searchInputValue);
 	};
 	makeStoredIcon = group => {
 		const value =
@@ -89,9 +90,14 @@ export default class GroupSelectorModal extends React.Component {
 				membershipKind={group.membershipKind}
 				relationshipKind={group.relationshipKind}
 				handleGetStartedClick={this.handleGetStarted}
-				handleRequestClick={this.handleRequest}
+				handleRequestClick={this.handleRequestAdmin}
 				handleEditClick={this.handleEdit}
 				handleJoinGroupClick={this.handleJoinGroup}
+				setModalState={this.setModalState}
+				setSelectedGroupId={this.setSelectedGroupId}
+				handleGetStarted={this.handleGetStarted}
+				handleJoinGroup={this.handleJoinGroup}
+				toggle={this.toggle}
 			/>
 		));
 	}
@@ -109,19 +115,20 @@ export default class GroupSelectorModal extends React.Component {
 					membershipKind={group.membershipKind}
 					relationshipKind={group.relationshipKind}
 					handleGetStartedClick={this.handleGetStarted}
-					handleRequestClick={this.handleRequest}
+					handleRequestClick={this.handleRequestAdmin}
 					handleEditClick={this.handleEdit}
 					handleJoinGroupClick={this.handleJoinGroup}
+					setModalState={this.setModalState}
+					setSelectedGroupId={this.setSelectedGroupId}
+					handleGetStarted={this.handleGetStarted}
+					handleJoinGroup={this.handleJoinGroup}
+					toggle={this.toggle}
 				/>
 			));
 		} else {
 			groups = this.getDefaultGroups();
 		}
 		return groups;
-	};
-
-	changeCreateGroupState = () => {
-		this.setState(({ isCreateGroupFocused }) => ({ isCreateGroupFocused: !isCreateGroupFocused }));
 	};
 
 	setCreateGroupState = focused => {
@@ -134,6 +141,18 @@ export default class GroupSelectorModal extends React.Component {
 
 	toggle = () => {
 		this.props.changeModalState();
+	};
+
+	setModalState = state => {
+		this.setState({ modalContent: state });
+	};
+
+	setSelectedGroupId = id => {
+		this.setState({ selectedGroupId: id });
+	};
+
+	resetModalState = () => {
+		this.setState({ modalContent: 'main' });
 	};
 
 	handleSearchInput = event => {
@@ -153,22 +172,18 @@ export default class GroupSelectorModal extends React.Component {
 		this.props.handleGetStartedClick(groupId);
 	};
 
-	handleRequest = groupId => {
-		this.setState({ modalContent: 'admin' });
-		this.setState({ selectedGroupId: groupId });
+	handleRequestAdmin = () => {
+		this.setModalState('main');
+		this.props.handleRequestClick(this.state.groupId);
 	};
 
-	handleEdit = groupId => {
-		this.setState({ modalContent: 'change' });
-		this.setState({ selectedGroupId: groupId });
+	handleEdit = () => {
+		this.setModalState('main');
+		this.props.handleEditClick(this.state.groupId);
 	};
 
 	handleJoinGroup = () => {
 		this.props.handleJoinGroupClick(this.state.selectedGroupId);
-	};
-
-	handleCancel = () => {
-		this.setState({ modalContent: 'main' });
 	};
 
 	render() {
@@ -223,7 +238,6 @@ export default class GroupSelectorModal extends React.Component {
 									<CreateGroup
 										isCreateGroupFocused={this.state.isCreateGroupFocused}
 										setCreateGroupFocused={this.setCreateGroupState}
-										changeCreateGroupFocused={this.changeCreateGroupState}
 										searchInputValue={this.state.searchInputValue}
 										handleCreateGroup={this.props.handleCreateGroup}
 									/>
@@ -233,7 +247,7 @@ export default class GroupSelectorModal extends React.Component {
 						{this.state.modalContent === 'admin' && (
 							<div>
 								<Styled.ModalCloseButtonContainer>
-									<button color="link" onClick={this.handleCancel} style={{ border: 0 }}>
+									<button color="link" onClick={this.resetModalState} style={{ border: 0 }}>
 										<Styled.SearchGlassHasText />
 									</button>
 								</Styled.ModalCloseButtonContainer>
@@ -246,10 +260,12 @@ export default class GroupSelectorModal extends React.Component {
 										Contact a group administrator to request Admin membership
 									</Styled.SecondaryModalText>
 									<Styled.SecondaryModalButtonContainer>
-										<Button color="primary">Continue</Button>
+										<Button color="primary" onClick={this.handleRequestAdmin}>
+											Continue
+										</Button>
 									</Styled.SecondaryModalButtonContainer>
 									<Styled.SecondaryModalButtonContainer>
-										<Button onClick={this.handleCancel}>Cancel</Button>
+										<Button onClick={this.resetModalState}>Cancel</Button>
 									</Styled.SecondaryModalButtonContainer>
 								</Styled.SecondaryModalContent>
 							</div>
@@ -257,7 +273,7 @@ export default class GroupSelectorModal extends React.Component {
 						{this.state.modalContent === 'change' && (
 							<div>
 								<Styled.ModalCloseButtonContainer>
-									<button color="link" onClick={this.handleCancel} style={{ border: 0 }}>
+									<button color="link" onClick={this.resetModalState} style={{ border: 0 }}>
 										<Styled.SearchGlassHasText />
 									</button>
 								</Styled.ModalCloseButtonContainer>
@@ -270,10 +286,12 @@ export default class GroupSelectorModal extends React.Component {
 										Visit the group settings page to change
 									</Styled.SecondaryModalText>
 									<Styled.SecondaryModalButtonContainer>
-										<Button color="primary">Change to Church</Button>
+										<Button color="primary" onClick={this.handleEdit}>
+											Change to Church
+										</Button>
 									</Styled.SecondaryModalButtonContainer>
 									<Styled.SecondaryModalButtonContainer>
-										<Button onClick={this.handleCancel}>Cancel</Button>
+										<Button onClick={this.resetModalState}>Cancel</Button>
 									</Styled.SecondaryModalButtonContainer>
 								</Styled.SecondaryModalContent>
 							</div>

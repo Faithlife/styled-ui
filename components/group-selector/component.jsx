@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Bootstrap } from '../../components/main.js';
 import * as Styled from './styled.jsx';
-import GroupDropdown from './dropdown.jsx';
-import GroupSelectorModal from './modal/component.jsx';
+import { GroupDropdown } from './dropdown.jsx';
+import { GroupSelectorModal } from './modal/component.jsx';
 
 const { Button, InputGroup, InputGroupAddon } = Bootstrap;
 const defaultGroup = {
@@ -13,7 +13,7 @@ const defaultGroup = {
 };
 
 /** Styled group selector control */
-export default class GroupSelector extends React.Component {
+export class GroupSelector extends React.Component {
 	static propTypes = {
 		/** Selects view state of group selector */
 		groupSelectorView: PropTypes.string.isRequired,
@@ -28,25 +28,27 @@ export default class GroupSelector extends React.Component {
 		/** -1 if no previous selected group */
 		selectedGroupId: PropTypes.number.isRequired,
 		/** all groups that should be displayed on the dropdown */
-		groups: PropTypes.arrayOf(
-			PropTypes.shape({
-				name: PropTypes.string,
-				groupId: PropTypes.number,
-				kind: PropTypes.string,
-				avatarUrl: PropTypes.string,
-				membershipKind: PropTypes.string,
-			}),
-		).isRequired,
+		// groups: PropTypes.arrayOf(
+		// 	PropTypes.shape({
+		// 		name: PropTypes.string,
+		// 		groupId: PropTypes.number,
+		// 		kind: PropTypes.string,
+		// 		avatarUrl: PropTypes.string,
+		// 		membershipKind: PropTypes.string,
+		// 	}),
+		// ).isRequired,
+		groups: PropTypes.array.isRequired,
 		/** undefined or empty if no search has been executed yet */
-		searchedGroups: PropTypes.arrayOf(
-			PropTypes.shape({
-				name: PropTypes.string,
-				groupId: PropTypes.number,
-				kind: PropTypes.string,
-				avatarUrl: PropTypes.string,
-				membershipKind: PropTypes.string,
-			}),
-		),
+		// searchedGroups: PropTypes.arrayOf(
+		// 	PropTypes.shape({
+		// 		name: PropTypes.string,
+		// 		groupId: PropTypes.number,
+		// 		kind: PropTypes.string,
+		// 		avatarUrl: PropTypes.string,
+		// 		membershipKind: PropTypes.string,
+		// 	}),
+		// ),
+		searchedGroups: PropTypes.array,
 		/** action that should be taken when user selects group with proper permissions */
 		handleGetStartedClick: PropTypes.func.isRequired,
 		/** function to execute when user wants to request access to a group */
@@ -125,7 +127,6 @@ export default class GroupSelector extends React.Component {
 					)}
 				</Styled.GroupSelector>
 				<GroupSelectorModal
-					onCreateGroup={this.props.handleCreateGroup}
 					isOpen={this.state.isModalOpen}
 					changeModalState={this.handleChangeModalState}
 					executeSearch={this.props.executeSearch}

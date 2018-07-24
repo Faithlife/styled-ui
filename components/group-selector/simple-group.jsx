@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './styled.jsx';
 
-export default function SimpleGroup({ onClick, id, avatar, name }) {
+export function SimpleGroup({ onClick, id, avatar, name }) {
 	return (
 		<Styled.SimpleGroup onClick={() => onClick(id)}>
 			<Styled.SimpleGroupAvatar>{avatar}</Styled.SimpleGroupAvatar>

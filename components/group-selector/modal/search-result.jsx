@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from '../styled.jsx';
 
-export default class SearchResult extends React.PureComponent {
+export class SearchResult extends React.PureComponent {
 	static propTypes = {
 		avatar: PropTypes.element,
 		groupId: PropTypes.number.isRequired,
 		name: PropTypes.string.isRequired,
 		kind: PropTypes.string,
 		membershipKind: PropTypes.string,
-		relationshipKind: PropTypes.string,
-		handleGetStartedClick: PropTypes.func.isRequired,
-		handleRequestClick: PropTypes.func.isRequired,
-		handleEditClick: PropTypes.func.isRequired,
-		handleJoinGroupClick: PropTypes.func.isRequired,
+		setModalState: PropTypes.func.isRequired,
+		setSelectedGroupId: PropTypes.func.isRequired,
+		handleGetStarted: PropTypes.func.isRequired,
+		handleJoinGroup: PropTypes.func.isRequired,
+		toggle: PropTypes.func.isRequired,
 	};
 
 	state = {
@@ -23,19 +23,25 @@ export default class SearchResult extends React.PureComponent {
 	};
 
 	getStarted = () => {
-		this.props.handleGetStartedClick(this.props.groupId);
+		this.props.setModalState('main');
+		this.props.toggle();
+		this.props.handleGetStarted(this.props.groupId);
 	};
 
 	requestAccess = () => {
-		this.props.handleRequestClick(this.props.groupId);
+		this.props.setModalState('admin');
+		this.props.setSelectedGroupId(this.props.groupId);
 	};
 
 	editGroupType = () => {
-		this.props.handleEditClick(this.props.groupId);
+		this.props.setModalState('change');
+		this.props.setSelectedGroupId(this.props.groupId);
 	};
 
 	joinGroup = () => {
-		this.props.handleJoinGroupClick(this.props.groupId);
+		this.props.setModalState('main');
+		this.props.toggle();
+		this.props.handleJoinGroup(this.props.groupId);
 	};
 
 	componentDidMount() {
