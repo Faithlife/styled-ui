@@ -1,5 +1,5 @@
 {
-	"presets": ["react", "env", "stage-0"],
+	"presets": ["react", ["env", { "modules": false }], "stage-0"],
 	"plugins": [
 		[
 			"babel-plugin-styled-components",
@@ -7,7 +7,6 @@
 				"ssr": true
 			}
 		],
-		"add-module-exports",
 		"react-docgen"
 	]
 }
