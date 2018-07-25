@@ -11,22 +11,6 @@ export const GroupSelector = styled.div`
 	padding-bottom: 6px;
 `;
 
-export const GroupSelectorButton = styled.div`
-	background-color: #1e91d6;
-	color: white;
-	display: inline-block;
-	vertical-align: middle;
-	margin-left: 32px;
-	margin-bottom: 8px;
-	min-width: 120px;
-	border-radius: 3px;
-
-	&:hover {
-		background-color: #0174b9;
-		border-color: #0174b9;
-	}
-`;
-
 export const GroupSelectorSignInButton = styled.div`
 	padding-bottom: 6px;
 	text-align: left;
@@ -162,22 +146,6 @@ export const DropdownButtonContainer = styled.div`
 	padding-bottom: 8px;
 `;
 
-export const Search = styled.div`
-	width: 400px;
-	height: 85vh;
-	max-width: 100%;
-	max-height: 100%;
-	padding: 32px 16px 16px;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	overflow: hidden;
-	box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
-	background-image: linear-gradient(to bottom, #ffffff, #f5f5f5);
-	border-radius: 3px;
-`;
-
 export const SearchGlass = styled.div`
 	height: 12px;
 	width: 12px;
@@ -217,20 +185,6 @@ export const SearchResultAvatar = styled.div`
 	height: 40px;
 	float: left;
 	margin: 6px;
-`;
-
-export const SearchNoResults = styled.p`
-	font-style: italic;
-	text-align: center;
-`;
-
-export const CloseButton = styled(Button)`
-	position: absolute;
-	right: 0;
-	top: 0;
-	padding: 8px;
-	margin: 16px;
-	min-width: 0;
 `;
 
 export const ModalTitle = styled.p`
@@ -303,10 +257,6 @@ export const CreateGroup = styled.div`
 	z-index: 11;
 `;
 
-export const CreateGroupActive = styled.div`
-	transition: 0.2s ease-in-out;
-`;
-
 export const CreateGroupTitle = styled.p`
 	composes: search__subtitle;
 	padding-bottom: 16px;
@@ -333,20 +283,6 @@ export const GroupSelectorModalContainer = styled.div`
 	display: block;
 `;
 
-export const GroupSelectorModalText = styled.p`
-	padding: 0 32px;
-	text-align: left;
-	color: #3d3d3d;
-	font-size: 16px;
-	line-height: normal;
-	margin-top: 8px;
-`;
-
-export const GroupSelectorModalButtonContainer = styled.div`
-	margin-top: 24px;
-	text-align: center;
-`;
-
 export const GroupSelectorModalBody = styled(ModalBody)`
 	overflow: hidden;
 `;
@@ -357,14 +293,6 @@ export const SearchResultNameText = styled.div`
 	padding-top: 8px;
 	margin-right: 0px;
 	margin-left: 56px;
-`;
-
-export const SearchResultText = styled.div`
-	padding-top: 2px;
-	padding-bottom: 12px;
-	color: #a8a8a8;
-	width: 50%;
-	margin-right: 0px;
 `;
 
 export const SearchResultButton = styled(Button)`
