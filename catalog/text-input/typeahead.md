@@ -42,6 +42,8 @@ state: { tags: [] }
 			onChange={value => { setState({ tags: value })}}
 			options={['very cool','outrageous','slick']}
 			placeholder="Add some tags..."
+			newSelectionPrefix="New entry: "
+			selectHintOnEnter
 		/>
 	</FormGroup>
 </Row>
