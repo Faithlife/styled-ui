@@ -14,7 +14,7 @@
 		"build": "rimraf dist && webpack -p",
 		"prepublishOnly": "npm test && npm run build",
 		"stylelint": "stylelint ./components/**/*.jsx",
-		"unit-test": "mocha -r esm ./tests/**/*.js",
+		"unit-test": "cross-env NODE_ENV=test mocha -r babel-core/register ./tests/**/*.js",
 		"catalog-start": "catalog start",
 		"catalog-build": "catalog build --public-url /styled-ui"
 	},
@@ -55,6 +55,7 @@
 		"babel-preset-stage-0": "^6.24.1",
 		"babel-runtime": "^6.26.0",
 		"catalog": "^3.5.4",
+		"cross-env": "^5.2.0",
 		"css-loader": "^1.0.0",
 		"eslint": "^4.19.1",
 		"eslint-config-faithlife": "^3.1.0",
