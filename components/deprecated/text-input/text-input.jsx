@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import debounce from 'lodash.debounce';
-import { Exclamation, Check } from '../icons';
+import { Exclamation, Check } from '../../icons';
 import * as Styled from './styled.jsx';
 
 /**

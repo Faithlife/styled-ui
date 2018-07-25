@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { thickness, fonts, colors, inputColors } from '../shared-styles';
+import { thickness, fonts, colors, inputColors } from '../../shared-styles';
 
 export const Label = styled.label`
 	display: block;

@@ -34,10 +34,9 @@ state: { modal: false, value: '' }
 		<div className="wide-content">
 			<Input
 				value={state.value}
-				onChange={value => setState({ value: value, isValid: value !== '' })}
+				onChange={value => setState({ value: value.value, isValid: value !== '' })}
 				placeholder="Bellingham"
 				title="Location"
-				debounce={200}
 			/>
 		</div>
 	</Modal>

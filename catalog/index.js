@@ -7,7 +7,6 @@ import {
 	Bootstrap,
 	Button,
 	Checkbox,
-	TextInput,
 	Modal,
 	ModalFooter,
 	LoadingSpinner,
@@ -113,22 +112,10 @@ const pages = [
 				imports: { Checkbox, DocgenTable },
 			},
 			{
-				path: '/text-input/variations',
-				title: 'Text input Variations',
-				content: pageLoader(() => import('./text-input/variations.md')),
-				imports: { ...TextInput, Button, delayPromise },
-			},
-			{
-				path: '/text-input/documentation',
-				title: 'Text input Documentation',
-				content: pageLoader(() => import('./text-input/documentation.md')),
-				imports: { ...TextInput, DocgenTable },
-			},
-			{
 				path: '/modal/variations',
 				title: 'Modal Variations',
 				content: pageLoader(() => import('./modal/variations.md')),
-				imports: { ...TextInput, Modal, ModalFooter, Button, delayPromise },
+				imports: { Input: Bootstrap.Input, Modal, ModalFooter, Button, delayPromise },
 			},
 			{
 				path: '/modal/documentation',
