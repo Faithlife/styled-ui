@@ -8,3 +8,4 @@ export { Button } from './demo-button/component.jsx';
 export { Bootstrap } from './bootstrap';
 export { LoadingSpinner } from './loading-spinner/component.jsx';
 export { Modal, ModalFooter } from './modal';
+export { HelpBox } from './help-box/component.jsx';

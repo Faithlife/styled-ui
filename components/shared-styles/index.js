@@ -20,6 +20,11 @@ export const fonts = {
 		font-weight: normal;
 		line-height: 14px;
 	`,
+	ui16: `
+		font-size: 16px;
+		font-weight: normal;
+		line-height: 16px;
+	`,
 	h4: `
 		font-size: 22px;
 		font-weight: bold;

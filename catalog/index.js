@@ -10,7 +10,9 @@ import {
 	Modal,
 	ModalFooter,
 	LoadingSpinner,
+	HelpBox,
 } from '../components/main.js';
+import { BootstrapContainer } from '../components/utils';
 import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
 import { colors } from '../components/shared-styles';
 import { CarouselDemo } from './bootstrap/carousel-demo.jsx';
@@ -191,6 +193,18 @@ const pages = [
 				title: 'Loading Spinner Documentation',
 				content: pageLoader(() => import('./loading-spinner/documentation.md')),
 				imports: { LoadingSpinner, DocgenTable },
+			},
+			{
+				path: '/help-box/variations',
+				title: 'Help Box Variations',
+				content: pageLoader(() => import('./help-box/variations.md')),
+				imports: { HelpBox, BootstrapContainer },
+			},
+			{
+				path: '/help-box/documentation',
+				title: 'Help Box Documentation',
+				content: pageLoader(() => import('./help-box/documentation.md')),
+				imports: { HelpBox, DocgenTable },
 			},
 		],
 	},
