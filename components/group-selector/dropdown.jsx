@@ -52,7 +52,7 @@ export class GroupDropdown extends React.PureComponent {
 			);
 		}
 
-		const Icon = (storedIcons || []).get(group.kind) || this.makeStoredIcon(group);
+		const Icon = storedIcons.get(group.kind) || this.makeStoredIcon(group);
 
 		return (
 			<Icon style={{ borderRadius: '3px', width: '32px', height: '32px' }} viewBox="0 0 76 76" />
@@ -77,7 +77,7 @@ export class GroupDropdown extends React.PureComponent {
 		const groups = this.props.groups.map(group => (
 			<SimpleGroup
 				key={group.groupId}
-				id={group.groupId}
+				groupId={group.groupId}
 				kind={group.kind}
 				name={group.name}
 				onClick={this.handleGroupSelection}
@@ -86,7 +86,7 @@ export class GroupDropdown extends React.PureComponent {
 		));
 		return (
 			<Styled.DropdownContainer>
-				<Styled.Select>
+				<Styled.SelectedGroupContainer>
 					<Styled.SelectedGroup onClick={this.handleDropdownToggle}>
 						<Styled.SelectedGroupAvatar>
 							{this.getIcon(this.props.selectedGroup)}
@@ -103,7 +103,7 @@ export class GroupDropdown extends React.PureComponent {
 							</Styled.DropdownButtonContainer>
 						</Styled.DropdownWrapper>
 					)}
-				</Styled.Select>
+				</Styled.SelectedGroupContainer>
 			</Styled.DropdownContainer>
 		);
 	}

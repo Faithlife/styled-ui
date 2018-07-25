@@ -6,7 +6,7 @@ import icons from '../icons';
 import { SearchResult } from './search-result.jsx';
 import { CreateGroup } from './create-group.jsx';
 
-const { Modal, ModalBody, Button } = Bootstrap;
+const { Modal, Button } = Bootstrap;
 const storedIcons = new Map();
 
 export class GroupSelectorModal extends React.Component {
@@ -35,7 +35,7 @@ export class GroupSelectorModal extends React.Component {
 		// 		relationshipKind: PropTypes.string,
 		// 	}),
 		// ),
-		searchedGroups: PropTypes.array,
+		groupSearchResults: PropTypes.array,
 		handleCreateGroup: PropTypes.func.isRequired,
 		handleGetStartedClick: PropTypes.func.isRequired,
 		handleRequestClick: PropTypes.func.isRequired,
@@ -53,7 +53,6 @@ export class GroupSelectorModal extends React.Component {
 		this.setState({
 			searchInputValue: '',
 		});
-		this.props.executeSearch(this.state.searchInputValue);
 	};
 	makeStoredIcon = group => {
 		const value =
@@ -104,8 +103,8 @@ export class GroupSelectorModal extends React.Component {
 
 	getSearchResults = () => {
 		let groups;
-		if (this.props.searchedGroups) {
-			groups = this.props.searchedGroups.map(group => (
+		if (this.props.groupSearchResults) {
+			groups = this.props.groupSearchResults.map(group => (
 				<SearchResult
 					key={group.groupId}
 					groupId={group.groupId}
@@ -189,21 +188,15 @@ export class GroupSelectorModal extends React.Component {
 	render() {
 		return (
 			<Styled.GroupSelectorModalContainer>
-				<Modal
-					centered
-					isOpen={this.props.isOpen}
-					backdrop
-					toggle={this.toggle}
-					style={{ overflow: 'hidden' }}
-				>
-					<ModalBody style={{ overflow: 'hidden' }}>
+				<Modal centered isOpen={this.props.isOpen} backdrop toggle={this.toggle}>
+					<Styled.GroupSelectorModalBody>
 						{this.state.modalContent === 'main' && (
 							<div>
 								<div onClick={this.hideCreateGroup}>
 									<Styled.ModalCloseButtonContainer>
-										<button color="link" onClick={this.toggle} style={{ border: 0 }}>
-											<Styled.SearchGlassHasText />
-										</button>
+										<Button color="link" onClick={this.toggle}>
+											<Styled.xButton />
+										</Button>
 									</Styled.ModalCloseButtonContainer>
 									<Styled.ModalTitle>Find Your Church</Styled.ModalTitle>
 									<Styled.ModalSubtitle>in the Faithlife Church Directory</Styled.ModalSubtitle>
@@ -215,17 +208,9 @@ export class GroupSelectorModal extends React.Component {
 											onKeyPress={this.handleKeyPress}
 										/>
 										<Styled.SearchInputAddon addonType="append">
-											<button
-												style={{ position: 'absolute', top: 6, right: 0, border: 0 }}
-												color="link"
-												onClick={this.clearSearchInput}
-											>
-												{this.state.searchInputValue ? (
-													<Styled.SearchGlassHasText />
-												) : (
-													<Styled.SearchGlass />
-												)}
-											</button>
+											<Button color="link" onClick={this.clearSearchInput}>
+												{this.state.searchInputValue ? <Styled.xButton /> : <Styled.SearchGlass />}
+											</Button>
 										</Styled.SearchInputAddon>
 									</Styled.SearchInputGroup>
 									<Styled.SearchResultsContainer>
@@ -233,7 +218,7 @@ export class GroupSelectorModal extends React.Component {
 									</Styled.SearchResultsContainer>
 								</div>
 								<Styled.CreateGroupWrapper
-									property={this.state.isCreateGroupFocused ? '0' : '-109px'}
+									position={this.state.isCreateGroupFocused ? '0' : '-109px'}
 								>
 									<CreateGroup
 										isCreateGroupFocused={this.state.isCreateGroupFocused}
@@ -247,9 +232,9 @@ export class GroupSelectorModal extends React.Component {
 						{this.state.modalContent === 'admin' && (
 							<div>
 								<Styled.ModalCloseButtonContainer>
-									<button color="link" onClick={this.resetModalState} style={{ border: 0 }}>
-										<Styled.SearchGlassHasText />
-									</button>
+									<Button color="link" onClick={this.resetModalState}>
+										<Styled.xButton />
+									</Button>
 								</Styled.ModalCloseButtonContainer>
 								<Styled.SecondaryModalContent>
 									<Styled.SecondaryModalText>
@@ -273,9 +258,9 @@ export class GroupSelectorModal extends React.Component {
 						{this.state.modalContent === 'change' && (
 							<div>
 								<Styled.ModalCloseButtonContainer>
-									<button color="link" onClick={this.resetModalState} style={{ border: 0 }}>
-										<Styled.SearchGlassHasText />
-									</button>
+									<Button color="link" onClick={this.resetModalState}>
+										<Styled.xButton />
+									</Button>
 								</Styled.ModalCloseButtonContainer>
 								<Styled.SecondaryModalContent>
 									<Styled.SecondaryModalText>
@@ -296,7 +281,7 @@ export class GroupSelectorModal extends React.Component {
 								</Styled.SecondaryModalContent>
 							</div>
 						)}
-					</ModalBody>
+					</Styled.GroupSelectorModalBody>
 				</Modal>
 			</Styled.GroupSelectorModalContainer>
 		);

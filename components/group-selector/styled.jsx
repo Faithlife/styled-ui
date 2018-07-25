@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Bootstrap } from '../../components/main.js';
 
-const { Button, Input, InputGroup, InputGroupAddon, Label } = Bootstrap;
+const { Button, Input, InputGroup, InputGroupAddon, Label, ModalBody } = Bootstrap;
 
 export const GroupSelector = styled.div`
 	max-width: 100%;
@@ -96,7 +96,7 @@ export const SimpleGroupMembershipLine = styled.div`
 	color: #95908f;
 `;
 
-export const Select = styled.div`
+export const SelectedGroupContainer = styled.div`
 	position: relative;
 	height: 44px;
 	cursor: pointer;
@@ -138,7 +138,7 @@ export const LoadingText = styled.div`
 `;
 
 export const DropdownGroupsContainer = styled.div`
-	max-height: 210px;
+	max-height: 205px;
 	overflow: auto;
 	padding-top: 6px;
 	padding-bottom: 6px;
@@ -190,7 +190,7 @@ export const SearchGlass = styled.div`
 	vertical-align: middle;
 `;
 
-export const SearchGlassHasText = styled.div`
+export const xButton = styled.div`
 	cursor: pointer;
 	height: 12px;
 	width: 12px;
@@ -250,7 +250,8 @@ export const ModalSubtitle = styled.p`
 `;
 
 export const ModalCloseButtonContainer = styled.div`
-	float: right;
+	position: absolute;
+	right: 4px;
 `;
 
 export const SearchResultsContainer = styled.div`
@@ -276,7 +277,9 @@ export const SearchInput = styled(Input)`
 `;
 
 export const SearchInputAddon = styled(InputGroupAddon)`
-	float: left;
+	position: absolute;
+	bottom: 0;
+	right: -6px;
 	z-index: 1000;
 `;
 
@@ -286,7 +289,7 @@ export const SearchInputGroup = styled(InputGroup)`
 
 export const CreateGroupWrapper = styled.div`
 	transition: 0.2s ease-in-out;
-	bottom: ${props => props.property};
+	bottom: ${props => props.position};
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -342,6 +345,10 @@ export const GroupSelectorModalText = styled.p`
 export const GroupSelectorModalButtonContainer = styled.div`
 	margin-top: 24px;
 	text-align: center;
+`;
+
+export const GroupSelectorModalBody = styled(ModalBody)`
+	overflow: hidden;
 `;
 
 export const SearchResultNameText = styled.div`

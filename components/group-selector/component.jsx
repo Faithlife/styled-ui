@@ -9,14 +9,14 @@ const { Button, InputGroup, InputGroupAddon } = Bootstrap;
 const defaultGroup = {
 	name: '',
 	groupId: -1,
-	kind: 'string',
+	kind: '',
 };
 
 /** Styled group selector control */
 export class GroupSelector extends React.Component {
 	static propTypes = {
 		/** Selects view state of group selector */
-		groupSelectorView: PropTypes.string.isRequired,
+		groupSelectorView: PropTypes.oneOf(['groups', 'sign-in', 'no-groups', 'fetching']).isRequired,
 		/** function that is called when "Sign In" is clicked by the user */
 		handleSignInClick: PropTypes.func.isRequired,
 		/** returns data to application for group creation */
@@ -48,7 +48,7 @@ export class GroupSelector extends React.Component {
 		// 		membershipKind: PropTypes.string,
 		// 	}),
 		// ),
-		searchedGroups: PropTypes.array,
+		groupSearchResults: PropTypes.array,
 		/** action that should be taken when user selects group with proper permissions */
 		handleGetStartedClick: PropTypes.func.isRequired,
 		/** function to execute when user wants to request access to a group */
@@ -65,10 +65,6 @@ export class GroupSelector extends React.Component {
 
 	getGroup = groupId =>
 		(this.props.groups || []).find(group => group.groupId === groupId) || defaultGroup;
-
-	changeDropdownState = () => {
-		this.setState(({ isDropdownOpen }) => ({ isDropdownOpen: !isDropdownOpen }));
-	};
 
 	handleChangeModalState = () => {
 		this.setState(({ isModalOpen }) => ({ isModalOpen: !isModalOpen }));
@@ -92,11 +88,11 @@ export class GroupSelector extends React.Component {
 			<div>
 				<Styled.GroupSelector>
 					{this.props.groupSelectorView === 'fetching' && (
-						<Styled.Select>
+						<Styled.SelectedGroupContainer>
 							<Styled.SelectedGroup>
 								<Styled.LoadingText>Loading...</Styled.LoadingText>
 							</Styled.SelectedGroup>
-						</Styled.Select>
+						</Styled.SelectedGroupContainer>
 					)}
 					{this.props.groupSelectorView === 'groups' && (
 						<GroupDropdown
@@ -131,7 +127,7 @@ export class GroupSelector extends React.Component {
 					changeModalState={this.handleChangeModalState}
 					executeSearch={this.props.executeSearch}
 					groups={this.props.groups}
-					searchedGroups={this.props.searchedGroups}
+					groupSearchResults={this.props.groupSearchResults}
 					handleCreateGroup={this.props.handleCreateGroup}
 					handleGetStartedClick={this.props.handleGetStartedClick}
 					handleRequestClick={this.props.handleRequestClick}
