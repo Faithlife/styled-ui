@@ -3,8 +3,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button } from '../components/main.js';
-import { Popover, PopoverBody } from '../components/bootstrap';
+import { Button, Bootstrap } from '../components/main.js';
+
+const { Popover, PopoverBody } = Bootstrap;
 
 const Container = styled.div`
 	font-family: 'Source Sans Pro';
