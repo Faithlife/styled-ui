@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Bootstrap } from '../../../components/main.js';
 import * as Styled from '../styled.jsx';
-import icons from '../icons';
+import { Avatar } from '../avatar.jsx';
 import { SearchResult } from './search-result.jsx';
 import { CreateGroup } from './create-group.jsx';
 
 const { Modal, Button } = Bootstrap;
-const storedIcons = new Map();
 
 export class GroupSelectorModal extends React.Component {
 	static propTypes = {
@@ -56,29 +55,6 @@ export class GroupSelectorModal extends React.Component {
 			searchInputValue: '',
 		});
 	};
-	makeStoredIcon = group => {
-		const value =
-			icons[`${group.kind.charAt(0).toUpperCase()}${group.kind.slice(1)}`] || icons.General;
-		storedIcons.set(group.kind, value);
-		return value;
-	};
-	getIcon = group => {
-		if (group.avatarUrl) {
-			return (
-				<img
-					style={{ borderRadius: '3px', width: '40px', height: '40px' }}
-					src={group.avatarUrl}
-					alt={group.name}
-				/>
-			);
-		}
-
-		const Icon = (storedIcons || []).get(group.kind) || this.makeStoredIcon(group);
-
-		return (
-			<Icon style={{ borderRadius: '3px', width: '40px', height: '40px' }} viewBox="0 0 76 76" />
-		);
-	};
 
 	getDefaultGroups() {
 		return this.props.groups.map(group => (
@@ -87,7 +63,7 @@ export class GroupSelectorModal extends React.Component {
 				groupId={group.groupId}
 				kind={group.kind}
 				name={group.name}
-				avatar={this.getIcon(group)}
+				avatar={<Avatar group={group} size="40px" />}
 				membershipKind={group.membershipKind}
 				relationshipKind={group.relationshipKind}
 				handleGetStartedClick={this.handleGetStarted}
@@ -112,7 +88,7 @@ export class GroupSelectorModal extends React.Component {
 					groupId={group.groupId}
 					kind={group.kind}
 					name={group.name}
-					avatar={this.getIcon(group)}
+					avatar={<Avatar group={group} size="40px" />}
 					membershipKind={group.membershipKind}
 					relationshipKind={group.relationshipKind}
 					handleGetStartedClick={this.handleGetStarted}

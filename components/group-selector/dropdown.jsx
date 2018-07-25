@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import { Bootstrap } from '../../components/main.js';
 import * as Styled from './styled.jsx';
 import { SimpleGroup } from './simple-group.jsx';
-import icons from './icons';
+import { Avatar } from './avatar.jsx';
 
 const { Button } = Bootstrap;
-const storedIcons = new Map();
 
 export class GroupDropdown extends React.PureComponent {
 	static propTypes = {
@@ -34,31 +33,6 @@ export class GroupDropdown extends React.PureComponent {
 		isDropdownOpen: false,
 	};
 
-	makeStoredIcon = group => {
-		const value =
-			icons[`${group.kind.charAt(0).toUpperCase()}${group.kind.slice(1)}`] || icons.General;
-		storedIcons.set(group.kind, value);
-		return value;
-	};
-
-	getIcon = group => {
-		if (group.avatarUrl) {
-			return (
-				<img
-					style={{ borderRadius: '3px', width: '32px', height: '32px' }}
-					src={group.avatarUrl}
-					alt={group.name}
-				/>
-			);
-		}
-
-		const Icon = storedIcons.get(group.kind) || this.makeStoredIcon(group);
-
-		return (
-			<Icon style={{ borderRadius: '3px', width: '32px', height: '32px' }} viewBox="0 0 76 76" />
-		);
-	};
-
 	handleDropdownToggle = () => {
 		this.setState(({ isDropdownOpen }) => ({ isDropdownOpen: !isDropdownOpen }));
 	};
@@ -81,7 +55,7 @@ export class GroupDropdown extends React.PureComponent {
 				kind={group.kind}
 				name={group.name}
 				onClick={this.handleGroupSelection}
-				avatar={this.getIcon(group)}
+				avatar={<Avatar group={group} />}
 			/>
 		));
 		return (
@@ -89,7 +63,7 @@ export class GroupDropdown extends React.PureComponent {
 				<Styled.SelectedGroupContainer>
 					<Styled.SelectedGroup onClick={this.handleDropdownToggle}>
 						<Styled.SelectedGroupAvatar>
-							{this.getIcon(this.props.selectedGroup)}
+							{<Avatar group={this.props.selectedGroup} />}
 						</Styled.SelectedGroupAvatar>
 						<Styled.SelectedGroupText>{this.props.selectedGroup.name}</Styled.SelectedGroupText>
 					</Styled.SelectedGroup>
