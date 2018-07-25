@@ -13,7 +13,7 @@ import { InferredTypeahead } from '@faithlife/styled-ui/dist/text-input.js';
 showSource: false
 state: { value: 'Washington', confirmed: false }
 ---
-<Row>
+<div>
 	<FormGroup>
 		<Label>Current selection: {state.value}</Label>
 		<InferredTypeahead
@@ -25,7 +25,7 @@ state: { value: 'Washington', confirmed: false }
 			defaultInputValue={state.value}
 		/>
 	</FormGroup>
-</Row>
+</div>
 ```
 
 ### Inferred text input
@@ -38,7 +38,7 @@ import { InferredText } from '@faithlife/styled-ui/dist/text-input.js';
 showSource: false
 state: { value: 'This value was guessed', confirmed: false }
 ---
-<Row>
+<div>
 	<FormGroup>
 		<Label>High Confidence</Label>
 		<InferredText
@@ -48,14 +48,14 @@ state: { value: 'This value was guessed', confirmed: false }
 			value={state.value}
 		/>
 	</FormGroup>
-</Row>
+</div>
 ```
 
 ```react
 showSource: false
 state: { value: 'This value was guessed', confirmed: false }
 ---
-<Row>
+<div>
 	<FormGroup>
 		<Label>Medium Confidence</Label>
 		<InferredText
@@ -65,14 +65,14 @@ state: { value: 'This value was guessed', confirmed: false }
 			value={state.value}
 		/>
 	</FormGroup>
-</Row>
+</div>
 ```
 
 ```react
 showSource: false
 state: { value: 'This value was guessed', confirmed: false }
 ---
-<Row>
+<div>
 	<FormGroup>
 		<Label>Low Confidence</Label>
 		<InferredText
@@ -82,7 +82,7 @@ state: { value: 'This value was guessed', confirmed: false }
 			value={state.value}
 		/>
 	</FormGroup>
-</Row>
+</div>
 ```
 
 ## Component PropTypes

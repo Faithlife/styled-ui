@@ -16,7 +16,7 @@ import { Typeahead } from '@faithlife/styled-ui/dist/text-input.js';
 showSource: true
 state: { selection: '' }
 ---
-<Row>
+<div>
 	<FormGroup>
 		<Label>Current selection: {state.selection}</Label>
 		<Typeahead
@@ -25,7 +25,7 @@ state: { selection: '' }
 			placeholder="Choose a state..."
 		/>
 	</FormGroup>
-</Row>
+</div>
 ```
 
 ### Tags demo
@@ -33,7 +33,7 @@ state: { selection: '' }
 showSource: true
 state: { tags: [] }
 ---
-<Row>
+<div>
 	<FormGroup>
 		<Label>Current tags: {JSON.stringify(state.tags)}</Label>
 		<Typeahead
@@ -46,5 +46,5 @@ state: { tags: [] }
 			selectHintOnEnter
 		/>
 	</FormGroup>
-</Row>
+</div>
 ```
