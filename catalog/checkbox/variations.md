@@ -4,13 +4,13 @@
 showSource: true
 state: { isChecked: false }
 ---
-<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
+<CheckboxDemo>
 	<Checkbox
 		onClick={() => setState({ isChecked: !state.isChecked })}
 		isChecked={state.isChecked}
 		title={'Click me'}
 	/>
-</div>
+</CheckboxDemo>
 ```
 
 ### Custom theme
@@ -18,7 +18,7 @@ state: { isChecked: false }
 showSource: true
 state: { isChecked: false }
 ---
-<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
+<CheckboxDemo>
 	<Checkbox
 		onClick={() => setState({ isChecked: !state.isChecked })}
 		isChecked={state.isChecked}
@@ -28,5 +28,5 @@ state: { isChecked: false }
 			border: 'plum',
 		}}
 	/>
-</div>
+</CheckboxDemo>
 ```

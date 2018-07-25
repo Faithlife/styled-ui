@@ -4,21 +4,7 @@
 showSource: true
 state: { modal: false, value: '' }
 ---
-<div  className="container">
-	<style>
-	{`
-		.container {
-			font-family: 'Source Sans Pro';
-			color: #333333;
-		}
-		.wide-content {
-			width: 600px;
-		}
-		.button-container {
-			margin-right: 16px;
-		}
-	`}
-	</style>
+<ModalDemo>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -40,7 +26,7 @@ state: { modal: false, value: '' }
 			/>
 		</div>
 	</Modal>
-</div>
+</ModalDemo>
 ```
 
 ## Modal with no delete option
@@ -49,21 +35,7 @@ state: { modal: false, value: '' }
 showSource: true
 state: { modal: false, value: '' }
 ---
-<div  className="container">
-	<style>
-	{`
-		.container {
-			font-family: 'Source Sans Pro';
-			color: #333333;
-		}
-		.wide-content {
-			width: 600px;
-		}
-		.button-container {
-			margin-right: 16px;
-		}
-	`}
-	</style>
+<ModalDemo>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -85,7 +57,7 @@ state: { modal: false, value: '' }
 			/>
 		</div>
 	</Modal>
-</div>
+</ModalDemo>
 ```
 
 ## Modal with only a delete option
@@ -94,21 +66,7 @@ state: { modal: false, value: '' }
 showSource: true
 state: { modal: false, value: '' }
 ---
-<div  className="container">
-	<style>
-	{`
-		.container {
-			font-family: 'Source Sans Pro';
-			color: #333333;
-		}
-		.wide-content {
-			width: 600px;
-		}
-		.button-container {
-			margin-right: 16px;
-		}
-	`}
-	</style>
+<ModalDemo>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -129,7 +87,7 @@ state: { modal: false, value: '' }
 			/>
 		</div>
 	</Modal>
-</div>
+</ModalDemo>
 ```
 
 ## Modal with stacked buttons
@@ -140,21 +98,7 @@ Modal buttons stack at 320px for 3 buttons configurations and 220px for 1 or 2 b
 showSource: true
 state: { modal: false, value: '' }
 ---
-<div  className="container">
-	<style>
-	{`
-		.container {
-			font-family: 'Source Sans Pro';
-			color: #333333;
-		}
-		.stacked-content {
-			width: 240px;
-		}
-		.button-container {
-			margin-right: 16px;
-		}
-	`}
-	</style>
+<ModalDemo>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -177,7 +121,7 @@ state: { modal: false, value: '' }
 			/>
 		</div>
 	</Modal>
-</div>
+</ModalDemo>
 ```
 
 ## Modal with custom footer
@@ -186,21 +130,7 @@ state: { modal: false, value: '' }
 showSource: true
 state: { modal: false, value: '' }
 ---
-<div  className="container">
-	<style>
-	{`
-		.container {
-			font-family: 'Source Sans Pro';
-			color: #333333;
-		}
-		.content {
-			width: 100%;
-		}
-		.button-container {
-			margin-right: 16px;
-		}
-	`}
-	</style>
+<ModalDemo>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -230,5 +160,5 @@ state: { modal: false, value: '' }
 			/>
 		</div>
 	</Modal>
-</div>
+</ModalDemo>
 ```

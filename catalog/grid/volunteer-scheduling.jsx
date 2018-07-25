@@ -184,7 +184,7 @@ class GridDemo extends Component {
 
 	render() {
 		return (
-			<Container>
+			<div>
 				<Row>
 					<Col>
 						<Button className="m-1" size="sm" outline color="primary" onClick={this.updateGrid}>
@@ -209,7 +209,7 @@ class GridDemo extends Component {
 						rowStyle={{ 'border-bottom': '1px solid #dbdbdb' }}
 					/>
 				</div>
-			</Container>
+			</div>
 		);
 	}
 }
@@ -217,13 +217,13 @@ class GridDemo extends Component {
 export class VolunteerScheduling extends Component {
 	render() {
 		return (
-			<Container>
+			<div>
 				<Row>
 					<Col>
 						<GridDemo />
 					</Col>
 				</Row>
-			</Container>
+			</div>
 		);
 	}
 }

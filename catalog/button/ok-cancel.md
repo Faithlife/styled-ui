@@ -1,14 +1,14 @@
 ```react
 showSource: true
 ---
-<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
+<ButtonDemo>
 	<Button primaryOutline medium theme={{ width: '80px' }}>
 		Cancel
 	</Button>
 	<Button primary medium theme={{ width: '80px' }}>
 		OK
 	</Button>
-</div>
+</ButtonDemo>
 ```
 
 It's common to need both a commit action ("OK", "Done", "Save") right next to a cancel action. Faithlife house style is:

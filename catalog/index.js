@@ -46,6 +46,15 @@ const pages = [
 					RowWithMargin: styled(Bootstrap.Row)`
 						margin-bottom: 1rem;
 					`,
+					LayoutGridDemo: styled.div`
+						.container .row > [class^='col'] {
+							padding-top: 0.75rem;
+							padding-bottom: 0.75rem;
+							background-color: #e5edf5;
+							border: 1px solid #c9c1d5;
+							color: #5f5f5f;
+						}
+					`,
 				},
 			},
 		],
@@ -90,13 +99,27 @@ const pages = [
 				path: '/button/variations',
 				title: 'Button Variations',
 				content: pageLoader(() => import('./button/variations.md')),
-				imports: { Button },
+				imports: {
+					Button,
+					ButtonDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
+				},
 			},
 			{
 				path: '/button/ok-cancel',
 				title: 'Button OK Cancel',
 				content: pageLoader(() => import('./button/ok-cancel.md')),
-				imports: { Button },
+				imports: {
+					Button,
+					ButtonDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
+				},
 			},
 			{
 				path: '/button/documentation',
@@ -108,7 +131,14 @@ const pages = [
 				path: '/checkbox/variations',
 				title: 'Checkbox Variations',
 				content: pageLoader(() => import('./checkbox/variations.md')),
-				imports: { Checkbox },
+				imports: {
+					Checkbox,
+					CheckboxDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
+				},
 			},
 			{
 				path: '/checkbox/documentation',
@@ -120,7 +150,29 @@ const pages = [
 				path: '/modal/variations',
 				title: 'Modal Variations',
 				content: pageLoader(() => import('./modal/variations.md')),
-				imports: { Input: Bootstrap.Input, Modal, ModalFooter, Button, delayPromise },
+				imports: {
+					Input: Bootstrap.Input,
+					Modal,
+					ModalFooter,
+					Button,
+					delayPromise,
+					ModalDemo: styled.div`
+						font-family: 'Source Sans Pro';
+						color: #333333;
+
+						.wide-content {
+							width: 600px;
+						}
+
+						.button-container {
+							margin-right: 16px;
+						}
+
+						.stacked-content {
+							width: 240px;
+						}
+					`,
+				},
 			},
 			{
 				path: '/modal/documentation',

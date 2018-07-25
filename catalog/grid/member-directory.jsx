@@ -157,25 +157,15 @@ export class MemberDirectory extends Component {
 
 	render() {
 		return (
-			<Container>
-				<Row>
-					<Col>
-						<Button className="m-1" size="sm" outline color="primary" onClick={this.updateGrid}>
-							Update grid
-						</Button>
-					</Col>
-					<Col>
-						<Button
-							className="m-1"
-							size="sm"
-							outline
-							color="primary"
-							onClick={this.toggleToolPanel}
-						>
-							Toggle tool panel
-						</Button>
-					</Col>
-				</Row>
+			<div>
+				<div>
+					<Button className="m-1" size="sm" outline color="primary" onClick={this.updateGrid}>
+						Update grid
+					</Button>
+					<Button className="m-1" size="sm" outline color="primary" onClick={this.toggleToolPanel}>
+						Toggle tool panel
+					</Button>
+				</div>
 				<div style={{ height: 525, width: '100%' }} className="ag-theme-faithlife">
 					<AgGridReact
 						colResizeDefault="shift"
@@ -202,7 +192,7 @@ export class MemberDirectory extends Component {
 						rowStyle={{ 'border-bottom': '1px solid #dbdbdb' }}
 					/>
 				</div>
-			</Container>
+			</div>
 		);
 	}
 }

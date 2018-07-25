@@ -7,7 +7,7 @@ Buttons allow users to command the computer to take some action. Buttons, like a
 ```react
 showSource: true
 ---
-<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
+<ButtonDemo>
 	<Button primary small>
 		Small
 	</Button>
@@ -20,7 +20,7 @@ showSource: true
 	<Button primary extraLarge>
 		Extra Large
 	</Button>
-</div>
+</ButtonDemo>
 ```
 
 ### Supported style customizations
@@ -29,7 +29,7 @@ Do not use the `style` prop to style this component (it will be ignored). Instea
 ```react
 showSource: true
 ---
-<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
+<ButtonDemo>
 	<Button primary large theme={{ defaultColor: 'plum', hoverColor: 'darkslateblue' }}>
 		Plum
 	</Button>
@@ -39,7 +39,7 @@ showSource: true
 	<Button primary theme={{ fontSize: '12px', padding: '8px' }}>
 		12px Font, 8px Padding
 	</Button>
-</div>
+</ButtonDemo>
 ```
 
 
@@ -54,7 +54,7 @@ showSource: true
 ```react
 showSource: true
 ---
-<div className="container"><style>{`.container > * { margin: 8px; font-family: 'Source Sans Pro' }`}</style>
+<ButtonDemo>
 	<Button primary medium>
 		Primary
 	</Button>
@@ -70,7 +70,7 @@ showSource: true
 	<div>
 		Here is some text with an inline <Button link>link button</Button>.
 	</div>
-</div>
+</ButtonDemo>
 ```
 
 * `primary` -- for the most important or most common action for a user to take in a given context/scope. This button variant grabs the user's attention. In marketing pages, this style is for the "call to action" on a page.
@@ -83,7 +83,7 @@ showSource: true
 ```react
 showSource: true
 ---
-<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
+<ButtonDemo>
 	<Button primary medium disabled>
 		Primary
 	</Button>
@@ -93,7 +93,7 @@ showSource: true
 	<Button minor medium disabled>
 		Minor
 	</Button>
-</div>
+</ButtonDemo>
 ```
 
 ## Button Text
@@ -115,7 +115,7 @@ A product sales page enables three possible user actions: Buy the product, rent 
 ```react
 showSource: true
 ---
-<div className="container"><style>{`.container > * { margin: 8px; }`}</style>
+<ButtonDemo>
 	<Button primary medium>
 		Buy now
 	</Button>
@@ -125,5 +125,5 @@ showSource: true
 	<Button minor medium>
 		Learn more
 	</Button>
-</div>
+</ButtonDemo>
 ```
