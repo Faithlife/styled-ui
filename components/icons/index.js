@@ -40,8 +40,8 @@ export const Close = props => (
 	</svg>
 );
 
-export const LightBulbL = () => (
-	<svg xmlns="http://www.w3.org/2000/svg" width="17" height="18">
+export const LightBulbL = props => (
+	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18">
 		<g fill="none" fillRule="evenodd">
 			<path
 				fill="#0174B9"
@@ -53,8 +53,8 @@ export const LightBulbL = () => (
 	</svg>
 );
 
-export const LightBulbM = () => (
-	<svg xmlns="http://www.w3.org/2000/svg" width="17" height="18">
+export const LightBulbM = props => (
+	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18">
 		<g fill="none" fillRule="evenodd">
 			<path
 				fill="#0174B9"
@@ -68,8 +68,8 @@ export const LightBulbM = () => (
 		</g>
 	</svg>
 );
-export const LightBulbH = () => (
-	<svg xmlns="http://www.w3.org/2000/svg" width="17" height="18">
+export const LightBulbH = props => (
+	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18">
 		<g fill="none" fillRule="evenodd">
 			<path
 				fill="#0174B9"
@@ -84,8 +84,8 @@ export const LightBulbH = () => (
 	</svg>
 );
 
-export const OKCircle = () => (
-	<svg xmlns="http://www.w3.org/2000/svg" width="17" height="18">
+export const OKCircle = props => (
+	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18">
 		<g fill="none" fillRule="evenodd">
 			<path
 				fill="#0174B9"
@@ -100,8 +100,8 @@ export const OKCircle = () => (
 	</svg>
 );
 
-export const KebabVertical = () => (
-	<svg viewBox="0 0 62 62" xmlns="http://www.w3.org/2000/svg">
+export const KebabVertical = props => (
+	<svg {...props} viewBox="0 0 62 62" xmlns="http://www.w3.org/2000/svg">
 		<path
 			transform="rotate(90 31,31)"
 			d="m8.016,36.5c3.047,0 5.516,-2.462 5.516,-5.5s-2.47,-5.5 -5.516,-5.5s-5.516,2.462 -5.516,5.5s2.47,5.5 5.516,5.5zm22.984,0c3.046,0 5.516,-2.462 5.516,-5.5s-2.47,-5.5 -5.516,-5.5s-5.516,2.462 -5.516,5.5s2.47,5.5 5.516,5.5zm22.984,0c3.046,0 5.516,-2.462 5.516,-5.5s-2.47,-5.5 -5.516,-5.5c-3.047,0 -5.516,2.462 -5.516,5.5s2.47,5.5 5.516,5.5z"
