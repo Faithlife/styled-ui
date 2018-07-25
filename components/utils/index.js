@@ -1,3 +1,5 @@
+export { BootstrapContainer, wrapBootstrap } from './bootstrap-container.jsx';
+
 export function applyVariations(component, variationMap, props) {
 	let wrappedComponent = component;
 	const filteredProps = { ...props };

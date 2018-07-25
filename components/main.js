@@ -7,7 +7,4 @@ export { Checkbox } from './check-box/component.jsx';
 export { Button } from './demo-button/component.jsx';
 export { Bootstrap } from './bootstrap';
 export { LoadingSpinner } from './loading-spinner/component.jsx';
-export * as TextInput from './text-input';
-export * as InferredText from './inferred-text';
 export { Modal, ModalFooter } from './modal';
-export { Typeahead } from './typeahead';

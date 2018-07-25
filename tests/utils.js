@@ -1,3 +1,4 @@
+/* globals describe, it */
 import assert from 'assert';
 import { applyVariations } from '../components/utils';
 

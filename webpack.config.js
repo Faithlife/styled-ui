@@ -7,6 +7,7 @@ module.exports = {
 		main: './components/main.js',
 		deprecated: './components/deprecated/index.js',
 		'ag-grid': './components/grid/index.js',
+		'text-input': './components/text-input/index.js',
 	},
 	devtool: 'sourcemap',
 	output: {

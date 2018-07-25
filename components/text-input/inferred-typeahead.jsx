@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Typeahead } from '../typeahead';
-import { BootstrapContainer } from '../bootstrap/util';
+import { BootstrapContainer } from '../utils';
+import { Typeahead } from './typeahead.jsx';
 import { InferredBase } from './inferred-base.jsx';
 
 const StyledTypeahead = styled(({ inferred, ...props }) => <Typeahead {...props} />)`

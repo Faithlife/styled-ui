@@ -1,7 +1,7 @@
 /* eslint-disable import/no-default-export */
 import * as _Bootstrap from 'reactstrap';
 import styled from 'styled-components';
-import { wrapBootstrap } from './util';
+import { wrapBootstrap } from '../utils';
 
 const inlineComponents = ['Button'];
 

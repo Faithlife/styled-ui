@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Bootstrap } from '../main';
 import { InferredBase } from './inferred-base.jsx';
-
-const { InputGroup, Input } = Bootstrap;
+import { Input } from './bootstrap.jsx';
 
 const StyledInput = styled(({ inferred, ...props }) => <Input {...props} />)`
 	&&&,
@@ -43,11 +41,7 @@ export class InferredText extends Component {
 				confidenceSource={confidenceSource}
 				onConfirm={onConfirm}
 			>
-				{props => (
-					<InputGroup>
-						<StyledInput inferred={props.inferred} {...inputProps} />
-					</InputGroup>
-				)}
+				{props => <StyledInput inferred={props.inferred} {...inputProps} />}
 			</InferredBase>
 		);
 	}

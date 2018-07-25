@@ -10,9 +10,8 @@ import {
 	Modal,
 	ModalFooter,
 	LoadingSpinner,
-	InferredText,
-	Typeahead,
 } from '../components/main.js';
+import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
 import { colors } from '../components/shared-styles';
 import { CarouselDemo } from './bootstrap/carousel-demo.jsx';
 import { DocgenTable } from './docgen-table.jsx';
@@ -22,6 +21,7 @@ import { MemberDirectory, VolunteerScheduling } from './grid';
 // so the stylesheets must be built by a separate webpack build.
 import '../dist/main.css';
 import '../dist/ag-grid.css';
+import '../dist/text-input.css';
 
 function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
@@ -48,18 +48,6 @@ const pages = [
 					`,
 				},
 			},
-			{
-				path: '/bootstrap/typeahead',
-				title: 'Typeahead',
-				content: pageLoader(() => import('./bootstrap/typeahead.md')),
-				imports: { Typeahead, ...Bootstrap },
-			},
-			{
-				path: '/bootstrap/inferred',
-				title: 'Inferred Inputs',
-				content: pageLoader(() => import('./bootstrap/inferred.md')),
-				imports: { ...InferredText, ...Bootstrap, DocgenTable },
-			},
 		],
 	},
 	{
@@ -75,6 +63,23 @@ const pages = [
 				title: 'Documentation',
 				path: '/grid/documentation',
 				content: pageLoader(() => import('./grid/documentation.md')),
+			},
+		],
+	},
+	{
+		title: 'Text Input',
+		pages: [
+			{
+				path: '/text-input/typeahead',
+				title: 'Typeahead',
+				content: pageLoader(() => import('./text-input/typeahead.md')),
+				imports: { Typeahead, ...Bootstrap },
+			},
+			{
+				path: '/text-input/inferred',
+				title: 'Inferred Inputs',
+				content: pageLoader(() => import('./text-input/inferred.md')),
+				imports: { InferredText, InferredTypeahead, ...Bootstrap, DocgenTable },
 			},
 		],
 	},

@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { LightBulbH, LightBulbM, LightBulbL, OKCircle } from '../icons';
-import { Bootstrap } from '../main';
-
-const { Popover, PopoverBody } = Bootstrap;
+import { Popover, PopoverBody } from './bootstrap.jsx';
 
 const RelativeContainer = styled.div`
 	position: relative;
