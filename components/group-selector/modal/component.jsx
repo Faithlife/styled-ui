@@ -45,7 +45,9 @@ export class GroupSelectorModal extends React.Component {
 
 	state = {
 		searchInputValue: '',
-		isCreateGroupFocused: false,
+		newChurchName: '',
+		newChurchLocation: '',
+		isCreateGroupOpen: false,
 		modalContent: 'main',
 	};
 
@@ -130,12 +132,12 @@ export class GroupSelectorModal extends React.Component {
 		return groups;
 	};
 
-	setCreateGroupState = focused => {
-		this.setState({ isCreateGroupFocused: focused });
+	toggleCreateGroupState = () => {
+		this.setState(({ isCreateGroupOpen }) => ({ isCreateGroupOpen: !isCreateGroupOpen }));
 	};
 
-	hideCreateGroup = () => {
-		this.setState({ isCreateGroupFocused: false });
+	closeCreateGroup = () => {
+		this.setState({ isCreateGroupOpen: false });
 	};
 
 	toggle = () => {
@@ -152,6 +154,14 @@ export class GroupSelectorModal extends React.Component {
 
 	resetModalState = () => {
 		this.setState({ modalContent: 'main' });
+	};
+
+	onChurchNameInputChange = event => {
+		this.setState({ newChurchName: event.target.value });
+	};
+
+	onChurchLocationInputChange = event => {
+		this.setState({ newChurchLocation: event.target.value });
 	};
 
 	handleSearchInput = event => {
@@ -192,7 +202,7 @@ export class GroupSelectorModal extends React.Component {
 					<Styled.GroupSelectorModalBody>
 						{this.state.modalContent === 'main' && (
 							<div>
-								<div onClick={this.hideCreateGroup}>
+								<div onClick={this.closeCreateGroup}>
 									<Styled.ModalCloseButtonContainer>
 										<Button color="link" onClick={this.toggle}>
 											<Styled.xButton />
@@ -217,14 +227,17 @@ export class GroupSelectorModal extends React.Component {
 										{this.getSearchResults()}
 									</Styled.SearchResultsContainer>
 								</div>
-								<Styled.CreateGroupWrapper
-									position={this.state.isCreateGroupFocused ? '0' : '-109px'}
-								>
+								<Styled.CreateGroupWrapper position={this.state.isCreateGroupOpen ? '0' : '-109px'}>
 									<CreateGroup
-										isCreateGroupFocused={this.state.isCreateGroupFocused}
-										setCreateGroupFocused={this.setCreateGroupState}
+										onClick={this.toggleCreateGroupState}
+										isCreateGroupOpen={this.state.isCreateGroupOpen}
 										searchInputValue={this.state.searchInputValue}
 										handleCreateGroup={this.props.handleCreateGroup}
+										onChurchNameInputChange={this.onChurchNameInputChange}
+										onChurchLocationInputChange={this.onChurchLocationInputChange}
+										newChurchName={this.state.newChurchName}
+										newChurchLocation={this.state.newChurchLocation}
+										toggleActive={this.toggleCreateGroupState}
 									/>
 								</Styled.CreateGroupWrapper>
 							</div>
