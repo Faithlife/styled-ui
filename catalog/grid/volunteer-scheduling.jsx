@@ -187,13 +187,14 @@ class GridDemo extends Component {
 			<Container>
 				<Row>
 					<Col>
-						<Button size="sm" outline color="primary" onClick={this.updateGrid}>
+						<Button className="m-1" size="sm" outline color="primary" onClick={this.updateGrid}>
 							Update grid
 						</Button>
 					</Col>
 				</Row>
 				<div style={{ height: 525, width: '100%' }} className="ag-theme-faithlife">
 					<AgGridReact
+						toolPanelSuppressSideButtons
 						columnDefs={this.state.columnDefs}
 						getRowNodeId={this.getRowNodeId}
 						onCellValueChanged={this.onCellValueChanged}

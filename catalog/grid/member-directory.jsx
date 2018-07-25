@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-enterprise';
 import styled from 'styled-components';
+import debounce from 'lodash.debounce';
 import { Bootstrap } from '../../components/main.js';
 import { KebabVertical } from '../../components/icons';
 import { colors } from '../../components/shared-styles';
@@ -92,14 +93,24 @@ export class MemberDirectory extends Component {
 				width: 60,
 				suppressCellSelection: true,
 				cellStyle: { border: 'none' },
+				pinned: 'right',
 			},
 		],
+		showToolPanel: false,
 	};
+
+	componentDidMount() {
+		window.addEventListener('resize', this.handleResize);
+	}
 
 	componentDidUpdate() {
 		if (this.api) {
 			this.api.setRowData(this.state.rowData);
 		}
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('resize', this.handleResize);
 	}
 
 	getRowNodeId = data => data.guid;
@@ -124,6 +135,10 @@ export class MemberDirectory extends Component {
 		this.api.sizeColumnsToFit();
 	};
 
+	toggleToolPanel = () => {
+		this.setState(state => ({ showToolPanel: !state.showToolPanel }));
+	};
+
 	updateGrid = () => {
 		const rowData = [...this.state.rowData];
 
@@ -136,18 +151,41 @@ export class MemberDirectory extends Component {
 		});
 	};
 
+	handleResize = debounce(() => {
+		this.api.sizeColumnsToFit();
+	}, 100);
+
 	render() {
 		return (
 			<Container>
 				<Row>
 					<Col>
-						<Button size="sm" outline color="primary" onClick={this.updateGrid}>
+						<Button className="m-1" size="sm" outline color="primary" onClick={this.updateGrid}>
 							Update grid
+						</Button>
+					</Col>
+					<Col>
+						<Button
+							className="m-1"
+							size="sm"
+							outline
+							color="primary"
+							onClick={this.toggleToolPanel}
+						>
+							Toggle tool panel
 						</Button>
 					</Col>
 				</Row>
 				<div style={{ height: 525, width: '100%' }} className="ag-theme-faithlife">
 					<AgGridReact
+						colResizeDefault="shift"
+						toolPanelSuppressRowGroups
+						toolPanelSuppressPivotMode
+						toolPanelSuppressValues
+						toolPanelSuppressSideButtons
+						toolPanelSuppressColumnFilter
+						toolPanelSuppressColumnSelectAll
+						showToolPanel={this.state.showToolPanel}
 						columnDefs={this.state.columnDefs}
 						getRowNodeId={this.getRowNodeId}
 						onCellValueChanged={this.onCellValueChanged}
