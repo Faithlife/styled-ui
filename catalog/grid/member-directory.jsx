@@ -6,10 +6,11 @@ import styled from 'styled-components';
 import debounce from 'lodash.debounce';
 import { Bootstrap } from '../../components/main.js';
 import { KebabVertical } from '../../components/icons';
+import { BootstrapContainer } from '../../components/utils';
 import { colors } from '../../components/shared-styles';
 import members from './members.json';
 
-const { Button, Container, Row, Col, Popover, ListGroup, ListGroupItem } = Bootstrap;
+const { Button, Popover, ListGroup, ListGroupItem } = Bootstrap;
 
 const IconContainer = styled.div`
 	display: flex;
@@ -157,7 +158,7 @@ export class MemberDirectory extends Component {
 
 	render() {
 		return (
-			<div>
+			<BootstrapContainer>
 				<div>
 					<Button className="m-1" size="sm" outline color="primary" onClick={this.updateGrid}>
 						Update grid
@@ -192,7 +193,7 @@ export class MemberDirectory extends Component {
 						rowStyle={{ 'border-bottom': '1px solid #dbdbdb' }}
 					/>
 				</div>
-			</div>
+			</BootstrapContainer>
 		);
 	}
 }

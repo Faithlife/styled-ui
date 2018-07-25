@@ -6,7 +6,7 @@ import 'ag-grid-enterprise';
 import { Bootstrap } from '../../components/main.js';
 import { getNextVolunteer, schedule } from './volunteers';
 
-const { Button, Container, Row, Col } = Bootstrap;
+const { Button, Row, Col } = Bootstrap;
 
 const availability = {
 	confirmed: 'confirmed',
