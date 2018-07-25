@@ -4,9 +4,14 @@
 
 Please add changes here when they're committed to the `master` branch, then move to "Released" once the package is published.
 
-* Moved TextInput components to deprecated bundle. They will be dropped on the next major release. Nobody was using these, but it's technically a breaking change. If you really need them back, import them from '@faithlife/styled-ui/dist/deprecated.js'
-
 ## Released
+
+### 1.1.0
+
+* Deprecated custom TextInput controls. They will be dropped on the next major release. It's technically a breaking change, but nobody was using these. If you really need them back, import them from '@faithlife/styled-ui/dist/deprecated.js'
+* Updated Button margins
+* Reduced bundle size of ag-grid style bundle
+* Reduce main JS bundle size by excluding unused module exports
 
 ### 1.0.0
 * **Breaking**: The main component stylesheet is now in `main.css`. Reference this instead of `styles.css`!

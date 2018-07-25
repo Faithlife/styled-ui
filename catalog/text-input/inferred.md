@@ -6,8 +6,7 @@ See the [standard components](/bootstrap/components) page for details on how to 
 ### Inferred typeahead
 
 ```
-import { Bootstrap } from '@faithlife/styled-ui';
-const { InferredTypeahead } = Bootstrap;
+import { InferredTypeahead } from '@faithlife/styled-ui/dist/text-input.js';
 ```
 
 ```react
@@ -32,8 +31,7 @@ state: { value: 'Washington', confirmed: false }
 ### Inferred text input
 
 ```
-import { Bootstrap } from '@faithlife/styled-ui';
-const { InferredText } = Bootstrap;
+import { InferredText } from '@faithlife/styled-ui/dist/text-input.js';
 ```
 
 ```react

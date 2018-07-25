@@ -9,8 +9,7 @@ See the [standard components](/bootstrap/components) page for details on how to 
 [More component demos](http://ericgio.github.io/react-bootstrap-typeahead/)
 
 ```
-import { Bootstrap } from '@faithlife/styled-ui';
-const { Typeahead } = Bootstrap;
+import { Typeahead } from '@faithlife/styled-ui/dist/text-input.js';
 ```
 
 ```react
