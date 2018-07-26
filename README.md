@@ -8,20 +8,23 @@
 
 ### How to contribute
 
-- Clone this repository locally. If you prefer a UI to interact with Github, [Github desktop is a good free tool to use](https://desktop.github.com/)
+- Clone this repository locally.
 - Install [NodeJS](https://nodejs.org/en/download/)
+- Install [Yarn](https://yarnpkg.com/lang/en/docs/install/)
 - From a terminal, run these commands from the project directory
-  - `npm i` to restore packages
+  - `yarn` to restore packages
   - `npm run catalog-start` to start the development environment
   - `npm run precommit` to fix style errors before committing
 - When you're ready to commit your work, create a new branch for your contribution, and then sync your branch with Github
-- Open a pull request via the Github UI to request review
+- Open a pull request via the Github Web UI to request review
 
 ### Why?
-This project addresses problems introduced by creating components from scratch. Often a component from spec gets implemented multiple times, either from Zeplin or forked from an existing control. Each time an implementation happens, inconsistencies are introduced. It's also harder to introduce animations and shadows after the prototype has been built. By using reference components instead,  there's a much higher chance the final products will the contain all margins, animations, and hover states the design calls for.
+
+This project addresses problems introduced by creating components from scratch. Often a component from spec gets implemented multiple times, either from Zeplin or forked from an existing control. Each time an implementation happens, inconsistencies are introduced. It's also harder to introduce animations and shadows after the prototype has been built. By using reference components instead, there's a much higher chance the final products will the contain all margins, animations, and hover states the design calls for.
 
 ### Goals
-- Components in this library must be built with Styled Components + React. Large additional runtime libraries should not be added such as `moment`, but tiny dependencies like `lodash.debounce` are OK.
+
+- Components in this library must be built with [Styled Components](https://www.styled-components.com/) + [React](https://reactjs.org/). Large additional runtime libraries should not be added such as `moment`, but tiny dependencies like `lodash.debounce` are OK.
 - UI components should support basic color theming and should have a variation documented that demos an alternate theme.
 - UI components are simple. For complex components (such as a sortable list control with inline search), consider creating a reusable component in a separate project
 - Style modifications should be approved by the design team before they are merged into this project
@@ -30,4 +33,5 @@ This project addresses problems introduced by creating components from scratch. 
 - Semantic versioning / version history updates when making releases
 
 ### Non-goals
+
 - Use across teams other than Engagement Products (future goal?)
