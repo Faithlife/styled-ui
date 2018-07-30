@@ -33,6 +33,25 @@ export class GroupDropdown extends React.PureComponent {
 		isDropdownOpen: false,
 	};
 
+	dropdownRef = React.createRef();
+
+	componentDidMount = () => {
+		window.addEventListener('mousedown', this.handleClick, false);
+	};
+
+	componentWillUnmount = () => {
+		window.removeEventListener('mousedown', this.handleClick, false);
+	};
+
+	closeDropdown = () => {
+		this.setState({ isDropdownOpen: false });
+	};
+
+	handleClick = event => {
+		if (this.dropdownRef.current.contains(event.target)) return;
+		this.closeDropdown();
+	};
+
 	handleDropdownToggle = () => {
 		this.setState(({ isDropdownOpen }) => ({ isDropdownOpen: !isDropdownOpen }));
 	};
@@ -60,7 +79,7 @@ export class GroupDropdown extends React.PureComponent {
 			/>
 		));
 		return (
-			<Styled.DropdownContainer>
+			<Styled.DropdownContainer innerRef={this.dropdownRef}>
 				<Styled.SelectedGroupContainer>
 					<Styled.SelectedGroup onClick={this.handleDropdownToggle}>
 						<Styled.SelectedGroupAvatar>
