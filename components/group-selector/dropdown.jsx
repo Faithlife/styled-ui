@@ -51,6 +51,7 @@ export class GroupDropdown extends React.PureComponent {
 		const groups = this.props.groups.map(group => (
 			<SimpleGroup
 				key={group.groupId}
+				isSelected={this.props.selectedGroup.groupId === group.groupId}
 				groupId={group.groupId}
 				kind={group.kind}
 				name={group.name}

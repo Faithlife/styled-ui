@@ -43,6 +43,17 @@ export const SimpleGroup = styled.div`
 	}
 `;
 
+export const SelectedSimpleGroup = styled.div`
+	text-align: left;
+	padding: 4px 6px 4px 6px;
+	background-color: #ebf7ff;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #ebf7ff;
+	}
+`;
+
 export const SelectedGroupAvatar = styled.div`
 	width: 32px;
 	height: 32px;
