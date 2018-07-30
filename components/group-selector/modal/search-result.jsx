@@ -12,7 +12,6 @@ export class SearchResult extends React.PureComponent {
 		setModalState: PropTypes.func.isRequired,
 		setSelectedGroupId: PropTypes.func.isRequired,
 		handleGetStarted: PropTypes.func.isRequired,
-		handleJoinGroup: PropTypes.func.isRequired,
 		toggle: PropTypes.func.isRequired,
 	};
 
@@ -41,7 +40,7 @@ export class SearchResult extends React.PureComponent {
 	joinGroup = () => {
 		this.props.setModalState('main');
 		this.props.toggle();
-		this.props.handleJoinGroup(this.props.groupId);
+		window.open(`https://www.faithlife.com/${this.state.selectedGroupId}`, 'noopener, noreferrer');
 	};
 
 	componentDidMount() {

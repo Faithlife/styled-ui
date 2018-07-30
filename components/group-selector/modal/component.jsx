@@ -37,9 +37,6 @@ export class GroupSelectorModal extends React.Component {
 		groupSearchResults: PropTypes.array,
 		handleCreateGroup: PropTypes.func.isRequired,
 		handleGetStartedClick: PropTypes.func.isRequired,
-		handleRequestClick: PropTypes.func.isRequired,
-		handleEditClick: PropTypes.func.isRequired,
-		handleJoinGroupClick: PropTypes.func.isRequired,
 	};
 
 	state = {
@@ -48,6 +45,7 @@ export class GroupSelectorModal extends React.Component {
 		newChurchLocation: '',
 		isCreateGroupOpen: false,
 		modalContent: 'main',
+		selectedGroupId: -1,
 	};
 
 	clearSearchInput = () => {
@@ -67,13 +65,12 @@ export class GroupSelectorModal extends React.Component {
 				membershipKind={group.membershipKind}
 				relationshipKind={group.relationshipKind}
 				handleGetStartedClick={this.handleGetStarted}
-				handleRequestClick={this.handleRequestAdmin}
-				handleEditClick={this.handleEdit}
-				handleJoinGroupClick={this.handleJoinGroup}
+				handleRequestClick={this.redirectToGroup}
+				handleEditClick={this.redirectToGroup}
+				handleJoinGroupClick={this.redirectToGroup}
 				setModalState={this.setModalState}
 				setSelectedGroupId={this.setSelectedGroupId}
 				handleGetStarted={this.handleGetStarted}
-				handleJoinGroup={this.handleJoinGroup}
 				toggle={this.toggle}
 			/>
 		));
@@ -92,13 +89,12 @@ export class GroupSelectorModal extends React.Component {
 					membershipKind={group.membershipKind}
 					relationshipKind={group.relationshipKind}
 					handleGetStartedClick={this.handleGetStarted}
-					handleRequestClick={this.handleRequestAdmin}
+					handleRequestClick={this.redirectToGroup}
 					handleEditClick={this.handleEdit}
-					handleJoinGroupClick={this.handleJoinGroup}
+					handleJoinGroupClick={this.redirectToGroup}
 					setModalState={this.setModalState}
 					setSelectedGroupId={this.setSelectedGroupId}
 					handleGetStarted={this.handleGetStarted}
-					handleJoinGroup={this.handleJoinGroup}
 					toggle={this.toggle}
 				/>
 			));
@@ -140,6 +136,11 @@ export class GroupSelectorModal extends React.Component {
 		this.setState({ newChurchLocation: event.target.value });
 	};
 
+	redirectToGroup = () => {
+		this.setModalState('main');
+		window.open(`https://www.faithlife.com/${this.state.selectedGroupId}`, 'noopener, noreferrer');
+	};
+
 	handleSearchInput = event => {
 		this.setState({
 			searchInputValue: event.target.value,
@@ -155,20 +156,6 @@ export class GroupSelectorModal extends React.Component {
 
 	handleGetStarted = groupId => {
 		this.props.handleGetStartedClick(groupId);
-	};
-
-	handleRequestAdmin = () => {
-		this.setModalState('main');
-		this.props.handleRequestClick(this.state.groupId);
-	};
-
-	handleEdit = () => {
-		this.setModalState('main');
-		this.props.handleEditClick(this.state.groupId);
-	};
-
-	handleJoinGroup = () => {
-		this.props.handleJoinGroupClick(this.state.selectedGroupId);
 	};
 
 	render() {
@@ -234,7 +221,7 @@ export class GroupSelectorModal extends React.Component {
 										Contact a group administrator to request Admin membership
 									</Styled.SecondaryModalText>
 									<Styled.SecondaryModalButtonContainer>
-										<Button color="primary" onClick={this.handleRequestAdmin}>
+										<Button color="primary" onClick={this.redirectToGroup}>
 											Continue
 										</Button>
 									</Styled.SecondaryModalButtonContainer>
@@ -260,7 +247,7 @@ export class GroupSelectorModal extends React.Component {
 										Visit the group settings page to change
 									</Styled.SecondaryModalText>
 									<Styled.SecondaryModalButtonContainer>
-										<Button color="primary" onClick={this.handleEdit}>
+										<Button color="primary" onClick={this.redirectToGroup}>
 											Change to Church
 										</Button>
 									</Styled.SecondaryModalButtonContainer>

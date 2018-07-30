@@ -51,12 +51,6 @@ export class GroupSelector extends React.Component {
 		groupSearchResults: PropTypes.array,
 		/** action that should be taken when user selects group with proper permissions */
 		handleGetStartedClick: PropTypes.func.isRequired,
-		/** function to execute when user wants to request access to a group */
-		handleRequestClick: PropTypes.func.isRequired,
-		/** function to execute when user wants to change group type to 'church' */
-		handleEditClick: PropTypes.func.isRequired,
-		/** function to execute when user wants to join a group displayed in a search result */
-		handleJoinGroupClick: PropTypes.func.isRequired,
 	};
 	state = {
 		newGroupName: '',
@@ -130,9 +124,6 @@ export class GroupSelector extends React.Component {
 					groupSearchResults={this.props.groupSearchResults}
 					handleCreateGroup={this.props.handleCreateGroup}
 					handleGetStartedClick={this.props.handleGetStartedClick}
-					handleRequestClick={this.props.handleRequestClick}
-					handleEditClick={this.props.handleEditClick}
-					handleJoinGroupClick={this.props.handleJoinGroupClick}
 				/>
 			</div>
 		);
