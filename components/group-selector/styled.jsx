@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Bootstrap } from '../../components/main.js';
 
-const { Button, Input, InputGroup, InputGroupAddon, Label, ModalBody } = Bootstrap;
+const { Alert, Button, Input, InputGroup, InputGroupAddon, Label, ModalBody } = Bootstrap;
 
 export const GroupSelector = styled.div`
 	max-width: 100%;
@@ -11,7 +11,7 @@ export const GroupSelector = styled.div`
 	padding-bottom: 6px;
 `;
 
-export const GroupSelectorSignInButton = styled.div`
+export const GroupSelectorSignInAlert = styled(Alert)`
 	padding-bottom: 6px;
 	text-align: left;
 `;

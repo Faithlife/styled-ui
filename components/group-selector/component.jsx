@@ -109,11 +109,17 @@ export class GroupSelector extends React.Component {
 						</InputGroup>
 					)}
 					{this.props.groupSelectorView === 'sign-in' && (
-						<Styled.GroupSelectorSignInButton>
-							<Button color="primary" onClick={this.props.handleSignInClick}>
+						<Styled.GroupSelectorSignInAlert color="primary" style={{ lineHeight: 0.9 }}>
+							<Button
+								color="link"
+								size="sm"
+								onClick={this.props.handleSignInClick}
+								style={{ padding: 0, paddingBottom: 1, fontSize: 9 }}
+							>
 								Sign In
-							</Button>
-						</Styled.GroupSelectorSignInButton>
+							</Button>{' '}
+							to add items to your catalog.
+						</Styled.GroupSelectorSignInAlert>
 					)}
 				</Styled.GroupSelector>
 				<GroupSelectorModal
