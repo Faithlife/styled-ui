@@ -21,6 +21,7 @@ export class GroupSelectorModal extends React.Component {
 		// 		avatarUrl: PropTypes.string,
 		// 		membershipKind: PropTypes.string,
 		// 		relationshipKind: PropTypes.string,
+		//		claimable: string,
 		// 	}),
 		// ).isRequired,
 		groups: PropTypes.array.isRequired,
@@ -32,11 +33,13 @@ export class GroupSelectorModal extends React.Component {
 		// 		avatarUrl: PropTypes.string,
 		// 		membershipKind: PropTypes.string,
 		// 		relationshipKind: PropTypes.string,
+		//		claimable: string,
 		// 	}),
 		// ),
 		groupSearchResults: PropTypes.array,
 		handleCreateGroup: PropTypes.func.isRequired,
 		handleGetStartedClick: PropTypes.func.isRequired,
+		handleClaimGroupClick: PropTypes.func.isRequired,
 	};
 
 	state = {
@@ -68,6 +71,7 @@ export class GroupSelectorModal extends React.Component {
 				handleRequestClick={this.redirectToGroup}
 				handleEditClick={this.redirectToGroup}
 				handleJoinGroupClick={this.redirectToGroup}
+				handleClaimGroupClick={this.handleClaimGroup}
 				setModalState={this.setModalState}
 				setSelectedGroupId={this.setSelectedGroupId}
 				handleGetStarted={this.handleGetStarted}
@@ -92,6 +96,7 @@ export class GroupSelectorModal extends React.Component {
 					handleRequestClick={this.redirectToGroup}
 					handleEditClick={this.handleEdit}
 					handleJoinGroupClick={this.redirectToGroup}
+					handleClaimGroupClick={this.handleClaimGroup}
 					setModalState={this.setModalState}
 					setSelectedGroupId={this.setSelectedGroupId}
 					handleGetStarted={this.handleGetStarted}
@@ -156,6 +161,10 @@ export class GroupSelectorModal extends React.Component {
 
 	handleGetStarted = groupId => {
 		this.props.handleGetStartedClick(groupId);
+	};
+
+	handleClaimGroup = groupId => {
+		this.props.handleClaimGroupClick(groupId);
 	};
 
 	render() {

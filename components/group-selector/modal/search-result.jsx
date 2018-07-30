@@ -12,13 +12,19 @@ export class SearchResult extends React.PureComponent {
 		setModalState: PropTypes.func.isRequired,
 		setSelectedGroupId: PropTypes.func.isRequired,
 		handleGetStarted: PropTypes.func.isRequired,
+		handleClaimGroupClick: PropTypes.func.isRequired,
 		toggle: PropTypes.func.isRequired,
+		claimable: PropTypes.string,
 	};
 
 	state = {
 		message: <p />,
 		membershipLine: <p />,
 		button: <p />,
+	};
+
+	claimGroup = () => {
+		this.props.handleClaimGroupClick(this.props.groupId);
 	};
 
 	getStarted = () => {
@@ -48,7 +54,20 @@ export class SearchResult extends React.PureComponent {
 	}
 
 	getSearchResultDetails = () => {
-		if (this.props.membershipKind === 'none') {
+		if (this.props.claimable === 'true') {
+			// message = <p className={styles.searchResultMessage}>This is an empty group</p>;
+			// buttonText = uiStrings.claimGroup;
+			this.setState({
+				message: <Styled.SearchResultMessage>This is an empty group</Styled.SearchResultMessage>,
+			});
+			this.setState({
+				button: (
+					<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.claimGroup}>
+						Claim
+					</Styled.SearchResultButton>
+				),
+			});
+		} else if (this.props.membershipKind === 'none') {
 			this.setState({
 				message: (
 					<Styled.SearchResultMessage>

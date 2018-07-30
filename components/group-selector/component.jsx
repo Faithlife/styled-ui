@@ -35,6 +35,7 @@ export class GroupSelector extends React.Component {
 		// 		kind: PropTypes.string,
 		// 		avatarUrl: PropTypes.string,
 		// 		membershipKind: PropTypes.string,
+		//		claimable: string,
 		// 	}),
 		// ).isRequired,
 		groups: PropTypes.array.isRequired,
@@ -46,11 +47,13 @@ export class GroupSelector extends React.Component {
 		// 		kind: PropTypes.string,
 		// 		avatarUrl: PropTypes.string,
 		// 		membershipKind: PropTypes.string,
+		//		claimable: string,
 		// 	}),
 		// ),
 		groupSearchResults: PropTypes.array,
 		/** action that should be taken when user selects group with proper permissions */
 		handleGetStartedClick: PropTypes.func.isRequired,
+		handleClaimGroupClick: PropTypes.func.isRequired,
 	};
 	state = {
 		newGroupName: '',
@@ -80,7 +83,7 @@ export class GroupSelector extends React.Component {
 		const selectedGroup = this.getGroup(this.props.selectedGroupId);
 		return (
 			<div>
-				<Styled.GroupSelector>
+				<Styled.GroupSelector tabIndex="0">
 					{this.props.groupSelectorView === 'fetching' && (
 						<Styled.SelectedGroupContainer>
 							<Styled.SelectedGroup>
@@ -123,6 +126,7 @@ export class GroupSelector extends React.Component {
 					groupSearchResults={this.props.groupSearchResults}
 					handleCreateGroup={this.props.handleCreateGroup}
 					handleGetStartedClick={this.props.handleGetStartedClick}
+					handleClaimGroupClick={this.props.handleClaimGroupClick}
 				/>
 			</div>
 		);
