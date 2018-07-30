@@ -5,7 +5,7 @@ import * as Styled from './styled.jsx';
 import { GroupDropdown } from './dropdown.jsx';
 import { GroupSelectorModal } from './modal/component.jsx';
 
-const { Button, InputGroup, InputGroupAddon } = Bootstrap;
+const { Button } = Bootstrap;
 const defaultGroup = {
 	name: '',
 	groupId: -1,
@@ -97,16 +97,9 @@ export class GroupSelector extends React.Component {
 						/>
 					)}
 					{this.props.groupSelectorView === 'no-groups' && (
-						<InputGroup>
-							<Styled.GroupSelectorInputContainer
-								type="text"
-								placeholder="Create Group"
-								value={this.state.newGroupName}
-								onChange={this.handleTextInput}
-								onKeyPress={this.handleKeyPress}
-							/>
-							<InputGroupAddon addonType="append" />
-						</InputGroup>
+						<Button color="primary" onClick={this.handleChangeModalState}>
+							Find or add Church
+						</Button>
 					)}
 					{this.props.groupSelectorView === 'sign-in' && (
 						<Styled.GroupSelectorSignInAlert color="primary" style={{ lineHeight: 0.9 }}>
