@@ -6,6 +6,9 @@ Please add changes here when they're committed to the `master` branch, then move
 
 ## Released
 
+### 1.2.2
+* Fixed a style issue if text-input was not already wrapped in a bootstrap element
+
 ### 1.2.1
 * Fixed a few oversights in Help Box control
 
