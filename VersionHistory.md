@@ -6,6 +6,10 @@ Please add changes here when they're committed to the `master` branch, then move
 
 ## Released
 
+### 1.2.0
+* check-box now supports different button types (needed for react-jsonschema-form)
+* Added blue Help Box control
+
 ### 1.1.0
 
 * Deprecated custom TextInput controls. They will be dropped on the next major release. It's technically a breaking change, but nobody was using these. If you really need them back, import them from '@faithlife/styled-ui/dist/deprecated.js'
