@@ -59,6 +59,11 @@ const pages = [
 					`,
 				},
 			},
+			{
+				path: '/bootstrap/stylesheet',
+				title: 'Stylesheet',
+				content: pageLoader(() => import('./bootstrap/stylesheet.md')),
+			},
 		],
 	},
 	{

@@ -1,13 +1,16 @@
 Most Bootstrap 4 components can be used in existing projects, powered by Reactstrap.
 
-Bootstrap components expect an opinionated CSS reset to be present. When using a component from this library, it will be automatically wrapped in an outer container element with the CSS reset styles applied to it. If the component contains other Bootstrap components (e.g. a group of form elements), only the outer-most component will be wrapped.
+```hint
+These components require the [Faithlife Bootstrap base stylesheet](/bootstrap/stylesheet) to be loaded globally in your app.
+```
 
 ## How to use
 
 Import the scoped Bootstrap stylesheet into your application:
 ```
 import { Bootstrap } from '@faithlife/styled-ui';
-import '@faithlife/styled-ui/dist/main.css';
+
+const { Button, InputGroup } = Bootstrap;
 
 const MyComponent = props => <Button color="primary">primary</Button>;
 

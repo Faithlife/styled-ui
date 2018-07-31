@@ -1,9 +1,10 @@
 A typeahead control with keyboard navigation.
 
-Source: [`react-bootstrap-typeahead`](https://github.com/Faithlife/react-bootstrap-typeahead)
+```hint
+These components require the [Faithlife Bootstrap base stylesheet](/bootstrap/stylesheet) to be loaded globally in your app.
+```
 
-## How to use
-See the [standard components](/bootstrap/components) page for details on how to import the stylesheet into your project.
+Source: [`react-bootstrap-typeahead`](https://github.com/Faithlife/react-bootstrap-typeahead)
 
 [Component documentation](https://github.com/Faithlife/react-bootstrap-typeahead/blob/master/docs/Usage.md)
 [More component demos](http://ericgio.github.io/react-bootstrap-typeahead/)

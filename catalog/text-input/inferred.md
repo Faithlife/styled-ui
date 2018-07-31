@@ -1,12 +1,14 @@
 A text input control with a clickable inline confidence indicator.
 
-## How to use
-See the [standard components](/bootstrap/components) page for details on how to import the stylesheet into your project.
+```hint
+These components require the [Faithlife Bootstrap base stylesheet](/bootstrap/stylesheet) to be loaded globally in your app.
+```
 
 ### Inferred typeahead
 
 ```
 import { InferredTypeahead } from '@faithlife/styled-ui/dist/text-input.js';
+import '@faithlife/dist/text-input.css';
 ```
 
 ```react
