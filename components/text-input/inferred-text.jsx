@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { BootstrapContainer } from '../utils';
 import { InferredBase } from './inferred-base.jsx';
 import { Input } from './bootstrap.jsx';
 
@@ -36,13 +37,15 @@ export class InferredText extends Component {
 	render() {
 		const { confidence, confidenceSource, className, onConfirm, ...inputProps } = this.props;
 		return (
-			<InferredBase
-				confidence={confidence}
-				confidenceSource={confidenceSource}
-				onConfirm={onConfirm}
-			>
-				{props => <StyledInput inferred={props.inferred} {...inputProps} />}
-			</InferredBase>
+			<BootstrapContainer>
+				<InferredBase
+					confidence={confidence}
+					confidenceSource={confidenceSource}
+					onConfirm={onConfirm}
+				>
+					{props => <StyledInput inferred={props.inferred} {...inputProps} />}
+				</InferredBase>
+			</BootstrapContainer>
 		);
 	}
 }

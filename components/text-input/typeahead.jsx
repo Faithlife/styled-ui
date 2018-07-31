@@ -1,8 +1,10 @@
+import React from 'react';
 import styled from 'styled-components';
 import { Typeahead as _Typeahead } from 'react-bootstrap-typeahead';
+import { BootstrapContainer } from '../utils';
 import './custom.scss';
 
-export const Typeahead = styled(_Typeahead)`
+const StyledTypeahead = styled(_Typeahead)`
 	.rbt-highlight-text {
 		padding: 0;
 		font-weight: bold;
@@ -15,3 +17,9 @@ export const Typeahead = styled(_Typeahead)`
 		}
 	}
 `;
+
+export const Typeahead = props => (
+	<BootstrapContainer>
+		<StyledTypeahead {...props} />
+	</BootstrapContainer>
+);
