@@ -14,6 +14,8 @@ export const BulbIcon = styled(LightBulbH)`
 	width: 40px;
 	height: 40px;
 	margin: ${thickness.sixteen};
+	margin-right: 0;
+	flex: none;
 `;
 
 export const BlueBox = styled.div`

@@ -2,7 +2,7 @@
 
 ```react
 <BootstrapContainer>
-	<HelpBox showLightBulb text="Anything not saved will be lost." />
+	<HelpBox showLightBulb>Anything not saved will be lost</HelpBox>
 </BootstrapContainer>
 ```
 
@@ -10,7 +10,7 @@
 
 ```react
 <BootstrapContainer>
-	<HelpBox text="Anything not saved will be lost." />
+	<HelpBox>Anything not saved will be lost</HelpBox>
 </BootstrapContainer>
 ```
 
