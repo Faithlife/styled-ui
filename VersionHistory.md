@@ -7,6 +7,7 @@ Please add changes here when they're committed to the `master` branch, then move
 ## Released
 
 ### 1.2.2
+* Fixed exporting async typeahead control
 * Fixed a style issue if text-input was not already wrapped in a bootstrap element
 
 ### 1.2.1
