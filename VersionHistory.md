@@ -6,6 +6,9 @@ Please add changes here when they're committed to the `master` branch, then move
 
 ## Released
 
+### 1.2.1
+* Fixed a few oversights in Help Box control
+
 ### 1.2.0
 * check-box now supports different button types (needed for react-jsonschema-form)
 * Added blue Help Box control
