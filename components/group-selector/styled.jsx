@@ -48,10 +48,13 @@ export const SelectedSimpleGroup = styled.div`
 	padding: 4px 6px 4px 6px;
 	background-color: #ebf7ff;
 	cursor: pointer;
+`;
 
-	&:hover {
-		background-color: #ebf7ff;
-	}
+export const HoveredSimpleGroup = styled.div`
+	text-align: left;
+	padding: 4px 6px 4px 6px;
+	background-color: #ebf7ff;
+	cursor: pointer;
 `;
 
 export const SelectedGroupAvatar = styled.div`

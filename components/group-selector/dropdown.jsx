@@ -31,6 +31,7 @@ export class GroupDropdown extends React.PureComponent {
 
 	state = {
 		isDropdownOpen: false,
+		hoveredGroupIndex: -1,
 	};
 
 	dropdownRef = React.createRef();
@@ -47,9 +48,38 @@ export class GroupDropdown extends React.PureComponent {
 		this.setState({ isDropdownOpen: false });
 	};
 
+	setHovered = group => {
+		if (this.state.hoveredGroupIndex !== -1)
+			if (group.groupId === this.props.groups[this.state.hoveredGroupIndex].groupId) return true;
+		return false;
+	};
+
 	handleClick = event => {
 		if (this.dropdownRef.current.contains(event.target)) return;
 		this.closeDropdown();
+	};
+
+	handleKeyPress = event => {
+		if (event.key === 'ArrowDown') {
+			const newIndex = this.state.hoveredGroupIndex + 1;
+			if (newIndex === this.props.groups.length) {
+				this.setState({ hoveredGroupIndex: newIndex - 1 });
+				return;
+			}
+			this.setState({ hoveredGroupIndex: newIndex });
+			return;
+		} else if (event.key === 'ArrowUp') {
+			const newIndex = this.state.hoveredGroupIndex - 1;
+
+			if (newIndex < 0) {
+				this.setState({ hoveredGroupIndex: 0 });
+				return;
+			}
+			this.setState({ hoveredGroupIndex: newIndex });
+		} else if (event.key === 'Enter') {
+			this.handleGroupSelection(this.props.groups[this.state.hoveredGroupIndex].groupId);
+			event.preventDefault();
+		}
 	};
 
 	handleDropdownToggle = () => {
@@ -58,7 +88,7 @@ export class GroupDropdown extends React.PureComponent {
 
 	handleGroupSelection = groupId => {
 		this.props.handleSelectionChange(groupId);
-		this.setState({ isDropdownOpen: false });
+		this.closeDropdown();
 	};
 
 	handleDropdownButtonClick = () => {
@@ -71,6 +101,7 @@ export class GroupDropdown extends React.PureComponent {
 			<SimpleGroup
 				key={group.groupId}
 				isSelected={this.props.selectedGroup.groupId === group.groupId}
+				isHovered={this.setHovered(group)}
 				groupId={group.groupId}
 				kind={group.kind}
 				name={group.name}
@@ -81,7 +112,7 @@ export class GroupDropdown extends React.PureComponent {
 		return (
 			<Styled.DropdownContainer innerRef={this.dropdownRef}>
 				<Styled.SelectedGroupContainer>
-					<Styled.SelectedGroup onClick={this.handleDropdownToggle}>
+					<Styled.SelectedGroup onClick={this.handleDropdownToggle} onKeyDown={this.handleKeyPress}>
 						<Styled.SelectedGroupAvatar>
 							{<Avatar group={this.props.selectedGroup} />}
 						</Styled.SelectedGroupAvatar>

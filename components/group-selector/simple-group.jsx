@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './styled.jsx';
 
-export function SimpleGroup({ onClick, groupId, avatar, name, isSelected }) {
+export function SimpleGroup({ onClick, groupId, avatar, name, isSelected, isHovered }) {
 	const child = (
 		<div>
 			<Styled.SimpleGroupAvatar>{avatar}</Styled.SimpleGroupAvatar>
@@ -18,6 +18,12 @@ export function SimpleGroup({ onClick, groupId, avatar, name, isSelected }) {
 				{child}
 			</Styled.SelectedSimpleGroup>
 		);
+	if (isHovered)
+		return (
+			<Styled.HoveredSimpleGroup onClick={() => onClick(groupId)}>
+				{child}
+			</Styled.HoveredSimpleGroup>
+		);
 
 	return <Styled.SimpleGroup onClick={() => onClick(groupId)}>{child}</Styled.SimpleGroup>;
 }
@@ -28,4 +34,5 @@ SimpleGroup.propTypes = {
 	avatar: PropTypes.object.isRequired,
 	name: PropTypes.string.isRequired,
 	isSelected: PropTypes.bool.isRequired,
+	isHovered: PropTypes.bool.isRequired,
 };
