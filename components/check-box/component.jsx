@@ -4,10 +4,10 @@ import { ThemeProvider } from 'styled-components';
 import * as Styled from './styled.jsx';
 
 /** Styled checkbox control (uses a button instead of an input) */
-export function Checkbox({ onClick, title, isChecked, theme }) {
+export function Checkbox({ onClick, title, isChecked, theme, type }) {
 	return (
 		<ThemeProvider theme={theme}>
-			<Styled.CheckboxContainer onClick={onClick}>
+			<Styled.CheckboxContainer onClick={onClick} type={type}>
 				<Styled.CheckboxDiv>
 					<Styled.CheckedIndicator isChecked={isChecked} />
 				</Styled.CheckboxDiv>
@@ -23,6 +23,7 @@ Checkbox.propTypes = {
 	title: PropTypes.string,
 	isChecked: PropTypes.bool,
 	theme: PropTypes.object,
+	type: PropTypes.string,
 };
 
 Checkbox.defaultProps = {
@@ -30,4 +31,5 @@ Checkbox.defaultProps = {
 		primary: '#1E91D6',
 		border: '#95908f',
 	},
+	type: 'button',
 };

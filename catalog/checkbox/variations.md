@@ -9,6 +9,7 @@ state: { isChecked: false }
 		onClick={() => setState({ isChecked: !state.isChecked })}
 		isChecked={state.isChecked}
 		title={'Click me'}
+		type="button"
 	/>
 </CheckboxDemo>
 ```
