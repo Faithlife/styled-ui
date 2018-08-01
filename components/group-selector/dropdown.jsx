@@ -27,6 +27,7 @@ export class GroupDropdown extends React.PureComponent {
 		selectedGroup: PropTypes.object.isRequired,
 		handleSelectionChange: PropTypes.func.isRequired,
 		handleFindChurchButtonClick: PropTypes.func.isRequired,
+		isMobile: PropTypes.bool.isRequired,
 	};
 
 	state = {
@@ -109,24 +110,52 @@ export class GroupDropdown extends React.PureComponent {
 				avatar={<Avatar group={group} />}
 			/>
 		));
+
+		const selectedGroupContents = (
+			<div>
+				<Styled.SelectedGroupAvatar>
+					{<Avatar group={this.props.selectedGroup} />}
+				</Styled.SelectedGroupAvatar>
+				<Styled.SelectedGroupText>{this.props.selectedGroup.name}</Styled.SelectedGroupText>
+			</div>
+		);
+
+		const dropdownWrapperContents = (
+			<div>
+				<Styled.DropdownGroupsContainer>{groups}</Styled.DropdownGroupsContainer>
+				<Styled.DropdownButtonContainer>
+					<Button outline color="primary" onClick={this.handleDropdownButtonClick}>
+						Find or Add Church
+					</Button>
+				</Styled.DropdownButtonContainer>
+			</div>
+		);
 		return (
 			<Styled.DropdownContainer innerRef={this.dropdownRef}>
 				<Styled.SelectedGroupContainer>
-					<Styled.SelectedGroup onClick={this.handleDropdownToggle} onKeyDown={this.handleKeyPress}>
-						<Styled.SelectedGroupAvatar>
-							{<Avatar group={this.props.selectedGroup} />}
-						</Styled.SelectedGroupAvatar>
-						<Styled.SelectedGroupText>{this.props.selectedGroup.name}</Styled.SelectedGroupText>
-					</Styled.SelectedGroup>
+					{!this.props.isMobile && (
+						<Styled.SelectedGroup
+							onClick={this.handleDropdownToggle}
+							onKeyDown={this.handleKeyPress}
+						>
+							{selectedGroupContents}
+						</Styled.SelectedGroup>
+					)}
+					{this.props.isMobile && (
+						<Styled.MobileSelectedGroup
+							onClick={this.handleDropdownToggle}
+							onKeyDown={this.handleKeyPress}
+						>
+							{selectedGroupContents}
+						</Styled.MobileSelectedGroup>
+					)}
 					{this.state.isDropdownOpen && (
-						<Styled.DropdownWrapper>
-							<Styled.DropdownGroupsContainer>{groups}</Styled.DropdownGroupsContainer>
-							<Styled.DropdownButtonContainer>
-								<Button outline color="primary" onClick={this.handleDropdownButtonClick}>
-									Find or Add Church
-								</Button>
-							</Styled.DropdownButtonContainer>
-						</Styled.DropdownWrapper>
+						<div>
+							{!this.props.isMobile && (
+								<Styled.DropdownWrapper>{dropdownWrapperContents}</Styled.DropdownWrapper>
+							)}
+							{this.props.isMobile && <div>{dropdownWrapperContents}</div>}
+						</div>
 					)}
 				</Styled.SelectedGroupContainer>
 			</Styled.DropdownContainer>

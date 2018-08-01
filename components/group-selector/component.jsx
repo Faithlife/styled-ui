@@ -53,7 +53,10 @@ export class GroupSelector extends React.Component {
 		groupSearchResults: PropTypes.array,
 		/** action that should be taken when user selects group with proper permissions */
 		handleGetStartedClick: PropTypes.func.isRequired,
+		/** action that should be taken when user claims group */
 		handleClaimGroupClick: PropTypes.func.isRequired,
+		/** is the dropdown on a mobile view */
+		isMobile: PropTypes.bool.isRequired,
 	};
 	state = {
 		newGroupName: '',
@@ -97,6 +100,7 @@ export class GroupSelector extends React.Component {
 							selectedGroup={selectedGroup}
 							handleSelectionChange={this.props.handleSelectionChange}
 							handleFindChurchButtonClick={this.handleChangeModalState}
+							isMobile={this.props.isMobile}
 						/>
 					)}
 					{this.props.groupSelectorView === 'no-groups' && (

@@ -113,6 +113,18 @@ export const SelectedGroup = styled.button`
 	color: black;
 `;
 
+export const MobileSelectedGroup = styled.button`
+	width: 100%;
+	height: 100%;
+	padding-left: 5px;
+	padding-bottom: 0px;
+	background-color: white;
+	border-radius: 3px;
+	border: 0;
+	cursor: pointer;
+	color: black;
+`;
+
 export const SelectedGroupText = styled.div`
 	font-size: 12px;
 	line-height: 44px;
