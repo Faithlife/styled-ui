@@ -5,5 +5,7 @@ When using a component from this library, it will be automatically wrapped in an
 To import the stylesheet:
 
 ```
-import '@faithlife/dist/main.css';
+import '@faithlife/styled-ui/dist/main.css';
 ```
+
+Make sure webpack is set up to handle stylesheet imports using `css-loader`, or you will get a syntax error during the build.
