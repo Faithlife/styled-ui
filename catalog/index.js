@@ -145,7 +145,26 @@ const pages = [
 				path: '/group-selector/variations',
 				title: 'Group Selector Variations',
 				content: pageLoader(() => import('./group-selector/variations.md')),
-				imports: { GroupSelector },
+				imports: {
+					GroupSelector,
+					Button: Bootstrap.Button,
+					GroupSelectorDemo: styled.div`
+						font-family: 'Source Sans Pro';
+						color: #333333;
+
+						.wide-content {
+							width: 600px;
+						}
+
+						.button-container {
+							margin-right: 16px;
+						}
+
+						.stacked-content {
+							width: 240px;
+						}
+					`,
+				},
 			},
 			{
 				path: '/group-selector/documentation',
