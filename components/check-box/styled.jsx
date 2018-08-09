@@ -21,7 +21,6 @@ export const CheckboxContainer = styled.button`
 	position: relative;
 	border: none;
 	padding: 0;
-	height: 16px;
 	min-width: 0;
 	min-height: 16px;
 	background: transparent;
