@@ -14,6 +14,7 @@
 - Install [Yarn](https://yarnpkg.com/lang/en/docs/install/)
 - From a terminal, run these commands from the project directory
   - `yarn` to restore packages
+  - `yarn build` to build webpack
   - `yarn catalog-start` to start the development environment
   - `yarn precommit` to fix style errors before committing
 - When you're ready to commit your work, create a new branch for your contribution, and then sync your branch with Github
