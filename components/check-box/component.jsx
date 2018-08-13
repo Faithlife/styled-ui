@@ -12,7 +12,7 @@ export function Checkbox({ onClick, title, isChecked, theme, type, children }) {
 					<Styled.CheckedIndicator isChecked={isChecked} />
 				</Styled.CheckboxDiv>
 				{title && <Styled.Label>{title}</Styled.Label>}
-				{children}
+				{children && <Styled.Label>{children}</Styled.Label>}
 			</Styled.CheckboxContainer>
 		</ThemeProvider>
 	);

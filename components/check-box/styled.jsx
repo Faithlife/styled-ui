@@ -62,4 +62,8 @@ export const CheckedIndicator = styled.div`
 
 export const Label = styled.div`
 	margin-left: 22px;
+
+	& + & {
+		margin-left: 6px;
+	}
 `;

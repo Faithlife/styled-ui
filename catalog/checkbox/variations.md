@@ -15,6 +15,7 @@ state: { isChecked: false }
 ```
 
 ### Custom theme
+
 ```react
 showSource: true
 state: { isChecked: false }
@@ -29,5 +30,22 @@ state: { isChecked: false }
 			border: 'plum',
 		}}
 	/>
+</CheckboxDemo>
+```
+
+### Custom label component
+
+```react
+showSource: true
+state: { isChecked: false }
+---
+<CheckboxDemo>
+	<Checkbox
+		onClick={() => setState({ isChecked: !state.isChecked })}
+		isChecked={state.isChecked}
+		type="button"
+	>
+		<span>No, click <b>me</b>!</span>
+	</Checkbox>
 </CheckboxDemo>
 ```
