@@ -1,11 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
 	AsyncTypeahead as _AsyncTypeahead,
 	Typeahead as _Typeahead,
 } from 'react-bootstrap-typeahead';
+import { SolidTriangleIcon as _SolidTriangleIcon } from '../icons';
 import { BootstrapContainer } from '../utils';
 import './custom.scss';
+
+const SolidTriangleIcon = styled(_SolidTriangleIcon)`
+	transform: rotateZ(90deg);
+	color: #7a7a7a;
+	height: 8px;
+	width: 8px;
+`;
 
 const StyledAsyncTypeahead = styled(_AsyncTypeahead)`
 	.rbt-highlight-text {
@@ -35,14 +44,52 @@ const StyledTypeahead = styled(_Typeahead)`
 	}
 `;
 
+const IndicatorContainer = styled.div`
+	position: absolute;
+	right: 6px;
+	top: calc(50% - 4px);
+	z-index: 3;
+	display: flex;
+
+	&:hover {
+		cursor: pointer;
+	}
+`;
+
+const RelativeContainer = styled.div`
+	position: relative;
+`;
+
 export const AsyncTypeahead = props => (
 	<BootstrapContainer>
-		<StyledAsyncTypeahead {...props} />
+		<RelativeContainer>
+			<StyledAsyncTypeahead {...props} />
+			{!props.inferred && (
+				<IndicatorContainer>
+					<SolidTriangleIcon />
+				</IndicatorContainer>
+			)}
+		</RelativeContainer>
 	</BootstrapContainer>
 );
 
 export const Typeahead = props => (
 	<BootstrapContainer>
-		<StyledTypeahead {...props} />
+		<RelativeContainer>
+			<StyledTypeahead {...props} />
+			{!props.inferred && (
+				<IndicatorContainer>
+					<SolidTriangleIcon />
+				</IndicatorContainer>
+			)}
+		</RelativeContainer>
 	</BootstrapContainer>
 );
+
+Typeahead.propTypes = {
+	inferred: PropTypes.bool,
+};
+
+AsyncTypeahead.propTypes = {
+	inferred: PropTypes.bool,
+};

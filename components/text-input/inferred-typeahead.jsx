@@ -5,7 +5,7 @@ import { BootstrapContainer } from '../utils';
 import { Typeahead } from './typeahead.jsx';
 import { InferredBase } from './inferred-base.jsx';
 
-const StyledTypeahead = styled(({ inferred, ...props }) => <Typeahead {...props} />)`
+const StyledTypeahead = styled(props => <Typeahead {...props} />)`
 	&& .rbt-input,
 	&& .rbt-input:focus {
 		${props => (props.inferred ? 'color: #006099' : '')};
@@ -46,6 +46,7 @@ export class InferredTypeahead extends Component {
 					confidence={confidence}
 					confidenceSource={confidenceSource}
 					onConfirm={onConfirm}
+					isDropdown
 				>
 					{props => (
 						<StyledTypeahead
