@@ -60,11 +60,11 @@ const RelativeContainer = styled.div`
 	position: relative;
 `;
 
-export const AsyncTypeahead = props => (
+export const AsyncTypeahead = ({ inferred, ...props }) => (
 	<BootstrapContainer>
 		<RelativeContainer>
 			<StyledAsyncTypeahead {...props} />
-			{!props.inferred && (
+			{!inferred && (
 				<IndicatorContainer>
 					<SolidTriangleIcon />
 				</IndicatorContainer>
@@ -73,11 +73,11 @@ export const AsyncTypeahead = props => (
 	</BootstrapContainer>
 );
 
-export const Typeahead = props => (
+export const Typeahead = ({ inferred, ...props }) => (
 	<BootstrapContainer>
 		<RelativeContainer>
 			<StyledTypeahead {...props} />
-			{!props.inferred && (
+			{!inferred && (
 				<IndicatorContainer>
 					<SolidTriangleIcon />
 				</IndicatorContainer>
