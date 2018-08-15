@@ -6,6 +6,15 @@ This is where the magic happens.
 1. Run `yarn add @faithlife/styled-ui styled-components`.  **Make sure to add styled-ui as a peer dependency to your project if you are hosting it within Faithlife.com (see below)**.
 1. Ship it!
 
+## Guidelines for use
+Use the className prop to control margins, font appearance, etc on an imported component. Prefer not to add style hacks that override the contents of the component (such as a style that uses a pseudo selector to display additional content), since the underlying styles could change in a future version update. If you need this level of customization, copy the component and styles into your own project and continue on from there.
+
+If you're using the included Bootstrap components, you can use the [spacing utilities](https://getbootstrap.com/docs/4.1/utilities/spacing/) in the className prop.
+
+## There are some components in Experimental, should I use those?
+
+We're working on consolidating the Bootstrap components and the components in the Experimental folder. These components are very light-weight and will ultimately replace any Bootstrap components that already exist in this library. You can use them now but some of the props might change in a future update (we'll coordinate with consumers when making breaking changes)
+
 ## How to contribute
 
 1. Follow the directions on the [Github repo](https://github.com/faithlife/styled-ui)
