@@ -15,7 +15,6 @@ import {
 import { BootstrapContainer } from '../components/utils';
 import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
 import { colors } from '../components/shared-styles';
-import { CarouselDemo } from './bootstrap/carousel-demo.jsx';
 import { DocgenTable } from './docgen-table.jsx';
 import { MemberDirectory, VolunteerScheduling } from './grid';
 
@@ -44,7 +43,6 @@ const pages = [
 				content: pageLoader(() => import('./bootstrap/components.md')),
 				imports: {
 					...Bootstrap,
-					CarouselDemo,
 					RowWithMargin: styled(Bootstrap.Row)`
 						margin-bottom: 1rem;
 					`,

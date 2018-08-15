@@ -5,13 +5,49 @@ import { wrapBootstrap } from '../utils';
 
 const inlineComponents = ['Button'];
 
-const Components = Object.keys(_Bootstrap).reduce(
-	(prev, curr) => ({
-		...prev,
-		[curr]: wrapBootstrap(_Bootstrap[curr], inlineComponents.includes(curr)),
-	}),
-	{},
-);
+const supportedComponents = [
+	'Button',
+	'ButtonDropdown',
+	'ButtonGroup',
+	'ButtonToolbar',
+	'Dropdown',
+	'DropdownItem',
+	'DropdownMenu',
+	'DropdownToggle',
+	'Popover',
+	'PopoverContent',
+	'PopoverBody',
+	'PopoverTitle',
+	'PopoverHeader',
+	'PopperContent',
+	'PopperTargetHelper',
+	'Form',
+	'FormFeedback',
+	'FormGroup',
+	'FormText',
+	'Input',
+	'Label',
+	'CustomInput',
+	'UncontrolledButtonDropdown',
+	'UncontrolledDropdown',
+	'Util',
+	'Row',
+	'Col',
+	'Container',
+	'Fade',
+	'UncontrolledTooltip',
+	'Tooltip',
+];
+
+const Components = Object.keys(_Bootstrap)
+	.filter(x => supportedComponents.includes(x))
+	.reduce(
+		(prev, curr) => ({
+			...prev,
+			[curr]: wrapBootstrap(_Bootstrap[curr], inlineComponents.includes(curr)),
+		}),
+		{},
+	);
 
 export default {
 	...Components,
