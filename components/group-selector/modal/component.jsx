@@ -51,6 +51,11 @@ export class GroupSelectorModal extends React.Component {
 		selectedGroupId: -1,
 	};
 
+	createGroupClick = () => {
+		this.toggle();
+		this.props.handleCreateGroup(this.state.newChurchName, this.state.newChurchLocation);
+	};
+
 	clearSearchInput = () => {
 		this.setState({
 			searchInputValue: '',
@@ -113,6 +118,10 @@ export class GroupSelectorModal extends React.Component {
 		this.setState(({ isCreateGroupOpen }) => ({ isCreateGroupOpen: !isCreateGroupOpen }));
 	};
 
+	openCreateGroup = () => {
+		this.setState({ isCreateGroupOpen: true });
+	};
+
 	closeCreateGroup = () => {
 		this.setState({ isCreateGroupOpen: false });
 	};
@@ -150,12 +159,24 @@ export class GroupSelectorModal extends React.Component {
 		this.setState({
 			searchInputValue: event.target.value,
 		});
-		this.props.executeSearch(this.state.searchInputValue);
+		if (
+			event.target.value !== undefined &&
+			event.target.value !== ' ' &&
+			event.target.value !== ''
+		) {
+			this.props.executeSearch(event.target.value);
+		}
 	};
 
 	handleKeyPress = event => {
 		if (event.key === 'Enter') {
-			this.props.executeSearch(this.state.searchInputValue);
+			if (
+				event.target.value !== undefined &&
+				event.target.value !== ' ' &&
+				event.target.value !== ''
+			) {
+				this.props.executeSearch(this.state.searchInputValue);
+			}
 		}
 	};
 
@@ -204,12 +225,12 @@ export class GroupSelectorModal extends React.Component {
 										onClick={this.toggleCreateGroupState}
 										isCreateGroupOpen={this.state.isCreateGroupOpen}
 										searchInputValue={this.state.searchInputValue}
-										handleCreateGroup={this.props.handleCreateGroup}
+										handleCreateGroup={this.createGroupClick}
 										onChurchNameInputChange={this.onChurchNameInputChange}
 										onChurchLocationInputChange={this.onChurchLocationInputChange}
 										newChurchName={this.state.newChurchName}
 										newChurchLocation={this.state.newChurchLocation}
-										toggleActive={this.toggleCreateGroupState}
+										openCreateGroup={this.openCreateGroup}
 									/>
 								</Styled.CreateGroupWrapper>
 							</div>
