@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import icons from './icons';
+import * as icons from './icons.jsx';
 
 export function Avatar({ group, size = '32px' }) {
 	if (group.avatarUrl) {

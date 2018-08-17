@@ -1,3 +1,5 @@
+// These svgs were copied from git/Logos/Sites.Admin
+
 import { createElement } from 'react';
 
 export function Band(props) {
@@ -587,7 +589,7 @@ export function Pericopes(props) {
 	);
 }
 
-export function PresentationTeam(props) {
+export function Proclaim(props) {
 	return createElement(
 		'svg',
 		{ ...props },
