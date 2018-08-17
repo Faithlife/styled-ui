@@ -11,6 +11,7 @@ import {
 	ModalFooter,
 	LoadingSpinner,
 	HelpBox,
+	Collapse,
 } from '../components/main.js';
 import { BootstrapContainer } from '../components/utils';
 import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
@@ -210,6 +211,18 @@ const pages = [
 				title: 'Help Box Documentation',
 				content: pageLoader(() => import('./help-box/documentation.md')),
 				imports: { HelpBox, DocgenTable },
+			},
+			{
+				path: '/collapse/variations',
+				title: 'Collapse Variations',
+				content: pageLoader(() => import('./collapse/variations.md')),
+				imports: { Collapse, BootstrapContainer, Button: Bootstrap.Button },
+			},
+			{
+				path: '/collapse/documentation',
+				title: 'Collapse Documentation',
+				content: pageLoader(() => import('./collapse/documentation.md')),
+				imports: { Collapse, DocgenTable },
 			},
 		],
 	},
