@@ -14,18 +14,18 @@ export function SimpleGroup({ onClick, groupId, avatar, name, isSelected, isHove
 
 	if (isSelected)
 		return (
-			<Styled.SelectedSimpleGroup onClick={() => onClick(groupId)}>
+			<Styled.SelectedSimpleGroup onClick={() => onClick(groupId, name)}>
 				{child}
 			</Styled.SelectedSimpleGroup>
 		);
 	if (isHovered)
 		return (
-			<Styled.HoveredSimpleGroup onClick={() => onClick(groupId)}>
+			<Styled.HoveredSimpleGroup onClick={() => onClick(groupId, name)}>
 				{child}
 			</Styled.HoveredSimpleGroup>
 		);
 
-	return <Styled.SimpleGroup onClick={() => onClick(groupId)}>{child}</Styled.SimpleGroup>;
+	return <Styled.SimpleGroup onClick={() => onClick(groupId, name)}>{child}</Styled.SimpleGroup>;
 }
 
 SimpleGroup.propTypes = {

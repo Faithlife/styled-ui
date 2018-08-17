@@ -78,7 +78,10 @@ export class GroupDropdown extends React.PureComponent {
 			}
 			this.setState({ hoveredGroupIndex: newIndex });
 		} else if (event.key === 'Enter') {
-			this.handleGroupSelection(this.props.groups[this.state.hoveredGroupIndex].groupId);
+			this.handleGroupSelection(
+				this.props.groups[this.state.hoveredGroupIndex].groupId,
+				this.props.groups[this.state.hoveredGroupIndex].name,
+			);
 			event.preventDefault();
 		}
 	};
@@ -87,8 +90,8 @@ export class GroupDropdown extends React.PureComponent {
 		this.setState(({ isDropdownOpen }) => ({ isDropdownOpen: !isDropdownOpen }));
 	};
 
-	handleGroupSelection = groupId => {
-		this.props.handleSelectionChange(groupId);
+	handleGroupSelection = (groupId, name) => {
+		this.props.handleSelectionChange(groupId, name);
 		this.closeDropdown();
 	};
 
