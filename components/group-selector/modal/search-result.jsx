@@ -9,6 +9,7 @@ export class SearchResult extends React.PureComponent {
 		name: PropTypes.string.isRequired,
 		kind: PropTypes.string,
 		membershipKind: PropTypes.string,
+		relationshipKind: PropTypes.string,
 		setModalState: PropTypes.func.isRequired,
 		setSelectedGroupId: PropTypes.func.isRequired,
 		handleGetStarted: PropTypes.func.isRequired,
@@ -49,6 +50,10 @@ export class SearchResult extends React.PureComponent {
 		window.open(`https://www.faithlife.com/${this.state.selectedGroupId}`, 'noopener, noreferrer');
 	};
 
+	changeFirstLetterCase(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+
 	componentDidMount() {
 		this.getSearchResultDetails();
 	}
@@ -67,7 +72,7 @@ export class SearchResult extends React.PureComponent {
 					</Styled.SearchResultButton>
 				),
 			});
-		} else if (this.props.membershipKind === 'none') {
+		} else if (this.props.membershipKind === 'none' || null) {
 			this.setState({
 				message: (
 					<Styled.SearchResultMessage>
@@ -90,7 +95,10 @@ export class SearchResult extends React.PureComponent {
 					</Styled.SearchResultButton>
 				),
 			});
-		} else if (this.props.membershipKind !== 'admin') {
+		} else if (
+			this.props.membershipKind !== 'admin' &&
+			this.props.relationshipKind === 'participant'
+		) {
 			this.setState({
 				message: (
 					<Styled.SearchResultMessage>
@@ -113,7 +121,10 @@ export class SearchResult extends React.PureComponent {
 					</Styled.SearchResultButton>
 				),
 			});
-		} else if (this.props.kind !== 'Church') {
+		} else if (
+			this.props.kind.toLowerCase() !== 'church' &&
+			this.props.membershipKind === 'admin'
+		) {
 			this.setState({
 				message: (
 					<Styled.SearchResultMessage>
@@ -133,6 +144,25 @@ export class SearchResult extends React.PureComponent {
 				button: (
 					<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.editGroupType}>
 						Edit
+					</Styled.SearchResultButton>
+				),
+			});
+		} else if (this.props.relationshipKind === 'none') {
+			this.setState({
+				message: '',
+			});
+			this.setState({
+				membershipLine: (
+					<Styled.SearchResultMembershipLine>
+						You are not a{' '}
+						<Styled.SearchResultHightlightText>Member</Styled.SearchResultHightlightText>
+					</Styled.SearchResultMembershipLine>
+				),
+			});
+			this.setState({
+				button: (
+					<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.joinGroup}>
+						Join Group
 					</Styled.SearchResultButton>
 				),
 			});
@@ -157,12 +187,14 @@ export class SearchResult extends React.PureComponent {
 		}
 	};
 
+	formatGroupKind = () => this.props.kind.replace(/([A-Z])/g, ' $1');
+
 	render() {
 		return (
 			<Styled.SearchResult>
 				<Styled.SearchResultAvatar>{this.props.avatar}</Styled.SearchResultAvatar>
 				<Styled.SearchResultNameText>{this.props.name}</Styled.SearchResultNameText>
-				<Styled.SearchResultGroupKind>{this.props.kind}</Styled.SearchResultGroupKind>
+				<Styled.SearchResultGroupKind>{this.formatGroupKind()}</Styled.SearchResultGroupKind>
 				{this.state.membershipLine}
 				{this.state.message}
 				<Styled.SearchResultButtonContainer>{this.state.button}</Styled.SearchResultButtonContainer>
