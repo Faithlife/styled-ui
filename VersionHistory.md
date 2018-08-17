@@ -6,6 +6,13 @@ Please add changes here when they're committed to the `master` branch, then move
 
 ## Released
 
+### 1.4.0
+* Added 'Collapse' accordion component
+
+### 1.3.0
+* Removed fixed 16px height on check-box (#17)
+* Display children inside check-box component (#19)
+
 ### 1.2.3
 * Fixed another bug when exporting AsyncTypeahead
 
