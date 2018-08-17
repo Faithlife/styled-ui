@@ -201,7 +201,7 @@ export const xButton = styled.div`
 export const SearchResult = styled.div`
 	height: 90px;
 	background-color: white;
-	margin-bottom: 8px;
+	margin: 1px 4px 7px 4px;
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 0 2px 0 rgba(0, 0, 0, 0.12);
 	border-radius: 3px;
 `;
@@ -235,10 +235,10 @@ export const ModalCloseButtonContainer = styled.div`
 `;
 
 export const SearchResultsContainer = styled.div`
-	height: 60%;
+	height: 55%;
 	max-height: 1000px;
 	overflow-y: auto;
-	padding-bottom: 85px;
+	margin-bottom: 85px;
 `;
 
 export const SearchInput = styled(Input)`
@@ -261,6 +261,7 @@ export const SearchInputAddon = styled(InputGroupAddon)`
 	bottom: 0;
 	right: -6px;
 	z-index: 1000;
+	border-radius 100px;
 `;
 
 export const SearchInputGroup = styled(InputGroup)`
