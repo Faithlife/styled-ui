@@ -4,6 +4,10 @@ Most Bootstrap 4 components can be used in existing projects, powered by Reactst
 These components require the [Faithlife Bootstrap base stylesheet](/bootstrap/stylesheet) to be loaded globally in your app.
 ```
 
+## When to use these components
+
+These components can help get teams working on new apps that don't have a lot of extra time. Typically we create the controls that we need from scratch, but unless care is taken, these controls might have accessibility problems. These bootstrap controls leverage the work already done by the Reactstrap and Bootstrap communities to make your application work well. That said, if there is a component provided in this Bootstrap section that also exists elsewhere in this library (such as Button), prefer to use the Faithlife-maintained component.
+
 ## How to use
 
 Import the scoped Bootstrap stylesheet into your application:
@@ -121,3 +125,18 @@ showSource: false
 </div>
 ```
 
+### Popover
+
+```react
+state: { isOpen: false }
+---
+<div>
+	<Button id="Popover1" onClick={() => setState({ isOpen: !state.isOpen })}>
+		Launch Popover
+	</Button>
+	<Popover placement="bottom" isOpen={state.isOpen} target="Popover1" toggle={() => setState({ isOpen: !state.isOpen })}>
+		<PopoverHeader>Popover Title</PopoverHeader>
+		<PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</PopoverBody>
+	</Popover>
+</div>
+```
