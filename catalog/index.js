@@ -65,40 +65,7 @@ const pages = [
 		],
 	},
 	{
-		title: 'Grid',
-		pages: [
-			{
-				title: 'Variations',
-				path: '/grid/variations',
-				content: pageLoader(() => import('./grid/variations.md')),
-				imports: { MemberDirectory, VolunteerScheduling },
-			},
-			{
-				title: 'Documentation',
-				path: '/grid/documentation',
-				content: pageLoader(() => import('./grid/documentation.md')),
-			},
-		],
-	},
-	{
-		title: 'Text Input',
-		pages: [
-			{
-				path: '/text-input/typeahead',
-				title: 'Typeahead',
-				content: pageLoader(() => import('./text-input/typeahead.md')),
-				imports: { Typeahead, ...Bootstrap },
-			},
-			{
-				path: '/text-input/inferred',
-				title: 'Inferred Inputs',
-				content: pageLoader(() => import('./text-input/inferred.md')),
-				imports: { InferredText, InferredTypeahead, ...Bootstrap, DocgenTable },
-			},
-		],
-	},
-	{
-		title: 'Experimental',
+		title: 'Button',
 		pages: [
 			{
 				path: '/button/variations',
@@ -132,6 +99,11 @@ const pages = [
 				content: pageLoader(() => import('./button/documentation.md')),
 				imports: { Button, DocgenTable },
 			},
+		],
+	},
+	{
+		title: 'Checkbox',
+		pages: [
 			{
 				path: '/checkbox/variations',
 				title: 'Checkbox Variations',
@@ -151,6 +123,61 @@ const pages = [
 				content: pageLoader(() => import('./checkbox/documentation.md')),
 				imports: { Checkbox, DocgenTable },
 			},
+		],
+	},
+	{
+		title: 'Grid',
+		pages: [
+			{
+				title: 'Variations',
+				path: '/grid/variations',
+				content: pageLoader(() => import('./grid/variations.md')),
+				imports: { MemberDirectory, VolunteerScheduling },
+			},
+			{
+				title: 'Documentation',
+				path: '/grid/documentation',
+				content: pageLoader(() => import('./grid/documentation.md')),
+			},
+		],
+	},
+	{
+		title: 'Help Box',
+		pages: [
+			{
+				path: '/help-box/variations',
+				title: 'Help Box Variations',
+				content: pageLoader(() => import('./help-box/variations.md')),
+				imports: { HelpBox, BootstrapContainer },
+			},
+			{
+				path: '/help-box/documentation',
+				title: 'Help Box Documentation',
+				content: pageLoader(() => import('./help-box/documentation.md')),
+				imports: { HelpBox, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Loading Spinner',
+		pages: [
+			{
+				path: '/loading-spinner/variations',
+				title: 'Loading Spinner Variations',
+				content: pageLoader(() => import('./loading-spinner/variations.md')),
+				imports: { LoadingSpinner },
+			},
+			{
+				path: '/loading-spinner/documentation',
+				title: 'Loading Spinner Documentation',
+				content: pageLoader(() => import('./loading-spinner/documentation.md')),
+				imports: { LoadingSpinner, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Modal',
+		pages: [
 			{
 				path: '/modal/variations',
 				title: 'Modal Variations',
@@ -185,29 +212,22 @@ const pages = [
 				content: pageLoader(() => import('./modal/documentation.md')),
 				imports: { Modal, DocgenTable },
 			},
+		],
+	},
+	{
+		title: 'Text Input',
+		pages: [
 			{
-				path: '/loading-spinner/variations',
-				title: 'Loading Spinner Variations',
-				content: pageLoader(() => import('./loading-spinner/variations.md')),
-				imports: { LoadingSpinner },
+				path: '/text-input/typeahead',
+				title: 'Typeahead',
+				content: pageLoader(() => import('./text-input/typeahead.md')),
+				imports: { Typeahead, ...Bootstrap },
 			},
 			{
-				path: '/loading-spinner/documentation',
-				title: 'Loading Spinner Documentation',
-				content: pageLoader(() => import('./loading-spinner/documentation.md')),
-				imports: { LoadingSpinner, DocgenTable },
-			},
-			{
-				path: '/help-box/variations',
-				title: 'Help Box Variations',
-				content: pageLoader(() => import('./help-box/variations.md')),
-				imports: { HelpBox, BootstrapContainer },
-			},
-			{
-				path: '/help-box/documentation',
-				title: 'Help Box Documentation',
-				content: pageLoader(() => import('./help-box/documentation.md')),
-				imports: { HelpBox, DocgenTable },
+				path: '/text-input/inferred',
+				title: 'Inferred Inputs',
+				content: pageLoader(() => import('./text-input/inferred.md')),
+				imports: { InferredText, InferredTypeahead, ...Bootstrap, DocgenTable },
 			},
 		],
 	},
