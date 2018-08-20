@@ -142,7 +142,7 @@ const pages = [
 				imports: { Collapse, DocgenTable },
 			},
 		]
-	}
+	},
 	{
 		title: 'Grid',
 		pages: [
