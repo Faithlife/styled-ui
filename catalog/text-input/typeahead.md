@@ -1,6 +1,6 @@
 A typeahead control with keyboard navigation.
 
-```hint
+```hint|directive
 These components require the [Faithlife Bootstrap base stylesheet](/bootstrap/stylesheet) to be loaded globally in your app.
 ```
 

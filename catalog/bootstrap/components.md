@@ -1,6 +1,6 @@
 Most Bootstrap 4 components can be used in existing projects, powered by Reactstrap.
 
-```hint
+```hint|directive
 These components require the [Faithlife Bootstrap base stylesheet](/bootstrap/stylesheet) to be loaded globally in your app.
 ```
 
@@ -20,11 +20,15 @@ See the [Reactstrap](https://reactstrap.github.io/) documentation for the compon
 
 ## Examples
 
-```hint
+```hint|neutral
 Click the <> on the right to view the sample source.
 ```
 
 ### Buttons
+
+```hint|directive
+Prefer to use [the non-Bootstrap button component](/button/variations). It's lighter weight and does not depend on a global stylesheet.
+```
 
 ```react
 showSource: false
