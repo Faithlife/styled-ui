@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { LightBulbH, LightBulbM, LightBulbL, OKCircle } from '../icons';
+import {
+	LightBulbH,
+	LightBulbM,
+	LightBulbL,
+	OKCircle,
+	SolidTriangleIcon as _SolidTriangleIcon,
+} from '../icons';
 import { Popover, PopoverBody } from './bootstrap.jsx';
+
+const SolidTriangleIcon = styled(_SolidTriangleIcon)`
+	transform: rotateZ(90deg);
+	color: #7a7a7a;
+	height: 8px;
+	width: 8px;
+	margin-left: 8px;
+`;
 
 const RelativeContainer = styled.div`
 	position: relative;
@@ -13,6 +27,8 @@ const IndicatorContainer = styled.div`
 	right: 6px;
 	top: 7px;
 	z-index: 3;
+	display: flex;
+	align-items: center;
 
 	&:hover {
 		cursor: pointer;
@@ -31,6 +47,10 @@ const StyledParagraph = styled.p`
 	}
 `;
 
+const ConfidenceIconContainer = styled.span`
+	height: 18px;
+`;
+
 /** Internal component. Contains common UI logic that is then used by inferred controls. */
 export class InferredBase extends Component {
 	static propTypes = {
@@ -40,6 +60,8 @@ export class InferredBase extends Component {
 		confidenceSource: PropTypes.string,
 		/** Function called when the OK button is clicked. Confidence should be set to null to clear the lightbulb indicator. */
 		onConfirm: PropTypes.func.isRequired,
+		/** Indicates another icon in input. */
+		isDropdown: PropTypes.bool,
 		/** Wrapped input or typeahead control */
 		children: PropTypes.func.isRequired,
 	};
@@ -72,19 +94,22 @@ export class InferredBase extends Component {
 		return (
 			<RelativeContainer>
 				{this.props.children({ inferred: ConfidenceIcon != null })}
-				<IndicatorContainer
-					onMouseEnter={() => this.setState({ isPopoverOpen: true })}
-					onMouseLeave={() => this.setState({ isPopoverOpen: false })}
-					onClick={() => {
-						if (this.state.isPopoverOpen) {
-							onConfirm();
-						} else {
-							this.setState({ isPopoverOpen: true });
-						}
-					}}
-					innerRef={this.containerRef}
-				>
-					{this.state.isPopoverOpen && ConfidenceIcon != null ? <OKCircle /> : ConfidenceIcon}
+				<IndicatorContainer>
+					<ConfidenceIconContainer
+						onMouseEnter={() => this.setState({ isPopoverOpen: true })}
+						onMouseLeave={() => this.setState({ isPopoverOpen: false })}
+						onClick={() => {
+							if (this.state.isPopoverOpen) {
+								onConfirm();
+							} else {
+								this.setState({ isPopoverOpen: true });
+							}
+						}}
+						innerRef={this.containerRef}
+					>
+						{this.state.isPopoverOpen && ConfidenceIcon != null ? <OKCircle /> : ConfidenceIcon}
+					</ConfidenceIconContainer>
+					{this.props.isDropdown && <SolidTriangleIcon />}
 				</IndicatorContainer>
 				{this.state.isPopoverOpen && (
 					<Popover

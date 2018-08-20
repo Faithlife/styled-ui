@@ -110,3 +110,13 @@ export const KebabVertical = props => (
 		/>
 	</svg>
 );
+
+export const SolidTriangleIcon = props => (
+	<svg {...props} width="12" height="12" viewBox="0 0 12 12">
+		<path
+			fill="currentColor"
+			className="icon-path"
+			d="M4.27 1.2l5.33 4a1 1 0 0 1 0 1.6l-5.33 4a1 1 0 0 1-1.6-.8V2a1 1 0 0 1 1.6-.8z"
+		/>
+	</svg>
+);

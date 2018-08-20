@@ -28,3 +28,14 @@ export const debouncedResize = callback => {
 		cancel: () => window.removeEventListener('resize', listener),
 	};
 };
+
+export const resetStyles = `
+	margin: 0;
+
+	&,
+	*,
+	*:before,
+	*:after {
+		box-sizing: border-box;
+	}
+`;
