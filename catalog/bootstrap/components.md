@@ -10,11 +10,12 @@ These components can help get teams working on new apps that don't have a lot of
 
 ## How to use
 
-Import the scoped Bootstrap stylesheet into your application:
+Import the [scoped Bootstrap stylesheet into your application](/bootstrap/stylesheet) first. Then:
+
 ```
 import { Bootstrap } from '@faithlife/styled-ui';
 
-const { Button, InputGroup } = Bootstrap;
+const { Button } = Bootstrap;
 
 const MyComponent = props => <Button color="primary">primary</Button>;
 
