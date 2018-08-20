@@ -6,6 +6,12 @@ Please add changes here when they're committed to the `master` branch, then move
 
 ## Released
 
+### 1.4.2
+* Fixed some spacing issues around elements caused by inherited styles
+
+### 1.4.1
+* Add triangle icon to typeahead. (#20)
+
 ### 1.4.0
 * Added 'Collapse' accordion component
 

@@ -1,12 +1,7 @@
 import styled from 'styled-components';
+import { resetStyles } from '../utils';
 
 export const CheckboxDiv = styled.div`
-	*,
-	*:after,
-	*:before {
-		box-sizing: border-box;
-	}
-
 	position: absolute;
 	border: solid 1px ${props => props.theme.border};
 	border-radius: 3px;
@@ -16,6 +11,8 @@ export const CheckboxDiv = styled.div`
 `;
 
 export const CheckboxContainer = styled.button`
+	${resetStyles};
+
 	display: flex;
 	align-items: center;
 	position: relative;
@@ -46,7 +43,7 @@ export const CheckedIndicator = styled.div`
 		content: '';
 		position: absolute;
 		top: 3px;
-		left: 3px;
+		left: 2px;
 		opacity: 0;
 		transform: rotate(-45deg);
 		border: 2px solid ${props => props.theme.primary};

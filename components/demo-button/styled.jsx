@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { colors } from '../shared-styles';
+import { resetStyles } from '../utils';
 
 const buttonColors = {
 	default: '#278ed4',
@@ -8,9 +9,10 @@ const buttonColors = {
 	disabled: '#bedcf2',
 };
 export const Button = styled.button`
+	${resetStyles};
+
 	box-shadow: none;
 	border-radius: 3px;
-	margin: 0;
 	cursor: pointer;
 	transition: all 0.25s ease 0s;
 	white-space: nowrap;
