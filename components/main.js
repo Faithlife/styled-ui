@@ -11,3 +11,4 @@ export { Modal, ModalFooter } from './modal';
 export { HelpBox } from './help-box/component.jsx';
 export { Collapse } from './collapse/component.jsx';
 export { GroupSelector } from './group-selector/component.jsx';
+export { GroupSelectorModal } from './group-selector/modal/component.jsx';
