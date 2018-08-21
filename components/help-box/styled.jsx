@@ -5,6 +5,7 @@ import { LightBulbH } from '../icons';
 export const BlueBoxContent = styled.div`
 	${fonts.ui16}
 
+	flex: 1; 
 	padding: ${thickness.sixteen};
 	text-align: left;
 	color: ${colors.flGray};
