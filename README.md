@@ -20,6 +20,12 @@
 - When you're ready to commit your work, create a new branch for your contribution, and then sync your branch with Github
 - Open a pull request via the Github Web UI to request review
 
+### How to publish
+- Update VersionHistory.md
+- Run `yarn version`. Please follow semver when bumping the version.
+- Push your changes to master
+- Run this publish job to push to our internal package manager: https://jenkins.lrscorp.net/view/Community/job/styled-ui%20publish/
+
 ### Why?
 
 This project addresses problems introduced by creating components from scratch. Often a component from spec gets implemented multiple times, either from Zeplin or forked from an existing control. Each time an implementation happens, inconsistencies are introduced. It's also harder to introduce animations and shadows after the prototype has been built. By using reference components instead, there's a much higher chance the final products will the contain all margins, animations, and hover states the design calls for.
