@@ -4,6 +4,9 @@
 
 Please add changes here when they're committed to the `master` branch, then move to "Released" once the package is published.
 
+### 2.0.2
+* Changed medium button font size to 16px
+
 ### 2.0.1
 * Fixed a flex issue in Helpbox. Thanks Seth Copeland (#22)
 * Added some more helpbox color variations. Thanks Ian Fisk (#21)
