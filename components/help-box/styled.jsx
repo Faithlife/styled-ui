@@ -3,7 +3,7 @@ import { fonts, colors, thickness } from '../../components/shared-styles';
 import { LightBulbH } from '../icons';
 
 export const BlueBoxContent = styled.div`
-	${fonts.ui16}
+	${fonts.ui16};
 
 	flex: 1;
 	padding: ${thickness.sixteen};
