@@ -4,6 +4,10 @@
 
 Please add changes here when they're committed to the `master` branch, then move to "Released" once the package is published.
 
+### 2.0.1
+* Fixed a flex issue in Helpbox. Thanks Seth Copeland (#22)
+* Added some more helpbox color variations. Thanks Ian Fisk (#21)
+
 ### 2.0.0
 * **Breaking**: After review with the UX team, there are several bootstrap components that are no longer included in this library, because they won't be used in any of our specs.
 - Removed: Alert, Navbar*, Nav*, Breadcrumb*, Badge, Card*, Carousel*, Progress, Modal*, Tooltip, Table, ListGroup*, InputGroup*, Media, Tab*, Jumbotron, Pagination*, Collapse
