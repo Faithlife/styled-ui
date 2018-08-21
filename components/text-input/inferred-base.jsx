@@ -64,6 +64,8 @@ export class InferredBase extends Component {
 		isDropdown: PropTypes.bool,
 		/** Wrapped input or typeahead control */
 		children: PropTypes.func.isRequired,
+		/** See the docs for how to override styles properly */
+		className: PropTypes.string,
 	};
 
 	static defaultProps = {
@@ -92,7 +94,7 @@ export class InferredBase extends Component {
 			) : null;
 
 		return (
-			<RelativeContainer>
+			<RelativeContainer className={this.props.className}>
 				{this.props.children({ inferred: ConfidenceIcon != null })}
 				<IndicatorContainer>
 					<ConfidenceIconContainer

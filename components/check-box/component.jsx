@@ -4,10 +4,10 @@ import { ThemeProvider } from 'styled-components';
 import * as Styled from './styled.jsx';
 
 /** Styled checkbox control (uses a button instead of an input) */
-export function Checkbox({ onClick, title, isChecked, theme, type, children }) {
+export function Checkbox({ onClick, title, isChecked, theme, type, children, className }) {
 	return (
 		<ThemeProvider theme={theme}>
-			<Styled.CheckboxContainer onClick={onClick} type={type}>
+			<Styled.CheckboxContainer onClick={onClick} type={type} className={className}>
 				<Styled.CheckboxDiv>
 					<Styled.CheckedIndicator isChecked={isChecked} />
 				</Styled.CheckboxDiv>
@@ -26,6 +26,8 @@ Checkbox.propTypes = {
 	theme: PropTypes.object,
 	type: PropTypes.string,
 	children: PropTypes.node,
+	/** See the docs for how to override styles properly  */
+	className: PropTypes.string,
 };
 
 Checkbox.defaultProps = {

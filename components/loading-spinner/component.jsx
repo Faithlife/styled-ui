@@ -5,7 +5,7 @@ import { colors } from '../shared-styles';
 import * as Styled from './styled.jsx';
 
 /** Loading spinner, frequently displayed as a placeholder when loading data */
-export function LoadingSpinner({ style, ...restProps }) {
+export function LoadingSpinner(restProps) {
 	const { component: MappedStyledComponent, filteredProps } = applyVariations(
 		Styled.Spinner,
 		Styled.variationMap,
@@ -16,8 +16,8 @@ export function LoadingSpinner({ style, ...restProps }) {
 }
 
 LoadingSpinner.propTypes = {
-	/** Ignored */
-	style: PropTypes.object,
+	/** See the docs for how to override styles properly  */
+	className: PropTypes.string,
 	/** 4px border thickness, 12px height */
 	small: PropTypes.bool,
 	/** 8px border thickness, 48px height*/

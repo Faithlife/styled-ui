@@ -26,7 +26,7 @@ export class InferredText extends Component {
 		value: PropTypes.string.isRequired,
 		/** Function called when the OK button is clicked. Confidence should be set to null to clear the lightbulb indicator. */
 		onConfirm: PropTypes.func.isRequired,
-		/** Ignored */
+		/** See the docs for how to override styles properly  */
 		className: PropTypes.string,
 	};
 
@@ -39,6 +39,7 @@ export class InferredText extends Component {
 		return (
 			<BootstrapContainer>
 				<InferredBase
+					className={className}
 					confidence={confidence}
 					confidenceSource={confidenceSource}
 					onConfirm={onConfirm}

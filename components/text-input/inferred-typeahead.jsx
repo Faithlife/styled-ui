@@ -22,7 +22,7 @@ export class InferredTypeahead extends Component {
 		onChange: PropTypes.func,
 		/** Function called when the OK button is clicked or an input value is confirmed */
 		onConfirm: PropTypes.func.isRequired,
-		/** Ignored */
+		/** See the docs for how to override styles properly  */
 		className: PropTypes.string,
 	};
 
@@ -43,6 +43,7 @@ export class InferredTypeahead extends Component {
 		return (
 			<BootstrapContainer>
 				<InferredBase
+					className={className}
 					confidence={confidence}
 					confidenceSource={confidenceSource}
 					onConfirm={onConfirm}

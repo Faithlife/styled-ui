@@ -6,6 +6,8 @@ import * as Styled from './styled.jsx';
 /** Standard button with transition styles */
 export class Button extends PureComponent {
 	static propTypes = {
+		/** See the docs for how to override styles properly  */
+		className: PropTypes.string,
 		/** The contents of the button (can be text, svg, or other element) */
 		children: PropTypes.node.isRequired,
 		/** An optional theme */
@@ -38,7 +40,7 @@ export class Button extends PureComponent {
 	};
 
 	render() {
-		const { children, theme, style, ...buttonProps } = this.props; // eslint-disable-line react/prop-types
+		const { children, theme, ...buttonProps } = this.props;
 
 		const { component: MappedStyledComponent, filteredProps } = applyVariations(
 			Styled.Button,

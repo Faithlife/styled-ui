@@ -8,6 +8,7 @@ const buttonColors = {
 	active: '#1d6ca1',
 	disabled: '#bedcf2',
 };
+
 export const Button = styled.button`
 	${resetStyles};
 
