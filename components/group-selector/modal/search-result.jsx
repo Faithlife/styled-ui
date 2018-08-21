@@ -14,6 +14,7 @@ export class SearchResult extends React.PureComponent {
 		setSelectedGroupId: PropTypes.func.isRequired,
 		handleGetStarted: PropTypes.func.isRequired,
 		handleClaimGroupClick: PropTypes.func.isRequired,
+		handleJoinGroupClick: PropTypes.func.isRequired,
 		toggle: PropTypes.func.isRequired,
 		claimable: PropTypes.string,
 	};
@@ -47,7 +48,8 @@ export class SearchResult extends React.PureComponent {
 	joinGroup = () => {
 		this.props.setModalState('main');
 		this.props.toggle();
-		window.open(`https://www.faithlife.com/${this.state.selectedGroupId}`, 'noopener, noreferrer');
+		this.props.setSelectedGroupId(this.props.groupId);
+		this.props.handleJoinGroupClick(this.props.groupId);
 	};
 
 	changeFirstLetterCase(string) {
@@ -187,7 +189,11 @@ export class SearchResult extends React.PureComponent {
 		}
 	};
 
-	formatGroupKind = () => this.props.kind.replace(/([A-Z])/g, ' $1');
+	formatGroupKind = () => {
+		let string = this.props.kind.replace(/([A-Z])/g, ' $1');
+		string = string.charAt(0).toUpperCase() + string.slice(1);
+		return string;
+	};
 
 	render() {
 		return (
