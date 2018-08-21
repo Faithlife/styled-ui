@@ -58,6 +58,7 @@
 		"catalog": "^3.5.4",
 		"cross-env": "^5.2.0",
 		"css-loader": "^1.0.0",
+		"es7-object-polyfill": "^0.0.7",
 		"eslint": "^4.19.1",
 		"eslint-config-faithlife": "^3.1.0",
 		"eslint-config-prettier": "^2.9.0",

@@ -1,6 +1,7 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+require('es7-object-polyfill'); // jenkins needs this, it runs Node 6
 
 module.exports = {
 	entry: {
