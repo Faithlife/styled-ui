@@ -1,6 +1,6 @@
 {
 	"name": "@faithlife/styled-ui",
-	"version": "2.0.2",
+	"version": "2.0.3",
 	"main": "index.js",
 	"repository": "git@github.com:Faithlife/styled-ui.git",
 	"author": "Dustin Masters <dustin.masters@faithlife.com>",
@@ -12,7 +12,7 @@
 		"test": "npm run unit-test && npm run eslint && npm run stylelint",
 		"precommit": "prettier --write \"./components/**/*.{js,jsx}\" && npm run stylelint",
 		"build": "rimraf dist && webpack -p",
-		"prepublishOnly": "npm run build && npm test",
+		"prepublishOnly": "npm run build",
 		"stylelint": "stylelint ./components/**/*.jsx",
 		"unit-test": "cross-env NODE_ENV=test mocha -r babel-core/register ./tests/**/*.js",
 		"catalog-start": "catalog start",
