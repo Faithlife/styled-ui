@@ -40,6 +40,8 @@ export class GroupSelectorModal extends React.Component {
 		handleCreateGroup: PropTypes.func.isRequired,
 		handleGetStartedClick: PropTypes.func.isRequired,
 		handleClaimGroupClick: PropTypes.func.isRequired,
+		showAlert: PropTypes.bool,
+		alertText: PropTypes.string,
 	};
 
 	state = {
@@ -100,7 +102,7 @@ export class GroupSelectorModal extends React.Component {
 					handleGetStartedClick={this.handleGetStarted}
 					handleRequestClick={this.redirectToGroup}
 					handleEditClick={this.handleEdit}
-					handleJoinGroupClick={this.redirectToGroup}
+					handleJoinGroupClick={this.joinGroup}
 					handleClaimGroupClick={this.handleClaimGroup}
 					setModalState={this.setModalState}
 					setSelectedGroupId={this.setSelectedGroupId}
@@ -148,6 +150,11 @@ export class GroupSelectorModal extends React.Component {
 
 	onChurchLocationInputChange = event => {
 		this.setState({ newChurchLocation: event.target.value });
+	};
+
+	joinGroup = groupId => {
+		this.setModalState('main');
+		window.open(`https://www.faithlife.com/${groupId}`, 'noopener, noreferrer');
 	};
 
 	redirectToGroup = () => {
@@ -203,12 +210,16 @@ export class GroupSelectorModal extends React.Component {
 									</Styled.ModalCloseButtonContainer>
 									<Styled.ModalTitle>Find Your Church</Styled.ModalTitle>
 									<Styled.ModalSubtitle>in the Faithlife Church Directory</Styled.ModalSubtitle>
+									{this.props.showAlert && (
+										<Styled.ModalAlert color="primary">{this.props.alertText}</Styled.ModalAlert>
+									)}
 									<Styled.SearchInputGroup>
 										<Styled.SearchInput
 											placeholder="Your church name and city"
 											value={this.state.searchInputValue}
 											onChange={this.handleSearchInput}
 											onKeyPress={this.handleKeyPress}
+											style={{ borderRadius: 3 }}
 										/>
 										<Styled.SearchInputAddon addonType="append">
 											<Button color="link" onClick={this.clearSearchInput}>
