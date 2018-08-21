@@ -70,19 +70,21 @@ state: {
 }
 ---
 <GroupSelectorDemo>
-	<GroupSelector style={{zIndex:1000}}
-		executeSearch={() => {alert("click handled")}}
-		handleSignInClick={() => {alert("click handled")}}
-		handleCreateGroup={() => {alert("click handled")}}
-		handleSelectionChange={() => {alert("click handled")}}
+	<GroupSelector
+		executeSearch={() => {alert("handled by application")}}
+		handleSignInClick={() => {alert("handled by application")}}
+		handleCreateGroup={() => {alert("handled by application")}}
+		handleSelectionChange={() => {alert("handled by application")}}
 		groups={state.groups}
 		selectedGroupId={state.selectedGroupId}
 		groupSearchResults={state.groups}
 		groupSelectorView={state.groupSelectorView}
-		handleGetStartedClick={() => {alert("click handled")}}
-		handleClaimGroupClick={() => {alert("click handled")}}
-		isMobile={state.mobile}
+		handleGetStartedClick={() => {alert("handled by application")}}
+		handleClaimGroupClick={() => {alert("handled by application")}}
+		isMobile={false}
+		style={{zIndex:1000}}
 	/>
+
 	<Button color="primary" onClick={() => {setState({groupSelectorView: "sign-in"})}}>Sign In</Button>
 	{' '}
 	<Button color="primary" onClick={() => {setState({groupSelectorView: "fetching"})}}>Loading</Button>
