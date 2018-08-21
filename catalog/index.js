@@ -141,7 +141,7 @@ const pages = [
 				content: pageLoader(() => import('./collapse/documentation.md')),
 				imports: { Collapse, DocgenTable },
 			},
-		]
+		],
 	},
 	{
 		title: 'Grid',
