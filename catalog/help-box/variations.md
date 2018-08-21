@@ -10,7 +10,7 @@
 
 ```react
 <BootstrapContainer>
-	<HelpBox info>Anything not saved will be lost</HelpBox>
+	<HelpBox>Anything not saved will be lost</HelpBox>
 	<HelpBox success>Anything not saved will be lost</HelpBox>
 	<HelpBox danger>Anything not saved will be lost</HelpBox>
 	<HelpBox warning>Anything not saved will be lost</HelpBox>

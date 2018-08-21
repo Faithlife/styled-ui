@@ -28,7 +28,6 @@ HelpBox.propTypes = {
 		foregroundColor: PropTypes.string,
 		backgroundColor: PropTypes.string,
 	}),
-	info: PropTypes.bool,
 	success: PropTypes.bool,
 	danger: PropTypes.bool,
 	warning: PropTypes.bool,
