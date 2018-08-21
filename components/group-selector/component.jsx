@@ -114,7 +114,7 @@ export class GroupSelector extends React.Component {
 								color="link"
 								size="sm"
 								onClick={this.props.handleSignInClick}
-								style={{ padding: 0, paddingBottom: 1, fontSize: 9 }}
+								style={{ padding: 0, paddingBottom: 1, fontSize: 12 }}
 							>
 								Sign In
 							</Button>{' '}

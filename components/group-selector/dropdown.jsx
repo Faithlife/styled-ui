@@ -127,7 +127,7 @@ export class GroupDropdown extends React.PureComponent {
 			<div>
 				<Styled.DropdownGroupsContainer>{groups}</Styled.DropdownGroupsContainer>
 				<Styled.DropdownButtonContainer>
-					<Button outline color="primary" onClick={this.handleDropdownButtonClick}>
+					<Button outline size="sm" color="primary" onClick={this.handleDropdownButtonClick}>
 						Find or Add Church
 					</Button>
 				</Styled.DropdownButtonContainer>

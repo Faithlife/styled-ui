@@ -199,7 +199,7 @@ export const xButton = styled.div`
 `;
 
 export const SearchResult = styled.div`
-	height: 90px;
+	height: 100px;
 	background-color: white;
 	margin: 1px 4px 7px 4px;
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 0 2px 0 rgba(0, 0, 0, 0.12);
@@ -227,6 +227,11 @@ export const ModalSubtitle = styled.p`
 	text-align: center;
 	padding-bottom: 22px;
 	line-height: 1.2;
+`;
+
+export const ModalAlert = styled(Alert)`
+	padding-bottom: 6px;
+	text-align: left;
 `;
 
 export const ModalCloseButtonContainer = styled.div`
@@ -261,7 +266,6 @@ export const SearchInputAddon = styled(InputGroupAddon)`
 	bottom: 0;
 	right: -6px;
 	z-index: 1000;
-	border-radius 100px;
 `;
 
 export const SearchInputGroup = styled(InputGroup)`
@@ -300,6 +304,7 @@ export const CreateGroupButton = styled.div`
 
 export const CreateGroupLabel = styled(Label)`
 	padding: 16px 0 6px 0;
+	transition: 0.2s ease-in-out;
 `;
 
 export const GroupSelectorModalContainer = styled.div`
@@ -312,6 +317,7 @@ export const GroupSelectorModalContainer = styled.div`
 
 export const GroupSelectorModalBody = styled(ModalBody)`
 	overflow: hidden;
+	border-radius: 6px;
 `;
 
 export const SearchResultNameText = styled.div`
