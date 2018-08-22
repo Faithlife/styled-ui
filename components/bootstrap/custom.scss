@@ -83,7 +83,11 @@ $custom-control-indicator-checked-color: $blue;
   @import "~bootstrap/scss/popover";  /* stylelint-disable-line */
   @import "~bootstrap/scss/grid";
 
-  .custom-control-label:before {
-    border: 1px solid $gray-600;
+  .custom-control-label {
+    line-height: $line-height-base;
+
+    &:before {
+      border: 1px solid $gray-600;
+    }
   }
 }
