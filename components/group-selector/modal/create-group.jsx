@@ -9,7 +9,7 @@ export class CreateGroup extends React.Component {
 	static propTypes = {
 		isCreateGroupOpen: PropTypes.bool,
 		searchInputValue: PropTypes.string,
-		handleCreateGroup: PropTypes.func.isRequired,
+		onCreateGroup: PropTypes.func.isRequired,
 		onChurchNameInputChange: PropTypes.func.isRequired,
 		newChurchName: PropTypes.string,
 		onChurchLocationInputChange: PropTypes.func.isRequired,
@@ -32,7 +32,7 @@ export class CreateGroup extends React.Component {
 					Or add your church to the Faithlife Church Directory
 				</Styled.CreateGroupTitle>
 				{this.props.isCreateGroupOpen ? (
-					<Styled.CreateGroupLabel>Church Name</Styled.CreateGroupLabel>
+					<Styled.CreateGroupLabel style={{ fontSize: 12 }}>Church Name</Styled.CreateGroupLabel>
 				) : null}
 				<Input
 					onClick={this.focusInput}
@@ -42,21 +42,27 @@ export class CreateGroup extends React.Component {
 					}
 					onChange={this.props.onChurchNameInputChange}
 				/>
-				<Styled.CreateGroupLabel>Church Location</Styled.CreateGroupLabel>
-				<Input
-					value={this.props.newChurchLocation}
-					placeholder="City, State"
-					onChange={this.props.onChurchLocationInputChange}
-				/>
-				<Styled.CreateGroupButton>
-					<Button
-						color="primary"
-						disabled={this.props.newChurchName === '' || this.props.newChurchLocation === ''}
-						onClick={this.props.handleCreateGroup}
-					>
-						Create
-					</Button>
-				</Styled.CreateGroupButton>
+				{this.props.isCreateGroupOpen ? (
+					<div>
+						<Styled.CreateGroupLabel style={{ fontSize: 12 }}>
+							Church Location
+						</Styled.CreateGroupLabel>
+						<Input
+							value={this.props.newChurchLocation}
+							placeholder="City, State"
+							onChange={this.props.onChurchLocationInputChange}
+						/>
+						<Styled.CreateGroupButton>
+							<Button
+								color="primary"
+								disabled={this.props.newChurchName === '' || this.props.newChurchLocation === ''}
+								onClick={this.props.onCreateGroup}
+							>
+								Create
+							</Button>
+						</Styled.CreateGroupButton>
+					</div>
+				) : null}
 			</Styled.CreateGroup>
 		);
 	}

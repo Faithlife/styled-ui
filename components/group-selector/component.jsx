@@ -18,16 +18,16 @@ export class GroupSelector extends React.Component {
 		/** Selects view state of group selector */
 		groupSelectorView: PropTypes.oneOf(['groups', 'sign-in', 'no-groups', 'fetching']).isRequired,
 		/** function that is called when "Sign In" is clicked by the user */
-		handleSignInClick: PropTypes.func.isRequired,
+		onSignInClick: PropTypes.func.isRequired,
 		/** returns data to application for group creation */
-		handleCreateGroup: PropTypes.func.isRequired,
+		onCreateGroup: PropTypes.func.isRequired,
 		/** function that is called every time user chooses a different group */
-		handleSelectionChange: PropTypes.func.isRequired,
+		onSelectionChange: PropTypes.func.isRequired,
 		/** returns search string to application */
 		executeSearch: PropTypes.func.isRequired,
 		/** -1 if no previous selected group */
 		selectedGroupId: PropTypes.number.isRequired,
-		/** all groups that should be displayed on the dropdown */
+		/** all groups that should be displayed on the dropdown can be empty but must be defined */
 		// groups: PropTypes.arrayOf(
 		// 	PropTypes.shape({
 		// 		name: PropTypes.string,
@@ -52,9 +52,9 @@ export class GroupSelector extends React.Component {
 		// ),
 		groupSearchResults: PropTypes.array,
 		/** action that should be taken when user selects group with proper permissions */
-		handleGetStartedClick: PropTypes.func.isRequired,
+		onGetStartedClick: PropTypes.func.isRequired,
 		/** action that should be taken when user claims group */
-		handleClaimGroupClick: PropTypes.func.isRequired,
+		onClaimGroupClick: PropTypes.func.isRequired,
 		/** is the dropdown on a mobile view */
 		isMobile: PropTypes.bool.isRequired,
 	};
@@ -72,7 +72,7 @@ export class GroupSelector extends React.Component {
 
 	handleKeyPress = event => {
 		if (event.key === 'Enter') {
-			this.props.handleCreateGroup(this.state.newGroupName, 'church');
+			this.props.onCreateGroup(this.state.newGroupName, 'church');
 		}
 	};
 
@@ -98,8 +98,8 @@ export class GroupSelector extends React.Component {
 						<GroupDropdown
 							groups={this.props.groups}
 							selectedGroup={selectedGroup}
-							handleSelectionChange={this.props.handleSelectionChange}
-							handleFindChurchButtonClick={this.handleChangeModalState}
+							onSelectionChange={this.props.onSelectionChange}
+							onFindChurchButtonClick={this.handleChangeModalState}
 							isMobile={this.props.isMobile}
 						/>
 					)}
@@ -113,8 +113,8 @@ export class GroupSelector extends React.Component {
 							<Button
 								color="link"
 								size="sm"
-								onClick={this.props.handleSignInClick}
-								style={{ padding: 0, paddingBottom: 1, fontSize: 12 }}
+								onClick={this.props.onSignInClick}
+								style={{ padding: 0, paddingBottom: 1, fontSize: 14 }}
 							>
 								Sign In
 							</Button>{' '}
@@ -124,13 +124,13 @@ export class GroupSelector extends React.Component {
 				</Styled.GroupSelector>
 				<GroupSelectorModal
 					isOpen={this.state.isModalOpen}
-					changeModalState={this.handleChangeModalState}
+					onChangeModalState={this.handleChangeModalState}
 					executeSearch={this.props.executeSearch}
 					groups={this.props.groups}
 					groupSearchResults={this.props.groupSearchResults}
-					handleCreateGroup={this.props.handleCreateGroup}
-					handleGetStartedClick={this.props.handleGetStartedClick}
-					handleClaimGroupClick={this.props.handleClaimGroupClick}
+					onCreateGroup={this.props.onCreateGroup}
+					onGetStartedClick={this.props.onGetStartedClick}
+					onClaimGroupClick={this.props.onClaimGroupClick}
 				/>
 			</div>
 		);

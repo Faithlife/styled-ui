@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { Bootstrap } from '../../components/main.js';
+import { Bootstrap, HelpBox, Modal } from '../../components/main.js';
 
-const { Alert, Button, Input, InputGroup, InputGroupAddon, Label, ModalBody } = Bootstrap;
+const { Button, Input, Label } = Bootstrap;
 
 export const GroupSelector = styled.div`
 	max-width: 100%;
@@ -9,9 +9,10 @@ export const GroupSelector = styled.div`
 	text-align: center;
 	position: relative;
 	padding-bottom: 6px;
+	font-family: Arial, Helvetica, sans-serif;
 `;
 
-export const GroupSelectorSignInAlert = styled(Alert)`
+export const GroupSelectorSignInAlert = styled(HelpBox)`
 	padding-bottom: 6px;
 	text-align: left;
 `;
@@ -127,7 +128,8 @@ export const MobileSelectedGroup = styled.button`
 
 export const SelectedGroupText = styled.div`
 	font-size: 12px;
-	line-height: 44px;
+	line-height: 18px;
+	padding-top: 13px;
 	float: left;
 	margin-left: 6px;
 	width: 71%;
@@ -172,36 +174,11 @@ export const DropdownButtonContainer = styled.div`
 	padding-bottom: 8px;
 `;
 
-export const SearchGlass = styled.div`
-	height: 12px;
-	width: 12px;
-	background-image: url(/images/search-icon.gif);
-	margin-top: 3px;
-	background-size: contain;
-	background-position: center;
-	background-repeat: no-repeat;
-	display: inline-block;
-	vertical-align: middle;
-`;
-
-export const xButton = styled.div`
-	cursor: pointer;
-	height: 12px;
-	width: 12px;
-	margin-top: 4px;
-	margin-right: 2px;
-	background-image: url(/images/x-icon.png);
-	background-size: contain;
-	background-position: center;
-	background-repeat: no-repeat;
-	display: inline-block;
-	vertical-align: middle;
-`;
-
 export const SearchResult = styled.div`
 	height: 100px;
+	width: 97%;
 	background-color: white;
-	margin: 1px 4px 7px 4px;
+	margin: 1px 0 7px 0;
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 0 2px 0 rgba(0, 0, 0, 0.12);
 	border-radius: 3px;
 `;
@@ -213,10 +190,13 @@ export const SearchResultAvatar = styled.div`
 	margin: 6px;
 `;
 
+export const GroupSelectorModal = styled(Modal)`
+	position: relative;
+`;
+
 export const ModalTitle = styled.p`
 	font-size: 32px;
-	line-height: 1.2em;
-	padding: 24px 0 16px;
+	margin-bottom: 4px;
 	font-weight: 800;
 	color: #575251;
 	text-align: center;
@@ -225,25 +205,22 @@ export const ModalTitle = styled.p`
 export const ModalSubtitle = styled.p`
 	font-size: 16px;
 	text-align: center;
-	padding-bottom: 22px;
 	line-height: 1.2;
 `;
 
-export const ModalAlert = styled(Alert)`
+export const ModalAlert = styled(HelpBox)`
 	padding-bottom: 6px;
 	text-align: left;
 `;
 
-export const ModalCloseButtonContainer = styled.div`
-	position: absolute;
-	right: 4px;
-`;
-
 export const SearchResultsContainer = styled.div`
-	height: 55%;
-	max-height: 1000px;
-	overflow-y: auto;
-	margin-bottom: 85px;
+	max-height: 63%;
+	overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	align-items: center;
+	width: 100%;
 `;
 
 export const SearchInput = styled(Input)`
@@ -261,24 +238,17 @@ export const SearchInput = styled(Input)`
 	}
 `;
 
-export const SearchInputAddon = styled(InputGroupAddon)`
-	position: absolute;
-	bottom: 0;
-	right: -6px;
-	z-index: 1000;
-`;
-
-export const SearchInputGroup = styled(InputGroup)`
+export const SearchInputGroup = styled.div`
 	margin-bottom: 22px;
+	padding: 0 2px 0 2px;
 `;
 
 export const CreateGroupWrapper = styled.div`
 	transition: 0.2s ease-in-out;
-	bottom: ${props => props.position};
-	position: absolute;
-	left: 0;
-	right: 0;
+	top: ${props => props.position};
+	position: relative;
 	background-color: white;
+	width: 100%;
 `;
 
 export const CreateGroup = styled.div`
@@ -292,9 +262,9 @@ export const CreateGroupTitle = styled.p`
 	composes: search__subtitle;
 	padding-bottom: 16px;
 	text-align: center;
-	font-size: 16;
+	font-size: 13px;
 	padding: 0;
-	margin-bottom: 12;
+	margin-bottom: 12px;
 `;
 
 export const CreateGroupButton = styled.div`
@@ -307,17 +277,18 @@ export const CreateGroupLabel = styled(Label)`
 	transition: 0.2s ease-in-out;
 `;
 
-export const GroupSelectorModalContainer = styled.div`
-	width: 30%;
-	padding: 45px 0 24px 0;
-	position: absolute;
-	bottom: 60px;
-	display: block;
-`;
-
-export const GroupSelectorModalBody = styled(ModalBody)`
+export const GroupSelectorModalBody = styled.div`
 	overflow: hidden;
 	border-radius: 6px;
+	width: 32vw;
+	max-width: 475px;
+`;
+
+export const MainModalContent = styled.div`
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	position: relative;
 `;
 
 export const SearchResultNameText = styled.div`
@@ -326,6 +297,10 @@ export const SearchResultNameText = styled.div`
 	padding-top: 8px;
 	margin-right: 0px;
 	margin-left: 56px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 157px;
+	white-space: nowrap;
 `;
 
 export const SearchResultButton = styled(Button)`
@@ -350,14 +325,15 @@ export const SearchResultMembershipLine = styled.div`
 	color: #a8a8a8;
 	font-size: 12;
 	width: 50%;
-	margin-top: 4px;
-	margin-left: 56px;
+	margin: 4px 160px 0 56px;
 `;
 
 export const SearchResultButtonContainer = styled.div`
-	float: right;
+	display: flex;
+	justify-content: flex-end;
 	margin-right: 8px;
-	margin-top: -33px;
+	margin-top: -40px;
+	padding-bottom: 4px;
 `;
 
 export const SearchResultBoldText = styled.span`

@@ -25,8 +25,8 @@ export class GroupDropdown extends React.PureComponent {
 		// }),
 		groups: PropTypes.array.isRequired,
 		selectedGroup: PropTypes.object.isRequired,
-		handleSelectionChange: PropTypes.func.isRequired,
-		handleFindChurchButtonClick: PropTypes.func.isRequired,
+		onSelectionChange: PropTypes.func.isRequired,
+		onFindChurchButtonClick: PropTypes.func.isRequired,
 		isMobile: PropTypes.bool.isRequired,
 	};
 
@@ -91,13 +91,13 @@ export class GroupDropdown extends React.PureComponent {
 	};
 
 	handleGroupSelection = (groupId, name) => {
-		this.props.handleSelectionChange(groupId, name);
+		this.props.onSelectionChange(groupId, name);
 		this.closeDropdown();
 	};
 
 	handleDropdownButtonClick = () => {
 		this.handleDropdownToggle();
-		this.props.handleFindChurchButtonClick();
+		this.props.onFindChurchButtonClick();
 	};
 
 	render() {

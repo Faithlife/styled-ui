@@ -12,9 +12,9 @@ export class SearchResult extends React.PureComponent {
 		relationshipKind: PropTypes.string,
 		setModalState: PropTypes.func.isRequired,
 		setSelectedGroupId: PropTypes.func.isRequired,
-		handleGetStarted: PropTypes.func.isRequired,
-		handleClaimGroupClick: PropTypes.func.isRequired,
-		handleJoinGroupClick: PropTypes.func.isRequired,
+		onGetStarted: PropTypes.func.isRequired,
+		onClaimGroupClick: PropTypes.func.isRequired,
+		onJoinGroupClick: PropTypes.func.isRequired,
 		toggle: PropTypes.func.isRequired,
 		claimable: PropTypes.string,
 	};
@@ -26,13 +26,13 @@ export class SearchResult extends React.PureComponent {
 	};
 
 	claimGroup = () => {
-		this.props.handleClaimGroupClick(this.props.groupId);
+		this.props.onClaimGroupClick(this.props.groupId);
 	};
 
 	getStarted = () => {
 		this.props.setModalState('main');
 		this.props.toggle();
-		this.props.handleGetStarted(this.props.groupId);
+		this.props.onGetStarted(this.props.groupId);
 	};
 
 	requestAccess = () => {
@@ -49,7 +49,7 @@ export class SearchResult extends React.PureComponent {
 		this.props.setModalState('main');
 		this.props.toggle();
 		this.props.setSelectedGroupId(this.props.groupId);
-		this.props.handleJoinGroupClick(this.props.groupId);
+		this.props.onJoinGroupClick(this.props.groupId);
 	};
 
 	changeFirstLetterCase(string) {

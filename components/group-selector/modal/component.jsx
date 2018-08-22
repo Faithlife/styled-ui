@@ -6,12 +6,15 @@ import { Avatar } from '../avatar.jsx';
 import { SearchResult } from './search-result.jsx';
 import { CreateGroup } from './create-group.jsx';
 
-const { Modal, Button } = Bootstrap;
+const { Button } = Bootstrap;
 
 export class GroupSelectorModal extends React.Component {
 	static propTypes = {
-		changeModalState: PropTypes.func.isRequired,
+		/** Toggles the modal state open and closed */
+		onChangeModalState: PropTypes.func.isRequired,
+		/** Keeps track of modal open/closed state */
 		isOpen: PropTypes.bool.isRequired,
+		/** Where search strings will be passed for application to query account services */
 		executeSearch: PropTypes.func.isRequired,
 		// groups: PropTypes.arrayOf(
 		// 	PropTypes.shape({
@@ -24,6 +27,7 @@ export class GroupSelectorModal extends React.Component {
 		//		claimable: string,
 		// 	}),
 		// ).isRequired,
+		/** Groups that user is a part of (can be empty array) */
 		groups: PropTypes.array.isRequired,
 		// searchedGroups: PropTypes.arrayOf(
 		// 	PropTypes.shape({
@@ -36,11 +40,17 @@ export class GroupSelectorModal extends React.Component {
 		//		claimable: string,
 		// 	}),
 		// ),
+		/** Where results from group search should be passed */
 		groupSearchResults: PropTypes.array,
-		handleCreateGroup: PropTypes.func.isRequired,
-		handleGetStartedClick: PropTypes.func.isRequired,
-		handleClaimGroupClick: PropTypes.func.isRequired,
+		/** Function called when user creates group.  Application is responsible for contacting account services */
+		onCreateGroup: PropTypes.func.isRequired,
+		/** Operation to perform when "Get Started" buttons are clicked */
+		onGetStartedClick: PropTypes.func.isRequired,
+		/** Operation to perform when user requests to claim a group */
+		onClaimGroupClick: PropTypes.func.isRequired,
+		/** Shows blue help box when true */
 		showAlert: PropTypes.bool,
+		/** Text to be included in help box */
 		alertText: PropTypes.string,
 	};
 
@@ -53,9 +63,19 @@ export class GroupSelectorModal extends React.Component {
 		selectedGroupId: -1,
 	};
 
+	createGroupPopupRef = React.createRef();
+
+	componentDidMount = () => {
+		window.addEventListener('mousedown', this.handleClick, false);
+	};
+
+	componentWillUnmount = () => {
+		window.removeEventListener('mousedown', this.handleClick, false);
+	};
+
 	createGroupClick = () => {
 		this.toggle();
-		this.props.handleCreateGroup(this.state.newChurchName, this.state.newChurchLocation);
+		this.props.onCreateGroup(this.state.newChurchName, this.state.newChurchLocation);
 	};
 
 	clearSearchInput = () => {
@@ -74,14 +94,14 @@ export class GroupSelectorModal extends React.Component {
 				avatar={<Avatar group={group} size="40px" />}
 				membershipKind={group.membershipKind}
 				relationshipKind={group.relationshipKind}
-				handleGetStartedClick={this.handleGetStarted}
-				handleRequestClick={this.redirectToGroup}
-				handleEditClick={this.redirectToGroup}
-				handleJoinGroupClick={this.redirectToGroup}
-				handleClaimGroupClick={this.handleClaimGroup}
+				onGetStartedClick={this.handleGetStarted}
+				onRequestClick={this.redirectToGroup}
+				onEditClick={this.redirectToGroup}
+				onJoinGroupClick={this.redirectToGroup}
+				onClaimGroupClick={this.handleClaimGroup}
 				setModalState={this.setModalState}
 				setSelectedGroupId={this.setSelectedGroupId}
-				handleGetStarted={this.handleGetStarted}
+				onGetStarted={this.handleGetStarted}
 				toggle={this.toggle}
 			/>
 		));
@@ -99,14 +119,14 @@ export class GroupSelectorModal extends React.Component {
 					avatar={<Avatar group={group} size="40px" />}
 					membershipKind={group.membershipKind}
 					relationshipKind={group.relationshipKind}
-					handleGetStartedClick={this.handleGetStarted}
-					handleRequestClick={this.redirectToGroup}
-					handleEditClick={this.handleEdit}
-					handleJoinGroupClick={this.joinGroup}
-					handleClaimGroupClick={this.handleClaimGroup}
+					onGetStartedClick={this.handleGetStarted}
+					onRequestClick={this.redirectToGroup}
+					onEditClick={this.handleEdit}
+					onJoinGroupClick={this.joinGroup}
+					onClaimGroupClick={this.handleClaimGroup}
 					setModalState={this.setModalState}
 					setSelectedGroupId={this.setSelectedGroupId}
-					handleGetStarted={this.handleGetStarted}
+					onGetStarted={this.handleGetStarted}
 					toggle={this.toggle}
 				/>
 			));
@@ -129,7 +149,7 @@ export class GroupSelectorModal extends React.Component {
 	};
 
 	toggle = () => {
-		this.props.changeModalState();
+		this.props.onChangeModalState();
 	};
 
 	setModalState = state => {
@@ -144,14 +164,6 @@ export class GroupSelectorModal extends React.Component {
 		this.setState({ modalContent: 'main' });
 	};
 
-	onChurchNameInputChange = event => {
-		this.setState({ newChurchName: event.target.value });
-	};
-
-	onChurchLocationInputChange = event => {
-		this.setState({ newChurchLocation: event.target.value });
-	};
-
 	joinGroup = groupId => {
 		this.setModalState('main');
 		window.open(`https://www.faithlife.com/${groupId}`, 'noopener, noreferrer');
@@ -162,9 +174,18 @@ export class GroupSelectorModal extends React.Component {
 		window.open(`https://www.faithlife.com/${this.state.selectedGroupId}`, 'noopener, noreferrer');
 	};
 
+	handleChurchNameInputChange = event => {
+		this.setState({ newChurchName: event.target.value });
+	};
+
+	handleChurchLocationInputChange = event => {
+		this.setState({ newChurchLocation: event.target.value });
+	};
+
 	handleSearchInput = event => {
 		this.setState({
 			searchInputValue: event.target.value,
+			newChurchName: event.target.value,
 		});
 		if (
 			event.target.value !== undefined &&
@@ -188,119 +209,115 @@ export class GroupSelectorModal extends React.Component {
 	};
 
 	handleGetStarted = groupId => {
-		this.props.handleGetStartedClick(groupId);
+		this.props.onGetStartedClick(groupId);
 	};
 
 	handleClaimGroup = groupId => {
-		this.props.handleClaimGroupClick(groupId);
+		this.props.onClaimGroupClick(groupId);
+	};
+
+	handleClick = event => {
+		if (this.createGroupPopupRef.current) {
+			if (this.createGroupPopupRef.current.contains(event.target)) {
+				return;
+			}
+		}
+		this.closeCreateGroup();
 	};
 
 	render() {
 		return (
-			<Styled.GroupSelectorModalContainer>
-				<Modal centered isOpen={this.props.isOpen} backdrop toggle={this.toggle}>
-					<Styled.GroupSelectorModalBody>
-						{this.state.modalContent === 'main' && (
-							<div>
-								<div onClick={this.closeCreateGroup}>
-									<Styled.ModalCloseButtonContainer>
-										<Button color="link" onClick={this.toggle}>
-											<Styled.xButton />
-										</Button>
-									</Styled.ModalCloseButtonContainer>
-									<Styled.ModalTitle>Find Your Church</Styled.ModalTitle>
-									<Styled.ModalSubtitle>in the Faithlife Church Directory</Styled.ModalSubtitle>
-									{this.props.showAlert && (
-										<Styled.ModalAlert color="primary">{this.props.alertText}</Styled.ModalAlert>
-									)}
-									<Styled.SearchInputGroup>
-										<Styled.SearchInput
-											placeholder="Your church name and city"
-											value={this.state.searchInputValue}
-											onChange={this.handleSearchInput}
-											onKeyPress={this.handleKeyPress}
-											style={{ borderRadius: 3 }}
-										/>
-										<Styled.SearchInputAddon addonType="append">
-											<Button color="link" onClick={this.clearSearchInput}>
-												{this.state.searchInputValue ? <Styled.xButton /> : <Styled.SearchGlass />}
-											</Button>
-										</Styled.SearchInputAddon>
-									</Styled.SearchInputGroup>
-									<Styled.SearchResultsContainer>
-										{this.getSearchResults()}
-									</Styled.SearchResultsContainer>
-								</div>
-								<Styled.CreateGroupWrapper position={this.state.isCreateGroupOpen ? '0' : '-109px'}>
-									<CreateGroup
-										onClick={this.toggleCreateGroupState}
-										isCreateGroupOpen={this.state.isCreateGroupOpen}
-										searchInputValue={this.state.searchInputValue}
-										handleCreateGroup={this.createGroupClick}
-										onChurchNameInputChange={this.onChurchNameInputChange}
-										onChurchLocationInputChange={this.onChurchLocationInputChange}
-										newChurchName={this.state.newChurchName}
-										newChurchLocation={this.state.newChurchLocation}
-										openCreateGroup={this.openCreateGroup}
-									/>
-								</Styled.CreateGroupWrapper>
-							</div>
-						)}
-						{this.state.modalContent === 'admin' && (
-							<div>
-								<Styled.ModalCloseButtonContainer>
-									<Button color="link" onClick={this.resetModalState}>
-										<Styled.xButton />
+			<Styled.GroupSelectorModal
+				isOpen={this.props.isOpen}
+				title={''}
+				onClose={this.toggle}
+				scrollContent={false}
+				showHeaderBorder={false}
+				footerProps={{}}
+			>
+				<Styled.GroupSelectorModalBody>
+					{this.state.modalContent === 'main' && (
+						<Styled.MainModalContent>
+							<Styled.ModalTitle>Find Your Church</Styled.ModalTitle>
+							<Styled.ModalSubtitle>in the Faithlife Church Directory</Styled.ModalSubtitle>
+							{this.props.showAlert && (
+								<Styled.ModalAlert color="primary">{this.props.alertText}</Styled.ModalAlert>
+							)}
+							<Styled.SearchInputGroup>
+								<Styled.SearchInput
+									placeholder="Your church name and city"
+									value={this.state.searchInputValue}
+									onChange={this.handleSearchInput}
+									onKeyPress={this.handleKeyPress}
+									style={{ borderRadius: 3 }}
+								/>
+							</Styled.SearchInputGroup>
+							<Styled.SearchResultsContainer>
+								{this.getSearchResults()}
+							</Styled.SearchResultsContainer>
+							<Styled.CreateGroupWrapper
+								position={this.state.isCreateGroupOpen ? '-14%' : '-3%'}
+								innerRef={this.createGroupPopupRef}
+								onClick={this.openCreateGroup}
+							>
+								<CreateGroup
+									onClick={this.toggleCreateGroupState}
+									isCreateGroupOpen={this.state.isCreateGroupOpen}
+									searchInputValue={this.state.searchInputValue}
+									onCreateGroup={this.createGroupClick}
+									onChurchNameInputChange={this.handleChurchNameInputChange}
+									onChurchLocationInputChange={this.handleChurchLocationInputChange}
+									newChurchName={this.state.newChurchName}
+									newChurchLocation={this.state.newChurchLocation}
+									openCreateGroup={this.openCreateGroup}
+								/>
+							</Styled.CreateGroupWrapper>
+						</Styled.MainModalContent>
+					)}
+					{this.state.modalContent === 'admin' && (
+						<div>
+							<Styled.SecondaryModalContent>
+								<Styled.SecondaryModalText>
+									<Styled.SearchResultBoldText>Admin</Styled.SearchResultBoldText>
+									<span> membership is neccessarry to perform this action.</span>
+								</Styled.SecondaryModalText>
+								<Styled.SecondaryModalText>
+									Contact a group administrator to request Admin membership
+								</Styled.SecondaryModalText>
+								<Styled.SecondaryModalButtonContainer>
+									<Button color="primary" onClick={this.redirectToGroup}>
+										Continue
 									</Button>
-								</Styled.ModalCloseButtonContainer>
-								<Styled.SecondaryModalContent>
-									<Styled.SecondaryModalText>
-										<Styled.SearchResultBoldText>Admin</Styled.SearchResultBoldText>
-										<span> membership is neccessarry to perform this action.</span>
-									</Styled.SecondaryModalText>
-									<Styled.SecondaryModalText>
-										Contact a group administrator to request Admin membership
-									</Styled.SecondaryModalText>
-									<Styled.SecondaryModalButtonContainer>
-										<Button color="primary" onClick={this.redirectToGroup}>
-											Continue
-										</Button>
-									</Styled.SecondaryModalButtonContainer>
-									<Styled.SecondaryModalButtonContainer>
-										<Button onClick={this.resetModalState}>Cancel</Button>
-									</Styled.SecondaryModalButtonContainer>
-								</Styled.SecondaryModalContent>
-							</div>
-						)}
-						{this.state.modalContent === 'change' && (
-							<div>
-								<Styled.ModalCloseButtonContainer>
-									<Button color="link" onClick={this.resetModalState}>
-										<Styled.xButton />
+								</Styled.SecondaryModalButtonContainer>
+								<Styled.SecondaryModalButtonContainer>
+									<Button onClick={this.resetModalState}>Cancel</Button>
+								</Styled.SecondaryModalButtonContainer>
+							</Styled.SecondaryModalContent>
+						</div>
+					)}
+					{this.state.modalContent === 'change' && (
+						<div>
+							<Styled.SecondaryModalContent>
+								<Styled.SecondaryModalText>
+									This group type must be set to{' '}
+									<Styled.SearchResultBoldText>"Church"</Styled.SearchResultBoldText>
+								</Styled.SecondaryModalText>
+								<Styled.SecondaryModalText>
+									Visit the group settings page to change
+								</Styled.SecondaryModalText>
+								<Styled.SecondaryModalButtonContainer>
+									<Button color="primary" onClick={this.redirectToGroup}>
+										Change to Church
 									</Button>
-								</Styled.ModalCloseButtonContainer>
-								<Styled.SecondaryModalContent>
-									<Styled.SecondaryModalText>
-										This group type must be set to{' '}
-										<Styled.SearchResultBoldText>"Church"</Styled.SearchResultBoldText>
-									</Styled.SecondaryModalText>
-									<Styled.SecondaryModalText>
-										Visit the group settings page to change
-									</Styled.SecondaryModalText>
-									<Styled.SecondaryModalButtonContainer>
-										<Button color="primary" onClick={this.redirectToGroup}>
-											Change to Church
-										</Button>
-									</Styled.SecondaryModalButtonContainer>
-									<Styled.SecondaryModalButtonContainer>
-										<Button onClick={this.resetModalState}>Cancel</Button>
-									</Styled.SecondaryModalButtonContainer>
-								</Styled.SecondaryModalContent>
-							</div>
-						)}
-					</Styled.GroupSelectorModalBody>
-				</Modal>
-			</Styled.GroupSelectorModalContainer>
+								</Styled.SecondaryModalButtonContainer>
+								<Styled.SecondaryModalButtonContainer>
+									<Button onClick={this.resetModalState}>Cancel</Button>
+								</Styled.SecondaryModalButtonContainer>
+							</Styled.SecondaryModalContent>
+						</div>
+					)}
+				</Styled.GroupSelectorModalBody>
+			</Styled.GroupSelectorModal>
 		);
 	}
 }

@@ -28,6 +28,7 @@ const storedIcons = new Map();
 function getIconForGroupKind(kind) {
 	let icon = storedIcons.get(kind);
 	if (!icon) {
+		/* eslint import/namespace: ['error', { allowComputed: true }] */
 		icon = icons[`${kind.charAt(0).toUpperCase()}${kind.slice(1)}`] || icons.General;
 		storedIcons.set(kind, icon);
 	}
