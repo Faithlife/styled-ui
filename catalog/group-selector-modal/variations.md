@@ -1,4 +1,4 @@
-### Group Selector
+### Group Selector Modal
 
 ```react
 showSource: true
@@ -62,35 +62,56 @@ state: {
 		availableActions: {
 			claim: 'false',
 		},
+	},
+	{
+		name: Cool Test Church 1,
+		groupId: 5,
+		kind: church,
+		avatarUrl: '',
+		relationship: {
+			membership: {
+				kind: 'member',
+			},
+			kind: 'admin',
+		},
+		availableActions: {
+			claim: 'false',
+		},
+	},
+	{
+		name: Last Cool Test Church,
+		groupId: 6,
+		kind: church,
+		avatarUrl: '',
+		relationship: {
+			membership: {
+				kind: 'member',
+			},
+			kind: 'admin',
+		},
+		availableActions: {
+			claim: 'false',
+		},
 	}
 	],
-	selectedGroupId: 1,
-	groupSelectorView: "groups",
-	mobile: false,
+	isOpen: false,
+	showAlert: false,
+	alertText: "You must sign in before doing that",
 }
 ---
-<GroupSelectorDemo>
-	<GroupSelector
+<GroupSelectorModalDemo>
+	<GroupSelectorModal
+		onChangeModalState={() => {setState({isOpen: false})}}
+		isOpen={state.isOpen}
 		executeSearch={() => {alert("handled by application")}}
-		onSignInClick={() => {alert("handled by application")}}
-		onCreateGroup={() => {alert("handled by application")}}
-		onSelectionChange={() => {alert("handled by application")}}
 		groups={state.groups}
-		selectedGroupId={state.selectedGroupId}
 		groupSearchResults={state.groups}
-		groupSelectorView={state.groupSelectorView}
+		onCreateGroup={() => {alert("handled by application")}}
 		onGetStartedClick={() => {alert("handled by application")}}
 		onClaimGroupClick={() => {alert("handled by application")}}
-		isMobile={false}
-		style={{zIndex:1000}}
+		showAlert={state.showAlert}
+		alertText={state.alertText}
 	/>
-
-	<Button color="primary" onClick={() => {setState({groupSelectorView: "sign-in"})}}>Sign In</Button>
-	{' '}
-	<Button color="primary" onClick={() => {setState({groupSelectorView: "fetching"})}}>Loading</Button>
-	{' '}
-	<Button color="primary" onClick={() => {setState({groupSelectorView: "groups"})}}>Groups</Button>
-	{' '}
-	<Button color="primary" onClick={() => {setState({groupSelectorView: "no-groups"})}}>No Groups</Button>
-</GroupSelectorDemo>
+	<Button color="primary" onClick={() => {setState({isOpen: true})}}>Open Modal</Button>
+</GroupSelectorModalDemo>
 ```

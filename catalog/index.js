@@ -13,6 +13,7 @@ import {
 	HelpBox,
 	Collapse,
 	GroupSelector,
+	GroupSelectorModal,
 } from '../components/main.js';
 import { BootstrapContainer } from '../components/utils';
 import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
@@ -141,6 +142,27 @@ const pages = [
 				content: pageLoader(() => import('./collapse/documentation.md')),
 				imports: { Collapse, DocgenTable },
 			},
+		],
+	},
+	{
+		title: 'Grid',
+		pages: [
+			{
+				title: 'Variations',
+				path: '/grid/variations',
+				content: pageLoader(() => import('./grid/variations.md')),
+				imports: { MemberDirectory, VolunteerScheduling },
+			},
+			{
+				title: 'Documentation',
+				path: '/grid/documentation',
+				content: pageLoader(() => import('./grid/documentation.md')),
+			},
+		],
+	},
+	{
+		title: 'Group Selector',
+		pages: [
 			{
 				path: '/group-selector/variations',
 				title: 'Group Selector Variations',
@@ -172,21 +194,36 @@ const pages = [
 				content: pageLoader(() => import('./group-selector/documentation.md')),
 				imports: { GroupSelector, DocgenTable },
 			},
-		],
-	},
-	{
-		title: 'Grid',
-		pages: [
 			{
-				title: 'Variations',
-				path: '/grid/variations',
-				content: pageLoader(() => import('./grid/variations.md')),
-				imports: { MemberDirectory, VolunteerScheduling },
+				path: '/group-selector-modal/variations',
+				title: 'Group Selector Modal Variations',
+				content: pageLoader(() => import('./group-selector-modal/variations.md')),
+				imports: {
+					GroupSelectorModal,
+					Button: Bootstrap.Button,
+					GroupSelectorModalDemo: styled.div`
+						font-family: 'Source Sans Pro';
+						color: #333333;
+
+						.wide-content {
+							width: 600px;
+						}
+
+						.button-container {
+							margin-right: 16px;
+						}
+
+						.stacked-content {
+							width: 240px;
+						}
+					`,
+				},
 			},
 			{
-				title: 'Documentation',
-				path: '/grid/documentation',
-				content: pageLoader(() => import('./grid/documentation.md')),
+				path: '/group-selector-modal/documentation',
+				title: 'Group Selector Modal Documentation',
+				content: pageLoader(() => import('./group-selector-modal/documentation.md')),
+				imports: { GroupSelectorModal, DocgenTable },
 			},
 		],
 	},
