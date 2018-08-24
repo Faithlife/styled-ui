@@ -19,8 +19,12 @@ export class Modal extends React.Component {
 		subtitle: PropTypes.string,
 		/** Callback function for when the modal is close  */
 		onClose: PropTypes.func.isRequired,
+		/** Toggle header border */
+		showHeaderBorder: PropTypes.bool,
 		/** Contents of the modal */
 		children: PropTypes.node.isRequired,
+		/** Toggle scrolling of modal contents */
+		scrollContent: PropTypes.bool,
 		/** Customizable theme properties */
 		theme: PropTypes.object,
 		/** values for rendering an FL standard footer */
@@ -45,6 +49,8 @@ export class Modal extends React.Component {
 		theme: {
 			background: 'white',
 		},
+		scrollContent: true,
+		showHeaderBorder: true,
 	};
 
 	state = {
@@ -79,7 +85,9 @@ export class Modal extends React.Component {
 			subtitle,
 			onClose,
 			isOpen,
+			showHeaderBorder,
 			children,
+			scrollContent,
 			renderFooter,
 			footerProps,
 		} = this.props;
@@ -109,8 +117,15 @@ export class Modal extends React.Component {
 							if (modal && modalWidth === null) this.setState({ modalWidth: modal.clientWidth });
 						}}
 					>
-						<ModalHeader title={title} subtitle={subtitle} onClose={onClose} />
-						<Styled.ModalContent>{children}</Styled.ModalContent>
+						<ModalHeader
+							title={title}
+							subtitle={subtitle}
+							onClose={onClose}
+							style={{ borderBottom: showHeaderBorder ? null : '0' }}
+						/>
+						<Styled.ModalContent style={{ overflowY: scrollContent ? 'unset' : 'hidden' }}>
+							{children}
+						</Styled.ModalContent>
 						{renderFooter ? (
 							renderFooter()
 						) : (
