@@ -14,6 +14,7 @@ export const Spinner = styled.div`
 	border: 0 solid ${props => props.theme.outerColor};
 	border-left-color: ${props => props.theme.innerColor};
 	border-radius: 50%;
+	box-sizing: content-box;
 	display: inline-block;
 	margin-left: 5px;
 	animation: ${spinTransform} 1.1s infinite linear;
