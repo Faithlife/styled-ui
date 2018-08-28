@@ -44,14 +44,13 @@ export const CheckedIndicator = styled.div`
 		encodeURIComponent(
 			props.theme.primary,
 		)}'%20d='M6.564.75l-3.59%203.612-1.538-1.55L0%204.26%202.974%207.25%208%202.193z'/%3E%3C/svg%3E");
-		background-size: 60% 60%;
 		background-repeat: no-repeat;
 		content: '';
 		position: absolute;
 		top: 1.5px;
 		left: 1.5px;
-		height: 16px;
-		width: 16px;
+		height: 9.6px;
+		width: 9.6px;
 		opacity: 0;
 	}
 
