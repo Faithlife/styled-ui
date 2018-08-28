@@ -4,6 +4,10 @@
 
 Please add changes here when they're committed to the `master` branch, then move to "Released" once the package is published.
 
+### 2.0.5
+* Fixed a focus border issue with checkboxes
+* Fixed an alignment issue with bootstrap custom inputs. Thanks Jeremy Einfeld (#24)
+
 ### 2.0.4
 * Fixed some alignment issues with checkboxes
 
