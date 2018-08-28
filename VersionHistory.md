@@ -4,6 +4,12 @@
 
 Please add changes here when they're committed to the `master` branch, then move to "Released" once the package is published.
 
+### 2.0.4
+* Fixed some alignment issues with checkboxes
+
+### 2.0.3
+* Re-publish of 2.0.2, which had a broken build artifact
+
 ### 2.0.2
 * Changed medium button font size to 16px
 
