@@ -16,9 +16,7 @@ const defaultGroup = {
 export class GroupSelector extends React.Component {
 	static propTypes = {
 		/** Selects view state of group selector */
-		groupSelectorView: PropTypes.oneOf(['groups', 'sign-in', 'no-groups', 'fetching']).isRequired,
-		/** function that is called when "Sign In" is clicked by the user */
-		onSignInClick: PropTypes.func.isRequired,
+		groupSelectorView: PropTypes.oneOf(['groups', 'no-groups']).isRequired,
 		/** returns data to application for group creation */
 		onCreateGroup: PropTypes.func.isRequired,
 		/** function that is called every time user chooses a different group */
@@ -35,7 +33,8 @@ export class GroupSelector extends React.Component {
 		// 		kind: PropTypes.string,
 		// 		avatarUrl: PropTypes.string,
 		// 		membershipKind: PropTypes.string,
-		//		claimable: string,
+		//		claimable: PropTypes.string,
+		//		location: PropTypes.string
 		// 	}),
 		// ).isRequired,
 		groups: PropTypes.array.isRequired,
@@ -48,6 +47,7 @@ export class GroupSelector extends React.Component {
 		// 		avatarUrl: PropTypes.string,
 		// 		membershipKind: PropTypes.string,
 		//		claimable: string,
+		//		location: PropTypes.string
 		// 	}),
 		// ),
 		groupSearchResults: PropTypes.array,
@@ -87,13 +87,6 @@ export class GroupSelector extends React.Component {
 		return (
 			<div>
 				<Styled.GroupSelector tabIndex="0">
-					{this.props.groupSelectorView === 'fetching' && (
-						<Styled.SelectedGroupContainer>
-							<Styled.SelectedGroup>
-								<Styled.LoadingText>Loading...</Styled.LoadingText>
-							</Styled.SelectedGroup>
-						</Styled.SelectedGroupContainer>
-					)}
 					{this.props.groupSelectorView === 'groups' && (
 						<GroupDropdown
 							groups={this.props.groups}
@@ -107,19 +100,6 @@ export class GroupSelector extends React.Component {
 						<Button color="primary" onClick={this.handleChangeModalState}>
 							Find or add Church
 						</Button>
-					)}
-					{this.props.groupSelectorView === 'sign-in' && (
-						<Styled.GroupSelectorSignInAlert color="primary" style={{ lineHeight: 0.9 }}>
-							<Button
-								color="link"
-								size="sm"
-								onClick={this.props.onSignInClick}
-								style={{ padding: 0, paddingBottom: 1, fontSize: 14 }}
-							>
-								Sign In
-							</Button>{' '}
-							to add items to your catalog.
-						</Styled.GroupSelectorSignInAlert>
 					)}
 				</Styled.GroupSelector>
 				<GroupSelectorModal

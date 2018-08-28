@@ -137,12 +137,22 @@ export class GroupDropdown extends React.PureComponent {
 			<Styled.DropdownContainer innerRef={this.dropdownRef}>
 				<Styled.SelectedGroupContainer>
 					{!this.props.isMobile && (
-						<Styled.SelectedGroup
-							onClick={this.handleDropdownToggle}
-							onKeyDown={this.handleKeyPress}
-						>
-							{selectedGroupContents}
-						</Styled.SelectedGroup>
+						<div>
+							<Styled.DownArrow
+								xmlns="http://www.w3.org/2000/svg"
+								width="12"
+								height="12"
+								viewBox="0 0 12 12"
+							>
+								<polygon fill="#888" points="8 6 4 9.5 4 2.5" transform="rotate(90 6 6)" />
+							</Styled.DownArrow>
+							<Styled.SelectedGroup
+								onClick={this.handleDropdownToggle}
+								onKeyDown={this.handleKeyPress}
+							>
+								{selectedGroupContents}
+							</Styled.SelectedGroup>
+						</div>
 					)}
 					{this.props.isMobile && (
 						<Styled.MobileSelectedGroup

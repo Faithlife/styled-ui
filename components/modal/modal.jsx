@@ -19,8 +19,12 @@ export class Modal extends React.Component {
 		subtitle: PropTypes.string,
 		/** Callback function for when the modal is close  */
 		onClose: PropTypes.func.isRequired,
+		/** Allow padding to be overridden */
+		modalPadding: PropTypes.string,
 		/** Toggle header border */
 		showHeaderBorder: PropTypes.bool,
+		/** Removes bottom padding and margin on header */
+		shrinkHeader: PropTypes.bool,
 		/** Contents of the modal */
 		children: PropTypes.node.isRequired,
 		/** Toggle scrolling of modal contents */
@@ -51,6 +55,7 @@ export class Modal extends React.Component {
 		},
 		scrollContent: true,
 		showHeaderBorder: true,
+		shrinkHeader: false,
 	};
 
 	state = {
@@ -85,6 +90,8 @@ export class Modal extends React.Component {
 			subtitle,
 			onClose,
 			isOpen,
+			modalPadding,
+			shrinkHeader,
 			showHeaderBorder,
 			children,
 			scrollContent,
@@ -112,6 +119,7 @@ export class Modal extends React.Component {
 					onClick={this.handleBackdropClick}
 				>
 					<Styled.Modal
+						style={{ padding: modalPadding }}
 						innerRef={modal => {
 							this._modal = modal;
 							if (modal && modalWidth === null) this.setState({ modalWidth: modal.clientWidth });
@@ -121,9 +129,14 @@ export class Modal extends React.Component {
 							title={title}
 							subtitle={subtitle}
 							onClose={onClose}
-							style={{ borderBottom: showHeaderBorder ? null : '0' }}
+							style={{
+								borderBottom: showHeaderBorder ? null : '0',
+								paddingBottom: shrinkHeader ? 0 : null,
+								marginBottom: shrinkHeader ? 0 : null,
+							}}
+							moveCloseButton={shrinkHeader}
 						/>
-						<Styled.ModalContent style={{ overflowY: scrollContent ? 'unset' : 'hidden' }}>
+						<Styled.ModalContent style={{ overflowY: scrollContent ? 'scroll' : 'hidden' }}>
 							{children}
 						</Styled.ModalContent>
 						{renderFooter ? (

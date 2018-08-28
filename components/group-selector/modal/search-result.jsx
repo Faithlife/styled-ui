@@ -181,7 +181,7 @@ export class SearchResult extends React.PureComponent {
 			});
 			this.setState({
 				button: (
-					<Styled.SearchResultButton size="sm" color="primary" onClick={this.getStarted}>
+					<Styled.SearchResultButton size="sm" color="primary" outline onClick={this.getStarted}>
 						Get Started
 					</Styled.SearchResultButton>
 				),

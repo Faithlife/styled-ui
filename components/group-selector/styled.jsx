@@ -1,20 +1,17 @@
 import styled from 'styled-components';
 import { Bootstrap, HelpBox, Modal } from '../../components/main.js';
+import { resetStyles } from '../utils/index.js';
 
-const { Button, Input, Label } = Bootstrap;
+const { Button, Label } = Bootstrap;
 
 export const GroupSelector = styled.div`
+	${resetStyles};
 	max-width: 100%;
 	max-height: 800px;
 	text-align: center;
 	position: relative;
 	padding-bottom: 6px;
-	font-family: Arial, Helvetica, sans-serif;
-`;
-
-export const GroupSelectorSignInAlert = styled(HelpBox)`
-	padding-bottom: 6px;
-	text-align: left;
+	font-family: Source Sans Pro, Arial, Helvetica, sans-serif;
 `;
 
 export const GroupSelectorInputContainer = styled.input`
@@ -83,11 +80,12 @@ export const SimpleGroupInfo = styled.div`
 `;
 
 export const SimpleGroupName = styled.div`
-	font-size: 12px;
+	font-size: 13px;
 	color: #585250;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	font-family: Source Sans Pro;
 `;
 
 export const SimpleGroupMembershipLine = styled.div`
@@ -100,6 +98,13 @@ export const SelectedGroupContainer = styled.div`
 	height: 44px;
 	cursor: pointer;
 	border-radius: 6px;
+`;
+
+export const DownArrow = styled.svg`
+	position: absolute;
+	float: right;
+	top: 15px;
+	right: 8px;
 `;
 
 export const SelectedGroup = styled.button`
@@ -127,26 +132,17 @@ export const MobileSelectedGroup = styled.button`
 `;
 
 export const SelectedGroupText = styled.div`
-	font-size: 12px;
+	font-size: 13px;
 	line-height: 18px;
 	padding-top: 13px;
 	float: left;
 	margin-left: 6px;
-	width: 71%;
+	width: 64%;
 	text-align: left;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-`;
-
-export const LoadingText = styled.div`
-	font-size: 12px;
-	font-style: italic;
-	color: gray;
-	line-height: 44px;
-	margin-left: 16px;
-	width: 100%;
-	text-align: left;
+	font-family: Source Sans Pro;
 `;
 
 export const DropdownGroupsContainer = styled.div`
@@ -170,16 +166,18 @@ export const DropdownWrapper = styled.div`
 export const DropdownButtonContainer = styled.div`
 	width: 100%;
 	background-color: white;
-	padding-top: 8px;
-	padding-bottom: 8px;
+	padding-top: 16px;
+	padding-bottom: 16px;
+	display: flex;
+	justify-content: center;
 `;
 
 export const SearchResult = styled.div`
 	height: 100px;
 	width: 97%;
 	background-color: white;
-	margin: 1px 0 7px 0;
-	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+	margin: 1px -10px 7px -10px;
+	box-shadow: 0 3px 2px 0 rgba(0, 0, 0, 0.12), 0 0 18px 0 rgba(0, 0, 0, 0.12);
 	border-radius: 3px;
 `;
 
@@ -187,22 +185,33 @@ export const SearchResultAvatar = styled.div`
 	width: 40px;
 	height: 40px;
 	float: left;
-	margin: 6px;
+	margin: 12px;
 `;
 
 export const GroupSelectorModal = styled(Modal)`
 	position: relative;
+	${resetStyles};
+`;
+
+export const GroupSelectorModalTopGradient = styled.div`
+	position: fixed;
+	width: 320px;
+	height: 10px;
+	margin-top: -11px;
+	z-index: 2;
+	box-shadow: 0px 3px 10px 5px white;
 `;
 
 export const ModalTitle = styled.p`
 	font-size: 32px;
-	margin-bottom: 4px;
+	margin: 5px 0 0 0;
 	font-weight: 800;
 	color: #575251;
 	text-align: center;
 `;
 
 export const ModalSubtitle = styled.p`
+	margin: 4px 0 30px 0;
 	font-size: 16px;
 	text-align: center;
 	line-height: 1.2;
@@ -214,74 +223,56 @@ export const ModalAlert = styled(HelpBox)`
 `;
 
 export const SearchResultsContainer = styled.div`
-	max-height: 63%;
-	overflow-y: scroll;
+	overflow-y: hidden;
 	display: flex;
 	flex-direction: column;
 	position: relative;
 	align-items: center;
 	width: 100%;
-`;
-
-export const SearchInput = styled(Input)`
-	position: relative;
-	margin-bottom: 22px;
-
-	:before {
-		content: '';
-		position: absolute;
-		top: 8px;
-		bottom: 8px;
-		width: 24px;
-		z-index: 10;
-		left: 8px;
-	}
-`;
-
-export const SearchInputGroup = styled.div`
-	margin-bottom: 22px;
-	padding: 0 2px 0 2px;
+	margin-top: 16px;
+	height: 100%;
 `;
 
 export const CreateGroupWrapper = styled.div`
-	transition: 0.2s ease-in-out;
-	top: ${props => props.position};
 	position: relative;
 	background-color: white;
-	width: 100%;
+	width: 93%;
+	padding-right: 2px;
+	padding-left: 12px;
+	z-index: 2;
+	box-sizing: content-box;
 `;
 
 export const CreateGroup = styled.div`
 	background-color: white;
-	padding: 16px;
-	border-top: 1px solid #a8a8a8;
-	z-index: 11;
 `;
 
-export const CreateGroupTitle = styled.p`
-	composes: search__subtitle;
-	padding-bottom: 16px;
-	text-align: center;
-	font-size: 13px;
-	padding: 0;
-	margin-bottom: 12px;
+export const CreateGroupButtonWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 18px 0 16px 0;
 `;
 
-export const CreateGroupButton = styled.div`
-	float: right;
-	padding: 8px 0 8px 0;
+export const CreateGroupButtonText = styled.p`
+	font-size: 16px;
+	color: #575251;
 `;
 
 export const CreateGroupLabel = styled(Label)`
-	padding: 16px 0 6px 0;
+	margin: 0 0 4px 0;
 	transition: 0.2s ease-in-out;
+	font-size: 14px;
+	color: #575251;
 `;
 
 export const GroupSelectorModalBody = styled.div`
-	overflow: hidden;
 	border-radius: 6px;
 	width: 32vw;
-	max-width: 475px;
+	max-width: 375px;
+	height: 60vh;
+	padding: 0 10px 0 10px;
+	box-sizing: border-box;
 `;
 
 export const MainModalContent = styled.div`
@@ -294,12 +285,12 @@ export const MainModalContent = styled.div`
 export const SearchResultNameText = styled.div`
 	font-weight: bold;
 	color: #575251;
-	padding-top: 8px;
+	padding-top: 11px;
 	margin-right: 0px;
 	margin-left: 56px;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	width: 157px;
+	width: 191px;
 	white-space: nowrap;
 `;
 
@@ -317,23 +308,21 @@ export const SearchResultMessage = styled.div`
 
 export const SearchResultHightlightText = styled.span`
 	font-weight: 600;
-	font-size: 12;
+	font-size: 12px;
 	color: #bd2929;
 `;
 
 export const SearchResultMembershipLine = styled.div`
 	color: #a8a8a8;
-	font-size: 12;
+	font-size: 12px;
 	width: 50%;
 	margin: 4px 160px 0 56px;
 `;
 
 export const SearchResultButtonContainer = styled.div`
-	display: flex;
-	justify-content: flex-end;
-	margin-right: 8px;
-	margin-top: -40px;
-	padding-bottom: 4px;
+	float: right;
+	margin-right: 16px;
+	margin-top: -43px;
 `;
 
 export const SearchResultBoldText = styled.span`
@@ -347,7 +336,6 @@ export const SearchResultGroupKind = styled.div`
 	font-size: 12;
 	padding-bottom: 12px;
 	color: #a8a8a8;
-	font-style: italic;
 	font-size: 12px;
 	line-height: 1em;
 	margin-left: 56px;

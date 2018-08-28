@@ -171,7 +171,7 @@ const pages = [
 					GroupSelector,
 					Button: Bootstrap.Button,
 					GroupSelectorDemo: styled.div`
-						font-family: 'Source Sans Pro';
+						font-family: Source Sans Pro;
 						color: #333333;
 
 						.wide-content {
@@ -202,7 +202,7 @@ const pages = [
 					GroupSelectorModal,
 					Button: Bootstrap.Button,
 					GroupSelectorModalDemo: styled.div`
-						font-family: 'Source Sans Pro';
+						font-family: Source Sans Pro;
 						color: #333333;
 
 						.wide-content {

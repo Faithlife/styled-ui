@@ -8,6 +8,12 @@ import { CreateGroup } from './create-group.jsx';
 
 const { Button } = Bootstrap;
 
+const origionalCreateGroupWidth = '93%';
+const origionalSearchResultsMargin = 16;
+const origionalPaddingLeft = 12;
+const origionalPaddingRight = 0;
+const origionalBoxShadow = '0px 0px 0px 0px rgba(0, 0, 0, 0.12)';
+
 export class GroupSelectorModal extends React.Component {
 	static propTypes = {
 		/** Toggles the modal state open and closed */
@@ -58,30 +64,30 @@ export class GroupSelectorModal extends React.Component {
 		searchInputValue: '',
 		newChurchName: '',
 		newChurchLocation: '',
-		isCreateGroupOpen: false,
 		modalContent: 'main',
 		selectedGroupId: -1,
+		showCreateGroupButton: false,
+		createGroupPosition: 'relative',
+		createGroupWidth: origionalCreateGroupWidth,
+		createGroupBoxShadow: origionalBoxShadow,
+		createGroupPaddingLeft: origionalPaddingLeft,
+		searchResultsMargin: origionalSearchResultsMargin,
 	};
 
-	createGroupPopupRef = React.createRef();
+	modalRef = React.createRef();
+	searchResultsRef = React.createRef();
 
 	componentDidMount = () => {
-		window.addEventListener('mousedown', this.handleClick, false);
+		window.addEventListener('scroll', this.handleScroll, true);
 	};
 
 	componentWillUnmount = () => {
-		window.removeEventListener('mousedown', this.handleClick, false);
+		window.removeEventListener('scroll', this.handleScroll, true);
 	};
 
 	createGroupClick = () => {
 		this.toggle();
 		this.props.onCreateGroup(this.state.newChurchName, this.state.newChurchLocation);
-	};
-
-	clearSearchInput = () => {
-		this.setState({
-			searchInputValue: '',
-		});
 	};
 
 	getDefaultGroups() {
@@ -136,18 +142,6 @@ export class GroupSelectorModal extends React.Component {
 		return groups;
 	};
 
-	toggleCreateGroupState = () => {
-		this.setState(({ isCreateGroupOpen }) => ({ isCreateGroupOpen: !isCreateGroupOpen }));
-	};
-
-	openCreateGroup = () => {
-		this.setState({ isCreateGroupOpen: true });
-	};
-
-	closeCreateGroup = () => {
-		this.setState({ isCreateGroupOpen: false });
-	};
-
 	toggle = () => {
 		this.props.onChangeModalState();
 	};
@@ -176,10 +170,12 @@ export class GroupSelectorModal extends React.Component {
 
 	handleChurchNameInputChange = event => {
 		this.setState({ newChurchName: event.target.value });
+		this.handleSearchInput(event);
 	};
 
 	handleChurchLocationInputChange = event => {
 		this.setState({ newChurchLocation: event.target.value });
+		this.handleSearchInput(event);
 	};
 
 	handleSearchInput = event => {
@@ -216,13 +212,32 @@ export class GroupSelectorModal extends React.Component {
 		this.props.onClaimGroupClick(groupId);
 	};
 
-	handleClick = event => {
-		if (this.createGroupPopupRef.current) {
-			if (this.createGroupPopupRef.current.contains(event.target)) {
-				return;
+	handleScroll = event => {
+		if (this.modalRef.current) {
+			if (this.modalRef.current.contains(event.target)) {
+				if (event.target.scrollTop >= 90) {
+					this.setState({
+						showCreateGroupButton: true,
+						createGroupWidth: this.modalRef.current.offsetWidth - 46,
+						createGroupPosition: 'fixed',
+						createGroupPaddingLeft: 11,
+						createGroupPaddingRight: 15,
+						createGroupBoxShadow: '0px 18px 10px -8px rgba(0, 0, 0, 0.12)',
+						searchResultsMargin: 130,
+					});
+				} else {
+					this.setState({
+						showCreateGroupButton: false,
+						createGroupPosition: 'relative',
+						createGroupPaddingLeft: origionalPaddingLeft,
+						createGroupPaddingRight: origionalPaddingRight,
+						createGroupWidth: origionalCreateGroupWidth,
+						createGroupBoxShadow: origionalBoxShadow,
+						searchResultsMargin: origionalSearchResultsMargin,
+					});
+				}
 			}
 		}
-		this.closeCreateGroup();
 	};
 
 	render() {
@@ -230,48 +245,47 @@ export class GroupSelectorModal extends React.Component {
 			<Styled.GroupSelectorModal
 				isOpen={this.props.isOpen}
 				title={''}
+				modalPadding={'10px 0 10px 0'}
 				onClose={this.toggle}
+				shrinkHeader
 				scrollContent={false}
 				showHeaderBorder={false}
 				footerProps={{}}
 			>
-				<Styled.GroupSelectorModalBody>
+				<Styled.GroupSelectorModalBody innerRef={this.modalRef} style={{ overflowY: 'scroll' }}>
 					{this.state.modalContent === 'main' && (
 						<Styled.MainModalContent>
+							<Styled.GroupSelectorModalTopGradient />
 							<Styled.ModalTitle>Find Your Church</Styled.ModalTitle>
 							<Styled.ModalSubtitle>in the Faithlife Church Directory</Styled.ModalSubtitle>
 							{this.props.showAlert && (
 								<Styled.ModalAlert color="primary">{this.props.alertText}</Styled.ModalAlert>
 							)}
-							<Styled.SearchInputGroup>
-								<Styled.SearchInput
-									placeholder="Your church name and city"
-									value={this.state.searchInputValue}
-									onChange={this.handleSearchInput}
-									onKeyPress={this.handleKeyPress}
-									style={{ borderRadius: 3 }}
-								/>
-							</Styled.SearchInputGroup>
-							<Styled.SearchResultsContainer>
-								{this.getSearchResults()}
-							</Styled.SearchResultsContainer>
 							<Styled.CreateGroupWrapper
-								position={this.state.isCreateGroupOpen ? '-14%' : '-3%'}
-								innerRef={this.createGroupPopupRef}
-								onClick={this.openCreateGroup}
+								style={{
+									position: this.state.createGroupPosition,
+									width: this.state.createGroupWidth,
+									boxShadow: this.state.createGroupBoxShadow,
+									paddingLeft: this.state.createGroupPaddingLeft,
+									paddingRight: this.state.createGroupPaddingRight,
+								}}
 							>
 								<CreateGroup
-									onClick={this.toggleCreateGroupState}
-									isCreateGroupOpen={this.state.isCreateGroupOpen}
 									searchInputValue={this.state.searchInputValue}
 									onCreateGroup={this.createGroupClick}
 									onChurchNameInputChange={this.handleChurchNameInputChange}
 									onChurchLocationInputChange={this.handleChurchLocationInputChange}
 									newChurchName={this.state.newChurchName}
 									newChurchLocation={this.state.newChurchLocation}
-									openCreateGroup={this.openCreateGroup}
+									showButton={this.state.showCreateGroupButton}
 								/>
 							</Styled.CreateGroupWrapper>
+							<Styled.SearchResultsContainer
+								innerRef={this.searchResultsRef}
+								style={{ marginTop: this.state.searchResultsMargin }}
+							>
+								{this.getSearchResults()}
+							</Styled.SearchResultsContainer>
 						</Styled.MainModalContent>
 					)}
 					{this.state.modalContent === 'admin' && (
