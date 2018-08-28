@@ -166,7 +166,13 @@ const pages = [
 				path: '/help-box/variations',
 				title: 'Help Box Variations',
 				content: pageLoader(() => import('./help-box/variations.md')),
-				imports: { HelpBox, BootstrapContainer },
+				imports: {
+					HelpBox,
+					Demo: styled.div`
+						font-family: Source Sans Pro;
+						color: #333;
+					`,
+				},
 			},
 			{
 				path: '/help-box/documentation',

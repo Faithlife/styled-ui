@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { fonts, colors, thickness } from '../../components/shared-styles';
 import { LightBulbH } from '../icons';
+import { resetStyles } from '../utils';
 
 export const HelpBoxContent = styled.div`
 	${fonts.ui16};
@@ -34,6 +35,8 @@ export const variationMap = {
 
 function variantCreator(backgroundColor, foregroundColor) {
 	return component => component.extend`
+		${resetStyles};
+
 		background-color: ${props => props.theme.backgroundColor || backgroundColor};
 		border: solid 1px ${props => props.theme.foregroundColor || foregroundColor};
 		border-left: solid ${thickness.eight} ${props => props.theme.foregroundColor || foregroundColor};
