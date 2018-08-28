@@ -40,18 +40,19 @@ export const CheckedIndicator = styled.div`
 	cursor: pointer;
 
 	&:after {
+	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%208%208'%3E%3Cpath%20fill='${props =>
+		encodeURIComponent(
+			props.theme.primary,
+		)}'%20d='M6.564.75l-3.59%203.612-1.538-1.55L0%204.26%202.974%207.25%208%202.193z'/%3E%3C/svg%3E");
+		background-size: 60% 60%;
+		background-repeat: no-repeat;
 		content: '';
 		position: absolute;
-		top: 3px;
-		left: 2px;
+		top: 1.5px;
+		left: 1.5px;
+		height: 16px;
+		width: 16px;
 		opacity: 0;
-		transform: rotate(-45deg);
-		border: 2px solid ${props => props.theme.primary};
-		border-top: none;
-		border-right: none;
-		width: 9px;
-		height: 5px;
-		background: transparent;
 	}
 
 	${props => (props.isChecked ? isCheckedStyles : '')};
