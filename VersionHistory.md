@@ -4,6 +4,9 @@
 
 Please add changes here when they're committed to the `master` branch, then move to "Released" once the package is published.
 
+### 2.0.6
+* Fixed box-sizing issues on LoadingSpinner and HelpBox components
+
 ### 2.0.5
 * Fixed a focus border issue with checkboxes
 * Fixed an alignment issue with bootstrap custom inputs. Thanks Jeremy Einfeld (#24)
