@@ -8,7 +8,7 @@ These components require the [Faithlife Bootstrap base stylesheet](/bootstrap/st
 
 ```
 import { InferredTypeahead } from '@faithlife/styled-ui/dist/text-input.js';
-import '@faithlife/dist/text-input.css';
+import '@faithlife/styled-ui/dist/text-input.css';
 ```
 
 ```react
