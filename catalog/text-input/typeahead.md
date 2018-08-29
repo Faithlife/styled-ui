@@ -11,7 +11,7 @@ Source: [`react-bootstrap-typeahead`](https://github.com/Faithlife/react-bootstr
 
 ```
 import { Typeahead } from '@faithlife/styled-ui/dist/text-input.js';
-import '@faithlife/dist/text-input.css';
+import '@faithlife/styled-ui/dist/text-input.css';
 ```
 
 ```react
