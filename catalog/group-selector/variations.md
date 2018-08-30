@@ -1,4 +1,4 @@
-### Group Selector
+### Group Selector with Groups
 
 ```react
 showSource: true
@@ -65,32 +65,49 @@ state: {
 	}
 	],
 	selectedGroupId: 1,
-	groupSelectorView: "groups",
 	mobile: false,
 }
 ---
 <GroupSelectorDemo>
 	<GroupSelector
 		executeSearch={() => {alert("handled by application")}}
-		onSignInClick={() => {alert("handled by application")}}
 		onCreateGroup={() => {alert("handled by application")}}
 		onSelectionChange={() => {alert("handled by application")}}
 		groups={state.groups}
 		selectedGroupId={state.selectedGroupId}
 		groupSearchResults={state.groups}
-		groupSelectorView={state.groupSelectorView}
+		groupSelectorView={"groups"}
 		onGetStartedClick={() => {alert("handled by application")}}
 		onClaimGroupClick={() => {alert("handled by application")}}
 		isMobile={false}
 		style={{zIndex:1000}}
 	/>
+</GroupSelectorDemo>
+```
 
-	<Button color="primary" onClick={() => {setState({groupSelectorView: "sign-in"})}}>Sign In</Button>
-	{' '}
-	<Button color="primary" onClick={() => {setState({groupSelectorView: "fetching"})}}>Loading</Button>
-	{' '}
-	<Button color="primary" onClick={() => {setState({groupSelectorView: "groups"})}}>Groups</Button>
-	{' '}
-	<Button color="primary" onClick={() => {setState({groupSelectorView: "no-groups"})}}>No Groups</Button>
+### Group Selector without Groups
+
+```react
+showSource: true
+state: {
+	groups: [],
+	selectedGroupId: 1,
+	mobile: false,
+}
+---
+<GroupSelectorDemo>
+	<GroupSelector
+		executeSearch={() => {alert("handled by application")}}
+		onCreateGroup={() => {alert("handled by application")}}
+		onSelectionChange={() => {alert("handled by application")}}
+		groups={state.groups}
+		selectedGroupId={state.selectedGroupId}
+		groupSearchResults={state.groups}
+		groupSelectorView={"no-groups"}
+		onGetStartedClick={() => {alert("handled by application")}}
+		onClaimGroupClick={() => {alert("handled by application")}}
+		isMobile={false}
+		style={{zIndex:1000}}
+	/>
 </GroupSelectorDemo>
 ```
