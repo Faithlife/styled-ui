@@ -1,8 +1,7 @@
 # Changelog
 
-## Pending
-
-Please add changes here when they're committed to the `master` branch, then move to "Released" once the package is published.
+### 2.0.7
+* Fixed blurry popover component on Windows. Thanks Robert Bolender (#28)
 
 ### 2.0.6
 * Fixed box-sizing issues on LoadingSpinner and HelpBox components
@@ -27,8 +26,6 @@ Please add changes here when they're committed to the `master` branch, then move
 ### 2.0.0
 * **Breaking**: After review with the UX team, there are several bootstrap components that are no longer included in this library, because they won't be used in any of our specs.
 - Removed: Alert, Navbar*, Nav*, Breadcrumb*, Badge, Card*, Carousel*, Progress, Modal*, Tooltip, Table, ListGroup*, InputGroup*, Media, Tab*, Jumbotron, Pagination*, Collapse
-
-## Released
 
 ### 1.4.2
 * Fixed some spacing issues around elements caused by inherited styles
