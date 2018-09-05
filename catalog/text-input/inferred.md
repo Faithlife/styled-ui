@@ -87,6 +87,13 @@ state: { value: 'This value was guessed', confirmed: false }
 </div>
 ```
 
+### Using innerRef
+```react
+showSource: false
+---
+<FocusDemo />
+```
+
 ## Component PropTypes
 ```react
 noSource: true

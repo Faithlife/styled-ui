@@ -1,4 +1,5 @@
 export { BootstrapContainer, wrapBootstrap } from './bootstrap-container.jsx';
+export { mapFromInnerRef, mapToInnerRef } from './forwardref-wrapper.jsx';
 
 export function applyVariations(component, variationMap, props) {
 	let wrappedComponent = component;

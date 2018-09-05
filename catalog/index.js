@@ -18,6 +18,7 @@ import { Typeahead, InferredText, InferredTypeahead } from '../components/text-i
 import { colors } from '../components/shared-styles';
 import { DocgenTable } from './docgen-table.jsx';
 import { MemberDirectory, VolunteerScheduling } from './grid';
+import { FocusDemo } from './text-input/demos.jsx';
 
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
@@ -251,7 +252,7 @@ const pages = [
 				path: '/text-input/inferred',
 				title: 'Inferred Inputs',
 				content: pageLoader(() => import('./text-input/inferred.md')),
-				imports: { InferredText, InferredTypeahead, ...Bootstrap, DocgenTable },
+				imports: { FocusDemo, InferredText, InferredTypeahead, ...Bootstrap, DocgenTable },
 			},
 		],
 	},
