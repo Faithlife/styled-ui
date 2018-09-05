@@ -87,12 +87,19 @@ state: { value: 'This value was guessed', confirmed: false }
 </div>
 ```
 
-### Using innerRef
+### Focusable Input
 ```react
 showSource: false
 ---
-<FocusDemo />
+<InferredTypeaheadFocusDemo />
 ```
+
+```react
+showSource: false
+---
+<InferredTextFocusDemo />
+```
+
 
 ## Component PropTypes
 ```react
