@@ -1,5 +1,8 @@
 # Changelog
 
+### 2.1.0
+* Add support for focus via `innerRef` prop on InferredText and InferredTypeahead
+
 ### 2.0.7
 * Fixed blurry popover component on Windows. Thanks Robert Bolender (#28)
 
