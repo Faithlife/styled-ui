@@ -30,6 +30,18 @@ export const debouncedResize = callback => {
 	};
 };
 
+export const addSeparator = (items = [], separator = '\u00a0\u00a0•\u00a0\u00a0') => {
+	const result = [];
+	for (const item of items) {
+		if (item) {
+			result.push(item, separator);
+		}
+	}
+
+	result.pop();
+	return result;
+};
+
 export const resetStyles = `
 	margin: 0;
 

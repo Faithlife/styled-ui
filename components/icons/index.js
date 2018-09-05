@@ -132,3 +132,37 @@ export const SolidTriangleIcon = props => (
 		/>
 	</svg>
 );
+
+export const FileIcon = props => (
+	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="22" height="24" viewBox="0 0 22 24">
+		<g fill="#444" fillRule="nonzero" opacity=".5">
+			<path d="M14 0H1C.448 0 0 .448 0 1v22c0 .552.448 1 1 1h20c.552 0 1-.448 1-1V8h-7c-.552 0-1-.448-1-1V0zM4 17h14v2H4v-2zm0-5h14v2H4v-2zm6-3H4V7h6v2z" />
+			<path d="M21.414 6H16V.586z" />
+		</g>
+	</svg>
+);
+
+export const AudioIcon = props => (
+	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="21" viewBox="0 0 24 21">
+		<g fill="#444" fillRule="nonzero" opacity=".5">
+			<path d="M15.584.082a.772.772 0 0 0-.794.061L6.61 6H.762A.755.755 0 0 0 0 6.75v7.5c0 .415.34.75.762.75H6.61l8.18 5.857a.768.768 0 0 0 .794.061.748.748 0 0 0 .416-.668V.75c0-.282-.16-.54-.416-.668zM19.5 9.75H24v1.5h-4.5zm-1.58-4.4l3.897-2.25.75 1.3-3.897 2.25zm0 10.3l.75-1.299 3.897 2.25-.75 1.3z" />
+		</g>
+	</svg>
+);
+
+export const VideoFileIcon = props => (
+	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="22" height="24" viewBox="0 0 22 24">
+		<g fill="none" fillRule="evenodd" opacity=".5">
+			<path
+				d="M14 0H1C.448 0 0 .448 0 1v22c0 .552.448 1 1 1h20c.552 0 1-.448 1-1V8h-7c-.552 0-1-.448-1-1V0z"
+				fill="#444"
+				fillRule="nonzero"
+			/>
+			<path
+				d="M14.83235 13.2846548l-6.3 3.6666784C8.4767 16.9836666 8.41335 17 8.35 17c-.0588 0-.11795-.014-.17115-.0426668C8.06825 16.898333 8 16.7873327 8 16.6666656V9.3333088c0-.120667.06825-.2316674.17885-.2906676.1106-.0590002.2457-.0566669.35385.0063333l6.3 3.6666784c.10395.0606669.1673.1683339.1673.2843343 0 .1160004-.06335.2236674-.16765.2846676z"
+				fill="#FFF"
+			/>
+			<path fill="#444" fillRule="nonzero" d="M21 6h-5V1z" />
+		</g>
+	</svg>
+);

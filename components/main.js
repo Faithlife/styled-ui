@@ -10,3 +10,4 @@ export { LoadingSpinner } from './loading-spinner/component.jsx';
 export { Modal, ModalFooter } from './modal';
 export { HelpBox } from './help-box/component.jsx';
 export { Collapse } from './collapse/component.jsx';
+export { FilesSection } from './files-section/component.jsx';
