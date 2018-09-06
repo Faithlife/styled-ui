@@ -12,6 +12,7 @@ import {
 	LoadingSpinner,
 	HelpBox,
 	Collapse,
+	FilesSection,
 } from '../components/main.js';
 import { BootstrapContainer } from '../components/utils';
 import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
@@ -262,6 +263,30 @@ const pages = [
 					...Bootstrap,
 					DocgenTable,
 				},
+			},
+		],
+	},
+	{
+		title: 'Files Section',
+		pages: [
+			{
+				path: '/files-section/variations',
+				title: 'Files Section Variations',
+				content: pageLoader(() => import('./files-section/variations.md')),
+				imports: {
+					FilesSection,
+					Button,
+					LoadingSpinner,
+					FilesSectionDemo: styled.div`
+						font-family: 'Source Sans Pro';
+					`,
+				},
+			},
+			{
+				path: 'files-section/documentation',
+				title: 'Files Section Documentation',
+				content: pageLoader(() => import('./files-section/documentation.md')),
+				imports: { FilesSection, DocgenTable },
 			},
 		],
 	},
