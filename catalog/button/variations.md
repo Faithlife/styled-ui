@@ -23,6 +23,17 @@ showSource: true
 </ButtonDemo>
 ```
 
+### With Icon
+```react
+showSource: true
+---
+<ButtonDemo>
+	<Button primary small renderIcon={<GearIcon />}>
+		Settings
+	</Button>
+</ButtonDemo>
+```
+
 ### Supported style customizations
 Do not use the `style` prop to style this component (it will be ignored). Instead, if there is missing customization that you need for this component, ask to have it added to the theme prop.
 

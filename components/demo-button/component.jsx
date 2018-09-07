@@ -33,6 +33,8 @@ export class Button extends PureComponent {
 		extraLarge: PropTypes.bool,
 		/** The type of button (for instance, submit) */
 		type: PropTypes.string,
+		/** Enables rendering a display: flex span, needed for rendering SVG icons */
+		renderIcon: PropTypes.node,
 	};
 
 	static defaultProps = {
@@ -50,7 +52,14 @@ export class Button extends PureComponent {
 
 		return (
 			<MappedStyledComponent theme={theme} {...filteredProps || {}}>
-				{children}
+				{this.props.renderIcon == null ? (
+					children
+				) : (
+					<Styled.ButtonContents>
+						{this.props.renderIcon}
+						<span>{children}</span>
+					</Styled.ButtonContents>
+				)}
 			</MappedStyledComponent>
 		);
 	}

@@ -9,6 +9,18 @@ const buttonColors = {
 	disabled: '#bedcf2',
 };
 
+export const ButtonContents = styled.span`
+	display: flex;
+
+	& > * {
+		flex: 1 0;
+
+		&:first-child {
+			margin-right: 6px;
+		}
+	}
+`;
+
 export const Button = styled.button`
 	${resetStyles};
 

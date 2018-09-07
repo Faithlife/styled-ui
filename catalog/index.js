@@ -15,6 +15,7 @@ import {
 } from '../components/main.js';
 import { BootstrapContainer } from '../components/utils';
 import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
+import { GearIcon } from '../components/icons';
 import { colors } from '../components/shared-styles';
 import { DocgenTable } from './docgen-table.jsx';
 import { MemberDirectory, VolunteerScheduling } from './grid';
@@ -80,6 +81,7 @@ const pages = [
 							margin: 8px;
 						}
 					`,
+					GearIcon,
 				},
 			},
 			{

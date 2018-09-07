@@ -111,6 +111,18 @@ export const KebabVertical = props => (
 	</svg>
 );
 
+export function GearIcon(props) {
+	return React.createElement(
+		'svg',
+		{ width: '18', height: '18', viewBox: '0 0 18 18', ...props },
+		React.createElement('path', {
+			fill: 'currentColor',
+			d:
+				'M14.3 6.2l1.1-2.1L14 2.7l-2.1 1.1c-.3-.2-.7-.3-1.1-.4L10 1H8l-.8 2.3c-.3.1-.7.2-1 .4L4.1 2.6 2.6 4.1l1.1 2.1c-.2.3-.3.7-.4 1L1 8v2l2.3.8c.1.4.3.7.4 1.1L2.6 14 4 15.4l2.1-1.1c.3.2.7.3 1.1.4L8 17h2l.8-2.3c.4-.1.7-.3 1.1-.4l2.1 1.1 1.4-1.4-1.1-2.1c.2-.3.3-.7.4-1.1L17 10V8l-2.3-.8c-.1-.3-.2-.7-.4-1zM9 12c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z',
+		}),
+	);
+}
+
 export const SolidTriangleIcon = props => (
 	<svg {...props} width="12" height="12" viewBox="0 0 12 12">
 		<path
