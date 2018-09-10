@@ -80,7 +80,6 @@ state: {
 		onGetStartedClick={() => {alert("handled by application")}}
 		onClaimGroupClick={() => {alert("handled by application")}}
 		isMobile={false}
-		style={{zIndex:1000}}
 	/>
 </GroupSelectorDemo>
 ```
