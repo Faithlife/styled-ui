@@ -17,45 +17,23 @@ export class GroupSelector extends React.Component {
 	static propTypes = {
 		/** Selects view state of group selector */
 		groupSelectorView: PropTypes.oneOf(['groups', 'no-groups']).isRequired,
-		/** returns data to application for group creation */
+		/** Returns data to application for group creation */
 		onCreateGroup: PropTypes.func.isRequired,
-		/** function that is called every time user chooses a different group */
+		/** Function that is called every time user chooses a different group */
 		onSelectionChange: PropTypes.func.isRequired,
-		/** returns search string to application */
+		/** Returns search string to application */
 		executeSearch: PropTypes.func.isRequired,
-		/** -1 if no previous selected group */
+		/** Returns -1 if no previous selected group */
 		selectedGroupId: PropTypes.number.isRequired,
-		/** all groups that should be displayed on the dropdown can be empty but must be defined */
-		// groups: PropTypes.arrayOf(
-		// 	PropTypes.shape({
-		// 		name: PropTypes.string,
-		// 		groupId: PropTypes.number,
-		// 		kind: PropTypes.string,
-		// 		avatarUrl: PropTypes.string,
-		// 		membershipKind: PropTypes.string,
-		//		claimable: PropTypes.string,
-		//		location: PropTypes.string
-		// 	}),
-		// ).isRequired,
+		/** All groups that should be displayed on the dropdown can be empty but must be defined */
 		groups: PropTypes.array.isRequired,
-		/** undefined or empty if no search has been executed yet */
-		// searchedGroups: PropTypes.arrayOf(
-		// 	PropTypes.shape({
-		// 		name: PropTypes.string,
-		// 		groupId: PropTypes.number,
-		// 		kind: PropTypes.string,
-		// 		avatarUrl: PropTypes.string,
-		// 		membershipKind: PropTypes.string,
-		//		claimable: string,
-		//		location: PropTypes.string
-		// 	}),
-		// ),
+		/** Undefined or empty if no search has been executed yet */
 		groupSearchResults: PropTypes.array,
-		/** action that should be taken when user selects group with proper permissions */
+		/** Action that should be taken when user selects group with proper permissions */
 		onGetStartedClick: PropTypes.func.isRequired,
-		/** action that should be taken when user claims group */
+		/** Action that should be taken when user claims group */
 		onClaimGroupClick: PropTypes.func.isRequired,
-		/** is the dropdown on a mobile view */
+		/** Is the dropdown on a mobile view */
 		isMobile: PropTypes.bool.isRequired,
 	};
 	state = {

@@ -9,20 +9,6 @@ const { Button } = Bootstrap;
 
 export class GroupDropdown extends React.PureComponent {
 	static propTypes = {
-		// groups: PropTypes.arrayOf(
-		// 	PropTypes.shape({
-		// 		name: PropTypes.string.isRequired,
-		// 		groupId: PropTypes.number.isRequired,
-		// 		kind: PropTypes.string.isRequired,
-		// 		avatarUrl: PropTypes.string,
-		// 	}),
-		// ).isRequired,
-		// selectedGroup: PropTypes.shape({
-		// 	name: PropTypes.string.isRequired,
-		// 	groupId: PropTypes.number.isRequired,
-		// 	kind: PropTypes.string.isRequired,
-		// 	avatarUrl: PropTypes.string,
-		// }),
 		groups: PropTypes.array.isRequired,
 		selectedGroup: PropTypes.object.isRequired,
 		onSelectionChange: PropTypes.func.isRequired,
