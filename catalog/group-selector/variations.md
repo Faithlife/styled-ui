@@ -4,9 +4,9 @@
 showSource: true
 state: {
 	groups: [{
-		name: Michael's Test Church,
+		name: 'Michaels Test Church',
 		groupId: 1,
-		kind: church,
+		kind: 'church',
 		avatarUrl: '',
 		relationship: {
 			membership: {
@@ -19,9 +19,9 @@ state: {
 		},
 	},
 	{
-		name: Example Community Church,
+		name: 'Example Community Church',
 		groupId: 2,
-		kind: church,
+		kind: 'church',
 		avatarUrl: '',
 		relationship: {
 			membership: {
@@ -34,9 +34,9 @@ state: {
 		},
 	},
 	{
-		name: Jordan's Test Church,
+		name: 'Jordans Test Church',
 		groupId: 3,
-		kind: church,
+		kind: 'church',
 		avatarUrl: '',
 		relationship: {
 			membership: {
@@ -49,9 +49,9 @@ state: {
 		},
 	},
 	{
-		name: Cool Test Church,
+		name: 'Cool Test Church',
 		groupId: 4,
-		kind: church,
+		kind: 'church',
 		avatarUrl: '',
 		relationship: {
 			membership: {
