@@ -273,6 +273,7 @@ export const GroupSelectorModalBody = styled.div`
 	height: 60vh;
 	padding: 0 10px 0 10px;
 	box-sizing: border-box;
+	overflow-y: scroll;
 `;
 
 export const MainModalContent = styled.div`

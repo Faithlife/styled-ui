@@ -230,7 +230,7 @@ export class GroupSelectorModal extends React.Component {
 				showHeaderBorder={false}
 				footerProps={{}}
 			>
-				<Styled.GroupSelectorModalBody innerRef={this.modalRef} style={{ overflowY: 'scroll' }}>
+				<Styled.GroupSelectorModalBody innerRef={this.modalRef}>
 					{this.state.modalContent === 'main' && (
 						<Styled.MainModalContent>
 							<Styled.GroupSelectorModalTopGradient />
