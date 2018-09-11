@@ -70,7 +70,7 @@ state: {
 ---
 <GroupSelectorDemo>
 	<GroupSelector
-		executeSearch={(search) => {
+		onSearchInputChange={(search) => {
 			setState({ groupSearchResults: [{
 				name: 'Search result 1',
 				groupId: 1,
@@ -179,7 +179,7 @@ state: {
 ---
 <GroupSelectorDemo>
 	<GroupSelector
-		executeSearch={() => {alert("handled by application")}}
+		onSearchInputChange={() => {alert("handled by application")}}
 		onCreateGroup={() => {alert("handled by application")}}
 		onSelectionChange={() => {alert("handled by application")}}
 		groups={state.groups}

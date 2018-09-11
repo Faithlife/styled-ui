@@ -22,7 +22,7 @@ export class GroupSelector extends React.Component {
 		/** Function that is called every time user chooses a different group */
 		onSelectionChange: PropTypes.func.isRequired,
 		/** Returns search string to application */
-		executeSearch: PropTypes.func.isRequired,
+		onSearchInputChange: PropTypes.func.isRequired,
 		/** Returns -1 if no previous selected group */
 		selectedGroupId: PropTypes.number.isRequired,
 		/** All groups that should be displayed on the dropdown can be empty but must be defined */
@@ -83,7 +83,7 @@ export class GroupSelector extends React.Component {
 				<GroupSelectorModal
 					isOpen={this.state.isModalOpen}
 					onChangeModalState={this.handleChangeModalState}
-					executeSearch={this.props.executeSearch}
+					onSearchInputChange={this.props.onSearchInputChange}
 					groups={this.props.groups}
 					groupSearchResults={this.props.groupSearchResults}
 					onCreateGroup={this.props.onCreateGroup}

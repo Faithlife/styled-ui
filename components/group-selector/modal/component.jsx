@@ -21,31 +21,9 @@ export class GroupSelectorModal extends React.Component {
 		/** Keeps track of modal open/closed state */
 		isOpen: PropTypes.bool.isRequired,
 		/** Where search strings will be passed for application to query account services */
-		executeSearch: PropTypes.func.isRequired,
-		// groups: PropTypes.arrayOf(
-		// 	PropTypes.shape({
-		// 		name: PropTypes.string.isRequired,
-		// 		groupId: PropTypes.number.isRequired,
-		// 		kind: PropTypes.string.isRequired,
-		// 		avatarUrl: PropTypes.string,
-		// 		membershipKind: PropTypes.string,
-		// 		relationshipKind: PropTypes.string,
-		//		claimable: string,
-		// 	}),
-		// ).isRequired,
+		onSearchInputChange: PropTypes.func.isRequired,
 		/** Groups that user is a part of (can be empty array) */
 		groups: PropTypes.array.isRequired,
-		// searchedGroups: PropTypes.arrayOf(
-		// 	PropTypes.shape({
-		// 		name: PropTypes.string.isRequired,
-		// 		groupId: PropTypes.number.isRequired,
-		// 		kind: PropTypes.string.isRequired,
-		// 		avatarUrl: PropTypes.string,
-		// 		membershipKind: PropTypes.string,
-		// 		relationshipKind: PropTypes.string,
-		//		claimable: string,
-		// 	}),
-		// ),
 		/** Where results from group search should be passed */
 		groupSearchResults: PropTypes.array,
 		/** Function called when user creates group.  Application is responsible for contacting account services */
@@ -188,7 +166,7 @@ export class GroupSelectorModal extends React.Component {
 			event.target.value !== ' ' &&
 			event.target.value !== ''
 		) {
-			this.props.executeSearch(event.target.value);
+			this.props.onSearchInputChange(event.target.value);
 		}
 	};
 
@@ -199,7 +177,7 @@ export class GroupSelectorModal extends React.Component {
 				event.target.value !== ' ' &&
 				event.target.value !== ''
 			) {
-				this.props.executeSearch(this.state.searchInputValue);
+				this.props.onSearchInputChange(this.state.searchInputValue);
 			}
 		}
 	};

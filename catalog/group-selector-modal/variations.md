@@ -103,7 +103,7 @@ state: {
 	<GroupSelectorModal
 		onChangeModalState={() => {setState({isOpen: false})}}
 		isOpen={state.isOpen}
-		executeSearch={() => {alert("handled by application")}}
+		onSearchInputChange={() => {alert("handled by application")}}
 		groups={state.groups}
 		groupSearchResults={state.groups}
 		onCreateGroup={() => {alert("handled by application")}}
