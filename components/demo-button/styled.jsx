@@ -111,7 +111,7 @@ export const variationMap = {
 		}
 `,
 	link: component => component.extend`
-		border: none;
+		border: 1px solid transparent;
 		background: none;
 		color: ${props => props.theme.defaultColor || buttonColors.default};
 		padding: 0;
