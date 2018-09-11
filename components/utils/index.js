@@ -1,5 +1,6 @@
 export { BootstrapContainer, wrapBootstrap } from './bootstrap-container.jsx';
 export { mapFromInnerRef, mapToInnerRef } from './forwardref-wrapper.jsx';
+export { shadeColor } from './shade-color';
 
 export function applyVariations(component, variationMap, props) {
 	let wrappedComponent = component;

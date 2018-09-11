@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { fonts, colors, thickness } from '../../components/shared-styles';
 import { LightBulbH } from '../icons';
-import { resetStyles } from '../utils';
+import { resetStyles, shadeColor } from '../utils';
 
 export const HelpBoxContent = styled.div`
 	${fonts.ui16};
@@ -18,6 +18,26 @@ export const BulbIcon = styled(LightBulbH)`
 	margin: ${thickness.sixteen};
 	margin-right: 0;
 	flex: none;
+`;
+
+export const CloseButton = styled.button`
+	margin: 10px 14px 0 0;
+	height: 18px;
+	background: transparent;
+	padding: 0;
+	border: none;
+
+	path {
+		fill: ${props =>
+			props.theme.backgroundColor
+				? shadeColor(props.theme.backgroundColor, -20)
+				: shadeColor(colors.blueLight, -20)};
+	}
+
+	&::-moz-focus-inner {
+		border: 0;
+		padding: 0;
+	}
 `;
 
 export const HelpBox = variantCreator(colors.blueTint, colors.blueLight)(styled.div`
