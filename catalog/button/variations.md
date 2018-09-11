@@ -32,6 +32,7 @@ showSource: true
 		Settings
 	</Button>
 	<Button primary square small renderIcon={<GearIcon />} />
+	<Button link square small renderIcon={<GearIcon />} />
 </ButtonDemo>
 ```
 
