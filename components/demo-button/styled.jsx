@@ -29,7 +29,7 @@ export const Button = styled.button`
 	cursor: pointer;
 	transition: all 0.25s ease 0s;
 	white-space: nowrap;
-	font-size: ${props => props.theme.fontSize || '14px'};
+	font-size: ${props => props.theme.fontSize || '16px'};
 	width: ${props => props.theme.width};
 	padding: ${props => props.theme.padding};
 
@@ -131,14 +131,13 @@ export const variationMap = {
 `,
 	small: component => component.extend`
 		padding: 6px ${props => (props.square ? '6px' : '12px')};
+		font-size: 14px;
 `,
 	medium: component => component.extend`
 		padding: 8px ${props => (props.square ? '8px' : '16px')};
-		font-size: 16px;
 `,
 	large: component => component.extend`
 		padding: 12px ${props => (props.square ? '12px' : '24px')};
-		font-size: 16px;
 `,
 	extraLarge: component => component.extend`
 		padding: 16px ${props => (props.square ? '16px' : '32px')};
