@@ -138,12 +138,12 @@ export class GroupSelectorModal extends React.Component {
 
 	joinGroup = groupId => {
 		this.setModalState('main');
-		window.open(`https://www.faithlife.com/${groupId}`, 'noopener, noreferrer');
+		window.open(`https://faithlife.com/${groupId}`, 'noopener, noreferrer');
 	};
 
 	redirectToGroup = () => {
 		this.setModalState('main');
-		window.open(`https://www.faithlife.com/${this.state.selectedGroupId}`, 'noopener, noreferrer');
+		window.open(`https://faithlife.com/${this.state.selectedGroupId}`, 'noopener, noreferrer');
 	};
 
 	handleChurchNameInputChange = event => {
