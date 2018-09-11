@@ -24,7 +24,7 @@ export const Exclamation = props => (
 
 export const Close = props => (
 	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-		<g fill="none" fillRule="evenodd" transform="translate(-3 -3)">
+		<g fill="none" fillRule="evenodd">
 			<path
 				fill="#979797"
 				fillRule="nonzero"
