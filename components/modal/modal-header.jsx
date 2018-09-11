@@ -3,14 +3,11 @@ import PropTypes from 'prop-types';
 import { Close } from '../icons';
 import * as Styled from './styled.jsx';
 
-export const ModalHeader = ({ title, subtitle, onClose, style, moveCloseButton }) => (
-	<Styled.ModalHeader style={style}>
+export const ModalHeader = ({ title, subtitle, onClose }) => (
+	<Styled.ModalHeader>
 		<Styled.ModalTitleBar>
 			<Styled.ModalTitle>{title}</Styled.ModalTitle>
-			<Styled.ModalClose
-				onClick={onClose}
-				style={{ margin: moveCloseButton ? '12px 16px 0 0' : null }}
-			>
+			<Styled.ModalClose onClick={onClose}>
 				<Close />
 			</Styled.ModalClose>
 		</Styled.ModalTitleBar>
@@ -22,6 +19,4 @@ ModalHeader.propTypes = {
 	title: PropTypes.string.isRequired,
 	onClose: PropTypes.func.isRequired,
 	subtitle: PropTypes.string,
-	style: PropTypes.object,
-	moveCloseButton: PropTypes.bool,
 };

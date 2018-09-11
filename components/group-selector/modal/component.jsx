@@ -220,16 +220,7 @@ export class GroupSelectorModal extends React.Component {
 
 	render() {
 		return (
-			<Styled.GroupSelectorModal
-				isOpen={this.props.isOpen}
-				title={''}
-				modalPadding={'10px 0 10px 0'}
-				onClose={this.toggle}
-				shrinkHeader
-				scrollContent={false}
-				showHeaderBorder={false}
-				footerProps={{}}
-			>
+			<Styled.GroupSelectorModal isOpen={this.props.isOpen} onClose={this.toggle}>
 				<Styled.GroupSelectorModalBody innerRef={this.modalRef}>
 					{this.state.modalContent === 'main' && (
 						<Styled.MainModalContent>

@@ -20,16 +20,8 @@ export class Modal extends React.Component {
 		subtitle: PropTypes.string,
 		/** Callback function for when the modal is close  */
 		onClose: PropTypes.func.isRequired,
-		/** Allow padding to be overridden */
-		modalPadding: PropTypes.string,
-		/** Toggle header border */
-		showHeaderBorder: PropTypes.bool,
-		/** Removes bottom padding and margin on header */
-		shrinkHeader: PropTypes.bool,
 		/** Contents of the modal */
 		children: PropTypes.node.isRequired,
-		/** Toggle scrolling of modal contents */
-		scrollContent: PropTypes.bool,
 		/** Customizable theme properties */
 		theme: PropTypes.object,
 		/** values for rendering an FL standard footer */
@@ -54,9 +46,6 @@ export class Modal extends React.Component {
 		theme: {
 			background: 'white',
 		},
-		scrollContent: true,
-		showHeaderBorder: true,
-		shrinkHeader: false,
 	};
 
 	state = {
@@ -85,11 +74,7 @@ export class Modal extends React.Component {
 			subtitle,
 			onClose,
 			isOpen,
-			modalPadding,
-			shrinkHeader,
-			showHeaderBorder,
 			children,
-			scrollContent,
 			renderFooter,
 			footerProps,
 		} = this.props;
@@ -109,26 +94,13 @@ export class Modal extends React.Component {
 			<ThemeProvider theme={{ ...theme, verticalButtons }}>
 				<ModalBackdrop onClose={onClose}>
 					<Styled.Modal
-						style={{ padding: modalPadding }}
 						innerRef={modal => {
 							this._modal = modal;
 							if (modal && modalWidth === null) this.setState({ modalWidth: modal.clientWidth });
 						}}
 					>
-						<ModalHeader
-							title={title}
-							subtitle={subtitle}
-							onClose={onClose}
-							style={{
-								borderBottom: showHeaderBorder ? null : '0',
-								paddingBottom: shrinkHeader ? 0 : null,
-								marginBottom: shrinkHeader ? 0 : null,
-							}}
-							moveCloseButton={shrinkHeader}
-						/>
-						<Styled.ModalContent style={{ overflowY: scrollContent ? 'scroll' : 'hidden' }}>
-							{children}
-						</Styled.ModalContent>
+						<ModalHeader title={title} subtitle={subtitle} onClose={onClose} />
+						<Styled.ModalContent> {children} </Styled.ModalContent>
 						{renderFooter ? (
 							renderFooter()
 						) : (

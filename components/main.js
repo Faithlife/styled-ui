@@ -8,6 +8,7 @@ export { Button } from './demo-button/component.jsx';
 export { Bootstrap } from './bootstrap';
 export { LoadingSpinner } from './loading-spinner/component.jsx';
 export { Modal, ModalFooter } from './modal';
+export { SimpleModal } from './simple-modal/component.jsx';
 export { HelpBox } from './help-box/component.jsx';
 export { Collapse } from './collapse/component.jsx';
 export { GroupSelector } from './group-selector/component.jsx';

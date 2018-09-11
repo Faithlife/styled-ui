@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Bootstrap, HelpBox, Modal } from '../../components/main.js';
+import { Bootstrap, HelpBox, SimpleModal } from '../../components/main.js';
 import { resetStyles } from '../utils/index.js';
 
 const { Button, Label } = Bootstrap;
@@ -188,7 +188,7 @@ export const SearchResultAvatar = styled.div`
 	margin: 12px;
 `;
 
-export const GroupSelectorModal = styled(Modal)`
+export const GroupSelectorModal = styled(SimpleModal)`
 	position: relative;
 	${resetStyles};
 `;
