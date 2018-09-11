@@ -31,6 +31,7 @@ showSource: true
 	<Button primary small renderIcon={<GearIcon />}>
 		Settings
 	</Button>
+	<Button primary square small renderIcon={<GearIcon />} />
 </ButtonDemo>
 ```
 

@@ -57,7 +57,7 @@ export class Button extends PureComponent {
 				) : (
 					<Styled.ButtonContents>
 						{this.props.renderIcon}
-						<span>{children}</span>
+						{children != null && <span>{children}</span>}
 					</Styled.ButtonContents>
 				)}
 			</MappedStyledComponent>

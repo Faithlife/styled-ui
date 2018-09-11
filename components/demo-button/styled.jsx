@@ -13,10 +13,10 @@ export const ButtonContents = styled.span`
 	display: flex;
 
 	& > * {
-		flex: 1 0;
+		flex: 1 0 auto;
 
-		&:first-child {
-			margin-right: 6px;
+		&:not(:first-child) {
+			margin-left: 6px;
 		}
 	}
 `;
@@ -130,18 +130,18 @@ export const variationMap = {
 		}
 `,
 	small: component => component.extend`
-		padding: 6px 12px;
+		padding: 6px ${props => (props.square ? '6px' : '12px')};
 `,
 	medium: component => component.extend`
-		padding: 8px 16px;
+		padding: 8px ${props => (props.square ? '8px' : '16px')};
 		font-size: 16px;
 `,
 	large: component => component.extend`
-		padding: 12px 24px;
+		padding: 12px ${props => (props.square ? '12px' : '24px')};
 		font-size: 16px;
 `,
 	extraLarge: component => component.extend`
-		padding: 16px 32px;
+		padding: 16px ${props => (props.square ? '16px' : '32px')};
 		font-size: 24px;
 `,
 };
