@@ -16,8 +16,12 @@ export class Button extends PureComponent {
 			hoverColor: PropTypes.string,
 			activeColor: PropTypes.string,
 			disabledColor: PropTypes.string,
+		}),
+		/** Style overrides */
+		styleOverrides: PropTypes.shape({
 			width: PropTypes.string,
 			fontSize: PropTypes.string,
+			padding: PropTypes.string,
 		}),
 		/** Primary button variation */
 		primary: PropTypes.bool,
@@ -39,6 +43,7 @@ export class Button extends PureComponent {
 
 	static defaultProps = {
 		type: 'button',
+		styleOverrides: {},
 	};
 
 	render() {

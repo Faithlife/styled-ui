@@ -29,9 +29,9 @@ export const Button = styled.button`
 	cursor: pointer;
 	transition: all 0.25s ease 0s;
 	white-space: nowrap;
-	font-size: ${props => props.theme.fontSize || '16px'};
-	width: ${props => props.theme.width};
-	padding: ${props => props.theme.padding};
+	font-size: ${props => props.styleOverrides.fontSize || '16px'};
+	width: ${props => props.styleOverrides.width};
+	padding: ${props => props.styleOverrides.padding};
 
 	&:focus {
 		outline: none;

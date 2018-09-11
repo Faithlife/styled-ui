@@ -9,7 +9,7 @@ import {
 } from '../utils/file-utils';
 import * as Styled from './styled.jsx';
 
-const fileLabelButtonTheme = {
+const fileLabelButtonWidthOverride = {
 	width: '100%',
 };
 
@@ -76,7 +76,11 @@ export class FileItem extends PureComponent {
 				)}
 				<Styled.FileInformation>
 					{onFileClicked ? (
-						<Button theme={fileLabelButtonTheme} onClick={this.handleFileClick} link>
+						<Button
+							styleOverrides={fileLabelButtonWidthOverride}
+							onClick={this.handleFileClick}
+							link
+						>
 							{fileInformation}
 						</Button>
 					) : (

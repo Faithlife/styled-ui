@@ -37,7 +37,7 @@ showSource: true
 ```
 
 ### Supported style customizations
-Do not use the `style` prop to style this component (it will be ignored). Instead, if there is missing customization that you need for this component, ask to have it added to the theme prop.
+Do not use the `style` prop to style this component (it will be ignored). Instead, if there is missing customization that you need for this component, ask to have it added. The `theme` prop can be used to control color variations while the `styleOverrides` prop can be used for other styles.
 
 ```react
 showSource: true
@@ -46,10 +46,10 @@ showSource: true
 	<Button primary large theme={{ defaultColor: 'plum', hoverColor: 'darkslateblue' }}>
 		Plum
 	</Button>
-	<Button primary large theme={{ width: '200px' }}>
+	<Button primary large styleOverrides={{ width: '200px' }}>
 		200px Wide
 	</Button>
-	<Button primary theme={{ fontSize: '12px', padding: '8px' }}>
+	<Button primary styleOverrides={{ fontSize: '12px', padding: '8px' }}>
 		12px Font, 8px Padding
 	</Button>
 </ButtonDemo>
