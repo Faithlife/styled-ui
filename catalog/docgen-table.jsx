@@ -83,7 +83,7 @@ export function DocgenTable(props) {
 	return (
 		<Container>
 			<div>
-				<h1>{docgen.displayName}</h1>
+				<h1>{props.displayName || docgen.displayName}</h1>
 				<p>{docgen.description}</p>
 			</div>
 			<Table>
@@ -137,4 +137,5 @@ export function DocgenTable(props) {
 
 DocgenTable.propTypes = {
 	component: PropTypes.func.isRequired,
+	displayName: PropTypes.string,
 };

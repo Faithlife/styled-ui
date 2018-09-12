@@ -4,7 +4,8 @@
 // but not all projects are able to use that right now.
 
 export { Checkbox } from './check-box/component.jsx';
-export { Button } from './demo-button/component.jsx';
+export { Button } from './button/component.jsx';
+export { AnchorButton } from './button/anchor-button.jsx';
 export { Bootstrap } from './bootstrap';
 export { LoadingSpinner } from './loading-spinner/component.jsx';
 export { Modal, ModalFooter } from './modal';
