@@ -1,5 +1,14 @@
 # Changelog
 
+### 2.2.0
+* New components: FilesSection, DropZone, AnchorButton
+* New variations: `primaryTransparent` and `minorTransparent` on Button
+* SVGs can now be added to buttons with the `renderIcon` prop
+* Fixed some margin issues with the close icon in Modal
+* Button default font size is now 16px
+
+Thanks Ian Fisk, Todd White, and Robert Bolender for contributing to this release!
+
 ### 2.1.0
 * Add support for focus via `innerRef` prop on InferredText and InferredTypeahead
 
