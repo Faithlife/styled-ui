@@ -33,7 +33,7 @@ export const Anchor = styled.a`
 	cursor: pointer;
 	transition: all 0.25s ease 0s;
 	white-space: nowrap;
-	font-size: ${props => props.styleOverrides.fontSize || '14px'};
+	font-size: ${props => props.styleOverrides.fontSize || '16px'};
 	width: ${props => props.styleOverrides.width};
 	padding: ${props => props.styleOverrides.padding};
 

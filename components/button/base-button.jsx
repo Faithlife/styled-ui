@@ -41,7 +41,7 @@ export class BaseButton extends PureComponent {
 		/** Transparent with primary text variation */
 		primaryTransparent: PropTypes.bool,
 		/** Transparent with minor text variation */
-		primaryMinor: PropTypes.bool,
+		minorTransparent: PropTypes.bool,
 		/** Enables rendering a display: flex span, needed for rendering SVG icons */
 		renderIcon: PropTypes.node,
 	};
