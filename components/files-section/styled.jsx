@@ -68,6 +68,10 @@ export const FileInputLabel = styled.label`
 	input {
 		display: none;
 	}
+
+	&& {
+		margin-bottom: 0;
+	}
 `;
 
 function createEllipsizedComponent(component) {

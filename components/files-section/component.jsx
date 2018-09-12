@@ -5,9 +5,6 @@ import { DropZone } from '../drop-zone/component.jsx';
 import { FileItem } from './file-item.jsx';
 import * as Styled from './styled.jsx';
 
-// margin is being overwritten when setting in the styled component and rendering this component in a bootstrap container
-const fileInputLabelStyle = { marginBottom: 0 };
-
 export class FilesSection extends PureComponent {
 	static propTypes = {
 		/** The files to render. */
@@ -123,7 +120,7 @@ export class FilesSection extends PureComponent {
 						<Button link onClick={this.handleBrowseFilesClick}>
 							{browseFilesButtonText}
 						</Button>
-						<Styled.FileInputLabel style={fileInputLabelStyle}>
+						<Styled.FileInputLabel>
 							<input
 								ref={this.fileInputRef}
 								onChange={onUploadFiles}
