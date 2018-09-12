@@ -2,9 +2,15 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './styled.jsx';
 
+/** A bordered drop zone that makes drag & drop easy. */
 export class DropZone extends PureComponent {
 	static propTypes = {
+		/**
+		 * An event handler that will be invoked on the drop event.
+		 * Signature: (dropEvent: React.SyntheticEvent) => void;
+		 */
 		onDrop: PropTypes.func.isRequired,
+		/** The contents of the drop zone. Children will be rendered into a flex container with align-items set to center. */
 		children: PropTypes.node,
 	};
 
