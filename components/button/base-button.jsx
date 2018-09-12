@@ -3,13 +3,16 @@ import PropTypes from 'prop-types';
 import { applyVariations } from '../utils';
 import * as Styled from './styled.jsx';
 
-/** Standard button with transition styles */
-export class Button extends PureComponent {
+export class BaseButton extends PureComponent {
 	static propTypes = {
-		/** See the docs for how to override styles properly  */
-		className: PropTypes.string,
+		/** This is only used by BaseButton not AnchorButton or Button */
+		baseComponent: PropTypes.element.isRequired,
 		/** The contents of the button (can be text, svg, or other element) */
 		children: PropTypes.node.isRequired,
+		/** See the docs for how to override styles properly  */
+		className: PropTypes.string,
+		/** Condensed button padding. Uses same padding for horizontal and vertical. */
+		condensed: PropTypes.bool,
 		/** An optional theme */
 		theme: PropTypes.shape({
 			defaultColor: PropTypes.string,
@@ -35,22 +38,23 @@ export class Button extends PureComponent {
 		large: PropTypes.bool,
 		/** Extra large variation */
 		extraLarge: PropTypes.bool,
-		/** The type of button (for instance, submit) */
-		type: PropTypes.string,
+		/** Transparent with primary text variation */
+		primaryTransparent: PropTypes.bool,
+		/** Transparent with minor text variation */
+		minorTransparent: PropTypes.bool,
 		/** Enables rendering a display: flex span, needed for rendering SVG icons */
 		renderIcon: PropTypes.node,
 	};
 
 	static defaultProps = {
-		type: 'button',
 		styleOverrides: {},
 	};
 
 	render() {
-		const { children, theme, ...buttonProps } = this.props;
+		const { children, theme, baseComponent, ...buttonProps } = this.props;
 
 		const { component: MappedStyledComponent, filteredProps } = applyVariations(
-			Styled.Button,
+			baseComponent,
 			Styled.variationMap,
 			buttonProps,
 		);

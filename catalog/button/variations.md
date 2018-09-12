@@ -31,8 +31,8 @@ showSource: true
 	<Button primary small renderIcon={<GearIcon />}>
 		Settings
 	</Button>
-	<Button primary square small renderIcon={<GearIcon />} />
-	<Button link square small renderIcon={<GearIcon />} />
+	<Button primary condensed small renderIcon={<GearIcon />} />
+	<Button minorTransparent condensed small renderIcon={<GearIcon />} />
 </ButtonDemo>
 ```
 
@@ -67,23 +67,28 @@ showSource: true
 ```react
 showSource: true
 ---
-<ButtonDemo>
-	<Button primary medium>
-		Primary
-	</Button>
-	<Button primaryOutline medium>
-		Primary Outline
-	</Button>
-	<Button minor medium>
-		Minor
-	</Button>
-	<Button link medium>
-		Link
-	</Button>
+<div>
+	<ButtonDemo>
+		<Button primary medium>
+			Primary
+		</Button>
+		<Button primaryOutline medium>
+			Primary Outline
+		</Button>
+		<Button minor medium>
+			Minor
+		</Button>
+		<Button primaryTransparent medium condensed>
+			Primary Transparent
+		</Button>
+		<Button minorTransparent medium condensed>
+			Minor Transparent
+		</Button>
+	</ButtonDemo>
 	<div>
-		Here is some text with an inline <Button link>link button</Button>.
+		Here is some text with an inline <Button primaryTransparent>primary</Button> and <Button minorTransparent>minor</Button>.
 	</div>
-</ButtonDemo>
+</div>
 ```
 
 * `primary` -- for the most important or most common action for a user to take in a given context/scope. This button variant grabs the user's attention. In marketing pages, this style is for the "call to action" on a page.
@@ -105,6 +110,12 @@ showSource: true
 	</Button>
 	<Button minor medium disabled>
 		Minor
+	</Button>
+	<Button primaryTransparent medium disabled>
+		Primary Transparent
+	</Button>
+	<Button minorTransparent medium disabled>
+		Minor Transparent
 	</Button>
 </ButtonDemo>
 ```

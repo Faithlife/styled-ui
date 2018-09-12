@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../demo-button/component.jsx';
+import { Button } from '../button/component.jsx';
 import { colors } from '../shared-styles';
 import { ModalFooter } from './modal-footer.jsx';
 import * as Styled from './styled.jsx';

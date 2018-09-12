@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { Catalog, pageLoader } from 'catalog';
 import {
+	AnchorButton,
 	Bootstrap,
 	Button,
 	Checkbox,
@@ -15,6 +16,7 @@ import {
 	FilesSection,
 	DropZone,
 } from '../components/main.js';
+import { BaseButton } from '../components/button/base-button.jsx';
 import { BootstrapContainer } from '../components/utils';
 import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
 import { GearIcon } from '../components/icons';
@@ -28,6 +30,14 @@ import { InferredTextFocusDemo, InferredTypeaheadFocusDemo } from './text-input/
 import '../dist/main.css';
 import '../dist/ag-grid.css';
 import '../dist/text-input.css';
+
+const ButtonDemo = styled.div`
+	display: grid;
+	grid-auto-flow: column;
+	align-items: center;
+	grid-column-gap: 12px;
+	width: min-content;
+`;
 
 function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
@@ -78,12 +88,18 @@ const pages = [
 				content: pageLoader(() => import('./button/variations.md')),
 				imports: {
 					Button,
-					ButtonDemo: styled.div`
-						&& > * {
-							margin: 8px;
-						}
-					`,
+					ButtonDemo,
 					GearIcon,
+				},
+			},
+			{
+				path: '/button/anchor-button',
+				title: 'Anchor Button',
+				content: pageLoader(() => import('./button/anchor-button.md')),
+				imports: {
+					AnchorButton,
+					GearIcon,
+					ButtonDemo,
 				},
 			},
 			{
@@ -92,18 +108,14 @@ const pages = [
 				content: pageLoader(() => import('./button/ok-cancel.md')),
 				imports: {
 					Button,
-					ButtonDemo: styled.div`
-						&& > * {
-							margin: 8px;
-						}
-					`,
+					ButtonDemo,
 				},
 			},
 			{
 				path: '/button/documentation',
 				title: 'Button Documentation',
 				content: pageLoader(() => import('./button/documentation.md')),
-				imports: { Button, DocgenTable },
+				imports: { BaseButton, DocgenTable },
 			},
 		],
 	},

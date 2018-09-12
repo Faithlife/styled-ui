@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../demo-button/component.jsx';
+import { Button } from '../button/component.jsx';
 import { addSeparator } from '../utils';
 import {
 	convertBytesToFriendlyString,
@@ -68,7 +68,7 @@ export class FileItem extends PureComponent {
 		return (
 			<Styled.FileItem>
 				{onFileClicked ? (
-					<Button onClick={this.handleFileClick} link>
+					<Button onClick={this.handleFileClick} primaryTransparent>
 						{fileIcon}
 					</Button>
 				) : (
@@ -79,7 +79,7 @@ export class FileItem extends PureComponent {
 						<Button
 							styleOverrides={fileLabelButtonWidthOverride}
 							onClick={this.handleFileClick}
-							link
+							primaryTransparent
 						>
 							{fileInformation}
 						</Button>
