@@ -40,6 +40,7 @@ HelpBox.propTypes = {
 	theme: PropTypes.shape({
 		foregroundColor: PropTypes.string,
 		backgroundColor: PropTypes.string,
+		closeIconColor: PropTypes.string,
 	}),
 	success: PropTypes.bool,
 	danger: PropTypes.bool,
