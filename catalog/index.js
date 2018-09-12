@@ -12,6 +12,8 @@ import {
 	LoadingSpinner,
 	HelpBox,
 	Collapse,
+	FilesSection,
+	DropZone,
 } from '../components/main.js';
 import { BootstrapContainer } from '../components/utils';
 import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
@@ -262,6 +264,66 @@ const pages = [
 					...Bootstrap,
 					DocgenTable,
 				},
+			},
+		],
+	},
+	{
+		title: 'Files Section',
+		pages: [
+			{
+				path: '/files-section/variations',
+				title: 'Files Section Variations',
+				content: pageLoader(() => import('./files-section/variations.md')),
+				imports: {
+					FilesSection,
+					Button,
+					LoadingSpinner,
+					FilesSectionDemo: styled.div`
+						font-family: 'Source Sans Pro';
+					`,
+				},
+			},
+			{
+				path: 'files-section/documentation',
+				title: 'Files Section Documentation',
+				content: pageLoader(() => import('./files-section/documentation.md')),
+				imports: { FilesSection, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Drop Zone',
+		pages: [
+			{
+				path: '/drop-zone/variations',
+				title: 'Drop Zone Variations',
+				content: pageLoader(() => import('./drop-zone/variations.md')),
+				imports: {
+					DropZone,
+					DropZoneDemo: styled.div`
+						font-family: 'Source Sans Pro';
+					`,
+					DroppedFiles: styled.div`
+						margin-top: 16px;
+					`,
+					DropZoneMessage: styled.div`
+						font-size: 20px;
+						max-width: 240px;
+						text-align: center;
+					`,
+					IconsContainer: styled.div`
+						color: #a8a8a8;
+						> * {
+							margin: 0 12px;
+						}
+					`,
+				},
+			},
+			{
+				path: 'drop-zone/documentation',
+				title: 'Drop Zone Documentation',
+				content: pageLoader(() => import('./drop-zone/documentation.md')),
+				imports: { DropZone, DocgenTable },
 			},
 		],
 	},

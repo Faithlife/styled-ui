@@ -30,7 +30,7 @@
 		"react/no-multi-comp": 0,
 		"react/no-unused-state": 2,
 		"react/no-string-refs": 2,
-		"react/no-unused-prop-types": 2,
+		"react/no-unused-prop-types": [2, { "skipShapeProps": true }],
 		"react/prefer-stateless-function": 0,
 		"react/prop-types": 2
 	},

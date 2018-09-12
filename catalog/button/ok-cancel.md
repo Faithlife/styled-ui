@@ -2,10 +2,10 @@
 showSource: true
 ---
 <ButtonDemo>
-	<Button primaryOutline medium theme={{ width: '80px' }}>
+	<Button primaryOutline medium styleOverrides={{ width: '80px' }}>
 		Cancel
 	</Button>
-	<Button primary medium theme={{ width: '80px' }}>
+	<Button primary medium styleOverrides={{ width: '80px' }}>
 		OK
 	</Button>
 </ButtonDemo>
