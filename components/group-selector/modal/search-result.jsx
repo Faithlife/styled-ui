@@ -16,13 +16,7 @@ export class SearchResult extends React.PureComponent {
 		onClaimGroupClick: PropTypes.func.isRequired,
 		onJoinGroupClick: PropTypes.func.isRequired,
 		toggle: PropTypes.func.isRequired,
-		claimable: PropTypes.string,
-	};
-
-	state = {
-		message: <p />,
-		membershipLine: <p />,
-		button: <p />,
+		claimable: PropTypes.bool,
 	};
 
 	claimGroup = () => {
@@ -56,139 +50,6 @@ export class SearchResult extends React.PureComponent {
 		return string.charAt(0).toUpperCase() + string.slice(1);
 	}
 
-	componentDidMount() {
-		this.getSearchResultDetails();
-	}
-
-	getSearchResultDetails = () => {
-		if (this.props.claimable === 'true') {
-			// message = <p className={styles.searchResultMessage}>This is an empty group</p>;
-			// buttonText = uiStrings.claimGroup;
-			this.setState({
-				message: <Styled.SearchResultMessage>This is an empty group</Styled.SearchResultMessage>,
-			});
-			this.setState({
-				button: (
-					<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.claimGroup}>
-						Claim
-					</Styled.SearchResultButton>
-				),
-			});
-		} else if (this.props.membershipKind === 'none' || null) {
-			this.setState({
-				message: (
-					<Styled.SearchResultMessage>
-						<Styled.SearchResultHightlightText>Admin</Styled.SearchResultHightlightText> membership
-						required
-					</Styled.SearchResultMessage>
-				),
-			});
-			this.setState({
-				membershipLine: (
-					<Styled.SearchResultMembershipLine>
-						You are <Styled.SearchResultBoldText>not</Styled.SearchResultBoldText> a member
-					</Styled.SearchResultMembershipLine>
-				),
-			});
-			this.setState({
-				button: (
-					<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.joinGroup}>
-						Join Group
-					</Styled.SearchResultButton>
-				),
-			});
-		} else if (
-			this.props.membershipKind !== 'admin' &&
-			this.props.relationshipKind === 'participant'
-		) {
-			this.setState({
-				message: (
-					<Styled.SearchResultMessage>
-						<Styled.SearchResultHightlightText>Admin</Styled.SearchResultHightlightText> membership
-						required
-					</Styled.SearchResultMessage>
-				),
-			});
-			this.setState({
-				membershipLine: (
-					<Styled.SearchResultMembershipLine>
-						You are a <Styled.SearchResultBoldText>member</Styled.SearchResultBoldText>
-					</Styled.SearchResultMembershipLine>
-				),
-			});
-			this.setState({
-				button: (
-					<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.requestAccess}>
-						Request Access
-					</Styled.SearchResultButton>
-				),
-			});
-		} else if (
-			this.props.kind.toLowerCase() !== 'church' &&
-			this.props.membershipKind === 'admin'
-		) {
-			this.setState({
-				message: (
-					<Styled.SearchResultMessage>
-						{'Group must be a '}
-						<Styled.SearchResultHightlightText>Church</Styled.SearchResultHightlightText>
-					</Styled.SearchResultMessage>
-				),
-			});
-			this.setState({
-				membershipLine: (
-					<Styled.SearchResultMembershipLine>
-						You are an <Styled.SearchResultBoldText>Admin</Styled.SearchResultBoldText>
-					</Styled.SearchResultMembershipLine>
-				),
-			});
-			this.setState({
-				button: (
-					<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.editGroupType}>
-						Edit
-					</Styled.SearchResultButton>
-				),
-			});
-		} else if (this.props.relationshipKind === 'none') {
-			this.setState({
-				message: '',
-			});
-			this.setState({
-				membershipLine: (
-					<Styled.SearchResultMembershipLine>
-						You are not a{' '}
-						<Styled.SearchResultHightlightText>Member</Styled.SearchResultHightlightText>
-					</Styled.SearchResultMembershipLine>
-				),
-			});
-			this.setState({
-				button: (
-					<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.joinGroup}>
-						Join Group
-					</Styled.SearchResultButton>
-				),
-			});
-		} else {
-			this.setState({
-				message: <p />,
-			});
-			this.setState({
-				membershipLine: (
-					<Styled.SearchResultMembershipLine>
-						You are an <Styled.SearchResultBoldText>Admin</Styled.SearchResultBoldText>
-					</Styled.SearchResultMembershipLine>
-				),
-			});
-			this.setState({
-				button: (
-					<Styled.SearchResultButton size="sm" color="primary" outline onClick={this.getStarted}>
-						Get Started
-					</Styled.SearchResultButton>
-				),
-			});
-		}
-	};
-
 	formatGroupKind = () => {
 		let string = this.props.kind.replace(/([A-Z])/g, ' $1');
 		string = string.charAt(0).toUpperCase() + string.slice(1);
@@ -196,14 +57,105 @@ export class SearchResult extends React.PureComponent {
 	};
 
 	render() {
+		const { claimable, relationshipKind, membershipKind, kind, avatar, name } = this.props;
+
+		let message;
+		let membershipLine;
+		let button;
+
+		if (claimable) {
+			message = <Styled.SearchResultMessage>This is an empty group</Styled.SearchResultMessage>;
+			button = (
+				<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.claimGroup}>
+					Claim
+				</Styled.SearchResultButton>
+			);
+		} else if (membershipKind === 'none' || null) {
+			message = (
+				<Styled.SearchResultMessage>
+					<Styled.SearchResultHightlightText>Admin</Styled.SearchResultHightlightText> membership
+					required
+				</Styled.SearchResultMessage>
+			);
+			membershipLine = (
+				<Styled.SearchResultMembershipLine>
+					You are <Styled.SearchResultBoldText>not</Styled.SearchResultBoldText> a member
+				</Styled.SearchResultMembershipLine>
+			);
+			button = (
+				<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.joinGroup}>
+					Join Group
+				</Styled.SearchResultButton>
+			);
+		} else if (membershipKind !== 'admin' && relationshipKind === 'participant') {
+			message = (
+				<Styled.SearchResultMessage>
+					<Styled.SearchResultHightlightText>Admin</Styled.SearchResultHightlightText> membership
+					required
+				</Styled.SearchResultMessage>
+			);
+			membershipLine = (
+				<Styled.SearchResultMembershipLine>
+					You are a <Styled.SearchResultBoldText>member</Styled.SearchResultBoldText>
+				</Styled.SearchResultMembershipLine>
+			);
+			button = (
+				<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.requestAccess}>
+					Request Access
+				</Styled.SearchResultButton>
+			);
+		} else if (kind.toLowerCase() !== 'church' && membershipKind === 'admin') {
+			message = (
+				<Styled.SearchResultMessage>
+					{'Group must be a '}
+					<Styled.SearchResultHightlightText>Church</Styled.SearchResultHightlightText>
+				</Styled.SearchResultMessage>
+			);
+			membershipLine = (
+				<Styled.SearchResultMembershipLine>
+					You are an <Styled.SearchResultBoldText>Admin</Styled.SearchResultBoldText>
+				</Styled.SearchResultMembershipLine>
+			);
+			button = (
+				<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.editGroupType}>
+					Edit
+				</Styled.SearchResultButton>
+			);
+		} else if (relationshipKind === 'none') {
+			message = '';
+			membershipLine = (
+				<Styled.SearchResultMembershipLine>
+					You are not a{' '}
+					<Styled.SearchResultHightlightText>Member</Styled.SearchResultHightlightText>
+				</Styled.SearchResultMembershipLine>
+			);
+			button = (
+				<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.joinGroup}>
+					Join Group
+				</Styled.SearchResultButton>
+			);
+		} else {
+			message = <p />;
+			membershipLine = (
+				<Styled.SearchResultMembershipLine>
+					You are an <Styled.SearchResultBoldText>Admin</Styled.SearchResultBoldText>
+				</Styled.SearchResultMembershipLine>
+			);
+			button = (
+				<Styled.SearchResultButton size="sm" color="primary" outline onClick={this.getStarted}>
+					Get Started
+				</Styled.SearchResultButton>
+			);
+		}
+
 		return (
 			<Styled.SearchResult>
-				<Styled.SearchResultAvatar>{this.props.avatar}</Styled.SearchResultAvatar>
-				<Styled.SearchResultNameText>{this.props.name}</Styled.SearchResultNameText>
+				<Styled.SearchResultAvatar>{avatar}</Styled.SearchResultAvatar>
+				<Styled.SearchResultNameText>{name}</Styled.SearchResultNameText>
 				<Styled.SearchResultGroupKind>{this.formatGroupKind()}</Styled.SearchResultGroupKind>
-				{this.state.membershipLine}
-				{this.state.message}
-				<Styled.SearchResultButtonContainer>{this.state.button}</Styled.SearchResultButtonContainer>
+				{membershipLine}
+				{message}
+				<Styled.SearchResultButtonContainer>{button}</Styled.SearchResultButtonContainer>
 			</Styled.SearchResult>
 		);
 	}
