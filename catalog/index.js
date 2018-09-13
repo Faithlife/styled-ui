@@ -115,7 +115,7 @@ const pages = [
 				path: '/button/documentation',
 				title: 'Button Documentation',
 				content: pageLoader(() => import('./button/documentation.md')),
-				imports: { BaseButton, DocgenTable },
+				imports: { BaseButton, Button, AnchorButton, DocgenTable },
 			},
 		],
 	},
