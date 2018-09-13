@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
-import { BaseButton } from './base-button.jsx';
+import { BaseButton, SharedButtonPropTypes } from './base-button.jsx';
 import * as Styled from './styled.jsx';
 
 export class AnchorButton extends PureComponent {
-	static propTypes = BaseButton.propTypes;
+	static propTypes = SharedButtonPropTypes;
 
 	render() {
 		return <BaseButton baseComponent={Styled.Anchor} {...this.props} />;

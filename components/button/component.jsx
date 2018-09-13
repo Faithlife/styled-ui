@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './styled.jsx';
-import { BaseButton } from './base-button.jsx';
+import { BaseButton, SharedButtonPropTypes } from './base-button.jsx';
 
 /** Standard button with transition styles */
 export class Button extends PureComponent {
 	static propTypes = {
-		...BaseButton.propTypes,
+		...SharedButtonPropTypes,
 		/** The type of button (for instance, submit) */
 		type: PropTypes.string,
 	};
