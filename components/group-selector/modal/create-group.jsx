@@ -11,6 +11,7 @@ export class CreateGroup extends React.Component {
 		newChurchName: PropTypes.string,
 		onChurchLocationInputChange: PropTypes.func.isRequired,
 		newChurchLocation: PropTypes.string,
+		showRequiredStars: PropTypes.bool
 	};
 
 	churchNameInput = React.createRef();
@@ -22,7 +23,11 @@ export class CreateGroup extends React.Component {
 	render() {
 		return (
 			<Styled.CreateGroup>
-				<Styled.CreateGroupLabel>Church Name</Styled.CreateGroupLabel>
+				<Styled.CreateGroupLabel>
+					Church Name{this.props.showRequiredStars && (
+						<Styled.CreateGroupRequiredStar>*</Styled.CreateGroupRequiredStar>
+					)}
+				</Styled.CreateGroupLabel>
 				<Input
 					innerRef={this.churchNameInput}
 					value={this.props.newChurchName}
@@ -30,7 +35,11 @@ export class CreateGroup extends React.Component {
 					placeholder="Church name"
 					bsSize="lg"
 				/>
-				<Styled.CreateGroupLabel>Church Location</Styled.CreateGroupLabel>
+				<Styled.CreateGroupLabel>
+					Church Location{this.props.showRequiredStars && (
+						<Styled.CreateGroupRequiredStar>*</Styled.CreateGroupRequiredStar>
+					)}
+				</Styled.CreateGroupLabel>
 				<Input
 					value={this.props.newChurchLocation}
 					placeholder="City, State"

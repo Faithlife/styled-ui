@@ -8,11 +8,7 @@ import { CreateGroup } from './create-group.jsx';
 
 const { Button } = Bootstrap;
 
-const origionalCreateGroupWidth = '93%';
-const origionalSearchResultsMargin = 16;
-const origionalPaddingLeft = 12;
-const origionalPaddingRight = 0;
-const origionalBoxShadow = '0px 0px 0px 0px rgba(0, 0, 0, 0.12)';
+const defaultResultsTopMargin = -64;
 
 export class GroupSelectorModal extends React.Component {
 	static propTypes = {
@@ -48,16 +44,14 @@ export class GroupSelectorModal extends React.Component {
 		newChurchLocation: '',
 		modalContent: 'main',
 		selectedGroupId: -1,
-		showCreateGroupButton: false,
-		createGroupPosition: 'relative',
-		createGroupWidth: origionalCreateGroupWidth,
-		createGroupBoxShadow: origionalBoxShadow,
-		createGroupPaddingLeft: origionalPaddingLeft,
-		searchResultsMargin: origionalSearchResultsMargin,
+		createGroupFixed: false,
+		resultsTopMargin: defaultResultsTopMargin,
 	};
 
 	modalRef = React.createRef();
 	searchResultsRef = React.createRef();
+
+	fixedCreateWrapper = false;
 
 	componentDidMount = () => {
 		window.addEventListener('scroll', this.handleScroll, true);
@@ -158,24 +152,15 @@ export class GroupSelectorModal extends React.Component {
 	handleSearchInput = event => {
 		this.setState({
 			searchInputValue: event.target.value,
-			newChurchName: event.target.value,
 		});
-		if (
-			event.target.value !== undefined &&
-			event.target.value !== ' ' &&
-			event.target.value !== ''
-		) {
+		if (event.target.value !== undefined && event.target.value !== ' ') {
 			this.props.onSearchInputChange(event.target.value);
 		}
 	};
 
 	handleKeyPress = event => {
 		if (event.key === 'Enter') {
-			if (
-				event.target.value !== undefined &&
-				event.target.value !== ' ' &&
-				event.target.value !== ''
-			) {
+			if (event.target.value !== undefined && event.target.value !== ' ') {
 				this.props.onSearchInputChange(this.state.searchInputValue);
 			}
 		}
@@ -192,65 +177,58 @@ export class GroupSelectorModal extends React.Component {
 	handleScroll = event => {
 		if (this.modalRef.current) {
 			if (this.modalRef.current.contains(event.target)) {
-				if (event.target.scrollTop >= 90) {
+				if (event.target.scrollTop >= 100 && !this.fixedCreateWrapper) {
 					this.setState({
-						showCreateGroupButton: true,
-						createGroupWidth: this.modalRef.current.offsetWidth - 46,
-						createGroupPosition: 'fixed',
-						createGroupPaddingLeft: 11,
-						createGroupPaddingRight: 15,
-						createGroupBoxShadow: '0px 18px 10px -8px rgba(0, 0, 0, 0.12)',
-						searchResultsMargin: 130,
+						createGroupFixed: true,
+						resultsTopMargin: 258,
 					});
-				} else {
+					this.fixedCreateWrapper = true;
+				} else if (event.target.scrollTop < 100) {
 					this.setState({
-						showCreateGroupButton: false,
-						createGroupPosition: 'relative',
-						createGroupPaddingLeft: origionalPaddingLeft,
-						createGroupPaddingRight: origionalPaddingRight,
-						createGroupWidth: origionalCreateGroupWidth,
-						createGroupBoxShadow: origionalBoxShadow,
-						searchResultsMargin: origionalSearchResultsMargin,
+						createGroupFixed: false,
+						resultsTopMargin: defaultResultsTopMargin + event.target.scrollTop,
 					});
+					this.fixedCreateWrapper = false;
 				}
 			}
 		}
 	};
 
 	render() {
+		const disableButton = this.state.newChurchName === '' || this.state.newChurchLocation === '';
+
 		return (
 			<Styled.GroupSelectorModal isOpen={this.props.isOpen} onClose={this.toggle}>
 				<Styled.GroupSelectorModalBody innerRef={this.modalRef}>
 					{this.state.modalContent === 'main' && (
 						<Styled.MainModalContent>
-							<Styled.GroupSelectorModalTopGradient />
+							<Styled.ModalTopGradient />
 							<Styled.ModalTitle>Find Your Church</Styled.ModalTitle>
 							<Styled.ModalSubtitle>in the Faithlife Church Directory</Styled.ModalSubtitle>
 							{this.props.showAlert && (
 								<Styled.ModalAlert color="primary">{this.props.alertText}</Styled.ModalAlert>
 							)}
-							<Styled.CreateGroupWrapper
-								style={{
-									position: this.state.createGroupPosition,
-									width: this.state.createGroupWidth,
-									boxShadow: this.state.createGroupBoxShadow,
-									paddingLeft: this.state.createGroupPaddingLeft,
-									paddingRight: this.state.createGroupPaddingRight,
-								}}
-							>
+							<Styled.CreateGroupWrapper fixed={this.state.createGroupFixed}>
 								<CreateGroup
-									searchInputValue={this.state.searchInputValue}
-									onCreateGroup={this.createGroupClick}
 									onChurchNameInputChange={this.handleChurchNameInputChange}
 									onChurchLocationInputChange={this.handleChurchLocationInputChange}
 									newChurchName={this.state.newChurchName}
 									newChurchLocation={this.state.newChurchLocation}
-									showButton={this.state.showCreateGroupButton}
+									showRequiredStars={this.state.createGroupFixed}
 								/>
+								<Styled.CreateGroupButtonWrapper>
+									<Styled.CreateGroupButtonText>
+										Don't see your church?
+									</Styled.CreateGroupButtonText>
+									<Button color="primary" disabled={disableButton} onClick={this.createGroupClick}>
+										Create
+									</Button>
+								</Styled.CreateGroupButtonWrapper>
 							</Styled.CreateGroupWrapper>
 							<Styled.SearchResultsContainer
+								style={{ marginTop: this.state.resultsTopMargin }}
+								fixed={this.state.createGroupFixed}
 								innerRef={this.searchResultsRef}
-								style={{ marginTop: this.state.searchResultsMargin }}
 							>
 								{this.getSearchResults()}
 							</Styled.SearchResultsContainer>

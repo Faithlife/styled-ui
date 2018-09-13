@@ -189,17 +189,18 @@ export const SearchResultAvatar = styled.div`
 `;
 
 export const GroupSelectorModal = styled(SimpleModal)`
-	position: relative;
 	${resetStyles};
+	position: relative;
 `;
 
-export const GroupSelectorModalTopGradient = styled.div`
-	position: fixed;
-	width: 320px;
-	height: 10px;
-	margin-top: -11px;
+export const ModalTopGradient = styled.div`
+	position: absolute;
+	top: 0px;
+	width: 355px;
+	height: 30px;
+	background: white;
 	z-index: 2;
-	box-shadow: 0px 3px 10px 5px white;
+	box-shadow: 0px 3px 4px 0px white;
 `;
 
 export const ModalTitle = styled.p`
@@ -211,7 +212,7 @@ export const ModalTitle = styled.p`
 `;
 
 export const ModalSubtitle = styled.p`
-	margin: 4px 0 30px 0;
+	margin: 4px 0 24px 0;
 	font-size: 16px;
 	text-align: center;
 	line-height: 1.2;
@@ -222,25 +223,38 @@ export const ModalAlert = styled(HelpBox)`
 	text-align: left;
 `;
 
+export const MainModalContent = styled.div`
+	padding-top: 30px;
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+`;
+
+export const CreateGroupWrapper = styled.div`
+	position: ${props => (props.fixed ? 'absolute' : 'relative')};
+	background-color: white;
+	width: 330px;
+	padding-right: 12px;
+	padding-left: 12px;
+	box-sizing: content-box;
+	box-shadow: 0px 3px 4px 0px white;
+	z-index: 1;
+
+	${props =>
+		props.fixed &&
+		`
+		top: 20px;
+		`};
+`;
+
 export const SearchResultsContainer = styled.div`
-	overflow-y: hidden;
 	display: flex;
 	flex-direction: column;
 	position: relative;
 	align-items: center;
 	width: 100%;
-	margin-top: 16px;
+	z-index: ${props => (props.fixed ? 0 : 3)};
 	height: 100%;
-`;
-
-export const CreateGroupWrapper = styled.div`
-	position: relative;
-	background-color: white;
-	width: 93%;
-	padding-right: 2px;
-	padding-left: 12px;
-	z-index: 2;
-	box-sizing: content-box;
 `;
 
 export const CreateGroup = styled.div`
@@ -251,7 +265,9 @@ export const CreateGroupButtonWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin: 18px 0 16px 0;
+	width: 93%;
+	padding-left: 12px;
+	margin: 16px 0 16px 0;
 `;
 
 export const CreateGroupButtonText = styled.p`
@@ -260,27 +276,27 @@ export const CreateGroupButtonText = styled.p`
 `;
 
 export const CreateGroupLabel = styled(Label)`
-	margin: 0 0 4px 0;
+	display: block;
+	margin: 16px 0 0 0;
 	transition: 0.2s ease-in-out;
 	font-size: 14px;
 	color: #575251;
 `;
 
+export const CreateGroupRequiredStar = styled.p`
+	display: inline;
+	color: #d94848;
+`;
+
 export const GroupSelectorModalBody = styled.div`
 	border-radius: 6px;
 	width: 32vw;
+	min-width: 375px;
 	max-width: 375px;
 	height: 60vh;
 	padding: 0 10px 0 10px;
 	box-sizing: border-box;
 	overflow-y: scroll;
-`;
-
-export const MainModalContent = styled.div`
-	height: 80vh;
-	display: flex;
-	flex-direction: column;
-	position: relative;
 `;
 
 export const SearchResultNameText = styled.div`
