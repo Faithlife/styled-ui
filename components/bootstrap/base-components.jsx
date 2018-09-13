@@ -71,7 +71,7 @@ export default {
 	...Components,
 	Label: styled(_Bootstrap.Label)`
 		&& {
-			font-size: 14px;
+			font-size: 16px;
 			line-height: 1em;
 			margin-bottom: 0.375rem;
 		}
