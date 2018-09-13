@@ -151,7 +151,7 @@ export const variationMap = {
 		}
 `,
 	minorTransparent: component => component.extend`
-		border: none;
+		border: 1px solid transparent;
 		background: none;
 		color: ${colors.flGray};
 		padding: 0;
