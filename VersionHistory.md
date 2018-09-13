@@ -1,5 +1,8 @@
 # Changelog
 
+### 2.2.2
+* Fix propType warnings
+
 ### 2.2.1
 * Add transparent border to `minorTransparent` button variation
 
