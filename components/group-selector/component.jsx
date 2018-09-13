@@ -33,6 +33,10 @@ export class GroupSelector extends React.Component {
 		onGetStartedClick: PropTypes.func.isRequired,
 		/** Action that should be taken when user claims group */
 		onClaimGroupClick: PropTypes.func.isRequired,
+		/** Operation to perform when user requests to join a group */
+		onJoinGroupClick: PropTypes.func.isRequired,
+		/** Operation to perform when user requests to join a group */
+		onAdminRequestClick: PropTypes.func.isRequired,
 		/** Is the dropdown on a mobile view */
 		isMobile: PropTypes.bool.isRequired,
 	};
@@ -89,6 +93,8 @@ export class GroupSelector extends React.Component {
 					onCreateGroup={this.props.onCreateGroup}
 					onGetStartedClick={this.props.onGetStartedClick}
 					onClaimGroupClick={this.props.onClaimGroupClick}
+					onJoinGroupClick={this.props.onJoinGroupClick}
+					onAdminRequestClick={this.props.onAdminRequestClick}
 				/>
 			</div>
 		);

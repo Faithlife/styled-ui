@@ -160,8 +160,10 @@ state: {
 		selectedGroupId={state.selectedGroupId}
 		groupSearchResults={state.groupSearchResults || state.groups}
 		groupSelectorView={"groups"}
-		onGetStartedClick={() => {alert("handled by application")}}
-		onClaimGroupClick={() => {alert("handled by application")}}
+		onGetStartedClick={() => {alert("Lets get started.")}}
+		onClaimGroupClick={() => {alert("Claim the group!")}}
+		onJoinGroupClick={() => {alert("Should Join the group, or request")}}
+		onAdminRequestClick={() => {alert("Admin access requested")}}
 		isMobile={false}
 	/>
 </GroupSelectorDemo>
@@ -188,6 +190,8 @@ state: {
 		groupSelectorView={"no-groups"}
 		onGetStartedClick={() => {alert("handled by application")}}
 		onClaimGroupClick={() => {alert("handled by application")}}
+		onJoinGroupClick={() => {alert("Should Join the group, or request")}}
+		onAdminRequestClick={() => {alert("Admin access requested")}}
 		isMobile={false}
 	/>
 </GroupSelectorDemo>

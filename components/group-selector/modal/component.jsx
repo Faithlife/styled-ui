@@ -32,6 +32,10 @@ export class GroupSelectorModal extends React.Component {
 		onGetStartedClick: PropTypes.func.isRequired,
 		/** Operation to perform when user requests to claim a group */
 		onClaimGroupClick: PropTypes.func.isRequired,
+		/** Operation to perform when user requests to join a group */
+		onJoinGroupClick: PropTypes.func.isRequired,
+		/** Operation to perform when user requests to join a group */
+		onAdminRequestClick: PropTypes.func.isRequired,
 		/** Shows blue help box when true */
 		showAlert: PropTypes.bool,
 		/** Text to be included in help box */
@@ -79,9 +83,9 @@ export class GroupSelectorModal extends React.Component {
 				membershipKind={group.membershipKind}
 				relationshipKind={group.relationshipKind}
 				onGetStartedClick={this.handleGetStarted}
-				onRequestClick={this.redirectToGroup}
+				onRequestClick={this.props.onAdminRequestClick}
 				onEditClick={this.redirectToGroup}
-				onJoinGroupClick={this.redirectToGroup}
+				onJoinGroupClick={this.props.onJoinGroupClick}
 				onClaimGroupClick={this.handleClaimGroup}
 				setModalState={this.setModalState}
 				setSelectedGroupId={this.setSelectedGroupId}
@@ -104,9 +108,9 @@ export class GroupSelectorModal extends React.Component {
 					membershipKind={group.membershipKind}
 					relationshipKind={group.relationshipKind}
 					onGetStartedClick={this.handleGetStarted}
-					onRequestClick={this.redirectToGroup}
-					onEditClick={this.handleEdit}
-					onJoinGroupClick={this.joinGroup}
+					onRequestClick={this.props.onAdminRequestClick}
+					onEditClick={this.redirectToGroup}
+					onJoinGroupClick={this.props.onJoinGroupClick}
 					onClaimGroupClick={this.handleClaimGroup}
 					setModalState={this.setModalState}
 					setSelectedGroupId={this.setSelectedGroupId}
@@ -134,11 +138,6 @@ export class GroupSelectorModal extends React.Component {
 
 	resetModalState = () => {
 		this.setState({ modalContent: 'main' });
-	};
-
-	joinGroup = groupId => {
-		this.setModalState('main');
-		window.open(`https://faithlife.com/${groupId}`, 'noopener, noreferrer');
 	};
 
 	redirectToGroup = () => {
@@ -269,7 +268,7 @@ export class GroupSelectorModal extends React.Component {
 								</Styled.SecondaryModalText>
 								<Styled.SecondaryModalButtonContainer>
 									<Button color="primary" onClick={this.redirectToGroup}>
-										Continue
+										Request access
 									</Button>
 								</Styled.SecondaryModalButtonContainer>
 								<Styled.SecondaryModalButtonContainer>
