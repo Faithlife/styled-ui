@@ -1,10 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Close } from '../icons';
 import { applyVariations } from '../utils';
 import * as Styled from './styled.jsx';
 
 /** Renders a box containing tips on how to use our products */
-export function HelpBox({ children, showLightBulb, className, theme, ...helpBoxProps }) {
+export function HelpBox({
+	children,
+	showLightBulb,
+	className,
+	theme,
+	handleClose,
+	...helpBoxProps
+}) {
 	const { component: HelpBoxVariation, filteredProps } = applyVariations(
 		Styled.HelpBox,
 		Styled.variationMap,
@@ -12,9 +20,14 @@ export function HelpBox({ children, showLightBulb, className, theme, ...helpBoxP
 	);
 
 	return (
-		<HelpBoxVariation className={className} theme={theme} {...filteredProps || {}}>
+		<HelpBoxVariation className={className} theme={theme} {...filteredProps}>
 			{showLightBulb && <Styled.BulbIcon />}
 			<Styled.HelpBoxContent>{children}</Styled.HelpBoxContent>
+			{handleClose != null && (
+				<Styled.CloseButton onClick={handleClose}>
+					<Close />
+				</Styled.CloseButton>
+			)}
 		</HelpBoxVariation>
 	);
 }
@@ -27,8 +40,10 @@ HelpBox.propTypes = {
 	theme: PropTypes.shape({
 		foregroundColor: PropTypes.string,
 		backgroundColor: PropTypes.string,
+		closeIconColor: PropTypes.string,
 	}),
 	success: PropTypes.bool,
 	danger: PropTypes.bool,
 	warning: PropTypes.bool,
+	handleClose: PropTypes.func,
 };
