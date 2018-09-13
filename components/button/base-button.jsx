@@ -5,10 +5,8 @@ import * as Styled from './styled.jsx';
 
 export class BaseButton extends PureComponent {
 	static propTypes = {
-		/** This is only used by BaseButton not AnchorButton or Button */
-		baseComponent: PropTypes.element.isRequired,
 		/** The contents of the button (can be text, svg, or other element) */
-		children: PropTypes.node.isRequired,
+		children: PropTypes.node,
 		/** See the docs for how to override styles properly  */
 		className: PropTypes.string,
 		/** Condensed button padding. Uses same padding for horizontal and vertical. */
@@ -51,13 +49,15 @@ export class BaseButton extends PureComponent {
 	};
 
 	render() {
-		const { children, theme, baseComponent, ...buttonProps } = this.props;
+		const { children, theme, ...buttonProps } = this.props;
 
+		/* eslint-disable react/prop-types */
 		const { component: MappedStyledComponent, filteredProps } = applyVariations(
-			baseComponent,
+			this.props.baseComponent, // this is required but we don't want it in the generated docs so don't include it above
 			Styled.variationMap,
 			buttonProps,
 		);
+		/* eslint-enable react/prop-types */
 
 		return (
 			<MappedStyledComponent theme={theme} {...filteredProps || {}}>
