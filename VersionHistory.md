@@ -1,5 +1,8 @@
 # Changelog
 
+### 2.2.1
+* Add transparent border to `minorTransparent` button variation
+
 ### 2.2.0
 * New components: FilesSection, DropZone, AnchorButton
 * New variations: `primaryTransparent` and `minorTransparent` on Button
