@@ -92,13 +92,10 @@ state: {
 				kind: 'church',
 				avatarUrl: '',
 				relationship: {
-					membership: {
-						kind: 'member',
-					},
-					kind: 'admin',
+					kind: 'none',
 				},
 				availableActions: {
-					claim: 'false',
+					claim: 'true',
 				},
 			},
 			{
@@ -130,7 +127,53 @@ state: {
 				availableActions: {
 					claim: 'false',
 				},
+			},
+			{
+				name: 'Search result 5',
+				groupId: 5,
+				kind: 'church',
+				avatarUrl: '',
+				relationship: {
+					membership: {
+						kind: 'member',
+					},
+					kind: 'admin',
+				},
+				availableActions: {
+					claim: 'false',
+				},
+			},
+			{
+				name: 'Search result 6',
+				groupId: 6,
+				kind: 'church',
+				avatarUrl: '',
+				relationship: {
+					membership: {
+						kind: 'member',
+					},
+					kind: 'admin',
+				},
+				availableActions: {
+					claim: 'false',
+				},
+			},
+			{
+				name: 'Search result 7',
+				groupId: 7,
+				kind: 'church',
+				avatarUrl: '',
+				relationship: {
+					membership: {
+						kind: 'member',
+					},
+					kind: 'admin',
+				},
+				availableActions: {
+					claim: 'false',
+				},
 			}
+
 			]});
 		}}
 		onCreateGroup={(name, location) => {
