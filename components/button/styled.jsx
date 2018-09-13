@@ -178,7 +178,6 @@ export const variationMap = {
 `,
 	large: component => component.extend`
 		padding: 13px ${props => (props.condensed ? '12px' : '24px')} 11px;
-
 `,
 	extraLarge: component => component.extend`
 		padding: 16px ${props => (props.condensed ? '16px' : '32px')};
