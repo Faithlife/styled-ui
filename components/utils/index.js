@@ -1,16 +1,32 @@
 export { BootstrapContainer, wrapBootstrap } from './bootstrap-container.jsx';
 export { mapFromInnerRef, mapToInnerRef } from './forwardref-wrapper.jsx';
 
+const variationCache = {};
+
 export function applyVariations(component, variationMap, props) {
 	let wrappedComponent = component;
 	const filteredProps = { ...props };
 
+	const variations = [];
+
 	for (const variation of Object.keys(variationMap) || []) {
 		if (props.hasOwnProperty(variation)) {
-			wrappedComponent = variationMap[variation](wrappedComponent);
+			variations.push(variation);
 			delete filteredProps[variation];
 		}
 	}
+
+	const cacheKey = JSON.stringify(variations.sort());
+
+	if (variationCache[cacheKey] != null) {
+		return { component: variationCache[cacheKey], filteredProps };
+	}
+
+	for (const variation of variations) {
+		wrappedComponent = variationMap[variation](wrappedComponent);
+	}
+
+	variationCache[cacheKey] = wrappedComponent;
 
 	return { component: wrappedComponent, filteredProps };
 }
