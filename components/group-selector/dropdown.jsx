@@ -109,14 +109,16 @@ export class GroupDropdown extends React.PureComponent {
 				kind={group.kind}
 				name={group.name}
 				onClick={this.handleGroupSelection}
-				avatar={<Avatar group={group} />}
+				avatarUrl={group.avatarUrl}
 			/>
 		));
+
+		const { name, kind, avatarUrl } = this.props.selectedGroup;
 
 		const selectedGroupContents = (
 			<div>
 				<Styled.SelectedGroupAvatar>
-					<Avatar group={this.props.selectedGroup} />
+					<Avatar avatarUrl={avatarUrl} name={name} kind={kind} />
 				</Styled.SelectedGroupAvatar>
 				<Styled.SelectedGroupText>{this.props.selectedGroup.name}</Styled.SelectedGroupText>
 			</div>

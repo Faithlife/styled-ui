@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Bootstrap } from '../../main.js';
 import * as Styled from '../styled.jsx';
-import { Avatar } from '../avatar.jsx';
 import { SearchResult } from './search-result.jsx';
 import { CreateGroup } from './create-group.jsx';
 
@@ -72,7 +71,7 @@ export class GroupSelectorModal extends React.Component {
 				groupId={group.groupId}
 				kind={group.kind}
 				name={group.name}
-				avatar={<Avatar group={group} size="40px" />}
+				avatarUrl={group.avatarUrl}
 				membershipKind={group.membershipKind}
 				relationshipKind={group.relationshipKind}
 				onGetStartedClick={this.handleGetStarted}
@@ -97,7 +96,7 @@ export class GroupSelectorModal extends React.Component {
 					groupId={group.groupId}
 					kind={group.kind}
 					name={group.name}
-					avatar={<Avatar group={group} size="40px" />}
+					avatarUrl={group.avatarUrl}
 					membershipKind={group.membershipKind}
 					relationshipKind={group.relationshipKind}
 					onGetStartedClick={this.handleGetStarted}

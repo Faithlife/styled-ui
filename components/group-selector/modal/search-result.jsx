@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Avatar } from '../avatar.jsx';
 import * as Styled from '../styled.jsx';
 
 export class SearchResult extends React.PureComponent {
 	static propTypes = {
-		avatar: PropTypes.element,
 		groupId: PropTypes.number.isRequired,
 		name: PropTypes.string.isRequired,
 		kind: PropTypes.string,
+		avatarUrl: PropTypes.string,
 		membershipKind: PropTypes.string,
 		relationshipKind: PropTypes.string,
 		setModalState: PropTypes.func.isRequired,
@@ -57,7 +58,7 @@ export class SearchResult extends React.PureComponent {
 	};
 
 	render() {
-		const { claimable, relationshipKind, membershipKind, kind, avatar, name } = this.props;
+		const { claimable, relationshipKind, membershipKind, kind, avatarUrl, name } = this.props;
 
 		let message;
 		let membershipLine;
@@ -150,7 +151,9 @@ export class SearchResult extends React.PureComponent {
 
 		return (
 			<Styled.SearchResult>
-				<Styled.SearchResultAvatar>{avatar}</Styled.SearchResultAvatar>
+				<Styled.SearchResultAvatar>
+					<Avatar avatarUrl={avatarUrl} name={name} kind={kind} size="40px" />
+				</Styled.SearchResultAvatar>
 				<Styled.SearchResultNameText>{name}</Styled.SearchResultNameText>
 				<Styled.SearchResultGroupKind>{this.formatGroupKind()}</Styled.SearchResultGroupKind>
 				{membershipLine}
