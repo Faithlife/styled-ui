@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar } from '../avatar.jsx';
+import { Bootstrap } from '../../main.js';
 import * as Styled from '../styled.jsx';
+
+const { Button } = Bootstrap;
 
 export class SearchResult extends React.PureComponent {
 	static propTypes = {
@@ -67,9 +70,9 @@ export class SearchResult extends React.PureComponent {
 		if (claimable) {
 			message = <Styled.SearchResultMessage>This is an empty group</Styled.SearchResultMessage>;
 			button = (
-				<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.claimGroup}>
+				<Button size="sm" outline color="primary" onClick={this.claimGroup}>
 					Claim
-				</Styled.SearchResultButton>
+				</Button>
 			);
 		} else if (membershipKind === 'none' || !membershipKind) {
 			message = (
@@ -84,9 +87,9 @@ export class SearchResult extends React.PureComponent {
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
-				<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.joinGroup}>
+				<Button size="sm" outline color="primary" onClick={this.joinGroup}>
 					Join Group
-				</Styled.SearchResultButton>
+				</Button>
 			);
 		} else if (membershipKind !== 'admin' && relationshipKind === 'participant') {
 			message = (
@@ -101,9 +104,9 @@ export class SearchResult extends React.PureComponent {
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
-				<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.requestAccess}>
+				<Button size="sm" outline color="primary" onClick={this.requestAccess}>
 					Request Access
-				</Styled.SearchResultButton>
+				</Button>
 			);
 		} else if (kind.toLowerCase() !== 'church' && membershipKind === 'admin') {
 			message = (
@@ -118,12 +121,11 @@ export class SearchResult extends React.PureComponent {
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
-				<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.editGroupType}>
+				<Button size="sm" outline color="primary" onClick={this.editGroupType}>
 					Edit
-				</Styled.SearchResultButton>
+				</Button>
 			);
 		} else if (relationshipKind === 'none') {
-			message = '';
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
 					You are not a{' '}
@@ -131,21 +133,20 @@ export class SearchResult extends React.PureComponent {
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
-				<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.joinGroup}>
+				<Button size="sm" outline color="primary" onClick={this.joinGroup}>
 					Join Group
-				</Styled.SearchResultButton>
+				</Button>
 			);
 		} else {
-			message = <p />;
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
 					You are an <Styled.SearchResultBoldText>Admin</Styled.SearchResultBoldText>
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
-				<Styled.SearchResultButton size="sm" color="primary" outline onClick={this.getStarted}>
+				<Button size="sm" color="primary" outline onClick={this.getStarted}>
 					Get Started
-				</Styled.SearchResultButton>
+				</Button>
 			);
 		}
 
@@ -154,11 +155,19 @@ export class SearchResult extends React.PureComponent {
 				<Styled.SearchResultAvatar>
 					<Avatar avatarUrl={avatarUrl} name={name} kind={kind} size="40px" />
 				</Styled.SearchResultAvatar>
-				<Styled.SearchResultNameText>{name}</Styled.SearchResultNameText>
-				<Styled.SearchResultGroupKind>{this.formatGroupKind()}</Styled.SearchResultGroupKind>
-				{membershipLine}
-				{message}
-				<Styled.SearchResultButtonContainer>{button}</Styled.SearchResultButtonContainer>
+				<Styled.SearchResultContent>
+					<div>
+						<Styled.SearchResultNameText>{name}</Styled.SearchResultNameText>
+						<Styled.SearchResultGroupKind>{this.formatGroupKind()}</Styled.SearchResultGroupKind>
+					</div>
+					<Styled.SearchResultInfoButtonRow>
+						<div>
+							{membershipLine}
+							{message}
+						</div>
+						{button}
+					</Styled.SearchResultInfoButtonRow>
+				</Styled.SearchResultContent>
 			</Styled.SearchResult>
 		);
 	}
