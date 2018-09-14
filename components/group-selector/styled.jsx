@@ -11,7 +11,7 @@ export const GroupSelector = styled.div`
 	text-align: center;
 	position: relative;
 	padding-bottom: 6px;
-	font-family: Source Sans Pro, Arial, Helvetica, sans-serif;
+	font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
 `;
 
 export const GroupSelectorInputContainer = styled.input`
@@ -85,7 +85,7 @@ export const SimpleGroupName = styled.div`
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	font-family: Source Sans Pro;
+	font-family: 'Source Sans Pro';
 `;
 
 export const SimpleGroupMembershipLine = styled.div`
@@ -142,7 +142,7 @@ export const SelectedGroupText = styled.div`
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	font-family: Source Sans Pro;
+	font-family: 'Source Sans Pro';
 `;
 
 export const DropdownGroupsContainer = styled.div`
