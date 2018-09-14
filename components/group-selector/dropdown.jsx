@@ -25,11 +25,11 @@ export class GroupDropdown extends React.PureComponent {
 
 	componentDidMount() {
 		window.addEventListener('mousedown', this.handleClick, false);
-	};
+	}
 
 	componentWillUnmount() {
 		window.removeEventListener('mousedown', this.handleClick, false);
-	};
+	}
 
 	closeDropdown = () => {
 		this.setState({ isDropdownOpen: false });

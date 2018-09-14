@@ -48,7 +48,7 @@ state: {
 	<GroupSelector
 		onSearchInputChange={(search) => {
 			setState({ groupSearchResults: [{
-				name: 'Search result 1',
+				name: 'Wrong Kind',
 				groupId: 1,
 				kind: 'general',
 				avatarUrl: '',
@@ -57,7 +57,7 @@ state: {
 				claimable: false,
 			},
 			{
-				name: 'Claim Church',
+				name: 'Claimable Church',
 				groupId: 2,
 				kind: 'church',
 				avatarUrl: '',
@@ -65,7 +65,7 @@ state: {
 				claimable: true,
 			},
 			{
-				name: 'Search result 3',
+				name: 'Not a Member',
 				groupId: 3,
 				kind: 'church',
 				avatarUrl: '',
@@ -73,12 +73,12 @@ state: {
 				claimable: false,
 			},
 			{
-				name: 'Search result 4',
+				name: 'Member but Ain\'t Admin',
 				groupId: 4,
 				kind: 'church',
 				avatarUrl: '',
 				relationshipKind: 'participant',
-				membershipKind: 'admin',
+				membershipKind: 'member',
 				claimable: false,
 			},
 			{
