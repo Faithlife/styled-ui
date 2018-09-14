@@ -105,7 +105,7 @@ export class SearchResult extends React.PureComponent {
 			);
 			button = (
 				<Button size="sm" outline color="primary" onClick={this.requestAccess}>
-					Request Access
+					Request Admin
 				</Button>
 			);
 		} else if (kind.toLowerCase() !== 'church' && membershipKind === 'admin') {
