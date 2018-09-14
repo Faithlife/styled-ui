@@ -109,7 +109,7 @@ export class GroupDropdown extends React.PureComponent {
 		const selectedGroupContents = (
 			<div>
 				<Styled.SelectedGroupAvatar>
-					{<Avatar group={this.props.selectedGroup} />}
+					<Avatar group={this.props.selectedGroup} />
 				</Styled.SelectedGroupAvatar>
 				<Styled.SelectedGroupText>{this.props.selectedGroup.name}</Styled.SelectedGroupText>
 			</div>
