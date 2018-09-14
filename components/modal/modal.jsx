@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import { debouncedResize } from '../utils';
+import { ModalBackdrop } from '../modal-backdrop/component.jsx';
 import { ModalHeader } from './modal-header.jsx';
-import { ModalBackdrop } from '../modal-backdrop/component.jsx'
 import { DefaultModalFooter } from './default-modal-footer.jsx';
 import * as Styled from './styled.jsx';
 

@@ -11,7 +11,7 @@ export class CreateGroup extends React.Component {
 		newChurchName: PropTypes.string,
 		onChurchLocationInputChange: PropTypes.func.isRequired,
 		newChurchLocation: PropTypes.string,
-		showRequiredStars: PropTypes.bool
+		showRequiredStars: PropTypes.bool,
 	};
 
 	churchNameInput = React.createRef();
