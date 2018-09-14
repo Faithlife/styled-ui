@@ -95,8 +95,6 @@ state: {
 	}
 	],
 	isOpen: false,
-	showAlert: false,
-	alertText: "You must sign in before doing that",
 }
 ---
 <GroupSelectorModalDemo>
@@ -109,8 +107,6 @@ state: {
 		onCreateGroup={() => {alert("handled by application")}}
 		onGetStartedClick={() => {alert("handled by application")}}
 		onClaimGroupClick={() => {alert("handled by application")}}
-		showAlert={state.showAlert}
-		alertText={state.alertText}
 	/>
 	<Button color="primary" onClick={() => {setState({isOpen: true})}}>Open Modal</Button>
 </GroupSelectorModalDemo>

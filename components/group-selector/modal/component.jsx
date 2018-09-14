@@ -31,10 +31,6 @@ export class GroupSelectorModal extends React.Component {
 		onJoinGroupClick: PropTypes.func.isRequired,
 		/** Operation to perform when user requests to join a group */
 		onAdminRequestClick: PropTypes.func.isRequired,
-		/** Shows blue help box when true */
-		showAlert: PropTypes.bool,
-		/** Text to be included in help box */
-		alertText: PropTypes.string,
 	};
 
 	state = {
@@ -209,9 +205,6 @@ export class GroupSelectorModal extends React.Component {
 							<Styled.ModalTopGradient />
 							<Styled.ModalTitle>Find Your Church</Styled.ModalTitle>
 							<Styled.ModalSubtitle>in the Faithlife Church Directory</Styled.ModalSubtitle>
-							{this.props.showAlert && (
-								<Styled.ModalAlert color="primary">{this.props.alertText}</Styled.ModalAlert>
-							)}
 							<Styled.CreateGroupWrapper fixed={this.state.createGroupFixed}>
 								<CreateGroup
 									onChurchNameInputChange={this.handleChurchNameInputChange}
