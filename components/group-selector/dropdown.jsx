@@ -36,13 +36,19 @@ export class GroupDropdown extends React.PureComponent {
 	};
 
 	setHovered = group => {
-		if (this.state.hoveredGroupIndex !== -1)
-			if (group.groupId === this.props.groups[this.state.hoveredGroupIndex].groupId) return true;
+		if (this.state.hoveredGroupIndex !== -1) {
+			if (group.groupId === this.props.groups[this.state.hoveredGroupIndex].groupId) {
+				return true;
+			}
+		}
+
 		return false;
 	};
 
 	handleClick = event => {
-		if (this.dropdownRef.current.contains(event.target)) return;
+		if (this.dropdownRef.current.contains(event.target)) {
+			return;
+		}
 		this.closeDropdown();
 	};
 
