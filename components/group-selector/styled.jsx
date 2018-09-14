@@ -166,11 +166,11 @@ export const GroupSelectorModal = styled(SimpleModal)`
 export const ModalTopGradient = styled.div`
 	position: absolute;
 	top: 0px;
-	width: 355px;
+	width: 100%;
 	height: 30px;
 	background: white;
 	z-index: 2;
-	box-shadow: 0px 3px 4px 0px white;
+	box-shadow: 0px 10px 8px -4px white;
 `;
 
 export const ModalTitle = styled.p`
@@ -201,11 +201,11 @@ export const MainModalContent = styled.div`
 export const CreateGroupWrapper = styled.div`
 	position: ${props => (props.fixed ? 'absolute' : 'relative')};
 	background-color: white;
-	width: 330px;
-	padding-right: 12px;
-	padding-left: 12px;
-	box-sizing: content-box;
-	box-shadow: 0px 3px 4px 0px white;
+	width: 100%;
+	padding-left: 24px;
+	padding-right: 24px;
+	box-sizing: border-box;
+	box-shadow: 0px 10px 8px -4px white;
 	z-index: 1;
 
 	${props =>
@@ -218,7 +218,10 @@ export const CreateGroupWrapper = styled.div`
 export const SearchResultsContainer = styled.div`
 	position: relative;
 	width: 100%;
-	z-index: ${props => (props.fixed ? -1 : 2)};
+	padding-left: 12px;
+	padding-right: 12px;
+	box-sizing: border-box;
+	z-index: ${props => (props.fixed ? 0 : 2)};
 	height: 100%;
 `;
 
@@ -257,10 +260,7 @@ export const GroupSelectorModalBody = styled.div`
 	border-radius: 6px;
 	width: 375px;
 	height: 60vh;
-	padding: 0 10px 0 10px;
-	box-sizing: border-box;
 	overflow-y: scroll;
-	z-index: 1;
 `;
 
 export const SearchResult = styled.div`
