@@ -23,11 +23,11 @@ export class GroupDropdown extends React.PureComponent {
 
 	dropdownRef = React.createRef();
 
-	componentDidMount = () => {
+	componentDidMount() {
 		window.addEventListener('mousedown', this.handleClick, false);
 	};
 
-	componentWillUnmount = () => {
+	componentWillUnmount() {
 		window.removeEventListener('mousedown', this.handleClick, false);
 	};
 
@@ -54,6 +54,7 @@ export class GroupDropdown extends React.PureComponent {
 
 	handleKeyPress = event => {
 		if (event.key === 'ArrowDown') {
+			event.preventDefault();
 			const newIndex = this.state.hoveredGroupIndex + 1;
 			if (newIndex === this.props.groups.length) {
 				this.setState({ hoveredGroupIndex: newIndex - 1 });
@@ -62,6 +63,7 @@ export class GroupDropdown extends React.PureComponent {
 			this.setState({ hoveredGroupIndex: newIndex });
 			return;
 		} else if (event.key === 'ArrowUp') {
+			event.preventDefault();
 			const newIndex = this.state.hoveredGroupIndex - 1;
 
 			if (newIndex < 0) {
@@ -70,11 +72,16 @@ export class GroupDropdown extends React.PureComponent {
 			}
 			this.setState({ hoveredGroupIndex: newIndex });
 		} else if (event.key === 'Enter') {
+			event.preventDefault();
+			if (!this.state.isDropdownOpen) {
+				this.handleDropdownToggle();
+				return;
+			}
+
 			this.handleGroupSelection(
 				this.props.groups[this.state.hoveredGroupIndex].groupId,
 				this.props.groups[this.state.hoveredGroupIndex].name,
 			);
-			event.preventDefault();
 		}
 	};
 

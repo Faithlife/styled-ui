@@ -3,29 +3,21 @@ import PropTypes from 'prop-types';
 import * as Styled from './styled.jsx';
 
 export function SimpleGroup({ onClick, groupId, avatar, name, isSelected, isHovered }) {
-	const child = (
-		<div>
+	let backgroundColor = 'white';
+	if (isSelected) {
+		backgroundColor = '#ebf7ff';
+	} else if (isHovered) {
+		backgroundColor = '#ebf7ff';
+	}
+
+	return (
+		<Styled.SimpleGroup color={backgroundColor} onClick={() => onClick(groupId, name)}>
 			<Styled.SimpleGroupAvatar>{avatar}</Styled.SimpleGroupAvatar>
 			<Styled.SimpleGroupInfo>
 				<Styled.SimpleGroupName>{name}</Styled.SimpleGroupName>
 			</Styled.SimpleGroupInfo>
-		</div>
+		</Styled.SimpleGroup>
 	);
-
-	if (isSelected)
-		return (
-			<Styled.SelectedSimpleGroup onClick={() => onClick(groupId, name)}>
-				{child}
-			</Styled.SelectedSimpleGroup>
-		);
-	if (isHovered)
-		return (
-			<Styled.HoveredSimpleGroup onClick={() => onClick(groupId, name)}>
-				{child}
-			</Styled.HoveredSimpleGroup>
-		);
-
-	return <Styled.SimpleGroup onClick={() => onClick(groupId, name)}>{child}</Styled.SimpleGroup>;
 }
 
 SimpleGroup.propTypes = {

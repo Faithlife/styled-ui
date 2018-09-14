@@ -68,9 +68,10 @@ export class GroupSelector extends React.Component {
 		const selectedGroup = this.getGroup(this.props.selectedGroupId);
 		return (
 			<div>
-				<Styled.GroupSelector tabIndex="0">
+				<Styled.GroupSelector>
 					{this.props.groupSelectorView === 'groups' && (
 						<GroupDropdown
+							tabIndex="0"
 							groups={this.props.groups}
 							selectedGroup={selectedGroup}
 							onSelectionChange={this.props.onSelectionChange}

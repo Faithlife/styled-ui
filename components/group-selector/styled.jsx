@@ -33,26 +33,12 @@ export const GroupInputButton = styled.div`
 export const SimpleGroup = styled.div`
 	text-align: left;
 	padding: 4px 6px 4px 6px;
-	background-color: white;
+	background-color: ${props => props.color};
 	cursor: pointer;
 
 	&:hover {
 		background-color: #ebf7ff;
 	}
-`;
-
-export const SelectedSimpleGroup = styled.div`
-	text-align: left;
-	padding: 4px 6px 4px 6px;
-	background-color: #ebf7ff;
-	cursor: pointer;
-`;
-
-export const HoveredSimpleGroup = styled.div`
-	text-align: left;
-	padding: 4px 6px 4px 6px;
-	background-color: #ebf7ff;
-	cursor: pointer;
 `;
 
 export const SelectedGroupAvatar = styled.div`
