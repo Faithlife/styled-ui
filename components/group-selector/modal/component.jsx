@@ -99,6 +99,7 @@ export class GroupSelectorModal extends React.Component {
 					avatarUrl={group.avatarUrl}
 					membershipKind={group.membershipKind}
 					relationshipKind={group.relationshipKind}
+					claimable={group.claimable}
 					onGetStartedClick={this.handleGetStarted}
 					onRequestClick={this.props.onAdminRequestClick}
 					onEditClick={this.redirectToGroup}

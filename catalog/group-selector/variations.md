@@ -8,60 +8,36 @@ state: {
 		groupId: 1,
 		kind: 'church',
 		avatarUrl: '',
-		relationship: {
-			membership: {
-				kind: 'member',
-			},
-			kind: 'admin',
-		},
-		availableActions: {
-			claim: 'false',
-		},
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
 	},
 	{
 		name: 'Example Community Church',
 		groupId: 2,
 		kind: 'church',
 		avatarUrl: '',
-		relationship: {
-			membership: {
-				kind: 'member',
-			},
-			kind: 'admin',
-		},
-		availableActions: {
-			claim: 'false',
-		},
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
 	},
 	{
 		name: 'Jordans Test Church',
 		groupId: 3,
 		kind: 'church',
 		avatarUrl: '',
-		relationship: {
-			membership: {
-				kind: 'member',
-			},
-			kind: 'admin',
-		},
-		availableActions: {
-			claim: 'false',
-		},
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
 	},
 	{
 		name: 'Cool Test Church',
 		groupId: 4,
 		kind: 'church',
 		avatarUrl: '',
-		relationship: {
-			membership: {
-				kind: 'member',
-			},
-			kind: 'admin',
-		},
-		availableActions: {
-			claim: 'false',
-		},
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
 	}
 	],
 	selectedGroupId: 1,
@@ -74,104 +50,63 @@ state: {
 			setState({ groupSearchResults: [{
 				name: 'Search result 1',
 				groupId: 1,
-				kind: 'church',
+				kind: 'general',
 				avatarUrl: '',
-				relationship: {
-					membership: {
-						kind: 'member',
-					},
-					kind: 'admin',
-				},
-				availableActions: {
-					claim: 'false',
-				},
+				relationshipKind: 'participant',
+				membershipKind: 'admin',
+				claimable: false,
 			},
 			{
-				name: 'Search result 2',
+				name: 'Claim Church',
 				groupId: 2,
 				kind: 'church',
 				avatarUrl: '',
-				relationship: {
-					kind: 'none',
-				},
-				availableActions: {
-					claim: 'true',
-				},
+				relationshipKind: 'none',
+				claimable: true,
 			},
 			{
 				name: 'Search result 3',
 				groupId: 3,
 				kind: 'church',
 				avatarUrl: '',
-				relationship: {
-					membership: {
-						kind: 'member',
-					},
-					kind: 'admin',
-				},
-				availableActions: {
-					claim: 'false',
-				},
+				relationshipKind: 'none',
+				claimable: false,
 			},
 			{
 				name: 'Search result 4',
 				groupId: 4,
 				kind: 'church',
 				avatarUrl: '',
-				relationship: {
-					membership: {
-						kind: 'member',
-					},
-					kind: 'admin',
-				},
-				availableActions: {
-					claim: 'false',
-				},
+				relationshipKind: 'participant',
+				membershipKind: 'admin',
+				claimable: false,
 			},
 			{
 				name: 'Search result 5',
 				groupId: 5,
 				kind: 'church',
 				avatarUrl: '',
-				relationship: {
-					membership: {
-						kind: 'member',
-					},
-					kind: 'admin',
-				},
-				availableActions: {
-					claim: 'false',
-				},
+				relationshipKind: 'participant',
+				membershipKind: 'admin',
+				claimable: false,
 			},
 			{
 				name: 'Search result 6',
 				groupId: 6,
 				kind: 'church',
 				avatarUrl: '',
-				relationship: {
-					membership: {
-						kind: 'member',
-					},
-					kind: 'admin',
-				},
-				availableActions: {
-					claim: 'false',
-				},
+				relationshipKind: 'participant',
+				membershipKind: 'admin',
+				claimable: false,
 			},
 			{
 				name: 'Search result 7',
 				groupId: 7,
 				kind: 'church',
 				avatarUrl: '',
-				relationship: {
-					membership: {
-						kind: 'member',
-					},
-					kind: 'admin',
-				},
-				availableActions: {
-					claim: 'false',
-				},
+				relationshipKind: 'participant',
+				membershipKind: 'admin',
+				claimable: false,
 			}
 
 			]});
@@ -182,15 +117,9 @@ state: {
 				groupId: 5,
 				kind: 'church',
 				avatarUrl: '',
-				relationship: {
-					membership: {
-						kind: 'member',
-					},
-					kind: 'admin',
-				},
-				availableActions: {
-					claim: 'false',
-				},
+				relationshipKind: 'participant',
+				membershipKind: 'admin',
+				claimable: false,
 			};
 
 			setState({

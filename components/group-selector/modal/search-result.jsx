@@ -17,7 +17,7 @@ export class SearchResult extends React.PureComponent {
 		onClaimGroupClick: PropTypes.func.isRequired,
 		onJoinGroupClick: PropTypes.func.isRequired,
 		toggle: PropTypes.func.isRequired,
-		claimable: PropTypes.string,
+		claimable: PropTypes.bool,
 	};
 
 	claimGroup = () => {
@@ -64,14 +64,14 @@ export class SearchResult extends React.PureComponent {
 		let membershipLine;
 		let button;
 
-		if (claimable === 'true') {
+		if (claimable) {
 			message = <Styled.SearchResultMessage>This is an empty group</Styled.SearchResultMessage>;
 			button = (
 				<Styled.SearchResultButton size="sm" outline color="primary" onClick={this.claimGroup}>
 					Claim
 				</Styled.SearchResultButton>
 			);
-		} else if (membershipKind === 'none' || null) {
+		} else if (membershipKind === 'none' || !membershipKind) {
 			message = (
 				<Styled.SearchResultMessage>
 					<Styled.SearchResultHightlightText>Admin</Styled.SearchResultHightlightText> membership
@@ -97,7 +97,7 @@ export class SearchResult extends React.PureComponent {
 			);
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
-					You are a <Styled.SearchResultBoldText>member</Styled.SearchResultBoldText>
+					You are a <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
