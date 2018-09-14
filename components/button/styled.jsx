@@ -12,10 +12,9 @@ const buttonColors = {
 export const ButtonContents = styled.span`
 	display: flex;
 	align-items: center;
+	justify-content: center;
 
 	& > * {
-		flex: 1 0 auto;
-
 		&:not(:first-child) {
 			margin-left: 6px;
 		}

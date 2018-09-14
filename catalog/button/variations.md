@@ -120,6 +120,22 @@ showSource: true
 </ButtonDemo>
 ```
 
+### Stretched buttons
+```react
+showSource: true
+---
+<ButtonGrid>
+	<Button primary small icon={<GearIcon />}>
+		Settings
+	</Button>
+	<Button primary small>
+		Settings
+	</Button>
+	<Button primary condensed small icon={<GearIcon />} />
+	<Button minorTransparent condensed small icon={<GearIcon />} />
+</ButtonGrid>
+```
+
 ## Button Text
 
 * Button text should be as concise as possible, but as long as necessary (for clarity).
