@@ -1,16 +1,16 @@
 export { BootstrapContainer, wrapBootstrap } from './bootstrap-container.jsx';
 export { mapFromInnerRef, mapToInnerRef } from './forwardref-wrapper.jsx';
 
-const variationCacheSymbol = Symbol('variationCache');
+const componentCache = new WeakMap();
 
 export function applyVariations(component, variationMap, props) {
 	let wrappedComponent = component;
 
-	// cache variations per styled component on the component
-	if (!wrappedComponent[variationCacheSymbol]) {
-		wrappedComponent[variationCacheSymbol] = {};
+	// cache variations per styled component
+	if (!componentCache.has(component)) {
+		componentCache.set(component, {});
 	}
-	const variationCache = wrappedComponent[variationCacheSymbol];
+	const variationCache = componentCache.get(component);
 
 	const filteredProps = { ...props };
 	const variations = [];
