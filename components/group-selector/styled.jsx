@@ -237,7 +237,7 @@ export const SearchResultsContainer = styled.div`
 	position: relative;
 	align-items: center;
 	width: 100%;
-	z-index: ${props => (props.fixed ? 0 : 3)};
+	z-index: ${props => (props.fixed ? -1 : 2)};
 	height: 100%;
 `;
 
@@ -281,6 +281,7 @@ export const GroupSelectorModalBody = styled.div`
 	padding: 0 10px 0 10px;
 	box-sizing: border-box;
 	overflow-y: scroll;
+	z-index: 1;
 `;
 
 export const SearchResultNameText = styled.div`
