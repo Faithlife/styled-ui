@@ -226,8 +226,6 @@ export const ModalAlert = styled(HelpBox)`
 export const MainModalContent = styled.div`
 	padding-top: 30px;
 	height: 80vh;
-	display: flex;
-	flex-direction: column;
 `;
 
 export const CreateGroupWrapper = styled.div`

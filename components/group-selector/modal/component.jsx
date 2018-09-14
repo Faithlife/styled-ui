@@ -50,7 +50,6 @@ export class GroupSelectorModal extends React.Component {
 
 	modalRef = React.createRef();
 	searchResultsRef = React.createRef();
-
 	fixedCreateWrapper = false;
 
 	componentDidMount = () => {
@@ -119,6 +118,11 @@ export class GroupSelectorModal extends React.Component {
 	};
 
 	toggle = () => {
+		this.setState({
+			createGroupFixed: false,
+			resultsTopMargin: defaultResultsTopMargin,
+		});
+
 		this.props.onChangeModalState();
 	};
 
@@ -177,13 +181,13 @@ export class GroupSelectorModal extends React.Component {
 	handleScroll = event => {
 		if (this.modalRef.current) {
 			if (this.modalRef.current.contains(event.target)) {
-				if (event.target.scrollTop >= 100 && !this.fixedCreateWrapper) {
+				if (event.target.scrollTop >= 82 && !this.fixedCreateWrapper) {
 					this.setState({
 						createGroupFixed: true,
-						resultsTopMargin: 258,
+						resultsTopMargin: 232,
 					});
 					this.fixedCreateWrapper = true;
-				} else if (event.target.scrollTop < 100) {
+				} else if (event.target.scrollTop < 82) {
 					this.setState({
 						createGroupFixed: false,
 						resultsTopMargin: defaultResultsTopMargin + event.target.scrollTop,
