@@ -18,3 +18,14 @@ export function mapToInnerRef(InnerComponent) {
 		return <InnerComponent innerRef={innerRef} {...restProps} />;
 	};
 }
+
+export function forwardClassRef(Component) {
+	function forwardRef(props, ref) {
+		return <Component {...props} forwardedRef={ref} />;
+	}
+
+	// Give this component a more helpful display name in DevTools.
+	forwardRef.displayName = Component.displayName || Component.name;
+
+	return React.forwardRef(forwardRef);
+}
