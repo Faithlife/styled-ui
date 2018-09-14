@@ -12,6 +12,16 @@ const defaultGroup = {
 	kind: '',
 };
 
+const groupShape = PropTypes.shape({
+	name: PropTypes.string.isRequired,
+	groupId: PropTypes.number.isRequired,
+	kind: PropTypes.string.isRequired,
+	avatarUrl: PropTypes.string,
+	relationshipKind: PropTypes.string,
+	membershipKind: PropTypes.string,
+	claimable: PropTypes.bool,
+});
+
 /** Styled group selector control */
 export class GroupSelector extends React.Component {
 	static propTypes = {
@@ -26,9 +36,9 @@ export class GroupSelector extends React.Component {
 		/** Returns -1 if no previous selected group */
 		selectedGroupId: PropTypes.number.isRequired,
 		/** All groups that should be displayed on the dropdown can be empty but must be defined */
-		groups: PropTypes.array.isRequired,
+		groups: PropTypes.arrayOf(groupShape).isRequired,
 		/** Undefined or empty if no search has been executed yet */
-		groupSearchResults: PropTypes.array,
+		groupSearchResults: PropTypes.arrayOf(groupShape),
 		/** Action that should be taken when user selects group with proper permissions */
 		onGetStartedClick: PropTypes.func.isRequired,
 		/** Action that should be taken when user claims group */
