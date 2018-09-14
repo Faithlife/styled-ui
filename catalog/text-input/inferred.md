@@ -87,6 +87,20 @@ state: { value: 'This value was guessed', confirmed: false }
 </div>
 ```
 
+### Focusable Input
+```react
+showSource: false
+---
+<InferredTypeaheadFocusDemo />
+```
+
+```react
+showSource: false
+---
+<InferredTextFocusDemo />
+```
+
+
 ## Component PropTypes
 ```react
 noSource: true

@@ -2,7 +2,7 @@
 
 ```react
 <Demo>
-	<HelpBox showLightBulb>Anything not saved will be lost</HelpBox>
+	<HelpBox showLightBulb handleClose={() => true}>Anything not saved will be lost</HelpBox>
 </Demo>
 ```
 

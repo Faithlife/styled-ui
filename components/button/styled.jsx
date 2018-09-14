@@ -9,6 +9,39 @@ const buttonColors = {
 	disabled: '#bedcf2',
 };
 
+export const ButtonContents = styled.span`
+	display: flex;
+	align-items: center;
+
+	& > * {
+		flex: 1 0 auto;
+
+		&:not(:first-child) {
+			margin-left: 6px;
+		}
+	}
+`;
+
+export const Anchor = styled.a`
+	${resetStyles};
+
+	display: inline-block;
+	text-decoration: none;
+	text-align: center;
+	box-shadow: none;
+	border-radius: 3px;
+	cursor: pointer;
+	transition: all 0.25s ease 0s;
+	white-space: nowrap;
+	font-size: ${props => props.styleOverrides.fontSize || '16px'};
+	width: ${props => props.styleOverrides.width};
+	padding: ${props => props.styleOverrides.padding};
+
+	&:focus {
+		outline: none;
+	}
+`;
+
 export const Button = styled.button`
 	${resetStyles};
 
@@ -17,9 +50,9 @@ export const Button = styled.button`
 	cursor: pointer;
 	transition: all 0.25s ease 0s;
 	white-space: nowrap;
-	font-size: ${props => props.theme.fontSize || '14px'};
-	width: ${props => props.theme.width};
-	padding: ${props => props.theme.padding};
+	font-size: ${props => props.styleOverrides.fontSize || '16px'};
+	width: ${props => props.styleOverrides.width};
+	padding: ${props => props.styleOverrides.padding};
 
 	&:focus {
 		outline: none;
@@ -98,8 +131,8 @@ export const variationMap = {
 			cursor: default;
 		}
 `,
-	link: component => component.extend`
-		border: none;
+	primaryTransparent: component => component.extend`
+		border: 1px solid transparent;
 		background: none;
 		color: ${props => props.theme.defaultColor || buttonColors.default};
 		padding: 0;
@@ -117,19 +150,37 @@ export const variationMap = {
 			cursor: default;
 		}
 `,
+	minorTransparent: component => component.extend`
+		border: 1px solid transparent;
+		background: none;
+		color: ${colors.flGray};
+		padding: 0;
+
+		&:hover {
+			color: ${colors.blueBase};
+		}
+
+		&:active {
+			color: ${colors.blueLight};
+		}
+
+		&:disabled {
+			color: ${colors.gray22};
+			cursor: default;
+		}
+`,
 	small: component => component.extend`
-		padding: 6px 12px;
+		padding: 6px ${props => (props.condensed ? '6px' : '12px')};
+		font-size: 14px;
 `,
 	medium: component => component.extend`
-		padding: 8px 16px;
-		font-size: 16px;
+		padding: 9px ${props => (props.condensed ? '8px' : '16px')} 7px;
 `,
 	large: component => component.extend`
-		padding: 12px 24px;
-		font-size: 16px;
+		padding: 13px ${props => (props.condensed ? '12px' : '24px')} 11px;
 `,
 	extraLarge: component => component.extend`
-		padding: 16px 32px;
+		padding: 16px ${props => (props.condensed ? '16px' : '32px')};
 		font-size: 24px;
 `,
 };

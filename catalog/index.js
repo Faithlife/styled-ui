@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { Catalog, pageLoader } from 'catalog';
 import {
+	AnchorButton,
 	Bootstrap,
 	Button,
 	Checkbox,
@@ -12,19 +13,32 @@ import {
 	LoadingSpinner,
 	HelpBox,
 	Collapse,
+	FilesSection,
+	DropZone,
 	GroupSelector,
 	GroupSelectorModal,
 } from '../components/main.js';
+import { BaseButton } from '../components/button/base-button.jsx';
 import { BootstrapContainer } from '../components/utils';
 import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
+import { GearIcon } from '../components/icons';
 import { colors } from '../components/shared-styles';
 import { DocgenTable } from './docgen-table.jsx';
 import { MemberDirectory, VolunteerScheduling } from './grid';
+import { InferredTextFocusDemo, InferredTypeaheadFocusDemo } from './text-input/demos.jsx';
 
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
 import '../dist/main.css';
 import '../dist/ag-grid.css';
+
+const ButtonDemo = styled.div`
+	display: grid;
+	grid-auto-flow: column;
+	align-items: center;
+	grid-column-gap: 12px;
+	width: min-content;
+`;
 
 function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
@@ -75,11 +89,18 @@ const pages = [
 				content: pageLoader(() => import('./button/variations.md')),
 				imports: {
 					Button,
-					ButtonDemo: styled.div`
-						&& > * {
-							margin: 8px;
-						}
-					`,
+					ButtonDemo,
+					GearIcon,
+				},
+			},
+			{
+				path: '/button/anchor-button',
+				title: 'Anchor Button',
+				content: pageLoader(() => import('./button/anchor-button.md')),
+				imports: {
+					AnchorButton,
+					GearIcon,
+					ButtonDemo,
 				},
 			},
 			{
@@ -88,18 +109,14 @@ const pages = [
 				content: pageLoader(() => import('./button/ok-cancel.md')),
 				imports: {
 					Button,
-					ButtonDemo: styled.div`
-						&& > * {
-							margin: 8px;
-						}
-					`,
+					ButtonDemo,
 				},
 			},
 			{
 				path: '/button/documentation',
 				title: 'Button Documentation',
 				content: pageLoader(() => import('./button/documentation.md')),
-				imports: { Button, DocgenTable },
+				imports: { BaseButton, Button, AnchorButton, DocgenTable },
 			},
 		],
 	},
@@ -319,7 +336,74 @@ const pages = [
 				path: '/text-input/inferred',
 				title: 'Inferred Inputs',
 				content: pageLoader(() => import('./text-input/inferred.md')),
-				imports: { InferredText, InferredTypeahead, ...Bootstrap, DocgenTable },
+				imports: {
+					InferredTextFocusDemo,
+					InferredTypeaheadFocusDemo,
+					InferredText,
+					InferredTypeahead,
+					...Bootstrap,
+					DocgenTable,
+				},
+			},
+		],
+	},
+	{
+		title: 'Files Section',
+		pages: [
+			{
+				path: '/files-section/variations',
+				title: 'Files Section Variations',
+				content: pageLoader(() => import('./files-section/variations.md')),
+				imports: {
+					FilesSection,
+					Button,
+					LoadingSpinner,
+					FilesSectionDemo: styled.div`
+						font-family: 'Source Sans Pro';
+					`,
+				},
+			},
+			{
+				path: 'files-section/documentation',
+				title: 'Files Section Documentation',
+				content: pageLoader(() => import('./files-section/documentation.md')),
+				imports: { FilesSection, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Drop Zone',
+		pages: [
+			{
+				path: '/drop-zone/variations',
+				title: 'Drop Zone Variations',
+				content: pageLoader(() => import('./drop-zone/variations.md')),
+				imports: {
+					DropZone,
+					DropZoneDemo: styled.div`
+						font-family: 'Source Sans Pro';
+					`,
+					DroppedFiles: styled.div`
+						margin-top: 16px;
+					`,
+					DropZoneMessage: styled.div`
+						font-size: 20px;
+						max-width: 240px;
+						text-align: center;
+					`,
+					IconsContainer: styled.div`
+						color: #a8a8a8;
+						> * {
+							margin: 0 12px;
+						}
+					`,
+				},
+			},
+			{
+				path: 'drop-zone/documentation',
+				title: 'Drop Zone Documentation',
+				content: pageLoader(() => import('./drop-zone/documentation.md')),
+				imports: { DropZone, DocgenTable },
 			},
 		],
 	},

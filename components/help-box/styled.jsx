@@ -20,7 +20,25 @@ export const BulbIcon = styled(LightBulbH)`
 	flex: none;
 `;
 
-export const HelpBox = variantCreator(colors.blueTint, colors.blueLight)(styled.div`
+export const CloseButton = styled.button`
+	cursor: pointer;
+	margin: 10px 14px 0 0;
+	height: 18px;
+	background: transparent;
+	padding: 0;
+	border: none;
+
+	&::-moz-focus-inner {
+		border: 0;
+		padding: 0;
+	}
+`;
+
+export const HelpBox = variantCreator(
+	colors.blueTint,
+	colors.blueLight,
+	colors.blueDark,
+)(styled.div`
 	position: relative;
 	display: flex;
 	border-radius: 3px;
@@ -28,17 +46,21 @@ export const HelpBox = variantCreator(colors.blueTint, colors.blueLight)(styled.
 `);
 
 export const variationMap = {
-	success: variantCreator(colors.greenTint, colors.greenLight),
-	danger: variantCreator(colors.redTint, colors.redLight),
-	warning: variantCreator(colors.yellowTint, colors.yellowLight),
+	success: variantCreator(colors.greenTint, colors.greenLight, colors.greenDark),
+	danger: variantCreator(colors.redTint, colors.redLight, colors.redDark),
+	warning: variantCreator(colors.yellowTint, colors.yellowLight, colors.yellowDark),
 };
 
-function variantCreator(backgroundColor, foregroundColor) {
+function variantCreator(backgroundColor, foregroundColor, closeIconColor) {
 	return component => component.extend`
 		${resetStyles};
 
 		background-color: ${props => props.theme.backgroundColor || backgroundColor};
 		border: solid 1px ${props => props.theme.foregroundColor || foregroundColor};
 		border-left: solid ${thickness.eight} ${props => props.theme.foregroundColor || foregroundColor};
+
+		path {
+			fill: ${props => props.theme.closeIconColor || closeIconColor};
+		}
 	`;
 }

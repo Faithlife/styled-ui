@@ -4,12 +4,15 @@
 // but not all projects are able to use that right now.
 
 export { Checkbox } from './check-box/component.jsx';
-export { Button } from './demo-button/component.jsx';
+export { Button } from './button/component.jsx';
+export { AnchorButton } from './button/anchor-button.jsx';
 export { Bootstrap } from './bootstrap';
 export { LoadingSpinner } from './loading-spinner/component.jsx';
 export { Modal, ModalFooter } from './modal';
 export { SimpleModal } from './simple-modal/component.jsx';
 export { HelpBox } from './help-box/component.jsx';
 export { Collapse } from './collapse/component.jsx';
+export { FilesSection } from './files-section/component.jsx';
+export { DropZone } from './drop-zone/component.jsx';
 export { GroupSelector } from './group-selector/component.jsx';
 export { GroupSelectorModal } from './group-selector/modal/component.jsx';

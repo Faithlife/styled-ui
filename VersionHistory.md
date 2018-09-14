@@ -1,8 +1,29 @@
 # Changelog
 
-## Pending
+### 3.0.0
+* Button ref now forwards to the `HTMLButtonElement`
+* Renamed `renderLink` to `link`.
 
-Please add changes here when they're committed to the `master` branch, then move to "Released" once the package is published.
+### 2.2.2
+* Fix propType warnings
+
+### 2.2.1
+* Add transparent border to `minorTransparent` button variation
+
+### 2.2.0
+* New components: FilesSection, DropZone, AnchorButton
+* New variations: `primaryTransparent` and `minorTransparent` on Button
+* SVGs can now be added to buttons with the `renderIcon` prop
+* Fixed some margin issues with the close icon in Modal
+* Button default font size is now 16px
+
+Thanks Ian Fisk, Todd White, and Robert Bolender for contributing to this release!
+
+### 2.1.0
+* Add support for focus via `innerRef` prop on InferredText and InferredTypeahead
+
+### 2.0.7
+* Fixed blurry popover component on Windows. Thanks Robert Bolender (#28)
 
 ### 2.0.6
 * Fixed box-sizing issues on LoadingSpinner and HelpBox components
@@ -27,8 +48,6 @@ Please add changes here when they're committed to the `master` branch, then move
 ### 2.0.0
 * **Breaking**: After review with the UX team, there are several bootstrap components that are no longer included in this library, because they won't be used in any of our specs.
 - Removed: Alert, Navbar*, Nav*, Breadcrumb*, Badge, Card*, Carousel*, Progress, Modal*, Tooltip, Table, ListGroup*, InputGroup*, Media, Tab*, Jumbotron, Pagination*, Collapse
-
-## Released
 
 ### 1.4.2
 * Fixed some spacing issues around elements caused by inherited styles

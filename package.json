@@ -1,6 +1,6 @@
 {
 	"name": "@faithlife/styled-ui",
-	"version": "2.0.6",
+	"version": "3.0.0",
 	"main": "index.js",
 	"repository": "git@github.com:Faithlife/styled-ui.git",
 	"author": "Dustin Masters <dustin.masters@faithlife.com>",
@@ -17,7 +17,7 @@
 		"unit-test": "cross-env NODE_ENV=test mocha -r babel-core/register ./tests/**/*.js",
 		"catalog-start": "catalog start",
 		"catalog-build": "catalog build --public-url /styled-ui",
-		"catalog-build-netlify": "catalog build"
+		"catalog-build-netlify": "npm run prepublishOnly && catalog build"
 	},
 	"files": [
 		"dist/**"

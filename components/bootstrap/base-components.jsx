@@ -1,6 +1,7 @@
 /* eslint-disable import/no-default-export */
 import * as _Bootstrap from 'reactstrap';
 import styled from 'styled-components';
+import React from 'react';
 import { wrapBootstrap } from '../utils';
 
 const inlineComponents = ['Button'];
@@ -49,6 +50,23 @@ const Components = Object.keys(_Bootstrap)
 		{},
 	);
 
+function withGpuAccelerationDisabled(Popover) {
+	return props => (
+		<Popover
+			{...props}
+			modifiers={{
+				computeStyle: {
+					gpuAcceleration: !(
+						typeof window !== `undefined` &&
+						window.devicePixelRatio < 1.5 &&
+						/Win/.test(navigator.platform)
+					),
+				},
+			}}
+		/>
+	);
+}
+
 export default {
 	...Components,
 	Label: styled(_Bootstrap.Label)`
@@ -58,7 +76,7 @@ export default {
 			margin-bottom: 0.375rem;
 		}
 	`,
-	Popover: styled(_Bootstrap.Popover)`
+	Popover: styled(withGpuAccelerationDisabled(_Bootstrap.Popover))`
 		&& {
 			box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.12), 0 0 4px 0 rgba(0, 0, 0, 0.12);
 		}

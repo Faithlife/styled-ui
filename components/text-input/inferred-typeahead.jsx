@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { BootstrapContainer } from '../utils';
+import { BootstrapContainer, mapFromInnerRef, mapToInnerRef } from '../utils';
 import { Typeahead } from './typeahead.jsx';
 import { InferredBase } from './inferred-base.jsx';
 
-const StyledTypeahead = styled(props => <Typeahead {...props} />)`
+const StyledTypeahead = mapFromInnerRef(styled(mapToInnerRef(props => <Typeahead {...props} />))`
 	&& .rbt-input,
 	&& .rbt-input:focus {
 		${props => (props.inferred ? 'color: #006099' : '')};
 	}
-`;
+`);
 
 export class InferredTypeahead extends Component {
 	static propTypes = {
