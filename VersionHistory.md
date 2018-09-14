@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.0.0
+* Button ref now forwards to the `HTMLButtonElement`
+* Renamed `renderLink` to `link`.
+
 ### 2.2.2
 * Fix propType warnings
 
