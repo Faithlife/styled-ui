@@ -131,6 +131,18 @@ showSource: true
 	<Button primary small>
 		Settings
 	</Button>
+	<Button primary small icon={<GearIcon />} styleOverrides={{ justifyContent: 'left' }}>
+		Settings
+	</Button>
+	<Button primary small styleOverrides={{ justifyContent: 'left' }}>
+		Settings
+	</Button>
+	<Button primary small icon={<GearIcon />} styleOverrides={{ justifyContent: 'right' }}>
+		Settings
+	</Button>
+	<Button primary small styleOverrides={{ justifyContent: 'right' }}>
+		Settings
+	</Button>
 	<Button primary condensed small icon={<GearIcon />} />
 	<Button minorTransparent condensed small icon={<GearIcon />} />
 </ButtonGrid>

@@ -25,6 +25,7 @@ export const BaseButton = forwardClassRef(
 				width: PropTypes.string,
 				fontSize: PropTypes.string,
 				padding: PropTypes.string,
+				justifyContent: PropTypes.string,
 			}),
 			/** Primary button variation */
 			primary: PropTypes.bool,
@@ -51,7 +52,7 @@ export const BaseButton = forwardClassRef(
 		};
 
 		render() {
-			const { children, theme, ...otherProps } = this.props;
+			const { children, theme, styleOverrides, ...otherProps } = this.props;
 
 			// ignore implementation detail props that we do not want documented by docgen
 			/* eslint-disable react/prop-types */
@@ -64,16 +65,19 @@ export const BaseButton = forwardClassRef(
 				buttonProps,
 			);
 
+			const { justifyContent, ...componentStyleOverrides } = styleOverrides;
+
 			return (
-				<MappedStyledComponent theme={theme} innerRef={forwardedRef} {...filteredProps || {}}>
-					{this.props.icon == null ? (
-						children
-					) : (
-						<Styled.ButtonContents>
-							{this.props.icon}
-							{children != null && <span>{children}</span>}
-						</Styled.ButtonContents>
-					)}
+				<MappedStyledComponent
+					theme={theme}
+					innerRef={forwardedRef}
+					{...filteredProps || {}}
+					styleOverrides={componentStyleOverrides}
+				>
+					<Styled.ButtonContents justifyContent={justifyContent}>
+						{this.props.icon}
+						{children != null && <span>{children}</span>}
+					</Styled.ButtonContents>
 				</MappedStyledComponent>
 			);
 		}
