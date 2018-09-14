@@ -28,11 +28,11 @@ showSource: true
 showSource: true
 ---
 <ButtonDemo>
-	<Button primary small renderIcon={<GearIcon />}>
+	<Button primary small icon={<GearIcon />}>
 		Settings
 	</Button>
-	<Button primary condensed small renderIcon={<GearIcon />} />
-	<Button minorTransparent condensed small renderIcon={<GearIcon />} />
+	<Button primary condensed small icon={<GearIcon />} />
+	<Button minorTransparent condensed small icon={<GearIcon />} />
 </ButtonDemo>
 ```
 

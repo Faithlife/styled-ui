@@ -9,10 +9,10 @@ AnchorButton supports same variations as Button. See [Button Variations](/button
 showSource: true
 ---
 <ButtonDemo>
-	<AnchorButton href="#settings" primary small renderIcon={<GearIcon />}>
+	<AnchorButton href="#settings" primary small icon={<GearIcon />}>
 		Settings
 	</AnchorButton>
-	<AnchorButton href="#settings" primary condensed small renderIcon={<GearIcon />} />
+	<AnchorButton href="#settings" primary condensed small icon={<GearIcon />} />
 	<AnchorButton href="#settings" primary small>Settings</AnchorButton>
 	<AnchorButton href="#settings" primaryTransparent small>Settings</AnchorButton>
 </ButtonDemo>

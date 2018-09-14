@@ -43,7 +43,7 @@ export const BaseButton = forwardClassRef(
 			/** Transparent with minor text variation */
 			minorTransparent: PropTypes.bool,
 			/** Enables rendering a display: flex span, needed for rendering SVG icons */
-			renderIcon: PropTypes.node,
+			icon: PropTypes.node,
 		};
 
 		static defaultProps = {
@@ -66,11 +66,11 @@ export const BaseButton = forwardClassRef(
 
 			return (
 				<MappedStyledComponent theme={theme} innerRef={forwardedRef} {...filteredProps || {}}>
-					{this.props.renderIcon == null ? (
+					{this.props.icon == null ? (
 						children
 					) : (
 						<Styled.ButtonContents>
-							{this.props.renderIcon}
+							{this.props.icon}
 							{children != null && <span>{children}</span>}
 						</Styled.ButtonContents>
 					)}
