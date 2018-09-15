@@ -195,7 +195,7 @@ export const ModalAlert = styled(HelpBox)`
 
 export const MainModalContent = styled.div`
 	padding-top: 30px;
-	height: 80vh;
+	height: 60vh;
 `;
 
 export const CreateGroupWrapper = styled.div`
@@ -259,7 +259,6 @@ export const CreateGroupRequiredStar = styled.p`
 export const GroupSelectorModalBody = styled.div`
 	border-radius: 6px;
 	width: 375px;
-	height: 60vh;
 	overflow-y: scroll;
 `;
 
@@ -330,15 +329,25 @@ export const SearchResultGroupKind = styled.div`
 `;
 
 export const SecondaryModalContent = styled.div`
-	padding-top: 16px;
+	padding-left: 12px;
+	padding-right: 12px;
+	padding-top: 36px;
+	padding-bottom: 12px;
 `;
 
 export const SecondaryModalText = styled.p`
-	padding-top: 4px;
 	font-size: 14px;
+	margin: 0px;
+`;
+
+export const SecondaryModalButtonWrapper = styled.div`
+	margin-left: 6px;
 `;
 
 export const SecondaryModalButtonContainer = styled.div`
-	float: right;
-	padding: 6px 6px 2px 0;
+	margin-top: 24px;
+	display: flex;
+	flex-direction: row-reverse;
+	width: 100%;
+	justify-content: flex-start;
 `;

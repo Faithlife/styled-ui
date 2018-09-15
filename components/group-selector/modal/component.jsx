@@ -232,46 +232,42 @@ export class GroupSelectorModal extends React.Component {
 						</Styled.MainModalContent>
 					)}
 					{this.state.modalContent === 'admin' && (
-						<div>
-							<Styled.SecondaryModalContent>
-								<Styled.SecondaryModalText>
-									<Styled.SearchResultBoldText>Admin</Styled.SearchResultBoldText>
-									<span> membership is neccessarry to perform this action.</span>
-								</Styled.SecondaryModalText>
-								<Styled.SecondaryModalText>
-									Contact a group administrator to request Admin membership
-								</Styled.SecondaryModalText>
-								<Styled.SecondaryModalButtonContainer>
+						<Styled.SecondaryModalContent>
+							<Styled.SecondaryModalText>
+								<Styled.SearchResultBoldText>Admin</Styled.SearchResultBoldText>
+								<span> membership is neccessarry to perform this action.</span>
+							</Styled.SecondaryModalText>
+							<Styled.SecondaryModalText>
+								Contact a group administrator to request Admin membership
+							</Styled.SecondaryModalText>
+							<Styled.SecondaryModalButtonContainer>
+								<Styled.SecondaryModalButtonWrapper>
 									<Button color="primary" onClick={this.redirectToGroup}>
 										Request access
 									</Button>
-								</Styled.SecondaryModalButtonContainer>
-								<Styled.SecondaryModalButtonContainer>
-									<Button onClick={this.resetModalState}>Cancel</Button>
-								</Styled.SecondaryModalButtonContainer>
-							</Styled.SecondaryModalContent>
-						</div>
+								</Styled.SecondaryModalButtonWrapper>
+								<Button onClick={this.resetModalState}>Cancel</Button>
+							</Styled.SecondaryModalButtonContainer>
+						</Styled.SecondaryModalContent>
 					)}
 					{this.state.modalContent === 'change' && (
-						<div>
-							<Styled.SecondaryModalContent>
-								<Styled.SecondaryModalText>
-									This group type must be set to{' '}
-									<Styled.SearchResultBoldText>"Church"</Styled.SearchResultBoldText>
-								</Styled.SecondaryModalText>
-								<Styled.SecondaryModalText>
-									Visit the group settings page to change
-								</Styled.SecondaryModalText>
-								<Styled.SecondaryModalButtonContainer>
+						<Styled.SecondaryModalContent>
+							<Styled.SecondaryModalText>
+								This group type must be set to{' '}
+								<Styled.SearchResultBoldText>"Church"</Styled.SearchResultBoldText>
+							</Styled.SecondaryModalText>
+							<Styled.SecondaryModalText>
+								Visit the group settings page to change
+							</Styled.SecondaryModalText>
+							<Styled.SecondaryModalButtonContainer>
+								<Styled.SecondaryModalButtonWrapper>
 									<Button color="primary" onClick={this.redirectToGroup}>
 										Change to Church
 									</Button>
-								</Styled.SecondaryModalButtonContainer>
-								<Styled.SecondaryModalButtonContainer>
-									<Button onClick={this.resetModalState}>Cancel</Button>
-								</Styled.SecondaryModalButtonContainer>
-							</Styled.SecondaryModalContent>
-						</div>
+								</Styled.SecondaryModalButtonWrapper>
+								<Button onClick={this.resetModalState}>Cancel</Button>
+							</Styled.SecondaryModalButtonContainer>
+						</Styled.SecondaryModalContent>
 					)}
 				</Styled.GroupSelectorModalBody>
 			</Styled.GroupSelectorModal>
