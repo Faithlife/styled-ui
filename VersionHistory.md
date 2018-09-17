@@ -1,5 +1,10 @@
 # Changelog
 
+### 3.0.1
+* Fixed a bug with the new variation cache
+* Aligned text in stretched buttons with icons
+* Added support for justifying content in buttons
+
 ### 3.0.0
 * Button ref now forwards to the `HTMLButtonElement`
 * Renamed `renderLink` to `link`.
