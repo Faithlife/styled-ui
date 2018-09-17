@@ -86,7 +86,7 @@ export class GroupSelector extends React.Component {
 						/>
 					)}
 					{this.props.groupSelectorView === 'no-groups' && (
-						<Button primary onClick={this.handleChangeModalState}>
+						<Button small primary onClick={this.handleChangeModalState}>
 							Find or add Church
 						</Button>
 					)}
