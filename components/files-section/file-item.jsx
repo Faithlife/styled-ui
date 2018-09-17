@@ -11,6 +11,7 @@ import * as Styled from './styled.jsx';
 
 const fileLabelButtonWidthOverride = {
 	width: '100%',
+	justifyContent: 'left',
 };
 
 export class FileItem extends PureComponent {
