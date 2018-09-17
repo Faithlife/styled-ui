@@ -1,9 +1,6 @@
 import styled from 'styled-components';
-import { Bootstrap, HelpBox } from '../main.js';
 import { SimpleModal } from '../simple-modal/component.jsx';
 import { resetStyles } from '../utils/index.js';
-
-const { Label } = Bootstrap;
 
 export const GroupSelector = styled.div`
 	${resetStyles};
@@ -184,11 +181,6 @@ export const ModalSubtitle = styled.p`
 	line-height: 1.2;
 `;
 
-export const ModalAlert = styled(HelpBox)`
-	padding-bottom: 6px;
-	text-align: left;
-`;
-
 export const MainModalContent = styled.div`
 	padding-top: 30px;
 	height: 60vh;
@@ -243,9 +235,9 @@ export const CreateGroupButtonText = styled.p`
 	color: #575251;
 `;
 
-export const CreateGroupLabel = styled(Label)`
+export const CreateGroupLabel = styled.div`
 	display: block;
-	margin: 16px 0 0 0;
+	margin: 16px 0 4px 0;
 	transition: 0.2s ease-in-out;
 	font-size: 14px;
 	color: #575251;
