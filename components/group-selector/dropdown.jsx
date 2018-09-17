@@ -125,10 +125,7 @@ export class GroupDropdown extends React.PureComponent {
 					>
 						<polygon fill="#888" points="8 6 4 9.5 4 2.5" transform="rotate(90 6 6)" />
 					</Styled.DownArrow>
-					<Styled.SelectedGroup
-						onClick={this.handleDropdownToggle}
-						onKeyDown={this.handleKeyPress}
-					>
+					<Styled.SelectedGroup onClick={this.handleDropdownToggle} onKeyDown={this.handleKeyPress}>
 						<Styled.SelectedGroupAvatar>
 							<Avatar avatarUrl={avatarUrl} name={name} kind={kind} />
 						</Styled.SelectedGroupAvatar>
