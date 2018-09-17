@@ -15,6 +15,8 @@ import {
 	Collapse,
 	FilesSection,
 	DropZone,
+	GroupSelector,
+	GroupSelectorModal,
 } from '../components/main.js';
 import { BaseButton } from '../components/button/base-button.jsx';
 import { BootstrapContainer } from '../components/utils';
@@ -29,7 +31,6 @@ import { InferredTextFocusDemo, InferredTypeaheadFocusDemo } from './text-input/
 // so the stylesheets must be built by a separate webpack build.
 import '../dist/main.css';
 import '../dist/ag-grid.css';
-import '../dist/text-input.css';
 
 const ButtonDemo = styled.div`
 	display: grid;
@@ -181,6 +182,73 @@ const pages = [
 				title: 'Documentation',
 				path: '/grid/documentation',
 				content: pageLoader(() => import('./grid/documentation.md')),
+			},
+		],
+	},
+	{
+		title: 'Group Selector',
+		pages: [
+			{
+				path: '/group-selector/variations',
+				title: 'Group Selector Variations',
+				content: pageLoader(() => import('./group-selector/variations.md')),
+				imports: {
+					GroupSelector,
+					Button: Bootstrap.Button,
+					GroupSelectorDemo: styled.div`
+						font-family: Source Sans Pro;
+						color: #333333;
+
+						.wide-content {
+							width: 600px;
+						}
+
+						.button-container {
+							margin-right: 16px;
+						}
+
+						.stacked-content {
+							width: 240px;
+						}
+					`,
+				},
+			},
+			{
+				path: '/group-selector/documentation',
+				title: 'Group Selector Documentation',
+				content: pageLoader(() => import('./group-selector/documentation.md')),
+				imports: { GroupSelector, DocgenTable },
+			},
+			{
+				path: '/group-selector-modal/variations',
+				title: 'Group Selector Modal Variations',
+				content: pageLoader(() => import('./group-selector-modal/variations.md')),
+				imports: {
+					GroupSelectorModal,
+					Button: Bootstrap.Button,
+					GroupSelectorModalDemo: styled.div`
+						font-family: Source Sans Pro;
+						color: #333333;
+
+						.wide-content {
+							width: 600px;
+						}
+
+						.button-container {
+							margin-right: 16px;
+						}
+
+						.stacked-content {
+							width: 240px;
+						}
+					`,
+				},
+			},
+			{
+				path: '/group-selector-modal/documentation',
+				title: 'Group Selector Modal Documentation',
+				content: pageLoader(() => import('./group-selector-modal/documentation.md')),
+				imports: { GroupSelectorModal, DocgenTable },
 			},
 		],
 	},

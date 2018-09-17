@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import { debouncedResize } from '../utils';
+import { ModalBackdrop } from '../modal-backdrop/component.jsx';
 import { ModalHeader } from './modal-header.jsx';
 import { DefaultModalFooter } from './default-modal-footer.jsx';
 import * as Styled from './styled.jsx';
@@ -66,12 +67,6 @@ export class Modal extends React.Component {
 		}
 	};
 
-	handleBackdropClick = backdrop => {
-		if (backdrop.target === this._backdrop) {
-			this.props.onClose();
-		}
-	};
-
 	render() {
 		const {
 			theme,
@@ -97,12 +92,7 @@ export class Modal extends React.Component {
 
 		return (
 			<ThemeProvider theme={{ ...theme, verticalButtons }}>
-				<Styled.Backdrop
-					innerRef={backdrop => {
-						this._backdrop = backdrop;
-					}}
-					onClick={this.handleBackdropClick}
-				>
+				<ModalBackdrop onClose={onClose}>
 					<Styled.Modal
 						innerRef={modal => {
 							this._modal = modal;
@@ -110,14 +100,14 @@ export class Modal extends React.Component {
 						}}
 					>
 						<ModalHeader title={title} subtitle={subtitle} onClose={onClose} />
-						<Styled.ModalContent>{children}</Styled.ModalContent>
+						<Styled.ModalContent> {children} </Styled.ModalContent>
 						{renderFooter ? (
 							renderFooter()
 						) : (
 							<DefaultModalFooter useFullWidthButtons={verticalButtons} {...footerProps} />
 						)}
 					</Styled.Modal>
-				</Styled.Backdrop>
+				</ModalBackdrop>
 			</ThemeProvider>
 		);
 	}
