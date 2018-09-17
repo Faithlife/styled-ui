@@ -41,6 +41,7 @@ export class GroupSelectorModal extends React.Component {
 		selectedGroupId: -1,
 		createGroupFixed: false,
 		resultsTopMargin: defaultResultsTopMargin,
+		scrollWidthDelta: 0,
 	};
 
 	modalRef = React.createRef();
@@ -176,17 +177,20 @@ export class GroupSelectorModal extends React.Component {
 
 	handleScroll = event => {
 		if (this.modalRef.current) {
-			if (this.modalRef.current.contains(event.target)) {
-				if (event.target.scrollTop >= 82 && !this.fixedCreateWrapper) {
+			const element = event.target;
+			if (this.modalRef.current.contains(element)) {
+				if (element.scrollTop >= 82 && !this.fixedCreateWrapper) {
 					this.setState({
 						createGroupFixed: true,
 						resultsTopMargin: 232,
+						scrollWidthDelta: element.offsetWidth - element.clientWidth,
 					});
 					this.fixedCreateWrapper = true;
-				} else if (event.target.scrollTop < 82) {
+				} else if (element.scrollTop < 82) {
 					this.setState({
 						createGroupFixed: false,
-						resultsTopMargin: defaultResultsTopMargin + event.target.scrollTop,
+						resultsTopMargin: defaultResultsTopMargin + element.scrollTop,
+						scrollWidthDelta: 0,
 					});
 					this.fixedCreateWrapper = false;
 				}
@@ -202,25 +206,33 @@ export class GroupSelectorModal extends React.Component {
 				<Styled.GroupSelectorModalBody innerRef={this.modalRef}>
 					{this.state.modalContent === 'main' && (
 						<Styled.MainModalContent>
-							<Styled.ModalTopGradient />
+							<Styled.ModalTopGradientWrapper>
+								<Styled.ModalTopGradient />
+							</Styled.ModalTopGradientWrapper>
 							<Styled.ModalTitle>Find Your Church</Styled.ModalTitle>
 							<Styled.ModalSubtitle>in the Faithlife Church Directory</Styled.ModalSubtitle>
 							<Styled.CreateGroupWrapper fixed={this.state.createGroupFixed}>
-								<CreateGroup
-									onChurchNameInputChange={this.handleChurchNameInputChange}
-									onChurchLocationInputChange={this.handleChurchLocationInputChange}
-									newChurchName={this.state.newChurchName}
-									newChurchLocation={this.state.newChurchLocation}
-									showRequiredStars={this.state.createGroupFixed}
-								/>
-								<Styled.CreateGroupButtonWrapper>
-									<Styled.CreateGroupButtonText>
-										Don't see your church?
-									</Styled.CreateGroupButtonText>
-									<Button color="primary" disabled={disableButton} onClick={this.createGroupClick}>
-										Create
-									</Button>
-								</Styled.CreateGroupButtonWrapper>
+								<Styled.CreateGroupBackground scrollWidthDelta={this.state.scrollWidthDelta}>
+									<CreateGroup
+										onChurchNameInputChange={this.handleChurchNameInputChange}
+										onChurchLocationInputChange={this.handleChurchLocationInputChange}
+										newChurchName={this.state.newChurchName}
+										newChurchLocation={this.state.newChurchLocation}
+										showRequiredStars={this.state.createGroupFixed}
+									/>
+									<Styled.CreateGroupButtonWrapper>
+										<Styled.CreateGroupButtonText>
+											Don't see your church?
+										</Styled.CreateGroupButtonText>
+										<Button
+											color="primary"
+											disabled={disableButton}
+											onClick={this.createGroupClick}
+										>
+											Create
+										</Button>
+									</Styled.CreateGroupButtonWrapper>
+								</Styled.CreateGroupBackground>
 							</Styled.CreateGroupWrapper>
 							<Styled.SearchResultsContainer
 								style={{ marginTop: this.state.resultsTopMargin }}
