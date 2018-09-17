@@ -44,7 +44,6 @@ export const FileInformation = styled.div`
 export const FileLabel = createEllipsizedComponent(styled.div`
 	${fonts.ui14};
 
-	text-align: left;
 	padding: 6px 0;
 `);
 
