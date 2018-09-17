@@ -39,6 +39,13 @@ const ButtonDemo = styled.div`
 	width: min-content;
 `;
 
+const ButtonGrid = styled.div`
+	display: grid;
+	grid-auto-flow: row;
+	grid-row-gap: 4px;
+	width: 200px;
+`;
+
 function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
 }
@@ -89,6 +96,7 @@ const pages = [
 				imports: {
 					Button,
 					ButtonDemo,
+					ButtonGrid,
 					GearIcon,
 				},
 			},

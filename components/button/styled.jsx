@@ -10,16 +10,11 @@ const buttonColors = {
 };
 
 export const ButtonContents = styled.span`
-	display: flex;
+	display: grid;
+	grid-auto-flow: column;
+	grid-column-gap: 6px;
 	align-items: center;
-
-	& > * {
-		flex: 1 0 auto;
-
-		&:not(:first-child) {
-			margin-left: 6px;
-		}
-	}
+	justify-content: ${props => props.justifyContent || 'center'};
 `;
 
 export const Anchor = styled.a`
