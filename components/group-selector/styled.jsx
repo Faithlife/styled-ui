@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { Bootstrap, HelpBox, SimpleModal } from '../main.js';
+import { Bootstrap, HelpBox } from '../main.js';
+import { SimpleModal } from '../simple-modal/component.jsx';
 import { resetStyles } from '../utils/index.js';
 
 const { Label } = Bootstrap;
