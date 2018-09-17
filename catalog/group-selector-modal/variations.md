@@ -127,7 +127,7 @@ state: {
 
 			setState({
 				groups: [...state.groups, newGroup],
-				selectedGroupId: newGroup.groupId
+				isOpen: false,
 			});
 		}}
 		onGetStartedClick={() => {alert("Lets get started.")}}
