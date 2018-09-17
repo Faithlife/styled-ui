@@ -47,8 +47,6 @@ export class GroupSelector extends React.Component {
 		onJoinGroupClick: PropTypes.func.isRequired,
 		/** Operation to perform when user requests to join a group */
 		onAdminRequestClick: PropTypes.func.isRequired,
-		/** Is the dropdown on a mobile view */
-		isMobile: PropTypes.bool.isRequired,
 	};
 	state = {
 		newGroupName: '',
@@ -86,7 +84,6 @@ export class GroupSelector extends React.Component {
 							selectedGroup={selectedGroup}
 							onSelectionChange={this.props.onSelectionChange}
 							onFindChurchButtonClick={this.handleChangeModalState}
-							isMobile={this.props.isMobile}
 						/>
 					)}
 					{this.props.groupSelectorView === 'no-groups' && (

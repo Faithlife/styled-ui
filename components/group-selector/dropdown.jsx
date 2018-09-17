@@ -13,7 +13,6 @@ export class GroupDropdown extends React.PureComponent {
 		selectedGroup: PropTypes.object.isRequired,
 		onSelectionChange: PropTypes.func.isRequired,
 		onFindChurchButtonClick: PropTypes.func.isRequired,
-		isMobile: PropTypes.bool.isRequired,
 	};
 
 	state = {
@@ -115,61 +114,35 @@ export class GroupDropdown extends React.PureComponent {
 
 		const { name, kind, avatarUrl } = this.props.selectedGroup;
 
-		const selectedGroupContents = (
-			<div>
-				<Styled.SelectedGroupAvatar>
-					<Avatar avatarUrl={avatarUrl} name={name} kind={kind} />
-				</Styled.SelectedGroupAvatar>
-				<Styled.SelectedGroupText>{this.props.selectedGroup.name}</Styled.SelectedGroupText>
-			</div>
-		);
-
-		const dropdownWrapperContents = (
-			<div>
-				<Styled.DropdownGroupsContainer>{groups}</Styled.DropdownGroupsContainer>
-				<Styled.DropdownButtonContainer>
-					<Button outline size="sm" color="primary" onClick={this.handleDropdownButtonClick}>
-						Find or Add Church
-					</Button>
-				</Styled.DropdownButtonContainer>
-			</div>
-		);
 		return (
 			<Styled.DropdownContainer innerRef={this.dropdownRef}>
 				<Styled.SelectedGroupContainer>
-					{!this.props.isMobile && (
-						<div>
-							<Styled.DownArrow
-								xmlns="http://www.w3.org/2000/svg"
-								width="12"
-								height="12"
-								viewBox="0 0 12 12"
-							>
-								<polygon fill="#888" points="8 6 4 9.5 4 2.5" transform="rotate(90 6 6)" />
-							</Styled.DownArrow>
-							<Styled.SelectedGroup
-								onClick={this.handleDropdownToggle}
-								onKeyDown={this.handleKeyPress}
-							>
-								{selectedGroupContents}
-							</Styled.SelectedGroup>
-						</div>
-					)}
-					{this.props.isMobile && (
-						<Styled.MobileSelectedGroup
-							onClick={this.handleDropdownToggle}
-							onKeyDown={this.handleKeyPress}
-						>
-							{selectedGroupContents}
-						</Styled.MobileSelectedGroup>
-					)}
+					<Styled.DownArrow
+						xmlns="http://www.w3.org/2000/svg"
+						width="12"
+						height="12"
+						viewBox="0 0 12 12"
+					>
+						<polygon fill="#888" points="8 6 4 9.5 4 2.5" transform="rotate(90 6 6)" />
+					</Styled.DownArrow>
+					<Styled.SelectedGroup
+						onClick={this.handleDropdownToggle}
+						onKeyDown={this.handleKeyPress}
+					>
+						<Styled.SelectedGroupAvatar>
+							<Avatar avatarUrl={avatarUrl} name={name} kind={kind} />
+						</Styled.SelectedGroupAvatar>
+						<Styled.SelectedGroupText>{this.props.selectedGroup.name}</Styled.SelectedGroupText>
+					</Styled.SelectedGroup>
 					{this.state.isDropdownOpen && (
-						<div>
-							{!this.props.isMobile && (
-								<Styled.DropdownWrapper>{dropdownWrapperContents}</Styled.DropdownWrapper>
-							)}
-							{this.props.isMobile && <div>{dropdownWrapperContents}</div>}
-						</div>
+						<Styled.DropdownWrapper>
+							<Styled.DropdownGroupsContainer>{groups}</Styled.DropdownGroupsContainer>
+							<Styled.DropdownButtonContainer>
+								<Button outline size="sm" color="primary" onClick={this.handleDropdownButtonClick}>
+									Find or Add Church
+								</Button>
+							</Styled.DropdownButtonContainer>
+						</Styled.DropdownWrapper>
 					)}
 				</Styled.SelectedGroupContainer>
 			</Styled.DropdownContainer>
