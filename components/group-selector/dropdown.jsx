@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Bootstrap } from '../../components/main.js';
+import { Button } from '../../components/main.js';
 import * as Styled from './styled.jsx';
 import { SimpleGroup } from './simple-group.jsx';
 import { Avatar } from './avatar.jsx';
-
-const { Button } = Bootstrap;
 
 export class GroupDropdown extends React.PureComponent {
 	static propTypes = {
@@ -135,7 +133,7 @@ export class GroupDropdown extends React.PureComponent {
 						<Styled.DropdownWrapper>
 							<Styled.DropdownGroupsContainer>{groups}</Styled.DropdownGroupsContainer>
 							<Styled.DropdownButtonContainer>
-								<Button outline size="sm" color="primary" onClick={this.handleDropdownButtonClick}>
+								<Button small primaryOutline onClick={this.handleDropdownButtonClick}>
 									Find or Add Church
 								</Button>
 							</Styled.DropdownButtonContainer>

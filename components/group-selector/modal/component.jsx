@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Bootstrap } from '../../main.js';
+import { Button } from '../../main.js';
 import * as Styled from '../styled.jsx';
 import { SearchResult } from './search-result.jsx';
 import { CreateGroup } from './create-group.jsx';
-
-const { Button } = Bootstrap;
 
 const defaultResultsTopMargin = -64;
 
@@ -224,11 +222,7 @@ export class GroupSelectorModal extends React.Component {
 										<Styled.CreateGroupButtonText>
 											Don't see your church?
 										</Styled.CreateGroupButtonText>
-										<Button
-											color="primary"
-											disabled={disableButton}
-											onClick={this.createGroupClick}
-										>
+										<Button small primary disabled={disableButton} onClick={this.createGroupClick}>
 											Create
 										</Button>
 									</Styled.CreateGroupButtonWrapper>
@@ -254,7 +248,7 @@ export class GroupSelectorModal extends React.Component {
 							</Styled.SecondaryModalText>
 							<Styled.SecondaryModalButtonContainer>
 								<Styled.SecondaryModalButtonWrapper>
-									<Button color="primary" onClick={this.redirectToGroup}>
+									<Button primary onClick={this.redirectToGroup}>
 										Request access
 									</Button>
 								</Styled.SecondaryModalButtonWrapper>
@@ -273,7 +267,7 @@ export class GroupSelectorModal extends React.Component {
 							</Styled.SecondaryModalText>
 							<Styled.SecondaryModalButtonContainer>
 								<Styled.SecondaryModalButtonWrapper>
-									<Button color="primary" onClick={this.redirectToGroup}>
+									<Button primary onClick={this.redirectToGroup}>
 										Change to Church
 									</Button>
 								</Styled.SecondaryModalButtonWrapper>

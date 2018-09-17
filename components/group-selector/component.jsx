@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Bootstrap } from '../main.js';
+import { Button } from '../main.js';
 import * as Styled from './styled.jsx';
 import { GroupDropdown } from './dropdown.jsx';
 import { GroupSelectorModal } from './modal/component.jsx';
 
-const { Button } = Bootstrap;
 const defaultGroup = {
 	name: '',
 	groupId: -1,
@@ -87,7 +86,7 @@ export class GroupSelector extends React.Component {
 						/>
 					)}
 					{this.props.groupSelectorView === 'no-groups' && (
-						<Button color="primary" onClick={this.handleChangeModalState}>
+						<Button primary onClick={this.handleChangeModalState}>
 							Find or add Church
 						</Button>
 					)}

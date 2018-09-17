@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar } from '../avatar.jsx';
-import { Bootstrap } from '../../main.js';
+import { Button } from '../../main.js';
 import * as Styled from '../styled.jsx';
-
-const { Button } = Bootstrap;
 
 export class SearchResult extends React.PureComponent {
 	static propTypes = {
@@ -70,7 +68,7 @@ export class SearchResult extends React.PureComponent {
 		if (claimable) {
 			message = <Styled.SearchResultMessage>This is an empty group</Styled.SearchResultMessage>;
 			button = (
-				<Button size="sm" outline color="primary" onClick={this.claimGroup}>
+				<Button small outline primary onClick={this.claimGroup}>
 					Claim
 				</Button>
 			);
@@ -87,7 +85,7 @@ export class SearchResult extends React.PureComponent {
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
-				<Button size="sm" outline color="primary" onClick={this.joinGroup}>
+				<Button small outline primary onClick={this.joinGroup}>
 					Join Group
 				</Button>
 			);
@@ -104,7 +102,7 @@ export class SearchResult extends React.PureComponent {
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
-				<Button size="sm" outline color="primary" onClick={this.requestAccess}>
+				<Button small outline primary onClick={this.requestAccess}>
 					Request Admin
 				</Button>
 			);
@@ -121,7 +119,7 @@ export class SearchResult extends React.PureComponent {
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
-				<Button size="sm" outline color="primary" onClick={this.editGroupType}>
+				<Button small outline primary onClick={this.editGroupType}>
 					Edit
 				</Button>
 			);
@@ -133,7 +131,7 @@ export class SearchResult extends React.PureComponent {
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
-				<Button size="sm" outline color="primary" onClick={this.joinGroup}>
+				<Button small outline primary onClick={this.joinGroup}>
 					Join Group
 				</Button>
 			);
@@ -144,7 +142,7 @@ export class SearchResult extends React.PureComponent {
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
-				<Button size="sm" color="primary" outline onClick={this.getStarted}>
+				<Button small primaryOutline onClick={this.getStarted}>
 					Get Started
 				</Button>
 			);
