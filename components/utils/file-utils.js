@@ -23,6 +23,9 @@ export const convertBytesToFriendlyString = bytes => {
 	if (bytes == null || isNaN(bytes) || bytes < 0) {
 		return null;
 	}
+	if (bytes === 0) {
+		return '0 B';
+	}
 
 	const roundedExponent = Math.min(Math.floor(log1024(bytes)), storageUnits.length - 1);
 	const convertedBytes = Math.round(bytes / Math.pow(1024, roundedExponent));
