@@ -76,7 +76,7 @@ export const BaseButton = forwardClassRef(
 				>
 					<Styled.ButtonContents justifyContent={justifyContent}>
 						{this.props.icon}
-						{children != null && <span>{children}</span>}
+						{children}
 					</Styled.ButtonContents>
 				</MappedStyledComponent>
 			);
