@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.0.2
+* Fixed overflow bug with buttons that are narrower than their content
+* Fixed empty file byte count
+
 ### 3.0.1
 * Fixed a bug with the new variation cache
 * Aligned text in stretched buttons with icons
