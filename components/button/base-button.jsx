@@ -52,7 +52,7 @@ export const BaseButton = forwardClassRef(
 		};
 
 		render() {
-			const { children, theme, styleOverrides, ...otherProps } = this.props;
+			const { children, theme, styleOverrides, icon, ...otherProps } = this.props;
 
 			// ignore implementation detail props that we do not want documented by docgen
 			/* eslint-disable react/prop-types */
@@ -75,7 +75,7 @@ export const BaseButton = forwardClassRef(
 					styleOverrides={componentStyleOverrides}
 				>
 					<Styled.ButtonContents justifyContent={justifyContent}>
-						{this.props.icon}
+						{icon}
 						{children}
 					</Styled.ButtonContents>
 				</MappedStyledComponent>
