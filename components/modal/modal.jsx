@@ -12,7 +12,7 @@ import * as Styled from './styled.jsx';
  */
 export class Modal extends React.Component {
 	static propTypes = {
-		/** controls state of modal */
+		/** Controls state of modal */
 		isOpen: PropTypes.bool.isRequired,
 		/** Title of the modal */
 		title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
@@ -24,7 +24,7 @@ export class Modal extends React.Component {
 		children: PropTypes.node.isRequired,
 		/** Customizable theme properties */
 		theme: PropTypes.object,
-		/** values for rendering an FL standard footer */
+		/** Values for rendering an FL standard footer */
 		footerProps: PropTypes.shape({
 			commitButton: PropTypes.shape({
 				onClick: PropTypes.func.isRequired,
