@@ -162,3 +162,31 @@ state: { modal: false, value: '' }
 	</Modal>
 </ModalDemo>
 ```
+
+## Modal with no footer
+
+```react
+showSource: true
+state: { modal: false, value: '' }
+---
+<ModalDemo>
+	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Modal
+		isOpen={state.modal}
+		onClose={() => setState({ modal: false })}
+		title="Location"
+		subtitle="Help us locate you"
+		withoutFooter
+	>
+		<div className="content">
+			<Input
+				value={state.value}
+				onChange={value => setState({ value: value, isValid: value !== '' })}
+				placeholder="Bellingham"
+				title="Location"
+				debounce={200}
+			/>
+		</div>
+	</Modal>
+</ModalDemo>
+```

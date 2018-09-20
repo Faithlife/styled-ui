@@ -39,7 +39,10 @@ export class Modal extends React.Component {
 				text: PropTypes.string.isRequired,
 			}),
 		}),
+		/** A default footer will be rendered if you don't supply a renderFooter function */
 		renderFooter: PropTypes.func,
+		/** No footer will be rendered if withoutFooter is true */
+		withoutFooter: PropTypes.bool,
 	};
 
 	static defaultProps = {
@@ -77,6 +80,7 @@ export class Modal extends React.Component {
 			children,
 			renderFooter,
 			footerProps,
+			withoutFooter,
 		} = this.props;
 
 		if (!isOpen) {
@@ -102,7 +106,7 @@ export class Modal extends React.Component {
 					>
 						<ModalHeader title={title} subtitle={subtitle} onClose={onClose} />
 						<Styled.ModalContent> {children} </Styled.ModalContent>
-						{renderFooter ? (
+						{withoutFooter ? null : renderFooter ? (
 							renderFooter()
 						) : (
 							<DefaultModalFooter useFullWidthButtons={verticalButtons} {...footerProps} />
