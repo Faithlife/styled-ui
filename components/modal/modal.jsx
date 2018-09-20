@@ -88,7 +88,8 @@ export class Modal extends React.Component {
 		const verticalButtons =
 			modalWidth &&
 			!renderFooter &&
-			(modalWidth < 220 || (modalWidth < 320 && Object.keys(footerProps).length === 3));
+			(modalWidth < 220 ||
+				(modalWidth < 320 && footerProps && Object.keys(footerProps).length === 3));
 
 		return (
 			<ThemeProvider theme={{ ...theme, verticalButtons }}>
