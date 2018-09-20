@@ -106,11 +106,12 @@ export class Modal extends React.Component {
 					>
 						<ModalHeader title={title} subtitle={subtitle} onClose={onClose} />
 						<Styled.ModalContent> {children} </Styled.ModalContent>
-						{withoutFooter ? null : renderFooter ? (
-							renderFooter()
-						) : (
-							<DefaultModalFooter useFullWidthButtons={verticalButtons} {...footerProps} />
-						)}
+						{withoutFooter ||
+							(renderFooter ? (
+								renderFooter()
+							) : (
+								<DefaultModalFooter useFullWidthButtons={verticalButtons} {...footerProps} />
+							))}
 					</Styled.Modal>
 				</ModalBackdrop>
 			</ThemeProvider>
