@@ -106,7 +106,7 @@ export class Modal extends React.Component {
 					>
 						<ModalHeader title={title} subtitle={subtitle} onClose={onClose} />
 						<Styled.ModalContent> {children} </Styled.ModalContent>
-						{withoutFooter ||
+						{!withoutFooter &&
 							(renderFooter ? (
 								renderFooter()
 							) : (
