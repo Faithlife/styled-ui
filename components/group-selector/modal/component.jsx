@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../../main.js';
+import { SimpleModal } from '../../simple-modal/component.jsx';
 import * as Styled from '../styled.jsx';
 import { SearchResult } from './search-result.jsx';
 import { CreateGroup } from './create-group.jsx';
@@ -200,82 +201,87 @@ export class GroupSelectorModal extends React.Component {
 		const disableButton = this.state.newChurchName === '' || this.state.newChurchLocation === '';
 
 		return (
-			<Styled.GroupSelectorModal isOpen={this.props.isOpen} onClose={this.toggle}>
-				<Styled.GroupSelectorModalBody innerRef={this.modalRef}>
-					{this.state.modalContent === 'main' && (
-						<Styled.MainModalContent>
-							<Styled.ModalTopGradientWrapper>
+			<Styled.GroupSelectorModal>
+				<SimpleModal isOpen={this.props.isOpen} onClose={this.toggle}>
+					<Styled.GroupSelectorModalBody innerRef={this.modalRef}>
+						{this.state.modalContent === 'main' && (
+							<Styled.MainModalContent>
 								<Styled.ModalTopGradient />
-							</Styled.ModalTopGradientWrapper>
-							<Styled.ModalTitle>Find Your Church</Styled.ModalTitle>
-							<Styled.ModalSubtitle>in the Faithlife Church Directory</Styled.ModalSubtitle>
-							<Styled.CreateGroupWrapper fixed={this.state.createGroupFixed}>
-								<Styled.CreateGroupBackground scrollWidthDelta={this.state.scrollWidthDelta}>
-									<CreateGroup
-										onChurchNameInputChange={this.handleChurchNameInputChange}
-										onChurchLocationInputChange={this.handleChurchLocationInputChange}
-										newChurchName={this.state.newChurchName}
-										newChurchLocation={this.state.newChurchLocation}
-										showRequiredStars={this.state.createGroupFixed}
-									/>
-									<Styled.CreateGroupButtonWrapper>
-										<Styled.CreateGroupButtonText>
-											Don't see your church?
-										</Styled.CreateGroupButtonText>
-										<Button small primary disabled={disableButton} onClick={this.createGroupClick}>
-											Create
+								<Styled.ModalTitle>Find Your Church</Styled.ModalTitle>
+								<Styled.ModalSubtitle>in the Faithlife Church Directory</Styled.ModalSubtitle>
+								<Styled.CreateGroupWrapper fixed={this.state.createGroupFixed}>
+									<Styled.CreateGroupBackground scrollWidthDelta={this.state.scrollWidthDelta}>
+										<CreateGroup
+											onChurchNameInputChange={this.handleChurchNameInputChange}
+											onChurchLocationInputChange={this.handleChurchLocationInputChange}
+											newChurchName={this.state.newChurchName}
+											newChurchLocation={this.state.newChurchLocation}
+											showRequiredStars={this.state.createGroupFixed}
+										/>
+										<Styled.CreateGroupButtonWrapper>
+											<Styled.CreateGroupButtonText>
+												Don't see your church?
+											</Styled.CreateGroupButtonText>
+											<Button
+												small
+												primary
+												disabled={disableButton}
+												onClick={this.createGroupClick}
+											>
+												Create
+											</Button>
+										</Styled.CreateGroupButtonWrapper>
+									</Styled.CreateGroupBackground>
+								</Styled.CreateGroupWrapper>
+								<Styled.SearchResultsContainer
+									style={{ marginTop: this.state.resultsTopMargin }}
+									fixed={this.state.createGroupFixed}
+									innerRef={this.searchResultsRef}
+								>
+									{this.getSearchResults()}
+								</Styled.SearchResultsContainer>
+							</Styled.MainModalContent>
+						)}
+						{this.state.modalContent === 'admin' && (
+							<Styled.SecondaryModalContent>
+								<Styled.SecondaryModalText>
+									<Styled.SearchResultBoldText>Admin</Styled.SearchResultBoldText>
+									<span> membership is neccessarry to perform this action.</span>
+								</Styled.SecondaryModalText>
+								<Styled.SecondaryModalText>
+									Contact a group administrator to request Admin membership
+								</Styled.SecondaryModalText>
+								<Styled.SecondaryModalButtonContainer>
+									<Styled.SecondaryModalButtonWrapper>
+										<Button primary onClick={this.redirectToGroup}>
+											Request access
 										</Button>
-									</Styled.CreateGroupButtonWrapper>
-								</Styled.CreateGroupBackground>
-							</Styled.CreateGroupWrapper>
-							<Styled.SearchResultsContainer
-								style={{ marginTop: this.state.resultsTopMargin }}
-								fixed={this.state.createGroupFixed}
-								innerRef={this.searchResultsRef}
-							>
-								{this.getSearchResults()}
-							</Styled.SearchResultsContainer>
-						</Styled.MainModalContent>
-					)}
-					{this.state.modalContent === 'admin' && (
-						<Styled.SecondaryModalContent>
-							<Styled.SecondaryModalText>
-								<Styled.SearchResultBoldText>Admin</Styled.SearchResultBoldText>
-								<span> membership is neccessarry to perform this action.</span>
-							</Styled.SecondaryModalText>
-							<Styled.SecondaryModalText>
-								Contact a group administrator to request Admin membership
-							</Styled.SecondaryModalText>
-							<Styled.SecondaryModalButtonContainer>
-								<Styled.SecondaryModalButtonWrapper>
-									<Button primary onClick={this.redirectToGroup}>
-										Request access
-									</Button>
-								</Styled.SecondaryModalButtonWrapper>
-								<Button onClick={this.resetModalState}>Cancel</Button>
-							</Styled.SecondaryModalButtonContainer>
-						</Styled.SecondaryModalContent>
-					)}
-					{this.state.modalContent === 'change' && (
-						<Styled.SecondaryModalContent>
-							<Styled.SecondaryModalText>
-								This group type must be set to{' '}
-								<Styled.SearchResultBoldText>"Church"</Styled.SearchResultBoldText>
-							</Styled.SecondaryModalText>
-							<Styled.SecondaryModalText>
-								Visit the group settings page to change
-							</Styled.SecondaryModalText>
-							<Styled.SecondaryModalButtonContainer>
-								<Styled.SecondaryModalButtonWrapper>
-									<Button primary onClick={this.redirectToGroup}>
-										Change to Church
-									</Button>
-								</Styled.SecondaryModalButtonWrapper>
-								<Button onClick={this.resetModalState}>Cancel</Button>
-							</Styled.SecondaryModalButtonContainer>
-						</Styled.SecondaryModalContent>
-					)}
-				</Styled.GroupSelectorModalBody>
+									</Styled.SecondaryModalButtonWrapper>
+									<Button onClick={this.resetModalState}>Cancel</Button>
+								</Styled.SecondaryModalButtonContainer>
+							</Styled.SecondaryModalContent>
+						)}
+						{this.state.modalContent === 'change' && (
+							<Styled.SecondaryModalContent>
+								<Styled.SecondaryModalText>
+									This group type must be set to{' '}
+									<Styled.SearchResultBoldText>"Church"</Styled.SearchResultBoldText>
+								</Styled.SecondaryModalText>
+								<Styled.SecondaryModalText>
+									Visit the group settings page to change
+								</Styled.SecondaryModalText>
+								<Styled.SecondaryModalButtonContainer>
+									<Styled.SecondaryModalButtonWrapper>
+										<Button primary onClick={this.redirectToGroup}>
+											Change to Church
+										</Button>
+									</Styled.SecondaryModalButtonWrapper>
+									<Button onClick={this.resetModalState}>Cancel</Button>
+								</Styled.SecondaryModalButtonContainer>
+							</Styled.SecondaryModalContent>
+						)}
+					</Styled.GroupSelectorModalBody>
+				</SimpleModal>
 			</Styled.GroupSelectorModal>
 		);
 	}
