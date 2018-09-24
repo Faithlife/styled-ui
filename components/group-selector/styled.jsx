@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { SimpleModal } from '../simple-modal/component.jsx';
 import { resetStyles } from '../utils/index.js';
 
 export const GroupSelector = styled.div`
@@ -144,16 +143,21 @@ export const DropdownButtonContainer = styled.div`
 	justify-content: center;
 `;
 
-export const GroupSelectorModal = styled(SimpleModal)`
+export const GroupSelectorModal = styled.div`
 	${resetStyles};
 	position: relative;
 `;
 
 export const ModalTopGradient = styled.div`
-	margin-left: 24px;
-	margin-right: 24px;
+	padding-left: 24px;
+	padding-right: 24px;
+	padding-top: 24px;
 	height: 100%;
 	background: white;
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	height: 30px;
 	z-index: 2;
 	box-shadow: 0px 10px 8px -4px white;
 `;
@@ -162,7 +166,7 @@ export const ModalTopGradientWrapper = styled.div`
 	position: absolute;
 	top: 0px;
 	width: 100%;
-	height: 30px;
+	height: 40px;
 	z-index: 2;
 `;
 
@@ -175,7 +179,7 @@ export const ModalTitle = styled.p`
 `;
 
 export const ModalSubtitle = styled.p`
-	margin: 4px 0 24px 0;
+	margin-top: 4px;
 	font-size: 16px;
 	text-align: center;
 	line-height: 1.2;
@@ -189,13 +193,12 @@ export const MainModalContent = styled.div`
 export const CreateGroupWrapper = styled.div`
 	position: ${props => (props.fixed ? 'absolute' : 'relative')};
 	width: 100%;
-	box-sizing: border-box;
 	z-index: 1;
 
 	${props =>
 		props.fixed &&
 		`
-		top: 20px;
+		top: 17px;
 		`};
 `;
 
@@ -212,7 +215,6 @@ export const SearchResultsContainer = styled.div`
 	width: 100%;
 	padding-left: 12px;
 	padding-right: 12px;
-	box-sizing: border-box;
 	z-index: ${props => (props.fixed ? 0 : 2)};
 	height: 100%;
 `;
@@ -255,7 +257,7 @@ export const GroupSelectorModalBody = styled.div`
 `;
 
 export const SearchResult = styled.div`
-	height: 76px;
+	height: 100px;
 	background-color: white;
 	margin-bottom: 7px;
 	padding: 12px;
