@@ -12,7 +12,7 @@ import * as Styled from './styled.jsx';
  */
 export class Modal extends React.Component {
 	static propTypes = {
-		/** controls state of modal */
+		/** Controls state of modal */
 		isOpen: PropTypes.bool.isRequired,
 		/** Title of the modal */
 		title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
@@ -24,7 +24,7 @@ export class Modal extends React.Component {
 		children: PropTypes.node.isRequired,
 		/** Customizable theme properties */
 		theme: PropTypes.object,
-		/** values for rendering an FL standard footer */
+		/** Values for rendering an FL standard footer */
 		footerProps: PropTypes.shape({
 			commitButton: PropTypes.shape({
 				onClick: PropTypes.func.isRequired,
@@ -39,7 +39,10 @@ export class Modal extends React.Component {
 				text: PropTypes.string.isRequired,
 			}),
 		}),
+		/** A default footer will be rendered if you don't supply a renderFooter function */
 		renderFooter: PropTypes.func,
+		/** No footer will be rendered if withoutFooter is true */
+		withoutFooter: PropTypes.bool,
 	};
 
 	static defaultProps = {
@@ -77,6 +80,7 @@ export class Modal extends React.Component {
 			children,
 			renderFooter,
 			footerProps,
+			withoutFooter,
 		} = this.props;
 
 		if (!isOpen) {
@@ -88,7 +92,8 @@ export class Modal extends React.Component {
 		const verticalButtons =
 			modalWidth &&
 			!renderFooter &&
-			(modalWidth < 220 || (modalWidth < 320 && Object.keys(footerProps).length === 3));
+			(modalWidth < 220 ||
+				(modalWidth < 320 && footerProps && Object.keys(footerProps).length === 3));
 
 		return (
 			<ThemeProvider theme={{ ...theme, verticalButtons }}>
@@ -101,11 +106,12 @@ export class Modal extends React.Component {
 					>
 						<ModalHeader title={title} subtitle={subtitle} onClose={onClose} />
 						<Styled.ModalContent> {children} </Styled.ModalContent>
-						{renderFooter ? (
-							renderFooter()
-						) : (
-							<DefaultModalFooter useFullWidthButtons={verticalButtons} {...footerProps} />
-						)}
+						{!withoutFooter &&
+							(renderFooter ? (
+								renderFooter()
+							) : (
+								<DefaultModalFooter useFullWidthButtons={verticalButtons} {...footerProps} />
+							))}
 					</Styled.Modal>
 				</ModalBackdrop>
 			</ThemeProvider>
