@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.1.0
+* Added `withoutFooter` prop so modals can be rendered without footers [#49](https://github.com/Faithlife/styled-ui/pull/49)
+* Fixed some CSS reset issues in `SimpleModal`, used by GroupSelector [#51](https://github.com/Faithlife/styled-ui/pull/51)
+
 ### 3.0.2
 * Fixed overflow bug with buttons that are narrower than their content
 * Fixed empty file byte count
