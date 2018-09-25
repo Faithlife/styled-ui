@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Button } from '../../components/main.js';
 import * as Styled from './styled.jsx';
 import { SimpleGroup } from './simple-group.jsx';
-import { Avatar } from './avatar.jsx';
 
 export class GroupDropdown extends React.PureComponent {
 	static propTypes = {
@@ -110,11 +109,20 @@ export class GroupDropdown extends React.PureComponent {
 			/>
 		));
 
-		const { name, kind, avatarUrl } = this.props.selectedGroup;
+		const { name, kind, groupId, avatarUrl } = this.props.selectedGroup;
 
 		return (
 			<Styled.DropdownContainer innerRef={this.dropdownRef}>
-				<Styled.SelectedGroupContainer>
+				<Styled.SelectedGroup onClick={this.handleDropdownToggle} onKeyDown={this.handleKeyPress}>
+					<SimpleGroup
+						groupId={groupId}
+						name={name}
+						kind={kind}
+						isSelected={false}
+						isHovered={false}
+						avatarUrl={avatarUrl}
+						disableHover
+					/>
 					<Styled.DownArrow
 						xmlns="http://www.w3.org/2000/svg"
 						width="12"
@@ -123,23 +131,17 @@ export class GroupDropdown extends React.PureComponent {
 					>
 						<polygon fill="#888" points="8 6 4 9.5 4 2.5" transform="rotate(90 6 6)" />
 					</Styled.DownArrow>
-					<Styled.SelectedGroup onClick={this.handleDropdownToggle} onKeyDown={this.handleKeyPress}>
-						<Styled.SelectedGroupAvatar>
-							<Avatar avatarUrl={avatarUrl} name={name} kind={kind} />
-						</Styled.SelectedGroupAvatar>
-						<Styled.SelectedGroupText>{this.props.selectedGroup.name}</Styled.SelectedGroupText>
-					</Styled.SelectedGroup>
-					{this.state.isDropdownOpen && (
-						<Styled.DropdownWrapper>
-							<Styled.DropdownGroupsContainer>{groups}</Styled.DropdownGroupsContainer>
-							<Styled.DropdownButtonContainer>
-								<Button small primaryOutline onClick={this.handleDropdownButtonClick}>
-									Find or Add Church
-								</Button>
-							</Styled.DropdownButtonContainer>
-						</Styled.DropdownWrapper>
-					)}
-				</Styled.SelectedGroupContainer>
+				</Styled.SelectedGroup>
+				{this.state.isDropdownOpen && (
+					<Styled.DropdownWrapper>
+						<Styled.DropdownGroupsContainer>{groups}</Styled.DropdownGroupsContainer>
+						<Styled.DropdownButtonContainer>
+							<Button small primaryOutline onClick={this.handleDropdownButtonClick}>
+								Find or Add Church
+							</Button>
+						</Styled.DropdownButtonContainer>
+					</Styled.DropdownWrapper>
+				)}
 			</Styled.DropdownContainer>
 		);
 	}
