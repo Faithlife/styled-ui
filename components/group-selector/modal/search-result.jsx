@@ -151,7 +151,7 @@ export class SearchResult extends React.PureComponent {
 		return (
 			<Styled.SearchResult>
 				<Styled.SearchResultAvatar>
-					<Avatar avatarUrl={avatarUrl} name={name} kind={kind} size="40px" />
+					<Avatar avatarUrl={avatarUrl} name={name} kind={kind} size={40} />
 				</Styled.SearchResultAvatar>
 				<Styled.SearchResultContent>
 					<div>

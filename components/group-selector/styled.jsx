@@ -48,6 +48,19 @@ export const SelectedGroup = styled.button`
 	align-items: center;
 `;
 
+export const AvatarWrapper = styled.div`
+	border-radius: 3px;
+	width: ${props => props.size}px;
+	height: ${props => props.size}px;
+	overflow: hidden;
+`;
+
+export const AvatarImage = styled.img`
+	display: block;
+	width: ${props => props.size}px;
+	height: ${props => props.size}px;
+`;
+
 export const SimpleGroup = styled.div`
 	text-align: left;
 	padding: 6px;

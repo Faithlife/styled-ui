@@ -1,24 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as Styled from './styled.jsx';
 import * as icons from './icons.jsx';
 
-export function Avatar({ avatarUrl, name, kind, size = '32px' }) {
+export function Avatar({ avatarUrl, name, kind, size = 32 }) {
+	let child;
 	if (avatarUrl) {
-		return (
-			<img style={{ borderRadius: '3px', width: size, height: size }} src={avatarUrl} alt={name} />
-		);
+		child = <Styled.AvatarImage size={size} src={avatarUrl} alt={name} />;
+	} else {
+		const Icon = storedIcons.get(kind) || getIconForGroupKind(kind);
+
+		child = <Icon viewBox="0 0 76 76" />;
 	}
 
-	const Icon = storedIcons.get(kind) || getIconForGroupKind(kind);
-
-	return <Icon style={{ borderRadius: '3px', width: size, height: size }} viewBox="0 0 76 76" />;
+	return <Styled.AvatarWrapper size={size}>{child}</Styled.AvatarWrapper>;
 }
 
 Avatar.propTypes = {
 	avatarUrl: PropTypes.string,
 	name: PropTypes.string,
 	kind: PropTypes.string,
-	size: PropTypes.string,
+	size: PropTypes.number,
 };
 
 const storedIcons = new Map();
