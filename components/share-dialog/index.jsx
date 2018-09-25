@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Clipboard from 'clipboard';
 import { Modal } from '../modal/modal.jsx';
 import {
 	FaithlifeShareButton,
@@ -7,7 +8,7 @@ import {
 	FacebookShareButton,
 	EmailShareButton,
 } from './social-share-buttons.jsx';
-import { CopyToClipboardButton } from './copy-to-clipboard-button.jsx';
+import { CopyToClipboard } from './copy-to-clipboard.jsx';
 import * as Styled from './styled.jsx';
 
 /**
@@ -21,26 +22,11 @@ export class ShareDialog extends React.Component {
 		isOpen: PropTypes.bool,
 	};
 
-	getCopyTarget(copyText) {
-		return (
-			<Styled.Input
-				type="text"
-				readOnly
-				value={copyText}
-				onClick={selectSelf}
-				ref={e => {
-					this.copyTarget = e;
-				}}
-			/>
-		);
-	}
-
 	render() {
 		const { shareUrl, message, onClose, isOpen } = this.props;
 
 		const encodedShareUrl = encodeURIComponent(shareUrl);
 		const encodedMessage = message ? encodeURIComponent(message) : '';
-		const copyTargetElement = this.getCopyTarget(shareUrl);
 
 		return (
 			<Modal isOpen={isOpen} onClose={onClose} title="Share this page">
@@ -49,14 +35,9 @@ export class ShareDialog extends React.Component {
 					<TwitterShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
 					<FacebookShareButton encodedShareUrl={encodedShareUrl} />
 					<EmailShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
-					<Styled.ShareContainer>
-						<Styled.CopyContainer>{copyTargetElement}</Styled.CopyContainer>
-						<CopyToClipboardButton getCopyTarget={() => this.copyTarget} copyButtonText="Copy" />
-					</Styled.ShareContainer>
+					<CopyToClipboard clipboard={Clipboard} copyValue={shareUrl} copyButtonText="Copy" />
 				</Styled.ShareContainer>
 			</Modal>
 		);
 	}
 }
-
-const selectSelf = e => e.target.select();
