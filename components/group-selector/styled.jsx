@@ -147,7 +147,7 @@ export const ModalTopGradientWrapper = styled.div`
 	z-index: 2;
 `;
 
-export const ModalTitle = styled.p`
+export const ModalTitle = styled.div`
 	font-size: 32px;
 	margin: 5px 0 0 0;
 	font-weight: 800;
@@ -155,7 +155,7 @@ export const ModalTitle = styled.p`
 	text-align: center;
 `;
 
-export const ModalSubtitle = styled.p`
+export const ModalSubtitle = styled.div`
 	margin-top: 4px;
 	font-size: 16px;
 	text-align: center;
@@ -209,8 +209,9 @@ export const CreateGroupButtonWrapper = styled.div`
 	margin: 16px 0 16px 0;
 `;
 
-export const CreateGroupButtonText = styled.p`
+export const CreateGroupButtonText = styled.div`
 	font-size: 16px;
+	margin: 16px 0 16px 0;
 	color: #575251;
 `;
 
@@ -222,7 +223,7 @@ export const CreateGroupLabel = styled.div`
 	color: #575251;
 `;
 
-export const CreateGroupRequiredStar = styled.p`
+export const CreateGroupRequiredStar = styled.div`
 	display: inline;
 	color: #d94848;
 `;
@@ -306,7 +307,7 @@ export const SecondaryModalContent = styled.div`
 	padding-bottom: 12px;
 `;
 
-export const SecondaryModalText = styled.p`
+export const SecondaryModalText = styled.div`
 	font-size: 14px;
 	margin: 0px;
 `;
