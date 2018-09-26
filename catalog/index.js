@@ -17,6 +17,7 @@ import {
 	DropZone,
 	GroupSelector,
 	GroupSelectorModal,
+	Tooltip,
 } from '../components/main.js';
 import { BaseButton } from '../components/button/base-button.jsx';
 import { BootstrapContainer } from '../components/utils';
@@ -149,6 +150,38 @@ const pages = [
 				title: 'Checkbox Documentation',
 				content: pageLoader(() => import('./checkbox/documentation.md')),
 				imports: { Checkbox, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Tooltip',
+		pages: [
+			{
+				path: '/tooltip/variations',
+				title: 'Tooltip Variations',
+				content: pageLoader(() => import('./tooltip/variations.md')),
+				imports: {
+					Tooltip,
+					Button,
+					TooltipDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
+					MultiTooltipDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+						display: flex;
+						justify-content: space-evenly;
+					`,
+				},
+			},
+			{
+				path: '/tooltip/documentation',
+				title: 'Tooltip Documentation',
+				content: pageLoader(() => import('./tooltip/documentation.md')),
+				imports: { Tooltip, DocgenTable },
 			},
 		],
 	},
