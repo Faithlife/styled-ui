@@ -51,11 +51,11 @@ export class CopyToClipboard extends React.Component {
 			<Styled.ShareContainer>
 				{!hideInput && (
 					<Styled.CopyContainer>
-						<Input type="text" readOnly value={copyValue} onClick={this.selectSelf} />
+						<Input small type="text" readOnly value={copyValue} onClick={this.selectSelf} />
 					</Styled.CopyContainer>
 				)}
 				<div>
-					<Button ref={this.button} data-clipboard-text={copyValue} primary medium condensed>
+					<Button small ref={this.button} data-clipboard-text={copyValue} primary>
 						{copyButtonText || 'Copy'}
 					</Button>
 					{showFeedback && <Styled.Copied>Copied!</Styled.Copied>}
