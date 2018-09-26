@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Clipboard from 'clipboard';
 import debounce from 'lodash.debounce';
 import { Button } from '../button/component.jsx';
 import { Input } from '../input/component.jsx';
@@ -7,35 +8,28 @@ import * as Styled from './styled.jsx';
 
 export class CopyToClipboard extends React.Component {
 	static propTypes = {
-		clipboard: PropTypes.func.isRequired,
 		copyValue: PropTypes.string.isRequired,
 		copyButtonText: PropTypes.string,
 		hideInput: PropTypes.bool,
 	};
 
-	constructor(props) {
-		super(props);
-		this.input = React.createRef();
-		this.button = React.createRef();
+	button = React.createRef();
+	state = {
+		showFeedback: false,
+	};
 
-		this.state = {
-			showFeedback: false,
-		};
-	}
 	componentDidMount() {
 		const button = this.button.current;
-		const input = this.input.current;
 
-		const Clipboard = this.props.clipboard;
 		this.clipboard = new Clipboard(button);
 
 		this.clipboard.on('success', () => {
 			this.showFeedback();
 		});
+	}
 
-		this.clipboard.on('error', () => {
-			input.select();
-		});
+	componentWillUnmount() {
+		this.clipboard.destroy();
 	}
 
 	showFeedback = () => {
@@ -57,18 +51,12 @@ export class CopyToClipboard extends React.Component {
 			<Styled.ShareContainer>
 				{!hideInput && (
 					<Styled.CopyContainer>
-						<Input
-							ref={this.input}
-							type="text"
-							readOnly
-							value={copyValue}
-							onClick={this.selectSelf}
-						/>
+						<Input type="text" readOnly value={copyValue} onClick={this.selectSelf} />
 					</Styled.CopyContainer>
 				)}
 				<div>
 					<Button ref={this.button} data-clipboard-text={copyValue} primary medium condensed>
-						{copyButtonText || 'Copy text'}
+						{copyButtonText || 'Copy'}
 					</Button>
 					{showFeedback && <Styled.Copied>Copied!</Styled.Copied>}
 				</div>

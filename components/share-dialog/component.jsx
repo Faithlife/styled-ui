@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Clipboard from 'clipboard';
 import { Modal } from '../modal/modal.jsx';
 import {
 	FaithlifeShareButton,
@@ -20,22 +19,29 @@ export class ShareDialog extends React.Component {
 		onClose: PropTypes.func.isRequired,
 		message: PropTypes.string,
 		isOpen: PropTypes.bool,
+		modalTitle: PropTypes.string,
+		copyButtonText: PropTypes.string,
 	};
 
 	render() {
-		const { shareUrl, message, onClose, isOpen } = this.props;
+		const { shareUrl, message, onClose, isOpen, modalTitle, copyButtonText } = this.props;
 
 		const encodedShareUrl = encodeURIComponent(shareUrl);
 		const encodedMessage = message ? encodeURIComponent(message) : '';
 
 		return (
-			<Modal renderFooter={() => null} isOpen={isOpen} onClose={onClose} title="Share this page">
+			<Modal
+				withoutFooter
+				isOpen={isOpen}
+				onClose={onClose}
+				title={modalTitle || 'Share this page'}
+			>
 				<Styled.ShareContainer>
 					<FaithlifeShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
 					<TwitterShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
 					<FacebookShareButton encodedShareUrl={encodedShareUrl} />
 					<EmailShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
-					<CopyToClipboard clipboard={Clipboard} copyValue={shareUrl} copyButtonText="Copy" />
+					<CopyToClipboard copyValue={shareUrl} copyButtonText={copyButtonText} />
 				</Styled.ShareContainer>
 			</Modal>
 		);
