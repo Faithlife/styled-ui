@@ -29,7 +29,7 @@ export class ShareDialog extends React.Component {
 		const encodedMessage = message ? encodeURIComponent(message) : '';
 
 		return (
-			<Modal isOpen={isOpen} onClose={onClose} title="Share this page">
+			<Modal renderFooter={() => null} isOpen={isOpen} onClose={onClose} title="Share this page">
 				<Styled.ShareContainer>
 					<FaithlifeShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
 					<TwitterShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />

@@ -79,7 +79,7 @@ export const colors = {
 };
 
 export const inputColors = {
-	inputBorderColor: colors.gray25,
+	inputBorderColor: colors.borderColor,
 	inputDarkBorderColor: '#95908f',
 	inputFocusedBorderColor: colors.blueBase,
 	inputCheckedColor: colors.blueBase,

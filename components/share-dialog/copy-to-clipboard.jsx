@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import debounce from 'lodash.debounce';
 import { Button } from '../button/component.jsx';
+import { Input } from '../input/component.jsx';
 import * as Styled from './styled.jsx';
 
 export class CopyToClipboard extends React.Component {
@@ -11,24 +13,39 @@ export class CopyToClipboard extends React.Component {
 		hideInput: PropTypes.bool,
 	};
 
-	state = {
-		showFeedback: false,
-	};
+	constructor(props) {
+		super(props);
+		this.input = React.createRef();
+		this.button = React.createRef();
 
+		this.state = {
+			showFeedback: false,
+		};
+	}
 	componentDidMount() {
-		const button = this.button;
+		const button = this.button.current;
+		const input = this.input.current;
 
 		const Clipboard = this.props.clipboard;
 		this.clipboard = new Clipboard(button);
 
 		this.clipboard.on('success', () => {
-			this.toggleFeedback();
+			this.showFeedback();
+		});
+
+		this.clipboard.on('error', () => {
+			input.select();
 		});
 	}
 
-	toggleFeedback = () => {
-		this.setState(prevState => ({ showFeedback: !prevState.showFeedback }));
+	showFeedback = () => {
+		this.setState({ showFeedback: true });
+		this.hideFeedback();
 	};
+
+	hideFeedback = debounce(() => {
+		this.setState({ showFeedback: false });
+	}, 2000);
 
 	selectSelf = e => e.target.select();
 
@@ -40,27 +57,21 @@ export class CopyToClipboard extends React.Component {
 			<Styled.ShareContainer>
 				{!hideInput && (
 					<Styled.CopyContainer>
-						<Styled.Input type="text" readOnly value={copyValue} onClick={this.selectSelf} />
+						<Input
+							ref={this.input}
+							type="text"
+							readOnly
+							value={copyValue}
+							onClick={this.selectSelf}
+						/>
 					</Styled.CopyContainer>
 				)}
 				<div>
-					<Button
-						ref={element => {
-							this.button = element;
-						}}
-						data-clipboard-text={copyValue}
-						primary
-						medium
-						condensed
-					>
+					<Button ref={this.button} data-clipboard-text={copyValue} primary medium condensed>
 						{copyButtonText || 'Copy text'}
 					</Button>
+					{showFeedback && <Styled.Copied>Copied!</Styled.Copied>}
 				</div>
-				{showFeedback && (
-					<div>
-						<div>Copied!</div>
-					</div>
-				)}
 			</Styled.ShareContainer>
 		);
 	}
