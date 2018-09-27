@@ -27,39 +27,60 @@ export const GroupInputButton = styled.div`
 	}
 `;
 
-export const SimpleGroup = styled.div`
-	text-align: left;
-	padding: 4px 6px 4px 6px;
-	background-color: ${props => props.color};
-	cursor: pointer;
-
-	&:hover {
-		background-color: #ebf7ff;
-	}
+export const DownArrow = styled.svg`
+	position: absolute;
+	right: 8px;
 `;
 
-export const SelectedGroupAvatar = styled.div`
-	width: 32px;
-	height: 32px;
-	float: left;
-	margin: 5px 0 6px 1px;
+export const SelectedGroup = styled.button`
+	width: 100%;
+	height: 44px;
+	position: relative;
+	cursor: pointer;
+	border-radius: 6px;
+	padding: 0px;
+	background-color: white;
 	border-radius: 3px;
+	border: 0;
+	cursor: pointer;
+	color: black;
+	display: flex;
+	align-items: center;
+`;
+
+export const AvatarWrapper = styled.div`
+	border-radius: 3px;
+	width: ${props => props.size}px;
+	height: ${props => props.size}px;
+	overflow: hidden;
+`;
+
+export const AvatarImage = styled.img`
+	display: block;
+	width: ${props => props.size}px;
+	height: ${props => props.size}px;
+`;
+
+export const SimpleGroup = styled.div`
+	text-align: left;
+	padding: 6px;
+	background-color: ${props => props.color};
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	${props =>
+		!props.disableHover &&
+		`&:hover {
+		background-color: #ebf7ff;
+	}`};
 `;
 
 export const SimpleGroupAvatar = styled.div`
 	width: 32px;
 	height: 32px;
-	display: inline-block;
-	vertical-align: middle;
 	margin-right: 6px;
 	border-radius: 3px;
-`;
-
-export const SimpleGroupInfo = styled.div`
-	display: inline-block;
-	vertical-align: middle;
-	max-width: 200px;
-	width: 76%;
+	overflow: hidden;
 `;
 
 export const SimpleGroupName = styled.div`
@@ -67,51 +88,6 @@ export const SimpleGroupName = styled.div`
 	color: #585250;
 	white-space: nowrap;
 	overflow: hidden;
-	text-overflow: ellipsis;
-	font-family: 'Source Sans Pro';
-`;
-
-export const SimpleGroupMembershipLine = styled.div`
-	font-size: 10px;
-	color: #95908f;
-`;
-
-export const SelectedGroupContainer = styled.div`
-	position: relative;
-	height: 44px;
-	cursor: pointer;
-	border-radius: 6px;
-`;
-
-export const DownArrow = styled.svg`
-	position: absolute;
-	float: right;
-	top: 15px;
-	right: 8px;
-`;
-
-export const SelectedGroup = styled.button`
-	width: 100%;
-	height: 100%;
-	padding-left: 5px;
-	padding-bottom: 0px;
-	background-color: white;
-	border-radius: 3px;
-	border: 0;
-	cursor: pointer;
-	color: black;
-`;
-
-export const SelectedGroupText = styled.div`
-	font-size: 13px;
-	line-height: 18px;
-	padding-top: 13px;
-	float: left;
-	margin-left: 6px;
-	width: 64%;
-	text-align: left;
-	overflow: hidden;
-	white-space: nowrap;
 	text-overflow: ellipsis;
 	font-family: 'Source Sans Pro';
 `;
@@ -126,7 +102,8 @@ export const DropdownGroupsContainer = styled.div`
 `;
 
 export const DropdownContainer = styled.div`
-	margin-bottom: 8px;
+	position: relative;
+	height: 44px;
 `;
 
 export const DropdownWrapper = styled.div`
@@ -170,7 +147,7 @@ export const ModalTopGradientWrapper = styled.div`
 	z-index: 2;
 `;
 
-export const ModalTitle = styled.p`
+export const ModalTitle = styled.div`
 	font-size: 32px;
 	margin: 5px 0 0 0;
 	font-weight: 800;
@@ -178,7 +155,7 @@ export const ModalTitle = styled.p`
 	text-align: center;
 `;
 
-export const ModalSubtitle = styled.p`
+export const ModalSubtitle = styled.div`
 	margin-top: 4px;
 	font-size: 16px;
 	text-align: center;
@@ -232,8 +209,9 @@ export const CreateGroupButtonWrapper = styled.div`
 	margin: 16px 0 16px 0;
 `;
 
-export const CreateGroupButtonText = styled.p`
+export const CreateGroupButtonText = styled.div`
 	font-size: 16px;
+	margin: 16px 0 16px 0;
 	color: #575251;
 `;
 
@@ -245,7 +223,7 @@ export const CreateGroupLabel = styled.div`
 	color: #575251;
 `;
 
-export const CreateGroupRequiredStar = styled.p`
+export const CreateGroupRequiredStar = styled.div`
 	display: inline;
 	color: #d94848;
 `;
@@ -329,7 +307,7 @@ export const SecondaryModalContent = styled.div`
 	padding-bottom: 12px;
 `;
 
-export const SecondaryModalText = styled.p`
+export const SecondaryModalText = styled.div`
 	font-size: 14px;
 	margin: 0px;
 `;
