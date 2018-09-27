@@ -17,6 +17,7 @@ import {
 	DropZone,
 	GroupSelector,
 	GroupSelectorModal,
+	ShareDialog,
 } from '../components/main.js';
 import { BaseButton } from '../components/button/base-button.jsx';
 import { BootstrapContainer } from '../components/utils';
@@ -422,6 +423,46 @@ const pages = [
 				path: '/design-styles/colors',
 				title: 'Colors',
 				content: pageLoader(() => import('./design-styles/colors.md')),
+			},
+		],
+	},
+	{
+		title: 'Share Dialog',
+		pages: [
+			{
+				path: '/share-dialog/variations',
+				title: 'Share Dialog Variations',
+				content: pageLoader(() => import('./share-dialog/variations.md')),
+				imports: {
+					Input: Bootstrap.Input,
+					Modal,
+					ModalFooter,
+					Button,
+					delayPromise,
+					ShareDialog,
+					ModalDemo: styled.div`
+						font-family: 'Source Sans Pro';
+						color: #333333;
+
+						.wide-content {
+							width: 600px;
+						}
+
+						.button-container {
+							margin-right: 16px;
+						}
+
+						.stacked-content {
+							width: 240px;
+						}
+					`,
+				},
+			},
+			{
+				path: 'share-dialog/documentation',
+				title: 'Share Dialog Documentation',
+				content: pageLoader(() => import('./share-dialog/documentation.md')),
+				imports: { ShareDialog, DocgenTable },
 			},
 		],
 	},
