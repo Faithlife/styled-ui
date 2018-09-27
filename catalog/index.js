@@ -458,6 +458,12 @@ const pages = [
 					`,
 				},
 			},
+			{
+				path: 'share-dialog/documentation',
+				title: 'Share Dialog Documentation',
+				content: pageLoader(() => import('./share-dialog/documentation.md')),
+				imports: { ShareDialog, DocgenTable },
+			},
 		],
 	},
 ];
