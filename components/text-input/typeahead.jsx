@@ -96,4 +96,3 @@ AsyncTypeahead.propTypes = {
 };
 
 export const Token = _Token;
-
