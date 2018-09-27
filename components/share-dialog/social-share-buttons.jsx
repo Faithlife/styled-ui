@@ -8,7 +8,7 @@ import {
 } from '../icons';
 import * as Styled from './styled.jsx';
 
-export const FaithlifeShareButton = ({ encodedShareUrl, encodedMessage, style }) => (
+export const FaithlifeShareButton = ({ encodedShareUrl, encodedMessage }) => (
 	<Styled.ShareAnchor
 		href={`https://faithlife.com/share?url=${encodedShareUrl}&content=${encodedMessage}`}
 		target="_blank"
@@ -21,10 +21,9 @@ export const FaithlifeShareButton = ({ encodedShareUrl, encodedMessage, style })
 FaithlifeShareButton.propTypes = {
 	encodedShareUrl: PropTypes.string.isRequired,
 	encodedMessage: PropTypes.string,
-	style: PropTypes.string,
 };
 
-export const TwitterShareButton = ({ encodedShareUrl, encodedMessage, style }) => (
+export const TwitterShareButton = ({ encodedShareUrl, encodedMessage }) => (
 	<Styled.ShareAnchor
 		href={`https://twitter.com/intent/tweet?url=${encodedShareUrl}&text=${encodedMessage}`}
 		target="_blank"
@@ -37,10 +36,9 @@ export const TwitterShareButton = ({ encodedShareUrl, encodedMessage, style }) =
 TwitterShareButton.propTypes = {
 	encodedShareUrl: PropTypes.string.isRequired,
 	encodedMessage: PropTypes.string,
-	style: PropTypes.string,
 };
 
-export const FacebookShareButton = ({ encodedShareUrl, style }) => (
+export const FacebookShareButton = ({ encodedShareUrl }) => (
 	<Styled.ShareAnchor
 		href={`https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}`}
 		target="_blank"
@@ -52,10 +50,9 @@ export const FacebookShareButton = ({ encodedShareUrl, style }) => (
 
 FacebookShareButton.propTypes = {
 	encodedShareUrl: PropTypes.string.isRequired,
-	style: PropTypes.string,
 };
 
-export const EmailShareButton = ({ encodedShareUrl, encodedMessage, style }) => (
+export const EmailShareButton = ({ encodedShareUrl, encodedMessage }) => (
 	<Styled.ShareAnchor href={`mailto:?subject=${encodedMessage}&body=${encodedShareUrl}`}>
 		<ShareToEmailIcon />
 	</Styled.ShareAnchor>
@@ -64,5 +61,4 @@ export const EmailShareButton = ({ encodedShareUrl, encodedMessage, style }) => 
 EmailShareButton.propTypes = {
 	encodedShareUrl: PropTypes.string.isRequired,
 	encodedMessage: PropTypes.string,
-	style: PropTypes.string,
 };
