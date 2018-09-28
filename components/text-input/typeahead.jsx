@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {
 	AsyncTypeahead as _AsyncTypeahead,
 	Typeahead as _Typeahead,
+	Token as _Token,
 } from 'react-bootstrap-typeahead';
 import { SolidTriangleIcon as _SolidTriangleIcon } from '../icons';
 import { BootstrapContainer } from '../utils';
@@ -93,3 +94,5 @@ Typeahead.propTypes = {
 AsyncTypeahead.propTypes = {
 	inferred: PropTypes.bool,
 };
+
+export const Token = _Token;
