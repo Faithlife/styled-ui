@@ -1,8 +1,11 @@
 # Changelog
 
+### 3.2.1
+* Fixed missing Token export in typeahead control [#53](https://github.com/Faithlife/styled-ui/pull/53)
+
 ### 3.2.0
-* New component: ShareDialog
-* Cleanup work on GroupSelector component
+* New component: ShareDialog [#50](https://github.com/Faithlife/styled-ui/pull/50)
+* Cleanup work on GroupSelector component [#52](https://github.com/Faithlife/styled-ui/pull/52)
 
 ### 3.1.0
 * Added `withoutFooter` prop so modals can be rendered without footers [#49](https://github.com/Faithlife/styled-ui/pull/49)
