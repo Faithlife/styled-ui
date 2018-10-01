@@ -18,6 +18,7 @@ import {
 	GroupSelector,
 	GroupSelectorModal,
 	ShareDialog,
+	SimpleModal,
 } from '../components/main.js';
 import { BaseButton } from '../components/button/base-button.jsx';
 import { BootstrapContainer } from '../components/utils';
@@ -329,6 +330,50 @@ const pages = [
 				title: 'Modal Documentation',
 				content: pageLoader(() => import('./modal/documentation.md')),
 				imports: { Modal, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'SimpleModal',
+		pages: [
+			{
+				path: '/simple-modal/variations',
+				title: 'Simple Modal Variations',
+				content: pageLoader(() => import('./simple-modal/variations.md')),
+				imports: {
+					SimpleModal,
+					Button,
+					SimpleModalDemo: styled.div`
+						font-family: 'Source Sans Pro';
+						color: #333333;
+
+						.modal-content {
+							margin-top: 20px;
+							margin-bottom: 20px;
+							width: 300px;
+							height: 200px;
+							display: flex;
+							flex-direction: column;
+							align-items: center;
+							justify-content: space-around;
+						}
+
+						.message {
+							background-color: #eeeeee;
+							padding: 20px;
+						}
+
+						.success {
+							width: 60px;
+						}
+					`,
+				},
+			},
+			{
+				path: '/simple-modal/documentation',
+				title: 'SimpleModal Documentation',
+				content: pageLoader(() => import('./simple-modal/documentation.md')),
+				imports: { SimpleModal, DocgenTable },
 			},
 		],
 	},
