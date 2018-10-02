@@ -80,6 +80,13 @@ export class FilesSection extends PureComponent {
 		this.fileInputRef.current.click();
 	};
 
+	handleUploadWithFileInput = event => {
+		this.props.onUploadFiles(event);
+
+		// reset the input's value so selecting the same file twice works
+		this.fileInputRef.current.value = '';
+	};
+
 	render() {
 		const {
 			title,
@@ -101,7 +108,7 @@ export class FilesSection extends PureComponent {
 				<Styled.Divider />
 				<Styled.FilesContainer>
 					{files.map((file, index) => (
-						<React.Fragment key={file.id}>
+						<React.Fragment key={`${file.id}-${index}`}>
 							<FileItem
 								file={file}
 								renderFileActions={renderFileActions}
@@ -123,7 +130,7 @@ export class FilesSection extends PureComponent {
 						<Styled.FileInputLabel>
 							<input
 								ref={this.fileInputRef}
-								onChange={onUploadFiles}
+								onChange={this.handleUploadWithFileInput}
 								type="file"
 								name="file"
 								multiple
