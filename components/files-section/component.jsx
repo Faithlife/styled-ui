@@ -81,7 +81,10 @@ export class FilesSection extends PureComponent {
 	};
 
 	handleUploadWithFileInput = event => {
-		this.props.onUploadFiles(event);
+		const { onUploadFiles } = this.props;
+		if (onUploadFiles) {
+			onUploadFiles(event);
+		}
 
 		// reset the input's value so selecting the same file twice works
 		this.fileInputRef.current.value = '';
