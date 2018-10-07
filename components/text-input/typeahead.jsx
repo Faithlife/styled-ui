@@ -5,6 +5,8 @@ import {
 	AsyncTypeahead as _AsyncTypeahead,
 	Typeahead as _Typeahead,
 	Token as _Token,
+	Menu as _Menu,
+	MenuItem as _MenuItem,
 } from 'react-bootstrap-typeahead';
 import { SolidTriangleIcon as _SolidTriangleIcon } from '../icons';
 import { BootstrapContainer } from '../utils';
@@ -96,3 +98,5 @@ AsyncTypeahead.propTypes = {
 };
 
 export const Token = _Token;
+export const Menu = _Menu;
+export const MenuItem = _MenuItem;
