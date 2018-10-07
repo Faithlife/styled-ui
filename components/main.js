@@ -1,4 +1,4 @@
-// This file intentionally intentionally only exports the main UI libraries
+// This file intentionally only exports the main UI libraries
 // Additional libraries, such as ag-grid, are moved into a separate export
 // We could use tree-shaking in the future to prune out unused exports,
 // but not all projects are able to use that right now.
