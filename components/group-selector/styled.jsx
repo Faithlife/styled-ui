@@ -91,6 +91,11 @@ export const SimpleGroupName = styled.div`
 	font-family: 'Source Sans Pro';
 `;
 
+export const SelectedSimpleGroupWrapper = styled.div`
+	padding-right: 20px;
+	width: 100%;
+`;
+
 export const DropdownGroupsContainer = styled.div`
 	max-height: 205px;
 	overflow: auto;
