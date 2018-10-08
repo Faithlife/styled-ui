@@ -7,7 +7,7 @@ state: {
 		name: 'Michaels Test Church',
 		groupId: 1,
 		kind: 'church',
-		avatarUrl: '',
+		avatarUrl: 'https://avatars.logoscdn.com/451/6830451_f896e509e7504b33812f0f6bf086ffa8.jpg',
 		relationshipKind: 'participant',
 		membershipKind: 'admin',
 		claimable: false,
