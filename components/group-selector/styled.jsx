@@ -80,7 +80,6 @@ export const SimpleGroupAvatar = styled.div`
 	height: 32px;
 	margin-right: 6px;
 	border-radius: 3px;
-	overflow: hidden;
 `;
 
 export const SimpleGroupName = styled.div`
