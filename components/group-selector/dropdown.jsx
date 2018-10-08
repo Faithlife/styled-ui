@@ -114,15 +114,17 @@ export class GroupDropdown extends React.PureComponent {
 		return (
 			<Styled.DropdownContainer innerRef={this.dropdownRef}>
 				<Styled.SelectedGroup onClick={this.handleDropdownToggle} onKeyDown={this.handleKeyPress}>
-					<SimpleGroup
-						groupId={groupId}
-						name={name}
-						kind={kind}
-						isSelected={false}
-						isHovered={false}
-						avatarUrl={avatarUrl}
-						disableHover
-					/>
+					<Styled.SelectedSimpleGroupWrapper>
+						<SimpleGroup
+							groupId={groupId}
+							name={name}
+							kind={kind}
+							isSelected={false}
+							isHovered={false}
+							avatarUrl={avatarUrl}
+							disableHover
+						/>
+					</Styled.SelectedSimpleGroupWrapper>
 					<Styled.DownArrow
 						xmlns="http://www.w3.org/2000/svg"
 						width="12"
