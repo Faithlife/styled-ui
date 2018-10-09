@@ -245,11 +245,13 @@ export class GroupSelectorModal extends React.Component {
 							</Styled.SecondaryModalText>
 							<Styled.SecondaryModalButtonContainer>
 								<Styled.SecondaryModalButtonWrapper>
-									<Button primary onClick={this.redirectToGroup}>
+									<Button small primary onClick={this.redirectToGroup}>
 										Request access
 									</Button>
 								</Styled.SecondaryModalButtonWrapper>
-								<Button onClick={this.resetModalState}>Cancel</Button>
+								<Button small onClick={this.resetModalState}>
+									Cancel
+								</Button>
 							</Styled.SecondaryModalButtonContainer>
 						</Styled.SecondaryModalContent>
 					)}
@@ -264,11 +266,13 @@ export class GroupSelectorModal extends React.Component {
 							</Styled.SecondaryModalText>
 							<Styled.SecondaryModalButtonContainer>
 								<Styled.SecondaryModalButtonWrapper>
-									<Button primary onClick={this.redirectToGroup}>
+									<Button small primary onClick={this.redirectToGroup}>
 										Change to Church
 									</Button>
 								</Styled.SecondaryModalButtonWrapper>
-								<Button onClick={this.resetModalState}>Cancel</Button>
+								<Button small onClick={this.resetModalState}>
+									Cancel
+								</Button>
 							</Styled.SecondaryModalButtonContainer>
 						</Styled.SecondaryModalContent>
 					)}
