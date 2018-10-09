@@ -150,7 +150,7 @@ export const ModalTopGradient = styled.div`
 	width: 100%;
 	height: 30px;
 	z-index: 2;
-	box-shadow: 0px 10px 8px -4px white;
+	box-shadow: 0px 5px 10px -4px white;
 `;
 
 export const ModalTopGradientWrapper = styled.div`
@@ -184,7 +184,7 @@ export const CreateGroupWrapper = styled.div`
 	${props =>
 		props.fixed &&
 		`
-		top: 17px;
+		top: 14px;
 		`};
 `;
 
