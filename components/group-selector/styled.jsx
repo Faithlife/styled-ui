@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ScrollArea from 'react-scrollbar';
 import { resetStyles } from '../utils/index.js';
 
 export const GroupSelector = styled.div`
@@ -126,7 +127,20 @@ export const DropdownButtonContainer = styled.div`
 
 export const GroupSelectorModal = styled.div`
 	${resetStyles};
+`;
+
+export const ModalScrollViewContentClass = 'modal-scroll-view-content';
+export const ModalScrollView = styled(ScrollArea)`
 	position: relative;
+	height: 60vh;
+	width: 375px;
+	background: white;
+	border-radius: 4px;
+
+	.${ModalScrollViewContentClass} {
+		padding-top: 30px;
+		position: unset;
+	}
 `;
 
 export const ModalTopGradient = styled.div`
@@ -140,7 +154,7 @@ export const ModalTopGradient = styled.div`
 	width: 100%;
 	height: 30px;
 	z-index: 2;
-	box-shadow: 0px 10px 8px -4px white;
+	box-shadow: 0px 5px 10px -4px white;
 `;
 
 export const ModalTopGradientWrapper = styled.div`
@@ -166,11 +180,6 @@ export const ModalSubtitle = styled.div`
 	line-height: 1.2;
 `;
 
-export const MainModalContent = styled.div`
-	padding-top: 30px;
-	height: 60vh;
-`;
-
 export const CreateGroupWrapper = styled.div`
 	position: ${props => (props.fixed ? 'absolute' : 'relative')};
 	width: 100%;
@@ -179,7 +188,7 @@ export const CreateGroupWrapper = styled.div`
 	${props =>
 		props.fixed &&
 		`
-		top: 17px;
+		top: 14px;
 		`};
 `;
 
@@ -230,12 +239,6 @@ export const CreateGroupLabel = styled.div`
 export const CreateGroupRequiredStar = styled.div`
 	display: inline;
 	color: #d94848;
-`;
-
-export const GroupSelectorModalBody = styled.div`
-	border-radius: 6px;
-	min-width: 375px;
-	overflow-y: scroll;
 `;
 
 export const SearchResult = styled.div`
@@ -309,6 +312,9 @@ export const SecondaryModalContent = styled.div`
 	padding-right: 12px;
 	padding-top: 36px;
 	padding-bottom: 12px;
+	background: white;
+	border-radius: 4px;
+	width: 375px;
 `;
 
 export const SecondaryModalText = styled.div`
