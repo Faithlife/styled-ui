@@ -43,8 +43,8 @@ export const CheckedIndicator = styled.div`
 		background: ${props => props.theme.primary};
 		content: '';
 		position: absolute;
-		top: 1.5px;
-		left: 1.5px;
+		top: 2px;
+		left: 2px;
 		border-radius: 8px;
 		height: 8px;
 		width: 8px;
