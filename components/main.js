@@ -4,6 +4,7 @@
 // but not all projects are able to use that right now.
 
 export { Checkbox } from './check-box/component.jsx';
+export { Radio } from './radio/component.jsx';
 export { Button } from './button/component.jsx';
 export { AnchorButton } from './button/anchor-button.jsx';
 export { Bootstrap } from './bootstrap';
