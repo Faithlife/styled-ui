@@ -22,6 +22,10 @@ export const RadioContainer = styled.button`
 	min-height: 16px;
 	background: transparent;
 
+	&:active {
+		color: buttontext;
+	}
+
 	&:hover ${RadioDiv} {
 		border: solid 1px ${props => props.theme.primary};
 	}
