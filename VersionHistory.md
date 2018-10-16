@@ -1,5 +1,12 @@
 # Changelog
 
+### 3.3.0
+* New component: styled radio button [#64](https://github.com/Faithlife/styled-ui/pull/64)
+* Improved close logic in Modal [#63](https://github.com/Faithlife/styled-ui/pull/63)
+* Improved scrollbar presentation in group selector [#62](https://github.com/Faithlife/styled-ui/pull/62)
+* Exported some more typeahead components (Menu, MenuItem) [#56](https://github.com/Faithlife/styled-ui/pull/56)
+* Updated docs [#60](https://github.com/Faithlife/styled-ui/pull/60)
+
 ### 3.2.1
 * Fixed missing Token export in typeahead control [#53](https://github.com/Faithlife/styled-ui/pull/53)
 
