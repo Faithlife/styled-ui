@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 import { resetStyles } from '../utils';
 
-export const CheckboxDiv = styled.div`
+export const RadioDiv = styled.div`
 	position: absolute;
 	border: solid 1px ${props => props.theme.border};
-	border-radius: 3px;
+	border-radius: 14px;
 	width: 14px;
 	height: 14px;
 	background: transparent;
 `;
 
-export const CheckboxContainer = styled.button`
+export const RadioContainer = styled.button`
 	${resetStyles};
 
 	display: flex;
@@ -26,7 +26,7 @@ export const CheckboxContainer = styled.button`
 		color: buttontext;
 	}
 
-	&:hover ${CheckboxDiv} {
+	&:hover ${RadioDiv} {
 		border: solid 1px ${props => props.theme.primary};
 	}
 `;
@@ -44,17 +44,14 @@ export const CheckedIndicator = styled.div`
 	cursor: pointer;
 
 	&:after {
-	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%208%208'%3E%3Cpath%20fill='${props =>
-		encodeURIComponent(
-			props.theme.primary,
-		)}'%20d='M6.564.75l-3.59%203.612-1.538-1.55L0%204.26%202.974%207.25%208%202.193z'/%3E%3C/svg%3E");
-		background-repeat: no-repeat;
+		background: ${props => props.theme.primary};
 		content: '';
 		position: absolute;
-		top: 1.5px;
-		left: 1.5px;
-		height: 9.6px;
-		width: 9.6px;
+		top: 2px;
+		left: 2px;
+		border-radius: 8px;
+		height: 8px;
+		width: 8px;
 		opacity: 0;
 	}
 

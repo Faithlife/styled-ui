@@ -8,6 +8,7 @@ import {
 	Bootstrap,
 	Button,
 	Checkbox,
+	Radio,
 	Modal,
 	ModalFooter,
 	LoadingSpinner,
@@ -151,6 +152,30 @@ const pages = [
 				title: 'Checkbox Documentation',
 				content: pageLoader(() => import('./checkbox/documentation.md')),
 				imports: { Checkbox, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Radio',
+		pages: [
+			{
+				path: '/radio/variations',
+				title: 'Radio Variations',
+				content: pageLoader(() => import('./radio/variations.md')),
+				imports: {
+					Radio,
+					RadioDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
+				},
+			},
+			{
+				path: '/radio/documentation',
+				title: 'Radio Documentation',
+				content: pageLoader(() => import('./radio/documentation.md')),
+				imports: { Radio, DocgenTable },
 			},
 		],
 	},
