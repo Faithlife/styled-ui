@@ -13,6 +13,8 @@ export class ModalBackdrop extends React.Component {
 		children: PropTypes.node.isRequired,
 	};
 
+	inPotentialCloseEvent = false;
+
 	componentDidMount() {
 		document.body.style.overflow = 'hidden';
 	}
@@ -21,10 +23,18 @@ export class ModalBackdrop extends React.Component {
 		document.body.style.overflow = '';
 	}
 
-	handleBackdropClick = backdrop => {
-		if (backdrop.target === this._backdrop) {
+	handleBackdropCloseEventStart = event => {
+		if (event.target === this._backdrop) {
+			this.inPotentialCloseEvent = true;
+		}
+	};
+
+	handleBackdropCloseEventEnd = event => {
+		if (event.target === this._backdrop && this.inPotentialCloseEvent) {
 			this.props.onClose();
 		}
+
+		this.inPotentialCloseEvent = false;
 	};
 
 	render() {
@@ -35,7 +45,10 @@ export class ModalBackdrop extends React.Component {
 				innerRef={backdrop => {
 					this._backdrop = backdrop;
 				}}
-				onClick={this.handleBackdropClick}
+				onMouseDown={this.handleBackdropCloseEventStart}
+				onMouseUp={this.handleBackdropCloseEventEnd}
+				onTouchStart={this.handleBackdropCloseEventStart}
+				onTouchEnd={this.handleBackdropCloseEventEnd}
 			>
 				{children}
 			</Styled.Backdrop>
