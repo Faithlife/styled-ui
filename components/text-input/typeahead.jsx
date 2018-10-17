@@ -48,6 +48,7 @@ const StyledTypeahead = styled(_Typeahead)`
 `;
 
 const IndicatorContainer = styled.div`
+	pointer-events: none;
 	position: absolute;
 	right: 6px;
 	top: calc(50% - 4px);
