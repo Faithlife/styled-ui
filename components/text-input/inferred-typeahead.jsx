@@ -19,6 +19,8 @@ export class InferredTypeahead extends Component {
 		/** String to display in the confidence tooltip. Defaults to Heuristic algorithm */
 		confidenceSource: PropTypes.string,
 		/** Function called when the input value is changed */
+		onInputChange: PropTypes.func,
+		/** Function called when the typeahead value is selected */
 		onChange: PropTypes.func,
 		/** Function called when the OK button is clicked or an input value is confirmed */
 		onConfirm: PropTypes.func.isRequired,
@@ -37,6 +39,7 @@ export class InferredTypeahead extends Component {
 			className,
 			onConfirm,
 			onChange,
+			onInputChange,
 			...inputProps
 		} = this.props;
 
@@ -52,7 +55,7 @@ export class InferredTypeahead extends Component {
 					{props => (
 						<StyledTypeahead
 							inferred={props.inferred}
-							onInputChange={onChange}
+							onInputChange={onInputChange}
 							onChange={onChange}
 							{...inputProps}
 						/>

@@ -13,7 +13,7 @@ import '@faithlife/styled-ui/dist/text-input.css';
 
 ```react
 showSource: false
-state: { value: 'Washington', confirmed: false }
+state: { defaultValue: 'Washington', confirmed: false }
 ---
 <div>
 	<FormGroup>
@@ -24,7 +24,33 @@ state: { value: 'Washington', confirmed: false }
 			onConfirm={value => { setState({ confirmed: true })}}
 			options={['Washington','California','Texas']}
 			placeholder="Choose a state..."
-			defaultInputValue={state.value}
+			defaultInputValue={state.defaultValue}
+		/>
+	</FormGroup>
+</div>
+```
+
+### Inferred typeahead with input onChange
+
+```
+import { InferredTypeahead } from '@faithlife/styled-ui/dist/text-input.js';
+import '@faithlife/styled-ui/dist/text-input.css';
+```
+
+```react
+showSource: false
+state: { value: '', confirmed: false, options: ['Washington','California','Texas'] }
+---
+<div>
+	<FormGroup>
+		<Label>Looking for: {state.inputValue} - selected: {state.value}</Label>
+		<InferredTypeahead
+			confidence={state.confirmed ? null : 0.9}
+			onInputChange={inputValue => { setState({ inputValue }); }}
+			onChange={value => { setState({ value, confirmed: true }); }}
+			onConfirm={value => { setState({ confirmed: true }); }}
+			options={state.options}
+			placeholder="Choose a state..."
 		/>
 	</FormGroup>
 </div>
