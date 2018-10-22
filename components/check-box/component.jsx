@@ -7,7 +7,13 @@ import * as Styled from './styled.jsx';
 export function Checkbox({ onClick, title, isChecked, theme, type, children, className }) {
 	return (
 		<ThemeProvider theme={theme}>
-			<Styled.CheckboxContainer onClick={onClick} type={type} className={className}>
+			<Styled.CheckboxContainer
+				onClick={onClick}
+				type={type}
+				className={className}
+				role={'checkbox'}
+				aria-checked={isChecked}
+			>
 				<Styled.CheckboxDiv>
 					<Styled.CheckedIndicator isChecked={isChecked} />
 				</Styled.CheckboxDiv>
