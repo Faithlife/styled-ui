@@ -7,7 +7,13 @@ import * as Styled from './styled.jsx';
 export function Radio({ onClick, title, isChecked, theme, type, children, className }) {
 	return (
 		<ThemeProvider theme={theme}>
-			<Styled.RadioContainer onClick={onClick} type={type} className={className}>
+			<Styled.RadioContainer
+				onClick={onClick}
+				type={type}
+				className={className}
+				role={'radio'}
+				aria-checked={isChecked}
+			>
 				<Styled.RadioDiv>
 					<Styled.CheckedIndicator isChecked={isChecked} />
 				</Styled.RadioDiv>
