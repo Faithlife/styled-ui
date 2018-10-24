@@ -102,6 +102,7 @@ const pages = [
 					ButtonDemo,
 					ButtonGrid,
 					GearIcon,
+					buttonRef: React.createRef(),
 				},
 			},
 			{

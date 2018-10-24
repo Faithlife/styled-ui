@@ -33,6 +33,9 @@ export const Anchor = styled.a`
 	padding: ${props => props.styleOverrides.padding};
 
 	&:focus {
+		&:not(:active) {
+			box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
+		}
 		outline: none;
 	}
 `;
@@ -50,6 +53,9 @@ export const Button = styled.button`
 	padding: ${props => props.styleOverrides.padding};
 
 	&:focus {
+		&:not(:active) {
+			box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
+		}
 		outline: none;
 	}
 `;

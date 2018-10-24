@@ -45,18 +45,43 @@ export const BaseButton = forwardClassRef(
 			minorTransparent: PropTypes.bool,
 			/** Enables rendering a display: flex span, needed for rendering SVG icons */
 			icon: PropTypes.node,
+			/** Disables automatic blur */
+			disableBlur: PropTypes.bool,
 		};
 
 		static defaultProps = {
 			styleOverrides: {},
+			disableBlur: false,
 		};
+
+		/* eslint-disable react/prop-types */
+		onMouseUp = e => {
+			if (this.props.onMouseUp) {
+				this.props.onMouseUp(e);
+			}
+
+			if (!this.props.disableBlur) {
+				this.componentRef.current.blur();
+			}
+		};
+
+		attachRef = element => {
+			this.componentRef.current = element;
+
+			if (this.props.forwardedRef) {
+				this.props.forwardedRef.current = element;
+			}
+		};
+		/* eslint-enable react/prop-types */
+
+		componentRef = React.createRef();
 
 		render() {
 			const { children, theme, styleOverrides, icon, ...otherProps } = this.props;
 
 			// ignore implementation detail props that we do not want documented by docgen
 			/* eslint-disable react/prop-types */
-			const { forwardedRef, baseComponent, ...buttonProps } = otherProps;
+			const { forwardedRef, baseComponent, onMouseUp, ...buttonProps } = otherProps;
 			/* eslint-enable react/prop-types */
 
 			const { component: MappedStyledComponent, filteredProps } = applyVariations(
@@ -70,8 +95,9 @@ export const BaseButton = forwardClassRef(
 			return (
 				<MappedStyledComponent
 					theme={theme}
-					innerRef={forwardedRef}
+					innerRef={this.attachRef}
 					{...filteredProps || {}}
+					onMouseUp={this.onMouseUp}
 					styleOverrides={componentStyleOverrides}
 				>
 					<Styled.ButtonContents justifyContent={justifyContent}>
