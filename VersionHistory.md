@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.4.0
+* Improve keyboard accessibility of Button (there is now a focus ring that appears)
+
 ### 3.3.0
 * New component: styled radio button [#64](https://github.com/Faithlife/styled-ui/pull/64)
 * Improved close logic in Modal [#63](https://github.com/Faithlife/styled-ui/pull/63)
