@@ -20,6 +20,7 @@ import {
 	Popover,
 	PopoverManager,
 	PopoverReference,
+	Tooltip,
 } from '../components/main.js';
 import { BaseButton } from '../components/button/base-button.jsx';
 import { BootstrapContainer } from '../components/utils';
@@ -552,6 +553,7 @@ const pages = [
 				imports: {
 					Button,
 					Popover,
+					Tooltip,
 					PopoverManager,
 					PopoverReference,
 					PopoverDemo: styled.div`
@@ -567,13 +569,17 @@ const pages = [
 						overflow: hidden;
 						padding-top: 20px;
 					`,
+					StyledDiv: styled.div`
+						font-weight: bold;
+						color: purple;
+					`,
 				},
 			},
 			{
 				path: '/popover/documentation',
 				title: 'Popover Documentation',
 				content: pageLoader(() => import('./popover/documentation.md')),
-				imports: { Popover, DocgenTable },
+				imports: { Popover, DocgenTable, Tooltip },
 			},
 		],
 	},

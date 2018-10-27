@@ -104,3 +104,26 @@ state: { isOpen: false }
 	</PopoverManager>
 </PopoverOverflowDemo>
 ```
+
+## Tooltip
+
+All props for normal popovers are available to tooltips.
+
+```react
+showSource: true
+state: { isOpen: false }
+---
+<PopoverDemo>
+	<Tooltip text="Hello!">
+		<Button primary medium>Uncontrolled Tooltip</Button>
+	</Tooltip>
+
+	<Tooltip text="Hello!" isOpen={state.isOpen}>
+		<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Controlled Tooltip</Button>
+	</Tooltip>
+
+	<Tooltip text={<StyledDiv>Hello!</StyledDiv>}>
+		<Button primary medium>Tooltip with jsx</Button>
+	</Tooltip>
+</PopoverDemo>
+```
