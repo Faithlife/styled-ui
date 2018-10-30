@@ -48,6 +48,7 @@ export const Button = styled.button`
 	cursor: pointer;
 	transition: all 0.25s ease 0s;
 	white-space: nowrap;
+	min-height: fit-content;
 	font-size: ${props => props.styleOverrides.fontSize || '16px'};
 	width: ${props => props.styleOverrides.width};
 	padding: ${props => props.styleOverrides.padding};
