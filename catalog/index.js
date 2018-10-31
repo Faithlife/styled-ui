@@ -3,6 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { Catalog, pageLoader } from 'catalog';
+import * as dateFunctions from 'date-fns';
+import chrono from 'chrono-node';
 import {
 	AnchorButton,
 	Bootstrap,
@@ -21,6 +23,7 @@ import {
 	PopoverManager,
 	PopoverReference,
 	Tooltip,
+	DatePicker,
 } from '../components/main.js';
 import { BaseButton } from '../components/button/base-button.jsx';
 import { BootstrapContainer } from '../components/utils';
@@ -566,6 +569,32 @@ const pages = [
 				title: 'Popover Documentation',
 				content: pageLoader(() => import('./popover/documentation.md')),
 				imports: { Popover, DocgenTable, Tooltip },
+			},
+		],
+	},
+	{
+		title: 'Date Picker',
+		pages: [
+			{
+				path: '/date-picker/variations',
+				title: 'Date Picker Variations',
+				content: pageLoader(() => import('./date-picker/variations.md')),
+				imports: {
+					DatePicker,
+					dateFunctions: {
+						...dateFunctions,
+						parseUserDateString: str => {
+							const parsed = chrono.parseDate(str);
+							return parsed;
+						},
+					},
+				},
+			},
+			{
+				path: 'date-picker/documentation',
+				title: 'Date Picker Documentation',
+				content: pageLoader(() => import('./date-picker/documentation.md')),
+				imports: { DatePicker, DocgenTable },
 			},
 		],
 	},

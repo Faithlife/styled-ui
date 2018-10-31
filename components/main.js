@@ -16,3 +16,4 @@ export { Collapse } from './collapse/component.jsx';
 export { FilesSection } from './files-section/component.jsx';
 export { DropZone } from './drop-zone/component.jsx';
 export { Popover, PopoverManager, PopoverReference, Tooltip } from './popover';
+export { DatePicker } from './date-picker/component.jsx';
