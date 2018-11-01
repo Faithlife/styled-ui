@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { thickness, fonts, colors } from '../shared-styles';
+import { resetStyles } from '../utils';
 
 export const Label = styled.label`
 	display: block;
@@ -8,9 +9,11 @@ export const Label = styled.label`
 `;
 
 export const Modal = styled.div`
+	${resetStyles};
 	margin: auto;
 	width: fit-content;
 	height: fit-content;
+	max-width: calc(100% - 16px);
 	max-height: 80%;
 	padding: ${thickness.twentyfour};
 	background-color: ${props => props.theme.background};
@@ -23,9 +26,11 @@ export const Modal = styled.div`
 `;
 
 export const ModalContent = styled.div`
+	max-width: 100%;
 	max-height: 80%;
 	overflow-x: hidden;
 	overflow-y: auto;
+	overflow-wrap: break-word;
 `;
 
 export const ModalHeader = styled.div`
