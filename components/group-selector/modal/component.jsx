@@ -8,6 +8,27 @@ import { CreateGroup } from './create-group.jsx';
 
 const defaultResultsTopMargin = -64;
 
+const scrollViewStyle = {
+	position: 'relative',
+	height: '60vh',
+	width: 375,
+	background: 'white',
+	borderRadius: 4,
+};
+
+const scrollViewContentStyle = {
+	paddingTop: '30px',
+	position: 'unset',
+};
+
+const scrollViewVerticalScrollbarStyle = {
+	borderRadius: 6,
+	marginTop: 1,
+	marginBottom: 1,
+};
+
+let ScrollView;
+
 export class GroupSelectorModal extends React.Component {
 	static propTypes = {
 		/** Toggles the modal state open and closed */
@@ -41,11 +62,19 @@ export class GroupSelectorModal extends React.Component {
 		createGroupFixed: false,
 		resultsTopMargin: defaultResultsTopMargin,
 		scrollWidthDelta: 0,
+		renderScrollView: false,
 	};
 
 	modalRef = React.createRef();
 	searchResultsRef = React.createRef();
 	fixedCreateWrapper = false;
+
+	componentDidMount() {
+		import('react-scrollbar').then(module => {
+			ScrollView = module.default;
+			this.setState({ renderScrollView: true }); // eslint-disable-line react/no-did-mount-set-state
+		});
+	}
 
 	createGroupClick = () => {
 		this.toggle();
@@ -184,6 +213,39 @@ export class GroupSelectorModal extends React.Component {
 
 	render() {
 		const disableButton = this.state.newChurchName === '' || this.state.newChurchLocation === '';
+		const { renderScrollView } = this.state;
+
+		const mainModalContent = (
+			<React.Fragment>
+				<Styled.ModalTopGradient />
+				<Styled.ModalTitle>Find Your Church</Styled.ModalTitle>
+				<Styled.ModalSubtitle>in the Faithlife Church Directory</Styled.ModalSubtitle>
+				<Styled.CreateGroupWrapper fixed={this.state.createGroupFixed}>
+					<Styled.CreateGroupBackground scrollWidthDelta={this.state.scrollWidthDelta}>
+						<CreateGroup
+							onChurchNameInputChange={this.handleChurchNameInputChange}
+							onChurchLocationInputChange={this.handleChurchLocationInputChange}
+							newChurchName={this.state.newChurchName}
+							newChurchLocation={this.state.newChurchLocation}
+							showRequiredStars={this.state.createGroupFixed}
+						/>
+						<Styled.CreateGroupButtonWrapper>
+							<Styled.CreateGroupButtonText>Don't see your church?</Styled.CreateGroupButtonText>
+							<Button small primary disabled={disableButton} onClick={this.createGroupClick}>
+								Create
+							</Button>
+						</Styled.CreateGroupButtonWrapper>
+					</Styled.CreateGroupBackground>
+				</Styled.CreateGroupWrapper>
+				<Styled.SearchResultsContainer
+					style={{ marginTop: this.state.resultsTopMargin }}
+					fixed={this.state.createGroupFixed}
+					innerRef={this.searchResultsRef}
+				>
+					{this.getSearchResults()}
+				</Styled.SearchResultsContainer>
+			</React.Fragment>
+		);
 
 		return (
 			<Styled.GroupSelectorModal>
@@ -192,48 +254,22 @@ export class GroupSelectorModal extends React.Component {
 					onClose={this.toggle}
 					theme={{ background: 'transparent' }}
 				>
-					{this.state.modalContent === 'main' && (
-						<Styled.ModalScrollView
-							horizontal={false}
-							contentClassName={Styled.ModalScrollViewContentClass}
-							onScroll={this.handleScroll}
-							verticalScrollbarStyle={{
-								borderRadius: '6px',
-								marginTop: '1px',
-								marginBottom: '1px',
-							}}
-						>
-							<Styled.ModalTopGradient />
-							<Styled.ModalTitle>Find Your Church</Styled.ModalTitle>
-							<Styled.ModalSubtitle>in the Faithlife Church Directory</Styled.ModalSubtitle>
-							<Styled.CreateGroupWrapper fixed={this.state.createGroupFixed}>
-								<Styled.CreateGroupBackground scrollWidthDelta={this.state.scrollWidthDelta}>
-									<CreateGroup
-										onChurchNameInputChange={this.handleChurchNameInputChange}
-										onChurchLocationInputChange={this.handleChurchLocationInputChange}
-										newChurchName={this.state.newChurchName}
-										newChurchLocation={this.state.newChurchLocation}
-										showRequiredStars={this.state.createGroupFixed}
-									/>
-									<Styled.CreateGroupButtonWrapper>
-										<Styled.CreateGroupButtonText>
-											Don't see your church?
-										</Styled.CreateGroupButtonText>
-										<Button small primary disabled={disableButton} onClick={this.createGroupClick}>
-											Create
-										</Button>
-									</Styled.CreateGroupButtonWrapper>
-								</Styled.CreateGroupBackground>
-							</Styled.CreateGroupWrapper>
-							<Styled.SearchResultsContainer
-								style={{ marginTop: this.state.resultsTopMargin }}
-								fixed={this.state.createGroupFixed}
-								innerRef={this.searchResultsRef}
+					{this.state.modalContent === 'main' &&
+						(renderScrollView ? (
+							<ScrollView
+								style={scrollViewStyle}
+								contentStyle={scrollViewContentStyle}
+								verticalScrollbarStyle={scrollViewVerticalScrollbarStyle}
+								horizontal={false}
+								onScroll={this.handleScroll}
 							>
-								{this.getSearchResults()}
-							</Styled.SearchResultsContainer>
-						</Styled.ModalScrollView>
-					)}
+								{mainModalContent}
+							</ScrollView>
+						) : (
+							<Styled.ModalScrollLoadingFallback>
+								{mainModalContent}
+							</Styled.ModalScrollLoadingFallback>
+						))}
 					{this.state.modalContent === 'admin' && (
 						<Styled.SecondaryModalContent>
 							<Styled.SecondaryModalText>
