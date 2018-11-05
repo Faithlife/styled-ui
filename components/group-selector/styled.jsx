@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ScrollArea from 'react-scrollbar';
 import { resetStyles } from '../utils/index.js';
 
 export const GroupSelector = styled.div`
@@ -128,14 +129,18 @@ export const GroupSelectorModal = styled.div`
 	${resetStyles};
 `;
 
-export const ModalScrollLoadingFallback = styled.div`
+export const ModalScrollViewContentClass = 'modal-scroll-view-content';
+export const ModalScrollView = styled(ScrollArea)`
 	position: relative;
 	height: 60vh;
 	width: 375px;
 	background: white;
 	border-radius: 4px;
-	overflow-y: hidden;
-	padding-top: 30px;
+
+	.${ModalScrollViewContentClass} {
+		padding-top: 30px;
+		position: unset;
+	}
 `;
 
 export const ModalTopGradient = styled.div`
