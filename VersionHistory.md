@@ -1,5 +1,10 @@
 # Changelog
 
+### 3.4.1
+* Added ARIA attributes to checkboxes and radios [#67](https://github.com/Faithlife/styled-ui/pull/67)
+* Fixed server-render errors with scrollbar changes [#73](https://github.com/Faithlife/styled-ui/pull/73)
+* Fixed modals with really long content overflowing the screen size [#72](https://github.com/Faithlife/styled-ui/pull/72)
+
 ### 3.4.0
 * Improve keyboard accessibility of Button (there is now a focus ring that appears)
 
