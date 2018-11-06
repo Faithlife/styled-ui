@@ -16,14 +16,13 @@ import {
 	Collapse,
 	FilesSection,
 	DropZone,
-	GroupSelector,
-	GroupSelectorModal,
-	ShareDialog,
 	SimpleModal,
 } from '../components/main.js';
 import { BaseButton } from '../components/button/base-button.jsx';
 import { BootstrapContainer } from '../components/utils';
 import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
+import { GroupSelector, GroupSelectorModal } from '../components/group-selector';
+import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
 import { colors } from '../components/shared-styles';
 import { DocgenTable } from './docgen-table.jsx';

@@ -9,6 +9,8 @@ module.exports = {
 		deprecated: './components/deprecated/index.js',
 		'ag-grid': './components/grid/index.js',
 		'text-input': './components/text-input/index.js',
+		'group-selector': './components/group-selector/index.js',
+		'share-dialog': './components/share-dialog/index.js',
 	},
 	devtool: 'sourcemap',
 	output: {

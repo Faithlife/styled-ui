@@ -1,5 +1,8 @@
 # Changelog
 
+### 4.0.0
+* Moved group-selector and share-dialog into separate bundles to avoid server-rendering problems
+
 ### 3.4.1
 * Added ARIA attributes to checkboxes and radios [#67](https://github.com/Faithlife/styled-ui/pull/67)
 * Fixed server-render errors with scrollbar changes [#73](https://github.com/Faithlife/styled-ui/pull/73)
