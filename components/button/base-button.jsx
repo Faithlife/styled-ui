@@ -60,7 +60,7 @@ export const BaseButton = forwardClassRef(
 				this.props.onMouseUp(e);
 			}
 
-			if (!this.props.disableAutoBlur) {
+			if (!this.props.disableAutoBlur && this.componentRef.current) {
 				this.componentRef.current.blur();
 			}
 		};
