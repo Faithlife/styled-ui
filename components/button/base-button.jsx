@@ -46,12 +46,12 @@ export const BaseButton = forwardClassRef(
 			/** Enables rendering a display: flex span, needed for rendering SVG icons */
 			icon: PropTypes.node,
 			/** Disables automatic blur */
-			disableBlur: PropTypes.bool,
+			disableAutoBlur: PropTypes.bool,
 		};
 
 		static defaultProps = {
 			styleOverrides: {},
-			disableBlur: false,
+			disableAutoBlur: false,
 		};
 
 		/* eslint-disable react/prop-types */
@@ -60,7 +60,7 @@ export const BaseButton = forwardClassRef(
 				this.props.onMouseUp(e);
 			}
 
-			if (!this.props.disableBlur) {
+			if (!this.props.disableAutoBlur) {
 				this.componentRef.current.blur();
 			}
 		};
