@@ -1,5 +1,8 @@
 # Changelog
 
+### 4.0.1
+* Fixed a production-only crash with clipboard.js by importing a minified version
+
 ### 4.0.0
 * Moved group-selector and share-dialog into separate bundles to avoid server-rendering problems
 
