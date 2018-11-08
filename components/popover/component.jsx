@@ -33,7 +33,10 @@ export class Popover extends React.Component {
 			}),
 			preventOverflow: PropTypes.shape({
 				padding: PropTypes.number,
-				boundariesElement: PropTypes.oneOfType([PropTypes.string, HTMLElement]),
+				boundariesElement: PropTypes.oneOfType([
+					PropTypes.string,
+					PropTypes.instanceOf(HTMLElement),
+				]),
 			}),
 			flip: PropTypes.shape({
 				enabled: PropTypes.bool,
