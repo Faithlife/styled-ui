@@ -210,3 +210,23 @@ state: { modal: false, value: '' }
 	</Modal>
 </ModalDemo>
 ```
+## Modal with no title border 
+
+```react
+showSource: true
+state: { modal: false, value: '' }
+---
+<ModalDemo>
+	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Modal
+		isOpen={state.modal}
+		onClose={() => setState({ modal: false })}
+		title="Modal with no title border"
+		theme={{ headerBottomBorder: 'none', background: 'white' }}
+	>
+		<div className="content">
+			This modal has no title border!
+		</div>
+	</Modal>
+</ModalDemo>
+```

@@ -41,7 +41,10 @@ export const ModalHeader = styled.div`
 	width: 100%;
 	padding-bottom: ${thickness.twelve};
 	margin-bottom: ${thickness.twelve};
-	border-bottom: 1px solid ${colors.borderColor};
+	${props =>
+		props.theme.headerBottomBorder
+			? props.theme.headerBottomBorder
+			: `border-bottom: 1px solid ${colors.borderColor}`};
 `;
 
 export const ModalTitleBar = styled.div`
