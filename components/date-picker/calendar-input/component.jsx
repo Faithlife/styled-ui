@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { dateFunctionProps } from '../date-function-props';
 import { Caret } from '../../icons';
 import { colors } from '../../shared-styles';
-import * as Styled from './styled';
-import { CalendarWeek } from './calendar-week/component';
+import * as Styled from './styled.jsx';
+import { CalendarWeek } from './calendar-week/component.jsx';
 
 function generateWeek(sunday, { getYear, getMonth, getDate }) {
 	const week = [];

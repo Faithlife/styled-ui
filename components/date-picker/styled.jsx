@@ -15,7 +15,7 @@ export const input = styled.input`
 	line-height: 1.3;
 	font-family: inherit;
 	color: @font-color;
-	border: 1px solid ${colors.borderColor}
+	border: 1px solid ${colors.borderColor};
 	border-radius: 3px;
 	height: 32px;
 	width: 100%;
@@ -43,7 +43,7 @@ export const calendarIconContainer = styled.div`
 
 export const calendarPopout = styled.div`
 	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-	background-color: ${colors.gray4}
+	background-color: ${colors.gray4};
 	z-index: 1;
 	user-select: none;
 

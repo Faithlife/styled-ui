@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { CalendarDate } from '../calendar-date/component';
+import { CalendarDate } from '../calendar-date/component.jsx';
 import { dateFunctionProps } from '../../date-function-props';
 
 const StyledCalendarWeek = styled.div`

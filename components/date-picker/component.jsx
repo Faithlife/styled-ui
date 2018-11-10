@@ -5,7 +5,7 @@ import { Calendar as CalendarIcon } from '../icons';
 import { colors } from '../shared-styles';
 import { dateFunctionProps } from './date-function-props';
 import * as Styled from './styled.jsx';
-import { CalendarInput } from './calendar-input/component';
+import { CalendarInput } from './calendar-input/component.jsx';
 
 export class DatePicker extends PureComponent {
 	static propTypes = {
