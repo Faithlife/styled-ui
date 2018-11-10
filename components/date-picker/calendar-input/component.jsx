@@ -68,25 +68,25 @@ export class CalendarInput extends Component {
 		const { currentMonth, weeks } = this.state;
 		return (
 			<Fragment>
-				<Styled.header>
-					<Styled.changeMonth onClick={this.decrementMonth} tabIndex="-1">
+				<Styled.Header>
+					<Styled.ChangeMonth onClick={this.decrementMonth} tabIndex="-1">
 						<Caret style={{ transform: 'scaleX(-1)', color: colors.blueBase }} />
-					</Styled.changeMonth>
-					<Styled.monthLabel>{dateFunctions.format(currentMonth, 'MMMM yyyy')}</Styled.monthLabel>
-					<Styled.changeMonth onClick={this.incrementMonth} tabIndex="-1">
+					</Styled.ChangeMonth>
+					<Styled.MonthLabel>{dateFunctions.format(currentMonth, 'MMMM yyyy')}</Styled.MonthLabel>
+					<Styled.ChangeMonth onClick={this.incrementMonth} tabIndex="-1">
 						<Caret style={{ color: colors.blueBase }} />
-					</Styled.changeMonth>
-				</Styled.header>
-				<Styled.week>
-					<Styled.weekDay>S</Styled.weekDay>
-					<Styled.weekDay>M</Styled.weekDay>
-					<Styled.weekDay>T</Styled.weekDay>
-					<Styled.weekDay>W</Styled.weekDay>
-					<Styled.weekDay>T</Styled.weekDay>
-					<Styled.weekDay>F</Styled.weekDay>
-					<Styled.weekDay>S</Styled.weekDay>
-				</Styled.week>
-				<Styled.month>
+					</Styled.ChangeMonth>
+				</Styled.Header>
+				<Styled.Week>
+					<Styled.WeekDay>S</Styled.WeekDay>
+					<Styled.WeekDay>M</Styled.WeekDay>
+					<Styled.WeekDay>T</Styled.WeekDay>
+					<Styled.WeekDay>W</Styled.WeekDay>
+					<Styled.WeekDay>T</Styled.WeekDay>
+					<Styled.WeekDay>F</Styled.WeekDay>
+					<Styled.WeekDay>S</Styled.WeekDay>
+				</Styled.Week>
+				<Styled.Month>
 					{weeks.map(week => (
 						<CalendarWeek
 							currentMonth={dateFunctions.getMonth(currentMonth)}
@@ -98,7 +98,7 @@ export class CalendarInput extends Component {
 							dateFunctions={this.props.dateFunctions}
 						/>
 					))}
-				</Styled.month>
+				</Styled.Month>
 			</Fragment>
 		);
 	}

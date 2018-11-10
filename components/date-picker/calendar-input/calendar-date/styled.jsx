@@ -39,11 +39,11 @@ const calendarWeekDayCss = `
 	}
 `;
 
-export const calendarWeekDay = styled.div`
+export const CalendarWeekDay = styled.div`
 	${calendarWeekDayCss};
 `;
 
-export const calendarWeekDaySelected = styled.button`
+export const CalendarWeekDaySelected = styled.button`
 	${calendarWeekDayCss}
 	background: ${colors.blueBase};
 	color: @shade0;
@@ -54,12 +54,12 @@ export const calendarWeekDaySelected = styled.button`
 	}
 `;
 
-export const calendarWeekDayGrayedOut = styled.button`
+export const CalendarWeekDayGrayedOut = styled.button`
 	${calendarWeekDayCss}
 	color: ${colors.gray34};
 `;
 
-export const calendarMonthLabel = styled.div`
+export const CalendarMonthLabel = styled.div`
 	position: absolute;
 	top: 1px;
 	left: 0;
@@ -67,7 +67,7 @@ export const calendarMonthLabel = styled.div`
 	text-transform: uppercase;
 `;
 
-export const calendarDateLabel = styled.div`
+export const CalendarDateLabel = styled.div`
 	position: absolute;
 	top: 50%;
 	left: 0;
@@ -75,7 +75,7 @@ export const calendarDateLabel = styled.div`
 	transform: translateY(-50%);
 `;
 
-export const calendarWeekDayCurrentDay = styled.div`
+export const CalendarWeekDayCurrentDay = styled.div`
 	display: block;
 	position: absolute;
 	bottom: 4%;

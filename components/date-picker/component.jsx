@@ -92,14 +92,14 @@ export class DatePicker extends PureComponent {
 	handlePopoutClicked = event => event.nativeEvent.stopImmediatePropagation();
 
 	renderCalendar = selectedDate => (
-		<Styled.dateTime>
+		<Styled.DateTime>
 			<CalendarInput
 				selectedDate={selectedDate}
 				setSelectedDate={this.handleChangeSelectedDate}
 				validate={this.props.validate}
 				dateFunctions={this.props.dateFunctions}
 			/>
-		</Styled.dateTime>
+		</Styled.DateTime>
 	);
 
 	render() {
@@ -111,8 +111,8 @@ export class DatePicker extends PureComponent {
 		const value = text != null ? text : formattedDate;
 
 		return (
-			<Styled.container>
-				<Styled.input
+			<Styled.Container>
+				<Styled.Input
 					type="text"
 					onBlur={this.handleBlur}
 					onChange={this.handleChange}
@@ -120,9 +120,9 @@ export class DatePicker extends PureComponent {
 					value={value}
 					disabled={disabled}
 				/>
-				<Styled.calendarButton innerRef={this.icon} onClick={!disabled ? this.openCalendar : null}>
+				<Styled.CalendarButton innerRef={this.icon} onClick={!disabled ? this.openCalendar : null}>
 					<CalendarIcon style={{ color: colors.flGray }} />
-				</Styled.calendarButton>
+				</Styled.CalendarButton>
 				{showCalendar && (
 					<Bootstrap.Popover
 						placement="right"
@@ -130,12 +130,12 @@ export class DatePicker extends PureComponent {
 						target={this.icon.current}
 						toggle={this.toggleCalendar}
 					>
-						<Styled.calendarPopout onClick={this.handlePopoutClicked}>
+						<Styled.CalendarPopout onClick={this.handlePopoutClicked}>
 							{this.renderCalendar(selectedDate || new Date())}
-						</Styled.calendarPopout>
+						</Styled.CalendarPopout>
 					</Bootstrap.Popover>
 				)}
-			</Styled.container>
+			</Styled.Container>
 		);
 	}
 }

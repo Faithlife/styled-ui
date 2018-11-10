@@ -25,22 +25,22 @@ export class CalendarDate extends Component {
 		const selectedDate = this.props.selectedDate;
 		const date = this.props.date;
 		let currentDayDot = null;
-		let CalendarWeekday = Styled.calendarWeekDay;
+		let CalendarWeekday = Styled.CalendarWeekDay;
 		const { getDate, endOfMonth, getMonth, format, isValid } = this.props.dateFunctions;
 
 		if (selectedDate != null && isValid(selectedDate) && this.areDatesEqual(selectedDate, date)) {
-			CalendarWeekday = Styled.calendarWeekDaySelected;
+			CalendarWeekday = Styled.CalendarWeekDaySelected;
 		}
 
 		if (
 			this.props.currentMonth !== getMonth(date) ||
 			(this.props.validate && !this.props.validate(date))
 		) {
-			CalendarWeekday = Styled.calendarWeekDayGrayedOut;
+			CalendarWeekday = Styled.CalendarWeekDayGrayedOut;
 		}
 
 		if (this.areDatesEqual(currentDate, date)) {
-			currentDayDot = <Styled.calendarWeekDayCurrentDay />;
+			currentDayDot = <Styled.CalendarWeekDayCurrentDay />;
 		}
 
 		return (
@@ -51,9 +51,9 @@ export class CalendarDate extends Component {
 			>
 				{this.props.currentMonth !== getMonth(date) &&
 					(getDate(date) === 1 || getDate(date) === getDate(endOfMonth(date))) && (
-						<Styled.calendarMonthLabel>{format(date, 'MMM')}</Styled.calendarMonthLabel>
+						<Styled.CalendarMonthLabel>{format(date, 'MMM')}</Styled.CalendarMonthLabel>
 					)}
-				<Styled.calendarDateLabel>{format(date, 'd')}</Styled.calendarDateLabel>
+				<Styled.CalendarDateLabel>{format(date, 'd')}</Styled.CalendarDateLabel>
 				{currentDayDot}
 			</CalendarWeekday>
 		);

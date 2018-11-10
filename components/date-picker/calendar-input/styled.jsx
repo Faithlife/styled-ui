@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { colors } from '../../shared-styles';
 
-export const changeMonth = styled.button`
+export const ChangeMonth = styled.button`
 	display: flex;
 	justify-content: space-around;
 	border: none;
@@ -13,7 +13,7 @@ export const changeMonth = styled.button`
 	cursor: pointer;
 `;
 
-export const header = styled.div`
+export const Header = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -25,11 +25,11 @@ export const header = styled.div`
 	line-height: 32px;
 `;
 
-export const monthLabel = styled.div`
+export const MonthLabel = styled.div`
 	display: inline-block;
 `;
 
-export const week = styled.ul`
+export const Week = styled.ul`
 	display: flex;
 	border-top: 1px solid ${colors.borderColor};
 	border-bottom: 1px solid ${colors.borderColor};
@@ -39,12 +39,12 @@ export const week = styled.ul`
 	margin: 0;
 `;
 
-export const weekDay = styled.li`
+export const WeekDay = styled.li`
 	flex: 1;
 	text-align: center;
 	text-transform: uppercase;
 `;
 
-export const month = styled.div`
+export const Month = styled.div`
 	background: ${colors.white};
 `;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { colors } from '../shared-styles';
 
-export const container = styled.div`
+export const Container = styled.div`
 	display: inherit;
 	flex-grow: 1;
 	position: relative;
@@ -10,7 +10,7 @@ export const container = styled.div`
 	height: 34px;
 `;
 
-export const input = styled.input`
+export const Input = styled.input`
 	font-size: 1rem;
 	line-height: 1.3;
 	font-family: inherit;
@@ -25,7 +25,7 @@ export const input = styled.input`
 	box-sizing: border-box;
 `;
 
-export const calendarButton = styled.div`
+export const CalendarButton = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -37,11 +37,11 @@ export const calendarButton = styled.div`
 	cursor: pointer;
 `;
 
-export const calendarIconContainer = styled.div`
+export const CalendarIconContainer = styled.div`
 	padding: 0 8px;
 `;
 
-export const calendarPopout = styled.div`
+export const CalendarPopout = styled.div`
 	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
 	background-color: ${colors.gray4};
 	z-index: 1;
@@ -56,6 +56,6 @@ export const calendarPopout = styled.div`
 	}
 `;
 
-export const dateTime = styled.div`
+export const DateTime = styled.div`
 	width: 204px;
 `;
