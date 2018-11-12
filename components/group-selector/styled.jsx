@@ -132,7 +132,7 @@ export const GroupSelectorModal = styled.div`
 export const ModalScrollViewContentClass = 'modal-scroll-view-content';
 export const ModalScrollView = styled(ScrollArea)`
 	position: relative;
-	height: 60vh;
+	height: ${props => (props.showInPlace ? 'auto' : '60vh')};
 	width: 375px;
 	background: white;
 	border-radius: 4px;
