@@ -222,7 +222,7 @@ state: { modal: false, value: '' }
 		isOpen={state.modal}
 		onClose={() => setState({ modal: false })}
 		title="Modal with no title border"
-		theme={{ headerBottomBorder: 'none', background: 'white' }}
+		styleOverrides={{ bottomBorder: 'none' }}
 	>
 		<div className="content">
 			This modal has no title border!

@@ -24,6 +24,10 @@ export class Modal extends React.Component {
 		children: PropTypes.node.isRequired,
 		/** Customizable theme properties */
 		theme: PropTypes.object,
+		/** Style overrides */
+		styleOverrides: PropTypes.shape({
+			bottomBorder: PropTypes.string,
+		}),
 		/** Values for rendering an FL standard footer */
 		footerProps: PropTypes.shape({
 			commitButton: PropTypes.shape({
@@ -49,6 +53,7 @@ export class Modal extends React.Component {
 		theme: {
 			background: 'white',
 		},
+		styleOverrides: {},
 	};
 
 	state = {
@@ -81,6 +86,7 @@ export class Modal extends React.Component {
 			renderFooter,
 			footerProps,
 			withoutFooter,
+			styleOverrides,
 		} = this.props;
 
 		if (!isOpen) {
@@ -104,7 +110,12 @@ export class Modal extends React.Component {
 							if (modal && modalWidth === null) this.setState({ modalWidth: modal.clientWidth });
 						}}
 					>
-						<ModalHeader title={title} subtitle={subtitle} onClose={onClose} />
+						<ModalHeader
+							title={title}
+							subtitle={subtitle}
+							onClose={onClose}
+							styleOverrides={styleOverrides}
+						/>
 						<Styled.ModalContent> {children} </Styled.ModalContent>
 						{!withoutFooter &&
 							(renderFooter ? (

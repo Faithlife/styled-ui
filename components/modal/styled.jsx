@@ -42,8 +42,8 @@ export const ModalHeader = styled.div`
 	padding-bottom: ${thickness.twelve};
 	margin-bottom: ${thickness.twelve};
 	${props =>
-		props.theme.headerBottomBorder
-			? props.theme.headerBottomBorder
+		props.styleOverrides.bottomBorder
+			? props.styleOverrides.bottomBorder
 			: `border-bottom: 1px solid ${colors.borderColor}`};
 `;
 
