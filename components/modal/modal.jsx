@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { createPortal } from 'react-dom';
 import { ThemeProvider } from 'styled-components';
 import { debouncedResize } from '../utils';
 import { ModalBackdrop } from '../modal-backdrop/component.jsx';
@@ -53,11 +54,13 @@ export class Modal extends React.Component {
 
 	state = {
 		modalWidth: null,
+		canUseDom: false,
 	};
 
 	componentDidMount() {
 		const { cancel } = debouncedResize(this.handleResize);
 		this.cancelResizeListener = cancel;
+		this.setState({ canUseDom: true }); // eslint-disable-line
 	}
 
 	componentWillUnmount() {
@@ -70,22 +73,17 @@ export class Modal extends React.Component {
 		}
 	};
 
-	render() {
+	renderModal() {
 		const {
 			theme,
 			title,
 			subtitle,
 			onClose,
-			isOpen,
 			children,
 			renderFooter,
 			footerProps,
 			withoutFooter,
 		} = this.props;
-
-		if (!isOpen) {
-			return null;
-		}
 
 		const { modalWidth } = this.state;
 
@@ -116,5 +114,13 @@ export class Modal extends React.Component {
 				</ModalBackdrop>
 			</ThemeProvider>
 		);
+	}
+
+	render() {
+		if (!this.props.isOpen || !this.state.canUseDom) {
+			return null;
+		}
+
+		return createPortal(this.renderModal(), document.body);
 	}
 }
