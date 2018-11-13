@@ -21,7 +21,7 @@ import {
 import { BaseButton } from '../components/button/base-button.jsx';
 import { BootstrapContainer } from '../components/utils';
 import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
-import { GroupSelector, GroupSelectorModal } from '../components/group-selector';
+import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
 import { colors } from '../components/shared-styles';
@@ -238,22 +238,9 @@ const pages = [
 							width: 240px;
 						}
 					`,
-				},
-			},
-			{
-				path: '/group-selector/documentation',
-				title: 'Group Selector Documentation',
-				content: pageLoader(() => import('./group-selector/documentation.md')),
-				imports: { GroupSelector, DocgenTable },
-			},
-			{
-				path: '/group-selector-modal/variations',
-				title: 'Group Selector Modal Variations',
-				content: pageLoader(() => import('./group-selector-modal/variations.md')),
-				imports: {
-					GroupSelectorModal,
+					LargeGroupSelector,
 					Button: Bootstrap.Button,
-					GroupSelectorModalDemo: styled.div`
+					LargeGroupSelectorDemo: styled.div`
 						font-family: Source Sans Pro;
 						color: #333333;
 
@@ -272,10 +259,10 @@ const pages = [
 				},
 			},
 			{
-				path: '/group-selector-modal/documentation',
-				title: 'Group Selector Modal Documentation',
-				content: pageLoader(() => import('./group-selector-modal/documentation.md')),
-				imports: { GroupSelectorModal, DocgenTable },
+				path: '/group-selector/documentation',
+				title: 'Group Selector Documentation',
+				content: pageLoader(() => import('./group-selector/documentation.md')),
+				imports: { GroupSelector, LargeGroupSelector, DocgenTable },
 			},
 		],
 	},

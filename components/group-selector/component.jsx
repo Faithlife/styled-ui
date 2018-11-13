@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from '../main.js';
 import * as Styled from './styled.jsx';
 import { GroupDropdown } from './dropdown.jsx';
-import { GroupSelectorModal } from './modal/component.jsx';
+import { LargeGroupSelector } from './large/component.jsx';
 
 const defaultGroup = {
 	name: '',
@@ -47,6 +47,7 @@ export class GroupSelector extends React.Component {
 		/** Operation to perform when user requests to join a group */
 		onAdminRequestClick: PropTypes.func.isRequired,
 	};
+
 	state = {
 		newGroupName: '',
 		isModalOpen: false,
@@ -91,7 +92,7 @@ export class GroupSelector extends React.Component {
 						</Button>
 					)}
 				</Styled.GroupSelector>
-				<GroupSelectorModal
+				<LargeGroupSelector
 					isOpen={this.state.isModalOpen}
 					onChangeModalState={this.handleChangeModalState}
 					onSearchInputChange={this.props.onSearchInputChange}

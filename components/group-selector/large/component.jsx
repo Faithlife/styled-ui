@@ -8,7 +8,7 @@ import { CreateGroup } from './create-group.jsx';
 
 const defaultResultsTopMargin = -64;
 
-export class GroupSelectorModal extends React.Component {
+export class LargeGroupSelector extends React.Component {
 	static propTypes = {
 		/** Toggles the modal state open and closed */
 		onChangeModalState: PropTypes.func.isRequired,
@@ -189,9 +189,9 @@ export class GroupSelectorModal extends React.Component {
 		const disableButton = this.state.newChurchName === '' || this.state.newChurchLocation === '';
 
 		const mainView = (
-			<Styled.ModalScrollView
+			<Styled.LargeScrollView
 				horizontal={false}
-				contentClassName={Styled.ModalScrollViewContentClass}
+				contentClassName={Styled.LargeScrollViewContentClass}
 				onScroll={this.handleScroll}
 				showInPlace={this.props.showInPlace}
 				verticalScrollbarStyle={{
@@ -200,9 +200,9 @@ export class GroupSelectorModal extends React.Component {
 					marginBottom: '1px',
 				}}
 			>
-				<Styled.ModalTopGradient />
-				<Styled.ModalTitle>Find Your Church</Styled.ModalTitle>
-				<Styled.ModalSubtitle>in the Faithlife Church Directory</Styled.ModalSubtitle>
+				<Styled.LargeTopGradient />
+				<Styled.LargeTitle>Find Your Church</Styled.LargeTitle>
+				<Styled.LargeSubtitle>in the Faithlife Church Directory</Styled.LargeSubtitle>
 				<Styled.CreateGroupWrapper fixed={this.state.createGroupFixed}>
 					<Styled.CreateGroupBackground scrollWidthDelta={this.state.scrollWidthDelta}>
 						<CreateGroup
@@ -227,14 +227,14 @@ export class GroupSelectorModal extends React.Component {
 				>
 					{this.getSearchResults()}
 				</Styled.SearchResultsContainer>
-			</Styled.ModalScrollView>
+			</Styled.LargeScrollView>
 		);
 
 		const secondaryModalOpen =
 			this.state.modalContent === 'admin' || this.state.modalContent === 'change';
 
 		return (
-			<Styled.GroupSelectorModal>
+			<Styled.LargeGroupSelector>
 				{this.props.showInPlace && mainView}
 				<SimpleModal
 					isOpen={
@@ -288,7 +288,7 @@ export class GroupSelectorModal extends React.Component {
 						</Styled.SecondaryModalContent>
 					)}
 				</SimpleModal>
-			</Styled.GroupSelectorModal>
+			</Styled.LargeGroupSelector>
 		);
 	}
 }
