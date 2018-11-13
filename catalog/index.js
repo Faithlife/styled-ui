@@ -17,6 +17,7 @@ import {
 	FilesSection,
 	DropZone,
 	SimpleModal,
+	Popover,
 } from '../components/main.js';
 import { BaseButton } from '../components/button/base-button.jsx';
 import { BootstrapContainer } from '../components/utils';
@@ -472,6 +473,7 @@ const pages = [
 					`,
 					IconsContainer: styled.div`
 						color: #a8a8a8;
+
 						> * {
 							margin: 0 12px;
 						}
@@ -533,6 +535,39 @@ const pages = [
 				title: 'Share Dialog Documentation',
 				content: pageLoader(() => import('./share-dialog/documentation.md')),
 				imports: { ShareDialog, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Popover',
+		pages: [
+			{
+				path: '/popover/variations',
+				title: 'Popover Variations',
+				content: pageLoader(() => import('./popover/variations.md')),
+				imports: {
+					Button,
+					Popover,
+					PopoverDemo: styled.div`
+						display: flex;
+						align-items: flex-start;
+						justify-content: space-between;
+					`,
+					PopoverOverflowDemo: styled.div`
+						display: flex;
+						align-items: flex-start;
+						justify-content: space-around;
+						position: relative;
+						overflow: hidden;
+						padding-top: 20px;
+					`,
+				},
+			},
+			{
+				path: '/popover/documentation',
+				title: 'Popover Documentation',
+				content: pageLoader(() => import('./popover/documentation.md')),
+				imports: { Popover, DocgenTable },
 			},
 		],
 	},
