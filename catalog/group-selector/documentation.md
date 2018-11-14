@@ -5,3 +5,9 @@ noSource: true
 ---
 <DocgenTable component={GroupSelector} />
 ```
+
+```react
+noSource: true
+---
+<DocgenTable component={LargeGroupSelector} />
+```

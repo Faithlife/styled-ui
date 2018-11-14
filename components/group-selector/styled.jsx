@@ -125,25 +125,25 @@ export const DropdownButtonContainer = styled.div`
 	justify-content: center;
 `;
 
-export const GroupSelectorModal = styled.div`
+export const LargeGroupSelector = styled.div`
 	${resetStyles};
 `;
 
-export const ModalScrollViewContentClass = 'modal-scroll-view-content';
-export const ModalScrollView = styled(ScrollArea)`
+export const LargeScrollViewContentClass = 'modal-scroll-view-content';
+export const LargeScrollView = styled(ScrollArea)`
 	position: relative;
-	height: 60vh;
+	height: ${props => (props.showInPlace ? 'auto' : '60vh')};
 	width: 375px;
 	background: white;
 	border-radius: 4px;
 
-	.${ModalScrollViewContentClass} {
+	.${LargeScrollViewContentClass} {
 		padding-top: 30px;
 		position: unset;
 	}
 `;
 
-export const ModalTopGradient = styled.div`
+export const LargeTopGradient = styled.div`
 	padding-left: 24px;
 	padding-right: 24px;
 	padding-top: 24px;
@@ -157,7 +157,7 @@ export const ModalTopGradient = styled.div`
 	box-shadow: 0px 5px 10px -4px white;
 `;
 
-export const ModalTopGradientWrapper = styled.div`
+export const LargeTopGradientWrapper = styled.div`
 	position: absolute;
 	top: 0px;
 	width: 100%;
@@ -165,7 +165,7 @@ export const ModalTopGradientWrapper = styled.div`
 	z-index: 2;
 `;
 
-export const ModalTitle = styled.div`
+export const LargeTitle = styled.div`
 	font-size: 32px;
 	margin: 5px 0 0 0;
 	font-weight: 800;
@@ -173,7 +173,7 @@ export const ModalTitle = styled.div`
 	text-align: center;
 `;
 
-export const ModalSubtitle = styled.div`
+export const LargeSubtitle = styled.div`
 	margin-top: 4px;
 	font-size: 16px;
 	text-align: center;
