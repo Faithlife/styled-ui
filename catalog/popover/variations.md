@@ -59,13 +59,13 @@ state: { isOpen: false }
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="top" theme={{ backgroundColor: '#ebf7ff', border: 'black solid 1px' }}>Hello!</Popover>
+		<Popover isOpen={state.isOpen} placement="top" theme={{ backgroundColor: '#ebf7ff' }}>Hello!</Popover>
 	</PopoverManager>
 	<PopoverManager>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="top" styleOverrides={{ padding: '18px', hideShadow: true, width: '200px' }}>Hello!</Popover>
+		<Popover isOpen={state.isOpen} placement="top" styleOverrides={{ padding: '18px', hideShadow: true, width: '200px', border: 'black solid 1px' }}>Hello!</Popover>
 	</PopoverManager>
 	<PopoverManager>
 		<PopoverReference>
@@ -77,7 +77,7 @@ state: { isOpen: false }
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover w/ a delay!</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="top" delay={1000}>Hello!</Popover>
+		<Popover isOpen={state.isOpen} placement="top" delay={{ show: 1000, hide: 1000 }}>Hello!</Popover>
 	</PopoverManager>
 </PopoverDemo>
 ```
