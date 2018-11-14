@@ -25,6 +25,12 @@ export class Popover extends React.Component {
 			'left-start',
 			'left-end',
 		]),
+		/** allows using an arbitrary reference element */
+		referenceElement: PropTypes.shape({
+			getBoundingClientRect: PropTypes.func.isRequired,
+			clientWidth: PropTypes.number.isRequired,
+			clientHeight: PropTypes.number.isRequired,
+		}),
 		/** Not all modifiers are shown. Refer to https://popper.js.org/popper-documentation.html#modifiers for a full list*/
 		modifiers: PropTypes.shape({
 			offset: PropTypes.shape({
@@ -109,16 +115,25 @@ export class Popover extends React.Component {
 		const {
 			children,
 			placement: popoverPlacement,
+			referenceElement,
 			modifiers,
 			hideArrow,
-			delay,
 			theme,
 			styleOverrides,
 		} = this.props;
 		const { showPopper } = this.state;
 
+		const popperProps = {
+			placement: popoverPlacement,
+			modifiers,
+		};
+
+		if (referenceElement) {
+			popperProps.referenceElement = referenceElement;
+		}
+
 		const popover = (
-			<Popper placement={popoverPlacement} modifiers={modifiers}>
+			<Popper {...popperProps}>
 				{({ ref, style, placement, arrowProps }) => (
 					<ThemeProvider theme={theme}>
 						<Styled.PopoverContent
@@ -128,9 +143,6 @@ export class Popover extends React.Component {
 								...style,
 								...(!hideArrow ? Styled.margins[Styled.getPlacement(placement)] : {}),
 							}}
-							delay={delay}
-							onAnimationEnd={this.handleTransition}
-							hideArrow={hideArrow}
 							styleOverrides={styleOverrides}
 						>
 							{children}

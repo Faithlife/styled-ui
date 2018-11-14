@@ -465,6 +465,7 @@ const pages = [
 					`,
 					IconsContainer: styled.div`
 						color: #a8a8a8;
+
 						> * {
 							margin: 0 12px;
 						}
@@ -559,6 +560,7 @@ const pages = [
 						font-weight: bold;
 						color: purple;
 					`,
+					buttonRef: React.createRef(),
 				},
 			},
 			{

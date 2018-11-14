@@ -105,6 +105,18 @@ state: { isOpen: false }
 </PopoverOverflowDemo>
 ```
 
+## Using a reference element
+
+```react
+showSource: true
+state: { isOpen: false }
+---
+<PopoverDemo>
+	<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })} ref={buttonRef}>Show a Popover!</Button>
+	<Popover isOpen={state.isOpen} referenceElement={buttonRef.current}>Hello!</Popover>
+</PopoverDemo>
+```
+
 ## Tooltip
 
 All props for normal popovers are available to tooltips.
