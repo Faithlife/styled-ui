@@ -239,7 +239,6 @@ const pages = [
 						}
 					`,
 					LargeGroupSelector,
-					Button: Bootstrap.Button,
 					LargeGroupSelectorDemo: styled.div`
 						font-family: Source Sans Pro;
 						color: #333333;
