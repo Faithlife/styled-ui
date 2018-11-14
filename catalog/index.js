@@ -17,6 +17,10 @@ import {
 	FilesSection,
 	DropZone,
 	SimpleModal,
+	Popover,
+	PopoverManager,
+	PopoverReference,
+	Tooltip,
 } from '../components/main.js';
 import { BaseButton } from '../components/button/base-button.jsx';
 import { BootstrapContainer } from '../components/utils';
@@ -368,6 +372,9 @@ const pages = [
 				imports: {
 					SimpleModal,
 					Button,
+					Popover,
+					PopoverManager,
+					PopoverReference,
 					SimpleModalDemo: styled.div`
 						font-family: 'Source Sans Pro';
 						color: #333333;
@@ -533,6 +540,46 @@ const pages = [
 				title: 'Share Dialog Documentation',
 				content: pageLoader(() => import('./share-dialog/documentation.md')),
 				imports: { ShareDialog, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Popover',
+		pages: [
+			{
+				path: '/popover/variations',
+				title: 'Popover Variations',
+				content: pageLoader(() => import('./popover/variations.md')),
+				imports: {
+					Button,
+					Popover,
+					Tooltip,
+					PopoverManager,
+					PopoverReference,
+					PopoverDemo: styled.div`
+						display: flex;
+						align-items: flex-start;
+						justify-content: space-between;
+					`,
+					PopoverOverflowDemo: styled.div`
+						display: flex;
+						align-items: flex-start;
+						justify-content: space-around;
+						position: relative;
+						overflow: hidden;
+						padding-top: 20px;
+					`,
+					StyledDiv: styled.div`
+						font-weight: bold;
+						color: purple;
+					`,
+				},
+			},
+			{
+				path: '/popover/documentation',
+				title: 'Popover Documentation',
+				content: pageLoader(() => import('./popover/documentation.md')),
+				imports: { Popover, DocgenTable, Tooltip },
 			},
 		],
 	},
