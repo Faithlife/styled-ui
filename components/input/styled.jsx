@@ -30,19 +30,19 @@ export const Input = styled.input`
 `;
 
 export const variationMap = {
-	small: component => component.extend`
+	small: component => styled(component)`
 		padding: ${thickness.eight};
 		height: 32px;
 		${fonts.ui16};
-`,
-	medium: component => component.extend`
+	`,
+	medium: component => styled(component)`
 		padding: 12px;
 		height: 40px;
 		${fonts.ui16};
-`,
-	large: component => component.extend`
+	`,
+	large: component => styled(component)`
 		padding: 16px;
 		height: 46px;
 		${fonts.ui16};
-`,
+	`,
 };

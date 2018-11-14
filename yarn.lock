@@ -38,6 +38,13 @@
     source-map "^0.5.0"
     trim-right "^1.0.1"
 
+"@babel/helper-annotate-as-pure@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@babel/helper-annotate-as-pure/-/helper-annotate-as-pure-7.0.0.tgz#323d39dd0b50e10c7c06ca7d7638e6864d8c5c32"
+  integrity sha512-3UYcJUj9kvSLbLbUIfQTqzcy5VX7GRZ/CCDrnOaZorFFM01aXp1+GJwuFGV4NDDoAS+mOUyHcO6UD/RfqOks3Q==
+  dependencies:
+    "@babel/types" "^7.0.0"
+
 "@babel/helper-annotate-as-pure@^7.0.0-beta.37":
   version "7.0.0-beta.51"
   resolved "https://registry.yarnpkg.com/@babel/helper-annotate-as-pure/-/helper-annotate-as-pure-7.0.0-beta.51.tgz#38cf7920bf5f338a227f754e286b6fbadee04b58"
@@ -243,6 +250,13 @@
   version "0.6.6"
   resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.6.6.tgz#62266c5f0eac6941fece302abad69f2ee7e25e44"
   integrity sha512-ojhgxzUHZ7am3D2jHkMzPpsBAiB005GF5YU4ea+8DNPybMk01JJUM9V9YRlF/GE95tcOm8DxQvWA2jq19bGalQ==
+
+"@emotion/is-prop-valid@^0.6.8":
+  version "0.6.8"
+  resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.6.8.tgz#68ad02831da41213a2089d2cab4e8ac8b30cbd85"
+  integrity sha512-IMSL7ekYhmFlILXcouA6ket3vV7u9BqStlXzbKOF9HBtpUPMMlHU+bBxrLOa2NvleVwNIxeq/zL8LafLbeUXcA==
+  dependencies:
+    "@emotion/memoize" "^0.6.6"
 
 "@emotion/memoize@^0.6.1":
   version "0.6.2"
@@ -1240,6 +1254,16 @@ babel-plugin-react-docgen@^1.9.0:
     babel-types "^6.24.1"
     lodash "^4.17.0"
     react-docgen "^3.0.0-beta11"
+
+"babel-plugin-styled-components@>= 1":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-styled-components/-/babel-plugin-styled-components-1.10.0.tgz#ff1f42ad2cc78c21f26b62266b8f564dbc862939"
+  integrity sha512-sQVKG8irFXx14ZfaK1bBePirfkacl3j8nZwSZK+ZjsbnadRHKQTbhXbe/RB1vT6Vgkz45E+V95LBq4KqdhZUNw==
+  dependencies:
+    "@babel/helper-annotate-as-pure" "^7.0.0"
+    "@babel/helper-module-imports" "^7.0.0"
+    babel-plugin-syntax-jsx "^6.18.0"
+    lodash "^4.17.10"
 
 babel-plugin-styled-components@^1.5.1:
   version "1.5.1"
@@ -2304,14 +2328,6 @@ buffer@^4.3.0:
     ieee754 "^1.1.4"
     isarray "^1.0.0"
 
-buffer@^5.0.3:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/buffer/-/buffer-5.1.0.tgz#c913e43678c7cb7c8bd16afbcddb6c5505e8f9fe"
-  integrity sha512-YkIRgwsZwJWTnyQrsBTWefizHh+8GYj3kbL1BTiAQ/9pwpino0G7B2gp5tx/FUBqUlvtxV85KNR3mwfAtv15Yw==
-  dependencies:
-    base64-js "^1.0.2"
-    ieee754 "^1.1.4"
-
 builtin-modules@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-1.1.1.tgz#270f076c5a72c02f5b65a47df94c5fe3a278892f"
@@ -2662,6 +2678,7 @@ chrome-trace-event@^1.0.0:
 chrono-node@^1.3.5:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/chrono-node/-/chrono-node-1.3.5.tgz#a2495298a32da82bcc01ad9be7d77efa5e244122"
+  integrity sha1-oklSmKMtqCvMAa2b59d++l4kQSI=
   dependencies:
     moment "^2.10.3"
 
@@ -3327,10 +3344,10 @@ css-selector-tokenizer@^0.7.0:
     fastparse "^1.1.1"
     regexpu-core "^1.0.0"
 
-css-to-react-native@^2.0.3:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/css-to-react-native/-/css-to-react-native-2.2.0.tgz#d524ef7f39a2747a8914e86563669ba35b7cf2e7"
-  integrity sha512-SWG8+tsVRBHpxn1cSDmx7B95DJCiKwUecBbboGpm2znDCnJDMGkcoYR73w1p2IZMab6iNqVms8VC+4TrSqoFeQ==
+css-to-react-native@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/css-to-react-native/-/css-to-react-native-2.2.2.tgz#c077d0f7bf3e6c915a539e7325821c9dd01f9965"
+  integrity sha512-w99Fzop1FO8XKm0VpbQp3y5mnTnaS+rtCvS+ylSEOK76YXO5zoHQx/QMB1N54Cp+Ya9jB9922EHrh14ld4xmmw==
   dependencies:
     css-color-keywords "^1.0.0"
     fbjs "^0.8.5"
@@ -3473,6 +3490,7 @@ dashdash@^1.12.0:
 date-fns@^2.0.0-alpha.25:
   version "2.0.0-alpha.25"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.0.0-alpha.25.tgz#651a5d1f59a01af6cf0371e39b2ae29df5d521ee"
+  integrity sha512-iQzJkHF0L4wah9Ae9PkvwemwFz6qmRLuNZcghmvf2t+ptLs1qXzONLiGtjmPQzL6+JpC01JjlTopY2AEy4NFAg==
 
 date-now@^0.1.4:
   version "0.1.4"
@@ -5814,7 +5832,7 @@ hoek@2.x.x:
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
   integrity sha1-ILt0A9POo5jpHcRxCo/xuCdKJe0=
 
-hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
+hoist-non-react-statics@^2.3.1:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
   integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
@@ -7806,6 +7824,7 @@ mocha@^5.1.1:
 moment@^2.10.3:
   version "2.22.2"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
+  integrity sha1-PCV/mDn8DpP/UxSWMiOeuQeD/2Y=
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -11059,21 +11078,19 @@ style-search@^0.1.0:
   resolved "https://registry.yarnpkg.com/style-search/-/style-search-0.1.0.tgz#7958c793e47e32e07d2b5cafe5c0bf8e12e77902"
   integrity sha1-eVjHk+R+MuB9K1yv5cC/jhLneQI=
 
-styled-components@^3.2.5:
-  version "3.3.3"
-  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-3.3.3.tgz#09e702055ab11f7a8eab8229b1c0d0b855095686"
-  integrity sha1-CecCBVqxH3qOq4IpscDQuFUJVoY=
+styled-components@4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-4.0.2.tgz#7d4409ada019cdd34c25ba68c4577ea95dbcf0c5"
+  integrity sha512-VTNCmBLNx0OS2GRaYk0yRAnQVDBCGnnxGkR6+BCmkKVv9VgICO7bEn3UDjlnwCw8hgIyecMzVLOPl+p1zqUxog==
   dependencies:
-    buffer "^5.0.3"
-    css-to-react-native "^2.0.3"
-    fbjs "^0.8.16"
-    hoist-non-react-statics "^2.5.0"
-    is-plain-object "^2.0.1"
+    "@emotion/is-prop-valid" "^0.6.8"
+    babel-plugin-styled-components ">= 1"
+    css-to-react-native "^2.2.2"
+    memoize-one "^4.0.0"
     prop-types "^15.5.4"
     react-is "^16.3.1"
     stylis "^3.5.0"
     stylis-rule-sheet "^0.0.10"
-    supports-color "^3.2.3"
 
 stylelint-config-recommended@^2.1.0:
   version "2.1.0"

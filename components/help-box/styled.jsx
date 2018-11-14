@@ -52,7 +52,7 @@ export const variationMap = {
 };
 
 function variantCreator(backgroundColor, foregroundColor, closeIconColor) {
-	return component => component.extend`
+	return component => styled(component)`
 		${resetStyles};
 
 		background-color: ${props => props.theme.backgroundColor || backgroundColor};

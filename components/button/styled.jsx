@@ -74,7 +74,7 @@ export const Button = styled.button`
 `;
 
 export const variationMap = {
-	primary: component => component.extend`
+	primary: component => styled(component)`
 		border: 1px solid ${props => props.theme.defaultColor || buttonColors.default};
 		background-color: ${props => props.theme.defaultColor || buttonColors.default};
 		color: #fff;
@@ -96,8 +96,8 @@ export const variationMap = {
 			background-color: ${props => props.theme.disabledColor || buttonColors.disabled};
 			cursor: default;
 		}
-`,
-	primaryOutline: component => component.extend`
+	`,
+	primaryOutline: component => styled(component)`
 		border: 1px solid ${props => props.theme.defaultColor || buttonColors.default};
 		background: none;
 		color: ${props => props.theme.defaultColor || buttonColors.default};
@@ -120,8 +120,8 @@ export const variationMap = {
 			color: ${props => props.theme.disabledColor || buttonColors.disabled};
 			cursor: default;
 		}
-`,
-	minor: component => component.extend`
+	`,
+	minor: component => styled(component)`
 		border: 1px solid ${colors.gray14};
 		background: ${colors.gray4};
 		color: ${colors.flGray};
@@ -144,8 +144,8 @@ export const variationMap = {
 			color: ${colors.gray22};
 			cursor: default;
 		}
-`,
-	primaryTransparent: component => component.extend`
+	`,
+	primaryTransparent: component => styled(component)`
 		border: 1px solid transparent;
 		background: none;
 		color: ${props => props.theme.defaultColor || buttonColors.default};
@@ -163,8 +163,8 @@ export const variationMap = {
 			color: ${props => props.theme.disabledColor || buttonColors.disabled};
 			cursor: default;
 		}
-`,
-	minorTransparent: component => component.extend`
+	`,
+	minorTransparent: component => styled(component)`
 		border: 1px solid transparent;
 		background: none;
 		color: ${colors.flGray};
@@ -182,18 +182,18 @@ export const variationMap = {
 			color: ${colors.gray22};
 			cursor: default;
 		}
-`,
-	small: component => component.extend`
+	`,
+	small: component => styled(component)`
 		height: 32px;
 		padding: 0 ${props => (props.condensed ? '7px' : '9px')};
-`,
-	medium: component => component.extend`
+	`,
+	medium: component => styled(component)`
 		height: 40px;
 		padding: 0 ${props => (props.condensed ? '11px' : '15px')};
-`,
-	large: component => component.extend`
+	`,
+	large: component => styled(component)`
 		height: 56px;
 		padding: 0 ${props => (props.condensed ? '15px' : '23px')};
 		font-size: 24px;
-`,
+	`,
 };
