@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../../shared-styles';
+import { colors } from '../../shared-styles';
 
 const calendarWeekDayCss = `
 	flex: 1;

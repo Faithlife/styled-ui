@@ -1,153 +1,105 @@
-import React, { PureComponent } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { PopoverManager, PopoverReference, Popover } from '../main.js';
-import { Calendar as CalendarIcon } from '../icons';
+import { Caret } from '../icons';
 import { colors } from '../shared-styles';
-import { dateFunctionProps } from './date-function-props';
+import { dateFunctionProps } from './date-function-props.js';
 import * as Styled from './styled.jsx';
-import { CalendarInput } from './calendar-input/component.jsx';
+import { CalendarWeek } from './calendar-week/component.jsx';
 
-export class DatePicker extends PureComponent {
+function generateWeek(sunday, { getYear, getMonth, getDate }) {
+	const week = [];
+	const year = getYear(sunday);
+	const month = getMonth(sunday);
+	const date = getDate(sunday);
+
+	for (let index = 0; index < 7; index++) {
+		week.push(new Date(year, month, date + index));
+	}
+
+	return week;
+}
+
+function generateWeeks(month, dateFunctions) {
+	const { startOfWeek, startOfMonth, endOfWeek, endOfMonth, isBefore, addWeeks } = dateFunctions;
+	const firstDay = startOfWeek(startOfMonth(month));
+	const lastDay = endOfWeek(endOfMonth(month));
+	const weeks = [];
+
+	for (
+		let walker = new Date(firstDay.getTime());
+		isBefore(walker, lastDay);
+		walker = addWeeks(walker, 1)
+	) {
+		weeks.push(generateWeek(walker, dateFunctions));
+	}
+
+	return weeks;
+}
+
+export class DatePicker extends Component {
 	static propTypes = {
-		defaultSelectedDate: PropTypes.instanceOf(Date),
-		/** Functions that operate on a JS Date obejct.
-		 * The following functions must be provided:
-		 *
-		 * startOfWeek, startOfMonth, endOfWeek, endOfMonth, getYear, getMonth,getDate, addWeeks, addMonths,s ubMonths, isBefore, format,isValid,parseUserDateString
-		 *
-		 * For details on how these function should behave see date-fns documentation (v2) https://date-fns.org
-		 *
-		 * In addition, parseUserDateString should be a function that takes a string and returns a js date. For example: https://www.npmjs.com/package/chrono-node (depends on momentjs)
-		 */
-		dateFunctions: dateFunctionProps,
+		selectedDate: PropTypes.instanceOf(Date),
+		setSelectedDate: PropTypes.func.isRequired,
 		validate: PropTypes.func,
-		onBlur: PropTypes.func,
-		onChange: PropTypes.func.isRequired,
-		onFocus: PropTypes.func,
-		disabled: PropTypes.bool,
+		dateFunctions: dateFunctionProps,
 	};
 
-	constructor(props) {
-		super(props);
-		this.icon = React.createRef();
-
-		this.state = {
-			showCalendar: false,
-			selectedDate: this.props.defaultSelectedDate,
-		};
+	componentWillMount() {
+		const selectedDate = this.props.selectedDate;
+		const date = selectedDate != null ? this.props.selectedDate : new Date();
+		this.setMonth(date);
 	}
 
-	componentDidUpdate(prevState) {
-		if (prevState.showCalendar !== this.state.showCalendar) {
-			if (this.state.showCalendar) {
-				document.addEventListener('click', this.onDocumentClick);
-			} else {
-				document.removeEventListener('click', this.onDocumentClick);
-			}
-		}
-	}
-
-	componentWillUnmount() {
-		document.removeEventListener('click', this.onDocumentClick);
-	}
-
-	onDocumentClick = () => this.setState({ showCalendar: false });
-
-	openCalendar = () => !this.state.showCalendar && this.setState({ showCalendar: true });
-
-	formatDate = date =>
-		this.props.dateFunctions.format(
-			date,
-			this.props.dateFunctions.isSameYear(date, new Date()) ? 'MMMM d' : 'MMMM d, yyyy',
-		);
-
-	isFocused = () => document.activeElement === this._input;
-
-	handleBlur = event => {
-		this.setState({ text: null });
-		if (this.props.onBlur) {
-			this.props.onBlur(event);
-		}
-	};
-
-	handleFocus = event => {
-		event.target.select();
-		if (this.props.onFocus) {
-			this.props.onFocus(event);
-		}
-	};
-
-	handleChange = ({ target }) => this.handleTextChange(target.value);
-
-	handleChangeSelectedDate = selectedDate => {
-		this.setState({ selectedDate, text: null });
-		this.props.onChange(selectedDate);
-	};
-
-	handleTextChange = text => {
+	setMonth = currentMonth => {
 		this.setState({
-			showCalendar: false,
-			text,
+			currentMonth,
+			weeks: generateWeeks(currentMonth, this.props.dateFunctions),
 		});
-
-		const selectedDate = this.props.dateFunctions.parseUserDateString(text);
-		this.setState({ selectedDate });
-		this.props.onChange(selectedDate);
 	};
 
-	handlePopoutClicked = event => event.nativeEvent.stopImmediatePropagation();
+	decrementMonth = () =>
+		this.setMonth(this.props.dateFunctions.subMonths(this.state.currentMonth, 1));
 
-	renderCalendar = selectedDate => (
-		<Styled.DateTime>
-			<CalendarInput
-				selectedDate={selectedDate}
-				setSelectedDate={this.handleChangeSelectedDate}
-				validate={this.props.validate}
-				dateFunctions={this.props.dateFunctions}
-			/>
-		</Styled.DateTime>
-	);
+	incrementMonth = () =>
+		this.setMonth(this.props.dateFunctions.addMonths(this.state.currentMonth, 1));
 
 	render() {
-		const { disabled, defaultSelectedDate } = this.props;
-		const { text, selectedDate, showCalendar } = this.state;
-
-		const defaultValue = defaultSelectedDate != null ? this.formatDate(defaultSelectedDate) : '';
-		const formattedDate = selectedDate != null ? this.formatDate(selectedDate) : defaultValue;
-		const value = text != null ? text : formattedDate;
-
+		const { selectedDate, dateFunctions } = this.props;
+		const { currentMonth, weeks } = this.state;
 		return (
-			<Styled.Container>
-				<PopoverManager>
-					<Styled.Input
-						type="text"
-						onBlur={this.handleBlur}
-						onChange={this.handleChange}
-						onFocus={this.handleFocus}
-						value={value}
-						disabled={disabled}
-					/>
-					<Styled.CalendarButton
-						innerRef={this.icon}
-						onClick={!disabled ? this.openCalendar : null}
-					>
-						<Styled.CalendarIconContainer>
-							<PopoverReference>
-								<CalendarIcon style={{ color: colors.gray52 }} />
-							</PopoverReference>
-						</Styled.CalendarIconContainer>
-					</Styled.CalendarButton>
-					<Popover
-						placement="bottom-start"
-						isOpen={showCalendar}
-						styleOverrides={{ padding: '16px 20px' }}
-					>
-						<div onClick={this.handlePopoutClicked}>
-							{this.renderCalendar(selectedDate || new Date())}
-						</div>
-					</Popover>
-				</PopoverManager>
-			</Styled.Container>
+			<Fragment>
+				<Styled.Header>
+					<Styled.ChangeMonth onClick={this.decrementMonth} tabIndex="-1">
+						<Caret style={{ transform: 'scaleX(-1)', color: colors.flGray }} />
+					</Styled.ChangeMonth>
+					<Styled.MonthLabel>{dateFunctions.format(currentMonth, 'MMMM yyyy')}</Styled.MonthLabel>
+					<Styled.ChangeMonth onClick={this.incrementMonth} tabIndex="-1">
+						<Caret style={{ color: colors.flGray }} />
+					</Styled.ChangeMonth>
+				</Styled.Header>
+				<Styled.Week>
+					<Styled.WeekDay>S</Styled.WeekDay>
+					<Styled.WeekDay>M</Styled.WeekDay>
+					<Styled.WeekDay>T</Styled.WeekDay>
+					<Styled.WeekDay>W</Styled.WeekDay>
+					<Styled.WeekDay>T</Styled.WeekDay>
+					<Styled.WeekDay>F</Styled.WeekDay>
+					<Styled.WeekDay>S</Styled.WeekDay>
+				</Styled.Week>
+				<Styled.Month>
+					{weeks.map(week => (
+						<CalendarWeek
+							currentMonth={dateFunctions.getMonth(currentMonth)}
+							days={week}
+							key={`week-${week[0]}`}
+							selectedDate={selectedDate}
+							setSelectedDate={this.props.setSelectedDate}
+							validate={this.props.validate}
+							dateFunctions={this.props.dateFunctions}
+						/>
+					))}
+				</Styled.Month>
+			</Fragment>
 		);
 	}
 }

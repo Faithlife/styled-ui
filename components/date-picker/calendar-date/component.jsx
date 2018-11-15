@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { dateFunctionProps } from '../../date-function-props';
+import { dateFunctionProps } from '../date-function-props';
 import * as Styled from './styled.jsx';
 
 export class CalendarDate extends Component {

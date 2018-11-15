@@ -23,7 +23,7 @@ import {
 	PopoverManager,
 	PopoverReference,
 	Tooltip,
-	DatePicker,
+	DatePickerInput,
 } from '../components/main.js';
 import { BaseButton } from '../components/button/base-button.jsx';
 import { BootstrapContainer } from '../components/utils';
@@ -573,17 +573,17 @@ const pages = [
 		],
 	},
 	{
-		title: 'Date Picker',
+		title: 'Date Picker Input',
 		pages: [
 			{
-				path: '/date-picker/variations',
-				title: 'Date Picker Variations',
-				content: pageLoader(() => import('./date-picker/variations.md')),
+				path: '/date-picker-input/variations',
+				title: 'Date Picker Input Variations',
+				content: pageLoader(() => import('./date-picker-input/variations.md')),
 				imports: {
 					DatePickerDemo: styled.div`
 						font-family: Source Sans Pro;
 					`,
-					DatePicker,
+					DatePickerInput,
 					dateFunctions: {
 						...dateFunctions,
 						parseUserDateString: str => {
@@ -594,10 +594,10 @@ const pages = [
 				},
 			},
 			{
-				path: 'date-picker/documentation',
-				title: 'Date Picker Documentation',
-				content: pageLoader(() => import('./date-picker/documentation.md')),
-				imports: { DatePicker, DocgenTable },
+				path: 'date-picker-input/documentation',
+				title: 'Date Picker Input Documentation',
+				content: pageLoader(() => import('./date-picker-input/documentation.md')),
+				imports: { DatePickerInput, DocgenTable },
 			},
 		],
 	},
