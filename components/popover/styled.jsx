@@ -25,7 +25,7 @@ export const PopoverContent = styled.div`
 	background-color: ${({ theme }) => theme.backgroundColor};
 	border-radius: 3px;
 	text-align: center;
-	border: ${({ theme }) => (theme.border ? theme.border : 'none')};
+	border: ${({ styleOverrides }) => (styleOverrides.border ? styleOverrides.border : 'none')};
 	box-shadow: ${({ styleOverrides }) => (styleOverrides.hideShadow ? 'none' : colors.boxShadow)};
 	${({ theme }) => (theme.textColor ? `color: ${theme.textColor}` : '')};
 `;
@@ -38,7 +38,7 @@ export const Arrow = styled.div`
 
 	&::after {
 		content: '';
-		border: ${({ theme }) => (theme.border ? theme.border : 'none')};
+		border: ${({ styleOverrides }) => (styleOverrides.border ? styleOverrides.border : 'none')};
 		position: absolute;
 		width: ${arrowWidth};
 		height: ${arrowWidth};

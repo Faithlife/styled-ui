@@ -57,11 +57,11 @@ export class Popover extends React.Component {
 			hideShadow: PropTypes.bool,
 			width: PropTypes.string,
 			padding: PropTypes.string,
+			border: PropTypes.string,
 		}),
 		theme: PropTypes.shape({
 			backgroundColor: PropTypes.string,
 			textColor: PropTypes.string,
-			border: PropTypes.string,
 		}),
 	};
 
@@ -76,6 +76,8 @@ export class Popover extends React.Component {
 	state = {
 		showPopper: false,
 	};
+
+	_timeout = null;
 
 	componentDidMount() {
 		const { container } = this.props;
@@ -95,13 +97,31 @@ export class Popover extends React.Component {
 		this.handleIsPopoverShowing(prevProps.isOpen, this.props.isOpen, this.props.delay);
 	}
 
+	componentWillUnmount() {
+		if (this._timeout) {
+			clearTimeout(this._timeout);
+		}
+	}
+
 	handleIsPopoverShowing = (prevIsOpen, isOpen, delay) => {
 		if (prevIsOpen !== isOpen && !delay) {
 			this.setState({ showPopper: isOpen });
 		} else if (prevIsOpen && !isOpen && !!delay) {
-			setTimeout(() => this.setState({ showPopper: false }), delay.hide || 0);
+			if (this._timeout) {
+				clearTimeout(this._timeout);
+			}
+			this._timeout = setTimeout(() => {
+				this.setState({ showPopper: false });
+				this._timeout = null;
+			}, delay.hide || 0);
 		} else if (!prevIsOpen && isOpen && !!delay) {
-			setTimeout(() => this.setState({ showPopper: true }), delay.show || 0);
+			if (this._timeout) {
+				clearTimeout(this._timeout);
+			}
+			this._timeout = setTimeout(() => {
+				this.setState({ showPopper: true });
+				this._timeout = null;
+			}, delay.show || 0);
 		}
 	};
 
