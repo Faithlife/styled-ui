@@ -229,39 +229,7 @@ const pages = [
 				imports: {
 					GroupSelector,
 					Button: Bootstrap.Button,
-					GroupSelectorDemo: styled.div`
-						font-family: Source Sans Pro;
-						color: #333333;
-
-						.wide-content {
-							width: 600px;
-						}
-
-						.button-container {
-							margin-right: 16px;
-						}
-
-						.stacked-content {
-							width: 240px;
-						}
-					`,
 					LargeGroupSelector,
-					LargeGroupSelectorDemo: styled.div`
-						font-family: Source Sans Pro;
-						color: #333333;
-
-						.wide-content {
-							width: 600px;
-						}
-
-						.button-container {
-							margin-right: 16px;
-						}
-
-						.stacked-content {
-							width: 240px;
-						}
-					`,
 				},
 			},
 			{
