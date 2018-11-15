@@ -325,21 +325,22 @@ const pages = [
 					ModalFooter,
 					Button,
 					delayPromise,
-					ModalDemo: styled.div`
+					ModalDemoContent: styled.div`
 						font-family: 'Source Sans Pro';
 						color: #333333;
-
-						.wide-content {
-							width: 600px;
-						}
-
-						.button-container {
-							margin-right: 16px;
-						}
-
-						.stacked-content {
-							width: 240px;
-						}
+					`,
+					ModalDemoWideContent: styled.div`
+						width: 600px;
+						font-family: 'Source Sans Pro';
+						color: #333333;
+					`,
+					ModalDemoButtonContainer: styled.div`
+						margin-right: 16px;
+					`,
+					ModalDemoStackedContent: styled.div`
+						width: 240px;
+						font-family: 'Source Sans Pro';
+						color: #333333;
 					`,
 				},
 			},
@@ -364,29 +365,24 @@ const pages = [
 					Popover,
 					PopoverManager,
 					PopoverReference,
-					SimpleModalDemo: styled.div`
+					SimpleModalDemoModalContent: styled.div`
+						margin-top: 20px;
+						margin-bottom: 20px;
+						width: 300px;
+						height: 200px;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: space-around;
 						font-family: 'Source Sans Pro';
 						color: #333333;
-
-						.modal-content {
-							margin-top: 20px;
-							margin-bottom: 20px;
-							width: 300px;
-							height: 200px;
-							display: flex;
-							flex-direction: column;
-							align-items: center;
-							justify-content: space-around;
-						}
-
-						.message {
-							background-color: #eeeeee;
-							padding: 20px;
-						}
-
-						.success {
-							width: 60px;
-						}
+					`,
+					SimpleModalDemoMessage: styled.div`
+						background-color: #eeeeee;
+						padding: 20px;
+					`,
+					SimpleModalDemoSuccess: styled.div`
+						width: 60px;
 					`,
 				},
 			},

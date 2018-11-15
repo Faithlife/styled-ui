@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { createPortal } from 'react-dom';
 import { ThemeProvider } from 'styled-components';
 import { ModalBackdrop } from '../modal-backdrop/component.jsx';
 import { Close } from '../icons';
@@ -29,11 +30,13 @@ export class SimpleModal extends React.Component {
 
 	state = {
 		modalWidth: null,
+		canUseDom: false,
 	};
 
 	componentDidMount() {
 		const { cancel } = debouncedResize(this.handleResize);
 		this.cancelResizeListener = cancel;
+		this.setState({ canUseDom: true }); // eslint-disable-line
 	}
 
 	componentWillUnmount() {
@@ -46,13 +49,8 @@ export class SimpleModal extends React.Component {
 		}
 	};
 
-	render() {
-		const { theme, onClose, isOpen, children } = this.props;
-
-		if (!isOpen) {
-			return null;
-		}
-
+	renderModal() {
+		const { theme, onClose, children } = this.props;
 		const { modalWidth } = this.state;
 
 		return (
@@ -72,5 +70,13 @@ export class SimpleModal extends React.Component {
 				</ModalBackdrop>
 			</ThemeProvider>
 		);
+	}
+
+	render() {
+		if (!this.props.isOpen || !this.state.canUseDom) {
+			return null;
+		}
+
+		return createPortal(this.renderModal(), document.body);
 	}
 }
