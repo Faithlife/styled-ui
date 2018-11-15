@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Bootstrap } from '../bootstrap';
+import { PopoverManager, PopoverReference, Popover } from '../main.js';
 import { Calendar as CalendarIcon } from '../icons';
 import { colors } from '../shared-styles';
 import { dateFunctionProps } from './date-function-props';
@@ -10,6 +10,15 @@ import { CalendarInput } from './calendar-input/component.jsx';
 export class DatePicker extends PureComponent {
 	static propTypes = {
 		defaultSelectedDate: PropTypes.instanceOf(Date),
+		/** Functions that operate on a JS Date obejct.
+		 * The following functions must be provided:
+		 *
+		 * startOfWeek, startOfMonth, endOfWeek, endOfMonth, getYear, getMonth,getDate, addWeeks, addMonths,s ubMonths, isBefore, format,isValid,parseUserDateString
+		 *
+		 * For details on how these function should behave see date-fns documentation (v2) https://date-fns.org
+		 *
+		 * In addition, parseUserDateString should be a function that takes a string and returns a js date. For example: https://www.npmjs.com/package/chrono-node (depends on momentjs)
+		 */
 		dateFunctions: dateFunctionProps,
 		validate: PropTypes.func,
 		onBlur: PropTypes.func,
@@ -53,9 +62,6 @@ export class DatePicker extends PureComponent {
 		);
 
 	isFocused = () => document.activeElement === this._input;
-	toggleCalendar = () => {
-		this.setState(state => ({ showCalendar: !state.showCalendar }));
-	};
 
 	handleBlur = event => {
 		this.setState({ text: null });
@@ -112,29 +118,35 @@ export class DatePicker extends PureComponent {
 
 		return (
 			<Styled.Container>
-				<Styled.Input
-					type="text"
-					onBlur={this.handleBlur}
-					onChange={this.handleChange}
-					onFocus={this.handleFocus}
-					value={value}
-					disabled={disabled}
-				/>
-				<Styled.CalendarButton innerRef={this.icon} onClick={!disabled ? this.openCalendar : null}>
-					<CalendarIcon style={{ color: colors.flGray }} />
-				</Styled.CalendarButton>
-				{showCalendar && (
-					<Bootstrap.Popover
-						placement="right"
-						isOpen={showCalendar}
-						target={this.icon.current}
-						toggle={this.toggleCalendar}
+				<PopoverManager>
+					<Styled.Input
+						type="text"
+						onBlur={this.handleBlur}
+						onChange={this.handleChange}
+						onFocus={this.handleFocus}
+						value={value}
+						disabled={disabled}
+					/>
+					<Styled.CalendarButton
+						innerRef={this.icon}
+						onClick={!disabled ? this.openCalendar : null}
 					>
-						<Styled.CalendarPopout onClick={this.handlePopoutClicked}>
+						<Styled.CalendarIconContainer>
+							<PopoverReference>
+								<CalendarIcon style={{ color: colors.gray52 }} />
+							</PopoverReference>
+						</Styled.CalendarIconContainer>
+					</Styled.CalendarButton>
+					<Popover
+						placement="bottom-start"
+						isOpen={showCalendar}
+						styleOverrides={{ padding: '16px 20px' }}
+					>
+						<div onClick={this.handlePopoutClicked}>
 							{this.renderCalendar(selectedDate || new Date())}
-						</Styled.CalendarPopout>
-					</Bootstrap.Popover>
-				)}
+						</div>
+					</Popover>
+				</PopoverManager>
 			</Styled.Container>
 		);
 	}

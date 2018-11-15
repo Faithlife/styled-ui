@@ -580,6 +580,9 @@ const pages = [
 				title: 'Date Picker Variations',
 				content: pageLoader(() => import('./date-picker/variations.md')),
 				imports: {
+					DatePickerDemo: styled.div`
+						font-family: Source Sans Pro;
+					`,
 					DatePicker,
 					dateFunctions: {
 						...dateFunctions,

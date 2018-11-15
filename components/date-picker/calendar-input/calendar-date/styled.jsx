@@ -5,15 +5,14 @@ const calendarWeekDayCss = `
 	flex: 1;
 	position: relative;
 	box-sizing: border-box;
-	border-top: none;
-	border-left: 1px solid ${colors.gray8};
-	border-right: none;
-	border-bottom: 1px solid ${colors.gray8};
 	margin: 0;
 	padding: 0;
 	background: none;
 	cursor: pointer;
 	text-align: center;
+	border: none;
+	height: 30px;
+	width: 30px;
 
 	&:hover {
 		background: ${colors.gray4};
@@ -23,19 +22,9 @@ const calendarWeekDayCss = `
 		outline: none;
 	}
 
-	&:after {
-		display: block;
-		content: '';
-		margin-top: 110%;
-	}
-
 	&:disabled {
 		cursor: default;
 		background: none;
-	}
-
-	&:first-of-type {
-		border-left: none;
 	}
 `;
 
@@ -46,25 +35,17 @@ export const CalendarWeekDay = styled.div`
 export const CalendarWeekDaySelected = styled.button`
 	${calendarWeekDayCss}
 	background: ${colors.blueBase};
-	color: @shade0;
+	color: ${colors.white};
 
 	&:hover {
 		background: ${colors.blueBase};
-		color: @shade0;
+		color: ${colors.white};
 	}
 `;
 
-export const CalendarWeekDayGrayedOut = styled.button`
+export const CalendarWeekDayGrayedOut = styled.div`
 	${calendarWeekDayCss}
 	color: ${colors.gray34};
-`;
-
-export const CalendarMonthLabel = styled.div`
-	position: absolute;
-	top: 1px;
-	left: 0;
-	right: 0;
-	text-transform: uppercase;
 `;
 
 export const CalendarDateLabel = styled.div`

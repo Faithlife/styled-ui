@@ -4,6 +4,7 @@
 showSource: true
 state: { selectedDate: null }
 ---
+<DatePickerDemo>
 <div>
 <span>The selected date is {dateFunctions.format(state.selectedDate, 'MM-dd-yyyy')}</span>
 <DatePicker
@@ -13,4 +14,5 @@ state: { selectedDate: null }
 	validate={() => true}
 />
 </div>
+</DatePickerDemo>
 ```

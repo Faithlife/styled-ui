@@ -19,10 +19,9 @@ export const Header = styled.div`
 	align-items: center;
 	white-space: nowrap;
 	border-bottom: none;
-	padding: 16px 8px;
-	height: 44px;
 	background: ${colors.white};
 	line-height: 32px;
+	font-weight: bold;
 `;
 
 export const MonthLabel = styled.div`
@@ -31,12 +30,12 @@ export const MonthLabel = styled.div`
 
 export const Week = styled.ul`
 	display: flex;
-	border-top: 1px solid ${colors.borderColor};
-	border-bottom: 1px solid ${colors.borderColor};
+	border-bottom: 1px solid ${colors.gray34};
 	padding: 8px 0;
 	background: ${colors.white};
 	list-style: none;
 	margin: 0;
+	color: ${colors.gray34};
 `;
 
 export const WeekDay = styled.li`

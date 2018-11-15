@@ -70,11 +70,11 @@ export class CalendarInput extends Component {
 			<Fragment>
 				<Styled.Header>
 					<Styled.ChangeMonth onClick={this.decrementMonth} tabIndex="-1">
-						<Caret style={{ transform: 'scaleX(-1)', color: colors.blueBase }} />
+						<Caret style={{ transform: 'scaleX(-1)', color: colors.flGray }} />
 					</Styled.ChangeMonth>
 					<Styled.MonthLabel>{dateFunctions.format(currentMonth, 'MMMM yyyy')}</Styled.MonthLabel>
 					<Styled.ChangeMonth onClick={this.incrementMonth} tabIndex="-1">
-						<Caret style={{ color: colors.blueBase }} />
+						<Caret style={{ color: colors.flGray }} />
 					</Styled.ChangeMonth>
 				</Styled.Header>
 				<Styled.Week>

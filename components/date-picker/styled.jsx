@@ -7,7 +7,9 @@ export const Container = styled.div`
 	position: relative;
 	max-width: 100%;
 	min-width: 0;
-	height: 34px;
+	height: 32px;
+	font-size: 14px;
+	color: ${colors.flGray};
 `;
 
 export const Input = styled.input`
@@ -26,34 +28,14 @@ export const Input = styled.input`
 `;
 
 export const CalendarButton = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	position: absolute;
-	top: 45%;
-	right: 5px;
-	transform: translateY(-50%);
-	height: 100%;
+	top: 0;
+	right: 7px;
 	cursor: pointer;
 `;
 
 export const CalendarIconContainer = styled.div`
-	padding: 0 8px;
-`;
-
-export const CalendarPopout = styled.div`
-	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-	background-color: ${colors.gray4};
-	z-index: 1;
-	user-select: none;
-
-	@media only screen and (max-width: 460px) {
-		.calendar-popout {
-			flex-wrap: wrap;
-			left: unset;
-			right: 0;
-		}
-	}
+	padding: 7px 0;
 `;
 
 export const DateTime = styled.div`

@@ -26,7 +26,7 @@ export class CalendarDate extends Component {
 		const date = this.props.date;
 		let currentDayDot = null;
 		let CalendarWeekday = Styled.CalendarWeekDay;
-		const { getDate, endOfMonth, getMonth, format, isValid } = this.props.dateFunctions;
+		const { getMonth, format, isValid } = this.props.dateFunctions;
 
 		if (selectedDate != null && isValid(selectedDate) && this.areDatesEqual(selectedDate, date)) {
 			CalendarWeekday = Styled.CalendarWeekDaySelected;
@@ -49,10 +49,6 @@ export class CalendarDate extends Component {
 				tabIndex="-1"
 				disabled={this.props.validate && !this.props.validate(date)}
 			>
-				{this.props.currentMonth !== getMonth(date) &&
-					(getDate(date) === 1 || getDate(date) === getDate(endOfMonth(date))) && (
-						<Styled.CalendarMonthLabel>{format(date, 'MMM')}</Styled.CalendarMonthLabel>
-					)}
 				<Styled.CalendarDateLabel>{format(date, 'd')}</Styled.CalendarDateLabel>
 				{currentDayDot}
 			</CalendarWeekday>
