@@ -3,6 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { Catalog, pageLoader } from 'catalog';
+import * as dateFunctions from 'date-fns';
+import chrono from 'chrono-node';
 import {
 	AnchorButton,
 	Bootstrap,
@@ -21,6 +23,7 @@ import {
 	PopoverManager,
 	PopoverReference,
 	Tooltip,
+	DatePickerInput,
 } from '../components/main.js';
 import { BaseButton } from '../components/button/base-button.jsx';
 import { BootstrapContainer } from '../components/utils';
@@ -566,6 +569,35 @@ const pages = [
 				title: 'Popover Documentation',
 				content: pageLoader(() => import('./popover/documentation.md')),
 				imports: { Popover, DocgenTable, Tooltip },
+			},
+		],
+	},
+	{
+		title: 'Date Picker Input',
+		pages: [
+			{
+				path: '/date-picker-input/variations',
+				title: 'Date Picker Input Variations',
+				content: pageLoader(() => import('./date-picker-input/variations.md')),
+				imports: {
+					DatePickerDemo: styled.div`
+						font-family: Source Sans Pro;
+					`,
+					DatePickerInput,
+					dateFunctions: {
+						...dateFunctions,
+						parseUserDateString: str => {
+							const parsed = chrono.parseDate(str);
+							return parsed;
+						},
+					},
+				},
+			},
+			{
+				path: 'date-picker-input/documentation',
+				title: 'Date Picker Input Documentation',
+				content: pageLoader(() => import('./date-picker-input/documentation.md')),
+				imports: { DatePickerInput, DocgenTable },
 			},
 		],
 	},
