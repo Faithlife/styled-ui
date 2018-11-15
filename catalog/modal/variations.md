@@ -4,7 +4,7 @@
 showSource: true
 state: { modal: false, value: '' }
 ---
-<ModalDemo>
+<div>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -17,16 +17,16 @@ state: { modal: false, value: '' }
 			deleteButton: { text: 'Delete Forever', onClick: () => alert('Deleted') }
 		}}
 	>
-		<div className="wide-content">
+		<ModalDemoWideContent>
 			<Input
 				value={state.value}
 				onChange={value => setState({ value: value.value, isValid: value !== '' })}
 				placeholder="Bellingham"
 				title="Location"
 			/>
-		</div>
+		</ModalDemoWideContent>
 	</Modal>
-</ModalDemo>
+</div>
 ```
 
 ## Modal with no delete option
@@ -35,7 +35,7 @@ state: { modal: false, value: '' }
 showSource: true
 state: { modal: false, value: '' }
 ---
-<ModalDemo>
+<div>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -47,7 +47,7 @@ state: { modal: false, value: '' }
 			cancelButton: { text: 'Cancel', onClick: () => setState({ modal: !state.modal })}
 		}}
 	>
-		<div className="wide-content">
+		<ModalDemoWideContent>
 			<Input
 				value={state.value}
 				onChange={value => setState({ value: value, isValid: value !== '' })}
@@ -55,9 +55,9 @@ state: { modal: false, value: '' }
 				title="Location"
 				debounce={200}
 			/>
-		</div>
+		</ModalDemoWideContent>
 	</Modal>
-</ModalDemo>
+</div>
 ```
 
 ## Modal with only a delete option
@@ -66,7 +66,7 @@ state: { modal: false, value: '' }
 showSource: true
 state: { modal: false, value: '' }
 ---
-<ModalDemo>
+<div>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -77,7 +77,7 @@ state: { modal: false, value: '' }
 			deleteButton: { text: 'Delete Forever', onClick: () => alert('Deleted') }
 		}}
 	>
-		<div className="wide-content">
+		<ModalDemoWideContent>
 			<Input
 				value={state.value}
 				onChange={value => setState({ value: value, isValid: value !== '' })}
@@ -85,9 +85,9 @@ state: { modal: false, value: '' }
 				title="Location"
 				debounce={200}
 			/>
-		</div>
+		</ModalDemoWideContent>
 	</Modal>
-</ModalDemo>
+</div>
 ```
 
 ## Modal with stacked buttons
@@ -98,7 +98,7 @@ Modal buttons stack at 320px for 3 buttons configurations and 220px for 1 or 2 b
 showSource: true
 state: { modal: false, value: '' }
 ---
-<ModalDemo>
+<div>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -111,7 +111,7 @@ state: { modal: false, value: '' }
 			deleteButton: { text: 'Delete Forever', onClick: () => alert('Deleted') }
 		}}
 	>
-		<div className="stacked-content">
+		<ModalDemoStackedContent>
 			<Input
 				value={state.value}
 				onChange={value => setState({ value: value, isValid: value !== '' })}
@@ -119,9 +119,9 @@ state: { modal: false, value: '' }
 				title="Location"
 				debounce={200}
 			/>
-		</div>
+		</ModalDemoStackedContent>
 	</Modal>
-</ModalDemo>
+</div>
 ```
 
 ## Modal with custom footer
@@ -130,7 +130,7 @@ state: { modal: false, value: '' }
 showSource: true
 state: { modal: false, value: '' }
 ---
-<ModalDemo>
+<div>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -138,19 +138,19 @@ state: { modal: false, value: '' }
 		title="Location"
 		subtitle="Help us locate you"
 		renderFooter={() => <ModalFooter>
-				<div className="button-container">
+				<ModalDemoButtonContainer>
 					<Button primaryOutline medium onClick={() => setState({ modal: false })}>Option 1</Button>
-				</div>
-				<div className="button-container">
+				</ModalDemoButtonContainer>
+				<ModalDemoButtonContainer>
 					<Button primaryOutline medium onClick={() => setState({ modal: false })}>Option 2</Button>
-				</div>
-				<div className="button-container">
+				</ModalDemoButtonContainer>
+				<ModalDemoButtonContainer>
 					<Button primaryOutline medium onClick={() => setState({ modal: false })}>Option 3</Button>
-				</div>
+				</ModalDemoButtonContainer>
 				<Button primary medium onClick={() => {}}>Yes!</Button>
 			</ModalFooter>}
 	>
-		<div className="content">
+		<ModalDemoWideContent>
 			<Input
 				value={state.value}
 				onChange={value => setState({ value: value, isValid: value !== '' })}
@@ -158,9 +158,9 @@ state: { modal: false, value: '' }
 				title="Location"
 				debounce={200}
 			/>
-		</div>
+		</ModalDemoWideContent>
 	</Modal>
-</ModalDemo>
+</div>
 ```
 
 ## Modal with no footer
@@ -169,7 +169,7 @@ state: { modal: false, value: '' }
 showSource: true
 state: { modal: false, value: '' }
 ---
-<ModalDemo>
+<div>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -178,7 +178,7 @@ state: { modal: false, value: '' }
 		subtitle="Help us locate you"
 		withoutFooter
 	>
-		<div className="content">
+		<ModalDemoContent>
 			<Input
 				value={state.value}
 				onChange={value => setState({ value: value, isValid: value !== '' })}
@@ -186,9 +186,9 @@ state: { modal: false, value: '' }
 				title="Location"
 				debounce={200}
 			/>
-		</div>
+		</ModalDemoContent>
 	</Modal>
-</ModalDemo>
+</div>
 ```
 
 ## Modal with really long content
@@ -197,26 +197,27 @@ state: { modal: false, value: '' }
 showSource: true
 state: { modal: false, value: '' }
 ---
-<ModalDemo>
+<div>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		onClose={() => setState({ modal: false })}
 		title="Lots of content"
 	>
-		<div className="content">
+		<ModalDemoContent>
 			{JSON.stringify(new Array(1000))}
-		</div>
+		</ModalDemoContent>
 	</Modal>
-</ModalDemo>
+</div>
 ```
-## Modal with no title border 
+
+## Modal with no title border
 
 ```react
 showSource: true
 state: { modal: false, value: '' }
 ---
-<ModalDemo>
+<div>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -224,9 +225,9 @@ state: { modal: false, value: '' }
 		title="Modal with no title border"
 		styleOverrides={{ bottomBorder: 'none' }}
 	>
-		<div className="content">
+		<ModalDemoContent>
 			This modal has no title border!
-		</div>
+		</ModalDemoContent>
 	</Modal>
-</ModalDemo>
+</div>
 ```
