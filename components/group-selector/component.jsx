@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../main.js';
+import { Button } from '../main.ts';
 import * as Styled from './styled.jsx';
 import { GroupDropdown } from './dropdown.jsx';
 import { LargeGroupSelector } from './large/component.jsx';

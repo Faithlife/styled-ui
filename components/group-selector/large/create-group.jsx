@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Bootstrap } from '../../../components/main.js';
+import { Bootstrap } from '../../../components/main.ts';
 import * as Styled from '../styled.jsx';
 
 const { Input } = Bootstrap;

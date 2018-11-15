@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../../main.js';
+import { Button } from '../../main.ts';
 import { SimpleModal } from '../../simple-modal/component.jsx';
 import * as Styled from '../styled.jsx';
 import { SearchResult } from './search-result.jsx';

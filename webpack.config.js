@@ -5,7 +5,7 @@ require('es7-object-polyfill'); // jenkins needs this, it runs Node 6
 
 module.exports = {
 	entry: {
-		main: './components/main.js',
+		main: './components/main.ts',
 		deprecated: './components/deprecated/index.js',
 		'ag-grid': './components/grid/index.js',
 		'text-input': './components/text-input/index.js',
@@ -30,6 +30,16 @@ module.exports = {
 				test: /\.jsx?$/,
 				use: 'babel-loader',
 				exclude: [/node_modules/],
+			},
+			{
+				test: /\.tsx?$/,
+				exclude: [/node_modules/],
+				use: {
+					loader: 'ts-loader',
+					options: {
+						logLevel: 'error',
+					},
+				},
 			},
 			{
 				test: /\.scss?$/,

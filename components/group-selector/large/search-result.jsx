@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar } from '../avatar.jsx';
-import { Button } from '../../main.js';
+import { Button } from '../../main.ts';
 import * as Styled from '../styled.jsx';
 
 export class SearchResult extends React.PureComponent {

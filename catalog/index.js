@@ -24,7 +24,7 @@ import {
 	PopoverReference,
 	Tooltip,
 	DatePickerInput,
-} from '../components/main.js';
+} from '../components/main.ts';
 import { BaseButton } from '../components/button/base-button.jsx';
 import { BootstrapContainer } from '../components/utils';
 import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';

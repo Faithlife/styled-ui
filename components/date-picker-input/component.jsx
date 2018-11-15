@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { PopoverManager, PopoverReference, Popover } from '../main.js';
+import { PopoverManager, PopoverReference, Popover } from '../main.ts';
 import { Calendar as CalendarIcon } from '../icons';
 import { colors } from '../shared-styles';
 import { dateFunctionProps } from '../date-picker/date-function-props';
