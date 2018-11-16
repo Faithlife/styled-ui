@@ -136,11 +136,6 @@ export const LargeScrollView = styled(ScrollArea)`
 	width: 375px;
 	background: white;
 	border-radius: 4px;
-	box-sizing: border-box;
-
-	* {
-		box-sizing: border-box;
-	}
 
 	.${LargeScrollViewContentClass} {
 		padding-top: ${props => (props.hideTitle ? '0' : '30px')};
@@ -320,11 +315,6 @@ export const SecondaryModalContent = styled.div`
 	background: white;
 	border-radius: 4px;
 	width: 375px;
-	box-sizing: border-box;
-
-	* {
-		box-sizing: border-box;
-	}
 `;
 
 export const SecondaryModalText = styled.div`
