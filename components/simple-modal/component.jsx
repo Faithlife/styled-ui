@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import { ThemeProvider } from 'styled-components';
-import { ModalBackdrop } from '../modal-backdrop/component.jsx';
+import { ModalBackdrop } from '../modal-backdrop/component';
 import { Close } from '../icons';
 import { debouncedResize } from '../utils';
-import * as Styled from './styled.jsx';
+import * as Styled from './styled';
 
 /**
  * SimpleModal

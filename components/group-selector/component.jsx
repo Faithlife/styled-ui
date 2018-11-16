@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../main.js';
-import * as Styled from './styled.jsx';
-import { GroupDropdown } from './dropdown.jsx';
-import { LargeGroupSelector } from './large/component.jsx';
+import { Button } from '../main';
+import * as Styled from './styled';
+import { GroupDropdown } from './dropdown';
+import { LargeGroupSelector } from './large/component';
 
 const defaultGroup = {
 	name: '',

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import * as Styled from './styled.jsx';
+import * as Styled from './styled';
 
 /** A bordered drop zone that makes drag & drop easy. */
 export class DropZone extends PureComponent {

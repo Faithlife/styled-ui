@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { BootstrapContainer, mapFromInnerRef, mapToInnerRef } from '../utils';
-import { Typeahead } from './typeahead.jsx';
-import { InferredBase } from './inferred-base.jsx';
+import { Typeahead } from './typeahead';
+import { InferredBase } from './inferred-base';
 
 const StyledTypeahead = mapFromInnerRef(styled(mapToInnerRef(props => <Typeahead {...props} />))`
 	&& .rbt-input,

@@ -2,9 +2,9 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Caret } from '../icons';
 import { colors } from '../shared-styles';
-import { dateFunctionProps } from './date-function-props.js';
-import * as Styled from './styled.jsx';
-import { CalendarWeek } from './calendar-week/component.jsx';
+import { dateFunctionProps } from './date-function-props';
+import * as Styled from './styled';
+import { CalendarWeek } from './calendar-week/component';
 
 function generateWeek(sunday, { getYear, getMonth, getDate }) {
 	const week = [];

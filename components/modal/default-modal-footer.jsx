@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../button/component.jsx';
+import { Button } from '../button/component';
 import { colors } from '../shared-styles';
-import { ModalFooter } from './modal-footer.jsx';
-import * as Styled from './styled.jsx';
+import { ModalFooter } from './modal-footer';
+import * as Styled from './styled';
 
 export const DefaultModalFooter = props => (
 	<ModalFooter>

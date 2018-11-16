@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { applyVariations } from '../utils';
 import { colors } from '../shared-styles';
-import * as Styled from './styled.jsx';
+import * as Styled from './styled';
 
 /** Loading spinner, frequently displayed as a placeholder when loading data */
 export function LoadingSpinner(restProps) {

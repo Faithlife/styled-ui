@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Close } from '../icons';
-import * as Styled from './styled.jsx';
+import * as Styled from './styled';
 
 export const ModalHeader = ({ title, subtitle, onClose, styleOverrides }) => (
 	<Styled.ModalHeader styleOverrides={styleOverrides}>

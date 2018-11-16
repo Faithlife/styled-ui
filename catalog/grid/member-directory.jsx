@@ -4,7 +4,7 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-enterprise';
 import styled from 'styled-components';
 import debounce from 'lodash.debounce';
-import { Bootstrap } from '../../components/main.js';
+import { Bootstrap } from '../../components/main';
 import { KebabVertical } from '../../components/icons';
 import { BootstrapContainer } from '../../components/utils';
 import { colors } from '../../components/shared-styles';

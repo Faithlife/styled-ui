@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
-import * as Styled from './styled.jsx';
+import * as Styled from './styled';
 
 /** Styled checkbox control (uses a button instead of an input) */
 export function Checkbox({ onClick, title, isChecked, theme, type, children, className }) {

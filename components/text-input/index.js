@@ -1,3 +1,3 @@
-export { Typeahead, AsyncTypeahead, Token, Menu, MenuItem } from './typeahead.jsx';
-export { InferredText } from './inferred-text.jsx';
-export { InferredTypeahead } from './inferred-typeahead.jsx';
+export { Typeahead, AsyncTypeahead, Token, Menu, MenuItem } from './typeahead';
+export { InferredText } from './inferred-text';
+export { InferredTypeahead } from './inferred-typeahead';

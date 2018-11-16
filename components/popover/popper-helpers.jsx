@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Manager, Reference } from 'react-popper';
-import * as Styled from './styled.jsx';
+import * as Styled from './styled';
 
 export const PopoverReference = ({ children }) => (
 	<Reference>

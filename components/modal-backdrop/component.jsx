@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as Styled from './styled.jsx';
+import * as Styled from './styled';
 
 /**
  * Modal Backdrop

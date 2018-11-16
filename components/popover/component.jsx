@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import { Popper } from 'react-popper';
 import { colors } from '../shared-styles';
-import * as Styled from './styled.jsx';
+import * as Styled from './styled';
 
 export class Popover extends React.Component {
 	static propTypes = {

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { BootstrapContainer, mapFromInnerRef, mapToInnerRef } from '../utils';
-import { InferredBase } from './inferred-base.jsx';
-import { Input } from './bootstrap.jsx';
+import { InferredBase } from './inferred-base';
+import { Input } from './bootstrap';
 
 const StyledInput = mapFromInnerRef(styled(
 	mapToInnerRef(({ inferred, ...props }) => <Input {...props} />),

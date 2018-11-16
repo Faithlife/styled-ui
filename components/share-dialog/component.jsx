@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from '../modal/modal.jsx';
+import { Modal } from '../modal/modal';
 import {
 	FaithlifeShareButton,
 	TwitterShareButton,
 	FacebookShareButton,
 	EmailShareButton,
-} from './social-share-buttons.jsx';
-import { CopyToClipboard } from './copy-to-clipboard.jsx';
-import * as Styled from './styled.jsx';
+} from './social-share-buttons';
+import { CopyToClipboard } from './copy-to-clipboard';
+import * as Styled from './styled';
 
 /**
  * ShareDialog

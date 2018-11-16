@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { applyVariations } from '../utils';
-import { forwardClassRef } from '../utils/forwardref-wrapper.jsx';
-import * as Styled from './styled.jsx';
+import { forwardClassRef } from '../utils/forwardref-wrapper';
+import * as Styled from './styled';
 
 export const BaseButton = forwardClassRef(
 	class BaseButton extends PureComponent {

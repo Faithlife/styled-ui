@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Bootstrap } from '../../../components/main.js';
-import * as Styled from '../styled.jsx';
+import { Bootstrap } from '../../../components/main';
+import * as Styled from '../styled';
 
 const { Input } = Bootstrap;
 

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { BaseButton } from './base-button.jsx';
-import * as Styled from './styled.jsx';
+import { BaseButton } from './base-button';
+import * as Styled from './styled';
 
 export class AnchorButton extends PureComponent {
 	static propTypes = {

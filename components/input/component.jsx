@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { applyVariations } from '../utils';
-import * as Styled from './styled.jsx';
+import * as Styled from './styled';
 
 export class Input extends PureComponent {
 	static propTypes = {

@@ -24,17 +24,17 @@ import {
 	PopoverReference,
 	Tooltip,
 	DatePickerInput,
-} from '../components/main.js';
-import { BaseButton } from '../components/button/base-button.jsx';
+} from '../components/main';
+import { BaseButton } from '../components/button/base-button';
 import { BootstrapContainer } from '../components/utils';
 import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
 import { colors } from '../components/shared-styles';
-import { DocgenTable } from './docgen-table.jsx';
+import { DocgenTable } from './docgen-table';
 import { MemberDirectory, VolunteerScheduling } from './grid';
-import { InferredTextFocusDemo, InferredTypeaheadFocusDemo } from './text-input/demos.jsx';
+import { InferredTextFocusDemo, InferredTypeaheadFocusDemo } from './text-input/demos';
 
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.

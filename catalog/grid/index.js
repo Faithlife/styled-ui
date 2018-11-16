@@ -1,2 +1,2 @@
-export { MemberDirectory } from './member-directory.jsx';
-export { VolunteerScheduling } from './volunteer-scheduling.jsx';
+export { MemberDirectory } from './member-directory';
+export { VolunteerScheduling } from './volunteer-scheduling';

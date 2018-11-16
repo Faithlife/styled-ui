@@ -7,7 +7,7 @@ These components require the [Faithlife Bootstrap base stylesheet](/bootstrap/st
 ### Inferred typeahead
 
 ```
-import { InferredTypeahead } from '@faithlife/styled-ui/dist/text-input.js';
+import { InferredTypeahead } from '@faithlife/styled-ui/dist/text-input';
 import '@faithlife/styled-ui/dist/text-input.css';
 ```
 
@@ -33,7 +33,7 @@ state: { value: 'Washington', confirmed: false }
 ### Inferred text input
 
 ```
-import { InferredText } from '@faithlife/styled-ui/dist/text-input.js';
+import { InferredText } from '@faithlife/styled-ui/dist/text-input';
 ```
 
 ```react

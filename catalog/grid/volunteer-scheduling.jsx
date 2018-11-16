@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-enterprise';
-import { Bootstrap } from '../../components/main.js';
+import { Bootstrap } from '../../components/main';
 import { getNextVolunteer, schedule } from './volunteers';
 
 const { Button, Row, Col } = Bootstrap;

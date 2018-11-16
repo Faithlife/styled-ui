@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../button/component.jsx';
-import { DropZone } from '../drop-zone/component.jsx';
-import { FileItem } from './file-item.jsx';
-import * as Styled from './styled.jsx';
+import { Button } from '../button/component';
+import { DropZone } from '../drop-zone/component';
+import { FileItem } from './file-item';
+import * as Styled from './styled';
 
 export class FilesSection extends PureComponent {
 	static propTypes = {

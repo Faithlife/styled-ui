@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { PopoverManager, PopoverReference, Popover } from '../main.js';
+import { PopoverManager, PopoverReference, Popover } from '../main';
 import { Calendar as CalendarIcon } from '../icons';
 import { colors } from '../shared-styles';
 import { dateFunctionProps } from '../date-picker/date-function-props';
-import { DatePicker } from '../date-picker/component.jsx';
-import * as Styled from './styled.jsx';
+import { DatePicker } from '../date-picker/component';
+import * as Styled from './styled';
 
 export class DatePickerInput extends PureComponent {
 	static propTypes = {

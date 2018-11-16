@@ -1,5 +1,5 @@
-export { BootstrapContainer, wrapBootstrap } from './bootstrap-container.jsx';
-export { mapFromInnerRef, mapToInnerRef } from './forwardref-wrapper.jsx';
+export { BootstrapContainer, wrapBootstrap } from './bootstrap-container';
+export { mapFromInnerRef, mapToInnerRef } from './forwardref-wrapper';
 
 const componentCache = new WeakMap();
 

@@ -10,7 +10,7 @@ Source: [`react-bootstrap-typeahead`](https://github.com/Faithlife/react-bootstr
 [More component demos](http://ericgio.github.io/react-bootstrap-typeahead/)
 
 ```
-import { Typeahead } from '@faithlife/styled-ui/dist/text-input.js';
+import { Typeahead } from '@faithlife/styled-ui/dist/text-input';
 import '@faithlife/styled-ui/dist/text-input.css';
 ```
 

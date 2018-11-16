@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../../main.js';
-import { SimpleModal } from '../../simple-modal/component.jsx';
-import * as Styled from '../styled.jsx';
-import { SearchResult } from './search-result.jsx';
-import { CreateGroup } from './create-group.jsx';
+import { Button } from '../../main';
+import { SimpleModal } from '../../simple-modal/component';
+import * as Styled from '../styled';
+import { SearchResult } from './search-result';
+import { CreateGroup } from './create-group';
 
 const defaultResultsTopMargin = -64;
 

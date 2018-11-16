@@ -8,7 +8,7 @@ import {
 	OKCircle,
 	SolidTriangleIcon as _SolidTriangleIcon,
 } from '../icons';
-import { Popover, PopoverBody } from './bootstrap.jsx';
+import { Popover, PopoverBody } from './bootstrap';
 
 const SolidTriangleIcon = styled(_SolidTriangleIcon)`
 	transform: rotateZ(90deg);

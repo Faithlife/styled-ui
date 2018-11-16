@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { forwardClassRef } from '../utils/forwardref-wrapper.jsx';
-import * as Styled from './styled.jsx';
-import { BaseButton } from './base-button.jsx';
+import { forwardClassRef } from '../utils/forwardref-wrapper';
+import * as Styled from './styled';
+import { BaseButton } from './base-button';
 
 /** Standard button with transition styles */
 export const Button = forwardClassRef(

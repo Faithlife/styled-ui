@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button, Bootstrap } from '../components/main.js';
+import { Button, Bootstrap } from '../components/main';
 
 const { Popover, PopoverBody } = Bootstrap;
 

@@ -1,3 +1,3 @@
 import './custom.scss';
 
-export { default as Bootstrap } from './base-components.jsx';
+export { default as Bootstrap } from './base-components';

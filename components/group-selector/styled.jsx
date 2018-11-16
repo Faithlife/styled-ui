@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ScrollArea from 'react-scrollbar';
-import { resetStyles } from '../utils/index.js';
+import { resetStyles } from '../utils/index';
 
 export const GroupSelector = styled.div`
 	${resetStyles};

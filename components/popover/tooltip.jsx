@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Popover } from './component.jsx';
-import { PopoverManager, PopoverReference } from './popper-helpers.jsx';
+import { Popover } from './component';
+import { PopoverManager, PopoverReference } from './popper-helpers';
 
 export class Tooltip extends Component {
 	static propTypes = {

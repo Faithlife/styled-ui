@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../button/component.jsx';
+import { Button } from '../button/component';
 import { addSeparator } from '../utils';
 import {
 	convertBytesToFriendlyString,
 	mapMediaTypeToLabel,
 	mapMediaTypeToIcon,
 } from '../utils/file-utils';
-import * as Styled from './styled.jsx';
+import * as Styled from './styled';
 
 const fileLabelButtonWidthOverride = {
 	width: '100%',
