@@ -13,9 +13,9 @@ export class DatePickerInput extends PureComponent {
 		/** Functions that operate on a JS Date obejct.
 		 * The following functions must be provided:
 		 *
-		 * startOfWeek, startOfMonth, endOfWeek, endOfMonth, getYear, getMonth,getDate, addWeeks, addMonths,s ubMonths, isBefore, format,isValid
+		 * startOfWeek, startOfMonth, endOfWeek, endOfMonth, getYear, getMonth, getDate, addWeeks, addMonths, subMonths, isBefore, format, isValid
 		 *
-		 * For details on how these function should behave see date-fns documentation (v2) https://date-fns.org
+		 * For details on how these functions should behave see the date-fns (v2) documentation https://date-fns.org
 		 *
 		 */
 		dateFunctions: dateFunctionProps,
