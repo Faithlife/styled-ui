@@ -20,6 +20,7 @@ export const Header = styled.div`
 	white-space: nowrap;
 	border-bottom: none;
 	background: ${colors.white};
+	color: ${colors.gray66};
 	line-height: 32px;
 	font-weight: bold;
 `;
@@ -30,12 +31,13 @@ export const MonthLabel = styled.div`
 
 export const Week = styled.ul`
 	display: flex;
-	border-bottom: 1px solid ${colors.gray34};
+	border-bottom: 1px solid ${colors.gray14};
 	padding: 8px 0;
 	background: ${colors.white};
 	list-style: none;
 	margin: 0;
-	color: ${colors.gray34};
+	color: ${colors.gray22};
+	font-size: 12px;
 `;
 
 export const WeekDay = styled.li`
@@ -46,4 +48,5 @@ export const WeekDay = styled.li`
 
 export const Month = styled.div`
 	background: ${colors.white};
+	font-size: 14px;
 `;
