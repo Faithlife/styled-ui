@@ -1,3 +1,4 @@
 *.g.js
 **/*.less
 dist/*
+catalog/build/*
