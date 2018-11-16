@@ -138,7 +138,7 @@ export const LargeScrollView = styled(ScrollArea)`
 	border-radius: 4px;
 
 	.${LargeScrollViewContentClass} {
-		padding-top: 30px;
+		padding-top: ${props => (props.hideTitle ? '0' : '30px')};
 		position: unset;
 	}
 `;

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import { resetStyles } from '../utils';
 
 export const SimpleModal = styled.div`
+	${resetStyles};
 	margin: auto;
 	width: fit-content;
 	height: fit-content;

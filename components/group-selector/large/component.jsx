@@ -32,6 +32,8 @@ export class LargeGroupSelector extends React.Component {
 		onAdminRequestClick: PropTypes.func.isRequired,
 		/** Whether or not to show the group selector in place */
 		showInPlace: PropTypes.bool,
+		/** Whether or not to show the "Find Your Church in the Faithlife Group Directory" title */
+		hideTitle: PropTypes.bool,
 	};
 
 	state = {
@@ -194,15 +196,20 @@ export class LargeGroupSelector extends React.Component {
 				contentClassName={Styled.LargeScrollViewContentClass}
 				onScroll={this.handleScroll}
 				showInPlace={this.props.showInPlace}
+				hideTitle={this.props.hideTitle}
 				verticalScrollbarStyle={{
 					borderRadius: '6px',
 					marginTop: '1px',
 					marginBottom: '1px',
 				}}
 			>
-				<Styled.LargeTopGradient />
-				<Styled.LargeTitle>Find Your Church</Styled.LargeTitle>
-				<Styled.LargeSubtitle>in the Faithlife Church Directory</Styled.LargeSubtitle>
+				{!this.props.hideTitle && (
+					<div>
+						<Styled.LargeTopGradient />
+						<Styled.LargeTitle>Find Your Church</Styled.LargeTitle>
+						<Styled.LargeSubtitle>in the Faithlife Church Directory</Styled.LargeSubtitle>
+					</div>
+				)}
 				<Styled.CreateGroupWrapper fixed={this.state.createGroupFixed}>
 					<Styled.CreateGroupBackground scrollWidthDelta={this.state.scrollWidthDelta}>
 						<CreateGroup

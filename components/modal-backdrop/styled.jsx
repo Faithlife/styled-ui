@@ -11,5 +11,5 @@ export const Backdrop = styled.div`
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
-	z-index: 1050;
+	z-index: 999999;
 `;
