@@ -70,11 +70,11 @@ export class DatePicker extends Component {
 			<Fragment>
 				<Styled.Header>
 					<Styled.ChangeMonth onClick={this.decrementMonth} tabIndex="-1">
-						<Caret style={{ transform: 'scaleX(-1)', color: colors.flGray }} />
+						<Caret style={{ transform: 'scaleX(-1)', color: colors.gray66 }} />
 					</Styled.ChangeMonth>
 					<Styled.MonthLabel>{dateFunctions.format(currentMonth, 'MMMM yyyy')}</Styled.MonthLabel>
 					<Styled.ChangeMonth onClick={this.incrementMonth} tabIndex="-1">
-						<Caret style={{ color: colors.flGray }} />
+						<Caret style={{ color: colors.gray66 }} />
 					</Styled.ChangeMonth>
 				</Styled.Header>
 				<Styled.Week>

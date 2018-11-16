@@ -13,13 +13,16 @@ export class DatePickerInput extends PureComponent {
 		/** Functions that operate on a JS Date obejct.
 		 * The following functions must be provided:
 		 *
-		 * startOfWeek, startOfMonth, endOfWeek, endOfMonth, getYear, getMonth,getDate, addWeeks, addMonths,s ubMonths, isBefore, format,isValid,parseUserDateString
+		 * startOfWeek, startOfMonth, endOfWeek, endOfMonth, getYear, getMonth,getDate, addWeeks, addMonths,s ubMonths, isBefore, format,isValid
 		 *
 		 * For details on how these function should behave see date-fns documentation (v2) https://date-fns.org
 		 *
-		 * In addition, parseUserDateString should be a function that takes a string and returns a js date. For example: https://www.npmjs.com/package/chrono-node (depends on momentjs)
 		 */
 		dateFunctions: dateFunctionProps,
+		/**
+		 * parseUserDateString should be a function that takes a string and returns a js date. For example: https://www.npmjs.com/package/chrono-node (depends on momentjs)
+		 */
+		parseUserDateString: PropTypes.func.isRequired,
 		validate: PropTypes.func,
 		onBlur: PropTypes.func,
 		onChange: PropTypes.func.isRequired,
@@ -90,7 +93,7 @@ export class DatePickerInput extends PureComponent {
 			text,
 		});
 
-		const selectedDate = this.props.dateFunctions.parseUserDateString(text);
+		const selectedDate = this.props.parseUserDateString(text);
 		this.setState({ selectedDate });
 		this.props.onChange(selectedDate);
 	};

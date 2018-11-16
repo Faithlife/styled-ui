@@ -11,6 +11,7 @@ state: { selectedDate: null }
 	defaultSelectedDate={state.selectedDate || new Date()}
 	onChange={(date) => setState({ selectedDate: date })}
 	dateFunctions={dateFunctions}
+	parseUserDateString={parseUserDateString}
 	validate={() => true}
 />
 </div>

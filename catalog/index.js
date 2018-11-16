@@ -582,10 +582,10 @@ const pages = [
 					DatePickerInput,
 					dateFunctions: {
 						...dateFunctions,
-						parseUserDateString: str => {
-							const parsed = chrono.parseDate(str);
-							return parsed;
-						},
+					},
+					parseUserDateString: str => {
+						const parsed = chrono.parseDate(str);
+						return parsed;
 					},
 				},
 			},

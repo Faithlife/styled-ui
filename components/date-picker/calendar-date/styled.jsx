@@ -36,6 +36,7 @@ export const CalendarWeekDaySelected = styled.button`
 	${calendarWeekDayCss}
 	background: ${colors.blueBase};
 	color: ${colors.white};
+	border-radius: 2px;
 
 	&:hover {
 		background: ${colors.blueBase};
@@ -45,7 +46,7 @@ export const CalendarWeekDaySelected = styled.button`
 
 export const CalendarWeekDayGrayedOut = styled.div`
 	${calendarWeekDayCss}
-	color: ${colors.gray34};
+	color: ${colors.gray22};
 `;
 
 export const CalendarDateLabel = styled.div`

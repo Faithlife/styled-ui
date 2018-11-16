@@ -14,5 +14,4 @@ export const dateFunctionProps = PropTypes.shape({
 	isBefore: PropTypes.func.isRequired,
 	format: PropTypes.func.isRequired,
 	isValid: PropTypes.func.isRequired,
-	parseUserDateString: PropTypes.func.isRequired,
 }).isRequired;
