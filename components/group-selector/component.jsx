@@ -21,7 +21,7 @@ const groupShape = PropTypes.shape({
 	claimable: PropTypes.bool,
 });
 
-/** Styled group selector control */
+/** Small group selector for searching Faithlife groups. Launches a modal containing LargeGroupSelector in some cases. */
 export class GroupSelector extends React.Component {
 	static propTypes = {
 		/** Selects view state of group selector */

@@ -6,6 +6,9 @@ import { Popper } from 'react-popper';
 import { colors } from '../shared-styles';
 import * as Styled from './styled';
 
+/** Positioning helper used to display content above another element.
+ *  Refs are not supported, please use PopoverManager and PopoverReference to handle positioning.
+ */
 export class Popover extends React.Component {
 	static propTypes = {
 		/** Is the popover open */

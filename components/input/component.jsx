@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { applyVariations } from '../utils';
 import * as Styled from './styled';
 
+/** Standard text input with no validation */
 export class Input extends PureComponent {
 	static propTypes = {
 		value: PropTypes.string,

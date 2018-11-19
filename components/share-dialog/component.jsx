@@ -11,7 +11,7 @@ import { CopyToClipboard } from './copy-to-clipboard';
 import * as Styled from './styled';
 
 /**
- * ShareDialog
+ * Branded Faithlife modal to share a link to social platforms
  */
 export class ShareDialog extends React.Component {
 	static propTypes = {

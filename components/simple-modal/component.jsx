@@ -8,7 +8,7 @@ import { debouncedResize } from '../utils';
 import * as Styled from './styled';
 
 /**
- * SimpleModal
+ * Simple modal with just a close icon and no padding. For a standardized modal layout, please see: Modal
  */
 export class SimpleModal extends React.Component {
 	static propTypes = {

@@ -36,6 +36,7 @@ function generateWeeks(month, dateFunctions) {
 	return weeks;
 }
 
+/** Standard date picker control (with support for many different date parsing libraries) */
 export class DatePicker extends Component {
 	static propTypes = {
 		selectedDate: PropTypes.instanceOf(Date),

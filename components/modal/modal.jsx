@@ -9,7 +9,7 @@ import { DefaultModalFooter } from './default-modal-footer';
 import * as Styled from './styled';
 
 /**
- * Modal
+ * Modal with flexible contents. See also: SimpleModal
  */
 export class Modal extends React.Component {
 	static propTypes = {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import * as Styled from './styled';
 
-/** Styled checkbox control (uses a button instead of an input) */
+/** Styled checkbox control with consistent styling across platforms */
 export function Checkbox({ onClick, title, isChecked, theme, type, children, className }) {
 	return (
 		<ThemeProvider theme={theme}>

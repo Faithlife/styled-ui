@@ -5,6 +5,7 @@ import { DropZone } from '../drop-zone';
 import { FileItem } from './file-item';
 import * as Styled from './styled';
 
+/** List of files (with icons and drop zone) */
 export class FilesSection extends PureComponent {
 	static propTypes = {
 		/** The files to render. */

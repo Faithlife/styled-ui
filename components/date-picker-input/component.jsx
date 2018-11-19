@@ -7,6 +7,7 @@ import { dateFunctionProps } from '../date-picker/date-function-props';
 import { DatePicker } from '../date-picker/component';
 import * as Styled from './styled';
 
+/** Flexible date picker input (with support for many date parsing libraries) */
 export class DatePickerInput extends PureComponent {
 	static propTypes = {
 		defaultSelectedDate: PropTypes.instanceOf(Date),

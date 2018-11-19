@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Popover } from './component';
 import { PopoverManager, PopoverReference } from './popper-helpers';
 
+/** Simple tooltip that uses popovers internally. Does not support custom positioning. */
 export class Tooltip extends Component {
 	static propTypes = {
 		...Popover.propTypes,

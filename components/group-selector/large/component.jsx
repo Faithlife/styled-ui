@@ -8,6 +8,7 @@ import { CreateGroup } from './create-group';
 
 const defaultResultsTopMargin = -64;
 
+/** Large group selector for searching Faithlife groups. Can be displayed inline or inside a modal. */
 export class LargeGroupSelector extends React.Component {
 	static propTypes = {
 		/** Toggles the modal state open and closed */
