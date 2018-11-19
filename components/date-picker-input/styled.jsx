@@ -16,7 +16,6 @@ export const Input = styled.input`
 	font-size: 1rem;
 	line-height: 1.3;
 	font-family: inherit;
-	color: @font-color;
 	border: 1px solid ${colors.borderColor};
 	border-radius: 3px;
 	height: 32px;
