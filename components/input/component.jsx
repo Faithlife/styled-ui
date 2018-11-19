@@ -50,7 +50,7 @@ export class Input extends PureComponent {
 		} = this.props;
 
 		const { component: MappedStyledComponent, filteredProps } = applyVariations(
-			Styled.Input, // this is required but we don't want it in the generated docs so don't include it above
+			Styled.Input,
 			Styled.variationMap,
 			inputProps,
 		);
