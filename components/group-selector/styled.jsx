@@ -213,6 +213,12 @@ export const CreateGroup = styled.div`
 	background-color: white;
 `;
 
+export const InputWrapper = styled.div`
+	& > * {
+		width: 100%;
+	}
+`;
+
 export const CreateGroupButtonWrapper = styled.div`
 	display: flex;
 	align-items: center;

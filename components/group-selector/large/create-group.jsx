@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Bootstrap } from '../../../components/main';
 import * as Styled from '../styled';
-
-const { Input } = Bootstrap;
+import { Input } from '../../input';
 
 export class CreateGroup extends React.Component {
 	static propTypes = {
@@ -28,24 +26,28 @@ export class CreateGroup extends React.Component {
 						<Styled.CreateGroupRequiredStar>*</Styled.CreateGroupRequiredStar>
 					)}
 				</Styled.CreateGroupLabel>
-				<Input
-					innerRef={this.churchNameInput}
-					value={this.props.newChurchName}
-					onChange={this.props.onChurchNameInputChange}
-					placeholder="Church name"
-					bsSize="lg"
-				/>
+				<Styled.InputWrapper>
+					<Input
+						innerRef={this.churchNameInput}
+						value={this.props.newChurchName}
+						onChange={this.props.onChurchNameInputChange}
+						placeholder="Church name"
+						medium
+					/>
+				</Styled.InputWrapper>
 				<Styled.CreateGroupLabel>
 					Church Location{this.props.showRequiredStars && (
 						<Styled.CreateGroupRequiredStar>*</Styled.CreateGroupRequiredStar>
 					)}
 				</Styled.CreateGroupLabel>
-				<Input
-					value={this.props.newChurchLocation}
-					placeholder="City, State"
-					onChange={this.props.onChurchLocationInputChange}
-					bsSize="lg"
-				/>
+				<Styled.InputWrapper>
+					<Input
+						value={this.props.newChurchLocation}
+						placeholder="City, State"
+						onChange={this.props.onChurchLocationInputChange}
+						medium
+					/>
+				</Styled.InputWrapper>
 			</Styled.CreateGroup>
 		);
 	}
