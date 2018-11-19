@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../button/component';
-import { DropZone } from '../drop-zone/component';
+import { Button } from '../button';
+import { DropZone } from '../drop-zone';
 import { FileItem } from './file-item';
 import * as Styled from './styled';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../../main';
-import { SimpleModal } from '../../simple-modal/component';
+import { SimpleModal } from '../../simple-modal';
 import * as Styled from '../styled';
 import { SearchResult } from './search-result';
 import { CreateGroup } from './create-group';

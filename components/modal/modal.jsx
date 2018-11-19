@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import { ThemeProvider } from 'styled-components';
 import { debouncedResize } from '../utils';
-import { ModalBackdrop } from '../modal-backdrop/component';
+import { ModalBackdrop } from '../modal-backdrop';
 import { ModalHeader } from './modal-header';
 import { DefaultModalFooter } from './default-modal-footer';
 import * as Styled from './styled';

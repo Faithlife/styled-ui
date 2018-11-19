@@ -1,5 +1,5 @@
 import React, { Component, createRef } from 'react';
-import { InferredTypeahead, InferredText } from '../../components/text-input/index';
+import { InferredTypeahead, InferredText } from '../../components/text-input';
 import { Bootstrap } from '../../components/main';
 
 const { FormGroup, Button } = Bootstrap;

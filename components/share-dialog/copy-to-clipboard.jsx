@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Clipboard from 'clipboard/dist/clipboard.min';
 import debounce from 'lodash.debounce';
-import { Button } from '../button/component';
-import { Input } from '../input/component';
+import { Button } from '../button';
+import { Input } from '../input';
 import * as Styled from './styled';
 
 export class CopyToClipboard extends React.Component {

@@ -4,7 +4,7 @@ import { Caret } from '../icons';
 import { colors } from '../shared-styles';
 import { dateFunctionProps } from './date-function-props';
 import * as Styled from './styled';
-import { CalendarWeek } from './calendar-week/component';
+import { CalendarWeek } from './calendar-week';
 
 function generateWeek(sunday, { getYear, getMonth, getDate }) {
 	const week = [];

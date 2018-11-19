@@ -3,18 +3,19 @@
 // We could use tree-shaking in the future to prune out unused exports,
 // but not all projects are able to use that right now.
 
-export { Checkbox } from './check-box/component';
-export { Radio } from './radio/component';
-export { Button } from './button/component';
 export { AnchorButton } from './button/anchor-button';
 export { Bootstrap } from './bootstrap';
-export { LoadingSpinner } from './loading-spinner/component';
+export { Button } from './button';
+export { Checkbox } from './check-box';
+export { Collapse } from './collapse';
+export { DatePicker } from './date-picker';
+export { DatePickerInput } from './date-picker-input';
+export { DropZone } from './drop-zone';
+export { FilesSection } from './files-section';
+export { HelpBox } from './help-box';
+export { Input } from './input';
+export { LoadingSpinner } from './loading-spinner';
 export { Modal, ModalFooter } from './modal';
-export { SimpleModal } from './simple-modal/component';
-export { HelpBox } from './help-box/component';
-export { Collapse } from './collapse/component';
-export { FilesSection } from './files-section/component';
-export { DropZone } from './drop-zone/component';
 export { Popover, PopoverManager, PopoverReference, Tooltip } from './popover';
-export { DatePickerInput } from './date-picker-input/component';
-export { DatePicker } from './date-picker/component';
+export { Radio } from './radio';
+export { SimpleModal } from './simple-modal';
