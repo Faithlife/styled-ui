@@ -241,3 +241,9 @@ export const ShareIcon = props => (
 		</g>
 	</svg>
 );
+
+export const ArrowUp = props => (
+	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
+		<polygon fill="currentColor" points="4 6 8 9.5 8 2.5" transform="rotate(90 6 6)" />
+	</svg>
+);
