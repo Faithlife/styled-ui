@@ -27,6 +27,7 @@ export const PopoverContent = styled.div`
 	text-align: center;
 	border: ${({ styleOverrides }) => (styleOverrides.border ? styleOverrides.border : 'none')};
 	box-shadow: ${({ styleOverrides }) => (styleOverrides.hideShadow ? 'none' : colors.boxShadow)};
+	white-space: normal;
 	${({ theme }) => (theme.textColor ? `color: ${theme.textColor}` : '')};
 `;
 
@@ -35,6 +36,7 @@ export const Arrow = styled.div`
 	height: 25px;
 	position: absolute;
 	overflow: hidden;
+	pointer-events: none;
 
 	&::after {
 		content: '';
