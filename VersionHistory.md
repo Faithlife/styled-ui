@@ -1,5 +1,16 @@
 # Changelog
 
+### 4.1.0
+* **New component**: Date Picker [#71](https://github.com/Faithlife/styled-ui/pull/71)
+* **New component**: Popover [#68](https://github.com/Faithlife/styled-ui/pull/68)
+* **Deprecated**: The `GroupSelectorModal` named export is deprecated in favor of `LargeGroupSelector`, which resolves to the same component
+* Group selector can now be placed inline, and is exported as `LargeGroupSelector`. [#80](https://github.com/Faithlife/styled-ui/pull/80)
+* Modals can now be rendered with no title border [#78](https://github.com/Faithlife/styled-ui/pull/78)
+* Fixed a flex issue with buttons [#70](https://github.com/Faithlife/styled-ui/pull/70)
+* Fixed a z-index issue with Modal, which now attaches as a child to `body`. If you were counting on Modal inheriting styles from its parent div, please re-apply the styles you want to the modal contents! [#83](https://github.com/Faithlife/styled-ui/pull/83) [#76](https://github.com/Faithlife/styled-ui/pull/76)
+* Fixed overflow issues with Modal [#72](https://github.com/Faithlife/styled-ui/pull/72)
+* Removed deprecated `TextInput` control. [Commit](https://github.com/Faithlife/styled-ui/commit/28e954462f63ef15a17eb76405f463f67ab9e5c8)
+
 ### 4.0.1
 * Fixed a production-only crash with clipboard.js by importing a minified version
 
