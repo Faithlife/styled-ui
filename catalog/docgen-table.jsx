@@ -3,9 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button, Bootstrap } from '../components/main';
-
-const { Popover, PopoverBody } = Bootstrap;
+import { Button, Popover, PopoverManager, PopoverReference } from '../components/main';
 
 const Container = styled.div`
 	font-family: 'Source Sans Pro';
@@ -43,31 +41,37 @@ class CollapsableText extends Component {
 		children: PropTypes.node.isRequired,
 	};
 
-	buttonRef = React.createRef();
-
 	state = { isPopoverOpen: false };
+
+	componentWillUnmount() {
+		document.removeEventListener('click', this.handleCloseTooltip);
+	}
+
+	handleCloseTooltip = () => {
+		this.setState({ isPopoverOpen: false });
+		document.removeEventListener('click', this.handleCloseTooltip);
+	};
+
+	handleOpenTooltip = () => {
+		if (this.state.isPopoverOpen) {
+			return;
+		}
+		document.addEventListener('click', this.handleCloseTooltip);
+		this.setState({ isPopoverOpen: true });
+	};
 
 	render() {
 		return (
-			<div id={`fl-inferredbase-${this.id}`} ref={this.buttonRef}>
-				<Button
-					primaryOutline
-					small
-					onClick={state => this.setState({ isPopoverOpen: !state.isPopoverOpen })}
-				>
-					Reveal
-				</Button>
-				{this.state.isPopoverOpen && (
-					<Popover
-						placement="top"
-						isOpen={this.state.isPopoverOpen}
-						target={this.buttonRef.current}
-						toggle={() => this.setState({ isPopoverOpen: false })}
-					>
-						<PopoverBody>{this.props.children}</PopoverBody>
-					</Popover>
-				)}
-			</div>
+			<PopoverManager>
+				<PopoverReference>
+					<Button primaryOutline small onClick={this.handleOpenTooltip}>
+						Reveal
+					</Button>
+				</PopoverReference>
+				<Popover isOpen={this.state.isPopoverOpen} placement="top">
+					{this.props.children}
+				</Popover>
+			</PopoverManager>
 		);
 	}
 }

@@ -4,13 +4,10 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-enterprise';
 import styled from 'styled-components';
 import debounce from 'lodash.debounce';
-import { Bootstrap } from '../../components/main';
+import { Button, Popover, PopoverReference, PopoverManager } from '../../components/main';
 import { KebabVertical } from '../../components/icons';
-import { BootstrapContainer } from '../../components/utils';
 import { colors } from '../../components/shared-styles';
 import members from './members.json';
-
-const { Button, Popover, ListGroup, ListGroupItem } = Bootstrap;
 
 const IconContainer = styled.div`
 	display: flex;
@@ -28,10 +25,14 @@ const IconButton = styled.button`
 	}
 `;
 
-class KebabCell extends Component {
-	state = { dropDownOpen: false };
+const ButtonWrapper = styled.div`
+	&& button :not(:last-of-type) {
+		margin-right: 4px;
+	}
+`;
 
-	buttonRef = React.createRef();
+class KebabCell extends Component {
+	state = { dropDownOpen: true };
 
 	toggle = () => {
 		this.setState(state => ({ dropDownOpen: !state.dropDownOpen }));
@@ -40,27 +41,16 @@ class KebabCell extends Component {
 	render() {
 		return (
 			<IconContainer>
-				<IconButton onClick={this.toggle} type="button" innerRef={this.buttonRef}>
-					<KebabVertical />
-				</IconButton>
-				{this.state.dropDownOpen && (
-					<Popover
-						target={this.buttonRef.current}
-						isOpen={this.state.dropDownOpen}
-						toggle={this.toggle}
-						placement="bottom-end"
-						hideArrow
-					>
-						<ListGroup flush>
-							<ListGroupItem active tag="button" action>
-								Send Message
-							</ListGroupItem>
-							<ListGroupItem tag="button" action>
-								View Details
-							</ListGroupItem>
-						</ListGroup>
+				<PopoverManager>
+					<PopoverReference>
+						<IconButton onClick={this.toggle} type="button">
+							<KebabVertical />
+						</IconButton>
+					</PopoverReference>
+					<Popover container="body" isOpen={this.state.dropDownOpen} placement="top">
+						Some sample content
 					</Popover>
-				)}
+				</PopoverManager>
 			</IconContainer>
 		);
 	}
@@ -158,15 +148,15 @@ export class MemberDirectory extends Component {
 
 	render() {
 		return (
-			<BootstrapContainer>
-				<div>
-					<Button className="m-1" size="sm" outline color="primary" onClick={this.updateGrid}>
+			<div>
+				<ButtonWrapper>
+					<Button primaryOutline small onClick={this.updateGrid}>
 						Update grid
 					</Button>
-					<Button className="m-1" size="sm" outline color="primary" onClick={this.toggleToolPanel}>
+					<Button primaryOutline small onClick={this.toggleToolPanel}>
 						Toggle tool panel
 					</Button>
-				</div>
+				</ButtonWrapper>
 				<div style={{ height: 525, width: '100%' }} className="ag-theme-faithlife">
 					<AgGridReact
 						colResizeDefault="shift"
@@ -193,7 +183,7 @@ export class MemberDirectory extends Component {
 						rowStyle={{ 'border-bottom': '1px solid #dbdbdb' }}
 					/>
 				</div>
-			</BootstrapContainer>
+			</div>
 		);
 	}
 }

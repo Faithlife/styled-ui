@@ -3,10 +3,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-enterprise';
-import { Bootstrap } from '../../components/main';
+import { Button } from '../../components/main';
 import { getNextVolunteer, schedule } from './volunteers';
-
-const { Button, Row, Col } = Bootstrap;
 
 const availability = {
 	confirmed: 'confirmed',
@@ -102,7 +100,7 @@ class VolunteerEditor extends Component {
 	}
 }
 
-class GridDemo extends Component {
+export class VolunteerScheduling extends Component {
 	state = {
 		rowData: schedule.roles.map(role => ({
 			role,
@@ -185,13 +183,9 @@ class GridDemo extends Component {
 	render() {
 		return (
 			<div>
-				<Row>
-					<Col>
-						<Button className="m-1" size="sm" outline color="primary" onClick={this.updateGrid}>
-							Update grid
-						</Button>
-					</Col>
-				</Row>
+				<Button primaryOutline small onClick={this.updateGrid}>
+					Update grid
+				</Button>
 				<div style={{ height: 525, width: '100%' }} className="ag-theme-faithlife">
 					<AgGridReact
 						toolPanelSuppressSideButtons
@@ -209,20 +203,6 @@ class GridDemo extends Component {
 						rowStyle={{ 'border-bottom': '1px solid #dbdbdb' }}
 					/>
 				</div>
-			</div>
-		);
-	}
-}
-
-export class VolunteerScheduling extends Component {
-	render() {
-		return (
-			<div>
-				<Row>
-					<Col>
-						<GridDemo />
-					</Col>
-				</Row>
 			</div>
 		);
 	}

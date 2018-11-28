@@ -1,9 +1,6 @@
-import * as _Bootstrap from 'reactstrap';
 import styled from 'styled-components';
 import { thickness, colors } from '../shared-styles';
-import { resetStyles, wrapBootstrap } from '../utils';
-
-export const Input = wrapBootstrap(_Bootstrap.Input);
+import { resetStyles } from '../utils';
 
 export const ShareAnchor = styled.a`
 	${resetStyles};
