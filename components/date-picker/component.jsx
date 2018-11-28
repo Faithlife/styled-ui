@@ -39,8 +39,17 @@ function generateWeeks(month, dateFunctions) {
 /** Standard date picker control (with support for many different date parsing libraries) */
 export class DatePicker extends Component {
 	static propTypes = {
+		/** Sets the selected date */
 		selectedDate: PropTypes.instanceOf(Date),
+		/** Sets the selected date range (use with asDateRange prop) */
+		selectedDateRange: PropTypes.shape({
+			start: PropTypes.instanceOf(Date),
+			end: PropTypes.instanceOf(Date),
+		}),
+		/** Returns a daate when selected. If asDateRangePicker is true, it will return a date range object matching the selectedDateRange prop shape */
 		setSelectedDate: PropTypes.func.isRequired,
+		/** specifies that the component should function as a date range picker */
+		asDateRangePicker: PropTypes.bool,
 		validate: PropTypes.func,
 		dateFunctions: dateFunctionProps,
 	};
@@ -58,6 +67,25 @@ export class DatePicker extends Component {
 		});
 	};
 
+	setSelectedDate = date => {
+		const { dateFunctions, selectedDateRange, asDateRangePicker, setSelectedDate } = this.props;
+		if (asDateRangePicker) {
+			let newDateRange;
+			if (selectedDateRange && selectedDateRange.start && !selectedDateRange.end) {
+				if (dateFunctions.isBefore(selectedDateRange.start, date)) {
+					newDateRange = { start: selectedDateRange.start, end: date };
+				} else {
+					newDateRange = { start: date, end: selectedDateRange.start };
+				}
+			} else {
+				newDateRange = { start: date };
+			}
+			setSelectedDate(newDateRange);
+		} else {
+			setSelectedDate(date);
+		}
+	};
+
 	decrementMonth = () =>
 		this.setMonth(this.props.dateFunctions.subMonths(this.state.currentMonth, 1));
 
@@ -65,8 +93,15 @@ export class DatePicker extends Component {
 		this.setMonth(this.props.dateFunctions.addMonths(this.state.currentMonth, 1));
 
 	render() {
-		const { selectedDate, dateFunctions } = this.props;
+		const {
+			selectedDate,
+			dateFunctions,
+			selectedDateRange,
+			asDateRangePicker,
+			validate,
+		} = this.props;
 		const { currentMonth, weeks } = this.state;
+
 		return (
 			<Fragment>
 				<Styled.Header>
@@ -93,10 +128,12 @@ export class DatePicker extends Component {
 							currentMonth={dateFunctions.getMonth(currentMonth)}
 							days={week}
 							key={`week-${week[0]}`}
-							selectedDate={selectedDate}
-							setSelectedDate={this.props.setSelectedDate}
-							validate={this.props.validate}
-							dateFunctions={this.props.dateFunctions}
+							selectedDate={asDateRangePicker ? null : selectedDate}
+							selectedDateRange={asDateRangePicker ? selectedDateRange : null}
+							asDateRangePicker={asDateRangePicker}
+							setSelectedDate={this.setSelectedDate}
+							validate={validate}
+							dateFunctions={dateFunctions}
 						/>
 					))}
 				</Styled.Month>
