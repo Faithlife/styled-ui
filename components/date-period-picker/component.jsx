@@ -7,6 +7,10 @@ import * as Styled from './styled';
 
 const DATE_FORMAT_STRING = 'M/d/yyyy';
 
+/**
+ * DatePicker with predefined options for periods (e.g. last 7 days, trailing year)
+ * Designed to be shown within a popover control
+ */
 export class DatePeriodPicker extends PureComponent {
 	static propTypes = {
 		datePeriods: PropTypes.arrayOf(
@@ -25,7 +29,7 @@ export class DatePeriodPicker extends PureComponent {
 		}),
 		/** Function to parse a date of format M/d/yyyy into a date object. See https://date-fns.org/v2.0.0-alpha.25/docs/parse for details */
 		parseDate: PropTypes.func.isRequired,
-		/** Returns a daate when selected. If asDateRangePicker is true, it will return a date range object matching the selectedDateRange prop shape */
+		/** Returns a date when selected. If asDateRangePicker is true, it will return a date range object matching the selectedDateRange prop shape */
 		setSelectedDate: PropTypes.func.isRequired,
 		/** Takes a date as a parameter and returns false if that date is invalid */
 		validate: PropTypes.func,
