@@ -39,16 +39,16 @@ export class Tooltip extends Component {
 		const { tooltipIsOpen } = this.state;
 		return (
 			<PopoverManager>
-				<div
+				<PopoverReference
 					onMouseEnter={this.handleMouseEnter}
 					onMouseLeave={this.handleMouseLeave}
 					onClick={this.hideTooltip}
 				>
-					<PopoverReference>{children}</PopoverReference>
-					<Popover {...otherProps} isOpen={tooltipIsOpen || isOpen}>
-						{text}
-					</Popover>
-				</div>
+					{children}
+				</PopoverReference>
+				<Popover {...otherProps} isOpen={tooltipIsOpen || isOpen}>
+					{text}
+				</Popover>
 			</PopoverManager>
 		);
 	}
