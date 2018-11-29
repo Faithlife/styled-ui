@@ -21,7 +21,8 @@ export const getPlacement = placement => {
 export const PopoverContent = styled.div`
 	position: absolute;
 	padding: ${({ styleOverrides }) => styleOverrides.padding || thickness.twelve};
-	${({ styleOverrides }) => styleOverrides.minWidth == null ? '' : `min-width: ${styleOverrides.minWidth}px`};
+	${({ styleOverrides }) =>
+		styleOverrides.minWidth == null ? '' : `min-width: ${styleOverrides.minWidth}px`};
 	max-width: ${({ styleOverrides }) => styleOverrides.width || maxWidth}px;
 	background-color: ${({ theme }) => theme.backgroundColor};
 	border-radius: 3px;
