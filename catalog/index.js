@@ -10,23 +10,23 @@ import {
 	Bootstrap,
 	Button,
 	Checkbox,
-	Radio,
+	Collapse,
+	DatePickerInput,
+	DropZone,
+	FilesSection,
+	HelpBox,
+	Input,
+	LoadingSpinner,
 	Modal,
 	ModalFooter,
-	LoadingSpinner,
-	HelpBox,
-	Collapse,
-	FilesSection,
-	DropZone,
-	SimpleModal,
 	Popover,
 	PopoverManager,
 	PopoverReference,
+	Radio,
+	SimpleModal,
 	Tooltip,
-	DatePickerInput,
 } from '../components/main';
 import { BaseButton } from '../components/button/base-button';
-import { BootstrapContainer } from '../components/utils';
 import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
@@ -189,7 +189,7 @@ const components = [
 				path: '/collapse/variations',
 				title: 'Collapse Variations',
 				content: pageLoader(() => import('./collapse/variations.md')),
-				imports: { Collapse, BootstrapContainer, Button: Bootstrap.Button },
+				imports: { Collapse, Button },
 			},
 			{
 				path: '/collapse/documentation',
@@ -224,7 +224,7 @@ const components = [
 				content: pageLoader(() => import('./group-selector/variations.md')),
 				imports: {
 					GroupSelector,
-					Button: Bootstrap.Button,
+					Button,
 					GroupSelectorDemo: styled.div`
 						font-family: Source Sans Pro;
 						color: #333333;
@@ -316,7 +316,7 @@ const components = [
 				title: 'Modal Variations',
 				content: pageLoader(() => import('./modal/variations.md')),
 				imports: {
-					Input: Bootstrap.Input,
+					Input,
 					Modal,
 					ModalFooter,
 					Button,
@@ -492,7 +492,7 @@ const components = [
 				title: 'Share Dialog Variations',
 				content: pageLoader(() => import('./share-dialog/variations.md')),
 				imports: {
-					Input: Bootstrap.Input,
+					Input,
 					Modal,
 					ModalFooter,
 					Button,

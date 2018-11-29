@@ -306,7 +306,7 @@ state: {
 		onJoinGroupClick={() => {alert("Should Join the group, or request")}}
 		onAdminRequestClick={() => {alert("Admin access requested")}}
 	/>
-	<Button color="primary" onClick={() => {setState({isOpen: true})}}>Open Modal</Button>
+	<Button primary medium onClick={() => {setState({isOpen: true})}}>Open Modal</Button>
 </LargeGroupSelectorDemo>
 ```
 
