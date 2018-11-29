@@ -16,7 +16,7 @@ const SolidTriangleIcon = styled(_SolidTriangleIcon)`
 	height: 8px;
 	width: 8px;
 	margin-left: 8px;
-	margin-top: -4px;
+	margin-top: -6px;
 `;
 
 const RelativeContainer = styled.div`

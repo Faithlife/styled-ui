@@ -8,7 +8,12 @@ import { InferredBase } from './inferred-base';
 const StyledTypeahead = mapFromInnerRef(styled(mapToInnerRef(props => <Typeahead {...props} />))`
 	&& .rbt-input,
 	&& .rbt-input:focus {
-		${props => (props.inferred ? 'color: #006099' : '')};
+		${props =>
+			props.inferred
+				? `
+		color: #006099;
+		padding-right: 44px;`
+				: ''};
 	}
 `);
 

@@ -26,6 +26,10 @@ const StyledAsyncTypeahead = styled(_AsyncTypeahead)`
 		background-color: inherit;
 	}
 
+	&& .rbt-input {
+		padding-right: 16px;
+	}
+
 	&&& {
 		.rbt-token-remove-button {
 			top: 0;
@@ -38,6 +42,10 @@ const StyledTypeahead = styled(_Typeahead)`
 		padding: 0;
 		font-weight: bold;
 		background-color: inherit;
+	}
+
+	&& .rbt-input {
+		padding-right: 16px;
 	}
 
 	&&& {
