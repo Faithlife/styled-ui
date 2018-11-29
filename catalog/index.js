@@ -61,12 +61,7 @@ function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
 }
 
-const pages = [
-	{
-		path: '/',
-		title: 'Welcome',
-		content: pageLoader(() => import('./WELCOME.md')),
-	},
+const components = [
 	{
 		title: 'Bootstrap',
 		pages: [
@@ -598,6 +593,23 @@ const pages = [
 			},
 		],
 	},
+].sort((a, b) => {
+	if (a.title < b.title) {
+		return -1;
+	}
+	if (a.title > b.title) {
+		return 1;
+	}
+	return 0;
+});
+
+const pages = [
+	{
+		path: '/',
+		title: 'Welcome',
+		content: pageLoader(() => import('./WELCOME.md')),
+	},
+	...components,
 ];
 
 ReactDOM.render(
