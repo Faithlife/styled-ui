@@ -39,6 +39,7 @@ import { InferredTextFocusDemo, InferredTypeaheadFocusDemo } from './text-input/
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
 import '../dist/main.css';
+import '../dist/text-input.css';
 import '../dist/ag-grid.css';
 
 const ButtonDemo = styled.div`
