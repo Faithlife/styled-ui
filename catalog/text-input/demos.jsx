@@ -39,12 +39,7 @@ export class InferredTextFocusDemo extends Component {
 		return (
 			<div>
 				<div>
-					<Button
-						className="mb-3"
-						size="md"
-						color="primary"
-						onClick={() => this.inputRef.current.focus()}
-					>
+					<Button primary medium onClick={() => this.inputRef.current.focus()}>
 						Focus input
 					</Button>
 				</div>

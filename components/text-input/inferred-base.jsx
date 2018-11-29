@@ -8,7 +8,7 @@ import {
 	OKCircle,
 	SolidTriangleIcon as _SolidTriangleIcon,
 } from '../icons';
-import { Popover, PopoverBody } from './bootstrap';
+import { Tooltip } from '../popover';
 
 const SolidTriangleIcon = styled(_SolidTriangleIcon)`
 	transform: rotateZ(90deg);
@@ -16,6 +16,7 @@ const SolidTriangleIcon = styled(_SolidTriangleIcon)`
 	height: 8px;
 	width: 8px;
 	margin-left: 8px;
+	margin-top: -4px;
 `;
 
 const RelativeContainer = styled.div`
@@ -35,10 +36,13 @@ const IndicatorContainer = styled.div`
 	}
 `;
 
+const TooltipContents = styled.div`
+	text-align: initial;
+	cursor: initial;
+`;
+
 const StyledParagraph = styled.p`
 	&& {
-		margin-bottom: 4px;
-		line-height: 1.14em;
 		color: #575251;
 
 		&:last-of-type {
@@ -80,8 +84,6 @@ export class InferredBase extends Component {
 
 	state = { isPopoverOpen: false };
 
-	containerRef = React.createRef();
-
 	render() {
 		const { confidence, confidenceSource, onConfirm } = this.props;
 		const ConfidenceIcon =
@@ -93,42 +95,38 @@ export class InferredBase extends Component {
 				<LightBulbL />
 			) : null;
 
+		const tooltipContents = (
+			<TooltipContents>
+				<StyledParagraph>
+					Value guessed with {Math.round(confidence * 100)}% confidence.<br />
+					Click OK if you can confirm value is correct, or delete or change the value.
+				</StyledParagraph>
+				<StyledParagraph>Source: {confidenceSource}</StyledParagraph>
+			</TooltipContents>
+		);
+
 		return (
 			<RelativeContainer className={this.props.className}>
 				{this.props.children({ inferred: ConfidenceIcon != null })}
 				<IndicatorContainer>
-					<ConfidenceIconContainer
-						onMouseEnter={() => this.setState({ isPopoverOpen: true })}
-						onMouseLeave={() => this.setState({ isPopoverOpen: false })}
-						onClick={() => {
-							if (this.state.isPopoverOpen) {
-								onConfirm();
-							} else {
-								this.setState({ isPopoverOpen: true });
-							}
-						}}
-						innerRef={this.containerRef}
-					>
-						{this.state.isPopoverOpen && ConfidenceIcon != null ? <OKCircle /> : ConfidenceIcon}
-					</ConfidenceIconContainer>
-					{this.props.isDropdown && <SolidTriangleIcon />}
+					<Tooltip text={tooltipContents} styleOverrides={{ minWidth: 300 }} placement="top-end">
+						<ConfidenceIconContainer
+							onMouseEnter={() => this.setState({ isPopoverOpen: true })}
+							onMouseLeave={() => this.setState({ isPopoverOpen: false })}
+							onClick={() => {
+								if (this.state.isPopoverOpen) {
+									onConfirm();
+									this.setState({ isPopoverOpen: false });
+								} else {
+									this.setState({ isPopoverOpen: true });
+								}
+							}}
+						>
+							{this.state.isPopoverOpen && ConfidenceIcon != null ? <OKCircle /> : ConfidenceIcon}
+						</ConfidenceIconContainer>
+					</Tooltip>
+					{this.props.confidence != null && this.props.isDropdown && <SolidTriangleIcon />}
 				</IndicatorContainer>
-				{this.state.isPopoverOpen && (
-					<Popover
-						placement="top"
-						isOpen={this.state.isPopoverOpen}
-						target={this.containerRef.current}
-						toggle={() => this.setState({ isPopoverOpen: false })}
-					>
-						<PopoverBody>
-							<StyledParagraph>
-								Value guessed with {Math.round(confidence * 100)}% confidence.<br />
-								Click OK if you can confirm value is correct, or delete or change the value.
-							</StyledParagraph>
-							<StyledParagraph>Source: {confidenceSource}</StyledParagraph>
-						</PopoverBody>
-					</Popover>
-				)}
 			</RelativeContainer>
 		);
 	}
