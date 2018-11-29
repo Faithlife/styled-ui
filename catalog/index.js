@@ -597,7 +597,7 @@ const components = [
 				path: 'date-picker/documentation',
 				title: 'Date Picker Documentation',
 				content: pageLoader(() => import('./date-picker/documentation.md')),
-				imports: { DatePicker, DocgenTable },
+				imports: { DatePicker, DatePeriodPicker, DocgenTable },
 			},
 		],
 	},
