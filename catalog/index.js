@@ -26,6 +26,7 @@ import {
 	Tooltip,
 	DatePicker,
 	DatePickerInput,
+	DatePeriodPicker,
 } from '../components/main';
 import { BaseButton } from '../components/button/base-button';
 import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
@@ -586,6 +587,7 @@ const components = [
 						}
 					`,
 					DatePicker,
+					DatePeriodPicker,
 					dateFunctions: {
 						...dateFunctions,
 					},

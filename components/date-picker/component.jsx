@@ -50,6 +50,7 @@ export class DatePicker extends Component {
 		setSelectedDate: PropTypes.func.isRequired,
 		/** specifies that the component should function as a date range picker */
 		asDateRangePicker: PropTypes.bool,
+		/** Takes a date as a parameter and returns false if that date is invalid */
 		validate: PropTypes.func,
 		dateFunctions: dateFunctionProps,
 	};
