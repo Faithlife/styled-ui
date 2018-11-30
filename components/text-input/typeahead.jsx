@@ -17,6 +17,8 @@ const SolidTriangleIcon = styled(_SolidTriangleIcon)`
 	color: #7a7a7a;
 	height: 8px;
 	width: 8px;
+	cursor: pointer;
+	pointer-events: none;
 `;
 
 const StyledAsyncTypeahead = styled(_AsyncTypeahead)`
