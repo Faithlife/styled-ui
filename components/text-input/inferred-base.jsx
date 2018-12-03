@@ -28,10 +28,11 @@ const TooltipContents = styled.div`
 
 const StyledParagraph = styled.p`
 	&& {
+		margin: 0;
 		color: #575251;
 
-		&:last-of-type {
-			margin-bottom: 0;
+		&:not(:last-of-type) {
+			margin-bottom: 8px;
 		}
 	}
 `;
