@@ -29,7 +29,6 @@ const StyledAsyncTypeahead = styled(_AsyncTypeahead)`
 	}
 
 	&& .rbt-input {
-		line-height: 1;
 		padding-right: 16px;
 	}
 
@@ -48,7 +47,6 @@ const StyledTypeahead = styled(_Typeahead)`
 	}
 
 	&& .rbt-input {
-		line-height: 1;
 		padding-right: 16px;
 	}
 
