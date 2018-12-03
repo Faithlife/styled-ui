@@ -11,7 +11,6 @@ import {
 	Button,
 	Checkbox,
 	Collapse,
-	DatePickerInput,
 	DropZone,
 	FilesSection,
 	HelpBox,
@@ -25,6 +24,9 @@ import {
 	Radio,
 	SimpleModal,
 	Tooltip,
+	DatePicker,
+	DatePickerInput,
+	DatePeriodPicker,
 } from '../components/main';
 import { BaseButton } from '../components/button/base-button';
 import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
@@ -539,6 +541,41 @@ const components = [
 				title: 'Popover Documentation',
 				content: pageLoader(() => import('./popover/documentation.md')),
 				imports: { Popover, DocgenTable, Tooltip },
+			},
+		],
+	},
+	{
+		title: 'Date Picker',
+		pages: [
+			{
+				path: '/date-picker/variations',
+				title: 'Date Picker Variations',
+				content: pageLoader(() => import('./date-picker/variations.md')),
+				imports: {
+					Button,
+					Popover,
+					PopoverManager,
+					PopoverReference,
+					DatePickerDemo: styled.div`
+						font-family: Source Sans Pro;
+
+						& button {
+							font-family: Source Sans pro;
+							font-size: 14px;
+						}
+					`,
+					DatePicker,
+					DatePeriodPicker,
+					dateFunctions: {
+						...dateFunctions,
+					},
+				},
+			},
+			{
+				path: 'date-picker/documentation',
+				title: 'Date Picker Documentation',
+				content: pageLoader(() => import('./date-picker/documentation.md')),
+				imports: { DatePicker, DatePeriodPicker, DocgenTable },
 			},
 		],
 	},

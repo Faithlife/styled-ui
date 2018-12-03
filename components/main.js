@@ -10,6 +10,7 @@ export { Checkbox } from './check-box';
 export { Collapse } from './collapse';
 export { DatePicker } from './date-picker';
 export { DatePickerInput } from './date-picker-input';
+export { DatePeriodPicker } from './date-period-picker';
 export { DropZone } from './drop-zone';
 export { FilesSection } from './files-section';
 export { HelpBox } from './help-box';

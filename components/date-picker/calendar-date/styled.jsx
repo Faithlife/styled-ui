@@ -16,6 +16,7 @@ const calendarWeekDayCss = `
 
 	&:hover {
 		background: ${colors.gray4};
+		transition: background 0.2s ease-out;
 	}
 
 	&:focus {
@@ -41,6 +42,18 @@ export const CalendarWeekDaySelected = styled.button`
 	&:hover {
 		background: ${colors.blueBase};
 		color: ${colors.white};
+	}
+`;
+
+export const CalendarWeekDayInRange = styled.button`
+	${calendarWeekDayCss}
+	background: ${colors.blueTint};
+	border-radius: 0;
+
+	&:hover {
+		background: ${colors.blueLight};
+		color: ${colors.white};
+		transition: background 0.2s ease-out, color 0.2s ease-out;
 	}
 `;
 
