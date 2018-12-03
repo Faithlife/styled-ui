@@ -44,11 +44,10 @@ export class LargeGroupSelector extends React.Component {
 		modalContent: 'main',
 		selectedGroupId: -1,
 		createGroupFixed: false,
-		resultsTopMargin: defaultResultsTopMargin,
+		resultsTopMargin: this.props.showInPlace ? 0 : defaultResultsTopMargin,
 		scrollWidthDelta: 0,
 	};
 
-	modalRef = React.createRef();
 	searchResultsRef = React.createRef();
 	fixedCreateWrapper = false;
 
@@ -113,7 +112,7 @@ export class LargeGroupSelector extends React.Component {
 	toggle = () => {
 		this.setState({
 			createGroupFixed: false,
-			resultsTopMargin: defaultResultsTopMargin,
+			resultsTopMargin: this.props.showInPlace ? 0 : defaultResultsTopMargin,
 			modalContent: 'main',
 		});
 
@@ -173,6 +172,10 @@ export class LargeGroupSelector extends React.Component {
 	};
 
 	handleScroll = scrollData => {
+		if (this.props.showInPlace) {
+			return;
+		}
+
 		if (scrollData.topPosition >= 82 && !this.fixedCreateWrapper) {
 			this.setState({
 				createGroupFixed: true,
