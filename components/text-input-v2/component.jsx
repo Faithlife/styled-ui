@@ -5,6 +5,32 @@ import { colors } from '../shared-styles';
 export const Select = props => (
 	<ExternalSelect
 		styles={{
+			control: styles => ({
+				...styles,
+				minHeight: '30px',
+			}),
+			valueContainer: styles => ({
+				...styles,
+				padding: '0 8px',
+			}),
+			input: styles => ({
+				...styles,
+				lineHeight: 1,
+			}),
+			indicatorSeparator: () => ({
+				display: 'none',
+			}),
+			clearIndicator: () => ({
+				display: 'none',
+			}),
+			dropdownIndicator: styles => ({
+				...styles,
+				padding: '5px 8px',
+			}),
+			placeholder: styles => ({
+				...styles,
+				lineHeight: 1,
+			}),
 			multiValue: styles => ({
 				...styles,
 				backgroundColor: colors.blueTint,
@@ -14,6 +40,7 @@ export const Select = props => (
 				color: colors.blueDark,
 			}),
 		}}
+		classNamePrefix="fl-select"
 		theme={theme => ({
 			...theme,
 			colors: {
