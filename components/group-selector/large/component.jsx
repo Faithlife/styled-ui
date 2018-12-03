@@ -176,7 +176,9 @@ export class LargeGroupSelector extends React.Component {
 	};
 
 	handleScroll = scrollData => {
-		if (this.props.showInPlace) return;
+		if (this.props.showInPlace) {
+			return;
+		}
 
 		if (scrollData.topPosition >= 82 && !this.fixedCreateWrapper) {
 			this.setState({
