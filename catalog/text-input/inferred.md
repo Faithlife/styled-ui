@@ -16,7 +16,7 @@ showSource: false
 state: { value: 'Washington', confirmed: false }
 ---
 <div>
-	<FormGroup>
+	<div>
 		<Label>Current selection: {state.value}</Label>
 		<InferredTypeahead
 			confidence={state.confirmed ? null : 0.9}
@@ -26,7 +26,7 @@ state: { value: 'Washington', confirmed: false }
 			placeholder="Choose a state..."
 			defaultInputValue={state.value}
 		/>
-	</FormGroup>
+	</div>
 </div>
 ```
 
@@ -41,7 +41,7 @@ showSource: false
 state: { value: 'This value was guessed', confirmed: false }
 ---
 <div>
-	<FormGroup>
+	<div>
 		<Label>High Confidence</Label>
 		<InferredText
 			confidence={state.confirmed ? null : 0.9}
@@ -49,7 +49,7 @@ state: { value: 'This value was guessed', confirmed: false }
 			onConfirm={() => setState({ confirmed: true })}
 			value={state.value}
 		/>
-	</FormGroup>
+	</div>
 </div>
 ```
 
@@ -58,7 +58,7 @@ showSource: false
 state: { value: 'This value was guessed', confirmed: false }
 ---
 <div>
-	<FormGroup>
+	<div>
 		<Label>Medium Confidence</Label>
 		<InferredText
 			confidence={state.confirmed ? null : 0.7}
@@ -66,7 +66,7 @@ state: { value: 'This value was guessed', confirmed: false }
 			onConfirm={() => setState({ confirmed: true })}
 			value={state.value}
 		/>
-	</FormGroup>
+	</div>
 </div>
 ```
 
@@ -75,7 +75,7 @@ showSource: false
 state: { value: 'This value was guessed', confirmed: false }
 ---
 <div>
-	<FormGroup>
+	<div>
 		<Label>Low Confidence</Label>
 		<InferredText
 			confidence={state.confirmed ? null : 0.6}
@@ -83,7 +83,7 @@ state: { value: 'This value was guessed', confirmed: false }
 			onConfirm={() => setState({ confirmed: true })}
 			value={state.value}
 		/>
-	</FormGroup>
+	</div>
 </div>
 ```
 
