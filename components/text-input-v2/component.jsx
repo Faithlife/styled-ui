@@ -8,6 +8,7 @@ export const Select = props => (
 			control: styles => ({
 				...styles,
 				minHeight: '30px',
+				fontSize: '16px',
 			}),
 			valueContainer: styles => ({
 				...styles,
