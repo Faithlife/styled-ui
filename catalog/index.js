@@ -543,8 +543,6 @@ const components = [
 				title: 'Date Picker Input Variations',
 				content: pageLoader(() => import('./date-picker-input/variations.md')),
 				imports: {
-					DatePickerDemo: styled.div`
-					`,
 					DatePickerInput,
 					dateFunctions: {
 						...dateFunctions,
