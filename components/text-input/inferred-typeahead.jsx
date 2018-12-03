@@ -53,7 +53,6 @@ export class InferredTypeahead extends Component {
 					confidence={confidence}
 					confidenceSource={confidenceSource}
 					onConfirm={onConfirm}
-					isDropdown
 				>
 					{props => (
 						<StyledTypeahead
