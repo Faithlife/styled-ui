@@ -1,25 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {
-	LightBulbH,
-	LightBulbM,
-	LightBulbL,
-	OKCircle,
-	SolidTriangleIcon as _SolidTriangleIcon,
-} from '../icons';
+import { LightBulbH, LightBulbM, LightBulbL, OKCircle } from '../icons';
 import { Tooltip } from '../popover';
-
-const SolidTriangleIcon = styled(_SolidTriangleIcon)`
-	transform: rotateZ(90deg);
-	color: #7a7a7a;
-	height: 8px;
-	width: 8px;
-	margin-left: 8px;
-	margin-top: -4px;
-	pointer-events: none;
-	cursor: pointer;
-`;
 
 const RelativeContainer = styled.div`
 	position: relative;
@@ -27,8 +10,8 @@ const RelativeContainer = styled.div`
 
 const IndicatorContainer = styled.div`
 	position: absolute;
-	right: 6px;
-	top: 7px;
+	right: 8px;
+	top: 8px;
 	z-index: 3;
 	display: flex;
 	align-items: center;
@@ -45,10 +28,11 @@ const TooltipContents = styled.div`
 
 const StyledParagraph = styled.p`
 	&& {
+		margin: 0;
 		color: #575251;
 
-		&:last-of-type {
-			margin-bottom: 0;
+		&:not(:last-of-type) {
+			margin-bottom: 8px;
 		}
 	}
 `;
@@ -66,8 +50,6 @@ export class InferredBase extends Component {
 		confidenceSource: PropTypes.string,
 		/** Function called when the OK button is clicked. Confidence should be set to null to clear the lightbulb indicator. */
 		onConfirm: PropTypes.func.isRequired,
-		/** Indicates another icon in input. */
-		isDropdown: PropTypes.bool,
 		/** Wrapped input or typeahead control */
 		children: PropTypes.func.isRequired,
 		/** See the docs for how to override styles properly */
@@ -127,7 +109,6 @@ export class InferredBase extends Component {
 							{this.state.isPopoverOpen && ConfidenceIcon != null ? <OKCircle /> : ConfidenceIcon}
 						</ConfidenceIconContainer>
 					</Tooltip>
-					{this.props.confidence != null && this.props.isDropdown && <SolidTriangleIcon />}
 				</IndicatorContainer>
 			</RelativeContainer>
 		);

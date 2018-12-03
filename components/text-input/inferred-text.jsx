@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { BootstrapContainer, mapFromInnerRef, mapToInnerRef } from '../utils';
+import { mapFromInnerRef, mapToInnerRef } from '../utils';
+import { Input } from '../input';
 import { InferredBase } from './inferred-base';
-import { Input } from './bootstrap';
 
 const StyledInput = mapFromInnerRef(styled(
 	mapToInnerRef(({ inferred, ...props }) => <Input {...props} />),
 )`
-	&&&,
-	&&&:focus,
-	&&&:hover {
-		${props => (props.inferred ? 'color: #006099' : '')};
-	}
+	width: 100%;
+	${props => (props.inferred ? 'color: #006099' : '')};
+	${props => (props.inferred ? 'padding-right: 32px' : '')};
 `);
 
 /** Text input control with a clickable inline confidence indicator. Extra props are passed to the wrapped input.*/
@@ -39,16 +37,14 @@ export class InferredText extends Component {
 	render() {
 		const { confidence, confidenceSource, className, onConfirm, ...inputProps } = this.props;
 		return (
-			<BootstrapContainer>
-				<InferredBase
-					className={className}
-					confidence={confidence}
-					confidenceSource={confidenceSource}
-					onConfirm={onConfirm}
-				>
-					{props => <StyledInput inferred={props.inferred} {...inputProps} />}
-				</InferredBase>
-			</BootstrapContainer>
+			<InferredBase
+				className={className}
+				confidence={confidence}
+				confidenceSource={confidenceSource}
+				onConfirm={onConfirm}
+			>
+				{props => <StyledInput inferred={props.inferred} {...inputProps} />}
+			</InferredBase>
 		);
 	}
 }
