@@ -37,20 +37,23 @@ export class LargeGroupSelector extends React.Component {
 		hideTitle: PropTypes.bool,
 	};
 
-	state = {
-		searchInputValue: '',
-		newChurchName: '',
-		newChurchLocation: '',
-		modalContent: 'main',
-		selectedGroupId: -1,
-		createGroupFixed: false,
-		resultsTopMargin: defaultResultsTopMargin,
-		scrollWidthDelta: 0,
-	};
+	constructor(props) {
+		super(props);
 
-	modalRef = React.createRef();
-	searchResultsRef = React.createRef();
-	fixedCreateWrapper = false;
+		this.searchResultsRef = React.createRef();
+		this.fixedCreateWrapper = false;
+
+		this.state = {
+			searchInputValue: '',
+			newChurchName: '',
+			newChurchLocation: '',
+			modalContent: 'main',
+			selectedGroupId: -1,
+			createGroupFixed: false,
+			resultsTopMargin: props.showInPlace ? 0 : defaultResultsTopMargin,
+			scrollWidthDelta: 0,
+		};
+	}
 
 	createGroupClick = () => {
 		this.toggle();
@@ -113,7 +116,7 @@ export class LargeGroupSelector extends React.Component {
 	toggle = () => {
 		this.setState({
 			createGroupFixed: false,
-			resultsTopMargin: defaultResultsTopMargin,
+			resultsTopMargin: this.props.showInPlace ? 0 : defaultResultsTopMargin,
 			modalContent: 'main',
 		});
 
@@ -173,6 +176,8 @@ export class LargeGroupSelector extends React.Component {
 	};
 
 	handleScroll = scrollData => {
+		if (this.props.showInPlace) return;
+
 		if (scrollData.topPosition >= 82 && !this.fixedCreateWrapper) {
 			this.setState({
 				createGroupFixed: true,
