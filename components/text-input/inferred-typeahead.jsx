@@ -8,6 +8,7 @@ import { InferredBase } from './inferred-base';
 const StyledTypeahead = mapFromInnerRef(styled(mapToInnerRef(props => <Typeahead {...props} />))`
 	&& .rbt-input,
 	&& .rbt-input:focus {
+		padding: 8px;
 		${props =>
 			props.inferred
 				? `

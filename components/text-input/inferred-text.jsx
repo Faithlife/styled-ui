@@ -8,6 +8,7 @@ import { InferredBase } from './inferred-base';
 const StyledInput = styled(({ inferred, ...props }) => <Input {...props} />)`
 	width: 100%;
 	${props => (props.inferred ? 'color: #006099' : '')};
+	${props => (props.inferred ? 'padding-right: 32px' : '')};
 `;
 
 /** Text input control with a clickable inline confidence indicator. Extra props are passed to the wrapped input.*/

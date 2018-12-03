@@ -8,7 +8,7 @@ export const Input = styled.input`
 	${fonts.ui16};
 	border-radius: 3px;
 	border: 1px solid ${inputColors.inputBorderColor};
-	padding: ${thickness.eight} 0 ${thickness.eight} ${thickness.eight};
+	padding: ${thickness.eight};
 
 	&:focus {
 		border-color: ${inputColors.inputFocusedBorderColor};

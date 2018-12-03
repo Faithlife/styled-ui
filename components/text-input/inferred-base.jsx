@@ -27,8 +27,8 @@ const RelativeContainer = styled.div`
 
 const IndicatorContainer = styled.div`
 	position: absolute;
-	right: 6px;
-	top: 7px;
+	right: 8px;
+	top: 10px;
 	z-index: 3;
 	display: flex;
 	align-items: center;
