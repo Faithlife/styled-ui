@@ -20,6 +20,10 @@ export const Spinner = styled.div`
 	display: inline-block;
 	margin-left: 5px;
 	animation: ${spinTransform} 1.1s infinite linear;
+
+	width: ${props => props.height || 20}px;
+	height: ${props => props.height || 20}px;
+	border-width: 4px;
 `;
 
 export const variationMap = {
