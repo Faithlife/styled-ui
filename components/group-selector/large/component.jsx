@@ -37,23 +37,19 @@ export class LargeGroupSelector extends React.Component {
 		hideTitle: PropTypes.bool,
 	};
 
-	constructor(props) {
-		super(props);
+	state = {
+		searchInputValue: '',
+		newChurchName: '',
+		newChurchLocation: '',
+		modalContent: 'main',
+		selectedGroupId: -1,
+		createGroupFixed: false,
+		resultsTopMargin: this.props.showInPlace ? 0 : defaultResultsTopMargin,
+		scrollWidthDelta: 0,
+	};
 
-		this.searchResultsRef = React.createRef();
-		this.fixedCreateWrapper = false;
-
-		this.state = {
-			searchInputValue: '',
-			newChurchName: '',
-			newChurchLocation: '',
-			modalContent: 'main',
-			selectedGroupId: -1,
-			createGroupFixed: false,
-			resultsTopMargin: props.showInPlace ? 0 : defaultResultsTopMargin,
-			scrollWidthDelta: 0,
-		};
-	}
+	searchResultsRef = React.createRef();
+	fixedCreateWrapper = false;
 
 	createGroupClick = () => {
 		this.toggle();
