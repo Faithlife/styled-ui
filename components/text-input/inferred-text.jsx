@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { BootstrapContainer, mapFromInnerRef, mapToInnerRef } from '../utils';
+import { BootstrapContainer } from '../utils';
+import { Input } from '../input';
 import { InferredBase } from './inferred-base';
-import { Input } from './bootstrap';
 
-const StyledInput = mapFromInnerRef(styled(
-	mapToInnerRef(({ inferred, ...props }) => <Input {...props} />),
-)`
-	&&&,
-	&&&:focus,
-	&&&:hover {
-		${props => (props.inferred ? 'color: #006099' : '')};
-	}
-`);
+const StyledInput = styled(({ inferred, ...props }) => <Input {...props} />)`
+	width: 100%;
+	${props => (props.inferred ? 'color: #006099' : '')};
+`;
 
 /** Text input control with a clickable inline confidence indicator. Extra props are passed to the wrapped input.*/
 export class InferredText extends Component {
