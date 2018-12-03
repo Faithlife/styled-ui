@@ -5,10 +5,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button, Popover, PopoverManager, PopoverReference } from '../components/main';
 
-const Container = styled.div`
-	font-family: 'Source Sans Pro';
-`;
-
 const Table = styled.table`
 	border-collapse: collapse;
 `;
@@ -85,7 +81,7 @@ export function DocgenTable(props) {
 	}));
 
 	return (
-		<Container>
+		<div>
 			<div>
 				<h1>{props.displayName || docgen.displayName}</h1>
 				<p>{docgen.description}</p>
@@ -135,7 +131,7 @@ export function DocgenTable(props) {
 					))}
 				</tbody>
 			</Table>
-		</Container>
+		</div>
 	);
 }
 

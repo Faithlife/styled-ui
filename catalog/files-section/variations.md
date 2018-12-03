@@ -30,7 +30,7 @@ state: {
 	],
 }
 ---
-<FilesSectionDemo>
+<div>
 	<FilesSection
 		files={state.files}
 		onFileClicked={file => console.log(file)}
@@ -57,7 +57,7 @@ state: {
 			}));
 		}}
 	/>
-</FilesSectionDemo>
+</div>
 ```
 
 ## With file actions
@@ -90,7 +90,7 @@ state: {
 	],
 }
 ---
-<FilesSectionDemo>
+<div>
 	<FilesSection
 		files={state.files}
 		onFileClicked={file => console.log(file)}
@@ -109,7 +109,7 @@ state: {
 			</div>
 		)}
 	/>
-</FilesSectionDemo>
+</div>
 ```
 
 ## With processing files
@@ -142,13 +142,13 @@ state: {
 	],
 }
 ---
-<FilesSectionDemo>
+<div>
 	<FilesSection
 		files={state.files}
 		onFileClicked={file => console.log(file)}
 		renderLoadingSpinner={() => <LoadingSpinner small />}
 	/>
-</FilesSectionDemo>
+</div>
 ```
 
 ## With localized strings
@@ -181,7 +181,7 @@ state: {
 	],
 }
 ---
-<FilesSectionDemo>
+<div>
 	<FilesSection
 		title="Archivos"
 		dropZoneText="Arrastra y suelta para subir archivos"
@@ -196,7 +196,7 @@ state: {
 		onFileClicked={file => console.log(file)}
 		onUploadFiles={() => console.log('Handle upload files')}
 	/>
-</FilesSectionDemo>
+</div>
 ```
 
 ## Without clickable files
@@ -229,9 +229,9 @@ state: {
 	],
 }
 ---
-<FilesSectionDemo>
+<div>
 	<FilesSection files={state.files} />
-</FilesSectionDemo>
+</div>
 ```
 
 ## With a large title
@@ -264,7 +264,7 @@ state: {
 	],
 }
 ---
-<FilesSectionDemo>
+<div>
 	<FilesSection files={state.files} titleFontSize="32px" />
-</FilesSectionDemo>
+</div>
 ```

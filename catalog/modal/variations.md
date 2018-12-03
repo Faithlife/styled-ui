@@ -178,7 +178,7 @@ state: { modal: false, value: '' }
 		subtitle="Help us locate you"
 		withoutFooter
 	>
-		<ModalDemoContent>
+		<div>
 			<Input
 				value={state.value}
 				onChange={value => setState({ value: value, isValid: value !== '' })}
@@ -186,7 +186,7 @@ state: { modal: false, value: '' }
 				title="Location"
 				debounce={200}
 			/>
-		</ModalDemoContent>
+		</div>
 	</Modal>
 </div>
 ```
@@ -204,9 +204,9 @@ state: { modal: false, value: '' }
 		onClose={() => setState({ modal: false })}
 		title="Lots of content"
 	>
-		<ModalDemoContent>
+		<div>
 			{JSON.stringify(new Array(1000))}
-		</ModalDemoContent>
+		</div>
 	</Modal>
 </div>
 ```
@@ -225,9 +225,9 @@ state: { modal: false, value: '' }
 		title="Modal with no title border"
 		styleOverrides={{ bottomBorder: 'none' }}
 	>
-		<ModalDemoContent>
+		<div>
 			This modal has no title border!
-		</ModalDemoContent>
+		</div>
 	</Modal>
 </div>
 ```

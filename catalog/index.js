@@ -226,9 +226,6 @@ const components = [
 					GroupSelector,
 					Button,
 					GroupSelectorDemo: styled.div`
-						font-family: Source Sans Pro;
-						color: #333333;
-
 						.wide-content {
 							width: 600px;
 						}
@@ -243,9 +240,6 @@ const components = [
 					`,
 					LargeGroupSelector,
 					LargeGroupSelectorDemo: styled.div`
-						font-family: Source Sans Pro;
-						color: #333333;
-
 						.wide-content {
 							width: 600px;
 						}
@@ -277,10 +271,6 @@ const components = [
 				content: pageLoader(() => import('./help-box/variations.md')),
 				imports: {
 					HelpBox,
-					Demo: styled.div`
-						font-family: Source Sans Pro;
-						color: #333;
-					`,
 				},
 			},
 			{
@@ -321,22 +311,14 @@ const components = [
 					ModalFooter,
 					Button,
 					delayPromise,
-					ModalDemoContent: styled.div`
-						font-family: 'Source Sans Pro';
-						color: #333333;
-					`,
 					ModalDemoWideContent: styled.div`
 						width: 600px;
-						font-family: 'Source Sans Pro';
-						color: #333333;
 					`,
 					ModalDemoButtonContainer: styled.div`
 						margin-right: 16px;
 					`,
 					ModalDemoStackedContent: styled.div`
 						width: 240px;
-						font-family: 'Source Sans Pro';
-						color: #333333;
 					`,
 				},
 			},
@@ -370,8 +352,6 @@ const components = [
 						flex-direction: column;
 						align-items: center;
 						justify-content: space-around;
-						font-family: 'Source Sans Pro';
-						color: #333333;
 					`,
 					SimpleModalDemoMessage: styled.div`
 						background-color: #eeeeee;
@@ -425,9 +405,6 @@ const components = [
 					FilesSection,
 					Button,
 					LoadingSpinner,
-					FilesSectionDemo: styled.div`
-						font-family: 'Source Sans Pro';
-					`,
 				},
 			},
 			{
@@ -447,9 +424,6 @@ const components = [
 				content: pageLoader(() => import('./drop-zone/variations.md')),
 				imports: {
 					DropZone,
-					DropZoneDemo: styled.div`
-						font-family: 'Source Sans Pro';
-					`,
 					DroppedFiles: styled.div`
 						margin-top: 16px;
 					`,
@@ -499,9 +473,6 @@ const components = [
 					delayPromise,
 					ShareDialog,
 					ModalDemo: styled.div`
-						font-family: 'Source Sans Pro';
-						color: #333333;
-
 						.wide-content {
 							width: 600px;
 						}
@@ -573,7 +544,6 @@ const components = [
 				content: pageLoader(() => import('./date-picker-input/variations.md')),
 				imports: {
 					DatePickerDemo: styled.div`
-						font-family: Source Sans Pro;
 					`,
 					DatePickerInput,
 					dateFunctions: {
