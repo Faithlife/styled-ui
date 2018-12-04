@@ -377,14 +377,14 @@ const components = [
 		title: 'Text Input',
 		pages: [
 			{
-				path: '/text-input/typeahead-v2',
-				title: 'Typeahead V2',
-				content: pageLoader(() => import('./text-input/typeahead-v2.md')),
+				path: '/text-input/autocomplete',
+				title: 'Autocomplete',
+				content: pageLoader(() => import('./text-input/autocomplete.md')),
 				imports: { Select },
 			},
 			{
 				path: '/text-input/typeahead',
-				title: 'Typeahead',
+				title: 'Typeahead (deprecated)',
 				content: pageLoader(() => import('./text-input/typeahead.md')),
 				imports: { Typeahead, ...Bootstrap },
 			},
