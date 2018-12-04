@@ -28,7 +28,7 @@ import {
 } from '../components/main';
 import { BaseButton } from '../components/button/base-button';
 import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
-import { Select } from '../components/text-input-v2';
+import { Select, CreatableSelect } from '../components/text-input-v2';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
@@ -375,10 +375,10 @@ const components = [
 		title: 'Text Input',
 		pages: [
 			{
-				path: '/text-input/autocomplete',
-				title: 'Autocomplete',
-				content: pageLoader(() => import('./text-input/autocomplete.md')),
-				imports: { Select },
+				path: '/text-input/select',
+				title: 'Autocomplete select',
+				content: pageLoader(() => import('./text-input/select.md')),
+				imports: { Select, CreatableSelect },
 			},
 			{
 				path: '/text-input/typeahead',

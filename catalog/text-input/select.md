@@ -13,6 +13,7 @@ A typeahead control with keyboard navigation based on react-select.
 import { Select } from '@faithlife/styled-ui/dist/text-input-v2';
 ```
 
+### Single select
 ```react
 showSource: true
 state: { selection: '' }
@@ -33,7 +34,7 @@ state: { selection: '' }
 </div>
 ```
 
-### Tags demo
+### Multi select
 ```react
 showSource: true
 state: { tags: [] }
@@ -41,6 +42,29 @@ state: { tags: [] }
 <div>
 	<div>Current selection: {state.selection}</div>
 	<Select
+		onChange={({ value }) => {
+			setState({ selection: value });
+		}}
+		isMulti
+		options={[
+			{ value: "washington", label: "Washington" },
+			{ value: "california", label: "California" },
+			{ value: "Texas", label: "Texas" }
+		]}
+		placeholder="Choose a state..."
+	/>
+</div>
+```
+
+
+### Multi select with custom entries
+```react
+showSource: true
+state: { tags: [] }
+---
+<div>
+	<div>Current selection: {state.selection}</div>
+	<CreatableSelect
 		onChange={({ value }) => {
 			setState({ selection: value });
 		}}
