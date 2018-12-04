@@ -4,7 +4,10 @@ A typeahead control with keyboard navigation based on react-select.
 
 ### Migration guide from V1 to v2:
 
-The dedicated stylesheets are not required for v2. Delete the typeahead and boostrap CSS imports when upgrading.
+* Change the import to `text-input-v2` (see below)
+* The dedicated CSS import is not required for v2. Delete the typeahead and boostrap CSS imports when upgrading.
+* `options` now requires an array of objects instead of strings
+* `multiple` should be changed to `isMulti` enable the tags input
 
 ```
 import { Select } from '@faithlife/styled-ui/dist/text-input-v2';
