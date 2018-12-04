@@ -1,5 +1,9 @@
 A typeahead control with keyboard navigation.
 
+```hint|warning
+This is a deprecated control! It won't receive any more updates. Please migrate to the new Autocomplete control.
+```
+
 ```hint|directive
 These components require the [Faithlife Bootstrap base stylesheet](/bootstrap/stylesheet) to be loaded globally in your app.
 ```
