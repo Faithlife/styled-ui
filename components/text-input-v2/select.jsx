@@ -31,6 +31,7 @@ export const Select = props => (
 			placeholder: styles => ({
 				...styles,
 				lineHeight: 1,
+				whiteSpace: 'nowrap',
 			}),
 			multiValue: styles => ({
 				...styles,
