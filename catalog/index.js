@@ -377,10 +377,18 @@ const components = [
 		title: 'Text Input',
 		pages: [
 			{
+				path: '/text-input/input',
+				title: 'Input Variations',
+				content: pageLoader(() => import('./text-input/input.md')),
+				imports: {
+					Input,
+				},
+			},
+			{
 				path: '/text-input/select',
-				title: 'Autocomplete select',
+				title: 'Autocomplete Select Variations',
 				content: pageLoader(() => import('./text-input/select.md')),
-				imports: { Select, CreatableSelect },
+				imports: { Input, Select, CreatableSelect },
 			},
 			{
 				path: '/text-input/typeahead',
