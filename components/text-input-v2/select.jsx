@@ -13,7 +13,7 @@ const selectStyles = {
 	}),
 	valueContainer: styles => ({
 		...styles,
-		padding: '0 8px',
+		padding: '0 6px',
 	}),
 	input: styles => ({
 		...styles,
@@ -36,11 +36,19 @@ const selectStyles = {
 	}),
 	multiValue: styles => ({
 		...styles,
-		backgroundColor: colors.blueTint,
+		backgroundColor: colors.gray4,
 	}),
 	multiValueLabel: styles => ({
 		...styles,
-		color: colors.blueDark,
+		color: colors.gray66,
+	}),
+	multiValueRemove: styles => ({
+		...styles,
+		color: colors.gray52,
+		':hover': {
+			backgroundColor: '',
+			color: colors.blueDark,
+		},
 	}),
 };
 
@@ -48,7 +56,7 @@ const selectTheme = theme => ({
 	...theme,
 	colors: {
 		...theme.colors,
-		primary: colors.blueDark,
+		primary: colors.blueBase,
 		primary25: colors.gray8,
 		primary50: colors.blueTint,
 		primary75: colors.blueTint,

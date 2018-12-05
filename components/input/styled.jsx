@@ -28,13 +28,14 @@ export const Input = styled.input`
 export const variationMap = {
 	small: component => component.extend`
 		${fonts.ui14};
-		padding: 6px 0 6px ${thickness.eight};
+		padding: 6px;
 `,
 	medium: component => component.extend`
+		padding: ${thickness.eight};
 		${fonts.ui16};
 `,
 	large: component => component.extend`
-		padding: 13px 0 11px 12px;
+		padding: 12px;
 		${fonts.ui16};
 `,
 };
