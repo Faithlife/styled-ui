@@ -59,16 +59,16 @@ export const makeAsyncSelect = (SelectComponent: ComponentType<*>) =>
 				loadedOptions: [],
 				passEmptyOptions: false,
 			};
-			this.loadOptions = props.debounceInterval
-				? debounce(this.debouncedLoadOptions, props.debounceInterval)
-				: this.debouncedLoadOptions;
+			this.debouncedLoadOptions = props.debounceInterval
+				? debounce(this.handleLoadOptions, props.debounceInterval)
+				: this.handleLoadOptions;
 		}
 		componentDidMount() {
 			this.mounted = true;
 			const { defaultOptions } = this.props;
 			const { inputValue } = this.state;
 			if (defaultOptions === true) {
-				this.loadOptions(inputValue, options => {
+				this.handleLoadOptions(inputValue, options => {
 					if (!this.mounted) return;
 					const isLoading = !!this.lastRequest;
 					this.setState({ defaultOptions: options || [], isLoading });
@@ -97,7 +97,7 @@ export const makeAsyncSelect = (SelectComponent: ComponentType<*>) =>
 		blur() {
 			this.select.blur();
 		}
-		debouncedLoadOptions = (inputValue: string, callback: (?Array<*>) => void) => {
+		handleLoadOptions = (inputValue: string, callback: (?Array<*>) => void) => {
 			if (!this.mounted) return;
 			const { loadOptions } = this.props;
 			if (!loadOptions) return callback();
@@ -138,7 +138,7 @@ export const makeAsyncSelect = (SelectComponent: ComponentType<*>) =>
 						passEmptyOptions: !this.state.loadedInputValue,
 					},
 					() => {
-						this.loadOptions(inputValue, options => {
+						this.debouncedLoadOptions(inputValue, options => {
 							if (!this.mounted) return;
 							if (options) {
 								this.optionsCache[inputValue] = options;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Client, compress } from 'micro-graphql-react';
+import { Client, compress } from 'micro-graphql-react/index-es5';
 import { AsyncCreatableSelect } from '../../../components/text-input-v2';
 
 const client = new Client({
@@ -36,7 +36,9 @@ fragment commit on GithubCommit {
 const fetchCommits = async query => {
 	const result = await client.runQuery(githubQuery);
 	return result.data.github.repo.commits
-		.filter(x => x.message.toLowerCase().includes(query.toLowerCase()))
+		.filter(
+			x => query === '' || query == null || x.message.toLowerCase().includes(query.toLowerCase()),
+		)
 		.map(x => ({ value: x.sha, label: x.message }));
 };
 
