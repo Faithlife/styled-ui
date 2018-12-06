@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
-import { InferredTypeahead, InferredText } from '../../components/text-input';
-import { Button } from '../../components/main';
+import { InferredTypeahead, InferredText } from '../../../components/text-input';
+import { Button } from '../../../components/main';
 
 export class InferredTypeaheadFocusDemo extends Component {
 	inputRef = createRef();
