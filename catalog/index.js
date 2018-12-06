@@ -612,31 +612,31 @@ const components = [
 				content: pageLoader(() => import('./date-picker-input/documentation.md')),
 				imports: { DatePickerInput, DocgenTable },
 			},
+		],
+	},
+	{
+		title: 'Experimental Table',
+		pages: [
 			{
-				title: 'Experimental Table',
-				pages: [
-					{
-						path: '/experimental-table/variations',
-						title: 'Experimental Table Variations',
-						content: pageLoader(() => import('./experimental-table/variations.md')),
-						imports: {
-							TableDemo: styled.div`
-								font-family: Source Sans Pro;
-								background-color: white;
-								border-radius: 2px;
-								box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.12), 0 0 4px 0 rgba(0, 0, 0, 0.12);
-								padding: 20px 0;
-							`,
-							ExperimentalTable,
-						},
-					},
-					{
-						path: '/experimental-table/documentation',
-						title: 'Experimental Table Documentation',
-						content: pageLoader(() => import('./experimental-table/documentation.md')),
-						imports: { ExperimentalTable, DocgenTable },
-					},
-				],
+				path: '/experimental-table/variations',
+				title: 'Experimental Table Variations',
+				content: pageLoader(() => import('./experimental-table/variations.md')),
+				imports: {
+					TableDemo: styled.div`
+						font-family: Source Sans Pro;
+						background-color: white;
+						border-radius: 2px;
+						box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.12), 0 0 4px 0 rgba(0, 0, 0, 0.12);
+						padding: 20px 0;
+					`,
+					ExperimentalTable,
+				},
+			},
+			{
+				path: '/experimental-table/documentation',
+				title: 'Experimental Table Documentation',
+				content: pageLoader(() => import('./experimental-table/documentation.md')),
+				imports: { ExperimentalTable, DocgenTable },
 			},
 		],
 	},

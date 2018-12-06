@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { thickness, colors } from '../shared-styles';
+import { resetStyles } from '../utils';
 
 export const Table = styled.table`
+	${resetStyles};
 	border-collapse: collapse;
 	width: 100%;
 `;

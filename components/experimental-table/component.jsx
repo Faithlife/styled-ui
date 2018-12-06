@@ -3,9 +3,15 @@ import PropTypes from 'prop-types';
 import { ArrowUp } from '../../components/icons';
 import * as Styled from './styled.jsx';
 
+/**
+ * ExperimentalTable:
+ * Simple table component (not meant as a replacement for ag-grid). It takes a set an arry of headings and an arry of rows.
+ * Order matters for headings and rows (data will be rendered in the order given)
+ */
 export class ExperimentalTable extends Component {
 	/* eslint-disable react/no-unused-prop-types */
 	static propTypes = {
+		/** Table headings. This can be null or empty for no headings */
 		headings: PropTypes.arrayOf(
 			PropTypes.shape({
 				heading: PropTypes.string.isRequired,
@@ -14,13 +20,16 @@ export class ExperimentalTable extends Component {
 				sortOrder: PropTypes.string,
 			}),
 		),
+		/** Table data. Each row should be provided with a key for proper list handling in react. See https://reactjs.org/docs/lists-and-keys.html */
 		data: PropTypes.arrayOf(
 			PropTypes.shape({
 				key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 				rowData: PropTypes.arrayOf(
 					PropTypes.shape({
 						content: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.node]),
+						/** override/cell-specific styling */
 						style: PropTypes.object,
+						className: PropTypes.string,
 					}),
 				),
 				onClickRow: PropTypes.func,
@@ -60,7 +69,11 @@ export class ExperimentalTable extends Component {
 			? []
 			: data.map(({ key, rowData, onClickRow }) => {
 					const tds = rowData.map((cellData, i) => (
-						<Styled.TableCell key={`${key}-${i}`} style={cellData.style}>
+						<Styled.TableCell
+							key={`${key}-${i}`}
+							className={cellData.className}
+							style={cellData.style}
+						>
 							{cellData.content}
 						</Styled.TableCell>
 					));

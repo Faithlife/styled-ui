@@ -3,6 +3,7 @@
 // We could use tree-shaking in the future to prune out unused exports,
 // but not all projects are able to use that right now.
 
+// Exports should be alphabetically sorted
 export { AnchorButton } from './button/anchor-button';
 export { Bootstrap } from './bootstrap';
 export { Button } from './button';
@@ -12,6 +13,7 @@ export { DatePicker } from './date-picker';
 export { DatePickerInput } from './date-picker-input';
 export { DatePeriodPicker } from './date-period-picker';
 export { DropZone } from './drop-zone';
+export { ExperimentalTable } from './experimental-table';
 export { FilesSection } from './files-section';
 export { HelpBox } from './help-box';
 export { Input } from './input';
@@ -20,4 +22,3 @@ export { Modal, ModalFooter } from './modal';
 export { Popover, PopoverManager, PopoverReference, Tooltip } from './popover';
 export { Radio } from './radio';
 export { SimpleModal } from './simple-modal';
-export { ExperimentalTable } from './experimental-table';
