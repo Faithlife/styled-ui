@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Client, compress } from 'micro-graphql-react/index-es5';
+import Client from 'micro-graphql-react/lib-es5/client';
+import compress from 'micro-graphql-react/lib-es5/compress';
 import { AsyncCreatableSelect } from '../../../components/text-input-v2';
 
 const client = new Client({
