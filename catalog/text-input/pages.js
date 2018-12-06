@@ -1,10 +1,10 @@
 import { pageLoader } from 'catalog';
 import styled from 'styled-components';
-import { Typeahead, InferredText, InferredTypeahead } from '../../components/text-input';
+import { Typeahead } from '../../components/text-input';
 import { Select, CreatableSelect } from '../../components/text-input-v2';
 import { DocgenTable } from '../docgen-table';
 import { Bootstrap, Button, Input } from '../../components/main';
-import { InferredTextFocusDemo, InferredTypeaheadFocusDemo, AsyncSelectDemo } from './demos';
+import { InferredTextFocusDemo, InferredSelectFocusDemo, AsyncSelectDemo } from './demos';
 
 export const textInputPages = {
 	title: 'Text Input',
@@ -41,10 +41,7 @@ export const textInputPages = {
 			content: pageLoader(() => import('./inferred.md')),
 			imports: {
 				InferredTextFocusDemo,
-				InferredTypeaheadFocusDemo,
-				InferredText,
-				InferredTypeahead,
-				...Bootstrap,
+				InferredSelectFocusDemo,
 				DocgenTable,
 			},
 		},
