@@ -14,13 +14,13 @@ import type { OptionsType, InputActionMeta } from 'react-select/lib/types';
 
 export type AsyncProps = {
 	/* The default set of options to show before the user starts searching. When
-     set to `true`, the results for loadOptions('') will be autoloaded. */
+	 set to `true`, the results for loadOptions('') will be autoloaded. */
 	defaultOptions: OptionsType | boolean,
 	/* Function that returns a promise, which is the set of options to be used
-     once the promise resolves. */
+	 once the promise resolves. */
 	loadOptions: (string, (OptionsType) => void) => Promise<*> | void,
 	/* If cacheOptions is truthy, then the loaded data will be cached. The cache
-     will remain until `cacheOptions` changes value. */
+	 will remain until `cacheOptions` changes value. */
 	cacheOptions: any,
 	/* Debounce interval in milliseconds on input change. */
 	debounceInterval: number,
@@ -30,8 +30,8 @@ export type Props = SelectProps & AsyncProps;
 
 export const defaultProps = {
 	cacheOptions: false,
-  defaultOptions: false,
-  debounceInterval: 200,
+	defaultOptions: false,
+	debounceInterval: 200,
 };
 
 type State = {
