@@ -59,7 +59,7 @@ export const makeAsyncSelect = (SelectComponent: ComponentType<*>) =>
 				loadedOptions: [],
 				passEmptyOptions: false,
 			};
-			this.debouncedLoadOptions = props.debounceInterval
+			this.loadOptions = props.debounceInterval
 				? debounce(this.handleLoadOptions, props.debounceInterval)
 				: this.handleLoadOptions;
 		}
@@ -138,7 +138,7 @@ export const makeAsyncSelect = (SelectComponent: ComponentType<*>) =>
 						passEmptyOptions: !this.state.loadedInputValue,
 					},
 					() => {
-						this.debouncedLoadOptions(inputValue, options => {
+						this.loadOptions(inputValue, options => {
 							if (!this.mounted) return;
 							if (options) {
 								this.optionsCache[inputValue] = options;
