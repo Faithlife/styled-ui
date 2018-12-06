@@ -37,7 +37,11 @@ import { GearIcon } from '../components/icons';
 import { colors } from '../components/shared-styles';
 import { DocgenTable } from './docgen-table';
 import { MemberDirectory, VolunteerScheduling } from './grid';
-import { InferredTextFocusDemo, InferredTypeaheadFocusDemo } from './text-input/demos';
+import {
+	InferredTextFocusDemo,
+	InferredTypeaheadFocusDemo,
+	AsyncSelectDemo,
+} from './text-input/demos';
 
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
@@ -388,7 +392,7 @@ const components = [
 				path: '/text-input/select',
 				title: 'Autocomplete Select Variations',
 				content: pageLoader(() => import('./text-input/select.md')),
-				imports: { Input, Select, CreatableSelect },
+				imports: { Input, Select, CreatableSelect, AsyncSelectDemo },
 			},
 			{
 				path: '/text-input/typeahead',

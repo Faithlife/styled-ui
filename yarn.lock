@@ -7550,6 +7550,13 @@ methods@~1.1.2:
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
   integrity sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4=
 
+micro-graphql-react@^0.3.0-beta2:
+  version "0.3.0-beta2"
+  resolved "https://registry.yarnpkg.com/micro-graphql-react/-/micro-graphql-react-0.3.0-beta2.tgz#a24b8b15e88779074c096d9f18619708b3477e88"
+  integrity sha512-103qZFv81aPB0lz5pFh/ihFjtHXb2NJoIjwMi95uu4B1ZmDZS0CWNl7DRYh1ZQ4jjxJUjZDZjpwIpOT/eL0c1A==
+  dependencies:
+    shallow-equal "^1.0.0"
+
 micromatch@^2.3.11, micromatch@^2.3.7:
   version "2.3.11"
   resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-2.3.11.tgz#86677c97d1720b363431d04d0d15293bd38c1565"
@@ -10498,6 +10505,11 @@ shallow-clone@^1.0.0:
     is-extendable "^0.1.1"
     kind-of "^5.0.0"
     mixin-object "^2.0.1"
+
+shallow-equal@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/shallow-equal/-/shallow-equal-1.0.0.tgz#508d1838b3de590ab8757b011b25e430900945f7"
+  integrity sha1-UI0YOLPeWQq4dXsBGyXkMJAJRfc=
 
 shallowequal@^1.0.1:
   version "1.0.2"

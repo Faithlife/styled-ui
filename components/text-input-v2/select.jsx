@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactSelect from 'react-select';
-import ReactSelectAsync from 'react-select/lib/Async';
 import ReactSelectCreatable from 'react-select/lib/Creatable';
-import ReactSelectAsyncCreatable from 'react-select/lib/AsyncCreatable';
 import { colors } from '../shared-styles';
+import { ReactSelectAsyncCreatable, ReactSelectAsync } from './react-select-async';
 
 const selectStyles = {
 	control: styles => ({
@@ -84,6 +83,7 @@ export const CreatableSelect = props => (
 /** The same as `Select`, but allows new entries and fetches data asynchronously. */
 export const AsyncCreatableSelect = props => (
 	<ReactSelectAsyncCreatable
+		allowCreateWhileLoading={false}
 		styles={selectStyles}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
