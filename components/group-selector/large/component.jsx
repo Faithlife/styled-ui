@@ -248,6 +248,7 @@ export class LargeGroupSelector extends React.Component {
 			<Styled.LargeGroupSelector>
 				{this.props.showInPlace && mainView}
 				<SimpleModal
+					container="body"
 					isOpen={
 						(!this.props.showInPlace && this.props.isOpen) ||
 						(this.props.showInPlace && secondaryModalOpen)

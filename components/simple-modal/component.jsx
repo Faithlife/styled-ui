@@ -20,6 +20,8 @@ export class SimpleModal extends React.Component {
 		children: PropTypes.node.isRequired,
 		/** Customizable theme properties */
 		theme: PropTypes.object,
+		/** Set to 'body' to attach the modal to body, otherwise will attach as a child element */
+		container: PropTypes.string,
 	};
 
 	static defaultProps = {
@@ -37,6 +39,18 @@ export class SimpleModal extends React.Component {
 		const { cancel } = debouncedResize(this.handleResize);
 		this.cancelResizeListener = cancel;
 		this.setState({ canUseDom: true }); // eslint-disable-line
+
+		const { container } = this.props;
+		if (container) {
+			if (typeof container === 'string') {
+				// must be an id or body
+				this.targetContainer =
+					container === 'body' ? document.body : document.getElementById(container);
+			} else {
+				// must be a ref
+				this.targetContainer = typeof container === 'object' ? container.current : container();
+			}
+		}
 	}
 
 	componentWillUnmount() {
@@ -77,6 +91,10 @@ export class SimpleModal extends React.Component {
 			return null;
 		}
 
-		return createPortal(this.renderModal(), document.body);
+		if (this.targetContainer != null) {
+			return createPortal(this.renderModal(), this.targetContainer);
+		}
+
+		return this.renderModal();
 	}
 }
