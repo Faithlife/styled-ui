@@ -49,6 +49,7 @@ export const Button = styled.button`
 	transition: all 0.25s ease 0s;
 	white-space: nowrap;
 	min-height: fit-content;
+	line-height: 1;
 	font-size: ${props => props.styleOverrides.fontSize || '16px'};
 	width: ${props => props.styleOverrides.width};
 	padding: ${props => props.styleOverrides.padding};
@@ -172,17 +173,16 @@ export const variationMap = {
 		}
 `,
 	small: component => component.extend`
-		padding: 6px ${props => (props.condensed ? '6px' : '12px')};
-		font-size: 14px;
+		padding: 7px ${props => (props.condensed ? '7px' : '9px')};
 `,
 	medium: component => component.extend`
-		padding: 9px ${props => (props.condensed ? '8px' : '16px')} 7px;
+		padding: 11px ${props => (props.condensed ? '11px' : '15px')};
 `,
 	large: component => component.extend`
-		padding: 13px ${props => (props.condensed ? '12px' : '24px')} 11px;
+		padding: 14px ${props => (props.condensed ? '14px' : '20px')};
 `,
 	extraLarge: component => component.extend`
-		padding: 16px ${props => (props.condensed ? '16px' : '32px')};
+		padding: 15px ${props => (props.condensed ? '15px' : '23px')};
 		font-size: 24px;
 `,
 };
