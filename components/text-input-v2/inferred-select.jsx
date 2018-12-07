@@ -5,6 +5,7 @@ import { InferredBase } from './inferred-base';
 
 const PlaceholderDropdown = styled.div`
 	height: 30px;
+	width: 36px;
 `;
 
 /** Text input control with a clickable inline confidence indicator. Extra props are passed to the wrapped input.*/
