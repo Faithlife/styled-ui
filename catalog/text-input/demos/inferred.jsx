@@ -19,7 +19,7 @@ export class InferredSelectFocusDemo extends Component {
 			<DemoContainer>
 				<div>{this.state.selected.value}</div>
 				<div>
-					<Button primary small onClick={() => this.inputRef.current.getInstance().focus()}>
+					<Button primary small onClick={() => this.inputRef.current.focus()}>
 						Focus input
 					</Button>
 				</div>
@@ -29,7 +29,7 @@ export class InferredSelectFocusDemo extends Component {
 						renderSelect={({ DropdownIndicator }) => (
 							<Select
 								components={{ DropdownIndicator }}
-								inputRef={this.inputRef}
+								ref={this.inputRef}
 								onChange={selected => {
 									this.setState({ selected, confirmed: true });
 								}}

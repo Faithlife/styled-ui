@@ -65,9 +65,15 @@ const selectTheme = theme => ({
 });
 
 /** Autocomplete control based on react-select */
-export const Select = props => (
-	<ReactSelect styles={selectStyles} classNamePrefix="fl-select" theme={selectTheme} {...props} />
-);
+export const Select = React.forwardRef((props, ref) => (
+	<ReactSelect
+		ref={ref}
+		styles={selectStyles}
+		classNamePrefix="fl-select"
+		theme={selectTheme}
+		{...props}
+	/>
+));
 
 /** The same as `Select`, but allows new entries. */
 export const CreatableSelect = props => (
