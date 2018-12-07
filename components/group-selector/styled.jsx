@@ -271,6 +271,7 @@ export const SearchResultContent = styled.div`
 `;
 
 export const SearchResultNameText = styled.div`
+	max-width: 275px;
 	font-weight: bold;
 	color: #575251;
 	overflow: hidden;

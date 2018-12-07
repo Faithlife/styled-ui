@@ -350,6 +350,15 @@ state: {
 		relationshipKind: 'participant',
 		membershipKind: 'admin',
 		claimable: false,
+	},
+	{
+		name: 'Church With Really Really Really Really Really Really Really Really Long Name',
+		groupId: 5,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
 	}
 	],
 }
@@ -428,7 +437,7 @@ state: {
 		onCreateGroup={(name, location) => {
 			const newGroup = {
 				name,
-				groupId: 5,
+				groupId: 6,
 				kind: 'church',
 				avatarUrl: '',
 				relationshipKind: 'participant',
