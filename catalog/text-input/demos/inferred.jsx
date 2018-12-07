@@ -9,10 +9,6 @@ const DemoContainer = styled.div`
 	}
 `;
 
-const PlaceholderDropdown = styled.div`
-	height: 30px;
-`;
-
 export class InferredSelectFocusDemo extends Component {
 	inputRef = createRef();
 
@@ -30,9 +26,9 @@ export class InferredSelectFocusDemo extends Component {
 				<div>
 					<InferredSelect
 						confidence={this.state.confirmed ? null : 0.9}
-						renderSelect={({ inferred }) => (
+						renderSelect={({ DropdownIndicator }) => (
 							<Select
-								components={inferred ? { DropdownIndicator: () => <PlaceholderDropdown /> } : null}
+								components={{ DropdownIndicator }}
 								inputRef={this.inputRef}
 								onChange={selected => {
 									this.setState({ selected, confirmed: true });

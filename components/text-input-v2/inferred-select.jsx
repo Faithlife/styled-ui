@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { InferredBase } from './inferred-base';
+
+const PlaceholderDropdown = styled.div`
+	height: 30px;
+`;
 
 /** Text input control with a clickable inline confidence indicator. Extra props are passed to the wrapped input.*/
 export class InferredSelect extends Component {
@@ -30,7 +35,11 @@ export class InferredSelect extends Component {
 				confidenceSource={confidenceSource}
 				onConfirm={onConfirm}
 			>
-				{renderSelect}
+				{inferred =>
+					renderSelect({
+						DropdownIndicator: inferred ? () => <PlaceholderDropdown /> : null,
+					})
+				}
 			</InferredBase>
 		);
 	}
