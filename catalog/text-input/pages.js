@@ -1,6 +1,6 @@
 import { pageLoader } from 'catalog';
 import styled from 'styled-components';
-import { Typeahead } from '../../components/text-input';
+import { InferredTypeahead, Typeahead } from '../../components/text-input';
 import { Select, CreatableSelect } from '../../components/text-input-v2';
 import { DocgenTable } from '../docgen-table';
 import { Bootstrap, Button, Input } from '../../components/main';
@@ -33,7 +33,7 @@ export const textInputPages = {
 			path: '/text-input/typeahead',
 			title: 'Typeahead (deprecated)',
 			content: pageLoader(() => import('./typeahead.md')),
-			imports: { Typeahead, ...Bootstrap },
+			imports: { InferredTypeahead, Typeahead, ...Bootstrap },
 		},
 		{
 			path: '/text-input/inferred',

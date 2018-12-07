@@ -54,3 +54,24 @@ state: { tags: [] }
 	</FormGroup>
 </div>
 ```
+
+### Legacy infered typeahead
+
+```react
+showSource: false
+state: { value: 'Washington', confirmed: false }
+---
+<div>
+	<div>
+		<Label>Current selection: {state.value}</Label>
+		<InferredTypeahead
+			confidence={state.confirmed ? null : 0.9}
+			onChange={value => { setState({ value, confirmed: true })}}
+			onConfirm={value => { setState({ confirmed: true })}}
+			options={['Washington','California','Texas']}
+			placeholder="Choose a state..."
+			defaultInputValue={state.value}
+		/>
+	</div>
+</div>
+```
