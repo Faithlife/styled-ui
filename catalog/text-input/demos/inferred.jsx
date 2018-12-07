@@ -26,9 +26,10 @@ export class InferredSelectFocusDemo extends Component {
 				<div>
 					<InferredSelect
 						confidence={this.state.confirmed ? null : 0.9}
-						renderSelect={({ DropdownIndicator }) => (
+						renderSelect={({ inferred, DropdownIndicator }) => (
 							<Select
-								components={{ DropdownIndicator }}
+								inferred={inferred}
+								components={DropdownIndicator && { DropdownIndicator }}
 								ref={this.inputRef}
 								onChange={selected => {
 									this.setState({ selected, confirmed: true });

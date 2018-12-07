@@ -35,8 +35,9 @@ export class InferredSelect extends Component {
 				confidenceSource={confidenceSource}
 				onConfirm={onConfirm}
 			>
-				{inferred =>
+				{({ inferred }) =>
 					renderSelect({
+						inferred,
 						DropdownIndicator: inferred ? () => <PlaceholderDropdown /> : null,
 					})
 				}

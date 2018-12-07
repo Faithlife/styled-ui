@@ -4,7 +4,7 @@ import ReactSelectCreatable from 'react-select/lib/Creatable';
 import { colors } from '../shared-styles';
 import { ReactSelectAsyncCreatable, ReactSelectAsync } from './react-select-async';
 
-const selectStyles = {
+const selectStyles = props => ({
 	control: styles => ({
 		...styles,
 		minHeight: '30px',
@@ -33,6 +33,10 @@ const selectStyles = {
 		lineHeight: 1,
 		whiteSpace: 'nowrap',
 	}),
+	singleValue: styles => ({
+		...styles,
+		color: props.inferred ? '#006099' : colors.gray66,
+	}),
 	multiValue: styles => ({
 		...styles,
 		backgroundColor: colors.gray4,
@@ -49,7 +53,7 @@ const selectStyles = {
 			color: colors.blueDark,
 		},
 	}),
-};
+});
 
 const selectTheme = theme => ({
 	...theme,
@@ -68,7 +72,7 @@ const selectTheme = theme => ({
 export const Select = React.forwardRef((props, ref) => (
 	<ReactSelect
 		ref={ref}
-		styles={selectStyles}
+		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
 		{...props}
@@ -78,7 +82,7 @@ export const Select = React.forwardRef((props, ref) => (
 /** The same as `Select`, but allows new entries. */
 export const CreatableSelect = props => (
 	<ReactSelectCreatable
-		styles={selectStyles}
+		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
 		formatCreateLabel={node => <span>New entry: {node}</span>}
@@ -90,7 +94,7 @@ export const CreatableSelect = props => (
 export const AsyncCreatableSelect = props => (
 	<ReactSelectAsyncCreatable
 		allowCreateWhileLoading={false}
-		styles={selectStyles}
+		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
 		formatCreateLabel={node => <span>New entry: {node}</span>}
@@ -101,7 +105,7 @@ export const AsyncCreatableSelect = props => (
 /** The same as `Select`, but fetches options asynchronously. */
 export const AsyncSelect = props => (
 	<ReactSelectAsync
-		styles={selectStyles}
+		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
 		{...props}
