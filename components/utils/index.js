@@ -75,4 +75,12 @@ export const resetStyles = `
 	*:after {
 		box-sizing: border-box;
 	}
+
+	&::placeholder {
+		font-style: initial;
+	}
+
+	p {
+		padding: 0;
+	}
 `;
