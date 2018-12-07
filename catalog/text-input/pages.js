@@ -17,6 +17,8 @@ export const textInputPages = {
 				Input,
 				Button,
 				InputSpacer: styled.div`
+					display: flex;
+
 					&& > * {
 						margin: 4px;
 					}
