@@ -4,16 +4,17 @@ A typeahead control with keyboard navigation based on react-select.
 
 ### Migration guide from V1 to v2:
 
-* Change the import to `text-input-v2` (see below)
-* The dedicated CSS import is not required for v2. Delete the typeahead and boostrap CSS imports when upgrading.
-* `options` now requires an array of objects instead of strings
-* `multiple` should be changed to `isMulti` enable the tags input
+- Change the import to `text-input-v2` (see below)
+- The dedicated CSS import is not required for v2. Delete the typeahead and boostrap CSS imports when upgrading.
+- `options` now requires an array of objects instead of strings
+- `multiple` should be changed to `isMulti` enable the tags input
 
 ```
 import { Select } from '@faithlife/styled-ui/dist/text-input-v2';
 ```
 
 ### Single select
+
 ```react
 showSource: true
 state: { selection: '' }
@@ -35,6 +36,7 @@ state: { selection: '' }
 ```
 
 ### Multi select
+
 ```react
 showSource: true
 state: { tags: [] }
@@ -56,8 +58,8 @@ state: { tags: [] }
 </div>
 ```
 
-
 ### Multi select with custom entries
+
 ```react
 showSource: true
 state: { tags: [] }
@@ -77,4 +79,13 @@ state: { tags: [] }
 		placeholder="Choose a state..."
 	/>
 </div>
+```
+
+### Async select
+
+```react
+showSource: true
+state: { tags: [] }
+---
+<AsyncSelectDemo />
 ```

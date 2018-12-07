@@ -17,7 +17,8 @@
         "ssr": true
       }
     ],
-    "react-docgen"
+	"react-docgen",
+	"babel-plugin-transform-flow-strip-types"
   ],
   "env": {
     "test": {

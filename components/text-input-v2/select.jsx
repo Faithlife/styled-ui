@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactSelect from 'react-select';
-import ReactSelectAsync from 'react-select/lib/Async';
 import ReactSelectCreatable from 'react-select/lib/Creatable';
-import ReactSelectAsyncCreatable from 'react-select/lib/AsyncCreatable';
 import { colors } from '../shared-styles';
+import { ReactSelectAsyncCreatable, ReactSelectAsync } from './react-select-async';
 
-const selectStyles = {
+const selectStyles = props => ({
 	control: styles => ({
 		...styles,
 		minHeight: '30px',
@@ -34,6 +33,10 @@ const selectStyles = {
 		lineHeight: 1,
 		whiteSpace: 'nowrap',
 	}),
+	singleValue: styles => ({
+		...styles,
+		color: props.inferred ? '#006099' : colors.gray66,
+	}),
 	multiValue: styles => ({
 		...styles,
 		backgroundColor: colors.gray4,
@@ -50,7 +53,7 @@ const selectStyles = {
 			color: colors.blueDark,
 		},
 	}),
-};
+});
 
 const selectTheme = theme => ({
 	...theme,
@@ -66,14 +69,20 @@ const selectTheme = theme => ({
 });
 
 /** Autocomplete control based on react-select */
-export const Select = props => (
-	<ReactSelect styles={selectStyles} classNamePrefix="fl-select" theme={selectTheme} {...props} />
-);
+export const Select = React.forwardRef((props, ref) => (
+	<ReactSelect
+		ref={ref}
+		styles={selectStyles(props)}
+		classNamePrefix="fl-select"
+		theme={selectTheme}
+		{...props}
+	/>
+));
 
 /** The same as `Select`, but allows new entries. */
 export const CreatableSelect = props => (
 	<ReactSelectCreatable
-		styles={selectStyles}
+		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
 		formatCreateLabel={node => <span>New entry: {node}</span>}
@@ -84,7 +93,8 @@ export const CreatableSelect = props => (
 /** The same as `Select`, but allows new entries and fetches data asynchronously. */
 export const AsyncCreatableSelect = props => (
 	<ReactSelectAsyncCreatable
-		styles={selectStyles}
+		allowCreateWhileLoading={false}
+		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
 		formatCreateLabel={node => <span>New entry: {node}</span>}
@@ -95,7 +105,7 @@ export const AsyncCreatableSelect = props => (
 /** The same as `Select`, but fetches options asynchronously. */
 export const AsyncSelect = props => (
 	<ReactSelectAsync
-		styles={selectStyles}
+		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
 		{...props}

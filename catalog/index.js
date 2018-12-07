@@ -29,15 +29,13 @@ import {
 	DatePeriodPicker,
 } from '../components/main';
 import { BaseButton } from '../components/button/base-button';
-import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
-import { Select, CreatableSelect } from '../components/text-input-v2';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
 import { colors } from '../components/shared-styles';
 import { DocgenTable } from './docgen-table';
 import { MemberDirectory, VolunteerScheduling } from './grid';
-import { InferredTextFocusDemo, InferredTypeaheadFocusDemo } from './text-input/demos';
+import { textInputPages } from './text-input/pages';
 
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
@@ -373,44 +371,7 @@ const components = [
 			},
 		],
 	},
-	{
-		title: 'Text Input',
-		pages: [
-			{
-				path: '/text-input/input',
-				title: 'Input Variations',
-				content: pageLoader(() => import('./text-input/input.md')),
-				imports: {
-					Input,
-				},
-			},
-			{
-				path: '/text-input/select',
-				title: 'Autocomplete Select Variations',
-				content: pageLoader(() => import('./text-input/select.md')),
-				imports: { Input, Select, CreatableSelect },
-			},
-			{
-				path: '/text-input/typeahead',
-				title: 'Typeahead (deprecated)',
-				content: pageLoader(() => import('./text-input/typeahead.md')),
-				imports: { Typeahead, ...Bootstrap },
-			},
-			{
-				path: '/text-input/inferred',
-				title: 'Inferred Inputs',
-				content: pageLoader(() => import('./text-input/inferred.md')),
-				imports: {
-					InferredTextFocusDemo,
-					InferredTypeaheadFocusDemo,
-					InferredText,
-					InferredTypeahead,
-					...Bootstrap,
-					DocgenTable,
-				},
-			},
-		],
-	},
+	textInputPages,
 	{
 		title: 'Files Section',
 		pages: [

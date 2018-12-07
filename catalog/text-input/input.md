@@ -3,7 +3,10 @@
 ```react
 state: { value: 'Washington' }
 ---
-<Input small value={state.value} onChange={event => setState({ value: event.target.value })} />
+<InputSpacer>
+	<Input small value={state.value} onChange={event => setState({ value: event.target.value })} />
+	<Button small primary>Search</Button>
+</InputSpacer>
 ```
 
 ### Medium
@@ -11,7 +14,10 @@ state: { value: 'Washington' }
 ```react
 state: { value: 'Washington' }
 ---
-<Input medium value={state.value} onChange={event => setState({ value: event.target.value })} />
+<InputSpacer>
+	<Input medium value={state.value} onChange={event => setState({ value: event.target.value })} />
+	<Button medium primary>Search</Button>
+</InputSpacer>
 ```
 
 ### Large
@@ -19,5 +25,8 @@ state: { value: 'Washington' }
 ```react
 state: { value: 'Washington' }
 ---
-<Input large value={state.value} onChange={event => setState({ value: event.target.value })} />
+<InputSpacer>
+	<Input large value={state.value} onChange={event => setState({ value: event.target.value })} />
+	<Button large primary>Search</Button>
+</InputSpacer>
 ```
