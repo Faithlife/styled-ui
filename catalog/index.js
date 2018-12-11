@@ -412,6 +412,7 @@ const components = [
 					`,
 					IconsContainer: styled.div`
 						color: #a8a8a8;
+
 						> * {
 							margin: 0 12px;
 						}
