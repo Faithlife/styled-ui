@@ -23,6 +23,7 @@ import {
 	PopoverReference,
 	Radio,
 	SimpleModal,
+	Slider,
 	Tooltip,
 	DatePicker,
 	DatePickerInput,
@@ -572,6 +573,26 @@ const components = [
 				title: 'Date Picker Input Documentation',
 				content: pageLoader(() => import('./date-picker-input/documentation.md')),
 				imports: { DatePickerInput, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Slider',
+		pages: [
+			{
+				path: '/slider/variations',
+				title: 'Slider Variations',
+				content: pageLoader(() => import('./slider/variations.md')),
+				imports: {
+					Slider,
+					DocgenTable,
+				},
+			},
+			{
+				path: 'slider/documentation',
+				title: 'Slider Documentation',
+				content: pageLoader(() => import('./slider/documentation.md')),
+				imports: { Slider, DocgenTable },
 			},
 		],
 	},
