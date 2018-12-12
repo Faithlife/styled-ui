@@ -28,6 +28,9 @@ showSource: true
 showSource: true
 ---
 <ButtonDemo>
+	<Button primary extraLarge icon={<GearIcon />}>
+		Settings
+	</Button>
 	<Button primary small icon={<GearIcon />}>
 		Settings
 	</Button>
