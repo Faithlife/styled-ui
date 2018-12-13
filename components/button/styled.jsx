@@ -15,6 +15,11 @@ export const ButtonContents = styled.span`
 	grid-column-gap: 6px;
 	align-items: center;
 	justify-content: ${props => props.justifyContent || 'center'};
+
+	> svg {
+		height: 1em;
+		width: 1em;
+	}
 `;
 
 export const Anchor = styled.a`
