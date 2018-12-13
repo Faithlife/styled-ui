@@ -178,15 +178,15 @@ export const variationMap = {
 		}
 `,
 	small: component => component.extend`
+		height: 32px;
 		padding: 7px ${props => (props.condensed ? '7px' : '9px')};
 `,
 	medium: component => component.extend`
+		height: 40px;
 		padding: 11px ${props => (props.condensed ? '11px' : '15px')};
 `,
 	large: component => component.extend`
-		padding: 14px ${props => (props.condensed ? '14px' : '20px')};
-`,
-	extraLarge: component => component.extend`
+		height: 56px;
 		padding: 15px ${props => (props.condensed ? '15px' : '23px')};
 		font-size: 24px;
 `,

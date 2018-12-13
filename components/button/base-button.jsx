@@ -31,14 +31,12 @@ export const BaseButton = forwardClassRef(
 			primary: PropTypes.bool,
 			/** Primary outline variation */
 			primaryOutline: PropTypes.bool,
-			/** Medium variation */
-			medium: PropTypes.bool,
 			/** Small variation */
 			small: PropTypes.bool,
+			/** Medium variation */
+			medium: PropTypes.bool,
 			/** Large variation */
 			large: PropTypes.bool,
-			/** Extra large variation */
-			extraLarge: PropTypes.bool,
 			/** Transparent with primary text variation */
 			primaryTransparent: PropTypes.bool,
 			/** Transparent with minor text variation */
