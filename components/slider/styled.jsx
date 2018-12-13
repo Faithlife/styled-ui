@@ -98,5 +98,5 @@ export const Thumb = styled.div`
 	width: 20px;
 	background: #fff;
 	box-shadow: ${props =>
-		props.active ? '0 1px 10px 0 #0174b9' : '0 2px 6px 1px rgba(0, 0, 0, 0.4)'};
+		props.active ? '0 1px 10px 0 #0174b9' : '0 2px 6px 1px rgba(0, 0, 0, 0.3)'};
 `;
