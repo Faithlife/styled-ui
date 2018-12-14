@@ -9,7 +9,7 @@ const buttonColors = {
 	disabled: '#bedcf2',
 };
 
-export const ButtonContents = styled.span`
+export const ButtonContentWrapper = styled.div`
 	display: grid;
 	grid-auto-flow: column;
 	grid-column-gap: 6px;
@@ -20,6 +20,12 @@ export const ButtonContents = styled.span`
 		height: 1em;
 		width: 1em;
 	}
+`;
+
+export const ButtonContents = styled.div`
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 `;
 
 export const Anchor = styled.a`
@@ -54,7 +60,6 @@ export const Button = styled.button`
 	transition: all 0.25s ease 0s;
 	white-space: nowrap;
 	min-height: fit-content;
-	line-height: 1;
 	font-size: ${props => props.styleOverrides.fontSize || '16px'};
 	width: ${props => props.styleOverrides.width};
 	padding: ${props => props.styleOverrides.padding};
@@ -179,15 +184,15 @@ export const variationMap = {
 `,
 	small: component => component.extend`
 		height: 32px;
-		padding: 7px ${props => (props.condensed ? '7px' : '9px')};
+		padding: 0 ${props => (props.condensed ? '7px' : '9px')};
 `,
 	medium: component => component.extend`
 		height: 40px;
-		padding: 11px ${props => (props.condensed ? '11px' : '15px')};
+		padding: 0 ${props => (props.condensed ? '11px' : '15px')};
 `,
 	large: component => component.extend`
 		height: 56px;
-		padding: 15px ${props => (props.condensed ? '15px' : '23px')};
+		padding: 0 ${props => (props.condensed ? '15px' : '23px')};
 		font-size: 24px;
 `,
 };

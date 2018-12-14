@@ -98,10 +98,10 @@ export const BaseButton = forwardClassRef(
 					onMouseUp={this.onMouseUp}
 					styleOverrides={componentStyleOverrides}
 				>
-					<Styled.ButtonContents justifyContent={justifyContent}>
+					<Styled.ButtonContentWrapper justifyContent={justifyContent}>
 						{icon}
-						{children}
-					</Styled.ButtonContents>
+						{children && <Styled.ButtonContents>{children}</Styled.ButtonContents>}
+					</Styled.ButtonContentWrapper>
 				</MappedStyledComponent>
 			);
 		}
