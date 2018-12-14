@@ -74,7 +74,7 @@ export class Popover extends React.Component {
 	};
 
 	state = {
-		showPopper: false,
+		showPopper: this.props.isOpen || false,
 	};
 
 	_timeout = null;
