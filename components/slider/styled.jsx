@@ -84,15 +84,18 @@ export const Stop = styled.div`
 
 export const ThumbAnchor = styled.div`
 	position: relative;
+	height: 8px;
+	width: 3px;
+	left: ${props => (props.trackStart ? '6px' : 'auto')};
+	right: ${props => (props.trackEnd ? '6px' : 'auto')};
 `;
 
 export const Thumb = styled.div`
 	position: absolute;
 	top: 50%;
-	left: ${props => (props.trackStart ? '-4px' : props.trackEnd ? 'auto' : 'auto')};
-	right: ${props => (props.trackStart ? 'auto' : props.trackEnd ? '-4px' : '50%')};
-	transform: ${props =>
-		props.trackStart || props.trackEnd ? 'translate(0, -50%)' : 'translate(50%, -50%)'};
+	left: auto;
+	right: 50%;
+	transform: translate(50%, -50%);
 	border-radius: 50%;
 	height: 20px;
 	width: 20px;

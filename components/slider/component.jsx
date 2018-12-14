@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { PopoverManager, PopoverReference, Popover } from '../main';
 import * as Styled from './styled';
 
 function range(from, to) {
@@ -9,6 +10,7 @@ function range(from, to) {
 export class Slider extends PureComponent {
 	static propTypes = {
 		value: PropTypes.number.isRequired,
+		labels: PropTypes.arrayOf(PropTypes.string),
 		minValue: PropTypes.number,
 		maxValue: PropTypes.number,
 		setValue: PropTypes.func.isRequired,
@@ -17,12 +19,21 @@ export class Slider extends PureComponent {
 
 	state = {
 		value: this.props.value,
+		isHovered: false,
 		isSliding: false,
 	};
+
+	_timeout = null;
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.value !== this.state.value) {
 			this.setState({ value: nextProps.value });
+		}
+	}
+
+	componentWillUnmount() {
+		if (this._timeout) {
+			clearTimeout(this._timeout);
 		}
 	}
 
@@ -41,7 +52,7 @@ export class Slider extends PureComponent {
 		event.preventDefault();
 		document.addEventListener('touchmove', this.touchMove);
 		document.addEventListener('touchend', this.touchEnd);
-		this.setState({ isSliding: true });
+		this.setState({ isHovered: true, isSliding: true });
 		this.touchMove(event);
 	};
 
@@ -70,7 +81,7 @@ export class Slider extends PureComponent {
 		event.preventDefault();
 		document.addEventListener('mousemove', this.mouseMove);
 		document.addEventListener('mouseup', this.mouseUp);
-		this.setState({ isSliding: true });
+		this.setState({ isHovered: true, isSliding: true });
 		this.mouseMove(event);
 	};
 
@@ -78,7 +89,7 @@ export class Slider extends PureComponent {
 		event.preventDefault();
 		const value = this.calculateValue(event.clientX);
 		if (this.state.value !== value) {
-			this.setState({ value });
+			this.setState({ value, isHovered: true });
 		}
 	};
 
@@ -87,13 +98,46 @@ export class Slider extends PureComponent {
 		document.removeEventListener('mousemove', this.mouseMove);
 		document.removeEventListener('mouseup', this.mouseUp);
 		this.setState({ isSliding: false });
+		this.handleTogglePopover(false, 1000);
 		if (this.state.value !== this.props.value) {
 			this.props.setValue(this.state.value);
 		}
 	};
 
+	handleMouseEnter = event => {
+		event.preventDefault();
+		this.handleTogglePopover(true, 2);
+	};
+
+	handleMouseLeave = event => {
+		event.preventDefault();
+		this.handleTogglePopover(false, 500);
+	};
+
+	handleTogglePopover = (isOpen, delay = 200) => {
+		if (!isOpen) {
+			if (this._timeout) {
+				clearTimeout(this._timeout);
+			}
+			this._timeout = setTimeout(() => {
+				this.setState({ isHovered: false });
+				this._timeout = null;
+			}, delay || 0);
+		} else {
+			if (this._timeout) {
+				clearTimeout(this._timeout);
+			}
+			this._timeout = setTimeout(() => {
+				this.setState({ isHovered: true });
+				this._timeout = null;
+			}, delay || 0);
+		}
+	};
+
 	render() {
 		const { maxValue } = this.props;
+		const { isHovered } = this.state;
+		const labels = this.props.labels || [];
 
 		return (
 			<Styled.SliderContainer
@@ -130,21 +174,31 @@ export class Slider extends PureComponent {
 						/>
 					))}
 				</Styled.StopContainer>
-				<Styled.ThumbContainer>
-					{range(0, this.props.stopCount).map(
-						index =>
-							index === this.state.value ? (
-								<Styled.ThumbAnchor key="thumb">
-									<Styled.Thumb
-										active={this.state.isSliding}
-										trackStart={index === 0}
-										trackEnd={index === this.props.stopCount - 1}
-									/>
-								</Styled.ThumbAnchor>
-							) : (
-								<Styled.ThumbAnchor key={index} />
-							),
-					)}
+				<Styled.ThumbContainer
+					onMouseEnter={this.handleMouseEnter}
+					onMouseLeave={this.handleMouseLeave}
+				>
+					{range(0, this.props.stopCount).map(index => (
+						<Styled.ThumbAnchor
+							key={index}
+							trackStart={index === 0}
+							trackEnd={index === this.props.stopCount - 1}
+						>
+							<PopoverManager>
+								<PopoverReference>
+									{index === this.state.value && <Styled.Thumb active={this.state.isSliding} />}
+								</PopoverReference>
+								<Popover
+									isOpen={index === this.state.value && isHovered && !!labels[index]}
+									placement={'top'}
+									container="body"
+									modifiers={{ offset: { offset: '1, 28' }, preventOverflow: { padding: 0 } }}
+								>
+									{labels[index]}
+								</Popover>
+							</PopoverManager>
+						</Styled.ThumbAnchor>
+					))}
 				</Styled.ThumbContainer>
 			</Styled.SliderContainer>
 		);
