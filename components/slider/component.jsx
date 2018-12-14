@@ -10,8 +10,11 @@ function range(from, to) {
 export class Slider extends PureComponent {
 	static propTypes = {
 		value: PropTypes.number.isRequired,
+		/** Array of strings to be used as tooltip labels */
 		labels: PropTypes.arrayOf(PropTypes.string),
+		/** 0-based index */
 		minValue: PropTypes.number,
+		/** 0-based index, should be less than stopCount if specified */
 		maxValue: PropTypes.number,
 		setValue: PropTypes.func.isRequired,
 		stopCount: PropTypes.number.isRequired,
