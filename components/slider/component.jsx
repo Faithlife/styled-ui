@@ -190,13 +190,15 @@ export class Slider extends PureComponent {
 						>
 							<PopoverManager>
 								<PopoverReference>
-									{index === this.state.value && <Styled.Thumb active={this.state.isSliding} />}
+									{index === this.state.value && (
+										<Styled.Thumb active={this.state.isSliding} hovered={this.state.isHovered} />
+									)}
 								</PopoverReference>
 								<Popover
 									isOpen={index === this.state.value && isHovered && !!labels[index]}
 									placement={'top'}
 									container="body"
-									modifiers={{ offset: { offset: '1, 28' }, preventOverflow: { padding: 0 } }}
+									modifiers={{ offset: { offset: '0, 33' } }}
 								>
 									{labels[index]}
 								</Popover>
