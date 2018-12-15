@@ -138,7 +138,7 @@ export class Slider extends PureComponent {
 	};
 
 	render() {
-		const { maxValue } = this.props;
+		const { maxValue, minValue } = this.props;
 		const { isHovered } = this.state;
 		const labels = this.props.labels || [];
 
@@ -173,6 +173,7 @@ export class Slider extends PureComponent {
 								!(index >= this.props.maxValue) &&
 								!(index === this.props.stopCount - 1)
 							}
+							minimumAvailable={index === minValue}
 							key={index}
 						/>
 					))}

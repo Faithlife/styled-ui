@@ -19,9 +19,9 @@ showSource: true
 state: {}
 ---
 <div style={{background: "#fff", padding: 20}}>
-	<Slider value={1} setValue={() => false} minValue={0} maxValue={3} stopCount={5} />
-	<Slider value={1} setValue={() => false} minValue={1} maxValue={4} stopCount={5} />
-	<Slider value={1} setValue={() => false} minValue={1} maxValue={5} stopCount={5} />
+	<Slider value={2} setValue={() => false} minValue={0} maxValue={2} stopCount={5} />
+	<Slider value={3} setValue={() => false} minValue={1} maxValue={3} stopCount={5} />
+	<Slider value={4} setValue={() => false} minValue={2} maxValue={4} stopCount={5} />
 </div>
 ```
 

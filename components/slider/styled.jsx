@@ -79,7 +79,8 @@ export const Track = styled.div`
 export const Stop = styled.div`
 	height: 8px;
 	width: 3px;
-	background-color: ${props => (props.available ? '#fff' : 'transparent')};
+	background-color: ${props =>
+		props.available || props.minimumAvailable ? '#fff' : 'transparent'};
 `;
 
 export const ThumbAnchor = styled.div`
