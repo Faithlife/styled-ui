@@ -38,7 +38,9 @@ state: {}
 </div>
 ```
 
-### Example
+### hideAvailableStops
+
+For sliders with many stops, consider using the `hideAvailableStops` option.
 
 ```react
 showSource: true
@@ -46,6 +48,12 @@ state: { value: 49 }
 ---
 <div style={{background: "#fff", padding: 20}}>
 	<div>Opacity: {state.value + 1}</div>
+	<Slider
+		value={state.value}
+		setValue={value => setState({value: value})}
+		stopCount={100}
+		labels={Array.from({length: 100}, (x,i) => i + 1)}
+	/>
 	<Slider
 		hideAvailableStops
 		value={state.value}
