@@ -42,11 +42,17 @@ state: {}
 
 ```react
 showSource: true
-state: { value: 99 }
+state: { value: 49 }
 ---
 <div style={{background: "#fff", padding: 20}}>
 	<div>Opacity: {state.value + 1}</div>
-	<Slider value={state.value} setValue={value => setState({value: value})} stopCount={100} labels={Array.from({length: 100}, (x,i) => i + 1)} />
+	<Slider
+		hideAvailableStops
+		value={state.value}
+		setValue={value => setState({value: value})}
+		stopCount={100}
+		labels={Array.from({length: 100}, (x,i) => i + 1)}
+	/>
 	<img src="https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201" alt="Faithlife campus" style={{ maxWidth: '100%', opacity: (state.value + 1) / 100 }} />
 </div>
 ```
