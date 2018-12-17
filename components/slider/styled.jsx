@@ -97,7 +97,7 @@ export const Thumb = styled.div`
 	left: auto;
 	right: 50%;
 	transform: translate(50%, -50%);
-	transition: height 200ms, width 200ms;
+	transition: height 100ms, width 100ms;
 	border-radius: 50%;
 	height: ${props => (props.hovered ? '26px' : '20px')};
 	width: ${props => (props.hovered ? '26px' : '20px')};
