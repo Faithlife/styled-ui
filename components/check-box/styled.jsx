@@ -29,6 +29,13 @@ export const CheckboxContainer = styled.button`
 	&:hover ${CheckboxDiv} {
 		border: solid 1px ${props => props.theme.primary};
 	}
+
+	&:focus {
+		&:not(:active) {
+			box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
+		}
+		outline: none;
+	}
 `;
 
 export const isCheckedStyles = `&:after {
