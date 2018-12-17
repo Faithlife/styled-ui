@@ -107,7 +107,7 @@ export class Slider extends PureComponent {
 		document.removeEventListener('mousemove', this.mouseMove);
 		document.removeEventListener('mouseup', this.mouseUp);
 		this.setState({ isSliding: false });
-		this.handleTogglePopover(false, 1000);
+		this.handleTogglePopover(false);
 		if (this.state.value !== this.props.value) {
 			this.props.setValue(this.state.value);
 		}
@@ -115,15 +115,15 @@ export class Slider extends PureComponent {
 
 	handleMouseEnter = event => {
 		event.preventDefault();
-		this.handleTogglePopover(true, 2);
+		this.handleTogglePopover(true);
 	};
 
 	handleMouseLeave = event => {
 		event.preventDefault();
-		this.handleTogglePopover(false, 500);
+		this.handleTogglePopover(false);
 	};
 
-	handleTogglePopover = (isOpen, delay = 200) => {
+	handleTogglePopover = (isOpen, delay = 0) => {
 		if (!isOpen) {
 			if (this._timeout) {
 				clearTimeout(this._timeout);
