@@ -1,14 +1,18 @@
 import React from 'react';
 import ReactSelect from 'react-select';
 import ReactSelectCreatable from 'react-select/lib/Creatable';
-import { colors } from '../shared-styles';
+import { colors, inputColors } from '../shared-styles';
 import { ReactSelectAsyncCreatable, ReactSelectAsync } from './react-select-async';
 
 const selectStyles = props => ({
-	control: styles => ({
+	control: (styles, state) => ({
 		...styles,
 		minHeight: '30px',
 		fontSize: '16px',
+		border: state.isFocused
+			? `1px solid ${inputColors.inputFocusedBorderColor}`
+			: `1px solid ${inputColors.inputBorderColor}`,
+		boxShadow: state.isFocused ? `0 0 0 2px ${inputColors.inputFocusedShadowColor}` : 'none',
 	}),
 	valueContainer: styles => ({
 		...styles,
