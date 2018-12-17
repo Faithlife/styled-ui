@@ -12,6 +12,8 @@ export const Input = styled.input`
 	height: 32px;
 	${fonts.ui16};
 
+	width: ${props => props.styleOverrides.width};
+
 	&:focus {
 		border-color: ${inputColors.inputFocusedBorderColor};
 		box-shadow: 0 0 0 2px ${inputColors.inputFocusedShadowColor};

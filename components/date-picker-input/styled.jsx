@@ -12,20 +12,6 @@ export const Container = styled.div`
 	color: ${colors.flGray};
 `;
 
-export const Input = styled.input`
-	font-size: 1rem;
-	line-height: 1.3;
-	font-family: inherit;
-	border: 1px solid ${colors.borderColor};
-	border-radius: 3px;
-	height: 32px;
-	width: 100%;
-	margin: 0;
-	padding: 0.25rem 0.5rem;
-	transition: color 0.2s linear;
-	box-sizing: border-box;
-`;
-
 export const CalendarButton = styled.div`
 	position: absolute;
 	top: 0;

@@ -21,6 +21,13 @@ export class Input extends PureComponent {
 		small: PropTypes.bool,
 		/** Large variation */
 		large: PropTypes.bool,
+		styleOverrides: PropTypes.shape({
+			width: PropTypes.string,
+		}),
+	};
+
+	static defaultProps = {
+		styleOverrides: {},
 	};
 
 	handleChange = () => {

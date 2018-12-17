@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { PopoverManager, PopoverReference, Popover } from '../main';
 import { Calendar as CalendarIcon } from '../icons';
+import { Input } from '../input';
 import { colors } from '../shared-styles';
 import { dateFunctionProps } from '../date-picker/date-function-props';
 import { DatePicker } from '../date-picker/component';
@@ -123,13 +124,14 @@ export class DatePickerInput extends PureComponent {
 		return (
 			<Styled.Container>
 				<PopoverManager>
-					<Styled.Input
+					<Input
 						type="text"
 						onBlur={this.handleBlur}
 						onChange={this.handleChange}
 						onFocus={this.handleFocus}
 						value={value}
 						disabled={disabled}
+						styleOverrides={{ width: '100%' }}
 					/>
 					<Styled.CalendarButton
 						innerRef={this.icon}
