@@ -25,9 +25,10 @@ export class Modal extends React.Component {
 		children: PropTypes.node.isRequired,
 		/** Customizable theme properties */
 		theme: PropTypes.object,
-		/** Style overrides */
+		/** Style overrides, the z-index is applied to the backdrop */
 		styleOverrides: PropTypes.shape({
 			bottomBorder: PropTypes.string,
+			zIndex: PropTypes.number,
 		}),
 		/** Values for rendering an FL standard footer */
 		footerProps: PropTypes.shape({
@@ -56,7 +57,9 @@ export class Modal extends React.Component {
 		theme: {
 			background: 'white',
 		},
-		styleOverrides: {},
+		styleOverrides: {
+			zIndex: 1050,
+		},
 	};
 
 	state = {
@@ -113,9 +116,13 @@ export class Modal extends React.Component {
 			(modalWidth < 220 ||
 				(modalWidth < 320 && footerProps && Object.keys(footerProps).length === 3));
 
+		const backdropStyleOverrides = {
+			zIndex: styleOverrides.zIndex,
+		};
+
 		return (
 			<ThemeProvider theme={{ ...theme, verticalButtons }}>
-				<ModalBackdrop onClose={onClose}>
+				<ModalBackdrop onClose={onClose} styleOverrides={backdropStyleOverrides}>
 					<Styled.Modal
 						innerRef={modal => {
 							this._modal = modal;
