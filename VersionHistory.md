@@ -2,12 +2,12 @@
 
 ### 4.2.0
 * **Important**: If you were using the brand new `Input` controls, the height of `small`, `medium`, and `large` has been adjusted to match `Button` variations. Please make sure your UI still renders properly!
-* **New component**: `InferredSelect`, which uses the new `react-select` control. #93 #95 
-* **New component**: `DatePeriodPicker` #91 
+* **New component**: `InferredSelect`, which uses the new `react-select` control. [#93](https://github.com/Faithlife/styled-ui/pull/93) [#95](https://github.com/Faithlife/styled-ui/pull/95)
+* **New component**: `DatePeriodPicker` [#91](https://github.com/Faithlife/styled-ui/pull/91)
 * **Deprecated**: `InferredTypeahead` is now deprecated in favor of `InferredSelect`, please migrate your code (chms should be the only tool using this)
-* Fix group creation for in place group selector (#94) 
-* Use new tooltip in inferred controls (a096de5394d1df6d1777fd5ef340e633389c09b9)
-* Prevent popover arrow from interfering with mouse events (#92)
+* Fix group creation for in place group selector [#94](https://github.com/Faithlife/styled-ui/pull/94)
+* Use new tooltip in inferred controls [commit](https://github.com/Faithlife/styled-ui/commit/a096de5394d1df6d1777fd5ef340e633389c09b9)
+* Prevent popover arrow from interfering with mouse events [#92](https://github.com/Faithlife/styled-ui/pull/92)
 * Added `container` prop to `Modal` and `SimpleModal` components
 * Added `zIndex` style override for `Modal` and `SimpleModal`, which is applied to the `ModalBackdrop`
 
