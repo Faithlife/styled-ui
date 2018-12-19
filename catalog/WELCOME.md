@@ -3,7 +3,8 @@ This is where the magic happens.
 ## How to use
 
 1. Make sure a `.npmrc` file is present in your repo, which should contain something like: `@faithlife:registry=http://npm.faithlife.io`
-1. Run `yarn add @faithlife/styled-ui styled-components`.  **Make sure to add styled-ui as a peer dependency to your project if you are hosting it within Faithlife.com (see below)**.
+1. Run `yarn add @faithlife/styled-ui styled-components@3`.  **Make sure to add styled-ui as a peer dependency to your project if you are hosting it within Faithlife.com (see below)**. Please note that until we finish updating to v4, your project needs to be referencing v3. [#75](https://github.com/Faithlife/styled-ui/pull/75)
+1. Use [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals) so your bundle does not include styled-ui directly
 1. Ship it!
 
 ## Guidelines for use
