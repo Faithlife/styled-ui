@@ -180,7 +180,7 @@ export class Slider extends PureComponent {
 									!(index >= this.props.maxValue) &&
 									!(index === this.props.stopCount - 1))
 							}
-							minimumAvailable={index === minValue}
+							minimumAvailable={index === minValue && minValue > 0}
 							key={index}
 						/>
 					))}
