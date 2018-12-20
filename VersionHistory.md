@@ -1,5 +1,8 @@
 # Changelog
 
+### 4.2.1
+* Specified `line-height: 1` on `AnchorButton` to match the setting on `Button` added in v4.2.0
+
 ### 4.2.0
 * **Important**: If you were using the brand new `Input` controls, the height of `small`, `medium`, and `large` has been adjusted to match `Button` variations. Please make sure your UI still renders properly!
 * **New component**: `InferredSelect`, which uses the new `react-select` control. [#93](https://github.com/Faithlife/styled-ui/pull/93) [#95](https://github.com/Faithlife/styled-ui/pull/95)
