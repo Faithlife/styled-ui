@@ -44,23 +44,17 @@ For sliders with many stops, consider using the `hideAvailableStops` option.
 
 ```react
 showSource: true
-state: { value: 49 }
+state: { value: 5 }
 ---
 <div style={{background: "#fff", padding: 20}}>
-	<div>Opacity: {state.value + 1}</div>
-	<Slider
-		value={state.value}
-		setValue={value => setState({value: value})}
-		stopCount={100}
-		labels={Array.from({length: 100}, (x,i) => i + 1)}
-	/>
+	<div>Opacity: {state.value * 10}</div>
 	<Slider
 		hideAvailableStops
 		value={state.value}
 		setValue={value => setState({value: value})}
-		stopCount={100}
-		labels={Array.from({length: 100}, (x,i) => i + 1)}
+		stopCount={11}
+		labels={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
 	/>
-	<img src="https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201" alt="Faithlife campus" style={{ maxWidth: '100%', opacity: (state.value + 1) / 100 }} />
+	<img src="https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201" alt="Faithlife campus" style={{ maxWidth: '100%', opacity: (state.value * 10) / 100 }} />
 </div>
 ```
