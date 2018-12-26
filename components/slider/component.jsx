@@ -113,6 +113,34 @@ export class Slider extends PureComponent {
 		}
 	};
 
+	handleKeyDown = event => {
+		const { minValue, maxValue, stopCount } = this.props;
+		const { value: currentValue } = this.state;
+
+		if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+			event.preventDefault();
+			const newValue = currentValue + 1;
+			const value =
+				newValue > maxValue ? maxValue : newValue > stopCount - 1 ? stopCount - 1 : newValue;
+			if (value !== currentValue) {
+				return this.setState({ value }, () => {
+					if (this.state.value !== this.props.value) this.props.setValue(this.state.value);
+				});
+			}
+		} else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+			event.preventDefault();
+			const newValue = currentValue - 1;
+			const value = newValue < minValue ? minValue : newValue < 0 ? 0 : newValue;
+			if (value !== currentValue) {
+				return this.setState({ value }, () => {
+					if (this.state.value !== this.props.value) this.props.setValue(this.state.value);
+				});
+			}
+		}
+
+		return false;
+	};
+
 	handleMouseEnter = event => {
 		event.preventDefault();
 		this.handleTogglePopover(true);
@@ -151,6 +179,7 @@ export class Slider extends PureComponent {
 		return (
 			<Styled.SliderContainer
 				onDragStart={event => event.preventDefault()}
+				onKeyDown={this.handleKeyDown}
 				onMouseDown={this.mouseDown}
 				onTouchStart={this.touchStart}
 				tabIndex="0"
