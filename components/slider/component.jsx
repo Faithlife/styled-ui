@@ -153,6 +153,7 @@ export class Slider extends PureComponent {
 				onDragStart={event => event.preventDefault()}
 				onMouseDown={this.mouseDown}
 				onTouchStart={this.touchStart}
+				tabIndex="0"
 				innerRef={ref => {
 					this._slider = ref;
 				}}
