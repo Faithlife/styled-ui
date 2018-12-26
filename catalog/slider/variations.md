@@ -49,6 +49,12 @@ state: { value: 5 }
 <div style={{background: "#fff", padding: 20}}>
 	<div>Opacity: {state.value * 10}</div>
 	<Slider
+		value={state.value}
+		setValue={value => setState({value: value})}
+		stopCount={11}
+		labels={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
+	/>
+	<Slider
 		hideAvailableStops
 		value={state.value}
 		setValue={value => setState({value: value})}
