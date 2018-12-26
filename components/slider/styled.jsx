@@ -59,7 +59,14 @@ export const TrackGradient = styled.div`
 `;
 
 export const Track = styled.div`
-	background-color: ${props => (props.active ? 'transparent' : props.invalid ? '#fff' : '#ebebeb')};
+	background-color: ${props =>
+		props.active
+			? 'transparent'
+			: props.invalid
+				? props.styleOverrides.backgroundColor
+					? props.styleOverrides.backgroundColor
+					: '#fff'
+				: '#ebebeb'};
 	flex-grow: 1;
 	position: relative;
 	height: 8px;
@@ -76,7 +83,8 @@ export const Track = styled.div`
 		bottom: 0;
 		right: 0;
 		width: 8px;
-		background-color: #fff;
+		background-color: ${props =>
+			props.styleOverrides.backgroundColor ? props.styleOverrides.backgroundColor : '#fff'};
 		z-index: -5;
 	}
 `;

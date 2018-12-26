@@ -1,7 +1,5 @@
 ## Slider
 
-Note: the slider component expects a white background.
-
 ```react
 showSource: true
 state: {}
@@ -62,5 +60,20 @@ state: { value: 5 }
 		labels={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
 	/>
 	<img src="https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201" alt="Faithlife campus" style={{ maxWidth: '100%', opacity: (state.value * 10) / 100 }} />
+</div>
+```
+
+### Note on background colors
+
+The slider component expects a white background to create the sections of inactive track that cover the blue gradient.
+If your slider is not on a white background, use the `styleOverrides` prop to indicate the background color.
+
+```react
+showSource: true
+state: {}
+---
+<div style={{background: "#8fdb6b", padding: 20}}>
+	<Slider value={1} setValue={() => false} maxValue={3} stopCount={5} />
+	<Slider styleOverrides={{ backgroundColor: '#8fdb6b' }} value={1} setValue={() => false} maxValue={3} stopCount={5} />
 </div>
 ```

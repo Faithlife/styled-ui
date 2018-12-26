@@ -20,10 +20,15 @@ export class Slider extends PureComponent {
 		stopCount: PropTypes.number.isRequired,
 		/** Useful for sliders with many stops */
 		hideAvailableStops: PropTypes.bool,
+		/** Style overrides */
+		styleOverrides: PropTypes.shape({
+			backgroundColor: PropTypes.string,
+		}),
 	};
 
 	static defaultProps = {
 		hideAvailableStops: false,
+		styleOverrides: {},
 	};
 
 	state = {
@@ -172,7 +177,7 @@ export class Slider extends PureComponent {
 	};
 
 	render() {
-		const { hideAvailableStops, maxValue, minValue } = this.props;
+		const { hideAvailableStops, maxValue, minValue, styleOverrides } = this.props;
 		const { isHovered } = this.state;
 		const labels = this.props.labels || [];
 
@@ -198,6 +203,7 @@ export class Slider extends PureComponent {
 								index === maxValue - 1 || (!maxValue && index === this.props.stopCount - 2)
 							}
 							key={index}
+							styleOverrides={styleOverrides}
 						/>
 					))}
 				</Styled.TrackContainer>
@@ -212,6 +218,7 @@ export class Slider extends PureComponent {
 							}
 							minimumAvailable={index === minValue && minValue > 0}
 							key={index}
+							styleOverrides={styleOverrides}
 						/>
 					))}
 				</Styled.StopContainer>
