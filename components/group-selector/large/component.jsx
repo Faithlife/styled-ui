@@ -251,7 +251,8 @@ export class LargeGroupSelector extends React.Component {
 					container="body"
 					isOpen={
 						(!this.props.showInPlace && this.props.isOpen) ||
-						(this.props.showInPlace && secondaryModalOpen)
+						(this.props.showInPlace && secondaryModalOpen) ||
+						false
 					}
 					onClose={this.toggle}
 					theme={{ background: 'transparent' }}
