@@ -1,5 +1,7 @@
 # Changelog
 
+* Fixed a false prop-types warning with GroupSelector
+
 ### 4.2.1
 * Specified `line-height: 1` on `AnchorButton` to match the setting on `Button` added in v4.2.0
 
