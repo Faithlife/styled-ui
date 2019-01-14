@@ -106,6 +106,7 @@ export const ThumbAnchor = styled.div`
 
 export const Thumb = styled.div`
 	position: absolute;
+	display: ${props => (props.hidden ? 'none' : 'block')};
 	top: 50%;
 	left: auto;
 	right: 50%;

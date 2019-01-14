@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { createDerivedValue } from '@faithlife/react-util';
 import { PopoverManager, PopoverReference, Popover } from '../main';
 import * as Styled from './styled';
 
@@ -61,6 +62,9 @@ export class Slider extends PureComponent {
 		const { minValue, maxValue } = this.props;
 		return newValue > maxValue ? maxValue : newValue < minValue ? minValue : newValue;
 	};
+
+	getStops = createDerivedValue(() => [this.props.stopCount], stopCount => range(0, stopCount));
+	getTrack = createDerivedValue(() => [this.props.stopCount], stopCount => range(0, stopCount - 1));
 
 	touchStart = event => {
 		event.preventDefault();
@@ -180,6 +184,8 @@ export class Slider extends PureComponent {
 		const { hideAvailableStops, maxValue, minValue, styleOverrides } = this.props;
 		const { isHovered } = this.state;
 		const labels = this.props.labels || [];
+		const track = this.getTrack();
+		const stops = this.getStops();
 
 		return (
 			<Styled.SliderContainer
@@ -194,7 +200,7 @@ export class Slider extends PureComponent {
 			>
 				<Styled.TrackContainer>
 					<Styled.TrackGradient />
-					{range(0, this.props.stopCount - 1).map(index => (
+					{track.map(index => (
 						<Styled.Track
 							active={index < this.state.value}
 							invalid={this.props.maxValue && index >= this.props.maxValue}
@@ -208,7 +214,7 @@ export class Slider extends PureComponent {
 					))}
 				</Styled.TrackContainer>
 				<Styled.StopContainer>
-					{range(0, this.props.stopCount).map(index => (
+					{stops.map(index => (
 						<Styled.Stop
 							available={
 								!hideAvailableStops &&
@@ -226,7 +232,7 @@ export class Slider extends PureComponent {
 					onMouseEnter={this.handleMouseEnter}
 					onMouseLeave={this.handleMouseLeave}
 				>
-					{range(0, this.props.stopCount).map(index => (
+					{stops.map(index => (
 						<Styled.ThumbAnchor
 							key={index}
 							trackStart={index === 0}
@@ -234,9 +240,11 @@ export class Slider extends PureComponent {
 						>
 							<PopoverManager>
 								<PopoverReference>
-									{index === this.state.value && (
-										<Styled.Thumb active={this.state.isSliding} hovered={this.state.isHovered} />
-									)}
+									<Styled.Thumb
+										active={this.state.isSliding}
+										hovered={this.state.isHovered}
+										hidden={index !== this.state.value}
+									/>
 								</PopoverReference>
 								<Popover
 									isOpen={index === this.state.value && isHovered && !!labels[index]}
