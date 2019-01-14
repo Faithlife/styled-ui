@@ -255,7 +255,12 @@ export class Slider extends PureComponent {
 									/>
 								</PopoverReference>
 								<Popover
-									isOpen={index === this.state.value && isHovered && labels[index] !== undefined}
+									isOpen={
+										index === this.state.value &&
+										isHovered &&
+										labels[index] !== undefined &&
+										labels[index] !== ''
+									}
 									placement={'top'}
 									container="body"
 									modifiers={{ offset: { offset: '0, 33' } }}
