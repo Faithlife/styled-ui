@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import debounce from 'lodash.debounce';
+import throttle from 'lodash.throttle';
 import { createDerivedValue } from '@faithlife/react-util';
 import { PopoverManager, PopoverReference, Popover } from '../main';
 import * as Styled from './styled';
@@ -123,6 +125,16 @@ export class Slider extends PureComponent {
 	};
 
 	handleKeyDown = event => {
+		event.persist();
+		this.handleThrottledKeyDown(event);
+	};
+
+	handleDebouncedKeyInput = debounce(() => {
+		this.handleTogglePopover(false, 150);
+		if (this.state.value !== this.props.value) this.props.setValue(this.state.value);
+	}, 250);
+
+	handleThrottledKeyDown = throttle(event => {
 		const { minValue, maxValue, stopCount } = this.props;
 		const { value: currentValue } = this.state;
 
@@ -131,24 +143,20 @@ export class Slider extends PureComponent {
 			const newValue = currentValue + 1;
 			const value =
 				newValue > maxValue ? maxValue : newValue > stopCount - 1 ? stopCount - 1 : newValue;
-			if (value !== currentValue) {
-				return this.setState({ value }, () => {
-					if (this.state.value !== this.props.value) this.props.setValue(this.state.value);
-				});
-			}
+			return this.setState({ value, isHovered: true }, () => {
+				this.handleDebouncedKeyInput();
+			});
 		} else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
 			event.preventDefault();
 			const newValue = currentValue - 1;
 			const value = newValue < minValue ? minValue : newValue < 0 ? 0 : newValue;
-			if (value !== currentValue) {
-				return this.setState({ value }, () => {
-					if (this.state.value !== this.props.value) this.props.setValue(this.state.value);
-				});
-			}
+			return this.setState({ value, isHovered: true }, () => {
+				this.handleDebouncedKeyInput();
+			});
 		}
 
 		return false;
-	};
+	}, 50);
 
 	handleMouseEnter = event => {
 		event.preventDefault();
