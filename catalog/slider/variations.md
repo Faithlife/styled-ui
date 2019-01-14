@@ -39,27 +39,28 @@ state: {}
 ### hideAvailableStops
 
 For sliders with many stops, consider using the `hideAvailableStops` option.
+This component has performances issues with many stops. Considering using no more than 51 stops for percentile sliders.
 
 ```react
 showSource: true
-state: { value: 5 }
+state: { value: 50, labels: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98, 100] }
 ---
 <div style={{background: "#fff", padding: 20}}>
-	<div>Opacity: {state.value * 10}</div>
+	<div>Opacity: {state.value * 2}</div>
 	<Slider
 		value={state.value}
-		setValue={value => setState({value: value})}
-		stopCount={11}
-		labels={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
+		setValue={function (value) {setState({value: value})}}
+		stopCount={51}
+		labels={state.labels}
 	/>
 	<Slider
 		hideAvailableStops
 		value={state.value}
-		setValue={value => setState({value: value})}
-		stopCount={11}
-		labels={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
+		setValue={function (value) {setState({value: value})}}
+		stopCount={51}
+		labels={state.labels}
 	/>
-	<img src="https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201" alt="Faithlife campus" style={{ maxWidth: '100%', opacity: (state.value * 10) / 100 }} />
+	<img src="https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201" alt="Faithlife campus" style={{ maxWidth: '100%', opacity: (state.value * 2) / 100 }} />
 </div>
 ```
 
