@@ -2,12 +2,18 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import throttle from 'lodash.throttle';
-import { createDerivedValue } from '@faithlife/react-util';
+import memoize from 'memoize-one';
 import { PopoverManager, PopoverReference, Popover } from '../main';
 import * as Styled from './styled';
 
 function range(from, to) {
 	return [...Array(to - from).keys()].map(num => num + from);
+}
+
+// Derived from https://github.com/Faithlife/react-util/
+function createDerivedValue(getDependencies, calculateValue) {
+	const calculateMemoizedValue = memoize(calculateValue);
+	return () => calculateMemoizedValue(...getDependencies());
 }
 
 export class Slider extends PureComponent {
