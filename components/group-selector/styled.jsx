@@ -265,7 +265,8 @@ export const SearchResultAvatar = styled.div`
 
 export const SearchResultContent = styled.div`
 	display: flex;
-	width: 100%;
+	flex-grow: 1;
+	min-width: 100px;
 	flex-direction: column;
 	justify-content: space-between;
 `;
