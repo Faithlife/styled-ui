@@ -39,7 +39,7 @@ state: {}
 ### hideAvailableStops
 
 For sliders with many stops, consider using the `hideAvailableStops` option.
-This component has performances issues with many stops. Considering using no more than 51 stops for percentile sliders.
+This component has performances issues with many stops. Consider using no more than 51 stops for percentile sliders.
 
 ```react
 showSource: true
