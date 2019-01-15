@@ -45,11 +45,10 @@ import '../dist/text-input.css';
 import '../dist/ag-grid.css';
 
 const ButtonDemo = styled.div`
-	display: grid;
+	display: inline-grid;
 	grid-auto-flow: column;
 	align-items: center;
 	grid-column-gap: 12px;
-	width: min-content;
 `;
 
 const ButtonGrid = styled.div`

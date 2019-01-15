@@ -9,7 +9,7 @@ const buttonColors = {
 	disabled: '#bedcf2',
 };
 
-export const ButtonContents = styled.span`
+export const ButtonContentWrapper = styled.div`
 	display: grid;
 	grid-auto-flow: column;
 	grid-column-gap: 6px;
@@ -20,6 +20,12 @@ export const ButtonContents = styled.span`
 		height: 1em;
 		width: 1em;
 	}
+`;
+
+export const ButtonContents = styled.div`
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 `;
 
 export const Anchor = styled.a`
@@ -55,7 +61,6 @@ export const Button = styled.button`
 	transition: all 0.25s ease 0s;
 	white-space: nowrap;
 	min-height: fit-content;
-	line-height: 1;
 	font-size: ${props => props.styleOverrides.fontSize || '16px'};
 	width: ${props => props.styleOverrides.width};
 	padding: ${props => props.styleOverrides.padding};
@@ -179,16 +184,16 @@ export const variationMap = {
 		}
 `,
 	small: component => component.extend`
-		padding: 7px ${props => (props.condensed ? '7px' : '9px')};
+		height: 32px;
+		padding: 0 ${props => (props.condensed ? '7px' : '9px')};
 `,
 	medium: component => component.extend`
-		padding: 11px ${props => (props.condensed ? '11px' : '15px')};
+		height: 40px;
+		padding: 0 ${props => (props.condensed ? '11px' : '15px')};
 `,
 	large: component => component.extend`
-		padding: 14px ${props => (props.condensed ? '14px' : '20px')};
-`,
-	extraLarge: component => component.extend`
-		padding: 15px ${props => (props.condensed ? '15px' : '23px')};
+		height: 56px;
+		padding: 0 ${props => (props.condensed ? '15px' : '23px')};
 		font-size: 24px;
 `,
 };
