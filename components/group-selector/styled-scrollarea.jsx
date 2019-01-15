@@ -52,10 +52,6 @@ export const ScrollArea = styled(WrappedScrollArea)`
 			opacity: 0.1;
 			z-index: 9999;
 
-			-webkit-transition: all 0.4s;
-			-moz-transition: all 0.4s;
-			-ms-transition: all 0.4s;
-			-o-transition: all 0.4s;
 			transition: all 0.4s;
 
 			&:hover {
