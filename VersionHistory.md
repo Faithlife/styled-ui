@@ -1,6 +1,13 @@
 # Changelog
 
-* Fixed a false prop-types warning with GroupSelector
+### 5.0.0
+* **Important**: We have updated to `styled-components` v4, which has support for forwarding refs with the React 16.3 API. There is no more need for `innerRef`.
+* **Important**: Button sizes have been adjusted to match current design specs.
+* **New component**: Slider
+* Fixed an overflow bug for churches with long names in the GroupSelector component.
+
+### 4.2.2
+* Fixed a false prop-types warning with GroupSelector.
 
 ### 4.2.1
 * Specified `line-height: 1` on `AnchorButton` to match the setting on `Button` added in v4.2.0
