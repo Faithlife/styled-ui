@@ -47,7 +47,7 @@ export const InferredTypeahead = forwardClassRef(
 				className,
 				onConfirm,
 				onChange,
-				forwardedRef,
+				forwardedRef, // eslint-disable-line react/prop-types
 				...inputProps
 			} = this.props;
 

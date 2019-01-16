@@ -54,7 +54,7 @@ export const Input = forwardClassRef(
 				autoFocus,
 				onClick,
 				disabled,
-				forwardedRef,
+				forwardedRef, // eslint-disable-line react/prop-types
 				...inputProps
 			} = this.props;
 
