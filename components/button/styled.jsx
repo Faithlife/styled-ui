@@ -31,7 +31,8 @@ export const ButtonContents = styled.div`
 export const Anchor = styled.a`
 	${resetStyles};
 
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
 	text-decoration: none;
 	text-align: center;
 	box-shadow: none;
