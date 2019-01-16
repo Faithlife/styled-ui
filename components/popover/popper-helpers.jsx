@@ -7,7 +7,7 @@ import * as Styled from './styled';
 export const PopoverReference = ({ children, ...referenceProps }) => (
 	<Reference>
 		{({ ref }) => (
-			<Styled.ReferenceContainer {...referenceProps} innerRef={ref}>
+			<Styled.ReferenceContainer {...referenceProps} ref={ref}>
 				{children}
 			</Styled.ReferenceContainer>
 		)}

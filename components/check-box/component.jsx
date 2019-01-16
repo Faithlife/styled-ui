@@ -38,7 +38,7 @@ export class Checkbox extends Component {
 		return (
 			<ThemeProvider theme={theme}>
 				<Styled.CheckboxContainer
-					innerRef={this.componentRef}
+					ref={this.componentRef}
 					onClick={onClick}
 					onMouseUp={this.onMouseUp}
 					type={type}

@@ -142,7 +142,7 @@ export class Popover extends React.Component {
 				{({ ref, style, placement, arrowProps }) => (
 					<ThemeProvider theme={theme}>
 						<Styled.PopoverContent
-							innerRef={ref}
+							ref={ref}
 							placement={placement}
 							style={{
 								...style,
@@ -156,7 +156,7 @@ export class Popover extends React.Component {
 							{children}
 							{!hideArrow && (
 								<Styled.Arrow
-									innerRef={arrowProps.ref}
+									ref={arrowProps.ref}
 									placement={placement}
 									style={arrowProps.style}
 									styleOverrides={styleOverrides}

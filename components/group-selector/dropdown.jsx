@@ -112,7 +112,7 @@ export class GroupDropdown extends React.PureComponent {
 		const { name, kind, groupId, avatarUrl } = this.props.selectedGroup;
 
 		return (
-			<Styled.DropdownContainer innerRef={this.dropdownRef}>
+			<Styled.DropdownContainer ref={this.dropdownRef}>
 				<Styled.SelectedGroup onClick={this.handleDropdownToggle} onKeyDown={this.handleKeyPress}>
 					<Styled.SelectedSimpleGroupWrapper>
 						<SimpleGroup

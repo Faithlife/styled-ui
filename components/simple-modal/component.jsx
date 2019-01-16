@@ -82,9 +82,11 @@ export class SimpleModal extends React.Component {
 			<ThemeProvider theme={{ ...theme }}>
 				<ModalBackdrop onClose={onClose} styleOverrides={backdropStyleOverrides}>
 					<Styled.SimpleModal
-						innerRef={modal => {
+						ref={modal => {
 							this._modal = modal;
-							if (modal && modalWidth === null) this.setState({ modalWidth: modal.clientWidth });
+							if (modal && modalWidth === null) {
+								this.setState({ modalWidth: modal.clientWidth });
+							}
 						}}
 					>
 						<Styled.ModalClose onClick={onClose}>

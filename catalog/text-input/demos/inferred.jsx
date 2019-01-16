@@ -70,7 +70,7 @@ export class InferredTextFocusDemo extends Component {
 						onChange={value => this.setState({ value, confirmed: true })}
 						onConfirm={() => this.setState({ confirmed: true })}
 						value={this.state.value}
-						innerRef={this.inputRef}
+						ref={this.inputRef}
 					/>
 				</div>
 			</DemoContainer>

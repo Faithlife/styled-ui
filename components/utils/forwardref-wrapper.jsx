@@ -1,26 +1,17 @@
 import React from 'react';
 
-/** Function to map innerRef to forwardedRef, which gets mapped back with mapToInnerRef.
- * Needed to get styled components to play nicely with libraries that use innerRef.
- * See: https://github.com/styled-components/styled-components/issues/1560
- */
-export function mapFromInnerRef(InnerComponent) {
-	return props => {
-		const { innerRef: forwardedRef, ...restProps } = props; // eslint-disable-line react/prop-types
-		return <InnerComponent forwardedRef={forwardedRef} {...restProps} />;
-	};
-}
-
-/** Function to map forwardedRef back to innerRef, see mapFromInnerRef */
-export function mapToInnerRef(InnerComponent) {
-	return props => {
-		const { forwardedRef: innerRef, ...restProps } = props; // eslint-disable-line react/prop-types
-		return <InnerComponent innerRef={innerRef} {...restProps} />;
-	};
-}
-
 export function forwardClassRef(Component) {
 	function forwardRef(props, ref) {
+		const { innerRef, ...restProps } = props;
+		// Legacy support for innerRef. Remove in the next major release.
+		if (props.innerRef) {
+			console.warn(
+				`Warning from ${Component.displayName ||
+					Component.name}: innerRef is deprecated, please use ref instead.`,
+			);
+			return <Component {...restProps} forwardedRef={innerRef} />;
+		}
+
 		return <Component {...props} forwardedRef={ref} />;
 	}
 

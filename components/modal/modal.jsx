@@ -124,7 +124,7 @@ export class Modal extends React.Component {
 			<ThemeProvider theme={{ ...theme, verticalButtons }}>
 				<ModalBackdrop onClose={onClose} styleOverrides={backdropStyleOverrides}>
 					<Styled.Modal
-						innerRef={modal => {
+						ref={modal => {
 							this._modal = modal;
 							if (modal && modalWidth === null) this.setState({ modalWidth: modal.clientWidth });
 						}}

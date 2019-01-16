@@ -28,7 +28,7 @@ export class CreateGroup extends React.Component {
 				</Styled.CreateGroupLabel>
 				<Styled.InputWrapper>
 					<Input
-						innerRef={this.churchNameInput}
+						ref={this.churchNameInput}
 						value={this.props.newChurchName}
 						onChange={this.props.onChurchNameInputChange}
 						placeholder="Church name"

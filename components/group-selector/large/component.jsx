@@ -234,7 +234,7 @@ export class LargeGroupSelector extends React.Component {
 				<Styled.SearchResultsContainer
 					style={{ marginTop: this.state.resultsTopMargin }}
 					fixed={this.state.createGroupFixed}
-					innerRef={this.searchResultsRef}
+					ref={this.searchResultsRef}
 				>
 					{this.getSearchResults()}
 				</Styled.SearchResultsContainer>
