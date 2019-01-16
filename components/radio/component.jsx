@@ -45,7 +45,7 @@ export class Radio extends Component {
 		return (
 			<ThemeProvider theme={theme}>
 				<Styled.RadioContainer
-					innerRef={this.componentRef}
+					ref={this.componentRef}
 					onMouseUp={this.onMouseUp}
 					onClick={onClick}
 					type={type}

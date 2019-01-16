@@ -133,10 +133,7 @@ export class DatePickerInput extends PureComponent {
 						disabled={disabled}
 						styleOverrides={{ width: '100%' }}
 					/>
-					<Styled.CalendarButton
-						innerRef={this.icon}
-						onClick={!disabled ? this.openCalendar : null}
-					>
+					<Styled.CalendarButton ref={this.icon} onClick={!disabled ? this.openCalendar : null}>
 						<Styled.CalendarIconContainer>
 							<PopoverReference>
 								<CalendarIcon style={{ color: colors.gray52 }} />

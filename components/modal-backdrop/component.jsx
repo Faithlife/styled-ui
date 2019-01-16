@@ -46,7 +46,7 @@ export class ModalBackdrop extends React.Component {
 
 		return (
 			<Styled.Backdrop
-				innerRef={backdrop => {
+				ref={backdrop => {
 					this._backdrop = backdrop;
 				}}
 				onMouseDown={this.handleBackdropCloseEventStart}

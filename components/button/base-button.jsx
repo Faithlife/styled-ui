@@ -93,7 +93,7 @@ export const BaseButton = forwardClassRef(
 			return (
 				<MappedStyledComponent
 					theme={theme}
-					innerRef={this.attachRef}
+					ref={this.attachRef}
 					{...filteredProps || {}}
 					onMouseUp={this.onMouseUp}
 					styleOverrides={componentStyleOverrides}
