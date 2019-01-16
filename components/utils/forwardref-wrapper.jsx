@@ -2,7 +2,8 @@ import React from 'react';
 
 export function forwardClassRef(Component) {
 	function forwardRef(props, ref) {
-		const { innerRef, ...restProps } = props;
+		const { innerRef, ...restProps } = props; // eslint-disable-line react/prop-types
+
 		// Legacy support for innerRef. Remove in the next major release.
 		if (props.innerRef) {
 			console.warn(

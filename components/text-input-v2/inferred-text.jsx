@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Input } from '../input';
-import { InferredBase } from './inferred-base';
 import { forwardClassRef } from '../utils';
+import { InferredBase } from './inferred-base';
 
 const StyledInput = styled(
 	React.forwardRef(({ inferred, ...props }, ref) => <Input {...props} ref={ref} />),
@@ -41,7 +41,7 @@ export const InferredText = forwardClassRef(
 				confidenceSource,
 				className,
 				onConfirm,
-				forwardedRef,
+				forwardedRef, // eslint-disable-line react/prop-types
 				...inputProps
 			} = this.props;
 			return (
