@@ -31,7 +31,8 @@ export const ButtonContents = styled.div`
 export const Anchor = styled.a`
 	${resetStyles};
 
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
 	text-decoration: none;
 	text-align: center;
 	box-shadow: none;
@@ -39,7 +40,6 @@ export const Anchor = styled.a`
 	cursor: pointer;
 	transition: all 0.25s ease 0s;
 	white-space: nowrap;
-	line-height: 1;
 	font-size: ${props => props.styleOverrides.fontSize || '16px'};
 	width: ${props => props.styleOverrides.width};
 	padding: ${props => props.styleOverrides.padding};
