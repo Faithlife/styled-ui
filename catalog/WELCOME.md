@@ -21,3 +21,10 @@ If you're using the included Bootstrap components, you can use the [spacing util
 Some third party components within styled-ui depend on a global stylesheet to be loaded on the page. Because these styles are not scoped, we need to ensure the components and the loaded global styles on the page stay in sync. Without using peer dependencies, styled-ui components might reference styles on the page that have not been loaded properly.
 
 `styled-components` also requires that only one instance is running within an app. See the [FAQs](https://www.styled-components.com/docs/faqs) for more information
+
+## If you are writing a library or integration
+
+1. Use [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals)
+
+If you are writing a package that will be required by someone else, you should exclude your `node_modules` from your Webpack bundle. This webpack plugin makes it easy.
+Even if you have correctly set `styled-ui` and `styled-components` as `peerDependencies`, you must still exclude `node_modules`. Webpack does not differentiate between "dependencies" and "peerDependencies" in your `package.json`.
