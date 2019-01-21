@@ -58,6 +58,7 @@ export class Popover extends React.Component {
 			width: PropTypes.string,
 			padding: PropTypes.string,
 			border: PropTypes.string,
+			zIndex: PropTypes.number,
 		}),
 		theme: PropTypes.shape({
 			backgroundColor: PropTypes.string,
