@@ -31,6 +31,7 @@ export const PopoverContent = styled.div`
 	box-shadow: ${({ styleOverrides }) => (styleOverrides.hideShadow ? 'none' : colors.boxShadow)};
 	white-space: normal;
 	${({ theme }) => (theme.textColor ? `color: ${theme.textColor}` : '')};
+	${({ styleOverrides }) => (styleOverrides.zIndex ? `z-index: ${styleOverrides.zIndex}` : '')};
 `;
 
 export const Arrow = styled.div`
