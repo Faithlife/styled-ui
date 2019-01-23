@@ -174,14 +174,16 @@ There are some exceptions, such as "Buy Now" buttons, which are generally interp
 
 Some buttons are noun phrases, but there should always be an implied verb. For example: a "Settings" button that launches a settings dialog in the current context has an implied verb of "Show" or "Launch" (if the user is thinking of what the computer will do) or "Edit" or "Change" (if they're thinking of what they want to do).
 
-Button text should never wrap, and will be ellipsized if there isn't enough room for the button.
+Button text should never wrap, and should generally never need ellipses. If you do need them, you will need to supply the styles yourself:
 
 ```react
 showSource: true
 ---
-<ButtonDemo style={{maxWidth: 250}}>
+<ButtonDemo>
 	<Button primary small>
-		Really long button text for demonstration purposes
+		<div style={{ overflow:'hidden', textOverflow:'ellipsis', maxWidth: 230 }}>
+			Really long button text for demonstration purposes
+		</div>
 	</Button>
 </ButtonDemo>
 ```
