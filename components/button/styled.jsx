@@ -24,8 +24,6 @@ export const ButtonContentWrapper = styled.div`
 
 export const ButtonContents = styled.div`
 	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
 `;
 
 export const Anchor = styled.a`
