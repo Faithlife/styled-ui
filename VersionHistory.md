@@ -4,6 +4,7 @@
 * **Important**: We have updated to `styled-components` v4, which has support for forwarding refs with the React 16.3 API. There is no more need for `innerRef`.
 * **Important**: Button sizes have been adjusted to match current design specs.
 * **New component**: Slider
+* Added z `zIndex` style override for the `Popover` component.
 * Fixed an overflow bug for churches with long names in the GroupSelector component.
 
 ### 4.2.2
