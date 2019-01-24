@@ -21,6 +21,7 @@ export const CheckboxContainer = styled.button`
 	min-width: 16px;
 	min-height: 16px;
 	background: transparent;
+	text-align: unset;
 
 	&:active {
 		color: buttontext;
