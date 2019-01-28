@@ -136,6 +136,11 @@ export class Slider extends PureComponent {
 	};
 
 	handleKeyDown = event => {
+		if (event.key === 'Tab' || event.key === 'Escape') {
+			return;
+		}
+
+		event.preventDefault();
 		event.persist();
 		this.handleThrottledKeyDown(event);
 	};
@@ -150,7 +155,6 @@ export class Slider extends PureComponent {
 		const { value: currentValue } = this.state;
 
 		if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
-			event.preventDefault();
 			const newValue = currentValue + 1;
 			const value =
 				newValue > maxValue ? maxValue : newValue > stopCount - 1 ? stopCount - 1 : newValue;
@@ -158,7 +162,6 @@ export class Slider extends PureComponent {
 				this.handleDebouncedKeyInput();
 			});
 		} else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
-			event.preventDefault();
 			const newValue = currentValue - 1;
 			const value = newValue < minValue ? minValue : newValue < 0 ? 0 : newValue;
 			return this.setState({ value, isHovered: true }, () => {
