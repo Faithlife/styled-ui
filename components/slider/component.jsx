@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { createRef, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import throttle from 'lodash.throttle';
@@ -46,6 +46,7 @@ export class Slider extends PureComponent {
 		isSliding: false,
 	};
 
+	_slider = createRef();
 	_timeout = null;
 
 	componentWillReceiveProps(nextProps) {
@@ -61,7 +62,11 @@ export class Slider extends PureComponent {
 	}
 
 	calculateValue = clientX => {
-		const rect = this._slider.getBoundingClientRect();
+		if (!(this._slider && this._slider.current)) {
+			return null;
+		}
+
+		const rect = this._slider.current.getBoundingClientRect();
 		const width = rect.right - rect.left;
 		const pos = clientX - rect.left;
 		const clampedX = Math.min(Math.max(0, pos), width);
@@ -208,9 +213,7 @@ export class Slider extends PureComponent {
 				onMouseDown={this.mouseDown}
 				onTouchStart={this.touchStart}
 				tabIndex="0"
-				ref={ref => {
-					this._slider = ref;
-				}}
+				ref={this._slider}
 			>
 				<Styled.TrackContainer>
 					<Styled.TrackGradient />
