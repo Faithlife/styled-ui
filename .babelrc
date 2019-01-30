@@ -1,5 +1,6 @@
 {
 	"presets": [
+		"@babel/preset-typescript",
 		"@babel/preset-react",
 		[
 			"@babel/preset-env",
@@ -10,14 +11,21 @@
 		]
 	],
 	"plugins": [
+		"@babel/plugin-transform-flow-strip-types",
 		[
 			"babel-plugin-styled-components",
 			{
 				"ssr": true
 			}
 		],
+		[
+			"babel-plugin-react-docgen-typescript",
+			{
+				"include": "components.*\\.tsx$",
+				"exclude": "catalog\\.tsx$"
+			}
+		],
 		"react-docgen",
-		"babel-plugin-transform-flow-strip-types",
 
 		// Stage 0
 		"@babel/plugin-proposal-function-bind",
@@ -45,8 +53,9 @@
 	],
 	"env": {
 		"test": {
-			"presets": ["@babel/preset-react", "@babel/preset-env"],
+			"presets": ["@babel/preset-react", "@babel/preset-env", "@babel/preset-typescript"],
 			"plugins": [
+				"@babel/plugin-transform-flow-strip-types",
 				// Stage 0
 				"@babel/plugin-proposal-function-bind",
 
