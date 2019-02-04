@@ -25,6 +25,11 @@ export const fonts = {
 		font-weight: normal;
 		line-height: 16px;
 	`,
+	ui18: `
+		font-size: 18px;
+		font-weight: normal;
+		line-height: 18px;
+	`,
 	h4: `
 		font-size: 22px;
 		font-weight: bold;
@@ -84,4 +89,10 @@ export const inputColors = {
 	inputBorderColor: colors.borderColor,
 	inputFocusedBorderColor: '#278ed4',
 	inputFocusedShadowColor: '#d0e6f6',
+};
+
+export const mediaSizes = {
+	desktop: '980px',
+	tablet: '736px',
+	phone: '480px',
 };
