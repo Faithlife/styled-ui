@@ -21,4 +21,4 @@ export { Popover, PopoverManager, PopoverReference, Tooltip } from './popover';
 export { Radio } from './radio';
 export { SimpleModal } from './simple-modal';
 export { Slider } from './slider';
-export { Toast } from './toast';
+export { SimpleToast } from './simple-toast';

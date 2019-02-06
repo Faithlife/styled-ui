@@ -1,9 +1,9 @@
 import styled, { keyframes, css } from 'styled-components';
 import { fonts, thickness, colors, mediaSizes } from '../shared-styles';
 
-const flcomMobileHeaderHeight = 47; // px
-const mobileTopOffset = 8; // px
-const toastOffset = { desktop: '24px', mobile: `${flcomMobileHeaderHeight + mobileTopOffset}px` };
+const fixedHeaderHeight = 47; // px
+const fixedHeightOffset = 8; // px
+const toastOffset = { desktop: '24px', mobile: `${fixedHeaderHeight + fixedHeightOffset}px` };
 const toastMinWidth = '285px';
 const toastPadding = '16px';
 const toastHeight = { desktop: '20px', mobile: '18px' };
@@ -38,6 +38,7 @@ const fadeInMobile = keyframes`
 	}
 `;
 
+// On desktop the toast should initially render hidden off screen and slide up into view
 const hiddenBottomValue = ({ styleOverrides }) => css`
 	bottom: calc(-1 * (${styleOverrides.height || toastHeight.desktop} + ${toastPadding} * 2));
 `;
@@ -56,7 +57,8 @@ export const ToastContainer = styled.div`
 	grid-template-columns: min-content max-content;
 
 	position: fixed;
-	z-index: 999999;
+	z-index: ${({ styleOverrides }) => styleOverrides.zIndex || 1000};
+	${({ styleOverrides }) => (styleOverrides.width ? `width: ${styleOverrides.width}` : '')};
 
 	${fonts.ui18};
 
@@ -101,7 +103,7 @@ export const ToastContainer = styled.div`
 	/** Desktop */
 	@media (min-width: ${mediaSizes.tablet}) {
 		padding: 16px;
-		min-width: ${toastMinWidth};
+		${({ styleOverrides }) => (!styleOverrides.width ? `min-width: ${toastMinWidth}` : '')};
 		height: ${({ styleOverrides }) => styleOverrides.height || toastHeight.desktop};
 
 		${props => hiddenBottomValue(props)};

@@ -8,7 +8,7 @@ const ToastStates = Styled.ToastStates;
  * A mobile first Toast. A toast indicates that an action is being taken that does not require the user's
  * specific attention.
  */
-export class Toast extends PureComponent {
+export class SimpleToast extends PureComponent {
 	static propTypes = {
 		/** SVG Icon */
 		icon: PropTypes.node,
@@ -20,10 +20,12 @@ export class Toast extends PureComponent {
 		styleOverrides: PropTypes.shape({
 			width: PropTypes.string,
 			height: PropTypes.string,
-			rightOffset: PropTypes.string,
-			bottomOffset: PropTypes.string,
+			zIndex: PropTypes.number,
 			/** Only for mobile view */
 			topOffset: PropTypes.string,
+			/** Only used for desktop view */
+			rightOffset: PropTypes.string,
+			bottomOffset: PropTypes.string,
 		}),
 	};
 
