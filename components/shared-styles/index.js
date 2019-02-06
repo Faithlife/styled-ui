@@ -92,7 +92,7 @@ export const inputColors = {
 };
 
 export const mediaSizes = {
-	desktop: '980px',
-	tablet: '736px',
-	phone: '480px',
+	desktop: '992px',
+	tablet: '768px',
+	phone: '579px',
 };

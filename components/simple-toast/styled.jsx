@@ -62,7 +62,7 @@ export const ToastContainer = styled.div`
 
 	${fonts.ui18};
 
-	background-color: ${colors.white};
+	background-color: ${({ theme }) => theme.backgroundColor || colors.white};
 	border-radius: 3px;
 	box-shadow: 0 19px 38px 0 rgba(0, 0, 0, 0.12), 0 15px 12px 0 rgba(0, 0, 0, 0.12);
 
@@ -74,31 +74,29 @@ export const ToastContainer = styled.div`
 	}
 
 	/** Mobile Styles */
-	@media (max-width: ${mediaSizes.tablet}) {
-		padding: 10px 16px;
-		height: ${({ styleOverrides }) => styleOverrides.height || toastHeight.mobile};
-		top: ${({ styleOverrides }) => styleOverrides.topOffset || toastOffset.mobile};
-		left: 50%;
-		transform: translateX(-50%);
-		opacity: 0;
+	padding: 10px 16px;
+	height: ${({ styleOverrides }) => styleOverrides.height || toastHeight.mobile};
+	top: ${({ styleOverrides }) => styleOverrides.topOffset || toastOffset.mobile};
+	left: 50%;
+	transform: translateX(-50%);
+	opacity: 0;
 
-		justify-items: center;
+	justify-items: center;
 
-		${props => {
-			switch (props.state) {
-				case ToastStates.showing:
-					return css`
-						animation: ${fadeInMobile} 1250ms linear;
-					`;
-				case ToastStates.hiding:
-					return css`
-						animation: ${fadeOut} 250ms linear;
-					`;
-				default:
-					return '';
-			}
-		}};
-	}
+	${props => {
+		switch (props.state) {
+			case ToastStates.showing:
+				return css`
+					animation: ${fadeInMobile} 1250ms linear;
+				`;
+			case ToastStates.hiding:
+				return css`
+					animation: ${fadeOut} 250ms linear;
+				`;
+			default:
+				return '';
+		}
+	}};
 
 	/** Desktop */
 	@media (min-width: ${mediaSizes.tablet}) {
@@ -108,6 +106,12 @@ export const ToastContainer = styled.div`
 
 		${props => hiddenBottomValue(props)};
 		right: ${({ styleOverrides }) => styleOverrides.rightOffset || toastOffset.desktop};
+
+		top: auto;
+		left: auto;
+		transform: none;
+		opacity: 1;
+		justify-items: left;
 
 		${props => {
 			switch (props.state) {
