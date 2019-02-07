@@ -149,7 +149,7 @@ export class Popover extends React.Component {
 						<ClickAwayHandler
 							mouseEvent="onMouseDown"
 							touchEvent="onTouchStart"
-							{...(showPopper && onClickAway ? { onClick: onClickAway } : {})}
+							onClick={onClickAway}
 						>
 							<Styled.PopoverContent
 								ref={ref}
