@@ -38,6 +38,7 @@
 		"memoize-one": "^5.0.0",
 		"prop-types": "^15.6.1",
 		"react-bootstrap-typeahead": "^3.1.4",
+		"react-event-listener": "^0.6.6",
 		"react-popper": "^1.0.2",
 		"react-scrollbar": "^0.5.4",
 		"react-select": "^2.1.2",
