@@ -88,11 +88,15 @@ export class SimpleToast extends PureComponent {
 	render() {
 		const { theme, styleOverrides } = this.props;
 		const { messages, transitionIn } = this.state;
+		const hasMultipleMessages = messages.length > 1;
 
 		return (
 			<Transition
 				in={transitionIn}
-				timeout={transitionTime}
+				timeout={{
+					enter: transitionTime,
+					exit: hasMultipleMessages ? transitionTime / 2 : transitionTime,
+				}}
 				onEntered={this.handleEntered}
 				onExited={this.handleExited}
 			>
