@@ -10,10 +10,6 @@ const ToastStates = Styled.ToastStates;
  */
 export class SimpleToast extends PureComponent {
 	static propTypes = {
-		/** SVG Icon */
-		icon: PropTypes.node,
-		/** Toast Content */
-		message: PropTypes.string,
 		theme: PropTypes.shape({
 			backgroundColor: PropTypes.string,
 		}),
@@ -39,25 +35,26 @@ export class SimpleToast extends PureComponent {
 		messages: [],
 	};
 
-	componentDidUpdate = (prevProps, prevState) => {
-		const { message } = this.props;
-		if (
-			!!message &&
-			prevProps.message !== message &&
-			!prevState.messages.some(item => item === message)
-		) {
-			this.setState({
+	/** Accepts an object with a required `message` and an optional `icon` property */
+	showMessage = newMessage => {
+		if (newMessage.message) {
+			this.setState(prevState => ({
 				toastState:
 					prevState.toastState === ToastStates.showing ? ToastStates.hiding : ToastStates.showing,
-				messages: [...prevState.messages, message],
-			});
+				messages: [...prevState.messages, newMessage],
+			}));
 		}
 	};
 
 	handleAnimationEnd = () => {
 		const { toastState, messages } = this.state;
-		if (toastState === ToastStates.showing) {
+		if (toastState === ToastStates.shown) {
 			this.setState({ toastState: ToastStates.hiding });
+			return;
+		}
+
+		if (toastState === ToastStates.showing) {
+			this.setState({ toastState: messages.length > 1 ? ToastStates.hiding : ToastStates.shown });
 			return;
 		}
 
@@ -74,7 +71,7 @@ export class SimpleToast extends PureComponent {
 	};
 
 	render() {
-		const { icon, theme, styleOverrides } = this.props;
+		const { theme, styleOverrides } = this.props;
 		const { messages, toastState } = this.state;
 
 		return (
@@ -84,8 +81,8 @@ export class SimpleToast extends PureComponent {
 				styleOverrides={styleOverrides}
 				onAnimationEnd={this.handleAnimationEnd}
 			>
-				{icon}
-				{messages.length > 0 && <Styled.ToastContent>{messages[0]}</Styled.ToastContent>}
+				{messages.length > 0 && messages[0].icon}
+				{messages.length > 0 && <Styled.ToastContent>{messages[0].message}</Styled.ToastContent>}
 			</Styled.ToastContainer>
 		);
 	}

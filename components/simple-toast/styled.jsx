@@ -13,7 +13,7 @@ const slideIn = ({ styleOverrides }) => keyframes`
 		opacity: 1;
 	}
 
-	7%, 100% {
+	100% {
 		bottom: ${styleOverrides.bottomOffset || toastOffset.desktop};
 	}
 `;
@@ -28,12 +28,25 @@ const fadeOut = keyframes`
 	}
 `;
 
+const showToast = ({ styleOverrides }) => keyframes`
+	0%, 100% {
+		opacity: 1;
+		bottom: ${styleOverrides.bottomOffset || toastOffset.desktop};
+	}
+`;
+
+const showToastMobile = keyframes`
+	0%, 100% {
+		opacity: 1;
+	}
+`;
+
 const fadeInMobile = keyframes`
-	0% {
+	from {
 		opacity: 0;
 	}
 
-	10%, 100% {
+	to {
 		opacity: 1;
 	}
 `;
@@ -47,6 +60,7 @@ export const ToastStates = Object.freeze({
 	hidden: 'hidden',
 	hiding: 'hiding',
 	showing: 'showing',
+	shown: 'shown',
 });
 
 export const ToastContainer = styled.div`
@@ -87,11 +101,15 @@ export const ToastContainer = styled.div`
 		switch (props.state) {
 			case ToastStates.showing:
 				return css`
-					animation: ${fadeInMobile} 1250ms linear;
+					animation: ${fadeInMobile} 1s linear;
 				`;
 			case ToastStates.hiding:
 				return css`
 					animation: ${fadeOut} 250ms linear;
+				`;
+			case ToastStates.shown:
+				return css`
+					animation: ${showToastMobile} 1s linear;
 				`;
 			default:
 				return '';
@@ -117,12 +135,16 @@ export const ToastContainer = styled.div`
 			switch (props.state) {
 				case ToastStates.showing:
 					return css`
-						animation: ${slideIn(props)} 5s linear;
+						animation: ${slideIn(props)} 250ms linear;
 					`;
 				case ToastStates.hiding:
 					return css`
 						animation: ${fadeOut} 250ms linear;
 						bottom: ${props.bottomOffset || toastOffset.desktop};
+					`;
+				case ToastStates.shown:
+					return css`
+						animation: ${showToast(props)} 5s linear;
 					`;
 				default:
 					return '';

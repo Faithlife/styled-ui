@@ -9,19 +9,8 @@ showSource: true
 state: { number: 0 }
 ---
 <ToastDemo>
-	<Button primary medium onClick={() => setState({ number: state.number + 1 })}>Click Me</Button>
-	<SimpleToast message={state.number > 0 ?`Hello! ${state.number}` : null} icon={<LoadingSpinner small />} />
-</ToastDemo>
-```
-
-## Toast without icon
-
-```react
-showSource: true
-state: { number: 0 }
----
-<ToastDemo>
-	<Button primary medium onClick={() => setState({ number: state.number + 1 })}>Click Me</Button>
-	<SimpleToast message={state.number > 0 ?`Hello! ${state.number}` : null} />
+	<Button primary medium onClick={() => toastRef.current.showMessage({ message: 'Hello!' })}>Hello!</Button>
+	<Button primary medium onClick={() => toastRef.current.showMessage({ message: 'Hello w/ Icon!', icon: <LoadingSpinner small /> })}>Hello w/ Icon!</Button>
+	<SimpleToast ref={toastRef} />
 </ToastDemo>
 ```

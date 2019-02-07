@@ -606,12 +606,13 @@ const components = [
 				imports: {
 					Button,
 					ToastDemo: styled.div`
-						display: flex;
-						align-items: flex-start;
-						justify-content: space-between;
+						&& > * {
+							margin: 8px;
+						}
 					`,
 					SimpleToast,
 					LoadingSpinner,
+					toastRef: React.createRef(),
 				},
 			},
 			{
