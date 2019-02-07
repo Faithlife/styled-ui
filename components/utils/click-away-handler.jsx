@@ -13,6 +13,11 @@ export class ClickAwayHandler extends Component {
 		children: PropTypes.node,
 	};
 
+	static defaultProps = {
+		mouseEvent: 'onMouseDown',
+		touchEvent: 'onTouchStart',
+	};
+
 	targetRef = React.createRef();
 
 	handleClick = event => {
