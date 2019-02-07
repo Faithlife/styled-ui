@@ -59,13 +59,11 @@ export const ToastContainer = styled.div`
 			case TransitionStatuses.ENTERING:
 				return css`
 					transition: opacity ${transitionTime}ms linear;
-					opacity: 0;
 					opacity: 1;
 				`;
 			case TransitionStatuses.EXITING:
 				return css`
 					transition: opacity ${transitionTime}ms linear;
-					opacity: 1;
 					opacity: 0;
 				`;
 			case TransitionStatuses.ENTERED:
@@ -101,7 +99,6 @@ export const ToastContainer = styled.div`
 				case TransitionStatuses.EXITING:
 					return css`
 						transition: opacity ${transitionTime}ms linear;
-						opacity: 1;
 						opacity: 0;
 					`;
 				case TransitionStatuses.ENTERED:
