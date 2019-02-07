@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Transition from 'react-transition-group/Transition';
 import styled from 'styled-components';
-import { forwardClassRef } from '../utils';
 import {
+	forwardClassRef,
 	omit,
 	pick,
 	TransitionTimeouts,
 	TransitionPropTypeKeys,
 	TransitionStatuses,
-} from './utils';
+} from '../utils';
 
 const CollapseDiv = styled.div`
 	${props =>
