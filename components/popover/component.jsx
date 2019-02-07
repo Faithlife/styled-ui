@@ -146,11 +146,7 @@ export class Popover extends React.Component {
 			<Popper placement={popoverPlacement} modifiers={modifiers}>
 				{({ ref, style, placement, arrowProps }) => (
 					<ThemeProvider theme={theme}>
-						<ClickAwayHandler
-							mouseEvent="onMouseDown"
-							touchEvent="onTouchStart"
-							onClick={onClickAway}
-						>
+						<ClickAwayHandler onClick={onClickAway}>
 							<Styled.PopoverContent
 								ref={ref}
 								placement={placement}
