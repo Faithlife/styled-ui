@@ -1,67 +1,24 @@
 import styled, { keyframes, css } from 'styled-components';
-import { fonts, thickness, colors, mediaSizes } from '../shared-styles';
+import { TransitionStatuses } from '../utils';
+import { fonts, colors, thickness, mediaSizes } from '../shared-styles';
 
 const fixedHeaderHeight = 47; // px
 const fixedHeightOffset = 8; // px
 const toastOffset = { desktop: '24px', mobile: `${fixedHeaderHeight + fixedHeightOffset}px` };
 const toastMinWidth = '285px';
-const toastPadding = '16px';
 const toastHeight = { desktop: '20px', mobile: '18px' };
 
 const slideIn = ({ styleOverrides }) => keyframes`
-	0% {
-		opacity: 1;
+	from {
+		bottom: 0;
 	}
 
-	100% {
+	to {
 		bottom: ${styleOverrides.bottomOffset || toastOffset.desktop};
 	}
 `;
 
-const fadeOut = keyframes`
-	from {
-		opacity: 1;
-	}
-
-	to {
-		opacity: 0;
-	}
-`;
-
-const showToast = ({ styleOverrides }) => keyframes`
-	0%, 100% {
-		opacity: 1;
-		bottom: ${styleOverrides.bottomOffset || toastOffset.desktop};
-	}
-`;
-
-const showToastMobile = keyframes`
-	0%, 100% {
-		opacity: 1;
-	}
-`;
-
-const fadeInMobile = keyframes`
-	from {
-		opacity: 0;
-	}
-
-	to {
-		opacity: 1;
-	}
-`;
-
-// On desktop the toast should initially render hidden off screen and slide up into view
-const hiddenBottomValue = ({ styleOverrides }) => css`
-	bottom: calc(-1 * (${styleOverrides.height || toastHeight.desktop} + ${toastPadding} * 2));
-`;
-
-export const ToastStates = Object.freeze({
-	hidden: 'hidden',
-	hiding: 'hiding',
-	showing: 'showing',
-	shown: 'shown',
-});
+export const transitionTime = 250; // milliseconds
 
 export const ToastContainer = styled.div`
 	/** Shared Styles */
@@ -79,6 +36,7 @@ export const ToastContainer = styled.div`
 	background-color: ${({ theme }) => theme.backgroundColor || colors.white};
 	border-radius: 3px;
 	box-shadow: 0 19px 38px 0 rgba(0, 0, 0, 0.12), 0 15px 12px 0 rgba(0, 0, 0, 0.12);
+	opacity: 0;
 
 	pointer-events: none;
 
@@ -93,23 +51,26 @@ export const ToastContainer = styled.div`
 	top: ${({ styleOverrides }) => styleOverrides.topOffset || toastOffset.mobile};
 	left: 50%;
 	transform: translateX(-50%);
-	opacity: 0;
 
 	justify-items: center;
 
 	${props => {
 		switch (props.state) {
-			case ToastStates.showing:
+			case TransitionStatuses.ENTERING:
 				return css`
-					animation: ${fadeInMobile} 1s linear;
+					transition: opacity ${transitionTime}ms linear;
+					opacity: 0;
+					opacity: 1;
 				`;
-			case ToastStates.hiding:
+			case TransitionStatuses.EXITING:
 				return css`
-					animation: ${fadeOut} 250ms linear;
+					transition: opacity ${transitionTime}ms linear;
+					opacity: 1;
+					opacity: 0;
 				`;
-			case ToastStates.shown:
+			case TransitionStatuses.ENTERED:
 				return css`
-					animation: ${showToastMobile} 1s linear;
+					opacity: 1;
 				`;
 			default:
 				return '';
@@ -122,29 +83,30 @@ export const ToastContainer = styled.div`
 		${({ styleOverrides }) => (!styleOverrides.width ? `min-width: ${toastMinWidth}` : '')};
 		height: ${({ styleOverrides }) => styleOverrides.height || toastHeight.desktop};
 
-		${props => hiddenBottomValue(props)};
 		right: ${({ styleOverrides }) => styleOverrides.rightOffset || toastOffset.desktop};
 
 		top: auto;
 		left: auto;
 		transform: none;
-		opacity: 1;
 		justify-items: left;
+
+		bottom: ${({ styleOverrides }) => styleOverrides.bottomOffset || toastOffset.desktop};
 
 		${props => {
 			switch (props.state) {
-				case ToastStates.showing:
+				case TransitionStatuses.ENTERING:
 					return css`
-						animation: ${slideIn(props)} 250ms linear;
+						animation: ${slideIn(props)} ${transitionTime}ms linear;
 					`;
-				case ToastStates.hiding:
+				case TransitionStatuses.EXITING:
 					return css`
-						animation: ${fadeOut} 250ms linear;
-						bottom: ${props.bottomOffset || toastOffset.desktop};
+						transition: opacity ${transitionTime}ms linear;
+						opacity: 1;
+						opacity: 0;
 					`;
-				case ToastStates.shown:
+				case TransitionStatuses.ENTERED:
 					return css`
-						animation: ${showToast(props)} 5s linear;
+						opacity: 1;
 					`;
 				default:
 					return '';

@@ -30,17 +30,17 @@ export function pick(obj, keys) {
 
 // These are all setup to match what is in the bootstrap _variables.scss
 // https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
-export const TransitionTimeouts = {
+export const TransitionTimeouts = Object.freeze({
 	Fade: 150, // $transition-fade
 	Collapse: 350, // $transition-collapse
 	Modal: 300, // $modal-transition
 	Carousel: 600, // $carousel-transition
-};
+});
 
 // Duplicated Transition.propType keys to ensure that Reactstrap builds
 // for distribution properly exclude these keys for nested child HTML attributes
 // since `react-transition-group` removes propTypes in production builds.
-export const TransitionPropTypeKeys = [
+export const TransitionPropTypeKeys = Object.freeze([
 	'in',
 	'mountOnEnter',
 	'unmountOnExit',
@@ -54,11 +54,11 @@ export const TransitionPropTypeKeys = [
 	'onExit',
 	'onExiting',
 	'onExited',
-];
+]);
 
-export const TransitionStatuses = {
+export const TransitionStatuses = Object.freeze({
 	ENTERING: 'entering',
 	ENTERED: 'entered',
 	EXITING: 'exiting',
 	EXITED: 'exited',
-};
+});

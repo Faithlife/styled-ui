@@ -1,5 +1,12 @@
 export { BootstrapContainer, wrapBootstrap } from './bootstrap-container';
 export { forwardClassRef } from './forwardref-wrapper';
+export {
+	TransitionStatuses,
+	TransitionTimeouts,
+	TransitionPropTypeKeys,
+	pick,
+	omit,
+} from './transition-group-utils';
 
 const componentCache = new WeakMap();
 
