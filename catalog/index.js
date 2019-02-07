@@ -28,6 +28,7 @@ import {
 	DatePicker,
 	DatePickerInput,
 	DatePeriodPicker,
+	SimpleToast,
 } from '../components/main';
 import { BaseButton } from '../components/button/base-button';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
@@ -592,6 +593,33 @@ const components = [
 				title: 'Slider Documentation',
 				content: pageLoader(() => import('./slider/documentation.md')),
 				imports: { Slider, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Simple Toast',
+		pages: [
+			{
+				path: '/simple-toast/variations',
+				title: 'Simple Toast Variations',
+				content: pageLoader(() => import('./simple-toast/variations.md')),
+				imports: {
+					Button,
+					ToastDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
+					SimpleToast,
+					LoadingSpinner,
+					toastRef: React.createRef(),
+				},
+			},
+			{
+				path: '/simple-toast/documentation',
+				title: 'Simple Toast Documentation',
+				content: pageLoader(() => import('./simple-toast/documentation.md')),
+				imports: { SimpleToast, DocgenTable },
 			},
 		],
 	},
