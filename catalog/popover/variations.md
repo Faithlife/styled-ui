@@ -48,6 +48,24 @@ state: { isOpen: false }
 </PopoverDemo>
 ```
 
+## With click away handler
+
+The `onClickAway` function will be called on a `onMouseDown` or `onTouchStart` even.
+
+```react
+showSource: true
+state: { isOpen: false }
+---
+<PopoverDemo>
+	<PopoverManager>
+		<PopoverReference>
+			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
+		</PopoverReference>
+		<Popover isOpen={state.isOpen} placement="top" onClickAway={()=> setState({isOpen: false})}>Hello!</Popover>
+	</PopoverManager>
+</PopoverDemo>
+```
+
 ## Options
 
 ```react
