@@ -286,4 +286,4 @@ export class Slider extends PureComponent {
 			</Styled.SliderContainer>
 		);
 	}
-}
+
