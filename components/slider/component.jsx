@@ -25,6 +25,8 @@ export class Slider extends PureComponent {
 		minValue: PropTypes.number,
 		/** 0-based index, should be less than stopCount if specified */
 		maxValue: PropTypes.number,
+		/** Triggered every time the slider moves */
+		onSlide: PropTypes.func,
 		/** Triggered when the slider stops moving */
 		onStop: PropTypes.func,
 		stopCount: PropTypes.number.isRequired,
@@ -92,6 +94,9 @@ export class Slider extends PureComponent {
 		event.preventDefault();
 		const value = this.calculateValue(event.touches[0].clientX);
 		if (this.state.value !== value) {
+			if (this.props.onSlide) {
+				this.props.onSlide(value);
+			}
 			this.setState({ value });
 		}
 	};
@@ -123,6 +128,9 @@ export class Slider extends PureComponent {
 		event.preventDefault();
 		const value = this.calculateValue(event.clientX);
 		if (this.state.value !== value) {
+			if (this.props.onSlide) {
+				this.props.onSlide(value);
+			}
 			this.setState({ value, isHovered: true });
 		}
 	};
@@ -167,12 +175,18 @@ export class Slider extends PureComponent {
 				newValue > maxValue ? maxValue : newValue > stopCount - 1 ? stopCount - 1 : newValue;
 			return this.setState({ value, isHovered: true }, () => {
 				this.handleDebouncedKeyInput();
+				if (this.props.onSlide) {
+					this.props.onSlide(value);
+				}
 			});
 		} else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
 			const newValue = currentValue - 1;
 			const value = newValue < minValue ? minValue : newValue < 0 ? 0 : newValue;
 			return this.setState({ value, isHovered: true }, () => {
 				this.handleDebouncedKeyInput();
+				if (this.props.onSlide) {
+					this.props.onSlide(value);
+				}
 			});
 		}
 
