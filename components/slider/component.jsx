@@ -100,12 +100,12 @@ export class Slider extends PureComponent {
 		event.preventDefault();
 		document.removeEventListener('touchmove', this.handleTouchMove);
 		document.removeEventListener('touchend', this.handleTouchEnd);
-		this.setState({ isSliding: false });
-		if (this.state.value !== this.props.value) {
-			if (this.props.onStop) {
-				this.props.onStop(this.state.value);
-			}
+
+		if (this.props.onStop) {
+			this.props.onStop(this.state.value);
 		}
+
+		this.setState({ isSliding: false });
 	};
 
 	handleMouseDown = event => {
@@ -131,13 +131,13 @@ export class Slider extends PureComponent {
 		event.preventDefault();
 		document.removeEventListener('mousemove', this.handleMouseMove);
 		document.removeEventListener('mouseup', this.handleMouseUp);
+
+		if (this.props.onStop) {
+			this.props.onStop(this.state.value);
+		}
+
 		this.setState({ isSliding: false });
 		this.handleTogglePopover(false);
-		if (this.state.value !== this.props.value) {
-			if (this.props.onStop) {
-				this.props.onStop(this.state.value);
-			}
-		}
 	};
 
 	handleKeyDown = event => {
@@ -152,10 +152,8 @@ export class Slider extends PureComponent {
 
 	handleDebouncedKeyInput = debounce(() => {
 		this.handleTogglePopover(false, 150);
-		if (this.state.value !== this.props.value) {
-			if (this.props.onStop) {
-				this.props.onStop(this.state.value);
-			}
+		if (this.props.onStop) {
+			this.props.onStop(this.state.value);
 		}
 	}, 250);
 
