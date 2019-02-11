@@ -5,8 +5,8 @@ showSource: true
 state: {}
 ---
 <div style={{background: "#fff", padding: 20}}>
-	<Slider value={1} setValue={() => false} stopCount={5} />
-	<Slider value={1} setValue={() => false} stopCount={5} />
+	<Slider value={1} stopCount={5} />
+	<Slider value={1} stopCount={5} />
 </div>
 ```
 
@@ -17,9 +17,9 @@ showSource: true
 state: {}
 ---
 <div style={{background: "#fff", padding: 20}}>
-	<Slider value={2} setValue={() => false} minValue={0} maxValue={2} stopCount={5} />
-	<Slider value={3} setValue={() => false} minValue={1} maxValue={3} stopCount={5} />
-	<Slider value={4} setValue={() => false} minValue={2} maxValue={4} stopCount={5} />
+	<Slider value={2} minValue={0} maxValue={2} stopCount={5} />
+	<Slider value={3} minValue={1} maxValue={3} stopCount={5} />
+	<Slider value={4} minValue={2} maxValue={4} stopCount={5} />
 </div>
 ```
 
@@ -30,9 +30,34 @@ showSource: true
 state: {}
 ---
 <div style={{background: "#fff", padding: 20}}>
-	<Slider value={1} setValue={() => false} stopCount={5} labels={['Admins', 'Moderators', 'Members', 'Followers', 'Public']} />
-	<Slider value={1} setValue={() => false} stopCount={5} labels={['One', 'Two', 'Three', 'Four', 'Five']}/>
-	<Slider value={1} setValue={() => false} minValue={1} maxValue={3} stopCount={5} labels={['', 'Min', '', 'Max', '']}/>
+	<Slider value={1} stopCount={5} labels={['Admins', 'Moderators', 'Members', 'Followers', 'Public']} />
+	<Slider value={1} stopCount={5} labels={['One', 'Two', 'Three', 'Four', 'Five']}/>
+	<Slider value={1} minValue={1} maxValue={3} stopCount={5} labels={['', 'Min', '', 'Max', '']}/>
+</div>
+```
+
+### Callback props: onStop vs onSlide
+
+If your slider will be making external API calls, you may wish to call that only on the `onStop` callback, when the user has finished sliding.
+If you want to have incremental updates while the slider is moving, such as to keep multiple sliders in sync, you may want to use the `onSlide` callback prop.
+
+```react
+showSource: true
+state: { value: 1 }
+---
+<div style={{background: "#fff", padding: 20}}>
+	onStop:
+	<Slider
+		value={state.value}
+		stopCount={5}
+		onStop={function (value) {setState({value: value})}}
+	/>
+	onSlide:
+	<Slider
+		value={state.value}
+		stopCount={5}
+		onSlide={function (value) {setState({value: value})}}
+	/>
 </div>
 ```
 
@@ -49,14 +74,14 @@ state: { value: 50, labels: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 
 	<div>Opacity: {state.value * 2}</div>
 	<Slider
 		value={state.value}
-		setValue={function (value) {setState({value: value})}}
+		onStop={function (value) {setState({value: value})}}
 		stopCount={51}
 		labels={state.labels}
 	/>
 	<Slider
 		hideAvailableStops
 		value={state.value}
-		setValue={function (value) {setState({value: value})}}
+		onStop={function (value) {setState({value: value})}}
 		stopCount={51}
 		labels={state.labels}
 	/>
@@ -74,7 +99,7 @@ showSource: true
 state: {}
 ---
 <div style={{background: "#8fdb6b", padding: 20}}>
-	<Slider value={1} setValue={() => false} maxValue={3} stopCount={5} />
-	<Slider styleOverrides={{ backgroundColor: '#8fdb6b' }} value={1} setValue={() => false} maxValue={3} stopCount={5} />
+	<Slider value={1} maxValue={3} stopCount={5} />
+	<Slider styleOverrides={{ backgroundColor: '#8fdb6b' }} value={1} maxValue={3} stopCount={5} />
 </div>
 ```
