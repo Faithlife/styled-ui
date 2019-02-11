@@ -25,7 +25,8 @@ export class Slider extends PureComponent {
 		minValue: PropTypes.number,
 		/** 0-based index, should be less than stopCount if specified */
 		maxValue: PropTypes.number,
-		setValue: PropTypes.func.isRequired,
+		/** Triggered when the slider stops moving */
+		onStop: PropTypes.func,
 		stopCount: PropTypes.number.isRequired,
 		/** Useful for sliders with many stops */
 		hideAvailableStops: PropTypes.bool,
@@ -101,7 +102,9 @@ export class Slider extends PureComponent {
 		document.removeEventListener('touchend', this.touchEnd);
 		this.setState({ isSliding: false });
 		if (this.state.value !== this.props.value) {
-			this.props.setValue(this.state.value);
+			if (this.props.onStop) {
+				this.props.onStop(this.state.value);
+			}
 		}
 	};
 
@@ -131,7 +134,9 @@ export class Slider extends PureComponent {
 		this.setState({ isSliding: false });
 		this.handleTogglePopover(false);
 		if (this.state.value !== this.props.value) {
-			this.props.setValue(this.state.value);
+			if (this.props.onStop) {
+				this.props.onStop(this.state.value);
+			}
 		}
 	};
 
@@ -147,7 +152,11 @@ export class Slider extends PureComponent {
 
 	handleDebouncedKeyInput = debounce(() => {
 		this.handleTogglePopover(false, 150);
-		if (this.state.value !== this.props.value) this.props.setValue(this.state.value);
+		if (this.state.value !== this.props.value) {
+			if (this.props.onStop) {
+				this.props.onStop(this.state.value);
+			}
+		}
 	}, 250);
 
 	handleThrottledKeyDown = throttle(event => {
