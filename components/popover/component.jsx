@@ -55,7 +55,7 @@ export class Popover extends React.Component {
 		/** Delay on popover showing in milliseconds*/
 		delay: PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
 		/** Will be called when the popover is clicked away from */
-		onClickAway: PropTypes.bool,
+		onClickAway: PropTypes.func,
 		styleOverrides: PropTypes.shape({
 			hideShadow: PropTypes.bool,
 			width: PropTypes.string,
