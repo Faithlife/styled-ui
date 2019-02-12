@@ -244,9 +244,13 @@ export class ProductDrawer extends React.PureComponent {
 							</Styled.DropdownColumn>
 						</Styled.DropdownColumns>
 						<Styled.DropdownSeeMore>
-							<a href="https://faithlife.com/about" target="_blank" rel="noopener noreferrer">
+							<Styled.DropdownSeeMoreLink
+								href="https://faithlife.com/about"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
 								{resources.more}
-							</a>
+							</Styled.DropdownSeeMoreLink>
 						</Styled.DropdownSeeMore>
 					</Styled.ProductDrawerDropdown>
 				) : null}

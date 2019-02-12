@@ -196,31 +196,32 @@ export const DropdownFooter = styled.div`
 export const DropdownSeeMore = styled.div`
 	border-radius: 0 0 4px 4px;
 	text-align: center;
+`;
 
-	a {
-		display: block;
-		padding: 14px;
-		font-size: 14px;
-		line-height: 1;
-		color: #575251;
-		background-color: #ebebeb;
+export const DropdownSeeMoreLink = styled.a`
+	text-decoration: none;
+	display: block;
+	padding: 14px;
+	font-size: 14px;
+	line-height: 1;
+	color: #575251;
+	background-color: #ebebeb;
 
-		&:hover {
-			background-color: #d2d2d2;
-		}
-
-		@media (min-width: ${mediaSizes.tablet}) {
-			padding: 9px;
-		}
-
-		@media (min-width: ${mediaSizes.tablet}) and (min-height: ${mediaSizes.tablet}) {
-			padding: 14px;
-		}
+	&:hover {
+		background-color: #d2d2d2;
 	}
 
-	a:focus,
-	a:hover {
+	&:focus,
+	&:hover {
 		text-decoration: none;
+	}
+
+	@media (min-width: ${mediaSizes.tablet}) {
+		padding: 9px;
+	}
+
+	@media (min-width: ${mediaSizes.tablet}) and (min-height: ${mediaSizes.tablet}) {
+		padding: 14px;
 	}
 `;
 
