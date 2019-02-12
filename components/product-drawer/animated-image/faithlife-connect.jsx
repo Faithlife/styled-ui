@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaithlifeSvg, ConnectSvg, LogosSvg, FaithlifeTvSvg, MobileEdSvg, EbooksSvg } from './svgs';
-
 import * as Styled from './styled';
 
 const FaithlifeConnectAnimatedImage = ({ isVisible }) => (

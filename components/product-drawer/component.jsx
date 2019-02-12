@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import defaultResources from './locales/en-US/resources.json';
-
 import { FaithlifeConnect, FaithlifeEquip } from './animated-image';
 import { ProductLinkList, ProductLink } from './product-link';
 import {
@@ -21,7 +19,6 @@ import {
 	GivingSvg,
 	BibleScreenSvg,
 } from './svgs';
-
 import * as Styled from './styled';
 
 export class ProductDrawer extends React.PureComponent {
@@ -68,7 +65,7 @@ export class ProductDrawer extends React.PureComponent {
 		return (
 			<Styled.ProductDrawer>
 				<Styled.ProductDrawerToggle
-					className={classNames((customClassNames && customClassNames.toggleButton) || null)}
+					className={(customClassNames && customClassNames.toggleButton) || null}
 					onClick={this.handleToggleClick}
 					ref={el => {
 						this.toggle = el;
@@ -88,7 +85,7 @@ export class ProductDrawer extends React.PureComponent {
 						/>
 					</svg>
 					<Styled.ProductDrawerToggleText
-						className={classNames((customClassNames && customClassNames.toggleButtonText) || null)}
+						className={(customClassNames && customClassNames.toggleButtonText) || null}
 					>
 						{resources.products}
 					</Styled.ProductDrawerToggleText>

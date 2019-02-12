@@ -70,7 +70,7 @@ export const ProductLinkListItem = styled.li`
 				color: #1e91d6;
 			}
 
-			${ProductLinkDescription} {
+			${/* sc-custom 'ProductLinkDescription' */ ProductLinkDescription} {
 				color: #7a7a7a;
 			}
 		}

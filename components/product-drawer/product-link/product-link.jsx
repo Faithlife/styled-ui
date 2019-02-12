@@ -27,6 +27,8 @@ ProductLink.propTypes = {
 	title: PropTypes.string.isRequired,
 	description: PropTypes.string.isRequired,
 	href: PropTypes.string.isRequired,
+	autoFocus: PropTypes.boolean,
+	children: PropTypes.array,
 };
 
 export default ProductLink;

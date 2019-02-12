@@ -8,6 +8,7 @@ const ProductLinkList = ({ isVisible, children }) => (
 
 ProductLinkList.propTypes = {
 	isVisible: PropTypes.bool.isRequired,
+	children: PropTypes.array,
 };
 
 export default ProductLinkList;
