@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './styled';
 
-const ProductLink = ({ title, description, href, autoFocus, children }) => (
+export const ProductLink = ({ title, description, href, autoFocus, children }) => (
 	<Styled.ProductLinkListItem>
 		<Styled.ProductLink
 			href={href}
@@ -30,5 +30,3 @@ ProductLink.propTypes = {
 	autoFocus: PropTypes.boolean,
 	children: PropTypes.array,
 };
-
-export default ProductLink;

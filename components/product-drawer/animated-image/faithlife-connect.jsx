@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FaithlifeSvg, ConnectSvg, LogosSvg, FaithlifeTvSvg, MobileEdSvg, EbooksSvg } from './svgs';
 import * as Styled from './styled';
 
-const FaithlifeConnectAnimatedImage = ({ isVisible }) => (
+export const FaithlifeConnectAnimatedImage = ({ isVisible }) => (
 	<Styled.AnimatedImage animatedImageVisible={isVisible}>
 		<div>
 			<Styled.AnimatedImageTextFirst src={FaithlifeSvg} role="presentation" />
@@ -19,5 +19,3 @@ const FaithlifeConnectAnimatedImage = ({ isVisible }) => (
 FaithlifeConnectAnimatedImage.propTypes = {
 	isVisible: PropTypes.bool.isRequired,
 };
-
-export default FaithlifeConnectAnimatedImage;

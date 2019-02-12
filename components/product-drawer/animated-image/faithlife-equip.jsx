@@ -10,10 +10,9 @@ import {
 	MobileEdSvg,
 	BibleScreenSvg,
 } from './svgs';
-
 import * as Styled from './styled';
 
-const FaithlifeEquipAnimatedImage = ({ isVisible }) => (
+export const FaithlifeEquipAnimatedImage = ({ isVisible }) => (
 	<Styled.AnimatedImageEquip animatedImageVisible={isVisible}>
 		<div>
 			<Styled.AnimatedImageTextFirst src={FaithlifeSvg} role="presentation" />
@@ -31,5 +30,3 @@ const FaithlifeEquipAnimatedImage = ({ isVisible }) => (
 FaithlifeEquipAnimatedImage.propTypes = {
 	isVisible: PropTypes.bool.isRequired,
 };
-
-export default FaithlifeEquipAnimatedImage;
