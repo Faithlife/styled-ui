@@ -29,7 +29,7 @@
 		}
 	},
 	"lint-staged": {
-		"*.{js,jsx}": ["npm run eslint -- --fix", "npm run prettier -- --fix", "npm run stylelint -- --fix", "git add"]
+		"*.{js,jsx}": ["eslint --fix", "prettier --write", "stylelint --fix", "git add"]
 	},
 	"browserslist": [
 		"> 1%",
