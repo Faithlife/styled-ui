@@ -28,6 +28,7 @@ export const ProductLink = styled.a`
 		padding: 11px 27px 11px 46px;
 	}
 
+	// eslint-disable-next-line no-dupe-keys
 	${ProductLinkInfo} {
 		padding-left: ${props => (props.productLinkNoIcon ? '35px' : '')};
 	}
@@ -65,11 +66,14 @@ export const ProductLinkListItem = styled.li`
 	&:hover {
 		background-color: #f5f5f5;
 
+		// eslint-disable-next-line no-dupe-keys
 		${ProductLink} {
+			// eslint-disable-next-line no-dupe-keys
 			${ProductLinkTitle} {
 				color: #1e91d6;
 			}
 
+			// eslint-disable-next-line no-dupe-keys $ProductLinkDescription
 			${ProductLinkDescription} {
 				color: #7a7a7a;
 			}
@@ -110,6 +114,7 @@ export const ProductLinkList = styled.ul`
 	margin: 0;
 	padding: 0;
 
+	// eslint-disable-next-line no-dupe-keys
 	${ProductLinkListItem} {
 		animation-name: ${props => (props.isVisible ? reveal : '')};
 	}

@@ -111,27 +111,31 @@ export const AnimatedImage = styled.div`
 	height: 30px;
 	width: 70%;
 
+	// eslint-disable-next-line no-dupe-keys
 	${AnimatedImageTextFirst} {
 		animation-name: ${props => (props.animatedImageVisible ? textSlideUpAndFadeIn : '')};
 	}
-	${AnimatedImageTextSecond} {
-		animation-name: ${props => (props.animatedImageVisible ? textSlideUpAndFadeIn : '')};
-	}
+
+	// eslint-disable-next-line no-dupe-keys $AnimatedImageTextSecond
 	${AnimatedImageTextSecond} {
 		animation-name: ${props => (props.animatedImageVisible ? textSlideUpAndFadeIn : '')};
 	}
 
+	// eslint-disable-next-line
 	${AnimatedImageIcon} {
 		animation-name: ${props => (props.animatedImageVisible ? iconsSlideUpPauseAndSlideOut : '')};
 	}
 
 	&:hover {
+		// eslint-disable-next-line no-dupe-keys
 		${AnimatedImageTextFirst} {
 			animation-name: ${textShrinkUpAndFadeOut};
 			animation-duration: 300ms;
 			animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
 			animation-fill-mode: both;
 		}
+
+		// eslint-disable-next-line no-dupe-keys $AnimatedImageTextSecond
 		${AnimatedImageTextSecond} {
 			animation-name: ${textShrinkUpAndFadeOut};
 			animation-duration: 300ms;
@@ -139,6 +143,7 @@ export const AnimatedImage = styled.div`
 			animation-fill-mode: both;
 		}
 
+		// eslint-disable-next-line no-dupe-keys $AnimatedImageIcon
 		${AnimatedImageIcon} {
 			animation-name: ${iconSlideUpAndFadeIn};
 			animation-duration: 300ms;
@@ -149,6 +154,7 @@ export const AnimatedImage = styled.div`
 `;
 
 export const AnimatedImageEquip = styled(AnimatedImage)`
+	// eslint-disable-next-line no-dupe-keys
 	${AnimatedImageIcon} {
 		&:nth-of-type(2) {
 			transform-origin: 100% 50%;
