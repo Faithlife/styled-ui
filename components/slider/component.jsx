@@ -25,7 +25,10 @@ export class Slider extends PureComponent {
 		minValue: PropTypes.number,
 		/** 0-based index, should be less than stopCount if specified */
 		maxValue: PropTypes.number,
-		setValue: PropTypes.func.isRequired,
+		/** Triggered every time the slider moves */
+		onSlide: PropTypes.func,
+		/** Triggered when the slider stops moving */
+		onStop: PropTypes.func,
 		stopCount: PropTypes.number.isRequired,
 		/** Useful for sliders with many stops */
 		hideAvailableStops: PropTypes.bool,
@@ -79,60 +82,70 @@ export class Slider extends PureComponent {
 	getStops = createDerivedValue(() => [this.props.stopCount], stopCount => range(0, stopCount));
 	getTrack = createDerivedValue(() => [this.props.stopCount], stopCount => range(0, stopCount - 1));
 
-	touchStart = event => {
+	handleTouchStart = event => {
 		event.preventDefault();
-		document.addEventListener('touchmove', this.touchMove);
-		document.addEventListener('touchend', this.touchEnd);
+		document.addEventListener('touchmove', this.handleTouchMove);
+		document.addEventListener('touchend', this.handleTouchEnd);
 		this.setState({ isHovered: true, isSliding: true });
-		this.touchMove(event);
+		this.handleTouchMove(event);
 	};
 
-	touchMove = event => {
+	handleTouchMove = event => {
 		event.preventDefault();
 		const value = this.calculateValue(event.touches[0].clientX);
 		if (this.state.value !== value) {
+			if (this.props.onSlide) {
+				this.props.onSlide(value);
+			}
 			this.setState({ value });
 		}
 	};
 
-	touchEnd = event => {
+	handleTouchEnd = event => {
 		event.preventDefault();
-		document.removeEventListener('touchmove', this.touchMove);
-		document.removeEventListener('touchend', this.touchEnd);
-		this.setState({ isSliding: false });
-		if (this.state.value !== this.props.value) {
-			this.props.setValue(this.state.value);
+		document.removeEventListener('touchmove', this.handleTouchMove);
+		document.removeEventListener('touchend', this.handleTouchEnd);
+
+		if (this.props.onStop) {
+			this.props.onStop(this.state.value);
 		}
+
+		this.setState({ isSliding: false });
 	};
 
-	mouseDown = event => {
+	handleMouseDown = event => {
 		if (event.button !== 0 || this.state.isSliding) {
 			return;
 		}
 		event.preventDefault();
-		document.addEventListener('mousemove', this.mouseMove);
-		document.addEventListener('mouseup', this.mouseUp);
+		document.addEventListener('mousemove', this.handleMouseMove);
+		document.addEventListener('mouseup', this.handleMouseUp);
 		this.setState({ isHovered: true, isSliding: true });
-		this.mouseMove(event);
+		this.handleMouseMove(event);
 	};
 
-	mouseMove = event => {
+	handleMouseMove = event => {
 		event.preventDefault();
 		const value = this.calculateValue(event.clientX);
 		if (this.state.value !== value) {
+			if (this.props.onSlide) {
+				this.props.onSlide(value);
+			}
 			this.setState({ value, isHovered: true });
 		}
 	};
 
-	mouseUp = event => {
+	handleMouseUp = event => {
 		event.preventDefault();
-		document.removeEventListener('mousemove', this.mouseMove);
-		document.removeEventListener('mouseup', this.mouseUp);
+		document.removeEventListener('mousemove', this.handleMouseMove);
+		document.removeEventListener('mouseup', this.handleMouseUp);
+
+		if (this.props.onStop) {
+			this.props.onStop(this.state.value);
+		}
+
 		this.setState({ isSliding: false });
 		this.handleTogglePopover(false);
-		if (this.state.value !== this.props.value) {
-			this.props.setValue(this.state.value);
-		}
 	};
 
 	handleKeyDown = event => {
@@ -147,7 +160,9 @@ export class Slider extends PureComponent {
 
 	handleDebouncedKeyInput = debounce(() => {
 		this.handleTogglePopover(false, 150);
-		if (this.state.value !== this.props.value) this.props.setValue(this.state.value);
+		if (this.props.onStop) {
+			this.props.onStop(this.state.value);
+		}
 	}, 250);
 
 	handleThrottledKeyDown = throttle(event => {
@@ -160,12 +175,18 @@ export class Slider extends PureComponent {
 				newValue > maxValue ? maxValue : newValue > stopCount - 1 ? stopCount - 1 : newValue;
 			return this.setState({ value, isHovered: true }, () => {
 				this.handleDebouncedKeyInput();
+				if (this.props.onSlide) {
+					this.props.onSlide(value);
+				}
 			});
 		} else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
 			const newValue = currentValue - 1;
 			const value = newValue < minValue ? minValue : newValue < 0 ? 0 : newValue;
 			return this.setState({ value, isHovered: true }, () => {
 				this.handleDebouncedKeyInput();
+				if (this.props.onSlide) {
+					this.props.onSlide(value);
+				}
 			});
 		}
 
@@ -213,8 +234,8 @@ export class Slider extends PureComponent {
 			<Styled.SliderContainer
 				onDragStart={event => event.preventDefault()}
 				onKeyDown={this.handleKeyDown}
-				onMouseDown={this.mouseDown}
-				onTouchStart={this.touchStart}
+				onMouseDown={this.handleMouseDown}
+				onTouchStart={this.handleTouchStart}
 				tabIndex="0"
 				ref={this._slider}
 			>
