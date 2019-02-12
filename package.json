@@ -10,7 +10,8 @@
 		"deploy-site": "npm run catalog-build && storybook-to-ghpages --ci --existing-output-dir=catalog/build",
 		"eslint": "eslint ./components ./catalog --ext .js --ext .jsx",
 		"test": "npm run build && npm run unit-test && npm run eslint && npm run stylelint",
-		"precommit": "prettier --write \"./components/**/*.{js,jsx}\" && npm run stylelint",
+		"prettier": "prettier --write \"./components/**/*.{js,jsx}\"",
+		"precommit": "npm run eslint --fix && npm run prettier --write && npm run stylelint --fix",
 		"build": "rimraf dist && webpack -p",
 		"prepublishOnly": "npm test",
 		"stylelint": "stylelint ./components/**/*.jsx",
@@ -22,6 +23,14 @@
 	"files": [
 		"dist/**"
 	],
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.{js,jsx}": ["npm run eslint -- --fix", "npm run prettier -- --fix", "npm run stylelint -- --fix", "git add"]
+	},
 	"browserslist": [
 		"> 1%",
 		"last 2 versions"
@@ -78,7 +87,9 @@
 		"eslint-plugin-prettier": "^2.6.0",
 		"eslint-plugin-react": "^7.7.0",
 		"esm": "^3.0.24",
+		"husky": "^1.3.1",
 		"image-webpack-loader": "^4.3.1",
+		"lint-staged": "^8.1.3",
 		"micro-graphql-react": "^0.3.0-beta2",
 		"mini-css-extract-plugin": "^0.4.1",
 		"mocha": "^5.1.1",
