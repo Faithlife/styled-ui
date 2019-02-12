@@ -17,62 +17,62 @@ const dropdownSlideDownFadeIn = keyframes`
 `;
 
 export const ProductDrawer = styled.div`
-		position: relative;
-		font-family: 'source_sans', sans-serif;
+	position: relative;
+	font-family: 'source_sans', sans-serif;
 `;
 
 export const ProductDrawerToggle = styled.button`
-display: flex;
-padding: 0;
-align-items: center;
-cursor: pointer;
-background: transparent;
-border: none;
+	display: flex;
+	padding: 0;
+	align-items: center;
+	cursor: pointer;
+	background: transparent;
+	border: none;
 
-&:focus {
-	outline: none;
-}
+	&:focus {
+		outline: none;
+	}
 `;
 
 export const ProductDrawerToggleText = styled.span`
-display: none;
+	display: none;
 
-@media (min-width: ${mediaSizes.tablet}) {
-	display: inline;
-	margin-left: 8px;
-}
+	@media (min-width: ${mediaSizes.tablet}) {
+		display: inline;
+		margin-left: 8px;
+	}
 `;
 
 export const ProductDrawerDropdown = styled.div`
-position: fixed;
-left: 0;
-right: 0;
-bottom: 0;
-top: ${props => (props.isBrandBarEnabled ? '95px' : '55px')};
-overflow-y: scroll;
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: ${props => (props.isBrandBarEnabled ? '95px' : '55px')};
+	overflow-y: scroll;
 
-&:focus {
-	outline: none;
-}
+	&:focus {
+		outline: none;
+	}
 
-@media (min-width: ${mediaSizes.tablet}) {
-	position: absolute;
-	left: auto;
-	bottom: auto;
-	top: auto;
-	overflow-y: auto;
-	animation-duration: 300ms;
-	animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
-	animation-fill-mode: forwards;
-	animation-name: ${dropdownSlideDownFadeIn};
-}
+	@media (min-width: ${mediaSizes.tablet}) {
+		position: absolute;
+		left: auto;
+		bottom: auto;
+		top: auto;
+		overflow-y: auto;
+		animation-duration: 300ms;
+		animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
+		animation-fill-mode: forwards;
+		animation-name: ${dropdownSlideDownFadeIn};
+	}
 
-right: 0;
-white-space: nowrap;
-border-radius: 4px;
-background-color: white;
-z-index: 999;
-box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.23);
+	right: 0;
+	white-space: nowrap;
+	border-radius: 4px;
+	background-color: white;
+	z-index: 999;
+	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.23);
 `;
 
 export const DropdownCloseButton = styled.button`
@@ -229,39 +229,39 @@ export const ProductLinkIcon = styled.img`
 `;
 
 export const FooterDivider = styled.hr`
-margin: 0 40px 12px;
-border: 0;
-border-bottom: 1px solid #ebebeb;
+	margin: 0 40px 12px;
+	border: 0;
+	border-bottom: 1px solid #ebebeb;
 
-@media (min-width: ${mediaSizes.tablet}) and (min-height: ${mediaSizes.tablet}) {
-	margin-bottom: 20px;
-}
+	@media (min-width: ${mediaSizes.tablet}) and (min-height: ${mediaSizes.tablet}) {
+		margin-bottom: 20px;
+	}
 `;
 
 export const FooterComingSoon = styled.div`
-font-family: 'Gotham A', 'Gotham B', sans-serif;
-font-size: 18px;
-font-weight: 900;
-letter-spacing: 0.2px;
-color: #585250;
+	font-family: 'Gotham A', 'Gotham B', sans-serif;
+	font-size: 18px;
+	font-weight: 900;
+	letter-spacing: 0.2px;
+	color: #585250;
 `;
 
 export const LearnMoreLink = styled.a`
-text-decoration: none;
-background-color: #5fbc39;
-color: white;
-border-radius: 4px;
-padding: 5px 21px;
-font-size: 16px;
-font-weight: bold;
-line-height: 1;
-
-&:hover {
-	background-color: #42991d;
-}
-
-&:active,
-&:hover {
+	text-decoration: none;
+	background-color: #5fbc39;
 	color: white;
-}
+	border-radius: 4px;
+	padding: 5px 21px;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 1;
+
+	&:hover {
+		background-color: #42991d;
+	}
+
+	&:active,
+	&:hover {
+		color: white;
+	}
 `;

@@ -58,116 +58,115 @@ const iconSlideUpAndFadeIn = keyframes`
     `;
 
 export const AnimatedImageIcon = styled.img`
-margin: 0 7px;
-transform-origin: 100% 50%;
-animation-duration: 1.5s;
-animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
-animation-fill-mode: both;
+	margin: 0 7px;
+	transform-origin: 100% 50%;
+	animation-duration: 1.5s;
+	animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
+	animation-fill-mode: both;
 
-&:nth-of-type(2) {
-    animation-delay: 40ms;
-    transform-origin: 50% 50%;
-}
+	&:nth-of-type(2) {
+		animation-delay: 40ms;
+		transform-origin: 50% 50%;
+	}
 
-&:nth-of-type(3) {
-    animation-delay: 80ms;
-    transform-origin: 50% 50%;
-}
+	&:nth-of-type(3) {
+		animation-delay: 80ms;
+		transform-origin: 50% 50%;
+	}
 
-&:nth-of-type(4) {
-    animation-delay: 120ms;
-    transform-origin: 0% 50%;
-}
+	&:nth-of-type(4) {
+		animation-delay: 120ms;
+		transform-origin: 0% 50%;
+	}
 
-&:nth-of-type(5) {
-    animation-delay: 160ms;
-    transform-origin: 0% 50%;
-}
+	&:nth-of-type(5) {
+		animation-delay: 160ms;
+		transform-origin: 0% 50%;
+	}
 
-&:nth-of-type(6) {
-    animation-delay: 160ms;
-    transform-origin: 0% 50%;
-}
+	&:nth-of-type(6) {
+		animation-delay: 160ms;
+		transform-origin: 0% 50%;
+	}
 `;
 
 const AnimatedImageText = styled.img`
-vertical-align: bottom;
-animation-duration: 1.5s;
-animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
-animation-fill-mode: both;
+	vertical-align: bottom;
+	animation-duration: 1.5s;
+	animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
+	animation-fill-mode: both;
 `;
 
 export const AnimatedImageTextFirst = styled(AnimatedImageText)`
-    transform-origin: 100% 50%;
+	transform-origin: 100% 50%;
 `;
 
 export const AnimatedImageTextSecond = styled(AnimatedImageText)`
-    transform-origin: 0% 50%;
-    animation-delay: 40ms;
+	transform-origin: 0% 50%;
+	animation-delay: 40ms;
 `;
 
 export const AnimatedImage = styled.div`
-    margin: 0 auto;
-    height: 30px;
-    width: 70%;
+	margin: 0 auto;
+	height: 30px;
+	width: 70%;
 
-    ${AnimatedImageTextFirst} {
-        animation-name: ${props => (props.animatedImageVisible ? textSlideUpAndFadeIn : '')};
-    }
-    ${AnimatedImageTextSecond} {
-        animation-name: ${props => (props.animatedImageVisible ? textSlideUpAndFadeIn : '')};
-    }
-    ${AnimatedImageTextSecond} {
-        animation-name: ${props => (props.animatedImageVisible ? textSlideUpAndFadeIn : '')};
-    }
+	${AnimatedImageTextFirst} {
+		animation-name: ${props => (props.animatedImageVisible ? textSlideUpAndFadeIn : '')};
+	}
+	${AnimatedImageTextSecond} {
+		animation-name: ${props => (props.animatedImageVisible ? textSlideUpAndFadeIn : '')};
+	}
+	${AnimatedImageTextSecond} {
+		animation-name: ${props => (props.animatedImageVisible ? textSlideUpAndFadeIn : '')};
+	}
 
-    ${AnimatedImageIcon} {
-        animation-name: ${props =>
-					props.animatedImageVisible ? iconsSlideUpPauseAndSlideOut : ''};
-    }
+	${AnimatedImageIcon} {
+		animation-name: ${props => (props.animatedImageVisible ? iconsSlideUpPauseAndSlideOut : '')};
+	}
 
-    &:hover {
-        ${AnimatedImageTextFirst} {
-            animation-name: ${textShrinkUpAndFadeOut};
-            animation-duration: 300ms;
-            animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
-            animation-fill-mode: both;
-        }
-        ${AnimatedImageTextSecond} {
-            animation-name: ${textShrinkUpAndFadeOut};
-            animation-duration: 300ms;
-            animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
-            animation-fill-mode: both;
-        }
+	&:hover {
+		${AnimatedImageTextFirst} {
+			animation-name: ${textShrinkUpAndFadeOut};
+			animation-duration: 300ms;
+			animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
+			animation-fill-mode: both;
+		}
+		${AnimatedImageTextSecond} {
+			animation-name: ${textShrinkUpAndFadeOut};
+			animation-duration: 300ms;
+			animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
+			animation-fill-mode: both;
+		}
 
-        ${AnimatedImageIcon} {
-            animation-name: ${iconSlideUpAndFadeIn};
-            animation-duration: 300ms;
-            animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
-            animation-fill-mode: both;
-        }
-    }
+		${AnimatedImageIcon} {
+			animation-name: ${iconSlideUpAndFadeIn};
+			animation-duration: 300ms;
+			animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
+			animation-fill-mode: both;
+		}
+	}
 `;
 
 export const AnimatedImageEquip = styled(AnimatedImage)`
-${AnimatedImageIcon} {
-    &:nth-of-type(2) {
-        transform-origin: 100% 50%;
-    }
+	${AnimatedImageIcon} {
+		&:nth-of-type(2) {
+			transform-origin: 100% 50%;
+		}
 
-    &:nth-of-type(4) {
-        animation-delay: 120ms;
-        transform-origin: 50% 50%;
-    }
+		&:nth-of-type(4) {
+			animation-delay: 120ms;
+			transform-origin: 50% 50%;
+		}
 
-    &:nth-of-type(5) {
-        animation-delay: 160ms;
-        transform-origin: 0% 50%;
-    }
+		&:nth-of-type(5) {
+			animation-delay: 160ms;
+			transform-origin: 0% 50%;
+		}
 
-    &:nth-of-type(6) {
-        animation-delay: 200ms;
-        transform-origin: 0% 50%;
-    }
-}
+		&:nth-of-type(6) {
+			animation-delay: 200ms;
+			transform-origin: 0% 50%;
+		}
+	}
 `;
