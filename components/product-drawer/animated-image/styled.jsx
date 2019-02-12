@@ -111,40 +111,34 @@ export const AnimatedImage = styled.div`
 	height: 30px;
 	width: 70%;
 
-	// eslint-disable-next-line no-dupe-keys
-	${AnimatedImageTextFirst} {
+	${/* sc-custom 'AnimatedImageTextFirst' */ AnimatedImageTextFirst} {
 		animation-name: ${props => (props.animatedImageVisible ? textSlideUpAndFadeIn : '')};
 	}
 
-	// eslint-disable-next-line no-dupe-keys $AnimatedImageTextSecond
-	${AnimatedImageTextSecond} {
+	${/* sc-custom 'AnimatedImageTextSecond' */ AnimatedImageTextSecond} {
 		animation-name: ${props => (props.animatedImageVisible ? textSlideUpAndFadeIn : '')};
 	}
 
-	// eslint-disable-next-line
-	${AnimatedImageIcon} {
+	${/* sc-custom 'AnimatedImageIcon' */ AnimatedImageIcon} {
 		animation-name: ${props => (props.animatedImageVisible ? iconsSlideUpPauseAndSlideOut : '')};
 	}
 
 	&:hover {
-		// eslint-disable-next-line no-dupe-keys
-		${AnimatedImageTextFirst} {
+		${/* sc-custom 'AnimatedImageTextFirst' */ AnimatedImageTextFirst} {
 			animation-name: ${textShrinkUpAndFadeOut};
 			animation-duration: 300ms;
 			animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
 			animation-fill-mode: both;
 		}
 
-		// eslint-disable-next-line no-dupe-keys $AnimatedImageTextSecond
-		${AnimatedImageTextSecond} {
+		${/* sc-custom 'AnimatedImageTextSecond' */ AnimatedImageTextSecond} {
 			animation-name: ${textShrinkUpAndFadeOut};
 			animation-duration: 300ms;
 			animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
 			animation-fill-mode: both;
 		}
 
-		// eslint-disable-next-line no-dupe-keys $AnimatedImageIcon
-		${AnimatedImageIcon} {
+		${/* sc-custom 'AnimatedImageIcon' */ AnimatedImageIcon} {
 			animation-name: ${iconSlideUpAndFadeIn};
 			animation-duration: 300ms;
 			animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
@@ -154,8 +148,7 @@ export const AnimatedImage = styled.div`
 `;
 
 export const AnimatedImageEquip = styled(AnimatedImage)`
-	// eslint-disable-next-line no-dupe-keys
-	${AnimatedImageIcon} {
+	${/* sc-custom 'img' */ AnimatedImageIcon} {
 		&:nth-of-type(2) {
 			transform-origin: 100% 50%;
 		}
