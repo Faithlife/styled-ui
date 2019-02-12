@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import defaultResources from './locales/en-US/resources.json';
-import { FaithlifeConnect, FaithlifeEquip } from './animated-image';
+import { FaithlifeConnectAnimatedImage, FaithlifeEquipAnimatedImage } from './animated-image';
 import { ProductLinkList, ProductLink } from './product-link';
 import {
 	FaithlifeFlameSvg,
@@ -159,7 +159,7 @@ export class ProductDrawer extends React.PureComponent {
 								</Styled.DropdownBody>
 								<Styled.DropdownFooter>
 									<Styled.FooterDivider />
-									<FaithlifeConnect isVisible={isOpen} />
+									<FaithlifeConnectAnimatedImage isVisible={isOpen} />
 									<p>{resources.connectDescription}</p>
 									<Styled.LearnMoreLink
 										href="https://connect.faithlife.com/"
@@ -228,7 +228,7 @@ export class ProductDrawer extends React.PureComponent {
 								</Styled.DropdownBody>
 								<Styled.DropdownFooter>
 									<Styled.FooterDivider />
-									<FaithlifeEquip isVisible={isOpen} />
+									<FaithlifeEquipAnimatedImage isVisible={isOpen} />
 									<p>{resources.equipDescription}</p>
 									<Styled.LearnMoreLink
 										href="https://faithlife.com/products/equip?utm_medium=web&utm_content=product-drawer-link"
