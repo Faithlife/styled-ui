@@ -24,7 +24,7 @@
 	],
 	"browserslist": [
 		"> 1%",
-		"last 2 versions"
+		"not op_mini all"
 	],
 	"peerDependencies": {
 		"react": ">=16.3.0",
