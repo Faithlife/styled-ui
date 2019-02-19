@@ -67,7 +67,7 @@ export class InferredTextFocusDemo extends Component {
 				<div>
 					<InferredText
 						confidence={this.state.confirmed ? null : 0.9}
-						onChange={value => this.setState({ value, confirmed: true })}
+						onChange={e => this.setState({ value: e.target.value, confirmed: true })}
 						onConfirm={() => this.setState({ confirmed: true })}
 						value={this.state.value}
 						ref={this.inputRef}
