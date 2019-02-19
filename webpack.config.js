@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 require('es7-object-polyfill'); // jenkins needs this, it runs Node 6
 
 module.exports = {
+	mode: 'development',
 	entry: {
 		main: './components/main.js',
 		'ag-grid': './components/grid/index.js',
@@ -16,7 +17,7 @@ module.exports = {
 	output: {
 		filename: '[name].js',
 		path: path.resolve('./dist'),
-		libraryTarget: 'commonjs-module',
+		libraryTarget: 'commonjs2',
 	},
 	externals: [nodeExternals()],
 	plugins: [
