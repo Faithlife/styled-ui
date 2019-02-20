@@ -21,6 +21,11 @@ const selectStyles = props => ({
 	input: styles => ({
 		...styles,
 		lineHeight: 1,
+		input: {
+			'&,&:focus': {
+				boxShadow: 'none',
+			},
+		},
 	}),
 	indicatorSeparator: () => ({
 		display: 'none',
