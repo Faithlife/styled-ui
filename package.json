@@ -28,8 +28,8 @@
 		"not op_mini all"
 	],
 	"peerDependencies": {
-		"react": ">=16.3.0",
-		"react-dom": ">=16.3.0",
+		"react": "^16.8.0",
+		"react-dom": "^16.8.0",
 		"styled-components": "^4.0.2"
 	},
 	"dependencies": {
@@ -87,8 +87,8 @@
 		"postcss-inline-svg": "^3.1.1",
 		"postcss-loader": "^2.1.6",
 		"prettier": "^1.13.7",
-		"react": "^16.4.0",
-		"react-dom": "^16.4.0",
+		"react": "^16.8.0",
+		"react-dom": "^16.8.0",
 		"react-dom-factories": "^1.0.2",
 		"rimraf": "^2.6.2",
 		"sass-loader": "^7.0.3",
