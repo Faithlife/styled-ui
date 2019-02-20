@@ -79,7 +79,7 @@ const selectTheme = theme => ({
 	},
 });
 
-const components = {
+const defaultComponents = {
 	// eslint-disable-next-line react/prop-types
 	Option: ({ children, ...props }) => (
 		<reactSelectComponents.Option {...props}>{children || '\u200B'}</reactSelectComponents.Option>
@@ -87,49 +87,52 @@ const components = {
 };
 
 /** Autocomplete control based on react-select */
-export const Select = React.forwardRef((props, ref) => (
+export const Select = React.forwardRef(({ components = {}, ...props }, ref) => (
 	<ReactSelect
 		ref={ref}
 		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
-		components={components}
+		components={{ ...defaultComponents, ...components }}
 		{...props}
 	/>
 ));
 
 /** The same as `Select`, but allows new entries. */
-export const CreatableSelect = props => (
+export const CreatableSelect = React.forwardRef(({ components = {}, ...props }, ref) => (
 	<ReactSelectCreatable
+		ref={ref}
 		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
-		components={components}
 		formatCreateLabel={node => <span>New entry: {node}</span>}
+		components={{ ...defaultComponents, ...components }}
 		{...props}
 	/>
-);
+));
 
 /** The same as `Select`, but allows new entries and fetches data asynchronously. */
-export const AsyncCreatableSelect = props => (
+export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...props }, ref) => (
 	<ReactSelectAsyncCreatable
+		ref={ref}
 		allowCreateWhileLoading={false}
 		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
-		components={components}
+		components={{ ...defaultComponents, ...components }}
 		formatCreateLabel={node => <span>New entry: {node}</span>}
 		{...props}
 	/>
-);
+));
 
 /** The same as `Select`, but fetches options asynchronously. */
-export const AsyncSelect = props => (
+export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref) => (
 	<ReactSelectAsync
+		ref={ref}
 		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
-		components={components}
+		components={{ ...defaultComponents, ...components }}
 		{...props}
 	/>
-);
+));
