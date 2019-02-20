@@ -1,6 +1,8 @@
 import React from 'react';
-import ReactSelect from 'react-select';
-import ReactSelectCreatable from 'react-select/lib/Creatable';
+import ReactSelect, {
+	Creatable as ReactSelectCreatable,
+	components as reactSelectComponents,
+} from 'react-select';
 import { colors, inputColors } from '../shared-styles';
 import { ReactSelectAsyncCreatable, ReactSelectAsync } from './react-select-async';
 
@@ -77,6 +79,13 @@ const selectTheme = theme => ({
 	},
 });
 
+const components = {
+	// eslint-disable-next-line react/prop-types
+	Option: ({ children, ...props }) => (
+		<reactSelectComponents.Option {...props}>{children || '\u200B'}</reactSelectComponents.Option>
+	),
+};
+
 /** Autocomplete control based on react-select */
 export const Select = React.forwardRef((props, ref) => (
 	<ReactSelect
@@ -84,6 +93,7 @@ export const Select = React.forwardRef((props, ref) => (
 		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
+		components={components}
 		{...props}
 	/>
 ));
@@ -94,6 +104,7 @@ export const CreatableSelect = props => (
 		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
+		components={components}
 		formatCreateLabel={node => <span>New entry: {node}</span>}
 		{...props}
 	/>
@@ -106,6 +117,7 @@ export const AsyncCreatableSelect = props => (
 		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
+		components={components}
 		formatCreateLabel={node => <span>New entry: {node}</span>}
 		{...props}
 	/>
@@ -117,6 +129,7 @@ export const AsyncSelect = props => (
 		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
+		components={components}
 		{...props}
 	/>
 );
