@@ -182,9 +182,7 @@ export const makeAsyncSelect = (SelectComponent: ComponentType<*>) =>
 					}}
 					options={options}
 					isLoading={isLoading}
-					onInputChange={
-						this.handleInputChange
-					}
+					onInputChange={this.handleInputChange}
 				/>
 			);
 		}
