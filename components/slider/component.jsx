@@ -111,6 +111,7 @@ export class Slider extends PureComponent {
 		}
 
 		this.setState({ isSliding: false });
+		this.handleTogglePopover(false, 250);
 	};
 
 	handleMouseDown = event => {
