@@ -1,75 +1,54 @@
-import React from 'react';
+import React, { RefObject, Component, MouseEvent, TouchEvent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
+import { Placement, Modifiers } from 'popper.js';
 import { Popper } from 'react-popper';
 import { ClickAwayHandler } from '../utils';
 import { colors } from '../shared-styles';
 import * as Styled from './styled';
 
+type PopoverPlacements = Exclude<Placement, 'auto' | 'auto-start' | 'auto-end'>;
+
+export type Props = {
+	/** Is the popover open */
+	isOpen?: boolean;
+	/** Where on the target the popover renders */
+	placement?: PopoverPlacements;
+	/** Refer to https://popper.js.org/popper-documentation.html#modifiers for documentation*/
+	modifiers?: Modifiers;
+	/** Where to inject the popover. Defaults to inline */
+	container?: string | RefObject<any> | (() => RefObject<any>);
+	/** Hide popover arrow */
+	hideArrow?: boolean;
+	/** Delay on popover showing in milliseconds*/
+	delay?: { show: number; hide: number };
+	/** Will be called when the popover is clicked away from */
+	onClickAway?: (event: MouseEvent | TouchEvent) => void;
+	styleOverrides?: {
+		hideShadow?: boolean;
+		width?: string;
+		padding?: string;
+		border?: string;
+		zIndex?: number;
+	};
+	theme?: {
+		backgroundColor?: string;
+		textColor?: string;
+	};
+};
+
+const initialState = {
+	showPopper: false,
+};
+
+type State = Readonly<typeof initialState>;
+
 /** Positioning helper used to display content above another element.
  *  Refs are not supported, please use PopoverManager and PopoverReference to handle positioning.
  */
-export class Popover extends React.Component {
-	static propTypes = {
-		/** Is the popover open */
-		isOpen: PropTypes.bool,
-		/** Where on the target the popover renders */
-		placement: PropTypes.oneOf([
-			'top',
-			'top-start',
-			'top-end',
-			'right',
-			'right-start',
-			'right-end',
-			'bottom',
-			'bottom-start',
-			'bottom-end',
-			'left',
-			'left-start',
-			'left-end',
-		]),
-		/** Not all modifiers are shown. Refer to https://popper.js.org/popper-documentation.html#modifiers for a full list*/
-		modifiers: PropTypes.shape({
-			offset: PropTypes.shape({
-				enabled: PropTypes.bool,
-				offset: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-			}),
-			preventOverflow: PropTypes.shape({
-				padding: PropTypes.number,
-				boundariesElement: PropTypes.any,
-			}),
-			flip: PropTypes.shape({
-				enabled: PropTypes.bool,
-				behavior: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-				padding: PropTypes.number,
-				boundariesElement: PropTypes.any,
-			}),
-		}),
-		/** Contents of the Popover */
-		children: PropTypes.node,
-		/** Where to inject the popover. Defaults to inline */
-		container: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
-		/** Hide popover arrow */
-		hideArrow: PropTypes.bool,
-		/** Delay on popover showing in milliseconds*/
-		delay: PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
-		/** Will be called when the popover is clicked away from */
-		onClickAway: PropTypes.func,
-		styleOverrides: PropTypes.shape({
-			hideShadow: PropTypes.bool,
-			width: PropTypes.string,
-			padding: PropTypes.string,
-			border: PropTypes.string,
-			zIndex: PropTypes.number,
-		}),
-		theme: PropTypes.shape({
-			backgroundColor: PropTypes.string,
-			textColor: PropTypes.string,
-		}),
-	};
-
-	static defaultProps = {
+export class Popover extends Component<Props, State> {
+	static defaultProps: Props = {
 		placement: 'top',
 		theme: {
 			backgroundColor: colors.white,
@@ -77,11 +56,10 @@ export class Popover extends React.Component {
 		styleOverrides: {},
 	};
 
-	state = {
-		showPopper: this.props.isOpen || false,
-	};
+	readonly state: State = initialState;
 
-	_timeout = null;
+	private timeout: number | null = null;
+	private targetContainer: Element | null = null;
 
 	componentDidMount() {
 		const { container } = this.props;
@@ -102,8 +80,8 @@ export class Popover extends React.Component {
 	}
 
 	componentWillUnmount() {
-		if (this._timeout) {
-			clearTimeout(this._timeout);
+		if (this.timeout) {
+			clearTimeout(this.timeout);
 		}
 	}
 
@@ -111,20 +89,20 @@ export class Popover extends React.Component {
 		if (prevIsOpen !== isOpen && !delay) {
 			this.setState({ showPopper: isOpen });
 		} else if (prevIsOpen && !isOpen && !!delay) {
-			if (this._timeout) {
-				clearTimeout(this._timeout);
+			if (this.timeout) {
+				clearTimeout(this.timeout);
 			}
-			this._timeout = setTimeout(() => {
+			this.timeout = setTimeout(() => {
 				this.setState({ showPopper: false });
-				this._timeout = null;
+				this.timeout = null;
 			}, delay.hide || 0);
 		} else if (!prevIsOpen && isOpen && !!delay) {
-			if (this._timeout) {
-				clearTimeout(this._timeout);
+			if (this.timeout) {
+				clearTimeout(this.timeout);
 			}
-			this._timeout = setTimeout(() => {
+			this.timeout = setTimeout(() => {
 				this.setState({ showPopper: true });
-				this._timeout = null;
+				this.timeout = null;
 			}, delay.show || 0);
 		}
 	};
@@ -155,7 +133,6 @@ export class Popover extends React.Component {
 									...(!hideArrow ? Styled.margins[Styled.getPlacement(placement)] : {}),
 								}}
 								delay={delay}
-								onAnimationEnd={this.handleTransition}
 								hideArrow={hideArrow}
 								styleOverrides={styleOverrides}
 							>

@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, ReactNode } from 'react';
 import debounce from 'lodash.debounce';
-import { Popover } from './component';
+import { Popover, Props as PopoverProps } from './component';
 import { PopoverManager, PopoverReference } from './popper-helpers';
 
+type Props = Partial<PopoverProps> & {
+	text: string | ReactNode;
+};
+
+const initialState = {
+	tooltipIsOpen: false,
+};
+
+type State = Readonly<typeof initialState>;
+
 /** Simple tooltip that uses popovers internally. Does not support custom positioning. */
-export class Tooltip extends Component {
-	static propTypes = {
-		...Popover.propTypes,
-
-		/** Text for the tooltip */
-		text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-	};
-
-	state = {
-		tooltipIsOpen: false,
-	};
+export class Tooltip extends Component<Props, State> {
+	readonly state: State = initialState;
 
 	componentWillUnmount() {
 		this.handleMouseLeave.cancel();
