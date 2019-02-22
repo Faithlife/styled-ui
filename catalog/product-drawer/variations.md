@@ -1,31 +1,14 @@
 ### Default View
 
 ```react
-showSource: true
+showSource: false,
 ---
-<ProductDrawerDemo>
-	<ProductDrawer />
-</ProductDrawerDemo>
+<ProductDrawerWithResources/>
 ```
 ### Style Overrides
 
 ```react
 showSource: true
 ---
-<ProductDrawerDemo>
-	<ProductDrawer styleOverrides={{mobileTopOffset: '55px', toggleButtonColor: 'green', toggleButtonHoverColor: 'red'}} />
-</ProductDrawerDemo>
-```
-
-
-### Localize resources
-
-```react
-showSource: true
----
-<ProductDrawerDemo>
-	<ProductDrawer
-		resources={({products: 'Alternate Product text'})}
-	/>
-</ProductDrawerDemo>
+<ProductDrawerWithResources styleOverrides={{mobileTopOffset: '55px', toggleButtonColor: 'green', toggleButtonHoverColor: 'red'}} />
 ```

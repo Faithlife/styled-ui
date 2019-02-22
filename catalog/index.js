@@ -35,7 +35,7 @@ import { GroupSelector, LargeGroupSelector } from '../components/group-selector'
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
 import { colors } from '../components/shared-styles';
-import { ProductDrawer } from '../components/product-drawer';
+import { ProductDrawerWithResources } from './product-drawer';
 import { DocgenTable } from './docgen-table';
 import { MemberDirectory, VolunteerScheduling } from './grid';
 import { textInputPages } from './text-input/pages';
@@ -631,28 +631,13 @@ const components = [
 				path: '/product-drawer/variations',
 				title: 'Product Drawer',
 				content: pageLoader(() => import('./product-drawer/variations.md')),
-				imports: {
-					ProductDrawer,
-					ProductDrawerDemo: styled.div`
-						.wide-content {
-							width: 600px;
-						}
-
-						.button-container {
-							margin-right: 16px;
-						}
-
-						.stacked-content {
-							width: 240px;
-						}
-					`,
-				},
+				imports: { ProductDrawerWithResources },
 			},
 			{
 				path: '/product-drawer/documentation',
 				title: 'Product Drawer Documentation',
 				content: pageLoader(() => import('./product-drawer/documentation.md')),
-				imports: { ProductDrawer, DocgenTable },
+				imports: { ProductDrawerWithResources, DocgenTable },
 			},
 		],
 	},

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import defaultResources from './locales/en-US/resources.json';
 import { FaithlifeConnectAnimatedImage, FaithlifeEquipAnimatedImage } from './animated-image';
 import { ProductLinkList, ProductLink } from './product-link';
 import {
@@ -23,7 +22,45 @@ import * as Styled from './styled';
 
 export class ProductDrawer extends React.PureComponent {
 	static propTypes = {
-		resources: PropTypes.object,
+		resources: PropTypes.shape({
+			closeButtonAltText: PropTypes.string.isRequired,
+			toggleButtonAltText: PropTypes.string.isRequired,
+			individualsSectionTitle: PropTypes.string.isRequired,
+			churchesSectionTitle: PropTypes.string.isRequired,
+			faithlifeLinkTitle: PropTypes.string.isRequired,
+			faithlifeIndividualLinkDescription: PropTypes.string.isRequired,
+			faithlifeChurchLinkDescription: PropTypes.string.isRequired,
+			sitesLinkTitle: PropTypes.string.isRequired,
+			sitesLinkDescription: PropTypes.string.isRequired,
+			proclaimLinkTitle: PropTypes.string.isRequired,
+			proclaimLinkDescription: PropTypes.string.isRequired,
+			logosLinkTitle: PropTypes.string.isRequired,
+			logosLinkDescription: PropTypes.string.isRequired,
+			mobileEdLinkTitle: PropTypes.string.isRequired,
+			mobileEdLinkDescription: PropTypes.string.isRequired,
+			faithlifeTvLinkTitle: PropTypes.string.isRequired,
+			faithlifeTvLinkDescription: PropTypes.string.isRequired,
+			ebooksLinkTitle: PropTypes.string.isRequired,
+			ebooksLinkDescription: PropTypes.string.isRequired,
+			bsmLinkTitle: PropTypes.string.isRequired,
+			bsmLinkDescription: PropTypes.string.isRequired,
+			connectDescription: PropTypes.string.isRequired,
+			learnMore: PropTypes.string.isRequired,
+			sermonsLinkTitle: PropTypes.string.isRequired,
+			sermonsLinkDescription: PropTypes.string.isRequired,
+			equipDescription: PropTypes.string.isRequired,
+			comingSoon: PropTypes.string.isRequired,
+			more: PropTypes.string.isRequired,
+			products: PropTypes.string.isRequired,
+			faithlifeStudyBibleLinkTitle: PropTypes.string.isRequired,
+			faithlifeStudyBibleLinkDescription: PropTypes.string.isRequired,
+			givingLinkTitle: PropTypes.string.isRequired,
+			givingLinkDescription: PropTypes.string.isRequired,
+			faithlifeBibleScreenLinkTitle: PropTypes.string.isRequired,
+			faithlifeBibleScreenLinkDescription: PropTypes.string.isRequired,
+			ministryTeamMagazineLinkTitle: PropTypes.string.isRequired,
+			ministryTeamMagazineLinkDescription: PropTypes.string.isRequired,
+		}),
 		styleOverrides: PropTypes.shape({
 			mobileTopOffset: PropTypes.string,
 			toggleButtonColor: PropTypes.string,
@@ -63,8 +100,7 @@ export class ProductDrawer extends React.PureComponent {
 	};
 
 	render() {
-		const { styleOverrides } = this.props;
-		const resources = { ...defaultResources.productDrawer, ...this.props.resources };
+		const { styleOverrides, resources } = this.props;
 		const { isOpen } = this.state;
 
 		return (
