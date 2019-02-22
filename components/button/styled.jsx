@@ -14,6 +14,7 @@ export const ButtonContentWrapper = styled.div`
 	grid-auto-flow: column;
 	grid-column-gap: 6px;
 	align-items: center;
+	pointer-events: none;
 	justify-content: ${props => props.justifyContent || 'center'};
 
 	> svg {
