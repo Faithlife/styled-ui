@@ -28,6 +28,20 @@ export const ProductDrawerToggle = styled.button`
 	cursor: pointer;
 	background: transparent;
 	border: none;
+	
+	color: ${({ styleOverrides }) => styleOverrides.toggleButtonColor || 'initial'};
+	
+	path {
+		fill: ${({ styleOverrides }) => styleOverrides.toggleButtonColor || 'initial'};
+	}
+
+	&:hover {
+		color: ${({ styleOverrides }) => styleOverrides.toggleButtonHoverColor || 'initial'};
+
+		path {
+			fill: ${({ styleOverrides }) => styleOverrides.toggleButtonHoverColor || 'initial'};
+		}
+	}
 
 	&:focus {
 		outline: none;
@@ -48,7 +62,7 @@ export const ProductDrawerDropdown = styled.div`
 	left: 0;
 	right: 0;
 	bottom: 0;
-	top: ${props => (props.isBrandBarEnabled ? '95px' : '55px')};
+	top: ${({ styleOverrides }) => styleOverrides.mobileTopOffset || '0'};
 	overflow-y: scroll;
 
 	&:focus {

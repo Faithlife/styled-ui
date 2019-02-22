@@ -23,11 +23,16 @@ import * as Styled from './styled';
 
 export class ProductDrawer extends React.PureComponent {
 	static propTypes = {
-		isBrandBarEnabled: PropTypes.bool.isRequired,
 		resources: PropTypes.object,
-		customClassNames: PropTypes.shape({
-			toggleButton: PropTypes.string,
+		styleOverrides: PropTypes.shape({
+			mobileTopOffset: PropTypes.string,
+			toggleButtonColor: PropTypes.string,
+			toggleButtonHoverColor: PropTypes.string,
 		}),
+	};
+
+	static defaultProps = {
+		styleOverrides: {},
 	};
 
 	state = {
@@ -58,14 +63,14 @@ export class ProductDrawer extends React.PureComponent {
 	};
 
 	render() {
-		const { isBrandBarEnabled, customClassNames } = this.props;
+		const { styleOverrides } = this.props;
 		const resources = { ...defaultResources.productDrawer, ...this.props.resources };
 		const { isOpen } = this.state;
 
 		return (
 			<Styled.ProductDrawer>
 				<Styled.ProductDrawerToggle
-					className={(customClassNames && customClassNames.toggleButton) || null}
+					styleOverrides={styleOverrides}
 					onClick={this.handleToggleClick}
 					ref={el => {
 						this.toggle = el;
@@ -84,15 +89,13 @@ export class ProductDrawer extends React.PureComponent {
 							fillRule="evenodd"
 						/>
 					</svg>
-					<Styled.ProductDrawerToggleText
-						className={(customClassNames && customClassNames.toggleButtonText) || null}
-					>
+					<Styled.ProductDrawerToggleText styleOverrides={styleOverrides}>
 						{resources.products}
 					</Styled.ProductDrawerToggleText>
 				</Styled.ProductDrawerToggle>
 				{isOpen ? (
 					<Styled.ProductDrawerDropdown
-						isBrandBarEnabled={isBrandBarEnabled}
+						styleOverrides={styleOverrides}
 						onBlur={this.handleBlur}
 						tabIndex="-1"
 					>

@@ -1,27 +1,21 @@
-### Without Brand Bar
+### Default View
 
 ```react
 showSource: true
 ---
 <ProductDrawerDemo>
-	<ProductDrawer
-		isBrandBarEnabled={false}
-	/>
+	<ProductDrawer />
 </ProductDrawerDemo>
 ```
-
-### With Brand Bar
+### Style Overrides
 
 ```react
 showSource: true
 ---
 <ProductDrawerDemo>
-	<ProductDrawer
-		isBrandBarEnabled={true}
-	/>
+	<ProductDrawer styleOverrides={{mobileTopOffset: '55px', toggleButtonColor: 'green', toggleButtonHoverColor: 'red'}} />
 </ProductDrawerDemo>
 ```
-
 
 
 ### Localize resources
@@ -31,7 +25,6 @@ showSource: true
 ---
 <ProductDrawerDemo>
 	<ProductDrawer
-		isBrandBarEnabled={true}
 		resources={({products: 'Alternate Product text'})}
 	/>
 </ProductDrawerDemo>
