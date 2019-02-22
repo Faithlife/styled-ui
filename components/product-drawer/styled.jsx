@@ -28,9 +28,9 @@ export const ProductDrawerToggle = styled.button`
 	cursor: pointer;
 	background: transparent;
 	border: none;
-	
+
 	color: ${({ styleOverrides }) => styleOverrides.toggleButtonColor || 'initial'};
-	
+
 	path {
 		fill: ${({ styleOverrides }) => styleOverrides.toggleButtonColor || 'initial'};
 	}

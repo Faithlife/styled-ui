@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ProductDrawer } from '../../components/product-drawer';
 import resources from './resources.json';
 
