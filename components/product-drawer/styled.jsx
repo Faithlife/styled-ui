@@ -18,7 +18,7 @@ const dropdownSlideDownFadeIn = keyframes`
 
 export const ProductDrawer = styled.div`
 	position: relative;
-	font-family: 'source_sans', sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 `;
 
 export const ProductDrawerToggle = styled.button`
