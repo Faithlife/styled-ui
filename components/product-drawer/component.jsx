@@ -75,7 +75,6 @@ export class ProductDrawer extends React.PureComponent {
 					ref={el => {
 						this.toggle = el;
 					}}
-					tabIndex="-1"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -94,11 +93,7 @@ export class ProductDrawer extends React.PureComponent {
 					</Styled.ProductDrawerToggleText>
 				</Styled.ProductDrawerToggle>
 				{isOpen ? (
-					<Styled.ProductDrawerDropdown
-						styleOverrides={styleOverrides}
-						onBlur={this.handleBlur}
-						tabIndex="-1"
-					>
+					<Styled.ProductDrawerDropdown styleOverrides={styleOverrides} onBlur={this.handleBlur}>
 						<Styled.DropdownCloseButton onClick={this.handleCloseButtonClick}>
 							<img src={CloseButtonSvg} alt={resources.closeButtonAltText} />
 						</Styled.DropdownCloseButton>
