@@ -28,6 +28,20 @@ export class DatePickerInput extends PureComponent {
 		onChange: PropTypes.func.isRequired,
 		onFocus: PropTypes.func,
 		disabled: PropTypes.bool,
+		placement: PropTypes.oneOf([
+			'top',
+			'top-start',
+			'top-end',
+			'right',
+			'right-start',
+			'right-end',
+			'bottom',
+			'bottom-start',
+			'bottom-end',
+			'left',
+			'left-start',
+			'left-end',
+		]),
 	};
 
 	constructor(props) {
@@ -112,7 +126,7 @@ export class DatePickerInput extends PureComponent {
 	);
 
 	render() {
-		const { disabled, defaultSelectedDate } = this.props;
+		const { disabled, defaultSelectedDate, placement } = this.props;
 		const { text, selectedDate, showCalendar } = this.state;
 
 		const defaultValue = defaultSelectedDate != null ? this.formatDate(defaultSelectedDate) : '';
@@ -141,7 +155,7 @@ export class DatePickerInput extends PureComponent {
 						</Styled.CalendarIconContainer>
 					</Styled.CalendarButton>
 					<Popover
-						placement="bottom-start"
+						placement={placement || "bottom-start"}
 						isOpen={showCalendar}
 						styleOverrides={{ padding: '16px 20px' }}
 					>

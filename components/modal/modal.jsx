@@ -99,8 +99,10 @@ export class Modal extends React.Component {
 			(modalWidth < 220 ||
 				(modalWidth < 320 && footerProps && Object.keys(footerProps).length === 3));
 
+		const isMobileViewport = modalWidth < 768;
+
 		return (
-			<ThemeProvider theme={{ ...theme, verticalButtons }}>
+			<ThemeProvider theme={{ ...theme, verticalButtons, isMobileViewport }}>
 				<ModalBackdrop onClose={onClose}>
 					<Styled.Modal
 						innerRef={modal => {
@@ -119,8 +121,8 @@ export class Modal extends React.Component {
 							(renderFooter ? (
 								renderFooter()
 							) : (
-								<DefaultModalFooter useFullWidthButtons={verticalButtons} {...footerProps} />
-							))}
+									<DefaultModalFooter useFullWidthButtons={verticalButtons} {...footerProps} />
+								))}
 					</Styled.Modal>
 				</ModalBackdrop>
 			</ThemeProvider>
