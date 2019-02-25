@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Manager, Reference } from 'react-popper';
+import { Reference } from 'react-popper';
 import * as Styled from './styled';
 
 /** Popover reference container from react-popper */
@@ -18,8 +18,13 @@ PopoverReference.propTypes = {
 	children: PropTypes.node,
 };
 
-/** Popover manager from react-popper */
-export const PopoverManager = Manager;
+const context = {
+	togglePopover: null,
+	popoverContainerRef: null,
+};
+
+export const PopoverContext = React.createContext(context);
+
 export const PlainPopoverReference = Reference;
 export const PlacementOptionsProps = PropTypes.oneOf([
 	'top',

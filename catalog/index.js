@@ -511,7 +511,7 @@ const components = [
 				path: '/popover/documentation',
 				title: 'Popover Documentation',
 				content: pageLoader(() => import('./popover/documentation.md')),
-				imports: { Popover, DocgenTable, Tooltip },
+				imports: { Popover, DocgenTable, Tooltip, PopoverManager },
 			},
 		],
 	},

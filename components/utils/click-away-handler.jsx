@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactEventListener from 'react-event-listener';
+import styled from 'styled-components';
+
+const reactRef = PropTypes.shape({
+	current: PropTypes.instanceOf(HTMLElement),
+});
 
 export class ClickAwayHandler extends Component {
 	static propTypes = {
@@ -10,6 +15,8 @@ export class ClickAwayHandler extends Component {
 		touchEvent: PropTypes.oneOf(['onTouchStart', 'onTouchEnd']),
 		/** Callback for when the element is clicked away from */
 		onClick: PropTypes.func,
+		/** Optional ref or array of refs that are also inbounds */
+		inboundsElements: PropTypes.oneOfType([reactRef, PropTypes.arrayOf(reactRef)]),
 		children: PropTypes.node,
 	};
 
@@ -21,9 +28,17 @@ export class ClickAwayHandler extends Component {
 	targetRef = React.createRef();
 
 	handleClick = event => {
-		const { onClick } = this.props;
+		const { onClick, inboundsElements } = this.props;
 
-		if (this.targetRef.current && !this.targetRef.current.contains(event.target)) {
+		if (
+			this.targetRef.current &&
+			!this.targetRef.current.contains(event.target) &&
+			(Array.isArray(inboundsElements)
+				? !inboundsElements.some(ref => ref.current && ref.current.contains(event.target))
+				: !inboundsElements ||
+				  !inboundsElements.current ||
+				  !inboundsElements.current.contains(event.target))
+		) {
 			onClick(event);
 		}
 	};
@@ -36,14 +51,19 @@ export class ClickAwayHandler extends Component {
 		}
 
 		return (
-			<div ref={this.targetRef}>
+			<ContainerDiv ref={this.targetRef}>
 				{children}
 				<ReactEventListener
 					target="document"
 					{...(mouseEvent ? { [mouseEvent]: this.handleClick } : {})}
 					{...(touchEvent ? { [touchEvent]: this.handleClick } : {})}
 				/>
-			</div>
+			</ContainerDiv>
 		);
 	}
 }
+
+const ContainerDiv = styled.div`
+	margin: 0;
+	display: inline-block;
+`;

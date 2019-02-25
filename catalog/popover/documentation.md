@@ -11,3 +11,9 @@ noSource: true
 ---
 <DocgenTable component={Tooltip} />
 ```
+
+```react
+noSource: true
+---
+<DocgenTable component={PopoverManager} />
+```
