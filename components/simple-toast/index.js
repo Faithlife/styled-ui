@@ -1,0 +1,1 @@
+export { SimpleToast } from './component';

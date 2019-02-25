@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as Styled from './styled.jsx';
-import * as icons from './icons.jsx';
+import * as Styled from './styled';
+import * as icons from './icons';
 
 export function Avatar({ avatarUrl, name, kind, size = 32 }) {
 	let child;

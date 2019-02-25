@@ -5,10 +5,14 @@ import { resetStyles } from '../utils';
 export const Input = styled.input`
 	${resetStyles};
 
-	${fonts.ui16};
 	border-radius: 3px;
 	border: 1px solid ${inputColors.inputBorderColor};
-	padding: ${thickness.eight} 0 ${thickness.eight} ${thickness.eight};
+
+	padding: ${thickness.eight};
+	height: 32px;
+	${fonts.ui16};
+
+	width: ${props => props.styleOverrides.width};
 
 	&:focus {
 		border-color: ${inputColors.inputFocusedBorderColor};
@@ -26,15 +30,19 @@ export const Input = styled.input`
 `;
 
 export const variationMap = {
-	small: component => component.extend`
-		${fonts.ui14};
-		padding: 6px 0 6px ${thickness.eight};
-`,
-	medium: component => component.extend`
+	small: component => styled(component)`
+		padding: ${thickness.eight};
+		height: 32px;
 		${fonts.ui16};
-`,
-	large: component => component.extend`
-		padding: 13px 0 11px 12px;
+	`,
+	medium: component => styled(component)`
+		padding: 12px;
+		height: 40px;
 		${fonts.ui16};
-`,
+	`,
+	large: component => styled(component)`
+		padding: 16px;
+		height: 46px;
+		${fonts.ui16};
+	`,
 };

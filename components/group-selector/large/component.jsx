@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../../main.js';
-import { SimpleModal } from '../../simple-modal/component.jsx';
-import * as Styled from '../styled.jsx';
-import { SearchResult } from './search-result.jsx';
-import { CreateGroup } from './create-group.jsx';
+import { Button } from '../../main';
+import { SimpleModal } from '../../simple-modal';
+import * as Styled from '../styled';
+import { SearchResult } from './search-result';
+import { CreateGroup } from './create-group';
 
 const defaultResultsTopMargin = -64;
 
+/** Large group selector for searching Faithlife groups. Can be displayed inline or inside a modal. */
 export class LargeGroupSelector extends React.Component {
 	static propTypes = {
 		/** Toggles the modal state open and closed */
@@ -43,11 +44,10 @@ export class LargeGroupSelector extends React.Component {
 		modalContent: 'main',
 		selectedGroupId: -1,
 		createGroupFixed: false,
-		resultsTopMargin: defaultResultsTopMargin,
+		resultsTopMargin: this.props.showInPlace ? 0 : defaultResultsTopMargin,
 		scrollWidthDelta: 0,
 	};
 
-	modalRef = React.createRef();
 	searchResultsRef = React.createRef();
 	fixedCreateWrapper = false;
 
@@ -112,7 +112,7 @@ export class LargeGroupSelector extends React.Component {
 	toggle = () => {
 		this.setState({
 			createGroupFixed: false,
-			resultsTopMargin: defaultResultsTopMargin,
+			resultsTopMargin: this.props.showInPlace ? 0 : defaultResultsTopMargin,
 			modalContent: 'main',
 		});
 
@@ -172,6 +172,10 @@ export class LargeGroupSelector extends React.Component {
 	};
 
 	handleScroll = scrollData => {
+		if (this.props.showInPlace) {
+			return;
+		}
+
 		if (scrollData.topPosition >= 82 && !this.fixedCreateWrapper) {
 			this.setState({
 				createGroupFixed: true,
@@ -230,7 +234,7 @@ export class LargeGroupSelector extends React.Component {
 				<Styled.SearchResultsContainer
 					style={{ marginTop: this.state.resultsTopMargin }}
 					fixed={this.state.createGroupFixed}
-					innerRef={this.searchResultsRef}
+					ref={this.searchResultsRef}
 				>
 					{this.getSearchResults()}
 				</Styled.SearchResultsContainer>
@@ -244,9 +248,11 @@ export class LargeGroupSelector extends React.Component {
 			<Styled.LargeGroupSelector>
 				{this.props.showInPlace && mainView}
 				<SimpleModal
+					container="body"
 					isOpen={
 						(!this.props.showInPlace && this.props.isOpen) ||
-						(this.props.showInPlace && secondaryModalOpen)
+						(this.props.showInPlace && secondaryModalOpen) ||
+						false
 					}
 					onClose={this.toggle}
 					theme={{ background: 'transparent' }}

@@ -6,7 +6,7 @@ import {
 	ShareToFaithlifeIcon,
 	ShareToEmailIcon,
 } from '../icons';
-import * as Styled from './styled.jsx';
+import * as Styled from './styled';
 
 export const FaithlifeShareButton = ({ encodedShareUrl, encodedMessage }) => (
 	<Styled.ShareAnchor

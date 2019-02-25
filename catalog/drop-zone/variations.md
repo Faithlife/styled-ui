@@ -8,7 +8,7 @@ state: {
 	fileNames: [],
 }
 ---
-<DropZoneDemo>
+<div>
 	<DropZone
 		onDrop={dropEvent => {
 			dropEvent.preventDefault();
@@ -30,7 +30,7 @@ state: {
 	<DroppedFiles>
 		{state.fileNames.map((name, i) => <div key={`${name}_{i}`}>Dropped file: {name}</div>)}
 	</DroppedFiles>
-</DropZoneDemo>
+</div>
 ```
 
 ### With more complex children
@@ -41,7 +41,7 @@ state: {
 	fileNames: [],
 }
 ---
-<DropZoneDemo>
+<div>
 	<DropZone
 		onDrop={dropEvent => {
 			dropEvent.preventDefault();
@@ -85,5 +85,5 @@ state: {
 	<DroppedFiles>
 		{state.fileNames.map((name, i) => <div key={`${name}_{i}`}>Dropped file: {name}</div>)}
 	</DroppedFiles>
-</DropZoneDemo>
+</div>
 ```

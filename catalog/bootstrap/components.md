@@ -1,5 +1,9 @@
 Most Bootstrap 4 components can be used in existing projects, powered by Reactstrap.
 
+```hint|warning
+These are deprecated controls! They won't receive any more updates. Prefer to use Reactstrap directly in your project if you *need* bootstrap-based controls, but at this point we have replaced all of the controls on this page with our own versions in this library.
+```
+
 ```hint|directive
 These components require the [Faithlife Bootstrap base stylesheet](/bootstrap/stylesheet) to be loaded globally in your app.
 ```

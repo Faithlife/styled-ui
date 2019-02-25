@@ -1,2 +1,2 @@
-export { ModalFooter } from './modal-footer.jsx';
-export { Modal } from './modal.jsx';
+export { ModalFooter } from './modal-footer';
+export { Modal } from './modal';

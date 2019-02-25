@@ -9,18 +9,28 @@ const buttonColors = {
 	disabled: '#bedcf2',
 };
 
-export const ButtonContents = styled.span`
+export const ButtonContentWrapper = styled.div`
 	display: grid;
 	grid-auto-flow: column;
 	grid-column-gap: 6px;
 	align-items: center;
 	justify-content: ${props => props.justifyContent || 'center'};
+
+	> svg {
+		height: 1em;
+		width: 1em;
+	}
+`;
+
+export const ButtonContents = styled.div`
+	white-space: nowrap;
 `;
 
 export const Anchor = styled.a`
 	${resetStyles};
 
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
 	text-decoration: none;
 	text-align: center;
 	box-shadow: none;
@@ -62,7 +72,7 @@ export const Button = styled.button`
 `;
 
 export const variationMap = {
-	primary: component => component.extend`
+	primary: component => styled(component)`
 		border: 1px solid ${props => props.theme.defaultColor || buttonColors.default};
 		background-color: ${props => props.theme.defaultColor || buttonColors.default};
 		color: #fff;
@@ -84,8 +94,8 @@ export const variationMap = {
 			background-color: ${props => props.theme.disabledColor || buttonColors.disabled};
 			cursor: default;
 		}
-`,
-	primaryOutline: component => component.extend`
+	`,
+	primaryOutline: component => styled(component)`
 		border: 1px solid ${props => props.theme.defaultColor || buttonColors.default};
 		background: none;
 		color: ${props => props.theme.defaultColor || buttonColors.default};
@@ -108,8 +118,8 @@ export const variationMap = {
 			color: ${props => props.theme.disabledColor || buttonColors.disabled};
 			cursor: default;
 		}
-`,
-	minor: component => component.extend`
+	`,
+	minor: component => styled(component)`
 		border: 1px solid ${colors.gray14};
 		background: ${colors.gray4};
 		color: ${colors.flGray};
@@ -132,8 +142,8 @@ export const variationMap = {
 			color: ${colors.gray22};
 			cursor: default;
 		}
-`,
-	primaryTransparent: component => component.extend`
+	`,
+	primaryTransparent: component => styled(component)`
 		border: 1px solid transparent;
 		background: none;
 		color: ${props => props.theme.defaultColor || buttonColors.default};
@@ -151,8 +161,8 @@ export const variationMap = {
 			color: ${props => props.theme.disabledColor || buttonColors.disabled};
 			cursor: default;
 		}
-`,
-	minorTransparent: component => component.extend`
+	`,
+	minorTransparent: component => styled(component)`
 		border: 1px solid transparent;
 		background: none;
 		color: ${colors.flGray};
@@ -170,19 +180,18 @@ export const variationMap = {
 			color: ${colors.gray22};
 			cursor: default;
 		}
-`,
-	small: component => component.extend`
-		padding: 6px ${props => (props.condensed ? '6px' : '12px')};
-		font-size: 14px;
-`,
-	medium: component => component.extend`
-		padding: 9px ${props => (props.condensed ? '8px' : '16px')} 7px;
-`,
-	large: component => component.extend`
-		padding: 13px ${props => (props.condensed ? '12px' : '24px')} 11px;
-`,
-	extraLarge: component => component.extend`
-		padding: 16px ${props => (props.condensed ? '16px' : '32px')};
+	`,
+	small: component => styled(component)`
+		height: 32px;
+		padding: 0 ${props => (props.condensed ? '7px' : '9px')};
+	`,
+	medium: component => styled(component)`
+		height: 40px;
+		padding: 0 ${props => (props.condensed ? '11px' : '15px')};
+	`,
+	large: component => styled(component)`
+		height: 56px;
+		padding: 0 ${props => (props.condensed ? '15px' : '23px')};
 		font-size: 24px;
-`,
+	`,
 };

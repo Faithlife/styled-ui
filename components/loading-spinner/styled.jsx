@@ -20,22 +20,26 @@ export const Spinner = styled.div`
 	display: inline-block;
 	margin-left: 5px;
 	animation: ${spinTransform} 1.1s infinite linear;
-`;
 
-export const variationMap = {
-	small: component => component.extend`
 	width: ${props => props.height || 20}px;
 	height: ${props => props.height || 20}px;
 	border-width: 4px;
-`,
-	medium: component => component.extend`
-	width: ${props => props.height || 64}px;
-	height: ${props => props.height || 64}px;
-	border-width: 8px;
-`,
-	large: component => component.extend`
-	width: ${props => props.height || 120}px;
-	height: ${props => props.height || 120}px;
-	border-width: 12px;
-`,
+`;
+
+export const variationMap = {
+	small: component => styled(component)`
+		width: ${props => props.height || 20}px;
+		height: ${props => props.height || 20}px;
+		border-width: 4px;
+	`,
+	medium: component => styled(component)`
+		width: ${props => props.height || 64}px;
+		height: ${props => props.height || 64}px;
+		border-width: 8px;
+	`,
+	large: component => styled(component)`
+		width: ${props => props.height || 120}px;
+		height: ${props => props.height || 120}px;
+		border-width: 12px;
+	`,
 };

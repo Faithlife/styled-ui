@@ -306,7 +306,7 @@ state: {
 		onJoinGroupClick={() => {alert("Should Join the group, or request")}}
 		onAdminRequestClick={() => {alert("Admin access requested")}}
 	/>
-	<Button color="primary" onClick={() => {setState({isOpen: true})}}>Open Modal</Button>
+	<Button primary medium onClick={() => {setState({isOpen: true})}}>Open Modal</Button>
 </LargeGroupSelectorDemo>
 ```
 
@@ -345,6 +345,15 @@ state: {
 	{
 		name: 'Cool Test Church',
 		groupId: 4,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
+	},
+	{
+		name: 'Church With Really Really Really Really Really Really Really Really Long Name',
+		groupId: 5,
 		kind: 'church',
 		avatarUrl: '',
 		relationshipKind: 'participant',
@@ -428,7 +437,7 @@ state: {
 		onCreateGroup={(name, location) => {
 			const newGroup = {
 				name,
-				groupId: 5,
+				groupId: 6,
 				kind: 'church',
 				avatarUrl: '',
 				relationshipKind: 'participant',

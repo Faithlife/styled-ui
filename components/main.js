@@ -3,18 +3,22 @@
 // We could use tree-shaking in the future to prune out unused exports,
 // but not all projects are able to use that right now.
 
-export { Checkbox } from './check-box/component.jsx';
-export { Radio } from './radio/component.jsx';
-export { Button } from './button/component.jsx';
-export { AnchorButton } from './button/anchor-button.jsx';
+export { AnchorButton } from './button/anchor-button';
 export { Bootstrap } from './bootstrap';
-export { LoadingSpinner } from './loading-spinner/component.jsx';
+export { Button } from './button';
+export { Checkbox } from './check-box';
+export { Collapse } from './collapse';
+export { DatePicker } from './date-picker';
+export { DatePickerInput } from './date-picker-input';
+export { DatePeriodPicker } from './date-period-picker';
+export { DropZone } from './drop-zone';
+export { FilesSection } from './files-section';
+export { HelpBox } from './help-box';
+export { Input } from './input';
+export { LoadingSpinner } from './loading-spinner';
 export { Modal, ModalFooter } from './modal';
-export { SimpleModal } from './simple-modal/component.jsx';
-export { HelpBox } from './help-box/component.jsx';
-export { Collapse } from './collapse/component.jsx';
-export { FilesSection } from './files-section/component.jsx';
-export { DropZone } from './drop-zone/component.jsx';
 export { Popover, PopoverManager, PopoverReference, Tooltip } from './popover';
-export { DatePickerInput } from './date-picker-input/component.jsx';
-export { DatePicker } from './date-picker/component.jsx';
+export { Radio } from './radio';
+export { SimpleModal } from './simple-modal';
+export { Slider } from './slider';
+export { SimpleToast } from './simple-toast';

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../../components/main.js';
-import * as Styled from './styled.jsx';
-import { SimpleGroup } from './simple-group.jsx';
+import { Button } from '../../components/main';
+import * as Styled from './styled';
+import { SimpleGroup } from './simple-group';
 
 export class GroupDropdown extends React.PureComponent {
 	static propTypes = {
@@ -112,7 +112,7 @@ export class GroupDropdown extends React.PureComponent {
 		const { name, kind, groupId, avatarUrl } = this.props.selectedGroup;
 
 		return (
-			<Styled.DropdownContainer innerRef={this.dropdownRef}>
+			<Styled.DropdownContainer ref={this.dropdownRef}>
 				<Styled.SelectedGroup onClick={this.handleDropdownToggle} onKeyDown={this.handleKeyPress}>
 					<Styled.SelectedSimpleGroupWrapper>
 						<SimpleGroup

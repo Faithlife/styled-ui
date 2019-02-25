@@ -1,5 +1,13 @@
-export { BootstrapContainer, wrapBootstrap } from './bootstrap-container.jsx';
-export { mapFromInnerRef, mapToInnerRef } from './forwardref-wrapper.jsx';
+export { BootstrapContainer, wrapBootstrap } from './bootstrap-container';
+export { forwardClassRef } from './forwardref-wrapper';
+export { ClickAwayHandler } from './click-away-handler';
+export {
+	TransitionStatuses,
+	TransitionTimeouts,
+	TransitionPropTypeKeys,
+	pick,
+	omit,
+} from './transition-group-utils';
 
 const componentCache = new WeakMap();
 
@@ -74,5 +82,13 @@ export const resetStyles = `
 	*:before,
 	*:after {
 		box-sizing: border-box;
+	}
+
+	&::placeholder {
+		font-style: initial;
+	}
+
+	p {
+		padding: 0;
 	}
 `;

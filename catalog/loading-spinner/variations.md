@@ -1,3 +1,11 @@
+### Default size
+
+```react
+showSource: true
+---
+<LoadingSpinner />
+```
+
 ### Small
 
 ```react

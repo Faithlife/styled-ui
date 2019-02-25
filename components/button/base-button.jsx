@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { applyVariations } from '../utils';
-import { forwardClassRef } from '../utils/forwardref-wrapper.jsx';
-import * as Styled from './styled.jsx';
+import { forwardClassRef } from '../utils/forwardref-wrapper';
+import * as Styled from './styled';
 
 export const BaseButton = forwardClassRef(
 	class BaseButton extends PureComponent {
@@ -31,14 +31,12 @@ export const BaseButton = forwardClassRef(
 			primary: PropTypes.bool,
 			/** Primary outline variation */
 			primaryOutline: PropTypes.bool,
-			/** Medium variation */
-			medium: PropTypes.bool,
 			/** Small variation */
 			small: PropTypes.bool,
+			/** Medium variation */
+			medium: PropTypes.bool,
 			/** Large variation */
 			large: PropTypes.bool,
-			/** Extra large variation */
-			extraLarge: PropTypes.bool,
 			/** Transparent with primary text variation */
 			primaryTransparent: PropTypes.bool,
 			/** Transparent with minor text variation */
@@ -95,15 +93,15 @@ export const BaseButton = forwardClassRef(
 			return (
 				<MappedStyledComponent
 					theme={theme}
-					innerRef={this.attachRef}
+					ref={this.attachRef}
 					{...filteredProps || {}}
 					onMouseUp={this.onMouseUp}
 					styleOverrides={componentStyleOverrides}
 				>
-					<Styled.ButtonContents justifyContent={justifyContent}>
+					<Styled.ButtonContentWrapper justifyContent={justifyContent}>
 						{icon}
-						{children}
-					</Styled.ButtonContents>
+						{children && <Styled.ButtonContents>{children}</Styled.ButtonContents>}
+					</Styled.ButtonContentWrapper>
 				</MappedStyledComponent>
 			);
 		}

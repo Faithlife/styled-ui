@@ -1,1 +1,1 @@
-export { ShareDialog } from './component.jsx';
+export { ShareDialog } from './component';

@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from '../modal/modal.jsx';
+import { Modal } from '../modal/modal';
 import {
 	FaithlifeShareButton,
 	TwitterShareButton,
 	FacebookShareButton,
 	EmailShareButton,
-} from './social-share-buttons.jsx';
-import { CopyToClipboard } from './copy-to-clipboard.jsx';
-import * as Styled from './styled.jsx';
+} from './social-share-buttons';
+import { CopyToClipboard } from './copy-to-clipboard';
+import * as Styled from './styled';
 
 /**
- * ShareDialog
+ * Branded Faithlife modal to share a link to social platforms
  */
 export class ShareDialog extends React.Component {
 	static propTypes = {
@@ -34,7 +34,7 @@ export class ShareDialog extends React.Component {
 		const encodedMessage = message ? encodeURIComponent(message) : '';
 
 		return (
-			<Modal withoutFooter isOpen={isOpen} onClose={onClose} title={modalTitle}>
+			<Modal withoutFooter isOpen={isOpen} onClose={onClose} title={modalTitle} container="body">
 				<Styled.ShareContainer>
 					<FaithlifeShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
 					<TwitterShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />

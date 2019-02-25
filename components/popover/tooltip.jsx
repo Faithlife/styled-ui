@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Popover } from './component.jsx';
-import { PopoverManager, PopoverReference } from './popper-helpers.jsx';
+import debounce from 'lodash.debounce';
+import { Popover } from './component';
+import { PopoverManager, PopoverReference } from './popper-helpers';
 
+/** Simple tooltip that uses popovers internally. Does not support custom positioning. */
 export class Tooltip extends Component {
 	static propTypes = {
 		...Popover.propTypes,
@@ -15,19 +17,34 @@ export class Tooltip extends Component {
 		tooltipIsOpen: false,
 	};
 
-	showTooltip = () => this.setState({ tooltipIsOpen: true });
+	componentWillUnmount() {
+		this.handleMouseLeave.cancel();
+	}
 
-	hideTooltip = () => this.setState({ tooltipIsOpen: false });
+	hideTooltip = () => {
+		this.setState({ tooltipIsOpen: false });
+	};
+
+	handleMouseLeave = debounce(() => {
+		this.setState({ tooltipIsOpen: false });
+	}, 200);
+
+	handleMouseEnter = () => {
+		this.handleMouseLeave.cancel();
+		this.setState({ tooltipIsOpen: true });
+	};
 
 	render() {
 		const { children, text, isOpen, ...otherProps } = this.props;
 		const { tooltipIsOpen } = this.state;
 		return (
 			<PopoverManager>
-				<PopoverReference>
-					<div onMouseEnter={this.showTooltip} onMouseLeave={this.hideTooltip}>
-						{children}
-					</div>
+				<PopoverReference
+					onMouseEnter={this.handleMouseEnter}
+					onMouseLeave={this.handleMouseLeave}
+					onClick={this.hideTooltip}
+				>
+					{children}
 				</PopoverReference>
 				<Popover {...otherProps} isOpen={tooltipIsOpen || isOpen}>
 					{text}

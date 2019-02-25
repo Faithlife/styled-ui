@@ -1,5 +1,5 @@
-export { GroupSelector } from './component.jsx';
-export { LargeGroupSelector } from './large/component.jsx';
+export { GroupSelector } from './component';
+export { LargeGroupSelector } from './large/component';
 
 // Deprecated
-export { LargeGroupSelector as GroupSelectorModal } from './large/component.jsx';
+export { LargeGroupSelector as GroupSelectorModal } from './large/component';

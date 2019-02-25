@@ -5,7 +5,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.png">
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+	<script src="https://browser.sentry-cdn.com/4.4.1/bundle.min.js" crossorigin="anonymous"></script>
+	<script>
+		Sentry.init({ dsn: 'https://ae8f5c0a341e46b8aa70fd1251e20e4f@sentry.io/1336237' });
+	</script>
+	<style type="text/css">
+		body {
+			font-family: "Source Sans Pro";
+			color: #333;
+		}
+		input, select, textarea, button{
+			font-family: inherit;
+		}
+	</style>
   <title>Catalog</title>
 </head>
 <body>

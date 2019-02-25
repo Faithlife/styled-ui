@@ -1,11 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Manager, Reference } from 'react-popper';
-import * as Styled from './styled.jsx';
+import * as Styled from './styled';
 
-export const PopoverReference = ({ children }) => (
+/** Popover reference container from react-popper */
+export const PopoverReference = ({ children, ...referenceProps }) => (
 	<Reference>
-		{({ ref }) => <Styled.ReferenceContainer innerRef={ref}>{children}</Styled.ReferenceContainer>}
+		{({ ref }) => (
+			<Styled.ReferenceContainer {...referenceProps} ref={ref}>
+				{children}
+			</Styled.ReferenceContainer>
+		)}
 	</Reference>
 );
 
@@ -13,4 +18,6 @@ PopoverReference.propTypes = {
 	children: PropTypes.node,
 };
 
+/** Popover manager from react-popper */
 export const PopoverManager = Manager;
+export const PlainPopoverReference = Reference;

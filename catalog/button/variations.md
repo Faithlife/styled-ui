@@ -17,17 +17,18 @@ showSource: true
 	<Button primary large>
 		Large
 	</Button>
-	<Button primary extraLarge>
-		Extra Large
-	</Button>
 </ButtonDemo>
 ```
 
 ### With Icon
+
 ```react
 showSource: true
 ---
 <ButtonDemo>
+	<Button primary large icon={<GearIcon />}>
+		Settings
+	</Button>
 	<Button primary small icon={<GearIcon />}>
 		Settings
 	</Button>
@@ -37,6 +38,7 @@ showSource: true
 ```
 
 ### With Attached Ref
+
 ```react
 showSource: true
 ---
@@ -51,6 +53,7 @@ showSource: true
 ```
 
 ### Supported style customizations
+
 Do not use the `style` prop to style this component (it will be ignored). Instead, if there is missing customization that you need for this component, ask to have it added. The `theme` prop can be used to control color variations while the `styleOverrides` prop can be used for other styles.
 
 ```react
@@ -69,14 +72,11 @@ showSource: true
 </ButtonDemo>
 ```
 
-
-* `small` -- used for apps with tight spacing, never for marketing pages.
-* `medium` -- this is the default size for web applications.
-* `large` -- this is the default scale for marketing web pages.
-* `extraLarge` -- extra large inputs and call-to-action buttons for marketing page use.
+- `small` -- this is the default size for web applications.
+- `medium` -- this is the default size for marketing web pages.
+- `large` -- for extra-special calls to action, used sparingly.
 
 ### Relative Emphasis
-
 
 ```react
 showSource: true
@@ -105,10 +105,10 @@ showSource: true
 </div>
 ```
 
-* `primary` -- for the most important or most common action for a user to take in a given context/scope. This button variant grabs the user's attention. In marketing pages, this style is for the "call to action" on a page.
-* `primaryOutline` -- for actions related to, or nearby the primary button in terms of visual hieararchy that are less common or less critical. Use this button when you want the user's casual attention.
-* `minor` -- for apps, not marketing pages. When there are a lot of common actions that are all of equal weight, consider using minor buttons.
-* `link` -- for situations where a hyperlink is indicated, but must be aligned with a row of buttons. Is very lightweight in terms of visual attention.
+- `primary` -- for the most important or most common action for a user to take in a given context/scope. This button variant grabs the user's attention. In marketing pages, this style is for the "call to action" on a page.
+- `primaryOutline` -- for actions related to, or nearby the primary button in terms of visual hieararchy that are less common or less critical. Use this button when you want the user's casual attention.
+- `minor` -- for apps, not marketing pages. When there are a lot of common actions that are all of equal weight, consider using minor buttons.
+- `link` -- for situations where a hyperlink is indicated, but must be aligned with a row of buttons. Is very lightweight in terms of visual attention.
 
 ## Disabled states
 
@@ -135,6 +135,7 @@ showSource: true
 ```
 
 ### Stretched buttons
+
 ```react
 showSource: true
 ---
@@ -164,8 +165,8 @@ showSource: true
 
 ## Button Text
 
-* Button text should be as concise as possible, but as long as necessary (for clarity).
-* Buttons are usually verbs (or short phrases that begin with a verb).
+- Button text should be as concise as possible, but as long as necessary (for clarity).
+- Buttons are usually verbs (or short phrases that begin with a verb).
 
 Buttons are generally interpreted as imperatives, with the computer as agent ("hey computer, do the thing"), the text of the thing to be done as a verb ("frob"), and a direct object to take the action on if needed ("frob widgets"). Thus a button that reads "frob widgets" will normally be interpreted by the user as them issuing the command: "Hey computer, frob the widgets!"
 
@@ -173,10 +174,23 @@ There are some exceptions, such as "Buy Now" buttons, which are generally interp
 
 Some buttons are noun phrases, but there should always be an implied verb. For example: a "Settings" button that launches a settings dialog in the current context has an implied verb of "Show" or "Launch" (if the user is thinking of what the computer will do) or "Edit" or "Change" (if they're thinking of what they want to do).
 
+Button text should never wrap, and should generally never need ellipses. If you do need them, you will need to supply the styles yourself:
+
+```react
+showSource: true
+---
+<ButtonDemo>
+	<Button primary small>
+		<div style={{ overflow:'hidden', textOverflow:'ellipsis', maxWidth: 230 }}>
+			Really long button text for demonstration purposes
+		</div>
+	</Button>
+</ButtonDemo>
+```
+
 ## Examples
 
 A product sales page enables three possible user actions: Buy the product, rent the product, or learn more about the product. Appropriate button styles and text would be: "Buy now" (primary), "Rent" (primaryOutline), and "Learn more" (minor). If they are all in a row, they would come in the order: "Learn more", "Rent", and "Buy now" on the right.
-
 
 ```react
 showSource: true

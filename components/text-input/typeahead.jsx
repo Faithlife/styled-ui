@@ -17,6 +17,8 @@ const SolidTriangleIcon = styled(_SolidTriangleIcon)`
 	color: #7a7a7a;
 	height: 8px;
 	width: 8px;
+	cursor: pointer;
+	pointer-events: none;
 `;
 
 const StyledAsyncTypeahead = styled(_AsyncTypeahead)`
@@ -24,6 +26,10 @@ const StyledAsyncTypeahead = styled(_AsyncTypeahead)`
 		padding: 0;
 		font-weight: bold;
 		background-color: inherit;
+	}
+
+	&& .rbt-input {
+		padding-right: 16px;
 	}
 
 	&&& {
@@ -38,6 +44,10 @@ const StyledTypeahead = styled(_Typeahead)`
 		padding: 0;
 		font-weight: bold;
 		background-color: inherit;
+	}
+
+	&& .rbt-input {
+		padding-right: 16px;
 	}
 
 	&&& {

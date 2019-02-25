@@ -1,11 +1,11 @@
 This is a straight port of the component from [Reactstrap](https://reactstrap.github.io/components/collapse/), using only `styled-components`
 
 ```react
-state: { isOpen: true }
+state: { isOpen: false }
 showSource: true
 ---
 <div>
-		<Button color="primary"  onClick={() => setState({ isOpen: !state.isOpen })} style={{ marginBottom: '1rem' }}>Toggle</Button>
+		<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })} style={{ marginBottom: '1rem' }}>Toggle</Button>
 		<Collapse
 			isOpen={state.isOpen}
 		>

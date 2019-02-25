@@ -10,43 +10,46 @@ import {
 	Bootstrap,
 	Button,
 	Checkbox,
-	Radio,
+	Collapse,
+	DropZone,
+	FilesSection,
+	HelpBox,
+	Input,
+	LoadingSpinner,
 	Modal,
 	ModalFooter,
-	LoadingSpinner,
-	HelpBox,
-	Collapse,
-	FilesSection,
-	DropZone,
-	SimpleModal,
 	Popover,
 	PopoverManager,
 	PopoverReference,
+	Radio,
+	SimpleModal,
+	Slider,
 	Tooltip,
+	DatePicker,
 	DatePickerInput,
-} from '../components/main.js';
-import { BaseButton } from '../components/button/base-button.jsx';
-import { BootstrapContainer } from '../components/utils';
-import { Typeahead, InferredText, InferredTypeahead } from '../components/text-input';
+	DatePeriodPicker,
+	SimpleToast,
+} from '../components/main';
+import { BaseButton } from '../components/button/base-button';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
 import { colors } from '../components/shared-styles';
-import { DocgenTable } from './docgen-table.jsx';
+import { DocgenTable } from './docgen-table';
 import { MemberDirectory, VolunteerScheduling } from './grid';
-import { InferredTextFocusDemo, InferredTypeaheadFocusDemo } from './text-input/demos.jsx';
+import { textInputPages } from './text-input/pages';
 
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
 import '../dist/main.css';
+import '../dist/text-input.css';
 import '../dist/ag-grid.css';
 
 const ButtonDemo = styled.div`
-	display: grid;
+	display: inline-grid;
 	grid-auto-flow: column;
 	align-items: center;
 	grid-column-gap: 12px;
-	width: min-content;
 `;
 
 const ButtonGrid = styled.div`
@@ -60,12 +63,7 @@ function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
 }
 
-const pages = [
-	{
-		path: '/',
-		title: 'Welcome',
-		content: pageLoader(() => import('./WELCOME.md')),
-	},
+const components = [
 	{
 		title: 'Bootstrap',
 		pages: [
@@ -193,7 +191,7 @@ const pages = [
 				path: '/collapse/variations',
 				title: 'Collapse Variations',
 				content: pageLoader(() => import('./collapse/variations.md')),
-				imports: { Collapse, BootstrapContainer, Button: Bootstrap.Button },
+				imports: { Collapse, Button },
 			},
 			{
 				path: '/collapse/documentation',
@@ -228,11 +226,8 @@ const pages = [
 				content: pageLoader(() => import('./group-selector/variations.md')),
 				imports: {
 					GroupSelector,
-					Button: Bootstrap.Button,
+					Button,
 					GroupSelectorDemo: styled.div`
-						font-family: Source Sans Pro;
-						color: #333333;
-
 						.wide-content {
 							width: 600px;
 						}
@@ -247,9 +242,6 @@ const pages = [
 					`,
 					LargeGroupSelector,
 					LargeGroupSelectorDemo: styled.div`
-						font-family: Source Sans Pro;
-						color: #333333;
-
 						.wide-content {
 							width: 600px;
 						}
@@ -281,10 +273,6 @@ const pages = [
 				content: pageLoader(() => import('./help-box/variations.md')),
 				imports: {
 					HelpBox,
-					Demo: styled.div`
-						font-family: Source Sans Pro;
-						color: #333;
-					`,
 				},
 			},
 			{
@@ -320,27 +308,19 @@ const pages = [
 				title: 'Modal Variations',
 				content: pageLoader(() => import('./modal/variations.md')),
 				imports: {
-					Input: Bootstrap.Input,
+					Input,
 					Modal,
 					ModalFooter,
 					Button,
 					delayPromise,
-					ModalDemoContent: styled.div`
-						font-family: 'Source Sans Pro';
-						color: #333333;
-					`,
 					ModalDemoWideContent: styled.div`
 						width: 600px;
-						font-family: 'Source Sans Pro';
-						color: #333333;
 					`,
 					ModalDemoButtonContainer: styled.div`
 						margin-right: 16px;
 					`,
 					ModalDemoStackedContent: styled.div`
 						width: 240px;
-						font-family: 'Source Sans Pro';
-						color: #333333;
 					`,
 				},
 			},
@@ -374,8 +354,6 @@ const pages = [
 						flex-direction: column;
 						align-items: center;
 						justify-content: space-around;
-						font-family: 'Source Sans Pro';
-						color: #333333;
 					`,
 					SimpleModalDemoMessage: styled.div`
 						background-color: #eeeeee;
@@ -394,30 +372,7 @@ const pages = [
 			},
 		],
 	},
-	{
-		title: 'Text Input',
-		pages: [
-			{
-				path: '/text-input/typeahead',
-				title: 'Typeahead',
-				content: pageLoader(() => import('./text-input/typeahead.md')),
-				imports: { Typeahead, ...Bootstrap },
-			},
-			{
-				path: '/text-input/inferred',
-				title: 'Inferred Inputs',
-				content: pageLoader(() => import('./text-input/inferred.md')),
-				imports: {
-					InferredTextFocusDemo,
-					InferredTypeaheadFocusDemo,
-					InferredText,
-					InferredTypeahead,
-					...Bootstrap,
-					DocgenTable,
-				},
-			},
-		],
-	},
+	textInputPages,
 	{
 		title: 'Files Section',
 		pages: [
@@ -429,9 +384,6 @@ const pages = [
 					FilesSection,
 					Button,
 					LoadingSpinner,
-					FilesSectionDemo: styled.div`
-						font-family: 'Source Sans Pro';
-					`,
 				},
 			},
 			{
@@ -451,9 +403,6 @@ const pages = [
 				content: pageLoader(() => import('./drop-zone/variations.md')),
 				imports: {
 					DropZone,
-					DropZoneDemo: styled.div`
-						font-family: 'Source Sans Pro';
-					`,
 					DroppedFiles: styled.div`
 						margin-top: 16px;
 					`,
@@ -464,6 +413,7 @@ const pages = [
 					`,
 					IconsContainer: styled.div`
 						color: #a8a8a8;
+
 						> * {
 							margin: 0 12px;
 						}
@@ -496,16 +446,13 @@ const pages = [
 				title: 'Share Dialog Variations',
 				content: pageLoader(() => import('./share-dialog/variations.md')),
 				imports: {
-					Input: Bootstrap.Input,
+					Input,
 					Modal,
 					ModalFooter,
 					Button,
 					delayPromise,
 					ShareDialog,
 					ModalDemo: styled.div`
-						font-family: 'Source Sans Pro';
-						color: #333333;
-
 						.wide-content {
 							width: 600px;
 						}
@@ -569,6 +516,41 @@ const pages = [
 		],
 	},
 	{
+		title: 'Date Picker',
+		pages: [
+			{
+				path: '/date-picker/variations',
+				title: 'Date Picker Variations',
+				content: pageLoader(() => import('./date-picker/variations.md')),
+				imports: {
+					Button,
+					Popover,
+					PopoverManager,
+					PopoverReference,
+					DatePickerDemo: styled.div`
+						font-family: Source Sans Pro;
+
+						& button {
+							font-family: Source Sans pro;
+							font-size: 14px;
+						}
+					`,
+					DatePicker,
+					DatePeriodPicker,
+					dateFunctions: {
+						...dateFunctions,
+					},
+				},
+			},
+			{
+				path: 'date-picker/documentation',
+				title: 'Date Picker Documentation',
+				content: pageLoader(() => import('./date-picker/documentation.md')),
+				imports: { DatePicker, DatePeriodPicker, DocgenTable },
+			},
+		],
+	},
+	{
 		title: 'Date Picker Input',
 		pages: [
 			{
@@ -576,9 +558,6 @@ const pages = [
 				title: 'Date Picker Input Variations',
 				content: pageLoader(() => import('./date-picker-input/variations.md')),
 				imports: {
-					DatePickerDemo: styled.div`
-						font-family: Source Sans Pro;
-					`,
 					DatePickerInput,
 					dateFunctions: {
 						...dateFunctions,
@@ -597,6 +576,70 @@ const pages = [
 			},
 		],
 	},
+	{
+		title: 'Slider',
+		pages: [
+			{
+				path: '/slider/variations',
+				title: 'Slider Variations',
+				content: pageLoader(() => import('./slider/variations.md')),
+				imports: {
+					Slider,
+					DocgenTable,
+				},
+			},
+			{
+				path: 'slider/documentation',
+				title: 'Slider Documentation',
+				content: pageLoader(() => import('./slider/documentation.md')),
+				imports: { Slider, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Simple Toast',
+		pages: [
+			{
+				path: '/simple-toast/variations',
+				title: 'Simple Toast Variations',
+				content: pageLoader(() => import('./simple-toast/variations.md')),
+				imports: {
+					Button,
+					ToastDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
+					SimpleToast,
+					LoadingSpinner,
+					toastRef: React.createRef(),
+				},
+			},
+			{
+				path: '/simple-toast/documentation',
+				title: 'Simple Toast Documentation',
+				content: pageLoader(() => import('./simple-toast/documentation.md')),
+				imports: { SimpleToast, DocgenTable },
+			},
+		],
+	},
+].sort((a, b) => {
+	if (a.title < b.title) {
+		return -1;
+	}
+	if (a.title > b.title) {
+		return 1;
+	}
+	return 0;
+});
+
+const pages = [
+	{
+		path: '/',
+		title: 'Welcome',
+		content: pageLoader(() => import('./WELCOME.md')),
+	},
+	...components,
 ];
 
 ReactDOM.render(

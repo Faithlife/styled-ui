@@ -1,0 +1,1 @@
+export { CalendarWeek } from './component';

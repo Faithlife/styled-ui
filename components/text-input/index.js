@@ -1,3 +1,5 @@
-export { Typeahead, AsyncTypeahead, Token, Menu, MenuItem } from './typeahead.jsx';
-export { InferredText } from './inferred-text.jsx';
-export { InferredTypeahead } from './inferred-typeahead.jsx';
+// These exports are deprecated!
+
+export { Typeahead, AsyncTypeahead, Token, Menu, MenuItem } from './typeahead';
+export { InferredText } from '../text-input-v2';
+export { InferredTypeahead } from './inferred-typeahead';

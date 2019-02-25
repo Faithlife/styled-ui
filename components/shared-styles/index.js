@@ -25,6 +25,11 @@ export const fonts = {
 		font-weight: normal;
 		line-height: 16px;
 	`,
+	ui18: `
+		font-size: 18px;
+		font-weight: normal;
+		line-height: 18px;
+	`,
 	h4: `
 		font-size: 22px;
 		font-weight: bold;
@@ -75,15 +80,19 @@ export const colors = {
 	redBase: '#d94848',
 	redDark: '#bd2929',
 
-	borderColor: ' #a8a8a8',
+	borderColor: '#C7C7C7',
 
 	boxShadow: '0 4px 4px 0 rgba(0, 0, 0, 0.12), 0 0 4px 0 rgba(0, 0, 0, 0.12)',
 };
 
 export const inputColors = {
 	inputBorderColor: colors.borderColor,
-	inputDarkBorderColor: '#95908f',
-	inputFocusedBorderColor: colors.blueBase,
-	inputCheckedColor: colors.blueBase,
+	inputFocusedBorderColor: '#278ed4',
 	inputFocusedShadowColor: '#d0e6f6',
+};
+
+export const mediaSizes = {
+	desktop: '992px',
+	tablet: '768px',
+	phone: '579px',
 };

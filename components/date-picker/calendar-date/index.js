@@ -1,0 +1,1 @@
+export { CalendarDate } from './component';

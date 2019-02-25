@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import { ThemeProvider } from 'styled-components';
 import { debouncedResize } from '../utils';
-import { ModalBackdrop } from '../modal-backdrop/component.jsx';
-import { ModalHeader } from './modal-header.jsx';
-import { DefaultModalFooter } from './default-modal-footer.jsx';
-import * as Styled from './styled.jsx';
+import { ModalBackdrop } from '../modal-backdrop';
+import { ModalHeader } from './modal-header';
+import { DefaultModalFooter } from './default-modal-footer';
+import * as Styled from './styled';
 
 /**
- * Modal
+ * Modal with flexible contents. See also: SimpleModal
  */
 export class Modal extends React.Component {
 	static propTypes = {
@@ -25,9 +25,10 @@ export class Modal extends React.Component {
 		children: PropTypes.node.isRequired,
 		/** Customizable theme properties */
 		theme: PropTypes.object,
-		/** Style overrides */
+		/** Style overrides, the z-index is applied to the backdrop */
 		styleOverrides: PropTypes.shape({
 			bottomBorder: PropTypes.string,
+			zIndex: PropTypes.number,
 		}),
 		/** Values for rendering an FL standard footer */
 		footerProps: PropTypes.shape({
@@ -48,13 +49,17 @@ export class Modal extends React.Component {
 		renderFooter: PropTypes.func,
 		/** No footer will be rendered if withoutFooter is true */
 		withoutFooter: PropTypes.bool,
+		/** Set to 'body' to attach the modal to body, otherwise will attach as a child element */
+		container: PropTypes.string,
 	};
 
 	static defaultProps = {
 		theme: {
 			background: 'white',
 		},
-		styleOverrides: {},
+		styleOverrides: {
+			zIndex: 1050,
+		},
 	};
 
 	state = {
@@ -66,6 +71,18 @@ export class Modal extends React.Component {
 		const { cancel } = debouncedResize(this.handleResize);
 		this.cancelResizeListener = cancel;
 		this.setState({ canUseDom: true }); // eslint-disable-line
+
+		const { container } = this.props;
+		if (container) {
+			if (typeof container === 'string') {
+				// must be an id or body
+				this.targetContainer =
+					container === 'body' ? document.body : document.getElementById(container);
+			} else {
+				// must be a ref
+				this.targetContainer = typeof container === 'object' ? container.current : container();
+			}
+		}
 	}
 
 	componentWillUnmount() {
@@ -101,11 +118,15 @@ export class Modal extends React.Component {
 
 		const isMobileViewport = modalWidth < 768;
 
+		const backdropStyleOverrides = {
+			zIndex: styleOverrides.zIndex,
+		};
+
 		return (
 			<ThemeProvider theme={{ ...theme, verticalButtons, isMobileViewport }}>
-				<ModalBackdrop onClose={onClose}>
+				<ModalBackdrop onClose={onClose} styleOverrides={backdropStyleOverrides}>
 					<Styled.Modal
-						innerRef={modal => {
+						ref={modal => {
 							this._modal = modal;
 							if (modal && modalWidth === null) this.setState({ modalWidth: modal.clientWidth });
 						}}
@@ -134,6 +155,10 @@ export class Modal extends React.Component {
 			return null;
 		}
 
-		return createPortal(this.renderModal(), document.body);
+		if (this.targetContainer != null) {
+			return createPortal(this.renderModal(), this.targetContainer);
+		}
+
+		return this.renderModal();
 	}
 }

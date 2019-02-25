@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Close } from '../icons';
 import { applyVariations } from '../utils';
-import * as Styled from './styled.jsx';
+import * as Styled from './styled';
 
-/** Renders a box containing tips on how to use our products */
+/** Rectangular box containing tips on how to use our products */
 export function HelpBox({
 	children,
 	showLightBulb,

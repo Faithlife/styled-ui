@@ -3,9 +3,13 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import { Popper } from 'react-popper';
+import { ClickAwayHandler } from '../utils';
 import { colors } from '../shared-styles';
-import * as Styled from './styled.jsx';
+import * as Styled from './styled';
 
+/** Positioning helper used to display content above another element.
+ *  Refs are not supported, please use PopoverManager and PopoverReference to handle positioning.
+ */
 export class Popover extends React.Component {
 	static propTypes = {
 		/** Is the popover open */
@@ -33,16 +37,13 @@ export class Popover extends React.Component {
 			}),
 			preventOverflow: PropTypes.shape({
 				padding: PropTypes.number,
-				boundariesElement: PropTypes.oneOfType([
-					PropTypes.string,
-					PropTypes.instanceOf(HTMLElement),
-				]),
+				boundariesElement: PropTypes.any,
 			}),
 			flip: PropTypes.shape({
 				enabled: PropTypes.bool,
 				behavior: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 				padding: PropTypes.number,
-				boundariesElement: PropTypes.oneOfType([PropTypes.string, HTMLElement]),
+				boundariesElement: PropTypes.any,
 			}),
 		}),
 		/** Contents of the Popover */
@@ -53,11 +54,14 @@ export class Popover extends React.Component {
 		hideArrow: PropTypes.bool,
 		/** Delay on popover showing in milliseconds*/
 		delay: PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
+		/** Will be called when the popover is clicked away from */
+		onClickAway: PropTypes.func,
 		styleOverrides: PropTypes.shape({
 			hideShadow: PropTypes.bool,
 			width: PropTypes.string,
 			padding: PropTypes.string,
 			border: PropTypes.string,
+			zIndex: PropTypes.number,
 		}),
 		theme: PropTypes.shape({
 			backgroundColor: PropTypes.string,
@@ -74,7 +78,7 @@ export class Popover extends React.Component {
 	};
 
 	state = {
-		showPopper: false,
+		showPopper: this.props.isOpen || false,
 	};
 
 	_timeout = null;
@@ -134,6 +138,7 @@ export class Popover extends React.Component {
 			delay,
 			theme,
 			styleOverrides,
+			onClickAway,
 		} = this.props;
 		const { showPopper } = this.state;
 
@@ -141,28 +146,30 @@ export class Popover extends React.Component {
 			<Popper placement={popoverPlacement} modifiers={modifiers}>
 				{({ ref, style, placement, arrowProps }) => (
 					<ThemeProvider theme={theme}>
-						<Styled.PopoverContent
-							innerRef={ref}
-							placement={placement}
-							style={{
-								...style,
-								...(!hideArrow ? Styled.margins[Styled.getPlacement(placement)] : {}),
-							}}
-							delay={delay}
-							onAnimationEnd={this.handleTransition}
-							hideArrow={hideArrow}
-							styleOverrides={styleOverrides}
-						>
-							{children}
-							{!hideArrow && (
-								<Styled.Arrow
-									innerRef={arrowProps.ref}
-									placement={placement}
-									style={arrowProps.style}
-									styleOverrides={styleOverrides}
-								/>
-							)}
-						</Styled.PopoverContent>
+						<ClickAwayHandler onClick={onClickAway}>
+							<Styled.PopoverContent
+								ref={ref}
+								placement={placement}
+								style={{
+									...style,
+									...(!hideArrow ? Styled.margins[Styled.getPlacement(placement)] : {}),
+								}}
+								delay={delay}
+								onAnimationEnd={this.handleTransition}
+								hideArrow={hideArrow}
+								styleOverrides={styleOverrides}
+							>
+								{children}
+								{!hideArrow && (
+									<Styled.Arrow
+										ref={arrowProps.ref}
+										placement={placement}
+										style={arrowProps.style}
+										styleOverrides={styleOverrides}
+									/>
+								)}
+							</Styled.PopoverContent>
+						</ClickAwayHandler>
 					</ThemeProvider>
 				)}
 			</Popper>

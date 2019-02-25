@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import ScrollArea from 'react-scrollbar';
-import { resetStyles } from '../utils/index.js';
+import { resetStyles } from '../utils';
+import { ScrollArea } from './styled-scrollarea';
 
 export const GroupSelector = styled.div`
 	${resetStyles};
@@ -213,6 +213,12 @@ export const CreateGroup = styled.div`
 	background-color: white;
 `;
 
+export const InputWrapper = styled.div`
+	& > * {
+		width: 100%;
+	}
+`;
+
 export const CreateGroupButtonWrapper = styled.div`
 	display: flex;
 	align-items: center;
@@ -259,7 +265,8 @@ export const SearchResultAvatar = styled.div`
 
 export const SearchResultContent = styled.div`
 	display: flex;
-	width: 100%;
+	flex-grow: 1;
+	min-width: 100px;
 	flex-direction: column;
 	justify-content: space-between;
 `;

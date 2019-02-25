@@ -52,12 +52,12 @@ export const variationMap = {
 };
 
 function variantCreator(backgroundColor, foregroundColor, closeIconColor) {
-	return component => component.extend`
+	return component => styled(component)`
 		${resetStyles};
 
 		background-color: ${props => props.theme.backgroundColor || backgroundColor};
 		border: solid 1px ${props => props.theme.foregroundColor || foregroundColor};
-		border-left: solid ${thickness.eight} ${props => props.theme.foregroundColor || foregroundColor};
+		border-left: solid ${thickness.four} ${props => props.theme.foregroundColor || foregroundColor};
 
 		path {
 			fill: ${props => props.theme.closeIconColor || closeIconColor};

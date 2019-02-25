@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import { ThemeProvider } from 'styled-components';
-import { ModalBackdrop } from '../modal-backdrop/component.jsx';
+import { ModalBackdrop } from '../modal-backdrop';
 import { Close } from '../icons';
 import { debouncedResize } from '../utils';
-import * as Styled from './styled.jsx';
+import * as Styled from './styled';
 
 /**
- * SimpleModal
+ * Simple modal with just a close icon and no padding. For a standardized modal layout, please see: Modal
  */
 export class SimpleModal extends React.Component {
 	static propTypes = {
@@ -20,11 +20,20 @@ export class SimpleModal extends React.Component {
 		children: PropTypes.node.isRequired,
 		/** Customizable theme properties */
 		theme: PropTypes.object,
+		/** Style overrides, the z-index is applied to the backdrop */
+		styleOverrides: PropTypes.shape({
+			zIndex: PropTypes.number,
+		}),
+		/** Set to 'body' to attach the modal to body, otherwise will attach as a child element */
+		container: PropTypes.string,
 	};
 
 	static defaultProps = {
 		theme: {
 			background: 'white',
+		},
+		styleOverrides: {
+			zIndex: 1050,
 		},
 	};
 
@@ -37,6 +46,18 @@ export class SimpleModal extends React.Component {
 		const { cancel } = debouncedResize(this.handleResize);
 		this.cancelResizeListener = cancel;
 		this.setState({ canUseDom: true }); // eslint-disable-line
+
+		const { container } = this.props;
+		if (container) {
+			if (typeof container === 'string') {
+				// must be an id or body
+				this.targetContainer =
+					container === 'body' ? document.body : document.getElementById(container);
+			} else {
+				// must be a ref
+				this.targetContainer = typeof container === 'object' ? container.current : container();
+			}
+		}
 	}
 
 	componentWillUnmount() {
@@ -50,16 +71,22 @@ export class SimpleModal extends React.Component {
 	};
 
 	renderModal() {
-		const { theme, onClose, children } = this.props;
+		const { theme, onClose, children, styleOverrides } = this.props;
 		const { modalWidth } = this.state;
+
+		const backdropStyleOverrides = {
+			zIndex: styleOverrides.zIndex,
+		};
 
 		return (
 			<ThemeProvider theme={{ ...theme }}>
-				<ModalBackdrop onClose={onClose}>
+				<ModalBackdrop onClose={onClose} styleOverrides={backdropStyleOverrides}>
 					<Styled.SimpleModal
-						innerRef={modal => {
+						ref={modal => {
 							this._modal = modal;
-							if (modal && modalWidth === null) this.setState({ modalWidth: modal.clientWidth });
+							if (modal && modalWidth === null) {
+								this.setState({ modalWidth: modal.clientWidth });
+							}
 						}}
 					>
 						<Styled.ModalClose onClick={onClose}>
@@ -77,6 +104,10 @@ export class SimpleModal extends React.Component {
 			return null;
 		}
 
-		return createPortal(this.renderModal(), document.body);
+		if (this.targetContainer != null) {
+			return createPortal(this.renderModal(), this.targetContainer);
+		}
+
+		return this.renderModal();
 	}
 }
