@@ -22,7 +22,6 @@ state: { selectedDate: null }
 showSource: true
 state: { selectedDate: null }
 ---
-<DatePickerDemo>
 <div>
 <span>The selected date is {dateFunctions.format(state.selectedDate, 'MM-dd-yyyy')}</span>
 <DatePickerInput
@@ -34,5 +33,4 @@ state: { selectedDate: null }
 	placement={"left-start"}
 />
 </div>
-</DatePickerDemo>
 ```

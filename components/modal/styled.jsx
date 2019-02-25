@@ -14,7 +14,7 @@ export const Modal = styled.div`
 	width: fit-content;
 	height: fit-content;
 	max-width: calc(100% - 16px);
-	max-height: ${props => props.theme.isMobileViewport ? `calc(100% - 16px)` : `80%`};
+	max-height: ${props => props.theme.isMobileViewport ? `calc(100% - ${thickness.sixteen})` : `80%`};
 	padding: ${thickness.twentyfour};
 	background-color: ${props => props.theme.background};
 	border-radius: 3px;

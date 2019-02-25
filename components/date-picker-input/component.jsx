@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { PopoverManager, PopoverReference, Popover } from '../main';
+import { PlacementOptionsProps } from '../popover/popper-helpers';
 import { Calendar as CalendarIcon } from '../icons';
 import { Input } from '../input';
 import { colors } from '../shared-styles';
@@ -30,20 +31,12 @@ export class DatePickerInput extends PureComponent {
 		onChange: PropTypes.func.isRequired,
 		onFocus: PropTypes.func,
 		disabled: PropTypes.bool,
-		placement: PropTypes.oneOf([
-			'top',
-			'top-start',
-			'top-end',
-			'right',
-			'right-start',
-			'right-end',
-			'bottom',
-			'bottom-start',
-			'bottom-end',
-			'left',
-			'left-start',
-			'left-end',
-		]),
+		/** Where on the target the date picker renders */
+		placement: PlacementOptionsProps,
+	};
+
+	static defaultProps = {
+		placement: 'bottom-start',
 	};
 
 	constructor(props) {
@@ -155,7 +148,7 @@ export class DatePickerInput extends PureComponent {
 						</Styled.CalendarIconContainer>
 					</Styled.CalendarButton>
 					<Popover
-						placement={placement || "bottom-start"}
+						placement={placement}
 						isOpen={showCalendar}
 						styleOverrides={{ padding: '16px 20px' }}
 					>

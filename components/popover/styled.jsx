@@ -29,7 +29,6 @@ export const PopoverContent = styled.div`
 	text-align: center;
 	border: ${({ styleOverrides }) => (styleOverrides.border ? styleOverrides.border : 'none')};
 	box-shadow: ${({ styleOverrides }) => (styleOverrides.hideShadow ? 'none' : colors.boxShadow)};
-	z-index: 3;
 	white-space: normal;
 	${({ theme }) => (theme.textColor ? `color: ${theme.textColor}` : '')};
 	${({ styleOverrides }) => (styleOverrides.zIndex ? `z-index: ${styleOverrides.zIndex}` : '')};
