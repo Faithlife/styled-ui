@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import { Popper } from 'react-popper';
 import { ClickAwayHandler } from '../utils';
-import { PlacementOptionsProps } from './popper-helpers';
 import { colors } from '../shared-styles';
+import { PlacementOptionsProps } from './popper-helpers';
 import * as Styled from './styled';
 
 /** Positioning helper used to display content above another element.
