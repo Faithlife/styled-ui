@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { thickness, fonts, colors } from '../shared-styles';
+import { thickness, fonts, colors, mediaSizes } from '../shared-styles';
 import { resetStyles } from '../utils';
 
 export const Label = styled.label`
@@ -13,7 +13,7 @@ export const Modal = styled.div`
 	margin: auto;
 	width: fit-content;
 	height: fit-content;
-	max-width: calc(100% - 16px);
+	max-width: calc(100% - ${thickness.sixteen});
 	max-height: 80%;
 	padding: ${thickness.twentyfour};
 	background-color: ${props => props.theme.background};
@@ -23,6 +23,10 @@ export const Modal = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+
+	@media (max-width: ${mediaSizes.tablet}) {
+		max-height: calc(100% - ${thickness.sixteen});
+	}
 `;
 
 export const ModalContent = styled.div`

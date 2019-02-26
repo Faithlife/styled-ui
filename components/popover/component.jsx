@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { Popper } from 'react-popper';
 import { ClickAwayHandler } from '../utils';
 import { colors } from '../shared-styles';
+import { PlacementOptionsProps } from './popper-helpers';
 import * as Styled from './styled';
 
 /** Positioning helper used to display content above another element.
@@ -15,20 +16,7 @@ export class Popover extends React.Component {
 		/** Is the popover open */
 		isOpen: PropTypes.bool,
 		/** Where on the target the popover renders */
-		placement: PropTypes.oneOf([
-			'top',
-			'top-start',
-			'top-end',
-			'right',
-			'right-start',
-			'right-end',
-			'bottom',
-			'bottom-start',
-			'bottom-end',
-			'left',
-			'left-start',
-			'left-end',
-		]),
+		placement: PlacementOptionsProps,
 		/** Not all modifiers are shown. Refer to https://popper.js.org/popper-documentation.html#modifiers for a full list*/
 		modifiers: PropTypes.shape({
 			offset: PropTypes.shape({

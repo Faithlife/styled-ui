@@ -21,3 +21,17 @@ PopoverReference.propTypes = {
 /** Popover manager from react-popper */
 export const PopoverManager = Manager;
 export const PlainPopoverReference = Reference;
+export const PlacementOptionsProps = PropTypes.oneOf([
+	'top',
+	'top-start',
+	'top-end',
+	'right',
+	'right-start',
+	'right-end',
+	'bottom',
+	'bottom-start',
+	'bottom-end',
+	'left',
+	'left-start',
+	'left-end',
+]);

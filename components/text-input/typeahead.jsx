@@ -62,7 +62,6 @@ const IndicatorContainer = styled.div`
 	position: absolute;
 	right: 6px;
 	top: calc(50% - 4px);
-	z-index: 3;
 	display: flex;
 
 	&:hover {

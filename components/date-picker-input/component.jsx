@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { PopoverManager, PopoverReference, Popover } from '../main';
+import { PlacementOptionsProps } from '../popover/popper-helpers';
 import { Calendar as CalendarIcon } from '../icons';
 import { Input } from '../input';
 import { colors } from '../shared-styles';
@@ -30,6 +31,26 @@ export class DatePickerInput extends PureComponent {
 		onChange: PropTypes.func.isRequired,
 		onFocus: PropTypes.func,
 		disabled: PropTypes.bool,
+		/** Where on the target the date picker renders */
+		placement: PlacementOptionsProps,
+		/** Style overrides, inputWidth is applied to the input */
+		styleOverrides: PropTypes.shape({
+			inputWidth: PropTypes.string,
+			hideShadow: PropTypes.bool,
+			width: PropTypes.string,
+			padding: PropTypes.string,
+			border: PropTypes.string,
+			zIndex: PropTypes.number,
+		}),
+	};
+
+	static defaultProps = {
+		placement: 'bottom-start',
+		styleOverrides: {
+			inputWidth: '100%',
+			padding: '16px 20px',
+			zIndex: 3,
+		},
 	};
 
 	constructor(props) {
@@ -114,12 +135,22 @@ export class DatePickerInput extends PureComponent {
 	);
 
 	render() {
-		const { disabled, defaultSelectedDate } = this.props;
+		const { disabled, defaultSelectedDate, placement, styleOverrides } = this.props;
 		const { text, selectedDate, showCalendar } = this.state;
 
 		const defaultValue = defaultSelectedDate != null ? this.formatDate(defaultSelectedDate) : '';
 		const formattedDate = selectedDate != null ? this.formatDate(selectedDate) : defaultValue;
 		const value = text != null ? text : formattedDate;
+		const inputStyleOverrides = {
+			width: styleOverrides.inputWidth,
+		};
+		const popoverStyleOverrides = {
+			hideShadow: styleOverrides.hideShadow,
+			width: styleOverrides.width,
+			padding: styleOverrides.padding,
+			border: styleOverrides.border,
+			zIndex: styleOverrides.zIndex,
+		};
 
 		return (
 			<Styled.Container>
@@ -131,7 +162,7 @@ export class DatePickerInput extends PureComponent {
 						onFocus={this.handleFocus}
 						value={value}
 						disabled={disabled}
-						styleOverrides={{ width: '100%' }}
+						styleOverrides={inputStyleOverrides}
 					/>
 					<Styled.CalendarButton ref={this.icon} onClick={!disabled ? this.openCalendar : null}>
 						<Styled.CalendarIconContainer>
@@ -141,9 +172,9 @@ export class DatePickerInput extends PureComponent {
 						</Styled.CalendarIconContainer>
 					</Styled.CalendarButton>
 					<Popover
-						placement="bottom-start"
+						placement={placement}
 						isOpen={showCalendar}
-						styleOverrides={{ padding: '16px 20px' }}
+						styleOverrides={popoverStyleOverrides}
 					>
 						<div onClick={this.handlePopoutClicked}>
 							{this.renderCalendar(selectedDate || new Date())}
