@@ -24,7 +24,7 @@ export const PopoverContent = styled.div`
 	${({ styleOverrides }) =>
 		styleOverrides.minWidth == null ? '' : `min-width: ${styleOverrides.minWidth}px`};
 	max-width: ${({ styleOverrides }) => styleOverrides.width || maxWidth}px;
-	background-color: ${({ theme }) => theme.backgroundColor};
+	background-color: ${({ theme }) => theme.backgroundColor || colors.white};
 	border-radius: 3px;
 	text-align: center;
 	border: ${({ styleOverrides }) => (styleOverrides.border ? styleOverrides.border : 'none')};

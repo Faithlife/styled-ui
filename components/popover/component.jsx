@@ -7,6 +7,11 @@ import { colors } from '../shared-styles';
 import { PopoverContext, PlacementOptionsProps } from './popper-helpers';
 import * as Styled from './styled';
 
+export const popoverThemeProps = {
+	backgroundColor: PropTypes.string,
+	textColor: PropTypes.string,
+};
+
 /** Positioning helper used to display content above another element.
  *  Refs are not supported, please use PopoverManager and PopoverReference to handle positioning.
  */
@@ -48,10 +53,7 @@ export class Popover extends React.Component {
 			border: PropTypes.string,
 			zIndex: PropTypes.number,
 		}),
-		theme: PropTypes.shape({
-			backgroundColor: PropTypes.string,
-			textColor: PropTypes.string,
-		}),
+		theme: PropTypes.shape(popoverThemeProps),
 	};
 
 	static defaultProps = {

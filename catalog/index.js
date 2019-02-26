@@ -29,6 +29,10 @@ import {
 	DatePickerInput,
 	DatePeriodPicker,
 	SimpleToast,
+	Dropdown,
+	DropdownToggle,
+	DropdownMenu,
+	DropdownItem,
 } from '../components/main';
 import { BaseButton } from '../components/button/base-button';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
@@ -620,6 +624,34 @@ const components = [
 				title: 'Simple Toast Documentation',
 				content: pageLoader(() => import('./simple-toast/documentation.md')),
 				imports: { SimpleToast, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Dropdown',
+		pages: [
+			{
+				path: '/dropdown/variations',
+				title: 'Dropdown Variations',
+				content: pageLoader(() => import('./dropdown/variations.md')),
+				imports: {
+					Button,
+					DropdownDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
+					Dropdown,
+					DropdownToggle,
+					DropdownMenu,
+					DropdownItem,
+				},
+			},
+			{
+				path: '/dropdown/documentation',
+				title: 'Dropdown Documentation',
+				content: pageLoader(() => import('./dropdown/documentation.md')),
+				imports: { DropdownItem, DropdownMenu, DocgenTable },
 			},
 		],
 	},

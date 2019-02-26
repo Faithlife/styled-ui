@@ -92,3 +92,24 @@ export const resetStyles = `
 		padding: 0;
 	}
 `;
+
+// Remove all styles from buttons from here: https://css-tricks.com/overriding-default-button-styles/
+export const clearButtonStyles = `
+	display: inline-block;
+	border: none;
+	padding: 0;
+	margin: 0;
+	text-decoration: none;
+	background: transparent;
+	color: #ffffff;
+	font-family: inherit;
+	cursor: pointer;
+	text-align: center;
+	transition: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+
+	&:hover,
+	&:focus,
+	&:active,
+`;
