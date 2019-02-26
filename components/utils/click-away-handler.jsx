@@ -4,7 +4,7 @@ import ReactEventListener from 'react-event-listener';
 import styled from 'styled-components';
 
 const reactRef = PropTypes.shape({
-	current: PropTypes.instanceOf(HTMLElement),
+	current: PropTypes.object,
 });
 
 export class ClickAwayHandler extends Component {
