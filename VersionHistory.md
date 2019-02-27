@@ -4,9 +4,9 @@
 
 - **Important**: We have updated to `styled-components` v4, which has support for forwarding refs with the React 16.3 API. There is no more need for `innerRef`.
 - **Important**: Button sizes have been adjusted to match current design specs.
+- **Important**: Input "large" size has been adjusted to match the "large" button size.
 - **New component**: `Slider`
 - **New component**: `SimpleToast`
-- Added a `ClickAwayHandler` for the `Popover` component.
 - Added a `zIndex` style override for the `Popover` component.
 - Fixed an overflow bug for churches with long names in the `GroupSelector` component.
 - Fixed `Checkbox` text alignment when the text wraps.
