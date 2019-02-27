@@ -8,6 +8,7 @@
 - **New component**: `Slider`
 - **New component**: `SimpleToast`
 - Added a `zIndex` style override for the `Popover` component.
+- Added placement options and styleOverrides for the `DatePickerInput` component.
 - Fixed an overflow bug for churches with long names in the `GroupSelector` component.
 - Fixed `Checkbox` text alignment when the text wraps.
 
