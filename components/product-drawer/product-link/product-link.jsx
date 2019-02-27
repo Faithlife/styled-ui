@@ -28,5 +28,5 @@ ProductLink.propTypes = {
 	description: PropTypes.string.isRequired,
 	href: PropTypes.string.isRequired,
 	autoFocus: PropTypes.boolean,
-	children: PropTypes.array,
+	children: PropTypes.node,
 };
