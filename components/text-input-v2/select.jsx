@@ -64,6 +64,10 @@ const selectStyles = props => ({
 			color: colors.blueDark,
 		},
 	}),
+	menu: styles => ({
+		...styles,
+		zIndex: 100,
+	}),
 });
 
 const selectTheme = theme => ({
