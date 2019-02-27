@@ -1,6 +1,5 @@
 export { BootstrapContainer, wrapBootstrap } from './bootstrap-container';
 export { forwardClassRef } from './forwardref-wrapper';
-export { ClickAwayHandler } from './click-away-handler';
 export {
 	TransitionStatuses,
 	TransitionTimeouts,

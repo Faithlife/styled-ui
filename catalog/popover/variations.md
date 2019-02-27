@@ -48,30 +48,6 @@ state: { isOpen: false }
 </PopoverDemo>
 ```
 
-## With click away handler
-
-The `onClickAway` function will be called on a `onMouseDown` or `onTouchStart` event not on the popover.
-
-```react
-showSource: true
-state: { leftIsOpen: false, rightIsOpen: false }
----
-<PopoverDemo>
-	<PopoverManager>
-		<PopoverReference>
-			<Button primary medium onClick={() => setState({ leftIsOpen: !state.leftIsOpen })}>Show a Popover!</Button>
-		</PopoverReference>
-		<Popover isOpen={state.leftIsOpen} placement="top" onClickAway={()=> setState({leftIsOpen: false})}>Hello!</Popover>
-	</PopoverManager>
-	<PopoverManager>
-		<PopoverReference>
-			<Button primary medium onClick={() => setState({ rightIsOpen: !state.rightIsOpen })}>It even works with portals</Button>
-		</PopoverReference>
-		<Popover isOpen={state.rightIsOpen} placement="top" onClickAway={()=> setState({rightIsOpen: false})} container="body">I'm in a portal!</Popover>
-	</PopoverManager>
-</PopoverDemo>
-```
-
 ## Options
 
 ```react
