@@ -2,7 +2,8 @@
 
 ### 5.0.0
 
-- **Important**: We have updated to `styled-components` v4, which has support for forwarding refs with the React 16.3 API. There is no more need for `innerRef`.
+- **Peer dependency updated**: React 16.8 is now required, which comes with support for Hooks. 
+- **Peer dependency updated**: Styled Components v4 is now required, which has support for forwarding refs with the React 16.3 API. There is no more need for `innerRef`.
 - **Important**: Button sizes have been adjusted to match current design specs.
 - **Important**: Input "large" size has been adjusted to match the "large" button size.
 - **New component**: `Slider`
