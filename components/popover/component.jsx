@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import { Popper } from 'react-popper';
-import { ClickAwayHandler } from '../utils';
 import { colors } from '../shared-styles';
 import { PlacementOptionsProps } from './popper-helpers';
 import * as Styled from './styled';
@@ -43,7 +42,6 @@ export class Popover extends React.Component {
 		/** Delay on popover showing in milliseconds*/
 		delay: PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
 		/** Will be called when the popover is clicked away from */
-		onClickAway: PropTypes.func,
 		styleOverrides: PropTypes.shape({
 			hideShadow: PropTypes.bool,
 			width: PropTypes.string,
@@ -126,7 +124,6 @@ export class Popover extends React.Component {
 			delay,
 			theme,
 			styleOverrides,
-			onClickAway,
 		} = this.props;
 		const { showPopper } = this.state;
 
@@ -134,30 +131,28 @@ export class Popover extends React.Component {
 			<Popper placement={popoverPlacement} modifiers={modifiers}>
 				{({ ref, style, placement, arrowProps }) => (
 					<ThemeProvider theme={theme}>
-						<ClickAwayHandler onClick={onClickAway}>
-							<Styled.PopoverContent
-								ref={ref}
-								placement={placement}
-								style={{
-									...style,
-									...(!hideArrow ? Styled.margins[Styled.getPlacement(placement)] : {}),
-								}}
-								delay={delay}
-								onAnimationEnd={this.handleTransition}
-								hideArrow={hideArrow}
-								styleOverrides={styleOverrides}
-							>
-								{children}
-								{!hideArrow && (
-									<Styled.Arrow
-										ref={arrowProps.ref}
-										placement={placement}
-										style={arrowProps.style}
-										styleOverrides={styleOverrides}
-									/>
-								)}
-							</Styled.PopoverContent>
-						</ClickAwayHandler>
+						<Styled.PopoverContent
+							ref={ref}
+							placement={placement}
+							style={{
+								...style,
+								...(!hideArrow ? Styled.margins[Styled.getPlacement(placement)] : {}),
+							}}
+							delay={delay}
+							onAnimationEnd={this.handleTransition}
+							hideArrow={hideArrow}
+							styleOverrides={styleOverrides}
+						>
+							{children}
+							{!hideArrow && (
+								<Styled.Arrow
+									ref={arrowProps.ref}
+									placement={placement}
+									style={arrowProps.style}
+									styleOverrides={styleOverrides}
+								/>
+							)}
+						</Styled.PopoverContent>
 					</ThemeProvider>
 				)}
 			</Popper>
