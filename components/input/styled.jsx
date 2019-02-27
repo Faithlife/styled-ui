@@ -42,7 +42,7 @@ export const variationMap = {
 	`,
 	large: component => styled(component)`
 		padding: 16px;
-		height: 46px;
-		${fonts.ui16};
+		height: 56px;
+		${fonts.ui18};
 	`,
 };
