@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { mediaSizes } from '../../shared-styles';
+import { mediaSizes, colors } from '../../shared-styles';
 
 const reveal = keyframes`
 	100% {
@@ -38,7 +38,7 @@ export const ProductLink = styled.a`
 `;
 
 export const ProductLinkTitle = styled.div`
-	color: #575251;
+	color: ${colors.flGray};
 	font-size: 16px;
 	line-height: 1.06;
 `;
@@ -46,7 +46,7 @@ export const ProductLinkTitle = styled.div`
 export const ProductLinkDescription = styled.div`
 	display: none;
 	font-size: 13px;
-	color: #a8a8a8;
+	color: ${colors.gray34};
 	line-height: 1.31;
 
 	@media (min-width: ${mediaSizes.tablet}) {
@@ -63,15 +63,15 @@ export const ProductLinkListItem = styled.li`
 	animation-fill-mode: forwards;
 
 	&:hover {
-		background-color: #f5f5f5;
+		background-color: ${colors.gray4};
 
 		${/* sc-custom 'ProductLink' */ ProductLink} {
 			${/* sc-custom 'ProductLinkTitle' */ ProductLinkTitle} {
-				color: #1e91d6;
+				color: ${colors.blueBase};
 			}
 
 			${/* sc-custom 'ProductLinkDescription' */ ProductLinkDescription} {
-				color: #7a7a7a;
+				color: ${colors.gray52};
 			}
 		}
 	}
