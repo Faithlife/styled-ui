@@ -6,7 +6,7 @@
 	"author": "Dustin Masters <dustin.masters@faithlife.com>",
 	"license": "UNLICENSED",
 	"description": "UI components for use in Faithlife applications.",
-	"sideEffects": false,
+	"sideEffects": ["dist/main.css", "dist/text-input.css"],
 	"scripts": {
 		"deploy-site": "npm run catalog-build && storybook-to-ghpages --ci --existing-output-dir=catalog/build",
 		"eslint": "eslint ./components ./catalog --ext .js --ext .jsx",
