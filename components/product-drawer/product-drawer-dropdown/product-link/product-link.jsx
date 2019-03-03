@@ -27,6 +27,6 @@ ProductLink.propTypes = {
 	title: PropTypes.string.isRequired,
 	description: PropTypes.string.isRequired,
 	href: PropTypes.string.isRequired,
-	autoFocus: PropTypes.boolean,
+	autoFocus: PropTypes.bool,
 	children: PropTypes.node,
 };

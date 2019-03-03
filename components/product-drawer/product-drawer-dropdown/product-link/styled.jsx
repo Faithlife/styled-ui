@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { mediaSizes, colors } from '../../shared-styles';
+import { mediaSizes, colors } from '../../../shared-styles';
 
 const reveal = keyframes`
 	100% {
