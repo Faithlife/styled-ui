@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
+import { LoadingSpinner } from '../loading-spinner';
 import * as Styled from './styled';
+
+const ProductDrawerDropdown = lazy(() => import('./product-drawer-dropdown'));
 
 export class ProductDrawer extends React.PureComponent {
 	static propTypes = {
@@ -58,24 +61,6 @@ export class ProductDrawer extends React.PureComponent {
 		isOpen: false,
 	};
 
-	componentDidMount() {
-		import('./product-drawer-dropdown').then(({ ProductDrawerDropdown }) =>
-			this.setState({ productDrawerDropdown: ProductDrawerDropdown }),
-		);
-	}
-
-	getProductDrawerDropdown = () => {
-		const { styleOverrides, resources } = this.props;
-		const { isOpen, productDrawerDropdown } = this.state;
-		const props = {
-			isOpen,
-			styleOverrides,
-			resources,
-			handleCloseButtonClick: this.handleCloseButtonClick,
-		};
-		return productDrawerDropdown ? React.createElement(productDrawerDropdown, props) : null;
-	};
-
 	handleBlur = e => {
 		const currentTarget = e.currentTarget;
 
@@ -128,7 +113,16 @@ export class ProductDrawer extends React.PureComponent {
 						{resources.products}
 					</Styled.ProductDrawerToggleText>
 				</Styled.ProductDrawerToggle>
-				{isOpen ? this.getProductDrawerDropdown() : null}
+				{isOpen ? (
+					<Suspense fallback={<LoadingSpinner />}>
+						<ProductDrawerDropdown
+							isOpen={isOpen}
+							resources={resources}
+							styleOverrides={styleOverrides}
+							handleCloseButtonClick={this.handleCloseButtonClick}
+						/>
+					</Suspense>
+				) : null}
 			</Styled.ProductDrawer>
 		);
 	}
