@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ProductDrawerDropdown from './product-drawer-dropdown';
-
 import * as Styled from './styled';
 
 export class ProductDrawer extends React.PureComponent {
@@ -60,6 +58,24 @@ export class ProductDrawer extends React.PureComponent {
 		isOpen: false,
 	};
 
+	componentDidMount() {
+		import('./product-drawer-dropdown').then(({ ProductDrawerDropdown }) =>
+			this.setState({ productDrawerDropdown: ProductDrawerDropdown }),
+		);
+	}
+
+	getProductDrawerDropdown = () => {
+		const { styleOverrides, resources } = this.props;
+		const { isOpen, productDrawerDropdown } = this.state;
+		const props = {
+			isOpen,
+			styleOverrides,
+			resources,
+			handleCloseButtonClick: this.handleCloseButtonClick,
+		};
+		return productDrawerDropdown ? React.createElement(productDrawerDropdown, props) : null;
+	};
+
 	handleBlur = e => {
 		const currentTarget = e.currentTarget;
 
@@ -112,14 +128,7 @@ export class ProductDrawer extends React.PureComponent {
 						{resources.products}
 					</Styled.ProductDrawerToggleText>
 				</Styled.ProductDrawerToggle>
-				{isOpen ? (
-					<ProductDrawerDropdown
-						isOpen={isOpen}
-						styleOverrides={styleOverrides}
-						resources={resources}
-						handleCloseButtonClick={this.handleCloseButtonClick}
-					/>
-				) : null}
+				{isOpen ? this.getProductDrawerDropdown() : null}
 			</Styled.ProductDrawer>
 		);
 	}

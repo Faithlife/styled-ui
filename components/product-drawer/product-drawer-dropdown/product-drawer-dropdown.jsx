@@ -18,7 +18,6 @@ import {
 	GivingSvg,
 	BibleScreenSvg,
 } from './svgs';
-
 import * as Styled from './styled';
 
 export const ProductDrawerDropdown = ({
@@ -183,3 +182,12 @@ export const ProductDrawerDropdown = ({
 		</Styled.DropdownSeeMore>
 	</Styled.ProductDrawerDropdown>
 );
+
+ProductDrawerDropdown.propTypes = {
+	isOpen: PropTypes.bool.isRequired,
+	handleCloseButtonClick: PropTypes.func.isRequired,
+	resources: PropTypes.object.isRequired,
+	styleOverrides: PropTypes.shape({
+		mobileTopOffset: PropTypes.string,
+	}),
+};
