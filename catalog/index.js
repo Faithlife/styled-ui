@@ -35,6 +35,7 @@ import { GroupSelector, LargeGroupSelector } from '../components/group-selector'
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
 import { colors } from '../components/shared-styles';
+import { ProductDrawerWithResources } from './product-drawer';
 import { DocgenTable } from './docgen-table';
 import { MemberDirectory, VolunteerScheduling } from './grid';
 import { textInputPages } from './text-input/pages';
@@ -620,6 +621,23 @@ const components = [
 				title: 'Simple Toast Documentation',
 				content: pageLoader(() => import('./simple-toast/documentation.md')),
 				imports: { SimpleToast, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Product Drawer',
+		pages: [
+			{
+				path: '/product-drawer/variations',
+				title: 'Product Drawer',
+				content: pageLoader(() => import('./product-drawer/variations.md')),
+				imports: { ProductDrawerWithResources },
+			},
+			{
+				path: '/product-drawer/documentation',
+				title: 'Product Drawer Documentation',
+				content: pageLoader(() => import('./product-drawer/documentation.md')),
+				imports: { ProductDrawerWithResources, DocgenTable },
 			},
 		],
 	},

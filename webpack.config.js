@@ -12,6 +12,7 @@ module.exports = {
 		'text-input-v2': './components/text-input-v2/index.js',
 		'group-selector': './components/group-selector/index.js',
 		'share-dialog': './components/share-dialog/index.js',
+		'product-drawer': './components/product-drawer/index.js',
 	},
 	devtool: 'sourcemap',
 	output: {
