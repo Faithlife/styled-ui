@@ -6,69 +6,94 @@ import ReactSelect, {
 import { colors, inputColors } from '../shared-styles';
 import { ReactSelectAsyncCreatable, ReactSelectAsync } from './react-select-async';
 
-const selectStyles = props => ({
-	control: (styles, state) => ({
-		...styles,
-		minHeight: '30px',
-		fontSize: '16px',
-		border: state.isFocused
-			? `1px solid ${inputColors.inputFocusedBorderColor}`
-			: `1px solid ${inputColors.inputBorderColor}`,
-		boxShadow: state.isFocused ? `0 0 0 2px ${inputColors.inputFocusedShadowColor}` : 'none',
-	}),
-	valueContainer: styles => ({
-		...styles,
-		padding: '0 6px',
-	}),
-	input: styles => ({
-		...styles,
-		lineHeight: 1,
-		input: {
-			'&,&:focus': {
-				boxShadow: 'none',
+const selectStyles = props => {
+	const ourStyles = {
+		control: (styles, state) => ({
+			...styles,
+			minHeight: '30px',
+			fontSize: '16px',
+			border: state.isFocused
+				? `1px solid ${inputColors.inputFocusedBorderColor}`
+				: `1px solid ${inputColors.inputBorderColor}`,
+			boxShadow: state.isFocused ? `0 0 0 2px ${inputColors.inputFocusedShadowColor}` : 'none',
+		}),
+		valueContainer: styles => ({
+			...styles,
+			padding: '0 6px',
+		}),
+		input: styles => ({
+			...styles,
+			lineHeight: 1,
+			input: {
+				'&,&:focus': {
+					boxShadow: 'none',
+				},
 			},
-		},
-	}),
-	indicatorSeparator: () => ({
-		display: 'none',
-	}),
-	clearIndicator: () => ({
-		display: 'none',
-	}),
-	dropdownIndicator: styles => ({
-		...styles,
-		padding: '5px 8px',
-	}),
-	placeholder: styles => ({
-		...styles,
-		lineHeight: 1,
-		whiteSpace: 'nowrap',
-	}),
-	singleValue: styles => ({
-		...styles,
-		color: props.inferred ? '#006099' : colors.gray66,
-	}),
-	multiValue: styles => ({
-		...styles,
-		backgroundColor: colors.gray4,
-	}),
-	multiValueLabel: styles => ({
-		...styles,
-		color: colors.gray66,
-	}),
-	multiValueRemove: styles => ({
-		...styles,
-		color: colors.gray52,
-		':hover': {
-			backgroundColor: '',
-			color: colors.blueDark,
-		},
-	}),
-	menu: styles => ({
-		...styles,
-		zIndex: 100,
-	}),
-});
+		}),
+		indicatorSeparator: () => ({
+			display: 'none',
+		}),
+		clearIndicator: () => ({
+			display: 'none',
+		}),
+		dropdownIndicator: styles => ({
+			...styles,
+			padding: '5px 8px',
+		}),
+		placeholder: styles => ({
+			...styles,
+			lineHeight: 1,
+			whiteSpace: 'nowrap',
+		}),
+		singleValue: styles => ({
+			...styles,
+			color: props.inferred ? '#006099' : colors.gray66,
+		}),
+		multiValue: styles => ({
+			...styles,
+			backgroundColor: colors.gray4,
+		}),
+		multiValueLabel: styles => ({
+			...styles,
+			color: colors.gray66,
+		}),
+		multiValueRemove: styles => ({
+			...styles,
+			color: colors.gray52,
+			':hover': {
+				backgroundColor: '',
+				color: colors.blueDark,
+			},
+		}),
+		menu: styles => ({
+			...styles,
+			zIndex: 100,
+		}),
+	};
+
+	const customStyles = props.styles;
+	if (!customStyles) {
+		return ourStyles;
+	}
+
+	const ourWrappedStyles = Object.entries(ourStyles).reduce(
+		(acc, [key, value]) => ({
+			...acc,
+			[key]: (styles, state) => {
+				const ourStyle = value(styles, state);
+				if (props.styles[key]) {
+					// pass the resulting style object from our style functions to the custom style functions
+					return props.styles[key](ourStyle, state);
+				}
+
+				return ourStyle;
+			},
+		}),
+		{},
+	);
+
+	return { ...customStyles, ...ourWrappedStyles };
+};
 
 const selectTheme = theme => ({
 	...theme,
@@ -94,11 +119,11 @@ const defaultComponents = {
 export const Select = React.forwardRef(({ components = {}, ...props }, ref) => (
 	<ReactSelect
 		ref={ref}
-		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
 		components={{ ...defaultComponents, ...components }}
 		{...props}
+		styles={selectStyles(props)}
 	/>
 ));
 
@@ -106,12 +131,12 @@ export const Select = React.forwardRef(({ components = {}, ...props }, ref) => (
 export const CreatableSelect = React.forwardRef(({ components = {}, ...props }, ref) => (
 	<ReactSelectCreatable
 		ref={ref}
-		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
 		formatCreateLabel={node => <span>New entry: {node}</span>}
 		components={{ ...defaultComponents, ...components }}
 		{...props}
+		styles={selectStyles(props)}
 	/>
 ));
 
@@ -120,12 +145,12 @@ export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...prop
 	<ReactSelectAsyncCreatable
 		ref={ref}
 		allowCreateWhileLoading={false}
-		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
 		components={{ ...defaultComponents, ...components }}
 		formatCreateLabel={node => <span>New entry: {node}</span>}
 		{...props}
+		styles={selectStyles(props)}
 	/>
 ));
 
@@ -133,10 +158,10 @@ export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...prop
 export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref) => (
 	<ReactSelectAsync
 		ref={ref}
-		styles={selectStyles(props)}
 		classNamePrefix="fl-select"
 		theme={selectTheme}
 		components={{ ...defaultComponents, ...components }}
 		{...props}
+		styles={selectStyles(props)}
 	/>
 ));
