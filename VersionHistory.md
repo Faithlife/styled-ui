@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.2.0
+
+- Allow `Select` components styles to be overridden.
+
 ### 5.1.0
 
 - Added `ProductDrawer` component.
