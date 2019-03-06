@@ -35,6 +35,11 @@ export const fonts = {
 		font-weight: bold;
 		line-height: 28px;
 	`,
+	c16: `
+		font-size: 16px;
+		font-weight: normal;
+		line-height: 20px;
+	`,
 };
 
 export const colors = {
