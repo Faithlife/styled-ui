@@ -4,7 +4,7 @@ import { LightBulbH } from '../icons';
 import { resetStyles } from '../utils';
 
 export const HelpBoxContent = styled.div`
-	${fonts.ui16};
+	${fonts.c16};
 
 	flex: 1;
 	padding: ${thickness.sixteen};
