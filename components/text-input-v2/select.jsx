@@ -115,6 +115,10 @@ const defaultComponents = {
 	),
 };
 
+function noOptionsMessage({ inputValue }) {
+	return inputValue ? 'No options' : null;
+}
+
 /** Autocomplete control based on react-select */
 export const Select = React.forwardRef(({ components = {}, ...props }, ref) => (
 	<ReactSelect
@@ -122,6 +126,7 @@ export const Select = React.forwardRef(({ components = {}, ...props }, ref) => (
 		classNamePrefix="fl-select"
 		theme={selectTheme}
 		components={{ ...defaultComponents, ...components }}
+		noOptionsMessage={noOptionsMessage}
 		{...props}
 		styles={selectStyles(props)}
 	/>
@@ -135,6 +140,7 @@ export const CreatableSelect = React.forwardRef(({ components = {}, ...props }, 
 		theme={selectTheme}
 		formatCreateLabel={node => <span>New entry: {node}</span>}
 		components={{ ...defaultComponents, ...components }}
+		noOptionsMessage={noOptionsMessage}
 		{...props}
 		styles={selectStyles(props)}
 	/>
@@ -149,6 +155,7 @@ export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...prop
 		theme={selectTheme}
 		components={{ ...defaultComponents, ...components }}
 		formatCreateLabel={node => <span>New entry: {node}</span>}
+		noOptionsMessage={noOptionsMessage}
 		{...props}
 		styles={selectStyles(props)}
 	/>
@@ -161,6 +168,7 @@ export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref)
 		classNamePrefix="fl-select"
 		theme={selectTheme}
 		components={{ ...defaultComponents, ...components }}
+		noOptionsMessage={noOptionsMessage}
 		{...props}
 		styles={selectStyles(props)}
 	/>
