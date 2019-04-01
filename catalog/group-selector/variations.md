@@ -429,7 +429,6 @@ state: {
 				membershipKind: 'admin',
 				claimable: false,
 			}
-
 			]});
 		}}
 		groups={state.groups}
