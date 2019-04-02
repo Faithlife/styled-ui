@@ -248,7 +248,8 @@ export const CreateGroupRequiredStar = styled.div`
 `;
 
 export const SearchResult = styled.div`
-	height: 100px;
+	height: auto;
+	min-height: 100px;
 	background-color: white;
 	margin-bottom: 7px;
 	padding: 12px;
