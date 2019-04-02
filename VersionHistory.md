@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.2.1
+
+- Fix text overflow in `GroupSelector` search results.
+
 ### 5.2.0
 
 - Allow `Select` components styles to be overridden.
