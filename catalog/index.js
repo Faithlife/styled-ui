@@ -52,6 +52,7 @@ import {
 	ParameterSelect,
 	ParameterInputBox,
 	ParameterSentence,
+	AmberLightbox,
 } from '../components/main';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
@@ -873,6 +874,24 @@ const components = [
 				title: 'Parameter Sentence Documentation',
 				content: pageLoader(() => import('./parameter-sentence/documentation.md')),
 				imports: { ParameterSentence, ParameterSelect, ParameterInputBox, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Amber Lightbox',
+		pages: [
+			{
+				path: '/amber-lightbox/variations',
+				title: 'Amber Lightbox',
+				content: pageLoader(() => import('./amber-lightbox/variations.md')),
+				imports: {
+					AmberLightbox,
+					AmberLightboxDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
+				},
 			},
 		],
 	},
