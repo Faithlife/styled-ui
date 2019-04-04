@@ -22,3 +22,4 @@ export { Radio } from './radio';
 export { SimpleModal } from './simple-modal';
 export { Slider } from './slider';
 export { SimpleToast } from './simple-toast';
+export { AmberLightbox } from './amber-lightbox';

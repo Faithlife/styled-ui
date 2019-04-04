@@ -29,6 +29,7 @@ import {
 	DatePickerInput,
 	DatePeriodPicker,
 	SimpleToast,
+	AmberLightbox,
 } from '../components/main';
 import { BaseButton } from '../components/button/base-button';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
@@ -638,6 +639,24 @@ const components = [
 				title: 'Product Drawer Documentation',
 				content: pageLoader(() => import('./product-drawer/documentation.md')),
 				imports: { ProductDrawerWithResources, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Amber Lightbox',
+		pages: [
+			{
+				path: '/amber-lightbox/variations',
+				title: 'Amber Lightbox',
+				content: pageLoader(() => import('./amber-lightbox/variations.md')),
+				imports: {
+					AmberLightbox,
+					AmberLightboxDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
+				},
 			},
 		],
 	},
