@@ -42,6 +42,8 @@ export class Popover extends React.Component {
 		/** Delay on popover showing in milliseconds*/
 		delay: PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
 		/** Will be called when the popover is clicked away from */
+		eventsEnabled: PropTypes.bool,
+		positionFixed: PropTypes.bool,
 		styleOverrides: PropTypes.shape({
 			hideShadow: PropTypes.bool,
 			width: PropTypes.string,
@@ -124,11 +126,18 @@ export class Popover extends React.Component {
 			delay,
 			theme,
 			styleOverrides,
+			eventsEnabled,
+			positionFixed,
 		} = this.props;
 		const { showPopper } = this.state;
 
 		const popover = (
-			<Popper placement={popoverPlacement} modifiers={modifiers}>
+			<Popper
+				placement={popoverPlacement}
+				modifiers={modifiers}
+				eventsEnabled={eventsEnabled}
+				positionFixed={positionFixed}
+			>
 				{({ ref, style, placement, arrowProps }) => (
 					<ThemeProvider theme={theme}>
 						<Styled.PopoverContent
