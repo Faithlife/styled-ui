@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.3.0
+
+- Add `eventsEnabled` and `positionFixed` props to Popover component, corresponding to the props of the same name in the underlying Popper component.
+
 ### 5.2.1
 
 - Fix text overflow in `GroupSelector` search results.
