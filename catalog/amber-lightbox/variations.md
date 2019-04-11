@@ -1,10 +1,19 @@
 ### Default theme
 
 ```react
+state: {
+	file: null,
+}
 ---
-<AmberLightboxDemo>
-	<AmberLightbox
-		localizationProps={{cancelText: 'Cancel (localized)'}}
-	/>
-</AmberLightboxDemo>
+<div>
+	<AmberLightboxDemo>
+		<AmberLightbox
+			localizationProps={{cancelText: 'Cancel (localized)'}}
+			onFileSelected={(file) => setState({ file: file })}
+		/>
+	</AmberLightboxDemo>
+	<FileContainer>
+		File name: {state.file ? state.file.name : ''}
+	</FileContainer>
+</div>
 ```

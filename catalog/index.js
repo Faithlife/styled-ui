@@ -891,6 +891,11 @@ const components = [
 							margin: 8px;
 						}
 					`,
+					FileContainer: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
 				},
 			},
 		],

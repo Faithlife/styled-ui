@@ -7,7 +7,6 @@ import * as Styled from './styled';
 export const Tab = forwardClassRef(
 	class Tab extends PureComponent {
 		static propTypes = {
-			// onFileSelected: PropTypes.func.isRequired,
 			title: PropTypes.string.isRequired,
 			vaultId: PropTypes.number.isRequired,
 			filter: PropTypes.string,
@@ -16,10 +15,11 @@ export const Tab = forwardClassRef(
 
 		render() {
 			const vaultId = this.props.vaultId;
+			const URI = `https://internal.amber.faithlife.com/embed/${vaultId}`;
 			return (
 				<Styled.Tab>
 					{this.props.title}
-					<Styled.Iframe src={`https://amber.faithlife.com/${vaultId}`} />
+					<Styled.Iframe src={URI} />
 				</Styled.Tab>
 			);
 		}
