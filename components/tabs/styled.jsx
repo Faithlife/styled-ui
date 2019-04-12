@@ -1,3 +1,5 @@
+// Many of the ARIA options and designs are taken from Reach-Ui: https://ui.reach.tech/tabs
+
 import styled, { css } from 'styled-components';
 import { resetStyles } from '../utils';
 import { colors, thickness } from '../shared-styles';
@@ -36,7 +38,13 @@ const selectedTab = css`
 	border-left: 1px solid ${colors.gray14};
 `;
 
-export const Tab = styled.button`
+export const Tab = styled.button.attrs({
+	role: 'tab',
+	id: ({ index }) => `tab:${index}`,
+	'aria-selected': ({ selected }) => selected,
+	'aria-controls': ({ index }) => `panel:${index}`,
+	tabIndex: ({ selected }) => (selected ? '0' : '-1'),
+})`
 	${resetStyles};
 
 	box-shadow: none;
@@ -73,10 +81,11 @@ export const TabContent = styled.span.attrs({ tabIndex: -1 })`
 		outline: none;
 	}
 
+	${({ disabled }) => (disabled ? `color: ${colors.gray52}` : '')};
 	${({ selected }) => selected && selectedTab};
 `;
 
-export const TabGroup = styled.div`
+export const TabList = styled.div.attrs({ role: 'tablist' })`
 	border-bottom: 1px solid ${colors.gray14};
 	display: flex;
 	flex-direction: row;
@@ -86,8 +95,29 @@ export const TabGroup = styled.div`
 	}
 `;
 
-export const TabBody = styled.div`
+export const TabPanels = styled.div.attrs({ tabIndex: -1 })`
+	width: 100%;
+	height: 100%;
+	transition: all 0.25s ease 0s;
+
+	&:focus {
+		box-shadow: inset 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
+		outline: none;
+	}
+`;
+
+export const TabPanel = styled.div.attrs({
+	role: 'tabpanel',
+	id: ({ index }) => `panel:${index}`,
+	'aria-labelledby': ({ index }) => `tab:${index}`,
+	tabIndex: -1,
+})`
 	position: relative;
 	padding: ${thickness.eight};
+
+	&:focus {
+		outline: none;
+	}
+
 	${({ selected }) => !selected && 'display: none'};
 `;

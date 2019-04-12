@@ -22,4 +22,4 @@ export { Radio } from './radio';
 export { SimpleModal } from './simple-modal';
 export { Slider } from './slider';
 export { SimpleToast } from './simple-toast';
-export { TabManager, Tab } from './tabs';
+export { TabManager, Tab, TabList, TabPanel, TabPanels } from './tabs';

@@ -31,6 +31,9 @@ import {
 	SimpleToast,
 	TabManager,
 	Tab,
+	TabList,
+	TabPanel,
+	TabPanels,
 } from '../components/main';
 import { BaseButton } from '../components/button/base-button';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
@@ -651,12 +654,20 @@ const components = [
 				title: 'Tabs Variations',
 				content: pageLoader(() => import('./tabs/variations.md')),
 				imports: {
-					Tab,
 					TabManager,
+					Tab,
+					TabList,
+					TabPanel,
+					TabPanels,
 					TabDemo: styled.div`
 						padding: 8px;
 						background-color: white;
+						&& > * {
+							margin: 16px;
+						}
 					`,
+					Button,
+					createPortal: component => ReactDOM.createPortal(component, document.body),
 				},
 			},
 			{

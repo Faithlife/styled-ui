@@ -1,46 +1,50 @@
-import React, { useState, useCallback, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { TabContext, useTabList } from './use-tab-list';
-import * as Styled from './styled.jsx';
+// Many of the ARIA options and designs are taken from Reach-Ui: https://ui.reach.tech/tabs
 
-export function TabManager({ children, theme, styleOverrides }) {
-	const { tabList, registerTab, editTabName } = useTabList();
-	const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
+import { TabContext } from './use-tab-list';
+
+export function TabManager({ children, theme, styleOverrides, selectedTab, onSelectedTabChange }) {
+	const [selectedTabIndex, setSelectedTabIndex] = useState(selectedTab || 0);
+	const panelsContainerRef = useRef();
+
+	useEffect(
+		() => {
+			if (selectedTab !== null && selectedTab !== undefined) {
+				setSelectedTabIndex(selectedTab);
+			}
+		},
+		[selectedTab],
+	);
 
 	const handleSelectTab = useCallback(
-		tabIndex => () => {
+		tabIndex => {
+			if (onSelectedTabChange) {
+				onSelectedTabChange(tabIndex);
+			}
 			setSelectedTabIndex(tabIndex);
 		},
-		[],
+		[onSelectedTabChange],
 	);
 
 	const context = useMemo(
-		() => ({ tabList, selectedTabIndex, handleSelectTab, registerTab, editTabName }),
-		[tabList, selectedTabIndex, handleSelectTab, registerTab, editTabName],
+		() => ({
+			selectedTabIndex,
+			onSelectTab: handleSelectTab,
+			panelsContainerRef,
+			theme,
+			styleOverrides,
+		}),
+		[selectedTabIndex, handleSelectTab, theme, styleOverrides, panelsContainerRef],
 	);
 
-	return (
-		<React.Fragment>
-			<Styled.TabGroup>
-				{tabList.map((tabName, index) => (
-					<Styled.Tab key={`${tabName}-${index}`} onClick={handleSelectTab(index)}>
-						<Styled.TabContent
-							theme={theme}
-							styleOverrides={styleOverrides}
-							selected={selectedTabIndex === index}
-						>
-							{tabName}
-						</Styled.TabContent>
-					</Styled.Tab>
-				))}
-			</Styled.TabGroup>
-			<TabContext.Provider value={context}>{children}</TabContext.Provider>
-		</React.Fragment>
-	);
+	return <TabContext.Provider value={context}>{children}</TabContext.Provider>;
 }
 
 TabManager.propTypes = {
 	children: PropTypes.node.isRequired,
+	selectedTab: PropTypes.number,
+	onSelectedTabChange: PropTypes.func,
 	theme: PropTypes.shape({
 		tabHighlightColor: PropTypes.string,
 		activeBackgroundColor: PropTypes.string,
