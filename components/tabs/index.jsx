@@ -1,3 +1,3 @@
 export { TabManager } from './component';
-export { Tab, TabList } from './tab';
-export { TabPanel, TabPanels } from './tab-body';
+export { Tab } from './tab';
+export { TabPanel, TabPanels, TabList } from './tab-helpers';

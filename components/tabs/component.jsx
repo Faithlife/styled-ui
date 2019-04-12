@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { TabContext } from './use-tab-list';
+import { TabContext } from './tab-utils';
 
 export function TabManager({ children, theme, styleOverrides, selectedTab, onSelectedTabChange }) {
 	const [selectedTabIndex, setSelectedTabIndex] = useState(selectedTab || 0);

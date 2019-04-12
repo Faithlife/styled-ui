@@ -1,7 +1,37 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { TabContext } from './use-tab-list';
+import { TabContext, useKeyboardNav } from './tab-utils';
 import * as Styled from './styled.jsx';
+
+export function TabList({ children }) {
+	const { onSelectTab, selectedTabIndex, panelsContainerRef, theme, styleOverrides } = useContext(
+		TabContext,
+	);
+	const handleKeyboardNav = useKeyboardNav(
+		selectedTabIndex,
+		onSelectTab,
+		panelsContainerRef,
+		children,
+	);
+
+	return (
+		<Styled.TabList onKeyDown={handleKeyboardNav}>
+			{React.Children.map(children, (child, index) =>
+				React.cloneElement(child, {
+					selected: selectedTabIndex === index,
+					onSelectTab,
+					index,
+					theme,
+					styleOverrides,
+				}),
+			)}
+		</Styled.TabList>
+	);
+}
+
+TabList.propTypes = {
+	children: PropTypes.node.isRequired,
+};
 
 export function TabPanels({ children }) {
 	const { panelsContainerRef, selectedTabIndex } = useContext(TabContext);
