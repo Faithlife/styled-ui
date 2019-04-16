@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { TabContext, useKeyboardNav } from './tab-utils';
-import * as Styled from './styled.jsx';
+import { useTabContext, useKeyboardNav } from './tab-utils';
+import * as Styled from './styled';
 
 export function TabList({ children }) {
-	const { onSelectTab, selectedTabIndex, panelsContainerRef, theme, styleOverrides } = useContext(
-		TabContext,
-	);
+	const { onSelectTab, selectedTabIndex, panelsContainerRef, theme } = useTabContext();
+
 	const handleKeyboardNav = useKeyboardNav(
 		selectedTabIndex,
 		onSelectTab,
@@ -22,7 +21,6 @@ export function TabList({ children }) {
 					onSelectTab,
 					index,
 					theme,
-					styleOverrides,
 				}),
 			)}
 		</Styled.TabList>

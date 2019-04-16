@@ -4,7 +4,7 @@ import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types';
 import { TabContext } from './tab-utils';
 
-export function TabManager({ children, theme, styleOverrides, selectedTab, onSelectedTabChange }) {
+export function TabManager({ children, theme, selectedTab, onSelectedTabChange }) {
 	const [selectedTabIndex, setSelectedTabIndex] = useState(selectedTab || 0);
 	const panelsContainerRef = useRef();
 
@@ -33,9 +33,8 @@ export function TabManager({ children, theme, styleOverrides, selectedTab, onSel
 			onSelectTab: handleSelectTab,
 			panelsContainerRef,
 			theme,
-			styleOverrides,
 		}),
-		[selectedTabIndex, handleSelectTab, theme, styleOverrides, panelsContainerRef],
+		[selectedTabIndex, handleSelectTab, theme, panelsContainerRef],
 	);
 
 	return <TabContext.Provider value={context}>{children}</TabContext.Provider>;
@@ -50,14 +49,8 @@ TabManager.propTypes = {
 		activeBackgroundColor: PropTypes.string,
 		inactiveBackgroundColor: PropTypes.string,
 	}),
-	styleOverrides: PropTypes.shape({
-		fontSize: PropTypes.string,
-		width: PropTypes.string,
-		padding: PropTypes.string,
-	}),
 };
 
 TabManager.defaultProps = {
 	theme: {},
-	styleOverrides: {},
 };
