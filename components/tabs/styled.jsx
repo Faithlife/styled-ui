@@ -96,9 +96,7 @@ export const TabList = styled.div.attrs({ role: 'tablist' })`
 `;
 
 export const TabPanels = styled.div.attrs({ tabIndex: -1 })`
-	width: 100%;
-	height: 100%;
-	transition: all 0.25s ease 0s;
+	transition: box-shadow 0.25s ease 0s;
 
 	&:focus {
 		box-shadow: inset 0 0 0 0.2rem rgba(30, 145, 214, 0.5);

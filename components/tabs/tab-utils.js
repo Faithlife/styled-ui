@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 const handledKeys = Object.freeze({
 	arrowRight: 'ArrowRight',
@@ -9,6 +9,12 @@ const handledKeys = Object.freeze({
 });
 
 export const TabContext = React.createContext();
+
+export function useTabContext() {
+	const { onSelectTab, selectedTabIndex, panelsContainerRef, theme } = useContext(TabContext);
+
+	return { onSelectTab, selectedTabIndex, panelsContainerRef, theme };
+}
 
 export function useKeyboardNav(selectedIndex, onSelectTab, panelsContainerRef, children) {
 	const handleKeyboardNav = useCallback(
@@ -33,7 +39,6 @@ export function useKeyboardNav(selectedIndex, onSelectTab, panelsContainerRef, c
 				}
 				case handledKeys.arrowDown: {
 					event.preventDefault();
-					console.log(panelsContainerRef.current);
 					if (panelsContainerRef.current) {
 						panelsContainerRef.current.focus();
 					}
@@ -51,7 +56,7 @@ export function useKeyboardNav(selectedIndex, onSelectTab, panelsContainerRef, c
 					return;
 			}
 		},
-		[selectedIndex, onSelectTab, children],
+		[selectedIndex, onSelectTab, panelsContainerRef.current, children],
 	);
 
 	return handleKeyboardNav;

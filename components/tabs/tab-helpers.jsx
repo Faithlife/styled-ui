@@ -32,7 +32,7 @@ TabList.propTypes = {
 };
 
 export function TabPanels({ children }) {
-	const { panelsContainerRef, selectedTabIndex } = useContext(TabContext);
+	const { panelsContainerRef, selectedTabIndex } = useTabContext();
 	return (
 		<Styled.TabPanels ref={panelsContainerRef}>
 			{React.Children.map(children, (child, index) =>
