@@ -1,4 +1,5 @@
-// Many of the ARIA options and designs are taken from Reach-Ui: https://ui.reach.tech/tabs
+// ARIA for Tabs are documented in https://www.w3.org/TR/wai-aria-practices-1.1/#tabpanel
+// Tabs from Reach-Ui were used as a base https://ui.reach.tech/tabs
 
 import styled, { css } from 'styled-components';
 import { resetStyles } from '../utils';
@@ -40,9 +41,8 @@ const selectedTab = css`
 
 export const Tab = styled.button.attrs({
 	role: 'tab',
-	id: ({ index }) => `tab:${index}`,
 	'aria-selected': ({ selected }) => selected,
-	'aria-controls': ({ index }) => `panel:${index}`,
+	'aria-controls': ({ panelId }) => `panel:${panelId}`,
 	'aria-disabled': ({ disabled }) => disabled,
 	tabIndex: ({ selected }) => (selected ? '0' : '-1'),
 })`
@@ -98,8 +98,7 @@ export const TabList = styled.div.attrs({ role: 'tablist' })`
 
 export const TabPanel = styled.div.attrs({
 	role: 'tabpanel',
-	id: ({ index }) => `panel:${index}`,
-	'aria-labelledby': ({ index }) => `tab:${index}`,
+	id: ({ panelId }) => `panel:${panelId}`,
 	'aria-expanded': ({ selected }) => selected,
 })`
 	position: relative;

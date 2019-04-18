@@ -1,11 +1,13 @@
-// Many of the ARIA options and designs are taken from Reach-Ui: https://ui.reach.tech/tabs
+// ARIA for Tabs are documented in https://www.w3.org/TR/wai-aria-practices-1.1/#tabpanel
+// Tabs from Reach-Ui were used as a base https://ui.reach.tech/tabs
 
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { TabContext } from './tab-utils';
+import { TabContext, usePanelIdsHandler } from './tab-utils';
 
 export function TabManager({ children, theme, selectedTab, onSelectedTabChange }) {
 	const [selectedTabIndex, setSelectedTabIndex] = useState(selectedTab || 0);
+	const { panelIdsMap, registerPanelId, unRegisterPanelId } = usePanelIdsHandler();
 
 	useEffect(
 		() => {
@@ -31,8 +33,11 @@ export function TabManager({ children, theme, selectedTab, onSelectedTabChange }
 			selectedTabIndex,
 			onSelectTab: handleSelectTab,
 			theme,
+			panelIdsMap,
+			registerPanelId,
+			unRegisterPanelId,
 		}),
-		[selectedTabIndex, handleSelectTab, theme],
+		[selectedTabIndex, handleSelectTab, theme, panelIdsMap, registerPanelId, unRegisterPanelId],
 	);
 
 	return <TabContext.Provider value={context}>{children}</TabContext.Provider>;

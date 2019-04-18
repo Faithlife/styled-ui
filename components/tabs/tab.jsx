@@ -4,8 +4,17 @@ import * as Styled from './styled.jsx';
 
 export function Tab(props) {
 	// PropType linting is diabled so out hidden props can be destuctured along with own consumer props
-	// eslint-disable-next-line react/prop-types
-	const { children, disabled, styleOverrides, index, selected, onSelectTab, theme } = props;
+	/* eslint-disable react/prop-types */
+	const {
+		children,
+		disabled,
+		styleOverrides,
+		index,
+		selected,
+		onSelectTab,
+		theme,
+		panelId,
+	} = props;
 	const tabRef = useRef();
 
 	useEffect(
@@ -25,7 +34,12 @@ export function Tab(props) {
 	);
 
 	return (
-		<Styled.Tab disabled={disabled} index={index} selected={selected} onClick={handleSelectTab}>
+		<Styled.Tab
+			disabled={disabled}
+			panelId={panelId || ''}
+			selected={selected}
+			onClick={handleSelectTab}
+		>
 			<Styled.TabContent
 				ref={tabRef}
 				disabled={disabled}

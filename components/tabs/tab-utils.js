@@ -1,4 +1,5 @@
 import React, { useCallback, useContext } from 'react';
+import { useBasicMap } from '../shared-hooks';
 
 const handledKeys = Object.freeze({
 	arrowRight: 'ArrowRight',
@@ -11,9 +12,9 @@ const handledKeys = Object.freeze({
 export const TabContext = React.createContext();
 
 export function useTabContext() {
-	const { onSelectTab, selectedTabIndex, theme } = useContext(TabContext);
+	const context = useContext(TabContext);
 
-	return { onSelectTab, selectedTabIndex, theme };
+	return context;
 }
 
 export function useKeyboardNav(selectedIndex, onSelectTab, children) {
@@ -53,4 +54,24 @@ export function useKeyboardNav(selectedIndex, onSelectTab, children) {
 	);
 
 	return handleKeyboardNav;
+}
+
+export function usePanelIdsHandler() {
+	const panelIdsMap = useBasicMap();
+
+	const registerPanelId = useCallback(
+		(index, id) => {
+			panelIdsMap.add(index, id);
+		},
+		[panelIdsMap.add],
+	);
+
+	const unRegisterPanelId = useCallback(
+		index => {
+			panelIdsMap.remove(index);
+		},
+		[panelIdsMap.remove],
+	);
+
+	return { panelIdsMap: panelIdsMap.map, registerPanelId, unRegisterPanelId };
 }
