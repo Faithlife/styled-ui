@@ -43,6 +43,7 @@ export const Tab = styled.button.attrs({
 	id: ({ index }) => `tab:${index}`,
 	'aria-selected': ({ selected }) => selected,
 	'aria-controls': ({ index }) => `panel:${index}`,
+	'aria-disabled': ({ disabled }) => disabled,
 	tabIndex: ({ selected }) => (selected ? '0' : '-1'),
 })`
 	${resetStyles};
@@ -95,20 +96,11 @@ export const TabList = styled.div.attrs({ role: 'tablist' })`
 	}
 `;
 
-export const TabPanels = styled.div.attrs({ tabIndex: -1 })`
-	transition: box-shadow 0.25s ease 0s;
-
-	&:focus {
-		box-shadow: inset 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
-		outline: none;
-	}
-`;
-
 export const TabPanel = styled.div.attrs({
 	role: 'tabpanel',
 	id: ({ index }) => `panel:${index}`,
 	'aria-labelledby': ({ index }) => `tab:${index}`,
-	tabIndex: -1,
+	'aria-expanded': ({ selected }) => selected,
 })`
 	position: relative;
 	padding: ${thickness.eight};

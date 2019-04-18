@@ -4,14 +4,9 @@ import { useTabContext, useKeyboardNav } from './tab-utils';
 import * as Styled from './styled';
 
 export function TabList({ children }) {
-	const { onSelectTab, selectedTabIndex, panelsContainerRef, theme } = useTabContext();
+	const { onSelectTab, selectedTabIndex, theme } = useTabContext();
 
-	const handleKeyboardNav = useKeyboardNav(
-		selectedTabIndex,
-		onSelectTab,
-		panelsContainerRef,
-		children,
-	);
+	const handleKeyboardNav = useKeyboardNav(selectedTabIndex, onSelectTab, children);
 
 	return (
 		<Styled.TabList onKeyDown={handleKeyboardNav}>
@@ -32,13 +27,13 @@ TabList.propTypes = {
 };
 
 export function TabPanels({ children }) {
-	const { panelsContainerRef, selectedTabIndex } = useTabContext();
+	const { selectedTabIndex } = useTabContext();
 	return (
-		<Styled.TabPanels ref={panelsContainerRef}>
+		<div>
 			{React.Children.map(children, (child, index) =>
 				React.cloneElement(child, { index, selected: selectedTabIndex === index }),
 			)}
-		</Styled.TabPanels>
+		</div>
 	);
 }
 
