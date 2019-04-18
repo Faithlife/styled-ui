@@ -15,14 +15,12 @@ export const Title = styled.h1`
 
 export const Tab = styled.div`
 	border-style: dashed;
-	visibility: hidden;
-`;
-
-export const Iframe = styled.iframe`
+	background: ${colors.white};
 	height: 394px;
 	width: 752px;
-	margin: 24px;
+	margin: 8px;
 `;
+
 export const NativeContainer = styled.div`
 	height: 394px;
 	width: 752px;
@@ -45,7 +43,7 @@ export const DragDropText = styled.h2`
 `;
 
 export const DragDropContainer = styled.div`
-	height: 394px;
+	height: 389px;
 	width: 752px;
 	text-align: center;
 `;

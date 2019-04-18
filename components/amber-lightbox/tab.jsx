@@ -1,27 +1,60 @@
 /* eslint-disable react/no-unused-prop-types */
-import React, { PureComponent } from 'react';
+import React, { useRef, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { forwardClassRef } from '../utils';
 import * as Styled from './styled';
 
-export const Tab = forwardClassRef(
-	class Tab extends PureComponent {
-		static propTypes = {
-			title: PropTypes.string.isRequired,
-			vaultId: PropTypes.number.isRequired,
-			filter: PropTypes.string,
-			viewStyle: PropTypes.string,
-		};
+// TODO implement viewStyle
+// TODO: configure url for internal/test/beta/prod environments
 
-		render() {
-			const vaultId = this.props.vaultId;
-			const URI = `https://internal.amber.faithlife.com/embed/${vaultId}`;
-			return (
-				<Styled.Tab>
-					{this.props.title}
-					<Styled.Iframe src={URI} />
-				</Styled.Tab>
-			);
-		}
-	},
-);
+export function Tab({ title, vaultId, filter, viewStyle, onFileSelected }) {
+	const onMessageRef = useRef();
+
+	const onMessage = useCallback(
+		event => {
+			const data = JSON.parse(event.data);
+			if (data && data.type === 'assets') {
+				onFileSelected(data.assets[0]);
+			}
+		},
+		[onFileSelected],
+	);
+
+	useEffect(
+		() => {
+			onMessageRef.current = onMessage;
+		},
+		[onMessage],
+	);
+
+	const amberRef = useRef();
+
+	useEffect(
+		// eslint-disable-next-line consistent-return
+		() => {
+			if (amberRef.current && window.amberfile) {
+				window.amberfile.embedded.load({
+					url: '/embed/',
+					container: amberRef.current,
+					groupId: vaultId,
+					multiSelect: false,
+				});
+				window.addEventListener('message', onMessageRef.current);
+
+				return () => {
+					window.removeEventListener('message', onMessageRef.current);
+				};
+			}
+		},
+		[amberRef.current, window.amberfile],
+	);
+
+	return <Styled.Tab ref={amberRef} />;
+}
+
+Tab.propTypes = {
+	title: PropTypes.string.isRequired,
+	vaultId: PropTypes.number.isRequired,
+	filter: PropTypes.string,
+	viewStyle: PropTypes.string,
+	onFileSelected: PropTypes.func.isRequired,
+};
