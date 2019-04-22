@@ -34,6 +34,10 @@ import {
 	TabList,
 	TabPanel,
 	TabPanels,
+	Dropdown,
+	DropdownToggle,
+	DropdownMenu,
+	MenuItem,
 } from '../components/main';
 import { BaseButton } from '../components/button/base-button';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
@@ -678,6 +682,27 @@ const components = [
 					Tab,
 					TabManager,
 					DocgenTable,
+				},
+			},
+		],
+	},
+	{
+		title: 'Dropdown',
+		pages: [
+			{
+				path: '/dropdown/variations',
+				title: 'Dropdown',
+				content: pageLoader(() => import('./dropdown/variations.md')),
+				imports: {
+					Dropdown,
+					DropdownToggle,
+					DropdownMenu,
+					MenuItem,
+					DropdownDemo: styled.div`
+						display: flex;
+						align-items: flex-start;
+						justify-content: space-between;
+					`,
 				},
 			},
 		],

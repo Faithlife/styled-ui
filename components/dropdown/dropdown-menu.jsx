@@ -11,7 +11,8 @@ export function DropdownMenu({ children, ...popoverProps }) {
 		<Popover
 			isOpen={isOpen}
 			placement={'bottom-start' || popoverProps.placement}
-			hasArrow={false}
+			hideArrow
+			styleOverrides={{ padding: '0', width: '160px' }}
 			{...popoverProps}
 		>
 			<Styled.DropdownMenu>{children}</Styled.DropdownMenu>

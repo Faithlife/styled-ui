@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { PopoverManager } from '../popover';
 import { DropdownContext } from './dropdown-helpers';
 
-export function Dropdown({ isOpen, onCloseCallback, children }) {
+export function Dropdown({ isOpen, onToggleIsOpen, children }) {
 	const handleCloseMenu = useCallback(
 		() => {
-			if (onCloseCallback) {
-				onCloseCallback();
+			if (onToggleIsOpen) {
+				onToggleIsOpen();
 			}
 		},
-		[onCloseCallback],
+		[onToggleIsOpen],
 	);
 
 	return (
@@ -22,6 +22,6 @@ export function Dropdown({ isOpen, onCloseCallback, children }) {
 
 Dropdown.propTypes = {
 	isOpen: PropTypes.bool.isRequired,
-	onCloseCallback: PropTypes.func.isRequired,
+	onToggleIsOpen: PropTypes.func.isRequired,
 	children: PropTypes.node.isRequried,
 };

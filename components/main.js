@@ -23,3 +23,4 @@ export { SimpleModal } from './simple-modal';
 export { Slider } from './slider';
 export { SimpleToast } from './simple-toast';
 export { TabManager, Tab, TabList, TabPanel, TabPanels } from './tabs';
+export { Dropdown, DropdownToggle, DropdownMenu, MenuItem } from './dropdown';

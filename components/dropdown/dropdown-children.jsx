@@ -1,13 +1,16 @@
-import React, { useCallback } from 'react';
+import React, { useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { Button } from '../button';
 import { PopoverReference } from '../popover';
 import { useDropdownContext } from './dropdown-helpers';
 import * as Styled from './styled';
 
-export function DropdownToggle({ children, onToggleMenu }) {
+export function DropdownToggle({ children, onToggleMenu, ...buttonProps }) {
 	return (
 		<PopoverReference>
-			<Styled.ToggleButton onClick={onToggleMenu}>{children}</Styled.ToggleButton>
+			<Button onClick={onToggleMenu} {...buttonProps}>
+				{children}
+			</Button>
 		</PopoverReference>
 	);
 }
@@ -22,6 +25,8 @@ DropdownToggle.propTypes = {
 export function MenuItem({ children, onClick }) {
 	const { handleCloseMenu } = useDropdownContext();
 
+	const ref = useRef();
+
 	const handleClick = useCallback(
 		() => {
 			if (onClick) {
@@ -33,7 +38,20 @@ export function MenuItem({ children, onClick }) {
 		[onClick, handleCloseMenu],
 	);
 
-	return <Styled.MenuItem onClick={handleClick}>{children}</Styled.MenuItem>;
+	const onMouseEnter = useCallback(
+		() => {
+			if (ref.current) {
+				ref.current.focus();
+			}
+		},
+		[ref.current],
+	);
+
+	return (
+		<Styled.MenuItem ref={ref} onClick={handleClick} onMouseEnter={onMouseEnter}>
+			{children}
+		</Styled.MenuItem>
+	);
 }
 
 MenuItem.propTypes = {
