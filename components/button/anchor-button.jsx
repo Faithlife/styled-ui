@@ -1,17 +1,22 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { usefilteredChildProps } from '../shared-hooks';
 import { BaseButton } from './base-button';
 import * as Styled from './styled';
 
 /** Standard anchor styled as a button. Use this instead of a button if you are linking to another page. */
-export class AnchorButton extends PureComponent {
-	static propTypes = {
-		...BaseButton.propTypes,
-		/** The destination the AnchorButton should link to. */
-		href: PropTypes.string,
-	};
+export const AnchorButton = React.forwardRef((props, ref) => {
+	const [buttonProps, baseProps] = usefilteredChildProps(props, BaseButton.propTypes);
 
-	render() {
-		return <BaseButton baseComponent={Styled.Anchor} {...this.props} />;
-	}
-}
+	return (
+		<Styled.Button as="a" ref={ref} {...buttonProps}>
+			<BaseButton {...baseProps} />
+		</Styled.Button>
+	);
+});
+
+AnchorButton.propTypes = {
+	...BaseButton.propTypes,
+	/** The destination the AnchorButton should link to. */
+	href: PropTypes.string,
+};

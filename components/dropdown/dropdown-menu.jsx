@@ -8,7 +8,12 @@ export function DropdownMenu({ children, ...popoverProps }) {
 	const { isOpen } = useDropdownContext();
 
 	return (
-		<Popover isOpen={isOpen} placement={'bottom-start' || popoverProps.placement} {...popoverProps}>
+		<Popover
+			isOpen={isOpen}
+			placement={'bottom-start' || popoverProps.placement}
+			hasArrow={false}
+			{...popoverProps}
+		>
 			<Styled.DropdownMenu>{children}</Styled.DropdownMenu>
 		</Popover>
 	);

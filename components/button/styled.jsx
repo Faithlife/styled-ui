@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { colors } from '../shared-styles';
 import { resetStyles } from '../utils';
 
@@ -9,12 +9,23 @@ const buttonColors = {
 	disabled: '#bedcf2',
 };
 
-export const ButtonContentWrapper = styled.div`
+export const ButtonContentWrapper = styled.div.attrs({ tabIndex: '-1' })`
 	display: grid;
 	grid-auto-flow: column;
 	grid-column-gap: 6px;
 	align-items: center;
-	justify-content: ${props => props.justifyContent || 'center'};
+	justify-content: ${props => props.styleOverrides.justifyContent || 'center'};
+	border-radius: 3px;
+
+	white-space: nowrap;
+	min-height: fit-content;
+	font-size: ${props => props.styleOverrides.fontSize || '16px'};
+	width: ${props => props.styleOverrides.width};
+	padding: ${props => props.styleOverrides.padding};
+
+	&:focus {
+		outline: none;
+	}
 
 	> svg {
 		height: 1em;
@@ -26,28 +37,10 @@ export const ButtonContents = styled.div`
 	white-space: nowrap;
 `;
 
-export const Anchor = styled.a`
-	${resetStyles};
-
-	display: inline-flex;
+const Anchor = css`
 	align-items: center;
 	text-decoration: none;
 	text-align: center;
-	box-shadow: none;
-	border-radius: 3px;
-	cursor: pointer;
-	transition: all 0.25s ease 0s;
-	white-space: nowrap;
-	font-size: ${props => props.styleOverrides.fontSize || '16px'};
-	width: ${props => props.styleOverrides.width};
-	padding: ${props => props.styleOverrides.padding};
-
-	&:focus {
-		&:not(:active) {
-			box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
-		}
-		outline: none;
-	}
 `;
 
 export const Button = styled.button`
@@ -56,12 +49,13 @@ export const Button = styled.button`
 	box-shadow: none;
 	border-radius: 3px;
 	cursor: pointer;
-	transition: all 0.25s ease 0s;
-	white-space: nowrap;
-	min-height: fit-content;
-	font-size: ${props => props.styleOverrides.fontSize || '16px'};
-	width: ${props => props.styleOverrides.width};
-	padding: ${props => props.styleOverrides.padding};
+	display: inline-block;
+	background-color: transparent;
+	padding: 0;
+	border: none;
+	outline: none;
+
+	transition: box-shadow 0.25s ease 0s;
 
 	&:focus {
 		&:not(:active) {
@@ -69,6 +63,8 @@ export const Button = styled.button`
 		}
 		outline: none;
 	}
+
+	${({ as: baseTag }) => baseTag && baseTag === 'a' && Anchor};
 `;
 
 export const variationMap = {
