@@ -105,6 +105,30 @@ state: { isOpen: false }
 </PopoverOverflowDemo>
 ```
 
+## With focus handling
+
+Works with container prop as well.
+
+```react
+showSource: true
+state: { isOpen: false }
+---
+<PopoverDemo>
+	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
+		<PopoverReference>
+			<Button primary disableAutoBlur medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
+		</PopoverReference>
+		<Popover isOpen={state.isOpen} placement="top">Click or tab to make me go away</Popover>
+	</PopoverManager>
+	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
+		<PopoverReference>
+			<Button primary medium disableAutoBlur onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
+		</PopoverReference>
+		<Popover isOpen={state.isOpen} placement="top" container="body">I'm thinking with portals!</Popover>
+	</PopoverManager>
+</PopoverDemo>
+```
+
 ## Tooltip
 
 All props for normal popovers are available to tooltips.
