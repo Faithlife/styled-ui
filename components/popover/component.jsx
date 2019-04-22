@@ -46,6 +46,8 @@ export class Popover extends React.Component {
 		styleOverrides: PropTypes.shape({
 			hideShadow: PropTypes.bool,
 			width: PropTypes.string,
+			minWidth: PropTypes.string,
+			maxWidth: PropTypes.string,
 			padding: PropTypes.string,
 			border: PropTypes.string,
 			zIndex: PropTypes.number,
