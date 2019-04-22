@@ -5,13 +5,17 @@ export function useBasicMap(initialState) {
 
 	return {
 		map,
-		clear: useCallback(() => setMap({}), []),
-		add: useCallback((key, value) => setMap(prevState => ({ ...prevState, [key]: value })), []),
-		remove: useCallback(key =>
+		clear: useCallback(() => {
+			setMap({});
+		}, []),
+		add: useCallback((key, value) => {
+			setMap(prevState => ({ ...prevState, [key]: value }));
+		}, []),
+		remove: useCallback(key => {
 			setMap(prevState => {
 				const { [key]: removed, ...rest } = prevState;
 				return rest;
-			}),
-		),
+			});
+		}, []),
 	};
 }

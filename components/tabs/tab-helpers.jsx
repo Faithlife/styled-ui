@@ -55,9 +55,14 @@ export function TabPanel(props) {
 	const id = useId();
 
 	useEffect(
+		// eslint-disable-next-line consistent-return
 		() => {
-			registerPanelId(index, id);
-			return () => unRegisterPanelId(index);
+			if (id) {
+				registerPanelId(index, id);
+				return () => {
+					unRegisterPanelId(index);
+				};
+			}
 		},
 		[index, id],
 	);

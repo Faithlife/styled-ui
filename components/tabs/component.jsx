@@ -3,7 +3,7 @@
 
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { TabContext, usePanelIdsHandler } from './tab-utils';
+import { TabContextProvider, usePanelIdsHandler } from './tab-utils';
 
 export function TabManager({ children, theme, selectedTab, onSelectedTabChange }) {
 	const [selectedTabIndex, setSelectedTabIndex] = useState(selectedTab || 0);
@@ -40,7 +40,7 @@ export function TabManager({ children, theme, selectedTab, onSelectedTabChange }
 		[selectedTabIndex, handleSelectTab, theme, panelIdsMap, registerPanelId, unRegisterPanelId],
 	);
 
-	return <TabContext.Provider value={context}>{children}</TabContext.Provider>;
+	return <TabContextProvider value={context}>{children}</TabContextProvider>;
 }
 
 TabManager.propTypes = {

@@ -10,7 +10,7 @@ export function useId() {
 	const [currentId, setCurrentId] = useState(null);
 
 	useEffect(() => {
-		setCurrentId(genId());
+		setCurrentId(genId().toString());
 	}, []);
 
 	return currentId;

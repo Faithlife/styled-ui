@@ -1,15 +1,17 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useRef, useEffect } from 'react';
 import { useBasicMap } from '../shared-hooks';
 
-const handledKeys = Object.freeze({
+const handledKeys = {
 	arrowRight: 'ArrowRight',
 	arrowLeft: 'ArrowLeft',
 	arrowDown: 'ArrowDown',
 	home: 'Home',
 	end: 'End',
-});
+};
 
-export const TabContext = React.createContext();
+const TabContext = React.createContext();
+
+export const TabContextProvider = TabContext.Provider;
 
 export function useTabContext() {
 	const context = useContext(TabContext);
@@ -18,10 +20,19 @@ export function useTabContext() {
 }
 
 export function useKeyboardNav(selectedIndex, onSelectTab, children) {
+	const currentChildren = useRef();
+
+	useEffect(
+		() => {
+			currentChildren.current = children;
+		},
+		[children],
+	);
+
 	const handleKeyboardNav = useCallback(
 		event => {
 			const enabledTabIndexes = React.Children.map(
-				children,
+				currentChildren.current,
 				(child, index) => (child.props.disabled ? null : index),
 			).filter(index => index !== null);
 			const currentEnabledIndex = enabledTabIndexes.indexOf(selectedIndex);
@@ -50,7 +61,7 @@ export function useKeyboardNav(selectedIndex, onSelectTab, children) {
 					return;
 			}
 		},
-		[selectedIndex, onSelectTab, children],
+		[selectedIndex, onSelectTab],
 	);
 
 	return handleKeyboardNav;
