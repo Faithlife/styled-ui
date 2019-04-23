@@ -1,10 +1,12 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useId } from '../shared-hooks';
 import { PopoverManager } from '../popover';
-import { DropdownContext } from './dropdown-helpers';
+import { DropdownContextProvider } from './dropdown-utils';
 
 export function Dropdown({ isOpen, onToggleIsOpen, children }) {
+	const [focusedMenuItem, setFocusedMenuItem] = useState(null);
+	const dropdownToggleRef = useRef();
 	const menuId = useId();
 
 	const handleCloseMenu = useCallback(
@@ -16,10 +18,19 @@ export function Dropdown({ isOpen, onToggleIsOpen, children }) {
 		[onToggleIsOpen],
 	);
 
+	const context = {
+		isOpen,
+		handleCloseMenu,
+		menuId,
+		focusedMenuItem,
+		setFocusedMenuItem,
+		dropdownToggleRef,
+	};
+
 	return (
-		<DropdownContext.Provider value={{ isOpen, handleCloseMenu, menuId }}>
+		<DropdownContextProvider value={context}>
 			<PopoverManager onFocusAway={handleCloseMenu}>{children}</PopoverManager>
-		</DropdownContext.Provider>
+		</DropdownContextProvider>
 	);
 }
 

@@ -1,12 +1,17 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../button';
 import { PopoverReference } from '../popover';
-import { useDropdownContext } from './dropdown-helpers';
+import {
+	useDropdownContext,
+	useKeyboardActivate,
+	useMenuItemKeyboardHandler,
+} from './dropdown-utils';
 import * as Styled from './styled';
 
 export function DropdownToggle({ children, onToggleMenu, ...buttonProps }) {
-	const { isOpen, menuId } = useDropdownContext();
+	const { isOpen, menuId, setFocusedMenuItem, dropdownToggleRef } = useDropdownContext();
+	const handleKeyPress = useKeyboardActivate(onToggleMenu, setFocusedMenuItem);
 
 	const buttonAriaProps = {
 		role: 'button',
@@ -19,7 +24,13 @@ export function DropdownToggle({ children, onToggleMenu, ...buttonProps }) {
 
 	return (
 		<PopoverReference>
-			<Button onClick={onToggleMenu} {...buttonAriaProps} {...buttonProps}>
+			<Button
+				ref={dropdownToggleRef}
+				onClick={onToggleMenu}
+				onKeyDown={handleKeyPress}
+				{...buttonAriaProps}
+				{...buttonProps}
+			>
 				{children}
 			</Button>
 		</PopoverReference>
@@ -33,10 +44,23 @@ DropdownToggle.propTypes = {
 	onToggleMenu: PropTypes.func.isRequried,
 };
 
-export function MenuItem({ children, onClick, disabled }) {
-	const { handleCloseMenu } = useDropdownContext();
+export function MenuItem(props) {
+	// Proptypes is linting so index does not show up in consumer proptypes
+	// eslint-disable-next-line react/prop-types
+	const { children, onClick, disabled, index } = props;
 
+	const { handleCloseMenu, focusedMenuItem, setFocusedMenuItem } = useDropdownContext();
 	const ref = useRef();
+	const selected = focusedMenuItem === index;
+
+	useEffect(
+		() => {
+			if (selected && ref.current) {
+				ref.current.focus();
+			}
+		},
+		[selected],
+	);
 
 	const handleClick = useCallback(
 		() => {
@@ -48,14 +72,14 @@ export function MenuItem({ children, onClick, disabled }) {
 		},
 		[onClick, handleCloseMenu],
 	);
+	// catch keyup event for spacebar in firefox. Opening the menu with spacebar will trigger the first option with the onKeyUp event from the spacebar
+	const [handleKeyDown, handleKeyUp] = useMenuItemKeyboardHandler(handleClick);
 
 	const onMouseEnter = useCallback(
 		() => {
-			if (ref.current) {
-				ref.current.focus();
-			}
+			setFocusedMenuItem(index);
 		},
-		[ref.current],
+		[setFocusedMenuItem],
 	);
 
 	return (
@@ -64,8 +88,10 @@ export function MenuItem({ children, onClick, disabled }) {
 			onClick={handleClick}
 			onMouseEnter={onMouseEnter}
 			disabled={disabled}
+			onKeyDown={handleKeyDown}
+			onKeyUp={handleKeyUp}
 		>
-			{children}
+			{typeof children === 'function' ? children({ selected, disabled }) : children}
 		</Styled.MenuItem>
 	);
 }
@@ -75,3 +101,5 @@ MenuItem.propTypes = {
 	onClick: PropTypes.func.isRequried,
 	disabled: PropTypes.func,
 };
+
+MenuItem.isFocusable = true;

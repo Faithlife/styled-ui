@@ -29,5 +29,10 @@ export const MenuItem = styled.button.attrs({
 	&:focus {
 		background-color: ${colors.gray4};
 		outline: none;
+		border: 0;
+	}
+
+	&::-moz-focus-inner {
+		border: 0;
 	}
 `;
