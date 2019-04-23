@@ -5,18 +5,20 @@ import { useDropdownContext } from './dropdown-helpers';
 import * as Styled from './styled';
 
 export function DropdownMenu({ children, ...popoverProps }) {
-	const { isOpen } = useDropdownContext();
+	const { isOpen, menuId } = useDropdownContext();
 
 	return (
-		<Popover
-			isOpen={isOpen}
-			placement={'bottom-start' || popoverProps.placement}
-			hideArrow
-			styleOverrides={{ padding: '0', width: '160px' }}
-			{...popoverProps}
-		>
-			<Styled.DropdownMenu>{children}</Styled.DropdownMenu>
-		</Popover>
+		<Styled.DropdownMenu id={menuId}>
+			<Popover
+				isOpen={isOpen}
+				placement={'bottom-start' || popoverProps.placement}
+				hideArrow
+				styleOverrides={{ padding: '0', width: '160px' }}
+				{...popoverProps}
+			>
+				<Styled.DropdownMenuContent>{children}</Styled.DropdownMenuContent>
+			</Popover>
+		</Styled.DropdownMenu>
 	);
 }
 
