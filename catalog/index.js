@@ -29,6 +29,11 @@ import {
 	DatePickerInput,
 	DatePeriodPicker,
 	SimpleToast,
+	TabManager,
+	Tab,
+	TabList,
+	TabPanel,
+	TabPanels,
 } from '../components/main';
 import { BaseButton } from '../components/button/base-button';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
@@ -638,6 +643,42 @@ const components = [
 				title: 'Product Drawer Documentation',
 				content: pageLoader(() => import('./product-drawer/documentation.md')),
 				imports: { ProductDrawerWithResources, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Tabs',
+		pages: [
+			{
+				path: '/tabs/variations',
+				title: 'Tabs Variations',
+				content: pageLoader(() => import('./tabs/variations.md')),
+				imports: {
+					TabManager,
+					Tab,
+					TabList,
+					TabPanel,
+					TabPanels,
+					TabDemo: styled.div`
+						padding: 8px;
+						background-color: white;
+						&& > * {
+							margin: 16px;
+						}
+					`,
+					Button,
+					createPortal: component => ReactDOM.createPortal(component, document.body),
+				},
+			},
+			{
+				path: '/tabs/documentation',
+				title: 'Tabs Documentation',
+				content: pageLoader(() => import('./tabs/documentation.md')),
+				imports: {
+					Tab,
+					TabManager,
+					DocgenTable,
+				},
 			},
 		],
 	},
