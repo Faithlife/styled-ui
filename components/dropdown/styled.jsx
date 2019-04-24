@@ -2,7 +2,11 @@ import styled from 'styled-components';
 import { colors, thickness } from '../shared-styles';
 import { resetStyles } from '../utils';
 
-export const DropdownMenu = styled.div.attrs({ role: 'menu' })``;
+export const DropdownMenu = styled.div.attrs({
+	role: 'menu',
+})`
+	/* stylelint-disable no-empty-block https://github.com/stylelint/stylelint/issues/3494 */
+`;
 
 export const DropdownMenuContent = styled.div`
 	width: 100%;

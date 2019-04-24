@@ -28,6 +28,7 @@ export function useFocusAwayHandler(onFocusAwayCallback) {
 	);
 
 	useEffect(
+		// eslint-disable-next-line consistent-return
 		() => {
 			const targetList = [
 				targetRef.current,
@@ -58,11 +59,14 @@ export function useAddInboundsElement(addInboundsElement, removeInboundsElement)
 	const id = useId();
 
 	useEffect(
+		// eslint-disable-next-line consistent-return
 		() => {
 			if (id && targetRef.current) {
 				addInboundsElement(id, targetRef);
 
-				return () => removeInboundsElement(id);
+				return () => {
+					removeInboundsElement(id);
+				};
 			}
 		},
 		[addInboundsElement, removeInboundsElement, targetRef.current, id],
