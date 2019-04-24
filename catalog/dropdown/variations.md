@@ -35,3 +35,27 @@ state: { isOpen: false, isChecked: false }
 	</Dropdown>
 </DropdownDemo>
 ```
+
+## Style Variations
+
+DropdownToggle accepts all theme and styleOverrides that a button component would.
+
+```react
+showSource: true
+state: { isOpen: false, isChecked: false }
+---
+<DropdownDemo>
+	<Dropdown
+		theme={{ hoverBackgroundColor: 'plum', checkboxPrimary: 'darkslateblue', checkboxBorder: 'purple' }}
+		styleOverrides={{ fontSize: '14px', padding: '4px' }}
+		isOpen={state.isOpen}
+		onToggleIsOpen={() => setState({ isOpen: false })}
+	>
+		<DropdownToggle primary medium onToggleMenu={() => setState({ isOpen: !state.isOpen })}>Show a Dropdown!</DropdownToggle>
+		<DropdownMenu>
+			<MenuItem onClick={() => alert("Menu Item 1")}>Menu Item 1</MenuItem>
+			<MenuCheckbox onClick={() => setState({ isChecked: !state.isChecked })} isChecked={state.isChecked}>Menu Checkbox</MenuCheckbox>
+		</DropdownMenu>
+	</Dropdown>
+</DropdownDemo>
+```

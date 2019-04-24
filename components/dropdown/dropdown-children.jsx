@@ -1,5 +1,6 @@
 import React, { useRef, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { ThemeProvider } from 'styled-components';
 import { Button } from '../button';
 import { CheckboxCore } from '../check-box';
 import { PopoverReference } from '../popover';
@@ -50,7 +51,7 @@ export function MenuItem(props) {
 	// eslint-disable-next-line react/prop-types
 	const { children, onClick, shouldKeepOpenOnClick, disabled, index, ...ariaProps } = props;
 
-	const { handleCloseMenu, focusedMenuItem } = useDropdownContext();
+	const { handleCloseMenu, focusedMenuItem, theme, styleOverrides } = useDropdownContext();
 	const ref = useRef();
 	const selected = focusedMenuItem === index;
 
@@ -91,7 +92,7 @@ export function MenuItem(props) {
 			// `Disabled menu items are focusable but cannot be activated.` https://www.w3.org/TR/wai-aria-practices-1.1/#menubutton
 			{...(!disabled ? {} : { as: 'div' })}
 		>
-			<Styled.MenuItemContent isDisabled={disabled}>
+			<Styled.MenuItemContent isDisabled={disabled} theme={theme} styleOverrides={styleOverrides}>
 				{typeof children === 'function' ? children({ selected, disabled }) : children}
 			</Styled.MenuItemContent>
 		</Styled.MenuItem>
@@ -115,6 +116,8 @@ export function MenuCheckbox(props) {
 	// eslint-disable-next-line react/prop-types
 	const { onClick, disabled, index, isChecked, ...checkboxProps } = props;
 
+	const { theme } = useDropdownContext();
+
 	return (
 		<MenuItem
 			shouldKeepOpenOnClick
@@ -124,7 +127,9 @@ export function MenuCheckbox(props) {
 			role="menuitemcheckbox"
 			aria-checked={isChecked}
 		>
-			<CheckboxCore isChecked={isChecked} {...checkboxProps} />
+			<ThemeProvider theme={{ primary: theme.checkboxPrimary, border: theme.checkboxBorder }}>
+				<CheckboxCore isChecked={isChecked} {...checkboxProps} />
+			</ThemeProvider>
 		</MenuItem>
 	);
 }

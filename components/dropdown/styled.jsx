@@ -40,11 +40,11 @@ export const MenuItem = styled.button.attrs({
 export const MenuItemContent = styled.span.attrs({ tabIndex: '-1' })`
 	${({ isDisabled }) => isDisabled && `color: ${colors.gray22}`};
 
-	padding: ${thickness.eight};
+	padding: ${({ styleOverrides }) => styleOverrides.padding || thickness.eight};
 	text-align: left;
 	white-space: nowrap;
 	background-color: transparent;
-	font-size: 16px;
+	font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
 
 	display: flex;
 	flex-direction: row;

@@ -12,6 +12,7 @@ export function DropdownMenu({ children, ...popoverProps }) {
 		setFocusedMenuItem,
 		handleCloseMenu,
 		dropdownToggleRef,
+		styleOverrides,
 	} = useDropdownContext();
 
 	const closeMenu = useCallback(
@@ -51,7 +52,7 @@ export function DropdownMenu({ children, ...popoverProps }) {
 				isOpen={isOpen}
 				placement={'bottom-start' || popoverProps.placement}
 				hideArrow
-				styleOverrides={{ padding: '0', width: '160px' }}
+				styleOverrides={{ padding: '0', width: styleOverrides.width || '160px' }}
 				{...popoverProps}
 			>
 				<Styled.DropdownMenuContent onKeyDown={handleKeyboardNav}>

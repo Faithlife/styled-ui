@@ -4,7 +4,7 @@ import { useId } from '../shared-hooks';
 import { PopoverManager } from '../popover';
 import { DropdownContextProvider } from './dropdown-utils';
 
-export function Dropdown({ isOpen, onToggleIsOpen, children }) {
+export function Dropdown({ isOpen, onToggleIsOpen, theme, styleOverrides, children }) {
 	const [focusedMenuItem, setFocusedMenuItem] = useState(null);
 	const dropdownToggleRef = useRef();
 	const menuId = useId();
@@ -25,6 +25,8 @@ export function Dropdown({ isOpen, onToggleIsOpen, children }) {
 		focusedMenuItem,
 		setFocusedMenuItem,
 		dropdownToggleRef,
+		theme,
+		styleOverrides,
 	};
 
 	return (
@@ -38,4 +40,22 @@ Dropdown.propTypes = {
 	isOpen: PropTypes.bool.isRequired,
 	onToggleIsOpen: PropTypes.func.isRequired,
 	children: PropTypes.node.isRequried,
+	theme: PropTypes.shape({
+		hoverBackgroundColor: PropTypes.string,
+		checkboxPrimary: PropTypes.string,
+		checkboxBorder: PropTypes.string,
+	}),
+	styleOverrides: PropTypes.shape({
+		fontSize: PropTypes.string,
+		padding: PropTypes.string,
+		width: PropTypes.string,
+	}),
+};
+
+Dropdown.defaultProps = {
+	theme: {
+		checkboxPrimary: '#1E91D6',
+		checkboxBorder: '#95908f',
+	},
+	styleOverrides: {},
 };
