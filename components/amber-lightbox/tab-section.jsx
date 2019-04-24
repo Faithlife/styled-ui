@@ -3,17 +3,16 @@ import React, { useRef, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './styled';
 
-// TODO implement viewStyle
-// TODO: configure url for internal/test/beta/prod environments
-
-export function Tab({ title, vaultId, filter, viewStyle, onFileSelected }) {
+export function TabSection({ vaultId, filter, viewStyle, onFileSelected }) {
 	const onMessageRef = useRef();
 
 	const onMessage = useCallback(
 		event => {
-			const data = JSON.parse(event.data);
-			if (data && data.type === 'assets') {
-				onFileSelected(data.assets[0]);
+			if (event.data) {
+				const data = JSON.parse(event.data);
+				if (data && data.type === 'assets') {
+					onFileSelected(data.assets[0]);
+				}
 			}
 		},
 		[onFileSelected],
@@ -37,6 +36,8 @@ export function Tab({ title, vaultId, filter, viewStyle, onFileSelected }) {
 					container: amberRef.current,
 					groupId: vaultId,
 					multiSelect: false,
+					viewStyle,
+					filter,
 				});
 				window.addEventListener('message', onMessageRef.current);
 
@@ -45,14 +46,13 @@ export function Tab({ title, vaultId, filter, viewStyle, onFileSelected }) {
 				};
 			}
 		},
-		[amberRef.current, window.amberfile],
+		[window.amberfile],
 	);
 
 	return <Styled.Tab ref={amberRef} />;
 }
 
-Tab.propTypes = {
-	title: PropTypes.string.isRequired,
+TabSection.propTypes = {
 	vaultId: PropTypes.number.isRequired,
 	filter: PropTypes.string,
 	viewStyle: PropTypes.string,

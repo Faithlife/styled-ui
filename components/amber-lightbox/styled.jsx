@@ -14,26 +14,25 @@ export const Title = styled.h1`
 `;
 
 export const Tab = styled.div`
-	border-style: dashed;
 	background: ${colors.white};
-	height: 394px;
+	height: 532px;
 	width: 752px;
 	margin: 8px;
 `;
 
 export const NativeContainer = styled.div`
-	height: 394px;
+	height: 400px;
 	width: 752px;
-	margin: 24px;
+	margin: 24px 24px 60px 24px;
 `;
 
 export const ButtonSection = styled.div`
-	margin: 48px 16px;
+	margin: 48px 32px;
 `;
 
 export const ButtonContainer = styled.div`
 	float: right;
-	padding: 8px;
+	padding: 8px 10px;
 `;
 
 export const DragDropText = styled.h2`
@@ -43,7 +42,7 @@ export const DragDropText = styled.h2`
 `;
 
 export const DragDropContainer = styled.div`
-	height: 389px;
+	height: 400px;
 	width: 752px;
 	text-align: center;
 `;
