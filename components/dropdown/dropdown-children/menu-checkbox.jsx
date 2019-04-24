@@ -9,7 +9,7 @@ import { MenuItem } from './menu-item';
 export const MenuSeparator = Styled.MenuSeparator;
 MenuSeparator.propTypes = {};
 
-/** Inherits Props from MenuItem */
+/** Inherits props from MenuItem */
 export function MenuCheckbox(props) {
 	// Proptypes is linting so index does not show up in consumer proptypes
 	// eslint-disable-next-line react/prop-types

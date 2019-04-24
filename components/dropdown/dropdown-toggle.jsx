@@ -5,7 +5,8 @@ import { PopoverReference } from '../popover';
 import { useDropdownContext, useKeyboardActivate } from './dropdown-utils';
 
 /** Accepts all props a Button component would as well. */
-export function DropdownToggle({ children, onToggleMenu, ...buttonProps }) {
+export function DropdownToggle(props) {
+	const { children, onToggleMenu, ...buttonProps } = props;
 	const { isOpen, menuId, setFocusedMenuItem, dropdownToggleRef } = useDropdownContext();
 	const handleKeyPress = useKeyboardActivate(onToggleMenu, setFocusedMenuItem);
 
@@ -24,8 +25,8 @@ export function DropdownToggle({ children, onToggleMenu, ...buttonProps }) {
 				ref={dropdownToggleRef}
 				onClick={onToggleMenu}
 				onKeyDown={handleKeyPress}
-				{...buttonAriaProps}
 				{...buttonProps}
+				{...buttonAriaProps}
 			>
 				{children}
 			</Button>

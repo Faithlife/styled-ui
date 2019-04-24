@@ -4,7 +4,8 @@ import { Popover } from '../popover';
 import { useDropdownContext, getFocusableChildrenList, useKeyboardNav } from './dropdown-utils';
 import * as Styled from './styled';
 
-export function DropdownMenu({ children, ...popoverProps }) {
+export function DropdownMenu(props) {
+	const { children, ...popoverProps } = props;
 	const {
 		isOpen,
 		menuId,
@@ -39,7 +40,6 @@ export function DropdownMenu({ children, ...popoverProps }) {
 			if (focusedMenuItem === 'last') {
 				setFocusedMenuItem(focusableChildList[focusableChildList.length - 1]);
 			} else if (focusedMenuItem === 'first') {
-				console.log(focusableChildList);
 				setFocusedMenuItem(focusableChildList[0]);
 			}
 		},
