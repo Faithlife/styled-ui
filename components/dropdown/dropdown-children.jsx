@@ -16,7 +16,7 @@ export function DropdownToggle({ children, onToggleMenu, ...buttonProps }) {
 
 	const buttonAriaProps = {
 		role: 'button',
-		'aria-haspopup': 'menu',
+		'aria-haspopup': true,
 		'aria-controls': `dropdown:${menuId}`,
 		'aria-label': `dropdown:${menuId}`,
 		// do not specify aria-expanded unless it is expanded
@@ -50,7 +50,7 @@ export function MenuItem(props) {
 	// eslint-disable-next-line react/prop-types
 	const { children, onClick, shouldKeepOpenOnClick, disabled, index, ...ariaProps } = props;
 
-	const { handleCloseMenu, focusedMenuItem, setFocusedMenuItem } = useDropdownContext();
+	const { handleCloseMenu, focusedMenuItem } = useDropdownContext();
 	const ref = useRef();
 	const selected = focusedMenuItem === index;
 

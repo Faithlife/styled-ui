@@ -20,11 +20,11 @@ export const MenuItem = styled.button.attrs({
 	${resetStyles};
 	outline: none;
 	border: none;
+	padding: 0;
 
-	padding: ${thickness.eight};
-	text-align: left;
-	white-space: nowrap;
 	background-color: transparent;
+
+	${({ isDisabled }) => !isDisabled && 'cursor: pointer'};
 
 	&:focus {
 		background-color: ${colors.gray4};

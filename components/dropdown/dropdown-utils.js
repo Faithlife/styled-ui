@@ -20,7 +20,7 @@ export function useDropdownContext() {
 	return context;
 }
 
-export function useKeyboardActivate(onToggleMenu, setSelectedIndex) {
+export function useKeyboardActivate(onToggleMenu, setSelectedItem) {
 	const handleKeyboardActivate = useCallback(
 		event => {
 			switch (event.key) {
@@ -28,14 +28,14 @@ export function useKeyboardActivate(onToggleMenu, setSelectedIndex) {
 				case handledKeys.spaceBar:
 				case handledKeys.arrowDown: {
 					event.preventDefault();
-					setSelectedIndex(0);
+					setSelectedItem('first');
 					onToggleMenu();
 					break;
 				}
 				case handledKeys.arrowUp: {
 					event.preventDefault();
 					// Should select the last menuItem
-					setSelectedIndex(-1);
+					setSelectedItem('last');
 					onToggleMenu();
 					break;
 				}
@@ -43,7 +43,7 @@ export function useKeyboardActivate(onToggleMenu, setSelectedIndex) {
 					return;
 			}
 		},
-		[onToggleMenu, setSelectedIndex],
+		[onToggleMenu, setSelectedItem],
 	);
 
 	return handleKeyboardActivate;

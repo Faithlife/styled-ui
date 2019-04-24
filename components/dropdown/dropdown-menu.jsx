@@ -35,11 +35,14 @@ export function DropdownMenu({ children, ...popoverProps }) {
 
 	useEffect(
 		() => {
-			if (focusedMenuItem === -1) {
+			if (focusedMenuItem === 'last') {
 				setFocusedMenuItem(focusableChildList[focusableChildList.length - 1]);
+			} else if (focusedMenuItem === 'first') {
+				console.log(focusableChildList);
+				setFocusedMenuItem(focusableChildList[0]);
 			}
 		},
-		[focusedMenuItem],
+		[focusedMenuItem, focusableChildList],
 	);
 
 	return (
