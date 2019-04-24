@@ -60,7 +60,10 @@ export const MenuItemContent = styled.span.attrs({ tabIndex: '-1' })`
 	}
 `;
 
-export const MenuSeparator = styled.hr.attrs({ role: 'separator' })`
+export const MenuSeparator = styled.hr.attrs({
+	role: 'separator',
+	'aria-orientation': 'horizontal',
+})`
 	border: 0;
 	border-top: 1px solid ${colors.gray14};
 	width: 100%;

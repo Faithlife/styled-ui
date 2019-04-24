@@ -709,6 +709,18 @@ const components = [
 					`,
 				},
 			},
+			{
+				path: '/dropdown/documentation',
+				title: 'Dropdown Documentation',
+				content: pageLoader(() => import('./dropdown/documentation.md')),
+				imports: { Dropdown, DropdownToggle, DocgenTable },
+			},
+			{
+				path: '/dropdown/documentation/items',
+				title: 'Dropdown Child Documentation',
+				content: pageLoader(() => import('./dropdown/item-documentation.md')),
+				imports: { MenuItem, MenuCheckbox, MenuSeparator, DocgenTable },
+			},
 		],
 	},
 ].sort((a, b) => {

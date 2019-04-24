@@ -39,7 +39,7 @@ export function Dropdown({ isOpen, onToggleIsOpen, theme, styleOverrides, childr
 Dropdown.propTypes = {
 	isOpen: PropTypes.bool.isRequired,
 	onToggleIsOpen: PropTypes.func.isRequired,
-	children: PropTypes.node.isRequried,
+	children: PropTypes.node.isRequired,
 	theme: PropTypes.shape({
 		hoverBackgroundColor: PropTypes.string,
 		checkboxPrimary: PropTypes.string,

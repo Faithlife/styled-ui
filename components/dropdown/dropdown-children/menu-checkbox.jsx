@@ -1,0 +1,40 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { ThemeProvider } from 'styled-components';
+import { CheckboxCore } from '../../check-box';
+import { useDropdownContext } from '../dropdown-utils';
+import * as Styled from '../styled';
+import { MenuItem } from './menu-item';
+
+export const MenuSeparator = Styled.MenuSeparator;
+MenuSeparator.propTypes = {};
+
+/** Inherits Props from MenuItem */
+export function MenuCheckbox(props) {
+	// Proptypes is linting so index does not show up in consumer proptypes
+	// eslint-disable-next-line react/prop-types
+	const { onClick, disabled, index, isChecked, ...checkboxProps } = props;
+
+	const { theme } = useDropdownContext();
+
+	return (
+		<MenuItem
+			shouldKeepOpenOnClick
+			onClick={onClick}
+			disabled={disabled}
+			index={index}
+			role="menuitemcheckbox"
+			aria-checked={isChecked}
+		>
+			<ThemeProvider theme={{ primary: theme.checkboxPrimary, border: theme.checkboxBorder }}>
+				<CheckboxCore isChecked={isChecked} {...checkboxProps} />
+			</ThemeProvider>
+		</MenuItem>
+	);
+}
+
+MenuCheckbox.propTypes = {
+	isChecked: PropTypes.bool.isRequired,
+};
+
+MenuCheckbox.isFocusableMenuChild = true;

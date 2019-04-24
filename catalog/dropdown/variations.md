@@ -38,8 +38,6 @@ state: { isOpen: false, isChecked: false }
 
 ## Style Variations
 
-DropdownToggle accepts all theme and styleOverrides that a button component would.
-
 ```react
 showSource: true
 state: { isOpen: false, isChecked: false }
