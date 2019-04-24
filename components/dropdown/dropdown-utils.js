@@ -50,9 +50,10 @@ export function useKeyboardActivate(onToggleMenu, setSelectedIndex) {
 }
 
 export function getFocusableChildrenList(children) {
-	return React.Children.map(children, (child, index) => (child.isFocusable ? null : index)).filter(
-		index => index !== null,
-	);
+	return React.Children.map(
+		children,
+		(child, index) => (!child.type.isFocusableMenuChild ? null : index),
+	).filter(index => index !== null);
 }
 
 export function useKeyboardNav(selectedIndex, setSelectedIndex, closeMenu, focusableItemIndexes) {

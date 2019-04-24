@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
+import { CheckboxCore } from './checkbox-core';
 import * as Styled from './styled';
 
 /** Styled checkbox control with consistent styling across platforms */
@@ -46,11 +47,9 @@ export class Checkbox extends Component {
 					role={'checkbox'}
 					aria-checked={isChecked}
 				>
-					<Styled.CheckboxDiv>
-						<Styled.CheckedIndicator isChecked={isChecked} />
-					</Styled.CheckboxDiv>
-					{title && <Styled.Label>{title}</Styled.Label>}
-					{children && <Styled.Label>{children}</Styled.Label>}
+					<CheckboxCore isChecked={isChecked} title={title}>
+						{children}
+					</CheckboxCore>
 				</Styled.CheckboxContainer>
 			</ThemeProvider>
 		);

@@ -1,6 +1,7 @@
 import React, { useRef, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../button';
+import { CheckboxCore } from '../check-box';
 import { PopoverReference } from '../popover';
 import {
 	useDropdownContext,
@@ -47,7 +48,7 @@ DropdownToggle.propTypes = {
 export function MenuItem(props) {
 	// Proptypes is linting so index does not show up in consumer proptypes
 	// eslint-disable-next-line react/prop-types
-	const { children, onClick, disabled, index } = props;
+	const { children, onClick, shouldKeepOpenOnClick, disabled, index, ...ariaProps } = props;
 
 	const { handleCloseMenu, focusedMenuItem, setFocusedMenuItem } = useDropdownContext();
 	const ref = useRef();
@@ -64,42 +65,72 @@ export function MenuItem(props) {
 
 	const handleClick = useCallback(
 		() => {
-			if (onClick) {
-				onClick();
-			}
+			if (!disabled) {
+				if (onClick) {
+					onClick();
+				}
 
-			handleCloseMenu();
+				if (!shouldKeepOpenOnClick) {
+					handleCloseMenu();
+				}
+			}
 		},
-		[onClick, handleCloseMenu],
+		[onClick, handleCloseMenu, shouldKeepOpenOnClick, disabled],
 	);
 	// catch keyup event for spacebar in firefox. Opening the menu with spacebar will trigger the first option with the onKeyUp event from the spacebar
 	const [handleKeyDown, handleKeyUp] = useMenuItemKeyboardHandler(handleClick);
 
-	const onMouseEnter = useCallback(
-		() => {
-			setFocusedMenuItem(index);
-		},
-		[setFocusedMenuItem],
-	);
-
 	return (
 		<Styled.MenuItem
 			ref={ref}
-			onClick={handleClick}
-			onMouseEnter={onMouseEnter}
-			disabled={disabled}
 			onKeyDown={handleKeyDown}
 			onKeyUp={handleKeyUp}
+			isDisabled={disabled}
+			onClick={handleClick}
+			{...ariaProps}
+			// `Disabled menu items are focusable but cannot be activated.` https://www.w3.org/TR/wai-aria-practices-1.1/#menubutton
+			{...(!disabled ? {} : { as: 'div' })}
 		>
-			{typeof children === 'function' ? children({ selected, disabled }) : children}
+			<Styled.MenuItemContent isDisabled={disabled}>
+				{typeof children === 'function' ? children({ selected, disabled }) : children}
+			</Styled.MenuItemContent>
 		</Styled.MenuItem>
 	);
 }
 
 MenuItem.propTypes = {
-	children: PropTypes.node.isRequired,
-	onClick: PropTypes.func.isRequried,
-	disabled: PropTypes.func,
+	children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+	onClick: PropTypes.func.isRequired,
+	disabled: PropTypes.bool,
+	shouldKeepOpenOnClick: PropTypes.bool,
 };
 
-MenuItem.isFocusable = true;
+MenuItem.isFocusableMenuChild = true;
+
+export const MenuSeparator = Styled.MenuSeparator;
+MenuSeparator.propTypes = {};
+
+export function MenuCheckbox(props) {
+	// Proptypes is linting so index does not show up in consumer proptypes
+	// eslint-disable-next-line react/prop-types
+	const { onClick, disabled, index, isChecked, ...checkboxProps } = props;
+
+	return (
+		<MenuItem
+			shouldKeepOpenOnClick
+			onClick={onClick}
+			disabled={disabled}
+			index={index}
+			role="menuitemcheckbox"
+			aria-checked={isChecked}
+		>
+			<CheckboxCore isChecked={isChecked} {...checkboxProps} />
+		</MenuItem>
+	);
+}
+
+MenuCheckbox.propTypes = {
+	isChecked: PropTypes.bool.isRequried,
+};
+
+MenuCheckbox.isFocusableMenuChild = true;

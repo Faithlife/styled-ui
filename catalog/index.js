@@ -38,6 +38,8 @@ import {
 	DropdownToggle,
 	DropdownMenu,
 	MenuItem,
+	MenuSeparator,
+	MenuCheckbox,
 } from '../components/main';
 import { BaseButton } from '../components/button/base-button';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
@@ -698,6 +700,8 @@ const components = [
 					DropdownToggle,
 					DropdownMenu,
 					MenuItem,
+					MenuSeparator,
+					MenuCheckbox,
 					DropdownDemo: styled.div`
 						display: flex;
 						align-items: flex-start;
