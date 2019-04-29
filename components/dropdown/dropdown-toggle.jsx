@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../button';
 import { PopoverReference } from '../popover';
 import { useDropdownContext, useKeyboardActivate } from './dropdown-utils';
 
 /** Accepts all props a Button component would as well. */
-export function DropdownToggle(props) {
-	const { children, onToggleMenu, ...buttonProps } = props;
+export function DropdownToggle({ children, onToggleMenu }) {
 	const { isOpen, menuId, setFocusedMenuItem, dropdownToggleRef } = useDropdownContext();
 	const handleKeyPress = useKeyboardActivate(onToggleMenu, setFocusedMenuItem);
 
-	const buttonAriaProps = {
+	const toggleAriaProps = {
 		role: 'button',
 		'aria-haspopup': true,
 		'aria-controls': `dropdown:${menuId}`,
@@ -19,24 +17,22 @@ export function DropdownToggle(props) {
 		...(isOpen ? { 'aria-expanded': true } : {}),
 	};
 
-	return (
-		<PopoverReference>
-			<Button
-				ref={dropdownToggleRef}
-				onClick={onToggleMenu}
-				onKeyDown={handleKeyPress}
-				{...buttonProps}
-				{...buttonAriaProps}
-			>
-				{children}
-			</Button>
-		</PopoverReference>
+	const childProps = useMemo(
+		() => ({
+			ref: dropdownToggleRef,
+			onKeyDown: handleKeyPress,
+			onClick: onToggleMenu,
+			ariaProps: toggleAriaProps,
+		}),
+		[dropdownToggleRef, handleKeyPress, onToggleMenu, toggleAriaProps],
 	);
+
+	return <PopoverReference>{children && children(childProps)}</PopoverReference>;
 }
 
 DropdownToggle.propTypes = {
 	/** The content of the toggle button, usually a span */
-	children: PropTypes.node.isRequired,
+	children: PropTypes.func.isRequired,
 	/** Toggle the isOpen prop when called */
 	onToggleMenu: PropTypes.func.isRequired,
 };

@@ -707,6 +707,7 @@ const components = [
 						align-items: flex-start;
 						justify-content: space-between;
 					`,
+					Button,
 				},
 			},
 			{
