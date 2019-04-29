@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './styled';
 
-export function CheckboxCore({ isChecked, title, children }) {
+export function CheckboxContent({ isChecked, title, children }) {
 	return (
 		<React.Fragment>
 			<Styled.CheckboxDiv>
@@ -14,7 +14,7 @@ export function CheckboxCore({ isChecked, title, children }) {
 	);
 }
 
-CheckboxCore.propTypes = {
+CheckboxContent.propTypes = {
 	children: PropTypes.node,
 	title: PropTypes.string,
 	isChecked: PropTypes.bool,

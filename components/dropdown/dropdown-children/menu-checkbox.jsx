@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
-import { CheckboxCore } from '../../check-box';
+import { CheckboxContent } from '../../check-box';
 import { useDropdownContext } from '../dropdown-utils';
 import * as Styled from '../styled';
 import { MenuItem } from './menu-item';
@@ -9,7 +9,6 @@ import { MenuItem } from './menu-item';
 export const MenuSeparator = Styled.MenuSeparator;
 MenuSeparator.propTypes = {};
 
-/** Inherits props from MenuItem */
 export function MenuCheckbox(props) {
 	// Proptypes is linting so index does not show up in consumer proptypes
 	// eslint-disable-next-line react/prop-types
@@ -27,7 +26,7 @@ export function MenuCheckbox(props) {
 			aria-checked={isChecked}
 		>
 			<ThemeProvider theme={{ primary: theme.checkboxPrimary, border: theme.checkboxBorder }}>
-				<CheckboxCore isChecked={isChecked} {...checkboxProps} />
+				<CheckboxContent isChecked={isChecked} {...checkboxProps} />
 			</ThemeProvider>
 		</MenuItem>
 	);

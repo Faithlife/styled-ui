@@ -3,7 +3,7 @@ This documentation is automatically generated from jsdoc comments.
 ```react
 noSource: true
 ---
-<DocgenTable component={MenuItem} />
+<DocgenTable component={MenuItem} displayName="Shared between MenuItem and MenuCheckbox" />
 ```
 
 ```react

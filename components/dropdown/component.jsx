@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useState, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useId } from '../shared-hooks';
 import { PopoverManager } from '../popover';
@@ -18,16 +18,28 @@ export function Dropdown({ isOpen, onToggleIsOpen, theme, styleOverrides, childr
 		[onToggleIsOpen],
 	);
 
-	const context = {
-		isOpen,
-		handleCloseMenu,
-		menuId,
-		focusedMenuItem,
-		setFocusedMenuItem,
-		dropdownToggleRef,
-		theme,
-		styleOverrides,
-	};
+	const context = useMemo(
+		() => ({
+			isOpen,
+			handleCloseMenu,
+			menuId,
+			focusedMenuItem,
+			setFocusedMenuItem,
+			dropdownToggleRef,
+			theme,
+			styleOverrides,
+		}),
+		[
+			isOpen,
+			handleCloseMenu,
+			menuId,
+			focusedMenuItem,
+			setFocusedMenuItem,
+			dropdownToggleRef,
+			theme,
+			styleOverrides,
+		],
+	);
 
 	return (
 		<DropdownContextProvider value={context}>

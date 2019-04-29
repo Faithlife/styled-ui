@@ -28,6 +28,7 @@ export function useFocusAwayHandler(onFocusAwayCallback) {
 	);
 
 	useEffect(
+		// There is no reason to return a cleanup function if an event listener is not created
 		// eslint-disable-next-line consistent-return
 		() => {
 			const targetList = [
@@ -59,6 +60,7 @@ export function useAddInboundsElement(addInboundsElement, removeInboundsElement)
 	const id = useId();
 
 	useEffect(
+		// There is no reason to return a cleanup function if an event listener is not created
 		// eslint-disable-next-line consistent-return
 		() => {
 			if (id && targetRef.current) {

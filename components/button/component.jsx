@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { usefilteredChildProps } from '../shared-hooks';
+import { filterChildProps } from '../utils';
+import { BaseButton, baseButtonProps } from './base-button';
 import * as Styled from './styled';
-import { BaseButton } from './base-button';
 
 /** Standard button with transition styles */
 export const Button = React.forwardRef((props, ref) => {
-	const [buttonProps, baseProps] = usefilteredChildProps(props, BaseButton.propTypes);
+	const [buttonProps, baseProps] = filterChildProps(props, baseButtonProps);
 
 	return (
 		<Styled.Button ref={ref} {...buttonProps}>

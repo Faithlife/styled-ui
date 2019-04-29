@@ -17,6 +17,7 @@ export const DropdownMenuContent = styled.div`
 `;
 
 export const MenuItem = styled.button.attrs({
+	// Menu items should not be in the tab order. They are only reachable by the arrow keys
 	tabIndex: '-1',
 	role: ({ role }) => role || 'menuitem',
 	'aria-disabled': ({ isDisabled }) => isDisabled,
