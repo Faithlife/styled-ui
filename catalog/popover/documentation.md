@@ -9,5 +9,11 @@ noSource: true
 ```react
 noSource: true
 ---
+<DocgenTable component={PopoverManager} />
+```
+
+```react
+noSource: true
+---
 <DocgenTable component={Tooltip} />
 ```

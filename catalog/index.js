@@ -34,6 +34,12 @@ import {
 	TabList,
 	TabPanel,
 	TabPanels,
+	Dropdown,
+	DropdownToggle,
+	DropdownMenu,
+	MenuItem,
+	MenuSeparator,
+	MenuCheckbox,
 } from '../components/main';
 import { BaseButton } from '../components/button/base-button';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
@@ -517,7 +523,7 @@ const components = [
 				path: '/popover/documentation',
 				title: 'Popover Documentation',
 				content: pageLoader(() => import('./popover/documentation.md')),
-				imports: { Popover, DocgenTable, Tooltip },
+				imports: { Popover, DocgenTable, Tooltip, PopoverManager },
 			},
 		],
 	},
@@ -679,6 +685,42 @@ const components = [
 					TabManager,
 					DocgenTable,
 				},
+			},
+		],
+	},
+	{
+		title: 'Dropdown',
+		pages: [
+			{
+				path: '/dropdown/variations',
+				title: 'Dropdown',
+				content: pageLoader(() => import('./dropdown/variations.md')),
+				imports: {
+					Dropdown,
+					DropdownToggle,
+					DropdownMenu,
+					MenuItem,
+					MenuSeparator,
+					MenuCheckbox,
+					DropdownDemo: styled.div`
+						display: flex;
+						align-items: flex-start;
+						justify-content: space-between;
+					`,
+					Button,
+				},
+			},
+			{
+				path: '/dropdown/documentation',
+				title: 'Dropdown Documentation',
+				content: pageLoader(() => import('./dropdown/documentation.md')),
+				imports: { Dropdown, DropdownToggle, DocgenTable },
+			},
+			{
+				path: '/dropdown/documentation/items',
+				title: 'Dropdown Child Documentation',
+				content: pageLoader(() => import('./dropdown/item-documentation.md')),
+				imports: { MenuItem, MenuCheckbox, MenuSeparator, DocgenTable },
 			},
 		],
 	},

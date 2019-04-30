@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import { Popper } from 'react-popper';
 import { colors } from '../shared-styles';
-import { PlacementOptionsProps } from './popper-helpers';
+import { PlacementOptionsProps, FocusHandlerInboundsElement } from './popper-helpers';
 import * as Styled from './styled';
 
 /** Positioning helper used to display content above another element.
@@ -41,12 +41,13 @@ export class Popover extends React.Component {
 		hideArrow: PropTypes.bool,
 		/** Delay on popover showing in milliseconds*/
 		delay: PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
-		/** Will be called when the popover is clicked away from */
 		eventsEnabled: PropTypes.bool,
 		positionFixed: PropTypes.bool,
 		styleOverrides: PropTypes.shape({
 			hideShadow: PropTypes.bool,
 			width: PropTypes.string,
+			minWidth: PropTypes.string,
+			maxWidth: PropTypes.string,
 			padding: PropTypes.string,
 			border: PropTypes.string,
 			zIndex: PropTypes.number,
@@ -168,7 +169,10 @@ export class Popover extends React.Component {
 		);
 
 		if (!!this.targetContainer && showPopper) {
-			return ReactDOM.createPortal(<div>{popover}</div>, this.targetContainer);
+			return ReactDOM.createPortal(
+				<FocusHandlerInboundsElement>{popover}</FocusHandlerInboundsElement>,
+				this.targetContainer,
+			);
 		}
 
 		if (showPopper) {

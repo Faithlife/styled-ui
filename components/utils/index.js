@@ -7,6 +7,8 @@ export {
 	pick,
 	omit,
 } from './transition-group-utils';
+export { FocusAwayHandler } from './focus-away-handler';
+export { filterChildProps } from './filter-props';
 
 const componentCache = new WeakMap();
 
