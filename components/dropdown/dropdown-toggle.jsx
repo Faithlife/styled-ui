@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { PopoverReference } from '../popover';
 import { useDropdownContext, useKeyboardActivate } from './dropdown-utils';
@@ -17,14 +17,22 @@ export function DropdownToggle({ children, onToggleMenu }) {
 		...(isOpen ? { 'aria-expanded': true } : {}),
 	};
 
+	const handleToggleMenu = useCallback(
+		event => {
+			setFocusedMenuItem(-1);
+			onToggleMenu(event);
+		},
+		[setFocusedMenuItem, onToggleMenu],
+	);
+
 	const childProps = useMemo(
 		() => ({
 			ref: dropdownToggleRef,
 			onKeyDown: handleKeyPress,
-			onClick: onToggleMenu,
+			onClick: handleToggleMenu,
 			ariaProps: toggleAriaProps,
 		}),
-		[dropdownToggleRef, handleKeyPress, onToggleMenu, toggleAriaProps],
+		[dropdownToggleRef, handleKeyPress, handleToggleMenu, toggleAriaProps],
 	);
 
 	return <PopoverReference>{children && children(childProps)}</PopoverReference>;
