@@ -1,11 +1,20 @@
 import React, { useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { Button } from '../button';
 import { PopoverReference } from '../popover';
 import { useDropdownContext, useKeyboardActivate } from './dropdown-utils';
 
 /** Accepts all props a Button component would as well. */
-export function DropdownToggle({ children, onToggleMenu }) {
-	const { isOpen, menuId, setFocusedMenuItem, dropdownToggleRef } = useDropdownContext();
+export function DropdownToggle(props) {
+	// DropdownToggle will pass all props that a Button component will want if it is not using render props
+	const { children, ...buttonProps } = props;
+	const {
+		isOpen,
+		menuId,
+		setFocusedMenuItem,
+		dropdownToggleRef,
+		onToggleMenu,
+	} = useDropdownContext();
 	const handleKeyPress = useKeyboardActivate(onToggleMenu, setFocusedMenuItem);
 
 	const toggleAriaProps = {
@@ -35,12 +44,26 @@ export function DropdownToggle({ children, onToggleMenu }) {
 		[dropdownToggleRef, handleKeyPress, handleToggleMenu, toggleAriaProps],
 	);
 
-	return <PopoverReference>{children && children(childProps)}</PopoverReference>;
+	return (
+		<PopoverReference>
+			{typeof children === 'function' ? (
+				children(childProps)
+			) : (
+				<Button
+					ref={dropdownToggleRef}
+					onKeyDown={handleKeyPress}
+					onClick={handleToggleMenu}
+					{...toggleAriaProps}
+					{...buttonProps}
+				>
+					{children}
+				</Button>
+			)}
+		</PopoverReference>
+	);
 }
 
 DropdownToggle.propTypes = {
 	/** The content of the toggle button, usually a span */
-	children: PropTypes.func.isRequired,
-	/** Toggle the isOpen prop when called */
-	onToggleMenu: PropTypes.func.isRequired,
+	children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]).isRequired,
 };
