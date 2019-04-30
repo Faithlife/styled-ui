@@ -68,6 +68,8 @@ const selectStyles = props => {
 		menu: styles => ({
 			...styles,
 			zIndex: 100,
+			marginTop: 0,
+			boxShadow: 'rgba(0, 0, 0, 0.24) 0px 4px 4px 0px, rgba(0, 0, 0, 0.24) 0px 0px 4px 0px;',
 		}),
 	};
 
