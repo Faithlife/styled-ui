@@ -4,18 +4,18 @@ import { useId } from '../shared-hooks';
 import { PopoverManager } from '../popover';
 import { DropdownContextProvider } from './dropdown-utils';
 
-export function Dropdown({ isOpen, onToggleIsOpen, theme, styleOverrides, children }) {
+export function Dropdown({ isOpen, onToggleMenu, theme, styleOverrides, children }) {
 	const [focusedMenuItem, setFocusedMenuItem] = useState(null);
 	const dropdownToggleRef = useRef();
 	const menuId = useId();
 
 	const handleCloseMenu = useCallback(
 		() => {
-			if (onToggleIsOpen) {
-				onToggleIsOpen();
+			if (onToggleMenu && isOpen) {
+				onToggleMenu();
 			}
 		},
-		[onToggleIsOpen],
+		[onToggleMenu],
 	);
 
 	const context = useMemo(
@@ -28,6 +28,7 @@ export function Dropdown({ isOpen, onToggleIsOpen, theme, styleOverrides, childr
 			dropdownToggleRef,
 			theme,
 			styleOverrides,
+			onToggleMenu,
 		}),
 		[
 			isOpen,
@@ -38,6 +39,7 @@ export function Dropdown({ isOpen, onToggleIsOpen, theme, styleOverrides, childr
 			dropdownToggleRef,
 			theme,
 			styleOverrides,
+			onToggleMenu,
 		],
 	);
 
@@ -50,7 +52,7 @@ export function Dropdown({ isOpen, onToggleIsOpen, theme, styleOverrides, childr
 
 Dropdown.propTypes = {
 	isOpen: PropTypes.bool.isRequired,
-	onToggleIsOpen: PropTypes.func.isRequired,
+	onToggleMenu: PropTypes.func.isRequired,
 	children: PropTypes.node.isRequired,
 	theme: PropTypes.shape({
 		hoverBackgroundColor: PropTypes.string,
