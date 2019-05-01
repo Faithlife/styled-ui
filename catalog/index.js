@@ -6,6 +6,10 @@ import { Catalog, pageLoader } from 'catalog';
 import * as dateFunctions from 'date-fns';
 import chrono from 'chrono-node';
 import {
+	Accordion,
+	AccordionHeader,
+	AccordionItem,
+	AccordionPanel,
 	AnchorButton,
 	Bootstrap,
 	Button,
@@ -76,6 +80,33 @@ function delayPromise(duration) {
 }
 
 const components = [
+	{
+		title: 'Accordion',
+		pages: [
+			{
+				path: '/accordion/variations',
+				title: 'Accordion Variations',
+				content: pageLoader(() => import('./accordion/variations.md')),
+				imports: {
+					Accordion,
+					AccordionHeader,
+					AccordionItem,
+					AccordionPanel,
+					AccordionDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
+				},
+			},
+			{
+				path: '/accordion/documentation',
+				title: 'Accordion Documentation',
+				content: pageLoader(() => import('./accordion/documentation.md')),
+				imports: { Accordion, AccordionHeader, AccordionItem, AccordionPanel, DocgenTable },
+			},
+		],
+	},
 	{
 		title: 'Bootstrap',
 		pages: [
