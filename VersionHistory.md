@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.5.0
+
+- Add `Dropdown` component.
+- Adjust shared shadow styling.
+
 ### 5.4.0
 
 - Add `Tabs` component.
