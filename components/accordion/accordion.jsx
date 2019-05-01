@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as Styled from './styled';
+import * as Styled from './styled-accordion';
 
 export function Accordion({ children }) {
-	return <div>{children}</div>;
+	return <Styled.Accordion>{children}</Styled.Accordion>;
 }
 
 Accordion.propTypes = {
-	/** Children */
 	children: PropTypes.node,
 };
