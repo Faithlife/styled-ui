@@ -5,8 +5,16 @@ import * as Styled from '../styled';
 
 export function MenuItem(props) {
 	// Proptypes is linting so index does not show up in consumer proptypes
-	// eslint-disable-next-line react/prop-types
-	const { children, onClick, shouldKeepOpenOnClick, disabled, index, ...ariaProps } = props;
+	const {
+		children,
+		onClick,
+		onFocus,
+		shouldKeepOpenOnClick,
+		disabled,
+		// eslint-disable-next-line react/prop-types
+		index,
+		...ariaProps
+	} = props;
 
 	const { handleCloseMenu, focusedMenuItem, theme, styleOverrides } = useDropdownContext();
 	const ref = useRef();
@@ -16,6 +24,9 @@ export function MenuItem(props) {
 		() => {
 			if (selected && ref.current) {
 				ref.current.focus();
+				if (onFocus) {
+					onFocus();
+				}
 			}
 		},
 		[selected],
@@ -59,6 +70,7 @@ export function MenuItem(props) {
 MenuItem.propTypes = {
 	children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
 	onClick: PropTypes.func.isRequired,
+	onFocus: PropTypes.func,
 	disabled: PropTypes.bool,
 	shouldKeepOpenOnClick: PropTypes.bool,
 };

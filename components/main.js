@@ -31,3 +31,4 @@ export {
 	MenuSeparator,
 	MenuCheckbox,
 } from './dropdown';
+export { Listbox, ListboxToggle, ListboxMenu, ListItem } from './listbox';
