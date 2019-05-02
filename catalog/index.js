@@ -40,6 +40,10 @@ import {
 	MenuItem,
 	MenuSeparator,
 	MenuCheckbox,
+	Listbox,
+	ListboxToggle,
+	ListboxMenu,
+	ListItem,
 } from '../components/main';
 import { BaseButton } from '../components/button/base-button';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
@@ -50,6 +54,7 @@ import { ProductDrawerWithResources } from './product-drawer';
 import { DocgenTable } from './docgen-table';
 import { MemberDirectory, VolunteerScheduling } from './grid';
 import { textInputPages } from './text-input/pages';
+import DownArrow from './svgs/arrow-down.svg';
 
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
@@ -721,6 +726,32 @@ const components = [
 				title: 'Dropdown Child Documentation',
 				content: pageLoader(() => import('./dropdown/item-documentation.md')),
 				imports: { MenuItem, MenuCheckbox, MenuSeparator, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Listbox',
+		pages: [
+			{
+				path: '/Listbox/variations',
+				title: 'Listbox',
+				content: pageLoader(() => import('./listbox/variations.md')),
+				imports: {
+					Listbox,
+					ListboxToggle,
+					ListboxMenu,
+					ListItem,
+					ListboxDemo: styled.div`
+						display: flex;
+						align-items: baseline;
+					`,
+					Button,
+					browserList: ['Firefox', 'Chrome', 'Opera', 'Edge'],
+					Label: styled.span`
+						margin-right: 8px;
+					`,
+					DownArrow: styled.img.attrs({ src: DownArrow })``,
+				},
 			},
 		],
 	},
