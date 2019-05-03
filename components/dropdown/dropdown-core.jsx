@@ -22,7 +22,7 @@ export function DropdownCore({
 				onToggleMenu();
 			}
 		},
-		[onToggleMenu],
+		[onToggleMenu, isOpen],
 	);
 
 	const context = useMemo(

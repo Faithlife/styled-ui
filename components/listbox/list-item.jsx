@@ -13,9 +13,12 @@ export function ListItem(props) {
 	const handleItemSelect = useCallback(
 		() => {
 			setFocusedMenuItem(index);
-			onItemSelect(id);
+
+			if (!disabled) {
+				onItemSelect(id);
+			}
 		},
-		[onItemSelect, id],
+		[onItemSelect, id, disabled],
 	);
 
 	return (

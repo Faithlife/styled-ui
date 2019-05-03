@@ -10,15 +10,19 @@ const handledKeys = {
 	end: 'End',
 };
 
-export function useKeyboardActivate(onToggleMenu, focusedMenuItem, setSelectedItem) {
+export function useKeyboardActivate(onToggleMenu, focusedMenuItem, setFocusedMenuItem) {
 	const handleKeyboardActivate = useCallback(
 		event => {
 			switch (event.key) {
 				case handledKeys.enter:
-				case handledKeys.spaceBar:
+				case handledKeys.spaceBar: {
+					event.preventDefault();
+					onToggleMenu();
+					break;
+				}
 				case handledKeys.arrowDown: {
 					event.preventDefault();
-					setSelectedItem(
+					setFocusedMenuItem(
 						focusedMenuItem && typeof focusedMenuItem === 'number' ? focusedMenuItem + 1 : 'first',
 					);
 					onToggleMenu();
@@ -26,7 +30,7 @@ export function useKeyboardActivate(onToggleMenu, focusedMenuItem, setSelectedIt
 				}
 				case handledKeys.arrowUp: {
 					event.preventDefault();
-					setSelectedItem(
+					setFocusedMenuItem(
 						focusedMenuItem && typeof focusedMenuItem === 'number' ? focusedMenuItem - 1 : 'last',
 					);
 					onToggleMenu();
@@ -36,7 +40,7 @@ export function useKeyboardActivate(onToggleMenu, focusedMenuItem, setSelectedIt
 					return;
 			}
 		},
-		[onToggleMenu, setSelectedItem],
+		[onToggleMenu, setFocusedMenuItem, focusedMenuItem],
 	);
 
 	return handleKeyboardActivate;

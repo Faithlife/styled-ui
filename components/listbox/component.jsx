@@ -48,7 +48,7 @@ Listbox.propTypes = {
 	}),
 	/** If the what the content of the listbox is, is not apparent (ex: it is not part of a larger component) the id of the label must be supplied */
 	labelledBy: PropTypes.string,
-	selectedId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+	selectedId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 Listbox.defaultProps = {
