@@ -44,6 +44,7 @@ import {
 	ListboxToggle,
 	ListboxMenu,
 	ListItem,
+	ParameterSelect,
 } from '../components/main';
 import { BaseButton } from '../components/button/base-button';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
@@ -751,6 +752,31 @@ const components = [
 						margin-right: 8px;
 					`,
 					DownArrow: styled.img.attrs({ src: DownArrow })``,
+				},
+			},
+		],
+	},
+	{
+		title: 'Parameter Sentence',
+		pages: [
+			{
+				path: '/parameter-sentence/variations',
+				title: 'Parameter Sentence',
+				content: pageLoader(() => import('./parameter-sentence/variations.md')),
+				imports: {
+					ParameterSelect,
+					ListboxDemo: styled.div`
+						display: flex;
+						align-items: baseline;
+					`,
+					Button,
+					timeSpans: {
+						month: 'month',
+						threeMonths: '3 months',
+						sixMonths: '6 months',
+						twelveMonths: '12 months',
+						yearToDate: 'year to date',
+					},
 				},
 			},
 		],

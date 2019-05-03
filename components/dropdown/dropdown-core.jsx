@@ -29,7 +29,7 @@ export function DropdownCore({
 		() => ({
 			isOpen,
 			handleCloseMenu,
-			menuId,
+			menuId: `menu:${menuId}`,
 			focusedMenuItem,
 			setFocusedMenuItem,
 			dropdownToggleRef,

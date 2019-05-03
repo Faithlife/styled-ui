@@ -64,6 +64,7 @@ export const colors = {
 	blueLight: '#79cafb',
 	blueBase: '#1e91d6',
 	blueDark: '#0174b9',
+	blueActive: '#1D6CA1',
 
 	greenTint: '#e9f8e1',
 	greenLight: '#8fdb6b',
