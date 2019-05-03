@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Catalog, pageLoader } from 'catalog';
 import * as dateFunctions from 'date-fns';
 import chrono from 'chrono-node';
+import { CommandSentence } from '@faithlife/command-sentence-control';
 import {
 	AnchorButton,
 	Bootstrap,
@@ -770,13 +771,15 @@ const components = [
 						align-items: baseline;
 					`,
 					Button,
-					timeSpans: {
-						month: 'month',
-						threeMonths: '3 months',
-						sixMonths: '6 months',
-						twelveMonths: '12 months',
-						yearToDate: 'year to date',
+					prePostOptions: {
+						after: 'after',
+						before: 'before',
 					},
+					scheduleOptions: {
+						annual: 'annual',
+						monthly: 'monthly',
+					},
+					CommandSentence,
 				},
 			},
 		],
