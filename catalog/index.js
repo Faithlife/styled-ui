@@ -47,6 +47,7 @@ import {
 	ListItem,
 	ParameterSelect,
 	ParameterInputBox,
+	ParameterSentence,
 } from '../components/main';
 import { BaseButton } from '../components/button/base-button';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
