@@ -11,6 +11,8 @@ export function ParameterInputBox(props) {
 		formatValue,
 		width,
 		accessibilityLabel,
+		styleOverrides,
+		theme,
 		...inputProps
 	} = props;
 	const [isFocused, setIsFocused] = useState(false);
@@ -25,7 +27,7 @@ export function ParameterInputBox(props) {
 		<Styled.Container {...(isFocused ? { width } : {})}>
 			{!isFocused ? (
 				<Styled.Button onClick={toggleFocus} onFocus={toggleFocus}>
-					<Styled.ButtonContent theme={{}} styleOverrides={{}}>
+					<Styled.ButtonContent theme={theme} styleOverrides={styleOverrides}>
 						{displayValue}
 					</Styled.ButtonContent>
 				</Styled.Button>
@@ -38,7 +40,7 @@ export function ParameterInputBox(props) {
 						onEnter={toggleFocus}
 						onBlur={toggleFocus}
 						autoFocus
-						styleOverrides={{ width, useBorderBox: true }}
+						styleOverrides={{ width }}
 						aria-label={accessibilityLabel}
 						{...inputProps}
 					/>
@@ -55,4 +57,17 @@ ParameterInputBox.propTypes = {
 	formatValue: PropTypes.func,
 	width: PropTypes.string,
 	accessibilityLabel: PropTypes.string.isRequired,
+	theme: PropTypes.shape({
+		hoverColor: PropTypes.string,
+		activeColor: PropTypes.string,
+		underlineColor: PropTypes.string,
+	}),
+	styleOverrides: PropTypes.shape({
+		fontSize: PropTypes.string,
+	}),
+};
+
+ParameterInputBox.defaultProps = {
+	theme: {},
+	styleOverrides: {},
 };

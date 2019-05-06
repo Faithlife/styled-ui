@@ -2,6 +2,8 @@
 
 Note to designers: under the hood a parameter sentence is seen as a form by screen readers. Including a small description of each parameter as if it was a form label will go a long way towards keeping it accessible.
 
+This example uses [@faithlife/command-sentence-control](https://git/Logos/command-sentence-control) (git enterprise link)
+
 ```react
 showSource: true
 state: {
@@ -83,6 +85,32 @@ state: {
 				/>
 			</CommandSentence.Field>
 		</CommandSentence>
+	</ParameterSentence>
+</ParameterSentenceDemo>
+```
+
+## Style variations
+
+```react
+showSource: true
+state: {
+	isOpen: false,
+	prepost: 'after',
+	schedule: 'annual',
+	percentage: 10,
+	income: 55700,
+}
+---
+<ParameterSentenceDemo>
+	<ParameterSentence accessibilityFormLabel="Tithe Calculator">
+		<ParameterSelect
+			selectedId={state.schedule}
+			onItemSelect={item => setState({ schedule: item })}
+			options={scheduleOptions}
+			accessibilityLabel={'Pay schedule of income'}
+			theme={{ underlineColor: 'plum' }}
+			styleOverrides={{ fontSize: '18px' }}
+		/>
 	</ParameterSentence>
 </ParameterSentenceDemo>
 ```

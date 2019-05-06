@@ -10,6 +10,8 @@ export function ParameterSelect({
 	width,
 	accessibilityLabel,
 	useNativeSelect,
+	styleOverrides,
+	theme,
 }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isFocused, setIsFocused] = useState(false);
@@ -24,7 +26,6 @@ export function ParameterSelect({
 
 	const handleNativeSelect = useCallback(
 		event => {
-			console.log(event.target.value);
 			onItemSelect(event.target.value);
 		},
 		[onItemSelect],
@@ -53,8 +54,8 @@ export function ParameterSelect({
 							>
 								<Styled.ButtonContent
 									isOpen={isOpen}
-									theme={{}}
-									styleOverrides={{}}
+									theme={theme}
+									styleOverrides={styleOverrides}
 									aria-label={isFocused ? accessibilityLabel : options[selectedId]}
 								>
 									{options[selectedId]}
@@ -75,8 +76,8 @@ export function ParameterSelect({
 				<Styled.Select
 					value={selectedId}
 					onChange={handleNativeSelect}
-					theme={{}}
-					styleOverrides={{}}
+					theme={theme}
+					styleOverrides={styleOverrides}
 				>
 					{options &&
 						Object.entries(options).map(([id, name]) => (
@@ -99,8 +100,18 @@ ParameterSelect.propTypes = {
 	accessibilityLabel: PropTypes.string,
 	/** Use the native select controls (mobile only) */
 	useNativeSelect: PropTypes.bool,
+	theme: PropTypes.shape({
+		hoverColor: PropTypes.string,
+		activeColor: PropTypes.string,
+		underlineColor: PropTypes.string,
+	}),
+	styleOverrides: PropTypes.shape({
+		fontSize: PropTypes.string,
+	}),
 };
 
 ParameterSelect.defaultProps = {
 	width: '180px',
+	styleOverrides: {},
+	theme: {},
 };

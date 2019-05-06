@@ -8,22 +8,22 @@ const defaultInputHeight = 14;
 const selectStyling = css`
 	white-space: nowrap;
 	min-height: fit-content;
-	font-size: ${props => props.styleOverrides.fontSize || '16px'};
-	width: ${props => props.styleOverrides.width};
+	font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
+	width: ${({ styleOverrides }) => styleOverrides.width};
 	padding-bottom: 1px;
-	border-bottom: dashed ${thickness.three} ${colors.blueBase};
+	border-bottom: dashed ${thickness.three} ${({ theme }) => theme.underlineColor || colors.blueBase};
 	font-weight: bold;
-	color: black;
+	color: ${colors.gray66};
 	${props => `color: ${props.isOpen ? colors.blueActive : colors.gray66}`};
 
 	&:hover {
 		&:not(:focus) {
-			color: ${colors.blueBase};
+			color: ${({ theme }) => theme.hoverColor || colors.blueBase};
 		}
 	}
 
 	&:active {
-		color: ${colors.blueBase};
+		color: ${({ theme }) => theme.activeColor || colors.blueActive};
 	}
 
 	&:focus {
