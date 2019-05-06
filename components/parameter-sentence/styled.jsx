@@ -70,7 +70,9 @@ export const InputContainer = styled.div`
 export const ParameterSentence = styled.form.attrs({
 	role: props => (props.isSearchForm ? 'search' : 'form'),
 	'aria-labelledby': ({ labelledBy }) => labelledBy,
-})``;
+})`
+	/* stylelint-disable no-empty-block https://github.com/stylelint/stylelint/issues/3494 */
+`;
 
 export const Fieldset = styled.fieldset`
 	border: none;
@@ -79,8 +81,7 @@ export const Fieldset = styled.fieldset`
 `;
 
 export const Select = styled.select`
-	-moz-appearance: none;
-	-webkit-appearance: none;
+	appearance: none;
 	user-select: none;
 	cursor: pointer;
 	border: none;
