@@ -7,7 +7,7 @@ showSource: true
 state: { isOpen: false, selected: 0 }
 ---
 <ListboxDemo>
-	<Label id="listboxLabel">Pick you favorite browser:</Label>
+	<Label id="listboxLabel">Pick your favorite browser:</Label>
 	<Listbox
 		isOpen={state.isOpen}
 		onItemSelect={id => setState({ selected: id })}

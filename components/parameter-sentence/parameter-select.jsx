@@ -3,8 +3,13 @@ import PropTypes from 'prop-types';
 import { Listbox, ListboxToggle, ListboxMenu, ListItem } from '../listbox';
 import * as Styled from './styled.jsx';
 
-export function ParameterSelect({ options, selectedId, onItemSelect, width }) {
+export function ParameterSelect({ options, selectedId, onItemSelect, width, accessibilityLabel }) {
 	const [isOpen, setIsOpen] = useState(false);
+	const [isFocused, setIsFocused] = useState(false);
+
+	const toggleFocus = useCallback(() => {
+		setIsFocused(state => !state);
+	}, []);
 
 	const handleToggleMenu = useCallback(() => {
 		setIsOpen(state => !state);
@@ -21,8 +26,20 @@ export function ParameterSelect({ options, selectedId, onItemSelect, width }) {
 			>
 				<ListboxToggle>
 					{({ ref, onKeyDown, onClick, ariaProps }) => (
-						<Styled.Button ref={ref} onKeyDown={onKeyDown} onClick={onClick} {...ariaProps}>
-							<Styled.ButtonContent isOpen={isOpen} theme={{}} styleOverrides={{}}>
+						<Styled.Button
+							ref={ref}
+							onKeyDown={onKeyDown}
+							onClick={onClick}
+							onFocus={toggleFocus}
+							onBlur={toggleFocus}
+							{...ariaProps}
+						>
+							<Styled.ButtonContent
+								isOpen={isOpen}
+								theme={{}}
+								styleOverrides={{}}
+								aria-label={isFocused ? accessibilityLabel : options[selectedId]}
+							>
 								{options[selectedId]}
 							</Styled.ButtonContent>
 						</Styled.Button>
@@ -47,6 +64,7 @@ ParameterSelect.propTypes = {
 	onItemSelect: PropTypes.func.isRequired,
 	/** Width (in pixels) of the select dropdown */
 	width: PropTypes.string,
+	accessibilityLabel: PropTypes.string,
 };
 
 ParameterSelect.defaultProps = {
