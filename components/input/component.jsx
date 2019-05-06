@@ -25,6 +25,7 @@ export const Input = forwardClassRef(
 			styleOverrides: PropTypes.shape({
 				width: PropTypes.string,
 			}),
+			size: PropTypes.number,
 		};
 
 		static defaultProps = {

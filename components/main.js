@@ -32,4 +32,4 @@ export {
 	MenuCheckbox,
 } from './dropdown';
 export { Listbox, ListboxToggle, ListboxMenu, ListItem } from './listbox';
-export { ParameterSelect } from './parameter-sentence';
+export { ParameterSelect, ParameterInputBox } from './parameter-sentence';

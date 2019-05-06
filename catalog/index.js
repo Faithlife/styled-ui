@@ -46,6 +46,7 @@ import {
 	ListboxMenu,
 	ListItem,
 	ParameterSelect,
+	ParameterInputBox,
 } from '../components/main';
 import { BaseButton } from '../components/button/base-button';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
@@ -780,6 +781,8 @@ const components = [
 						monthly: 'monthly',
 					},
 					CommandSentence,
+					ParameterInputBox,
+					ParameterSentence,
 				},
 			},
 		],

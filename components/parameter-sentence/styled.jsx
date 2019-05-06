@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import { colors, thickness } from '../shared-styles';
 import { resetStyles } from '../utils';
 
+const defaultInputPadding = 8;
+const defaultInputHeight = 14;
+
 export const Button = styled.button`
 	${resetStyles};
 
@@ -51,4 +54,22 @@ export const ButtonContent = styled.div.attrs({ tabIndex: '-1' })`
 
 export const Container = styled.div`
 	display: inline-block;
+	position: relative;
+	width: ${props => props.width};
+`;
+
+export const InputContainer = styled.div`
+	position: absolute;
+	top: -${defaultInputPadding + defaultInputHeight}px;
+`;
+
+export const ParameterSentence = styled.form.attrs({
+	role: props => (props.isSearchForm ? 'search' : 'form'),
+	'aria-labelledby': ({ labelledBy }) => labelledBy,
+})``;
+
+export const Fieldset = styled.fieldset`
+	border: none;
+	padding: 0;
+	margin: 0;
 `;
