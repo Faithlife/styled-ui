@@ -17,6 +17,7 @@ export const baseButtonProps = Object.freeze({
 	primaryTransparent: 'primaryTransparent',
 	minorTransparent: 'minorTransparent',
 	icon: 'icon',
+	minor: 'minor',
 });
 
 export function BaseButton(props) {
@@ -72,6 +73,8 @@ BaseButton.propTypes = {
 	[baseButtonProps.large]: PropTypes.bool,
 	/** Transparent with primary text variation */
 	[baseButtonProps.primaryTransparent]: PropTypes.bool,
+	/** Minor button variation */
+	[baseButtonProps.primary]: PropTypes.bool,
 	/** Transparent with minor text variation */
 	[baseButtonProps.minorTransparent]: PropTypes.bool,
 	/** Enables rendering a display: flex span, needed for rendering SVG icons */
