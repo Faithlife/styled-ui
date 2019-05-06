@@ -774,7 +774,7 @@ const components = [
 				content: pageLoader(() => import('./parameter-sentence/variations.md')),
 				imports: {
 					ParameterSelect,
-					ListboxDemo: styled.div`
+					ParameterSentenceDemo: styled.div`
 						display: flex;
 						align-items: baseline;
 					`,
@@ -784,8 +784,8 @@ const components = [
 						before: 'before',
 					},
 					scheduleOptions: {
-						annual: 'annual',
 						monthly: 'monthly',
+						annual: 'annual',
 					},
 					CommandSentence,
 					ParameterInputBox,

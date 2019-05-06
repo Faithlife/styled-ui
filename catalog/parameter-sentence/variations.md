@@ -1,6 +1,6 @@
-## Listbox
+## Desktop Parameter Sentence
 
-Refer to the dropdown docs for more info
+Note to designers: under the hood a parameter sentence is seen as a form by screen readers. Including a small description of each parameter as if it was a form label will go a long way towards keeping it accessible.
 
 ```react
 showSource: true
@@ -10,12 +10,11 @@ state: {
 	schedule: 'annual',
 	percentage: 10,
 	income: 55700,
-	template: 'I want to give %PERCENTAGE% (%PREPOST% 19% taxes) of my %SCHEDULE% income of %INCOME%.'
 }
 ---
-<ListboxDemo>
+<ParameterSentenceDemo>
 	<ParameterSentence accessibilityFormLabel="Tithe Calculator">
-		<CommandSentence template={state.template}>
+		<CommandSentence template={'I want to give %PERCENTAGE% (%PREPOST% 19% taxes) of my %SCHEDULE% income of %INCOME%.'}>
 			<CommandSentence.Field name="PERCENTAGE">
 				<ParameterInputBox
 					defaultValue="10"
@@ -54,5 +53,36 @@ state: {
 			</CommandSentence.Field>
 		</CommandSentence>
 	</ParameterSentence>
-</ListboxDemo>
+</ParameterSentenceDemo>
+```
+
+## Mobile ParameterSelects
+
+If this is a mobile or touch screen device include the `useNativeSelect` prop to trigger the native select picker.
+
+```react
+showSource: true
+state: {
+	isOpen: false,
+	prepost: 'after',
+	schedule: 'annual',
+	percentage: 10,
+	income: 55700,
+}
+---
+<ParameterSentenceDemo>
+	<ParameterSentence accessibilityFormLabel="Tithe Calculator">
+		<CommandSentence template={'I want to give 10% of my %SCHEDULE% income.'}>
+			<CommandSentence.Field name="SCHEDULE">
+				<ParameterSelect
+					useNativeSelect
+					selectedId={state.schedule}
+					onItemSelect={item => setState({ schedule: item })}
+					options={scheduleOptions}
+					accessibilityLabel={'Pay schedule of income'}
+				/>
+			</CommandSentence.Field>
+		</CommandSentence>
+	</ParameterSentence>
+</ParameterSentenceDemo>
 ```

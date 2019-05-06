@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 import { Listbox, ListboxToggle, ListboxMenu, ListItem } from '../listbox';
 import * as Styled from './styled.jsx';
 
-export function ParameterSelect({ options, selectedId, onItemSelect, width, accessibilityLabel }) {
+export function ParameterSelect({
+	options,
+	selectedId,
+	onItemSelect,
+	width,
+	accessibilityLabel,
+	useNativeSelect,
+}) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isFocused, setIsFocused] = useState(false);
 
@@ -15,45 +22,70 @@ export function ParameterSelect({ options, selectedId, onItemSelect, width, acce
 		setIsOpen(state => !state);
 	}, []);
 
+	const handleNativeSelect = useCallback(
+		event => {
+			console.log(event.target.value);
+			onItemSelect(event.target.value);
+		},
+		[onItemSelect],
+	);
+
 	return (
 		<Styled.Container>
-			<Listbox
-				isOpen={isOpen}
-				onToggleMenu={handleToggleMenu}
-				onItemSelect={onItemSelect}
-				selectedId={selectedId}
-				styleOverrides={{ width }}
-			>
-				<ListboxToggle>
-					{({ ref, onKeyDown, onClick, ariaProps }) => (
-						<Styled.Button
-							ref={ref}
-							onKeyDown={onKeyDown}
-							onClick={onClick}
-							onFocus={toggleFocus}
-							onBlur={toggleFocus}
-							{...ariaProps}
-						>
-							<Styled.ButtonContent
-								isOpen={isOpen}
-								theme={{}}
-								styleOverrides={{}}
-								aria-label={isFocused ? accessibilityLabel : options[selectedId]}
+			{!useNativeSelect ? (
+				<Listbox
+					isOpen={isOpen}
+					onToggleMenu={handleToggleMenu}
+					onItemSelect={onItemSelect}
+					selectedId={selectedId}
+					styleOverrides={{ width }}
+				>
+					<ListboxToggle>
+						{({ ref, onKeyDown, onClick, ariaProps }) => (
+							<Styled.Button
+								ref={ref}
+								onKeyDown={onKeyDown}
+								onClick={onClick}
+								onFocus={toggleFocus}
+								onBlur={toggleFocus}
+								type="button"
+								{...ariaProps}
 							>
-								{options[selectedId]}
-							</Styled.ButtonContent>
-						</Styled.Button>
-					)}
-				</ListboxToggle>
-				<ListboxMenu>
+								<Styled.ButtonContent
+									isOpen={isOpen}
+									theme={{}}
+									styleOverrides={{}}
+									aria-label={isFocused ? accessibilityLabel : options[selectedId]}
+								>
+									{options[selectedId]}
+								</Styled.ButtonContent>
+							</Styled.Button>
+						)}
+					</ListboxToggle>
+					<ListboxMenu>
+						{options &&
+							Object.entries(options).map(([id, name]) => (
+								<ListItem key={id} id={id}>
+									{name}
+								</ListItem>
+							))}
+					</ListboxMenu>
+				</Listbox>
+			) : (
+				<Styled.Select
+					value={selectedId}
+					onChange={handleNativeSelect}
+					theme={{}}
+					styleOverrides={{}}
+				>
 					{options &&
 						Object.entries(options).map(([id, name]) => (
-							<ListItem key={id} id={id}>
+							<option key={id} value={id}>
 								{name}
-							</ListItem>
+							</option>
 						))}
-				</ListboxMenu>
-			</Listbox>
+				</Styled.Select>
+			)}
 		</Styled.Container>
 	);
 }
@@ -65,6 +97,8 @@ ParameterSelect.propTypes = {
 	/** Width (in pixels) of the select dropdown */
 	width: PropTypes.string,
 	accessibilityLabel: PropTypes.string,
+	/** Use the native select controls (mobile only) */
+	useNativeSelect: PropTypes.bool,
 };
 
 ParameterSelect.defaultProps = {
