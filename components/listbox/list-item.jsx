@@ -36,6 +36,7 @@ export function ListItem(props) {
 }
 
 ListItem.propTypes = {
+	/** Passed to the onItemSelect function */
 	id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 

@@ -1,6 +1,6 @@
 ## Listbox
 
-Refer to the dropdown docs for more info
+A list box should be used in situations simmilar to a html select. Refer to the dropdown docs for more info on varriations.
 
 ```react
 showSource: true

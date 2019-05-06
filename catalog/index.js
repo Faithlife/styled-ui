@@ -757,6 +757,12 @@ const components = [
 					DownArrow: styled.img.attrs({ src: DownArrow })``,
 				},
 			},
+			{
+				path: '/listbox/documentation',
+				title: 'Listbox Documentation',
+				content: pageLoader(() => import('./listbox/documentation.md')),
+				imports: { Listbox, ListboxToggle, ListItem, DocgenTable },
+			},
 		],
 	},
 	{
@@ -785,6 +791,12 @@ const components = [
 					ParameterInputBox,
 					ParameterSentence,
 				},
+			},
+			{
+				path: '/parameter-sentence/documentation',
+				title: 'Parameter Sentence Documentation',
+				content: pageLoader(() => import('./parameter-sentence/documentation.md')),
+				imports: { ParameterSentence, ParameterSelect, ParameterInputBox, DocgenTable },
 			},
 		],
 	},
