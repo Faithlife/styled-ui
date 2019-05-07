@@ -86,6 +86,7 @@ export const Select = styled.select`
 	cursor: pointer;
 	border: none;
 	background-color: transparent;
+	text-align-last: center;
 
 	&::-ms-expand: {
 		display: none;

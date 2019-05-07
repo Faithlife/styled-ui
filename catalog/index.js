@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { Catalog, pageLoader } from 'catalog';
 import * as dateFunctions from 'date-fns';
 import chrono from 'chrono-node';
-import { CommandSentence } from '@faithlife/command-sentence-control';
 import {
 	AnchorButton,
 	Bootstrap,
@@ -778,19 +777,23 @@ const components = [
 						display: flex;
 						align-items: baseline;
 					`,
-					Button,
-					prePostOptions: {
-						after: 'after',
-						before: 'before',
-					},
 					scheduleOptions: {
+						weekly: 'weekly',
+						biweekly: 'biweekly',
+						twiceMonthly: 'twice-monthly',
 						monthly: 'monthly',
+						quarterly: 'quarterly',
 						annual: 'annual',
 					},
-					CommandSentence,
 					ParameterInputBox,
 					ParameterSentence,
 				},
+			},
+			{
+				path: '/parameter-sentence/command-sentence',
+				title: 'Command Sentence',
+				content: pageLoader(() => import('./parameter-sentence/command-sentence.md')),
+				imports: {},
 			},
 			{
 				path: '/parameter-sentence/documentation',

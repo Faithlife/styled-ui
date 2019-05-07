@@ -295,13 +295,6 @@
   resolved "https://registry.yarnpkg.com/@emotion/utils/-/utils-0.8.2.tgz#576ff7fb1230185b619a75d258cbc98f0867a8dc"
   integrity sha512-rLu3wcBWH4P5q1CGoSSH/i9hrXs7SlbRLkoq9IGuoPYNGQvDJ3pt/wmOM+XgYjIDRMVIdkUWt0RsfzF50JfnCw==
 
-"@faithlife/command-sentence-control@^1.0.4":
-  version "1.0.4"
-  resolved "http://npm.faithlife.io/@faithlife%2fcommand-sentence-control/-/command-sentence-control-1.0.4.tgz#c5c7133d998818d87f2945a665b391495d9cf553"
-  integrity sha512-6L9fafggK09PJmZMOiBn9Es5vhmJu4p4wRwMakdl+njOrUv2imJSfdexaIi7jiSZfCvQjAG3Aep/Vul7cTCIFA==
-  dependencies:
-    prop-types "^15.5.10"
-
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"

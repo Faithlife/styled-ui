@@ -50,7 +50,6 @@
 		"reactstrap": "^6.1.0"
 	},
 	"devDependencies": {
-		"@faithlife/command-sentence-control": "^1.0.4",
 		"@storybook/storybook-deployer": "^2.3.0",
 		"ag-grid": "^18.0.1",
 		"ag-grid-enterprise": "^18.1.0",
