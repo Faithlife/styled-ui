@@ -5,7 +5,6 @@ import * as Styled from './styled';
 
 export const baseButtonProps = Object.freeze({
 	children: 'children',
-	className: 'className',
 	condensed: 'condensed',
 	theme: 'theme',
 	styleOverrides: 'styleOverrides',
@@ -43,8 +42,6 @@ export function BaseButton(props) {
 BaseButton.propTypes = {
 	/** The contents of the button (can be text, svg, or other element) */
 	[baseButtonProps.children]: PropTypes.node,
-	/** See the docs for how to override styles properly */
-	[baseButtonProps.className]: PropTypes.string,
 	/** Condensed button padding. Uses same padding for horizontal and vertical. */
 	[baseButtonProps.condensed]: PropTypes.bool,
 	/** An optional theme */

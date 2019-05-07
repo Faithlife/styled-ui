@@ -19,6 +19,8 @@ Button.propTypes = {
 	...BaseButton.propTypes,
 	/** The type of button (for instance, submit) */
 	type: PropTypes.string,
+	/** See the docs for how to override styles properly */
+	className: PropTypes.string,
 };
 
 Button.defaultProps = {
