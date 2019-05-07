@@ -3,23 +3,6 @@ import PropTypes from 'prop-types';
 import { applyVariations } from '../utils';
 import * as Styled from './styled';
 
-export const baseButtonProps = Object.freeze({
-	children: 'children',
-	className: 'className',
-	condensed: 'condensed',
-	theme: 'theme',
-	styleOverrides: 'styleOverrides',
-	primary: 'primary',
-	primaryOutline: 'primaryOutline',
-	small: 'small',
-	medium: 'medium',
-	large: 'large',
-	primaryTransparent: 'primaryTransparent',
-	minorTransparent: 'minorTransparent',
-	icon: 'icon',
-	minor: 'minor',
-});
-
 export function BaseButton(props) {
 	// To make sure that BaseButton and the Button/AnchorButton components get the right props we export an object with the expected props for the BaseButton
 	// The Button/AnchorButtons should get all props that are not explicity required by the child
@@ -42,45 +25,43 @@ export function BaseButton(props) {
 
 BaseButton.propTypes = {
 	/** The contents of the button (can be text, svg, or other element) */
-	[baseButtonProps.children]: PropTypes.node,
-	/** See the docs for how to override styles properly */
-	[baseButtonProps.className]: PropTypes.string,
+	children: PropTypes.node,
 	/** Condensed button padding. Uses same padding for horizontal and vertical. */
-	[baseButtonProps.condensed]: PropTypes.bool,
+	condensed: PropTypes.bool,
 	/** An optional theme */
-	[baseButtonProps.theme]: PropTypes.shape({
+	theme: PropTypes.shape({
 		defaultColor: PropTypes.string,
 		hoverColor: PropTypes.string,
 		activeColor: PropTypes.string,
 		disabledColor: PropTypes.string,
 	}),
 	/** Style overrides */
-	[baseButtonProps.styleOverrides]: PropTypes.shape({
+	styleOverrides: PropTypes.shape({
 		width: PropTypes.string,
 		fontSize: PropTypes.string,
 		padding: PropTypes.string,
 		justifyContent: PropTypes.string,
 	}),
 	/** Primary button variation */
-	[baseButtonProps.primary]: PropTypes.bool,
+	primary: PropTypes.bool,
 	/** Primary outline variation */
-	[baseButtonProps.primaryOutline]: PropTypes.bool,
+	primaryOutline: PropTypes.bool,
 	/** Small variation */
-	[baseButtonProps.small]: PropTypes.bool,
+	small: PropTypes.bool,
 	/** Medium variation */
-	[baseButtonProps.medium]: PropTypes.bool,
+	medium: PropTypes.bool,
 	/** Large variation */
-	[baseButtonProps.large]: PropTypes.bool,
+	large: PropTypes.bool,
 	/** Transparent with primary text variation */
-	[baseButtonProps.primaryTransparent]: PropTypes.bool,
+	primaryTransparent: PropTypes.bool,
 	/** Minor button variation */
-	[baseButtonProps.primary]: PropTypes.bool,
+	minor: PropTypes.bool,
 	/** Transparent with minor text variation */
-	[baseButtonProps.minorTransparent]: PropTypes.bool,
+	minorTransparent: PropTypes.bool,
 	/** Enables rendering a display: flex span, needed for rendering SVG icons */
-	[baseButtonProps.icon]: PropTypes.node,
+	icon: PropTypes.node,
 };
 
 BaseButton.defaultProps = {
-	[baseButtonProps.styleOverrides]: {},
+	styleOverrides: {},
 };
