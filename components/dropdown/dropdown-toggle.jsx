@@ -20,7 +20,7 @@ export function DropdownToggle(props) {
 
 	const handleToggleMenu = useCallback(
 		event => {
-			setFocusedMenuItem(-1);
+			setFocusedMenuItem(null);
 			onToggleMenu(event);
 		},
 		[setFocusedMenuItem, onToggleMenu],
