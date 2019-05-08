@@ -101,7 +101,7 @@ const components = [
 						background: #fff;
 						border: 16px solid #f2f2f2;
 					`,
-					AccordionExtraButton: styled.div.attrs({
+					AccordionCustomIndicator: styled.div.attrs({
 						tabIndex: '-1',
 					})`
 						grid-row: header;

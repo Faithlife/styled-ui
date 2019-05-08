@@ -43,7 +43,7 @@ showSource: true
 </AccordionDemo>
 ```
 
-### With hideArrows
+### With `hideArrows` and custom indicators
 
 ```react
 plain: true
@@ -55,9 +55,9 @@ showSource: true
 			<AccordionHeader>
 				Section One Title
 			</AccordionHeader>
-			<AccordionExtraButton>
+			<AccordionCustomIndicator>
 				<Checkbox isChecked />
-			</AccordionExtraButton>
+			</AccordionCustomIndicator>
 			<AccordionPanel>
 				<div><input placeholder="Name" /></div>
 				<div><input placeholder="Email" /></div>
@@ -67,9 +67,9 @@ showSource: true
 			<AccordionHeader>
 				Section Two Title
 			</AccordionHeader>
-			<AccordionExtraButton>
+			<AccordionCustomIndicator>
 				<Checkbox isChecked />
-			</AccordionExtraButton>
+			</AccordionCustomIndicator>
 			<AccordionPanel>
 				<div><input placeholder="Home address" /></div>
 				<div><input placeholder="Zip code" /></div>
@@ -79,9 +79,9 @@ showSource: true
 			<AccordionHeader>
 				Section Three Title
 			</AccordionHeader>
-			<AccordionExtraButton>
+			<AccordionCustomIndicator>
 				<Checkbox isChecked />
-			</AccordionExtraButton>
+			</AccordionCustomIndicator>
 			<AccordionPanel>
 				<div><input placeholder="Mother's maiden name" /></div>
 				<div><input placeholder="Name of your first pet" /></div>
