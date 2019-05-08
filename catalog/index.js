@@ -91,12 +91,25 @@ const components = [
 					Accordion,
 					AccordionHeader,
 					AccordionItem,
-					AccordionPanel,
-					AccordionDemo: styled.div`
-						&& > * {
-							margin: 8px;
-						}
+					AccordionPanel: styled(AccordionPanel)`
+						display: grid;
+						grid-auto-flow: row;
+						grid-row-gap: 12px;
+						color: #f00;
 					`,
+					AccordionDemo: styled.div`
+						background: #fff;
+						border: 16px solid #f2f2f2;
+					`,
+					AccordionExtraButton: styled.div.attrs({
+						tabIndex: '-1',
+					})`
+						grid-row: header;
+						grid-column: extra;
+						margin-top: 16px;
+						margin-right: 24px;
+					`,
+					Checkbox,
 				},
 			},
 			{

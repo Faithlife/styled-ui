@@ -2,9 +2,10 @@ Accordions.
 
 ## Component Variations
 
-### Scale Factor
+### With arrows
 
 ```react
+plain: true
 showSource: true
 ---
 <AccordionDemo>
@@ -14,18 +15,17 @@ showSource: true
 				Section One Title
 			</AccordionHeader>
 			<AccordionPanel>
-				Section One Body
+				<div><input placeholder="Name" /></div>
+				<div><input placeholder="Email" /></div>
 			</AccordionPanel>
 		</AccordionItem>
 		<AccordionItem>
 			<AccordionHeader>
 				Section Two Title
 			</AccordionHeader>
-			<div style={{ gridRow: 'header', gridColumn: 'extra'}}>
-				Hey!
-			</div>
 			<AccordionPanel>
-				Section Two Body
+				<div><input placeholder="Home address" /></div>
+				<div><input placeholder="Zip code" /></div>
 			</AccordionPanel>
 		</AccordionItem>
 		<AccordionItem>
@@ -33,7 +33,56 @@ showSource: true
 				Section Three Title
 			</AccordionHeader>
 			<AccordionPanel>
-				Section Three Body
+				<div><input placeholder="Mother's maiden name" /></div>
+				<div><input placeholder="Name of your first pet" /></div>
+			</AccordionPanel>
+		</AccordionItem>
+	</Accordion>
+</AccordionDemo>
+```
+
+### With hideArrows
+
+```react
+plain: true
+showSource: true
+---
+<AccordionDemo>
+	<Accordion hideArrows>
+		<AccordionItem>
+			<AccordionHeader>
+				Section One Title
+			</AccordionHeader>
+			<AccordionExtraButton>
+				<Checkbox isChecked />
+			</AccordionExtraButton>
+			<AccordionPanel>
+				<div><input placeholder="Name" /></div>
+				<div><input placeholder="Email" /></div>
+			</AccordionPanel>
+		</AccordionItem>
+		<AccordionItem>
+			<AccordionHeader>
+				Section Two Title
+			</AccordionHeader>
+			<AccordionExtraButton>
+				<Checkbox isChecked />
+			</AccordionExtraButton>
+			<AccordionPanel>
+				<div><input placeholder="Home address" /></div>
+				<div><input placeholder="Zip code" /></div>
+			</AccordionPanel>
+		</AccordionItem>
+		<AccordionItem>
+			<AccordionHeader>
+				Section Three Title
+			</AccordionHeader>
+			<AccordionExtraButton>
+				<Checkbox isChecked />
+			</AccordionExtraButton>
+			<AccordionPanel>
+				<div><input placeholder="Mother's maiden name" /></div>
+				<div><input placeholder="Name of your first pet" /></div>
 			</AccordionPanel>
 		</AccordionItem>
 	</Accordion>
