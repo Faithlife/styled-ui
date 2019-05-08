@@ -30,8 +30,8 @@ export function ParameterSentence({ children, isSearchForm, accessibilityFormLab
 ParameterSentence.propTypes = {
 	children: PropTypes.node.isRequired,
 	isSearchForm: PropTypes.bool,
-	/** A hidden label that will be applied to the parameter sentence (required is labelledBy is not supplied)*/
+	/** A hidden label that will be applied to the parameter sentence (required if labelledBy is not supplied)*/
 	accessibilityFormLabel: PropTypes.string,
-	/** The id of a label that describes the parameter sentence (required is accessibilityFormLabel is not supplied) */
+	/** The id of a label that describes the parameter sentence (required if accessibilityFormLabel is not supplied) */
 	labelledBy: PropTypes.string,
 };

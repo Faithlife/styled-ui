@@ -20,7 +20,7 @@ export function ParameterSelect({
 	const labelId = `parameterSelectLabel:${id}`;
 
 	const handleToggleMenu = useCallback(() => {
-		setIsOpen(state => !state);
+		setIsOpen(isOpenState => !isOpenState);
 	}, []);
 
 	const handleNativeSelect = useCallback(

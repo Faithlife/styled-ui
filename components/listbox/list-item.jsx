@@ -18,7 +18,7 @@ export function ListItem(props) {
 				onItemSelect(id);
 			}
 		},
-		[onItemSelect, id, disabled],
+		[onItemSelect, id, disabled, index],
 	);
 
 	return (

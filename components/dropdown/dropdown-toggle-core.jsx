@@ -4,7 +4,7 @@ import { Button } from '../button';
 import { PopoverReference } from '../popover';
 import { useDropdownContext } from './dropdown-utils';
 
-/** Accepts all props a Button component would as well. */
+/** If not using render props will pass all unrecognized props to children. */
 export function DropdownToggleCore({ children, buttonProps, onKeyPress, onToggleMenu, ariaProps }) {
 	const { dropdownToggleRef } = useDropdownContext();
 
