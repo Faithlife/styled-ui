@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.5.1
+
+- Fix bug with minor `Button` styles not showing up
+- Fix classnames not being applied to base button component in `Button`
+
 ### 5.5.0
 
 - Add `Dropdown` component.
