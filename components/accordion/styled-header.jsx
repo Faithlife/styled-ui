@@ -2,10 +2,31 @@ import styled from 'styled-components';
 import { colors } from '../shared-styles';
 import { resetStyles } from '../utils';
 
-export const AccordionHeader = styled.div.attrs({ tabIndex: '0' })`
+export const Heading = styled.div.attrs({
+	role: 'heading',
+})`
 	${resetStyles};
 
 	grid-area: header;
+`;
+
+export const Button = styled.button.attrs({
+	role: 'button',
+	'aria-disabled': ({ isDisabled }) => isDisabled,
+})`
+	${resetStyles};
+
+	padding: 0;
+	border: 0;
+	background: 0;
+	appearance: none;
+	width: 100%;
+	height: 100%;
+	text-align: left;
+`;
+
+export const ButtonContent = styled.div`
+	${resetStyles};
 
 	display: grid;
 	padding: 16px 24px;

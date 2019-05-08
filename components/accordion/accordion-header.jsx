@@ -31,19 +31,24 @@ export function AccordionHeader({ children }) {
 		[headerId],
 	);
 	return (
-		<Styled.AccordionHeader hideArrows={hideArrows} ref={ref}>
-			<React.Fragment>
-				{!hideArrows && (
-					<div>
-						<img
-							src={focusedMenuItem === headerId ? ExpandedIcon : CollapsedIcon}
-							role="presentation"
-						/>
-					</div>
-				)}
-				<div>{children}</div>
-			</React.Fragment>
-		</Styled.AccordionHeader>
+		<Styled.Heading as="h1">
+			<Styled.Button isDisabled ref={ref}>
+				<Styled.ButtonContent hideArrows={hideArrows}>
+					<React.Fragment>
+						{!hideArrows && (
+							<div>
+								<img
+									src={focusedMenuItem === headerId ? ExpandedIcon : CollapsedIcon}
+									role="presentation"
+									alt=""
+								/>
+							</div>
+						)}
+						<div>{children}</div>
+					</React.Fragment>
+				</Styled.ButtonContent>
+			</Styled.Button>
+		</Styled.Heading>
 	);
 }
 
