@@ -93,4 +93,13 @@ export const Select = styled.select`
 	}
 
 	${selectStyling};
+
+	transition: box-shadow 0.25s ease 0s;
+
+	&:focus {
+		&:not(:active) {
+			box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
+		}
+		outline: none;
+	}
 `;

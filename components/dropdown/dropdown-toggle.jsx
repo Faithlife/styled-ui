@@ -15,8 +15,7 @@ export function DropdownToggle(props) {
 		'aria-haspopup': true,
 		'aria-controls': `dropdown:${menuId}`,
 		'aria-label': `dropdown:${menuId}`,
-		// do not specify aria-expanded unless it is expanded
-		...(isOpen ? { 'aria-expanded': true } : {}),
+		'aria-expanded': isOpen,
 	};
 
 	const handleToggleMenu = useCallback(

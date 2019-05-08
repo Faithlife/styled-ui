@@ -1,5 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { useId } from '../shared-hooks';
+import { VisuallyHiddenLabel } from '../hidden-label';
 import { Listbox, ListboxToggle, ListboxMenu, ListItem } from '../listbox';
 import * as Styled from './styled.jsx';
 
@@ -14,11 +16,8 @@ export function ParameterSelect({
 	theme,
 }) {
 	const [isOpen, setIsOpen] = useState(false);
-	const [isFocused, setIsFocused] = useState(false);
-
-	const toggleFocus = useCallback(() => {
-		setIsFocused(state => !state);
-	}, []);
+	const id = useId();
+	const labelId = `parameterSelectLabel:${id}`;
 
 	const handleToggleMenu = useCallback(() => {
 		setIsOpen(state => !state);
@@ -33,6 +32,7 @@ export function ParameterSelect({
 
 	return (
 		<Styled.Container>
+			<VisuallyHiddenLabel id={labelId}>{accessibilityLabel}</VisuallyHiddenLabel>
 			{!useNativeSelect ? (
 				<Listbox
 					isOpen={isOpen}
@@ -40,6 +40,7 @@ export function ParameterSelect({
 					onItemSelect={onItemSelect}
 					selectedId={selectedId}
 					styleOverrides={{ width }}
+					labelledBy={labelId}
 				>
 					<ListboxToggle>
 						{({ ref, onKeyDown, onClick, ariaProps }) => (
@@ -47,17 +48,10 @@ export function ParameterSelect({
 								ref={ref}
 								onKeyDown={onKeyDown}
 								onClick={onClick}
-								onFocus={toggleFocus}
-								onBlur={toggleFocus}
 								type="button"
 								{...ariaProps}
 							>
-								<Styled.ButtonContent
-									isOpen={isOpen}
-									theme={theme}
-									styleOverrides={styleOverrides}
-									aria-label={isFocused ? accessibilityLabel : options[selectedId]}
-								>
+								<Styled.ButtonContent isOpen={isOpen} theme={theme} styleOverrides={styleOverrides}>
 									{options[selectedId]}
 								</Styled.ButtonContent>
 							</Styled.Button>
@@ -65,8 +59,8 @@ export function ParameterSelect({
 					</ListboxToggle>
 					<ListboxMenu>
 						{options &&
-							Object.entries(options).map(([id, name]) => (
-								<ListItem key={id} id={id}>
+							Object.entries(options).map(([value, name]) => (
+								<ListItem key={value} id={value}>
 									{name}
 								</ListItem>
 							))}
@@ -78,10 +72,11 @@ export function ParameterSelect({
 					onChange={handleNativeSelect}
 					theme={theme}
 					styleOverrides={styleOverrides}
+					aria-labelledby={labelId}
 				>
 					{options &&
-						Object.entries(options).map(([id, name]) => (
-							<option key={id} value={id}>
+						Object.entries(options).map(([value, name]) => (
+							<option key={value} value={value}>
 								{name}
 							</option>
 						))}

@@ -10,7 +10,6 @@ export function ListboxToggle(props) {
 	const { children, ...buttonProps } = props;
 	const {
 		isOpen,
-		menuId,
 		focusedMenuItem,
 		setFocusedMenuItem,
 		onToggleMenu,
@@ -21,13 +20,11 @@ export function ListboxToggle(props) {
 	const id = useId();
 
 	const toggleAriaProps = {
-		role: 'combobox',
-		'aria-haspopup': 'listbox',
-		'aria-controls': `dropdown:${menuId}`,
-		'aria-labelledby': `listbox:${id} ${labelledBy || ''}`,
 		id: `listbox:${id}`,
-		// do not specify aria-expanded unless it is expanded
-		...(isOpen ? { 'aria-expanded': true } : {}),
+		role: 'button',
+		'aria-haspopup': 'listbox',
+		'aria-labelledby': `${labelledBy || ''} listbox:${id}`,
+		'aria-expanded': isOpen,
 	};
 
 	const handleToggleMenu = useCallback(
