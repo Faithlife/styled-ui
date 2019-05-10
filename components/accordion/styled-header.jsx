@@ -12,7 +12,8 @@ export const Heading = styled.div.attrs({
 
 export const Button = styled.button.attrs({
 	role: 'button',
-	'aria-disabled': ({ isDisabled }) => isDisabled,
+	'aria-disabled': ({ isExpanded }) => !isExpanded,
+	'aria-expanded': ({ isExpanded }) => isExpanded,
 })`
 	${resetStyles};
 

@@ -1,25 +1,33 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useId } from '../shared-hooks';
 import ExpandedIcon from './svgs/expanded-icon.svg';
 import CollapsedIcon from './svgs/collapsed-icon.svg';
 import * as Styled from './styled-header';
-import { useAccordionContext } from './accordion-util';
+import { useAccordionContext, useAccordionItemContext } from './accordion-util';
 
 export function AccordionHeader({ children }) {
 	const { focusedMenuItem, focusableChildList, hideArrows } = useAccordionContext();
-	const headerId = useId();
+	const { isExpanded, onExpansion } = useAccordionItemContext();
 
+	const handleExpansion = useCallback(
+		() => {
+			onExpansion(!isExpanded);
+		},
+		[isExpanded, onExpansion],
+	);
+
+	const headerId = useId();
 	const ref = useRef();
-	const selected = focusedMenuItem && focusedMenuItem === headerId;
+	const isSelected = focusedMenuItem && focusedMenuItem === headerId;
 
 	useEffect(
 		() => {
-			if (selected && ref.current) {
+			if (isSelected && ref.current) {
 				ref.current.focus();
 			}
 		},
-		[selected],
+		[isSelected],
 	);
 
 	useEffect(
@@ -32,16 +40,12 @@ export function AccordionHeader({ children }) {
 	);
 	return (
 		<Styled.Heading as="h1">
-			<Styled.Button isDisabled ref={ref}>
+			<Styled.Button isExpanded={isExpanded} onClick={handleExpansion} ref={ref}>
 				<Styled.ButtonContent hideArrows={hideArrows}>
 					<React.Fragment>
 						{!hideArrows && (
 							<div>
-								<img
-									src={focusedMenuItem === headerId ? ExpandedIcon : CollapsedIcon}
-									role="presentation"
-									alt=""
-								/>
+								<img src={isExpanded ? ExpandedIcon : CollapsedIcon} role="presentation" alt="" />
 							</div>
 						)}
 						<div>{children}</div>
@@ -55,5 +59,3 @@ export function AccordionHeader({ children }) {
 AccordionHeader.propTypes = {
 	children: PropTypes.node,
 };
-
-AccordionHeader.isFocusableMenuChild = true;

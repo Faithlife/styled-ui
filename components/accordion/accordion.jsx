@@ -1,41 +1,69 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useKeyboardNav } from '../dropdown/dropdown-utils';
-import { AccordionContextProvider } from './accordion-util';
+import { useKeyboardNav, AccordionContextProvider } from './accordion-util';
 import * as Styled from './styled-accordion';
 
-export function Accordion({ children, hideArrows }) {
+export function Accordion({ children, expandedSections, hideArrows, onExpansion }) {
 	const [focusedMenuItem, setFocusedMenuItem] = useState(null);
-	const setFocusedMenuIndex = index => {
-		setFocusedMenuItem(focusableChildList.current.indexOf(index));
-	};
-	const closeMenu = () => {};
 	const focusableChildList = useRef([]);
 	const handleKeyboardNav = useKeyboardNav(
 		focusedMenuItem,
 		setFocusedMenuItem,
-		closeMenu,
 		focusableChildList.current,
+	);
+
+	const handleExpansion = useCallback(
+		(index, isExpanded) => {
+			const set = new Set(expandedSections);
+			if (isExpanded) {
+				set.add(index);
+			} else {
+				set.delete(index);
+			}
+			onExpansion(Array.from(set));
+		},
+		[expandedSections, onExpansion],
 	);
 
 	const context = useMemo(
 		() => ({
+			expandedSections,
 			focusedMenuItem,
 			focusableChildList: focusableChildList.current,
 			hideArrows,
-			setFocusedMenuIndex,
+			onExpansion: handleExpansion,
+			setFocusedMenuItem,
 		}),
-		[focusedMenuItem, focusableChildList, hideArrows, setFocusedMenuIndex],
+		[
+			expandedSections,
+			focusedMenuItem,
+			focusableChildList,
+			hideArrows,
+			handleExpansion,
+			setFocusedMenuItem,
+		],
 	);
 
 	return (
 		<Styled.Accordion onKeyDown={handleKeyboardNav}>
-			<AccordionContextProvider value={context}>{children}</AccordionContextProvider>
+			<AccordionContextProvider value={context}>
+				{React.Children.map(children, (child, index) => React.cloneElement(child, { index }))}
+			</AccordionContextProvider>
 		</Styled.Accordion>
 	);
 }
 
 Accordion.propTypes = {
-	children: PropTypes.node,
+	/** Should contain AccordionItem components. */
+	children: PropTypes.node.isRequired,
+	/** An array of indexes for AccordionItems which should be expanded. */
+	expandedSections: PropTypes.arrayOf(PropTypes.number).isRequired,
+	/** For hiding the default arrow indicators. */
 	hideArrows: PropTypes.bool,
+	/** Will be called with an array of indexes for AccordionItems which should be expanded. */
+	onExpansion: PropTypes.func.isRequired,
+};
+
+Accordion.defaultProps = {
+	expandedSections: [],
 };

@@ -1,9 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Collapse } from '../collapse';
+import { useAccordionItemContext } from './accordion-util';
 import * as Styled from './styled-panel';
 
 export function AccordionPanel({ children, className }) {
-	return <Styled.AccordionPanel className={className}>{children}</Styled.AccordionPanel>;
+	const { isExpanded } = useAccordionItemContext();
+	return (
+		<Collapse isOpen={isExpanded}>
+			<Styled.AccordionPanel className={className}>{children}</Styled.AccordionPanel>
+		</Collapse>
+	);
 }
 
 AccordionPanel.propTypes = {

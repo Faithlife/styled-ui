@@ -9,9 +9,10 @@ We do not currently support any options for requiring that one section always be
 ```react
 plain: true
 showSource: true
+state: { expandedSections: [0] }
 ---
 <AccordionDemo>
-	<Accordion>
+	<Accordion expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
 		<AccordionItem>
 			<AccordionHeader>
 				Section One Title
@@ -45,12 +46,15 @@ showSource: true
 
 ### With `hideArrows` and custom indicators
 
+For usability, it is suggested that custom indicators have `tabindex: -1` and not be a part of the tab order.
+
 ```react
 plain: true
 showSource: true
+state: { expandedSections: [0, 2] }
 ---
 <AccordionDemo>
-	<Accordion hideArrows>
+	<Accordion hideArrows expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
 		<AccordionItem>
 			<AccordionHeader>
 				Section One Title
