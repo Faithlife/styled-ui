@@ -57,7 +57,7 @@ export function ParameterSelect({
 							</Styled.Button>
 						)}
 					</ListboxToggle>
-					<ListboxMenu>
+					<ListboxMenu styleOverrides={{ zIndex: 10, padding: '4px 0' }}>
 						{options &&
 							Object.entries(options).map(([value, name]) => (
 								<ListItem key={value} id={value}>

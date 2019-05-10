@@ -776,6 +776,7 @@ const components = [
 					ParameterSentenceDemo: styled.div`
 						display: flex;
 						align-items: baseline;
+						${({ addMargin }) => addMargin && '&& > * { margin-right: 16px; }'};
 					`,
 					scheduleOptions: {
 						weekly: 'weekly',

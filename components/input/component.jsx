@@ -26,6 +26,8 @@ export const Input = forwardClassRef(
 				width: PropTypes.string,
 			}),
 			size: PropTypes.number,
+			/** Inline input variation */
+			inline: PropTypes.bool,
 		};
 
 		static defaultProps = {

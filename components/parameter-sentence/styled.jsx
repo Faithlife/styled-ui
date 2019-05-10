@@ -2,16 +2,14 @@ import styled, { css } from 'styled-components';
 import { colors, thickness } from '../shared-styles';
 import { resetStyles } from '../utils';
 
-const defaultInputPadding = 8;
-const defaultInputHeight = 14;
+const inputOffset = '-6px';
 
 const selectStyling = css`
 	white-space: nowrap;
 	min-height: fit-content;
 	font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
 	width: ${({ styleOverrides }) => styleOverrides.width};
-	padding-bottom: 1px;
-	border-bottom: dashed ${thickness.three} ${({ theme }) => theme.underlineColor || colors.blueBase};
+	border-bottom: dashed ${thickness.two} ${({ theme }) => theme.underlineColor || colors.blueBase};
 	font-weight: bold;
 	color: ${colors.gray66};
 	${props => `color: ${props.isOpen ? colors.blueActive : colors.gray66}`};
@@ -64,7 +62,17 @@ export const Container = styled.div`
 
 export const InputContainer = styled.div`
 	position: absolute;
-	top: -${defaultInputPadding + defaultInputHeight}px;
+	bottom: ${inputOffset};
+
+	&& > input::-webkit-outer-spin-button, /* Safari Chrome */
+	input::-webkit-inner-spin-button {
+		appearance: none;
+		margin: 0;
+	}
+
+	&& > input[type='number'] {
+		appearance: textfield; /* Firefox */
+	}
 `;
 
 export const ParameterSentence = styled.form.attrs({

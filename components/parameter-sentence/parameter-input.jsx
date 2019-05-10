@@ -34,13 +34,15 @@ export function ParameterInputBox(props) {
 			) : (
 				<Styled.InputContainer>
 					<Input
+						small
+						inline
 						value={value}
 						onChange={onChange}
 						placeholder={defaultValue}
 						onEnter={toggleFocus}
 						onBlur={toggleFocus}
-						autoFocus
-						styleOverrides={{ width }}
+						theme={theme}
+						styleOverrides={{ width, ...styleOverrides }}
 						aria-label={accessibilityLabel}
 						{...inputProps}
 					/>

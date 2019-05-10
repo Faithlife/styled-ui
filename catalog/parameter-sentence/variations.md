@@ -74,16 +74,24 @@ state: {
 	income: 55700,
 }
 ---
-<ParameterSentenceDemo>
-	<ParameterSentence accessibilityFormLabel="Tithe Calculator">
-		<ParameterSelect
-			selectedId={state.schedule}
-			onItemSelect={item => setState({ schedule: item })}
-			options={scheduleOptions}
-			accessibilityLabel={'Pay schedule of income'}
-			theme={{ underlineColor: 'plum' }}
-			styleOverrides={{ fontSize: '18px' }}
-		/>
-	</ParameterSentence>
+<ParameterSentenceDemo addMargin>
+	<ParameterSelect
+		selectedId={state.schedule}
+		onItemSelect={item => setState({ schedule: item })}
+		options={scheduleOptions}
+		accessibilityLabel={'Pay schedule of income'}
+		theme={{ underlineColor: 'plum' }}
+		styleOverrides={{ fontSize: '18px' }}
+	/>
+	<ParameterInputBox
+		defaultValue="10"
+		value={state.percentage}
+		onChange={event => setState({ percentage: event.target.value })}
+		formatValue={val => `${val}%`}
+		width="35px"
+		accessibilityLabel={'Percent of income to tithe'}
+		theme={{ underlineColor: 'plum' }}
+		styleOverrides={{ fontSize: '18px' }}
+	/>
 </ParameterSentenceDemo>
 ```
