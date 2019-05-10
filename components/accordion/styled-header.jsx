@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../shared-styles';
+import { colors, mediaSizes } from '../shared-styles';
 import { resetStyles } from '../utils';
 
 export const Heading = styled.div.attrs({
@@ -30,7 +30,6 @@ export const ButtonContent = styled.div`
 	${resetStyles};
 
 	display: grid;
-	padding: 16px 24px;
 	grid-template-columns: ${props => (props.hideArrows ? 'auto' : 'min-content auto')};
 	grid-column-gap: 12px;
 
@@ -43,4 +42,9 @@ export const ButtonContent = styled.div`
 	letter-spacing: 0.5px;
 	font-weight: 600;
 	font-family: 'Source Sans Pro';
+
+	padding: 16px;
+	@media (min-width: ${mediaSizes.tablet}) {
+		padding: 16px 24px;
+	}
 `;
