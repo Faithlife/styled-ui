@@ -723,6 +723,7 @@ const components = [
 					TabDemo: styled.div`
 						padding: 8px;
 						background-color: white;
+
 						&& > * {
 							margin: 16px;
 						}
