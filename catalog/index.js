@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-indent */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Catalog, pageLoader } from 'catalog';
 import * as dateFunctions from 'date-fns';
@@ -75,6 +76,21 @@ const ButtonGrid = styled.div`
 	width: 200px;
 `;
 
+const AccordionPanelDemoContents = styled.div`
+	display: grid;
+	grid-auto-flow: row;
+	grid-row-gap: 12px;
+`;
+
+const AccordionPanelDemo = ({ children }) => (
+	<AccordionPanel>
+		<AccordionPanelDemoContents>{children}</AccordionPanelDemoContents>
+	</AccordionPanel>
+);
+AccordionPanelDemo.propTypes = {
+	children: PropTypes.node.isRequired,
+};
+
 function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
 }
@@ -91,12 +107,7 @@ const components = [
 					Accordion,
 					AccordionHeader,
 					AccordionItem,
-					AccordionPanel: styled(AccordionPanel)`
-						display: grid;
-						grid-auto-flow: row;
-						grid-row-gap: 12px;
-						color: #f00;
-					`,
+					AccordionPanel: AccordionPanelDemo,
 					AccordionDemo: styled.div`
 						background: #fff;
 						border: 16px solid #f2f2f2;

@@ -4,16 +4,15 @@ import { Collapse } from '../collapse';
 import { useAccordionItemContext } from './accordion-util';
 import * as Styled from './styled-panel';
 
-export function AccordionPanel({ children, className }) {
+export function AccordionPanel({ children }) {
 	const { isExpanded } = useAccordionItemContext();
 	return (
 		<Collapse isOpen={isExpanded}>
-			<Styled.AccordionPanel className={className}>{children}</Styled.AccordionPanel>
+			<Styled.AccordionPanel>{children}</Styled.AccordionPanel>
 		</Collapse>
 	);
 }
 
 AccordionPanel.propTypes = {
 	children: PropTypes.node,
-	className: PropTypes.string,
 };
