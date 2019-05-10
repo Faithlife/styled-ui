@@ -18,29 +18,29 @@ export function AccordionHeader({ children }) {
 	);
 
 	const headerId = useId();
-	const ref = useRef();
+	const buttonRef = useRef();
 	const isSelected = focusedMenuItem && focusedMenuItem === headerId;
 
 	useEffect(
 		() => {
-			if (isSelected && ref.current) {
-				ref.current.focus();
+			if (isSelected && buttonRef.current) {
+				buttonRef.current.focus();
 			}
 		},
-		[isSelected],
+		[isSelected, buttonRef],
 	);
 
 	useEffect(
 		() => {
 			if (headerId) {
-				focusableChildList.push(headerId);
+				focusableChildList.current.push(headerId);
 			}
 		},
-		[headerId],
+		[headerId, focusableChildList],
 	);
 	return (
 		<Styled.Heading as="h1">
-			<Styled.Button isExpanded={isExpanded} onClick={handleExpansion} ref={ref}>
+			<Styled.Button isExpanded={isExpanded} onClick={handleExpansion} ref={buttonRef}>
 				<Styled.ButtonContent hideArrows={hideArrows}>
 					<React.Fragment>
 						{!hideArrows && (

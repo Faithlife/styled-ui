@@ -29,7 +29,7 @@ export function Accordion({ children, expandedSections, hideArrows, onExpansion 
 		() => ({
 			expandedSections,
 			focusedMenuItem,
-			focusableChildList: focusableChildList.current,
+			focusableChildList,
 			hideArrows,
 			onExpansion: handleExpansion,
 			setFocusedMenuItem,
