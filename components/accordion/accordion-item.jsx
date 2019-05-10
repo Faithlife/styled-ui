@@ -8,7 +8,6 @@ export function AccordionItem({ children, index }) {
 
 	const handleExpansion = useCallback(
 		isExpanded => {
-			console.log(index, isExpanded);
 			onExpansion(index, isExpanded);
 		},
 		[onExpansion, index],
