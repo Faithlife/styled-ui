@@ -32,6 +32,13 @@ export function useKeyboardNav(selectedIndex, setSelectedIndex, focusableItemInd
 		event => {
 			const currentEnabledIndex = focusableItemIndexes.indexOf(selectedIndex);
 
+			// According to the ARIA Accordion spec, keyboard navigation should only be available
+			// when a header is focused, not when the focus is within a panel as panels may contain
+			// other form fields.
+			if (currentEnabledIndex === -1) {
+				return;
+			}
+
 			switch (event.key) {
 				case handledKeys.arrowDown: {
 					event.preventDefault();
@@ -47,10 +54,12 @@ export function useKeyboardNav(selectedIndex, setSelectedIndex, focusableItemInd
 					break;
 				}
 				case handledKeys.home: {
+					event.preventDefault();
 					setSelectedIndex(focusableItemIndexes[0]);
 					break;
 				}
 				case handledKeys.end: {
+					event.preventDefault();
 					setSelectedIndex(focusableItemIndexes[focusableItemIndexes.length - 1]);
 					break;
 				}

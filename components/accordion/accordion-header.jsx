@@ -7,7 +7,12 @@ import * as Styled from './styled-header';
 import { useAccordionContext, useAccordionItemContext } from './accordion-util';
 
 export function AccordionHeader({ children }) {
-	const { focusedMenuItem, focusableChildList, hideArrows } = useAccordionContext();
+	const {
+		focusedMenuItem,
+		focusableChildList,
+		hideArrows,
+		setFocusedMenuItem,
+	} = useAccordionContext();
 	const { isExpanded, onExpansion } = useAccordionItemContext();
 
 	const handleExpansion = useCallback(
@@ -30,6 +35,24 @@ export function AccordionHeader({ children }) {
 		[isSelected, buttonRef],
 	);
 
+	const handleBlur = useCallback(
+		() => {
+			if (headerId) {
+				setFocusedMenuItem(null);
+			}
+		},
+		[setFocusedMenuItem, headerId],
+	);
+
+	const handleFocus = useCallback(
+		() => {
+			if (headerId) {
+				setFocusedMenuItem(headerId);
+			}
+		},
+		[setFocusedMenuItem, headerId],
+	);
+
 	useEffect(
 		() => {
 			if (headerId) {
@@ -40,7 +63,13 @@ export function AccordionHeader({ children }) {
 	);
 	return (
 		<Styled.Heading as="h1">
-			<Styled.Button isExpanded={isExpanded} onClick={handleExpansion} ref={buttonRef}>
+			<Styled.Button
+				isExpanded={isExpanded}
+				onBlur={handleBlur}
+				onClick={handleExpansion}
+				onFocus={handleFocus}
+				ref={buttonRef}
+			>
 				<Styled.ButtonContent hideArrows={hideArrows}>
 					<React.Fragment>
 						{!hideArrows && (
