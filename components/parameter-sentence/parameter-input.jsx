@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Input } from '../input';
 import * as Styled from './styled';
@@ -16,6 +16,20 @@ export function ParameterInputBox(props) {
 		...inputProps
 	} = props;
 	const [isFocused, setIsFocused] = useState(false);
+	const inputRef = useRef();
+
+	/**
+	 * Due to a really strange firefox bug inputs with type=number will unfocus the input as soon as it is focused using the autofocus option.
+	 * Possibly related to https://github.com/angular/angular.js/issues/8365 though the described fixes did not work.
+	 */
+	useEffect(
+		() => {
+			if (isFocused && inputRef.current) {
+				inputRef.current.focus();
+			}
+		},
+		[isFocused],
+	);
 
 	const toggleFocus = useCallback(() => {
 		setIsFocused(state => !state);
@@ -34,6 +48,7 @@ export function ParameterInputBox(props) {
 			) : (
 				<Styled.InputContainer>
 					<Input
+						ref={inputRef}
 						small
 						inline
 						value={value}

@@ -61,6 +61,7 @@ export const Container = styled.div`
 `;
 
 export const InputContainer = styled.div`
+	z-index: 0;
 	position: absolute;
 	bottom: ${inputOffset};
 

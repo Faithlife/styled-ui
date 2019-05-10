@@ -22,6 +22,7 @@ state: {
 			formatValue={val => `${val}%`}
 			width="35px"
 			accessibilityLabel={'Percent of income to tithe'}
+			type="number"
 		/>
 		{' of my '}
 		<ParameterSelect
