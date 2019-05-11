@@ -42,6 +42,7 @@ export const ButtonContent = styled.div`
 	letter-spacing: 0.5px;
 	font-weight: 600;
 	font-family: 'Source Sans Pro';
+	font-size: 16px;
 
 	padding: 16px;
 	@media (min-width: ${mediaSizes.tablet}) {
