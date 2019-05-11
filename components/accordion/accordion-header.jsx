@@ -87,6 +87,8 @@ export function AccordionHeader({ children, headingLevel }) {
 
 AccordionHeader.propTypes = {
 	children: PropTypes.node,
+	/** Which HTML heading element to use. */
+	headingLevel: PropTypes.number,
 };
 
 AccordionHeader.defaultProps = {
