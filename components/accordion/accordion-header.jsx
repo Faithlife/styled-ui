@@ -6,7 +6,7 @@ import CollapsedIcon from './svgs/collapsed-icon.svg';
 import * as Styled from './styled-header';
 import { useAccordionContext, useAccordionItemContext } from './accordion-util';
 
-export function AccordionHeader({ children }) {
+export function AccordionHeader({ children, headingLevel }) {
 	const {
 		focusedMenuItem,
 		focusableChildList,
@@ -62,7 +62,7 @@ export function AccordionHeader({ children }) {
 		[headerId, focusableChildList],
 	);
 	return (
-		<Styled.Heading as="h1">
+		<Styled.Heading as={`h${headingLevel}`}>
 			<Styled.Button
 				isExpanded={isExpanded}
 				onBlur={handleBlur}
@@ -87,4 +87,8 @@ export function AccordionHeader({ children }) {
 
 AccordionHeader.propTypes = {
 	children: PropTypes.node,
+};
+
+AccordionHeader.defaultProps = {
+	headingLevel: 1,
 };

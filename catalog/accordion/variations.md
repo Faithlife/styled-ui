@@ -55,37 +55,28 @@ state: { expandedSections: [0, 2] }
 ---
 <AccordionDemo>
 	<Accordion hideArrows expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
-		<AccordionItem>
+		<AccordionItem customIndicator={AccordionCustomIndicator}>
 			<AccordionHeader>
 				Section One Title
 			</AccordionHeader>
-			<AccordionCustomIndicator>
-				<Checkbox isChecked />
-			</AccordionCustomIndicator>
 			<AccordionPanel>
 				<div><input placeholder="Name" /></div>
 				<div><input placeholder="Email" /></div>
 			</AccordionPanel>
 		</AccordionItem>
-		<AccordionItem>
+		<AccordionItem customIndicator={AccordionCustomIndicator}>
 			<AccordionHeader>
 				Section Two Title
 			</AccordionHeader>
-			<AccordionCustomIndicator>
-				<Checkbox isChecked />
-			</AccordionCustomIndicator>
 			<AccordionPanel>
 				<div><input placeholder="Home address" /></div>
 				<div><input placeholder="Zip code" /></div>
 			</AccordionPanel>
 		</AccordionItem>
-		<AccordionItem>
+		<AccordionItem customIndicator={AccordionCustomIndicator}>
 			<AccordionHeader>
 				Section Three Title
 			</AccordionHeader>
-			<AccordionCustomIndicator>
-				<Checkbox isChecked />
-			</AccordionCustomIndicator>
 			<AccordionPanel>
 				<div><input placeholder="Mother's maiden name" /></div>
 				<div><input placeholder="Name of your first pet" /></div>

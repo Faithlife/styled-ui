@@ -3,7 +3,13 @@
 // We could use tree-shaking in the future to prune out unused exports,
 // but not all projects are able to use that right now.
 
-export { Accordion, AccordionHeader, AccordionItem, AccordionPanel } from './accordion';
+export {
+	Accordion,
+	AccordionHeader,
+	AccordionIndicator,
+	AccordionItem,
+	AccordionPanel,
+} from './accordion';
 export { AnchorButton } from './button/anchor-button';
 export { Bootstrap } from './bootstrap';
 export { Button } from './button';

@@ -91,6 +91,15 @@ AccordionPanelDemo.propTypes = {
 	children: PropTypes.node.isRequired,
 };
 
+const AccordionIndicatorDemo = ({ isExpanded, onExpansion }) => (
+	<input type="checkbox" checked={isExpanded} onChange={onExpansion} tabIndex={-1} />
+);
+
+AccordionIndicatorDemo.propTypes = {
+	isExpanded: PropTypes.bool,
+	onExpansion: PropTypes.func,
+};
+
 function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
 }
@@ -112,14 +121,7 @@ const components = [
 						background: #fff;
 						border: 16px solid #f2f2f2;
 					`,
-					AccordionCustomIndicator: styled.div.attrs({
-						tabIndex: '-1',
-					})`
-						grid-row: header;
-						grid-column: extra;
-						margin-top: 16px;
-						margin-right: 24px;
-					`,
+					AccordionCustomIndicator: AccordionIndicatorDemo,
 					Checkbox,
 				},
 			},
