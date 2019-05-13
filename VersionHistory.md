@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.5.2
+
+- Fix focus and display issues with `Popover` component
+
 ### 5.5.1
 
 - Fix bug with minor `Button` styles not showing up
