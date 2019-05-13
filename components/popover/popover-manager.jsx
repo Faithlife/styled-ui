@@ -3,15 +3,18 @@ import PropTypes from 'prop-types';
 import { Manager } from 'react-popper';
 import { useFocusAwayHandler } from '../shared-hooks';
 import { PopoverContext } from './popper-helpers';
+import * as Styled from './styled';
 
 export function PopoverManager({ children, onFocusAway }) {
 	const { targetRef, addInboundsElement, removeInboundsElement } = useFocusAwayHandler(onFocusAway);
 	return (
 		<Manager>
 			<PopoverContext.Provider value={{ addInboundsElement, removeInboundsElement }}>
-				<div tabIndex="-1" ref={targetRef}>
-					{children}
-				</div>
+				{onFocusAway ? (
+					<Styled.FocusCatcher ref={targetRef}>{children}</Styled.FocusCatcher>
+				) : (
+					children
+				)}
 			</PopoverContext.Provider>
 		</Manager>
 	);
