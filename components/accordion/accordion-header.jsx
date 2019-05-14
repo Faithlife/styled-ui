@@ -7,7 +7,7 @@ import { AccordionIndicator } from './accordion-indicator';
 import { useAccordionContext, useAccordionItemContext } from './accordion-util';
 import * as Styled from './styled-header';
 
-export function AccordionHeader({ children, customIndicator, headingLevel }) {
+export function AccordionHeader({ children, customIndicator, headingLevel, subtitle }) {
 	const {
 		focusedMenuItem,
 		focusableChildList,
@@ -72,16 +72,19 @@ export function AccordionHeader({ children, customIndicator, headingLevel }) {
 					onFocus={handleFocus}
 					ref={buttonRef}
 				>
-					<Styled.ButtonContent hideArrows={hideArrows}>
+					<Styled.ButtonContentWrapper hideArrows={hideArrows} subtitle={subtitle}>
 						<React.Fragment>
 							{!hideArrows && (
 								<div>
 									<img src={isExpanded ? ExpandedIcon : CollapsedIcon} role="presentation" alt="" />
 								</div>
 							)}
-							<div>{children}</div>
+							<Styled.ButtonContent>
+								{children ? <Styled.Title>{children}</Styled.Title> : null}
+								{subtitle ? <Styled.Subtitle>{subtitle}</Styled.Subtitle> : null}
+							</Styled.ButtonContent>
 						</React.Fragment>
-					</Styled.ButtonContent>
+					</Styled.ButtonContentWrapper>
 				</Styled.Button>
 			</Styled.Heading>
 			{customIndicator ? (
@@ -99,6 +102,8 @@ AccordionHeader.propTypes = {
 	customIndicator: PropTypes.func,
 	/** Which HTML heading element to use. */
 	headingLevel: PropTypes.number,
+	/** In most cases the subtitle should be hidden on mobile viewports, but that is a responsibility of the consumer. */
+	subtitle: PropTypes.node,
 };
 
 AccordionHeader.defaultProps = {

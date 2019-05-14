@@ -36,7 +36,7 @@ export const Button = styled.button.attrs({
 	text-align: left;
 `;
 
-export const ButtonContent = styled.div`
+export const ButtonContentWrapper = styled.div`
 	${resetStyles};
 
 	display: grid;
@@ -47,15 +47,34 @@ export const ButtonContent = styled.div`
 	border-top: 1px solid ${colors.gray14};
 	background: linear-gradient(180deg, #fafafa, hsla(0, 0%, 100%, 0));
 
+	padding: 16px;
+	@media (min-width: ${mediaSizes.tablet}) {
+		padding: 16px 24px;
+	}
+`;
+
+export const ButtonContent = styled.div`
+	${resetStyles};
+
+	display: inline-grid;
+	grid-template-columns: min-content auto;
+	grid-gap: 24px;
+	align-items: center;
+	white-space: nowrap;
+`;
+
+export const Title = styled.div`
 	color: ${colors.gray52};
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
 	font-weight: 600;
 	font-family: 'Source Sans Pro';
 	font-size: 16px;
+`;
 
-	padding: 16px;
-	@media (min-width: ${mediaSizes.tablet}) {
-		padding: 16px 24px;
-	}
+export const Subtitle = styled.div`
+	color: ${colors.gray52};
+	font-family: 'Source Sans Pro';
+	font-size: 14px;
+	line-height: 16px;
 `;
