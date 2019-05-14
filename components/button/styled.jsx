@@ -73,71 +73,80 @@ export const variationMap = {
 		background-color: ${props => props.theme.defaultColor || buttonColors.default};
 		color: #fff;
 
-		&:hover {
-			border-color: ${props => props.theme.hoverColor || buttonColors.hover};
-			background-color: ${props => props.theme.hoverColor || buttonColors.hover};
-			color: #fff;
-		}
+		${({ disabled }) =>
+			disabled
+				? css`
+						border-color: ${props => props.theme.disabledColor || buttonColors.disabled};
+						background-color: ${props => props.theme.disabledColor || buttonColors.disabled};
+						cursor: default;
+				  `
+				: css`
+						&:hover {
+							border-color: ${props => props.theme.hoverColor || buttonColors.hover};
+							background-color: ${props => props.theme.hoverColor || buttonColors.hover};
+							color: #fff;
+						}
 
-		&:active {
-			border-color: ${props => props.theme.activeColor || buttonColors.active};
-			background-color: ${props => props.theme.activeColor || buttonColors.active};
-			color: #fff;
-		}
-
-		&:disabled {
-			border-color: ${props => props.theme.disabledColor || buttonColors.disabled};
-			background-color: ${props => props.theme.disabledColor || buttonColors.disabled};
-			cursor: default;
-		}
+						&:active {
+							border-color: ${props => props.theme.activeColor || buttonColors.active};
+							background-color: ${props => props.theme.activeColor || buttonColors.active};
+							color: #fff;
+						}
+				  `};
 	`,
 	primaryOutline: component => styled(component)`
 		border: 1px solid ${props => props.theme.defaultColor || buttonColors.default};
 		background: none;
 		color: ${props => props.theme.defaultColor || buttonColors.default};
 
-		&:hover {
-			background-color: ${props => props.theme.hoverColor || buttonColors.hover};
-			border-color: ${props => props.theme.hoverColor || buttonColors.hover};
-			color: #fff;
-		}
+		${({ disabled }) =>
+			disabled
+				? css`
+						background: none;
+						border-color: ${props => props.theme.disabledColor || buttonColors.disabled};
+						color: ${props => props.theme.disabledColor || buttonColors.disabled};
+						cursor: default;
+				  `
+				: css`
+						&:hover {
+							background-color: ${props => props.theme.hoverColor || buttonColors.hover};
+							border-color: ${props => props.theme.hoverColor || buttonColors.hover};
+							color: #fff;
+						}
 
-		&:active {
-			background-color: ${props => props.theme.activeColor || buttonColors.active};
-			border-color: ${props => props.theme.activeColor || buttonColors.active};
-			color: #fff;
-		}
-
-		&:disabled {
-			background: none;
-			border-color: ${props => props.theme.disabledColor || buttonColors.disabled};
-			color: ${props => props.theme.disabledColor || buttonColors.disabled};
-			cursor: default;
-		}
+						&:active {
+							background-color: ${props => props.theme.activeColor || buttonColors.active};
+							border-color: ${props => props.theme.activeColor || buttonColors.active};
+							color: #fff;
+						}
+				  `};
 	`,
 	minor: component => styled(component)`
 		border: 1px solid ${colors.gray14};
 		background: ${colors.gray4};
 		color: ${colors.flGray};
 
-		&:hover {
-			background-color: ${colors.gray14};
-			border: 1px solid ${colors.gray14};
-			color: ${colors.flGray};
-		}
+		${({ disabled }) =>
+			disabled
+				? css`
+						background-color: #fff;
+						border-color: ${colors.gray8};
+						color: ${colors.gray22};
+						cursor: default;
+				  `
+				: css`
+						&:hover {
+							background-color: ${colors.gray14};
+							border: 1px solid ${colors.gray14};
+							color: ${colors.flGray};
+						}
 
-		&:active {
-			background-color: ${colors.gray22};
-			border: 1px solid ${colors.gray22};
-			color: ${colors.flGray};
-		}
-
-		&:disabled {
-			background-color: #fff;
-			border-color: ${colors.gray8};
-			color: ${colors.gray22};
-			cursor: default;
-		}
+						&:active {
+							background-color: ${colors.gray22};
+							border: 1px solid ${colors.gray22};
+							color: ${colors.flGray};
+						}
+				  `};
 	`,
 	primaryTransparent: component => styled(component)`
 		border: 1px solid transparent;
@@ -145,18 +154,21 @@ export const variationMap = {
 		color: ${props => props.theme.defaultColor || buttonColors.default};
 		padding: 0;
 
-		&:hover {
-			color: ${props => props.theme.hoverColor || buttonColors.hover};
-		}
+		${({ disabled }) =>
+			disabled
+				? css`
+						color: ${props => props.theme.disabledColor || buttonColors.disabled};
+						cursor: default;
+				  `
+				: css`
+						&:hover {
+							color: ${props => props.theme.hoverColor || buttonColors.hover};
+						}
 
-		&:active {
-			color: ${props => props.theme.activeColor || buttonColors.active};
-		}
-
-		&:disabled {
-			color: ${props => props.theme.disabledColor || buttonColors.disabled};
-			cursor: default;
-		}
+						&:active {
+							color: ${props => props.theme.activeColor || buttonColors.active};
+						}
+				  `};
 	`,
 	minorTransparent: component => styled(component)`
 		border: 1px solid transparent;
@@ -164,18 +176,21 @@ export const variationMap = {
 		color: ${colors.flGray};
 		padding: 0;
 
-		&:hover {
-			color: ${colors.blueBase};
-		}
+		${({ disabled }) =>
+			disabled
+				? css`
+						color: ${colors.gray22};
+						cursor: default;
+				  `
+				: css`
+						&:hover {
+							color: ${colors.blueBase};
+						}
 
-		&:active {
-			color: ${colors.blueLight};
-		}
-
-		&:disabled {
-			color: ${colors.gray22};
-			cursor: default;
-		}
+						&:active {
+							color: ${colors.blueLight};
+						}
+				  `};
 	`,
 	small: component => styled(component)`
 		height: 32px;
