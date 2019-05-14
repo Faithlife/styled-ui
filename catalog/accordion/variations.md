@@ -2,6 +2,9 @@ These `<Accordion>` components follow the [WAI-AIRA spec for accordions](https:/
 
 We do not currently support any options for requiring that one section always be open, or else limiting that no more than one section can be open. If you need this functionality, consider opening a PR.
 
+An `<Accordion>` can have any number of `<AccordionItem>` children.
+Each `<AccordionItem>` should have exactly one `<AccordionHeader>` and one `<AccordionPanel>` as children.
+
 ## Component Variations
 
 ### With arrows
@@ -55,8 +58,8 @@ state: { expandedSections: [0, 2] }
 ---
 <AccordionDemo>
 	<Accordion hideArrows expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
-		<AccordionItem customIndicator={AccordionCustomIndicator}>
-			<AccordionHeader>
+		<AccordionItem>
+			<AccordionHeader customIndicator={AccordionCustomIndicator}>
 				Section One Title
 			</AccordionHeader>
 			<AccordionPanel>
@@ -64,8 +67,8 @@ state: { expandedSections: [0, 2] }
 				<div><input placeholder="Email" /></div>
 			</AccordionPanel>
 		</AccordionItem>
-		<AccordionItem customIndicator={AccordionCustomIndicator}>
-			<AccordionHeader>
+		<AccordionItem>
+			<AccordionHeader customIndicator={AccordionCustomIndicator}>
 				Section Two Title
 			</AccordionHeader>
 			<AccordionPanel>
@@ -73,8 +76,8 @@ state: { expandedSections: [0, 2] }
 				<div><input placeholder="Zip code" /></div>
 			</AccordionPanel>
 		</AccordionItem>
-		<AccordionItem customIndicator={AccordionCustomIndicator}>
-			<AccordionHeader>
+		<AccordionItem>
+			<AccordionHeader customIndicator={AccordionCustomIndicator}>
 				Section Three Title
 			</AccordionHeader>
 			<AccordionPanel>

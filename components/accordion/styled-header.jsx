@@ -2,12 +2,22 @@ import styled from 'styled-components';
 import { colors, mediaSizes } from '../shared-styles';
 import { resetStyles } from '../utils';
 
+export const HeadingWrapper = styled.div`
+	${resetStyles};
+
+	display: grid;
+	grid-area: header;
+	grid-template-columns: ${({ customIndicator }) =>
+		customIndicator ? '[title] auto [indicator] min-content' : '[title] auto [space] 0'};
+`;
+
 export const Heading = styled.div.attrs({
 	role: 'heading',
 })`
 	${resetStyles};
 
-	grid-area: header;
+	grid-column: 1 / span 2;
+	grid-row: 1;
 `;
 
 export const Button = styled.button.attrs({

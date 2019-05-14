@@ -5,8 +5,8 @@ import { resetStyles } from '../utils';
 export const Indicator = styled.div`
 	${resetStyles};
 
-	grid-row: header;
 	grid-column: indicator;
+	grid-row: 1;
 
 	margin-top: 16px;
 	margin-right: 16px;

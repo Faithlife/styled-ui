@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { useId } from '../shared-hooks';
 import ExpandedIcon from './svgs/expanded-icon.svg';
 import CollapsedIcon from './svgs/collapsed-icon.svg';
-import * as Styled from './styled-header';
+import { AccordionIndicator } from './accordion-indicator';
 import { useAccordionContext, useAccordionItemContext } from './accordion-util';
+import * as Styled from './styled-header';
 
-export function AccordionHeader({ children, headingLevel }) {
+export function AccordionHeader({ children, customIndicator, headingLevel }) {
 	const {
 		focusedMenuItem,
 		focusableChildList,
@@ -62,31 +63,40 @@ export function AccordionHeader({ children, headingLevel }) {
 		[headerId, focusableChildList],
 	);
 	return (
-		<Styled.Heading as={`h${headingLevel}`}>
-			<Styled.Button
-				isExpanded={isExpanded}
-				onBlur={handleBlur}
-				onClick={handleExpansion}
-				onFocus={handleFocus}
-				ref={buttonRef}
-			>
-				<Styled.ButtonContent hideArrows={hideArrows}>
-					<React.Fragment>
-						{!hideArrows && (
-							<div>
-								<img src={isExpanded ? ExpandedIcon : CollapsedIcon} role="presentation" alt="" />
-							</div>
-						)}
-						<div>{children}</div>
-					</React.Fragment>
-				</Styled.ButtonContent>
-			</Styled.Button>
-		</Styled.Heading>
+		<Styled.HeadingWrapper customIndicator={customIndicator}>
+			<Styled.Heading as={`h${headingLevel}`}>
+				<Styled.Button
+					isExpanded={isExpanded}
+					onBlur={handleBlur}
+					onClick={handleExpansion}
+					onFocus={handleFocus}
+					ref={buttonRef}
+				>
+					<Styled.ButtonContent hideArrows={hideArrows}>
+						<React.Fragment>
+							{!hideArrows && (
+								<div>
+									<img src={isExpanded ? ExpandedIcon : CollapsedIcon} role="presentation" alt="" />
+								</div>
+							)}
+							<div>{children}</div>
+						</React.Fragment>
+					</Styled.ButtonContent>
+				</Styled.Button>
+			</Styled.Heading>
+			{customIndicator ? (
+				<AccordionIndicator>
+					{customIndicator({ isExpanded, onExpansion: handleExpansion })}
+				</AccordionIndicator>
+			) : null}
+		</Styled.HeadingWrapper>
 	);
 }
 
 AccordionHeader.propTypes = {
 	children: PropTypes.node,
+	/** A render prop which receives an isExpanded boolean value. */
+	customIndicator: PropTypes.func,
 	/** Which HTML heading element to use. */
 	headingLevel: PropTypes.number,
 };
