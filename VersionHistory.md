@@ -1,5 +1,11 @@
 # Changelog
 
+### 5.6.0
+
+- Add `Listbox` component
+- Add `ParameterSentence`, `ParameterSelect`, and `ParameterInputBox` component
+- Fix disabled states for button
+
 ### 5.5.2
 
 - Fix focus and display issues with `Popover` component
