@@ -22,8 +22,9 @@ export const Heading = styled.div.attrs({
 
 export const Button = styled.button.attrs({
 	role: 'button',
-	'aria-disabled': ({ isExpanded }) => !isExpanded,
 	'aria-expanded': ({ isExpanded }) => isExpanded,
+	'aria-controls': ({ panelId }) => `accordion-panel-${panelId}`,
+	id: ({ headerId }) => `accordion-header-${headerId}`,
 })`
 	${resetStyles};
 

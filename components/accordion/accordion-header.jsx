@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useId } from '../shared-hooks';
 import ExpandedIcon from './svgs/expanded-icon.svg';
 import CollapsedIcon from './svgs/collapsed-icon.svg';
 import { AccordionIndicator } from './accordion-indicator';
@@ -14,7 +13,7 @@ export function AccordionHeader({ children, customIndicator, headingLevel, subti
 		hideArrows,
 		setFocusedMenuItem,
 	} = useAccordionContext();
-	const { isExpanded, onExpansion } = useAccordionItemContext();
+	const { isExpanded, onExpansion, headerId, panelId } = useAccordionItemContext();
 
 	const handleExpansion = useCallback(
 		() => {
@@ -23,7 +22,6 @@ export function AccordionHeader({ children, customIndicator, headingLevel, subti
 		[isExpanded, onExpansion],
 	);
 
-	const headerId = useId();
 	const buttonRef = useRef();
 	const isSelected = focusedMenuItem && focusedMenuItem === headerId;
 
@@ -71,6 +69,8 @@ export function AccordionHeader({ children, customIndicator, headingLevel, subti
 					onClick={handleExpansion}
 					onFocus={handleFocus}
 					ref={buttonRef}
+					panelId={panelId}
+					headerId={headerId}
 				>
 					<Styled.ButtonContentWrapper hideArrows={hideArrows} subtitle={subtitle}>
 						<React.Fragment>

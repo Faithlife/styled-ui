@@ -5,10 +5,12 @@ import { useAccordionItemContext } from './accordion-util';
 import * as Styled from './styled-panel';
 
 export function AccordionPanel({ children }) {
-	const { isExpanded } = useAccordionItemContext();
+	const { isExpanded, headerId, panelId } = useAccordionItemContext();
 	return (
 		<Collapse isOpen={isExpanded}>
-			<Styled.AccordionPanel>{children}</Styled.AccordionPanel>
+			<Styled.AccordionPanel headerId={headerId} panelId={panelId}>
+				{children}
+			</Styled.AccordionPanel>
 		</Collapse>
 	);
 }
