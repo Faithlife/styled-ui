@@ -65,6 +65,7 @@ export const ButtonContent = styled.div`
 `;
 
 export const Title = styled.div`
+	display: grid;
 	color: ${colors.gray52};
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
@@ -74,6 +75,7 @@ export const Title = styled.div`
 `;
 
 export const Subtitle = styled.div`
+	display: grid;
 	color: ${colors.gray52};
 	font-family: 'Source Sans Pro';
 	font-size: 14px;
