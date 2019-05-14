@@ -21,13 +21,13 @@ export const Button = forwardClassRef(
 		};
 
 		render() {
-			const [{ forwardedRef, ...buttonProps }, baseProps] = filterChildProps(
+			const [{ forwardedRef, disabled, ...buttonProps }, baseProps] = filterChildProps(
 				this.props,
 				baseButtonProps,
 			);
 			return (
-				<Styled.Button ref={forwardedRef} {...buttonProps}>
-					<BaseButton {...baseProps} />
+				<Styled.Button ref={forwardedRef} disabled={disabled} {...buttonProps}>
+					<BaseButton disabled={disabled} {...baseProps} />
 				</Styled.Button>
 			);
 		}
