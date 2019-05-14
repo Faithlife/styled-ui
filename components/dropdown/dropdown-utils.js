@@ -76,10 +76,12 @@ export function useKeyboardNav(selectedIndex, setSelectedIndex, closeMenu, focus
 					break;
 				}
 				case handledKeys.home: {
+					event.preventDefault();
 					setSelectedIndex(focusableItemIndexes[0]);
 					break;
 				}
 				case handledKeys.end: {
+					event.preventDefault();
 					setSelectedIndex(focusableItemIndexes[focusableItemIndexes.length - 1]);
 					break;
 				}

@@ -7,7 +7,7 @@ import * as Styled from './styled';
 export const Input = forwardClassRef(
 	class Input extends PureComponent {
 		static propTypes = {
-			value: PropTypes.string,
+			value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 			placeholder: PropTypes.string,
 			type: PropTypes.string,
 			readOnly: PropTypes.bool,
@@ -25,6 +25,9 @@ export const Input = forwardClassRef(
 			styleOverrides: PropTypes.shape({
 				width: PropTypes.string,
 			}),
+			size: PropTypes.number,
+			/** Inline input variation */
+			inline: PropTypes.bool,
 		};
 
 		static defaultProps = {
@@ -54,6 +57,7 @@ export const Input = forwardClassRef(
 				autoFocus,
 				onClick,
 				disabled,
+				onEnter,
 				forwardedRef, // eslint-disable-line react/prop-types
 				...inputProps
 			} = this.props;

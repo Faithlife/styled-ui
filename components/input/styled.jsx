@@ -45,4 +45,22 @@ export const variationMap = {
 		height: 56px;
 		${fonts.ui18};
 	`,
+	inline: component => styled(component)`
+		background-color: transparent;
+		border: none;
+		box-shadow: none;
+		border-radius: 0;
+		padding: 0;
+		border-bottom: solid ${thickness.two} ${({ theme }) => theme.underlineColor || colors.blueBase};
+		height: ${({ styleOverrides }) => styleOverrides.fontSize || '20px'};
+		padding-bottom: ${thickness.four};
+		font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
+
+		&:focus {
+			box-shadow: none;
+			border-bottom: solid ${thickness.two}
+				${({ theme }) => theme.underlineColor || colors.blueBase};
+			outline: 0;
+		}
+	`,
 };
