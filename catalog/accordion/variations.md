@@ -57,7 +57,7 @@ showSource: true
 state: { expandedSections: [0, 2] }
 ---
 <AccordionDemo>
-	<Accordion expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
+	<Accordion hideArrows expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
 		<AccordionItem>
 			<AccordionHeader customIndicator={AccordionCustomIndicator}>
 				Section One Title
