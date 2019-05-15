@@ -27,7 +27,7 @@ export function AccordionItem({ children, index }) {
 			isExpanded,
 			onExpansion: handleExpansion,
 		}),
-		[headerId, panelId, index, expandedSections, handleExpansion],
+		[headerId, panelId, index, isExpanded, handleExpansion],
 	);
 
 	return (
