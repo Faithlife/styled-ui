@@ -59,7 +59,7 @@ state: { expandedSections: [0, 2] }
 <AccordionDemo>
 	<Accordion hideArrows expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
 		<AccordionItem>
-			<AccordionHeader customIndicator={AccordionCustomIndicator}>
+			<AccordionHeader renderCustomIndicator={AccordionCustomIndicator}>
 				Section One Title
 			</AccordionHeader>
 			<AccordionPanel>
@@ -68,7 +68,7 @@ state: { expandedSections: [0, 2] }
 			</AccordionPanel>
 		</AccordionItem>
 		<AccordionItem>
-			<AccordionHeader customIndicator={AccordionCustomIndicator}>
+			<AccordionHeader renderCustomIndicator={AccordionCustomIndicator}>
 				Section Two Title
 			</AccordionHeader>
 			<AccordionPanel>
@@ -77,12 +77,51 @@ state: { expandedSections: [0, 2] }
 			</AccordionPanel>
 		</AccordionItem>
 		<AccordionItem>
-			<AccordionHeader customIndicator={AccordionCustomIndicator}>
+			<AccordionHeader renderCustomIndicator={AccordionCustomIndicator}>
 				Section Three Title
 			</AccordionHeader>
 			<AccordionPanel>
 				<div><input placeholder="Mother's maiden name" /></div>
 				<div><input placeholder="Name of your first pet" /></div>
+			</AccordionPanel>
+		</AccordionItem>
+	</Accordion>
+</AccordionDemo>
+```
+
+### With subtitles
+
+In most cases the subtitle should be hidden on mobile viewports, but that is a responsibility of the consumer.
+
+```react
+plain: true
+showSource: true
+state: { expandedSections: [] }
+---
+<AccordionDemo>
+	<Accordion expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
+		<AccordionItem>
+			<AccordionHeader subtitle="The first book of the Bible.">
+				Genesis
+			</AccordionHeader>
+			<AccordionPanel>
+				<div>In the beginning, God created the heavens and the earth.</div>
+			</AccordionPanel>
+		</AccordionItem>
+		<AccordionItem>
+			<AccordionHeader subtitle="The second book of the Bible.">
+				Exodus
+			</AccordionHeader>
+			<AccordionPanel>
+				<div>And these are the names of the sons of Israel who came to Egypt; with Jacob, they each came with his ⌊family⌋:</div>
+			</AccordionPanel>
+		</AccordionItem>
+		<AccordionItem>
+			<AccordionHeader subtitle="The third book of the Bible.">
+				Leviticus
+			</AccordionHeader>
+			<AccordionPanel>
+				<div>Thena Yahweh called to Moses and spoke to him from the tent of assembly, saying,</div>
 			</AccordionPanel>
 		</AccordionItem>
 	</Accordion>
