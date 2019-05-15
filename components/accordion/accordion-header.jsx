@@ -31,7 +31,7 @@ export function AccordionHeader({ children, customIndicator, headingLevel, subti
 				buttonRef.current.focus();
 			}
 		},
-		[isSelected, buttonRef],
+		[isSelected, buttonRef.current],
 	);
 
 	const handleBlur = useCallback(
