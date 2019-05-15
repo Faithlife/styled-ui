@@ -82,6 +82,12 @@ AccordionIndicatorDemo.propTypes = {
 	onExpansion: PropTypes.func,
 };
 
+const FormDemo = styled.form`
+	display: inline-grid;
+	grid-auto-flow: row;
+	grid-row-gap: 12px;
+`;
+
 function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
 }
@@ -102,6 +108,8 @@ const components = [
 					`,
 					AccordionCustomIndicator: AccordionIndicatorDemo,
 					Checkbox,
+					Form: FormDemo,
+					Input,
 				},
 			},
 			{

@@ -21,8 +21,10 @@ state: { expandedSections: [0] }
 				Section One Title
 			</Accordion.Header>
 			<Accordion.Panel>
-				<div><input placeholder="Name" /></div>
-				<div><input placeholder="Email" /></div>
+				<Form>
+					<Input small placeholder="Name" />
+					<Input small placeholder="Email" />
+				</Form>
 			</Accordion.Panel>
 		</Accordion.Item>
 		<Accordion.Item>
@@ -30,8 +32,10 @@ state: { expandedSections: [0] }
 				Section Two Title
 			</Accordion.Header>
 			<Accordion.Panel>
-				<div><input placeholder="Home address" /></div>
-				<div><input placeholder="Zip code" /></div>
+				<Form>
+					<Input small placeholder="Home address" />
+					<Input small placeholder="Zip code" />
+				</Form>
 			</Accordion.Panel>
 		</Accordion.Item>
 		<Accordion.Item>
@@ -39,8 +43,10 @@ state: { expandedSections: [0] }
 				Section Three Title
 			</Accordion.Header>
 			<Accordion.Panel>
-				<div><input placeholder="Mother's maiden name" /></div>
-				<div><input placeholder="Name of your first pet" /></div>
+				<Form>
+					<Input small placeholder="Mother's maiden name" />
+					<Input small placeholder="Name of your first pet" />
+				</Form>
 			</Accordion.Panel>
 		</Accordion.Item>
 	</Accordion>
@@ -63,8 +69,10 @@ state: { expandedSections: [0, 2] }
 				Section One Title
 			</Accordion.Header>
 			<Accordion.Panel>
-				<div><input placeholder="Name" /></div>
-				<div><input placeholder="Email" /></div>
+				<Form>
+					<Input small placeholder="Name" />
+					<Input small placeholder="Email" />
+				</Form>
 			</Accordion.Panel>
 		</Accordion.Item>
 		<Accordion.Item>
@@ -72,8 +80,10 @@ state: { expandedSections: [0, 2] }
 				Section Two Title
 			</Accordion.Header>
 			<Accordion.Panel>
-				<div><input placeholder="Home address" /></div>
-				<div><input placeholder="Zip code" /></div>
+				<Form>
+					<Input small placeholder="Home address" />
+					<Input small placeholder="Zip code" />
+				</Form>
 			</Accordion.Panel>
 		</Accordion.Item>
 		<Accordion.Item>
@@ -81,8 +91,10 @@ state: { expandedSections: [0, 2] }
 				Section Three Title
 			</Accordion.Header>
 			<Accordion.Panel>
-				<div><input placeholder="Mother's maiden name" /></div>
-				<div><input placeholder="Name of your first pet" /></div>
+				<Form>
+					<Input small placeholder="Mother's maiden name" />
+					<Input small placeholder="Name of your first pet" />
+				</Form>
 			</Accordion.Panel>
 		</Accordion.Item>
 	</Accordion>
