@@ -2,8 +2,8 @@ These `<Accordion>` components follow the [WAI-AIRA spec for accordions](https:/
 
 We do not currently support any options for requiring that one section always be open, or else limiting that no more than one section can be open. If you need this functionality, consider opening a PR.
 
-An `<Accordion>` can have any number of `<AccordionItem>` children.
-Each `<AccordionItem>` should have exactly one `<AccordionHeader>` and one `<AccordionPanel>` as children.
+An `<Accordion>` can have any number of `<Accordion.Item>` children.
+Each `<Accordion.Item>` should have exactly one `<Accordion.Header>` and one `<Accordion.Panel>` as children.
 
 ## Component Variations
 
@@ -16,33 +16,33 @@ state: { expandedSections: [0] }
 ---
 <AccordionDemo>
 	<Accordion expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
-		<AccordionItem>
-			<AccordionHeader subtitle="Subtitle for Section One.">
+		<Accordion.Item>
+			<Accordion.Header subtitle="Subtitle for Section One.">
 				Section One Title
-			</AccordionHeader>
-			<AccordionPanel>
+			</Accordion.Header>
+			<Accordion.Panel>
 				<div><input placeholder="Name" /></div>
 				<div><input placeholder="Email" /></div>
-			</AccordionPanel>
-		</AccordionItem>
-		<AccordionItem>
-			<AccordionHeader>
+			</Accordion.Panel>
+		</Accordion.Item>
+		<Accordion.Item>
+			<Accordion.Header>
 				Section Two Title
-			</AccordionHeader>
-			<AccordionPanel>
+			</Accordion.Header>
+			<Accordion.Panel>
 				<div><input placeholder="Home address" /></div>
 				<div><input placeholder="Zip code" /></div>
-			</AccordionPanel>
-		</AccordionItem>
-		<AccordionItem>
-			<AccordionHeader>
+			</Accordion.Panel>
+		</Accordion.Item>
+		<Accordion.Item>
+			<Accordion.Header>
 				Section Three Title
-			</AccordionHeader>
-			<AccordionPanel>
+			</Accordion.Header>
+			<Accordion.Panel>
 				<div><input placeholder="Mother's maiden name" /></div>
 				<div><input placeholder="Name of your first pet" /></div>
-			</AccordionPanel>
-		</AccordionItem>
+			</Accordion.Panel>
+		</Accordion.Item>
 	</Accordion>
 </AccordionDemo>
 ```
@@ -58,33 +58,33 @@ state: { expandedSections: [0, 2] }
 ---
 <AccordionDemo>
 	<Accordion hideArrows expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
-		<AccordionItem>
-			<AccordionHeader renderCustomIndicator={AccordionCustomIndicator}>
+		<Accordion.Item>
+			<Accordion.Header renderCustomIndicator={AccordionCustomIndicator}>
 				Section One Title
-			</AccordionHeader>
-			<AccordionPanel>
+			</Accordion.Header>
+			<Accordion.Panel>
 				<div><input placeholder="Name" /></div>
 				<div><input placeholder="Email" /></div>
-			</AccordionPanel>
-		</AccordionItem>
-		<AccordionItem>
-			<AccordionHeader renderCustomIndicator={AccordionCustomIndicator}>
+			</Accordion.Panel>
+		</Accordion.Item>
+		<Accordion.Item>
+			<Accordion.Header renderCustomIndicator={AccordionCustomIndicator}>
 				Section Two Title
-			</AccordionHeader>
-			<AccordionPanel>
+			</Accordion.Header>
+			<Accordion.Panel>
 				<div><input placeholder="Home address" /></div>
 				<div><input placeholder="Zip code" /></div>
-			</AccordionPanel>
-		</AccordionItem>
-		<AccordionItem>
-			<AccordionHeader renderCustomIndicator={AccordionCustomIndicator}>
+			</Accordion.Panel>
+		</Accordion.Item>
+		<Accordion.Item>
+			<Accordion.Header renderCustomIndicator={AccordionCustomIndicator}>
 				Section Three Title
-			</AccordionHeader>
-			<AccordionPanel>
+			</Accordion.Header>
+			<Accordion.Panel>
 				<div><input placeholder="Mother's maiden name" /></div>
 				<div><input placeholder="Name of your first pet" /></div>
-			</AccordionPanel>
-		</AccordionItem>
+			</Accordion.Panel>
+		</Accordion.Item>
 	</Accordion>
 </AccordionDemo>
 ```
@@ -100,30 +100,30 @@ state: { expandedSections: [] }
 ---
 <AccordionDemo>
 	<Accordion expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
-		<AccordionItem>
-			<AccordionHeader subtitle="The first book of the Bible.">
+		<Accordion.Item>
+			<Accordion.Header subtitle="The first book of the Bible.">
 				Genesis
-			</AccordionHeader>
-			<AccordionPanel>
+			</Accordion.Header>
+			<Accordion.Panel>
 				<div>In the beginning, God created the heavens and the earth.</div>
-			</AccordionPanel>
-		</AccordionItem>
-		<AccordionItem>
-			<AccordionHeader subtitle="The second book of the Bible.">
+			</Accordion.Panel>
+		</Accordion.Item>
+		<Accordion.Item>
+			<Accordion.Header subtitle="The second book of the Bible.">
 				Exodus
-			</AccordionHeader>
-			<AccordionPanel>
+			</Accordion.Header>
+			<Accordion.Panel>
 				<div>And these are the names of the sons of Israel who came to Egypt; with Jacob, they each came with his ⌊family⌋:</div>
-			</AccordionPanel>
-		</AccordionItem>
-		<AccordionItem>
-			<AccordionHeader subtitle="The third book of the Bible.">
+			</Accordion.Panel>
+		</Accordion.Item>
+		<Accordion.Item>
+			<Accordion.Header subtitle="The third book of the Bible.">
 				Leviticus
-			</AccordionHeader>
-			<AccordionPanel>
-				<div>Thena Yahweh called to Moses and spoke to him from the tent of assembly, saying,</div>
-			</AccordionPanel>
-		</AccordionItem>
+			</Accordion.Header>
+			<Accordion.Panel>
+				<div>Then Yahweh called to Moses and spoke to him from the tent of assembly, saying,</div>
+			</Accordion.Panel>
+		</Accordion.Item>
 	</Accordion>
 </AccordionDemo>
 ```

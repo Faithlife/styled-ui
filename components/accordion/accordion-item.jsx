@@ -31,13 +31,14 @@ export function AccordionItem({ children, index }) {
 	);
 
 	return (
-		<Styled.AccordionItem>
+		<Styled.Item>
 			<AccordionItemContextProvider value={context}>{children}</AccordionItemContextProvider>
-		</Styled.AccordionItem>
+		</Styled.Item>
 	);
 }
 
 AccordionItem.propTypes = {
+	/** Should contain exactly one Header and one Panel as children. */
 	children: PropTypes.node.isRequired,
 	/** This is supplied by the Accordion component. */
 	index: PropTypes.number,

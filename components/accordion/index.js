@@ -1,4 +1,10 @@
-export { Accordion } from './accordion';
-export { AccordionHeader } from './accordion-header';
-export { AccordionItem } from './accordion-item';
-export { AccordionPanel } from './accordion-panel';
+import { Accordion } from './accordion';
+import { AccordionHeader } from './accordion-header';
+import { AccordionItem } from './accordion-item';
+import { AccordionPanel } from './accordion-panel';
+
+Accordion.Header = AccordionHeader;
+Accordion.Item = AccordionItem;
+Accordion.Panel = AccordionPanel;
+
+export { Accordion };

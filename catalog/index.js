@@ -8,9 +8,6 @@ import * as dateFunctions from 'date-fns';
 import chrono from 'chrono-node';
 import {
 	Accordion,
-	AccordionHeader,
-	AccordionItem,
-	AccordionPanel,
 	AnchorButton,
 	Bootstrap,
 	Button,
@@ -76,21 +73,6 @@ const ButtonGrid = styled.div`
 	width: 200px;
 `;
 
-const AccordionPanelDemoContents = styled.div`
-	display: grid;
-	grid-auto-flow: row;
-	grid-row-gap: 12px;
-`;
-
-const AccordionPanelDemo = ({ children }) => (
-	<AccordionPanel>
-		<AccordionPanelDemoContents>{children}</AccordionPanelDemoContents>
-	</AccordionPanel>
-);
-AccordionPanelDemo.propTypes = {
-	children: PropTypes.node.isRequired,
-};
-
 const AccordionIndicatorDemo = ({ isExpanded, onExpansion }) => (
 	<input type="checkbox" checked={isExpanded} onChange={onExpansion} tabIndex={-1} />
 );
@@ -114,9 +96,6 @@ const components = [
 				content: pageLoader(() => import('./accordion/variations.md')),
 				imports: {
 					Accordion,
-					AccordionHeader,
-					AccordionItem,
-					AccordionPanel: AccordionPanelDemo,
 					AccordionDemo: styled.div`
 						background: #fff;
 						border: 16px solid #f2f2f2;
@@ -129,7 +108,7 @@ const components = [
 				path: '/accordion/documentation',
 				title: 'Accordion Documentation',
 				content: pageLoader(() => import('./accordion/documentation.md')),
-				imports: { Accordion, AccordionHeader, AccordionItem, AccordionPanel, DocgenTable },
+				imports: { Accordion, DocgenTable },
 			},
 		],
 	},

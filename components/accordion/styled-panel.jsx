@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { resetStyles } from '../utils';
 
-export const AccordionPanel = styled.div.attrs({
+export const Panel = styled.div.attrs({
 	role: 'region',
 	'aria-labelledby': ({ headerId }) => `accordion-header-${headerId}`,
 	id: ({ panelId }) => `accordion-panel-${panelId}`,

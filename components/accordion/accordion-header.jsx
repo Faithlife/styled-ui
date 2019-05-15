@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ExpandedIcon from './svgs/expanded-icon.svg';
 import CollapsedIcon from './svgs/collapsed-icon.svg';
-import { AccordionIndicator } from './accordion-indicator';
 import { useAccordionContext, useAccordionItemContext } from './accordion-util';
 import * as Styled from './styled-header';
 
@@ -88,9 +87,9 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 				</Styled.Button>
 			</Styled.Heading>
 			{renderCustomIndicator ? (
-				<AccordionIndicator>
+				<Styled.Indicator>
 					{renderCustomIndicator({ isExpanded, onExpansion: handleExpansion })}
-				</AccordionIndicator>
+				</Styled.Indicator>
 			) : null}
 		</Styled.HeadingWrapper>
 	);

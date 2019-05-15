@@ -54,13 +54,13 @@ export function Accordion({ children, expandedSections, hideArrows, onExpansion 
 }
 
 Accordion.propTypes = {
-	/** Should contain AccordionItem components. */
+	/** Should contain Accordion.Item components. */
 	children: PropTypes.node.isRequired,
-	/** An array of indexes for AccordionItems which should be expanded. */
+	/** An array of indexes for Accordion.Items which should be expanded. */
 	expandedSections: PropTypes.arrayOf(PropTypes.number).isRequired,
 	/** For hiding the default arrow indicators. */
 	hideArrows: PropTypes.bool,
-	/** Will be called with an array of indexes for AccordionItems which should be expanded. */
+	/** Will be called with an array of indexes for Accordion.Items which should be expanded. */
 	onExpansion: PropTypes.func.isRequired,
 };
 

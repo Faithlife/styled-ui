@@ -9,17 +9,17 @@ noSource: true
 ```react
 noSource: true
 ---
-<DocgenTable component={AccordionItem} />
+<DocgenTable component={Accordion.Item} displayName="Accordion.Item" />
 ```
 
 ```react
 noSource: true
 ---
-<DocgenTable component={AccordionHeader} />
+<DocgenTable component={Accordion.Header} displayName="Accordion.Header" />
 ```
 
 ```react
 noSource: true
 ---
-<DocgenTable component={AccordionPanel} />
+<DocgenTable component={Accordion.Panel} displayName="Accordion.Panel" />
 ```

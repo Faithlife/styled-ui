@@ -8,13 +8,14 @@ export function AccordionPanel({ children }) {
 	const { isExpanded, headerId, panelId } = useAccordionItemContext();
 	return (
 		<Collapse isOpen={isExpanded}>
-			<Styled.AccordionPanel headerId={headerId} panelId={panelId}>
+			<Styled.Panel headerId={headerId} panelId={panelId}>
 				{children}
-			</Styled.AccordionPanel>
+			</Styled.Panel>
 		</Collapse>
 	);
 }
 
 AccordionPanel.propTypes = {
+	/** Children will be rendered as contents of the panel. */
 	children: PropTypes.node,
 };
