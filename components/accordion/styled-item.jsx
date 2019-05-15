@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { resetStyles } from '../utils';
 
-export const AccordionItem = styled.div`
+export const AccordionItem = styled.section`
 	${resetStyles};
 
 	display: grid;

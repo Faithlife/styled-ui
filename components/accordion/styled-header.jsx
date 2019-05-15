@@ -11,8 +11,9 @@ export const HeadingWrapper = styled.div`
 		customIndicator ? '[title] auto [indicator] min-content' : '[title] auto [space] 0'};
 `;
 
-export const Heading = styled.div.attrs({
+export const Heading = styled.header.attrs({
 	role: 'heading',
+	'aria-level': ({ ariaLevel }) => ariaLevel,
 })`
 	${resetStyles};
 

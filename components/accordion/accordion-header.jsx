@@ -6,7 +6,7 @@ import { AccordionIndicator } from './accordion-indicator';
 import { useAccordionContext, useAccordionItemContext } from './accordion-util';
 import * as Styled from './styled-header';
 
-export function AccordionHeader({ children, customIndicator, headingLevel, subtitle }) {
+export function AccordionHeader({ ariaLevel, children, customIndicator, subtitle }) {
 	const {
 		focusedMenuItem,
 		focusableChildList,
@@ -62,7 +62,7 @@ export function AccordionHeader({ children, customIndicator, headingLevel, subti
 	);
 	return (
 		<Styled.HeadingWrapper customIndicator={customIndicator}>
-			<Styled.Heading as={`h${headingLevel}`}>
+			<Styled.Heading ariaLevel={ariaLevel}>
 				<Styled.Button
 					isExpanded={isExpanded}
 					onBlur={handleBlur}
@@ -100,12 +100,8 @@ AccordionHeader.propTypes = {
 	children: PropTypes.node,
 	/** A render prop which receives an isExpanded boolean value. */
 	customIndicator: PropTypes.func,
-	/** Which HTML heading element to use. */
-	headingLevel: PropTypes.number,
 	/** In most cases the subtitle should be hidden on mobile viewports, but that is a responsibility of the consumer. */
 	subtitle: PropTypes.node,
-};
-
-AccordionHeader.defaultProps = {
-	headingLevel: 1,
+	/** Defines the hierarchical level of an element within a structure. */
+	ariaLevel: PropTypes.number,
 };
