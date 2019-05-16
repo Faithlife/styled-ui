@@ -74,9 +74,7 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 					<Styled.ButtonContentWrapper hideArrows={hideArrows} subtitle={subtitle}>
 						<React.Fragment>
 							{!hideArrows && (
-								<div>
-									<img src={isExpanded ? ExpandedIcon : CollapsedIcon} role="presentation" alt="" />
-								</div>
+								<img src={isExpanded ? ExpandedIcon : CollapsedIcon} role="presentation" alt="" />
 							)}
 							<Styled.ButtonContent>
 								{children ? <Styled.Title>{children}</Styled.Title> : null}

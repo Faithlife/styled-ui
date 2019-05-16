@@ -42,6 +42,7 @@ export const ButtonContentWrapper = styled.div`
 	${resetStyles};
 
 	display: grid;
+	align-items: center;
 	grid-template-columns: ${props => (props.hideArrows ? 'auto' : 'min-content auto')};
 	grid-column-gap: 12px;
 
