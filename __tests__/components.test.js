@@ -62,4 +62,74 @@ describe('Visual Regressions', async () => {
 		},
 		16000,
 	);
+
+	test(
+		'test helpbox visuals',
+		async () => {
+			const page = await browser.newPage();
+			await page.goto('http://localhost:4000/#/help-box/variations');
+			const image = await page.screenshot({ fullPage: true });
+
+			expect(image).toMatchImageSnapshot({
+				customSnapshotIdentifier: 'helpbox-variations',
+			});
+		},
+		16000,
+	);
+
+	test(
+		'test parameter sentence visuals',
+		async () => {
+			const page = await browser.newPage();
+			await page.goto('http://localhost:4000/#/parameter-sentence/variations');
+			const image = await page.screenshot({ fullPage: true });
+
+			expect(image).toMatchImageSnapshot({
+				customSnapshotIdentifier: 'parametersentence-variations',
+			});
+		},
+		16000,
+	);
+
+	test(
+		'test radio visuals',
+		async () => {
+			const page = await browser.newPage();
+			await page.goto('http://localhost:4000/#/radio/variations');
+			const image = await page.screenshot({ fullPage: true });
+
+			expect(image).toMatchImageSnapshot({
+				customSnapshotIdentifier: 'radio-variations',
+			});
+		},
+		16000,
+	);
+
+	test(
+		'test slider visuals',
+		async () => {
+			const page = await browser.newPage();
+			await page.goto('http://localhost:4000/#/slider/variations');
+			const image = await page.screenshot({ fullPage: true });
+
+			expect(image).toMatchImageSnapshot({
+				customSnapshotIdentifier: 'slider-variations',
+			});
+		},
+		16000,
+	);
+
+	test(
+		'test tabs visuals',
+		async () => {
+			const page = await browser.newPage();
+			await page.goto('http://localhost:4000/#/tabs/variations');
+			const image = await page.screenshot({ fullPage: true });
+
+			expect(image).toMatchImageSnapshot({
+				customSnapshotIdentifier: 'tabs-variations',
+			});
+		},
+		16000,
+	);
 });
