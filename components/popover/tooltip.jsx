@@ -17,7 +17,12 @@ export class Tooltip extends Component {
 		tooltipIsOpen: false,
 	};
 
+	componentDidMount() {
+		window.addEventListener('click', this.handleClick);
+	}
+
 	componentWillUnmount() {
+		window.removeEventListener('click', this.handleClick);
 		this.handleMouseLeave.cancel();
 	}
 
@@ -32,6 +37,14 @@ export class Tooltip extends Component {
 	handleMouseEnter = () => {
 		this.handleMouseLeave.cancel();
 		this.setState({ tooltipIsOpen: true });
+	};
+
+	handleClick = () => {
+		if (!this.state.tooltipIsOpen) {
+			return;
+		}
+
+		this.setState({ tooltipIsOpen: false });
 	};
 
 	render() {

@@ -60,6 +60,14 @@ export class InferredBase extends Component {
 		confidenceSource: 'Heuristic Algorithm',
 	};
 
+	componentDidMount() {
+		window.addEventListener('click', this.handleClick);
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('click', this.handleClick);
+	}
+
 	componentWillReceiveProps(props) {
 		if (props.confidence !== this.props.confidence) {
 			this.setState({ isPopoverOpen: false });
@@ -67,6 +75,14 @@ export class InferredBase extends Component {
 	}
 
 	state = { isPopoverOpen: false };
+
+	handleClick = () => {
+		if (!this.state.isPopoverOpen) {
+			return;
+		}
+
+		this.setState({ isPopoverOpen: false });
+	};
 
 	render() {
 		const { confidence, confidenceSource, onConfirm } = this.props;
