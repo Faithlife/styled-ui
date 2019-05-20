@@ -15,9 +15,30 @@ const IndicatorContainer = styled.div`
 	z-index: 3;
 	display: flex;
 	align-items: center;
+	cursor: pointer;
 
-	&:hover {
-		cursor: pointer;
+	.confidenceIcon {
+		display: none;
+	}
+
+	.okIcon {
+		display: none;
+	}
+
+	&.hasConfidence {
+		.confidenceIcon {
+			display: inline-block;
+		}
+	}
+
+	&.hasConfidence:hover {
+		.okIcon {
+			display: inline-block;
+		}
+
+		.confidenceIcon {
+			display: none;
+		}
 	}
 `;
 
@@ -60,23 +81,16 @@ export class InferredBase extends Component {
 		confidenceSource: 'Heuristic Algorithm',
 	};
 
-	componentWillReceiveProps(props) {
-		if (props.confidence !== this.props.confidence) {
-			this.setState({ isPopoverOpen: false });
-		}
-	}
-
-	state = { isPopoverOpen: false };
-
 	render() {
 		const { confidence, confidenceSource, onConfirm } = this.props;
+
 		const ConfidenceIcon =
 			confidence >= 0.9 ? (
-				<LightBulbH />
+				<LightBulbH className="confidenceIcon" />
 			) : confidence >= 0.7 ? (
-				<LightBulbM />
+				<LightBulbM className="confidenceIcon" />
 			) : confidence >= 0.6 ? (
-				<LightBulbL />
+				<LightBulbL className="confidenceIcon" />
 			) : null;
 
 		const tooltipContents = (
@@ -92,21 +106,15 @@ export class InferredBase extends Component {
 		return (
 			<RelativeContainer className={this.props.className}>
 				{this.props.children({ inferred: ConfidenceIcon != null })}
-				<IndicatorContainer>
+				<IndicatorContainer className={ConfidenceIcon ? 'hasConfidence' : ''}>
 					<Tooltip text={tooltipContents} styleOverrides={{ minWidth: 300 }} placement="top-end">
 						<ConfidenceIconContainer
-							onMouseEnter={() => this.setState({ isPopoverOpen: true })}
-							onMouseLeave={() => this.setState({ isPopoverOpen: false })}
 							onClick={() => {
-								if (this.state.isPopoverOpen) {
-									onConfirm();
-									this.setState({ isPopoverOpen: false });
-								} else {
-									this.setState({ isPopoverOpen: true });
-								}
+								onConfirm();
 							}}
 						>
-							{this.state.isPopoverOpen && ConfidenceIcon != null ? <OKCircle /> : ConfidenceIcon}
+							<OKCircle className="okIcon" />
+							{ConfidenceIcon}
 						</ConfidenceIconContainer>
 					</Tooltip>
 				</IndicatorContainer>
