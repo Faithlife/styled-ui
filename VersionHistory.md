@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.7.0
+
+- Add `Accordion` component
+
 ### 5.6.0
 
 - Add `Listbox` component
