@@ -17,7 +17,7 @@
 			}
 		],
 		"declaration-block-trailing-semicolon": "always",
-		"declaration-colon-space-after": "always",
+		"declaration-colon-space-after": "always-single-line",
 		"declaration-colon-space-before": "never",
 		"max-empty-lines": 1,
 		"no-duplicate-selectors": true,

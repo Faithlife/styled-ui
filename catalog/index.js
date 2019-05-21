@@ -1,11 +1,13 @@
 /* eslint-disable react/jsx-indent */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Catalog, pageLoader } from 'catalog';
 import * as dateFunctions from 'date-fns';
 import chrono from 'chrono-node';
 import {
+	Accordion,
 	AnchorButton,
 	Bootstrap,
 	Button,
@@ -79,11 +81,53 @@ const ButtonGrid = styled.div`
 	width: 200px;
 `;
 
+const AccordionIndicatorDemo = ({ isExpanded, onExpansion }) => (
+	<input type="checkbox" checked={isExpanded} onChange={onExpansion} tabIndex={-1} />
+);
+
+AccordionIndicatorDemo.propTypes = {
+	isExpanded: PropTypes.bool,
+	onExpansion: PropTypes.func,
+};
+
+const FormDemo = styled.form`
+	display: inline-grid;
+	grid-auto-flow: row;
+	grid-row-gap: 12px;
+`;
+
 function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
 }
 
 const components = [
+	{
+		title: 'Accordion',
+		pages: [
+			{
+				path: '/accordion/variations',
+				title: 'Accordion Variations',
+				content: pageLoader(() => import('./accordion/variations.md')),
+				imports: {
+					Accordion,
+					AccordionDemo: styled.div`
+						background: #fff;
+						border: 16px solid #f2f2f2;
+					`,
+					AccordionCustomIndicator: AccordionIndicatorDemo,
+					Checkbox,
+					Form: FormDemo,
+					Input,
+				},
+			},
+			{
+				path: '/accordion/documentation',
+				title: 'Accordion Documentation',
+				content: pageLoader(() => import('./accordion/documentation.md')),
+				imports: { Accordion, DocgenTable },
+			},
+		],
+	},
 	{
 		title: 'Bootstrap',
 		pages: [
@@ -676,6 +720,7 @@ const components = [
 					TabDemo: styled.div`
 						padding: 8px;
 						background-color: white;
+
 						&& > * {
 							margin: 16px;
 						}

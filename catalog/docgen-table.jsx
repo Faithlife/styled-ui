@@ -75,6 +75,10 @@ class CollapsableText extends Component {
 export function DocgenTable(props) {
 	const docgen = props.component.__docgenInfo;
 
+	if (!docgen) {
+		return <p>docgenInfo not found for {props.component.name}</p>;
+	}
+
 	const componentProps = Object.keys(docgen.props).map(name => ({
 		name,
 		...docgen.props[name],
