@@ -97,10 +97,6 @@ export const Select = styled.select`
 	background-color: transparent;
 	text-align-last: center;
 
-	&::-ms-expand: {
-		display: none;
-	}
-
 	${selectStyling};
 
 	transition: box-shadow 0.25s ease 0s;
