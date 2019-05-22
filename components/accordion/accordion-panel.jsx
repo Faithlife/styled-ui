@@ -7,11 +7,13 @@ import * as Styled from './styled-panel';
 export function AccordionPanel({ children }) {
 	const { isExpanded, headerId, panelId } = useAccordionItemContext();
 	return (
-		<Collapse isOpen={isExpanded}>
-			<Styled.Panel headerId={headerId} panelId={panelId}>
-				{children}
-			</Styled.Panel>
-		</Collapse>
+		<Styled.PanelContainer>
+			<Collapse isOpen={isExpanded}>
+				<Styled.Panel headerId={headerId} panelId={panelId}>
+					{children}
+				</Styled.Panel>
+			</Collapse>
+		</Styled.PanelContainer>
 	);
 }
 
