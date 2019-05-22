@@ -12,3 +12,7 @@ export const Panel = styled.div.attrs({
 
 	padding: 8px 24px 32px;
 `;
+
+export const PanelContainer = styled.div`
+	min-width: 0;
+`;
