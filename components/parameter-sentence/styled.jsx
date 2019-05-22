@@ -65,7 +65,7 @@ export const InputContainer = styled.div`
 	position: absolute;
 	bottom: ${inputOffset};
 
-	&& > input::-webkit-outer-spin-button, /* Safari Chrome */
+	&& > input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button {
 		appearance: none;
 		margin: 0;
