@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.7.1
+
+- Fix window resizing issue on `Accordion` component
+
 ### 5.7.0
 
 - Add `Accordion` component
