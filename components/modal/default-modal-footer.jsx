@@ -32,6 +32,7 @@ export const DefaultModalFooter = props => (
 						primaryOutline
 						medium
 						theme={{ width: props.useFullWidthButtons ? '100%' : null }}
+						tabindex={props.cancelButton.tabindex}
 						onClick={props.cancelButton.onClick}
 					>
 						{props.cancelButton.text}
@@ -43,6 +44,7 @@ export const DefaultModalFooter = props => (
 					primary
 					medium
 					theme={{ width: props.useFullWidthButtons ? '100%' : null }}
+					tabindex={props.commitButton.tabindex}
 					onClick={props.commitButton.onClick}
 				>
 					{props.commitButton.text}
@@ -56,10 +58,12 @@ DefaultModalFooter.propTypes = {
 	commitButton: PropTypes.shape({
 		onClick: PropTypes.func.isRequired,
 		text: PropTypes.string.isRequired,
+		tabindex: PropTypes.string,
 	}),
 	cancelButton: PropTypes.shape({
 		onClick: PropTypes.func.isRequired,
 		text: PropTypes.string.isRequired,
+		tabindex: PropTypes.string,
 	}),
 	deleteButton: PropTypes.shape({
 		onClick: PropTypes.func.isRequired,
