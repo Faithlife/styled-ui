@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactSelect, {
 	Creatable as ReactSelectCreatable,
 	components as reactSelectComponents,
@@ -122,56 +122,85 @@ function noOptionsMessage({ inputValue }) {
 }
 
 /** Autocomplete control based on react-select */
-export const Select = React.forwardRef(({ components = {}, ...props }, ref) => (
-	<ReactSelect
-		ref={ref}
-		classNamePrefix="fl-select"
-		theme={selectTheme}
-		components={{ ...defaultComponents, ...components }}
-		noOptionsMessage={noOptionsMessage}
-		{...props}
-		styles={selectStyles(props)}
-	/>
-));
+export const Select = React.forwardRef(({ components = {}, ...props }, ref) => {
+	const body = useBody();
+
+	return (
+		<ReactSelect
+			ref={ref}
+			classNamePrefix="fl-select"
+			theme={selectTheme}
+			components={{ ...defaultComponents, ...components }}
+			noOptionsMessage={noOptionsMessage}
+			menuPortalTarget={body}
+			{...props}
+			styles={selectStyles(props)}
+		/>
+	);
+});
 
 /** The same as `Select`, but allows new entries. */
-export const CreatableSelect = React.forwardRef(({ components = {}, ...props }, ref) => (
-	<ReactSelectCreatable
-		ref={ref}
-		classNamePrefix="fl-select"
-		theme={selectTheme}
-		formatCreateLabel={node => <span>New entry: {node}</span>}
-		components={{ ...defaultComponents, ...components }}
-		noOptionsMessage={noOptionsMessage}
-		{...props}
-		styles={selectStyles(props)}
-	/>
-));
+export const CreatableSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
+	const body = useBody();
+
+	return (
+		<ReactSelectCreatable
+			ref={ref}
+			classNamePrefix="fl-select"
+			theme={selectTheme}
+			formatCreateLabel={node => <span>New entry: {node}</span>}
+			components={{ ...defaultComponents, ...components }}
+			noOptionsMessage={noOptionsMessage}
+			menuPortalTarget={body}
+			{...props}
+			styles={selectStyles(props)}
+		/>
+	);
+});
 
 /** The same as `Select`, but allows new entries and fetches data asynchronously. */
-export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...props }, ref) => (
-	<ReactSelectAsyncCreatable
-		ref={ref}
-		allowCreateWhileLoading={false}
-		classNamePrefix="fl-select"
-		theme={selectTheme}
-		components={{ ...defaultComponents, ...components }}
-		formatCreateLabel={node => <span>New entry: {node}</span>}
-		noOptionsMessage={noOptionsMessage}
-		{...props}
-		styles={selectStyles(props)}
-	/>
-));
+export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
+	const body = useBody();
+
+	return (
+		<ReactSelectAsyncCreatable
+			ref={ref}
+			allowCreateWhileLoading={false}
+			classNamePrefix="fl-select"
+			theme={selectTheme}
+			components={{ ...defaultComponents, ...components }}
+			formatCreateLabel={node => <span>New entry: {node}</span>}
+			noOptionsMessage={noOptionsMessage}
+			menuPortalTarget={body}
+			{...props}
+			styles={selectStyles(props)}
+		/>
+	);
+});
 
 /** The same as `Select`, but fetches options asynchronously. */
-export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref) => (
-	<ReactSelectAsync
-		ref={ref}
-		classNamePrefix="fl-select"
-		theme={selectTheme}
-		components={{ ...defaultComponents, ...components }}
-		noOptionsMessage={noOptionsMessage}
-		{...props}
-		styles={selectStyles(props)}
-	/>
-));
+export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
+	const body = useBody();
+
+	return (
+		<ReactSelectAsync
+			ref={ref}
+			classNamePrefix="fl-select"
+			theme={selectTheme}
+			components={{ ...defaultComponents, ...components }}
+			noOptionsMessage={noOptionsMessage}
+			menuPortalTarget={body}
+			{...props}
+			styles={selectStyles(props)}
+		/>
+	);
+});
+
+function useBody() {
+	const [body, setBody] = useState(null);
+	useEffect(() => {
+		setBody((window && window.document.body) || null);
+	}, []);
+
+	return body;
+}
