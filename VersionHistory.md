@@ -1,5 +1,11 @@
 # Changelog
 
+### 5.7.2
+
+- Adjust default tab order of `Modal` footer buttons.
+- Allow tabindex to be specified on `Modal` footer buttons.
+- Render `Select` popups attached to the body to avoid layout issues.
+
 ### 5.7.1
 
 - Fix window resizing issue on `Accordion` component
