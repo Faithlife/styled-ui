@@ -8,6 +8,30 @@ import * as Styled from './styled';
 export const DefaultModalFooter = props => (
 	<ModalFooter>
 		<Styled.FooterContainer>
+			{props.commitButton && (
+				<Button
+					primary
+					medium
+					theme={{ width: props.useFullWidthButtons ? '100%' : null }}
+					tabindex={props.commitButton.tabindex}
+					onClick={props.commitButton.onClick}
+				>
+					{props.commitButton.text}
+				</Button>
+			)}
+			{props.cancelButton && (
+				<Styled.CancelContainer>
+					<Button
+						primaryOutline
+						medium
+						theme={{ width: props.useFullWidthButtons ? '100%' : null }}
+						tabindex={props.cancelButton.tabindex}
+						onClick={props.cancelButton.onClick}
+					>
+						{props.cancelButton.text}
+					</Button>
+				</Styled.CancelContainer>
+			)}
 			{props.deleteButton && (
 				<Styled.DeleteContainer>
 					<Button
@@ -25,30 +49,6 @@ export const DefaultModalFooter = props => (
 						{props.deleteButton.text}
 					</Button>
 				</Styled.DeleteContainer>
-			)}
-			{props.cancelButton && (
-				<Styled.CancelContainer>
-					<Button
-						primaryOutline
-						medium
-						theme={{ width: props.useFullWidthButtons ? '100%' : null }}
-						tabindex={props.cancelButton.tabindex}
-						onClick={props.cancelButton.onClick}
-					>
-						{props.cancelButton.text}
-					</Button>
-				</Styled.CancelContainer>
-			)}
-			{props.commitButton && (
-				<Button
-					primary
-					medium
-					theme={{ width: props.useFullWidthButtons ? '100%' : null }}
-					tabindex={props.commitButton.tabindex}
-					onClick={props.commitButton.onClick}
-				>
-					{props.commitButton.text}
-				</Button>
 			)}
 		</Styled.FooterContainer>
 	</ModalFooter>

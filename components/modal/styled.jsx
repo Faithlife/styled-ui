@@ -81,7 +81,7 @@ export const ModalFooter = styled.div`
 
 export const FooterContainer = styled.div`
 	display: flex;
-	flex-direction: ${props => (props.theme.verticalButtons ? 'column' : 'row')};
+	flex-direction: ${props => (props.theme.verticalButtons ? 'column-reverse' : 'row-reverse')};
 	justify-content: flex-end;
 	align-items: center;
 	width: 100%;
