@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.7.3
+
+- Adds padding `styleOverride` to `Accordian`
+
 ### 5.7.2
 
 - Adjust default tab order of `Modal` footer buttons.
