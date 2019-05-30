@@ -20,6 +20,7 @@ export const Heading = styled.header.attrs({
 	grid-column: 1 / span 2;
 	grid-row: 1;
 	min-width: 0;
+	width: 100%;
 `;
 
 export const Button = styled.button.attrs({
