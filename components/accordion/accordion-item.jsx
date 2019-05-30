@@ -5,7 +5,7 @@ import { useAccordionContext, AccordionItemContextProvider } from './accordion-u
 import * as Styled from './styled-item';
 
 export function AccordionItem({ children, index }) {
-	const { expandedSections, onExpansion } = useAccordionContext();
+	const { expandedSections, onExpansion, styleOverrides } = useAccordionContext();
 
 	const isExpanded = expandedSections.includes(index);
 
@@ -26,8 +26,9 @@ export function AccordionItem({ children, index }) {
 			index,
 			isExpanded,
 			onExpansion: handleExpansion,
+			styleOverrides,
 		}),
-		[headerId, panelId, index, isExpanded, handleExpansion],
+		[headerId, panelId, index, isExpanded, handleExpansion, styleOverrides],
 	);
 
 	return (
