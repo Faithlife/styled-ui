@@ -46,7 +46,7 @@ Listbox.propTypes = {
 		padding: PropTypes.string,
 		width: PropTypes.string,
 	}),
-	/** If the what the content of the listbox is, is not apparent (ex: it is not part of a larger component) the id of the label must be supplied */
+	/** The id of an element containing the label for this component. Maybe omitted if the content is self-explanatory. */
 	labelledBy: PropTypes.string,
 	selectedId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
