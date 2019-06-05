@@ -18,7 +18,7 @@
 		"build": "rimraf dist && webpack",
 		"prepublishOnly": "npm test",
 		"stylelint": "stylelint ./components/**/*.jsx",
-		"unit-test": "cross-env NODE_ENV=test mocha -t 15000 -r babel-core/register ./tests/**/*.js",
+		"unit-test": "cross-env NODE_ENV=test mocha -t 30000 -r babel-core/register ./tests/**/*.js",
 		"catalog-start": "catalog start",
 		"catalog-build": "catalog build --public-url /styled-ui",
 		"catalog-build-netlify": "npm run prepublishOnly && catalog build"
