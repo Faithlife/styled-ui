@@ -61,7 +61,9 @@ export class SimpleModal extends React.Component {
 	}
 
 	componentWillUnmount() {
-		if (this.cancelResizeListener) this.cancelResizeListener();
+		if (this.cancelResizeListener) {
+			this.cancelResizeListener();
+		}
 	}
 
 	handleResize = () => {
@@ -104,7 +106,7 @@ export class SimpleModal extends React.Component {
 			return null;
 		}
 
-		if (this.targetContainer != null) {
+		if (this.targetContainer) {
 			return createPortal(this.renderModal(), this.targetContainer);
 		}
 

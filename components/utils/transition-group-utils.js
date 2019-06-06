@@ -4,7 +4,7 @@
 export function omit(obj, omitKeys) {
 	const result = {};
 	Object.keys(obj).forEach(key => {
-		if (omitKeys.indexOf(key) === -1) {
+		if (!omitKeys.includes(key)) {
 			result[key] = obj[key];
 		}
 	});

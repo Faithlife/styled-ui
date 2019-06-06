@@ -14,51 +14,36 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 	} = useAccordionContext();
 	const { isExpanded, onExpansion, headerId, panelId } = useAccordionItemContext();
 
-	const handleExpansion = useCallback(
-		() => {
-			onExpansion(!isExpanded);
-		},
-		[isExpanded, onExpansion],
-	);
+	const handleExpansion = useCallback(() => {
+		onExpansion(!isExpanded);
+	}, [isExpanded, onExpansion]);
 
 	const buttonRef = useRef();
 	const isSelected = focusedMenuItem && focusedMenuItem === headerId;
 
-	useEffect(
-		() => {
-			if (isSelected && buttonRef.current) {
-				buttonRef.current.focus();
-			}
-		},
-		[isSelected, buttonRef.current],
-	);
+	useEffect(() => {
+		if (isSelected && buttonRef.current) {
+			buttonRef.current.focus();
+		}
+	}, [isSelected]);
 
-	const handleBlur = useCallback(
-		() => {
-			if (headerId) {
-				setFocusedMenuItem(null);
-			}
-		},
-		[setFocusedMenuItem, headerId],
-	);
+	const handleBlur = useCallback(() => {
+		if (headerId) {
+			setFocusedMenuItem(null);
+		}
+	}, [setFocusedMenuItem, headerId]);
 
-	const handleFocus = useCallback(
-		() => {
-			if (headerId) {
-				setFocusedMenuItem(headerId);
-			}
-		},
-		[setFocusedMenuItem, headerId],
-	);
+	const handleFocus = useCallback(() => {
+		if (headerId) {
+			setFocusedMenuItem(headerId);
+		}
+	}, [setFocusedMenuItem, headerId]);
 
-	useEffect(
-		() => {
-			if (headerId) {
-				focusableChildList.current.push(headerId);
-			}
-		},
-		[headerId, focusableChildList],
-	);
+	useEffect(() => {
+		if (headerId) {
+			focusableChildList.current.push(headerId);
+		}
+	}, [headerId, focusableChildList]);
 	return (
 		<Styled.HeadingWrapper renderCustomIndicator={renderCustomIndicator}>
 			<Styled.Heading ariaLevel={ariaLevel}>

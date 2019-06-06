@@ -64,7 +64,7 @@ export function TabPanel(props) {
 				};
 			}
 		},
-		[index, id],
+		[index, id, registerPanelId, unRegisterPanelId],
 	);
 
 	return (

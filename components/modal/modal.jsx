@@ -86,7 +86,9 @@ export class Modal extends React.Component {
 	}
 
 	componentWillUnmount() {
-		if (this.cancelResizeListener) this.cancelResizeListener();
+		if (this.cancelResizeListener) {
+			this.cancelResizeListener();
+		}
 	}
 
 	handleResize = () => {
@@ -126,7 +128,9 @@ export class Modal extends React.Component {
 					<Styled.Modal
 						ref={modal => {
 							this._modal = modal;
-							if (modal && modalWidth === null) this.setState({ modalWidth: modal.clientWidth });
+							if (modal && modalWidth === null) {
+								this.setState({ modalWidth: modal.clientWidth });
+							}
 						}}
 					>
 						<ModalHeader
@@ -153,7 +157,7 @@ export class Modal extends React.Component {
 			return null;
 		}
 
-		if (this.targetContainer != null) {
+		if (this.targetContainer) {
 			return createPortal(this.renderModal(), this.targetContainer);
 		}
 

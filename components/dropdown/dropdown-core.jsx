@@ -16,14 +16,11 @@ export function DropdownCore({
 	const dropdownToggleRef = useRef();
 	const menuId = useId();
 
-	const handleCloseMenu = useCallback(
-		() => {
-			if (onToggleMenu && isOpen) {
-				onToggleMenu();
-			}
-		},
-		[onToggleMenu, isOpen],
-	);
+	const handleCloseMenu = useCallback(() => {
+		if (onToggleMenu && isOpen) {
+			onToggleMenu();
+		}
+	}, [onToggleMenu, isOpen]);
 
 	const context = useMemo(
 		() => ({

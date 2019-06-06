@@ -22,7 +22,8 @@ export class CreateGroup extends React.Component {
 		return (
 			<Styled.CreateGroup>
 				<Styled.CreateGroupLabel>
-					Church Name{this.props.showRequiredStars && (
+					Church Name
+					{this.props.showRequiredStars && (
 						<Styled.CreateGroupRequiredStar>*</Styled.CreateGroupRequiredStar>
 					)}
 				</Styled.CreateGroupLabel>
@@ -36,7 +37,8 @@ export class CreateGroup extends React.Component {
 					/>
 				</Styled.InputWrapper>
 				<Styled.CreateGroupLabel>
-					Church Location{this.props.showRequiredStars && (
+					Church Location
+					{this.props.showRequiredStars && (
 						<Styled.CreateGroupRequiredStar>*</Styled.CreateGroupRequiredStar>
 					)}
 				</Styled.CreateGroupLabel>

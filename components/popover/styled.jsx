@@ -22,7 +22,9 @@ export const PopoverContent = styled.div`
 	position: absolute;
 	padding: ${({ styleOverrides }) => styleOverrides.padding || thickness.twelve};
 	${({ styleOverrides }) =>
-		styleOverrides.minWidth == null ? '' : `min-width: ${styleOverrides.minWidth}px`};
+		styleOverrides.minWidth === null || styleOverrides.minWidth === undefined
+			? ''
+			: `min-width: ${styleOverrides.minWidth}px`};
 	max-width: ${({ styleOverrides }) => styleOverrides.maxWidth || maxWidth}px;
 	${({ styleOverrides }) => (styleOverrides.width ? `width: ${styleOverrides.width}` : '')};
 	background-color: ${({ theme }) => theme.backgroundColor};

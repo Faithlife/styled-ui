@@ -1,4 +1,3 @@
-/* eslint-disable import/no-default-export */
 import * as _Bootstrap from 'reactstrap';
 import styled from 'styled-components';
 import React from 'react';
@@ -45,6 +44,7 @@ const Components = Object.keys(_Bootstrap)
 	.reduce(
 		(prev, curr) => ({
 			...prev,
+			// eslint-disable-next-line import/namespace
 			[curr]: wrapBootstrap(_Bootstrap[curr], inlineComponents.includes(curr)),
 		}),
 		{},

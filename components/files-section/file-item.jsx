@@ -42,7 +42,9 @@ export class FileItem extends PureComponent {
 		e.preventDefault();
 
 		const { file, onFileClicked } = this.props;
-		if (onFileClicked) onFileClicked(file);
+		if (onFileClicked) {
+			onFileClicked(file);
+		}
 	};
 
 	render() {

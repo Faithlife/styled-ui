@@ -10,16 +10,13 @@ export function ListItem(props) {
 	const { onItemSelect, focusedMenuItem, setFocusedMenuItem } = useDropdownContext();
 	const selected = focusedMenuItem === index;
 
-	const handleItemSelect = useCallback(
-		() => {
-			setFocusedMenuItem(index);
+	const handleItemSelect = useCallback(() => {
+		setFocusedMenuItem(index);
 
-			if (!disabled) {
-				onItemSelect(id);
-			}
-		},
-		[onItemSelect, id, disabled, index],
-	);
+		if (!disabled) {
+			onItemSelect(id);
+		}
+	}, [setFocusedMenuItem, index, disabled, onItemSelect, id]);
 
 	return (
 		<MenuItem

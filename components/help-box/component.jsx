@@ -23,7 +23,7 @@ export function HelpBox({
 		<HelpBoxVariation className={className} theme={theme} {...filteredProps}>
 			{showLightBulb && <Styled.BulbIcon />}
 			<Styled.HelpBoxContent>{children}</Styled.HelpBoxContent>
-			{handleClose != null && (
+			{handleClose && (
 				<Styled.CloseButton onClick={handleClose}>
 					<Close />
 				</Styled.CloseButton>

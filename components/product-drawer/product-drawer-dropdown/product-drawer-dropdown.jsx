@@ -33,7 +33,7 @@ export const ProductDrawerDropdown = ({
 		<Styled.DropdownColumns>
 			<Styled.DropdownColumn>
 				<Styled.DropdownHeader>
-					<img role="presentation" src={IndividualsSvg} />
+					<img alt="" src={IndividualsSvg} />
 					<h1>{resources.individualsSectionTitle}</h1>
 				</Styled.DropdownHeader>
 				<Styled.DropdownBody>
@@ -103,7 +103,7 @@ export const ProductDrawerDropdown = ({
 			</Styled.DropdownColumn>
 			<Styled.DropdownColumn>
 				<Styled.DropdownHeader>
-					<img role="presentation" src={ChurchesSvg} />
+					<img alt="" src={ChurchesSvg} />
 					<h1>{resources.churchesSectionTitle}</h1>
 				</Styled.DropdownHeader>
 				<Styled.DropdownBody>

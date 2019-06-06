@@ -46,11 +46,13 @@ export function useFocusAwayHandler(onFocusAwayCallback) {
 				};
 			}
 		},
-		[onBlur, targetRef.current, inboundsElements.map],
+		[onBlur, inboundsElements.map],
 	);
 
-	const addInboundsElement = useCallback((id, ref) => inboundsElements.add(id, ref), []);
-	const removeInboundsElement = useCallback(id => inboundsElements.remove(id), []);
+	const addInboundsElement = useCallback((id, ref) => inboundsElements.add(id, ref), [
+		inboundsElements,
+	]);
+	const removeInboundsElement = useCallback(id => inboundsElements.remove(id), [inboundsElements]);
 
 	return { targetRef, addInboundsElement, removeInboundsElement };
 }
@@ -71,7 +73,7 @@ export function useAddInboundsElement(addInboundsElement, removeInboundsElement)
 				};
 			}
 		},
-		[addInboundsElement, removeInboundsElement, targetRef.current, id],
+		[addInboundsElement, removeInboundsElement, id],
 	);
 
 	return targetRef;
