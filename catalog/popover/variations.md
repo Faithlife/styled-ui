@@ -138,15 +138,15 @@ showSource: true
 state: { isOpen: false }
 ---
 <PopoverDemo>
-	<Tooltip text="Hello!">
+	<Tooltip content="Hello!">
 		<Button primary medium>Uncontrolled Tooltip</Button>
 	</Tooltip>
 
-	<Tooltip text="Hello!" isOpen={state.isOpen}>
+	<Tooltip content="Hello!" isOpen={state.isOpen}>
 		<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Controlled Tooltip</Button>
 	</Tooltip>
 
-	<Tooltip text={<StyledDiv>Hello!</StyledDiv>}>
+	<Tooltip content={<StyledDiv>Hello!</StyledDiv>}>
 		<Button primary medium>Tooltip with jsx</Button>
 	</Tooltip>
 </PopoverDemo>
