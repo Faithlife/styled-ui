@@ -20,10 +20,20 @@ export const getPlacement = placement => {
 
 export const PopoverContent = styled.div`
 	position: absolute;
-	padding: ${({ styleOverrides }) => styleOverrides.padding || thickness.twelve};
-	${({ styleOverrides }) =>
-		styleOverrides.minWidth == null ? '' : `min-width: ${styleOverrides.minWidth}px`};
-	max-width: ${({ styleOverrides }) => styleOverrides.maxWidth || maxWidth}px;
+	padding: ${({ styleOverrides }) =>
+		styleOverrides.padding ? styleOverrides.padding : thickness.twelve};
+	min-width: ${({ styleOverrides }) =>
+		styleOverrides.minWidth
+			? isNaN(styleOverrides.minWidth)
+				? styleOverrides.minWidth
+				: `${styleOverrides.minWidth}px`
+			: ''};
+	max-width: ${({ styleOverrides }) =>
+		styleOverrides.maxWidth
+			? isNaN(styleOverrides.maxWidth)
+				? styleOverrides.maxWidth
+				: `${styleOverrides.maxWidth}px`
+			: maxWidth};
 	${({ styleOverrides }) => (styleOverrides.width ? `width: ${styleOverrides.width}` : '')};
 	background-color: ${({ theme }) => theme.backgroundColor};
 	border-radius: 3px;
