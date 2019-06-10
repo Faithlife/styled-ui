@@ -16,7 +16,6 @@ const supportedComponents = [
 	'DropdownMenu',
 	'DropdownToggle',
 	'Popover',
-	'PopoverContent',
 	'PopoverBody',
 	'PopoverTitle',
 	'PopoverHeader',
