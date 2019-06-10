@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.7.4
+
+- Increase z-index of select menu portal to restore expected behavior inside modals.
+
 ### 5.7.3
 
 - Adds padding `styleOverride` to `Accordian`

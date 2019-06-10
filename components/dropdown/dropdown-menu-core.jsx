@@ -15,16 +15,13 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 		styleOverrides,
 	} = useDropdownContext();
 
-	const closeMenu = useCallback(
-		() => {
-			if (dropdownToggleRef.current) {
-				dropdownToggleRef.current.focus();
-			}
+	const closeMenu = useCallback(() => {
+		if (dropdownToggleRef.current) {
+			dropdownToggleRef.current.focus();
+		}
 
-			handleCloseMenu();
-		},
-		[handleCloseMenu],
-	);
+		handleCloseMenu();
+	}, [dropdownToggleRef, handleCloseMenu]);
 
 	const focusableChildList = getFocusableChildrenList(children);
 	const handleKeyboardNav = useKeyboardNav(
@@ -34,16 +31,13 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 		focusableChildList,
 	);
 
-	useEffect(
-		() => {
-			if (focusedMenuItem === 'last' || focusedMenuItem < 0) {
-				setFocusedMenuItem(focusableChildList[focusableChildList.length - 1]);
-			} else if (focusedMenuItem === 'first' || focusedMenuItem > focusableChildList.length - 1) {
-				setFocusedMenuItem(focusableChildList[0]);
-			}
-		},
-		[focusedMenuItem, focusableChildList],
-	);
+	useEffect(() => {
+		if (focusedMenuItem === 'last' || focusedMenuItem < 0) {
+			setFocusedMenuItem(focusableChildList[focusableChildList.length - 1]);
+		} else if (focusedMenuItem === 'first' || focusedMenuItem > focusableChildList.length - 1) {
+			setFocusedMenuItem(focusableChildList[0]);
+		}
+	}, [focusedMenuItem, focusableChildList, setFocusedMenuItem]);
 
 	return (
 		<div id={menuId} {...ariaProps}>

@@ -17,21 +17,15 @@ export function Tab(props) {
 	} = props;
 	const tabRef = useRef();
 
-	useEffect(
-		() => {
-			if (selected && tabRef.current) {
-				tabRef.current.focus();
-			}
-		},
-		[selected, tabRef.current],
-	);
+	useEffect(() => {
+		if (selected && tabRef.current) {
+			tabRef.current.focus();
+		}
+	}, [selected]);
 
-	const handleSelectTab = useCallback(
-		() => {
-			onSelectTab(index);
-		},
-		[onSelectTab, index],
-	);
+	const handleSelectTab = useCallback(() => {
+		onSelectTab(index);
+	}, [onSelectTab, index]);
 
 	return (
 		<Styled.Tab

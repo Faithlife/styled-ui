@@ -19,7 +19,7 @@ export const PopoverReference = ({ children, ...referenceProps }) => (
 			<Styled.ReferenceContainer {...referenceProps} ref={ref}>
 				{children}
 			</Styled.ReferenceContainer>
-		)}}
+		)}
 	</Reference>
 );
 

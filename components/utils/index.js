@@ -35,7 +35,7 @@ export function applyVariations(component, variationMap, props) {
 
 	// sort the variations for the cache key
 	const cacheKey = JSON.stringify([...variations].sort());
-	if (variationCache[cacheKey] != null) {
+	if (variationCache[cacheKey]) {
 		return { component: variationCache[cacheKey], filteredProps };
 	}
 
@@ -51,7 +51,9 @@ export function applyVariations(component, variationMap, props) {
 export const debouncedResize = callback => {
 	let frame;
 	const listener = () => {
-		if (frame) window.cancelAnimationFrame(frame);
+		if (frame) {
+			window.cancelAnimationFrame(frame);
+		}
 
 		frame = window.requestAnimationFrame(callback);
 	};

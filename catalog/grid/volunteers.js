@@ -125,7 +125,7 @@ const names = [
 ];
 
 export const getNextVolunteer = () => {
-	if (names[nameIndex] == null) {
+	if (!names[nameIndex]) {
 		nameIndex = 0;
 	}
 

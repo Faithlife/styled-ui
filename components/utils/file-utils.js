@@ -20,11 +20,12 @@ const supportedMediaTypesRegex = new RegExp(
 const storageUnits = ['B', 'KB', 'MB', 'GB'];
 
 export const convertBytesToFriendlyString = bytes => {
-	if (bytes == null || isNaN(bytes) || bytes < 0) {
-		return null;
-	}
 	if (bytes === 0) {
 		return '0 B';
+	}
+
+	if (!bytes || bytes < 0) {
+		return null;
 	}
 
 	const roundedExponent = Math.min(Math.floor(log1024(bytes)), storageUnits.length - 1);

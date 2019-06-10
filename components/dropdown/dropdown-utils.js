@@ -50,9 +50,8 @@ export function useKeyboardActivate(onToggleMenu, setSelectedItem) {
 }
 
 export function getFocusableChildrenList(children) {
-	return React.Children.map(
-		children,
-		(child, index) => (!child.type.isFocusableMenuChild ? null : index),
+	return React.Children.map(children, (child, index) =>
+		!child.type.isFocusableMenuChild ? null : index,
 	).filter(index => index !== null);
 }
 
@@ -106,11 +105,14 @@ export function useMenuItemKeyboardHandler(onTrigger) {
 		}
 	}, []);
 
-	const handleKeyDown = useCallback(event => {
-		if (event.key === handledKeys.spaceBar) {
-			onTrigger();
-		}
-	});
+	const handleKeyDown = useCallback(
+		event => {
+			if (event.key === handledKeys.spaceBar) {
+				onTrigger();
+			}
+		},
+		[onTrigger],
+	);
 
 	return [handleKeyDown, handleKeyUp];
 }

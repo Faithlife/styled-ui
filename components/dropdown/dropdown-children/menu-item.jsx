@@ -20,32 +20,26 @@ export function MenuItem(props) {
 	const ref = useRef();
 	const selected = focusedMenuItem === index;
 
-	useEffect(
-		() => {
-			if (selected && ref.current) {
-				ref.current.focus();
-				if (onFocus) {
-					onFocus();
-				}
+	useEffect(() => {
+		if (selected && ref.current) {
+			ref.current.focus();
+			if (onFocus) {
+				onFocus();
 			}
-		},
-		[selected],
-	);
+		}
+	}, [onFocus, selected]);
 
-	const handleClick = useCallback(
-		() => {
-			if (!disabled) {
-				if (onClick) {
-					onClick();
-				}
-
-				if (!shouldKeepOpenOnClick) {
-					handleCloseMenu();
-				}
+	const handleClick = useCallback(() => {
+		if (!disabled) {
+			if (onClick) {
+				onClick();
 			}
-		},
-		[onClick, handleCloseMenu, shouldKeepOpenOnClick, disabled],
-	);
+
+			if (!shouldKeepOpenOnClick) {
+				handleCloseMenu();
+			}
+		}
+	}, [onClick, handleCloseMenu, shouldKeepOpenOnClick, disabled]);
 	// catch keyup event for spacebar in firefox. Opening the menu with spacebar will trigger the first option with the onKeyUp event from the spacebar
 	const [handleKeyDown, handleKeyUp] = useMenuItemKeyboardHandler(handleClick);
 

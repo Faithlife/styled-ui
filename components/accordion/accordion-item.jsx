@@ -9,12 +9,9 @@ export function AccordionItem({ children, index }) {
 
 	const isExpanded = expandedSections.includes(index);
 
-	const handleExpansion = useCallback(
-		() => {
-			onExpansion(index, !isExpanded);
-		},
-		[onExpansion, index, isExpanded],
-	);
+	const handleExpansion = useCallback(() => {
+		onExpansion(index, !isExpanded);
+	}, [onExpansion, index, isExpanded]);
 
 	const headerId = useId();
 	const panelId = useId();

@@ -35,6 +35,41 @@ state: { selection: '' }
 </div>
 ```
 
+### Single select in a modal
+
+```react
+showSource: true
+state: { modal: false, value: '', selection: '' }
+---
+<div>
+	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Modal
+		isOpen={state.modal}
+		container="body"
+		onClose={() => setState({ modal: false })}
+		title="Test"
+		footerProps={{
+			cancelButton: { text: 'Cancel', onClick: () => setState({ modal: !state.modal })},
+		}}
+	>
+		<div>
+			<div>Current selection: {state.selection}</div>
+			<Select
+				onChange={({ value }) => {
+					setState({ selection: value });
+				}}
+				options={[
+					{ value: "washington", label: "Washington" },
+					{ value: "california", label: "California" },
+					{ value: "Texas", label: "Texas" }
+				]}
+				placeholder="Choose a state..."
+			/>
+		</div>
+	</Modal>
+</div>
+```
+
 ### Multi select
 
 ```react

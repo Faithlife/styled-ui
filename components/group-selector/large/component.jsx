@@ -224,7 +224,7 @@ export class LargeGroupSelector extends React.Component {
 							showRequiredStars={this.state.createGroupFixed}
 						/>
 						<Styled.CreateGroupButtonWrapper>
-							<Styled.CreateGroupButtonText>Don't see your church?</Styled.CreateGroupButtonText>
+							<Styled.CreateGroupButtonText>Don’t see your church?</Styled.CreateGroupButtonText>
 							<Button small primary disabled={disableButton} onClick={this.createGroupClick}>
 								Create
 							</Button>
@@ -283,7 +283,7 @@ export class LargeGroupSelector extends React.Component {
 						<Styled.SecondaryModalContent>
 							<Styled.SecondaryModalText>
 								This group type must be set to{' '}
-								<Styled.SearchResultBoldText>"Church"</Styled.SearchResultBoldText>
+								<Styled.SearchResultBoldText>“Church”</Styled.SearchResultBoldText>
 							</Styled.SecondaryModalText>
 							<Styled.SecondaryModalText>
 								Visit the group settings page to change

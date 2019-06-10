@@ -63,10 +63,10 @@ export const Track = styled.div`
 		props.active
 			? 'transparent'
 			: props.invalid
+			? props.styleOverrides.backgroundColor
 				? props.styleOverrides.backgroundColor
-					? props.styleOverrides.backgroundColor
-					: '#fff'
-				: '#ebebeb'};
+				: '#fff'
+			: '#ebebeb'};
 	flex-grow: 1;
 	position: relative;
 	height: 8px;

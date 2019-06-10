@@ -1,45 +1,7 @@
 {
-	"extends": [
-		"faithlife",
-		"plugin:import/errors",
-		"prettier"
-	],
-	"plugins": [
-		"import",
-		"prettier"
-	],
-	"env": {
-		"browser": true
-	},
+	"extends": ["faithlife"],
 	"rules": {
-		"class-methods-use-this": 0,
-		"prettier/prettier": 2,
-		"jsx-a11y/label-has-for": 0,
-		"react/jsx-filename-extension": 0,
-		"import/no-default-export": 2,
-		"import/named": 0,
-		"import/order": 2,
-		"no-nested-ternary": 0,
-		"no-prototype-builtins": 0,
-		"no-unused-vars": [2, { "ignoreRestSiblings": true }],
-		"object-curly-spacing": [2, "always"],
-		"object-curly-newline": [2, { "consistent": true }],
-		"react/jsx-key": 2,
-		"react/no-danger": 0,
-		"react/no-direct-mutation-state": 2,
-		"react/no-multi-comp": 0,
-		"react/no-unused-state": 2,
-		"react/no-string-refs": 2,
-		"react/no-unused-prop-types": [2, { "skipShapeProps": true }],
-		"react/prefer-stateless-function": 0,
-		"react/prop-types": 2
-	},
-	"settings": {
-		"import/ignore": [
-			"node_modules",
-			".(less|css)$"
-		],
-		"import/resolver": "webpack",
-		"propWrapperFunctions": ["forbidExtraProps"]
+		"react/jsx-no-literals": "off",
+		"react/display-name": "off"
 	}
 }

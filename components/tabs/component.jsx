@@ -9,14 +9,11 @@ export function TabManager({ children, theme, selectedTab, onSelectedTabChange }
 	const [selectedTabIndex, setSelectedTabIndex] = useState(selectedTab || 0);
 	const { panelIdsMap, registerPanelId, unRegisterPanelId } = usePanelIdsHandler();
 
-	useEffect(
-		() => {
-			if (selectedTab !== null && selectedTab !== undefined) {
-				setSelectedTabIndex(selectedTab);
-			}
-		},
-		[selectedTab],
-	);
+	useEffect(() => {
+		if (selectedTab !== null && selectedTab !== undefined) {
+			setSelectedTabIndex(selectedTab);
+		}
+	}, [selectedTab]);
 
 	const handleSelectTab = useCallback(
 		tabIndex => {

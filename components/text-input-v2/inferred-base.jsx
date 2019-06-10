@@ -96,7 +96,8 @@ export class InferredBase extends Component {
 		const tooltipContents = (
 			<TooltipContents>
 				<StyledParagraph>
-					Value guessed with {Math.round(confidence * 100)}% confidence.<br />
+					Value guessed with {Math.round(confidence * 100)}% confidence.
+					<br />
 					Click OK if you can confirm value is correct, or delete or change the value.
 				</StyledParagraph>
 				<StyledParagraph>Source: {confidenceSource}</StyledParagraph>
@@ -105,7 +106,7 @@ export class InferredBase extends Component {
 
 		return (
 			<RelativeContainer className={this.props.className}>
-				{this.props.children({ inferred: ConfidenceIcon != null })}
+				{this.props.children({ inferred: !!ConfidenceIcon })}
 				<IndicatorContainer className={ConfidenceIcon ? 'hasConfidence' : ''}>
 					<Tooltip text={tooltipContents} styleOverrides={{ minWidth: 300 }} placement="top-end">
 						<ConfidenceIconContainer

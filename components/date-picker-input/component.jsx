@@ -138,9 +138,9 @@ export class DatePickerInput extends PureComponent {
 		const { disabled, defaultSelectedDate, placement, styleOverrides } = this.props;
 		const { text, selectedDate, showCalendar } = this.state;
 
-		const defaultValue = defaultSelectedDate != null ? this.formatDate(defaultSelectedDate) : '';
-		const formattedDate = selectedDate != null ? this.formatDate(selectedDate) : defaultValue;
-		const value = text != null ? text : formattedDate;
+		const defaultValue = defaultSelectedDate ? this.formatDate(defaultSelectedDate) : '';
+		const formattedDate = selectedDate ? this.formatDate(selectedDate) : defaultValue;
+		const value = text ? text : formattedDate;
 		const inputStyleOverrides = {
 			width: styleOverrides.inputWidth,
 		};
@@ -176,6 +176,7 @@ export class DatePickerInput extends PureComponent {
 						isOpen={showCalendar}
 						styleOverrides={popoverStyleOverrides}
 					>
+						{/*eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
 						<div onClick={this.handlePopoutClicked}>
 							{this.renderCalendar(selectedDate || new Date())}
 						</div>

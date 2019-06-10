@@ -57,7 +57,7 @@ export class DatePicker extends Component {
 
 	componentWillMount() {
 		const selectedDate = this.props.selectedDate;
-		const date = selectedDate != null ? this.props.selectedDate : new Date();
+		const date = selectedDate ? this.props.selectedDate : new Date();
 		this.setMonth(date);
 	}
 

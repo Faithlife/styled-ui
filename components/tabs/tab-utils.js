@@ -22,18 +22,14 @@ export function useTabContext() {
 export function useKeyboardNav(selectedIndex, onSelectTab, children) {
 	const currentChildren = useRef();
 
-	useEffect(
-		() => {
-			currentChildren.current = children;
-		},
-		[children],
-	);
+	useEffect(() => {
+		currentChildren.current = children;
+	}, [children]);
 
 	const handleKeyboardNav = useCallback(
 		event => {
-			const enabledTabIndexes = React.Children.map(
-				currentChildren.current,
-				(child, index) => (child.props.disabled ? null : index),
+			const enabledTabIndexes = React.Children.map(currentChildren.current, (child, index) =>
+				child.props.disabled ? null : index,
 			).filter(index => index !== null);
 			const currentEnabledIndex = enabledTabIndexes.indexOf(selectedIndex);
 
@@ -74,14 +70,14 @@ export function usePanelIdsHandler() {
 		(index, id) => {
 			panelIdsMap.add(index, id);
 		},
-		[panelIdsMap.add],
+		[panelIdsMap],
 	);
 
 	const unRegisterPanelId = useCallback(
 		index => {
 			panelIdsMap.remove(index);
 		},
-		[panelIdsMap.remove],
+		[panelIdsMap],
 	);
 
 	return { panelIdsMap: panelIdsMap.map, registerPanelId, unRegisterPanelId };

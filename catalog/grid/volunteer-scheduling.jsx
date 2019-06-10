@@ -30,8 +30,8 @@ class VolunteerCellRenderer extends Component {
 							this.props.value.status === availability.confirmed
 								? 'darkgreen'
 								: this.props.value.status === availability.maybe
-									? 'goldenrod'
-									: 'dimgray',
+								? 'goldenrod'
+								: 'dimgray',
 					}}
 				>
 					{this.props.value.status}
@@ -69,7 +69,7 @@ function aggregateVolunteers(values) {
 		availability: values.reduce(
 			(prev, curr) => ({
 				...prev,
-				[curr.status]: prev[curr.status] == null ? 1 : prev[curr.status] + 1,
+				[curr.status]: !prev[curr.status] ? 1 : prev[curr.status] + 1,
 			}),
 			{},
 		),

@@ -22,14 +22,11 @@ export function ParameterInputBox(props) {
 	 * Due to a really strange firefox bug inputs with type=number will unfocus the input as soon as it is focused using the autofocus option.
 	 * Possibly related to https://github.com/angular/angular.js/issues/8365 though the described fixes did not work.
 	 */
-	useEffect(
-		() => {
-			if (isFocused && inputRef.current) {
-				inputRef.current.focus();
-			}
-		},
-		[isFocused],
-	);
+	useEffect(() => {
+		if (isFocused && inputRef.current) {
+			inputRef.current.focus();
+		}
+	}, [isFocused]);
 
 	const toggleFocus = useCallback(() => {
 		setIsFocused(state => !state);

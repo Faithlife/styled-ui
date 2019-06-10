@@ -23,6 +23,8 @@ export class CopyToClipboard extends React.Component {
 
 		this.clipboard = new Clipboard(button);
 
+		// clipboard instance is destroyed when the component unmounts
+		// eslint-disable-next-line mozilla/balanced-listeners
 		this.clipboard.on('success', () => {
 			this.showFeedback();
 		});
