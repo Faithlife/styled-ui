@@ -9,7 +9,7 @@ export function Popover(props) {
 	return (
 		<PopoverBase
 			{...otherProps}
-			placement={placement || 'top'}
+			placement={placement}
 			theme={theme || { ...Popover.defaultProps.theme }}
 			styleOverrides={newStyle || {}}
 		>
