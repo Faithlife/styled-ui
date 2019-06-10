@@ -10,7 +10,7 @@ import * as Styled from './styled';
 /** Positioning helper used to display content above another element.
  *  Refs are not supported, please use PopoverManager and PopoverReference to handle positioning.
  */
-export class UnstyledPopover extends Component {
+export class PopoverBase extends Component {
 	static propTypes = {
 		/** Is the popover open */
 		isOpen: PropTypes.bool,
@@ -152,7 +152,7 @@ export class UnstyledPopover extends Component {
 			>
 				{({ ref, style, placement, arrowProps }) => (
 					<ThemeProvider theme={theme}>
-						<Styled.UnstyledPopover
+						<Styled.PopoverBase
 							ref={ref}
 							placement={placement}
 							style={{
@@ -173,7 +173,7 @@ export class UnstyledPopover extends Component {
 									styleOverrides={styleOverrides}
 								/>
 							)}
-						</Styled.UnstyledPopover>
+						</Styled.PopoverBase>
 					</ThemeProvider>
 				)}
 			</Popper>

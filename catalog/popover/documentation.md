@@ -3,7 +3,7 @@ This documentation is automatically generated from jsdoc comments.
 ```react
 noSource: true
 ---
-<DocgenTable component={UnstyledPopover} displayName={'Shared props between UnstyledPopovers, Popovers and Tooltips'} />
+<DocgenTable component={PopoverBase} displayName={'Shared props between PopoverBase, Popovers and Tooltips'} />
 ```
 
 ```react

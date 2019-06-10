@@ -1,24 +1,24 @@
 import React from 'react';
 import { colors } from '../shared-styles';
-import { UnstyledPopover } from './unstyled-popover';
+import { PopoverBase } from './popover-base';
 
 /** Pre-styled popover that uses unstyled popovers internally. */
 export function Popover(props) {
 	const { children, placement, theme, styleOverrides, ...otherProps } = props;
 	const newStyle = { ...Popover.defaultProps.styleOverrides, ...styleOverrides };
 	return (
-		<UnstyledPopover
+		<PopoverBase
 			{...otherProps}
 			placement={placement || 'top'}
 			theme={theme || { ...Popover.defaultProps.theme }}
 			styleOverrides={newStyle || {}}
 		>
 			{children}
-		</UnstyledPopover>
+		</PopoverBase>
 	);
 }
 
-Popover.propTypes = { ...UnstyledPopover.propTypes };
+Popover.propTypes = { ...PopoverBase.propTypes };
 
 Popover.defaultProps = {
 	placement: 'top',

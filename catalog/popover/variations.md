@@ -25,7 +25,7 @@ state: { isOpen: false }
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
-		<UnstyledPopover isOpen={state.isOpen} placement="top">Notice my lack of style!</UnstyledPopover>
+		<PopoverBase isOpen={state.isOpen} placement="top">Notice my lack of style!</PopoverBase>
 	</PopoverManager>
 </PopoverDemo>
 ```

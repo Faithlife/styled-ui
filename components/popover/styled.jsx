@@ -19,7 +19,7 @@ export const getPlacement = placement => {
 	return placement.split('-')[0];
 };
 
-export const UnstyledPopover = styled.div`
+export const PopoverBase = styled.div`
 	background: ${({ styleOverrides }) =>
 		styleOverrides.background
 			? styleOverrides.background
