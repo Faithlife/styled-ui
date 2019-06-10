@@ -48,7 +48,7 @@ export class Tooltip extends Component {
 				>
 					{children}
 				</PopoverReference>
-				<Popover {...otherProps} isOpen={tooltipIsOpen || isOpen} styleOverrides={{ zIndex: 10 }}>
+				<Popover {...otherProps} isOpen={tooltipIsOpen || isOpen}>
 					{content || text}
 				</Popover>
 			</PopoverManager>
