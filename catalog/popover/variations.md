@@ -14,6 +14,22 @@ state: { isOpen: false }
 </PopoverDemo>
 ```
 
+## Unstyled Popover
+
+```react
+showSource: true
+state: { isOpen: false }
+---
+<PopoverDemo>
+	<PopoverManager>
+		<PopoverReference>
+			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
+		</PopoverReference>
+		<UnstyledPopover isOpen={state.isOpen} placement="top">Notice my lack of style!</UnstyledPopover>
+	</PopoverManager>
+</PopoverDemo>
+```
+
 ## Placement
 
 ```react
