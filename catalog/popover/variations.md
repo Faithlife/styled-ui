@@ -14,7 +14,7 @@ state: { isOpen: false }
 </PopoverDemo>
 ```
 
-## Unstyled Popover
+## PopoverBase
 
 ```react
 showSource: true
