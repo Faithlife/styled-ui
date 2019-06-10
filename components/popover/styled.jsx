@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { colors } from '../shared-styles';
 
 const arrowWidth = '10px';
-const maxWidth = 1000;
-const maxHeight = 1000;
+const maxWidth = '1000px';
+const maxHeight = '1000px';
 
 export const margins = {
 	top: { marginBottom: arrowWidth },
@@ -40,27 +40,27 @@ export const PopoverBase = styled.div`
 	margin: ${({ styleOverrides }) => (styleOverrides.margin ? styleOverrides.margin : '0px')};
 	max-height: ${({ styleOverrides }) =>
 		styleOverrides.maxHeight
-			? isNaN(styleOverrides.maxHeight)
-				? styleOverrides.maxHeight
-				: `${styleOverrides.maxHeight}px`
+			? typeof styleOverrides.maxHeight === 'number'
+				? `${styleOverrides.maxHeight}px`
+				: styleOverrides.maxHeight
 			: maxHeight};
 	max-width: ${({ styleOverrides }) =>
 		styleOverrides.maxWidth
-			? isNaN(styleOverrides.maxWidth)
-				? styleOverrides.maxWidth
-				: `${styleOverrides.maxWidth}px`
+			? typeof styleOverrides.maxWidth === 'number'
+				? `${styleOverrides.maxWidth}px`
+				: styleOverrides.maxWidth
 			: maxWidth};
 	min-height: ${({ styleOverrides }) =>
 		styleOverrides.minHeight
-			? isNaN(styleOverrides.minHeight)
-				? styleOverrides.minHeight
-				: `${styleOverrides.minHeight}px`
+			? typeof styleOverrides.minHeight === 'number'
+				? `${styleOverrides.maxWidth}px`
+				: styleOverrides.maxWidth
 			: ''};
 	min-width: ${({ styleOverrides }) =>
 		styleOverrides.minWidth
-			? isNaN(styleOverrides.minWidth)
-				? styleOverrides.minWidth
-				: `${styleOverrides.minWidth}px`
+			? typeof styleOverrides.minWidth === 'number'
+				? `${styleOverrides.maxWidth}px`
+				: styleOverrides.maxWidth
 			: ''};
 	outline: ${({ styleOverrides }) => (styleOverrides.outline ? styleOverrides.outline : '')};
 	padding: ${({ styleOverrides }) => (styleOverrides.padding ? styleOverrides.padding : '0px')};
