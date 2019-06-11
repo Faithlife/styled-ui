@@ -77,11 +77,13 @@ export class AsyncTypeahead extends React.Component {
 	static propTypes = { inferred: PropTypes.bool };
 
 	componentDidMount() {
-		console.warn(
-			'Warning: You are using a deprecated `AsyncTypeahead` element. \n',
-			'You can find the deprecation documentation here: https://faithlife.github.io/styled-ui/#/text-input/typeahead \n',
-			'And you can find the documentation for the element that has replaced this one here: https://faithlife.github.io/styled-ui/#/text-input/select',
-		);
+		if (process.env.NODE_ENV !== 'production') {
+			console.warn(
+				'Warning: You are using a deprecated `AsyncTypeahead` element. \n',
+				'You can find the deprecation documentation here: https://faithlife.github.io/styled-ui/#/text-input/typeahead \n',
+				'And you can find the documentation for the element that has replaced this one here: https://faithlife.github.io/styled-ui/#/text-input/select',
+			);
+		}
 	}
 
 	render() {
