@@ -54,6 +54,7 @@ export const Button = styled.button`
 	padding: 0;
 	border: none;
 	outline: none;
+	font-family: inherit;
 
 	transition: box-shadow 0.25s ease 0s;
 
