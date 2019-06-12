@@ -79,6 +79,7 @@ export const addSeparator = (items = [], separator = '\u00a0\u00a0•\u00a0\u00a
 
 export const resetStyles = `
 	margin: 0;
+	font-family: inherit;
 
 	&,
 	*,
