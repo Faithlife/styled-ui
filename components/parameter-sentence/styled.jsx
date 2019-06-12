@@ -13,6 +13,7 @@ const selectStyling = css`
 	font-weight: bold;
 	color: ${colors.gray66};
 	${props => `color: ${props.isOpen ? colors.blueActive : colors.gray66}`};
+	font-family: inherit;
 
 	&:hover {
 		&:not(:focus) {
