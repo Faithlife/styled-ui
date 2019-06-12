@@ -73,65 +73,39 @@ const RelativeContainer = styled.div`
 	position: relative;
 `;
 
-export class AsyncTypeahead extends React.Component {
-	static propTypes = { inferred: PropTypes.bool };
+export const Typeahead = ({ inferred, ...props }) => (
+	<BootstrapContainer>
+		<RelativeContainer>
+			<StyledTypeahead {...props} />
+			{!inferred && (
+				<IndicatorContainer>
+					<SolidTriangleIcon />
+				</IndicatorContainer>
+			)}
+		</RelativeContainer>
+	</BootstrapContainer>
+);
 
-	componentDidMount() {
-		if (process.env.NODE_ENV !== 'production') {
-			console.warn(
-				'Warning: You are using a deprecated `AsyncTypeahead` element. \n',
-				'You can find the deprecation documentation here: https://faithlife.github.io/styled-ui/#/text-input/typeahead \n',
-				'And you can find the documentation for the element that has replaced this one here: https://faithlife.github.io/styled-ui/#/text-input/select',
-			);
-		}
-	}
+export const AsyncTypeahead = ({ inferred, ...props }) => (
+	<BootstrapContainer>
+		<RelativeContainer>
+			<StyledAsyncTypeahead {...props} />
+			{!inferred && (
+				<IndicatorContainer>
+					<SolidTriangleIcon />
+				</IndicatorContainer>
+			)}
+		</RelativeContainer>
+	</BootstrapContainer>
+);
 
-	render() {
-		const { inferred, ...otherProps } = this.props;
-		return (
-			<BootstrapContainer>
-				<RelativeContainer>
-					<StyledAsyncTypeahead {...otherProps} />
-					{!inferred && (
-						<IndicatorContainer>
-							<SolidTriangleIcon />
-						</IndicatorContainer>
-					)}
-				</RelativeContainer>
-			</BootstrapContainer>
-		);
-	}
-}
+Typeahead.propTypes = {
+	inferred: PropTypes.bool,
+};
 
-export class Typeahead extends React.Component {
-	static propTypes = { inferred: PropTypes.bool };
-
-	componentDidMount() {
-		if (process.env.NODE_ENV !== 'production') {
-			console.warn(
-				'Warning: You are using a deprecated `Typeahead` element. \n',
-				'You can find the deprecation documentation here: https://faithlife.github.io/styled-ui/#/text-input/typeahead \n',
-				'And you can find the documentation for the element that has replaced this one here: https://faithlife.github.io/styled-ui/#/text-input/select',
-			);
-		}
-	}
-
-	render() {
-		const { inferred, ...otherProps } = this.props;
-		return (
-			<BootstrapContainer>
-				<RelativeContainer>
-					<StyledTypeahead {...otherProps} />
-					{!inferred && (
-						<IndicatorContainer>
-							<SolidTriangleIcon />
-						</IndicatorContainer>
-					)}
-				</RelativeContainer>
-			</BootstrapContainer>
-		);
-	}
-}
+AsyncTypeahead.propTypes = {
+	inferred: PropTypes.bool,
+};
 
 export const Token = _Token;
 export const Menu = _Menu;
