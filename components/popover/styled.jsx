@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { colors, thickness } from '../shared-styles';
+import { colors } from '../shared-styles';
 
 const arrowWidth = '10px';
-const maxWidth = 300;
+const maxWidth = '1000px';
+const maxHeight = '1000px';
 
 export const margins = {
 	top: { marginBottom: arrowWidth },
@@ -18,23 +19,57 @@ export const getPlacement = placement => {
 	return placement.split('-')[0];
 };
 
-export const PopoverContent = styled.div`
-	position: absolute;
-	padding: ${({ styleOverrides }) => styleOverrides.padding || thickness.twelve};
-	${({ styleOverrides }) =>
-		styleOverrides.minWidth === null || styleOverrides.minWidth === undefined
-			? ''
-			: `min-width: ${styleOverrides.minWidth}px`};
-	max-width: ${({ styleOverrides }) => styleOverrides.maxWidth || maxWidth}px;
-	${({ styleOverrides }) => (styleOverrides.width ? `width: ${styleOverrides.width}` : '')};
+export const PopoverBase = styled.div`
+	background: ${({ styleOverrides }) =>
+		styleOverrides.background
+			? styleOverrides.background
+			: `${({ theme }) => theme.backgroundColor}`};
 	background-color: ${({ theme }) => theme.backgroundColor};
-	border-radius: 3px;
-	text-align: center;
 	border: ${({ styleOverrides }) => (styleOverrides.border ? styleOverrides.border : 'none')};
+	border-radius: ${({ styleOverrides }) =>
+		styleOverrides.borderRadius ? styleOverrides.borderRadius : '0px'};
 	box-shadow: ${({ styleOverrides }) => (styleOverrides.hideShadow ? 'none' : colors.boxShadow)};
+	color: ${({ theme }) => theme.textColor};
+	font-size: ${({ styleOverrides }) =>
+		styleOverrides.fontSize ? styleOverrides.fontSize : 'medium'};
+	font-weight: ${({ styleOverrides }) =>
+		styleOverrides.fontWeight ? styleOverrides.fontWeight : 'normal'};
+	height: ${({ styleOverrides }) => (styleOverrides.height ? styleOverrides.height : 'auto')};
+	line-height: ${({ styleOverrides }) =>
+		styleOverrides.lineHeight ? styleOverrides.lineHeight : 'normal'};
+	margin: ${({ styleOverrides }) => (styleOverrides.margin ? styleOverrides.margin : '0px')};
+	max-height: ${({ styleOverrides }) =>
+		styleOverrides.maxHeight
+			? typeof styleOverrides.maxHeight === 'number'
+				? `${styleOverrides.maxHeight}px`
+				: styleOverrides.maxHeight
+			: maxHeight};
+	max-width: ${({ styleOverrides }) =>
+		styleOverrides.maxWidth
+			? typeof styleOverrides.maxWidth === 'number'
+				? `${styleOverrides.maxWidth}px`
+				: styleOverrides.maxWidth
+			: maxWidth};
+	min-height: ${({ styleOverrides }) =>
+		styleOverrides.minHeight
+			? typeof styleOverrides.minHeight === 'number'
+				? `${styleOverrides.maxWidth}px`
+				: styleOverrides.maxWidth
+			: ''};
+	min-width: ${({ styleOverrides }) =>
+		styleOverrides.minWidth
+			? typeof styleOverrides.minWidth === 'number'
+				? `${styleOverrides.maxWidth}px`
+				: styleOverrides.maxWidth
+			: ''};
+	outline: ${({ styleOverrides }) => (styleOverrides.outline ? styleOverrides.outline : '')};
+	padding: ${({ styleOverrides }) => (styleOverrides.padding ? styleOverrides.padding : '0px')};
+	position: absolute;
+	text-align: ${({ styleOverrides }) =>
+		styleOverrides.textAlign ? styleOverrides.textAlign : 'center'};
 	white-space: normal;
-	${({ theme }) => (theme.textColor ? `color: ${theme.textColor}` : '')};
-	${({ styleOverrides }) => (styleOverrides.zIndex ? `z-index: ${styleOverrides.zIndex}` : '')};
+	width: ${({ styleOverrides }) => (styleOverrides.width ? styleOverrides.width : 'auto')};
+	z-index: ${({ styleOverrides }) => (styleOverrides.zIndex ? styleOverrides.zIndex : '10')};
 `;
 
 export const Arrow = styled.div`

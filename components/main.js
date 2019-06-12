@@ -18,7 +18,7 @@ export { HelpBox } from './help-box';
 export { Input } from './input';
 export { LoadingSpinner } from './loading-spinner';
 export { Modal, ModalFooter } from './modal';
-export { Popover, PopoverManager, PopoverReference, Tooltip } from './popover';
+export { Popover, PopoverBase, PopoverManager, PopoverReference, Tooltip } from './popover';
 export { Radio } from './radio';
 export { SimpleModal } from './simple-modal';
 export { Slider } from './slider';

@@ -9,7 +9,9 @@ export class Tooltip extends Component {
 	static propTypes = {
 		...Popover.propTypes,
 
-		/** Text for the tooltip */
+		/** Content for the tooltip */
+		content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+		/** Text for the tooltip (deprecated) */
 		text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 	};
 
@@ -35,7 +37,7 @@ export class Tooltip extends Component {
 	};
 
 	render() {
-		const { children, text, isOpen, ...otherProps } = this.props;
+		const { children, text, content, isOpen, ...otherProps } = this.props;
 		const { tooltipIsOpen } = this.state;
 		return (
 			<PopoverManager>
@@ -47,7 +49,7 @@ export class Tooltip extends Component {
 					{children}
 				</PopoverReference>
 				<Popover {...otherProps} isOpen={tooltipIsOpen || isOpen}>
-					{text}
+					{content || text}
 				</Popover>
 			</PopoverManager>
 		);
