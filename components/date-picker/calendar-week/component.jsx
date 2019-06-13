@@ -6,6 +6,7 @@ import { dateFunctionProps } from '../date-function-props';
 
 const StyledCalendarWeek = styled.div`
 	display: flex;
+	width: 308px;
 
 	&:last-of-type {
 		border-bottom: none;

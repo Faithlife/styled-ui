@@ -49,4 +49,5 @@ export const WeekDay = styled.li`
 export const Month = styled.div`
 	background: ${colors.white};
 	font-size: 14px;
+	width: 308px;
 `;
