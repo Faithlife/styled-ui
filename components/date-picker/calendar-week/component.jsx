@@ -12,38 +12,47 @@ const StyledCalendarWeek = styled.div`
 	}
 `;
 
-export class CalendarWeek extends Component {
-	static propTypes = {
-		days: PropTypes.arrayOf(PropTypes.object).isRequired,
-		currentMonth: PropTypes.number.isRequired,
-		selectedDate: PropTypes.instanceOf(Date),
-		selectedDateRange: PropTypes.shape({
-			start: PropTypes.instanceOf(Date),
-			end: PropTypes.instanceOf(Date),
-		}),
-		setSelectedDate: PropTypes.func.isRequired,
-		validate: PropTypes.func,
-		dateFunctions: dateFunctionProps,
-		asDateRangePicker: PropTypes.bool,
-	};
+export function CalendarWeek(props) {
+	const {
+		days,
+		currentMonth,
+		selectedDate,
+		selectedDateRange,
+		setSelectedDate,
+		validate,
+		dateFunctions,
+		asDateRangePicker,
+	} = props;
 
-	render() {
-		return (
-			<StyledCalendarWeek>
-				{this.props.days.map(day => (
-					<CalendarDate
-						key={`day-${day}`}
-						currentMonth={this.props.currentMonth}
-						date={day}
-						selectedDate={this.props.selectedDate}
-						selectedDateRange={this.props.selectedDateRange}
-						setSelectedDate={this.props.setSelectedDate}
-						validate={this.props.validate}
-						dateFunctions={this.props.dateFunctions}
-						asDateRangePicker={this.props.asDateRangePicker}
-					/>
-				))}
-			</StyledCalendarWeek>
-		);
-	}
+	return (
+		<StyledCalendarWeek>
+			{days.map(day => (
+				<CalendarDate
+					key={`day-${day}`}
+					currentMonth={currentMonth}
+					date={day}
+					selectedDate={selectedDate}
+					selectedDateRange={selectedDateRange}
+					setSelectedDate={setSelectedDate}
+					validate={validate}
+					dateFunctions={dateFunctions}
+					asDateRangePicker={asDateRangePicker}
+				/>
+			))}
+		</StyledCalendarWeek>
+	);
 }
+
+CalendarWeek.PropTypes = {
+	days: PropTypes.arrayOf(PropTypes.object).isRequired,
+	currentMonth: PropTypes.number.isRequired,
+	selectedDate: PropTypes.instanceOf(Date),
+	selectedDateRange: PropTypes.shape({
+		start: PropTypes.instanceOf(Date),
+		end: PropTypes.instanceOf(Date),
+	}),
+	setSelectedDate: PropTypes.func.isRequired,
+	validate: PropTypes.func,
+	dateFunctions: dateFunctionProps,
+	asDateRangePicker: PropTypes.bool,
+};
