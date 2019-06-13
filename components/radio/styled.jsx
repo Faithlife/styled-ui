@@ -17,9 +17,9 @@ export const RadioContainer = styled.button`
 	align-items: center;
 	position: relative;
 	border: none;
-	padding: 0;
-	min-width: 16px;
-	min-height: 16px;
+	padding: 0px 16px;
+	min-width: 44px;
+	min-height: 44px;
 	background: transparent;
 
 	&:active {
