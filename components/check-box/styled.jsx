@@ -29,8 +29,15 @@ export const CheckboxContainer = styled.button`
 		color: buttontext;
 	}
 
-	&:hover ${CheckboxDiv} {
-		border: solid 1px ${props => props.theme.primary};
+	@media (hover: hover) {
+		&:hover ${CheckboxDiv} {
+			border: solid 1px ${props => props.theme.primary};
+		}
+	}
+	@media (hover: none) {
+		&:active ${CheckboxDiv} {
+			border: solid 1px ${props => props.theme.primary};
+		}
 	}
 
 	&:focus {
