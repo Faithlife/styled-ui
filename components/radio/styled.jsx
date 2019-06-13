@@ -26,8 +26,15 @@ export const RadioContainer = styled.button`
 		color: buttontext;
 	}
 
-	&:hover ${RadioDiv} {
-		border: solid 1px ${props => props.theme.primary};
+	@media (hover: hover) {
+		&:hover ${RadioDiv} {
+			border: solid 1px ${props => props.theme.primary};
+		}
+	}
+	@media (hover: none) {
+		&:active ${RadioDiv} {
+			border: solid 1px ${props => props.theme.primary};
+		}
 	}
 
 	&:focus {
