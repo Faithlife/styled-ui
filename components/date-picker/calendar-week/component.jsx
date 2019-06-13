@@ -43,7 +43,7 @@ export function CalendarWeek(props) {
 	);
 }
 
-CalendarWeek.PropTypes = {
+CalendarWeek.propTypes = {
 	days: PropTypes.arrayOf(PropTypes.object).isRequired,
 	currentMonth: PropTypes.number.isRequired,
 	selectedDate: PropTypes.instanceOf(Date),
