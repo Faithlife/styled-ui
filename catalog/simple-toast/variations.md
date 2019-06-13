@@ -12,5 +12,7 @@ state: { number: 0 }
 	<Button primary medium onClick={() => toastRef.current.showMessage({ message: 'Hello!' })}>Hello!</Button>
 	<Button primary medium onClick={() => toastRef.current.showMessage({ message: 'Hello w/ Icon!', icon: <LoadingSpinner small /> })}>Hello w/ Icon!</Button>
 	<SimpleToast ref={toastRef} />
+	<Button primary medium onClick={() => toastRef2.current.showMessage({ message: 'Hello for a Shorter Time' })}>Hello for a Shorter Time!</Button>
+	<SimpleToast ref={toastRef2} desktopTime={1000} mobileTime={500} />
 </ToastDemo>
 ```

@@ -5,7 +5,6 @@ import { mediaSizes } from '../shared-styles';
 import * as Styled from './styled.jsx';
 
 const transitionTime = Styled.transitionTime; // milliseconds
-const showTime = { desktop: 5000, mobile: 1000 }; // milliseconds
 
 /**
  * A mobile first Toast. A toast indicates that an action is being taken that does not require the user's
@@ -13,6 +12,10 @@ const showTime = { desktop: 5000, mobile: 1000 }; // milliseconds
  */
 export class SimpleToast extends PureComponent {
 	static propTypes = {
+		/** Show time on desktop in milliseconds */
+		desktopTime: PropTypes.number,
+		/** Show time on mobile in milliseconds */
+		mobileTime: PropTypes.number,
 		theme: PropTypes.shape({
 			backgroundColor: PropTypes.string,
 		}),
@@ -29,6 +32,8 @@ export class SimpleToast extends PureComponent {
 	};
 
 	static defaultProps = {
+		desktopTime: 5000,
+		mobileTime: 1000,
 		theme: {},
 		styleOverrides: {},
 	};
@@ -45,8 +50,8 @@ export class SimpleToast extends PureComponent {
 	componentDidMount() {
 		if (window) {
 			this._showDuration = window.matchMedia(`(min-width: ${mediaSizes.tablet})`).matches
-				? showTime.desktop
-				: showTime.mobile;
+				? this.props.desktopTime
+				: this.props.mobileTime;
 		}
 	}
 
