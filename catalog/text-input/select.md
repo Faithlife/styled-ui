@@ -52,7 +52,7 @@ state: { modal: false, value: '', selection: '' }
 			cancelButton: { text: 'Cancel', onClick: () => setState({ modal: !state.modal })},
 		}}
 	>
-		<div style={{ width: '400px' }}>
+		<DemoDiv>
 			<div>Current selection: {state.selection}</div>
 			<Select
 				onChange={({ value }) => {
@@ -65,7 +65,7 @@ state: { modal: false, value: '', selection: '' }
 				]}
 				placeholder="Choose a state..."
 			/>
-		</div>
+		</DemoDiv>
 	</Modal>
 </div>
 ```

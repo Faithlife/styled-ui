@@ -29,7 +29,17 @@ export const textInputPages = {
 			path: '/text-input/select',
 			title: 'Autocomplete Select Variations',
 			content: pageLoader(() => import('./select.md')),
-			imports: { Input, Select, CreatableSelect, AsyncSelectDemo, Modal, Button },
+			imports: {
+				Input,
+				Select,
+				CreatableSelect,
+				AsyncSelectDemo,
+				Modal,
+				Button,
+				DemoDiv: styled.div`
+					width: 256px;
+				`,
+			},
 		},
 		{
 			path: '/text-input/typeahead',
