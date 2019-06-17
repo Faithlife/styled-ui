@@ -25,7 +25,7 @@ export const Input = styled.input`
 	}
 
 	&:read-only {
-		background: ${colors.gray22};
+		background: ${colors.gray8};
 	}
 `;
 
