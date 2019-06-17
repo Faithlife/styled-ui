@@ -55,10 +55,6 @@ export const DropdownCloseButton = styled.button`
 	cursor: pointer;
 	border: none;
 	background-color: transparent;
-
-	@media (min-width: ${mediaSizes.tablet}) {
-		display: none;
-	}
 `;
 
 export const DropdownColumns = styled.div`
