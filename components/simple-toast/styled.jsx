@@ -25,7 +25,8 @@ export const ToastContainer = styled.div`
 	display: grid;
 	grid-auto-flow: column;
 	grid-column-gap: ${thickness.eight};
-	grid-template-columns: min-content max-content;
+
+	grid-template-columns: min-content;
 
 	position: fixed;
 	z-index: ${({ styleOverrides }) => styleOverrides.zIndex || 1000};
@@ -37,8 +38,6 @@ export const ToastContainer = styled.div`
 	border-radius: 3px;
 	box-shadow: 0 19px 38px 0 rgba(0, 0, 0, 0.12), 0 15px 12px 0 rgba(0, 0, 0, 0.12);
 	opacity: 0;
-
-	pointer-events: none;
 
 	> svg {
 		height: 1em;
@@ -114,4 +113,9 @@ export const ToastContainer = styled.div`
 
 export const ToastContent = styled.div`
 	white-space: nowrap;
+`;
+
+export const ToastClose = styled.div`
+	cursor: pointer;
+	justify-self: right;
 `;

@@ -679,7 +679,6 @@ const components = [
 					SimpleToast,
 					LoadingSpinner,
 					toastRef: React.createRef(),
-					toastRef2: React.createRef(),
 				},
 			},
 			{

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Transition from 'react-transition-group/Transition';
 import { mediaSizes } from '../shared-styles';
+import { Close } from '../icons';
 import * as Styled from './styled.jsx';
 
 const transitionTime = Styled.transitionTime; // milliseconds
@@ -116,6 +117,9 @@ export class SimpleToast extends PureComponent {
 						{messages.length > 0 && (
 							<Styled.ToastContent>{messages[0].message}</Styled.ToastContent>
 						)}
+						<Styled.ToastClose onClick={this.triggerExit}>
+							<Close />
+						</Styled.ToastClose>
 					</Styled.ToastContainer>
 				)}
 			</Transition>
