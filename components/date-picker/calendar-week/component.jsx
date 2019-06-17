@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { CalendarDate } from '../calendar-date';
@@ -6,7 +6,10 @@ import { dateFunctionProps } from '../date-function-props';
 
 const StyledCalendarWeek = styled.div`
 	display: flex;
-	width: 308px;
+
+	@media (hover: none) {
+		max-width: 308px;
+	}
 
 	&:last-of-type {
 		border-bottom: none;

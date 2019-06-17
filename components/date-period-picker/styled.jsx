@@ -4,7 +4,14 @@ import { colors, thickness, fonts } from '../shared-styles';
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	width: 324px;
+
+	@media (hover: hover) {
+		max-width: 250px;
+	}
+	@media (hover: none) {
+		max-width: 324px;
+	}
+
 	padding: ${thickness.four} 0 ${thickness.twelve} 0;
 	overflow: hidden;
 `;
