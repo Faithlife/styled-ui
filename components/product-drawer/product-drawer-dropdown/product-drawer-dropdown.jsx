@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaithlifeConnectAnimatedImage, FaithlifeEquipAnimatedImage } from './animated-image';
 import { ProductLinkList, ProductLink } from './product-link';
-import { Close } from '../../icons';
 import {
 	FaithlifeFlameSvg,
 	FaithlifeTvSvg,
@@ -11,6 +10,7 @@ import {
 	EbooksSvg,
 	ProclaimSvg,
 	SermonsSvg,
+	CloseButtonSvg,
 	IndividualsSvg,
 	ChurchesSvg,
 	SitesSvg,
@@ -28,7 +28,7 @@ export const ProductDrawerDropdown = ({
 }) => (
 	<Styled.ProductDrawerDropdown styleOverrides={styleOverrides} onBlur={this.handleBlur}>
 		<Styled.DropdownCloseButton onClick={handleCloseButtonClick}>
-			<Close />
+			<img src={CloseButtonSvg} alt={resources.closeButtonAltText} />
 		</Styled.DropdownCloseButton>
 		<Styled.DropdownColumns>
 			<Styled.DropdownColumn>
