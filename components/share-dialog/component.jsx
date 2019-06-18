@@ -27,21 +27,44 @@ export class ShareDialog extends React.Component {
 		modalTitle: 'Share this page',
 	};
 
+	static onDesktop = false;
+
+	componentDidMount() {
+		this.onDesktop = window.matchMedia('(hover: hover)').matches;
+	}
+
 	render() {
 		const { shareUrl, message, onClose, isOpen, modalTitle, copyButtonText } = this.props;
 
 		const encodedShareUrl = encodeURIComponent(shareUrl);
 		const encodedMessage = message ? encodeURIComponent(message) : '';
 
-		return (
-			<Modal withoutFooter isOpen={isOpen} onClose={onClose} title={modalTitle} container="body">
+		const desktopModal = (
+			<Styled.ShareContainer>
+				<FaithlifeShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
+				<TwitterShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
+				<FacebookShareButton encodedShareUrl={encodedShareUrl} />
+				<EmailShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
+				<CopyToClipboard copyValue={shareUrl} copyButtonText={copyButtonText} />
+			</Styled.ShareContainer>
+		);
+		const mobileModal = (
+			<div>
 				<Styled.ShareContainer>
 					<FaithlifeShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
 					<TwitterShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
 					<FacebookShareButton encodedShareUrl={encodedShareUrl} />
 					<EmailShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
+				</Styled.ShareContainer>
+				<Styled.ShareContainer>
 					<CopyToClipboard copyValue={shareUrl} copyButtonText={copyButtonText} />
 				</Styled.ShareContainer>
+			</div>
+		);
+
+		return (
+			<Modal withoutFooter isOpen={isOpen} onClose={onClose} title={modalTitle} container="body">
+				{this.onDesktop ? desktopModal : mobileModal}
 			</Modal>
 		);
 	}
