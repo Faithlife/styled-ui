@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Transition from 'react-transition-group/Transition';
-import { mediaSizes } from '../shared-styles';
 import { Close } from '../icons';
 import * as Styled from './styled.jsx';
 
@@ -13,10 +12,8 @@ const transitionTime = Styled.transitionTime; // milliseconds
  */
 export class SimpleToast extends PureComponent {
 	static propTypes = {
-		/** Show time on desktop in milliseconds */
-		desktopTime: PropTypes.number,
-		/** Show time on mobile in milliseconds */
-		mobileTime: PropTypes.number,
+		/** In milliseconds */
+		showTime: PropTypes.number,
 		theme: PropTypes.shape({
 			backgroundColor: PropTypes.string,
 		}),
@@ -33,8 +30,7 @@ export class SimpleToast extends PureComponent {
 	};
 
 	static defaultProps = {
-		desktopTime: 5000,
-		mobileTime: 1000,
+		showTime: 1000,
 		theme: {},
 		styleOverrides: {},
 	};
@@ -45,16 +41,7 @@ export class SimpleToast extends PureComponent {
 		messages: [],
 	};
 
-	_showDuration = null;
 	_showTimeout = null;
-
-	componentDidMount() {
-		if (window) {
-			this._showDuration = window.matchMedia(`(min-width: ${mediaSizes.tablet})`).matches
-				? this.props.desktopTime
-				: this.props.mobileTime;
-		}
-	}
 
 	componentWillUnmount() {
 		clearTimeout(this._showTimeout);
@@ -75,7 +62,7 @@ export class SimpleToast extends PureComponent {
 	handleEntered = () => {
 		const { messages } = this.state;
 		this.setState({ toastHasEntered: true, transitionIn: messages.length === 1 });
-		this._showTimeout = setTimeout(this.triggerExit, this._showDuration);
+		this._showTimeout = setTimeout(this.triggerExit, this.props.showTime);
 	};
 
 	handleExited = () => {
