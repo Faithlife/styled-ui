@@ -27,14 +27,17 @@ export class ShareDialog extends React.Component {
 		modalTitle: 'Share this page',
 	};
 
-	static onDesktop = false;
+	state = {
+		onDesktop: false,
+	};
 
 	componentDidMount() {
-		this.onDesktop = window.matchMedia('(hover: hover)').matches;
+		this.setState({ onDesktop: window.matchMedia('(hover: hover)').matches });
 	}
 
 	render() {
 		const { shareUrl, message, onClose, isOpen, modalTitle, copyButtonText } = this.props;
+		const { onDesktop } = this.state;
 
 		const encodedShareUrl = encodeURIComponent(shareUrl);
 		const encodedMessage = message ? encodeURIComponent(message) : '';
@@ -64,7 +67,7 @@ export class ShareDialog extends React.Component {
 
 		return (
 			<Modal withoutFooter isOpen={isOpen} onClose={onClose} title={modalTitle} container="body">
-				{this.onDesktop ? desktopModal : mobileModal}
+				{onDesktop ? desktopModal : mobileModal}
 			</Modal>
 		);
 	}
