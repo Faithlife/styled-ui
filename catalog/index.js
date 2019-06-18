@@ -398,7 +398,7 @@ const components = [
 		],
 	},
 	{
-		title: 'SimpleModal',
+		title: 'Simple Modal',
 		pages: [
 			{
 				path: '/simple-modal/variations',
