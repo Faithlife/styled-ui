@@ -22,10 +22,6 @@ export const ShareContainer = styled.div`
 
 export const CopyContainer = styled.div`
 	margin: 0 ${thickness.eight};
-
-	input {
-		text-overflow: ellipsis;
-	}
 `;
 
 export const Copied = styled.div`
