@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.8.1
+
+- Fix spacing of custom indicators on Accordion components.
+- Update default Accordion.Panel padding.
+
 ### 5.8.0
 
 - Support more `styleOverrides` in `Popover`.
