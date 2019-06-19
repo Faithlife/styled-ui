@@ -1,5 +1,12 @@
 # Changelog
 
+### 5.8.0
+
+- Support more `styleOverrides` in `Popover`.
+- Add unstyled `PopoverBase`.
+- Add `content` prop to `Tooltip`; the `text` prop is now deprecated.
+- Reset font-family to `inherit` in dropdowns, buttons, inputs, and others.
+
 ### 5.7.4
 
 - Increase z-index of select menu portal to restore expected behavior inside modals.
