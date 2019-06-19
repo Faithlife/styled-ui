@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { LoadingSpinner } from '../loading-spinner';
+import { PopoverManager, PopoverReference } from '../popover';
 import * as Styled from './styled';
 
 const ProductDrawerDropdown = lazy(() => import('./product-drawer-dropdown'));
@@ -90,39 +91,43 @@ export class ProductDrawer extends React.PureComponent {
 
 		return (
 			<Styled.ProductDrawer>
-				<Styled.ProductDrawerToggle
-					styleOverrides={styleOverrides}
-					onClick={this.handleToggleClick}
-					ref={el => {
-						this.toggle = el;
-					}}
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="16"
-						height="16"
-						title={resources.toggleButtonAltText}
-					>
-						<path
-							d="M0 0h4v4H0zm0 6h4v4H0zm0 6h4v4H0zM6 0h4v4H6zm0 6h4v4H6zm0 6h4v4H6zm6-12h4v4h-4zm0 6h4v4h-4zm0 6h4v4h-4z"
-							fill="#878787"
-							fillRule="evenodd"
-						/>
-					</svg>
-					<Styled.ProductDrawerToggleText styleOverrides={styleOverrides}>
-						{resources.products}
-					</Styled.ProductDrawerToggleText>
-				</Styled.ProductDrawerToggle>
-				{isOpen ? (
-					<Suspense fallback={<LoadingSpinner />}>
-						<ProductDrawerDropdown
-							isOpen={isOpen}
-							resources={resources}
+				<PopoverManager onFocusAway={() => this.setState({ isOpen: false })}>
+					<PopoverReference>
+						<Styled.ProductDrawerToggle
 							styleOverrides={styleOverrides}
-							handleCloseButtonClick={this.handleCloseButtonClick}
-						/>
-					</Suspense>
-				) : null}
+							onClick={this.handleToggleClick}
+							ref={el => {
+								this.toggle = el;
+							}}
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="16"
+								height="16"
+								title={resources.toggleButtonAltText}
+							>
+								<path
+									d="M0 0h4v4H0zm0 6h4v4H0zm0 6h4v4H0zM6 0h4v4H6zm0 6h4v4H6zm0 6h4v4H6zm6-12h4v4h-4zm0 6h4v4h-4zm0 6h4v4h-4z"
+									fill="#878787"
+									fillRule="evenodd"
+								/>
+							</svg>
+							<Styled.ProductDrawerToggleText styleOverrides={styleOverrides}>
+								{resources.products}
+							</Styled.ProductDrawerToggleText>
+						</Styled.ProductDrawerToggle>
+					</PopoverReference>
+					{isOpen ? (
+						<Suspense fallback={<LoadingSpinner />}>
+							<ProductDrawerDropdown
+								isOpen={isOpen}
+								resources={resources}
+								styleOverrides={styleOverrides}
+								handleCloseButtonClick={this.handleCloseButtonClick}
+							/>
+						</Suspense>
+					) : null}
+				</PopoverManager>
 			</Styled.ProductDrawer>
 		);
 	}

@@ -5,7 +5,12 @@ import { resetStyles } from '../utils';
 export const ShareAnchor = styled.a`
 	${resetStyles};
 
-	margin: 0 ${thickness.four};
+	@media (hover: none) {
+		padding: 10px;
+	}
+	@media (hover: hover) {
+		margin: 0 ${thickness.four};
+	}
 	display: flex;
 `;
 

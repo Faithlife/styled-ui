@@ -17,9 +17,9 @@ export const CheckboxContainer = styled.button`
 	align-items: center;
 	position: relative;
 	border: none;
-	padding: 0;
-	min-width: 16px;
-	min-height: 16px;
+	padding: 0px 16px;
+	min-height: 44px;
+	min-width: 44px;
 	background: transparent;
 	text-align: unset;
 
@@ -27,8 +27,15 @@ export const CheckboxContainer = styled.button`
 		color: buttontext;
 	}
 
-	&:hover ${CheckboxDiv} {
-		border: solid 1px ${props => props.theme.primary};
+	@media (hover: hover) {
+		&:hover ${CheckboxDiv} {
+			border: solid 1px ${props => props.theme.primary};
+		}
+	}
+	@media (hover: none) {
+		&:active ${CheckboxDiv} {
+			border: solid 1px ${props => props.theme.primary};
+		}
 	}
 
 	&:focus {

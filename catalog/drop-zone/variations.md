@@ -1,5 +1,7 @@
 ## Component Variations
 
+In general, it is recommended to provide some other alternate UI on mobile .
+
 ### Basic
 
 ```react

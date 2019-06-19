@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Transition from 'react-transition-group/Transition';
-import { mediaSizes } from '../shared-styles';
+import { Button } from '../button';
+import { Close } from '../icons';
 import * as Styled from './styled.jsx';
 
 const transitionTime = Styled.transitionTime; // milliseconds
-const showTime = { desktop: 5000, mobile: 1000 }; // milliseconds
 
 /**
  * A mobile first Toast. A toast indicates that an action is being taken that does not require the user's
@@ -13,6 +13,8 @@ const showTime = { desktop: 5000, mobile: 1000 }; // milliseconds
  */
 export class SimpleToast extends PureComponent {
 	static propTypes = {
+		/** In milliseconds */
+		showTime: PropTypes.number,
 		theme: PropTypes.shape({
 			backgroundColor: PropTypes.string,
 		}),
@@ -29,6 +31,7 @@ export class SimpleToast extends PureComponent {
 	};
 
 	static defaultProps = {
+		showTime: 1000,
 		theme: {},
 		styleOverrides: {},
 	};
@@ -39,16 +42,7 @@ export class SimpleToast extends PureComponent {
 		messages: [],
 	};
 
-	_showDuration = null;
 	_showTimeout = null;
-
-	componentDidMount() {
-		if (window) {
-			this._showDuration = window.matchMedia(`(min-width: ${mediaSizes.tablet})`).matches
-				? showTime.desktop
-				: showTime.mobile;
-		}
-	}
 
 	componentWillUnmount() {
 		clearTimeout(this._showTimeout);
@@ -69,7 +63,7 @@ export class SimpleToast extends PureComponent {
 	handleEntered = () => {
 		const { messages } = this.state;
 		this.setState({ toastHasEntered: true, transitionIn: messages.length === 1 });
-		this._showTimeout = setTimeout(this.triggerExit, this._showDuration);
+		this._showTimeout = setTimeout(this.triggerExit, this.props.showTime);
 	};
 
 	handleExited = () => {
@@ -111,6 +105,9 @@ export class SimpleToast extends PureComponent {
 						{messages.length > 0 && (
 							<Styled.ToastContent>{messages[0].message}</Styled.ToastContent>
 						)}
+						<Styled.ToastClose>
+							<Button minorTransparent icon={<Close />} onClick={this.triggerExit} />
+						</Styled.ToastClose>
 					</Styled.ToastContainer>
 				)}
 			</Transition>

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import { ThemeProvider } from 'styled-components';
+import { Button } from '../button';
 import { ModalBackdrop } from '../modal-backdrop';
 import { Close } from '../icons';
 import { debouncedResize } from '../utils';
@@ -91,8 +92,8 @@ export class SimpleModal extends React.Component {
 							}
 						}}
 					>
-						<Styled.ModalClose onClick={onClose}>
-							<Close />
+						<Styled.ModalClose>
+							<Button minorTransparent icon={<Close />} onClick={onClose} />
 						</Styled.ModalClose>
 						{children}
 					</Styled.SimpleModal>

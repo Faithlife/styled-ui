@@ -11,8 +11,15 @@ const calendarWeekDayCss = `
 	cursor: pointer;
 	text-align: center;
 	border: none;
-	height: 30px;
-	width: 30px;
+
+	@media (hover: hover) {
+		height: 30px;
+		width: 30px;
+	}
+	@media (hover: none) {
+		height: 44px;
+		width: 44px;
+	}
 
 	&:hover {
 		background: ${colors.gray4};

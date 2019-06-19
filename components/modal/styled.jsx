@@ -63,10 +63,6 @@ export const ModalTitle = styled.div`
 	${fonts.h4};
 `;
 
-export const ModalClose = styled.div`
-	cursor: pointer;
-`;
-
 export const ModalSubtitle = styled.div`
 	width: 100%;
 	${fonts.ui14};

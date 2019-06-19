@@ -81,10 +81,12 @@ export const variationMap = {
 						cursor: default;
 				  `
 				: css`
-						&:hover {
-							border-color: ${props => props.theme.hoverColor || buttonColors.hover};
-							background-color: ${props => props.theme.hoverColor || buttonColors.hover};
-							color: #fff;
+						@media (hover: hover) {
+							&:hover {
+								border-color: ${props => props.theme.hoverColor || buttonColors.hover};
+								background-color: ${props => props.theme.hoverColor || buttonColors.hover};
+								color: #fff;
+							}
 						}
 
 						&:active {
@@ -108,10 +110,12 @@ export const variationMap = {
 						cursor: default;
 				  `
 				: css`
-						&:hover {
-							background-color: ${props => props.theme.hoverColor || buttonColors.hover};
-							border-color: ${props => props.theme.hoverColor || buttonColors.hover};
-							color: #fff;
+						@media (hover: hover) {
+							&:hover {
+								background-color: ${props => props.theme.hoverColor || buttonColors.hover};
+								border-color: ${props => props.theme.hoverColor || buttonColors.hover};
+								color: #fff;
+							}
 						}
 
 						&:active {
@@ -135,10 +139,12 @@ export const variationMap = {
 						cursor: default;
 				  `
 				: css`
-						&:hover {
-							background-color: ${colors.gray14};
-							border: 1px solid ${colors.gray14};
-							color: ${colors.flGray};
+						@media (hover: hover) {
+							&:hover {
+								background-color: ${colors.gray14};
+								border: 1px solid ${colors.gray14};
+								color: ${colors.flGray};
+							}
 						}
 
 						&:active {
@@ -161,8 +167,10 @@ export const variationMap = {
 						cursor: default;
 				  `
 				: css`
-						&:hover {
-							color: ${props => props.theme.hoverColor || buttonColors.hover};
+						@media (hover: hover) {
+							&:hover {
+								color: ${props => props.theme.hoverColor || buttonColors.hover};
+							}
 						}
 
 						&:active {
@@ -183,8 +191,10 @@ export const variationMap = {
 						cursor: default;
 				  `
 				: css`
-						&:hover {
-							color: ${colors.blueBase};
+						@media (hover: hover) {
+							&:hover {
+								color: ${colors.blueBase};
+							}
 						}
 
 						&:active {
