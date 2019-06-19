@@ -8,7 +8,7 @@ export const HeadingWrapper = styled.div`
 	display: grid;
 	grid-area: header;
 	grid-template-columns: ${({ renderCustomIndicator }) =>
-		renderCustomIndicator ? '[title] auto [indicator] min-content' : '[title] auto [space] 0'};
+		renderCustomIndicator ? '[title] 1fr [indicator] min-content' : '[title] auto [space] 0'};
 `;
 
 export const Heading = styled.header.attrs({
