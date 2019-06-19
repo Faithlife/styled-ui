@@ -10,7 +10,7 @@ export const Panel = styled.div.attrs({
 
 	grid-area: panel;
 
-	padding: ${({ styleOverrides }) => styleOverrides.panelPadding || '8px 24px 32px'};
+	padding: ${({ styleOverrides }) => styleOverrides.panelPadding || '12px 24px 24px'};
 `;
 
 export const PanelContainer = styled.div`
