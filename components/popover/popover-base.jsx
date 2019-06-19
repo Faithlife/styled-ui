@@ -74,6 +74,7 @@ export class PopoverBase extends Component {
 		theme: {
 			backgroundColor: colors.white,
 		},
+		modifiers: {},
 		styleOverrides: {},
 	};
 
@@ -143,10 +144,22 @@ export class PopoverBase extends Component {
 		} = this.props;
 		const { showPopper } = this.state;
 
+		const popperModifiers = {
+			...modifiers,
+			computeStyle: {
+				...modifiers.computeStyle,
+				gpuAcceleration: !(
+					typeof window !== `undefined` &&
+					window.devicePixelRatio < 1.5 &&
+					/Win/.test(navigator.platform)
+				),
+			},
+		};
+
 		const popover = (
 			<Popper
 				placement={popoverPlacement}
-				modifiers={modifiers}
+				modifiers={popperModifiers}
 				eventsEnabled={eventsEnabled}
 				positionFixed={positionFixed}
 			>
