@@ -48,11 +48,10 @@ export const ProductDrawerDropdown = styled.div`
 	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.23);
 `;
 
-export const DropdownCloseButton = styled.button`
+export const DropdownClose = styled.div`
 	position: absolute;
 	top: 0;
 	right: 0;
-	cursor: pointer;
 	border: none;
 	background-color: transparent;
 `;
