@@ -149,7 +149,6 @@ export class PopoverBase extends Component {
 		const {
 			children,
 			placement: popoverPlacement,
-			modifiers,
 			hideArrow,
 			delay,
 			theme,
