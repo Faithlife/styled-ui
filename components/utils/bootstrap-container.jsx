@@ -1,41 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const { Provider, Consumer } = React.createContext({});
 
-export class BootstrapContainer extends React.Component {
-	static propTypes = { children: PropTypes.node.isRequired, styles: PropTypes.object };
-
-	componentDidMount() {
+export const BootstrapContainer = ({ children, styles }) => {
+	useEffect(() => {
 		if (process.env.NODE_ENV !== 'production') {
 			console.warn(
 				'Warning: You are using a deprecated Bootstrap element. \n',
 				'Styled-UI has replaced all Bootstrap elements: https://faithlife.github.io/styled-ui/#/ \n',
 			);
 		}
-	}
+	}, []);
+	return (
+		<Consumer>
+			{value =>
+				value.inCssResetScope ? (
+					children
+				) : (
+					<Provider value={{ inCssResetScope: true }}>
+						<BootstrapContainer styles={styles}>
+							<div className="fl-b" style={styles}>
+								{children}
+							</div>
+						</BootstrapContainer>
+					</Provider>
+				)
+			}
+		</Consumer>
+	);
+};
 
-	render() {
-		const { children, styles } = this.props;
-		return (
-			<Consumer>
-				{value =>
-					value.inCssResetScope ? (
-						children
-					) : (
-						<Provider value={{ inCssResetScope: true }}>
-							<BootstrapContainer styles={styles}>
-								<div className="fl-b" style={styles}>
-									{children}
-								</div>
-							</BootstrapContainer>
-						</Provider>
-					)
-				}
-			</Consumer>
-		);
-	}
-}
+BootstrapContainer.propTypes = {
+	children: PropTypes.node.isRequired,
+	styles: PropTypes.object,
+};
 
 export function wrapBootstrap(Component, inline) {
 	const styles = inline ? { display: 'inline-block' } : {};
