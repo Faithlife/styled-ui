@@ -8,7 +8,7 @@ export const ModalHeader = ({ title, subtitle, onClose, styleOverrides }) => (
 	<Styled.ModalHeader styleOverrides={styleOverrides}>
 		<Styled.ModalTitleBar>
 			<Styled.ModalTitle>{title}</Styled.ModalTitle>
-			<Button icon={<Close />} onClick={onClose} />
+			<Button primaryTransparent icon={<Close />} onClick={onClose} />
 		</Styled.ModalTitleBar>
 		{subtitle && <Styled.ModalSubtitle>{subtitle}</Styled.ModalSubtitle>}
 	</Styled.ModalHeader>

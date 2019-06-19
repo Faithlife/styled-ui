@@ -106,7 +106,7 @@ export class SimpleToast extends PureComponent {
 							<Styled.ToastContent>{messages[0].message}</Styled.ToastContent>
 						)}
 						<Styled.ToastClose>
-							<Button icon={<Close />} onClick={this.triggerExit} />
+							<Button minorTransparent icon={<Close />} onClick={this.triggerExit} />
 						</Styled.ToastClose>
 					</Styled.ToastContainer>
 				)}
