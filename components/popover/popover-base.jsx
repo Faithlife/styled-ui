@@ -80,6 +80,7 @@ export class PopoverBase extends Component {
 
 	state = {
 		showPopper: this.props.isOpen || false,
+		popperModifiers: this.props.modifiers,
 	};
 
 	_timeout = null;
@@ -96,6 +97,20 @@ export class PopoverBase extends Component {
 				this.targetContainer = typeof container === 'object' ? container.current : container();
 			}
 		}
+
+		this.setState(previousState => ({
+			popperModifiers: {
+				...previousState.popperModifiers,
+				computeStyle: {
+					...previousState.popperModifiers.computeStyle,
+					gpuAcceleration: !(
+						typeof window !== `undefined` &&
+						window.devicePixelRatio < 1.5 &&
+						/Win/.test(navigator.platform)
+					),
+				},
+			},
+		}));
 	}
 
 	componentDidUpdate(prevProps) {
@@ -142,19 +157,7 @@ export class PopoverBase extends Component {
 			eventsEnabled,
 			positionFixed,
 		} = this.props;
-		const { showPopper } = this.state;
-
-		const popperModifiers = {
-			...modifiers,
-			computeStyle: {
-				...modifiers.computeStyle,
-				gpuAcceleration: !(
-					typeof window !== `undefined` &&
-					window.devicePixelRatio < 1.5 &&
-					/Win/.test(navigator.platform)
-				),
-			},
-		};
+		const { showPopper, popperModifiers } = this.state;
 
 		const popover = (
 			<Popper
