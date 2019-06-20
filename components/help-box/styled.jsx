@@ -49,6 +49,7 @@ export const variationMap = {
 	success: variantCreator(colors.greenTint, colors.greenLight, colors.greenDark),
 	danger: variantCreator(colors.redTint, colors.redLight, colors.redDark),
 	warning: variantCreator(colors.yellowTint, colors.yellowLight, colors.yellowDark),
+	minor: variantCreator(colors.gray4, colors.gray14, colors.gray34),
 };
 
 function variantCreator(backgroundColor, foregroundColor, closeIconColor) {

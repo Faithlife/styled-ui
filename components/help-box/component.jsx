@@ -45,5 +45,6 @@ HelpBox.propTypes = {
 	success: PropTypes.bool,
 	danger: PropTypes.bool,
 	warning: PropTypes.bool,
+	minor: PropTypes.bool,
 	handleClose: PropTypes.func,
 };
