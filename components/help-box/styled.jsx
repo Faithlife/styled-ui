@@ -7,7 +7,7 @@ export const HelpBoxContent = styled.div`
 	${fonts.c16};
 
 	flex: 1;
-	padding: ${thickness.sixteen};
+	padding: 14px 0px 14px 12px;
 	text-align: left;
 	color: ${colors.flGray};
 `;
@@ -20,9 +20,17 @@ export const BulbIcon = styled(LightBulbH)`
 	flex: none;
 `;
 
+export const LeftIcon = styled.div`
+	margin: 15px -4px 0px 16px;
+`;
+
+export const RightIcon = styled.div`
+	margin: 15px 16px 0px 24px;
+`;
+
 export const CloseButton = styled.button`
 	cursor: pointer;
-	margin: 10px 14px 0 0;
+	margin: 17px 14px 0px 0px;
 	height: 18px;
 	background: transparent;
 	padding: 0;

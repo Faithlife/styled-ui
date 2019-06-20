@@ -8,6 +8,7 @@ import * as Styled from './styled';
 export function HelpBox({
 	children,
 	showLightBulb,
+	icon,
 	className,
 	theme,
 	handleClose,
@@ -21,13 +22,15 @@ export function HelpBox({
 
 	return (
 		<HelpBoxVariation className={className} theme={theme} {...filteredProps}>
-			{showLightBulb && <Styled.BulbIcon />}
+			{(showLightBulb && <Styled.BulbIcon />) ||
+				(icon && <Styled.LeftIcon>{icon}</Styled.LeftIcon>)}
 			<Styled.HelpBoxContent>{children}</Styled.HelpBoxContent>
 			{handleClose && (
 				<Styled.CloseButton onClick={handleClose}>
 					<Close />
 				</Styled.CloseButton>
-			)}
+			)) ||
+				(icon && <Styled.RightIcon>{icon}</Styled.RightIcon>)}
 		</HelpBoxVariation>
 	);
 }
@@ -37,6 +40,7 @@ HelpBox.propTypes = {
 	className: PropTypes.string,
 	children: PropTypes.node.isRequired,
 	showLightBulb: PropTypes.bool,
+	icon: PropTypes.node,
 	theme: PropTypes.shape({
 		foregroundColor: PropTypes.string,
 		backgroundColor: PropTypes.string,
