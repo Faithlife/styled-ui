@@ -66,7 +66,7 @@ export class ShareDialog extends React.Component {
 		);
 
 		return (
-			<Modal withoutFooter isOpen={isOpen} onClose={onClose} title={modalTitle} container="body">
+			<Modal withoutFooter isOpen={isOpen} onClose={onClose} title={modalTitle}>
 				{onDesktop ? desktopModal : mobileModal}
 			</Modal>
 		);

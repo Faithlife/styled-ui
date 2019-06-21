@@ -296,7 +296,6 @@ export class Slider extends PureComponent {
 										labels[index] !== ''
 									}
 									placement={'top'}
-									container="body"
 									modifiers={{ offset: { offset: '0, 33' } }}
 								>
 									{`${labels[index]}`}

@@ -8,7 +8,6 @@ state: { modal: false, value: '' }
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
-		container="body"
 		onClose={() => setState({ modal: false })}
 		title="Location"
 		subtitle="Help us locate you"
@@ -71,7 +70,6 @@ state: { modal: false, value: '' }
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
-		container="body"
 		onClose={() => setState({ modal: false })}
 		title="Location"
 		subtitle="Help us locate you"
@@ -103,7 +101,6 @@ state: { modal: false, value: '' }
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
-		container="body"
 		onClose={() => setState({ modal: false })}
 		title="Location"
 		subtitle="Help us locate you"
@@ -136,7 +133,6 @@ state: { modal: false, value: '' }
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
-		container="body"
 		onClose={() => setState({ modal: false })}
 		title="Location"
 		subtitle="Help us locate you"
@@ -169,7 +165,6 @@ state: { modal: false, value: '' }
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
-		container="body"
 		onClose={() => setState({ modal: false })}
 		title="Location"
 		subtitle="Help us locate you"
@@ -209,7 +204,6 @@ state: { modal: false, value: '' }
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
-		container="body"
 		onClose={() => setState({ modal: false })}
 		title="Location"
 		subtitle="Help us locate you"
@@ -238,7 +232,6 @@ state: { modal: false, value: '' }
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
-		container="body"
 		onClose={() => setState({ modal: false })}
 		title="Lots of content"
 	>
@@ -259,7 +252,6 @@ state: { modal: false, value: '' }
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
-		container="body"
 		onClose={() => setState({ modal: false })}
 		title="Modal with no title border"
 		styleOverrides={{ bottomBorder: 'none' }}

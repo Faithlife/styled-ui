@@ -85,15 +85,14 @@ export class PopoverBase extends Component {
 
 	componentDidMount() {
 		const { container } = this.props;
-		if (container) {
-			if (typeof container === 'string') {
-				// must be an id or body
-				this.targetContainer =
-					container === 'body' ? document.body : document.getElementById(container);
-			} else {
-				// must be a ref
-				this.targetContainer = typeof container === 'object' ? container.current : container();
-			}
+		if (container === undefined || container === 'body') {
+			this.targetContainer = document.body;
+		} else if (typeof container === 'string') {
+			// must be an id or body
+			this.targetContainer = document.getElementById(container);
+		} else {
+			// must be a ref
+			this.targetContainer = typeof container === 'object' ? container.current : container();
 		}
 	}
 

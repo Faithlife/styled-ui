@@ -47,7 +47,7 @@ class KebabCell extends Component {
 							<KebabVertical />
 						</IconButton>
 					</PopoverReference>
-					<Popover container="body" isOpen={this.state.dropDownOpen} placement="top">
+					<Popover isOpen={this.state.dropDownOpen} placement="top">
 						Some sample content
 					</Popover>
 				</PopoverManager>

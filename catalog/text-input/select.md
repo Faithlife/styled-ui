@@ -45,7 +45,6 @@ state: { modal: false, value: '', selection: '' }
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
-		container="body"
 		onClose={() => setState({ modal: false })}
 		title="Test"
 		footerProps={{

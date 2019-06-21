@@ -110,13 +110,13 @@ state: { isOpen: false }
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="top">I'm inline</Popover>
+		<Popover isOpen={state.isOpen} placement="top" container="inline">I'm inline</Popover>
 	</PopoverManager>
 	<PopoverManager>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="top" container="body">I'm thinking with portals!</Popover>
+		<Popover isOpen={state.isOpen} placement="top">I'm thinking with portals!</Popover>
 	</PopoverManager>
 </PopoverOverflowDemo>
 ```
@@ -134,13 +134,13 @@ state: { isOpen: false }
 		<PopoverReference>
 			<Button primary disableAutoBlur medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="top">Click or tab to make me go away</Popover>
+		<Popover isOpen={state.isOpen} placement="top" container="inline">Click or tab to make me go away</Popover>
 	</PopoverManager>
 	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium disableAutoBlur onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="top" container="body">I'm thinking with portals!</Popover>
+		<Popover isOpen={state.isOpen} placement="top">I'm thinking with portals!</Popover>
 	</PopoverManager>
 </PopoverDemo>
 ```
