@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import { Popover } from './component';
-import { PopoverManager, PopoverReference } from './popper-helpers';
+import { PopoverManager, PopoverReference } from '../popover';
 
 /** Simple tooltip that uses popovers internally. Does not support custom positioning. */
 export class Tooltip extends Component {
