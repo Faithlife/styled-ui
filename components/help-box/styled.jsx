@@ -79,6 +79,20 @@ export const HelpBox = variantCreator(
 	display: flex;
 	border-radius: 3px;
 	word-break: break-word;
+
+	${HelpBoxContent} {
+		flex-direction: ${props => (props.stacked ? 'column' : 'row')};
+		@media (max-width: ${mediaSizes.phone}) {
+			flex-direction: column;
+		}
+
+		${HelpBoxFooter} {
+			margin: ${props => (props.stacked ? '12px 0px 0px 0px' : '-3px 0px')};
+			@media (max-width: ${mediaSizes.phone}) {
+				margin: 12px 0px 0px 0px;
+			}
+		}
+	}
 `);
 
 export const variationMap = {
