@@ -60,6 +60,7 @@ HelpBox.propTypes = {
 	children: PropTypes.node.isRequired,
 	showLightBulb: PropTypes.bool,
 	hideIcon: PropTypes.bool,
+	stacked: PropTypes.bool,
 	theme: PropTypes.shape({
 		foregroundColor: PropTypes.string,
 		backgroundColor: PropTypes.string,
@@ -69,7 +70,7 @@ HelpBox.propTypes = {
 	danger: PropTypes.bool,
 	warning: PropTypes.bool,
 	minor: PropTypes.bool,
-	stacked: PropTypes.bool,
+	large: PropTypes.bool,
 	handleClose: PropTypes.func,
 };
 

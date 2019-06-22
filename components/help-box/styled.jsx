@@ -41,18 +41,22 @@ export const HelpBox = variantCreator(
 		margin: ${thickness.sixteen};
 		margin-right: 0;
 		flex: none;
+
+		width: ${props => (props.large ? '42px' : '24px')};
+		height: ${props => (props.large ? '42px' : '24px')};
 	}
 
 	${HelpBoxContent} {
-	${fonts.c16};
-	display: flex;
-	flex: 1;
-	padding: 14px 0px 14px 12px;
-	text-align: left;
-	line-height: 1.25;
-	font-size: 16px;
-	color: ${colors.flGray};
+		${fonts.c16};
+		display: flex;
+		flex: 1;
+		text-align: left;
+		line-height: 1.25;
+		font-size: 16px;
+		color: ${colors.flGray};
 
+		height: ${props => (props.large ? '230px' : '')};
+		padding: ${props => (props.large ? '32px 0px 32px 19px' : '14px 0px 14px 12px')};
 
 		flex-direction: ${props => (props.stacked ? 'column' : 'row')};
 		@media (max-width: ${mediaSizes.phone}) {
@@ -60,16 +64,16 @@ export const HelpBox = variantCreator(
 		}
 
 		${HelpBoxBody} {
-	${fonts.c16};
-	display: flex;
-	flex: 1;
-	order: 2;
+			${fonts.c16};
+			display: flex;
+			flex: 1;
+			order: 2;
 		}
 
 		${HelpBoxFooter} {
-	${fonts.c16};
-	display: flex;
-	order: 2;
+			${fonts.c16};
+			display: flex;
+			order: 2;
 
 			margin: ${props => (props.stacked ? '12px 0px 0px 0px' : '-3px 0px')};
 			@media (max-width: ${mediaSizes.phone}) {
@@ -79,17 +83,17 @@ export const HelpBox = variantCreator(
 	}
 
 	${CloseButton} {
-	cursor: pointer;
-	margin: 17px 14px 0px 12px;
-	height: 18px;
-	background: transparent;
-	padding: 0;
-	border: none;
-
-	&::-moz-focus-inner {
-		border: 0;
+		cursor: pointer;
+		margin: ${props => (props.large ? '15px 16px 0px 16px' : '15px 16px 0px 12px')};
+		height: 18px;
+		background: transparent;
 		padding: 0;
-	}
+		border: none;
+
+		&::-moz-focus-inner {
+			border: 0;
+			padding: 0;
+		}
 	}
 `);
 
@@ -113,9 +117,9 @@ function variantCreator(backgroundColor, foregroundColor, closeIconColor) {
 		}
 
 		button {
-		path {
-			fill: ${props => props.theme.closeIconColor || closeIconColor};
-		}
+			path {
+				fill: ${props => props.theme.closeIconColor || closeIconColor};
+			}
 		}
 	`;
 }
