@@ -36,14 +36,11 @@ export const HelpBox = variantCreator(
 	}
 
 	${BulbIcon} {
-		width: 42px;
-		height: 42px;
-		margin: ${thickness.sixteen};
-		margin-right: 0;
 		flex: none;
 
 		width: ${props => (props.large ? '42px' : '24px')};
 		height: ${props => (props.large ? '42px' : '24px')};
+		margin: ${props => (props.large ? '31px 0px 0px 24px' : '12px 0px 0px 16px')};
 	}
 
 	${HelpBoxContent} {
