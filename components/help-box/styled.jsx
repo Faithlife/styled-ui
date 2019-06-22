@@ -72,7 +72,7 @@ export const HelpBox = variantCreator(
 			display: flex;
 			order: 2;
 
-			margin: ${props => (props.stacked ? '12px 0px 0px 0px' : '-3px 0px')};
+			margin: ${props => (props.stacked ? '12px 16px 0px 0px' : '-3px 16px -3px 0px')};
 			@media (max-width: ${mediaSizes.phone}) {
 				margin: 12px 0px 0px 0px;
 			}
@@ -82,6 +82,7 @@ export const HelpBox = variantCreator(
 	${CloseButton} {
 		cursor: pointer;
 		margin: ${props => (props.large ? '15px 16px 0px 16px' : '15px 16px 0px 12px')};
+		margin-left: ${props => (!props.stacked ? '-4px' : '')};
 		height: 18px;
 		background: transparent;
 		padding: 0;
