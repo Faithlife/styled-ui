@@ -1,74 +1,20 @@
 import styled from 'styled-components';
 import { fonts, colors, thickness } from '../../components/shared-styles';
-import { LightBulbH, Exclamation } from '../icons';
+import { LightBulbH } from '../icons';
 import { resetStyles } from '../utils';
 import { mediaSizes } from '../shared-styles';
 
-export const HelpBoxContent = styled.div`
-	${fonts.c16};
-	display: flex;
-	flex: 1;
-	padding: 14px 0px 14px 12px;
-	text-align: left;
-	line-height: 1.25;
-	font-size: 16px;
-	color: ${colors.flGray};
-`;
+export const HelpBoxContent = styled.div``;
 
-export const HelpBoxBody = styled.div`
-	${fonts.c16};
-	display: flex;
-	flex: 1;
-	order: 2;
-`;
+export const HelpBoxBody = styled.div``;
 
-export const HelpBoxFooter = styled.div`
-	${fonts.c16};
-	display: flex;
-	order: 2;
-`;
+export const HelpBoxFooter = styled.div``;
 
-export const BulbIcon = styled(LightBulbH)`
-	width: 42px;
-	height: 42px;
-	margin: ${thickness.sixteen};
-	margin-right: 0;
-	flex: none;
-`;
+export const BulbIcon = styled(LightBulbH)``;
 
-export const SmallBulbIcon = styled(LightBulbH)`
-	width: 24px;
-	height: 24px;
-	margin: ${thickness.sixteen};
-	margin-right: 0;
-	flex: none;
-`;
+export const CloseButton = styled.button``;
 
-export const LeftIcon = styled.div`
-	margin: 15px -4px 0px 16px;
-`;
-
-export const RightIcon = styled.div`
-	margin: 15px 16px 0px 24px;
-`;
-
-export const CloseButton = styled.button`
-	cursor: pointer;
-	margin: 17px 14px 0px 12px;
-	height: 18px;
-	background: transparent;
-	padding: 0;
-	border: none;
-
-	&::-moz-focus-inner {
-		border: 0;
-		padding: 0;
-	}
-`;
-
-export const Icon = styled(Exclamation)`
-	margin: 15px -4px 0px 16px;
-`;
+export const IconDiv = styled.div``;
 
 export const HelpBox = variantCreator(
 	colors.blueTint,
@@ -80,18 +26,70 @@ export const HelpBox = variantCreator(
 	border-radius: 3px;
 	word-break: break-word;
 
+	${IconDiv} {
+		margin: 15px -4px 0px 16px;
+
+		svg {
+			height: 18px;
+			width: 18px;
+		}
+	}
+
+	${BulbIcon} {
+		width: 42px;
+		height: 42px;
+		margin: ${thickness.sixteen};
+		margin-right: 0;
+		flex: none;
+	}
+
 	${HelpBoxContent} {
+	${fonts.c16};
+	display: flex;
+	flex: 1;
+	padding: 14px 0px 14px 12px;
+	text-align: left;
+	line-height: 1.25;
+	font-size: 16px;
+	color: ${colors.flGray};
+
+
 		flex-direction: ${props => (props.stacked ? 'column' : 'row')};
 		@media (max-width: ${mediaSizes.phone}) {
 			flex-direction: column;
 		}
 
+		${HelpBoxBody} {
+	${fonts.c16};
+	display: flex;
+	flex: 1;
+	order: 2;
+		}
+
 		${HelpBoxFooter} {
+	${fonts.c16};
+	display: flex;
+	order: 2;
+
 			margin: ${props => (props.stacked ? '12px 0px 0px 0px' : '-3px 0px')};
 			@media (max-width: ${mediaSizes.phone}) {
 				margin: 12px 0px 0px 0px;
 			}
 		}
+	}
+
+	${CloseButton} {
+	cursor: pointer;
+	margin: 17px 14px 0px 12px;
+	height: 18px;
+	background: transparent;
+	padding: 0;
+	border: none;
+
+	&::-moz-focus-inner {
+		border: 0;
+		padding: 0;
+	}
 	}
 `);
 
@@ -111,7 +109,13 @@ function variantCreator(backgroundColor, foregroundColor, closeIconColor) {
 		border-left: solid ${thickness.four} ${props => props.theme.foregroundColor || foregroundColor};
 
 		path {
+			fill: ${props => props.theme.foregroundColor || foregroundColor};
+		}
+
+		button {
+		path {
 			fill: ${props => props.theme.closeIconColor || closeIconColor};
+		}
 		}
 	`;
 }

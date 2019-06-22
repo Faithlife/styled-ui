@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Close } from '../icons';
+import { Close, Exclamation, OKCircle, Caret } from '../icons';
 import { applyVariations } from '../utils';
 import * as Styled from './styled';
 
@@ -8,6 +8,7 @@ import * as Styled from './styled';
 export function HelpBox({
 	children,
 	showLightBulb,
+	hideIcon,
 	className,
 	theme,
 	handleClose,
@@ -21,8 +22,28 @@ export function HelpBox({
 	);
 
 	return (
-		<HelpBoxVariation className={className} theme={theme} stacked={stacked} {...filteredProps}>
-			{(showLightBulb && <Styled.BulbIcon />) || <Styled.Icon />}
+		<HelpBoxVariation
+			className={className}
+			theme={theme}
+			success={helpBoxProps.success}
+			danger={helpBoxProps.danger}
+			warning={helpBoxProps.warning}
+			minor={helpBoxProps.minor}
+			stacked={stacked}
+			{...filteredProps}
+		>
+			{(showLightBulb && <Styled.BulbIcon />) ||
+				(!hideIcon && (
+					<Styled.IconDiv>
+						{helpBoxProps.danger ? (
+							<Exclamation />
+						) : helpBoxProps.success ? (
+							<OKCircle />
+						) : helpBoxProps.minor ? null : (
+							<Caret />
+						)}
+					</Styled.IconDiv>
+				))}
 			{children}
 			{handleClose && (
 				<Styled.CloseButton onClick={handleClose}>
@@ -38,6 +59,7 @@ HelpBox.propTypes = {
 	className: PropTypes.string,
 	children: PropTypes.node.isRequired,
 	showLightBulb: PropTypes.bool,
+	hideIcon: PropTypes.bool,
 	theme: PropTypes.shape({
 		foregroundColor: PropTypes.string,
 		backgroundColor: PropTypes.string,
