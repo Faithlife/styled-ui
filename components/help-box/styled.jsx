@@ -16,6 +16,8 @@ export const CloseButton = styled.button``;
 
 export const IconDiv = styled.div``;
 
+export const RightIconDiv = styled.div``;
+
 export const HelpBox = variantCreator(
 	colors.blueTint,
 	colors.blueLight,
@@ -81,6 +83,20 @@ export const HelpBox = variantCreator(
 
 	${CloseButton} {
 		cursor: pointer;
+		margin: ${props => (props.large ? '15px 16px 0px 16px' : '15px 16px 0px 12px')};
+		margin-left: ${props => (!props.stacked ? '-4px' : '')};
+		height: 18px;
+		background: transparent;
+		padding: 0;
+		border: none;
+
+		&::-moz-focus-inner {
+			border: 0;
+			padding: 0;
+		}
+	}
+
+	${RightIconDiv} {
 		margin: ${props => (props.large ? '15px 16px 0px 16px' : '15px 16px 0px 12px')};
 		margin-left: ${props => (!props.stacked ? '-4px' : '')};
 		height: 18px;

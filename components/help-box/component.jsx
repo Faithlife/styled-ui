@@ -9,10 +9,11 @@ export function HelpBox({
 	children,
 	showLightBulb,
 	hideIcon,
+	showRightIcon,
+	stacked,
 	className,
 	theme,
 	handleClose,
-	stacked,
 	...helpBoxProps
 }) {
 	const { component: HelpBoxVariation, filteredProps } = applyVariations(
@@ -45,11 +46,22 @@ export function HelpBox({
 					</Styled.IconDiv>
 				))}
 			{children}
-			{handleClose && (
+			{(handleClose && (
 				<Styled.CloseButton onClick={handleClose}>
 					<Close />
 				</Styled.CloseButton>
-			)}
+			)) ||
+				(showRightIcon && (
+					<Styled.RightIconDiv>
+						{helpBoxProps.danger ? (
+							<Exclamation />
+						) : helpBoxProps.success ? (
+							<OKCircle />
+						) : helpBoxProps.minor ? null : (
+							<Caret />
+						)}
+					</Styled.RightIconDiv>
+				))}
 		</HelpBoxVariation>
 	);
 }
@@ -61,6 +73,7 @@ HelpBox.propTypes = {
 	/** The light bulb will override the other icon. */
 	showLightBulb: PropTypes.bool,
 	hideIcon: PropTypes.bool,
+	showRightIcon: PropTypes.bool,
 	/** Stacking will happen automatically on small viewports. */
 	stacked: PropTypes.bool,
 	/** Blue theme is the default. */
