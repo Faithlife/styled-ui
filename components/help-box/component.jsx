@@ -8,10 +8,10 @@ import * as Styled from './styled';
 export function HelpBox({
 	children,
 	showLightBulb,
-	icon,
 	className,
 	theme,
 	handleClose,
+	stacked,
 	...helpBoxProps
 }) {
 	const { component: HelpBoxVariation, filteredProps } = applyVariations(
@@ -21,16 +21,14 @@ export function HelpBox({
 	);
 
 	return (
-		<HelpBoxVariation className={className} theme={theme} {...filteredProps}>
-			{(showLightBulb && <Styled.BulbIcon />) ||
-				(icon && <Styled.LeftIcon>{icon}</Styled.LeftIcon>)}
-			<Styled.HelpBoxContent>{children}</Styled.HelpBoxContent>
+		<HelpBoxVariation className={className} theme={theme} stacked={stacked} {...filteredProps}>
+			{(showLightBulb && <Styled.BulbIcon />) || <Styled.Icon />}
+			{children}
 			{handleClose && (
 				<Styled.CloseButton onClick={handleClose}>
 					<Close />
 				</Styled.CloseButton>
-			)) ||
-				(icon && <Styled.RightIcon>{icon}</Styled.RightIcon>)}
+			)}
 		</HelpBoxVariation>
 	);
 }
@@ -40,7 +38,6 @@ HelpBox.propTypes = {
 	className: PropTypes.string,
 	children: PropTypes.node.isRequired,
 	showLightBulb: PropTypes.bool,
-	icon: PropTypes.node,
 	theme: PropTypes.shape({
 		foregroundColor: PropTypes.string,
 		backgroundColor: PropTypes.string,
@@ -50,5 +47,12 @@ HelpBox.propTypes = {
 	danger: PropTypes.bool,
 	warning: PropTypes.bool,
 	minor: PropTypes.bool,
+	stacked: PropTypes.bool,
 	handleClose: PropTypes.func,
 };
+
+HelpBox.Content = Styled.HelpBoxContent;
+
+HelpBox.Body = Styled.HelpBoxBody;
+
+HelpBox.Footer = Styled.HelpBoxFooter;
