@@ -55,22 +55,30 @@ export function HelpBox({
 }
 
 HelpBox.propTypes = {
-	/** See the docs for how to override styles properly  */
+	/** See the docs for how to override styles properly.  */
 	className: PropTypes.string,
 	children: PropTypes.node.isRequired,
+	/** The light bulb will override the other icon. */
 	showLightBulb: PropTypes.bool,
 	hideIcon: PropTypes.bool,
+	/** Stacking will happen automatically on small viewports. */
 	stacked: PropTypes.bool,
+	/** Blue theme is the default. */
 	theme: PropTypes.shape({
 		foregroundColor: PropTypes.string,
 		backgroundColor: PropTypes.string,
 		closeIconColor: PropTypes.string,
 	}),
+	/** Green theme */
 	success: PropTypes.bool,
+	/** Red theme */
 	danger: PropTypes.bool,
+	/** Yellow theme */
 	warning: PropTypes.bool,
+	/** Gray theme */
 	minor: PropTypes.bool,
 	large: PropTypes.bool,
+	/** If not handled, there will be no close icon. */
 	handleClose: PropTypes.func,
 };
 
