@@ -1,11 +1,13 @@
 ## Popover
 
+onFocusAway should always be used according to the spec.
+
 ```react
 showSource: true
 state: { isOpen: false }
 ---
 <PopoverDemo>
-	<PopoverManager>
+	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
@@ -21,7 +23,7 @@ showSource: true
 state: { isOpen: false }
 ---
 <PopoverDemo>
-	<PopoverManager>
+	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
@@ -37,25 +39,25 @@ showSource: true
 state: { isOpen: false }
 ---
 <PopoverDemo>
-	<PopoverManager>
+	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
 		<Popover isOpen={state.isOpen} placement="top">Hello!</Popover>
 	</PopoverManager>
-	<PopoverManager>
+	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
 		<Popover isOpen={state.isOpen} placement="bottom">Hello!</Popover>
 	</PopoverManager>
-	<PopoverManager>
+	<PopoverManager  onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
 		<Popover isOpen={state.isOpen} placement="left">Hello!</Popover>
 	</PopoverManager>
-	<PopoverManager>
+	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
@@ -71,25 +73,25 @@ showSource: true
 state: { isOpen: false }
 ---
 <PopoverDemo>
-	<PopoverManager>
+	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
 		<Popover isOpen={state.isOpen} placement="top" theme={{ backgroundColor: '#ebf7ff' }}>Hello!</Popover>
 	</PopoverManager>
-	<PopoverManager>
+	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover with zIndex!</Button>
 		</PopoverReference>
 		<Popover isOpen={state.isOpen} placement="top" styleOverrides={{ padding: '18px', hideShadow: true, width: '200px', border: 'black solid 1px', zIndex: 10 }}>Hello!</Popover>
 	</PopoverManager>
-	<PopoverManager>
+	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
 		<Popover isOpen={state.isOpen} placement="top" hideArrow>Hello!</Popover>
 	</PopoverManager>
-	<PopoverManager>
+	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover w/ a delay!</Button>
 		</PopoverReference>
@@ -106,43 +108,19 @@ state: { isOpen: false }
 ---
 // overflow: hidden
 <PopoverOverflowDemo>
-	<PopoverManager>
+	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
 		<Popover isOpen={state.isOpen} placement="top">I'm inline</Popover>
 	</PopoverManager>
-	<PopoverManager>
+	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
 		<Popover isOpen={state.isOpen} placement="top" container="body">I'm thinking with portals!</Popover>
 	</PopoverManager>
 </PopoverOverflowDemo>
-```
-
-## With focus handling
-
-Works with container prop as well.
-
-```react
-showSource: true
-state: { isOpen: false }
----
-<PopoverDemo>
-	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
-		<PopoverReference>
-			<Button primary disableAutoBlur medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
-		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="top">Click or tab to make me go away</Popover>
-	</PopoverManager>
-	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
-		<PopoverReference>
-			<Button primary medium disableAutoBlur onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
-		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="top" container="body">I'm thinking with portals!</Popover>
-	</PopoverManager>
-</PopoverDemo>
 ```
 
 ## Tooltip

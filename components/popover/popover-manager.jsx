@@ -22,5 +22,6 @@ export function PopoverManager({ children, onFocusAway }) {
 
 PopoverManager.propTypes = {
 	children: PropTypes.node.isRequired,
+	/** Per spec, this should always be used to support closing on click away. */
 	onFocusAway: PropTypes.func,
 };
