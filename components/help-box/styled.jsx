@@ -73,8 +73,9 @@ export const HelpBox = variantCreator(
 			${fonts.c16};
 			display: flex;
 			order: 2;
+			align-items: center;
 
-			margin: ${props => (props.stacked ? '12px 16px 0px 0px' : '-3px 16px -3px 0px')};
+			margin: ${props => (props.stacked ? '12px 16px 0px 0px' : '-7px 16px -7px 0px')};
 			@media (max-width: ${mediaSizes.phone}) {
 				margin: 12px 0px 0px 0px;
 			}
