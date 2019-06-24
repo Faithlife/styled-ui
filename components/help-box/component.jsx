@@ -72,11 +72,14 @@ HelpBox.propTypes = {
 	children: PropTypes.node.isRequired,
 	/** The light bulb will override the other icon. */
 	showLightBulb: PropTypes.bool,
+	/** Hides the left icon. */
 	hideIcon: PropTypes.bool,
+	/** This icon will not show if closing is handled. */
 	showRightIcon: PropTypes.bool,
 	/** Stacking will happen automatically on small viewports. */
 	stacked: PropTypes.bool,
-	/** Blue theme is the default. */
+	/** Blue theme is the default.
+	 * The icons are colored by foregroundColor. */
 	theme: PropTypes.shape({
 		foregroundColor: PropTypes.string,
 		backgroundColor: PropTypes.string,
@@ -90,6 +93,7 @@ HelpBox.propTypes = {
 	warning: PropTypes.bool,
 	/** Gray theme */
 	minor: PropTypes.bool,
+	/** Height will be 230px */
 	large: PropTypes.bool,
 	/** If not handled, there will be no close icon. */
 	handleClose: PropTypes.func,
