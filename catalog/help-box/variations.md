@@ -29,15 +29,9 @@
 
 ```react
 <div>
-	<HelpBox showLightBulb handleClose={() => true}>
-		<HelpBox.Body>This is an alert with a light bulb.</HelpBox.Body>
-	</HelpBox>
-	<HelpBox hideIcon handleClose={() => true}>
-		<HelpBox.Body>This alert has its icon hidden.</HelpBox.Body>
-	</HelpBox>
-	<HelpBox showRightIcon>
-		<HelpBox.Body>This alert is showing its icon on both sides.</HelpBox.Body>
-	</HelpBox>
+	<HelpBox showLightBulb handleClose={() => true}>This is an alert with a light bulb.</HelpBox>
+	<HelpBox hideIcon handleClose={() => true}>This alert has its icon hidden.</HelpBox>
+	<HelpBox showRightIcon>This alert is showing its icon on both sides.</HelpBox>
 	<HelpBox stacked handleClose={() => true}>
 		<HelpBox.Body>This alert's contents are stacked.</HelpBox.Body>
 		<HelpBox.Footer><Button primary small>CTA</Button></HelpBox.Footer>
@@ -53,11 +47,7 @@
 
 ```react
 <div>
-	<HelpBox large handleClose={() => true}>
-		<HelpBox.Body>This is a large alert.</HelpBox.Body>
-	</HelpBox>
-	<HelpBox showLightBulb large handleClose={() => true}>
-		<HelpBox.Body>This is a large alert with a light bulb.</HelpBox.Body>
-	</HelpBox>
+	<HelpBox large handleClose={() => true}>This is a large alert.</HelpBox>
+	<HelpBox showLightBulb large handleClose={() => true}>This is a large alert with a light bulb.</HelpBox>
 </div>
 ```
