@@ -7,7 +7,7 @@ state: { selectedDate: null }
 <DatePickerDemo>
 <div>
 <span>The selected date is {dateFunctions.format(state.selectedDate, 'MM-dd-yyyy')}</span>
-	<PopoverManager>
+	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Select Date</Button>
 		</PopoverReference>
@@ -33,7 +33,7 @@ state: { selectedDateRange: null }
 <DatePickerDemo>
 <div>
 	<span>The selected date range is {(state.selectedDateRange ? dateFunctions.format(state.selectedDateRange.start, 'MM-dd-yyyy') : null)} to {(state.selectedDateRange ? dateFunctions.format(state.selectedDateRange.end, 'MM-dd-yyyy') : null)}</span>
-	<PopoverManager>
+	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Select Dates</Button>
 		</PopoverReference>
@@ -60,7 +60,7 @@ state: { selectedDateRange: null }
 <DatePickerDemo>
 <div>
 	<span style={{ marginRight: '8px' }}>The selected date range is {(state.selectedDateRange ? dateFunctions.format(state.selectedDateRange.start, 'MM-dd-yyyy') : null)} to {(state.selectedDateRange ? dateFunctions.format(state.selectedDateRange.end, 'MM-dd-yyyy') : null)}</span>
-	<PopoverManager>
+	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Select Dates</Button>
 		</PopoverReference>
