@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Close, Exclamation, OKCircle, Caret } from '../icons';
+import { Close, Exclamation, CircleCheck, Info } from '../icons';
 import { applyVariations } from '../utils';
 import * as Styled from './styled';
 
@@ -39,9 +39,9 @@ export function HelpBox({
 						{helpBoxProps.danger ? (
 							<Exclamation />
 						) : helpBoxProps.success ? (
-							<OKCircle />
+							<CircleCheck />
 						) : helpBoxProps.minor ? null : (
-							<Caret />
+							<Info />
 						)}
 					</Styled.IconDiv>
 				))}
@@ -56,9 +56,9 @@ export function HelpBox({
 						{helpBoxProps.danger ? (
 							<Exclamation />
 						) : helpBoxProps.success ? (
-							<OKCircle />
+							<CircleCheck />
 						) : helpBoxProps.minor ? null : (
-							<Caret />
+							<Info />
 						)}
 					</Styled.RightIconDiv>
 				))}
