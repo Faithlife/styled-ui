@@ -79,6 +79,7 @@ export const variationMap = {
 						border-color: ${props => props.theme.disabledColor || buttonColors.disabled};
 						background-color: ${props => props.theme.disabledColor || buttonColors.disabled};
 						cursor: default;
+						color: #fff;
 				  `
 				: css`
 						@media (hover: hover) {
@@ -126,30 +127,30 @@ export const variationMap = {
 				  `};
 	`,
 	minor: component => styled(component)`
-		border: 1px solid ${colors.gray14};
-		background: ${colors.gray4};
+		border: 1px solid ${props => props.theme.defaultColor || colors.gray14};
+		background: ${props => props.theme.defaultColor || colors.gray4};
 		color: ${colors.flGray};
 
 		${({ disabled }) =>
 			disabled
 				? css`
-						background-color: #fff;
-						border-color: ${colors.gray8};
+						background-color: ${props => props.theme.disabledColor || `#fff`};
+						border-color: ${props => props.theme.disabledColor || colors.gray8};
 						color: ${colors.gray22};
 						cursor: default;
 				  `
 				: css`
 						@media (hover: hover) {
 							&:hover {
-								background-color: ${colors.gray14};
-								border: 1px solid ${colors.gray14};
+								background-color: ${props => props.theme.hoverColor || colors.gray14};
+								border: 1px solid ${props => props.theme.hoverColor || colors.gray14};
 								color: ${colors.flGray};
 							}
 						}
 
 						&:active {
-							background-color: ${colors.gray22};
-							border: 1px solid ${colors.gray22};
+							background-color: ${props => props.theme.activeColor || colors.gray22};
+							border: 1px solid ${props => props.theme.activeColor || colors.gray22};
 							color: ${colors.flGray};
 						}
 				  `};
@@ -181,24 +182,24 @@ export const variationMap = {
 	minorTransparent: component => styled(component)`
 		border: 1px solid transparent;
 		background: none;
-		color: ${colors.flGray};
+		color: ${props => props.theme.defaultColor || colors.flGray};
 		padding: 0;
 
 		${({ disabled }) =>
 			disabled
 				? css`
-						color: ${colors.gray22};
+						color: ${props => props.theme.disabledColor || colors.gray22};
 						cursor: default;
 				  `
 				: css`
 						@media (hover: hover) {
 							&:hover {
-								color: ${colors.blueBase};
+								color: ${props => props.theme.hoverColor || colors.blueBase};
 							}
 						}
 
 						&:active {
-							color: ${colors.blueLight};
+							color: ${props => props.theme.activeColor || colors.blueLight};
 						}
 				  `};
 	`,
