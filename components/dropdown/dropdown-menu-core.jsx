@@ -31,13 +31,15 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 		focusableChildList,
 	);
 
+	const focusedIndex = focusableChildList.indexOf(focusedMenuItem);
+
 	useEffect(() => {
-		if (focusedMenuItem === 'last' || focusedMenuItem < 0) {
+		if (focusedMenuItem === 'last' || focusedIndex < 0) {
 			setFocusedMenuItem(focusableChildList[focusableChildList.length - 1]);
-		} else if (focusedMenuItem === 'first' || focusedMenuItem > focusableChildList.length - 1) {
+		} else if (focusedMenuItem === 'first' || focusedIndex > focusableChildList.length - 1) {
 			setFocusedMenuItem(focusableChildList[0]);
 		}
-	}, [focusedMenuItem, focusableChildList, setFocusedMenuItem]);
+	}, [focusedMenuItem, focusedIndex, focusableChildList, setFocusedMenuItem]);
 
 	return (
 		<div id={menuId} {...ariaProps}>
