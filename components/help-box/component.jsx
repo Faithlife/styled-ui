@@ -45,7 +45,7 @@ export function HelpBox({
 						)}
 					</Styled.IconDiv>
 				))}
-			{children}
+			<Styled.HelpBoxContent>{children}</Styled.HelpBoxContent>
 			{(handleClose && (
 				<Styled.CloseButton onClick={handleClose}>
 					<Close />
@@ -98,8 +98,6 @@ HelpBox.propTypes = {
 	/** If not handled, there will be no close icon. */
 	handleClose: PropTypes.func,
 };
-
-HelpBox.Content = Styled.HelpBoxContent;
 
 HelpBox.Body = Styled.HelpBoxBody;
 
