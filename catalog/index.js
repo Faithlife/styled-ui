@@ -338,6 +338,7 @@ const components = [
 				content: pageLoader(() => import('./help-box/variations.md')),
 				imports: {
 					HelpBox,
+					Button,
 				},
 			},
 			{
