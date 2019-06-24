@@ -73,7 +73,7 @@ showSource: true
 ```
 
 - `small` -- this is the default size for web applications.
-- `medium` -- this is the default size for marketing web pages.
+- `medium` -- this is the default size for mobile applications and marketing web pages.
 - `large` -- for extra-special calls to action, used sparingly.
 
 ### Relative Emphasis
