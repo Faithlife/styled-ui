@@ -19,7 +19,6 @@ export const ButtonContentWrapper = styled.div.attrs({ tabIndex: '-1' })`
 
 	white-space: nowrap;
 	min-height: fit-content;
-	font-size: ${props => props.styleOverrides.fontSize || '16px'};
 	width: ${props => props.styleOverrides.width};
 	padding: ${props => props.styleOverrides.padding};
 
@@ -46,6 +45,7 @@ const Anchor = css`
 export const Button = styled.button`
 	${resetStyles};
 
+	font-size: ${styleOverrides => styleOverrides.fontSize || '16px'};
 	box-shadow: none;
 	border-radius: 3px;
 	cursor: pointer;

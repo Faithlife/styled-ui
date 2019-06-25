@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { filterChildProps, forwardClassRef } from '../utils';
 import { BaseButton } from './base-button';
 import { baseButtonProps } from './button-utils';
-import * as Styled from './styled';
 
 /** Standard button with transition styles */
 export const Button = forwardClassRef(
@@ -25,11 +24,7 @@ export const Button = forwardClassRef(
 				this.props,
 				baseButtonProps,
 			);
-			return (
-				<Styled.Button ref={forwardedRef} disabled={disabled} {...buttonProps}>
-					<BaseButton disabled={disabled} {...baseProps} />
-				</Styled.Button>
-			);
+			return <BaseButton disabled={disabled} ref={forwardedRef} {...buttonProps} {...baseProps} />;
 		}
 	},
 );

@@ -10,15 +10,17 @@ export function BaseButton(props) {
 	const { children, theme, styleOverrides, icon, ...buttonProps } = props;
 
 	const { component: MappedStyledComponent, filteredProps } = applyVariations(
-		Styled.ButtonContentWrapper,
+		Styled.Button,
 		Styled.variationMap,
 		buttonProps,
 	);
 
 	return (
 		<MappedStyledComponent theme={theme} {...filteredProps || {}} styleOverrides={styleOverrides}>
-			{icon}
-			{children && <Styled.ButtonContents>{children}</Styled.ButtonContents>}
+			<Styled.ButtonContentWrapper {...filteredProps || {}} styleOverrides={styleOverrides}>
+				{icon}
+				{children && <Styled.ButtonContents>{children}</Styled.ButtonContents>}
+			</Styled.ButtonContentWrapper>
 		</MappedStyledComponent>
 	);
 }
