@@ -7,7 +7,15 @@ import { buttonProps } from './button-utils';
 /** Standard button with transition styles */
 export function AnchorButton(props) {
 	const [{ disabled, ...anchorProps }, baseProps] = filterChildProps(props, buttonProps);
-	return <Button disabled={disabled} as="a" {...baseProps} {...anchorProps} />;
+	let makeDisabled = null;
+	if (disabled) {
+		makeDisabled = e => {
+			e.preventDefault();
+		};
+	}
+	return (
+		<Button disabled={disabled} onClick={makeDisabled} as="a" {...baseProps} {...anchorProps} />
+	);
 }
 
 AnchorButton.propTypes = {
