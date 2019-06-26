@@ -7,7 +7,7 @@ export function BaseButton(props) {
 	// To make sure that BaseButton and the Button/AnchorButton components get the right props we export an object with the expected props for the BaseButton
 	// The Button/AnchorButtons should get all props that are not explicity required by the child
 	// eslint-disable-next-line react/prop-types
-	const { children, theme, styleOverrides, icon, ...buttonProps } = props;
+	const { children, theme, styleOverrides, icon, as, ...buttonProps } = props;
 
 	const { component: MappedStyledComponent, filteredProps } = applyVariations(
 		Styled.Button,
@@ -16,7 +16,12 @@ export function BaseButton(props) {
 	);
 
 	return (
-		<MappedStyledComponent theme={theme} {...filteredProps || {}} styleOverrides={styleOverrides}>
+		<MappedStyledComponent
+			as={as}
+			theme={theme}
+			{...filteredProps || {}}
+			styleOverrides={styleOverrides}
+		>
 			<Styled.ButtonContentWrapper {...filteredProps || {}} styleOverrides={styleOverrides}>
 				{icon}
 				{children}
