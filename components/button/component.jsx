@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { applyVariations } from '../utils';
 import * as Styled from './styled';
 
-export function Button(props) {
+const Button = React.forwardRef(function Button(props, ref) {
 	// To make sure that Button and the AnchorButton components get the right props we export an object with the expected props for the Button
 	// The AnchorButton should get all props that are not explicity required by the child
 	// eslint-disable-next-line react/prop-types
@@ -17,6 +17,7 @@ export function Button(props) {
 
 	return (
 		<MappedStyledComponent
+			ref={ref}
 			as={as}
 			theme={theme}
 			{...filteredProps || {}}
@@ -28,7 +29,7 @@ export function Button(props) {
 			</Styled.ButtonContentWrapper>
 		</MappedStyledComponent>
 	);
-}
+});
 
 Button.propTypes = {
 	/** The contents of the button (can be text, svg, or other element) */
@@ -72,3 +73,5 @@ Button.propTypes = {
 Button.defaultProps = {
 	styleOverrides: {},
 };
+
+export { Button };
