@@ -15,12 +15,11 @@ export const ButtonContentWrapper = styled.div.attrs({ tabIndex: '-1' })`
 	grid-column-gap: 6px;
 	align-items: center;
 	justify-content: ${props => props.styleOverrides.justifyContent || 'center'};
+	padding: ${props => props.styleOverrides.padding || Button.padding};
+	font-size: ${props => props.styleOverrides.fontSize || '16px'};
 	border-radius: 3px;
-
 	white-space: nowrap;
 	min-height: fit-content;
-	width: ${props => props.styleOverrides.width};
-	padding: ${props => props.styleOverrides.padding};
 
 	&:focus {
 		outline: none;
@@ -41,7 +40,7 @@ const Anchor = css`
 export const Button = styled.button`
 	${resetStyles};
 
-	font-size: ${styleOverrides => styleOverrides.fontSize || '16px'};
+	width: ${props => props.styleOverrides.width};
 	box-shadow: none;
 	border-radius: 3px;
 	cursor: pointer;
@@ -50,7 +49,6 @@ export const Button = styled.button`
 	padding: 0;
 	border: none;
 	outline: none;
-
 	transition: box-shadow 0.25s ease 0s;
 
 	&:focus {
