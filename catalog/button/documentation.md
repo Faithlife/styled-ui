@@ -3,7 +3,7 @@ This documentation is automatically generated from jsdoc comments.
 ```react
 noSource: true
 ---
-<DocgenTable component={BaseButton} displayName="Shared between Button and AnchorButton" />
+<DocgenTable component={Button} displayName="Shared between Button and AnchorButton" />
 ```
 
 ```react
