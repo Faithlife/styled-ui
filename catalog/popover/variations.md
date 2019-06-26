@@ -126,6 +126,7 @@ state: { isOpen: false }
 ## Tooltip
 
 All props for normal popovers are available to tooltips.
+Tooltips will be hidden on mobile.
 
 ```react
 showSource: true

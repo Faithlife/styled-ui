@@ -17,7 +17,12 @@ export class Tooltip extends Component {
 
 	state = {
 		tooltipIsOpen: false,
+		isOnMobile: false,
 	};
+
+	componentDidMount() {
+		this.setState({ isOnMobile: window.matchMedia('(max-width: 576px)').matches });
+	}
 
 	componentWillUnmount() {
 		this.handleMouseLeave.cancel();
@@ -42,6 +47,7 @@ export class Tooltip extends Component {
 		return (
 			<PopoverManager>
 				<PopoverReference
+					style={{ display: this.state.isOnMobile && 'none' }}
 					onMouseEnter={this.handleMouseEnter}
 					onMouseLeave={this.handleMouseLeave}
 					onClick={this.hideTooltip}
