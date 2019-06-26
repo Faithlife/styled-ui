@@ -32,10 +32,6 @@ export const ButtonContentWrapper = styled.div.attrs({ tabIndex: '-1' })`
 	}
 `;
 
-export const ButtonContents = styled.div`
-	white-space: nowrap;
-`;
-
 const Anchor = css`
 	align-items: center;
 	text-decoration: none;

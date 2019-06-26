@@ -19,7 +19,7 @@ export function BaseButton(props) {
 		<MappedStyledComponent theme={theme} {...filteredProps || {}} styleOverrides={styleOverrides}>
 			<Styled.ButtonContentWrapper {...filteredProps || {}} styleOverrides={styleOverrides}>
 				{icon}
-				{children && <Styled.ButtonContents>{children}</Styled.ButtonContents>}
+				{children}
 			</Styled.ButtonContentWrapper>
 		</MappedStyledComponent>
 	);
