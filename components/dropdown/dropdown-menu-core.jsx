@@ -51,7 +51,9 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 				{...popoverProps}
 			>
 				<Styled.DropdownMenuContent onKeyDown={handleKeyboardNav}>
-					{React.Children.map(children, (child, index) => React.cloneElement(child, { index }))}
+					{React.Children.map(children, (child, index) =>
+						React.isValidElement(child) ? React.cloneElement(child, { index }) : null,
+					)}
 				</Styled.DropdownMenuContent>
 			</Popover>
 		</div>
