@@ -15,7 +15,7 @@
 		"eslint": "eslint ./components ./catalog --ext .js --ext .jsx",
 		"test": "npm run build && npm run unit-test && npm run eslint && npm run stylelint",
 		"precommit": "prettier --write \"./components/**/*.{js,jsx}\" && npm run stylelint",
-		"build": "rimraf dist && webpack",
+		"build": "rimraf dist && webpack --mode=none",
 		"prepublishOnly": "npm test",
 		"stylelint": "stylelint ./components/**/*.jsx",
 		"unit-test": "cross-env NODE_ENV=test mocha -t 30000 -r @babel/register ./tests/**/*.js",
