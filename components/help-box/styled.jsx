@@ -42,7 +42,7 @@ export const HelpBox = variantCreator(
 
 		width: ${props => (props.large ? '42px' : '24px')};
 		height: ${props => (props.large ? '42px' : '24px')};
-		margin: ${props => (props.large ? '31px 0px 0px 24px' : '12px 0px 0px 16px')};
+		margin: 12px 0px 0px 16px;
 	}
 
 	${HelpBoxContent} {
@@ -55,7 +55,7 @@ export const HelpBox = variantCreator(
 		color: ${colors.flGray};
 
 		height: ${props => (props.large ? '230px' : '')};
-		padding: ${props => (props.large ? '32px 0px 32px 19px' : '14px 0px 14px 12px')};
+		padding: 14px 0px 14px 12px;
 
 		flex-direction: ${props => (props.stacked ? 'column' : 'row')};
 		@media (max-width: ${mediaSizes.phone}) {
