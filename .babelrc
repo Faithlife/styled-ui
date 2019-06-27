@@ -1,14 +1,12 @@
 {
 	"presets": [
-		"react",
+		"@babel/preset-react",
 		[
-			"env",
+			"@babel/preset-env",
 			{
-				"modules": false,
-				"targets": { "browsers": [">1%", "not op_mini all"] }
+				"modules": false
 			}
-		],
-		"stage-0"
+		]
 	],
 	"plugins": [
 		[
@@ -18,11 +16,24 @@
 			}
 		],
 		"react-docgen",
-		"babel-plugin-transform-flow-strip-types"
+		"babel-plugin-transform-flow-strip-types",
+		"@babel/plugin-proposal-class-properties",
+		"@babel/plugin-syntax-dynamic-import"
 	],
 	"env": {
 		"test": {
-			"presets": ["react", "env", "stage-0"]
+			"presets": ["@babel/preset-react", "@babel/preset-env"],
+			"plugins": [
+				[
+					"babel-plugin-styled-components",
+					{
+						"ssr": true
+					}
+				],
+				"babel-plugin-transform-flow-strip-types",
+				"@babel/plugin-proposal-class-properties",
+				"@babel/plugin-syntax-dynamic-import"
+			]
 		}
 	}
 }

@@ -18,7 +18,7 @@
 		"build": "rimraf dist && webpack",
 		"prepublishOnly": "npm test",
 		"stylelint": "stylelint ./components/**/*.jsx",
-		"unit-test": "cross-env NODE_ENV=test mocha -t 30000 -r babel-core/register ./tests/**/*.js",
+		"unit-test": "cross-env NODE_ENV=test mocha -t 30000 -r @babel/register ./tests/**/*.js",
 		"catalog-start": "catalog start",
 		"catalog-build": "catalog build --public-url /styled-ui",
 		"catalog-build-netlify": "npm run prepublishOnly && catalog build"
@@ -50,22 +50,25 @@
 		"reactstrap": "^6.1.0"
 	},
 	"devDependencies": {
+		"@babel/core": "^7.4.5",
+		"@babel/plugin-proposal-class-properties": "^7.4.4",
+		"@babel/plugin-syntax-dynamic-import": "^7.2.0",
+		"@babel/preset-env": "^7.4.5",
+		"@babel/preset-react": "^7.0.0",
+		"@babel/register": "^7.4.4",
 		"@storybook/storybook-deployer": "^2.3.0",
 		"ag-grid": "^18.0.1",
 		"ag-grid-enterprise": "^18.1.0",
 		"ag-grid-react": "^18.0.0",
 		"assert": "^1.4.1",
 		"autoprefixer": "^8.2.0",
-		"babel-core": "^6.26.0",
-		"babel-eslint": "^8.2.2",
-		"babel-loader": "^7.1.5",
-		"babel-plugin-add-module-exports": "^0.2.1",
-		"babel-plugin-react-docgen": "^1.9.0",
-		"babel-plugin-styled-components": "^1.10.0",
+		"babel-core": "^7.0.0-bridge.0",
+		"babel-eslint": "^10.0.2",
+		"babel-loader": "^8.0.6",
+		"babel-plugin-add-module-exports": "^1.0.2",
+		"babel-plugin-react-docgen": "^3.1.0",
+		"babel-plugin-styled-components": "^1.10.2",
 		"babel-plugin-transform-flow-strip-types": "^6.22.0",
-		"babel-preset-env": "^1.6.1",
-		"babel-preset-react": "^6.24.1",
-		"babel-preset-stage-0": "^6.24.1",
 		"babel-runtime": "^6.26.0",
 		"bootstrap": "^4.1.1",
 		"catalog": "^3.5.4",
@@ -100,5 +103,8 @@
 		"webpack": "^4.15.1",
 		"webpack-cli": "^3.0.8",
 		"webpack-node-externals": "^1.7.2"
+	},
+	"resolutions": {
+		"babel-core": "7.0.0-bridge.0"
 	}
 }
