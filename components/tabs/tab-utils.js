@@ -29,7 +29,7 @@ export function useKeyboardNav(selectedIndex, onSelectTab, children) {
 	const handleKeyboardNav = useCallback(
 		event => {
 			const enabledTabIndexes = React.Children.map(currentChildren.current, (child, index) =>
-				child.props.disabled ? null : index,
+				!child || child.props.disabled ? null : index,
 			).filter(index => index !== null);
 			const currentEnabledIndex = enabledTabIndexes.indexOf(selectedIndex);
 

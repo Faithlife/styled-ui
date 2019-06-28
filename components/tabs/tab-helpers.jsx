@@ -12,13 +12,15 @@ export function TabList({ children }) {
 	return (
 		<Styled.TabList onKeyDown={handleKeyboardNav}>
 			{React.Children.map(children, (child, index) =>
-				React.cloneElement(child, {
-					selected: selectedTabIndex === index,
-					onSelectTab,
-					index,
-					theme,
-					panelId: panelIdsMap[index],
-				}),
+				React.isValidElement(child)
+					? React.cloneElement(child, {
+							selected: selectedTabIndex === index,
+							onSelectTab,
+							index,
+							theme,
+							panelId: panelIdsMap[index],
+					  })
+					: null,
 			)}
 		</Styled.TabList>
 	);
@@ -33,12 +35,14 @@ export function TabPanels({ children }) {
 	return (
 		<div>
 			{React.Children.map(children, (child, index) =>
-				React.cloneElement(child, {
-					registerPanelId,
-					unRegisterPanelId,
-					index,
-					selected: selectedTabIndex === index,
-				}),
+				React.isValidElement(child)
+					? React.cloneElement(child, {
+							registerPanelId,
+							unRegisterPanelId,
+							index,
+							selected: selectedTabIndex === index,
+					  })
+					: null,
 			)}
 		</div>
 	);

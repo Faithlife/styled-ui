@@ -51,7 +51,7 @@ export function useKeyboardActivate(onToggleMenu, setSelectedItem) {
 
 export function getFocusableChildrenList(children) {
 	return React.Children.map(children, (child, index) =>
-		!child.type.isFocusableMenuChild ? null : index,
+		!child || !child.type.isFocusableMenuChild ? null : index,
 	).filter(index => index !== null);
 }
 

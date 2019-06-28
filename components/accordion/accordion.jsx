@@ -49,7 +49,9 @@ export function Accordion({ children, expandedSections, hideArrows, onExpansion,
 	return (
 		<Styled.Accordion onKeyDown={handleKeyboardNav}>
 			<AccordionContextProvider value={context}>
-				{React.Children.map(children, (child, index) => React.cloneElement(child, { index }))}
+				{React.Children.map(children, (child, index) =>
+					React.isValidElement(child) ? React.cloneElement(child, { index }) : null,
+				)}
 			</AccordionContextProvider>
 		</Styled.Accordion>
 	);
