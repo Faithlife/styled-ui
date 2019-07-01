@@ -1,4 +1,3 @@
-export { BootstrapContainer, wrapBootstrap } from './bootstrap-container';
 export { forwardClassRef } from './forwardref-wrapper';
 export {
 	TransitionStatuses,

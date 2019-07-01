@@ -21,6 +21,7 @@
 - Open a pull request via the Github Web UI to request review
 
 ### How to publish
+
 - Update VersionHistory.md
 - Run `yarn version`. Please follow semver when bumping the version.
 - Push your changes to master
@@ -39,6 +40,6 @@ This project addresses problems introduced by creating components from scratch. 
 - Components should have a prose description and live demo of different component states (using real data)
 - UI components are accompanied by documentation to show how the component should be used within a real app. The UI components should rely on a parent component to contain state, however in some cases local state may be used to handle UI-specific concerns (such the location of a popup or visibility)
 - Semantic versioning / version history updates when making releases
-- Third-party components, such as `ag-grid` or `bootstrap`, will have their stylesheet re-exported with the Faithlife styles applied (preferably via sass variables and no styles that require an opinionated CSS reset)
+- Third-party components, such as `ag-grid` will have their stylesheet re-exported with the Faithlife styles applied (preferably via sass variables and no styles that require an opinionated CSS reset)
   - Customizations should be done via sass variables if possible, instead of hacky css overrides
   - If an opinionated CSS reset is required, the CSS reset styles should be scoped to a div that this library controls (for example, look at how bootstrap is imported). This is required so that other styles on the page won't break when styled-ui is imported.

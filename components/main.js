@@ -5,7 +5,6 @@
 
 export { Accordion } from './accordion';
 export { AnchorButton } from './button/anchor-button';
-export { Bootstrap } from './bootstrap';
 export { Button } from './button';
 export { Checkbox } from './check-box';
 export { Collapse } from './collapse';

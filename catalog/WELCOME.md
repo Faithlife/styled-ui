@@ -3,14 +3,13 @@ This is where the magic happens.
 ## How to use
 
 1. Make sure a `.npmrc` file is present in your repo, which should contain something like: `@faithlife:registry=http://npm.faithlife.io`
-1. Run `yarn add @faithlife/styled-ui styled-components@4`.  **Make sure to add styled-ui as a peer dependency to your project if you are hosting it within Faithlife.com (see below)**.
+1. Run `yarn add @faithlife/styled-ui styled-components@4`. **Make sure to add styled-ui as a peer dependency to your project if you are hosting it within Faithlife.com (see below)**.
 1. Use [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals) so your bundle does not include styled-ui directly
 1. Ship it!
 
 ## Guidelines for use
-Use the className prop to control margins, font appearance, etc on an imported component. Prefer not to add style hacks that override the contents of the component (such as a style that uses a pseudo selector to display additional content), since the underlying styles could change in a future version update. If you need this level of customization, copy the component and styles into your own project and continue on from there.
 
-If you're using the included Bootstrap components, you can use the [spacing utilities](https://getbootstrap.com/docs/4.1/utilities/spacing/) in the className prop.
+Use the className prop to control margins, font appearance, etc on an imported component. Prefer not to add style hacks that override the contents of the component (such as a style that uses a pseudo selector to display additional content), since the underlying styles could change in a future version update. If you need this level of customization, copy the component and styles into your own project and continue on from there.
 
 ## How to contribute
 
