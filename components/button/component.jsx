@@ -68,6 +68,8 @@ Button.propTypes = {
 	minorTransparent: PropTypes.bool,
 	/** Enables rendering a display: flex span, needed for rendering SVG icons */
 	icon: PropTypes.node,
+	/** This should only be used as a last resort if Theme and StyleOverrides will not do what you need */
+	className: PropTypes.string,
 };
 
 Button.defaultProps = {
