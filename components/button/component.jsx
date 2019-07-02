@@ -23,7 +23,7 @@ const Button = React.forwardRef(function Button(props, ref) {
 			{...filteredProps || {}}
 			styleOverrides={styleOverrides}
 		>
-			<Styled.ButtonContentWrapper {...filteredProps || {}} styleOverrides={styleOverrides}>
+			<Styled.ButtonContentWrapper styleOverrides={styleOverrides}>
 				{icon}
 				{children}
 			</Styled.ButtonContentWrapper>
