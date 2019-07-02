@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
-import { mediaSizes } from '../shared-styles';
 import { Popover } from './component';
 import { PopoverManager, PopoverReference } from './popper-helpers';
 
@@ -21,7 +20,7 @@ export function Tooltip(props) {
 	}, 200);
 
 	useEffect(() => {
-		setIsOnMobile(window.matchMedia(`(max-width: ${mediaSizes.tablet})`).matches);
+		setIsOnMobile(window.matchMedia('(hover: none)').matches);
 		return () => {
 			handleMouseLeave.cancel();
 		};
