@@ -27,10 +27,11 @@ export function Tooltip(props) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	return (
+	return isOnMobile ? (
+		children
+	) : (
 		<PopoverManager>
 			<PopoverReference
-				style={{ display: isOnMobile && 'none' }}
 				onMouseEnter={handleMouseEnter}
 				onMouseLeave={handleMouseLeave}
 				onClick={() => setToolTipIsOpen(false)}
