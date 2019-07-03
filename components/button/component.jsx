@@ -22,11 +22,10 @@ const Button = React.forwardRef(function Button(props, ref) {
 			theme={theme}
 			{...filteredProps || {}}
 			styleOverrides={styleOverrides}
+			hasChildren={!!children}
 		>
-			<Styled.ButtonContentWrapper styleOverrides={styleOverrides}>
-				{icon}
-				{children}
-			</Styled.ButtonContentWrapper>
+			{icon}
+			{children}
 		</MappedStyledComponent>
 	);
 });

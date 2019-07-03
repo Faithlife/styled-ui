@@ -9,28 +9,6 @@ const buttonColors = {
 	disabled: '#bedcf2',
 };
 
-export const ButtonContentWrapper = styled.div.attrs({ tabIndex: '-1' })`
-	display: grid;
-	grid-auto-flow: column;
-	grid-column-gap: 6px;
-	align-items: center;
-	justify-content: ${props => props.styleOverrides.justifyContent || 'center'};
-	padding: ${props => props.styleOverrides.padding || Button.padding};
-	font-size: ${props => props.styleOverrides.fontSize || '16px'};
-	border-radius: 3px;
-	white-space: nowrap;
-	min-height: fit-content;
-
-	&:focus {
-		outline: none;
-	}
-
-	> svg {
-		height: 1em;
-		width: 1em;
-	}
-`;
-
 const Anchor = css`
 	align-items: center;
 	text-decoration: none;
@@ -40,16 +18,19 @@ const Anchor = css`
 export const Button = styled.button`
 	${resetStyles};
 
+	justify-content: ${props => props.styleOverrides.justifyContent || 'center'};
+	padding: ${props => props.styleOverrides.padding || Button.padding};
+	font-size: ${props => props.styleOverrides.fontSize || '16px'};
 	width: ${props => props.styleOverrides.width};
 	box-shadow: none;
 	border-radius: 3px;
 	cursor: pointer;
-	display: inline-block;
+	display: inline-flex;
 	background-color: transparent;
-	padding: 0;
 	border: none;
-	outline: none;
 	transition: box-shadow 0.25s ease 0s;
+	white-space: nowrap;
+	align-items: center;
 
 	&:focus {
 		&:not(:active) {
@@ -63,18 +44,14 @@ export const Button = styled.button`
 
 export const variationMap = {
 	primary: component => styled(component)`
-		${ButtonContentWrapper} {
 			border: 1px solid ${props => props.theme.defaultColor || buttonColors.default};
-		}
 		background-color: ${props => props.theme.defaultColor || buttonColors.default};
 		color: #fff;
 
 		${({ disabled }) =>
 			disabled
 				? css`
-						${ButtonContentWrapper} {
 							border-color: ${props => props.theme.disabledColor || buttonColors.disabled};
-						}
 						background-color: ${props => props.theme.disabledColor || buttonColors.disabled};
 						cursor: default;
 						color: #fff;
@@ -82,36 +59,28 @@ export const variationMap = {
 				: css`
 						@media (hover: hover) {
 							&:hover {
-								${ButtonContentWrapper} {
 									border-color: ${props => props.theme.hoverColor || buttonColors.hover};
-								}
 								background-color: ${props => props.theme.hoverColor || buttonColors.hover};
 								color: #fff;
 							}
 						}
 
 						&:active {
-							${ButtonContentWrapper} {
 								border-color: ${props => props.theme.activeColor || buttonColors.active};
-							}
 							background-color: ${props => props.theme.activeColor || buttonColors.active};
 							color: #fff;
 						}
 				  `};
 	`,
 	primaryOutline: component => styled(component)`
-		${ButtonContentWrapper} {
 			border: 1px solid ${props => props.theme.defaultColor || buttonColors.default};
-		}
 		background: none;
 		color: ${props => props.theme.defaultColor || buttonColors.default};
 
 		${({ disabled }) =>
 			disabled
 				? css`
-						${ButtonContentWrapper} {
 							border-color: ${props => props.theme.disabledColor || buttonColors.disabled};
-						}
 						background: none;
 						color: ${props => props.theme.disabledColor || buttonColors.disabled};
 						cursor: default;
@@ -119,36 +88,28 @@ export const variationMap = {
 				: css`
 						@media (hover: hover) {
 							&:hover {
-								${ButtonContentWrapper} {
 									border-color: ${props => props.theme.hoverColor || buttonColors.hover};
-								}
 								background-color: ${props => props.theme.hoverColor || buttonColors.hover};
 								color: #fff;
 							}
 						}
 
 						&:active {
-							${ButtonContentWrapper} {
 								border-color: ${props => props.theme.activeColor || buttonColors.active};
-							}
 							background-color: ${props => props.theme.activeColor || buttonColors.active};
 							color: #fff;
 						}
 				  `};
 	`,
 	minor: component => styled(component)`
-		${ButtonContentWrapper} {
 			border: 1px solid ${props => props.theme.defaultColor || colors.gray14};
-		}
 		background: ${props => props.theme.defaultColor || colors.gray4};
 		color: ${colors.flGray};
 
 		${({ disabled }) =>
 			disabled
 				? css`
-						${ButtonContentWrapper} {
 							border-color: ${props => props.theme.disabledColor || colors.gray8};
-						}
 						background-color: ${props => props.theme.disabledColor || `#fff`};
 						color: ${colors.gray22};
 						cursor: default;
@@ -156,27 +117,21 @@ export const variationMap = {
 				: css`
 						@media (hover: hover) {
 							&:hover {
-								${ButtonContentWrapper} {
 									border: 1px solid ${props => props.theme.hoverColor || colors.gray14};
-								}
 								background-color: ${props => props.theme.hoverColor || colors.gray14};
 								color: ${colors.flGray};
 							}
 						}
 
 						&:active {
-							${ButtonContentWrapper} {
 								border: 1px solid ${props => props.theme.activeColor || colors.gray22};
-							}
 							background-color: ${props => props.theme.activeColor || colors.gray22};
 							color: ${colors.flGray};
 						}
 				  `};
 	`,
 	primaryTransparent: component => styled(component)`
-		${ButtonContentWrapper} {
 			border: 1px solid transparent;
-		}
 		background: none;
 		color: ${props => props.theme.defaultColor || buttonColors.default};
 		padding: 0;
@@ -200,9 +155,7 @@ export const variationMap = {
 				  `};
 	`,
 	minorTransparent: component => styled(component)`
-		${ButtonContentWrapper} {
 			border: 1px solid transparent;
-		}
 		background: none;
 		color: ${props => props.theme.defaultColor || colors.flGray};
 		padding: 0;
@@ -226,22 +179,16 @@ export const variationMap = {
 				  `};
 	`,
 	small: component => styled(component)`
-		${ButtonContentWrapper} {
 			height: 32px;
 			padding: 0 ${props => (props.condensed ? '7px' : '9px')};
-		}
 	`,
 	medium: component => styled(component)`
-		${ButtonContentWrapper} {
 			height: 40px;
 			padding: 0 ${props => (props.condensed ? '11px' : '15px')};
-		}
 	`,
 	large: component => styled(component)`
-		${ButtonContentWrapper} {
 			height: 56px;
 			padding: 0 ${props => (props.condensed ? '15px' : '23px')};
 			font-size: 24px;
-		}
 	`,
 };
