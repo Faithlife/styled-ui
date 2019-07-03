@@ -37,6 +37,7 @@
 	},
 	"dependencies": {
 		"clipboard": "^2.0.1",
+		"focus-visible": "^5.0.1",
 		"lodash.debounce": "^4.0.8",
 		"lodash.throttle": "^4.1.1",
 		"memoize-one": "^5.0.0",
