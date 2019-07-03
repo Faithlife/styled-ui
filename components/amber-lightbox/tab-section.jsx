@@ -3,15 +3,30 @@ import React, { useRef, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './styled';
 
-export function TabSection({ vaultId, filter, viewStyle, onFileSelected }) {
+export function TabSection({
+	vaultId,
+	filter,
+	viewStyle,
+	onFileSelected,
+	allowMultiSelect,
+	onCancel,
+}) {
 	const onMessageRef = useRef();
 
 	const onMessage = useCallback(
 		event => {
-			if (event.data) {
-				const data = JSON.parse(event.data);
-				if (data && data.type === 'assets') {
-					onFileSelected(data.assets[0]);
+			console.log(event.data);
+
+			if (event.data && typeof event.data === 'string') {
+				console.log('event data is ', event.data);
+				const parsedEvent = JSON.parse(event.data);
+				// const data = JSON.parse(event.data);
+				if (parsedEvent.canceled) {
+					console.log('oncancel');
+					onCancel();
+				} else if (parsedEvent.assets) {
+					console.log('assets');
+					onFileSelected(parsedEvent.assets);
 				}
 			}
 		},
@@ -35,7 +50,7 @@ export function TabSection({ vaultId, filter, viewStyle, onFileSelected }) {
 					url: '/embed/',
 					container: amberRef.current,
 					groupId: vaultId,
-					multiSelect: false,
+					multiSelect: allowMultiSelect,
 					viewStyle,
 					filter,
 				});
@@ -57,4 +72,6 @@ TabSection.propTypes = {
 	filter: PropTypes.string,
 	viewStyle: PropTypes.string,
 	onFileSelected: PropTypes.func.isRequired,
+	allowMultiSelect: PropTypes.bool,
+	onCancel: PropTypes.func.isRequired,
 };
