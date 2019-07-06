@@ -801,7 +801,7 @@ const components = [
 					Label: styled.span`
 						margin-right: 8px;
 					`,
-					DownArrow: styled.img.attrs({ src: DownArrow })``,
+					DownArrow: styled.img.attrs(props => ({ src: DownArrow }))``,
 				},
 			},
 			{

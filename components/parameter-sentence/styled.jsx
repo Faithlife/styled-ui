@@ -51,7 +51,7 @@ export const Button = styled.button`
 	}
 `;
 
-export const ButtonContent = styled.div.attrs({ tabIndex: '-1' })`
+export const ButtonContent = styled.div.attrs(_ => ({ tabIndex: '-1' }))`
 	${selectStyling};
 `;
 
@@ -77,10 +77,10 @@ export const InputContainer = styled.div`
 	}
 `;
 
-export const ParameterSentence = styled.form.attrs({
-	role: props => (props.isSearchForm ? 'search' : 'form'),
-	'aria-labelledby': ({ labelledBy }) => labelledBy,
-})`
+export const ParameterSentence = styled.form.attrs(props => ({
+	role: props.isSearchForm ? 'search' : 'form',
+	'aria-labelledby': props.labelledBy,
+}))`
 	/* stylelint-disable no-empty-block https://github.com/stylelint/stylelint/issues/3494 */
 `;
 

@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { resetStyles } from '../utils';
 
-export const Panel = styled.div.attrs({
+export const Panel = styled.div.attrs(props => ({
 	role: 'region',
-	'aria-labelledby': ({ headerId }) => `accordion-header-${headerId}`,
-	id: ({ panelId }) => `accordion-panel-${panelId}`,
-})`
+	'aria-labelledby': `accordion-header-${props.headerId}`,
+	id: `accordion-panel-${props.panelId}`,
+}))`
 	${resetStyles};
 
 	grid-area: panel;

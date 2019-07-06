@@ -11,10 +11,10 @@ export const HeadingWrapper = styled.div`
 		renderCustomIndicator ? '[title] 1fr [indicator] min-content' : '[title] auto [space] 0'};
 `;
 
-export const Heading = styled.header.attrs({
+export const Heading = styled.header.attrs(props => ({
 	role: 'heading',
-	'aria-level': ({ ariaLevel }) => ariaLevel,
-})`
+	'aria-level': props.ariaLevel,
+}))`
 	${resetStyles};
 
 	grid-column: 1 / span 2;
@@ -23,12 +23,12 @@ export const Heading = styled.header.attrs({
 	width: 100%;
 `;
 
-export const Button = styled.button.attrs({
+export const Button = styled.button.attrs(props => ({
 	role: 'button',
-	'aria-expanded': ({ isExpanded }) => isExpanded,
-	'aria-controls': ({ panelId }) => `accordion-panel-${panelId}`,
-	id: ({ headerId }) => `accordion-header-${headerId}`,
-})`
+	'aria-expanded': props.isExpanded,
+	'aria-controls': `accordion-panel-${props.panelId}`,
+	id: `accordion-header-${props.headerId}`,
+}))`
 	${resetStyles};
 
 	padding: 0;

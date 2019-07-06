@@ -129,7 +129,7 @@ export const ReferenceContainer = styled.div`
 	display: inline-block;
 `;
 
-export const FocusCatcher = styled.div.attrs({ tabIndex: '-1' })`
+export const FocusCatcher = styled.div.attrs(_ => ({ tabIndex: '-1' }))`
 	display: inline-block;
 
 	&:focus {

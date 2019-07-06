@@ -9,7 +9,7 @@ const buttonColors = {
 	disabled: '#bedcf2',
 };
 
-export const ButtonContentWrapper = styled.div.attrs({ tabIndex: '-1' })`
+export const ButtonContentWrapper = styled.div.attrs(_ => ({ tabIndex: '-1' }))`
 	display: grid;
 	grid-auto-flow: column;
 	grid-column-gap: 6px;

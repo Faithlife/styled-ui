@@ -39,13 +39,13 @@ const selectedTab = css`
 	border-left: 1px solid ${colors.gray14};
 `;
 
-export const Tab = styled.button.attrs({
+export const Tab = styled.button.attrs(props => ({
 	role: 'tab',
-	'aria-selected': ({ selected }) => selected,
-	'aria-controls': ({ panelId }) => `panel:${panelId}`,
-	'aria-disabled': ({ disabled }) => disabled,
-	tabIndex: ({ selected }) => (selected ? '0' : '-1'),
-})`
+	'aria-selected': props.selected,
+	'aria-controls': `panel:${props.panelId}`,
+	'aria-disabled': props.disabled,
+	tabIndex: props.selected ? '0' : '-1',
+}))`
 	${resetStyles};
 
 	box-shadow: none;
@@ -66,7 +66,7 @@ export const Tab = styled.button.attrs({
 	}
 `;
 
-export const TabContent = styled.span.attrs({ tabIndex: -1 })`
+export const TabContent = styled.span.attrs(_ => ({ tabIndex: -1 }))`
 	border-radius: ${borderRadius};
 	cursor: pointer;
 	white-space: nowrap;
@@ -86,7 +86,7 @@ export const TabContent = styled.span.attrs({ tabIndex: -1 })`
 	${({ selected }) => selected && selectedTab};
 `;
 
-export const TabList = styled.div.attrs({ role: 'tablist' })`
+export const TabList = styled.div.attrs(_ => ({ role: 'tablist' }))`
 	border-bottom: 1px solid ${colors.gray14};
 	display: flex;
 	flex-direction: row;
@@ -96,11 +96,11 @@ export const TabList = styled.div.attrs({ role: 'tablist' })`
 	}
 `;
 
-export const TabPanel = styled.div.attrs({
+export const TabPanel = styled.div.attrs(props => ({
 	role: 'tabpanel',
-	id: ({ panelId }) => `panel:${panelId}`,
-	'aria-expanded': ({ selected }) => selected,
-})`
+	id: `panel:${props.panelId}`,
+	'aria-expanded': props.selected,
+}))`
 	position: relative;
 	padding: ${thickness.eight};
 

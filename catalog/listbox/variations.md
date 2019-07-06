@@ -17,8 +17,8 @@ state: { isOpen: false, selected: 0 }
 	>
 		<ListboxToggle primary medium icon={<DownArrow />} styleOverrides={{width: '100px'}}>{browserList[state.selected]}</ListboxToggle>
 		<ListboxMenu>
-			{browserList.map((name, index) => <ListItem id={index}>{name}</ListItem>)}
-			<ListItem id="ie" disabled>Internet Explorer</ListItem>
+			{browserList.map((name, index) => <ListItem id={index} key={index}>{name}</ListItem>)}
+			<ListItem id="ie" key="ie" disabled>Internet Explorer</ListItem>
 		</ListboxMenu>
 	</Listbox>
 </ListboxDemo>
