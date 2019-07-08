@@ -54,7 +54,7 @@ export class Checkbox extends Component {
 					aria-checked={isChecked}
 					disabled={disabled}
 				>
-					<CheckboxContent isChecked={isChecked} title={title}>
+					<CheckboxContent isChecked={isChecked} title={title} disabled={disabled}>
 						{children}
 					</CheckboxContent>
 				</Styled.CheckboxContainer>

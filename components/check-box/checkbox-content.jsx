@@ -18,4 +18,5 @@ CheckboxContent.propTypes = {
 	children: PropTypes.node,
 	title: PropTypes.string,
 	isChecked: PropTypes.bool,
+	disabled: PropTypes.bool,
 };
