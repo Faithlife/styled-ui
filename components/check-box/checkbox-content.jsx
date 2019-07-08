@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './styled';
 
-export function CheckboxContent({ isChecked, title, children }) {
+export function CheckboxContent({ isChecked, title, children, disabled }) {
 	return (
 		<React.Fragment>
-			<Styled.CheckboxDiv>
+			<Styled.CheckboxDiv disabled={disabled}>
 				<Styled.CheckedIndicator isChecked={isChecked} />
 			</Styled.CheckboxDiv>
 			{title && <Styled.Label>{title}</Styled.Label>}

@@ -10,19 +10,27 @@ export class Radio extends Component {
 		onClick: PropTypes.func.isRequired,
 		title: PropTypes.string,
 		isChecked: PropTypes.bool,
-		theme: PropTypes.object,
+		theme: PropTypes.shape({
+			primary: PropTypes.string,
+			border: PropTypes.string,
+			disabledBackground: PropTypes.string,
+			disabledBorder: PropTypes.string,
+		}),
 		type: PropTypes.string,
 		children: PropTypes.node,
 		/** See the docs for how to override styles properly  */
 		className: PropTypes.string,
 		/** Disables automatic blur */
 		disableAutoBlur: PropTypes.bool,
+		disabled: PropTypes.bool,
 	};
 
 	static defaultProps = {
 		theme: {
 			primary: '#1E91D6',
 			border: '#95908f',
+			disabledBackground: '#ebebeb',
+			disabledBorder: '#c7c7c7',
 		},
 		type: 'button',
 	};
@@ -41,7 +49,7 @@ export class Radio extends Component {
 	componentRef = React.createRef();
 
 	render() {
-		const { onClick, title, isChecked, theme, type, children, className } = this.props;
+		const { onClick, title, isChecked, theme, type, children, className, disabled } = this.props;
 		return (
 			<ThemeProvider theme={theme}>
 				<Styled.RadioContainer
@@ -52,8 +60,9 @@ export class Radio extends Component {
 					className={className}
 					role={'radio'}
 					aria-checked={isChecked}
+					disabled={disabled}
 				>
-					<Styled.RadioDiv>
+					<Styled.RadioDiv disabled={disabled}>
 						<Styled.CheckedIndicator isChecked={isChecked} />
 					</Styled.RadioDiv>
 					{title && <Styled.Label>{title}</Styled.Label>}

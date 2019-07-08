@@ -12,13 +12,19 @@ export class Checkbox extends Component {
 		onMouseUp: PropTypes.func,
 		title: PropTypes.string,
 		isChecked: PropTypes.bool,
-		theme: PropTypes.object,
+		theme: PropTypes.shape({
+			primary: PropTypes.string,
+			border: PropTypes.string,
+			disabledBackground: PropTypes.string,
+			disabledBorder: PropTypes.string,
+		}),
 		type: PropTypes.string,
 		children: PropTypes.node,
 		/** See the docs for how to override styles properly  */
 		className: PropTypes.string,
 		/** Disables automatic blur */
 		disableAutoBlur: PropTypes.bool,
+		disabled: PropTypes.bool,
 	};
 
 	/* eslint-disable react/prop-types */
@@ -35,7 +41,7 @@ export class Checkbox extends Component {
 	componentRef = React.createRef();
 
 	render() {
-		const { onClick, title, isChecked, theme, type, children, className } = this.props;
+		const { onClick, title, isChecked, theme, type, children, className, disabled } = this.props;
 		return (
 			<ThemeProvider theme={theme}>
 				<Styled.CheckboxContainer
@@ -46,6 +52,7 @@ export class Checkbox extends Component {
 					className={className}
 					role={'checkbox'}
 					aria-checked={isChecked}
+					disabled={disabled}
 				>
 					<CheckboxContent isChecked={isChecked} title={title}>
 						{children}
@@ -60,6 +67,8 @@ Checkbox.defaultProps = {
 	theme: {
 		primary: '#1E91D6',
 		border: '#95908f',
+		disabledBackground: '#ebebeb',
+		disabledBorder: '#c7c7c7',
 	},
 	type: 'button',
 };

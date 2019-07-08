@@ -8,6 +8,14 @@ export const RadioDiv = styled.div`
 	width: 14px;
 	height: 14px;
 	background: transparent;
+
+	${props =>
+		props.disabled
+			? `
+		border: solid 1px ${props.theme.disabledBorder};
+		background-color: ${props.theme.disabledBackground};
+	`
+			: ''}
 `;
 
 export const RadioContainer = styled.button`
@@ -22,18 +30,20 @@ export const RadioContainer = styled.button`
 	min-height: 44px;
 	background: transparent;
 
-	&:active {
-		color: buttontext;
-	}
-
-	@media (hover: hover) {
-		&:hover ${RadioDiv} {
-			border: solid 1px ${props => props.theme.primary};
+	&:not(:disabled) {
+		&:active {
+			color: buttontext;
 		}
-	}
-	@media (hover: none) {
-		&:active ${RadioDiv} {
-			border: solid 1px ${props => props.theme.primary};
+
+		@media (hover: hover) {
+			&:hover ${RadioDiv} {
+				border: solid 1px ${props => props.theme.primary};
+			}
+		}
+		@media (hover: none) {
+			&:active ${RadioDiv} {
+				border: solid 1px ${props => props.theme.primary};
+			}
 		}
 	}
 
