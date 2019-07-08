@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import debounce from 'lodash.debounce';
+import { useDebouncedCallback } from '../shared-hooks'; // Copied from react-ui. Import from there when made available.
 import { Popover } from './component';
 import { PopoverManager, PopoverReference } from './popper-helpers';
 
@@ -15,7 +15,7 @@ export function Tooltip(props) {
 		setToolTipIsOpen(true);
 	};
 
-	const handleMouseLeave = debounce(() => {
+	const handleMouseLeave = useDebouncedCallback(() => {
 		setToolTipIsOpen(false);
 	}, 200);
 
