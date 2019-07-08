@@ -19,7 +19,12 @@ const Anchor = css`
 export const Button = styled.button`
 	${resetStyles};
 
-	justify-content: ${props => props.styleOverrides.justifyContent || 'center'};
+	justify-content: ${props =>
+		props.styleOverrides.justifyContent === 'left'
+			? 'flex-start'
+			: props.styleOverrides.justifyContent === 'right'
+			? 'flex-end'
+			: props.styleOverrides.justifyContent || 'center'};
 	padding: ${props => props.styleOverrides.padding || Button.padding};
 	font-size: ${props => props.styleOverrides.fontSize || '16px'};
 	width: ${props => props.styleOverrides.width};
