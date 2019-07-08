@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
+import { colors as sharedColors } from '../shared-styles';
 import { CheckboxContent } from './checkbox-content';
 import * as Styled from './styled';
 
@@ -65,10 +66,10 @@ export class Checkbox extends Component {
 
 Checkbox.defaultProps = {
 	theme: {
-		primary: '#1E91D6',
+		primary: sharedColors.blueBase,
 		border: '#95908f',
-		disabledBackground: '#ebebeb',
-		disabledBorder: '#c7c7c7',
+		disabledBackground: sharedColors.gray8,
+		disabledBorder: sharedColors.gray22,
 	},
 	type: 'button',
 };

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
+import { colors as sharedColors } from '../shared-styles';
 import * as Styled from './styled';
 
 /** Styled radio control (uses a button instead of an input) */
@@ -27,10 +28,10 @@ export class Radio extends Component {
 
 	static defaultProps = {
 		theme: {
-			primary: '#1E91D6',
+			primary: sharedColors.blueBase,
 			border: '#95908f',
-			disabledBackground: '#ebebeb',
-			disabledBorder: '#c7c7c7',
+			disabledBackground: sharedColors.gray8,
+			disabledBorder: sharedColors.gray22,
 		},
 		type: 'button',
 	};
