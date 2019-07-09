@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { SmallCheck } from '../icons';
 import * as Styled from './styled.jsx';
 
 export function Tab(props, { isSequenced }) {
@@ -8,6 +9,7 @@ export function Tab(props, { isSequenced }) {
 	const {
 		children,
 		disabled,
+		completed,
 		styleOverrides,
 		index,
 		selected,
@@ -29,13 +31,16 @@ export function Tab(props, { isSequenced }) {
 
 	if (isSequenced) {
 		return (
-			<Styled.Tab
+			<Styled.SequencedTab
 				disabled={disabled}
 				panelId={panelId || ''}
 				selected={selected}
 				onClick={handleSelectTab}
 			>
-				<Styled.TabContent
+				<Styled.Circle selected={selected} completed={completed}>
+					{completed ? <SmallCheck /> : index + 1}
+				</Styled.Circle>
+				<Styled.SequencedTabContent
 					ref={tabRef}
 					disabled={disabled}
 					theme={theme}
@@ -43,8 +48,8 @@ export function Tab(props, { isSequenced }) {
 					selected={selected}
 				>
 					{typeof children === 'function' ? children({ selected, disabled }) : children}
-				</Styled.TabContent>
-			</Styled.Tab>
+				</Styled.SequencedTabContent>
+			</Styled.SequencedTab>
 		);
 	} else {
 		return (

@@ -10,12 +10,13 @@ export function TabList({ children }, { isSequenced }) {
 	const handleKeyboardNav = useKeyboardNav(selectedTabIndex, onSelectTab, children);
 	if (isSequenced) {
 		return (
-			<Styled.TabList>
+			<Styled.SequencedTabList>
 				{React.Children.map(children, (child, index) =>
 					React.isValidElement(child)
 						? React.cloneElement(child, {
 								selected: selectedTabIndex === index,
 								disabled: selectedTabIndex < index - 1,
+								completed: selectedTabIndex > index,
 								onSelectTab,
 								index,
 								theme,
@@ -23,7 +24,7 @@ export function TabList({ children }, { isSequenced }) {
 						  })
 						: null,
 				)}
-			</Styled.TabList>
+			</Styled.SequencedTabList>
 		);
 	} else {
 		return (

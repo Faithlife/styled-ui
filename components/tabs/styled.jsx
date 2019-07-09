@@ -4,6 +4,7 @@
 import styled, { css } from 'styled-components';
 import { resetStyles } from '../utils';
 import { colors, thickness } from '../shared-styles';
+import { mediaSizes } from '../shared-styles';
 
 const borderRadius = '3px 3px 0 0';
 
@@ -108,4 +109,79 @@ export const TabPanel = styled.div.attrs({
 	}
 
 	${({ selected }) => !selected && 'display: none'};
+`;
+
+export const SequencedTabList = styled.div.attrs(_ => ({ role: 'tablist' }))`
+	display: flex;
+	flex-direction: row;
+`;
+
+export const SequencedTab = styled.button.attrs(props => ({
+	role: 'tab',
+	'aria-selected': props.selected,
+	'aria-controls': `panel:${props.panelId}`,
+	'aria-disabled': props.disabled,
+	tabIndex: props.selected ? '0' : '-1',
+}))`
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	flex-grow: 1;
+	flex-basis: 0;
+	cursor: ${({ disabled }) => disabled || 'pointer'};
+	padding: 0;
+	border: 0;
+	background: ${({ selected }) => (selected ? colors.blueTint : 'white')};
+	height: 54px;
+
+	@media (hover: hover) {
+		&:hover {
+			background: #d5ecfc;
+		}
+	}
+
+	&:focus {
+		outline: none;
+	}
+`;
+
+export const SequencedTabContent = styled.span.attrs(_ => ({ tabIndex: -1 }))`
+	overflow: wrap;
+	min-height: fit-content;
+	display: flex;
+	font-size: 14px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: ${({ selected }) => (selected ? colors.blueBase : colors.gray52)};
+	padding-right: 16px;
+
+	@media (max-width: ${mediaSizes.phone}) {
+		display: none;
+	}
+
+	&:focus {
+		outline: none;
+	}
+`;
+
+export const Circle = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: solid 2px
+		${({ selected, completed }) => (selected || completed ? colors.blueLight : colors.gray34)};
+	border-radius: 50px;
+	width: 24px;
+	min-width: 24px;
+	height: 24px;
+	margin: 0px 8px 0px 14px;
+	font-size: 14px;
+	font-weight: bold;
+	color: ${({ selected }) => (selected ? colors.blueBase : colors.gray52)};
+	background: ${({ completed }) => completed && colors.blueLight};
+
+	@media (max-width: ${mediaSizes.phone}) {
+		margin: 0px;
+	}
 `;
