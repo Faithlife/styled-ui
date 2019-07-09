@@ -735,8 +735,8 @@ const components = [
 				},
 			},
 			{
-				path: '/tabs/sequence-tabs',
-				title: 'Sequence Tabs',
+				path: '/tabs/sequenced-tabs',
+				title: 'Sequenced Tabs',
 				content: pageLoader(() => import('./tabs/sequenced-tabs.md')),
 				imports: {
 					TabManager,
