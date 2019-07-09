@@ -146,7 +146,7 @@ const theme = {
 export { theme, breakpoints, mediaQueries };
 
 function indexed(obj) {
-	return Object.assign({}, obj, Object.values(obj));
+	return Object.assign([], obj, Object.values(obj));
 }
 
 function mapMediaQueries(breakpoints) {
