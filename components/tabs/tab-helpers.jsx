@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useId } from '../shared-hooks';
-import { useTabContext, useKeyboardNav } from './tab-utils';
+import { useTabContext, useKeyboardNav, useSequencedKeyboardNav } from './tab-utils';
 import * as Styled from './styled';
 
 export function TabList({ children }) {
@@ -33,9 +33,9 @@ TabList.propTypes = {
 export function SequencedTabList({ children }) {
 	const { onSelectTab, selectedTabIndex, theme, panelIdsMap } = useTabContext();
 
-	//const handleKeyboardNav = useKeyboardNav(selectedTabIndex, onSelectTab, children);
+	const handleKeyboardNav = useSequencedKeyboardNav(selectedTabIndex, onSelectTab, children);
 	return (
-		<Styled.SequencedTabList>
+		<Styled.SequencedTabList onKeyDown={handleKeyboardNav}>
 			{React.Children.map(children, (child, index) =>
 				React.isValidElement(child)
 					? React.cloneElement(child, {
