@@ -1,17 +1,11 @@
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import { AgGridReact } from 'ag-grid-react';
+import React, { useEffect, useCallback } from 'react';
+import { AgGridReact, AgGridColumn } from 'ag-grid-react';
 import 'ag-grid-enterprise';
 import { CustomHeader } from './table-helpers';
 import * as Styled from './styled';
 
 const rowHeight = 45;
 const headerHeight = rowHeight - 5;
-
-const serverSideDatasource = 'serverSide';
-const clientSideDatasource = 'clientSide';
-
-const rtmString =
-	'See the documentation at https://faithlife.github.io/styled-ui/#/grid/documentation for examples.';
 
 /** A wrapper of ag-grid with some boilerplate code to handle initialization and sorting/ filtering */
 export function BaseTable({
@@ -25,32 +19,18 @@ export function BaseTable({
 	tableRowCount,
 	maxRowsPerPage,
 	children,
-	/** Do not use with data prop */
-	datasource,
-	/** Do not use with datasource prop */
 	data,
 	/** IGridOptions interface from ag-grid */
 	gridOptions,
+	sortModel,
+	updateSortModel,
+	filterText,
 }) {
-	const [datasourceType, setDatasourceType] = useState(null);
-
 	useEffect(() => {
-		if (datasource && data) {
-			console.warn(
-				'You should never have a `datasource` and `data` prop together. If you want to use client side data specify just the `data` prop, otherwise just the `datasource` prop',
-				rtmString,
-			);
-		} else if (!datasource && !data) {
-			console.warn('You must specify either `datasource` or `data` props.', rtmString);
-		} else if (!!datasource !== !!data && !datasourceType) {
-			setDatasourceType(datasource ? serverSideDatasource : clientSideDatasource);
-		} else if (
-			(datasourceType === serverSideDatasource && data) ||
-			(datasourceType === clientSideDatasource && datasource)
-		) {
-			console.warn('You cannot switch datasource types.', rtmString);
+		if (gridApi) {
+			gridApi.setQuickFilter(filterText);
 		}
-	}, [datasource, data, datasourceType]);
+	}, [gridApi, filterText]);
 
 	const handleGridReady = useCallback(
 		({ api, columnApi }) => {
@@ -60,11 +40,14 @@ export function BaseTable({
 
 			api.sizeColumnsToFit();
 
-			/*if (datasourceType === serverSideDatasource) {
-				api.setServerSideDatasource({ getRows: datasource });
-			}*/
+			if (sortModel) {
+				api.setSortModel(sortModel);
+			}
+			if (filterText) {
+				api.setQuickFilter(filterText);
+			}
 		},
-		[datasource, setGridApi, setColumnApi, datasourceType],
+		[setGridApi, setColumnApi, sortModel, filterText],
 	);
 
 	const handleSelectionChanged = useCallback(() => {
@@ -83,19 +66,6 @@ export function BaseTable({
 			{},
 		);
 
-	const headings = headingChildren.map(child => ({
-		headerName: child.props.displayName,
-		field: child.props.fieldName,
-		sortable: child.props.sortable,
-		sort: child.props.defaultSort,
-		cellRenderer: cellComponents[child.props.fieldName],
-		headerComponent: 'customHeader',
-		/* cellClass: classNames(styles.cellStyle, {
-			[styles.cellStyleRightAligned]: child.props.isRightAligned,
-		}), */
-		headerComponentParams: { rightAligned: child.props.isRightAligned },
-	}));
-
 	console.log(cellComponents, data);
 	const largeOnlyColumns = headingChildren
 		.filter(child => child.props.isLargeViewportOnly)
@@ -104,64 +74,67 @@ export function BaseTable({
 	const handleGridResize = useCallback(() => {
 		if (gridApi && columnApi) {
 			if (largeOnlyColumns) {
-				const columns = columnApi.getAllColumns();
+				// const columns = columnApi.getAllColumns();
 				if (isSmallViewport) {
-					const hiddenColumns = columns.filter(({ colDef }) =>
+					/* const hiddenColumns = columns.filter(({ colDef }) =>
 						largeOnlyColumns.includes(colDef.field),
-					);
+					); */
 
-					columnApi.setColumnsVisible(hiddenColumns, false);
+					columnApi.setColumnsVisible(largeOnlyColumns, false);
 				} else {
-					columnApi.setColumnsVisible(columns, true);
+					columnApi.setColumnsVisible(largeOnlyColumns, true);
 				}
 			}
 			gridApi.sizeColumnsToFit();
 		}
 	}, [gridApi, columnApi, isSmallViewport, largeOnlyColumns]);
 
-	/* const handleSortChanged = useCallback(() => {
-		setCurrentPage(0);
-		updateSort();
-	}, []); */
+	const handleSortChanged = useCallback(() => {
+		const newSortModel = gridApi.getSortModel();
+		updateSortModel(newSortModel);
+	}, [updateSortModel, gridApi]);
 
-	const tableConfig = useMemo(
-		() => ({
-			columnDefs: headings,
-			onGridReady: handleGridReady,
-			onGridSizeChanged: handleGridResize,
-			rowSelection: onRowClick ? 'single' : null,
-			onSelectionChanged: handleSelectionChanged,
-			frameworkComponents: { ...cellComponents, customHeader: CustomHeader },
-			headerHeight: headerHeight,
-			rowHeight: rowHeight,
-			pagination: !!maxRowsPerPage,
-			cacheBlockSize: maxRowsPerPage || 2000,
-			paginationPageSize: maxRowsPerPage,
-			rowModelType: datasourceType === serverSideDatasource ? serverSideDatasource : '',
-			onPaginationChanged: onPaginationChanged,
-			maxConcurrentDatasourceRequests: 1,
-			suppressPaginationPanel: true,
-			infiniteInitialRowCount: 1000,
-			...gridOptions,
-		}),
-		[
-			cellComponents,
-			datasourceType,
-			gridOptions,
-			handleGridReady,
-			handleGridResize,
-			handleSelectionChanged,
-			headings,
-			maxRowsPerPage,
-			onPaginationChanged,
-			onRowClick,
-		],
-	);
-
-	const tableHeight = (tableRowCount + 1) * rowHeight + 33;
+	const tableHeight = (data ? data.length + 1 : 1) * rowHeight + 33;
 	return (
 		<Styled.GridContainer className="ag-theme-faithlife" height={tableHeight}>
-			<AgGridReact gridOptions={tableConfig} rowData={data} />
+			<AgGridReact
+				rowData={data}
+				onGridReady={handleGridReady}
+				onGridSizeChanged={handleGridResize}
+				onSortChanged={handleSortChanged}
+				onSelectionChanged={handleSelectionChanged}
+				frameworkComponents={cellComponents}
+				headerHeight={headerHeight}
+				rowHeight={rowHeight}
+				reactNext
+				{...gridOptions}
+			>
+				{headingChildren.map(child => {
+					const {
+						fieldName,
+						displayName,
+						isSortable,
+						cellComponent,
+						sortFunction,
+						isResizable,
+						defaultSort,
+						...columnProps
+					} = child.props;
+					return (
+						<AgGridColumn
+							{...columnProps}
+							key={fieldName}
+							field={fieldName}
+							headerName={displayName}
+							sortable={isSortable}
+							cellRenderer={cellComponent ? fieldName : null}
+							comparator={sortFunction}
+							resizable={isResizable}
+							sort={defaultSort}
+						/>
+					);
+				})}
+			</AgGridReact>
 		</Styled.GridContainer>
 	);
 }
@@ -183,3 +156,29 @@ export function BaseTable({
 	referenceId: PropTypes.string,
 	context: PropTypes.object,
 }; */
+
+BaseTable.defaultProps = {
+	sortModel: {},
+};
+
+/**
+ * 
+ * onGridReady={handleGridReady}
+				onGridSizeChanged={handleGridResize}
+				onSortChanged={handleSortChanged}
+				rowSelection={onRowClick ? 'single' : null}
+				onSelectionChanged={handleSelectionChanged}
+				frameworkComponents={{ ...cellComponents, customHeader: CustomHeader }}
+				headerHeight={headerHeight}
+				rowHeight={rowHeight}
+				pagination={!!maxRowsPerPage}
+				cacheBlockSize={maxRowsPerPage || 2000}
+				paginationPageSize={maxRowsPerPage}
+				onPaginationChanged={onPaginationChanged}
+				maxConcurrentDatasourceRequests={1}
+				suppressPaginationPanel
+				infiniteInitialRowCount={1000}
+				reactNext
+				{...gridOptions}
+				rowData={data}
+ */

@@ -1,30 +1,26 @@
 import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { BaseTable } from './base-table';
-import { useServerSideDatasource } from './table-helpers';
 
 export function InfiniteScrollTable({
 	onRowClick,
-	getAdditionalRows,
 	isLoading,
 	children,
 	isSmallViewport,
-	filter,
 	data,
+	filterText,
+	sortModel,
+	updateSortModel,
 }) {
 	const [gridApi, setGridApi] = useState(null);
 	const [columnApi, setColumnApi] = useState(null);
 
-	const { datasource, rowCount } = useServerSideDatasource({ gridApi, getAdditionalRows, filter });
-
-	const tableRowCount = 1;
-
-	const gridOptions = useMemo(
+	/*const gridOptions = useMemo(
 		() => ({
 			domLayout: 'autoHeight',
 		}),
 		[],
-	);
+	);*/
 
 	return (
 		<BaseTable
@@ -32,19 +28,19 @@ export function InfiniteScrollTable({
 			setGridApi={setGridApi}
 			columnApi={columnApi}
 			setColumnApi={setColumnApi}
-			datasource={datasource}
 			onRowClick={onRowClick}
 			isSmallViewport={isSmallViewport}
-			tableRowCount={tableRowCount}
-			filter={filter}
+			sortModel={sortModel}
 			data={data}
-			gridOptions={gridOptions}
+			updateSortModel={updateSortModel}
+			filterText={filterText}
 		>
 			{children}
 		</BaseTable>
 	);
 }
 
+/*
 InfiniteScrollTable.propTypes = {
 	onRowClick: PropTypes.func,
 	largeOnlyColumns: PropTypes.arrayOf(PropTypes.string),
@@ -55,3 +51,4 @@ InfiniteScrollTable.propTypes = {
 	referenceId: PropTypes.string,
 	context: PropTypes.object,
 };
+*/

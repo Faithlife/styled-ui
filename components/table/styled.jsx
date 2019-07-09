@@ -61,5 +61,5 @@ export const CarretLeftIcon = styled(CarretRight)`
 
 // Base Table
 export const GridContainer = styled.div`
-	/* height: ${({ height }) => height}px; */
+	height: ${({ height }) => height}px;
 `;
