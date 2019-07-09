@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './styled.jsx';
 
-export function Tab(props) {
+export function Tab(props, { isSequenced }) {
 	// PropType linting is diabled so out hidden props can be destuctured along with own consumer props
 	/* eslint-disable react/prop-types */
 	const {
@@ -27,24 +27,45 @@ export function Tab(props) {
 		onSelectTab(index);
 	}, [onSelectTab, index]);
 
-	return (
-		<Styled.Tab
-			disabled={disabled}
-			panelId={panelId || ''}
-			selected={selected}
-			onClick={handleSelectTab}
-		>
-			<Styled.TabContent
-				ref={tabRef}
+	if (isSequenced) {
+		return (
+			<Styled.Tab
 				disabled={disabled}
-				theme={theme}
-				styleOverrides={styleOverrides}
+				panelId={panelId || ''}
 				selected={selected}
+				onClick={handleSelectTab}
 			>
-				{typeof children === 'function' ? children({ selected, disabled }) : children}
-			</Styled.TabContent>
-		</Styled.Tab>
-	);
+				<Styled.TabContent
+					ref={tabRef}
+					disabled={disabled}
+					theme={theme}
+					styleOverrides={styleOverrides}
+					selected={selected}
+				>
+					{typeof children === 'function' ? children({ selected, disabled }) : children}
+				</Styled.TabContent>
+			</Styled.Tab>
+		);
+	} else {
+		return (
+			<Styled.Tab
+				disabled={disabled}
+				panelId={panelId || ''}
+				selected={selected}
+				onClick={handleSelectTab}
+			>
+				<Styled.TabContent
+					ref={tabRef}
+					disabled={disabled}
+					theme={theme}
+					styleOverrides={styleOverrides}
+					selected={selected}
+				>
+					{typeof children === 'function' ? children({ selected, disabled }) : children}
+				</Styled.TabContent>
+			</Styled.Tab>
+		);
+	}
 }
 
 Tab.propTypes = {
@@ -61,3 +82,7 @@ Tab.propTypes = {
 Tab.defaultProps = {
 	styleOverrides: {},
 };
+
+export function SequencedTab(props) {
+	return Tab(props, { isSequenced: true });
+}

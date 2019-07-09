@@ -72,10 +72,9 @@ export const TabContent = styled.span.attrs({ tabIndex: -1 })`
 	white-space: nowrap;
 	min-height: fit-content;
 	display: inline-block;
-	font-size: ${({ styleOverrides }) => styleOverrides.fontSize || thickness.sixteen};
-	width: ${({ styleOverrides }) => styleOverrides.width};
-	padding: ${({ styleOverrides }) =>
-		styleOverrides.padding || `${thickness.eight} ${thickness.sixteen}`};
+	font-size: ${styleOverrides => styleOverrides.fontSize || thickness.sixteen};
+	width: ${styleOverrides => styleOverrides.width};
+	padding: ${styleOverrides => styleOverrides.padding || `${thickness.eight} ${thickness.sixteen}`};
 	background-color: ${({ theme }) => theme.inactiveBackgroundColor || colors.gray4};
 
 	&:focus {

@@ -4,31 +4,54 @@ import { useId } from '../shared-hooks';
 import { useTabContext, useKeyboardNav } from './tab-utils';
 import * as Styled from './styled';
 
-export function TabList({ children }) {
+export function TabList({ children }, { isSequenced }) {
 	const { onSelectTab, selectedTabIndex, theme, panelIdsMap } = useTabContext();
 
 	const handleKeyboardNav = useKeyboardNav(selectedTabIndex, onSelectTab, children);
-
-	return (
-		<Styled.TabList onKeyDown={handleKeyboardNav}>
-			{React.Children.map(children, (child, index) =>
-				React.isValidElement(child)
-					? React.cloneElement(child, {
-							selected: selectedTabIndex === index,
-							onSelectTab,
-							index,
-							theme,
-							panelId: panelIdsMap[index],
-					  })
-					: null,
-			)}
-		</Styled.TabList>
-	);
+	if (isSequenced) {
+		return (
+			<Styled.TabList>
+				{React.Children.map(children, (child, index) =>
+					React.isValidElement(child)
+						? React.cloneElement(child, {
+								selected: selectedTabIndex === index,
+								disabled: selectedTabIndex < index - 1,
+								onSelectTab,
+								index,
+								theme,
+								panelId: panelIdsMap[index],
+						  })
+						: null,
+				)}
+			</Styled.TabList>
+		);
+	} else {
+		return (
+			<Styled.TabList onKeyDown={handleKeyboardNav}>
+				{React.Children.map(children, (child, index) =>
+					React.isValidElement(child)
+						? React.cloneElement(child, {
+								selected: selectedTabIndex === index,
+								disabled: child.props.disabled,
+								onSelectTab,
+								index,
+								theme,
+								panelId: panelIdsMap[index],
+						  })
+						: null,
+				)}
+			</Styled.TabList>
+		);
+	}
 }
 
 TabList.propTypes = {
 	children: PropTypes.node.isRequired,
 };
+
+export function SequencedTabList({ children }) {
+	return TabList({ children }, { isSequenced: true });
+}
 
 export function TabPanels({ children }) {
 	const { selectedTabIndex, registerPanelId, unRegisterPanelId } = useTabContext();

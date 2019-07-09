@@ -23,7 +23,15 @@ export { Radio } from './radio';
 export { SimpleModal } from './simple-modal';
 export { Slider } from './slider';
 export { SimpleToast } from './simple-toast';
-export { TabManager, Tab, TabList, TabPanel, TabPanels } from './tabs';
+export {
+	TabManager,
+	Tab,
+	SequencedTab,
+	TabList,
+	SequencedTabList,
+	TabPanel,
+	TabPanels,
+} from './tabs';
 export {
 	Dropdown,
 	DropdownToggle,
