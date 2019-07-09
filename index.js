@@ -43,5 +43,6 @@ export {
 	ParameterInputBox,
 	ParameterSentence,
 } from './components/parameter-sentence';
+export { InfiniteScrollTable, TableHeading, PaginatedTable } from './components/grid';
 
 export { theme } from './theme';

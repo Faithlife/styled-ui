@@ -15,8 +15,6 @@ export function BaseTable({
 	setColumnApi,
 	onRowClick,
 	isSmallViewport,
-	onPaginationChanged,
-	tableRowCount,
 	maxRowsPerPage,
 	children,
 	data,
@@ -25,6 +23,7 @@ export function BaseTable({
 	sortModel,
 	updateSortModel,
 	filterText,
+	initialPageNumber,
 }) {
 	useEffect(() => {
 		if (gridApi) {
@@ -46,8 +45,11 @@ export function BaseTable({
 			if (filterText) {
 				api.setQuickFilter(filterText);
 			}
+			if (initialPageNumber) {
+				api.goToPage(initialPageNumber);
+			}
 		},
-		[setGridApi, setColumnApi, sortModel, filterText],
+		[setGridApi, setColumnApi, sortModel, filterText, initialPageNumber],
 	);
 
 	const handleSelectionChanged = useCallback(() => {
@@ -90,11 +92,16 @@ export function BaseTable({
 	}, [gridApi, columnApi, isSmallViewport, largeOnlyColumns]);
 
 	const handleSortChanged = useCallback(() => {
-		const newSortModel = gridApi.getSortModel();
-		updateSortModel(newSortModel);
+		if (updateSortModel) {
+			const newSortModel = gridApi.getSortModel();
+			updateSortModel(newSortModel);
+		}
 	}, [updateSortModel, gridApi]);
 
-	const tableHeight = (data ? data.length + 1 : 1) * rowHeight + 33;
+	const rowCount = data ? data.length : 1;
+	const tableHeight =
+		(maxRowsPerPage && maxRowsPerPage < rowCount ? maxRowsPerPage + 1 : rowCount + 1) * rowHeight +
+		33;
 	return (
 		<Styled.GridContainer className="ag-theme-faithlife" height={tableHeight}>
 			<AgGridReact

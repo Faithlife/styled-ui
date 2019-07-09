@@ -49,14 +49,18 @@ import {
 	ParameterSelect,
 	ParameterInputBox,
 	ParameterSentence,
+	InfiniteScrollTable,
+	TableHeading,
+	PaginatedTable,
 } from '../index';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
 import { colors } from '../components/shared-styles';
+import censusData from './grid/2010census.json';
 import { ProductDrawerWithResources } from './product-drawer';
 import { DocgenTable } from './docgen-table';
-import { MemberDirectory, VolunteerScheduling } from './grid';
+import { textInputPages } from './text-input/pages';
 import DownArrow from './svgs/arrow-down.svg';
 
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
@@ -238,7 +242,7 @@ const components = [
 				title: 'Variations',
 				path: '/grid/variations',
 				content: pageLoader(() => import('./grid/variations.md')),
-				imports: { InfiniteScrollTable, TableHeading },
+				imports: { InfiniteScrollTable, TableHeading, PaginatedTable, censusData },
 			},
 			{
 				title: 'Documentation',
