@@ -45,7 +45,7 @@ export const Tab = styled.button.attrs({
 	'aria-selected': ({ selected }) => selected,
 	'aria-controls': ({ panelId }) => `panel:${panelId}`,
 	'aria-disabled': ({ disabled }) => disabled,
-	tabIndex: ({ selected }) => (selected ? '0' : '-1'),
+	tabIndex: ({ selected }) => (selected ? 0 : -1),
 })`
 	${resetStyles};
 
@@ -116,13 +116,7 @@ export const SequencedTabList = styled.div.attrs(_ => ({ role: 'tablist' }))`
 	flex-direction: row;
 `;
 
-export const SequencedTab = styled.button.attrs(props => ({
-	role: 'tab',
-	'aria-selected': props.selected,
-	'aria-controls': `panel:${props.panelId}`,
-	'aria-disabled': props.disabled,
-	tabIndex: props.selected ? '0' : '-1',
-}))`
+export const SequencedTab = styled(Tab)`
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -130,8 +124,6 @@ export const SequencedTab = styled.button.attrs(props => ({
 	flex-grow: 1;
 	flex-basis: 0;
 	cursor: ${({ disabled }) => disabled || 'pointer'};
-	padding: 0;
-	border: 0;
 	background: ${({ selected }) => (selected ? colors.blueTint : 'white')};
 	height: 54px;
 
@@ -139,10 +131,6 @@ export const SequencedTab = styled.button.attrs(props => ({
 		&:hover {
 			background: #d5ecfc;
 		}
-	}
-
-	&:focus {
-		outline: none;
 	}
 `;
 
