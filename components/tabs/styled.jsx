@@ -149,15 +149,15 @@ export const SequencedTab = styled.button.attrs(props => ({
 export const SequencedTabContent = styled.span.attrs(_ => ({ tabIndex: -1 }))`
 	overflow: wrap;
 	min-height: fit-content;
-	display: flex;
+	display: none;
 	font-size: 14px;
 	font-weight: 600;
 	text-transform: uppercase;
 	color: ${({ selected }) => (selected ? colors.blueBase : colors.gray52)};
 	padding-right: 16px;
 
-	@media (max-width: ${mediaSizes.phone}) {
-		display: none;
+	@media (min-width: ${mediaSizes.phone}) {
+		display: flex;
 	}
 
 	&:focus {
@@ -175,13 +175,13 @@ export const Circle = styled.div`
 	width: 24px;
 	min-width: 24px;
 	height: 24px;
-	margin: 0px 8px 0px 14px;
+	margin: 0px;
 	font-size: 14px;
 	font-weight: bold;
 	color: ${({ selected }) => (selected ? colors.blueBase : colors.gray52)};
 	background: ${({ completed }) => completed && colors.blueLight};
 
-	@media (max-width: ${mediaSizes.phone}) {
-		margin: 0px;
+	@media (min-width: ${mediaSizes.phone}) {
+		margin: 0px 8px 0px 14px;
 	}
 `;
