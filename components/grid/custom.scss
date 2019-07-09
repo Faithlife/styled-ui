@@ -139,3 +139,11 @@ $params: (
       border: 1px solid #ccc;
   }
 }
+
+.ag-cell {
+  border: none !important;
+}
+
+.ag-cell-right-aligned {
+  text-align: right;
+}

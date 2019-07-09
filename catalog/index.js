@@ -238,7 +238,7 @@ const components = [
 				title: 'Variations',
 				path: '/grid/variations',
 				content: pageLoader(() => import('./grid/variations.md')),
-				imports: { MemberDirectory, VolunteerScheduling },
+				imports: { InfiniteScrollTable, TableHeading },
 			},
 			{
 				title: 'Documentation',
