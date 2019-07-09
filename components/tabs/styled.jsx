@@ -141,7 +141,8 @@ export const SequencedTabContent = styled.span.attrs(_ => ({ tabIndex: -1 }))`
 	font-size: 14px;
 	font-weight: 600;
 	text-transform: uppercase;
-	color: ${({ selected }) => (selected ? colors.blueBase : colors.gray52)};
+	color: ${({ selected, disabled }) =>
+		selected ? colors.blueBase : disabled ? colors.gray22 : colors.gray52};
 	padding-right: 16px;
 
 	@media (min-width: ${mediaSizes.phone}) {
@@ -158,7 +159,8 @@ export const Circle = styled.div`
 	justify-content: center;
 	align-items: center;
 	border: solid 2px
-		${({ selected, completed }) => (selected || completed ? colors.blueLight : colors.gray34)};
+		${({ selected, completed, disabled }) =>
+			selected || completed ? colors.blueLight : disabled ? colors.gray14 : colors.gray34};
 	border-radius: 50px;
 	width: 24px;
 	min-width: 24px;
@@ -166,7 +168,8 @@ export const Circle = styled.div`
 	margin: 0px;
 	font-size: 14px;
 	font-weight: bold;
-	color: ${({ selected }) => (selected ? colors.blueBase : colors.gray52)};
+	color: ${({ selected, disabled }) =>
+		selected ? colors.blueBase : disabled ? colors.gray22 : colors.gray52};
 	background: ${({ completed }) => completed && colors.blueLight};
 
 	@media (min-width: ${mediaSizes.phone}) {

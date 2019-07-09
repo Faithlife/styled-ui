@@ -37,7 +37,7 @@ export function Tab(props, { isSequenced }) {
 				selected={selected}
 				onClick={handleSelectTab}
 			>
-				<Styled.Circle selected={selected} completed={completed}>
+				<Styled.Circle selected={selected} completed={completed} disabled={disabled}>
 					{completed ? <SmallCheck /> : index + 1}
 				</Styled.Circle>
 				<Styled.SequencedTabContent
@@ -91,3 +91,10 @@ Tab.defaultProps = {
 export function SequencedTab(props) {
 	return Tab(props, { isSequenced: true });
 }
+
+SequencedTab.propTypes = {
+	/** The tab's label */
+	children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+	disabled: PropTypes.bool,
+	completed: PropTypes.bool,
+};

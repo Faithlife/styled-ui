@@ -762,6 +762,7 @@ const components = [
 				content: pageLoader(() => import('./tabs/documentation.md')),
 				imports: {
 					Tab,
+					SequencedTab,
 					TabManager,
 					DocgenTable,
 				},
