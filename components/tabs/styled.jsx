@@ -2,6 +2,7 @@
 // Tabs from Reach-Ui were used as a base https://ui.reach.tech/tabs
 
 import styled, { css } from 'styled-components';
+import 'focus-visible';
 import { resetStyles } from '../utils';
 import { colors, thickness } from '../shared-styles';
 import { mediaSizes } from '../shared-styles';
@@ -61,9 +62,19 @@ export const Tab = styled.button.attrs({
 
 	position: relative;
 
-	&:focus {
-		box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
+	&:focus:not(.focus-visible) {
 		outline: none;
+	}
+
+	&.focus-visible {
+		&:not(:active) {
+			box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
+			z-index: 10;
+		}
+	}
+
+	&::-moz-focus-inner {
+		border: 0;
 	}
 `;
 
@@ -126,6 +137,7 @@ export const SequencedTab = styled(Tab)`
 	cursor: ${({ disabled }) => disabled || 'pointer'};
 	background: ${({ selected }) => (selected ? colors.blueTint : 'white')};
 	height: 54px;
+	border-radius: 0;
 
 	@media (hover: hover) {
 		&:hover {
