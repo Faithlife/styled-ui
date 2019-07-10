@@ -1,31 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { filterChildProps, forwardClassRef } from '../utils';
-import { BaseButton } from './base-button';
-import { baseButtonProps } from './button-utils';
-import * as Styled from './styled';
+import { Button } from './component';
 
 /** Standard button with transition styles */
-export const AnchorButton = forwardClassRef(
-	class AnchorButton extends React.Component {
-		static propTypes = {
-			...BaseButton.propTypes,
-			/** The destination the AnchorButton should link to. */
-			href: PropTypes.string,
-			/** This should only be used as a last resort if Theme and StyleOverrides will not do what you need */
-			className: PropTypes.string,
+const AnchorButton = React.forwardRef(function AnchorButton(props, ref) {
+	const { disabled, ...otherProps } = props;
+	let makeDisabled = null;
+	if (disabled) {
+		makeDisabled = e => {
+			e.preventDefault();
 		};
+	}
+	return <Button ref={ref} disabled={disabled} onClick={makeDisabled} as="a" {...otherProps} />;
+});
 
-		render() {
-			const [{ forwardedRef, ...buttonProps }, baseProps] = filterChildProps(
-				this.props,
-				baseButtonProps,
-			);
-			return (
-				<Styled.Button as="a" ref={forwardedRef} {...buttonProps}>
-					<BaseButton {...baseProps} />
-				</Styled.Button>
-			);
-		}
-	},
-);
+AnchorButton.propTypes = {
+	...Button.propTypes,
+	/** The destination the AnchorButton should link to. */
+	href: PropTypes.string,
+	/** This should only be used as a last resort if Theme and StyleOverrides will not do what you need */
+	className: PropTypes.string,
+};
+
+export { AnchorButton };

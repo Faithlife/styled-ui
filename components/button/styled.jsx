@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import 'focus-visible';
 import { colors } from '../shared-styles';
 import { resetStyles } from '../utils';
 
@@ -9,34 +10,6 @@ const buttonColors = {
 	disabled: '#bedcf2',
 };
 
-export const ButtonContentWrapper = styled.div.attrs({ tabIndex: '-1' })`
-	display: grid;
-	grid-auto-flow: column;
-	grid-column-gap: 6px;
-	align-items: center;
-	justify-content: ${props => props.styleOverrides.justifyContent || 'center'};
-	border-radius: 3px;
-
-	white-space: nowrap;
-	min-height: fit-content;
-	font-size: ${props => props.styleOverrides.fontSize || '16px'};
-	width: ${props => props.styleOverrides.width};
-	padding: ${props => props.styleOverrides.padding};
-
-	&:focus {
-		outline: none;
-	}
-
-	> svg {
-		height: 1em;
-		width: 1em;
-	}
-`;
-
-export const ButtonContents = styled.div`
-	white-space: nowrap;
-`;
-
 const Anchor = css`
 	align-items: center;
 	text-decoration: none;
@@ -46,22 +19,43 @@ const Anchor = css`
 export const Button = styled.button`
 	${resetStyles};
 
+	justify-content: ${props =>
+		props.styleOverrides.justifyContent === 'left'
+			? 'flex-start'
+			: props.styleOverrides.justifyContent === 'right'
+			? 'flex-end'
+			: props.styleOverrides.justifyContent || 'center'};
+	padding: ${props => props.styleOverrides.padding || Button.padding};
+	font-size: ${props => props.styleOverrides.fontSize || '16px'};
+	width: ${props => props.styleOverrides.width};
 	box-shadow: none;
 	border-radius: 3px;
 	cursor: pointer;
-	display: inline-block;
+	display: inline-flex;
 	background-color: transparent;
-	padding: 0;
 	border: none;
-	outline: none;
-
 	transition: box-shadow 0.25s ease 0s;
+	white-space: nowrap;
+	align-items: center;
 
-	&:focus {
+	&:focus:not(.focus-visible) {
+		outline: none;
+	}
+
+	&.focus-visible {
 		&:not(:active) {
 			box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
 		}
-		outline: none;
+	}
+
+	&::-moz-focus-inner {
+		border: 0;
+	}
+
+	> svg {
+		height: 1em;
+		width: 1em;
+		margin-right: ${props => (props.hasChildren ? '6px' : '')};
 	}
 
 	${({ as: baseTag }) => baseTag && baseTag === 'a' && Anchor};
@@ -105,23 +99,23 @@ export const variationMap = {
 		${({ disabled }) =>
 			disabled
 				? css`
-						background: none;
 						border-color: ${props => props.theme.disabledColor || buttonColors.disabled};
+						background: none;
 						color: ${props => props.theme.disabledColor || buttonColors.disabled};
 						cursor: default;
 				  `
 				: css`
 						@media (hover: hover) {
 							&:hover {
-								background-color: ${props => props.theme.hoverColor || buttonColors.hover};
 								border-color: ${props => props.theme.hoverColor || buttonColors.hover};
+								background-color: ${props => props.theme.hoverColor || buttonColors.hover};
 								color: #fff;
 							}
 						}
 
 						&:active {
-							background-color: ${props => props.theme.activeColor || buttonColors.active};
 							border-color: ${props => props.theme.activeColor || buttonColors.active};
+							background-color: ${props => props.theme.activeColor || buttonColors.active};
 							color: #fff;
 						}
 				  `};
@@ -134,23 +128,23 @@ export const variationMap = {
 		${({ disabled }) =>
 			disabled
 				? css`
-						background-color: ${props => props.theme.disabledColor || `#fff`};
 						border-color: ${props => props.theme.disabledColor || colors.gray8};
+						background-color: ${props => props.theme.disabledColor || `#fff`};
 						color: ${colors.gray22};
 						cursor: default;
 				  `
 				: css`
 						@media (hover: hover) {
 							&:hover {
-								background-color: ${props => props.theme.hoverColor || colors.gray14};
 								border: 1px solid ${props => props.theme.hoverColor || colors.gray14};
+								background-color: ${props => props.theme.hoverColor || colors.gray14};
 								color: ${colors.flGray};
 							}
 						}
 
 						&:active {
-							background-color: ${props => props.theme.activeColor || colors.gray22};
 							border: 1px solid ${props => props.theme.activeColor || colors.gray22};
+							background-color: ${props => props.theme.activeColor || colors.gray22};
 							color: ${colors.flGray};
 						}
 				  `};
