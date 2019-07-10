@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useId } from '../shared-hooks';
 import { useTabContext, useKeyboardNav, useSequencedKeyboardNav } from './tab-utils';
@@ -32,6 +32,15 @@ TabList.propTypes = {
 export function SequencedTabList({ children }) {
 	const { onSelectTab, selectedTabIndex, theme, panelIdsMap } = useTabContext();
 
+	const [touchedTabs, setTouchedTabs] = useState(new Set());
+
+	useEffect(() => {
+		const newTouchedTabs = touchedTabs;
+		newTouchedTabs.add(selectedTabIndex);
+		setTouchedTabs(new Set(newTouchedTabs));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedTabIndex]);
+
 	const handleKeyboardNav = useSequencedKeyboardNav(selectedTabIndex, onSelectTab, children);
 	return (
 		<Styled.SequencedTabList onKeyDown={handleKeyboardNav}>
@@ -39,10 +48,14 @@ export function SequencedTabList({ children }) {
 				React.isValidElement(child)
 					? React.cloneElement(child, {
 							selected: selectedTabIndex === index,
-							disabled: child.props.disabled || selectedTabIndex < index - 1,
-							completed: child.props.disabled
-								? false
-								: child.props.completed || selectedTabIndex > index,
+							disabled:
+								!touchedTabs.has(index) && (child.props.disabled || selectedTabIndex < index - 1),
+							completed:
+								selectedTabIndex !== index &&
+								(touchedTabs.has(index) ||
+									(child.props.disabled
+										? false
+										: child.props.completed || selectedTabIndex > index)),
 							onSelectTab,
 							index,
 							theme,
