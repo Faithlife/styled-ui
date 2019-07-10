@@ -174,7 +174,7 @@ export const Circle = styled.div`
 	border: solid 2px
 		${({ selected, completed, disabled }) =>
 			selected || completed ? colors.blueLight : disabled ? colors.gray14 : colors.gray34};
-	border-radius: 50px;
+	border-radius: 50%;
 	width: 24px;
 	min-width: 24px;
 	height: 24px;
