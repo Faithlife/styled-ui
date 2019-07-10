@@ -122,7 +122,7 @@ export const TabPanel = styled.div.attrs({
 	${({ selected }) => !selected && 'display: none'};
 `;
 
-export const SequencedTabList = styled.div.attrs(_ => ({ role: 'tablist' }))`
+export const SequencedTabList = styled.div.attrs(() => ({ role: 'tablist' }))`
 	display: flex;
 	flex-direction: row;
 `;
@@ -134,7 +134,7 @@ export const SequencedTab = styled(Tab)`
 	align-items: center;
 	flex-grow: 1;
 	flex-basis: 0;
-	cursor: ${({ disabled }) => disabled || 'pointer'};
+	cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 	background: ${({ selected }) => (selected ? colors.blueTint : 'white')};
 	height: 54px;
 	border-radius: 0;
@@ -146,7 +146,7 @@ export const SequencedTab = styled(Tab)`
 	}
 `;
 
-export const SequencedTabContent = styled.span.attrs(_ => ({ tabIndex: -1 }))`
+export const SequencedTabContent = styled.span.attrs(() => ({ tabIndex: -1 }))`
 	overflow: wrap;
 	min-height: fit-content;
 	display: none;
