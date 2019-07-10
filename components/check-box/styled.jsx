@@ -8,6 +8,14 @@ export const CheckboxDiv = styled.div`
 	width: 14px;
 	height: 14px;
 	background: transparent;
+
+	${props =>
+		props.disabled
+			? `
+		border: solid 1px ${props.theme.disabledBorder};
+		background-color: ${props.theme.disabledBackground};
+	`
+			: ''}
 `;
 
 export const CheckboxContainer = styled.button`
@@ -23,18 +31,20 @@ export const CheckboxContainer = styled.button`
 	background: transparent;
 	text-align: unset;
 
-	&:active {
-		color: buttontext;
-	}
-
-	@media (hover: hover) {
-		&:hover ${CheckboxDiv} {
-			border: solid 1px ${props => props.theme.primary};
+	&:not(:disabled) {
+		&:active {
+			color: buttontext;
 		}
-	}
-	@media (hover: none) {
-		&:active ${CheckboxDiv} {
-			border: solid 1px ${props => props.theme.primary};
+
+		@media (hover: hover) {
+			&:hover ${CheckboxDiv} {
+				border: solid 1px ${props => props.theme.primary};
+			}
+		}
+		@media (hover: none) {
+			&:active ${CheckboxDiv} {
+				border: solid 1px ${props => props.theme.primary};
+			}
 		}
 	}
 
@@ -57,6 +67,8 @@ export const CheckedIndicator = styled.div`
 	width: 14px;
 	height: 14px;
 	cursor: pointer;
+
+	${props => (props.disabled ? 'cursor: default;' : '')};
 
 	&:after {
 	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%208%208'%3E%3Cpath%20fill='${props =>
