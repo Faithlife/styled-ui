@@ -14,7 +14,6 @@ export function TabList({ children }) {
 				React.isValidElement(child)
 					? React.cloneElement(child, {
 							selected: selectedTabIndex === index,
-							disabled: child.props.disabled,
 							onSelectTab,
 							index,
 							theme,
