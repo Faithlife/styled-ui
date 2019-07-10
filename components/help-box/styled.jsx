@@ -55,7 +55,7 @@ export const HelpBox = variantCreator(
 		color: ${colors.flGray};
 
 		height: ${props => (props.large ? '230px' : '')};
-		padding: 14px 0px 14px 12px;
+		padding: 14px 16px 14px 12px;
 
 		flex-direction: ${props => (props.stacked ? 'column' : 'row')};
 		@media (max-width: ${mediaSizes.phone}) {
@@ -75,7 +75,7 @@ export const HelpBox = variantCreator(
 			order: 2;
 			align-items: center;
 
-			margin: ${props => (props.stacked ? '12px 16px 0px 0px' : '-7px 16px -7px 0px')};
+			margin: ${props => (props.stacked ? '12px 16px 0px 0px' : '-7px 0px -7px 16px')};
 			@media (max-width: ${mediaSizes.phone}) {
 				margin: 12px 0px 0px 0px;
 			}
