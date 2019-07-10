@@ -34,9 +34,9 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 	const focusedIndex = focusableChildList.indexOf(focusedMenuItem);
 
 	useEffect(() => {
-		if (focusedMenuItem === 'last' || focusedIndex < 0) {
+		if (focusedMenuItem === 'last') {
 			setFocusedMenuItem(focusableChildList[focusableChildList.length - 1]);
-		} else if (focusedMenuItem === 'first' || focusedIndex > focusableChildList.length - 1) {
+		} else if (focusedMenuItem === 'first') {
 			setFocusedMenuItem(focusableChildList[0]);
 		}
 	}, [focusedMenuItem, focusedIndex, focusableChildList, setFocusedMenuItem]);
