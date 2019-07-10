@@ -6,7 +6,7 @@ export function CheckboxContent({ isChecked, title, children, disabled }) {
 	return (
 		<React.Fragment>
 			<Styled.CheckboxDiv disabled={disabled}>
-				<Styled.CheckedIndicator isChecked={isChecked} />
+				<Styled.CheckedIndicator isChecked={isChecked} disabled={disabled} />
 			</Styled.CheckboxDiv>
 			{title && <Styled.Label>{title}</Styled.Label>}
 			{children && <Styled.Label>{children}</Styled.Label>}

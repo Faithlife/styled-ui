@@ -67,6 +67,8 @@ export const CheckedIndicator = styled.div`
 	height: 14px;
 	cursor: pointer;
 
+	${props => (props.disabled ? 'cursor: default;' : '')};
+
 	&:after {
 		background: ${props => props.theme.primary};
 		content: '';

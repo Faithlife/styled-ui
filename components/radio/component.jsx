@@ -64,7 +64,7 @@ export class Radio extends Component {
 					disabled={disabled}
 				>
 					<Styled.RadioDiv disabled={disabled}>
-						<Styled.CheckedIndicator isChecked={isChecked} />
+						<Styled.CheckedIndicator isChecked={isChecked} disabled={disabled} />
 					</Styled.RadioDiv>
 					{title && <Styled.Label>{title}</Styled.Label>}
 					{children && <Styled.Label>{children}</Styled.Label>}

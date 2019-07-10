@@ -49,3 +49,20 @@ state: { isChecked: false }
 	</Checkbox>
 </CheckboxDemo>
 ```
+
+### Disabled state
+
+```react
+showSource: true
+state: { isChecked: false }
+---
+<CheckboxDemo>
+	<Checkbox
+		onClick={() => setState({ isChecked: !state.isChecked })}
+		isChecked={state.isChecked}
+		title={'Click me'}
+		type="button"
+		disabled
+	/>
+</CheckboxDemo>
+```

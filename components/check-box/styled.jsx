@@ -68,6 +68,8 @@ export const CheckedIndicator = styled.div`
 	height: 14px;
 	cursor: pointer;
 
+	${props => (props.disabled ? 'cursor: default;' : '')};
+
 	&:after {
 	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%208%208'%3E%3Cpath%20fill='${props =>
 		encodeURIComponent(
