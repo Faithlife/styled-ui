@@ -49,9 +49,9 @@ import {
 	ParameterSelect,
 	ParameterInputBox,
 	ParameterSentence,
-	InfiniteScrollTable,
 	TableHeading,
 	PaginatedTable,
+	SimpleTable,
 } from '../index';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
@@ -242,7 +242,7 @@ const components = [
 				title: 'Variations',
 				path: '/grid/variations',
 				content: pageLoader(() => import('./grid/variations.md')),
-				imports: { InfiniteScrollTable, TableHeading, PaginatedTable, censusData },
+				imports: { TableHeading, PaginatedTable, SimpleTable, censusData },
 			},
 			{
 				title: 'Documentation',

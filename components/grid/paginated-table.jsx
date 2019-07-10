@@ -1,11 +1,11 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import { useTableState } from './table-helpers';
 import { BaseTable } from './base-table';
 
 export function PaginatedTable({
 	onRowClick,
 	maxRowsPerPage,
-	isLoading,
 	children,
 	isSmallViewport,
 	filterText,
@@ -15,8 +15,7 @@ export function PaginatedTable({
 	setCurrentPageNumber,
 	data,
 }) {
-	const [gridApi, setGridApi] = useState(null);
-	const [columnApi, setColumnApi] = useState(null);
+	const { gridApi, setGridApi, columnApi, setColumnApi } = useTableState();
 
 	const handlePaginationChanged = useCallback(() => {
 		if (setCurrentPageNumber) {
@@ -55,6 +54,7 @@ export function PaginatedTable({
 	);
 }
 
+/*
 PaginatedTable.propTypes = {
 	headings: PropTypes.arrayOf(
 		PropTypes.shape({
@@ -72,3 +72,4 @@ PaginatedTable.propTypes = {
 	referenceId: PropTypes.string,
 	context: PropTypes.object,
 };
+*/

@@ -34,4 +34,4 @@ export {
 } from './dropdown';
 export { Listbox, ListboxToggle, ListboxMenu, ListItem } from './listbox';
 export { ParameterSelect, ParameterInputBox, ParameterSentence } from './parameter-sentence';
-export { InfiniteScrollTable, PaginatedTable, TableHeading } from './table';
+export { PaginatedTable, TableHeading, SimpleTable } from './grid';

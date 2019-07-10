@@ -1,8 +1,8 @@
 import React, { useEffect, useCallback } from 'react';
 import { AgGridReact, AgGridColumn } from 'ag-grid-react';
-import 'ag-grid-enterprise';
-import { CustomHeader } from './table-helpers';
 import * as Styled from './styled';
+
+import './custom.scss';
 
 const rowHeight = 45;
 const headerHeight = rowHeight - 5;
@@ -33,7 +33,6 @@ export function BaseTable({
 
 	const handleGridReady = useCallback(
 		({ api, columnApi }) => {
-			console.log('init');
 			setGridApi(api);
 			setColumnApi(columnApi);
 
@@ -68,7 +67,6 @@ export function BaseTable({
 			{},
 		);
 
-	console.log(cellComponents, data);
 	const largeOnlyColumns = headingChildren
 		.filter(child => child.props.isLargeViewportOnly)
 		.map(child => child.fieldName);
@@ -101,7 +99,7 @@ export function BaseTable({
 	const rowCount = data ? data.length : 1;
 	const tableHeight =
 		(maxRowsPerPage && maxRowsPerPage < rowCount ? maxRowsPerPage + 1 : rowCount + 1) * rowHeight +
-		33;
+		25;
 	return (
 		<Styled.GridContainer className="ag-theme-faithlife" height={tableHeight}>
 			<AgGridReact
