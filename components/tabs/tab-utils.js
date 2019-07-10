@@ -35,7 +35,6 @@ export function useKeyboardNav(selectedIndex, onSelectTab, children) {
 
 			switch (event.key) {
 				case handledKeys.arrowRight: {
-					// const nextEnabledIndex = (currentEnabledIndex + 1) % enabledTabIndexes.length;
 					const nextEnabledIndex =
 						currentEnabledIndex === enabledTabIndexes.length - 1
 							? currentEnabledIndex
@@ -44,8 +43,6 @@ export function useKeyboardNav(selectedIndex, onSelectTab, children) {
 					break;
 				}
 				case handledKeys.arrowLeft: {
-					// const nextEnabledIndex =
-					// 	(currentEnabledIndex - 1 + enabledTabIndexes.length) % enabledTabIndexes.length;
 					const nextEnabledIndex =
 						currentEnabledIndex === 0 ? currentEnabledIndex : currentEnabledIndex - 1;
 					onSelectTab(enabledTabIndexes[nextEnabledIndex]);
