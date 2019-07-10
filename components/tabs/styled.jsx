@@ -80,7 +80,7 @@ export const Tab = styled.button.attrs({
 
 export const TabContent = styled.span.attrs({ tabIndex: -1 })`
 	border-radius: ${borderRadius};
-	cursor: pointer;
+	cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 	white-space: nowrap;
 	min-height: fit-content;
 	display: inline-block;
