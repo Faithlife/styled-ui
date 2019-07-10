@@ -2,8 +2,6 @@ import React, { useEffect, useCallback } from 'react';
 import { AgGridReact, AgGridColumn } from 'ag-grid-react';
 import * as Styled from './styled';
 
-import './custom.scss';
-
 const rowHeight = 45;
 const headerHeight = rowHeight - 5;
 
