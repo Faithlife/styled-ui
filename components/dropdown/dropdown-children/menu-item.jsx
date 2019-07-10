@@ -12,22 +12,22 @@ export function MenuItem(props) {
 		shouldKeepOpenOnClick,
 		disabled,
 		// eslint-disable-next-line react/prop-types
-		index,
+		isSelected,
 		...ariaProps
 	} = props;
 
-	const { handleCloseMenu, focusedMenuItem, theme, styleOverrides } = useDropdownContext();
+	const { handleCloseMenu, theme, styleOverrides } = useDropdownContext();
 	const ref = useRef();
-	const selected = focusedMenuItem === index;
 
 	useEffect(() => {
-		if (selected && ref.current) {
-			ref.current.focus();
+		if (isSelected && ref.current) {
+			// We need to defer the focus so that we are sure the parent is mounted and added as an inbounds element for the focusAwayHandler
+			setTimeout(() => ref.current.focus(), 0);
 			if (onFocus) {
 				onFocus();
 			}
 		}
-	}, [onFocus, selected]);
+	}, [onFocus, isSelected]);
 
 	const handleClick = useCallback(() => {
 		if (!disabled) {
@@ -55,7 +55,7 @@ export function MenuItem(props) {
 			{...(!disabled ? {} : { as: 'div' })}
 		>
 			<Styled.MenuItemContent isDisabled={disabled} theme={theme} styleOverrides={styleOverrides}>
-				{typeof children === 'function' ? children({ selected, disabled }) : children}
+				{typeof children === 'function' ? children({ selected: isSelected, disabled }) : children}
 			</Styled.MenuItemContent>
 		</Styled.MenuItem>
 	);

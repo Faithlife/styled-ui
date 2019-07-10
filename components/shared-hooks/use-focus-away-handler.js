@@ -8,7 +8,7 @@ export function useFocusAwayHandler(onFocusAwayCallback) {
 
 	const onBlur = useCallback(
 		event => {
-			const inboundsElementsList = Object.values(inboundsElements.map);
+			const inboundsElementsList = Object.values(inboundsElements.map).filter(ref => !!ref.current);
 			if (targetRef.current || inboundsElementsList.length > 0) {
 				const relatedTarget =
 					event.relatedTarget || event.explicitOriginalTarget || document.activeElement;
@@ -65,7 +65,7 @@ export function useAddInboundsElement(addInboundsElement, removeInboundsElement)
 		// There is no reason to return a cleanup function if an event listener is not created
 		// eslint-disable-next-line consistent-return
 		() => {
-			if (id && targetRef.current) {
+			if (id) {
 				addInboundsElement(id, targetRef);
 
 				return () => {
