@@ -4,7 +4,7 @@ import { SmallCheck } from '../icons';
 import * as Styled from './styled.jsx';
 
 export function Tab(props) {
-	// PropType linting is diabled so out hidden props can be destuctured along with own consumer props
+	// PropType linting is diabled so our hidden props can be destuctured along with own consumer props
 	/* eslint-disable react/prop-types */
 	const {
 		children,
@@ -64,7 +64,7 @@ Tab.defaultProps = {
 };
 
 export function SequencedTab(props) {
-	// PropType linting is diabled so out hidden props can be destuctured along with own consumer props
+	// PropType linting is diabled so our hidden props can be destuctured along with own consumer props
 	/* eslint-disable react/prop-types */
 	const {
 		children,
