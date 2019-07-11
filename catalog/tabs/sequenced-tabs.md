@@ -2,7 +2,6 @@
 
 ```react
 showSource: true
-state: { currentTab: 0 }
 ---
 <TabDemo>
 	<TabManager>
@@ -17,29 +16,13 @@ state: { currentTab: 0 }
 </TabDemo>
 ```
 
-```react
-showSource: true
-state: { currentTab: 0 }
----
-<TabDemo>
-	<TabManager>
-		<SequencedTabList>
-			<SequencedTab>First Tab</SequencedTab>
-			<SequencedTab>Second Tab</SequencedTab>
-			<SequencedTab>Third Tab</SequencedTab>
-		</SequencedTabList>
-	</TabManager>
-</TabDemo>
-```
-
 ### With Associated Tab Content
 
 ```react
 showSource: true
-state: { currentTab: 0 }
 ---
 <TabDemo>
-	<TabManager selectedTab={state.currentTab} onSelectedTabChange={tabIndex => setState({ currentTab: tabIndex })}>
+	<TabManager>
 		<SequencedTabList>
 			<SequencedTab>First Tab</SequencedTab>
 			<SequencedTab>Second Tab</SequencedTab>
@@ -55,11 +38,25 @@ state: { currentTab: 0 }
 			<TabPanel>Fifth Tab!</TabPanel>
 		</TabPanels>
 	</TabManager>
-	<Button disabled={state.currentTab === 0} primary medium onClick={() => setState({ currentTab: state.currentTab - 1 })}>
-		Back
-	</Button>
-	<Button disabled={state.currentTab === 4} primary medium onClick={() => setState({ currentTab: state.currentTab + 1 })}>
-		Next
-	</Button>
+</TabDemo>
+```
+
+### Using Disabled and Completed Flags
+
+A tab with `completed` set should not be skipped.
+
+```react
+showSource: true
+---
+<TabDemo>
+	<TabManager>
+		<SequencedTabList>
+			<SequencedTab>First Tab</SequencedTab>
+			<SequencedTab>Second Tab</SequencedTab>
+			<SequencedTab disabled>Third Tab</SequencedTab>
+			<SequencedTab completed>Fourth Tab</SequencedTab>
+			<SequencedTab>Fifth Tab</SequencedTab>
+		</SequencedTabList>
+	</TabManager>
 </TabDemo>
 ```
