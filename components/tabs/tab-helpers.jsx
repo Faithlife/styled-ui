@@ -49,7 +49,12 @@ export function SequencedTabList({ children }) {
 					? React.cloneElement(child, {
 							selected: selectedTabIndex === index,
 							disabled:
-								!touchedTabs.has(index) && (child.props.disabled || selectedTabIndex < index - 1),
+								!touchedTabs.has(index) &&
+								(child.props.disabled ||
+									(selectedTabIndex < index - 1 &&
+										!children
+											.slice(selectedTabIndex + 1, index)
+											.every(value => value.props.disabled))),
 							completed:
 								selectedTabIndex !== index &&
 								(touchedTabs.has(index) ||
