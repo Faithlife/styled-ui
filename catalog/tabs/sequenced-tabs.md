@@ -11,7 +11,7 @@ state: { currentTab: 0 }
 			<SequencedTab>Second Tab</SequencedTab>
 			<SequencedTab>Third Tab</SequencedTab>
 			<SequencedTab>Fourth Tab</SequencedTab>
-			<SequencedTab>Fifth Tab is Wrapped</SequencedTab>
+			<SequencedTab>Fifth Tab, Text is Wrapped</SequencedTab>
 		</SequencedTabList>
 	</TabManager>
 </TabDemo>
