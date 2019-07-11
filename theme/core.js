@@ -102,6 +102,7 @@ const fonts = {
 
 const fontWeights = indexed({
 	regular: 400,
+	semibold: 600,
 	bold: 600,
 });
 
