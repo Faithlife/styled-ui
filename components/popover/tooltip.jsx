@@ -1,57 +1,55 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import debounce from 'lodash.debounce';
+import { useDebouncedCallback } from '../shared-hooks'; // Copied from react-ui. Import from there when made available.
 import { Popover } from './component';
 import { PopoverManager, PopoverReference } from './popper-helpers';
 
 /** Simple tooltip that uses popovers internally. Does not support custom positioning. */
-export class Tooltip extends Component {
-	static propTypes = {
-		...Popover.propTypes,
+export function Tooltip(props) {
+	const { children, text, content, isOpen, ...otherProps } = props;
+	const [tooltipIsOpen, setToolTipIsOpen] = useState(false);
+	const [isOnMobile, setIsOnMobile] = useState(false);
 
-		/** Content for the tooltip */
-		content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-		/** Text for the tooltip (deprecated) */
-		text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+	const handleMouseEnter = () => {
+		handleMouseLeave.cancel();
+		setToolTipIsOpen(true);
 	};
 
-	state = {
-		tooltipIsOpen: false,
-	};
-
-	componentWillUnmount() {
-		this.handleMouseLeave.cancel();
-	}
-
-	hideTooltip = () => {
-		this.setState({ tooltipIsOpen: false });
-	};
-
-	handleMouseLeave = debounce(() => {
-		this.setState({ tooltipIsOpen: false });
+	const handleMouseLeave = useDebouncedCallback(() => {
+		setToolTipIsOpen(false);
 	}, 200);
 
-	handleMouseEnter = () => {
-		this.handleMouseLeave.cancel();
-		this.setState({ tooltipIsOpen: true });
-	};
+	useEffect(() => {
+		setIsOnMobile(window.matchMedia('(hover: none)').matches);
+		return () => {
+			handleMouseLeave.cancel();
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
-	render() {
-		const { children, text, content, isOpen, ...otherProps } = this.props;
-		const { tooltipIsOpen } = this.state;
-		return (
-			<PopoverManager>
-				<PopoverReference
-					onMouseEnter={this.handleMouseEnter}
-					onMouseLeave={this.handleMouseLeave}
-					onClick={this.hideTooltip}
-				>
-					{children}
-				</PopoverReference>
-				<Popover {...otherProps} isOpen={tooltipIsOpen || isOpen}>
-					{content || text}
-				</Popover>
-			</PopoverManager>
-		);
-	}
+	return isOnMobile ? (
+		children
+	) : (
+		<PopoverManager>
+			<PopoverReference
+				onMouseEnter={handleMouseEnter}
+				onMouseLeave={handleMouseLeave}
+				onClick={() => setToolTipIsOpen(false)}
+			>
+				{children}
+			</PopoverReference>
+			<Popover {...otherProps} isOpen={tooltipIsOpen || isOpen}>
+				{content || text}
+			</Popover>
+		</PopoverManager>
+	);
 }
+
+Tooltip.propTypes = {
+	...Popover.propTypes,
+
+	/** Content for the tooltip */
+	content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+	/** Text for the tooltip (deprecated) */
+	text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+};

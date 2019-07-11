@@ -1,5 +1,17 @@
 # Changelog
 
+### 5.9.1
+
+- Update dependencies.
+
+### 5.9.0
+
+- Update `HelpBox` styling and expand API to allow for more customization.
+- Log deprecation warnings to the console when using Bootstrap components.
+- Fix `Modal` footer button alignment.
+- Fix keyboard navigation in `Dropdown`.
+- Fix crash in `Accordion` when using `null` content.
+
 ### 5.8.1
 
 - Fix spacing of custom indicators on Accordion components.

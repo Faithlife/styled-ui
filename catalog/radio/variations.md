@@ -49,3 +49,21 @@ state: { isChecked: false }
 	</Radio>
 </RadioDemo>
 ```
+
+### Disabled state
+
+```react
+showSource: true
+state: { isChecked: false }
+---
+<RadioDemo>
+	<Radio
+		onClick={() => setState({ isChecked: !state.isChecked })}
+		isChecked={state.isChecked}
+		title={'You can\'t click me'}
+		type="button"
+		disabled
+	>
+	</Radio>
+</RadioDemo>
+```
