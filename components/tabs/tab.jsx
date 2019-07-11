@@ -116,5 +116,6 @@ SequencedTab.propTypes = {
 	/** The tab's label */
 	children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
 	disabled: PropTypes.bool,
+	/** The user should always be shown this tab even though it's been externally completed. */
 	completed: PropTypes.bool,
 };
