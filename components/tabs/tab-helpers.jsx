@@ -35,7 +35,7 @@ export function SequencedTabList({ children }) {
 	const [touchedTabs, setTouchedTabs] = useState(new Set());
 
 	useEffect(() => {
-		const newTouchedTabs = touchedTabs;
+		const newTouchedTabs = new Set(touchedTabs);
 		newTouchedTabs.add(selectedTabIndex);
 		setTouchedTabs(new Set(newTouchedTabs));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
