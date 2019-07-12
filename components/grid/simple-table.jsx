@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useTableState } from './table-helpers';
 import { BaseTable } from './base-table';
 
@@ -12,7 +11,7 @@ export function SimpleTable({
 	sortModel,
 	updateSortModel,
 	maxRows,
-	rowSelection,
+	rowSelectionType,
 }) {
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useTableState();
 
@@ -28,8 +27,8 @@ export function SimpleTable({
 			data={data}
 			updateSortModel={updateSortModel}
 			filterText={filterText}
-			maxRowsPerPage={maxRows}
-			rowSelection={rowSelection}
+			maxRows={maxRows}
+			rowSelectionType={rowSelectionType}
 		>
 			{children}
 		</BaseTable>
@@ -38,15 +37,6 @@ export function SimpleTable({
 
 SimpleTable.rowSelectionOptions = BaseTable.rowSelectionOptions;
 
-/*
 SimpleTable.propTypes = {
-	onRowClick: PropTypes.func,
-	largeOnlyColumns: PropTypes.arrayOf(PropTypes.string),
-	maxRowsPerPage: PropTypes.number,
-	getAdditionalRows: PropTypes.func,
-	rowMapper: PropTypes.func.isRequired,
-	tableState: PropTypes.object.isRequired,
-	referenceId: PropTypes.string,
-	context: PropTypes.object,
+	...BaseTable.props,
 };
-*/

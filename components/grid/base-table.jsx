@@ -1,11 +1,12 @@
 import React, { useEffect, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { AgGridReact, AgGridColumn } from 'ag-grid-react';
 import 'ag-grid-enterprise';
 import * as Styled from './styled';
 
 const rowHeight = 45;
 const headerHeight = rowHeight - 5;
-const tableHeightPadding = 43;
+const tableHeightPadding = 45;
 
 /** A wrapper of ag-grid with some boilerplate code to handle initialization and sorting/ filtering */
 export function BaseTable({
@@ -15,7 +16,7 @@ export function BaseTable({
 	setColumnApi,
 	onRowClick,
 	isSmallViewport,
-	maxRowsPerPage,
+	maxRows,
 	children,
 	data,
 	/** IGridOptions interface from ag-grid */
@@ -23,14 +24,19 @@ export function BaseTable({
 	sortModel,
 	updateSortModel,
 	filterText,
-	initialPageNumber,
-	rowSelection,
+	rowSelectionType,
 }) {
 	useEffect(() => {
 		if (gridApi) {
 			gridApi.setQuickFilter(filterText);
 		}
 	}, [gridApi, filterText]);
+
+	useEffect(() => {
+		if (gridApi && sortModel) {
+			gridApi.setSortModel(sortModel);
+		}
+	}, [gridApi, sortModel]);
 
 	const handleGridReady = useCallback(
 		({ api, columnApi }) => {
@@ -45,11 +51,8 @@ export function BaseTable({
 			if (filterText) {
 				api.setQuickFilter(filterText);
 			}
-			if (initialPageNumber) {
-				api.goToPage(initialPageNumber);
-			}
 		},
-		[setGridApi, setColumnApi, sortModel, filterText, initialPageNumber],
+		[setGridApi, setColumnApi, sortModel, filterText],
 	);
 
 	const handleSelectionChanged = useCallback(() => {
@@ -62,25 +65,20 @@ export function BaseTable({
 	);
 
 	const cellComponents = headingChildren
-		.filter(child => !!child.props.cellRenderer)
-		.reduce(
-			(components, child) => (components[child.props.fieldName] = child.props.cellComponent),
-			{},
-		);
+		.filter(child => !!child.props.cellComponent)
+		.reduce((components, child) => {
+			components[child.props.fieldName] = child.props.cellComponent;
+			return components;
+		}, {});
 
 	const largeOnlyColumns = headingChildren
 		.filter(child => child.props.isLargeViewportOnly)
-		.map(child => child.fieldName);
+		.map(child => child.props.fieldName);
 
 	const handleGridResize = useCallback(() => {
 		if (gridApi && columnApi) {
 			if (largeOnlyColumns) {
-				// const columns = columnApi.getAllColumns();
 				if (isSmallViewport) {
-					/* const hiddenColumns = columns.filter(({ colDef }) =>
-						largeOnlyColumns.includes(colDef.field),
-					); */
-
 					columnApi.setColumnsVisible(largeOnlyColumns, false);
 				} else {
 					columnApi.setColumnsVisible(largeOnlyColumns, true);
@@ -99,8 +97,7 @@ export function BaseTable({
 
 	const rowCount = data ? data.length : 1;
 	const tableHeight =
-		(maxRowsPerPage && maxRowsPerPage < rowCount ? maxRowsPerPage + 1 : rowCount + 1) * rowHeight +
-		tableHeightPadding;
+		(maxRows && maxRows < rowCount ? maxRows + 1 : rowCount + 1) * rowHeight + tableHeightPadding;
 	return (
 		<Styled.GridContainer className="ag-theme-faithlife" height={tableHeight}>
 			<AgGridReact
@@ -112,7 +109,7 @@ export function BaseTable({
 				rowSelection={
 					!onRowClick
 						? BaseTable.rowSelectionOptions.none
-						: rowSelection || BaseTable.rowSelectionOptions.single
+						: rowSelectionType || BaseTable.rowSelectionOptions.single
 				}
 				frameworkComponents={cellComponents}
 				headerHeight={headerHeight}
@@ -120,6 +117,7 @@ export function BaseTable({
 				suppressHorizontalScroll
 				rowClass={onRowClick ? 'ag-grid-clickable-row' : ''}
 				groupUseEntireRow
+				deltaRowDataMode
 				reactNext
 				{...gridOptions}
 			>
@@ -135,6 +133,7 @@ export function BaseTable({
 						isRightAligned,
 						groupByColumn,
 						hide,
+						isLargeViewportOnly,
 						...columnProps
 					} = child.props;
 					return (
@@ -166,42 +165,21 @@ BaseTable.rowSelectionOptions = {
 	multi: 'multiple',
 };
 
-/* BaseTable.propTypes = {
-	headings: PropTypes.arrayOf(
-		PropTypes.shape({
-			field: PropTypes.string.isRequired,
-			headerName: PropTypes.string.isRequired,
-		})
-	),
-	cellComponents: PropTypes.object,
+BaseTable.propTypes = {
+	isSmallViewport: PropTypes.bool,
+	/** The Max amount of rows to show in the table */
+	maxRows: PropTypes.number,
+	/** An array of the data for the rows */
+	data: PropTypes.array.isRequired,
+	/** The current sort model for the table */
+	sortModel: PropTypes.object,
+	/** Called when `sortModel` is updated by the table */
+	updateSortModel: PropTypes.func,
+	/** Text to filter the rows on */
+	filterText: PropTypes.string,
+	/** Whether to allow single or multi row select */
+	rowSelectionType: PropTypes.oneOf(Object.values(BaseTable.rowSelectionOptions)),
+	/** Handler for selected rows */
 	onRowClick: PropTypes.func,
-	largeOnlyColumns: PropTypes.arrayOf(PropTypes.string),
-	maxRowsPerPage: PropTypes.number,
-	getAdditionalRows: PropTypes.func,
-	rowMapper: PropTypes.func.isRequired,
-	tableState: PropTypes.object.isRequired,
-	referenceId: PropTypes.string,
-	context: PropTypes.object,
-}; */
-
-/**
- * 
- * onGridReady={handleGridReady}
-				onGridSizeChanged={handleGridResize}
-				onSortChanged={handleSortChanged}
-				rowSelection={onRowClick ? 'single' : null}
-				onSelectionChanged={handleSelectionChanged}
-				frameworkComponents={{ ...cellComponents, customHeader: CustomHeader }}
-				headerHeight={headerHeight}
-				rowHeight={rowHeight}
-				pagination={!!maxRowsPerPage}
-				cacheBlockSize={maxRowsPerPage || 2000}
-				paginationPageSize={maxRowsPerPage}
-				onPaginationChanged={onPaginationChanged}
-				maxConcurrentDatasourceRequests={1}
-				suppressPaginationPanel
-				infiniteInitialRowCount={1000}
-				reactNext
-				{...gridOptions}
-				rowData={data}
- */
+	children: PropTypes.node,
+};

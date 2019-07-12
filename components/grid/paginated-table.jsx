@@ -1,36 +1,43 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useTableState } from './table-helpers';
 import { BaseTable } from './base-table';
 
 export function PaginatedTable({
 	onRowClick,
-	maxRowsPerPage,
+	maxRows,
 	children,
 	isSmallViewport,
 	filterText,
 	sortModel,
 	updateSortModel,
-	initialPageNumber,
-	setCurrentPageNumber,
+	currentPageNumber,
+	onPageNumberChange,
 	data,
+	rowSelectionType,
 }) {
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useTableState();
 
-	const handlePaginationChanged = useCallback(() => {
-		if (setCurrentPageNumber) {
-			const pageNumber = gridApi.getCurrentPage();
-			setCurrentPageNumber(pageNumber);
+	useEffect(() => {
+		if (gridApi && currentPageNumber !== null && currentPageNumber !== undefined) {
+			gridApi.paginationGoToPage(currentPageNumber);
 		}
-	}, [gridApi, setCurrentPageNumber]);
+	}, [gridApi, currentPageNumber]);
+
+	const handlePaginationChanged = useCallback(() => {
+		if (gridApi && onPageNumberChange) {
+			const pageNumber = gridApi.paginationGetCurrentPage();
+			onPageNumberChange(pageNumber);
+		}
+	}, [gridApi, onPageNumberChange]);
 
 	const gridOptions = useMemo(
 		() => ({
 			onPaginationChanged: handlePaginationChanged,
 			pagination: true,
-			paginationPageSize: maxRowsPerPage,
+			paginationPageSize: maxRows,
 		}),
-		[handlePaginationChanged, maxRowsPerPage],
+		[handlePaginationChanged, maxRows],
 	);
 
 	return (
@@ -41,12 +48,12 @@ export function PaginatedTable({
 			setColumnApi={setColumnApi}
 			onRowClick={onRowClick}
 			isSmallViewport={isSmallViewport}
-			maxRowsPerPage={maxRowsPerPage}
-			initialPageNumber={initialPageNumber}
+			maxRows={maxRows}
 			filterText={filterText}
 			sortModel={sortModel}
 			gridOptions={gridOptions}
 			updateSortModel={updateSortModel}
+			rowSelectionType={rowSelectionType}
 			data={data}
 		>
 			{children}
@@ -54,22 +61,10 @@ export function PaginatedTable({
 	);
 }
 
-/*
+PaginatedTable.rowSelectionOptions = BaseTable.rowSelectionOptions;
+
 PaginatedTable.propTypes = {
-	headings: PropTypes.arrayOf(
-		PropTypes.shape({
-			field: PropTypes.string.isRequired,
-			headerName: PropTypes.string.isRequired,
-		}),
-	),
-	cellComponents: PropTypes.object,
-	onRowClick: PropTypes.func,
-	largeOnlyColumns: PropTypes.arrayOf(PropTypes.string),
-	maxRowsPerPage: PropTypes.number,
-	getAdditionalRows: PropTypes.func,
-	rowMapper: PropTypes.func.isRequired,
-	tableState: PropTypes.object.isRequired,
-	referenceId: PropTypes.string,
-	context: PropTypes.object,
+	...BaseTable.propTypes,
+	currentPageNumber: PropTypes.number,
+	onPageNumberChange: PropTypes.func,
 };
-*/

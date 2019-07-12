@@ -12,8 +12,8 @@ showSource: true
 		<TableHeading displayName="Name" fieldName="NAME" defaultSort={TableHeading.sortOptions.ascending} />
 		<TableHeading displayName="Population" fieldName="CENSUS2010POP" isRightAligned />
 		<TableHeading displayName="Net Population Change" fieldName="NPOPCHG2010" isRightAligned />
-		<TableHeading displayName="Births" fieldName="BIRTHS2010" isRightAligned width={100} />
-		<TableHeading displayName="Deaths" fieldName="DEATHS2010" isRightAligned width={100} isSortable={false} />
+		<TableHeading displayName="Births" fieldName="BIRTHS2010" isRightAligned width={100} isLargeViewportOnly />
+		<TableHeading displayName="Deaths" fieldName="DEATHS2010" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
 	</SimpleTable>
 </div>
 ```
@@ -26,28 +26,13 @@ Simple table with pagination.
 showSource: true
 ---
 <div>
-	<PaginatedTable data={censusData} maxRowsPerPage={10}>
+	<PaginatedTable data={censusData} maxRows={10}>
 		<TableHeading displayName="Name" fieldName="NAME" defaultSort={TableHeading.sortOptions.ascending} />
 		<TableHeading displayName="Population" fieldName="CENSUS2010POP" />
 		<TableHeading displayName="Net Population Change" fieldName="NPOPCHG2010" />
 		<TableHeading displayName="Births" fieldName="BIRTHS2010" />
 		<TableHeading displayName="Deaths" fieldName="DEATHS2010" />
 	</PaginatedTable>
-</div>
-```
-
-### Simple Aggregations
-
-```react
-showSource: true
----
-<div>
-	<SimpleTable data={censusData} maxRows={10}>
-		<TableHeading displayName="Area Description" fieldName="LSAD" groupByColumn width={200} />
-		<TableHeading displayName="Name" fieldName="NAME" defaultSort={TableHeading.sortOptions.ascending} />
-		<TableHeading displayName="Population" fieldName="CENSUS2010POP" />
-		<TableHeading displayName="Net Population Change" fieldName="NPOPCHG2010" />
-	</SimpleTable>
 </div>
 ```
 
