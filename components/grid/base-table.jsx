@@ -4,6 +4,7 @@ import * as Styled from './styled';
 
 const rowHeight = 45;
 const headerHeight = rowHeight - 5;
+const tableHeightPadding = 43;
 
 /** A wrapper of ag-grid with some boilerplate code to handle initialization and sorting/ filtering */
 export function BaseTable({
@@ -97,7 +98,7 @@ export function BaseTable({
 	const rowCount = data ? data.length : 1;
 	const tableHeight =
 		(maxRowsPerPage && maxRowsPerPage < rowCount ? maxRowsPerPage + 1 : rowCount + 1) * rowHeight +
-		25;
+		tableHeightPadding;
 	return (
 		<Styled.GridContainer className="ag-theme-faithlife" height={tableHeight}>
 			<AgGridReact
@@ -109,6 +110,8 @@ export function BaseTable({
 				frameworkComponents={cellComponents}
 				headerHeight={headerHeight}
 				rowHeight={rowHeight}
+				suppressHorizontalScroll
+				rowClass={onRowClick ? 'ag-grid-clickable-row' : ''}
 				reactNext
 				{...gridOptions}
 			>
@@ -121,6 +124,7 @@ export function BaseTable({
 						sortFunction,
 						isResizable,
 						defaultSort,
+						isRightAligned,
 						...columnProps
 					} = child.props;
 					return (
@@ -134,6 +138,8 @@ export function BaseTable({
 							comparator={sortFunction}
 							resizable={isResizable}
 							sort={defaultSort}
+							headerClass={isRightAligned && 'ag-header-right-aligned'}
+							cellClass={`ag-faithlife-cell ${isRightAligned ? 'ag-cell-right-aligned' : ''}`}
 						/>
 					);
 				})}
@@ -159,10 +165,6 @@ export function BaseTable({
 	referenceId: PropTypes.string,
 	context: PropTypes.object,
 }; */
-
-BaseTable.defaultProps = {
-	sortModel: {},
-};
 
 /**
  * 

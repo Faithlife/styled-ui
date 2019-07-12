@@ -1,27 +1,26 @@
-These examples use `ag-grid-react` with the Faithlife theme applied. Some features require an enterprise license to be set.
+These examples use `ag-grid-react` with the Faithlife theme applied.
 
-### Simple
+### Simple Table
 
-Member directory with sortable columns.
+The simplest use of the table. Each column is sortable and resizable. Leave `maxRows` blank for an infinite scroll table.
 
 ```react
 showSource: true
 ---
 <div>
-	<SimpleTable data={censusData} maxRows={10}>
+	<SimpleTable data={censusData} maxRows={10} onRowClick={() => {}}>
 		<TableHeading displayName="Name" fieldName="NAME" defaultSort={TableHeading.sortOptions.ascending} />
-		<TableHeading displayName="Area Description" fieldName="LSAD" />
-		<TableHeading displayName="Population" fieldName="CENSUS2010POP" />
-		<TableHeading displayName="Net Population Change" fieldName="NPOPCHG2010" />
-		<TableHeading displayName="Births" fieldName="BIRTHS2010" />
-		<TableHeading displayName="Deaths" fieldName="DEATHS2010" />
+		<TableHeading displayName="Population" fieldName="CENSUS2010POP" isRightAligned />
+		<TableHeading displayName="Net Population Change" fieldName="NPOPCHG2010" isRightAligned />
+		<TableHeading displayName="Births" fieldName="BIRTHS2010" isRightAligned width={100} />
+		<TableHeading displayName="Deaths" fieldName="DEATHS2010" isRightAligned width={100} isSortable={false} />
 	</SimpleTable>
 </div>
 ```
 
-### Simple
+### Paginated Table
 
-Member directory with sortable columns.
+Simple table with pagination.
 
 ```react
 showSource: true
@@ -29,7 +28,6 @@ showSource: true
 <div>
 	<PaginatedTable data={censusData} maxRowsPerPage={10}>
 		<TableHeading displayName="Name" fieldName="NAME" defaultSort={TableHeading.sortOptions.ascending} />
-		<TableHeading displayName="Area Description" fieldName="LSAD" />
 		<TableHeading displayName="Population" fieldName="CENSUS2010POP" />
 		<TableHeading displayName="Net Population Change" fieldName="NPOPCHG2010" />
 		<TableHeading displayName="Births" fieldName="BIRTHS2010" />
@@ -53,4 +51,19 @@ land: json
 		"DEATHS2010": 406
 	}
 ]
+```
+
+```react
+showSource: true
+---
+<div>
+	<PaginatedTable data={censusData} maxRowsPerPage={10}>
+		<TableHeading displayName="Name" fieldName="NAME" defaultSort={TableHeading.sortOptions.ascending} />
+		<TableHeading displayName="Area Description" fieldName="LSAD" />
+		<TableHeading displayName="Population" fieldName="CENSUS2010POP" />
+		<TableHeading displayName="Net Population Change" fieldName="NPOPCHG2010" />
+		<TableHeading displayName="Births" fieldName="BIRTHS2010" />
+		<TableHeading displayName="Deaths" fieldName="DEATHS2010" />
+	</PaginatedTable>
+</div>
 ```
