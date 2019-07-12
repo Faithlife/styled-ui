@@ -57,7 +57,6 @@
 		"@babel/preset-react": "^7.0.0",
 		"@babel/register": "^7.4.4",
 		"@storybook/storybook-deployer": "^2.3.0",
-		"ag-grid": "^18.0.1",
 		"ag-grid-enterprise": "^21.0.1",
 		"ag-grid-react": "^21.0.1",
 		"assert": "^1.4.1",
