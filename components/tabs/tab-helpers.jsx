@@ -37,9 +37,15 @@ export function SequencedTabList({ children }) {
 	useEffect(() => {
 		const newTouchedTabs = new Set(touchedTabs);
 		newTouchedTabs.add(selectedTabIndex);
-		setTouchedTabs(new Set(newTouchedTabs));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [selectedTabIndex]);
+
+		const setsAreEqual =
+			newTouchedTabs.size === touchedTabs.size &&
+			[...newTouchedTabs].every(value => touchedTabs.has(value));
+
+		if (!setsAreEqual) {
+			setTouchedTabs(new Set(newTouchedTabs));
+		}
+	}, [selectedTabIndex, touchedTabs]);
 
 	const handleKeyboardNav = useSequencedKeyboardNav(selectedTabIndex, onSelectTab, children);
 	return (
