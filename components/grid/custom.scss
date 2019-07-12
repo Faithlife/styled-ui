@@ -1,6 +1,8 @@
 @import '~ag-grid-community/src/styles/ag-grid.scss';
 @import '~ag-grid-community/src/styles/ag-theme-material/resources/material-legacy-var-names';
 
+// Most styled are modified from the ag-theme-material theme.
+
 // opacity values used for black values, taken from material spec
 $foreground-opacity: 0.87 !default;
 $secondary-foreground-color-opacity: 0.54 !default;

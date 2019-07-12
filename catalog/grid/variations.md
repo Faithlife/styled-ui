@@ -8,7 +8,7 @@ The simplest use of the table. Each column is sortable and resizable. Leave `max
 showSource: true
 ---
 <div>
-	<SimpleTable data={censusData} maxRows={10} onRowClick={() => {}}>
+	<SimpleTable data={censusData} maxRows={10} onRowClick={row => {alert(row[0].NAME)}}>
 		<TableHeading displayName="Name" fieldName="NAME" defaultSort={TableHeading.sortOptions.ascending} />
 		<TableHeading displayName="Population" fieldName="CENSUS2010POP" isRightAligned />
 		<TableHeading displayName="Net Population Change" fieldName="NPOPCHG2010" isRightAligned />
@@ -36,6 +36,21 @@ showSource: true
 </div>
 ```
 
+### Simple Aggregations
+
+```react
+showSource: true
+---
+<div>
+	<SimpleTable data={censusData} maxRows={10}>
+		<TableHeading displayName="Area Description" fieldName="LSAD" groupByColumn width={200} />
+		<TableHeading displayName="Name" fieldName="NAME" defaultSort={TableHeading.sortOptions.ascending} />
+		<TableHeading displayName="Population" fieldName="CENSUS2010POP" />
+		<TableHeading displayName="Net Population Change" fieldName="NPOPCHG2010" />
+	</SimpleTable>
+</div>
+```
+
 ### Example data
 
 ```code
@@ -51,19 +66,4 @@ land: json
 		"DEATHS2010": 406
 	}
 ]
-```
-
-```react
-showSource: true
----
-<div>
-	<PaginatedTable data={censusData} maxRowsPerPage={10}>
-		<TableHeading displayName="Name" fieldName="NAME" defaultSort={TableHeading.sortOptions.ascending} />
-		<TableHeading displayName="Area Description" fieldName="LSAD" />
-		<TableHeading displayName="Population" fieldName="CENSUS2010POP" />
-		<TableHeading displayName="Net Population Change" fieldName="NPOPCHG2010" />
-		<TableHeading displayName="Births" fieldName="BIRTHS2010" />
-		<TableHeading displayName="Deaths" fieldName="DEATHS2010" />
-	</PaginatedTable>
-</div>
 ```

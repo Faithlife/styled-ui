@@ -12,6 +12,7 @@ export function SimpleTable({
 	sortModel,
 	updateSortModel,
 	maxRows,
+	rowSelection,
 }) {
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useTableState();
 
@@ -28,11 +29,14 @@ export function SimpleTable({
 			updateSortModel={updateSortModel}
 			filterText={filterText}
 			maxRowsPerPage={maxRows}
+			rowSelection={rowSelection}
 		>
 			{children}
 		</BaseTable>
 	);
 }
+
+SimpleTable.rowSelectionOptions = BaseTable.rowSelectionOptions;
 
 /*
 SimpleTable.propTypes = {

@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { AgGridReact, AgGridColumn } from 'ag-grid-react';
+import 'ag-grid-enterprise';
 import * as Styled from './styled';
 
 const rowHeight = 45;
@@ -23,6 +24,7 @@ export function BaseTable({
 	updateSortModel,
 	filterText,
 	initialPageNumber,
+	rowSelection,
 }) {
 	useEffect(() => {
 		if (gridApi) {
@@ -52,7 +54,7 @@ export function BaseTable({
 
 	const handleSelectionChanged = useCallback(() => {
 		const selectedRows = gridApi.getSelectedRows();
-		onRowClick && onRowClick(selectedRows[0].id);
+		onRowClick && onRowClick(selectedRows);
 	}, [gridApi, onRowClick]);
 
 	const headingChildren = React.Children.toArray(children).filter(
@@ -107,11 +109,17 @@ export function BaseTable({
 				onGridSizeChanged={handleGridResize}
 				onSortChanged={handleSortChanged}
 				onSelectionChanged={handleSelectionChanged}
+				rowSelection={
+					!onRowClick
+						? BaseTable.rowSelectionOptions.none
+						: rowSelection || BaseTable.rowSelectionOptions.single
+				}
 				frameworkComponents={cellComponents}
 				headerHeight={headerHeight}
 				rowHeight={rowHeight}
 				suppressHorizontalScroll
 				rowClass={onRowClick ? 'ag-grid-clickable-row' : ''}
+				groupUseEntireRow
 				reactNext
 				{...gridOptions}
 			>
@@ -125,14 +133,16 @@ export function BaseTable({
 						isResizable,
 						defaultSort,
 						isRightAligned,
+						groupByColumn,
+						hide,
 						...columnProps
 					} = child.props;
 					return (
 						<AgGridColumn
 							{...columnProps}
 							key={fieldName}
-							field={fieldName}
 							headerName={displayName}
+							field={fieldName}
 							sortable={isSortable}
 							cellRenderer={cellComponent ? fieldName : null}
 							comparator={sortFunction}
@@ -140,6 +150,8 @@ export function BaseTable({
 							sort={defaultSort}
 							headerClass={isRightAligned && 'ag-header-right-aligned'}
 							cellClass={`ag-faithlife-cell ${isRightAligned ? 'ag-cell-right-aligned' : ''}`}
+							rowGroup={groupByColumn}
+							hide={groupByColumn || hide}
 						/>
 					);
 				})}
@@ -147,6 +159,12 @@ export function BaseTable({
 		</Styled.GridContainer>
 	);
 }
+
+BaseTable.rowSelectionOptions = {
+	none: '',
+	single: 'single',
+	multi: 'multiple',
+};
 
 /* BaseTable.propTypes = {
 	headings: PropTypes.arrayOf(

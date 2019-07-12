@@ -14,6 +14,7 @@ export function TableHeading({
 	width,
 	minWidth,
 	maxWidth,
+	groupByColumn,
 }) {
 	return null;
 }
