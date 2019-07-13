@@ -6,7 +6,7 @@ import * as Styled from './styled';
 
 const rowHeight = 45;
 const headerHeight = rowHeight - 5;
-const tableHeightPadding = 45;
+const tableHeightPadding = 42;
 
 /** A wrapper of ag-grid with some boilerplate code to handle initialization and sorting/ filtering */
 export function BaseTable({
@@ -25,6 +25,7 @@ export function BaseTable({
 	updateSortModel,
 	filterText,
 	rowSelectionType,
+	hideHeaders,
 }) {
 	useEffect(() => {
 		if (gridApi) {
@@ -96,8 +97,11 @@ export function BaseTable({
 	}, [updateSortModel, gridApi]);
 
 	const rowCount = data ? data.length : 1;
+	const currentHeaderHeight = hideHeaders ? 0 : headerHeight;
 	const tableHeight =
-		(maxRows && maxRows < rowCount ? maxRows + 1 : rowCount + 1) * rowHeight + tableHeightPadding;
+		(maxRows && maxRows < rowCount ? maxRows : rowCount) * rowHeight +
+		tableHeightPadding +
+		currentHeaderHeight;
 	return (
 		<Styled.GridContainer className="ag-theme-faithlife" height={tableHeight}>
 			<AgGridReact
@@ -112,7 +116,7 @@ export function BaseTable({
 						: rowSelectionType || BaseTable.rowSelectionOptions.single
 				}
 				frameworkComponents={cellComponents}
-				headerHeight={headerHeight}
+				headerHeight={!hideHeaders ? headerHeight : 0}
 				rowHeight={rowHeight}
 				suppressHorizontalScroll
 				rowClass={onRowClick ? 'ag-grid-clickable-row' : ''}
@@ -181,5 +185,7 @@ BaseTable.propTypes = {
 	rowSelectionType: PropTypes.oneOf(Object.values(BaseTable.rowSelectionOptions)),
 	/** Handler for selected rows */
 	onRowClick: PropTypes.func,
+	/** Hide headers */
+	hideHeaders: PropTypes.bool,
 	children: PropTypes.node,
 };

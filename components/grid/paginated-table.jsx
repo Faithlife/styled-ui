@@ -15,6 +15,7 @@ export function PaginatedTable({
 	onPageNumberChange,
 	data,
 	rowSelectionType,
+	hideHeaders,
 }) {
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useTableState();
 
@@ -55,6 +56,7 @@ export function PaginatedTable({
 			updateSortModel={updateSortModel}
 			rowSelectionType={rowSelectionType}
 			data={data}
+			hideHeaders={hideHeaders}
 		>
 			{children}
 		</BaseTable>
