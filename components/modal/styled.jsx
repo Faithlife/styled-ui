@@ -61,11 +61,13 @@ export const ModalTitleBar = styled.div`
 
 export const ModalTitle = styled.div`
 	${fonts.h4};
+	color: ${colors.gray66};
 `;
 
 export const ModalSubtitle = styled.div`
 	width: 100%;
 	${fonts.ui14};
+	color: ${colors.gray66};
 `;
 
 export const ModalFooter = styled.div`
