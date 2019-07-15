@@ -28,6 +28,8 @@ export const Input = forwardClassRef(
 			size: PropTypes.number,
 			/** Inline input variation */
 			inline: PropTypes.bool,
+			/** Textarea input variation */
+			textarea: PropTypes.bool,
 		};
 
 		static defaultProps = {
@@ -58,6 +60,7 @@ export const Input = forwardClassRef(
 				onClick,
 				disabled,
 				onEnter,
+				textarea,
 				forwardedRef, // eslint-disable-line react/prop-types
 				...inputProps
 			} = this.props;
@@ -68,7 +71,20 @@ export const Input = forwardClassRef(
 				inputProps,
 			);
 
-			return (
+			return textarea ? (
+				<Styled.Textarea
+					autoFocus={autoFocus}
+					readOnly={readOnly}
+					disabled={disabled}
+					value={value || ''}
+					placeholder={placeholder || ''}
+					onChange={this.handleChange}
+					onClick={onClick}
+					onKeyPress={this.handleKeyPress}
+					ref={forwardedRef}
+					{...filteredProps || {}}
+				/>
+			) : (
 				<MappedStyledComponent
 					type={type || 'text'}
 					autoFocus={autoFocus}

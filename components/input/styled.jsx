@@ -64,3 +64,32 @@ export const variationMap = {
 		}
 	`,
 };
+
+export const Textarea = styled.textarea`
+	${resetStyles};
+
+	border-radius: 3px;
+	border: 1px solid ${inputColors.inputBorderColor};
+
+	padding: ${thickness.eight};
+	min-height: 117px;
+	min-width: 280px;
+	width: ${props => props.styleOverrides.width};
+	${fonts.ui16};
+
+	width: ${props => props.styleOverrides.width};
+
+	&:focus {
+		border: 2px solid ${inputColors.inputFocusedBorderColor};
+		box-shadow: 0 0 0 2px ${inputColors.inputFocusedShadowColor};
+		outline: 0;
+	}
+
+	&:disabled {
+		opacity: 0.5;
+	}
+
+	&:read-only {
+		background: ${colors.gray8};
+	}
+`;

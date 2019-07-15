@@ -41,3 +41,14 @@ state: { value: 'Washington' }
 	<Button primary>Search</Button>
 </InputSpacer>
 ```
+
+### Textarea
+
+```react
+state: { value: '' }
+---
+<InputSpacer>
+	<Input textarea placeholder='My favorite state is...' value={state.value} onChange={event => setState({ value: event.target.value })} />
+	<Button small primary>Search</Button>
+</InputSpacer>
+```
