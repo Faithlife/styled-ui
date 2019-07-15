@@ -15,6 +15,7 @@ export const DefaultModalFooter = props => (
 					theme={{ width: props.useFullWidthButtons ? '100%' : null }}
 					tabIndex={props.commitButton.tabindex}
 					onClick={props.commitButton.onClick}
+					disabled={props.commitButton.disabled}
 				>
 					{props.commitButton.text}
 				</Button>
@@ -27,6 +28,7 @@ export const DefaultModalFooter = props => (
 						theme={{ width: props.useFullWidthButtons ? '100%' : null }}
 						tabIndex={props.cancelButton.tabindex}
 						onClick={props.cancelButton.onClick}
+						disabled={props.cancelButton.disabled}
 					>
 						{props.cancelButton.text}
 					</Button>
@@ -45,6 +47,7 @@ export const DefaultModalFooter = props => (
 							width: props.useFullWidthButtons ? '100%' : null,
 						}}
 						onClick={props.deleteButton.onClick}
+						disabled={props.deleteButton.disabled}
 					>
 						{props.deleteButton.text}
 					</Button>
