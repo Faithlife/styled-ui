@@ -71,21 +71,9 @@ export const Input = forwardClassRef(
 				inputProps,
 			);
 
-			return textarea ? (
-				<Styled.Textarea
-					autoFocus={autoFocus}
-					readOnly={readOnly}
-					disabled={disabled}
-					value={value || ''}
-					placeholder={placeholder || ''}
-					onChange={this.handleChange}
-					onClick={onClick}
-					onKeyPress={this.handleKeyPress}
-					ref={forwardedRef}
-					{...filteredProps || {}}
-				/>
-			) : (
+			return (
 				<MappedStyledComponent
+					as={textarea && Styled.Textarea}
 					type={type || 'text'}
 					autoFocus={autoFocus}
 					readOnly={readOnly}
