@@ -1,4 +1,4 @@
-import { theme as coreTheme, breakpoints, mediaQueries } from './core';
+import { theme as coreTheme } from './core';
 import { textStyles } from './textStyles';
 
 const theme = {
@@ -6,4 +6,4 @@ const theme = {
 	textStyles,
 };
 
-export { theme, breakpoints, mediaQueries };
+export { theme };

@@ -144,7 +144,7 @@ const theme = {
 	mediaQueries,
 };
 
-export { theme, breakpoints, mediaQueries };
+export { theme };
 
 function indexed(obj) {
 	return Object.assign([], obj, Object.values(obj));
