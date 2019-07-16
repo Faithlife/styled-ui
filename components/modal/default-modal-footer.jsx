@@ -62,15 +62,18 @@ DefaultModalFooter.propTypes = {
 		onClick: PropTypes.func.isRequired,
 		text: PropTypes.string.isRequired,
 		tabindex: PropTypes.string,
+		disabled: PropTypes.bool,
 	}),
 	cancelButton: PropTypes.shape({
 		onClick: PropTypes.func.isRequired,
 		text: PropTypes.string.isRequired,
 		tabindex: PropTypes.string,
+		disabled: PropTypes.bool,
 	}),
 	deleteButton: PropTypes.shape({
 		onClick: PropTypes.func.isRequired,
 		text: PropTypes.string.isRequired,
+		disabled: PropTypes.bool,
 	}),
 	useFullWidthButtons: PropTypes.bool,
 };
