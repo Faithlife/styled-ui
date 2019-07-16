@@ -115,7 +115,7 @@ const sizes = []; // todo
 
 const borders = [0, '1px solid'];
 
-const radii = [0, 3, 6];
+const radii = ['0px', '3px', '6px'];
 
 const shadows = ['0 4px 4px 0 rgba(0, 0, 0, 0.12), 0 0 4px 0 rgba(0, 0, 0, 0.12)'];
 
