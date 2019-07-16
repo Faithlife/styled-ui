@@ -8,7 +8,7 @@ module.exports = {
 		nodeEnv: false,
 	},
 	entry: {
-		main: './components/main.js',
+		main: './index.js',
 		'ag-grid': './components/grid/index.js',
 		'text-input-v2': './components/text-input-v2/index.js',
 		'group-selector': './components/group-selector/index.js',

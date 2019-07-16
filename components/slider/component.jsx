@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import throttle from 'lodash.throttle';
 import memoize from 'memoize-one';
-import { PopoverManager, PopoverReference, Popover } from '../main';
+import { PopoverManager, PopoverReference, Popover } from '../popover';
 import * as Styled from './styled';
 
 function range(from, to) {
