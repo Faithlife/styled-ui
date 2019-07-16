@@ -81,7 +81,7 @@ export const Textarea = styled.textarea`
 	width: ${props => props.styleOverrides.width};
 
 	&:focus {
-		border: 2px solid ${inputColors.inputFocusedBorderColor};
+		border-color: ${inputColors.inputFocusedBorderColor};
 		box-shadow: 0 0 0 2px ${inputColors.inputFocusedShadowColor};
 		outline: 0;
 	}
