@@ -73,6 +73,7 @@ export const Textarea = styled.textarea`
 
 	padding: ${thickness.eight};
 	min-height: 117px;
+	height: ${props => props.styleOverrides.height};
 	min-width: 280px;
 	width: ${props => props.styleOverrides.width};
 	${fonts.ui16};

@@ -22,8 +22,10 @@ export const Input = forwardClassRef(
 			small: PropTypes.bool,
 			/** Large variation */
 			large: PropTypes.bool,
+			/** Height only applies to the Textarea variation */
 			styleOverrides: PropTypes.shape({
 				width: PropTypes.string,
+				height: PropTypes.string,
 			}),
 			size: PropTypes.number,
 			/** Inline input variation */
