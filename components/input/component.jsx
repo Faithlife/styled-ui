@@ -75,7 +75,7 @@ export const Input = forwardClassRef(
 
 			return (
 				<MappedStyledComponent
-					as={textarea && Styled.Textarea}
+					as={textarea && 'textarea'}
 					type={type || 'text'}
 					autoFocus={autoFocus}
 					readOnly={readOnly}

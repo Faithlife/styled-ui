@@ -48,7 +48,7 @@ state: { value: 'Washington' }
 state: { value: '' }
 ---
 <InputSpacer>
-	<Input textarea placeholder='My favorite state is...' value={state.value} onChange={event => setState({ value: event.target.value })} />
+	<Input textarea placeholder='My favorite state is...' value={state.value} onChange={event => setState({ value: event.target.value })} styleOverrides={{ height: '120px', width: '280px' }} />
 	<Button small primary>Search</Button>
 </InputSpacer>
 ```
