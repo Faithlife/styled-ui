@@ -59,7 +59,9 @@ export const ModalTitleBar = styled.div`
 `;
 
 export const ModalTitle = styled.div`
-	${fonts.h4};
+	font-size: 24px;
+	line-height: 1.25;
+	font-weight: bold;
 	color: ${colors.gray66};
 `;
 
