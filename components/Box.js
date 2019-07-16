@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { layout, flexbox, position, grid, shadow, border, background } from 'styled-system';
 import { common } from '../theme/system';
+import { theme } from '../theme';
 
 export const Box = styled.div(
 	{
@@ -16,3 +17,5 @@ export const Box = styled.div(
 	border,
 	background,
 );
+
+Box.defaultProps.theme = theme;

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { textStyle, space, color, layout, border } from 'styled-system';
+import { textStyle, layout, border } from 'styled-system';
 import { themeGet } from '@styled-system/theme-get';
-import { typography } from '../theme/system';
+import { typography, common } from '../theme/system';
+import { theme } from '../theme';
 
 export const Text = styled.span`
 	display: inline-flex;
@@ -9,9 +10,10 @@ export const Text = styled.span`
 	${themeGet('textStyles.c.16')};
 
 	${textStyle};
-	${space};
-	${color};
+	${common};
 	${layout};
 	${typography};
 	${border};
 `;
+
+Text.defaultProps.theme = theme;
