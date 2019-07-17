@@ -70,6 +70,8 @@ export const PopoverBase = styled.div`
 	white-space: normal;
 	width: ${({ styleOverrides }) => (styleOverrides.width ? styleOverrides.width : 'auto')};
 	z-index: ${({ styleOverrides }) => (styleOverrides.zIndex ? styleOverrides.zIndex : '10')};
+	${({ styleOverrides }) =>
+		styleOverrides.overflow ? `overflow: ${styleOverrides.overflow}` : ''};
 `;
 
 export const Arrow = styled.div`

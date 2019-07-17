@@ -47,7 +47,11 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 				isOpen={isOpen}
 				placement={'bottom-start' || popoverProps.placement}
 				hideArrow
-				styleOverrides={{ padding: '0', width: styleOverrides.width || '160px' }}
+				styleOverrides={{
+					padding: '0',
+					width: styleOverrides.width || '160px',
+					overflow: styleOverrides.overflow,
+				}}
 				{...popoverProps}
 			>
 				<Styled.DropdownMenuContent onKeyDown={handleKeyboardNav}>
