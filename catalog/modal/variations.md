@@ -14,7 +14,7 @@ state: { modal: false, value: '' }
 		subtitle="Help us locate you"
 		footerProps={{
 			commitButton: { text: 'Save', onClick: () => alert('Saved') },
-			cancelButton: { text: 'Cancel', onClick: () => setState({ modal: !state.modal })},
+			cancelButton: { text: 'Cancel', onClick: () => setState({ modal: !state.modal }) },
 			deleteButton: { text: 'Delete Forever', onClick: () => alert('Deleted') }
 		}}
 	>
