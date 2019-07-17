@@ -53,14 +53,14 @@ export const PopoverBase = styled.div`
 	min-height: ${({ styleOverrides }) =>
 		styleOverrides.minHeight
 			? typeof styleOverrides.minHeight === 'number'
-				? `${styleOverrides.maxWidth}px`
-				: styleOverrides.maxWidth
+				? `${styleOverrides.minHeight}px`
+				: styleOverrides.minHeight
 			: ''};
 	min-width: ${({ styleOverrides }) =>
 		styleOverrides.minWidth
 			? typeof styleOverrides.minWidth === 'number'
-				? `${styleOverrides.maxWidth}px`
-				: styleOverrides.maxWidth
+				? `${styleOverrides.minWidth}px`
+				: styleOverrides.minWidth
 			: ''};
 	outline: ${({ styleOverrides }) => (styleOverrides.outline ? styleOverrides.outline : '')};
 	padding: ${({ styleOverrides }) => (styleOverrides.padding ? styleOverrides.padding : '0px')};
