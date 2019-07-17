@@ -30,3 +30,25 @@ state: { value: 'Washington' }
 	<Button large primary>Search</Button>
 </InputSpacer>
 ```
+
+### Inline
+
+```react
+state: { value: 'Washington' }
+---
+<InputSpacer>
+	<Input inline value={state.value} onChange={event => setState({ value: event.target.value })} />
+	<Button primary>Search</Button>
+</InputSpacer>
+```
+
+### Textarea
+
+```react
+state: { value: '' }
+---
+<InputSpacer>
+	<Input textarea placeholder='My favorite state is...' value={state.value} onChange={event => setState({ value: event.target.value })} styleOverrides={{ height: '120px', width: '280px' }} />
+	<Button small primary>Search</Button>
+</InputSpacer>
+```

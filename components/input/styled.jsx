@@ -9,7 +9,7 @@ export const Input = styled.input`
 	border: 1px solid ${inputColors.inputBorderColor};
 
 	padding: ${thickness.eight};
-	height: 32px;
+	height: ${props => props.styleOverrides.height || '32px'};
 	${fonts.ui16};
 
 	width: ${props => props.styleOverrides.width};
