@@ -3,7 +3,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button, Popover, PopoverManager, PopoverReference } from '../components/main';
+import { Popover, PopoverManager, PopoverReference } from '../components/popover';
+import { Button } from '../components/button';
 
 const Table = styled.table`
 	border-collapse: collapse;

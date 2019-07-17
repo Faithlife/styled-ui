@@ -49,7 +49,7 @@ import {
 	ParameterSelect,
 	ParameterInputBox,
 	ParameterSentence,
-} from '../components/main';
+} from '../index';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
