@@ -9,6 +9,7 @@ export function TableHeading({
 	isRightAligned,
 	cellComponent,
 	isLargeViewportOnly,
+	isSmallViewportOnly,
 	suppressMenu,
 	isResizable,
 	width,
@@ -35,7 +36,7 @@ TableHeading.sortOptions = Object.freeze({
 
 TableHeading.propTypes = {
 	displayName: PropTypes.string,
-	fieldName: PropTypes.string.isRequired,
+	fieldName: PropTypes.string,
 	isSortable: PropTypes.bool,
 	defaultSort: PropTypes.oneOf(Object.values(TableHeading.sortOptions)),
 	isRightAligned: PropTypes.bool,
@@ -43,6 +44,8 @@ TableHeading.propTypes = {
 	cellComponent: PropTypes.function,
 	/** Whether the column should only show on larger viewports */
 	isLargeViewportOnly: PropTypes.bool,
+	/** Whether the column should only show on small viewports */
+	isSmallViewportOnly: PropTypes.bool,
 	/** Where to hide the ag-grid options menu */
 	suppressMenu: PropTypes.bool,
 	/** Allows the column to be resized */

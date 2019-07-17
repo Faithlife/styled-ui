@@ -39,23 +39,6 @@ export function BaseTable({
 		}
 	}, [gridApi, sortModel]);
 
-	const handleGridReady = useCallback(
-		({ api, columnApi }) => {
-			setGridApi(api);
-			setColumnApi(columnApi);
-
-			api.sizeColumnsToFit();
-
-			if (sortModel) {
-				api.setSortModel(sortModel);
-			}
-			if (filterText) {
-				api.setQuickFilter(filterText);
-			}
-		},
-		[setGridApi, setColumnApi, sortModel, filterText],
-	);
-
 	const handleSelectionChanged = useCallback(() => {
 		const selectedRows = gridApi.getSelectedRows();
 		onRowClick && onRowClick(selectedRows);
@@ -76,18 +59,24 @@ export function BaseTable({
 		.filter(child => child.props.isLargeViewportOnly)
 		.map(child => child.props.fieldName);
 
+	const smallOnlyColumns = headingChildren
+		.filter(child => child.props.isSmallViewportOnly)
+		.map(child => child.props.fieldName);
+
 	const handleGridResize = useCallback(() => {
 		if (gridApi && columnApi) {
 			if (largeOnlyColumns) {
 				if (isSmallViewport) {
 					columnApi.setColumnsVisible(largeOnlyColumns, false);
+					columnApi.setColumnsVisible(smallOnlyColumns, true);
 				} else {
 					columnApi.setColumnsVisible(largeOnlyColumns, true);
+					columnApi.setColumnsVisible(smallOnlyColumns, false);
 				}
 			}
 			gridApi.sizeColumnsToFit();
 		}
-	}, [gridApi, columnApi, isSmallViewport, largeOnlyColumns]);
+	}, [gridApi, columnApi, isSmallViewport, largeOnlyColumns, smallOnlyColumns]);
 
 	const handleSortChanged = useCallback(() => {
 		if (updateSortModel) {
@@ -95,6 +84,23 @@ export function BaseTable({
 			updateSortModel(newSortModel);
 		}
 	}, [updateSortModel, gridApi]);
+
+	const handleGridReady = useCallback(
+		({ api, columnApi }) => {
+			setGridApi(api);
+			setColumnApi(columnApi);
+
+			// handleGridResize(api, columnApi);
+
+			if (sortModel) {
+				api.setSortModel(sortModel);
+			}
+			if (filterText) {
+				api.setQuickFilter(filterText);
+			}
+		},
+		[setGridApi, setColumnApi, sortModel, filterText],
+	);
 
 	const rowCount = data ? data.length : 1;
 	const currentHeaderHeight = hideHeaders ? 0 : headerHeight;
