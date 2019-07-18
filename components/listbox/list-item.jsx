@@ -5,27 +5,26 @@ import { useDropdownContext, MenuItem } from '../dropdown';
 export function ListItem(props) {
 	// Proptypes is linting so index does not show up in consumer proptypes
 	// eslint-disable-next-line react/prop-types
-	const { id, disabled, index, children } = props;
+	const { id, disabled, children, isSelected, onFocusedMenuItemChange } = props;
 
-	const { onItemSelect, focusedMenuItem, setFocusedMenuItem } = useDropdownContext();
-	const selected = focusedMenuItem === index;
+	const { onItemSelect } = useDropdownContext();
 
 	const handleItemSelect = useCallback(() => {
-		setFocusedMenuItem(index);
+		onFocusedMenuItemChange();
 
 		if (!disabled) {
 			onItemSelect(id);
 		}
-	}, [setFocusedMenuItem, index, disabled, onItemSelect, id]);
+	}, [onFocusedMenuItemChange, disabled, onItemSelect, id]);
 
 	return (
 		<MenuItem
 			onClick={handleItemSelect}
 			onFocus={handleItemSelect}
 			disabled={disabled}
-			index={index}
+			isSelected={isSelected}
 			role="option"
-			aria-selected={selected}
+			aria-selected={isSelected}
 		>
 			{children}
 		</MenuItem>

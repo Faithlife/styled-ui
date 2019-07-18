@@ -69,6 +69,7 @@ DropdownCore.propTypes = {
 		fontSize: PropTypes.string,
 		padding: PropTypes.string,
 		width: PropTypes.string,
+		overflow: PropTypes.string,
 	}),
 	/** Additional context to include in the dropdown context */
 	additionalContext: PropTypes.object,

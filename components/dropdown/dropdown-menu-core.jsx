@@ -41,13 +41,22 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 		}
 	}, [focusedMenuItem, focusedIndex, focusableChildList, setFocusedMenuItem]);
 
+	const handleFocusedMenuItemChange = useCallback(
+		itemIndex => () => setFocusedMenuItem(itemIndex),
+		[setFocusedMenuItem],
+	);
+
 	return (
 		<div id={menuId} {...ariaProps}>
 			<Popover
 				isOpen={isOpen}
 				placement={'bottom-start' || popoverProps.placement}
 				hideArrow
-				styleOverrides={{ padding: '0', width: styleOverrides.width || '160px' }}
+				styleOverrides={{
+					padding: '0',
+					width: styleOverrides.width || '160px',
+					overflow: styleOverrides.overflow,
+				}}
 				{...popoverProps}
 			>
 				<Styled.DropdownMenuContent onKeyDown={handleKeyboardNav}>
@@ -55,6 +64,7 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 						React.isValidElement(child)
 							? React.cloneElement(child, {
 									isSelected: index === focusedMenuItem,
+									onFocusedMenuItemChange: handleFocusedMenuItemChange(index),
 							  })
 							: null,
 					)}
