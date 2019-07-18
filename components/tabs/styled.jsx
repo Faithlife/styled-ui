@@ -2,8 +2,10 @@
 // Tabs from Reach-Ui were used as a base https://ui.reach.tech/tabs
 
 import styled, { css } from 'styled-components';
+import 'focus-visible';
 import { resetStyles } from '../utils';
 import { colors, thickness } from '../shared-styles';
+import { mediaSizes } from '../shared-styles';
 
 const borderRadius = '3px 3px 0 0';
 
@@ -44,7 +46,7 @@ export const Tab = styled.button.attrs({
 	'aria-selected': ({ selected }) => selected,
 	'aria-controls': ({ panelId }) => `panel:${panelId}`,
 	'aria-disabled': ({ disabled }) => disabled,
-	tabIndex: ({ selected }) => (selected ? '0' : '-1'),
+	tabIndex: ({ selected }) => (selected ? 0 : -1),
 })`
 	${resetStyles};
 
@@ -60,15 +62,25 @@ export const Tab = styled.button.attrs({
 
 	position: relative;
 
-	&:focus {
-		box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
+	&:focus:not(.focus-visible) {
 		outline: none;
+	}
+
+	&.focus-visible {
+		&:not(:active) {
+			box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
+			z-index: 10;
+		}
+	}
+
+	&::-moz-focus-inner {
+		border: 0;
 	}
 `;
 
 export const TabContent = styled.span.attrs({ tabIndex: -1 })`
 	border-radius: ${borderRadius};
-	cursor: pointer;
+	cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 	white-space: nowrap;
 	min-height: fit-content;
 	display: inline-block;
@@ -109,4 +121,71 @@ export const TabPanel = styled.div.attrs({
 	}
 
 	${({ selected }) => !selected && 'display: none'};
+`;
+
+export const SequencedTabList = styled.div.attrs(() => ({ role: 'tablist' }))`
+	display: flex;
+	flex-direction: row;
+`;
+
+export const SequencedTab = styled(Tab)`
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	flex-grow: 1;
+	flex-basis: 0;
+	cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
+	background: ${({ selected }) => (selected ? colors.blueTint : 'white')};
+	height: 54px;
+	border-radius: 0;
+
+	@media (hover: hover) {
+		&:hover {
+			background: #d5ecfc;
+		}
+	}
+`;
+
+export const SequencedTabContent = styled.span.attrs(() => ({ tabIndex: -1 }))`
+	overflow: wrap;
+	min-height: fit-content;
+	display: none;
+	font-size: 14px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: ${({ selected, disabled }) =>
+		selected ? colors.blueBase : disabled ? colors.gray22 : colors.gray52};
+	padding-right: 16px;
+
+	@media (min-width: ${mediaSizes.phone}) {
+		display: flex;
+	}
+
+	&:focus {
+		outline: none;
+	}
+`;
+
+export const Circle = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: solid 2px
+		${({ selected, completed, disabled }) =>
+			selected || completed ? colors.blueLight : disabled ? colors.gray14 : colors.gray34};
+	border-radius: 50%;
+	width: 24px;
+	min-width: 24px;
+	height: 24px;
+	margin: 0px;
+	font-size: 14px;
+	font-weight: bold;
+	color: ${({ selected, disabled }) =>
+		selected ? colors.blueBase : disabled ? colors.gray22 : colors.gray52};
+	background: ${({ completed }) => completed && colors.blueLight};
+
+	@media (min-width: ${mediaSizes.phone}) {
+		margin: 0px 8px 0px 14px;
+	}
 `;

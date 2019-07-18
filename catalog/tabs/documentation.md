@@ -11,3 +11,9 @@ noSource: true
 ---
 <DocgenTable component={Tab} />
 ```
+
+```react
+noSource: true
+---
+<DocgenTable component={SequencedTab} />
+```
