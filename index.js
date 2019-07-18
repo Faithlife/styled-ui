@@ -43,5 +43,6 @@ export {
 	ParameterInputBox,
 	ParameterSentence,
 } from './components/parameter-sentence';
+export { SimpleTable, TableHeading, PaginatedTable } from './components/grid';
 
 export { theme } from './theme';

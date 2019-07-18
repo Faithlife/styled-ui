@@ -1,6 +1,6 @@
 {
 	"name": "@faithlife/styled-ui",
-	"version": "5.9.1",
+	"version": "6.0.0-beta.0",
 	"main": "dist/index.js",
 	"repository": "git@github.com:Faithlife/styled-ui.git",
 	"author": "Dustin Masters <dustin.masters@faithlife.com>",
@@ -36,6 +36,7 @@
 	},
 	"dependencies": {
 		"@styled-system/theme-get": "^5.0.12",
+		"ag-grid-community": "^21.0.1",
 		"clipboard": "^2.0.1",
 		"focus-visible": "^5.0.1",
 		"lodash.debounce": "^4.0.8",
@@ -56,9 +57,8 @@
 		"@babel/preset-react": "^7.0.0",
 		"@babel/register": "^7.4.4",
 		"@storybook/storybook-deployer": "^2.3.0",
-		"ag-grid": "^18.0.1",
-		"ag-grid-enterprise": "^18.1.0",
-		"ag-grid-react": "^18.0.0",
+		"ag-grid-enterprise": "^21.0.1",
+		"ag-grid-react": "^21.0.1",
 		"assert": "^1.4.1",
 		"autoprefixer": "^8.2.0",
 		"babel-core": "^7.0.0-bridge.0",

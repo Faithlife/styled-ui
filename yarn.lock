@@ -1303,22 +1303,22 @@ address@^1.0.1:
   resolved "https://registry.yarnpkg.com/address/-/address-1.1.0.tgz#ef8e047847fcd2c5b6f50c16965f924fd99fe709"
   integrity sha512-4diPfzWbLEIElVG4AnqP+00SULlPzNuyJFNnmMrLgyaxG6tZXJ1sn7mjBu4fHrJE+Yp/jgylOweJn2xsLMFggQ==
 
-ag-grid-enterprise@^18.1.0:
-  version "18.1.1"
-  resolved "https://registry.yarnpkg.com/ag-grid-enterprise/-/ag-grid-enterprise-18.1.1.tgz#ee2754c991a798cff0ed85350781008d1058f0b8"
-  integrity sha512-OdV3UVuWnAThqOHH28PEBj82T5HP5JbDRg9DT4jYMo7U8+30SzdDNxB6a0CxiThbwhcDMywrCrUI2guV4wVCdw==
+ag-grid-community@^21.0.1:
+  version "21.0.1"
+  resolved "https://registry.yarnpkg.com/ag-grid-community/-/ag-grid-community-21.0.1.tgz#8cf6096de7e9ae6144bf5aced89b03814ea7b034"
+  integrity sha512-wqm6W39kImPonjRxHvnt/L6roJLxPXSopXF4pvcE1paxN7S25HNsBgTOB1uaLlQ4/xt3xSpccPbTDqVUnSxrmQ==
 
-ag-grid-react@^18.0.0:
-  version "18.1.0"
-  resolved "https://registry.yarnpkg.com/ag-grid-react/-/ag-grid-react-18.1.0.tgz#ecbdb14ebb8880dd233ab8956c08003f35f9e1e0"
-  integrity sha512-J3Q1e4nt0arCZNSZYTDSZHaAcxticnprAPIKAYvGNknobz0iaSFWD/3iyPj9AT+0uNocTrWXUt0rBurbqA4/2A==
+ag-grid-enterprise@^21.0.1:
+  version "21.0.1"
+  resolved "https://registry.yarnpkg.com/ag-grid-enterprise/-/ag-grid-enterprise-21.0.1.tgz#a84796a25c9754c2535c9ea47d3146e57e0b2960"
+  integrity sha512-C1R6bk+zltxMlZSddzaS5Go7ZfEieYTngfxbxJxldehvUFXxY3rRM3PA9NJyNVDQmks6T3Zm7jxkdw9RNUxItA==
+
+ag-grid-react@^21.0.1:
+  version "21.0.1"
+  resolved "https://registry.yarnpkg.com/ag-grid-react/-/ag-grid-react-21.0.1.tgz#99cba1db66710d071e19870da64ffe89d5bd4dd9"
+  integrity sha512-r6YRH9QQsU5t01w16QK6DFJNNhg1r9Zk92FcyCSQ/vRVYrD2rYrA8s//cpvMSAajCh7aKNsssHP6uYSrnkM7Fw==
   dependencies:
-    prop-types "15.6.0"
-
-ag-grid@^18.0.1:
-  version "18.1.1"
-  resolved "https://registry.yarnpkg.com/ag-grid/-/ag-grid-18.1.1.tgz#55bb84ee30a5393162704f30aca2562ae798c328"
-  integrity sha512-t3kODJvpwdzPiYQP2wKuoVLSwo9dfrLwNTUJHQ+hhsohRM4BFq9J/GEedAbiIFlbciXn0WYsp3sXZ2bwkPuX4g==
+    prop-types "^15.6.2"
 
 ajv-keywords@^3.1.0:
   version "3.2.0"
@@ -5574,7 +5574,7 @@ faye-websocket@~0.11.0:
   dependencies:
     websocket-driver ">=0.5.1"
 
-fbjs@^0.8.0, fbjs@^0.8.16, fbjs@^0.8.5, fbjs@^0.8.9:
+fbjs@^0.8.0, fbjs@^0.8.5, fbjs@^0.8.9:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   integrity sha1-xNWY6taUkRJlPWWIsBpc3Nn5D90=
@@ -10275,15 +10275,6 @@ promise@^7.1.1:
   integrity sha512-nolQXZ/4L+bP/UGlkfaIujX9BKxGwmQ9OT4mOt5yvy8iK1h3wqTEJCijzGANTCCl9nWjY41juyAn2K3Q1hLLTg==
   dependencies:
     asap "~2.0.3"
-
-prop-types@15.6.0:
-  version "15.6.0"
-  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
-  integrity sha1-zq8IMCL8RrSjX2nhPvda7Q1jmFY=
-  dependencies:
-    fbjs "^0.8.16"
-    loose-envify "^1.3.1"
-    object-assign "^4.1.1"
 
 prop-types@^15.5.4:
   version "15.6.2"

@@ -49,15 +49,20 @@ import {
 	ParameterSelect,
 	ParameterInputBox,
 	ParameterSentence,
+	TableHeading,
+	PaginatedTable,
+	SimpleTable,
 } from '../index';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
 import { colors } from '../components/shared-styles';
+import censusData from './grid/2010census.json';
 import { ProductDrawerWithResources } from './product-drawer';
 import { DocgenTable } from './docgen-table';
-import { MemberDirectory, VolunteerScheduling } from './grid';
 import DownArrow from './svgs/arrow-down.svg';
+import { PopulationChange } from './grid/population-change';
+import { BaseTable } from '../components/grid/base-table';
 
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
@@ -238,12 +243,19 @@ const components = [
 				title: 'Variations',
 				path: '/grid/variations',
 				content: pageLoader(() => import('./grid/variations.md')),
-				imports: { MemberDirectory, VolunteerScheduling },
+				imports: { TableHeading, PaginatedTable, SimpleTable, Button, censusData },
+			},
+			{
+				title: 'Simple Examples',
+				path: '/grid/simple-examples',
+				content: pageLoader(() => import('./grid/examples.md')),
+				imports: { TableHeading, SimpleTable, Input, PopulationChange, censusData },
 			},
 			{
 				title: 'Documentation',
 				path: '/grid/documentation',
 				content: pageLoader(() => import('./grid/documentation.md')),
+				imports: { DocgenTable, TableHeading, SimpleTable, BaseTable, PaginatedTable },
 			},
 		],
 	},
