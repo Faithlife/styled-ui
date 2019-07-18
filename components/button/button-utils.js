@@ -1,4 +1,4 @@
-export const baseButtonProps = Object.freeze({
+export const buttonProps = Object.freeze({
 	children: 'children',
 	condensed: 'condensed',
 	theme: 'theme',

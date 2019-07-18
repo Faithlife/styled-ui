@@ -146,16 +146,16 @@ showSource: true
 	<Button primary small>
 		Settings
 	</Button>
-	<Button primary small icon={<GearIcon />} styleOverrides={{ justifyContent: 'left' }}>
+	<Button primary small icon={<GearIcon />} styleOverrides={{ justifyContent: 'flex-start' }}>
 		Settings
 	</Button>
-	<Button primary small styleOverrides={{ justifyContent: 'left' }}>
+	<Button primary small styleOverrides={{ justifyContent: 'flex-start' }}>
 		Settings
 	</Button>
-	<Button primary small icon={<GearIcon />} styleOverrides={{ justifyContent: 'right' }}>
+	<Button primary small icon={<GearIcon />} styleOverrides={{ justifyContent: 'flex-end' }}>
 		Settings
 	</Button>
-	<Button primary small styleOverrides={{ justifyContent: 'right' }}>
+	<Button primary small styleOverrides={{ justifyContent: 'flex-end' }}>
 		Settings
 	</Button>
 	<Button primary condensed small icon={<GearIcon />} />

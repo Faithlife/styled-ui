@@ -22,12 +22,16 @@ export const Input = forwardClassRef(
 			small: PropTypes.bool,
 			/** Large variation */
 			large: PropTypes.bool,
+			/** Height only applies to the Textarea variation */
 			styleOverrides: PropTypes.shape({
 				width: PropTypes.string,
+				height: PropTypes.string,
 			}),
 			size: PropTypes.number,
 			/** Inline input variation */
 			inline: PropTypes.bool,
+			/** Textarea input variation */
+			textarea: PropTypes.bool,
 		};
 
 		static defaultProps = {
@@ -58,6 +62,7 @@ export const Input = forwardClassRef(
 				onClick,
 				disabled,
 				onEnter,
+				textarea,
 				forwardedRef, // eslint-disable-line react/prop-types
 				...inputProps
 			} = this.props;
@@ -70,6 +75,7 @@ export const Input = forwardClassRef(
 
 			return (
 				<MappedStyledComponent
+					as={textarea && 'textarea'}
 					type={type || 'text'}
 					autoFocus={autoFocus}
 					readOnly={readOnly}

@@ -53,7 +53,6 @@ import {
 	ParameterInputBox,
 	ParameterSentence,
 } from '../components/main';
-import { BaseButton } from '../components/button/base-button';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
@@ -199,7 +198,7 @@ const components = [
 				path: '/button/documentation',
 				title: 'Button Documentation',
 				content: pageLoader(() => import('./button/documentation.md')),
-				imports: { BaseButton, Button, AnchorButton, DocgenTable },
+				imports: { Button, AnchorButton, DocgenTable },
 			},
 		],
 	},

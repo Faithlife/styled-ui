@@ -34,9 +34,9 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 	const focusedIndex = focusableChildList.indexOf(focusedMenuItem);
 
 	useEffect(() => {
-		if (focusedMenuItem === 'last' || focusedIndex < 0) {
+		if (focusedMenuItem === 'last') {
 			setFocusedMenuItem(focusableChildList[focusableChildList.length - 1]);
-		} else if (focusedMenuItem === 'first' || focusedIndex > focusableChildList.length - 1) {
+		} else if (focusedMenuItem === 'first') {
 			setFocusedMenuItem(focusableChildList[0]);
 		}
 	}, [focusedMenuItem, focusedIndex, focusableChildList, setFocusedMenuItem]);
@@ -52,7 +52,11 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 			>
 				<Styled.DropdownMenuContent onKeyDown={handleKeyboardNav}>
 					{React.Children.map(children, (child, index) =>
-						React.isValidElement(child) ? React.cloneElement(child, { index }) : null,
+						React.isValidElement(child)
+							? React.cloneElement(child, {
+									isSelected: index === focusedMenuItem,
+							  })
+							: null,
 					)}
 				</Styled.DropdownMenuContent>
 			</Popover>

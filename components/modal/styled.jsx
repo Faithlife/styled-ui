@@ -43,7 +43,7 @@ export const ModalHeader = styled.div`
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	padding-bottom: ${thickness.twelve};
+	padding-bottom: ${thickness.sixteen};
 	margin-bottom: ${thickness.twelve};
 	${props =>
 		props.styleOverrides.bottomBorder
@@ -56,16 +56,20 @@ export const ModalTitleBar = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
-	padding-bottom: ${thickness.twelve};
 `;
 
 export const ModalTitle = styled.div`
-	${fonts.h4};
+	font-size: 24px;
+	line-height: 1.25;
+	font-weight: bold;
+	color: ${colors.gray66};
 `;
 
 export const ModalSubtitle = styled.div`
 	width: 100%;
 	${fonts.ui14};
+	color: ${colors.gray66};
+	padding-top: ${thickness.twelve};
 `;
 
 export const ModalFooter = styled.div`

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
+import { colors as sharedColors } from '../shared-styles';
 import { CheckboxContent } from './checkbox-content';
 import * as Styled from './styled';
 
@@ -12,13 +13,19 @@ export class Checkbox extends Component {
 		onMouseUp: PropTypes.func,
 		title: PropTypes.string,
 		isChecked: PropTypes.bool,
-		theme: PropTypes.object,
+		theme: PropTypes.shape({
+			primary: PropTypes.string,
+			border: PropTypes.string,
+			disabledBackground: PropTypes.string,
+			disabledBorder: PropTypes.string,
+		}),
 		type: PropTypes.string,
 		children: PropTypes.node,
 		/** See the docs for how to override styles properly  */
 		className: PropTypes.string,
 		/** Disables automatic blur */
 		disableAutoBlur: PropTypes.bool,
+		disabled: PropTypes.bool,
 	};
 
 	/* eslint-disable react/prop-types */
@@ -35,7 +42,7 @@ export class Checkbox extends Component {
 	componentRef = React.createRef();
 
 	render() {
-		const { onClick, title, isChecked, theme, type, children, className } = this.props;
+		const { onClick, title, isChecked, theme, type, children, className, disabled } = this.props;
 		return (
 			<ThemeProvider theme={theme}>
 				<Styled.CheckboxContainer
@@ -46,8 +53,9 @@ export class Checkbox extends Component {
 					className={className}
 					role={'checkbox'}
 					aria-checked={isChecked}
+					disabled={disabled}
 				>
-					<CheckboxContent isChecked={isChecked} title={title}>
+					<CheckboxContent isChecked={isChecked} title={title} disabled={disabled}>
 						{children}
 					</CheckboxContent>
 				</Styled.CheckboxContainer>
@@ -58,8 +66,10 @@ export class Checkbox extends Component {
 
 Checkbox.defaultProps = {
 	theme: {
-		primary: '#1E91D6',
+		primary: sharedColors.blueBase,
 		border: '#95908f',
+		disabledBackground: sharedColors.gray8,
+		disabledBorder: sharedColors.gray22,
 	},
 	type: 'button',
 };

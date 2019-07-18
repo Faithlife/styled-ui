@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.9.1
+
+- Update dependencies.
+
 ### 5.9.0
 
 - Update `HelpBox` styling and expand API to allow for more customization.
