@@ -60,7 +60,6 @@ import { colors } from '../components/shared-styles';
 import censusData from './grid/2010census.json';
 import { ProductDrawerWithResources } from './product-drawer';
 import { DocgenTable } from './docgen-table';
-import { textInputPages } from './text-input/pages';
 import DownArrow from './svgs/arrow-down.svg';
 import { PopulationChange } from './grid/population-change';
 import { BaseTable } from '../components/grid/base-table';
