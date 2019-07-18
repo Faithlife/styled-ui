@@ -13,7 +13,6 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 		handleCloseMenu,
 		dropdownToggleRef,
 		styleOverrides,
-		onItemSelect,
 	} = useDropdownContext();
 
 	const closeMenu = useCallback(() => {
