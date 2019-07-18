@@ -1,5 +1,15 @@
 # Changelog
 
+### 5.10.0
+
+- Add `SequencedTab` and `SequencedTabList` components
+- Add `textarea` variation to `Input`
+- Add disabled props to `Checkbox` and `Radio`
+- Update `Modal` `Popover` `Helpbox` and `Button` to spec
+- Hide tooltips on mobile
+- Fix keyboard navigation on `Dropdown` and `Listbox` components
+- Add overflow style override to `Popover`
+
 ### 5.9.1
 
 - Update dependencies.
