@@ -35,17 +35,8 @@ export function SequencedTabList({ children }) {
 	const [touchedTabs, setTouchedTabs] = useState(new Set());
 
 	useEffect(() => {
-		const newTouchedTabs = new Set(touchedTabs);
-		newTouchedTabs.add(selectedTabIndex);
-
-		const setsAreEqual =
-			newTouchedTabs.size === touchedTabs.size &&
-			[...newTouchedTabs].every(value => touchedTabs.has(value));
-
-		if (!setsAreEqual) {
-			setTouchedTabs(new Set(newTouchedTabs));
-		}
-	}, [selectedTabIndex, touchedTabs]);
+		setTouchedTabs(touchedTabs => new Set(touchedTabs).add(selectedTabIndex));
+	}, [selectedTabIndex]);
 
 	const handleKeyboardNav = useSequencedKeyboardNav(selectedTabIndex, onSelectTab, children);
 	return (
