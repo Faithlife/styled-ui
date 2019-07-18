@@ -22,7 +22,7 @@ export function MenuItem(props) {
 	useEffect(() => {
 		if (isSelected && ref.current) {
 			// We need to defer the focus so that we are sure the parent is mounted and added as an inbounds element for the focusAwayHandler
-			setTimeout(() => ref.current.focus(), 0);
+			setTimeout(() => ref.current && ref.current.focus(), 0);
 			if (onFocus) {
 				onFocus();
 			}

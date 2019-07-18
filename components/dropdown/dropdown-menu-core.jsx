@@ -13,6 +13,7 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 		handleCloseMenu,
 		dropdownToggleRef,
 		styleOverrides,
+		onItemSelect,
 	} = useDropdownContext();
 
 	const closeMenu = useCallback(() => {
@@ -41,6 +42,11 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 		}
 	}, [focusedMenuItem, focusedIndex, focusableChildList, setFocusedMenuItem]);
 
+	const handleFocusedMenuItemChange = useCallback(
+		itemIndex => () => setFocusedMenuItem(itemIndex),
+		[setFocusedMenuItem],
+	);
+
 	return (
 		<div id={menuId} {...ariaProps}>
 			<Popover
@@ -59,6 +65,7 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 						React.isValidElement(child)
 							? React.cloneElement(child, {
 									isSelected: index === focusedMenuItem,
+									onFocusedMenuItemChange: handleFocusedMenuItemChange(index),
 							  })
 							: null,
 					)}
