@@ -14,4 +14,4 @@ export const Stack = styled(Box)`
 	}
 `;
 
-Stack.defaultProps.theme = theme;
+Stack.defaultProps = { theme };

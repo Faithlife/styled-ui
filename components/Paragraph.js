@@ -15,4 +15,4 @@ export const Paragraph = styled.p`
 	${border};
 `;
 
-Paragraph.defaultProps.theme = theme;
+Paragraph.defaultProps = { theme };

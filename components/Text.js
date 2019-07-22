@@ -16,4 +16,4 @@ export const Text = styled.span`
 	${border};
 `;
 
-Text.defaultProps.theme = theme;
+Text.defaultProps = { theme };

@@ -18,4 +18,4 @@ export const Box = styled.div(
 	background,
 );
 
-Box.defaultProps.theme = theme;
+Box.defaultProps = { theme };
