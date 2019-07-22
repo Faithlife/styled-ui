@@ -68,7 +68,10 @@ import { BaseTable } from '../components/grid/base-table';
 // so the stylesheets must be built by a separate webpack build.
 import '../dist/ag-grid.css';
 
-const censusDataWithId = censusData.map((data, index) => ({ ...data, id: index }));
+const censusDataWithId = censusData.map((data, index) => ({
+	...data,
+	id: index,
+}));
 
 const ButtonDemo = styled.div`
 	display: inline-grid;

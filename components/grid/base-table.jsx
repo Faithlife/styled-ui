@@ -64,6 +64,8 @@ export function BaseTable({
 		.filter(child => child.props.isSmallViewportOnly)
 		.map(child => child.props.fieldName);
 
+	const suppressRowClick = headingChildren.some(child => child.props.hasInteractableElement);
+
 	const handleGridResize = useCallback(() => {
 		if (gridApi && columnApi) {
 			if (largeOnlyColumns) {
@@ -88,12 +90,19 @@ export function BaseTable({
 
 	const getRowNodeId = useCallback(data => data.id, []);
 
+	const handleCellClicked = useCallback(
+		event => {
+			if (!event.column.colDef.hasInteractableElement) {
+				onRowClick && onRowClick([event.data]);
+			}
+		},
+		[onRowClick],
+	);
+
 	const handleGridReady = useCallback(
 		({ api, columnApi }) => {
 			setGridApi(api);
 			setColumnApi(columnApi);
-
-			// handleGridResize(api, columnApi);
 
 			if (sortModel) {
 				api.setSortModel(sortModel);
@@ -132,6 +141,8 @@ export function BaseTable({
 				groupUseEntireRow
 				deltaRowDataMode
 				getRowNodeId={handleGetRowId || getRowNodeId}
+				suppressRowClickSelection={suppressRowClick}
+				onCellClicked={suppressRowClick ? handleCellClicked : null}
 				reactNext
 				{...gridOptions}
 			>

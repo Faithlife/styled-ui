@@ -20,6 +20,34 @@ state: { data: null }
 </div>
 ```
 
+### Interactable Elements in the rows
+
+The `hasInteractableElement` allows you to use interactable in rows without triggering a row click
+
+```react
+showSource: true
+---
+<div>
+	<SimpleTable data={censusData} maxRows={10} onRowClick={() => alert('Click')}>
+		<TableHeading displayName="Name" fieldName="NAME" defaultSort={TableHeading.sortOptions.ascending} />
+		<TableHeading displayName="Population" fieldName="CENSUS2010POP" isRightAligned />
+		<TableHeading displayName="Net Population Change" fieldName="NPOPCHG2010" isRightAligned />
+		<TableHeading
+			hasInteractableElement
+			displayName=""
+			fieldName="edit"
+			width={100}
+			cellComponent={ ({data}) =>
+				(<Button primary small onClick={() => console.log(data)}>
+					Edit
+				</Button>)
+			}
+			isLargeViewportOnly
+		/>
+	</SimpleTable>
+</div>
+```
+
 ### Simple Aggregations
 
 ```react
