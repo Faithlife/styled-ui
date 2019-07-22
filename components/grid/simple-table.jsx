@@ -13,6 +13,7 @@ export function SimpleTable({
 	maxRows,
 	rowSelectionType,
 	hideHeaders,
+	handleGetRowId,
 }) {
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useTableState();
 
@@ -31,6 +32,7 @@ export function SimpleTable({
 			maxRows={maxRows}
 			rowSelectionType={rowSelectionType}
 			hideHeaders={hideHeaders}
+			handleGetRowId={handleGetRowId}
 		>
 			{children}
 		</BaseTable>

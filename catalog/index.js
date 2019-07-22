@@ -83,6 +83,8 @@ import '../dist/main.css';
 import '../dist/text-input.css';
 import '../dist/ag-grid.css';
 
+const censusDataWithId = censusData.map((data, index) => ({ ...data, id: index }));
+
 const ButtonDemo = styled.div`
 	display: inline-grid;
 	grid-auto-flow: column;
@@ -326,13 +328,26 @@ const components = [
 				title: 'Variations',
 				path: '/grid/variations',
 				content: pageLoader(() => import('./grid/variations.md')),
-				imports: { TableHeading, PaginatedTable, SimpleTable, Button, censusData },
+				imports: {
+					TableHeading,
+					PaginatedTable,
+					SimpleTable,
+					Button,
+					censusData: censusDataWithId,
+				},
 			},
 			{
 				title: 'Simple Examples',
 				path: '/grid/simple-examples',
 				content: pageLoader(() => import('./grid/examples.md')),
-				imports: { TableHeading, SimpleTable, Input, PopulationChange, censusData },
+				imports: {
+					TableHeading,
+					SimpleTable,
+					Input,
+					PopulationChange,
+					Button,
+					censusData: censusDataWithId,
+				},
 			},
 			{
 				title: 'Documentation',

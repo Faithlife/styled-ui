@@ -26,6 +26,7 @@ export function BaseTable({
 	filterText,
 	rowSelectionType,
 	hideHeaders,
+	handleGetRowId,
 }) {
 	useEffect(() => {
 		if (gridApi) {
@@ -85,6 +86,8 @@ export function BaseTable({
 		}
 	}, [updateSortModel, gridApi]);
 
+	const getRowNodeId = useCallback(data => data.id, []);
+
 	const handleGridReady = useCallback(
 		({ api, columnApi }) => {
 			setGridApi(api);
@@ -128,6 +131,7 @@ export function BaseTable({
 				rowClass={onRowClick ? 'ag-grid-clickable-row' : ''}
 				groupUseEntireRow
 				deltaRowDataMode
+				getRowNodeId={handleGetRowId || getRowNodeId}
 				reactNext
 				{...gridOptions}
 			>
@@ -193,5 +197,7 @@ BaseTable.propTypes = {
 	onRowClick: PropTypes.func,
 	/** Hide headers */
 	hideHeaders: PropTypes.bool,
+	/** Your data should have an id property or this handler must be included */
+	handleGetRowId: PropTypes.func,
 	children: PropTypes.node,
 };

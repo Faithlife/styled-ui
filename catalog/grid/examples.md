@@ -1,5 +1,25 @@
 Usage examples
 
+### Row ID
+
+All data must include an `id` property or `handleGetRowId` must be provided
+
+```react
+showSource: true
+state: { data: null }
+---
+<div>
+	<Button primary medium onClick={() => setState({ data: (state.data && state.data.slice(50)) || censusData.slice(50) })}>Update Data</Button>
+	<SimpleTable data={state.data || censusData} maxRows={10} handleGetRowId={data => data.NAME}>
+		<TableHeading displayName="Name" fieldName="NAME" defaultSort={TableHeading.sortOptions.ascending} />
+		<TableHeading displayName="Population" fieldName="CENSUS2010POP" isRightAligned />
+		<TableHeading displayName="Net Population Change" fieldName="NPOPCHG2010" isRightAligned />
+		<TableHeading displayName="Births" fieldName="BIRTHS2010" isRightAligned width={100} isLargeViewportOnly />
+		<TableHeading displayName="Deaths" fieldName="DEATHS2010" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
+	</SimpleTable>
+</div>
+```
+
 ### Simple Aggregations
 
 ```react
