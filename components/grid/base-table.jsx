@@ -6,7 +6,6 @@ import * as Styled from './styled';
 
 const defaultRowHeight = 45;
 const headerHeight = defaultRowHeight - 5;
-const tableHeightPadding = 42;
 
 /** A wrapper of ag-grid with some boilerplate code to handle initialization and sorting/ filtering */
 export function BaseTable({
@@ -27,8 +26,11 @@ export function BaseTable({
 	rowSelectionType,
 	hideHeaders,
 	rowHeight,
+	hasPagingBar,
 	handleGetRowId,
 }) {
+	const tableHeightPadding = hasPagingBar ? 50 : 2;
+
 	useEffect(() => {
 		if (gridApi) {
 			gridApi.setQuickFilter(filterText);
@@ -211,6 +213,8 @@ BaseTable.propTypes = {
 	hideHeaders: PropTypes.bool,
 	/** The height, in pixels, of non-header rows in the table.  If not provided, default is 45px */
 	rowHeight: PropTypes.number,
+	/** Whether component is simple table or paginated table */
+	hasPagingBar: PropTypes.bool,
 	/** Your data should have an id property or this handler must be included */
 	handleGetRowId: PropTypes.func,
 	children: PropTypes.node,

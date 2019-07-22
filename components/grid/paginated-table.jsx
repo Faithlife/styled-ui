@@ -60,6 +60,7 @@ export function PaginatedTable({
 			data={data}
 			hideHeaders={hideHeaders}
 			rowHeight={rowHeight}
+			hasPagingBar
 			handleGetRowId={handleGetRowId}
 		>
 			{children}
