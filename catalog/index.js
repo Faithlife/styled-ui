@@ -83,7 +83,10 @@ import '../dist/main.css';
 import '../dist/text-input.css';
 import '../dist/ag-grid.css';
 
-const censusDataWithId = censusData.map((data, index) => ({ ...data, id: index }));
+const censusDataWithId = censusData.map((data, index) => ({
+	...data,
+	id: index,
+}));
 
 const ButtonDemo = styled.div`
 	display: inline-grid;
