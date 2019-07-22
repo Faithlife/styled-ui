@@ -118,8 +118,9 @@ export function BaseTable({
 	const rowCount = data ? data.length : 1;
 	const currentHeaderHeight = hideHeaders ? 0 : headerHeight;
 	const tableHeight =
-		(maxRows && maxRows < rowCount ? maxRows : rowCount) * rowHeight ||
-		defaultRowHeight + tableHeightPadding + currentHeaderHeight;
+		(maxRows && maxRows < rowCount ? maxRows : rowCount) * (rowHeight || defaultRowHeight) +
+		tableHeightPadding +
+		currentHeaderHeight;
 	return (
 		<Styled.GridContainer className="ag-theme-faithlife" height={tableHeight}>
 			<AgGridReact
