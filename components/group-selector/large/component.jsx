@@ -69,7 +69,9 @@ export class LargeGroupSelector extends React.Component {
 	};
 
 	componentDidMount() {
-		if (this.props.showInPlace) window.addEventListener('scroll', this.handleScroll);
+		if (this.props.showInPlace) {
+			window.addEventListener('scroll', this.handleScroll);
+		}
 	}
 
 	componentWillUnmount() {
@@ -86,7 +88,7 @@ export class LargeGroupSelector extends React.Component {
 
 	formatStringList = arrayOfStrings => {
 		const result =
-			arrayOfStrings.length == 1
+			arrayOfStrings.length === 1
 				? arrayOfStrings[0]
 				: [arrayOfStrings.slice(0, -1).join(', '), arrayOfStrings.slice(-1)[0]].join(
 						arrayOfStrings.length < 2 ? '' : ' or ',

@@ -113,7 +113,7 @@ export class SearchResult extends React.PureComponent {
 					<Styled.SearchResultHightlightText>
 						{formattedMembershiplevels}
 					</Styled.SearchResultHightlightText>{' '}
-					membership required. By selecting, you'll join this group.
+					membership required. By selecting, you&apos;ll join this group.
 				</Styled.SearchResultMessage>
 			);
 			membershipLine = (
