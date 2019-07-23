@@ -1,140 +1,86 @@
 import styled from 'styled-components';
-import { fonts, colors, thickness } from '../../components/shared-styles';
+import { theme as globalTheme } from '../../theme';
 import { LightBulbH } from '../icons';
-import { resetStyles } from '../utils';
 import { mediaSizes } from '../shared-styles';
+import { Box } from '../Box';
 
-export const HelpBoxContent = styled.div``;
+export const HelpBoxBody = styled(Box)``;
 
-export const HelpBoxBody = styled.div``;
+export const HelpBoxFooter = styled(Box)``;
 
-export const HelpBoxFooter = styled.div``;
+export const HelpBoxContent = styled(Box)`
+	line-height: 1.25;
 
-export const BulbIcon = styled(LightBulbH)``;
-
-export const CloseButton = styled.button``;
-
-export const IconDiv = styled.div``;
-
-export const RightIconDiv = styled.div``;
-
-export const HelpBox = variantCreator(
-	colors.blueTint,
-	colors.blueLight,
-	colors.blueDark,
-)(styled.div`
-	position: relative;
-	display: flex;
-	border-radius: 3px;
-	word-break: break-word;
-
-	${IconDiv} {
-		margin: 15px -4px 0px 16px;
-
-		svg {
-			height: 18px;
-			width: 18px;
-		}
-	}
-
-	${BulbIcon} {
-		flex: none;
-
-		width: ${props => (props.large ? '42px' : '24px')};
-		height: ${props => (props.large ? '42px' : '24px')};
-		margin: 12px 0px 0px 16px;
-	}
-
-	${HelpBoxContent} {
-		${fonts.c16};
+	${HelpBoxBody} {
 		display: flex;
 		flex: 1;
-		text-align: left;
-		line-height: 1.25;
-		font-size: 16px;
-		color: ${colors.flGray};
+		order: 2;
+	}
 
-		height: ${props => (props.large ? '230px' : '')};
-		padding: 14px 16px 14px 12px;
+	${HelpBoxFooter} {
+		display: flex;
+		order: 2;
+		align-items: center;
+		margin: ${props =>
+			props.stacked
+				? `${globalTheme.space[4]}px ${globalTheme.space[5]}px ${globalTheme.space[0]}px 
+					${globalTheme.space[0]}px`
+				: `-7px ${globalTheme.space[0]}px -7px ${globalTheme.space[5]}px`};
 
-		flex-direction: ${props => (props.stacked ? 'column' : 'row')};
 		@media (max-width: ${mediaSizes.phone}) {
-			flex-direction: column;
-		}
-
-		${HelpBoxBody} {
-			${fonts.c16};
-			display: flex;
-			flex: 1;
-			order: 2;
-		}
-
-		${HelpBoxFooter} {
-			${fonts.c16};
-			display: flex;
-			order: 2;
-			align-items: center;
-
-			margin: ${props => (props.stacked ? '12px 16px 0px 0px' : '-7px 0px -7px 16px')};
-			@media (max-width: ${mediaSizes.phone}) {
-				margin: 12px 0px 0px 0px;
-			}
+			margin: ${`${globalTheme.space[4]}px ${globalTheme.space[0]}px ${globalTheme.space[0]}px
+				${globalTheme.space[0]}px`};
 		}
 	}
+`;
 
-	${CloseButton} {
-		cursor: pointer;
-		margin: ${props => (props.large ? '15px 16px 0px 16px' : '15px 16px 0px 12px')};
-		margin-left: ${props => (!props.stacked ? '-4px' : '')};
-		height: 18px;
-		background: transparent;
-		padding: 0;
-		border: none;
-
-		&::-moz-focus-inner {
-			border: 0;
-			padding: 0;
-		}
+export const Icon = styled(Box)`
+	path {
+		fill: ${props =>
+			props.success
+				? globalTheme.colors.green2
+				: props.danger
+				? globalTheme.colors.red3
+				: props.warning
+				? globalTheme.colors.yellow3
+				: props.minor
+				? globalTheme.colors.gray14
+				: globalTheme.colors.blue3};
 	}
+`;
 
-	${RightIconDiv} {
-		margin: ${props => (props.large ? '15px 16px 0px 16px' : '15px 16px 0px 12px')};
-		margin-left: ${props => (!props.stacked ? '-4px' : '')};
-		height: 18px;
-		background: transparent;
-		padding: 0;
-		border: none;
-
-		&::-moz-focus-inner {
-			border: 0;
-			padding: 0;
-		}
+export const CloseIcon = styled(Box)`
+	path {
+		fill: ${props =>
+			props.success
+				? globalTheme.colors.green5
+				: props.danger
+				? globalTheme.colors.red5
+				: props.warning
+				? globalTheme.colors.yellow5
+				: props.minor
+				? globalTheme.colors.gray34
+				: globalTheme.colors.blue5};
 	}
-`);
+`;
 
-export const variationMap = {
-	success: variantCreator(colors.greenTint, colors.greenLight, colors.greenDark),
-	danger: variantCreator(colors.redTint, colors.redLight, colors.redDark),
-	warning: variantCreator(colors.yellowTint, colors.yellowLight, colors.yellowDark),
-	minor: variantCreator(colors.gray4, colors.gray14, colors.gray34),
-};
+export const BulbIcon = styled(LightBulbH)`
+	flex: none;
+	width: ${props => (props.large ? '42px' : '24px')};
+	height: ${props => (props.large ? '42px' : '24px')};
+	margin: ${`${globalTheme.space[4]}px ${globalTheme.space[0]}px ${globalTheme.space[0]}px
+				${globalTheme.space[5]}px`};
 
-function variantCreator(backgroundColor, foregroundColor, closeIconColor) {
-	return component => styled(component)`
-		${resetStyles};
-
-		background-color: ${props => props.theme.backgroundColor || backgroundColor};
-		border: solid 1px ${props => props.theme.foregroundColor || foregroundColor};
-		border-left: solid ${thickness.four} ${props => props.theme.foregroundColor || foregroundColor};
-
-		path {
-			fill: ${props => props.theme.foregroundColor || foregroundColor};
-		}
-
-		button {
-			path {
-				fill: ${props => props.theme.closeIconColor || closeIconColor};
-			}
-		}
-	`;
-}
+	path {
+		fill: ${props =>
+			props.success
+				? globalTheme.colors.green2
+				: props.danger
+				? globalTheme.colors.red3
+				: props.warning
+				? globalTheme.colors.yellow3
+				: props.minor
+				? globalTheme.colors.gray14
+				: globalTheme.colors.blue3};
+	}
+`;

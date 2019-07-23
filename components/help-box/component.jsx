@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { theme as globalTheme } from '../../theme';
 import { Close, Exclamation, CircleCheck, Info } from '../icons';
-import { applyVariations } from '../utils';
+import { Box } from '../Box';
+import { Button } from '../button';
 import * as Styled from './styled';
 
 /** Rectangular box containing tips on how to use our products */
@@ -14,55 +16,120 @@ export function HelpBox({
 	className,
 	theme,
 	handleClose,
+	success,
+	danger,
+	warning,
+	minor,
+	large,
 	...helpBoxProps
 }) {
-	const { component: HelpBoxVariation, filteredProps } = applyVariations(
-		Styled.HelpBox,
-		Styled.variationMap,
-		helpBoxProps,
-	);
-
 	return (
-		<HelpBoxVariation
+		<Box
 			className={className}
-			theme={theme}
-			success={helpBoxProps.success}
-			danger={helpBoxProps.danger}
-			warning={helpBoxProps.warning}
-			minor={helpBoxProps.minor}
 			stacked={stacked}
-			{...filteredProps}
+			backgroundColor={
+				success
+					? globalTheme.colors.green1
+					: danger
+					? globalTheme.colors.red1
+					: warning
+					? globalTheme.colors.yellow1
+					: minor
+					? globalTheme.colors.gray4
+					: globalTheme.colors.blue1
+			}
+			border={`solid 1px ${
+				success
+					? globalTheme.colors.green2
+					: danger
+					? globalTheme.colors.red3
+					: warning
+					? globalTheme.colors.yellow3
+					: minor
+					? globalTheme.colors.gray14
+					: globalTheme.colors.blue3
+			}`}
+			borderLeft={`solid 4px ${
+				success
+					? globalTheme.colors.green2
+					: danger
+					? globalTheme.colors.red3
+					: warning
+					? globalTheme.colors.yellow3
+					: minor
+					? globalTheme.colors.gray14
+					: globalTheme.colors.blue3
+			}`}
+			color={globalTheme.colors.flGray}
+			position="relative"
+			display="flex"
+			borderRadius={globalTheme.radii[1]}
+			{...helpBoxProps}
 		>
 			{(showLightBulb && <Styled.BulbIcon />) ||
 				(!hideIcon && (
-					<Styled.IconDiv>
-						{helpBoxProps.danger ? (
-							<Exclamation />
-						) : helpBoxProps.success ? (
-							<CircleCheck />
-						) : helpBoxProps.minor ? null : (
-							<Info />
-						)}
-					</Styled.IconDiv>
+					<Styled.Icon
+						success={success}
+						danger={danger}
+						warning={warning}
+						minor={minor}
+						margin={`15px -4px 0px ${globalTheme.space[5]}px`}
+					>
+						{danger ? <Exclamation /> : success ? <CircleCheck /> : minor ? null : <Info />}
+					</Styled.Icon>
 				))}
-			<Styled.HelpBoxContent>{children}</Styled.HelpBoxContent>
+			<Styled.HelpBoxContent
+				stacked={stacked}
+				display="flex"
+				flex="1"
+				height={large ? '230px' : ''}
+				padding={`14px ${globalTheme.space[5]}px 14px ${globalTheme.space[4]}px`}
+				flexDirection={stacked ? 'column' : ['column', 'row']}
+			>
+				{children}
+			</Styled.HelpBoxContent>
 			{(handleClose && (
-				<Styled.CloseButton onClick={handleClose}>
-					<Close />
-				</Styled.CloseButton>
+				<Styled.CloseIcon
+					success={success}
+					danger={danger}
+					warning={warning}
+					minor={minor}
+					margin={
+						large
+							? `15px ${globalTheme.space[5]}px ${globalTheme.space[0]}px ${globalTheme.space[5]}px`
+							: `15px ${globalTheme.space[5]}px ${globalTheme.space[0]}px ${globalTheme.space[4]}px`
+					}
+					marginLeft={!stacked ? '-4px' : ''}
+				>
+					<Button
+						icon={<Close />}
+						onClick={handleClose}
+						styleOverrides={{
+							fontSize: globalTheme.fontSizes[4],
+							padding: `${globalTheme.space[0]}px`,
+						}}
+					/>
+				</Styled.CloseIcon>
 			)) ||
 				(showRightIcon && (
-					<Styled.RightIconDiv>
-						{helpBoxProps.danger ? (
-							<Exclamation />
-						) : helpBoxProps.success ? (
-							<CircleCheck />
-						) : helpBoxProps.minor ? null : (
-							<Info />
-						)}
-					</Styled.RightIconDiv>
+					<Styled.Icon
+						success={success}
+						danger={danger}
+						warning={warning}
+						minor={minor}
+						margin={
+							large
+								? `15px ${globalTheme.space[5]}px ${globalTheme.space[0]}px 
+									${globalTheme.space[5]}px`
+								: `15px ${globalTheme.space[5]}px ${globalTheme.space[0]}px 
+									${globalTheme.space[4]}px`
+						}
+						marginLeft={!stacked ? '-4px' : ''}
+					>
+						{danger ? <Exclamation /> : success ? <CircleCheck /> : minor ? null : <Info />}
+					</Styled.Icon>
 				))}
-		</HelpBoxVariation>
+		</Box>
 	);
 }
 
