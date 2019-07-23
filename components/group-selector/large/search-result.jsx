@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar } from '../avatar';
 import { Button } from '../../main';
+import { Tooltip } from '../../popover';
 import * as Styled from '../styled';
 
 export class SearchResult extends React.PureComponent {
@@ -18,7 +19,11 @@ export class SearchResult extends React.PureComponent {
 		onClaimGroupClick: PropTypes.func.isRequired,
 		onJoinGroupClick: PropTypes.func.isRequired,
 		toggle: PropTypes.func.isRequired,
+		authorizedMembershipLevels: PropTypes.arrayOf(PropTypes.string).isRequired,
+		authorizedGroupKinds: PropTypes.arrayOf(PropTypes.string).isRequired,
 		claimable: PropTypes.bool,
+		joinable: PropTypes.bool,
+		resources: PropTypes.object,
 	};
 
 	claimGroup = () => {
@@ -59,24 +64,56 @@ export class SearchResult extends React.PureComponent {
 	};
 
 	render() {
-		const { claimable, relationshipKind, membershipKind, kind, avatarUrl, name } = this.props;
+		const {
+			claimable,
+			joinable,
+			relationshipKind,
+			membershipKind,
+			kind,
+			avatarUrl,
+			name,
+			authorizedMembershipLevels,
+			authorizedGroupKinds,
+			formattedMembershiplevels,
+			formattedGroupLevels,
+			resources,
+		} = this.props;
 
 		let message;
 		let membershipLine;
 		let button;
 
 		if (claimable) {
-			message = <Styled.SearchResultMessage>This is an empty group</Styled.SearchResultMessage>;
+			message = (
+				<Tooltip
+					content={
+						<>
+							<Styled.SearchResultMessage>
+								Claiming this group will make you the admin.
+							</Styled.SearchResultMessage>
+							<br />
+							<Styled.SearchResultMessage>
+								You can invite others to the group, assign additional admins, and transfer admin
+								permissions in the future.
+							</Styled.SearchResultMessage>
+						</>
+					}
+				>
+					<Styled.SearchResultMessage>This is an unclaimed group</Styled.SearchResultMessage>
+				</Tooltip>
+			);
 			button = (
 				<Button small outline primary onClick={this.claimGroup}>
-					Claim
+					{resources.claimButtonText}
 				</Button>
 			);
-		} else if (membershipKind === 'none' || !membershipKind) {
+		} else if ((membershipKind === 'none' || !membershipKind) && joinable) {
 			message = (
 				<Styled.SearchResultMessage>
-					<Styled.SearchResultHightlightText>Admin</Styled.SearchResultHightlightText> membership
-					required
+					<Styled.SearchResultHightlightText>
+						{formattedMembershiplevels}
+					</Styled.SearchResultHightlightText>{' '}
+					membership required. By selecting, you'll join this group.
 				</Styled.SearchResultMessage>
 			);
 			membershipLine = (
@@ -86,14 +123,38 @@ export class SearchResult extends React.PureComponent {
 			);
 			button = (
 				<Button small outline primary onClick={this.joinGroup}>
-					Join Group
+					{resources.joinButtonText}
 				</Button>
 			);
-		} else if (membershipKind !== 'admin' && relationshipKind === 'participant') {
+		} else if ((membershipKind === 'none' || !membershipKind) && !joinable) {
 			message = (
 				<Styled.SearchResultMessage>
-					<Styled.SearchResultHightlightText>Admin</Styled.SearchResultHightlightText> membership
-					required
+					<Styled.SearchResultHightlightText>
+						{formattedMembershiplevels}
+					</Styled.SearchResultHightlightText>{' '}
+					membership required
+				</Styled.SearchResultMessage>
+			);
+			membershipLine = (
+				<Styled.SearchResultMembershipLine>
+					You are <Styled.SearchResultBoldText>not</Styled.SearchResultBoldText> a member
+				</Styled.SearchResultMembershipLine>
+			);
+			button = (
+				<Button small outline primary onClick={this.requestAccess}>
+					{resources.requestButtonText}
+				</Button>
+			);
+		} else if (
+			!authorizedMembershipLevels.includes(membershipKind) &&
+			relationshipKind === 'participant'
+		) {
+			message = (
+				<Styled.SearchResultMessage>
+					<Styled.SearchResultHightlightText>
+						{formattedMembershiplevels}
+					</Styled.SearchResultHightlightText>{' '}
+					membership required
 				</Styled.SearchResultMessage>
 			);
 			membershipLine = (
@@ -103,14 +164,16 @@ export class SearchResult extends React.PureComponent {
 			);
 			button = (
 				<Button small outline primary onClick={this.requestAccess}>
-					Request Admin
+					{resources.requestButtonText}
 				</Button>
 			);
-		} else if (kind.toLowerCase() !== 'church' && membershipKind === 'admin') {
+		} else if (!authorizedGroupKinds.includes(kind.toLowerCase()) && membershipKind === 'admin') {
 			message = (
 				<Styled.SearchResultMessage>
 					{'Group must be a '}
-					<Styled.SearchResultHightlightText>Church</Styled.SearchResultHightlightText>
+					<Styled.SearchResultHightlightText>
+						{formattedGroupLevels}
+					</Styled.SearchResultHightlightText>
 				</Styled.SearchResultMessage>
 			);
 			membershipLine = (
@@ -123,7 +186,7 @@ export class SearchResult extends React.PureComponent {
 					Edit
 				</Button>
 			);
-		} else if (relationshipKind === 'none') {
+		} else if (relationshipKind === 'none' && joinable) {
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
 					You are not a{' '}
@@ -132,18 +195,31 @@ export class SearchResult extends React.PureComponent {
 			);
 			button = (
 				<Button small outline primary onClick={this.joinGroup}>
-					Join Group
+					{resources.joinButtonText}
+				</Button>
+			);
+		} else if (relationshipKind === 'none' && !joinable) {
+			membershipLine = (
+				<Styled.SearchResultMembershipLine>
+					You are not a{' '}
+					<Styled.SearchResultHightlightText>Member</Styled.SearchResultHightlightText>
+				</Styled.SearchResultMembershipLine>
+			);
+			button = (
+				<Button small outline primary onClick={this.requestAccess}>
+					{resources.requestButtonText}
 				</Button>
 			);
 		} else {
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
-					You are an <Styled.SearchResultBoldText>Admin</Styled.SearchResultBoldText>
+					You are {membershipKind === 'admin' ? 'an' : 'a'}{' '}
+					<Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
 				<Button small primaryOutline onClick={this.getStarted}>
-					Get Started
+					{resources.selectButtonText}
 				</Button>
 			);
 		}
@@ -170,3 +246,7 @@ export class SearchResult extends React.PureComponent {
 		);
 	}
 }
+
+SearchResult.defaultProps = {
+	joinable: true,
+};

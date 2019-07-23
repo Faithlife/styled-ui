@@ -35,6 +35,26 @@ export class LargeGroupSelector extends React.Component {
 		showInPlace: PropTypes.bool,
 		/** Whether or not to show the "Find Your Church in the Faithlife Group Directory" title */
 		hideTitle: PropTypes.bool,
+		/** Array of membership levels allowed to "Select" group. Defaults to Admin only */
+		authorizedMembershipLevels: PropTypes.arrayOf(PropTypes.string),
+		/** Array of group kinds user is allowed to "Select". Defaults to 'church' only */
+		authorizedGroupKinds: PropTypes.arrayOf(PropTypes.string),
+		/** Flag to use "Select"/"Request" button style instead of "Get Started"/"Join"/"Follow"/"Claim" */
+		useSelectRequestButtonStyle: PropTypes.bool,
+		/** String literals to overload UI elements and for localization */
+		resources: PropTypes.shape({
+			title: PropTypes.string,
+			subTitle: PropTypes.string,
+			requestButtonText: PropTypes.string,
+			joinButtonText: PropTypes.string,
+			claimButtonText: PropTypes.string,
+			selectButtonText: PropTypes.string,
+			dontSeeChurchText: PropTypes.string,
+			goToGroupButtonText: PropTypes.string,
+			churchNameText: PropTypes.string,
+			churchLocationText: PropTypes.string,
+			churchLocationPlaceholder: PropTypes.string,
+		}),
 	};
 
 	state = {
@@ -48,6 +68,14 @@ export class LargeGroupSelector extends React.Component {
 		scrollWidthDelta: 0,
 	};
 
+	componentDidMount() {
+		if (this.props.showInPlace) window.addEventListener('scroll', this.handleScroll);
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('scroll', this.handleScroll);
+	}
+
 	searchResultsRef = React.createRef();
 	fixedCreateWrapper = false;
 
@@ -56,33 +84,25 @@ export class LargeGroupSelector extends React.Component {
 		this.props.onCreateGroup(this.state.newChurchName, this.state.newChurchLocation);
 	};
 
-	getDefaultGroups() {
-		return this.props.groups.map(group => (
-			<SearchResult
-				key={group.groupId}
-				groupId={group.groupId}
-				kind={group.kind}
-				name={group.name}
-				avatarUrl={group.avatarUrl}
-				membershipKind={group.membershipKind}
-				relationshipKind={group.relationshipKind}
-				onGetStartedClick={this.handleGetStarted}
-				onRequestClick={this.props.onAdminRequestClick}
-				onEditClick={this.redirectToGroup}
-				onJoinGroupClick={this.props.onJoinGroupClick}
-				onClaimGroupClick={this.handleClaimGroup}
-				setModalState={this.setModalState}
-				setSelectedGroupId={this.setSelectedGroupId}
-				onGetStarted={this.handleGetStarted}
-				toggle={this.toggle}
-			/>
-		));
-	}
+	formatStringList = arrayOfStrings => {
+		const result =
+			arrayOfStrings.length == 1
+				? arrayOfStrings[0]
+				: [arrayOfStrings.slice(0, -1).join(', '), arrayOfStrings.slice(-1)[0]].join(
+						arrayOfStrings.length < 2 ? '' : ' or ',
+				  );
+		return result.charAt(0).toUpperCase() + result.slice(1);
+	};
 
 	getSearchResults = () => {
 		let groups;
-		if (this.props.groupSearchResults) {
-			groups = this.props.groupSearchResults.map(group => (
+		const groupResults = this.props.groupSearchResults || this.props.groups;
+
+		const formattedMembershiplevels = this.formatStringList(this.props.authorizedMembershipLevels);
+		const formattedGroupLevels = this.formatStringList(this.props.authorizedGroupKinds);
+
+		if (groupResults) {
+			groups = groupResults.map(group => (
 				<SearchResult
 					key={group.groupId}
 					groupId={group.groupId}
@@ -91,7 +111,11 @@ export class LargeGroupSelector extends React.Component {
 					avatarUrl={group.avatarUrl}
 					membershipKind={group.membershipKind}
 					relationshipKind={group.relationshipKind}
+					authorizedMembershipLevels={this.props.authorizedMembershipLevels}
+					authorizedGroupKinds={this.props.authorizedGroupKinds}
+					resources={this.props.resources}
 					claimable={group.claimable}
+					joinable={group.joinable}
 					onGetStartedClick={this.handleGetStarted}
 					onRequestClick={this.props.onAdminRequestClick}
 					onEditClick={this.redirectToGroup}
@@ -101,10 +125,10 @@ export class LargeGroupSelector extends React.Component {
 					setSelectedGroupId={this.setSelectedGroupId}
 					onGetStarted={this.handleGetStarted}
 					toggle={this.toggle}
+					formattedMembershiplevels={formattedMembershiplevels}
+					formattedGroupLevels={formattedGroupLevels}
 				/>
 			));
-		} else {
-			groups = this.getDefaultGroups();
 		}
 		return groups;
 	};
@@ -133,7 +157,10 @@ export class LargeGroupSelector extends React.Component {
 
 	redirectToGroup = () => {
 		this.setModalState('main');
-		window.open(`https://faithlife.com/${this.state.selectedGroupId}`, 'noopener, noreferrer');
+		window.open(
+			`https://faithlife.com/${this.state.selectedGroupId}/about`,
+			'noopener, noreferrer',
+		);
 	};
 
 	handleChurchNameInputChange = event => {
@@ -172,20 +199,18 @@ export class LargeGroupSelector extends React.Component {
 	};
 
 	handleScroll = scrollData => {
-		if (this.props.showInPlace) {
-			return;
-		}
+		const scrollTopPosition = this.props.showInPlace ? window.scrollY : scrollData.topPosition;
 
-		if (scrollData.topPosition >= 82 && !this.fixedCreateWrapper) {
+		if (scrollTopPosition >= 82 && !this.fixedCreateWrapper) {
 			this.setState({
 				createGroupFixed: true,
-				resultsTopMargin: 232,
+				resultsTopMargin: this.props.showInPlace ? 136 : 232,
 			});
 			this.fixedCreateWrapper = true;
-		} else if (scrollData.topPosition < 82) {
+		} else if (scrollTopPosition < 82) {
 			this.setState({
 				createGroupFixed: false,
-				resultsTopMargin: defaultResultsTopMargin + scrollData.topPosition,
+				resultsTopMargin: defaultResultsTopMargin + scrollTopPosition,
 			});
 			this.fixedCreateWrapper = false;
 		}
@@ -193,6 +218,9 @@ export class LargeGroupSelector extends React.Component {
 
 	render() {
 		const disableButton = this.state.newChurchName === '' || this.state.newChurchLocation === '';
+
+		const formattedMembershiplevels = this.formatStringList(this.props.authorizedMembershipLevels);
+		const formattedGroupLevels = this.formatStringList(this.props.authorizedGroupKinds);
 
 		const mainView = (
 			<Styled.LargeScrollView
@@ -210,8 +238,8 @@ export class LargeGroupSelector extends React.Component {
 				{!this.props.hideTitle && (
 					<div>
 						<Styled.LargeTopGradient />
-						<Styled.LargeTitle>Find Your Church</Styled.LargeTitle>
-						<Styled.LargeSubtitle>in the Faithlife Church Directory</Styled.LargeSubtitle>
+						<Styled.LargeTitle>{this.props.resources.title}</Styled.LargeTitle>
+						<Styled.LargeSubtitle>{this.props.resources.subTitle}</Styled.LargeSubtitle>
 					</div>
 				)}
 				<Styled.CreateGroupWrapper fixed={this.state.createGroupFixed}>
@@ -222,9 +250,12 @@ export class LargeGroupSelector extends React.Component {
 							newChurchName={this.state.newChurchName}
 							newChurchLocation={this.state.newChurchLocation}
 							showRequiredStars={this.state.createGroupFixed}
+							resources={this.props.resources}
 						/>
 						<Styled.CreateGroupButtonWrapper>
-							<Styled.CreateGroupButtonText>Don’t see your church?</Styled.CreateGroupButtonText>
+							<Styled.CreateGroupButtonText>
+								{this.props.resources.dontSeeChurchText}
+							</Styled.CreateGroupButtonText>
 							<Button small primary disabled={disableButton} onClick={this.createGroupClick}>
 								Create
 							</Button>
@@ -261,16 +292,18 @@ export class LargeGroupSelector extends React.Component {
 					{this.state.modalContent === 'admin' && (
 						<Styled.SecondaryModalContent>
 							<Styled.SecondaryModalText>
-								<Styled.SearchResultBoldText>Admin</Styled.SearchResultBoldText>
+								<Styled.SearchResultBoldText>
+									{formattedMembershiplevels}
+								</Styled.SearchResultBoldText>
 								<span> membership is neccessarry to perform this action.</span>
 							</Styled.SecondaryModalText>
 							<Styled.SecondaryModalText>
-								Contact a group administrator to request Admin membership
+								Contact a group administrator to request access
 							</Styled.SecondaryModalText>
 							<Styled.SecondaryModalButtonContainer>
 								<Styled.SecondaryModalButtonWrapper>
 									<Button small primary onClick={this.redirectToGroup}>
-										Request access
+										{this.props.resources.goToGroupButtonText}
 									</Button>
 								</Styled.SecondaryModalButtonWrapper>
 								<Button small onClick={this.resetModalState}>
@@ -283,7 +316,7 @@ export class LargeGroupSelector extends React.Component {
 						<Styled.SecondaryModalContent>
 							<Styled.SecondaryModalText>
 								This group type must be set to{' '}
-								<Styled.SearchResultBoldText>“Church”</Styled.SearchResultBoldText>
+								<Styled.SearchResultBoldText>{formattedGroupLevels}</Styled.SearchResultBoldText>
 							</Styled.SecondaryModalText>
 							<Styled.SecondaryModalText>
 								Visit the group settings page to change
@@ -291,7 +324,7 @@ export class LargeGroupSelector extends React.Component {
 							<Styled.SecondaryModalButtonContainer>
 								<Styled.SecondaryModalButtonWrapper>
 									<Button small primary onClick={this.redirectToGroup}>
-										Change to Church
+										Change to {formattedGroupLevels}
 									</Button>
 								</Styled.SecondaryModalButtonWrapper>
 								<Button small onClick={this.resetModalState}>
@@ -305,3 +338,21 @@ export class LargeGroupSelector extends React.Component {
 		);
 	}
 }
+
+LargeGroupSelector.defaultProps = {
+	authorizedMembershipLevels: ['admin'],
+	authorizedGroupKinds: ['church'],
+	resources: {
+		title: 'Find Your Church',
+		subTitle: 'in the Faithlife Church Directory',
+		requestButtonText: 'Request Admin',
+		joinButtonText: 'Join Group',
+		claimButtonText: 'Claim',
+		selectButtonText: 'Get Started',
+		dontSeeChurchText: "Don't see your church?",
+		goToGroupButtonText: 'Request Access',
+		churchNameText: 'Church Name',
+		churchLocationText: 'Church Location',
+		churchLocationPlaceholder: 'City, State',
+	},
+};

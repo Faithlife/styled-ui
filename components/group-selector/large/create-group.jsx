@@ -10,6 +10,7 @@ export class CreateGroup extends React.Component {
 		onChurchLocationInputChange: PropTypes.func.isRequired,
 		newChurchLocation: PropTypes.string,
 		showRequiredStars: PropTypes.bool,
+		resources: PropTypes.object,
 	};
 
 	churchNameInput = React.createRef();
@@ -19,34 +20,38 @@ export class CreateGroup extends React.Component {
 	}
 
 	render() {
+		const {
+			showRequiredStars,
+			newChurchName,
+			newChurchLocation,
+			onChurchNameInputChange,
+			onChurchLocationInputChange,
+			resources,
+		} = this.props;
 		return (
 			<Styled.CreateGroup>
 				<Styled.CreateGroupLabel>
-					Church Name
-					{this.props.showRequiredStars && (
-						<Styled.CreateGroupRequiredStar>*</Styled.CreateGroupRequiredStar>
-					)}
+					{resources.churchNameText}
+					{showRequiredStars && <Styled.CreateGroupRequiredStar>*</Styled.CreateGroupRequiredStar>}
 				</Styled.CreateGroupLabel>
 				<Styled.InputWrapper>
 					<Input
 						ref={this.churchNameInput}
-						value={this.props.newChurchName}
-						onChange={this.props.onChurchNameInputChange}
-						placeholder="Church name"
+						value={newChurchName}
+						onChange={onChurchNameInputChange}
+						placeholder={resources.churchNameText}
 						small
 					/>
 				</Styled.InputWrapper>
 				<Styled.CreateGroupLabel>
-					Church Location
-					{this.props.showRequiredStars && (
-						<Styled.CreateGroupRequiredStar>*</Styled.CreateGroupRequiredStar>
-					)}
+					{resources.churchLocationText}
+					{showRequiredStars && <Styled.CreateGroupRequiredStar>*</Styled.CreateGroupRequiredStar>}
 				</Styled.CreateGroupLabel>
 				<Styled.InputWrapper>
 					<Input
-						value={this.props.newChurchLocation}
-						placeholder="City, State"
-						onChange={this.props.onChurchLocationInputChange}
+						value={newChurchLocation}
+						placeholder={resources.churchLocationPlaceholder}
+						onChange={onChurchLocationInputChange}
 						small
 					/>
 				</Styled.InputWrapper>

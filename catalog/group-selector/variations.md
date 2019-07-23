@@ -1,3 +1,335 @@
+### In Place Large Group Selector
+
+```react
+showSource: true
+state: {
+	groups: [{
+		name: 'Michaels Test Church',
+		groupId: 1,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
+	},
+	{
+		name: 'Example Community Church',
+		groupId: 2,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'member',
+		claimable: false,
+	},
+	{
+		name: 'Jordans Test Church',
+		groupId: 3,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'follower',
+		claimable: false,
+	},
+	{
+		name: 'Cool Test Church',
+		groupId: 4,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: '',
+		claimable: false,
+	},
+	{
+		name: 'Church With Really Really Really Really Really Really Really Really Long Name',
+		groupId: 5,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
+	}
+	],
+}
+---
+<LargeGroupSelectorDemo>
+	<LargeGroupSelector
+		isOpen={false}
+		onChangeModalState={() => {}}
+		onSearchInputChange={(search) => {
+			setState({ groupSearchResults: [{
+				name: 'Wrong Kind',
+				groupId: 1,
+				kind: 'general',
+				avatarUrl: '',
+				relationshipKind: 'participant',
+				membershipKind: 'admin',
+				claimable: false,
+			},
+			{
+				name: 'Claimable Church',
+				groupId: 2,
+				kind: 'church',
+				avatarUrl: '',
+				relationshipKind: 'none',
+				claimable: true,
+			},
+			{
+				name: 'Not a Member',
+				groupId: 3,
+				kind: 'church',
+				avatarUrl: '',
+				relationshipKind: 'none',
+				claimable: false,
+			},
+			{
+				name: 'Member but Ain\'t Admin',
+				groupId: 4,
+				kind: 'church',
+				avatarUrl: '',
+				relationshipKind: 'participant',
+				membershipKind: 'member',
+				claimable: false,
+			},
+			{
+				name: 'Search result 5',
+				groupId: 5,
+				kind: 'church',
+				avatarUrl: '',
+				relationshipKind: 'participant',
+				membershipKind: 'admin',
+				claimable: false,
+			},
+			{
+				name: 'Search result 6',
+				groupId: 6,
+				kind: 'church',
+				avatarUrl: '',
+				relationshipKind: 'participant',
+				membershipKind: 'admin',
+				claimable: false,
+			},
+			{
+				name: 'Search result 7',
+				groupId: 7,
+				kind: 'church',
+				avatarUrl: '',
+				relationshipKind: 'participant',
+				membershipKind: 'admin',
+				claimable: false,
+			}
+			]});
+		}}
+		groups={state.groups}
+		groupSearchResults={state.groupSearchResults || state.groups}
+		onCreateGroup={(name, location) => {
+			const newGroup = {
+				name,
+				groupId: 6,
+				kind: 'church',
+				avatarUrl: '',
+				relationshipKind: 'participant',
+				membershipKind: 'admin',
+				claimable: false,
+			};
+
+			setState({
+				groups: [...state.groups, newGroup],
+				isOpen: false,
+			});
+		}}
+		onGetStartedClick={() => {alert("Lets get started.")}}
+		onClaimGroupClick={() => {alert("Claim the group!")}}
+		onJoinGroupClick={() => {alert("Should Join the group, or request")}}
+		onAdminRequestClick={() => {alert("Admin access requested")}}
+		showInPlace
+	/>
+</LargeGroupSelectorDemo>
+```
+
+### In Place Large Group Selector with Resources and non-Admin members
+
+```react
+showSource: true
+state: {
+	resources: {
+		title: 'Find your church or ministry',
+		subTitle: 'in the Faithlife Directory',
+		requestButtonText: 'Request',
+		joinButtonText: 'Join Me',
+		claimButtonText: 'Claim Me',
+		selectButtonText: 'Select Me',
+		dontSeeChurchText: "Don't see your church or ministry?",
+		goToGroupButtonText: 'Go to group',
+		churchNameText: 'Church or Ministry Name',
+		churchLocationText: 'Church or Ministry Location',
+		churchLocationPlaceholder: 'City, State',
+	},
+	authorizedMembershipLevels: ['admin', 'member', 'follower'],
+	authorizedGroupKinds: ['church', 'ministry', 'general'],
+	groups: [{
+		name: 'Michaels Test Church',
+		groupId: 1,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
+	},
+	{
+		name: 'Example Community Church',
+		groupId: 2,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'member',
+		claimable: false,
+	},
+	{
+		name: 'Jordans Test Church',
+		groupId: 3,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'follower',
+		claimable: false,
+	},
+	{
+		name: 'Cool Test Church',
+		groupId: 4,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: '',
+		claimable: false,
+	},
+	{
+		name: 'Church With Really Really Really Really Really Really Really Really Long Name',
+		groupId: 5,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: '',
+		claimable: false,
+	},
+	{
+		name: 'Ministry',
+		groupId: 6,
+		kind: 'ministry',
+		avatarUrl: '',
+		relationshipKind: '',
+		membershipKind: 'admin',
+		claimable: false,
+	},
+	{
+		name: 'Not Joinable Church',
+		groupId: 7,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: '',
+		membershipKind: '',
+		claimable: false,
+		joinable: false,
+	}
+	],
+}
+---
+<LargeGroupSelectorDemo>
+	<LargeGroupSelector
+		isOpen={false}
+		onChangeModalState={() => {}}
+		onSearchInputChange={(search) => {
+			setState({ groupSearchResults: [{
+				name: 'Wrong Kind',
+				groupId: 1,
+				kind: 'general',
+				avatarUrl: '',
+				relationshipKind: 'participant',
+				membershipKind: 'admin',
+				claimable: false,
+			},
+			{
+				name: 'Claimable Church',
+				groupId: 2,
+				kind: 'church',
+				avatarUrl: '',
+				relationshipKind: 'none',
+				claimable: true,
+			},
+			{
+				name: 'Not a Member',
+				groupId: 3,
+				kind: 'church',
+				avatarUrl: '',
+				relationshipKind: 'none',
+				claimable: false,
+			},
+			{
+				name: 'Member but Ain\'t Admin',
+				groupId: 4,
+				kind: 'church',
+				avatarUrl: '',
+				relationshipKind: 'participant',
+				membershipKind: 'member',
+				claimable: false,
+			},
+			{
+				name: 'Search result 5',
+				groupId: 5,
+				kind: 'church',
+				avatarUrl: '',
+				relationshipKind: 'participant',
+				membershipKind: 'admin',
+				claimable: false,
+			},
+			{
+				name: 'Search result 6',
+				groupId: 6,
+				kind: 'church',
+				avatarUrl: '',
+				relationshipKind: 'participant',
+				membershipKind: 'admin',
+				claimable: false,
+			},
+			{
+				name: 'Search result 7',
+				groupId: 7,
+				kind: 'church',
+				avatarUrl: '',
+				relationshipKind: 'participant',
+				membershipKind: 'admin',
+				claimable: false,
+			}
+			]});
+		}}
+		groups={state.groups}
+		groupSearchResults={state.groupSearchResults || state.groups}
+		onCreateGroup={(name, location) => {
+			const newGroup = {
+				name,
+				groupId: 6,
+				kind: 'church',
+				avatarUrl: '',
+				relationshipKind: 'participant',
+				membershipKind: 'admin',
+				claimable: false,
+			};
+
+			setState({
+				groups: [...state.groups, newGroup],
+				isOpen: false,
+			});
+		}}
+		onGetStartedClick={() => {alert("Lets get started.")}}
+		onClaimGroupClick={() => {alert("Claim the group!")}}
+		onJoinGroupClick={() => {alert("Should Join the group, or request")}}
+		onAdminRequestClick={() => {alert("Admin access requested")}}
+		showInPlace
+		resources={state.resources}
+		authorizedMembershipLevels={state.authorizedMembershipLevels}
+	/>
+</LargeGroupSelectorDemo>
+```
+
 ### Group Selector with Groups
 
 ```react
@@ -307,153 +639,5 @@ state: {
 		onAdminRequestClick={() => {alert("Admin access requested")}}
 	/>
 	<Button primary medium onClick={() => {setState({isOpen: true})}}>Open Modal</Button>
-</LargeGroupSelectorDemo>
-```
-
-### In Place Large Group Selector
-
-```react
-showSource: true
-state: {
-	groups: [{
-		name: 'Michaels Test Church',
-		groupId: 1,
-		kind: 'church',
-		avatarUrl: '',
-		relationshipKind: 'participant',
-		membershipKind: 'admin',
-		claimable: false,
-	},
-	{
-		name: 'Example Community Church',
-		groupId: 2,
-		kind: 'church',
-		avatarUrl: '',
-		relationshipKind: 'participant',
-		membershipKind: 'admin',
-		claimable: false,
-	},
-	{
-		name: 'Jordans Test Church',
-		groupId: 3,
-		kind: 'church',
-		avatarUrl: '',
-		relationshipKind: 'participant',
-		membershipKind: 'admin',
-		claimable: false,
-	},
-	{
-		name: 'Cool Test Church',
-		groupId: 4,
-		kind: 'church',
-		avatarUrl: '',
-		relationshipKind: 'participant',
-		membershipKind: 'admin',
-		claimable: false,
-	},
-	{
-		name: 'Church With Really Really Really Really Really Really Really Really Long Name',
-		groupId: 5,
-		kind: 'church',
-		avatarUrl: '',
-		relationshipKind: 'participant',
-		membershipKind: 'admin',
-		claimable: false,
-	}
-	],
-}
----
-<LargeGroupSelectorDemo>
-	<LargeGroupSelector
-		isOpen={false}
-		onChangeModalState={() => {}}
-		onSearchInputChange={(search) => {
-			setState({ groupSearchResults: [{
-				name: 'Wrong Kind',
-				groupId: 1,
-				kind: 'general',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			},
-			{
-				name: 'Claimable Church',
-				groupId: 2,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'none',
-				claimable: true,
-			},
-			{
-				name: 'Not a Member',
-				groupId: 3,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'none',
-				claimable: false,
-			},
-			{
-				name: 'Member but Ain\'t Admin',
-				groupId: 4,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'member',
-				claimable: false,
-			},
-			{
-				name: 'Search result 5',
-				groupId: 5,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			},
-			{
-				name: 'Search result 6',
-				groupId: 6,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			},
-			{
-				name: 'Search result 7',
-				groupId: 7,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			}
-			]});
-		}}
-		groups={state.groups}
-		groupSearchResults={state.groupSearchResults || state.groups}
-		onCreateGroup={(name, location) => {
-			const newGroup = {
-				name,
-				groupId: 6,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			};
-
-			setState({
-				groups: [...state.groups, newGroup],
-				isOpen: false,
-			});
-		}}
-		onGetStartedClick={() => {alert("Lets get started.")}}
-		onClaimGroupClick={() => {alert("Claim the group!")}}
-		onJoinGroupClick={() => {alert("Should Join the group, or request")}}
-		onAdminRequestClick={() => {alert("Admin access requested")}}
-		showInPlace
-	/>
 </LargeGroupSelectorDemo>
 ```
