@@ -8,7 +8,7 @@ export const Container = styled.div`
 	height: 600px;
 `;
 
-export const Title = styled.h1`
+export const Title = styled.header`
 	font-size: 24px;
 	color: ${colors.gray66};
 	margin: 24px;
@@ -36,13 +36,13 @@ export const ButtonContainer = styled.div`
 	padding: 8px 10px;
 `;
 
-export const DragDropText = styled.h2`
+export const DragDropText = styled.section`
 	font-size: 18px;
 	color: ${colors.gray52};
 	margin-top: 12px;
 `;
 
-export const DragDropSmallText = styled.h2`
+export const DragDropSmallText = styled.section`
 	font-size: 16px;
 	color: ${colors.gray52};
 	margin-top: 12px;
@@ -53,13 +53,13 @@ export const DragDropContainer = styled.div`
 	height: ${props => props.height};
 `;
 
-export const FileInputLabel = styled.h3`
+export const FileInputLabel = styled.section`
 	input {
 		display: none;
 	}
 `;
 
-export const MinSizeLabel = styled.h3`
+export const MinSizeLabel = styled.section`
 	font-size: 16px;
 	color: ${colors.gray34};
 	margin-top: 24px;

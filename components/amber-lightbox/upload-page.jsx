@@ -5,7 +5,13 @@ import { ImagePreview } from './image-preview';
 import * as Styled from './styled';
 import { LightboxDropZone } from './lightbox-drop-zone';
 
-export function UploadPage({ allowMultiSelect, onFileSelected, localizationProps, onCancel }) {
+export function UploadPage({
+	allowMultiSelect,
+	onFileSelected,
+	localizationProps,
+	onCancel,
+	minFileSize,
+}) {
 	const [selectedFiles, setSelectedFiles] = useState([]);
 
 	const handleRemoveFile = useCallback(
@@ -56,7 +62,12 @@ export function UploadPage({ allowMultiSelect, onFileSelected, localizationProps
 	return (
 		<React.Fragment>
 			<div>
-				<LightboxDropZone addFile={addFile} allowMultiSelect={allowMultiSelect} showDetails />
+				<LightboxDropZone
+					addFile={addFile}
+					allowMultiSelect={allowMultiSelect}
+					showDetails
+					minFileSize={minFileSize}
+				/>
 			</div>
 			<ButtonSection
 				selectedFiles={selectedFiles}
@@ -75,15 +86,13 @@ UploadPage.propTypes = {
 		cancelText: PropTypes.string,
 	}),
 	onCancel: PropTypes.func.isRequired,
+	minFileSize: PropTypes.string,
 };
 
 function ButtonSection({ selectedFiles, onFileSelected, localizationProps, onCancel }) {
-	const onSelect = useCallback(
-		() => {
-			onFileSelected(selectedFiles);
-		},
-		[onFileSelected, selectedFiles],
-	);
+	const onSelect = useCallback(() => {
+		onFileSelected(selectedFiles);
+	}, [onFileSelected, selectedFiles]);
 
 	const addText = (localizationProps && localizationProps.addText) || 'Insert';
 	const cancelText = (localizationProps && localizationProps.cancelText) || 'Cancel';

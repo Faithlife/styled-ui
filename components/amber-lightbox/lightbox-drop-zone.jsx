@@ -5,11 +5,10 @@ import { DropZone } from '../drop-zone';
 import { CameraSvg } from './svgs';
 import * as Styled from './styled';
 
-export function LightboxDropZone({ addFile, allowMultiSelect, showDetails }) {
+export function LightboxDropZone({ addFile, allowMultiSelect, showDetails, minFileSize }) {
 	const fileInputRef = useRef();
 
 	const handleUploadWithFileInput = useCallback(event => {
-		event.stopPropagation();
 		event.preventDefault();
 
 		const files =
@@ -29,7 +28,7 @@ export function LightboxDropZone({ addFile, allowMultiSelect, showDetails }) {
 			<Styled.DragDropContainer height={showDetails ? '415px' : '156px'}>
 				{showDetails && (
 					<Styled.SvgContainer>
-						<img role="presentation" src={CameraSvg} />
+						<img alt="drag and drop icon" src={CameraSvg} />
 					</Styled.SvgContainer>
 				)}
 				<Styled.DragDropText>Drag and drop to upload image</Styled.DragDropText>
@@ -46,7 +45,7 @@ export function LightboxDropZone({ addFile, allowMultiSelect, showDetails }) {
 						name="file"
 					/>
 				</Styled.FileInputLabel>
-				{showDetails && <Styled.MinSizeLabel>minimum image size: 800 x 400</Styled.MinSizeLabel>}
+				{showDetails && minFileSize && <Styled.MinSizeLabel>{minFileSize}</Styled.MinSizeLabel>}
 			</Styled.DragDropContainer>
 		</DropZone>
 	);
@@ -55,4 +54,5 @@ LightboxDropZone.propTypes = {
 	addFile: PropTypes.func.isRequired,
 	allowMultiSelect: PropTypes.bool,
 	showDetails: PropTypes.bool,
+	minFileSize: PropTypes.string,
 };

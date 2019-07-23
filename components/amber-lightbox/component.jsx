@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TabManager, TabList, TabPanels, Tab, TabPanel } from '../tabs';
-import { TabSection } from './tab-section';
+import { AmberContent } from './amber-content';
 import * as Styled from './styled';
 import { UploadPage } from './upload-page';
 
@@ -14,6 +14,7 @@ export function AmberLightbox({
 	allowMultiSelect,
 	localizationProps,
 	onCancel,
+	minFileSize,
 }) {
 	return (
 		<Styled.Container>
@@ -29,12 +30,13 @@ export function AmberLightbox({
 							onFileSelected={onFileSelected}
 							localizationProps={localizationProps}
 							onCancel={onCancel}
+							minFileSize={minFileSize}
 						/>
 					</TabPanel>
 					{tabs.length &&
 						tabs.map((t, index) => (
 							<TabPanel key={index}>
-								<TabSection
+								<AmberContent
 									title={t.title}
 									vaultId={t.vaultId}
 									onFileSelected={onFileSelected}
@@ -69,6 +71,7 @@ AmberLightbox.propTypes = {
 	}),
 	onCancel: PropTypes.func.isRequired,
 	userId: PropTypes.number.isRequired,
+	minFileSize: PropTypes.string,
 };
 
 AmberLightbox.defaultProps = {
