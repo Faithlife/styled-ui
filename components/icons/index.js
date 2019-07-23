@@ -1,4 +1,5 @@
 import React from 'react';
+import { colors } from '../shared-styles';
 
 export const Check = props => (
 	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
@@ -61,6 +62,16 @@ export const Calendar = props => (
 			fill="currentColor"
 			d="M3,3 L3,2 C3,1.44771525 3.44771525,1 4,1 C4.55228475,1 5,1.44771525 5,2 L5,3 L8,3 L8,2 C8,1.44771525 8.44771525,1 9,1 C9.55228475,1 10,1.44771525 10,2 L10,3 L13,3 L13,2 C13,1.44771525 13.4477153,1 14,1 C14.5522847,1 15,1.44771525 15,2 L15,3 L16,3 C16.5522847,3 17,3.44771525 17,4 L17,16 C17,16.5522847 16.5522847,17 16,17 L2,17 C1.44771525,17 1,16.5522847 1,16 L1,4 C1,3.44771525 1.44771525,3 2,3 L3,3 Z M15,15 L15,8 L3,8 L3,15 L15,15 Z"
 			id="path-1"
+		/>
+	</svg>
+);
+
+export const ChevronExpand = props => (
+	<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
+		<path
+			fill={colors.gray52}
+			d="M3.296 3L5.89 5.593 8.482 3l1.296 1.296-3.889 3.89L2 4.295z"
+			fillRule="evenodd"
 		/>
 	</svg>
 );
