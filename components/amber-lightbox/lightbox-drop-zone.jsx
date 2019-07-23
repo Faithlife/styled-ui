@@ -5,19 +5,25 @@ import { DropZone } from '../drop-zone';
 import { CameraSvg } from './svgs';
 import * as Styled from './styled';
 
+const dragDropText = 'Drag and dro pto upload image';
+const browseText = 'or browse files';
+
 export function LightboxDropZone({ addFile, allowMultiSelect, showDetails, minFileSize }) {
 	const fileInputRef = useRef();
 
-	const handleUploadWithFileInput = useCallback(event => {
-		event.preventDefault();
+	const handleUploadWithFileInput = useCallback(
+		event => {
+			event.preventDefault();
 
-		const files =
-			(event.dataTransfer && event.dataTransfer.files) || (event.target && event.target.files);
-		addFile(Array.from(files));
+			const files =
+				(event.dataTransfer && event.dataTransfer.files) || (event.target && event.target.files);
+			addFile(Array.from(files));
 
-		// reset the input's value so selecting the same file twice works
-		fileInputRef.current.value = '';
-	}, []);
+			// reset the input's value so selecting the same file twice works
+			fileInputRef.current.value = '';
+		},
+		[addFile],
+	);
 
 	const handleBrowseFilesClick = useCallback(() => {
 		fileInputRef.current.click();
@@ -31,9 +37,9 @@ export function LightboxDropZone({ addFile, allowMultiSelect, showDetails, minFi
 						<img alt="drag and drop icon" src={CameraSvg} />
 					</Styled.SvgContainer>
 				)}
-				<Styled.DragDropText>Drag and drop to upload image</Styled.DragDropText>
+				<Styled.DragDropText>{dragDropText}</Styled.DragDropText>
 				<Button primaryTransparent onClick={handleBrowseFilesClick}>
-					or browse files
+					{browseText}
 				</Button>
 				<br />
 				<Styled.FileInputLabel>
