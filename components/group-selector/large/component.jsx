@@ -57,6 +57,24 @@ export class LargeGroupSelector extends React.Component {
 		}),
 	};
 
+	static defaultProps = {
+		authorizedMembershipLevels: ['admin'],
+		authorizedGroupKinds: ['church'],
+		localizedResources: {
+			title: 'Find Your Church',
+			subTitle: 'in the Faithlife Church Directory',
+			requestButtonText: 'Request Admin',
+			joinButtonText: 'Join Group',
+			claimButtonText: 'Claim',
+			selectButtonText: 'Get Started',
+			dontSeeChurchText: "Don't see your church?",
+			goToGroupButtonText: 'Request Access',
+			churchNameText: 'Church Name',
+			churchLocationText: 'Church Location',
+			churchLocationPlaceholder: 'City, State',
+		},
+	};
+
 	state = {
 		searchInputValue: '',
 		newChurchName: '',
@@ -340,21 +358,3 @@ export class LargeGroupSelector extends React.Component {
 		);
 	}
 }
-
-LargeGroupSelector.defaultProps = {
-	authorizedMembershipLevels: ['admin'],
-	authorizedGroupKinds: ['church'],
-	localizedResources: {
-		title: 'Find Your Church',
-		subTitle: 'in the Faithlife Church Directory',
-		requestButtonText: 'Request Admin',
-		joinButtonText: 'Join Group',
-		claimButtonText: 'Claim',
-		selectButtonText: 'Get Started',
-		dontSeeChurchText: "Don't see your church?",
-		goToGroupButtonText: 'Request Access',
-		churchNameText: 'Church Name',
-		churchLocationText: 'Church Location',
-		churchLocationPlaceholder: 'City, State',
-	},
-};

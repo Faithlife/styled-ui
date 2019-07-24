@@ -26,6 +26,10 @@ export class SearchResult extends React.PureComponent {
 		localizedResources: PropTypes.object,
 	};
 
+	static defaultProps = {
+		joinable: true,
+	};
+
 	claimGroup = () => {
 		this.props.onClaimGroupClick(this.props.groupId);
 	};
@@ -246,7 +250,3 @@ export class SearchResult extends React.PureComponent {
 		);
 	}
 }
-
-SearchResult.defaultProps = {
-	joinable: true,
-};
