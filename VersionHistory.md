@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.10.1
+
+- Add additional group and member types to `GroupSelector` component
+- Add localization to `GroupSelector` component
+
 ### 5.10.0
 
 - Add `SequencedTab` and `SequencedTabList` components
