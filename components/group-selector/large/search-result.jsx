@@ -92,14 +92,13 @@ export class SearchResult extends React.PureComponent {
 				<Tooltip
 					content={
 						<>
-							<Styled.SearchResultMessage>
+							<Styled.TooltipContentBlock>
 								Claiming this group will make you the admin.
-							</Styled.SearchResultMessage>
-							<br />
-							<Styled.SearchResultMessage>
+							</Styled.TooltipContentBlock>
+							<Styled.TooltipContentBlock>
 								You can invite others to the group, assign additional admins, and transfer admin
 								permissions in the future.
-							</Styled.SearchResultMessage>
+							</Styled.TooltipContentBlock>
 						</>
 					}
 				>
