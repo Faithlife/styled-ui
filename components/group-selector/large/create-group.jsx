@@ -10,7 +10,7 @@ export class CreateGroup extends React.Component {
 		onChurchLocationInputChange: PropTypes.func.isRequired,
 		newChurchLocation: PropTypes.string,
 		showRequiredStars: PropTypes.bool,
-		resources: PropTypes.object,
+		localizedResources: PropTypes.object,
 	};
 
 	churchNameInput = React.createRef();
@@ -26,12 +26,12 @@ export class CreateGroup extends React.Component {
 			newChurchLocation,
 			onChurchNameInputChange,
 			onChurchLocationInputChange,
-			resources,
+			localizedResources,
 		} = this.props;
 		return (
 			<Styled.CreateGroup>
 				<Styled.CreateGroupLabel>
-					{resources.churchNameText}
+					{localizedResources.churchNameText}
 					{showRequiredStars && <Styled.CreateGroupRequiredStar>*</Styled.CreateGroupRequiredStar>}
 				</Styled.CreateGroupLabel>
 				<Styled.InputWrapper>
@@ -39,18 +39,18 @@ export class CreateGroup extends React.Component {
 						ref={this.churchNameInput}
 						value={newChurchName}
 						onChange={onChurchNameInputChange}
-						placeholder={resources.churchNameText}
+						placeholder={localizedResources.churchNameText}
 						small
 					/>
 				</Styled.InputWrapper>
 				<Styled.CreateGroupLabel>
-					{resources.churchLocationText}
+					{localizedResources.churchLocationText}
 					{showRequiredStars && <Styled.CreateGroupRequiredStar>*</Styled.CreateGroupRequiredStar>}
 				</Styled.CreateGroupLabel>
 				<Styled.InputWrapper>
 					<Input
 						value={newChurchLocation}
-						placeholder={resources.churchLocationPlaceholder}
+						placeholder={localizedResources.churchLocationPlaceholder}
 						onChange={onChurchLocationInputChange}
 						small
 					/>

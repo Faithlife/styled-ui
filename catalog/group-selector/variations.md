@@ -151,7 +151,7 @@ state: {
 ```react
 showSource: true
 state: {
-	resources: {
+	localizedResources: {
 		title: 'Find your church or ministry',
 		subTitle: 'in the Faithlife Directory',
 		requestButtonText: 'Request',
@@ -324,7 +324,7 @@ state: {
 		onJoinGroupClick={() => {alert("Should Join the group, or request")}}
 		onAdminRequestClick={() => {alert("Admin access requested")}}
 		showInPlace
-		resources={state.resources}
+		localizedResources={state.localizedResources}
 		authorizedMembershipLevels={state.authorizedMembershipLevels}
 	/>
 </LargeGroupSelectorDemo>

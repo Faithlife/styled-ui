@@ -42,7 +42,7 @@ export class LargeGroupSelector extends React.Component {
 		/** Flag to use "Select"/"Request" button style instead of "Get Started"/"Join"/"Follow"/"Claim" */
 		useSelectRequestButtonStyle: PropTypes.bool,
 		/** String literals to overload UI elements and for localization */
-		resources: PropTypes.shape({
+		localizedResources: PropTypes.shape({
 			title: PropTypes.string,
 			subTitle: PropTypes.string,
 			requestButtonText: PropTypes.string,
@@ -115,7 +115,7 @@ export class LargeGroupSelector extends React.Component {
 					relationshipKind={group.relationshipKind}
 					authorizedMembershipLevels={this.props.authorizedMembershipLevels}
 					authorizedGroupKinds={this.props.authorizedGroupKinds}
-					resources={this.props.resources}
+					localizedResources={this.props.localizedResources}
 					claimable={group.claimable}
 					joinable={group.joinable}
 					onGetStartedClick={this.handleGetStarted}
@@ -240,8 +240,8 @@ export class LargeGroupSelector extends React.Component {
 				{!this.props.hideTitle && (
 					<div>
 						<Styled.LargeTopGradient />
-						<Styled.LargeTitle>{this.props.resources.title}</Styled.LargeTitle>
-						<Styled.LargeSubtitle>{this.props.resources.subTitle}</Styled.LargeSubtitle>
+						<Styled.LargeTitle>{this.props.localizedResources.title}</Styled.LargeTitle>
+						<Styled.LargeSubtitle>{this.props.localizedResources.subTitle}</Styled.LargeSubtitle>
 					</div>
 				)}
 				<Styled.CreateGroupWrapper fixed={this.state.createGroupFixed}>
@@ -252,11 +252,11 @@ export class LargeGroupSelector extends React.Component {
 							newChurchName={this.state.newChurchName}
 							newChurchLocation={this.state.newChurchLocation}
 							showRequiredStars={this.state.createGroupFixed}
-							resources={this.props.resources}
+							localizedResources={this.props.localizedResources}
 						/>
 						<Styled.CreateGroupButtonWrapper>
 							<Styled.CreateGroupButtonText>
-								{this.props.resources.dontSeeChurchText}
+								{this.props.localizedResources.dontSeeChurchText}
 							</Styled.CreateGroupButtonText>
 							<Button small primary disabled={disableButton} onClick={this.createGroupClick}>
 								Create
@@ -305,7 +305,7 @@ export class LargeGroupSelector extends React.Component {
 							<Styled.SecondaryModalButtonContainer>
 								<Styled.SecondaryModalButtonWrapper>
 									<Button small primary onClick={this.redirectToGroup}>
-										{this.props.resources.goToGroupButtonText}
+										{this.props.localizedResources.goToGroupButtonText}
 									</Button>
 								</Styled.SecondaryModalButtonWrapper>
 								<Button small onClick={this.resetModalState}>
@@ -344,7 +344,7 @@ export class LargeGroupSelector extends React.Component {
 LargeGroupSelector.defaultProps = {
 	authorizedMembershipLevels: ['admin'],
 	authorizedGroupKinds: ['church'],
-	resources: {
+	localizedResources: {
 		title: 'Find Your Church',
 		subTitle: 'in the Faithlife Church Directory',
 		requestButtonText: 'Request Admin',

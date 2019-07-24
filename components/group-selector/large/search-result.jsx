@@ -23,7 +23,7 @@ export class SearchResult extends React.PureComponent {
 		authorizedGroupKinds: PropTypes.arrayOf(PropTypes.string).isRequired,
 		claimable: PropTypes.bool,
 		joinable: PropTypes.bool,
-		resources: PropTypes.object,
+		localizedResources: PropTypes.object,
 	};
 
 	claimGroup = () => {
@@ -76,7 +76,7 @@ export class SearchResult extends React.PureComponent {
 			authorizedGroupKinds,
 			formattedMembershiplevels,
 			formattedGroupLevels,
-			resources,
+			localizedResources,
 		} = this.props;
 
 		let message;
@@ -104,7 +104,7 @@ export class SearchResult extends React.PureComponent {
 			);
 			button = (
 				<Button small outline primary onClick={this.claimGroup}>
-					{resources.claimButtonText}
+					{localizedResources.claimButtonText}
 				</Button>
 			);
 		} else if ((membershipKind === 'none' || !membershipKind) && joinable) {
@@ -123,7 +123,7 @@ export class SearchResult extends React.PureComponent {
 			);
 			button = (
 				<Button small outline primary onClick={this.joinGroup}>
-					{resources.joinButtonText}
+					{localizedResources.joinButtonText}
 				</Button>
 			);
 		} else if ((membershipKind === 'none' || !membershipKind) && !joinable) {
@@ -142,7 +142,7 @@ export class SearchResult extends React.PureComponent {
 			);
 			button = (
 				<Button small outline primary onClick={this.requestAccess}>
-					{resources.requestButtonText}
+					{localizedResources.requestButtonText}
 				</Button>
 			);
 		} else if (
@@ -164,7 +164,7 @@ export class SearchResult extends React.PureComponent {
 			);
 			button = (
 				<Button small outline primary onClick={this.requestAccess}>
-					{resources.requestButtonText}
+					{localizedResources.requestButtonText}
 				</Button>
 			);
 		} else if (!authorizedGroupKinds.includes(kind.toLowerCase()) && membershipKind === 'admin') {
@@ -195,7 +195,7 @@ export class SearchResult extends React.PureComponent {
 			);
 			button = (
 				<Button small outline primary onClick={this.joinGroup}>
-					{resources.joinButtonText}
+					{localizedResources.joinButtonText}
 				</Button>
 			);
 		} else if (relationshipKind === 'none' && !joinable) {
@@ -207,7 +207,7 @@ export class SearchResult extends React.PureComponent {
 			);
 			button = (
 				<Button small outline primary onClick={this.requestAccess}>
-					{resources.requestButtonText}
+					{localizedResources.requestButtonText}
 				</Button>
 			);
 		} else {
@@ -219,7 +219,7 @@ export class SearchResult extends React.PureComponent {
 			);
 			button = (
 				<Button small primaryOutline onClick={this.getStarted}>
-					{resources.selectButtonText}
+					{localizedResources.selectButtonText}
 				</Button>
 			);
 		}
