@@ -25,7 +25,6 @@ export function HelpBox({
 }) {
 	return (
 		<Box
-			className={className}
 			stacked={stacked}
 			backgroundColor={
 				success
