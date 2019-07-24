@@ -32,6 +32,18 @@ export function BaseTable({
 	const tableHeightPadding = hasPagingBar ? 50 : 2;
 
 	useEffect(() => {
+		if (columnApi) {
+			columnApi.resetColumnState();
+		}
+	}, [columnApi, isSmallViewport]);
+
+	useEffect(() => {
+		if (gridApi) {
+			gridApi.resetRowHeights();
+		}
+	}, [gridApi, rowHeight]);
+
+	useEffect(() => {
 		if (gridApi) {
 			gridApi.setQuickFilter(filterText);
 		}
@@ -168,6 +180,7 @@ export function BaseTable({
 						<AgGridColumn
 							{...columnProps}
 							key={fieldName}
+							colId={fieldName}
 							headerName={displayName}
 							field={fieldName}
 							sortable={isSortable}
