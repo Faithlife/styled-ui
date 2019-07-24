@@ -106,16 +106,6 @@ export class LargeGroupSelector extends React.Component {
 		this.props.onCreateGroup(this.state.newChurchName, this.state.newChurchLocation);
 	};
 
-	formatStringList = arrayOfStrings => {
-		const result =
-			arrayOfStrings.length === 1
-				? arrayOfStrings[0]
-				: [arrayOfStrings.slice(0, -1).join(', '), arrayOfStrings.slice(-1)[0]].join(
-						arrayOfStrings.length < 2 ? '' : ' or ',
-				  );
-		return result.charAt(0).toUpperCase() + result.slice(1);
-	};
-
 	getSearchResults = () => {
 		let groups;
 		const groupResults = this.props.groupSearchResults || this.props.groups;
@@ -219,27 +209,6 @@ export class LargeGroupSelector extends React.Component {
 	handleClaimGroup = groupId => {
 		this.props.onClaimGroupClick(groupId);
 	};
-
-	getScrollParent(element, includeHidden) {
-		let style = getComputedStyle(element);
-		const excludeStaticParent = style.position === 'absolute';
-		const overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
-
-		if (style.position === 'fixed') {
-			return document.body;
-		}
-		for (let parent = element; (parent = parent.parentElement); ) {
-			style = getComputedStyle(parent);
-			if (excludeStaticParent && style.position === 'static') {
-				continue;
-			}
-			if (overflowRegex.test(style.overflow + style.overflowY + style.overflowX)) {
-				return parent;
-			}
-		}
-
-		return window;
-	}
 
 	handleScroll = scrollData => {
 		const scrollTopPosition =
@@ -390,3 +359,34 @@ export class LargeGroupSelector extends React.Component {
 		);
 	}
 }
+
+const formatStringList = arrayOfStrings => {
+	const result =
+		arrayOfStrings.length === 1
+			? arrayOfStrings[0]
+			: [arrayOfStrings.slice(0, -1).join(', '), arrayOfStrings.slice(-1)[0]].join(
+					arrayOfStrings.length < 2 ? '' : ' or ',
+			  );
+	return result.charAt(0).toUpperCase() + result.slice(1);
+};
+
+const getScrollParent = (element, includeHidden) => {
+	let style = getComputedStyle(element);
+	const excludeStaticParent = style.position === 'absolute';
+	const overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
+
+	if (style.position === 'fixed') {
+		return document.body;
+	}
+	for (let parent = element; (parent = parent.parentElement); ) {
+		style = getComputedStyle(parent);
+		if (excludeStaticParent && style.position === 'static') {
+			continue;
+		}
+		if (overflowRegex.test(style.overflow + style.overflowY + style.overflowX)) {
+			return parent;
+		}
+	}
+
+	return window;
+};
