@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Button } from '../../main';
 import { SimpleModal } from '../../simple-modal';
@@ -88,7 +89,8 @@ export class LargeGroupSelector extends React.Component {
 
 	componentDidMount() {
 		if (this.props.showInPlace) {
-			window.addEventListener('scroll', this.handleScroll);
+			var scrollableNode = this.getScrollParent(ReactDOM.findDOMNode(this));
+			scrollableNode.addEventListener('scroll', this.handleScroll.bind(this));
 		}
 	}
 
@@ -218,21 +220,47 @@ export class LargeGroupSelector extends React.Component {
 		this.props.onClaimGroupClick(groupId);
 	};
 
-	handleScroll = scrollData => {
-		const scrollTopPosition = this.props.showInPlace ? window.scrollY : scrollData.topPosition;
+	getScrollParent(element, includeHidden) {
+		var style = getComputedStyle(element);
+		var excludeStaticParent = style.position === 'absolute';
+		var overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
 
-		if (scrollTopPosition >= 82 && !this.fixedCreateWrapper) {
-			this.setState({
-				createGroupFixed: true,
-				resultsTopMargin: this.props.showInPlace ? 136 : 232,
-			});
-			this.fixedCreateWrapper = true;
+		if (style.position === 'fixed') return document.body;
+		for (var parent = element; (parent = parent.parentElement); ) {
+			style = getComputedStyle(parent);
+			if (excludeStaticParent && style.position === 'static') {
+				continue;
+			}
+			if (overflowRegex.test(style.overflow + style.overflowY + style.overflowX)) return parent;
+		}
+
+		return window;
+	}
+
+	handleScroll = scrollData => {
+		const scrollTopPosition =
+			this.props.showInPlace && scrollData.srcElement
+				? scrollData.srcElement.scrollingElement.scrollTop
+				: scrollData.topPosition;
+
+		const groupResultsCount = this.props.groupSearchResults
+			? this.props.groupSearchResults.length
+			: 99;
+
+		if (scrollTopPosition >= 82 || groupResultsCount < 4) {
+			if (!this.state.fixedCreateWrapper) {
+				this.setState({
+					createGroupFixed: !this.props.showInPlace,
+					resultsTopMargin: this.props.showInPlace ? 0 : 232,
+					fixedCreateWrapper: true,
+				});
+			}
 		} else if (scrollTopPosition < 82) {
 			this.setState({
 				createGroupFixed: false,
 				resultsTopMargin: defaultResultsTopMargin + scrollTopPosition,
+				fixedCreateWrapper: false,
 			});
-			this.fixedCreateWrapper = false;
 		}
 	};
 
@@ -246,7 +274,7 @@ export class LargeGroupSelector extends React.Component {
 			<Styled.LargeScrollView
 				horizontal={false}
 				contentClassName={Styled.LargeScrollViewContentClass}
-				onScroll={this.handleScroll}
+				onScroll={!this.props.showInPlace && this.handleScroll}
 				showInPlace={this.props.showInPlace}
 				hideTitle={this.props.hideTitle}
 				verticalScrollbarStyle={{
