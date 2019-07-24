@@ -89,12 +89,13 @@ export class LargeGroupSelector extends React.Component {
 	componentDidMount() {
 		if (this.props.showInPlace) {
 			var scrollableNode = this.getScrollParent(this.node);
-			scrollableNode.addEventListener('scroll', this.handleScroll.bind(this));
+			scrollableNode.addEventListener('scroll', this.handleScroll);
 		}
 	}
 
 	componentWillUnmount() {
-		window.removeEventListener('scroll', this.handleScroll);
+		var scrollableNode = this.getScrollParent(this.node);
+		scrollableNode.removeEventListener('scroll', this.handleScroll);
 	}
 
 	searchResultsRef = React.createRef();
