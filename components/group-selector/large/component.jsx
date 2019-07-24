@@ -88,13 +88,13 @@ export class LargeGroupSelector extends React.Component {
 
 	componentDidMount() {
 		if (this.props.showInPlace) {
-			const scrollableNode = this.getScrollParent(this.node);
+			const scrollableNode = getScrollParent(this.node);
 			scrollableNode.addEventListener('scroll', this.handleScroll);
 		}
 	}
 
 	componentWillUnmount() {
-		const scrollableNode = this.getScrollParent(this.node);
+		const scrollableNode = getScrollParent(this.node);
 		scrollableNode.removeEventListener('scroll', this.handleScroll);
 	}
 
@@ -107,11 +107,19 @@ export class LargeGroupSelector extends React.Component {
 	};
 
 	getSearchResults = () => {
+		const {
+			groupSearchResults,
+			authorizedMembershipLevels,
+			authorizedGroupKinds,
+			onAdminRequestClick,
+			onJoinGroupClick,
+			localizedResources,
+		} = this.props;
 		let groups;
-		const groupResults = this.props.groupSearchResults || this.props.groups;
+		const groupResults = groupSearchResults || groups;
 
-		const formattedMembershiplevels = this.formatStringList(this.props.authorizedMembershipLevels);
-		const formattedGroupLevels = this.formatStringList(this.props.authorizedGroupKinds);
+		const formattedMembershiplevels = formatStringList(authorizedMembershipLevels);
+		const formattedGroupLevels = formatStringList(authorizedGroupKinds);
 
 		if (groupResults) {
 			groups = groupResults.map(group => (
@@ -123,15 +131,15 @@ export class LargeGroupSelector extends React.Component {
 					avatarUrl={group.avatarUrl}
 					membershipKind={group.membershipKind}
 					relationshipKind={group.relationshipKind}
-					authorizedMembershipLevels={this.props.authorizedMembershipLevels}
-					authorizedGroupKinds={this.props.authorizedGroupKinds}
-					localizedResources={this.props.localizedResources}
+					authorizedMembershipLevels={authorizedMembershipLevels}
+					authorizedGroupKinds={authorizedGroupKinds}
+					localizedResources={localizedResources}
 					claimable={group.claimable}
 					joinable={group.joinable}
 					onGetStartedClick={this.handleGetStarted}
-					onRequestClick={this.props.onAdminRequestClick}
+					onRequestClick={onAdminRequestClick}
 					onEditClick={this.redirectToGroup}
-					onJoinGroupClick={this.props.onJoinGroupClick}
+					onJoinGroupClick={onJoinGroupClick}
 					onClaimGroupClick={this.handleClaimGroup}
 					setModalState={this.setModalState}
 					setSelectedGroupId={this.setSelectedGroupId}
@@ -211,20 +219,20 @@ export class LargeGroupSelector extends React.Component {
 	};
 
 	handleScroll = scrollData => {
+		const { showInPlace, groupSearchResults } = this.props;
+
 		const scrollTopPosition =
-			this.props.showInPlace && scrollData.srcElement
+			showInPlace && scrollData.srcElement
 				? scrollData.srcElement.scrollingElement.scrollTop
 				: scrollData.topPosition;
 
-		const groupResultsCount = this.props.groupSearchResults
-			? this.props.groupSearchResults.length
-			: 99;
+		const groupResultsCount = groupSearchResults ? groupSearchResults.length : 99;
 
 		if (scrollTopPosition >= 82 || groupResultsCount < 4) {
 			if (!this.state.fixedCreateWrapper) {
 				this.setState({
-					createGroupFixed: !this.props.showInPlace,
-					resultsTopMargin: this.props.showInPlace ? 0 : 232,
+					createGroupFixed: !showInPlace,
+					resultsTopMargin: showInPlace ? 0 : 232,
 					fixedCreateWrapper: true,
 				});
 			}
@@ -238,29 +246,38 @@ export class LargeGroupSelector extends React.Component {
 	};
 
 	render() {
+		const {
+			authorizedMembershipLevels,
+			authorizedGroupKinds,
+			showInPlace,
+			hideTitle,
+			isOpen,
+			localizedResources,
+		} = this.props;
+
 		const disableButton = this.state.newChurchName === '' || this.state.newChurchLocation === '';
 
-		const formattedMembershiplevels = this.formatStringList(this.props.authorizedMembershipLevels);
-		const formattedGroupLevels = this.formatStringList(this.props.authorizedGroupKinds);
+		const formattedMembershiplevels = formatStringList(authorizedMembershipLevels);
+		const formattedGroupLevels = formatStringList(authorizedGroupKinds);
 
 		const mainView = (
 			<Styled.LargeScrollView
 				horizontal={false}
 				contentClassName={Styled.LargeScrollViewContentClass}
-				onScroll={!this.props.showInPlace && this.handleScroll}
-				showInPlace={this.props.showInPlace}
-				hideTitle={this.props.hideTitle}
+				onScroll={!showInPlace && this.handleScroll}
+				showInPlace={showInPlace}
+				hideTitle={hideTitle}
 				verticalScrollbarStyle={{
 					borderRadius: '6px',
 					marginTop: '1px',
 					marginBottom: '1px',
 				}}
 			>
-				{!this.props.hideTitle && (
+				{!hideTitle && (
 					<div>
 						<Styled.LargeTopGradient />
-						<Styled.LargeTitle>{this.props.localizedResources.title}</Styled.LargeTitle>
-						<Styled.LargeSubtitle>{this.props.localizedResources.subTitle}</Styled.LargeSubtitle>
+						<Styled.LargeTitle>{localizedResources.title}</Styled.LargeTitle>
+						<Styled.LargeSubtitle>{localizedResources.subTitle}</Styled.LargeSubtitle>
 					</div>
 				)}
 				<Styled.CreateGroupWrapper fixed={this.state.createGroupFixed}>
@@ -271,11 +288,11 @@ export class LargeGroupSelector extends React.Component {
 							newChurchName={this.state.newChurchName}
 							newChurchLocation={this.state.newChurchLocation}
 							showRequiredStars={this.state.createGroupFixed}
-							localizedResources={this.props.localizedResources}
+							localizedResources={localizedResources}
 						/>
 						<Styled.CreateGroupButtonWrapper>
 							<Styled.CreateGroupButtonText>
-								{this.props.localizedResources.dontSeeChurchText}
+								{localizedResources.dontSeeChurchText}
 							</Styled.CreateGroupButtonText>
 							<Button small primary disabled={disableButton} onClick={this.createGroupClick}>
 								Create
@@ -298,18 +315,14 @@ export class LargeGroupSelector extends React.Component {
 
 		return (
 			<Styled.LargeGroupSelector ref={node => (this.node = node)}>
-				{this.props.showInPlace && mainView}
+				{showInPlace && mainView}
 				<SimpleModal
 					container="body"
-					isOpen={
-						(!this.props.showInPlace && this.props.isOpen) ||
-						(this.props.showInPlace && secondaryModalOpen) ||
-						false
-					}
+					isOpen={(!showInPlace && isOpen) || (showInPlace && secondaryModalOpen) || false}
 					onClose={this.toggle}
 					theme={{ background: 'transparent' }}
 				>
-					{this.state.modalContent === 'main' && !this.props.showInPlace && mainView}
+					{this.state.modalContent === 'main' && !showInPlace && mainView}
 					{this.state.modalContent === 'admin' && (
 						<Styled.SecondaryModalContent>
 							<Styled.SecondaryModalText>
@@ -324,7 +337,7 @@ export class LargeGroupSelector extends React.Component {
 							<Styled.SecondaryModalButtonContainer>
 								<Styled.SecondaryModalButtonWrapper>
 									<Button small primary onClick={this.redirectToGroup}>
-										{this.props.localizedResources.goToGroupButtonText}
+										{localizedResources.goToGroupButtonText}
 									</Button>
 								</Styled.SecondaryModalButtonWrapper>
 								<Button small onClick={this.resetModalState}>
@@ -370,6 +383,7 @@ const formatStringList = arrayOfStrings => {
 	return result.charAt(0).toUpperCase() + result.slice(1);
 };
 
+// Adapted from JQuery's getScrollParent method
 const getScrollParent = (element, includeHidden) => {
 	let style = getComputedStyle(element);
 	const excludeStaticParent = style.position === 'absolute';
@@ -378,7 +392,9 @@ const getScrollParent = (element, includeHidden) => {
 	if (style.position === 'fixed') {
 		return document.body;
 	}
-	for (let parent = element; (parent = parent.parentElement); ) {
+
+	let parent = element;
+	while ((parent = parent.parentElement)) {
 		style = getComputedStyle(parent);
 		if (excludeStaticParent && style.position === 'static') {
 			continue;
