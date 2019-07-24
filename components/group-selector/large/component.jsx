@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Button } from '../../main';
 import { SimpleModal } from '../../simple-modal';
@@ -89,7 +88,7 @@ export class LargeGroupSelector extends React.Component {
 
 	componentDidMount() {
 		if (this.props.showInPlace) {
-			var scrollableNode = this.getScrollParent(ReactDOM.findDOMNode(this));
+			var scrollableNode = this.getScrollParent(this.node);
 			scrollableNode.addEventListener('scroll', this.handleScroll.bind(this));
 		}
 	}
@@ -225,13 +224,17 @@ export class LargeGroupSelector extends React.Component {
 		var excludeStaticParent = style.position === 'absolute';
 		var overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
 
-		if (style.position === 'fixed') return document.body;
+		if (style.position === 'fixed') {
+			return document.body;
+		}
 		for (var parent = element; (parent = parent.parentElement); ) {
 			style = getComputedStyle(parent);
 			if (excludeStaticParent && style.position === 'static') {
 				continue;
 			}
-			if (overflowRegex.test(style.overflow + style.overflowY + style.overflowX)) return parent;
+			if (overflowRegex.test(style.overflow + style.overflowY + style.overflowX)) {
+				return parent;
+			}
 		}
 
 		return window;
@@ -324,7 +327,7 @@ export class LargeGroupSelector extends React.Component {
 			this.state.modalContent === 'admin' || this.state.modalContent === 'change';
 
 		return (
-			<Styled.LargeGroupSelector>
+			<Styled.LargeGroupSelector ref={node => (this.node = node)}>
 				{this.props.showInPlace && mainView}
 				<SimpleModal
 					container="body"
