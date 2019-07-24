@@ -88,13 +88,13 @@ export class LargeGroupSelector extends React.Component {
 
 	componentDidMount() {
 		if (this.props.showInPlace) {
-			var scrollableNode = this.getScrollParent(this.node);
+			const scrollableNode = this.getScrollParent(this.node);
 			scrollableNode.addEventListener('scroll', this.handleScroll);
 		}
 	}
 
 	componentWillUnmount() {
-		var scrollableNode = this.getScrollParent(this.node);
+		const scrollableNode = this.getScrollParent(this.node);
 		scrollableNode.removeEventListener('scroll', this.handleScroll);
 	}
 
@@ -221,14 +221,14 @@ export class LargeGroupSelector extends React.Component {
 	};
 
 	getScrollParent(element, includeHidden) {
-		var style = getComputedStyle(element);
-		var excludeStaticParent = style.position === 'absolute';
-		var overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
+		let style = getComputedStyle(element);
+		const excludeStaticParent = style.position === 'absolute';
+		const overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
 
 		if (style.position === 'fixed') {
 			return document.body;
 		}
-		for (var parent = element; (parent = parent.parentElement); ) {
+		for (let parent = element; (parent = parent.parentElement); ) {
 			style = getComputedStyle(parent);
 			if (excludeStaticParent && style.position === 'static') {
 				continue;
