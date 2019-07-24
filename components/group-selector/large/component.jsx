@@ -256,7 +256,16 @@ export class LargeGroupSelector extends React.Component {
 			localizedResources,
 		} = this.props;
 
-		const disableButton = this.state.newChurchName === '' || this.state.newChurchLocation === '';
+		const {
+			newChurchName,
+			newChurchLocation,
+			createGroupFixed,
+			scrollWidthDelta,
+			resultsTopMargin,
+			modalContent,
+		} = this.state;
+
+		const disableButton = newChurchName === '' || newChurchLocation === '';
 
 		const formattedMembershiplevels = formatStringList(authorizedMembershipLevels);
 		const formattedGroupLevels = formatStringList(authorizedGroupKinds);
@@ -281,14 +290,14 @@ export class LargeGroupSelector extends React.Component {
 						<Styled.LargeSubtitle>{localizedResources.subTitle}</Styled.LargeSubtitle>
 					</div>
 				)}
-				<Styled.CreateGroupWrapper fixed={this.state.createGroupFixed}>
-					<Styled.CreateGroupBackground scrollWidthDelta={this.state.scrollWidthDelta}>
+				<Styled.CreateGroupWrapper fixed={createGroupFixed}>
+					<Styled.CreateGroupBackground scrollWidthDelta={scrollWidthDelta}>
 						<CreateGroup
 							onChurchNameInputChange={this.handleChurchNameInputChange}
 							onChurchLocationInputChange={this.handleChurchLocationInputChange}
-							newChurchName={this.state.newChurchName}
-							newChurchLocation={this.state.newChurchLocation}
-							showRequiredStars={this.state.createGroupFixed}
+							newChurchName={newChurchName}
+							newChurchLocation={newChurchLocation}
+							showRequiredStars={createGroupFixed}
 							localizedResources={localizedResources}
 						/>
 						<Styled.CreateGroupButtonWrapper>
@@ -302,8 +311,8 @@ export class LargeGroupSelector extends React.Component {
 					</Styled.CreateGroupBackground>
 				</Styled.CreateGroupWrapper>
 				<Styled.SearchResultsContainer
-					style={{ marginTop: this.state.resultsTopMargin }}
-					fixed={this.state.createGroupFixed}
+					style={{ marginTop: resultsTopMargin }}
+					fixed={createGroupFixed}
 					ref={this.searchResultsRef}
 				>
 					{this.getSearchResults()}
@@ -311,8 +320,7 @@ export class LargeGroupSelector extends React.Component {
 			</Styled.LargeScrollView>
 		);
 
-		const secondaryModalOpen =
-			this.state.modalContent === 'admin' || this.state.modalContent === 'change';
+		const secondaryModalOpen = modalContent === 'admin' || modalContent === 'change';
 
 		return (
 			<Styled.LargeGroupSelector ref={this.nodeRef}>
@@ -323,8 +331,8 @@ export class LargeGroupSelector extends React.Component {
 					onClose={this.toggle}
 					theme={{ background: 'transparent' }}
 				>
-					{this.state.modalContent === 'main' && !showInPlace && mainView}
-					{this.state.modalContent === 'admin' && (
+					{modalContent === 'main' && !showInPlace && mainView}
+					{modalContent === 'admin' && (
 						<Styled.SecondaryModalContent>
 							<Styled.SecondaryModalText>
 								<Styled.SearchResultBoldText>
@@ -347,7 +355,7 @@ export class LargeGroupSelector extends React.Component {
 							</Styled.SecondaryModalButtonContainer>
 						</Styled.SecondaryModalContent>
 					)}
-					{this.state.modalContent === 'change' && (
+					{modalContent === 'change' && (
 						<Styled.SecondaryModalContent>
 							<Styled.SecondaryModalText>
 								This group type must be set to{' '}
