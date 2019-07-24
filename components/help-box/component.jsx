@@ -27,42 +27,17 @@ export function HelpBox({
 		<Box
 			stacked={stacked}
 			backgroundColor={
-				success
-					? globalTheme.colors.green1
-					: danger
-					? globalTheme.colors.red1
-					: warning
-					? globalTheme.colors.yellow1
-					: minor
-					? globalTheme.colors.gray4
-					: globalTheme.colors.blue1
+				success ? 'green1' : danger ? 'red1' : warning ? 'yellow1' : minor ? 'gray4' : 'blue1'
 			}
-			border={`solid 1px ${
-				success
-					? globalTheme.colors.green2
-					: danger
-					? globalTheme.colors.red3
-					: warning
-					? globalTheme.colors.yellow3
-					: minor
-					? globalTheme.colors.gray14
-					: globalTheme.colors.blue3
-			}`}
-			borderLeft={`solid 4px ${
-				success
-					? globalTheme.colors.green2
-					: danger
-					? globalTheme.colors.red3
-					: warning
-					? globalTheme.colors.yellow3
-					: minor
-					? globalTheme.colors.gray14
-					: globalTheme.colors.blue3
-			}`}
-			color={globalTheme.colors.flGray}
+			border={1}
+			borderColor={
+				success ? 'green2' : danger ? 'red3' : warning ? 'yellow3' : minor ? 'gray14' : 'blue3'
+			}
+			css="border-left-width: 4px"
+			color="flGray"
 			position="relative"
 			display="flex"
-			borderRadius={globalTheme.radii[1]}
+			borderRadius={1}
 			{...helpBoxProps}
 		>
 			{(showLightBulb && <Styled.BulbIcon />) ||
@@ -82,7 +57,8 @@ export function HelpBox({
 				display="flex"
 				flex="1"
 				height={large ? '230px' : ''}
-				padding={`14px ${globalTheme.space[5]}px 14px ${globalTheme.space[4]}px`}
+				padding={4}
+				paddingRight={5}
 				flexDirection={stacked ? 'column' : ['column', 'row']}
 			>
 				{children}
