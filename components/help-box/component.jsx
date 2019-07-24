@@ -40,9 +40,10 @@ export function HelpBox({
 			borderRadius={1}
 			{...helpBoxProps}
 		>
-			{(showLightBulb && <Styled.BulbIcon />) ||
+			{(showLightBulb && <Styled.BulbIcon theme={theme} />) ||
 				(!hideIcon && (
 					<Styled.Icon
+						theme={theme}
 						success={success}
 						danger={danger}
 						warning={warning}
@@ -65,6 +66,7 @@ export function HelpBox({
 			</Styled.HelpBoxContent>
 			{(handleClose && (
 				<Styled.CloseIcon
+					theme={theme}
 					success={success}
 					danger={danger}
 					warning={warning}
@@ -88,6 +90,7 @@ export function HelpBox({
 			)) ||
 				(showRightIcon && (
 					<Styled.Icon
+						theme={theme}
 						success={success}
 						danger={danger}
 						warning={warning}
@@ -139,6 +142,10 @@ HelpBox.propTypes = {
 	large: PropTypes.bool,
 	/** If not handled, there will be no close icon. */
 	handleClose: PropTypes.func,
+};
+
+HelpBox.defaultProps = {
+	theme: globalTheme,
 };
 
 HelpBox.Body = Styled.HelpBoxBody;

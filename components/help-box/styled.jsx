@@ -37,30 +37,28 @@ export const HelpBoxContent = styled(Box)`
 export const Icon = styled(Box)`
 	path {
 		fill: ${props =>
-			props.success
-				? globalTheme.colors.green2
-				: props.danger
-				? globalTheme.colors.red3
-				: props.warning
-				? globalTheme.colors.yellow3
-				: props.minor
-				? globalTheme.colors.gray14
-				: globalTheme.colors.blue3};
+			getColor(
+				props,
+				props.theme.colors.green2,
+				props.theme.colors.red3,
+				props.theme.colors.yellow3,
+				props.theme.colors.gray14,
+				props.theme.colors.blue3,
+			)};
 	}
 `;
 
 export const CloseIcon = styled(Box)`
 	path {
 		fill: ${props =>
-			props.success
-				? globalTheme.colors.green5
-				: props.danger
-				? globalTheme.colors.red5
-				: props.warning
-				? globalTheme.colors.yellow5
-				: props.minor
-				? globalTheme.colors.gray34
-				: globalTheme.colors.blue5};
+			getColor(
+				props,
+				props.theme.colors.green5,
+				props.theme.colors.red5,
+				props.theme.colors.yellow5,
+				props.theme.colors.gray34,
+				props.theme.colors.blue5,
+			)};
 	}
 `;
 
@@ -73,14 +71,25 @@ export const BulbIcon = styled(LightBulbH)`
 
 	path {
 		fill: ${props =>
-			props.success
-				? globalTheme.colors.green2
-				: props.danger
-				? globalTheme.colors.red3
-				: props.warning
-				? globalTheme.colors.yellow3
-				: props.minor
-				? globalTheme.colors.gray14
-				: globalTheme.colors.blue3};
+			getColor(
+				props,
+				props.theme.colors.green2,
+				props.theme.colors.red3,
+				props.theme.colors.yellow3,
+				props.theme.colors.gray14,
+				props.theme.colors.blue3,
+			)};
 	}
 `;
+
+function getColor(props, successColor, dangerColor, warningColor, minorColor, defaultColor) {
+	return props.success
+		? successColor
+		: props.danger
+		? dangerColor
+		: props.warning
+		? warningColor
+		: props.minor
+		? minorColor
+		: defaultColor;
+}
