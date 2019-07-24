@@ -88,16 +88,17 @@ export class LargeGroupSelector extends React.Component {
 
 	componentDidMount() {
 		if (this.props.showInPlace) {
-			const scrollableNode = getScrollParent(this.node);
+			const scrollableNode = getScrollParent(this.nodeRef.current);
 			scrollableNode.addEventListener('scroll', this.handleScroll);
 		}
 	}
 
 	componentWillUnmount() {
-		const scrollableNode = getScrollParent(this.node);
+		const scrollableNode = getScrollParent(this.nodeRef.current);
 		scrollableNode.removeEventListener('scroll', this.handleScroll);
 	}
 
+	nodeRef = React.createRef();
 	searchResultsRef = React.createRef();
 	fixedCreateWrapper = false;
 
@@ -314,7 +315,7 @@ export class LargeGroupSelector extends React.Component {
 			this.state.modalContent === 'admin' || this.state.modalContent === 'change';
 
 		return (
-			<Styled.LargeGroupSelector ref={node => (this.node = node)}>
+			<Styled.LargeGroupSelector ref={this.nodeRef}>
 				{showInPlace && mainView}
 				<SimpleModal
 					container="body"
