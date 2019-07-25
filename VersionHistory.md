@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.11.0
+
+- `GroupPicker` now allows non-admin users to select groups.
+- Update chevron icons.
+
 ### 5.10.0
 
 - Add `SequencedTab` and `SequencedTabList` components
