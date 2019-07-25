@@ -67,7 +67,7 @@ export class LargeGroupSelector extends React.Component {
 			joinButtonText: 'Join Group',
 			claimButtonText: 'Claim',
 			selectButtonText: 'Get Started',
-			dontSeeChurchText: "Don't see your church?",
+			dontSeeChurchText: 'Don’t see your church?',
 			goToGroupButtonText: 'Request Access',
 			churchNameText: 'Church Name',
 			churchLocationText: 'Church Location',
