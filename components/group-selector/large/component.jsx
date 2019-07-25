@@ -35,6 +35,44 @@ export class LargeGroupSelector extends React.Component {
 		showInPlace: PropTypes.bool,
 		/** Whether or not to show the "Find Your Church in the Faithlife Group Directory" title */
 		hideTitle: PropTypes.bool,
+		/** Array of membership levels allowed to "Select" group. Defaults to Admin only */
+		authorizedMembershipLevels: PropTypes.arrayOf(PropTypes.string),
+		/** Array of group kinds user is allowed to "Select". Defaults to 'church' only */
+		authorizedGroupKinds: PropTypes.arrayOf(PropTypes.string),
+		/** Flag to use "Select"/"Request" button style instead of "Get Started"/"Join"/"Follow"/"Claim" */
+		useSelectRequestButtonStyle: PropTypes.bool,
+		/** String literals to overload UI elements and for localization */
+		localizedResources: PropTypes.shape({
+			title: PropTypes.string,
+			subTitle: PropTypes.string,
+			requestButtonText: PropTypes.string,
+			joinButtonText: PropTypes.string,
+			claimButtonText: PropTypes.string,
+			selectButtonText: PropTypes.string,
+			dontSeeChurchText: PropTypes.string,
+			goToGroupButtonText: PropTypes.string,
+			churchNameText: PropTypes.string,
+			churchLocationText: PropTypes.string,
+			churchLocationPlaceholder: PropTypes.string,
+		}),
+	};
+
+	static defaultProps = {
+		authorizedMembershipLevels: ['admin'],
+		authorizedGroupKinds: ['church'],
+		localizedResources: {
+			title: 'Find Your Church',
+			subTitle: 'in the Faithlife Church Directory',
+			requestButtonText: 'Request Admin',
+			joinButtonText: 'Join Group',
+			claimButtonText: 'Claim',
+			selectButtonText: 'Get Started',
+			dontSeeChurchText: 'Don’t see your church?',
+			goToGroupButtonText: 'Request Access',
+			churchNameText: 'Church Name',
+			churchLocationText: 'Church Location',
+			churchLocationPlaceholder: 'City, State',
+		},
 	};
 
 	state = {
@@ -48,6 +86,19 @@ export class LargeGroupSelector extends React.Component {
 		scrollWidthDelta: 0,
 	};
 
+	componentDidMount() {
+		if (this.props.showInPlace) {
+			const scrollableNode = getScrollParent(this.nodeRef.current);
+			scrollableNode.addEventListener('scroll', this.handleScroll);
+		}
+	}
+
+	componentWillUnmount() {
+		const scrollableNode = getScrollParent(this.nodeRef.current);
+		scrollableNode.removeEventListener('scroll', this.handleScroll);
+	}
+
+	nodeRef = React.createRef();
 	searchResultsRef = React.createRef();
 	fixedCreateWrapper = false;
 
@@ -56,33 +107,23 @@ export class LargeGroupSelector extends React.Component {
 		this.props.onCreateGroup(this.state.newChurchName, this.state.newChurchLocation);
 	};
 
-	getDefaultGroups() {
-		return this.props.groups.map(group => (
-			<SearchResult
-				key={group.groupId}
-				groupId={group.groupId}
-				kind={group.kind}
-				name={group.name}
-				avatarUrl={group.avatarUrl}
-				membershipKind={group.membershipKind}
-				relationshipKind={group.relationshipKind}
-				onGetStartedClick={this.handleGetStarted}
-				onRequestClick={this.props.onAdminRequestClick}
-				onEditClick={this.redirectToGroup}
-				onJoinGroupClick={this.props.onJoinGroupClick}
-				onClaimGroupClick={this.handleClaimGroup}
-				setModalState={this.setModalState}
-				setSelectedGroupId={this.setSelectedGroupId}
-				onGetStarted={this.handleGetStarted}
-				toggle={this.toggle}
-			/>
-		));
-	}
-
 	getSearchResults = () => {
+		const {
+			groupSearchResults,
+			authorizedMembershipLevels,
+			authorizedGroupKinds,
+			onAdminRequestClick,
+			onJoinGroupClick,
+			localizedResources,
+		} = this.props;
 		let groups;
-		if (this.props.groupSearchResults) {
-			groups = this.props.groupSearchResults.map(group => (
+		const groupResults = groupSearchResults || groups;
+
+		const formattedMembershiplevels = formatStringList(authorizedMembershipLevels);
+		const formattedGroupLevels = formatStringList(authorizedGroupKinds);
+
+		if (groupResults) {
+			groups = groupResults.map(group => (
 				<SearchResult
 					key={group.groupId}
 					groupId={group.groupId}
@@ -91,20 +132,24 @@ export class LargeGroupSelector extends React.Component {
 					avatarUrl={group.avatarUrl}
 					membershipKind={group.membershipKind}
 					relationshipKind={group.relationshipKind}
+					authorizedMembershipLevels={authorizedMembershipLevels}
+					authorizedGroupKinds={authorizedGroupKinds}
+					localizedResources={localizedResources}
 					claimable={group.claimable}
+					joinable={group.joinable}
 					onGetStartedClick={this.handleGetStarted}
-					onRequestClick={this.props.onAdminRequestClick}
+					onRequestClick={onAdminRequestClick}
 					onEditClick={this.redirectToGroup}
-					onJoinGroupClick={this.props.onJoinGroupClick}
+					onJoinGroupClick={onJoinGroupClick}
 					onClaimGroupClick={this.handleClaimGroup}
 					setModalState={this.setModalState}
 					setSelectedGroupId={this.setSelectedGroupId}
 					onGetStarted={this.handleGetStarted}
 					toggle={this.toggle}
+					formattedMembershiplevels={formattedMembershiplevels}
+					formattedGroupLevels={formattedGroupLevels}
 				/>
 			));
-		} else {
-			groups = this.getDefaultGroups();
 		}
 		return groups;
 	};
@@ -133,7 +178,10 @@ export class LargeGroupSelector extends React.Component {
 
 	redirectToGroup = () => {
 		this.setModalState('main');
-		window.open(`https://faithlife.com/${this.state.selectedGroupId}`, 'noopener, noreferrer');
+		window.open(
+			`https://faithlife.com/${this.state.selectedGroupId}/about`,
+			'noopener, noreferrer',
+		);
 	};
 
 	handleChurchNameInputChange = event => {
@@ -172,59 +220,90 @@ export class LargeGroupSelector extends React.Component {
 	};
 
 	handleScroll = scrollData => {
-		if (this.props.showInPlace) {
-			return;
-		}
+		const { showInPlace, groupSearchResults } = this.props;
 
-		if (scrollData.topPosition >= 82 && !this.fixedCreateWrapper) {
-			this.setState({
-				createGroupFixed: true,
-				resultsTopMargin: 232,
-			});
-			this.fixedCreateWrapper = true;
-		} else if (scrollData.topPosition < 82) {
+		const scrollTopPosition =
+			showInPlace && scrollData.srcElement
+				? scrollData.srcElement.scrollingElement.scrollTop
+				: scrollData.topPosition;
+
+		const groupResultsCount = groupSearchResults ? groupSearchResults.length : 99;
+
+		if (scrollTopPosition >= 82 || groupResultsCount < 4) {
+			if (!this.state.fixedCreateWrapper) {
+				this.setState({
+					createGroupFixed: !showInPlace,
+					resultsTopMargin: showInPlace ? 0 : 232,
+					fixedCreateWrapper: true,
+				});
+			}
+		} else if (scrollTopPosition < 82) {
 			this.setState({
 				createGroupFixed: false,
-				resultsTopMargin: defaultResultsTopMargin + scrollData.topPosition,
+				resultsTopMargin: defaultResultsTopMargin + scrollTopPosition,
+				fixedCreateWrapper: false,
 			});
-			this.fixedCreateWrapper = false;
 		}
 	};
 
 	render() {
-		const disableButton = this.state.newChurchName === '' || this.state.newChurchLocation === '';
+		const {
+			authorizedMembershipLevels,
+			authorizedGroupKinds,
+			showInPlace,
+			hideTitle,
+			isOpen,
+			localizedResources,
+		} = this.props;
+
+		const {
+			newChurchName,
+			newChurchLocation,
+			createGroupFixed,
+			scrollWidthDelta,
+			resultsTopMargin,
+			modalContent,
+		} = this.state;
+
+		const disableButton = newChurchName === '' || newChurchLocation === '';
+
+		const formattedMembershiplevels = formatStringList(authorizedMembershipLevels);
+		const formattedGroupLevels = formatStringList(authorizedGroupKinds);
 
 		const mainView = (
 			<Styled.LargeScrollView
 				horizontal={false}
 				contentClassName={Styled.LargeScrollViewContentClass}
-				onScroll={this.handleScroll}
-				showInPlace={this.props.showInPlace}
-				hideTitle={this.props.hideTitle}
+				onScroll={!showInPlace && this.handleScroll}
+				showInPlace={showInPlace}
+				hideTitle={hideTitle}
 				verticalScrollbarStyle={{
 					borderRadius: '6px',
 					marginTop: '1px',
 					marginBottom: '1px',
 				}}
 			>
-				{!this.props.hideTitle && (
+				{!hideTitle && (
 					<div>
 						<Styled.LargeTopGradient />
-						<Styled.LargeTitle>Find Your Church</Styled.LargeTitle>
-						<Styled.LargeSubtitle>in the Faithlife Church Directory</Styled.LargeSubtitle>
+						<Styled.LargeTitle>{localizedResources.title}</Styled.LargeTitle>
+						<Styled.LargeSubtitle>{localizedResources.subTitle}</Styled.LargeSubtitle>
 					</div>
 				)}
-				<Styled.CreateGroupWrapper fixed={this.state.createGroupFixed}>
-					<Styled.CreateGroupBackground scrollWidthDelta={this.state.scrollWidthDelta}>
+				<Styled.CreateGroupWrapper fixed={createGroupFixed}>
+					<Styled.CreateGroupBackground scrollWidthDelta={scrollWidthDelta}>
 						<CreateGroup
 							onChurchNameInputChange={this.handleChurchNameInputChange}
 							onChurchLocationInputChange={this.handleChurchLocationInputChange}
-							newChurchName={this.state.newChurchName}
-							newChurchLocation={this.state.newChurchLocation}
-							showRequiredStars={this.state.createGroupFixed}
+							newChurchName={newChurchName}
+							newChurchLocation={newChurchLocation}
+							showRequiredStars={createGroupFixed}
+							localizedResources={localizedResources}
 						/>
 						<Styled.CreateGroupButtonWrapper>
-							<Styled.CreateGroupButtonText>Don’t see your church?</Styled.CreateGroupButtonText>
+							<Styled.CreateGroupButtonText>
+								{localizedResources.dontSeeChurchText}
+							</Styled.CreateGroupButtonText>
 							<Button small primary disabled={disableButton} onClick={this.createGroupClick}>
 								Create
 							</Button>
@@ -232,8 +311,8 @@ export class LargeGroupSelector extends React.Component {
 					</Styled.CreateGroupBackground>
 				</Styled.CreateGroupWrapper>
 				<Styled.SearchResultsContainer
-					style={{ marginTop: this.state.resultsTopMargin }}
-					fixed={this.state.createGroupFixed}
+					style={{ marginTop: resultsTopMargin }}
+					fixed={createGroupFixed}
 					ref={this.searchResultsRef}
 				>
 					{this.getSearchResults()}
@@ -241,36 +320,33 @@ export class LargeGroupSelector extends React.Component {
 			</Styled.LargeScrollView>
 		);
 
-		const secondaryModalOpen =
-			this.state.modalContent === 'admin' || this.state.modalContent === 'change';
+		const secondaryModalOpen = modalContent === 'admin' || modalContent === 'change';
 
 		return (
-			<Styled.LargeGroupSelector>
-				{this.props.showInPlace && mainView}
+			<Styled.LargeGroupSelector ref={this.nodeRef}>
+				{showInPlace && mainView}
 				<SimpleModal
 					container="body"
-					isOpen={
-						(!this.props.showInPlace && this.props.isOpen) ||
-						(this.props.showInPlace && secondaryModalOpen) ||
-						false
-					}
+					isOpen={(!showInPlace && isOpen) || (showInPlace && secondaryModalOpen) || false}
 					onClose={this.toggle}
 					theme={{ background: 'transparent' }}
 				>
-					{this.state.modalContent === 'main' && !this.props.showInPlace && mainView}
-					{this.state.modalContent === 'admin' && (
+					{modalContent === 'main' && !showInPlace && mainView}
+					{modalContent === 'admin' && (
 						<Styled.SecondaryModalContent>
 							<Styled.SecondaryModalText>
-								<Styled.SearchResultBoldText>Admin</Styled.SearchResultBoldText>
+								<Styled.SearchResultBoldText>
+									{formattedMembershiplevels}
+								</Styled.SearchResultBoldText>
 								<span> membership is neccessarry to perform this action.</span>
 							</Styled.SecondaryModalText>
 							<Styled.SecondaryModalText>
-								Contact a group administrator to request Admin membership
+								Contact a group administrator to request access
 							</Styled.SecondaryModalText>
 							<Styled.SecondaryModalButtonContainer>
 								<Styled.SecondaryModalButtonWrapper>
 									<Button small primary onClick={this.redirectToGroup}>
-										Request access
+										{localizedResources.goToGroupButtonText}
 									</Button>
 								</Styled.SecondaryModalButtonWrapper>
 								<Button small onClick={this.resetModalState}>
@@ -279,11 +355,11 @@ export class LargeGroupSelector extends React.Component {
 							</Styled.SecondaryModalButtonContainer>
 						</Styled.SecondaryModalContent>
 					)}
-					{this.state.modalContent === 'change' && (
+					{modalContent === 'change' && (
 						<Styled.SecondaryModalContent>
 							<Styled.SecondaryModalText>
 								This group type must be set to{' '}
-								<Styled.SearchResultBoldText>“Church”</Styled.SearchResultBoldText>
+								<Styled.SearchResultBoldText>{formattedGroupLevels}</Styled.SearchResultBoldText>
 							</Styled.SecondaryModalText>
 							<Styled.SecondaryModalText>
 								Visit the group settings page to change
@@ -291,7 +367,7 @@ export class LargeGroupSelector extends React.Component {
 							<Styled.SecondaryModalButtonContainer>
 								<Styled.SecondaryModalButtonWrapper>
 									<Button small primary onClick={this.redirectToGroup}>
-										Change to Church
+										Change to {formattedGroupLevels}
 									</Button>
 								</Styled.SecondaryModalButtonWrapper>
 								<Button small onClick={this.resetModalState}>
@@ -305,3 +381,37 @@ export class LargeGroupSelector extends React.Component {
 		);
 	}
 }
+
+const formatStringList = arrayOfStrings => {
+	const result =
+		arrayOfStrings.length === 1
+			? arrayOfStrings[0]
+			: [arrayOfStrings.slice(0, -1).join(', '), arrayOfStrings.slice(-1)[0]].join(
+					arrayOfStrings.length < 2 ? '' : ' or ',
+			  );
+	return result.charAt(0).toUpperCase() + result.slice(1);
+};
+
+// Adapted from JQuery's getScrollParent method
+const getScrollParent = (element, includeHidden) => {
+	let style = getComputedStyle(element);
+	const excludeStaticParent = style.position === 'absolute';
+	const overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
+
+	if (style.position === 'fixed') {
+		return document.body;
+	}
+
+	let parent = element;
+	while ((parent = parent.parentElement)) {
+		style = getComputedStyle(parent);
+		if (excludeStaticParent && style.position === 'static') {
+			continue;
+		}
+		if (overflowRegex.test(style.overflow + style.overflowY + style.overflowX)) {
+			return parent;
+		}
+	}
+
+	return window;
+};
