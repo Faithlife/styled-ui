@@ -166,7 +166,7 @@ export const LargeTopGradientWrapper = styled.div`
 `;
 
 export const LargeTitle = styled.div`
-	font-size: 32px;
+	font-size: 28px;
 	margin: 5px 0 0 0;
 	font-weight: 800;
 	color: #575251;
