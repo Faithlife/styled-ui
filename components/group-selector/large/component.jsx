@@ -44,6 +44,7 @@ export class LargeGroupSelector extends React.Component {
 		/** Style overrides, the z-index is applied to the backdrop of the modal */
 		styleOverrides: PropTypes.shape({
 			modalZIndex: PropTypes.number,
+			tooltipMargin: PropTypes.string,
 		}),
 		/** String literals to overload UI elements and for localization */
 		localizedResources: PropTypes.shape({
@@ -118,6 +119,7 @@ export class LargeGroupSelector extends React.Component {
 			authorizedGroupKinds,
 			onAdminRequestClick,
 			onJoinGroupClick,
+			styleOverrides,
 			localizedResources,
 		} = this.props;
 		let groups;
@@ -152,6 +154,7 @@ export class LargeGroupSelector extends React.Component {
 					toggle={this.toggle}
 					formattedMembershiplevels={formattedMembershiplevels}
 					formattedGroupLevels={formattedGroupLevels}
+					styleOverrides={styleOverrides}
 				/>
 			));
 		}

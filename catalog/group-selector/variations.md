@@ -123,7 +123,7 @@ state: {
 	},
 	authorizedMembershipLevels: ['admin', 'member', 'follower'],
 	authorizedGroupKinds: ['church', 'ministry', 'general'],
-	styleOverrides: { modalZIndex: 7000 },
+	styleOverrides: { modalZIndex: 7000, tooltipMargin: '0 0 0 20px' },
 	groups: [{
 		name: 'Michaels Test Church',
 		groupId: 1,

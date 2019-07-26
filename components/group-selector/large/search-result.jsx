@@ -23,6 +23,9 @@ export class SearchResult extends React.PureComponent {
 		authorizedGroupKinds: PropTypes.arrayOf(PropTypes.string).isRequired,
 		claimable: PropTypes.bool,
 		joinable: PropTypes.bool,
+		styleOverrides: PropTypes.shape({
+			tooltipMargin: PropTypes.string,
+		}),
 		localizedResources: PropTypes.object,
 	};
 
@@ -80,6 +83,7 @@ export class SearchResult extends React.PureComponent {
 			authorizedGroupKinds,
 			formattedMembershiplevels,
 			formattedGroupLevels,
+			styleOverrides,
 			localizedResources,
 		} = this.props;
 
@@ -101,6 +105,7 @@ export class SearchResult extends React.PureComponent {
 							</Styled.TooltipContentBlock>
 						</>
 					}
+					styleOverrides={{ margin: styleOverrides.tooltipMargin }}
 				>
 					<Styled.UnderlinedSearchResultMessage>
 						This is an unclaimed group
