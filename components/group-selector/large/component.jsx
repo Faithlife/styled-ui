@@ -41,6 +41,10 @@ export class LargeGroupSelector extends React.Component {
 		authorizedGroupKinds: PropTypes.arrayOf(PropTypes.string),
 		/** Flag to use "Select"/"Request" button style instead of "Get Started"/"Join"/"Follow"/"Claim" */
 		useSelectRequestButtonStyle: PropTypes.bool,
+		/** Style overrides, the z-index is applied to the backdrop of the modal */
+		styleOverrides: PropTypes.shape({
+			modalZIndex: PropTypes.number,
+		}),
 		/** String literals to overload UI elements and for localization */
 		localizedResources: PropTypes.shape({
 			title: PropTypes.string,
@@ -255,6 +259,7 @@ export class LargeGroupSelector extends React.Component {
 			showInPlace,
 			hideTitle,
 			isOpen,
+			styleOverrides,
 			localizedResources,
 		} = this.props;
 
@@ -332,6 +337,7 @@ export class LargeGroupSelector extends React.Component {
 					isOpen={(!showInPlace && isOpen) || (showInPlace && secondaryModalOpen) || false}
 					onClose={this.toggle}
 					theme={{ background: 'transparent' }}
+					styleOverrides={styleOverrides && { zIndex: styleOverrides.modalZIndex }}
 				>
 					{modalContent === 'main' && !showInPlace && mainView}
 					{modalContent === 'admin' && (
