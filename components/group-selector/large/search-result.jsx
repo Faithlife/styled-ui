@@ -102,7 +102,9 @@ export class SearchResult extends React.PureComponent {
 						</>
 					}
 				>
-					<Styled.SearchResultMessage>This is an unclaimed group</Styled.SearchResultMessage>
+					<Styled.UnderlinedSearchResultMessage>
+						This is an unclaimed group
+					</Styled.UnderlinedSearchResultMessage>
 				</Tooltip>
 			);
 			button = (

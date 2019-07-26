@@ -291,6 +291,10 @@ export const SearchResultMessage = styled.div`
 	font-size: 12px;
 `;
 
+export const UnderlinedSearchResultMessage = styled(SearchResultMessage)`
+	border-bottom: 1px dashed #a8a8a8;
+`;
+
 export const SearchResultHightlightText = styled.span`
 	font-weight: 600;
 	font-size: 12px;
