@@ -220,11 +220,11 @@ export class LargeGroupSelector extends React.Component {
 	};
 
 	handleScroll = scrollData => {
-		const { showInPlace, groupSearchResults } = this.props;
-
-		if (showInPlace && this.state.fixedCreateWrapper) {
+		if (this.state.fixedCreateWrapper) {
 			return;
 		}
+
+		const { showInPlace, groupSearchResults } = this.props;
 
 		const scrollTopPosition =
 			showInPlace && scrollData.srcElement
