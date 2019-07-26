@@ -82,7 +82,7 @@ export class LargeGroupSelector extends React.Component {
 		modalContent: 'main',
 		selectedGroupId: -1,
 		createGroupFixed: false,
-		resultsTopMargin: this.props.showInPlace ? 0 : defaultResultsTopMargin,
+		resultsTopMargin: defaultResultsTopMargin,
 		scrollWidthDelta: 0,
 	};
 
@@ -157,7 +157,7 @@ export class LargeGroupSelector extends React.Component {
 	toggle = () => {
 		this.setState({
 			createGroupFixed: false,
-			resultsTopMargin: this.props.showInPlace ? 0 : defaultResultsTopMargin,
+			resultsTopMargin: defaultResultsTopMargin,
 			modalContent: 'main',
 		});
 
@@ -222,6 +222,10 @@ export class LargeGroupSelector extends React.Component {
 	handleScroll = scrollData => {
 		const { showInPlace, groupSearchResults } = this.props;
 
+		if (showInPlace && this.state.fixedCreateWrapper) {
+			return;
+		}
+
 		const scrollTopPosition =
 			showInPlace && scrollData.srcElement
 				? scrollData.srcElement.scrollingElement.scrollTop
@@ -230,13 +234,11 @@ export class LargeGroupSelector extends React.Component {
 		const groupResultsCount = groupSearchResults ? groupSearchResults.length : 99;
 
 		if (scrollTopPosition >= 82 || groupResultsCount < 4) {
-			if (!this.state.fixedCreateWrapper) {
-				this.setState({
-					createGroupFixed: !showInPlace,
-					resultsTopMargin: showInPlace ? 0 : 232,
-					fixedCreateWrapper: true,
-				});
-			}
+			this.setState({
+				createGroupFixed: !showInPlace,
+				resultsTopMargin: showInPlace ? 0 : 232,
+				fixedCreateWrapper: true,
+			});
 		} else if (scrollTopPosition < 82) {
 			this.setState({
 				createGroupFixed: false,
@@ -341,7 +343,7 @@ export class LargeGroupSelector extends React.Component {
 								<span> membership is neccessarry to perform this action.</span>
 							</Styled.SecondaryModalText>
 							<Styled.SecondaryModalText>
-								Contact a group administrator to request access
+								Contact a group administrator to request access.
 							</Styled.SecondaryModalText>
 							<Styled.SecondaryModalButtonContainer>
 								<Styled.SecondaryModalButtonWrapper>

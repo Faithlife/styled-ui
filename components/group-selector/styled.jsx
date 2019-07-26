@@ -345,5 +345,9 @@ export const SecondaryModalButtonContainer = styled.div`
 export const TooltipContentBlock = styled.p`
 	text-align: left;
 	margin: 0 16px 16px 16px;
-	font-size: 12px;
+	font-size: 14px;
+
+	&:first-of-type {
+		margin-top: 16px;
+	}
 `;
