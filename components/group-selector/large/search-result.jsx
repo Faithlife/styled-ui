@@ -162,11 +162,20 @@ export class SearchResult extends React.PureComponent {
 					membership required
 				</Styled.SearchResultMessage>
 			);
-			membershipLine = (
-				<Styled.SearchResultMembershipLine>
-					You are a <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>
-				</Styled.SearchResultMembershipLine>
-			);
+			membershipLine =
+				membershipKind === 'admin' ? (
+					<Styled.SearchResultMembershipLine>
+						You are an <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>
+					</Styled.SearchResultMembershipLine>
+				) : membershipKind === 'invited' ? (
+					<Styled.SearchResultMembershipLine>
+						You are <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>
+					</Styled.SearchResultMembershipLine>
+				) : (
+					<Styled.SearchResultMembershipLine>
+						You are a <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>
+					</Styled.SearchResultMembershipLine>
+				);
 			button = (
 				<Button small outline primary onClick={this.requestAccess}>
 					{localizedResources.requestButtonText}
@@ -218,7 +227,7 @@ export class SearchResult extends React.PureComponent {
 		} else {
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
-					You are {membershipKind === 'admin' ? 'an' : 'a'}{' '}
+					You are{membershipKind === 'admin' ? ' an ' : membershipKind === 'invited' ? ' ' : ' a '}
 					<Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>
 				</Styled.SearchResultMembershipLine>
 			);
