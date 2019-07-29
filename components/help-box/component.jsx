@@ -40,9 +40,9 @@ export function HelpBox({
 			borderRadius={1}
 			{...helpBoxProps}
 		>
-			{(showLightBulb && <Styled.BulbIcon theme={theme} />) ||
+			{(showLightBulb && <BulbIcon theme={theme} />) ||
 				(!hideIcon && (
-					<Styled.Icon
+					<Icon
 						theme={theme}
 						success={success}
 						danger={danger}
@@ -54,9 +54,9 @@ export function HelpBox({
 						marginLeft={4}
 					>
 						{danger ? <Exclamation /> : success ? <CircleCheck /> : minor ? null : <Info />}
-					</Styled.Icon>
+					</Icon>
 				))}
-			<Styled.HelpBoxContent
+			<HelpBoxContent
 				stacked={stacked}
 				theme={theme}
 				display="flex"
@@ -66,11 +66,12 @@ export function HelpBox({
 				padding={5}
 				paddingLeft={4}
 				flexDirection={stacked ? 'column' : ['column', 'row']}
+				css="font-size: 16px; line-height: 1.25"
 			>
 				{children}
-			</Styled.HelpBoxContent>
+			</HelpBoxContent>
 			{(handleClose && (
-				<Styled.CloseIcon
+				<CloseIcon
 					theme={theme}
 					success={success}
 					danger={danger}
@@ -89,10 +90,10 @@ export function HelpBox({
 							padding: '0px',
 						}}
 					/>
-				</Styled.CloseIcon>
+				</CloseIcon>
 			)) ||
 				(showRightIcon && (
-					<Styled.Icon
+					<Icon
 						theme={theme}
 						success={success}
 						danger={danger}
@@ -104,7 +105,7 @@ export function HelpBox({
 						marginLeft={!stacked ? -2 : large ? 4 : 5}
 					>
 						{danger ? <Exclamation /> : success ? <CircleCheck /> : minor ? null : <Info />}
-					</Styled.Icon>
+					</Icon>
 				))}
 		</Box>
 	);
@@ -147,6 +148,90 @@ HelpBox.defaultProps = {
 	theme: globalTheme,
 };
 
-HelpBox.Body = Styled.HelpBoxBody;
+HelpBox.Body = styled(Box)``;
 
-HelpBox.Footer = Styled.HelpBoxFooter;
+HelpBox.Footer = styled(Box)``;
+
+const HelpBoxContent = styled(Box)`
+	${HelpBox.Body} {
+		display: flex;
+		flex: 1;
+		order: 2;
+	}
+
+	${HelpBox.Footer} {
+		display: flex;
+		order: 2;
+		align-items: center;
+		margin: ${props =>
+			props.stacked
+				? `${props.theme.space[4]}px ${props.theme.space[5]}px ${props.theme.space[0]}px 
+					${props.theme.space[0]}px`
+				: `-6px ${props.theme.space[0]}px -6px ${props.theme.space[5]}px`};
+
+		@media (max-width: ${mediaSizes.phone}) {
+			margin: ${props => `${props.theme.space[4]}px ${props.theme.space[0]}px 
+				${props.theme.space[0]}px ${props.theme.space[0]}px`};
+		}
+	}
+`;
+
+const Icon = styled(Box)`
+	path {
+		fill: ${props =>
+			getColor(
+				props,
+				props.theme.colors.green2,
+				props.theme.colors.red3,
+				props.theme.colors.yellow3,
+				props.theme.colors.gray14,
+				props.theme.colors.blue3,
+			)};
+	}
+`;
+
+const CloseIcon = styled(Box)`
+	path {
+		fill: ${props =>
+			getColor(
+				props,
+				props.theme.colors.green5,
+				props.theme.colors.red5,
+				props.theme.colors.yellow5,
+				props.theme.colors.gray34,
+				props.theme.colors.blue5,
+			)};
+	}
+`;
+
+const BulbIcon = styled(LightBulbH)`
+	flex: none;
+	width: ${props => (props.large ? '42px' : '24px')};
+	height: ${props => (props.large ? '42px' : '24px')};
+	margin: ${props => `${props.theme.space[4]}px ${props.theme.space[0]}px ${props.theme.space[0]}px
+				${props.theme.space[5]}px`};
+
+	path {
+		fill: ${props =>
+			getColor(
+				props,
+				props.theme.colors.green2,
+				props.theme.colors.red3,
+				props.theme.colors.yellow3,
+				props.theme.colors.gray14,
+				props.theme.colors.blue3,
+			)};
+	}
+`;
+
+function getColor(props, successColor, dangerColor, warningColor, minorColor, defaultColor) {
+	return props.success
+		? successColor
+		: props.danger
+		? dangerColor
+		: props.warning
+		? warningColor
+		: props.minor
+		? minorColor
+		: defaultColor;
+}
