@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.12.0
+
+- `GroupPicker` now accepts a z-index to use for its modal.
+
 ### 5.11.0
 
 - `GroupPicker` now allows non-admin users to select groups.
