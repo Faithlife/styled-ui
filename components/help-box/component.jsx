@@ -48,18 +48,23 @@ export function HelpBox({
 						danger={danger}
 						warning={warning}
 						minor={minor}
-						margin={`15px -4px 0px ${globalTheme.space[5]}px`}
+						height="18px"
+						margin="17px"
+						marginRight={-2}
+						marginLeft={4}
 					>
 						{danger ? <Exclamation /> : success ? <CircleCheck /> : minor ? null : <Info />}
 					</Styled.Icon>
 				))}
 			<Styled.HelpBoxContent
 				stacked={stacked}
+				theme={theme}
 				display="flex"
 				flex="1"
+				alignItems={stacked || large || 'flex-start'}
 				height={large ? '230px' : ''}
-				padding={4}
-				paddingRight={5}
+				padding={5}
+				paddingLeft={4}
 				flexDirection={stacked ? 'column' : ['column', 'row']}
 			>
 				{children}
@@ -71,19 +76,17 @@ export function HelpBox({
 					danger={danger}
 					warning={warning}
 					minor={minor}
-					margin={
-						large
-							? `15px ${globalTheme.space[5]}px ${globalTheme.space[0]}px ${globalTheme.space[5]}px`
-							: `15px ${globalTheme.space[5]}px ${globalTheme.space[0]}px ${globalTheme.space[4]}px`
-					}
-					marginLeft={!stacked ? '-4px' : ''}
+					height="18px"
+					margin="17px"
+					marginRight={5}
+					marginLeft={!stacked ? -2 : large ? 4 : 5}
 				>
 					<Button
 						icon={<Close />}
 						onClick={handleClose}
 						styleOverrides={{
-							fontSize: globalTheme.fontSizes[4],
-							padding: `${globalTheme.space[0]}px`,
+							fontSize: '18px',
+							padding: '0px',
 						}}
 					/>
 				</Styled.CloseIcon>
@@ -95,14 +98,10 @@ export function HelpBox({
 						danger={danger}
 						warning={warning}
 						minor={minor}
-						margin={
-							large
-								? `15px ${globalTheme.space[5]}px ${globalTheme.space[0]}px 
-									${globalTheme.space[5]}px`
-								: `15px ${globalTheme.space[5]}px ${globalTheme.space[0]}px 
-									${globalTheme.space[4]}px`
-						}
-						marginLeft={!stacked ? '-4px' : ''}
+						height="18px"
+						margin="17px"
+						marginRight={5}
+						marginLeft={!stacked ? -2 : large ? 4 : 5}
 					>
 						{danger ? <Exclamation /> : success ? <CircleCheck /> : minor ? null : <Info />}
 					</Styled.Icon>

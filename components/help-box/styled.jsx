@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { theme as globalTheme } from '../../theme';
 import { LightBulbH } from '../icons';
 import { mediaSizes } from '../shared-styles';
 import { Box } from '../Box';
@@ -10,6 +9,7 @@ export const HelpBoxFooter = styled(Box)``;
 
 export const HelpBoxContent = styled(Box)`
 	line-height: 1.25;
+	font-size: ${props => props.theme.fontSizes[3]};
 
 	${HelpBoxBody} {
 		display: flex;
@@ -23,13 +23,13 @@ export const HelpBoxContent = styled(Box)`
 		align-items: center;
 		margin: ${props =>
 			props.stacked
-				? `${globalTheme.space[4]}px ${globalTheme.space[5]}px ${globalTheme.space[0]}px 
-					${globalTheme.space[0]}px`
-				: `-7px ${globalTheme.space[0]}px -7px ${globalTheme.space[5]}px`};
+				? `${props.theme.space[4]}px ${props.theme.space[5]}px ${props.theme.space[0]}px 
+					${props.theme.space[0]}px`
+				: `-6px ${props.theme.space[0]}px -6px ${props.theme.space[5]}px`};
 
 		@media (max-width: ${mediaSizes.phone}) {
-			margin: ${`${globalTheme.space[4]}px ${globalTheme.space[0]}px ${globalTheme.space[0]}px
-				${globalTheme.space[0]}px`};
+			margin: ${props => `${props.theme.space[4]}px ${props.theme.space[0]}px 
+				${props.theme.space[0]}px ${props.theme.space[0]}px`};
 		}
 	}
 `;
@@ -66,8 +66,8 @@ export const BulbIcon = styled(LightBulbH)`
 	flex: none;
 	width: ${props => (props.large ? '42px' : '24px')};
 	height: ${props => (props.large ? '42px' : '24px')};
-	margin: ${`${globalTheme.space[4]}px ${globalTheme.space[0]}px ${globalTheme.space[0]}px
-				${globalTheme.space[5]}px`};
+	margin: ${props => `${props.theme.space[4]}px ${props.theme.space[0]}px ${props.theme.space[0]}px
+				${props.theme.space[5]}px`};
 
 	path {
 		fill: ${props =>
