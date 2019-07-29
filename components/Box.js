@@ -1,9 +1,18 @@
 import styled from 'styled-components';
-import { layout, flexbox, position, grid, shadow, border, background } from 'styled-system';
+import {
+	compose,
+	layout,
+	flexbox,
+	position,
+	grid,
+	shadow,
+	border,
+	background,
+} from 'styled-system';
 import { common } from '../theme/system';
 import { theme } from '../theme';
 
-export const Box = styled.div(
+export const boxStyles = compose(
 	{
 		boxSizing: 'border-box',
 		minWidth: 0,
@@ -17,5 +26,7 @@ export const Box = styled.div(
 	border,
 	background,
 );
+
+export const Box = styled.div(boxStyles);
 
 Box.defaultProps = { theme };
