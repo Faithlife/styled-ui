@@ -349,7 +349,7 @@ export class LargeGroupSelector extends React.Component {
 								<Styled.SearchResultBoldText>
 									{formattedMembershiplevels}
 								</Styled.SearchResultBoldText>
-								<span> membership is neccessarry to perform this action.</span>
+								<span> membership is necessary to perform this action.</span>
 							</Styled.SecondaryModalText>
 							<Styled.SecondaryModalText>
 								Contact a group administrator to request access.
