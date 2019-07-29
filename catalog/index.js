@@ -52,6 +52,7 @@ import {
 	TableHeading,
 	PaginatedTable,
 	SimpleTable,
+	Box,
 } from '../index';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
@@ -107,6 +108,19 @@ function delayPromise(duration) {
 }
 
 const components = [
+	{
+		title: 'Layout Primitives',
+		pages: [
+			{
+				path: '/layout/box',
+				title: 'Box',
+				content: pageLoader(() => import('./layout/box.md')),
+				imports: {
+					Box,
+				},
+			},
+		],
+	},
 	{
 		title: 'Accordion',
 		pages: [
