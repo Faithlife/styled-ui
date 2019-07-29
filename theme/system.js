@@ -18,3 +18,18 @@ export const typography = compose(
 		textTransform: true,
 	}),
 );
+
+export const box = compose(
+	{
+		boxSizing: 'border-box',
+		minWidth: 0,
+	},
+	common,
+	styledSystem.layout,
+	styledSystem.flexbox,
+	styledSystem.position,
+	styledSystem.grid,
+	styledSystem.shadow,
+	styledSystem.border,
+	styledSystem.background,
+);

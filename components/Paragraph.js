@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { textStyle, layout, border } from 'styled-system';
+import { textStyle } from 'styled-system';
 import { themeGet } from '@styled-system/theme-get';
-import { typography, common } from '../theme/system';
+import { typography, box } from '../theme/system';
 import { theme } from '../theme';
 
 export const Paragraph = styled.p`
@@ -9,10 +9,8 @@ export const Paragraph = styled.p`
 	${themeGet('textStyles.c.16')};
 
 	${textStyle};
-	${common};
-	${layout};
+	${box};
 	${typography};
-	${border};
 `;
 
 Paragraph.defaultProps = { theme };

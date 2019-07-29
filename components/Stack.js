@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import { system } from 'styled-system';
-import { boxStyles } from './Box';
+import { box } from '../theme/system';
+
 import { theme } from '../theme';
 
 export const Stack = styled.div`
-	${boxStyles};
+	${box};
 
 	> * + * {
 		${system({
