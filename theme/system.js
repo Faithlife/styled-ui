@@ -27,7 +27,7 @@ export const typography = compose(
 	}),
 );
 
-common.propTypes = {
+typography.propTypes = {
 	...systemPropTypes.typography,
 	textTransform: PropTypes.string,
 };
