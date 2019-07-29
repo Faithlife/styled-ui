@@ -117,7 +117,7 @@ const borders = [0, '1px solid'];
 
 const radii = ['0px', '3px', '6px'];
 
-const shadows = ['0 4px 4px 0 rgba(0, 0, 0, 0.12), 0 0 4px 0 rgba(0, 0, 0, 0.12)'];
+const shadows = ['none', '0 4px 4px 0 rgba(0, 0, 0, 0.12), 0 0 4px 0 rgba(0, 0, 0, 0.12)'];
 
 const zIndices = indexed({
 	normal: 0,
