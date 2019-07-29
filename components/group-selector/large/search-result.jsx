@@ -23,6 +23,9 @@ export class SearchResult extends React.PureComponent {
 		authorizedGroupKinds: PropTypes.arrayOf(PropTypes.string).isRequired,
 		claimable: PropTypes.bool,
 		joinable: PropTypes.bool,
+		styleOverrides: PropTypes.shape({
+			tooltipMargin: PropTypes.string,
+		}),
 		localizedResources: PropTypes.object,
 	};
 
@@ -80,6 +83,7 @@ export class SearchResult extends React.PureComponent {
 			authorizedGroupKinds,
 			formattedMembershiplevels,
 			formattedGroupLevels,
+			styleOverrides,
 			localizedResources,
 		} = this.props;
 
@@ -101,8 +105,11 @@ export class SearchResult extends React.PureComponent {
 							</Styled.TooltipContentBlock>
 						</>
 					}
+					styleOverrides={{ margin: styleOverrides.tooltipMargin }}
 				>
-					<Styled.SearchResultMessage>This is an unclaimed group</Styled.SearchResultMessage>
+					<Styled.UnderlinedSearchResultMessage>
+						This is an unclaimed group
+					</Styled.UnderlinedSearchResultMessage>
 				</Tooltip>
 			);
 			button = (
@@ -160,11 +167,20 @@ export class SearchResult extends React.PureComponent {
 					membership required
 				</Styled.SearchResultMessage>
 			);
-			membershipLine = (
-				<Styled.SearchResultMembershipLine>
-					You are a <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>
-				</Styled.SearchResultMembershipLine>
-			);
+			membershipLine =
+				membershipKind === 'admin' ? (
+					<Styled.SearchResultMembershipLine>
+						You are an <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>
+					</Styled.SearchResultMembershipLine>
+				) : membershipKind === 'invited' ? (
+					<Styled.SearchResultMembershipLine>
+						You are <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>
+					</Styled.SearchResultMembershipLine>
+				) : (
+					<Styled.SearchResultMembershipLine>
+						You are a <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>
+					</Styled.SearchResultMembershipLine>
+				);
 			button = (
 				<Button small outline primary onClick={this.requestAccess}>
 					{localizedResources.requestButtonText}
@@ -216,7 +232,7 @@ export class SearchResult extends React.PureComponent {
 		} else {
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
-					You are {membershipKind === 'admin' ? 'an' : 'a'}{' '}
+					You are{membershipKind === 'admin' ? ' an ' : membershipKind === 'invited' ? ' ' : ' a '}
 					<Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>
 				</Styled.SearchResultMembershipLine>
 			);

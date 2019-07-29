@@ -110,7 +110,7 @@ showSource: true
 state: {
 	localizedResources: {
 		title: 'Find your church or ministry',
-		subTitle: 'in the Faithlife Directory',
+		subTitle: '',
 		requestButtonText: 'Request',
 		joinButtonText: 'Join Me',
 		claimButtonText: 'Claim Me',
@@ -123,6 +123,7 @@ state: {
 	},
 	authorizedMembershipLevels: ['admin', 'member', 'follower'],
 	authorizedGroupKinds: ['church', 'ministry', 'general'],
+	styleOverrides: { modalZIndex: 7000, tooltipMargin: '0 0 0 20px' },
 	groups: [{
 		name: 'Michaels Test Church',
 		groupId: 1,
@@ -280,6 +281,7 @@ state: {
 		onClaimGroupClick={() => {alert("Claim the group!")}}
 		onJoinGroupClick={() => {alert("Should Join the group, or request")}}
 		onAdminRequestClick={() => {alert("Admin access requested")}}
+		styleOverrides={state.styleOverrides}
 		showInPlace
 		localizedResources={state.localizedResources}
 		authorizedMembershipLevels={state.authorizedMembershipLevels}

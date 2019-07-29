@@ -41,6 +41,11 @@ export class LargeGroupSelector extends React.Component {
 		authorizedGroupKinds: PropTypes.arrayOf(PropTypes.string),
 		/** Flag to use "Select"/"Request" button style instead of "Get Started"/"Join"/"Follow"/"Claim" */
 		useSelectRequestButtonStyle: PropTypes.bool,
+		/** Style overrides, the z-index is applied to the backdrop of the modal */
+		styleOverrides: PropTypes.shape({
+			modalZIndex: PropTypes.number,
+			tooltipMargin: PropTypes.string,
+		}),
 		/** String literals to overload UI elements and for localization */
 		localizedResources: PropTypes.shape({
 			title: PropTypes.string,
@@ -82,7 +87,7 @@ export class LargeGroupSelector extends React.Component {
 		modalContent: 'main',
 		selectedGroupId: -1,
 		createGroupFixed: false,
-		resultsTopMargin: this.props.showInPlace ? 0 : defaultResultsTopMargin,
+		resultsTopMargin: defaultResultsTopMargin,
 		scrollWidthDelta: 0,
 	};
 
@@ -114,6 +119,7 @@ export class LargeGroupSelector extends React.Component {
 			authorizedGroupKinds,
 			onAdminRequestClick,
 			onJoinGroupClick,
+			styleOverrides,
 			localizedResources,
 		} = this.props;
 		let groups;
@@ -148,6 +154,7 @@ export class LargeGroupSelector extends React.Component {
 					toggle={this.toggle}
 					formattedMembershiplevels={formattedMembershiplevels}
 					formattedGroupLevels={formattedGroupLevels}
+					styleOverrides={styleOverrides}
 				/>
 			));
 		}
@@ -157,7 +164,7 @@ export class LargeGroupSelector extends React.Component {
 	toggle = () => {
 		this.setState({
 			createGroupFixed: false,
-			resultsTopMargin: this.props.showInPlace ? 0 : defaultResultsTopMargin,
+			resultsTopMargin: defaultResultsTopMargin,
 			modalContent: 'main',
 		});
 
@@ -220,6 +227,10 @@ export class LargeGroupSelector extends React.Component {
 	};
 
 	handleScroll = scrollData => {
+		if (this.state.fixedCreateWrapper) {
+			return;
+		}
+
 		const { showInPlace, groupSearchResults } = this.props;
 
 		const scrollTopPosition =
@@ -230,13 +241,11 @@ export class LargeGroupSelector extends React.Component {
 		const groupResultsCount = groupSearchResults ? groupSearchResults.length : 99;
 
 		if (scrollTopPosition >= 82 || groupResultsCount < 4) {
-			if (!this.state.fixedCreateWrapper) {
-				this.setState({
-					createGroupFixed: !showInPlace,
-					resultsTopMargin: showInPlace ? 0 : 232,
-					fixedCreateWrapper: true,
-				});
-			}
+			this.setState({
+				createGroupFixed: !showInPlace,
+				resultsTopMargin: showInPlace ? 0 : 232,
+				fixedCreateWrapper: true,
+			});
 		} else if (scrollTopPosition < 82) {
 			this.setState({
 				createGroupFixed: false,
@@ -253,6 +262,7 @@ export class LargeGroupSelector extends React.Component {
 			showInPlace,
 			hideTitle,
 			isOpen,
+			styleOverrides,
 			localizedResources,
 		} = this.props;
 
@@ -330,6 +340,7 @@ export class LargeGroupSelector extends React.Component {
 					isOpen={(!showInPlace && isOpen) || (showInPlace && secondaryModalOpen) || false}
 					onClose={this.toggle}
 					theme={{ background: 'transparent' }}
+					styleOverrides={styleOverrides && { zIndex: styleOverrides.modalZIndex }}
 				>
 					{modalContent === 'main' && !showInPlace && mainView}
 					{modalContent === 'admin' && (
@@ -341,7 +352,7 @@ export class LargeGroupSelector extends React.Component {
 								<span> membership is neccessarry to perform this action.</span>
 							</Styled.SecondaryModalText>
 							<Styled.SecondaryModalText>
-								Contact a group administrator to request access
+								Contact a group administrator to request access.
 							</Styled.SecondaryModalText>
 							<Styled.SecondaryModalButtonContainer>
 								<Styled.SecondaryModalButtonWrapper>
