@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { textStyle } from 'styled-system';
 import { themeGet } from '@styled-system/theme-get';
@@ -14,3 +15,8 @@ export const Paragraph = styled.p`
 `;
 
 Paragraph.defaultProps = { theme };
+Paragraph.propTypes = {
+	...box.propTypes,
+	...typography.propTypes,
+	textStyle: PropTypes.string,
+};

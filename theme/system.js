@@ -1,4 +1,6 @@
 import * as styledSystem from 'styled-system';
+import PropTypes from 'prop-types';
+import systemPropTypes from '@styled-system/prop-types';
 import themeGet from '@styled-system/theme-get';
 import { theme } from './core';
 
@@ -12,12 +14,23 @@ export const common = compose(
 	styledSystem.display,
 );
 
+common.propTypes = {
+	...systemPropTypes.space,
+	...systemPropTypes.color,
+	...systemPropTypes.display,
+};
+
 export const typography = compose(
 	styledSystem.typography,
 	styledSystem.system({
 		textTransform: true,
 	}),
 );
+
+common.propTypes = {
+	...systemPropTypes.typography,
+	textTransform: PropTypes.string,
+};
 
 export const box = compose(
 	{
@@ -33,3 +46,14 @@ export const box = compose(
 	styledSystem.border,
 	styledSystem.background,
 );
+
+common.propTypes = {
+	...common.propTypes,
+	...systemPropTypes.layout,
+	...systemPropTypes.flexbox,
+	...systemPropTypes.position,
+	...systemPropTypes.grid,
+	...systemPropTypes.shadow,
+	...systemPropTypes.border,
+	...systemPropTypes.background,
+};
