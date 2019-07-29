@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { theme as globalTheme } from '../../theme';
-import { Close, Exclamation, CircleCheck, Info } from '../icons';
+import { mediaSizes } from '../shared-styles';
+import { Close, Exclamation, CircleCheck, Info, LightBulbH } from '../icons';
 import { Box } from '../Box';
 import { Button } from '../button';
-import * as Styled from './styled';
 
 /** Rectangular box containing tips on how to use our products */
 export function HelpBox({
@@ -23,16 +24,14 @@ export function HelpBox({
 	large,
 	...helpBoxProps
 }) {
+	const variations = { success, danger, warning, minor };
+
 	return (
 		<Box
 			stacked={stacked}
-			backgroundColor={
-				success ? 'green1' : danger ? 'red1' : warning ? 'yellow1' : minor ? 'gray4' : 'blue1'
-			}
+			backgroundColor={getColor(variations, 'green1', 'red1', 'yellow1', 'gray4', 'blue1')}
 			border={1}
-			borderColor={
-				success ? 'green2' : danger ? 'red3' : warning ? 'yellow3' : minor ? 'gray14' : 'blue3'
-			}
+			borderColor={getColor(variations, 'green2', 'red3', 'yellow3', 'gray14', 'blue3')}
 			css="border-left-width: 4px"
 			color="flGray"
 			position="relative"
