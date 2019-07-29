@@ -46,3 +46,7 @@ export {
 export { SimpleTable, TableHeading, PaginatedTable } from './components/grid';
 
 export { theme } from './theme';
+export { Box } from './components/Box';
+export { Stack } from './components/Stack';
+export { Paragraph } from './components/Paragraph';
+export { Text } from './components/Text';
