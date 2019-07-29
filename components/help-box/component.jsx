@@ -207,7 +207,7 @@ const BulbIcon = styled(LightBulbH)`
 	flex: none;
 	width: ${props => (props.large ? '42px' : '24px')};
 	height: ${props => (props.large ? '42px' : '24px')};
-	margin: ${props => `${props.theme.space[4]}px ${props.theme.space[0]}px ${props.theme.space[0]}px
+	margin: ${props => `14px ${props.theme.space[0]}px ${props.theme.space[0]}px
 				${props.theme.space[5]}px`};
 
 	path {
