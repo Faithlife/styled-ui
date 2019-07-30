@@ -15,12 +15,34 @@
 				"ssr": true
 			}
 		],
-		"react-docgen",
 		"babel-plugin-transform-flow-strip-types",
 		"@babel/plugin-proposal-class-properties",
 		"@babel/plugin-syntax-dynamic-import"
 	],
 	"env": {
+		"catalog": {
+			"presets": [
+				"@babel/preset-react",
+				[
+					"@babel/preset-env",
+					{
+						"modules": false
+					}
+				]
+			],
+			"plugins": [
+				[
+					"babel-plugin-styled-components",
+					{
+						"ssr": true
+					}
+				],
+				"react-docgen",
+				"babel-plugin-transform-flow-strip-types",
+				"@babel/plugin-proposal-class-properties",
+				"@babel/plugin-syntax-dynamic-import"
+			]
+		},
 		"test": {
 			"presets": ["@babel/preset-react", "@babel/preset-env"],
 			"plugins": [

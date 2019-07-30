@@ -1,9 +1,13 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { system } from 'styled-system';
-import { Box } from './Box';
+import { box } from '../theme/system';
+
 import { theme } from '../theme';
 
-export const Stack = styled(Box)`
+export const Stack = styled.div`
+	${box};
+
 	> * + * {
 		${system({
 			spacing: {
@@ -15,3 +19,11 @@ export const Stack = styled(Box)`
 `;
 
 Stack.defaultProps = { theme };
+Stack.propTypes = {
+	...box.propTypes,
+	spacing: PropTypes.oneOfType([
+		PropTypes.number,
+		PropTypes.string,
+		PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
+	]),
+};
