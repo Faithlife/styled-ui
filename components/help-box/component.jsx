@@ -92,7 +92,7 @@ export function HelpBox({
 			backgroundColor={chosenVariation.bg}
 			border={1}
 			borderColor={chosenVariation.borderColor}
-			css="border-left-width: 4px"
+			css={{ borderLeftWidth: '4px' }}
 			color="flGray"
 			position="relative"
 			display="flex"
@@ -133,7 +133,7 @@ export function HelpBox({
 				padding={5}
 				paddingLeft={4}
 				flexDirection={stacked ? 'column' : ['column', 'row']}
-				css="font-size: 16px; line-height: 1.25"
+				css={{ fontSize: '16px', lineHeight: '1.25' }}
 			>
 				{childrenWithProps}
 			</Box>
