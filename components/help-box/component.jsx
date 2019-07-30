@@ -9,6 +9,12 @@ function getVariation(obj) {
 	return [...Object.entries(obj)].find(entry => entry[1])[0];
 }
 
+function getFill(theme, color) {
+	return `path {
+				fill: ${new Map(Object.entries(theme.colors)).get(color)};
+			}`;
+}
+
 const variations = {
 	success: {
 		bg: 'green1',
@@ -98,14 +104,7 @@ export function HelpBox({
 					marginRight={0}
 					marginBottom={0}
 					marginLeft={5}
-					theme={theme}
-					fillColor={variation.bulbColor}
-					css={`
-						path {
-							fill: ${({ theme, fillColor }) =>
-								new Map(Object.entries(theme.colors)).get(fillColor)};
-						}
-					`}
+					css={getFill(theme, variation.bulbColor)}
 				/>
 			)) ||
 				(!hideIcon && (
@@ -114,14 +113,7 @@ export function HelpBox({
 						margin="17px"
 						marginRight={-2}
 						marginLeft={4}
-						theme={theme}
-						fillColor={variation.iconColor}
-						css={`
-							path {
-								fill: ${({ theme, fillColor }) =>
-									new Map(Object.entries(theme.colors)).get(fillColor)};
-							}
-						`}
+						css={getFill(theme, variation.iconColor)}
 					>
 						{variation.icon}
 					</Box>
@@ -146,14 +138,7 @@ export function HelpBox({
 					margin="17px"
 					marginRight={5}
 					marginLeft={!stacked ? -2 : large ? 4 : 5}
-					theme={theme}
-					fillColor={variation.closeIconColor}
-					css={`
-						path {
-							fill: ${({ theme, fillColor }) =>
-								new Map(Object.entries(theme.colors)).get(fillColor)};
-						}
-					`}
+					css={getFill(theme, variation.closeIconColor)}
 				>
 					<Button
 						icon={<Close />}
@@ -171,14 +156,7 @@ export function HelpBox({
 						margin="17px"
 						marginRight={5}
 						marginLeft={!stacked ? -2 : large ? 4 : 5}
-						theme={theme}
-						fillColor={variation.iconColor}
-						css={`
-							path {
-								fill: ${({ theme, fillColor }) =>
-									new Map(Object.entries(theme.colors)).get(fillColor)};
-							}
-						`}
+						css={getFill(theme, variation.iconColor)}
 					>
 						{variation.icon}
 					</Box>
