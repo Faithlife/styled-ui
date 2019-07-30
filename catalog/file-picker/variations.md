@@ -3,7 +3,7 @@
 ```react
 state: {
 	files: null,
-	tabs: [{ title: 'Your Group', vaultId: 5698187, viewStyle: 'tinygrid'}, { title: 'Stock Photos', vaultId: 6817140, filter: ''}]
+	tabs: [{ title: 'Stock Photos', accountId: 6817140, viewStyle: 'tinygrid', filter: ''}]
 }
 ---
 <div>

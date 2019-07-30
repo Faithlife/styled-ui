@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import * as Styled from './styled';
 
 export function AmberContent({
-	vaultId,
+	accountId,
 	filter,
 	viewStyle,
 	onFilesSelected,
@@ -41,19 +41,19 @@ export function AmberContent({
 			window.amberfile.embedded.load({
 				url: '/embed/',
 				container: amberRef.current,
-				groupId: vaultId,
+				groupId: accountId,
 				multiSelect: allowMultiSelect,
 				viewStyle,
 				filter,
 			});
 		}
-	}, [allowMultiSelect, filter, vaultId, viewStyle]);
+	}, [allowMultiSelect, filter, accountId, viewStyle]);
 
 	return <Styled.Tab ref={amberRef} />;
 }
 
 AmberContent.propTypes = {
-	vaultId: PropTypes.number.isRequired,
+	accountId: PropTypes.number.isRequired,
 	filter: PropTypes.string,
 	viewStyle: PropTypes.string,
 	onFilesSelected: PropTypes.func.isRequired,

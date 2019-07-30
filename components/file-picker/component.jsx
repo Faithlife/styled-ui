@@ -38,7 +38,7 @@ export function FilePicker({
 							<TabPanel key={index}>
 								<AmberContent
 									title={t.title}
-									vaultId={t.vaultId}
+									accountId={t.accountId}
 									onFilesSelected={onFilesSelected}
 									filter={t.filter}
 									viewStyle={t.viewStyle}
@@ -57,7 +57,7 @@ FilePicker.propTypes = {
 	tabs: PropTypes.arrayOf(
 		PropTypes.shape({
 			title: PropTypes.string.isRequired,
-			vaultId: PropTypes.number.isRequired,
+			accountId: PropTypes.number.isRequired,
 			filter: PropTypes.string,
 			viewStyle: PropTypes.string,
 		}),
