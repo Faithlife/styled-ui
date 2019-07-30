@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.12.1
+
+- Removed padding from checkboxes and radios that was previously added to increase tap target size on mobile.
+
 ### 5.12.0
 
 - `GroupPicker` now accepts a z-index to use for its modal.
