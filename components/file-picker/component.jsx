@@ -8,9 +8,9 @@ import { UploadPage } from './upload-page';
 
 // TODO standardize localization
 
-export function AmberLightbox({
+export function FilePicker({
 	tabs,
-	onFileSelected,
+	onFilesSelected,
 	allowMultiSelect,
 	localizationProps,
 	onCancel,
@@ -27,7 +27,7 @@ export function AmberLightbox({
 					<TabPanel>
 						<UploadPage
 							allowMultiSelect={allowMultiSelect}
-							onFileSelected={onFileSelected}
+							onFilesSelected={onFilesSelected}
 							localizationProps={localizationProps}
 							onCancel={onCancel}
 							minFileSize={minFileSize}
@@ -39,7 +39,7 @@ export function AmberLightbox({
 								<AmberContent
 									title={t.title}
 									vaultId={t.vaultId}
-									onFileSelected={onFileSelected}
+									onFilesSelected={onFilesSelected}
 									filter={t.filter}
 									viewStyle={t.viewStyle}
 									allowMultiSelect={allowMultiSelect}
@@ -53,7 +53,7 @@ export function AmberLightbox({
 	);
 }
 
-AmberLightbox.propTypes = {
+FilePicker.propTypes = {
 	tabs: PropTypes.arrayOf(
 		PropTypes.shape({
 			title: PropTypes.string.isRequired,
@@ -63,17 +63,16 @@ AmberLightbox.propTypes = {
 		}),
 	),
 	// fileTypes: PropTypes.arrayOf(PropTypes.string).isRequired,
-	onFileSelected: PropTypes.func.isRequired,
+	onFilesSelected: PropTypes.func.isRequired,
 	allowMultiSelect: PropTypes.bool,
 	localizationProps: PropTypes.shape({
 		addText: PropTypes.string,
 		cancelText: PropTypes.string,
 	}),
 	onCancel: PropTypes.func.isRequired,
-	userId: PropTypes.number.isRequired,
 	minFileSize: PropTypes.string,
 };
 
-AmberLightbox.defaultProps = {
+FilePicker.defaultProps = {
 	localizationProps: {},
 };

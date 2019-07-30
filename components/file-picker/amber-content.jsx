@@ -6,7 +6,7 @@ export function AmberContent({
 	vaultId,
 	filter,
 	viewStyle,
-	onFileSelected,
+	onFilesSelected,
 	allowMultiSelect,
 	onCancel,
 }) {
@@ -18,12 +18,12 @@ export function AmberContent({
 					if (parsedEvent.canceled) {
 						onCancel();
 					} else if (parsedEvent.assets) {
-						onFileSelected(parsedEvent.assets);
+						onFilesSelected(parsedEvent.assets);
 					}
 				}
 			}
 		},
-		[onFileSelected, onCancel],
+		[onFilesSelected, onCancel],
 	);
 
 	const amberRef = useRef();
@@ -56,7 +56,7 @@ AmberContent.propTypes = {
 	vaultId: PropTypes.number.isRequired,
 	filter: PropTypes.string,
 	viewStyle: PropTypes.string,
-	onFileSelected: PropTypes.func.isRequired,
+	onFilesSelected: PropTypes.func.isRequired,
 	allowMultiSelect: PropTypes.bool,
 	onCancel: PropTypes.func.isRequired,
 };

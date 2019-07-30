@@ -52,7 +52,7 @@ import {
 	ParameterSelect,
 	ParameterInputBox,
 	ParameterSentence,
-	AmberLightbox,
+	FilePicker,
 } from '../components/main';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
@@ -878,15 +878,15 @@ const components = [
 		],
 	},
 	{
-		title: 'Amber Lightbox',
+		title: 'File Picker',
 		pages: [
 			{
-				path: '/amber-lightbox/variations',
-				title: 'Amber Lightbox',
-				content: pageLoader(() => import('./amber-lightbox/variations.md')),
+				path: '/file-picker/variations',
+				title: 'File Picker',
+				content: pageLoader(() => import('./file-picker/variations.md')),
 				imports: {
-					AmberLightbox,
-					AmberLightboxDemo: styled.div`
+					FilePicker,
+					FilePickerDemo: styled.div`
 						&& > * {
 							margin: 8px;
 						}

@@ -15,7 +15,7 @@ export function ImagePreview({ imageSource, onRemoveFile }) {
 		<Styled.BorderBox>
 			<Styled.Image src={imageSource} onLoad={handleLoad} />
 			<Styled.CloseButton onClick={onRemoveFile}>
-				<img role="presentation" src={CloseButtonSvg} />
+				<img alt={'close button'} src={CloseButtonSvg} />
 			</Styled.CloseButton>
 
 			{!isLoaded && <LoadingSpinner large />}

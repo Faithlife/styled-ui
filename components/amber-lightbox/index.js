@@ -1,1 +1,0 @@
-export { AmberLightbox } from './component';

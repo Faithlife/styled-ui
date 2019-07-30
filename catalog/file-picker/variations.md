@@ -7,15 +7,14 @@ state: {
 }
 ---
 <div>
-	<AmberLightboxDemo>
-		<AmberLightbox
-			onFileSelected={files => { alert( files ); }}
+	<FilePickerDemo>
+		<FilePicker
+			onFilesSelected={files => { alert( files ); }}
 			tabs={state.tabs}
 			onCancel={() => alert('You called the onCancelFunction. This should be used to hide the component')}
 			allowMultiSelect
-			userId={6531175}
 			minFileSize={'minimum image size: 800 x 400'}
 		/>
-	</AmberLightboxDemo>
+	</FilePickerDemo>
 </div>
 ```

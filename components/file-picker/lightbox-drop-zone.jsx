@@ -5,7 +5,7 @@ import { DropZone } from '../drop-zone';
 import { CameraSvg } from './svgs';
 import * as Styled from './styled';
 
-const dragDropText = 'Drag and dro pto upload image';
+const dragDropText = 'Drag and drop to upload image';
 const browseText = 'or browse files';
 
 export function LightboxDropZone({ addFile, allowMultiSelect, showDetails, minFileSize }) {

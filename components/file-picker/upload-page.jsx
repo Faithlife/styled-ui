@@ -7,7 +7,7 @@ import { LightboxDropZone } from './lightbox-drop-zone';
 
 export function UploadPage({
 	allowMultiSelect,
-	onFileSelected,
+	onFilesSelected,
 	localizationProps,
 	onCancel,
 	minFileSize,
@@ -52,7 +52,7 @@ export function UploadPage({
 				)}
 				<ButtonSection
 					selectedFiles={selectedFiles}
-					onFileSelected={onFileSelected}
+					onFilesSelected={onFilesSelected}
 					localizationProps={localizationProps}
 					onCancel={onCancel}
 				/>
@@ -71,7 +71,7 @@ export function UploadPage({
 			</div>
 			<ButtonSection
 				selectedFiles={selectedFiles}
-				onFileSelected={onFileSelected}
+				onFilesSelected={onFilesSelected}
 				localizationProps={localizationProps}
 				onCancel={onCancel}
 			/>
@@ -80,7 +80,7 @@ export function UploadPage({
 }
 UploadPage.propTypes = {
 	allowMultiSelect: PropTypes.bool,
-	onFileSelected: PropTypes.func.isRequired,
+	onFilesSelected: PropTypes.func.isRequired,
 	localizationProps: PropTypes.shape({
 		addText: PropTypes.string,
 		cancelText: PropTypes.string,
@@ -89,10 +89,10 @@ UploadPage.propTypes = {
 	minFileSize: PropTypes.string,
 };
 
-function ButtonSection({ selectedFiles, onFileSelected, localizationProps, onCancel }) {
+function ButtonSection({ selectedFiles, onFilesSelected, localizationProps, onCancel }) {
 	const onSelect = useCallback(() => {
-		onFileSelected(selectedFiles);
-	}, [onFileSelected, selectedFiles]);
+		onFilesSelected(selectedFiles);
+	}, [onFilesSelected, selectedFiles]);
 
 	const addText = (localizationProps && localizationProps.addText) || 'Insert';
 	const cancelText = (localizationProps && localizationProps.cancelText) || 'Cancel';
@@ -125,7 +125,7 @@ function ButtonSection({ selectedFiles, onFileSelected, localizationProps, onCan
 }
 ButtonSection.propTypes = {
 	selectedFiles: PropTypes.object,
-	onFileSelected: PropTypes.func,
+	onFilesSelected: PropTypes.func,
 	localizationProps: PropTypes.shape({
 		addText: PropTypes.string,
 		cancelText: PropTypes.string,
