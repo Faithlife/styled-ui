@@ -180,7 +180,6 @@ export function BaseTable({
 						<AgGridColumn
 							{...columnProps}
 							key={fieldName}
-							colId={fieldName}
 							headerName={displayName}
 							field={fieldName}
 							sortable={isSortable}
