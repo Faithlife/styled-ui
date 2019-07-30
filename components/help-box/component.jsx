@@ -5,7 +5,10 @@ import { Close, Exclamation, CircleCheck, Info, LightBulbH } from '../icons';
 import { Box } from '../Box';
 import { Button } from '../button';
 
-function getVariation(obj) {
+function getVariation(variation, obj) {
+	if (variation) {
+		return variation;
+	}
 	return [...Object.entries(obj)].find(entry => entry[1])[0];
 }
 
@@ -68,6 +71,7 @@ export function HelpBox({
 	className,
 	theme,
 	handleClose,
+	variation,
 	success,
 	danger,
 	warning,
@@ -75,7 +79,8 @@ export function HelpBox({
 	large,
 	...helpBoxProps
 }) {
-	const variation = variations[getVariation({ success, danger, warning, minor, original: true })];
+	const chosenVariation =
+		variations[getVariation(variation, { success, danger, warning, minor, original: true })];
 	const childrenWithProps =
 		typeof children === 'string'
 			? children
@@ -84,9 +89,9 @@ export function HelpBox({
 	return (
 		<Box
 			stacked={stacked}
-			backgroundColor={variation.bg}
+			backgroundColor={chosenVariation.bg}
 			border={1}
-			borderColor={variation.borderColor}
+			borderColor={chosenVariation.borderColor}
 			css="border-left-width: 4px"
 			color="flGray"
 			position="relative"
@@ -104,7 +109,7 @@ export function HelpBox({
 					marginRight={0}
 					marginBottom={0}
 					marginLeft={5}
-					css={getFill(theme, variation.bulbColor)}
+					css={getFill(theme, chosenVariation.bulbColor)}
 				/>
 			)) ||
 				(!hideIcon && (
@@ -113,9 +118,9 @@ export function HelpBox({
 						margin="17px"
 						marginRight={-2}
 						marginLeft={4}
-						css={getFill(theme, variation.iconColor)}
+						css={getFill(theme, chosenVariation.iconColor)}
 					>
-						{variation.icon}
+						{chosenVariation.icon}
 					</Box>
 				))}
 			<Box
@@ -138,7 +143,7 @@ export function HelpBox({
 					margin="17px"
 					marginRight={5}
 					marginLeft={!stacked ? -2 : large ? 4 : 5}
-					css={getFill(theme, variation.closeIconColor)}
+					css={getFill(theme, chosenVariation.closeIconColor)}
 				>
 					<Button
 						icon={<Close />}
@@ -156,9 +161,9 @@ export function HelpBox({
 						margin="17px"
 						marginRight={5}
 						marginLeft={!stacked ? -2 : large ? 4 : 5}
-						css={getFill(theme, variation.iconColor)}
+						css={getFill(theme, chosenVariation.iconColor)}
 					>
-						{variation.icon}
+						{chosenVariation.icon}
 					</Box>
 				))}
 		</Box>
@@ -184,15 +189,16 @@ HelpBox.propTypes = {
 		backgroundColor: PropTypes.string,
 		closeIconColor: PropTypes.string,
 	}),
-	/** Green theme */
+	/** Enum with values: 'success', 'danger', 'warning', and 'minor' */
+	variation: PropTypes.oneOf(['success', 'danger', 'warning', 'minor']),
+	/** Green theme (depricated in favor of the variation prop) */
 	success: PropTypes.bool,
-	/** Red theme */
+	/** Red theme (depricated in favor of the variation prop) */
 	danger: PropTypes.bool,
-	/** Yellow theme */
+	/** Yellow theme (depricated in favor of the variation prop) */
 	warning: PropTypes.bool,
-	/** Gray theme */
+	/** Gray theme (depricated in favor of the variation prop) */
 	minor: PropTypes.bool,
-	/** Height will be 230px */
 	large: PropTypes.bool,
 	/** If not handled, there will be no close icon. */
 	handleClose: PropTypes.func,
