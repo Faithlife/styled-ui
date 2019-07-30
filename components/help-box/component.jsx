@@ -7,6 +7,53 @@ import { Close, Exclamation, CircleCheck, Info, LightBulbH } from '../icons';
 import { Box } from '../Box';
 import { Button } from '../button';
 
+function getVariation(obj) {
+	return [...Object.entries(obj)].find(entry => entry[1])[0];
+}
+
+const variations = {
+	success: {
+		bg: 'green1',
+		borderColor: 'green2',
+		iconColor: 'green2',
+		icon: <CircleCheck />,
+		close: 'green5',
+		bulbColor: 'green2',
+	},
+	danger: {
+		bg: 'red1',
+		borderColor: 'red3',
+		iconColor: 'red3',
+		icon: <Exclamation />,
+		close: 'red5',
+		bulbColor: 'red3',
+	},
+	warning: {
+		bg: 'yellow1',
+		borderColor: 'yellow3',
+		iconColor: 'yellow3',
+		icon: <Info />,
+		close: 'yellow5',
+		bulbColor: 'yellow3',
+	},
+	minor: {
+		bg: 'gray4',
+		borderColor: 'gray14',
+		iconColor: 'gray14',
+		icon: null,
+		close: 'gray34',
+		bulbColor: 'gray14',
+	},
+	original: {
+		bg: 'blue1',
+		borderColor: 'blue3',
+		iconColor: 'blue3',
+		icon: <Info />,
+		close: 'blue5',
+		bulbColor: 'blue3',
+	},
+};
+
 /** Rectangular box containing tips on how to use our products */
 export function HelpBox({
 	children,
@@ -29,9 +76,9 @@ export function HelpBox({
 	return (
 		<Box
 			stacked={stacked}
-			backgroundColor={getColor(variations, 'green1', 'red1', 'yellow1', 'gray4', 'blue1')}
+			backgroundColor={variation.bg}
 			border={1}
-			borderColor={getColor(variations, 'green2', 'red3', 'yellow3', 'gray14', 'blue3')}
+			borderColor={variation.borderColor}
 			css="border-left-width: 4px"
 			color="flGray"
 			position="relative"
@@ -39,20 +86,30 @@ export function HelpBox({
 			borderRadius={1}
 			{...helpBoxProps}
 		>
-			{(showLightBulb && <BulbIcon theme={theme} />) ||
+			{(showLightBulb && (
+					<Icon
+					as={LightBulbH}
+					flex="none"
+					height={large ? '42px' : '24px'}
+					width={large ? '42px' : '24px'}
+					marginTop="14px"
+					marginRight={0}
+					marginBottom={0}
+					marginLeft={5}
+						theme={theme}
+					fillColor={variation.bulbColor}
+				/>
+			)) ||
 				(!hideIcon && (
 					<Icon
-						theme={theme}
-						success={success}
-						danger={danger}
-						warning={warning}
-						minor={minor}
 						height="18px"
 						margin="17px"
 						marginRight={-2}
 						marginLeft={4}
+						theme={theme}
+						fillColor={variation.iconColor}
 					>
-						{danger ? <Exclamation /> : success ? <CircleCheck /> : minor ? null : <Info />}
+						{variation.icon}
 					</Icon>
 				))}
 			<HelpBoxContent
@@ -70,16 +127,13 @@ export function HelpBox({
 				{children}
 			</HelpBoxContent>
 			{(handleClose && (
-				<CloseIcon
-					theme={theme}
-					success={success}
-					danger={danger}
-					warning={warning}
-					minor={minor}
+				<Icon
 					height="18px"
 					margin="17px"
 					marginRight={5}
 					marginLeft={!stacked ? -2 : large ? 4 : 5}
+					theme={theme}
+					fillColor={variation.closeIconColor}
 				>
 					<Button
 						icon={<Close />}
@@ -89,21 +143,18 @@ export function HelpBox({
 							padding: '0px',
 						}}
 					/>
-				</CloseIcon>
+				</Icon>
 			)) ||
 				(showRightIcon && (
 					<Icon
-						theme={theme}
-						success={success}
-						danger={danger}
-						warning={warning}
-						minor={minor}
 						height="18px"
 						margin="17px"
 						marginRight={5}
 						marginLeft={!stacked ? -2 : large ? 4 : 5}
+						theme={theme}
+						fillColor={variation.iconColor}
 					>
-						{danger ? <Exclamation /> : success ? <CircleCheck /> : minor ? null : <Info />}
+						{variation.icon}
 					</Icon>
 				))}
 		</Box>
@@ -177,60 +228,6 @@ const HelpBoxContent = styled(Box)`
 
 const Icon = styled(Box)`
 	path {
-		fill: ${props =>
-			getColor(
-				props,
-				props.theme.colors.green2,
-				props.theme.colors.red3,
-				props.theme.colors.yellow3,
-				props.theme.colors.gray14,
-				props.theme.colors.blue3,
-			)};
+		fill: ${({ theme, fillColor }) => new Map(Object.entries(theme.colors)).get(fillColor)};
 	}
 `;
-
-const CloseIcon = styled(Box)`
-	path {
-		fill: ${props =>
-			getColor(
-				props,
-				props.theme.colors.green5,
-				props.theme.colors.red5,
-				props.theme.colors.yellow5,
-				props.theme.colors.gray34,
-				props.theme.colors.blue5,
-			)};
-	}
-`;
-
-const BulbIcon = styled(LightBulbH)`
-	flex: none;
-	width: ${props => (props.large ? '42px' : '24px')};
-	height: ${props => (props.large ? '42px' : '24px')};
-	margin: ${props => `14px ${props.theme.space[0]}px ${props.theme.space[0]}px
-				${props.theme.space[5]}px`};
-
-	path {
-		fill: ${props =>
-			getColor(
-				props,
-				props.theme.colors.green2,
-				props.theme.colors.red3,
-				props.theme.colors.yellow3,
-				props.theme.colors.gray14,
-				props.theme.colors.blue3,
-			)};
-	}
-`;
-
-function getColor(props, successColor, dangerColor, warningColor, minorColor, defaultColor) {
-	return props.success
-		? successColor
-		: props.danger
-		? dangerColor
-		: props.warning
-		? warningColor
-		: props.minor
-		? minorColor
-		: defaultColor;
-}
