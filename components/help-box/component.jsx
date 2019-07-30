@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { theme as globalTheme } from '../../theme';
 import { Close, Exclamation, CircleCheck, Info, LightBulbH } from '../icons';
 import { Box } from '../Box';
@@ -16,7 +15,7 @@ const variations = {
 		borderColor: 'green2',
 		iconColor: 'green2',
 		icon: <CircleCheck />,
-		close: 'green5',
+		closeIconColor: 'green5',
 		bulbColor: 'green2',
 	},
 	danger: {
@@ -24,7 +23,7 @@ const variations = {
 		borderColor: 'red3',
 		iconColor: 'red3',
 		icon: <Exclamation />,
-		close: 'red5',
+		closeIconColor: 'red5',
 		bulbColor: 'red3',
 	},
 	warning: {
@@ -32,7 +31,7 @@ const variations = {
 		borderColor: 'yellow3',
 		iconColor: 'yellow3',
 		icon: <Info />,
-		close: 'yellow5',
+		closeIconColor: 'yellow5',
 		bulbColor: 'yellow3',
 	},
 	minor: {
@@ -40,7 +39,7 @@ const variations = {
 		borderColor: 'gray14',
 		iconColor: 'gray14',
 		icon: null,
-		close: 'gray34',
+		closeIconColor: 'gray34',
 		bulbColor: 'gray14',
 	},
 	original: {
@@ -48,7 +47,7 @@ const variations = {
 		borderColor: 'blue3',
 		iconColor: 'blue3',
 		icon: <Info />,
-		close: 'blue5',
+		closeIconColor: 'blue5',
 		bulbColor: 'blue3',
 	},
 };
@@ -90,7 +89,7 @@ export function HelpBox({
 			{...helpBoxProps}
 		>
 			{(showLightBulb && (
-				<Icon
+				<Box
 					as={LightBulbH}
 					flex="none"
 					height={large ? '42px' : '24px'}
@@ -101,19 +100,31 @@ export function HelpBox({
 					marginLeft={5}
 					theme={theme}
 					fillColor={variation.bulbColor}
+					css={`
+						path {
+							fill: ${({ theme, fillColor }) =>
+								new Map(Object.entries(theme.colors)).get(fillColor)};
+						}
+					`}
 				/>
 			)) ||
 				(!hideIcon && (
-					<Icon
+					<Box
 						height="18px"
 						margin="17px"
 						marginRight={-2}
 						marginLeft={4}
 						theme={theme}
 						fillColor={variation.iconColor}
+						css={`
+							path {
+								fill: ${({ theme, fillColor }) =>
+									new Map(Object.entries(theme.colors)).get(fillColor)};
+							}
+						`}
 					>
 						{variation.icon}
-					</Icon>
+					</Box>
 				))}
 			<Box
 				stacked={stacked}
@@ -130,13 +141,19 @@ export function HelpBox({
 				{childrenWithProps}
 			</Box>
 			{(handleClose && (
-				<Icon
+				<Box
 					height="18px"
 					margin="17px"
 					marginRight={5}
 					marginLeft={!stacked ? -2 : large ? 4 : 5}
 					theme={theme}
 					fillColor={variation.closeIconColor}
+					css={`
+						path {
+							fill: ${({ theme, fillColor }) =>
+								new Map(Object.entries(theme.colors)).get(fillColor)};
+						}
+					`}
 				>
 					<Button
 						icon={<Close />}
@@ -146,19 +163,25 @@ export function HelpBox({
 							padding: '0px',
 						}}
 					/>
-				</Icon>
+				</Box>
 			)) ||
 				(showRightIcon && (
-					<Icon
+					<Box
 						height="18px"
 						margin="17px"
 						marginRight={5}
 						marginLeft={!stacked ? -2 : large ? 4 : 5}
 						theme={theme}
 						fillColor={variation.iconColor}
+						css={`
+							path {
+								fill: ${({ theme, fillColor }) =>
+									new Map(Object.entries(theme.colors)).get(fillColor)};
+							}
+						`}
 					>
 						{variation.icon}
-					</Icon>
+					</Box>
 				))}
 		</Box>
 	);
@@ -220,9 +243,3 @@ HelpBox.Footer = ({ children, stacked }) => (
 		{children}
 	</Box>
 );
-
-const Icon = styled(Box)`
-	path {
-		fill: ${({ theme, fillColor }) => new Map(Object.entries(theme.colors)).get(fillColor)};
-	}
-`;
