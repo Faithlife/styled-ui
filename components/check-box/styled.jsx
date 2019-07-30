@@ -25,9 +25,9 @@ export const CheckboxContainer = styled.button`
 	align-items: center;
 	position: relative;
 	border: none;
-	padding: 0px 16px;
-	min-height: 44px;
-	min-width: 44px;
+	padding: 0;
+	min-height: 16px;
+	min-width: 16px;
 	background: transparent;
 	text-align: unset;
 
