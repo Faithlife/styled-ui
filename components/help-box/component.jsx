@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { theme as globalTheme } from '../../theme';
-import { mediaSizes } from '../shared-styles';
 import { Close, Exclamation, CircleCheck, Info, LightBulbH } from '../icons';
 import { Box } from '../Box';
 import { Button } from '../button';
@@ -71,7 +70,11 @@ export function HelpBox({
 	large,
 	...helpBoxProps
 }) {
-	const variations = { success, danger, warning, minor };
+	const variation = variations[getVariation({ success, danger, warning, minor, original: true })];
+	const childrenWithProps =
+		typeof children === 'string'
+			? children
+			: React.Children.map(children, child => React.cloneElement(child, { stacked: stacked }));
 
 	return (
 		<Box
@@ -87,7 +90,7 @@ export function HelpBox({
 			{...helpBoxProps}
 		>
 			{(showLightBulb && (
-					<Icon
+				<Icon
 					as={LightBulbH}
 					flex="none"
 					height={large ? '42px' : '24px'}
@@ -96,7 +99,7 @@ export function HelpBox({
 					marginRight={0}
 					marginBottom={0}
 					marginLeft={5}
-						theme={theme}
+					theme={theme}
 					fillColor={variation.bulbColor}
 				/>
 			)) ||
@@ -112,7 +115,7 @@ export function HelpBox({
 						{variation.icon}
 					</Icon>
 				))}
-			<HelpBoxContent
+			<Box
 				stacked={stacked}
 				theme={theme}
 				display="flex"
@@ -124,8 +127,8 @@ export function HelpBox({
 				flexDirection={stacked ? 'column' : ['column', 'row']}
 				css="font-size: 16px; line-height: 1.25"
 			>
-				{children}
-			</HelpBoxContent>
+				{childrenWithProps}
+			</Box>
 			{(handleClose && (
 				<Icon
 					height="18px"
@@ -198,33 +201,25 @@ HelpBox.defaultProps = {
 	theme: globalTheme,
 };
 
-HelpBox.Body = styled(Box)``;
+HelpBox.Body = ({ children }) => (
+	<Box display="flex" flex="1" order="2">
+		{children}
+	</Box>
+);
 
-HelpBox.Footer = styled(Box)``;
-
-const HelpBoxContent = styled(Box)`
-	${HelpBox.Body} {
-		display: flex;
-		flex: 1;
-		order: 2;
-	}
-
-	${HelpBox.Footer} {
-		display: flex;
-		order: 2;
-		align-items: center;
-		margin: ${props =>
-			props.stacked
-				? `${props.theme.space[4]}px ${props.theme.space[5]}px ${props.theme.space[0]}px 
-					${props.theme.space[0]}px`
-				: `-6px ${props.theme.space[0]}px -6px ${props.theme.space[5]}px`};
-
-		@media (max-width: ${mediaSizes.phone}) {
-			margin: ${props => `${props.theme.space[4]}px ${props.theme.space[0]}px 
-				${props.theme.space[0]}px ${props.theme.space[0]}px`};
-		}
-	}
-`;
+HelpBox.Footer = ({ children, stacked }) => (
+	<Box
+		display="flex"
+		order="2"
+		alignItems="center"
+		marginTop={[4, stacked ? 4 : '-6px']}
+		marginRight={[0, stacked ? 5 : 0]}
+		marginBottom={[0, stacked ? 0 : '-6px']}
+		marginLeft={[0, stacked ? 0 : 5]}
+	>
+		{children}
+	</Box>
+);
 
 const Icon = styled(Box)`
 	path {
