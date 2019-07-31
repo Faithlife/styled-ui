@@ -53,6 +53,7 @@ import {
 	ParameterInputBox,
 	ParameterSentence,
 	FilePicker,
+	AmberContent,
 } from '../components/main';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
@@ -897,6 +898,12 @@ const components = [
 						}
 					`,
 				},
+			},
+			{
+				path: '/file-picker/documentation',
+				title: 'File Picker Documentation',
+				content: pageLoader(() => import('./file-picker/documentation.md')),
+				imports: { FilePicker, AmberContent, DocgenTable },
 			},
 		],
 	},

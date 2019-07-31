@@ -53,8 +53,11 @@ export function AmberContent({
 }
 
 AmberContent.propTypes = {
+	/** The id of the group who's files will be shown */
 	accountId: PropTypes.number.isRequired,
+	/** optional way to filter files */
 	filter: PropTypes.string,
+	/** optional way to chose layout of the Amber embeded view */
 	viewStyle: PropTypes.string,
 	onFilesSelected: PropTypes.func.isRequired,
 	allowMultiSelect: PropTypes.bool,

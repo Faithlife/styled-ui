@@ -1,12 +1,9 @@
-/* eslint-disable react/no-unused-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TabManager, TabList, TabPanels, Tab, TabPanel } from '../tabs';
 import { AmberContent } from './amber-content';
 import * as Styled from './styled';
 import { UploadPage } from './upload-page';
-
-// TODO standardize localization
 
 export function FilePicker({
 	tabs,
@@ -54,6 +51,7 @@ export function FilePicker({
 }
 
 FilePicker.propTypes = {
+	/** An array of the tabs; each tab is a lightbox to a different Amber group */
 	tabs: PropTypes.arrayOf(
 		PropTypes.shape({
 			title: PropTypes.string.isRequired,
@@ -62,14 +60,18 @@ FilePicker.propTypes = {
 			viewStyle: PropTypes.string,
 		}),
 	),
-	// fileTypes: PropTypes.arrayOf(PropTypes.string).isRequired,
+	/** This function handles your files once selected */
 	onFilesSelected: PropTypes.func.isRequired,
+	/** Is selecting multiple files allowed */
 	allowMultiSelect: PropTypes.bool,
+	/** Customized text */
 	localizationProps: PropTypes.shape({
 		addText: PropTypes.string,
 		cancelText: PropTypes.string,
 	}),
+	/** This function handles exiting the file picker */
 	onCancel: PropTypes.func.isRequired,
+	/** The minimum allowed file size; optional */
 	minFileSize: PropTypes.string,
 };
 
