@@ -57,7 +57,6 @@ import { GroupSelector, LargeGroupSelector } from '../components/group-selector'
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
 import { colors } from '../components/shared-styles';
-import { theme } from '../theme';
 import censusData from './grid/2010census.json';
 import { ProductDrawerWithResources } from './product-drawer';
 import { DocgenTable } from './docgen-table';
@@ -317,7 +316,6 @@ const components = [
 				imports: {
 					HelpBox,
 					Button,
-					theme,
 				},
 			},
 			{
