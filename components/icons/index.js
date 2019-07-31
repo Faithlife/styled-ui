@@ -12,6 +12,12 @@ export const Check = props => (
 	</svg>
 );
 
+export const SmallCheck = props => (
+	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="9.6" height="9.6" viewBox="0 0 8 8">
+		<path fill="none" d="M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z" />
+	</svg>
+);
+
 export const Exclamation = props => (
 	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
 		<path
