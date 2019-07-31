@@ -5,9 +5,9 @@ import { Close, Exclamation, CircleCheck, Info, LightBulbH } from '../icons';
 import { Box } from '../Box';
 import { Button } from '../button';
 
-function getVariation(variation, obj) {
-	if (variation) {
-		return variation;
+function getVariation(variant, obj) {
+	if (variant) {
+		return variant;
 	}
 	return [...Object.entries(obj)].find(entry => entry[1])[0];
 }
@@ -71,7 +71,7 @@ export function HelpBox({
 	className,
 	theme,
 	handleClose,
-	variation,
+	variant,
 	success,
 	danger,
 	warning,
@@ -80,7 +80,7 @@ export function HelpBox({
 	...helpBoxProps
 }) {
 	const chosenVariation =
-		variations[getVariation(variation, { success, danger, warning, minor, original: true })];
+		variations[getVariation(variant, { success, danger, warning, minor, original: true })];
 	const childrenWithProps =
 		typeof children === 'string'
 			? children
@@ -190,7 +190,7 @@ HelpBox.propTypes = {
 		closeIconColor: PropTypes.string,
 	}),
 	/** Enum with values: 'success', 'danger', 'warning', and 'minor' */
-	variation: PropTypes.oneOf(['success', 'danger', 'warning', 'minor']),
+	variant: PropTypes.oneOf(['success', 'danger', 'warning', 'minor']),
 	/** Green theme (depricated in favor of the variation prop) */
 	success: PropTypes.bool,
 	/** Red theme (depricated in favor of the variation prop) */

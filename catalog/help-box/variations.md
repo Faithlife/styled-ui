@@ -6,19 +6,19 @@
 		<HelpBox.Body>This is a helpful alert.</HelpBox.Body>
 		<HelpBox.Footer><Button primary small>CTA</Button></HelpBox.Footer>
 	</HelpBox>
-	<HelpBox variation='danger' handleClose={() => true}>
+	<HelpBox variant='danger' handleClose={() => true}>
 		<HelpBox.Body>This is an error alert.</HelpBox.Body>
 		<HelpBox.Footer><Button primary small>CTA</Button></HelpBox.Footer>
 	</HelpBox>
-	<HelpBox variation='success' handleClose={() => true}>
+	<HelpBox variant='success' handleClose={() => true}>
 		<HelpBox.Body>This is a successful alert.</HelpBox.Body>
 		<HelpBox.Footer><Button primary small>CTA</Button></HelpBox.Footer>
 	</HelpBox>
-	<HelpBox variation='warning' handleClose={() => true}>
+	<HelpBox variant='warning' handleClose={() => true}>
 		<HelpBox.Body>This is a cautious alert.</HelpBox.Body>
 		<HelpBox.Footer><Button primary small>CTA</Button></HelpBox.Footer>
 	</HelpBox>
-	<HelpBox variation='minor' handleClose={() => true}>
+	<HelpBox variant='minor' handleClose={() => true}>
 		<HelpBox.Body>This is a minor alert.</HelpBox.Body>
 		<HelpBox.Footer><Button primary small>CTA</Button></HelpBox.Footer>
 	</HelpBox>
