@@ -25,6 +25,9 @@ export const typography = compose(
 	styledSystem.system({
 		textTransform: true,
 	}),
+	styledSystem.system({
+		whiteSpace: true,
+	}),
 );
 
 typography.propTypes = {
