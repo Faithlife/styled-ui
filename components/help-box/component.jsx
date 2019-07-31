@@ -54,7 +54,6 @@ export function HelpBox({
 	showRightIcon,
 	stacked,
 	className,
-	theme,
 	handleClose,
 	variant,
 	success,
@@ -110,7 +109,6 @@ export function HelpBox({
 				))}
 			<Box
 				stacked={stacked}
-				theme={theme}
 				display="flex"
 				flex="1"
 				alignItems={stacked || large || 'flex-start'}
@@ -211,6 +209,6 @@ HelpBox.Footer = ({ children, stacked }) => (
 
 const IconBox = styled(Box)`
 	path {
-		${system({ fill: { property: 'fill', scale: 'colors' } })}
+		${system({ fill: { property: 'fill', scale: 'colors' } })};
 	}
 `;
