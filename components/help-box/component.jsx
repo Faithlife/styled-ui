@@ -21,43 +21,33 @@ function getFill(theme, color) {
 const variations = {
 	success: {
 		bg: 'green1',
-		borderColor: 'green2',
-		iconColor: 'green2',
+		fg: 'green2',
 		icon: <CircleCheck />,
 		closeIconColor: 'green5',
-		bulbColor: 'green2',
 	},
 	danger: {
 		bg: 'red1',
-		borderColor: 'red3',
-		iconColor: 'red3',
+		fg: 'red3',
 		icon: <Exclamation />,
 		closeIconColor: 'red5',
-		bulbColor: 'red3',
 	},
 	warning: {
 		bg: 'yellow1',
-		borderColor: 'yellow3',
-		iconColor: 'yellow3',
+		fg: 'yellow3',
 		icon: <Info />,
 		closeIconColor: 'yellow5',
-		bulbColor: 'yellow3',
 	},
 	minor: {
 		bg: 'gray4',
-		borderColor: 'gray14',
-		iconColor: 'gray14',
+		fg: 'gray14',
 		icon: null,
 		closeIconColor: 'gray34',
-		bulbColor: 'gray14',
 	},
 	original: {
 		bg: 'blue1',
-		borderColor: 'blue3',
-		iconColor: 'blue3',
+		fg: 'blue3',
 		icon: <Info />,
 		closeIconColor: 'blue5',
-		bulbColor: 'blue3',
 	},
 };
 
@@ -91,7 +81,7 @@ export function HelpBox({
 			stacked={stacked}
 			backgroundColor={chosenVariation.bg}
 			border={1}
-			borderColor={chosenVariation.borderColor}
+			borderColor={chosenVariation.fg}
 			css={{ borderLeftWidth: '4px' }}
 			color="flGray"
 			position="relative"
@@ -109,7 +99,7 @@ export function HelpBox({
 					marginRight={0}
 					marginBottom={0}
 					marginLeft={5}
-					css={getFill(theme, chosenVariation.bulbColor)}
+					css={getFill(theme, chosenVariation.fg)}
 				/>
 			)) ||
 				(!hideIcon && (
@@ -118,7 +108,7 @@ export function HelpBox({
 						margin="17px"
 						marginRight={-2}
 						marginLeft={4}
-						css={getFill(theme, chosenVariation.iconColor)}
+						css={getFill(theme, chosenVariation.fg)}
 					>
 						{chosenVariation.icon}
 					</Box>
@@ -161,7 +151,7 @@ export function HelpBox({
 						margin="17px"
 						marginRight={5}
 						marginLeft={!stacked ? -2 : large ? 4 : 5}
-						css={getFill(theme, chosenVariation.iconColor)}
+						css={getFill(theme, chosenVariation.fg)}
 					>
 						{chosenVariation.icon}
 					</Box>
