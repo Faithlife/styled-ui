@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { theme as globalTheme } from '../../theme';
+import styled from 'styled-components';
+import { system } from 'styled-system';
 import { Close, Exclamation, CircleCheck, Info, LightBulbH } from '../icons';
 import { Box } from '../Box';
 import { Button } from '../button';
@@ -10,12 +11,6 @@ function getVariation(variant, obj) {
 		return variant;
 	}
 	return [...Object.entries(obj)].find(entry => entry[1])[0];
-}
-
-function getFill(theme, color) {
-	return `path {
-				fill: ${new Map(Object.entries(theme.colors)).get(color)};
-			}`;
 }
 
 const variations = {
@@ -90,7 +85,7 @@ export function HelpBox({
 			{...helpBoxProps}
 		>
 			{(showLightBulb && (
-				<Box
+				<IconBox
 					as={LightBulbH}
 					flex="none"
 					height={large ? '42px' : '24px'}
@@ -99,19 +94,19 @@ export function HelpBox({
 					marginRight={0}
 					marginBottom={0}
 					marginLeft={5}
-					css={getFill(theme, chosenVariation.fg)}
+					fill={chosenVariation.fg}
 				/>
 			)) ||
 				(!hideIcon && (
-					<Box
+					<IconBox
 						height="18px"
 						margin="17px"
 						marginRight={-2}
 						marginLeft={4}
-						css={getFill(theme, chosenVariation.fg)}
+						fill={chosenVariation.fg}
 					>
 						{chosenVariation.icon}
-					</Box>
+					</IconBox>
 				))}
 			<Box
 				stacked={stacked}
@@ -128,12 +123,12 @@ export function HelpBox({
 				{childrenWithProps}
 			</Box>
 			{(handleClose && (
-				<Box
+				<IconBox
 					height="18px"
 					margin="17px"
 					marginRight={5}
 					marginLeft={!stacked ? -2 : large ? 4 : 5}
-					css={getFill(theme, chosenVariation.closeIconColor)}
+					fill={chosenVariation.closeIconColor}
 				>
 					<Button
 						icon={<Close />}
@@ -143,18 +138,18 @@ export function HelpBox({
 							padding: '0px',
 						}}
 					/>
-				</Box>
+				</IconBox>
 			)) ||
 				(showRightIcon && (
-					<Box
+					<IconBox
 						height="18px"
 						margin="17px"
 						marginRight={5}
 						marginLeft={!stacked ? -2 : large ? 4 : 5}
-						css={getFill(theme, chosenVariation.fg)}
+						fill={chosenVariation.fg}
 					>
 						{chosenVariation.icon}
-					</Box>
+					</IconBox>
 				))}
 		</Box>
 	);
@@ -194,10 +189,6 @@ HelpBox.propTypes = {
 	handleClose: PropTypes.func,
 };
 
-HelpBox.defaultProps = {
-	theme: globalTheme,
-};
-
 HelpBox.Body = ({ children }) => (
 	<Box display="flex" flex="1" order="2">
 		{children}
@@ -217,3 +208,9 @@ HelpBox.Footer = ({ children, stacked }) => (
 		{children}
 	</Box>
 );
+
+const IconBox = styled(Box)`
+	path {
+		${system({ fill: { property: 'fill', scale: 'colors' } })}
+	}
+`;
