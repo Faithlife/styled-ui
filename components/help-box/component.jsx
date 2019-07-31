@@ -74,7 +74,7 @@ export function HelpBox({
 	const childrenWithProps =
 		typeof children === 'string'
 			? children
-			: React.Children.map(children, child => React.cloneElement(child, { stacked: stacked }));
+			: React.Children.map(children, child => React.cloneElement(child, { stacked }));
 
 	return (
 		<Box
