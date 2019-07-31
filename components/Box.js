@@ -3,18 +3,19 @@ import { layout, flexbox, position, grid, shadow, border, background } from 'sty
 import { common } from '../theme/system';
 import { theme } from '../theme';
 
-export const Box = styled.div`
-	box-sizing: 'border-box';
-	min-width: 0;
-
-	${common};
-	${layout};
-	${flexbox};
-	${position};
-	${grid};
-	${shadow};
-	${border};
-	${background};
-`;
+export const Box = styled.div(
+	{
+		boxSizing: 'border-box',
+		minWidth: 0,
+	},
+	common,
+	layout,
+	flexbox,
+	position,
+	grid,
+	shadow,
+	border,
+	background,
+);
 
 Box.defaultProps.theme = theme;
