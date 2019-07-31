@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { Box } from '../Box';
+import { Text } from '../Text';
 import ExpandedIcon from './svgs/expanded-icon.svg';
 import CollapsedIcon from './svgs/collapsed-icon.svg';
 import { useAccordionContext, useAccordionItemContext } from './accordion-util';
@@ -45,7 +47,13 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 		}
 	}, [headerId, focusableChildList]);
 	return (
-		<Styled.HeadingWrapper renderCustomIndicator={renderCustomIndicator}>
+		<Box
+			display="grid"
+			gridArea="header"
+			gridTemplateColumns={
+				renderCustomIndicator ? '[title] 1fr [indicator] min-content' : '[title] auto [space] 0'
+			}
+		>
 			<Styled.Heading ariaLevel={ariaLevel}>
 				<Styled.Button
 					isExpanded={isExpanded}
@@ -56,25 +64,66 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 					panelId={panelId}
 					headerId={headerId}
 				>
-					<Styled.ButtonContentWrapper hideArrows={hideArrows} subtitle={subtitle}>
+					<Box
+						display="grid"
+						alignItems="center"
+						gridTemplateColumns={hideArrows ? 'auto' : 'min-content auto'}
+						gridColumnGap={4}
+						borderTop={1}
+						borderColor="gray14"
+						background="linear-gradient(180deg, #fafafa, hsla(0, 0%, 100%, 0))"
+						py={5}
+						px={[5, 5, 6]}
+						css={{ lineHeight: '1' }}
+					>
 						<React.Fragment>
 							{!hideArrows && (
 								<img src={isExpanded ? ExpandedIcon : CollapsedIcon} role="presentation" alt="" />
 							)}
-							<Styled.ButtonContent>
-								{children ? <Styled.Title>{children}</Styled.Title> : null}
-								{subtitle ? <Styled.Subtitle>{subtitle}</Styled.Subtitle> : null}
-							</Styled.ButtonContent>
+							<Box
+								display="inline-grid"
+								gridTemplateColumns="min-content auto"
+								gridGap={6}
+								alignItems="center"
+								css={{ whiteSpace: 'nowrap' }}
+							>
+								{children ? (
+									<Text
+										display="grid"
+										color="gray52"
+										letterSpacing="0.5px"
+										fontWeight="semibold"
+										fontFamily="normal"
+										fontSize={3}
+										lineHeight={1}
+										textTransform="uppercase"
+									>
+										{children}
+									</Text>
+								) : null}
+								{subtitle ? (
+									<Text
+										display="grid"
+										color="gray52"
+										fontFamily="normal"
+										fontSize={2}
+										lineHeight={1}
+										fontWeight="regular"
+									>
+										{subtitle}
+									</Text>
+								) : null}
+							</Box>
 						</React.Fragment>
-					</Styled.ButtonContentWrapper>
+					</Box>
 				</Styled.Button>
 			</Styled.Heading>
 			{renderCustomIndicator ? (
-				<Styled.Indicator>
+				<Box gridColumn="indicator" gridRow="1" marginTop={5} marginRight={[5, 5, 6]}>
 					{renderCustomIndicator({ isExpanded, onExpansion: handleExpansion })}
-				</Styled.Indicator>
+				</Box>
 			) : null}
-		</Styled.HeadingWrapper>
+		</Box>
 	);
 }
 
