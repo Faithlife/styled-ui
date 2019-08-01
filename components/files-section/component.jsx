@@ -137,7 +137,7 @@ export class FilesSection extends PureComponent {
 				</Box>
 				{onUploadFiles ? (
 					<DropZone onDrop={onUploadFiles}>
-						<Text textAlign="center" fontWeight="regular" lineHeight="26px">
+						<Text fontWeight="regular" lineHeight="26px">
 							{dropZoneText}
 						</Text>
 
