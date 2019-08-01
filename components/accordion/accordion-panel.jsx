@@ -5,14 +5,11 @@ import { Collapse } from '../collapse';
 import { useAccordionItemContext } from './accordion-util';
 
 export function AccordionPanel({ children }) {
-	const { isExpanded, headerId, panelId, styleOverrides } = useAccordionItemContext();
+	const { isExpanded, headerId, panelId } = useAccordionItemContext();
 	return (
-		<Box minWidth="0px">
+		<Box>
 			<Collapse isOpen={isExpanded}>
 				<Box
-					headerId={headerId}
-					panelId={panelId}
-					styleOverrides={styleOverrides}
 					role="region"
 					aria-labelledby={`accordion-header-${headerId}`}
 					id={`accordion-panel-${panelId}`}
