@@ -28,8 +28,8 @@ export const DefaultModalFooter = props => (
 			{props.cancelButton && (
 				<Box
 					width={props.useFullWidthButtons && '100%'}
-					marginBottom={props.useFullWidthButtons && 5}
-					marginRight={props.useFullWidthButtons || 5}
+					marginBottom={props.useFullWidthButtons ? 5 : ''}
+					marginRight={props.useFullWidthButtons ? '' : 5}
 				>
 					<Button
 						primaryOutline
