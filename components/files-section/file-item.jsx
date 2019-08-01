@@ -71,9 +71,7 @@ export class FileItem extends PureComponent {
 
 		const fileInformation = (
 			<Text
-				fontSize={2}
-				fontWeight="regular"
-				lineHeight="14px"
+				textStyle="ui.14"
 				paddingY="6px"
 				overflow="hidden"
 				css={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
@@ -105,9 +103,7 @@ export class FileItem extends PureComponent {
 					)}
 					<Text
 						display="block"
-						fontSize={1}
-						fontWeight="regular"
-						lineHeight="17px"
+						textStyle="c.13"
 						color="gray34"
 						paddingBottom={2}
 						overflow="hidden"

@@ -18,20 +18,13 @@ export const ModalHeader = ({ title, subtitle, onClose, styleOverrides }) => (
 		borderColor="gray22"
 	>
 		<Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
-			<Text fontSize={6} fontWeight="semibold" lineHeight="30px" color="gray66">
+			<Text textStyle="h.24" color="gray66">
 				{title}
 			</Text>
 			<Button primaryTransparent icon={<Close />} onClick={onClose} />
 		</Box>
 		{subtitle && (
-			<Text
-				width="100%"
-				paddingTop={4}
-				fontSize={2}
-				fontWeight="regular"
-				lineHeight="14px"
-				color="gray66"
-			>
+			<Text width="100%" paddingTop={4} textStyle="ui.14" color="gray66">
 				{subtitle}
 			</Text>
 		)}

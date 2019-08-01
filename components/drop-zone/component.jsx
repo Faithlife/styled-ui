@@ -66,9 +66,7 @@ export class DropZone extends PureComponent {
 				border="2px dashed"
 				borderColor="gray22"
 				background={showHighlight && 'blue1'}
-				fontSize={3}
-				fontWeight="regular"
-				lineHeight="26px"
+				textStyle="h.16"
 				css={{ transition: 'background 1s ease' }}
 			>
 				{children}

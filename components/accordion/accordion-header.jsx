@@ -93,24 +93,14 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 										display="grid"
 										color="gray52"
 										letterSpacing="0.5px"
-										fontWeight="semibold"
-										fontFamily="normal"
-										fontSize={3}
-										lineHeight={1}
+										textStyle="h.16"
 										textTransform="uppercase"
 									>
 										{children}
 									</Text>
 								) : null}
 								{subtitle ? (
-									<Text
-										display="grid"
-										color="gray52"
-										fontFamily="normal"
-										fontSize={2}
-										lineHeight={1}
-										fontWeight="regular"
-									>
+									<Text display="grid" color="gray52" textStyle="c.14">
 										{subtitle}
 									</Text>
 								) : null}

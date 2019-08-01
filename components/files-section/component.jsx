@@ -113,9 +113,9 @@ export class FilesSection extends PureComponent {
 			<Container>
 				<Text
 					display="block"
-					fontSize={titleFontSize || 3}
-					fontWeight="regular"
-					lineHeight={1}
+					textStyle="ui.16"
+					fontSize={titleFontSize && titleFontSize}
+					lineHeight={titleFontSize && 1}
 					marginBottom={3}
 				>
 					{title}
@@ -137,10 +137,7 @@ export class FilesSection extends PureComponent {
 				</Box>
 				{onUploadFiles ? (
 					<DropZone onDrop={onUploadFiles}>
-						<Text fontWeight="regular" lineHeight="26px">
-							{dropZoneText}
-						</Text>
-
+						{dropZoneText}
 						<Button primaryTransparent onClick={this.handleBrowseFilesClick}>
 							{browseFilesButtonText}
 						</Button>

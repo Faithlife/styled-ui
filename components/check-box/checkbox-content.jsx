@@ -33,7 +33,7 @@ export function CheckboxContent({ isChecked, title, children, disabled }) {
 				</Box>
 			</Styled.HoverableBox>
 			{title && (
-				<Styled.Label marginLeft="22px" siblingMarginLeft="6px" fontWeight="regular" fontSize={2}>
+				<Styled.Label marginLeft="22px" siblingMarginLeft="6px" textStyle="c.14">
 					{title}
 				</Styled.Label>
 			)}
