@@ -16,6 +16,7 @@ export function TableHeading({
 	minWidth,
 	maxWidth,
 	groupByColumn,
+	hasInteractableElement,
 }) {
 	return <div />;
 }
@@ -41,7 +42,7 @@ TableHeading.propTypes = {
 	defaultSort: PropTypes.oneOf(Object.values(TableHeading.sortOptions)),
 	isRightAligned: PropTypes.bool,
 	/** A react component to render in the cell */
-	cellComponent: PropTypes.function,
+	cellComponent: PropTypes.func,
 	/** Whether the column should only show on larger viewports */
 	isLargeViewportOnly: PropTypes.bool,
 	/** Whether the column should only show on small viewports */
@@ -55,4 +56,6 @@ TableHeading.propTypes = {
 	maxWidth: PropTypes.number,
 	/** Whether to use the column properties as a group */
 	groupByColumn: PropTypes.bool,
+	/** Suppress the entire row receiving the click when you have an interactable element */
+	hasInteractableElement: PropTypes.bool,
 };

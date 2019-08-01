@@ -52,6 +52,7 @@ import {
 	TableHeading,
 	PaginatedTable,
 	SimpleTable,
+	Box,
 } from '../index';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
@@ -67,6 +68,11 @@ import { BaseTable } from '../components/grid/base-table';
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
 import '../dist/ag-grid.css';
+
+const censusDataWithId = censusData.map((data, index) => ({
+	...data,
+	id: index,
+}));
 
 const ButtonDemo = styled.div`
 	display: inline-grid;
@@ -102,6 +108,19 @@ function delayPromise(duration) {
 }
 
 const components = [
+	{
+		title: 'Layout Primitives',
+		pages: [
+			{
+				path: '/layout/box',
+				title: 'Box',
+				content: pageLoader(() => import('./layout/box.md')),
+				imports: {
+					Box,
+				},
+			},
+		],
+	},
 	{
 		title: 'Accordion',
 		pages: [
@@ -243,13 +262,26 @@ const components = [
 				title: 'Variations',
 				path: '/grid/variations',
 				content: pageLoader(() => import('./grid/variations.md')),
-				imports: { TableHeading, PaginatedTable, SimpleTable, Button, censusData },
+				imports: {
+					TableHeading,
+					PaginatedTable,
+					SimpleTable,
+					Button,
+					censusData: censusDataWithId,
+				},
 			},
 			{
 				title: 'Simple Examples',
 				path: '/grid/simple-examples',
 				content: pageLoader(() => import('./grid/examples.md')),
-				imports: { TableHeading, SimpleTable, Input, PopulationChange, censusData },
+				imports: {
+					TableHeading,
+					SimpleTable,
+					Input,
+					PopulationChange,
+					Button,
+					censusData: censusDataWithId,
+				},
 			},
 			{
 				title: 'Documentation',

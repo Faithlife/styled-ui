@@ -52,54 +52,54 @@ export const textStyles = {
 		'12': {
 			fontSize: '12px',
 			lineHeight: '16px',
-			fontWeight: fontWeights.semibold,
+			fontWeight: fontWeights.normal,
 		},
 		'13': {
 			fontSize: '13px',
 			lineHeight: '18px',
-			fontWeight: fontWeights.semibold,
+			fontWeight: fontWeights.normal,
 		},
 		'14': {
 			fontSize: '14px',
 			lineHeight: '20px',
-			fontWeight: fontWeights.semibold,
+			fontWeight: fontWeights.normal,
 		},
 		'16': {
 			fontSize: '16px',
 			lineHeight: '22px',
-			fontWeight: fontWeights.semibold,
+			fontWeight: fontWeights.normal,
 		},
 		'18': {
 			fontSize: '18px',
 			lineHeight: '24px',
-			fontWeight: fontWeights.semibold,
+			fontWeight: fontWeights.normal,
 		},
 	},
 	ui: {
 		'12': {
 			fontSize: '12px',
 			lineHeight: '12px',
-			fontWeight: fontWeights.semibold,
+			fontWeight: fontWeights.normal,
 		},
 		'13': {
 			fontSize: '13px',
 			lineHeight: '13px',
-			fontWeight: fontWeights.semibold,
+			fontWeight: fontWeights.normal,
 		},
 		'14': {
 			fontSize: '14px',
 			lineHeight: '14px',
-			fontWeight: fontWeights.semibold,
+			fontWeight: fontWeights.normal,
 		},
 		'16': {
 			fontSize: '16px',
 			lineHeight: '16px',
-			fontWeight: fontWeights.semibold,
+			fontWeight: fontWeights.normal,
 		},
 		'18': {
 			fontSize: '18px',
 			lineHeight: '18px',
-			fontWeight: fontWeights.semibold,
+			fontWeight: fontWeights.normal,
 		},
 	},
 };

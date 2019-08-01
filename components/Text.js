@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+import systemPropTypes from '@styled-system/prop-types';
 import styled from 'styled-components';
 import { textStyle, layout, border } from 'styled-system';
 import { themeGet } from '@styled-system/theme-get';
@@ -16,4 +18,11 @@ export const Text = styled.span`
 	${border};
 `;
 
-Text.defaultProps.theme = theme;
+Text.defaultProps = { theme };
+Text.propTypes = {
+	...common.propTypes,
+	...typography.propTypes,
+	...systemPropTypes.layout,
+	...systemPropTypes.border,
+	textStyle: PropTypes.string,
+};

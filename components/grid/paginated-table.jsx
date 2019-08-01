@@ -16,6 +16,8 @@ export function PaginatedTable({
 	data,
 	rowSelectionType,
 	hideHeaders,
+	rowHeight,
+	handleGetRowId,
 }) {
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useTableState();
 
@@ -57,6 +59,9 @@ export function PaginatedTable({
 			rowSelectionType={rowSelectionType}
 			data={data}
 			hideHeaders={hideHeaders}
+			rowHeight={rowHeight}
+			hasPagingBar
+			handleGetRowId={handleGetRowId}
 		>
 			{children}
 		</BaseTable>

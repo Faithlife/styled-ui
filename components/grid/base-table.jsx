@@ -4,9 +4,8 @@ import { AgGridReact, AgGridColumn } from 'ag-grid-react';
 import 'ag-grid-enterprise';
 import * as Styled from './styled';
 
-const rowHeight = 45;
-const headerHeight = rowHeight - 5;
-const tableHeightPadding = 42;
+const defaultRowHeight = 45;
+const headerHeight = defaultRowHeight - 5;
 
 /** A wrapper of ag-grid with some boilerplate code to handle initialization and sorting/ filtering */
 export function BaseTable({
@@ -26,7 +25,12 @@ export function BaseTable({
 	filterText,
 	rowSelectionType,
 	hideHeaders,
+	rowHeight,
+	hasPagingBar,
+	handleGetRowId,
 }) {
+	const tableHeightPadding = hasPagingBar ? 50 : 2;
+
 	useEffect(() => {
 		if (gridApi) {
 			gridApi.setQuickFilter(filterText);
@@ -63,6 +67,8 @@ export function BaseTable({
 		.filter(child => child.props.isSmallViewportOnly)
 		.map(child => child.props.fieldName);
 
+	const suppressRowClick = headingChildren.some(child => child.props.hasInteractableElement);
+
 	const handleGridResize = useCallback(() => {
 		if (gridApi && columnApi) {
 			if (largeOnlyColumns) {
@@ -85,12 +91,21 @@ export function BaseTable({
 		}
 	}, [updateSortModel, gridApi]);
 
+	const getRowNodeId = useCallback(data => data.id, []);
+
+	const handleCellClicked = useCallback(
+		event => {
+			if (!event.column.colDef.hasInteractableElement) {
+				onRowClick && onRowClick([event.data]);
+			}
+		},
+		[onRowClick],
+	);
+
 	const handleGridReady = useCallback(
 		({ api, columnApi }) => {
 			setGridApi(api);
 			setColumnApi(columnApi);
-
-			// handleGridResize(api, columnApi);
 
 			if (sortModel) {
 				api.setSortModel(sortModel);
@@ -105,7 +120,7 @@ export function BaseTable({
 	const rowCount = data ? data.length : 1;
 	const currentHeaderHeight = hideHeaders ? 0 : headerHeight;
 	const tableHeight =
-		(maxRows && maxRows < rowCount ? maxRows : rowCount) * rowHeight +
+		(maxRows && maxRows < rowCount ? maxRows : rowCount) * (rowHeight || defaultRowHeight) +
 		tableHeightPadding +
 		currentHeaderHeight;
 	return (
@@ -123,11 +138,14 @@ export function BaseTable({
 				}
 				frameworkComponents={cellComponents}
 				headerHeight={!hideHeaders ? headerHeight : 0}
-				rowHeight={rowHeight}
+				rowHeight={rowHeight || defaultRowHeight}
 				suppressHorizontalScroll
 				rowClass={onRowClick ? 'ag-grid-clickable-row' : ''}
 				groupUseEntireRow
 				deltaRowDataMode
+				getRowNodeId={handleGetRowId || getRowNodeId}
+				suppressRowClickSelection={suppressRowClick}
+				onCellClicked={suppressRowClick ? handleCellClicked : null}
 				reactNext
 				{...gridOptions}
 			>
@@ -193,5 +211,11 @@ BaseTable.propTypes = {
 	onRowClick: PropTypes.func,
 	/** Hide headers */
 	hideHeaders: PropTypes.bool,
+	/** The height, in pixels, of non-header rows in the table.  If not provided, default is 45px */
+	rowHeight: PropTypes.number,
+	/** Whether component is simple table or paginated table */
+	hasPagingBar: PropTypes.bool,
+	/** Your data should have an id property or this handler must be included */
+	handleGetRowId: PropTypes.func,
 	children: PropTypes.node,
 };

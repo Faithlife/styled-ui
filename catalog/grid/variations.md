@@ -43,6 +43,7 @@ land: json
 ---
 [
 	{
+		"id": 0,
 		"NAME": "Abilene, TX",
 		"LSAD": "Metropolitan Statistical Area",
 		"CENSUS2010POP": 165252,
