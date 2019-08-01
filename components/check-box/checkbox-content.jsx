@@ -9,15 +9,15 @@ export function CheckboxContent({ isChecked, title, children, disabled }) {
 		<React.Fragment>
 			<Styled.HoverableBox
 				disabled={disabled}
-				border="1px solid" // {1}
-				borderColor={disabled ? '#c7c7c7' : '#95908f'} // gray22 : no identifier
-				hoverBorderColor={disabled || '#1e91d6'} // blue4
-				borderRadius="3px" // {1}
+				border={1}
+				borderColor={disabled ? 'gray22' : '#95908f'}
+				hoverBorderColor={disabled || 'blue4'}
+				borderRadius={1}
 				position="absolute"
 				width="14px"
 				height="14px"
 				background="transparent"
-				backgroundColor={disabled && '#ebebeb'} // gray8
+				backgroundColor={disabled && 'gray8'}
 			>
 				<Box
 					position="absolute"
@@ -37,12 +37,12 @@ export function CheckboxContent({ isChecked, title, children, disabled }) {
 						height="9.6px"
 						width="9.6px"
 						opacity={isChecked ? '1' : '0'}
-						fill="#1e91d6" // blue4
+						fill="blue4"
 					/>
 				</Box>
 			</Styled.HoverableBox>
 			{title && (
-				<Styled.Label marginLeft="22px" siblingMarginLeft="6px">
+				<Styled.Label marginLeft="22px" siblingMarginLeft="6px" fontWeight="regular" fontSize={2}>
 					{title}
 				</Styled.Label>
 			)}
