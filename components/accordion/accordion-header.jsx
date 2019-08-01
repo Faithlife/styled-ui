@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { resetStyles } from '../utils';
 import { Box } from '../Box';
 import { Text } from '../Text';
 import ExpandedIcon from './svgs/expanded-icon.svg';
 import CollapsedIcon from './svgs/collapsed-icon.svg';
 import { useAccordionContext, useAccordionItemContext } from './accordion-util';
-import * as Styled from './styled-header';
 
 export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, subtitle }) {
 	const {
@@ -54,8 +55,8 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 				renderCustomIndicator ? '[title] 1fr [indicator] min-content' : '[title] auto [space] 0'
 			}
 		>
-			<Styled.Heading ariaLevel={ariaLevel}>
-				<Styled.Button
+			<Heading ariaLevel={ariaLevel}>
+				<HeadingButton
 					isExpanded={isExpanded}
 					onBlur={handleBlur}
 					onClick={handleExpansion}
@@ -116,8 +117,8 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 							</Box>
 						</React.Fragment>
 					</Box>
-				</Styled.Button>
-			</Styled.Heading>
+				</HeadingButton>
+			</Heading>
 			{renderCustomIndicator ? (
 				<Box gridColumn="indicator" gridRow="1" marginTop={5} marginRight={[5, null, 6]}>
 					{renderCustomIndicator({ isExpanded, onExpansion: handleExpansion })}
@@ -137,3 +138,32 @@ AccordionHeader.propTypes = {
 	/** Receives an isExpanded boolean value. */
 	renderCustomIndicator: PropTypes.func,
 };
+
+export const Heading = styled.header.attrs({
+	role: 'heading',
+	'aria-level': ({ ariaLevel }) => ariaLevel,
+})`
+	${resetStyles};
+
+	grid-column: 1 / span 2;
+	grid-row: 1;
+	min-width: 0;
+	width: 100%;
+`;
+
+export const HeadingButton = styled.button.attrs({
+	role: 'button',
+	'aria-expanded': ({ isExpanded }) => isExpanded,
+	'aria-controls': ({ panelId }) => `accordion-panel-${panelId}`,
+	id: ({ headerId }) => `accordion-header-${headerId}`,
+})`
+	${resetStyles};
+
+	padding: 0;
+	border: 0;
+	background: 0;
+	appearance: none;
+	width: 100%;
+	height: 100%;
+	text-align: left;
+`;
