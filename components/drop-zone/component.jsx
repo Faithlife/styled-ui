@@ -58,7 +58,6 @@ export class DropZone extends PureComponent {
 				onDragLeave={this.handleDragLeave}
 				onDragOver={this.handleDragOver}
 				onDrop={this.handleDrop}
-				showHighlight={showHighlight}
 				display="flex"
 				flexDirection="column"
 				justifyContent="center"
