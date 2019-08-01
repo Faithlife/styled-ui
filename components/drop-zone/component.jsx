@@ -43,7 +43,6 @@ export class DropZone extends PureComponent {
 	handleDrop = e => {
 		this.dropTargets = 0;
 		this.setState({ showHighlight: false });
-		console.log(e);
 		this.props.onDrop(e);
 	};
 

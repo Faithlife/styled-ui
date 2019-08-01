@@ -9,15 +9,27 @@ export function FilePicker({
 	tabs,
 	onFilesSelected,
 	allowMultiSelect,
-	localizationProps,
 	onCancel,
-	minFileSize,
+	localizedResources,
 }) {
+	const defaultLocalizedResources = {
+		addText: 'Insert',
+		cancelText: 'Cancel',
+		uploadFile: 'Upload File',
+		uploadFiles: 'Upload Files',
+		dragDropText: 'Drag and drop to upload image',
+		browseText: 'or browse files',
+	};
+
 	return (
 		<Styled.Container>
 			<TabManager>
 				<TabList>
-					<Tab>{allowMultiSelect ? 'Upload Files' : 'Upload File'}</Tab>
+					<Tab>
+						{allowMultiSelect
+							? localizedResources.uploadFiles || defaultLocalizedResources.uploadFiles
+							: localizedResources.uploadFile || defaultLocalizedResources.uploadFile}
+					</Tab>
 					{tabs.length && tabs.map((t, index) => <Tab key={`tab:${index}`}>{t.title}</Tab>)}
 				</TabList>
 				<TabPanels>
@@ -25,9 +37,8 @@ export function FilePicker({
 						<UploadPage
 							allowMultiSelect={allowMultiSelect}
 							onFilesSelected={onFilesSelected}
-							localizationProps={localizationProps}
+							localizedResources={{ ...defaultLocalizedResources, ...localizedResources }}
 							onCancel={onCancel}
-							minFileSize={minFileSize}
 						/>
 					</TabPanel>
 					{tabs.length &&
@@ -65,16 +76,15 @@ FilePicker.propTypes = {
 	/** Is selecting multiple files allowed */
 	allowMultiSelect: PropTypes.bool,
 	/** Customized text */
-	localizationProps: PropTypes.shape({
+	localizedResources: PropTypes.shape({
 		addText: PropTypes.string,
 		cancelText: PropTypes.string,
+		reccomendedMinSize: PropTypes.string,
+		uploadFile: PropTypes.string,
+		uploadFiles: PropTypes.string,
+		dragDropText: PropTypes.string,
+		browseText: PropTypes.string,
 	}),
 	/** This function handles exiting the file picker */
 	onCancel: PropTypes.func.isRequired,
-	/** The minimum allowed file size; optional */
-	minFileSize: PropTypes.string,
-};
-
-FilePicker.defaultProps = {
-	localizationProps: {},
 };

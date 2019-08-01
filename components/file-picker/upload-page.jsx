@@ -5,13 +5,7 @@ import { ImagePreview } from './image-preview';
 import * as Styled from './styled';
 import { LightboxDropZone } from './lightbox-drop-zone';
 
-export function UploadPage({
-	allowMultiSelect,
-	onFilesSelected,
-	localizationProps,
-	onCancel,
-	minFileSize,
-}) {
+export function UploadPage({ allowMultiSelect, onFilesSelected, localizedResources, onCancel }) {
 	const [selectedFiles, setSelectedFiles] = useState([]);
 
 	const handleRemoveFile = useCallback(
@@ -34,7 +28,11 @@ export function UploadPage({
 				{allowMultiSelect ? (
 					<Styled.MultiSelectContainer>
 						<Styled.ImageBox>
-							<LightboxDropZone addFile={addFile} allowMultiSelect={allowMultiSelect} />
+							<LightboxDropZone
+								addFile={addFile}
+								allowMultiSelect={allowMultiSelect}
+								localizedResources={localizedResources}
+							/>
 						</Styled.ImageBox>
 						{selectedFiles.map((file, index) => (
 							<Styled.ImageBox key={file.dataUrl}>
@@ -53,7 +51,7 @@ export function UploadPage({
 				<ButtonSection
 					selectedFiles={selectedFiles}
 					onFilesSelected={onFilesSelected}
-					localizationProps={localizationProps}
+					localizedResources={localizedResources}
 					onCancel={onCancel}
 				/>
 			</React.Fragment>
@@ -66,13 +64,13 @@ export function UploadPage({
 					addFile={addFile}
 					allowMultiSelect={allowMultiSelect}
 					showDetails
-					minFileSize={minFileSize}
+					localizedResources={localizedResources}
 				/>
 			</div>
 			<ButtonSection
 				selectedFiles={selectedFiles}
 				onFilesSelected={onFilesSelected}
-				localizationProps={localizationProps}
+				localizedResources={localizedResources}
 				onCancel={onCancel}
 			/>
 		</React.Fragment>
@@ -81,21 +79,18 @@ export function UploadPage({
 UploadPage.propTypes = {
 	allowMultiSelect: PropTypes.bool,
 	onFilesSelected: PropTypes.func.isRequired,
-	localizationProps: PropTypes.shape({
+	localizedResources: PropTypes.shape({
 		addText: PropTypes.string,
 		cancelText: PropTypes.string,
+		reccomendedMinSize: PropTypes.string,
 	}),
 	onCancel: PropTypes.func.isRequired,
-	minFileSize: PropTypes.string,
 };
 
-function ButtonSection({ selectedFiles, onFilesSelected, localizationProps, onCancel }) {
+function ButtonSection({ selectedFiles, onFilesSelected, localizedResources, onCancel }) {
 	const onSelect = useCallback(() => {
 		onFilesSelected(selectedFiles);
 	}, [onFilesSelected, selectedFiles]);
-
-	const addText = (localizationProps && localizationProps.addText) || 'Insert';
-	const cancelText = (localizationProps && localizationProps.cancelText) || 'Cancel';
 
 	return (
 		<Styled.ButtonSection>
@@ -107,7 +102,7 @@ function ButtonSection({ selectedFiles, onFilesSelected, localizationProps, onCa
 					onClick={onSelect}
 					styleOverrides={{ width: '76px', fontSize: '14px' }}
 				>
-					{addText}
+					{localizedResources.addText}
 				</Button>
 			</Styled.ButtonContainer>
 			<Styled.ButtonContainer>
@@ -117,7 +112,7 @@ function ButtonSection({ selectedFiles, onFilesSelected, localizationProps, onCa
 					onClick={onCancel}
 					styleOverrides={{ width: '76px', fontSize: '14px' }}
 				>
-					{cancelText}
+					{localizedResources.cancelText}
 				</Button>
 			</Styled.ButtonContainer>
 		</Styled.ButtonSection>
@@ -126,9 +121,10 @@ function ButtonSection({ selectedFiles, onFilesSelected, localizationProps, onCa
 ButtonSection.propTypes = {
 	selectedFiles: PropTypes.object,
 	onFilesSelected: PropTypes.func,
-	localizationProps: PropTypes.shape({
+	localizedResources: PropTypes.shape({
 		addText: PropTypes.string,
 		cancelText: PropTypes.string,
+		reccomendedMinSize: PropTypes.string,
 	}),
 	onCancel: PropTypes.func.isRequired,
 };

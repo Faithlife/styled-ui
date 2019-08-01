@@ -5,10 +5,7 @@ import { DropZone } from '../drop-zone';
 import { CameraSvg } from './svgs';
 import * as Styled from './styled';
 
-const dragDropText = 'Drag and drop to upload image';
-const browseText = 'or browse files';
-
-export function LightboxDropZone({ addFile, allowMultiSelect, showDetails, minFileSize }) {
+export function LightboxDropZone({ addFile, allowMultiSelect, showDetails, localizedResources }) {
 	const fileInputRef = useRef();
 
 	const handleUploadWithFileInput = useCallback(
@@ -34,12 +31,12 @@ export function LightboxDropZone({ addFile, allowMultiSelect, showDetails, minFi
 			<Styled.DragDropContainer height={showDetails ? '415px' : '156px'}>
 				{showDetails && (
 					<Styled.SvgContainer>
-						<img alt="drag and drop icon" src={CameraSvg} />
+						<img alt="drag and drop" src={CameraSvg} />
 					</Styled.SvgContainer>
 				)}
-				<Styled.DragDropText>{dragDropText}</Styled.DragDropText>
+				<Styled.DragDropText>{localizedResources.dragDropText}</Styled.DragDropText>
 				<Button primaryTransparent onClick={handleBrowseFilesClick}>
-					{browseText}
+					{localizedResources.browseText}
 				</Button>
 				<br />
 				<Styled.FileInputLabel>
@@ -51,7 +48,9 @@ export function LightboxDropZone({ addFile, allowMultiSelect, showDetails, minFi
 						name="file"
 					/>
 				</Styled.FileInputLabel>
-				{showDetails && minFileSize && <Styled.MinSizeLabel>{minFileSize}</Styled.MinSizeLabel>}
+				{showDetails && localizedResources.reccomendedMinSize && (
+					<Styled.MinSizeLabel>{localizedResources.reccomendedMinSize}</Styled.MinSizeLabel>
+				)}
 			</Styled.DragDropContainer>
 		</DropZone>
 	);
@@ -60,5 +59,9 @@ LightboxDropZone.propTypes = {
 	addFile: PropTypes.func.isRequired,
 	allowMultiSelect: PropTypes.bool,
 	showDetails: PropTypes.bool,
-	minFileSize: PropTypes.string,
+	localizedResources: PropTypes.shape({
+		reccomendedMinSize: PropTypes.string,
+		dragDropText: PropTypes.string,
+		browseText: PropTypes.string,
+	}),
 };
