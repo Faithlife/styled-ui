@@ -7,6 +7,7 @@ import { theme } from '../theme';
 
 export const Paragraph = styled.p`
 	display: block;
+	margin: 0;
 	${themeGet('textStyles.c.16')};
 
 	${textStyle};
