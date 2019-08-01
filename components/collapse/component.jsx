@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Transition from 'react-transition-group/Transition';
-import styled from 'styled-components';
 import {
 	forwardClassRef,
 	omit,
@@ -11,21 +10,7 @@ import {
 	TransitionPropTypeKeys,
 	TransitionStatuses,
 } from '../utils';
-
-const CollapseDiv = styled.div`
-	${props =>
-		props.transitionStatus === TransitionStatuses.ENTERING ||
-		props.transitionStatus === TransitionStatuses.EXITING
-			? `
-		position: relative;
-		height: 0;
-		overflow: hidden;
-		transition: height 0.2s ease-in;
-	`
-			: ''};
-
-	${props => (props.transitionStatus === TransitionStatuses.EXITED ? `display: none` : '')};
-`;
+import { Box } from '../Box';
 
 const propTypes = {
 	...Transition.propTypes,
@@ -123,15 +108,31 @@ export const Collapse = forwardClassRef(
 					{status => {
 						const style = height === null ? null : { height };
 						return (
-							<CollapseDiv
+							<Box
 								{...childProps}
 								onClick={this.handleClick}
 								transitionStatus={status}
 								style={{ ...childProps.style, ...style }}
 								ref={forwardedRef}
+								display={status === TransitionStatuses.EXITED && 'none'}
+								position={
+									status === TransitionStatuses.ENTERING || status === TransitionStatuses.EXITING
+										? 'relative'
+										: ''
+								}
+								height={
+									status === TransitionStatuses.ENTERING || status === TransitionStatuses.EXITING
+										? '0'
+										: ''
+								}
+								css={`
+									${status === TransitionStatuses.ENTERING || status === TransitionStatuses.EXITING
+										? 'overflow: hidden; transition: height 0.2s ease-in;'
+										: ''}
+								`}
 							>
 								{children}
-							</CollapseDiv>
+							</Box>
 						);
 					}}
 				</Transition>
