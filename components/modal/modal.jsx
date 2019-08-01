@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
-import { ThemeProvider } from 'styled-components';
+import { Box } from '../Box';
 import { debouncedResize } from '../utils';
 import { ModalBackdrop } from '../modal-backdrop';
 import { ModalHeader } from './modal-header';
 import { DefaultModalFooter } from './default-modal-footer';
-import * as Styled from './styled';
 
 /**
  * Modal with flexible contents. See also: SimpleModal
@@ -99,7 +98,6 @@ export class Modal extends React.Component {
 
 	renderModal() {
 		const {
-			theme,
 			title,
 			subtitle,
 			onClose,
@@ -123,32 +121,49 @@ export class Modal extends React.Component {
 		};
 
 		return (
-			<ThemeProvider theme={{ ...theme, verticalButtons }}>
-				<ModalBackdrop onClose={onClose} styleOverrides={backdropStyleOverrides}>
-					<Styled.Modal
-						ref={modal => {
-							this._modal = modal;
-							if (modal && modalWidth === null) {
-								this.setState({ modalWidth: modal.clientWidth });
-							}
-						}}
+			<ModalBackdrop onClose={onClose} styleOverrides={backdropStyleOverrides}>
+				<Box
+					ref={modal => {
+						this._modal = modal;
+						if (modal && modalWidth === null) {
+							this.setState({ modalWidth: modal.clientWidth });
+						}
+					}}
+					display="flex"
+					flexDirection="column"
+					justifyContent="center"
+					alignItems="center"
+					width="fit-content"
+					height="fit-content"
+					maxWidth="calc(100% - 16px)"
+					maxHeight={['calc(100% - 16px)', 'calc(100% - 16px)', '80%']}
+					margin="auto"
+					padding={6}
+					borderRadius={1}
+					backgroundColor="white"
+				>
+					<ModalHeader
+						title={title}
+						subtitle={subtitle}
+						onClose={onClose}
+						styleOverrides={styleOverrides}
+					/>
+					<Box
+						maxWidth="100%"
+						maxHeight="80%"
+						css={{ overflowX: 'hidden', overflowY: 'auto', overflowWrap: 'break-word' }}
 					>
-						<ModalHeader
-							title={title}
-							subtitle={subtitle}
-							onClose={onClose}
-							styleOverrides={styleOverrides}
-						/>
-						<Styled.ModalContent> {children} </Styled.ModalContent>
-						{!withoutFooter &&
-							(renderFooter ? (
-								renderFooter()
-							) : (
-								<DefaultModalFooter useFullWidthButtons={verticalButtons} {...footerProps} />
-							))}
-					</Styled.Modal>
-				</ModalBackdrop>
-			</ThemeProvider>
+						{' '}
+						{children}{' '}
+					</Box>
+					{!withoutFooter &&
+						(renderFooter ? (
+							renderFooter()
+						) : (
+							<DefaultModalFooter useFullWidthButtons={verticalButtons} {...footerProps} />
+						))}
+				</Box>
+			</ModalBackdrop>
 		);
 	}
 

@@ -1,13 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Box } from '../Box';
 import { Button } from '../button';
 import { colors } from '../shared-styles';
 import { ModalFooter } from './modal-footer';
-import * as Styled from './styled';
 
 export const DefaultModalFooter = props => (
 	<ModalFooter>
-		<Styled.FooterContainer>
+		<Box
+			display="flex"
+			flexDirection={props.useFullWidthButtons ? 'column-reverse' : 'row-reverse'}
+			justifyContent="flex-start"
+			alignItems="center"
+			width="100%"
+		>
 			{props.commitButton && (
 				<Button
 					primary
@@ -20,7 +26,11 @@ export const DefaultModalFooter = props => (
 				</Button>
 			)}
 			{props.cancelButton && (
-				<Styled.CancelContainer>
+				<Box
+					width={props.useFullWidthButtons && '100%'}
+					marginBottom={props.useFullWidthButtons && 5}
+					marginRight={props.useFullWidthButtons || 5}
+				>
 					<Button
 						primaryOutline
 						medium
@@ -30,10 +40,14 @@ export const DefaultModalFooter = props => (
 					>
 						{props.cancelButton.text}
 					</Button>
-				</Styled.CancelContainer>
+				</Box>
 			)}
 			{props.deleteButton && (
-				<Styled.DeleteContainer>
+				<Box
+					width={props.useFullWidthButtons && '100%'}
+					marginBottom={props.useFullWidthButtons && 5}
+					marginRight={props.useFullWidthButtons || 'auto'}
+				>
 					<Button
 						primaryOutline
 						medium
@@ -48,9 +62,9 @@ export const DefaultModalFooter = props => (
 					>
 						{props.deleteButton.text}
 					</Button>
-				</Styled.DeleteContainer>
+				</Box>
 			)}
-		</Styled.FooterContainer>
+		</Box>
 	</ModalFooter>
 );
 
