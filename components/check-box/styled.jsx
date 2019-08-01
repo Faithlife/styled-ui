@@ -16,6 +16,7 @@ export const CheckboxContainer = styled.button`
 	min-width: 44px;
 	background: transparent;
 	text-align: unset;
+	cursor: ${props => props.disabled || 'pointer'};
 
 	&:not(:disabled) {
 		&:active {

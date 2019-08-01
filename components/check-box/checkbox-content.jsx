@@ -19,16 +19,7 @@ export function CheckboxContent({ isChecked, title, children, disabled }) {
 				background="transparent"
 				backgroundColor={disabled && 'gray8'}
 			>
-				<Box
-					position="absolute"
-					top="0"
-					left="0"
-					width="14px"
-					height="14px"
-					css={`
-						cursor: ${disabled ? 'default' : 'pointer'};
-					`}
-				>
+				<Box position="absolute" top="0" left="0" width="14px" height="14px">
 					<Styled.IconBox
 						as={SmallCheck}
 						position="absolute"
