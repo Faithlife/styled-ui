@@ -32,15 +32,16 @@ export const CheckboxContainer = styled.button`
 	}
 `;
 
+const hoverBorderColor = { hoverBorderColor: { property: 'borderColor', scale: 'colors' } };
 export const HoverableBox = styled(Box)`
 	@media (hover: hover) {
 		&:hover {
-			${system({ hoverBorderColor: { property: 'borderColor', scale: 'colors' } })};
+			${system(hoverBorderColor)};
 		}
 	}
 	@media (hover: none) {
 		&:active {
-			${system({ hoverBorderColor: { property: 'borderColor', scale: 'colors' } })};
+			${system(hoverBorderColor)};
 		}
 	}
 `;
