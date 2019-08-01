@@ -1,5 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { system } from 'styled-system';
+import { Box } from '../Box';
+import { Text } from '../Text';
 import { Button } from '../button';
 import { addSeparator } from '../utils';
 import {
@@ -7,7 +11,6 @@ import {
 	mapMediaTypeToLabel,
 	mapMediaTypeToIcon,
 } from '../utils/file-utils';
-import * as Styled from './styled';
 
 const fileLabelButtonWidthOverride = {
 	width: '100%',
@@ -61,15 +64,26 @@ export class FileItem extends PureComponent {
 		const Icon = mapMediaTypeToIcon(mediaType);
 
 		const fileIcon = (
-			<Styled.CenteredIconContainer>
+			<Box alignSelf="center" minWidth="24px">
 				{isProcessing && renderLoadingSpinner ? renderLoadingSpinner() : <Icon />}
-			</Styled.CenteredIconContainer>
+			</Box>
 		);
 
-		const fileInformation = <Styled.FileLabel>{name}</Styled.FileLabel>;
+		const fileInformation = (
+			<Text
+				fontSize={2}
+				fontWeight="regular"
+				lineHeight="14px"
+				paddingY="6px"
+				overflow="hidden"
+				css={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+			>
+				{name}
+			</Text>
+		);
 
 		return (
-			<Styled.FileItem>
+			<FileItemBox display="flex" padding={3}>
 				{onFileClicked ? (
 					<Button onClick={this.handleFileClick} primaryTransparent>
 						{fileIcon}
@@ -77,7 +91,7 @@ export class FileItem extends PureComponent {
 				) : (
 					fileIcon
 				)}
-				<Styled.FileInformation>
+				<Box paddingLeft={4} flexShrink="1" css={{ overflow: 'hidden' }}>
 					{onFileClicked ? (
 						<Button
 							styleOverrides={fileLabelButtonWidthOverride}
@@ -89,19 +103,36 @@ export class FileItem extends PureComponent {
 					) : (
 						fileInformation
 					)}
-					<Styled.Metadata>
+					<Text
+						display="block"
+						fontSize={1}
+						fontWeight="regular"
+						lineHeight="17px"
+						color="gray34"
+						paddingBottom={2}
+						overflow="hidden"
+						css={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+					>
 						{addSeparator([
 							mediaTypeLabel.toLowerCase().trim() !== (name || '').toLowerCase().trim()
 								? mediaTypeLabel
 								: null,
 							convertBytesToFriendlyString(byteCount),
 						])}
-					</Styled.Metadata>
-				</Styled.FileInformation>
+					</Text>
+				</Box>
 				{renderFileActions ? (
-					<Styled.FileActionsContainer>{renderFileActions(file)}</Styled.FileActionsContainer>
+					<Box display="flex" alignItems="flex-start" marginLeft="auto">
+						{renderFileActions(file)}
+					</Box>
 				) : null}
-			</Styled.FileItem>
+			</FileItemBox>
 		);
 	}
 }
+
+const FileItemBox = styled(Box)`
+	* {
+		${system({ childFlexShrink: { property: 'flex-shrink', scale: 'none' } })};
+	}
+`;

@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { resetStyles } from '../utils';
+import { Box } from '../Box';
+import { Text } from '../Text';
 import { Button } from '../button';
 import { DropZone } from '../drop-zone';
 import { FileItem } from './file-item';
-import * as Styled from './styled';
 
 /** List of files (with icons and drop zone) */
 export class FilesSection extends PureComponent {
@@ -107,10 +110,18 @@ export class FilesSection extends PureComponent {
 		const lastFileIndex = files.length - 1;
 
 		return (
-			<Styled.FilesSection>
-				<Styled.Title fontSize={titleFontSize}>{title}</Styled.Title>
-				<Styled.Divider />
-				<Styled.FilesContainer>
+			<Container>
+				<Text
+					display="block"
+					fontSize={titleFontSize || 3}
+					fontWeight="regular"
+					lineHeight={1}
+					marginBottom={3}
+				>
+					{title}
+				</Text>
+				<Box borderBottom={1} borderColor="gray14" />
+				<Box paddingBottom={3}>
 					{files.map((file, index) => (
 						<React.Fragment key={`${file.id}-${index}`}>
 							<FileItem
@@ -120,18 +131,20 @@ export class FilesSection extends PureComponent {
 								renderLoadingSpinner={renderLoadingSpinner}
 								mediaTypeLabels={mediaTypeLabels}
 							/>
-							{index < lastFileIndex && <Styled.Divider />}
+							{index < lastFileIndex && <Box borderBottom={1} borderColor="gray14" />}
 						</React.Fragment>
 					))}
-				</Styled.FilesContainer>
+				</Box>
 				{onUploadFiles ? (
 					<DropZone onDrop={onUploadFiles}>
-						<Styled.DropZoneText>{dropZoneText}</Styled.DropZoneText>
+						<Text textAlign="center" fontWeight="regular" lineHeight="26px">
+							{dropZoneText}
+						</Text>
 
 						<Button primaryTransparent onClick={this.handleBrowseFilesClick}>
 							{browseFilesButtonText}
 						</Button>
-						<Styled.FileInputLabel>
+						<FileInputLabel>
 							<input
 								ref={this.fileInputRef}
 								onChange={this.handleUploadWithFileInput}
@@ -139,10 +152,24 @@ export class FilesSection extends PureComponent {
 								name="file"
 								multiple
 							/>
-						</Styled.FileInputLabel>
+						</FileInputLabel>
 					</DropZone>
 				) : null}
-			</Styled.FilesSection>
+			</Container>
 		);
 	}
 }
+
+const Container = styled.section`
+	${resetStyles};
+`;
+
+const FileInputLabel = styled.label`
+	input {
+		display: none;
+	}
+
+	&& {
+		margin-bottom: 0;
+	}
+`;
