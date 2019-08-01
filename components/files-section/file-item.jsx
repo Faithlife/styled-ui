@@ -133,6 +133,6 @@ export class FileItem extends PureComponent {
 
 const FileItemBox = styled(Box)`
 	* {
-		${system({ childFlexShrink: { property: 'flex-shrink', scale: 'none' } })};
+		${system({ childFlexShrink: { property: 'flex-shrink' } })};
 	}
 `;
