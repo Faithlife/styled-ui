@@ -136,7 +136,7 @@ export class Modal extends React.Component {
 					width="fit-content"
 					height="fit-content"
 					maxWidth="calc(100% - 16px)"
-					maxHeight={['calc(100% - 16px)', 'calc(100% - 16px)', '80%']}
+					maxHeight={['calc(100% - 16px)', null, '80%']}
 					margin="auto"
 					padding={6}
 					borderRadius={1}

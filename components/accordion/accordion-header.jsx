@@ -73,7 +73,7 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 						borderColor="gray14"
 						background="linear-gradient(180deg, #fafafa, hsla(0, 0%, 100%, 0))"
 						py={5}
-						px={[5, 5, 6]}
+						px={[5, null, 6]}
 						css={{ lineHeight: '1' }}
 					>
 						<React.Fragment>
@@ -119,7 +119,7 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 				</Styled.Button>
 			</Styled.Heading>
 			{renderCustomIndicator ? (
-				<Box gridColumn="indicator" gridRow="1" marginTop={5} marginRight={[5, 5, 6]}>
+				<Box gridColumn="indicator" gridRow="1" marginTop={5} marginRight={[5, null, 6]}>
 					{renderCustomIndicator({ isExpanded, onExpansion: handleExpansion })}
 				</Box>
 			) : null}
