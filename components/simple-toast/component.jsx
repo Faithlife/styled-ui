@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Transition from 'react-transition-group/Transition';
+import { Box } from '../Box';
+import { Text } from '../Text';
 import { Button } from '../button';
 import { Close } from '../icons';
 import * as Styled from './styled.jsx';
@@ -102,12 +104,10 @@ export class SimpleToast extends PureComponent {
 						onAnimationEnd={this.handleAnimationEnd}
 					>
 						{messages.length > 0 && messages[0].icon}
-						{messages.length > 0 && (
-							<Styled.ToastContent>{messages[0].message}</Styled.ToastContent>
-						)}
-						<Styled.ToastClose>
+						{messages.length > 0 && <Text whiteSpace="nowrap">{messages[0].message}</Text>}
+						<Box justifySelf="right">
 							<Button minorTransparent icon={<Close />} onClick={this.triggerExit} />
-						</Styled.ToastClose>
+						</Box>
 					</Styled.ToastContainer>
 				)}
 			</Transition>

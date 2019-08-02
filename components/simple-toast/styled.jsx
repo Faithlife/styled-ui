@@ -1,6 +1,7 @@
 import styled, { keyframes, css } from 'styled-components';
 import { TransitionStatuses } from '../utils';
 import { fonts, colors, thickness, mediaSizes } from '../shared-styles';
+import { Box } from '../Box';
 
 const fixedHeaderHeight = 47; // px
 const fixedHeightOffset = 8; // px
@@ -20,7 +21,7 @@ const slideIn = ({ styleOverrides }) => keyframes`
 
 export const transitionTime = 250; // milliseconds
 
-export const ToastContainer = styled.div`
+export const ToastContainer = styled(Box)`
 	/** Shared Styles */
 	display: grid;
 	grid-auto-flow: column;
@@ -109,13 +110,4 @@ export const ToastContainer = styled.div`
 			}
 		}};
 	}
-`;
-
-export const ToastContent = styled.div`
-	white-space: nowrap;
-`;
-
-export const ToastClose = styled.div`
-	cursor: pointer;
-	justify-self: right;
 `;
