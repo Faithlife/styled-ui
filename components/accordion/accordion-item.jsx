@@ -43,7 +43,7 @@ AccordionItem.propTypes = {
 	index: PropTypes.number,
 };
 
-export const Item = styled.section`
+const Item = styled.section`
 	${resetStyles};
 
 	display: grid;

@@ -129,7 +129,7 @@ AccordionHeader.propTypes = {
 	renderCustomIndicator: PropTypes.func,
 };
 
-export const Heading = styled.header.attrs({
+const Heading = styled.header.attrs({
 	role: 'heading',
 	'aria-level': ({ ariaLevel }) => ariaLevel,
 })`
@@ -141,7 +141,7 @@ export const Heading = styled.header.attrs({
 	width: 100%;
 `;
 
-export const HeadingButton = styled.button.attrs({
+const HeadingButton = styled.button.attrs({
 	role: 'button',
 	'aria-expanded': ({ isExpanded }) => isExpanded,
 	'aria-controls': ({ panelId }) => `accordion-panel-${panelId}`,

@@ -122,7 +122,7 @@ const Label = styled(Text)`
 	}
 `;
 
-export const RadioContainer = styled.button`
+const RadioContainer = styled.button`
 	${resetStyles};
 
 	display: flex;
