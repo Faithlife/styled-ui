@@ -25,6 +25,9 @@
 	"files": [
 		"dist/**"
 	],
+	"publishConfig": {
+		"tag": "beta"
+	},
 	"browserslist": [
 		"> 1%",
 		"not op_mini all"
