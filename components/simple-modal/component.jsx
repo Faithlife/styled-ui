@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
-import { ThemeProvider } from 'styled-components';
+import { Box } from '../Box';
 import { Button } from '../button';
 import { ModalBackdrop } from '../modal-backdrop';
 import { Close } from '../icons';
 import { debouncedResize } from '../utils';
-import * as Styled from './styled';
 
 /**
  * Simple modal with just a close icon and no padding. For a standardized modal layout, please see: Modal
@@ -74,7 +73,7 @@ export class SimpleModal extends React.Component {
 	};
 
 	renderModal() {
-		const { theme, onClose, children, styleOverrides } = this.props;
+		const { onClose, children, styleOverrides } = this.props;
 		const { modalWidth } = this.state;
 
 		const backdropStyleOverrides = {
@@ -82,23 +81,31 @@ export class SimpleModal extends React.Component {
 		};
 
 		return (
-			<ThemeProvider theme={{ ...theme }}>
-				<ModalBackdrop onClose={onClose} styleOverrides={backdropStyleOverrides}>
-					<Styled.SimpleModal
-						ref={modal => {
-							this._modal = modal;
-							if (modal && modalWidth === null) {
-								this.setState({ modalWidth: modal.clientWidth });
-							}
-						}}
-					>
-						<Styled.ModalClose>
-							<Button minorTransparent icon={<Close />} onClick={onClose} />
-						</Styled.ModalClose>
-						{children}
-					</Styled.SimpleModal>
-				</ModalBackdrop>
-			</ThemeProvider>
+			<ModalBackdrop onClose={onClose} styleOverrides={backdropStyleOverrides}>
+				<Box
+					ref={modal => {
+						this._modal = modal;
+						if (modal && modalWidth === null) {
+							this.setState({ modalWidth: modal.clientWidth });
+						}
+					}}
+					display="flex"
+					flexDirection="column"
+					justifyContent="center"
+					alignItems="center"
+					position="relative"
+					width="fit-content"
+					height="fit-content"
+					maxHeight="80%"
+					borderRadius={1}
+					backgroundColor="white"
+				>
+					<Box position="absolute" top="24px" right="24px">
+						<Button minorTransparent icon={<Close />} onClick={onClose} />
+					</Box>
+					{children}
+				</Box>
+			</ModalBackdrop>
 		);
 	}
 
