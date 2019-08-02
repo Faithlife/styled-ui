@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
+import { system } from 'styled-system';
+import { resetStyles } from '../utils';
 import { colors as sharedColors } from '../shared-styles';
-import * as Styled from './styled';
+import { Box } from '../Box';
+import { Text } from '../Text';
 
 /** Styled radio control (uses a button instead of an input) */
 export class Radio extends Component {
@@ -50,26 +53,98 @@ export class Radio extends Component {
 	componentRef = React.createRef();
 
 	render() {
-		const { onClick, title, isChecked, theme, type, children, className, disabled } = this.props;
+		const { onClick, title, isChecked, type, children, className, disabled } = this.props;
 		return (
-			<ThemeProvider theme={theme}>
-				<Styled.RadioContainer
-					ref={this.componentRef}
-					onMouseUp={this.onMouseUp}
-					onClick={onClick}
-					type={type}
-					className={className}
-					role={'radio'}
-					aria-checked={isChecked}
-					disabled={disabled}
+			<RadioContainer
+				ref={this.componentRef}
+				onMouseUp={this.onMouseUp}
+				onClick={onClick}
+				type={type}
+				className={className}
+				role={'radio'}
+				aria-checked={isChecked}
+				disabled={disabled}
+			>
+				<HoverableBox
+					position="absolute"
+					width="14px"
+					height="14px"
+					borderRadius="50%"
+					border={1}
+					borderColor={disabled ? 'gray22' : '#95908f'}
+					hoverBorderColor={disabled || 'blue4'}
+					background="transparent"
+					backgroundColor={disabled && 'gray8'}
 				>
-					<Styled.RadioDiv disabled={disabled}>
-						<Styled.CheckedIndicator isChecked={isChecked} disabled={disabled} />
-					</Styled.RadioDiv>
-					{title && <Styled.Label>{title}</Styled.Label>}
-					{children && <Styled.Label>{children}</Styled.Label>}
-				</Styled.RadioContainer>
-			</ThemeProvider>
+					<Box
+						position="absolute"
+						top="2px"
+						left="2px"
+						width="8px"
+						height="8px"
+						borderRadius="50%"
+						opacity={isChecked ? '1' : '0'}
+						backgroundColor="blue4"
+					/>
+				</HoverableBox>
+				{title && (
+					<Label marginLeft="22px" siblingMarginLeft="6px" textStyle="c.14">
+						{title}
+					</Label>
+				)}
+				{children && (
+					<Label marginLeft="22px" siblingMarginLeft="6px">
+						{children}
+					</Label>
+				)}
+			</RadioContainer>
 		);
 	}
 }
+
+const hoverBorderColor = { hoverBorderColor: { property: 'borderColor', scale: 'colors' } };
+const HoverableBox = styled(Box)`
+	@media (hover: hover) {
+		&:hover {
+			${system(hoverBorderColor)};
+		}
+	}
+	@media (hover: none) {
+		&:active {
+			${system(hoverBorderColor)};
+		}
+	}
+`;
+
+const Label = styled(Text)`
+	& + & {
+		${system({ siblingMarginLeft: { property: 'margin-left', scale: 'space' } })};
+	}
+`;
+
+export const RadioContainer = styled.button`
+	${resetStyles};
+
+	display: flex;
+	align-items: center;
+	position: relative;
+	border: none;
+	padding: 0px;
+	min-width: 14px;
+	min-height: 14px;
+	background: transparent;
+	cursor: ${props => props.disabled || 'pointer'};
+
+	&:not(:disabled) {
+		&:active {
+			color: buttontext;
+		}
+	}
+
+	&:focus {
+		&:not(:active) {
+			box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
+		}
+		outline: none;
+	}
+`;
