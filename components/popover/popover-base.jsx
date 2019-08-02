@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { ThemeProvider } from 'styled-components';
 import { Popper } from 'react-popper';
+import { Box } from '../Box';
 import { colors } from '../shared-styles';
 import { PlacementOptionsProps, FocusHandlerInboundsElement } from './popper-helpers';
 import * as Styled from './styled';
@@ -136,7 +136,6 @@ export class PopoverBase extends Component {
 			placement: popoverPlacement,
 			hideArrow,
 			delay,
-			theme,
 			modifiers,
 			styleOverrides,
 			eventsEnabled,
@@ -160,30 +159,38 @@ export class PopoverBase extends Component {
 				positionFixed={positionFixed}
 			>
 				{({ ref, style, placement, arrowProps }) => (
-					<ThemeProvider theme={theme}>
-						<Styled.PopoverBase
-							ref={ref}
-							placement={placement}
-							style={{
-								...style,
-								...(!hideArrow ? Styled.margins[Styled.getPlacement(placement)] : {}),
-							}}
-							delay={delay}
-							onAnimationEnd={this.handleTransition}
-							hideArrow={hideArrow}
-							styleOverrides={styleOverrides}
-						>
-							{children}
-							{!hideArrow && (
-								<Styled.Arrow
-									ref={arrowProps.ref}
-									placement={placement}
-									style={arrowProps.style}
-									styleOverrides={styleOverrides}
-								/>
-							)}
-						</Styled.PopoverBase>
-					</ThemeProvider>
+					<Box
+						ref={ref}
+						style={{
+							...style,
+							...(!hideArrow ? Styled.margins[Styled.getPlacement(placement)] : {}),
+						}}
+						delay={delay}
+						hideArrow={hideArrow}
+						styleOverrides={styleOverrides}
+						onAnimationEnd={this.handleTransition}
+						background="white"
+						boxShadow={1}
+						fontSize="c.16"
+						position="absolute"
+						zIndex="menu"
+						css={{ textAlign: 'center' }}
+					>
+						{children}
+						{!hideArrow && (
+							<Styled.Arrow
+								ref={arrowProps.ref}
+								placement={placement}
+								style={arrowProps.style}
+								styleOverrides={styleOverrides}
+								position="absolute"
+								width="25px"
+								height="25px"
+								overflow="hidden"
+								arrowBackground="white"
+							/>
+						)}
+					</Box>
 				)}
 			</Popper>
 		);
