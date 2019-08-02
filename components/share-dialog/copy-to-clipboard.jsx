@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Clipboard from 'clipboard/dist/clipboard.min';
 import debounce from 'lodash.debounce';
+import { Box } from '../Box';
+import { Paragraph } from '../Paragraph';
 import { Button } from '../button';
 import { Input } from '../input';
-import * as Styled from './styled';
 
 export class CopyToClipboard extends React.Component {
 	static propTypes = {
@@ -50,19 +51,23 @@ export class CopyToClipboard extends React.Component {
 		const { showFeedback } = this.state;
 
 		return (
-			<Styled.ShareContainer>
+			<Box display="flex" alignItems="center" my={2}>
 				{!hideInput && (
-					<Styled.CopyContainer>
+					<Box mx={3}>
 						<Input small type="text" readOnly value={copyValue} onClick={this.selectSelf} />
-					</Styled.CopyContainer>
+					</Box>
 				)}
-				<div>
+				<Box>
 					<Button small ref={this.button} data-clipboard-text={copyValue} primary>
 						{copyButtonText || 'Copy'}
 					</Button>
-					{showFeedback && <Styled.Copied>Copied!</Styled.Copied>}
-				</div>
-			</Styled.ShareContainer>
+					{showFeedback && (
+						<Paragraph position="absolute" color="gray34">
+							Copied!
+						</Paragraph>
+					)}
+				</Box>
+			</Box>
 		);
 	}
 }

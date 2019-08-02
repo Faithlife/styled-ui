@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Box } from '../Box';
 import { Modal } from '../modal/modal';
 import {
 	FaithlifeShareButton,
@@ -8,7 +9,6 @@ import {
 	EmailShareButton,
 } from './social-share-buttons';
 import { CopyToClipboard } from './copy-to-clipboard';
-import * as Styled from './styled';
 
 /**
  * Branded Faithlife modal to share a link to social platforms
@@ -43,26 +43,26 @@ export class ShareDialog extends React.Component {
 		const encodedMessage = message ? encodeURIComponent(message) : '';
 
 		const desktopModal = (
-			<Styled.ShareContainer>
+			<Box display="flex" alignItems="center" my={2}>
 				<FaithlifeShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
 				<TwitterShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
 				<FacebookShareButton encodedShareUrl={encodedShareUrl} />
 				<EmailShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
 				<CopyToClipboard copyValue={shareUrl} copyButtonText={copyButtonText} />
-			</Styled.ShareContainer>
+			</Box>
 		);
 		const mobileModal = (
-			<div>
-				<Styled.ShareContainer>
+			<Box>
+				<Box display="flex" alignItems="center" my={2}>
 					<FaithlifeShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
 					<TwitterShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
 					<FacebookShareButton encodedShareUrl={encodedShareUrl} />
 					<EmailShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
-				</Styled.ShareContainer>
-				<Styled.ShareContainer>
+				</Box>
+				<Box display="flex" alignItems="center" my={2}>
 					<CopyToClipboard copyValue={shareUrl} copyButtonText={copyButtonText} />
-				</Styled.ShareContainer>
-			</div>
+				</Box>
+			</Box>
 		);
 
 		return (

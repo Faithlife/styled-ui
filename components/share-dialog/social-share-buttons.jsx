@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { resetStyles } from '../utils';
 import {
 	ShareToTwitterIcon,
 	ShareToFacebookIcon,
 	ShareToFaithlifeIcon,
 	ShareToEmailIcon,
 } from '../icons';
-import * as Styled from './styled';
 
 export const FaithlifeShareButton = ({ encodedShareUrl, encodedMessage }) => (
-	<Styled.ShareAnchor
+	<ShareAnchor
 		href={`https://faithlife.com/share?url=${encodedShareUrl}&content=${encodedMessage}`}
 		target="_blank"
 		rel="noopener noreferrer"
 	>
 		<ShareToFaithlifeIcon />
-	</Styled.ShareAnchor>
+	</ShareAnchor>
 );
 
 FaithlifeShareButton.propTypes = {
@@ -24,13 +25,13 @@ FaithlifeShareButton.propTypes = {
 };
 
 export const TwitterShareButton = ({ encodedShareUrl, encodedMessage }) => (
-	<Styled.ShareAnchor
+	<ShareAnchor
 		href={`https://twitter.com/intent/tweet?url=${encodedShareUrl}&text=${encodedMessage}`}
 		target="_blank"
 		rel="noopener noreferrer"
 	>
 		<ShareToTwitterIcon />
-	</Styled.ShareAnchor>
+	</ShareAnchor>
 );
 
 TwitterShareButton.propTypes = {
@@ -39,13 +40,13 @@ TwitterShareButton.propTypes = {
 };
 
 export const FacebookShareButton = ({ encodedShareUrl }) => (
-	<Styled.ShareAnchor
+	<ShareAnchor
 		href={`https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}`}
 		target="_blank"
 		rel="noopener noreferrer"
 	>
 		<ShareToFacebookIcon />
-	</Styled.ShareAnchor>
+	</ShareAnchor>
 );
 
 FacebookShareButton.propTypes = {
@@ -53,12 +54,24 @@ FacebookShareButton.propTypes = {
 };
 
 export const EmailShareButton = ({ encodedShareUrl, encodedMessage }) => (
-	<Styled.ShareAnchor href={`mailto:?subject=${encodedMessage}&body=${encodedShareUrl}`}>
+	<ShareAnchor href={`mailto:?subject=${encodedMessage}&body=${encodedShareUrl}`}>
 		<ShareToEmailIcon />
-	</Styled.ShareAnchor>
+	</ShareAnchor>
 );
 
 EmailShareButton.propTypes = {
 	encodedShareUrl: PropTypes.string.isRequired,
 	encodedMessage: PropTypes.string,
 };
+
+const ShareAnchor = styled.a`
+	${resetStyles};
+	display: flex;
+
+	@media (hover: none) {
+		padding: 10px;
+	}
+	@media (hover: hover) {
+		margin: 0 4px;
+	}
+`;
