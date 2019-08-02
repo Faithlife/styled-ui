@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { resetStyles } from '../utils';
 import { colors as sharedColors } from '../shared-styles';
 import { CheckboxContent } from './checkbox-content';
-import * as Styled from './styled';
 
 /** Styled checkbox control with consistent styling across platforms */
 export class Checkbox extends Component {
@@ -43,7 +44,7 @@ export class Checkbox extends Component {
 	render() {
 		const { onClick, title, isChecked, type, children, className, disabled } = this.props;
 		return (
-			<Styled.CheckboxContainer
+			<CheckboxContainer
 				ref={this.componentRef}
 				onClick={onClick}
 				onMouseUp={this.onMouseUp}
@@ -56,7 +57,7 @@ export class Checkbox extends Component {
 				<CheckboxContent isChecked={isChecked} title={title} disabled={disabled}>
 					{children}
 				</CheckboxContent>
-			</Styled.CheckboxContainer>
+			</CheckboxContainer>
 		);
 	}
 }
@@ -70,3 +71,31 @@ Checkbox.defaultProps = {
 	},
 	type: 'button',
 };
+
+const CheckboxContainer = styled.button`
+	${resetStyles};
+
+	display: flex;
+	align-items: center;
+	position: relative;
+	border: none;
+	padding: 0px 16px;
+	min-height: 44px;
+	min-width: 44px;
+	background: transparent;
+	text-align: unset;
+	cursor: ${props => props.disabled || 'pointer'};
+
+	&:not(:disabled) {
+		&:active {
+			color: buttontext;
+		}
+	}
+
+	&:focus {
+		&:not(:active) {
+			box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
+		}
+		outline: none;
+	}
+`;
