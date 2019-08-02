@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { system } from 'styled-system';
 import { useId } from '../shared-hooks';
+import { Box } from '../Box';
 import { useTabContext, useKeyboardNav } from './tab-utils';
-import * as Styled from './styled';
 
 export function TabList({ children }) {
 	const { onSelectTab, selectedTabIndex, theme, panelIdsMap } = useTabContext();
@@ -10,7 +12,15 @@ export function TabList({ children }) {
 	const handleKeyboardNav = useKeyboardNav(selectedTabIndex, onSelectTab, children);
 
 	return (
-		<Styled.TabList onKeyDown={handleKeyboardNav}>
+		<TabListBox
+			onKeyDown={handleKeyboardNav}
+			role="tablist"
+			display="flex"
+			marginRight={0}
+			notLastSiblingMarginRight={3}
+			borderBottom={1}
+			borderColor="gray14"
+		>
 			{React.Children.map(children, (child, index) =>
 				React.isValidElement(child)
 					? React.cloneElement(child, {
@@ -22,7 +32,7 @@ export function TabList({ children }) {
 					  })
 					: null,
 			)}
-		</Styled.TabList>
+		</TabListBox>
 	);
 }
 
@@ -30,10 +40,16 @@ TabList.propTypes = {
 	children: PropTypes.node.isRequired,
 };
 
+const TabListBox = styled(Box)`
+	& > *:not(:last-child) {
+		${system({ notLastSiblingMarginRight: { property: 'margin-right', scale: 'space' } })};
+	}
+`;
+
 export function TabPanels({ children }) {
 	const { selectedTabIndex, registerPanelId, unRegisterPanelId } = useTabContext();
 	return (
-		<div>
+		<Box>
 			{React.Children.map(children, (child, index) =>
 				React.isValidElement(child)
 					? React.cloneElement(child, {
@@ -44,7 +60,7 @@ export function TabPanels({ children }) {
 					  })
 					: null,
 			)}
-		</div>
+		</Box>
 	);
 }
 
@@ -72,12 +88,24 @@ export function TabPanel(props) {
 	);
 
 	return (
-		<Styled.TabPanel panelId={id} selected={selected}>
+		<TabPanelBox
+			role="tabpanel"
+			id={`panel:${id}`}
+			aria-expanded={selected}
+			display={!selected && 'none'}
+			position="relative"
+			padding={3}
+			focusOutline="none"
+		>
 			{children}
-		</Styled.TabPanel>
+		</TabPanelBox>
 	);
 }
 
 TabPanel.propTypes = {
 	children: PropTypes.node.isRequired,
 };
+
+const TabPanelBox = styled(Box)`
+	${system({ focusOutline: { property: 'outline' } })};
+`;
