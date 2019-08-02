@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { resetStyles } from '../utils';
 import { Box } from '../Box';
-import { Text } from '../Text';
+import { Paragraph } from '../Paragraph';
 import { Button } from '../button';
 import { DropZone } from '../drop-zone';
 import { FileItem } from './file-item';
@@ -111,15 +111,14 @@ export class FilesSection extends PureComponent {
 
 		return (
 			<Container>
-				<Text
-					display="block"
+				<Paragraph
 					textStyle="ui.16"
 					fontSize={titleFontSize && titleFontSize}
 					lineHeight={titleFontSize && 1}
 					marginBottom={3}
 				>
 					{title}
-				</Text>
+				</Paragraph>
 				<Box borderBottom={1} borderColor="gray14" />
 				<Box paddingBottom={3}>
 					{files.map((file, index) => (

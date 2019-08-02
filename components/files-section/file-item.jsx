@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { system } from 'styled-system';
 import { Box } from '../Box';
 import { Text } from '../Text';
+import { Paragraph } from '../Paragraph';
 import { Button } from '../button';
 import { addSeparator } from '../utils';
 import {
@@ -101,8 +102,7 @@ export class FileItem extends PureComponent {
 					) : (
 						fileInformation
 					)}
-					<Text
-						display="block"
+					<Paragraph
 						textStyle="c.13"
 						color="gray34"
 						paddingBottom={2}
@@ -115,7 +115,7 @@ export class FileItem extends PureComponent {
 								: null,
 							convertBytesToFriendlyString(byteCount),
 						])}
-					</Text>
+					</Paragraph>
 				</Box>
 				{renderFileActions ? (
 					<Box display="flex" alignItems="flex-start" marginLeft="auto">
