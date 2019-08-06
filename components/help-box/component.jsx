@@ -174,13 +174,13 @@ HelpBox.propTypes = {
 	}),
 	/** Enum with values: 'success', 'danger', 'warning', and 'minor' */
 	variant: PropTypes.oneOf(['success', 'danger', 'warning', 'minor']),
-	/** Green theme (depricated in favor of the variation prop) */
+	/** Green theme (deprecated in favor of the variation prop) */
 	success: PropTypes.bool,
-	/** Red theme (depricated in favor of the variation prop) */
+	/** Red theme (deprecated in favor of the variation prop) */
 	danger: PropTypes.bool,
-	/** Yellow theme (depricated in favor of the variation prop) */
+	/** Yellow theme (deprecated in favor of the variation prop) */
 	warning: PropTypes.bool,
-	/** Gray theme (depricated in favor of the variation prop) */
+	/** Gray theme (deprecated in favor of the variation prop) */
 	minor: PropTypes.bool,
 	large: PropTypes.bool,
 	/** If not handled, there will be no close icon. */
