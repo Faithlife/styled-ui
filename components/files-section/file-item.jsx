@@ -82,7 +82,7 @@ export class FileItem extends PureComponent {
 		);
 
 		return (
-			<FileItemBox display="flex" padding={3}>
+			<FileItemBox display="flex" padding={3} childFlexShrink="1">
 				{onFileClicked ? (
 					<Button onClick={this.handleFileClick} primaryTransparent>
 						{fileIcon}
