@@ -55,16 +55,16 @@ CheckboxContent.propTypes = {
 	disabled: PropTypes.bool,
 };
 
-const hoverBorderColor = { hoverBorderColor: { property: 'borderColor', scale: 'colors' } };
+const hoverBorderColor = system({ hoverBorderColor: { property: 'borderColor', scale: 'colors' } });
 const HoverableBox = styled(Box)`
 	@media (hover: hover) {
 		&:hover {
-			${system(hoverBorderColor)};
+			${hoverBorderColor};
 		}
 	}
 	@media (hover: none) {
 		&:active {
-			${system(hoverBorderColor)};
+			${hoverBorderColor};
 		}
 	}
 `;
