@@ -73,8 +73,8 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 						borderTop={1}
 						borderColor="gray14"
 						background="linear-gradient(180deg, #fafafa, hsla(0, 0%, 100%, 0))"
-						py={5}
-						px={[5, null, 6]}
+						paddingY={5}
+						paddingX={[5, null, 6]}
 						css={{ lineHeight: '1' }}
 					>
 						<React.Fragment>

@@ -31,8 +31,8 @@ export function Tab(props) {
 				display="inline-block"
 				width={styleOverrides.width}
 				minHeight="fit-content"
-				py={3}
-				px={5}
+				paddingY={3}
+				paddingX={5}
 				padding={styleOverrides.padding && styleOverrides.padding}
 				borderRight={selected ? 1 : ''}
 				borderLeft={selected ? 1 : ''}
