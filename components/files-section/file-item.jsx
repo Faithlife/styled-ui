@@ -75,7 +75,8 @@ export class FileItem extends PureComponent {
 				textStyle="ui.14"
 				paddingY="6px"
 				overflow="hidden"
-				css={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+				whiteSpace="nowrap"
+				css={{ textOverflow: 'ellipsis' }}
 			>
 				{name}
 			</Text>
@@ -107,7 +108,8 @@ export class FileItem extends PureComponent {
 						color="gray34"
 						paddingBottom={2}
 						overflow="hidden"
-						css={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+						whiteSpace="nowrap"
+						css={{ textOverflow: 'ellipsis' }}
 					>
 						{addSeparator([
 							mediaTypeLabel.toLowerCase().trim() !== (name || '').toLowerCase().trim()
