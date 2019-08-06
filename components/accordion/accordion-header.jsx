@@ -86,21 +86,20 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 								gridTemplateColumns="min-content auto"
 								gridGap={6}
 								alignItems="center"
-								css={{ whiteSpace: 'nowrap' }}
 							>
 								{children ? (
 									<Text
 										display="grid"
 										color="gray52"
-										letterSpacing="0.5px"
 										textStyle="h.16"
 										textTransform="uppercase"
+										whiteSpace="nowrap"
 									>
 										{children}
 									</Text>
 								) : null}
 								{subtitle ? (
-									<Text display="grid" color="gray52" textStyle="c.14">
+									<Text display="grid" color="gray52" textStyle="c.14" whiteSpace="nowrap">
 										{subtitle}
 									</Text>
 								) : null}
