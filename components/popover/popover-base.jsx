@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Popper } from 'react-popper';
+import styled from 'styled-components';
+import { typography } from 'styled-system';
 import { Box } from '../Box';
 import { colors } from '../shared-styles';
 import { PlacementOptionsProps, FocusHandlerInboundsElement } from './popper-helpers';
@@ -135,7 +137,6 @@ export class PopoverBase extends Component {
 			children,
 			placement: popoverPlacement,
 			hideArrow,
-			delay,
 			modifiers,
 			styleOverrides,
 			eventsEnabled,
@@ -159,22 +160,19 @@ export class PopoverBase extends Component {
 				positionFixed={positionFixed}
 			>
 				{({ ref, style, placement, arrowProps }) => (
-					<Box
+					<PopoverBox
 						ref={ref}
 						style={{
 							...style,
 							...(!hideArrow ? Styled.margins[Styled.getPlacement(placement)] : {}),
 						}}
-						delay={delay}
-						hideArrow={hideArrow}
-						styleOverrides={styleOverrides}
 						onAnimationEnd={this.handleTransition}
 						background="white"
 						boxShadow={1}
-						fontSize="c.16"
+						textStyle="c.16"
 						position="absolute"
 						zIndex="menu"
-						css={{ textAlign: 'center' }}
+						textAlign="center"
 					>
 						{children}
 						{!hideArrow && (
@@ -190,7 +188,7 @@ export class PopoverBase extends Component {
 								arrowBackground="white"
 							/>
 						)}
-					</Box>
+					</PopoverBox>
 				)}
 			</Popper>
 		);
@@ -209,3 +207,7 @@ export class PopoverBase extends Component {
 		return null;
 	}
 }
+
+const PopoverBox = styled(Box)`
+	${typography}
+`;
