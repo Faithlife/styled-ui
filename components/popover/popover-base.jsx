@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Popper } from 'react-popper';
 import styled from 'styled-components';
-import { typography } from 'styled-system';
+import { typography } from '../../theme/system';
 import { Box } from '../Box';
 import { colors } from '../shared-styles';
 import { PlacementOptionsProps, FocusHandlerInboundsElement } from './popper-helpers';
