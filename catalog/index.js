@@ -599,6 +599,7 @@ const components = [
 				content: pageLoader(() => import('./date-picker/variations.md')),
 				imports: {
 					Button,
+					PopoverBase,
 					Popover,
 					PopoverManager,
 					PopoverReference,

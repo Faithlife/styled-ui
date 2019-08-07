@@ -64,7 +64,7 @@ state: { selectedDateRange: null }
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Select Dates</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="bottom" styleOverrides={{ padding: '0px', maxWidth: '1000px' }}>
+		<PopoverBase isOpen={state.isOpen} placement="bottom" borderRadius={1}>
 			<DatePeriodPicker
 				selectedDateRange={state.selectedDateRange}
 				setSelectedDate={(dateRange) => setState({ selectedDateRange: dateRange })}
@@ -82,7 +82,7 @@ state: { selectedDateRange: null }
 					dateRange: { start: dateFunctions.addDays(new Date(), -90), end: new Date() }
 				}]}
 			/>
-		</Popover>
+		</PopoverBase>
 	</PopoverManager>
 </div>
 </DatePickerDemo>
