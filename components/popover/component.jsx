@@ -61,7 +61,7 @@ export function Popover(props) {
 					? padding
 					: ''
 			}
-			maxWidth={maxWidth || '300px'}
+			maxWidth={isDefined(maxWidth) ? maxWidth : '300px'}
 		>
 			{children}
 		</PopoverBase>
