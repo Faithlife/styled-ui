@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { typography } from '../../theme/system';
+import { textStyle } from 'styled-system';
 import { Box } from '../Box';
 
 /** A bordered drop zone that makes drag & drop easy. */
@@ -76,5 +76,5 @@ export class DropZone extends PureComponent {
 }
 
 const DropZoneBox = styled(Box)`
-	${typography}
+	${textStyle}
 `;

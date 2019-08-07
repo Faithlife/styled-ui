@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Popper } from 'react-popper';
 import styled from 'styled-components';
+import { textStyle } from 'styled-system';
 import { typography } from '../../theme/system';
 import { Box } from '../Box';
 import { colors } from '../shared-styles';
@@ -73,9 +74,6 @@ export class PopoverBase extends Component {
 
 	static defaultProps = {
 		placement: 'top',
-		theme: {
-			backgroundColor: colors.white,
-		},
 		modifiers: {},
 		styleOverrides: {},
 	};
@@ -209,5 +207,6 @@ export class PopoverBase extends Component {
 }
 
 const PopoverBox = styled(Box)`
+	${textStyle}
 	${typography}
 `;
