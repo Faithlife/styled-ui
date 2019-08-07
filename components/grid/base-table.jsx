@@ -6,6 +6,7 @@ import * as Styled from './styled';
 
 const defaultRowHeight = 45;
 const headerHeight = defaultRowHeight - 5;
+const noRowsTableHeight = 200;
 
 /** A wrapper of ag-grid with some boilerplate code to handle initialization and sorting/ filtering */
 export function BaseTable({
@@ -30,6 +31,18 @@ export function BaseTable({
 	handleGetRowId,
 }) {
 	const tableHeightPadding = hasPagingBar ? 50 : 2;
+
+	useEffect(() => {
+		if (columnApi) {
+			columnApi.resetColumnState();
+		}
+	}, [columnApi, isSmallViewport]);
+
+	useEffect(() => {
+		if (gridApi) {
+			gridApi.resetRowHeights();
+		}
+	}, [gridApi, rowHeight]);
 
 	useEffect(() => {
 		if (gridApi) {
@@ -117,12 +130,15 @@ export function BaseTable({
 		[setGridApi, setColumnApi, sortModel, filterText],
 	);
 
-	const rowCount = data ? data.length : 1;
+	const rowCount = data ? data.length : 0;
 	const currentHeaderHeight = hideHeaders ? 1 : headerHeight;
+
 	const tableHeight =
-		(maxRows && maxRows < rowCount ? maxRows : rowCount) * (rowHeight || defaultRowHeight) +
-		tableHeightPadding +
-		currentHeaderHeight;
+		rowCount !== 0
+			? (maxRows && maxRows < rowCount ? maxRows : rowCount) * (rowHeight || defaultRowHeight) +
+			  tableHeightPadding +
+			  currentHeaderHeight
+			: noRowsTableHeight;
 	return (
 		<Styled.GridContainer className="ag-theme-faithlife" height={tableHeight}>
 			<AgGridReact
