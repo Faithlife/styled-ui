@@ -6,33 +6,42 @@ import { theme } from './core';
 
 const { get: getKey, compose } = styledSystem;
 
+const responsivePropType = PropTypes.oneOfType([
+	PropTypes.string,
+	PropTypes.arrayOf(PropTypes.string),
+]);
+
 export const get = key => themeGet(key, getKey(theme, key));
 
 export const common = compose(
 	styledSystem.space,
 	styledSystem.color,
 	styledSystem.display,
+	styledSystem.system({
+		transform: true,
+		transition: true,
+	}),
 );
 
 common.propTypes = {
 	...systemPropTypes.space,
 	...systemPropTypes.color,
 	...systemPropTypes.display,
+	transform: responsivePropType,
+	transition: responsivePropType,
 };
 
 export const typography = compose(
 	styledSystem.typography,
 	styledSystem.system({
 		textTransform: true,
-	}),
-	styledSystem.system({
 		whiteSpace: true,
 	}),
 );
 
 typography.propTypes = {
 	...systemPropTypes.typography,
-	textTransform: PropTypes.string,
+	textTransform: responsivePropType,
 };
 
 export const box = compose(
@@ -50,7 +59,7 @@ export const box = compose(
 	styledSystem.background,
 );
 
-common.propTypes = {
+box.propTypes = {
 	...common.propTypes,
 	...systemPropTypes.layout,
 	...systemPropTypes.flexbox,
