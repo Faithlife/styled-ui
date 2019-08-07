@@ -174,6 +174,8 @@ export class DatePickerInput extends PureComponent {
 					<Popover
 						placement={placement}
 						isOpen={showCalendar}
+						paddingY={5}
+						paddingX="20px"
 						styleOverrides={popoverStyleOverrides}
 					>
 						{/*eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
