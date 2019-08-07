@@ -1,17 +1,35 @@
 import React from 'react';
-import { colors } from '../shared-styles';
 import { PopoverBase } from './popover-base';
 
 /** Pre-styled popover that uses unstyled popovers internally. */
 export function Popover(props) {
-	const { children, placement, theme, styleOverrides, ...otherProps } = props;
-	const newStyle = { ...Popover.defaultProps.styleOverrides, ...styleOverrides };
+	const {
+		children,
+		placement,
+		borderRadius,
+		padding,
+		paddingY,
+		paddingX,
+		paddingTop,
+		paddingRight,
+		paddingBottom,
+		paddingLeft,
+		maxWidth,
+		...otherProps
+	} = props;
 	return (
 		<PopoverBase
 			{...otherProps}
 			placement={placement}
-			theme={theme || { ...Popover.defaultProps.theme }}
-			styleOverrides={newStyle || {}}
+			borderRadius={borderRadius || 1}
+			padding={padding || 4}
+			paddingY={paddingY || padding || ''}
+			paddingX={paddingX || padding || ''}
+			paddingTop={paddingTop || paddingY || padding || ''}
+			paddingRight={paddingRight || paddingX || padding || ''}
+			paddingBottom={paddingBottom || paddingY || padding || ''}
+			paddingLeft={paddingLeft || paddingX || padding || ''}
+			maxWidth={maxWidth || '300px'}
 		>
 			{children}
 		</PopoverBase>
@@ -22,6 +40,4 @@ Popover.propTypes = { ...PopoverBase.propTypes };
 
 Popover.defaultProps = {
 	placement: 'top',
-	theme: { backgroundColor: colors.white },
-	styleOverrides: { borderRadius: '3px', padding: '12px', maxWidth: '300px' },
 };
