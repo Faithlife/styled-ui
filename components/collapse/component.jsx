@@ -125,9 +125,14 @@ export const Collapse = forwardClassRef(
 										? '0'
 										: ''
 								}
+								transition={
+									status === TransitionStatuses.ENTERING || status === TransitionStatuses.EXITING
+										? 'height 0.2s ease-in'
+										: ''
+								}
 								css={`
 									${status === TransitionStatuses.ENTERING || status === TransitionStatuses.EXITING
-										? 'overflow: hidden; transition: height 0.2s ease-in;'
+										? 'overflow: hidden'
 										: ''}
 								`}
 							>

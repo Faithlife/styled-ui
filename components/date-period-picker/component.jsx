@@ -145,6 +145,7 @@ export class DatePeriodPicker extends PureComponent {
 						width="100%"
 						hoverBackground="blue4"
 						hoverColor="white"
+						hoverTransition="background 0.2s ease-out, color 0.2s ease-out"
 					>
 						{datePeriod.displayName}
 					</DatePeriod>
@@ -199,6 +200,6 @@ const DatePeriod = styled(Text)`
 	&:hover {
 		${system({ hoverBackground: { property: 'background', scale: 'colors' } })};
 		${system({ hoverColor: { property: 'color', scale: 'colors' } })};
-		transition: background 0.2s ease-out, color 0.2s ease-out;
+		${system({ hoverTransition: { property: 'transition' } })};
 	}
 `;
