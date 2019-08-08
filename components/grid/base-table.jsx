@@ -131,7 +131,8 @@ export function BaseTable({
 	);
 
 	const rowCount = data ? data.length : 0;
-	const currentHeaderHeight = hideHeaders ? 0 : headerHeight;
+	const currentHeaderHeight = hideHeaders ? 1 : headerHeight;
+
 	const tableHeight =
 		rowCount !== 0
 			? (maxRows && maxRows < rowCount ? maxRows : rowCount) * (rowHeight || defaultRowHeight) +
