@@ -1,14 +1,6 @@
 import styled from 'styled-components';
-import { colors, thickness } from '../shared-styles';
+import { colors } from '../shared-styles';
 import { resetStyles } from '../utils';
-
-export const DropdownMenuContent = styled.div`
-	width: 100%;
-	padding: ${thickness.four} 0;
-
-	display: flex;
-	flex-direction: column;
-`;
 
 export const MenuItem = styled.button.attrs({
 	// Menu items should not be in the tab order. They are only reachable by the arrow keys

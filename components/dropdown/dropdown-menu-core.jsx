@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Box } from '../Box';
 import { Popover } from '../popover';
 import { useDropdownContext, getFocusableChildrenList, useKeyboardNav } from './dropdown-utils';
-import * as Styled from './styled';
 
 export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 	const {
@@ -97,7 +96,13 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 				width={isDefined(width) ? width : '160px'}
 				{...popoverProps}
 			>
-				<Styled.DropdownMenuContent onKeyDown={handleKeyboardNav}>
+				<Box
+					onKeyDown={handleKeyboardNav}
+					display="flex"
+					flexDirection="column"
+					width="100%"
+					paddingY={2}
+				>
 					{React.Children.map(children, (child, index) =>
 						React.isValidElement(child)
 							? React.cloneElement(child, {
@@ -105,7 +110,7 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 							  })
 							: null,
 					)}
-				</Styled.DropdownMenuContent>
+				</Box>
 			</Popover>
 		</Box>
 	);
