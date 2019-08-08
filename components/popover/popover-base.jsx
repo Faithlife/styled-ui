@@ -174,6 +174,7 @@ export class PopoverBase extends Component {
 						}}
 						onAnimationEnd={this.handleTransition}
 						background={background || 'white'}
+						width="auto"
 						boxShadow={boxShadow || 1}
 						textStyle={textStyle || 'c.16'}
 						position={position || 'absolute'}

@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { Box } from '../Box';
 import { useId } from '../shared-hooks';
 import { VisuallyHiddenLabel } from '../hidden-label';
 import { Listbox, ListboxToggle, ListboxMenu, ListItem } from '../listbox';
@@ -9,7 +10,6 @@ export function ParameterSelect({
 	options,
 	selectedId,
 	onItemSelect,
-	width,
 	accessibilityLabel,
 	useNativeSelect,
 	styleOverrides,
@@ -31,7 +31,7 @@ export function ParameterSelect({
 	);
 
 	return (
-		<Styled.Container>
+		<Box display="inline-block" position="relative">
 			<VisuallyHiddenLabel id={labelId}>{accessibilityLabel}</VisuallyHiddenLabel>
 			{!useNativeSelect ? (
 				<Listbox
@@ -39,7 +39,6 @@ export function ParameterSelect({
 					onToggleMenu={handleToggleMenu}
 					onItemSelect={onItemSelect}
 					selectedId={selectedId}
-					styleOverrides={{ width }}
 					labelledBy={labelId}
 				>
 					<ListboxToggle>
@@ -57,7 +56,7 @@ export function ParameterSelect({
 							</Styled.Button>
 						)}
 					</ListboxToggle>
-					<ListboxMenu styleOverrides={{ zIndex: 10, padding: '4px 0' }}>
+					<ListboxMenu paddingY={2}>
 						{options &&
 							Object.entries(options).map(([value, name]) => (
 								<ListItem key={value} id={value}>
@@ -82,7 +81,7 @@ export function ParameterSelect({
 						))}
 				</Styled.Select>
 			)}
-		</Styled.Container>
+		</Box>
 	);
 }
 

@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { colors, thickness } from '../shared-styles';
 import { resetStyles } from '../utils';
+import { Box } from '../Box';
 
 const inputOffset = '-6px';
 
@@ -55,13 +56,7 @@ export const ButtonContent = styled.div.attrs({ tabIndex: '-1' })`
 	${selectStyling};
 `;
 
-export const Container = styled.div`
-	display: inline-block;
-	position: relative;
-	width: ${props => props.width};
-`;
-
-export const InputContainer = styled.div`
+export const InputContainer = styled(Box)`
 	z-index: 0;
 	position: absolute;
 	bottom: ${inputOffset};

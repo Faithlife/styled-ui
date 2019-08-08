@@ -1,5 +1,6 @@
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { Box } from '../Box';
 import { Input } from '../input';
 import * as Styled from './styled';
 
@@ -35,7 +36,7 @@ export function ParameterInputBox(props) {
 	const displayValue = formatValue(value || defaultValue);
 
 	return (
-		<Styled.Container {...(isFocused ? { width } : {})}>
+		<Box display="inline-block" position="relative" {...(isFocused ? { width } : {})}>
 			{!isFocused ? (
 				<Styled.Button onClick={toggleFocus} onFocus={toggleFocus}>
 					<Styled.ButtonContent theme={theme} styleOverrides={styleOverrides}>
@@ -60,7 +61,7 @@ export function ParameterInputBox(props) {
 					/>
 				</Styled.InputContainer>
 			)}
-		</Styled.Container>
+		</Box>
 	);
 }
 
