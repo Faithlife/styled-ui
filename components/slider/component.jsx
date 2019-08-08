@@ -1,10 +1,12 @@
 import React, { createRef, PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import debounce from 'lodash.debounce';
 import throttle from 'lodash.throttle';
 import memoize from 'memoize-one';
+import { system } from 'styled-system';
+import { Box } from '../Box';
 import { PopoverManager, PopoverReference, Popover } from '../popover';
-import * as Styled from './styled';
 
 function range(from, to) {
 	return [...Array(to - from).keys()].map(num => num + from);
@@ -32,15 +34,10 @@ export class Slider extends PureComponent {
 		stopCount: PropTypes.number.isRequired,
 		/** Useful for sliders with many stops */
 		hideAvailableStops: PropTypes.bool,
-		/** Style overrides */
-		styleOverrides: PropTypes.shape({
-			backgroundColor: PropTypes.string,
-		}),
 	};
 
 	static defaultProps = {
 		hideAvailableStops: false,
-		styleOverrides: {},
 	};
 
 	state = {
@@ -225,67 +222,135 @@ export class Slider extends PureComponent {
 	};
 
 	render() {
-		const { hideAvailableStops, maxValue, minValue, styleOverrides } = this.props;
+		const { hideAvailableStops, maxValue, minValue } = this.props;
 		const { isHovered } = this.state;
 		const labels = this.props.labels || [];
 		const track = this.getTrack();
 		const stops = this.getStops();
 
 		return (
-			<Styled.SliderContainer
+			<SliderContainer
 				onDragStart={event => event.preventDefault()}
 				onKeyDown={this.handleKeyDown}
 				onMouseDown={this.handleMouseDown}
 				onTouchStart={this.handleTouchStart}
 				tabIndex="0"
 				ref={this._slider}
+				position="relative"
+				width="100%"
+				minHeight="28px"
 			>
-				<Styled.TrackContainer>
-					<Styled.TrackGradient />
+				<Box
+					display="flex"
+					alignItems="center"
+					position="absolute"
+					top="0"
+					right="0"
+					bottom="0"
+					left="0"
+					zIndex="2"
+				>
+					<Box
+						position="absolute"
+						right="0"
+						left="0"
+						height="8px"
+						borderRadius="10px"
+						zIndex="-10"
+						backgroundImage="linear-gradient(to left, #79cafb, #1e91d6)"
+					/>
 					{track.map(index => (
-						<Styled.Track
-							active={index < this.state.value}
-							invalid={this.props.maxValue && index >= this.props.maxValue}
+						<Track
 							trackFirst={index === 0}
 							trackLast={
 								index === maxValue - 1 || (!maxValue && index === this.props.stopCount - 2)
 							}
 							key={index}
-							styleOverrides={styleOverrides}
-						/>
-					))}
-				</Styled.TrackContainer>
-				<Styled.StopContainer>
-					{stops.map(index => (
-						<Styled.Stop
-							available={
-								!hideAvailableStops &&
-								(index > this.state.value &&
-									!(index >= this.props.maxValue) &&
-									!(index === this.props.stopCount - 1))
+							flexGrow="1"
+							position="relative"
+							height="8px"
+							backgroundColor={
+								index < this.state.value
+									? 'transparent'
+									: this.props.maxValue && index >= this.props.maxValue
+									? 'white'
+									: 'gray8'
 							}
-							minimumAvailable={index === minValue && minValue > 0}
-							key={index}
-							styleOverrides={styleOverrides}
+							beforeBackgroundColor="white"
 						/>
 					))}
-				</Styled.StopContainer>
-				<Styled.ThumbContainer
-					onMouseEnter={this.handleMouseEnter}
-					onMouseLeave={this.handleMouseLeave}
+				</Box>
+				<Box
+					display="flex"
+					alignItems="center"
+					justifyContent="space-between"
+					position="absolute"
+					top="0"
+					right="0"
+					bottom="0"
+					left="0"
+					zIndex="3"
 				>
 					{stops.map(index => (
-						<Styled.ThumbAnchor
+						<Box
+							key={index}
+							height="8px"
+							width="3px"
+							backgroundColor={
+								(!hideAvailableStops &&
+									(index > this.state.value &&
+										!(index >= this.props.maxValue) &&
+										!(index === this.props.stopCount - 1))) ||
+								(index === minValue && minValue > 0)
+									? 'white'
+									: 'transparent'
+							}
+						/>
+					))}
+				</Box>
+				<Box
+					onMouseEnter={this.handleMouseEnter}
+					onMouseLeave={this.handleMouseLeave}
+					display="flex"
+					alignItems="center"
+					justifyContent="space-between"
+					position="absolute"
+					top="0"
+					right="0"
+					bottom="0"
+					left="0"
+					zIndex="4"
+				>
+					{stops.map(index => (
+						<Box
 							key={index}
 							trackStart={index === 0}
 							trackEnd={index === this.props.stopCount - 1}
+							position="relative"
+							height="8px"
+							width="3px"
+							left={index === 0 ? '6px' : 'auto'}
+							right={index === this.props.stopCount - 1 ? '6px' : 'auto'}
 						>
 							<PopoverManager>
 								<PopoverReference>
-									<Styled.Thumb
-										active={this.state.isSliding}
-										hovered={this.state.isHovered}
-										hidden={index !== this.state.value}
+									<Box
+										display={index !== this.state.value ? 'none' : 'block'}
+										position="absolute"
+										top="50%"
+										right="50%"
+										left="auto"
+										height={this.state.isHovered ? '26px' : '20px'}
+										width={this.state.isHovered ? '26px' : '20px'}
+										backgroundColor="white"
+										borderRadius="50%"
+										boxShadow={
+											this.state.isSliding
+												? '0 1px 10px 0 #0174b9'
+												: '0 2px 6px 1px rgba(0, 0, 0, 0.3)'
+										}
+										transform="translate(50%, -50%)"
+										transition="height 100ms, width 100ms"
 									/>
 								</PopoverReference>
 								<Popover
@@ -295,17 +360,44 @@ export class Slider extends PureComponent {
 										labels[index] !== undefined &&
 										labels[index] !== ''
 									}
-									placement={'top'}
+									placement="top"
 									container="body"
 									modifiers={{ offset: { offset: '0, 33' } }}
 								>
 									{`${labels[index]}`}
 								</Popover>
 							</PopoverManager>
-						</Styled.ThumbAnchor>
+						</Box>
 					))}
-				</Styled.ThumbContainer>
-			</Styled.SliderContainer>
+				</Box>
+			</SliderContainer>
 		);
 	}
 }
+
+const SliderContainer = styled(Box)`
+	cursor: pointer;
+	touch-action: none;
+
+	${system({ focusBoxShadow: { property: 'box-shadow', scale: 'shadows' } })};
+	${system({ focusOutline: { property: 'outline' } })};
+`;
+
+const Track = styled(Box)`
+	border-top-left-radius: ${props => (props.trackFirst ? '10px' : '0')};
+	border-bottom-left-radius: ${props => (props.trackFirst ? '10px' : '0')};
+	border-top-right-radius: ${props => (props.trackLast ? '10px' : '0')};
+	border-bottom-right-radius: ${props => (props.trackLast ? '10px' : '0')};
+
+	&:before {
+		content: '';
+		display: ${props => (props.trackLast ? 'block' : 'none')};
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		width: 8px;
+		${system({ beforeBackgroundColor: { property: 'background-color', scale: 'colors' } })};
+		z-index: -5;
+	}
+`;
