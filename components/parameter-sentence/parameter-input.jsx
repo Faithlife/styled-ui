@@ -1,9 +1,10 @@
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { useCopyRefs } from '../shared-hooks';
 import { Input } from '../input';
 import * as Styled from './styled';
 
-export function ParameterInputBox(props) {
+export const ParameterInputBox = React.forwardRef((props, ref) => {
 	const {
 		defaultValue,
 		value,
@@ -17,6 +18,7 @@ export function ParameterInputBox(props) {
 	} = props;
 	const [isFocused, setIsFocused] = useState(false);
 	const inputRef = useRef();
+	const refGroup = useCopyRefs([ref, inputRef]);
 
 	/**
 	 * Due to a really strange firefox bug inputs with type=number will unfocus the input as soon as it is focused using the autofocus option.
@@ -45,7 +47,7 @@ export function ParameterInputBox(props) {
 			) : (
 				<Styled.InputContainer>
 					<Input
-						ref={inputRef}
+						ref={refGroup}
 						small
 						inline
 						value={value}
@@ -62,7 +64,7 @@ export function ParameterInputBox(props) {
 			)}
 		</Styled.Container>
 	);
-}
+});
 
 ParameterInputBox.propTypes = {
 	defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
