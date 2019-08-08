@@ -1,8 +1,10 @@
 import React, { lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { Box } from '../Box';
+import { Text } from '../Text';
 import { LoadingSpinner } from '../loading-spinner';
 import { PopoverManager, PopoverReference } from '../popover';
-import * as Styled from './styled';
 
 const ProductDrawerDropdown = lazy(() => import('./product-drawer-dropdown'));
 
@@ -90,10 +92,10 @@ export class ProductDrawer extends React.PureComponent {
 		const { isOpen } = this.state;
 
 		return (
-			<Styled.ProductDrawer>
+			<Box position="relative">
 				<PopoverManager onFocusAway={() => this.setState({ isOpen: false })}>
 					<PopoverReference>
-						<Styled.ProductDrawerToggle
+						<ProductDrawerToggle
 							styleOverrides={styleOverrides}
 							onClick={this.handleToggleClick}
 							ref={el => {
@@ -112,10 +114,10 @@ export class ProductDrawer extends React.PureComponent {
 									fillRule="evenodd"
 								/>
 							</svg>
-							<Styled.ProductDrawerToggleText styleOverrides={styleOverrides}>
+							<Text display={['none', null, 'inline']} marginLeft={3} textStyle="c.14">
 								{resources.products}
-							</Styled.ProductDrawerToggleText>
-						</Styled.ProductDrawerToggle>
+							</Text>
+						</ProductDrawerToggle>
 					</PopoverReference>
 					{isOpen ? (
 						<Suspense fallback={<LoadingSpinner />}>
@@ -128,7 +130,34 @@ export class ProductDrawer extends React.PureComponent {
 						</Suspense>
 					) : null}
 				</PopoverManager>
-			</Styled.ProductDrawer>
+			</Box>
 		);
 	}
 }
+
+const ProductDrawerToggle = styled.button`
+	display: flex;
+	padding: 0;
+	align-items: center;
+	cursor: pointer;
+	background: transparent;
+	border: none;
+
+	color: ${({ styleOverrides }) => styleOverrides.toggleButtonColor || 'initial'};
+
+	path {
+		fill: ${({ styleOverrides }) => styleOverrides.toggleButtonColor || 'initial'};
+	}
+
+	&:hover {
+		color: ${({ styleOverrides }) => styleOverrides.toggleButtonHoverColor || 'initial'};
+
+		path {
+			fill: ${({ styleOverrides }) => styleOverrides.toggleButtonHoverColor || 'initial'};
+		}
+	}
+
+	&:focus {
+		outline: none;
+	}
+`;

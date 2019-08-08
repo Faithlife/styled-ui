@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Box } from '../../Box';
+import { Paragraph } from '../../Paragraph';
+import { Close } from '../../icons';
+import { Button } from '../../button';
 import { FaithlifeConnectAnimatedImage, FaithlifeEquipAnimatedImage } from './animated-image';
 import { ProductLinkList, ProductLink } from './product-link';
-import { Button } from '../../button';
-import { Close } from '../../icons';
 import {
 	FaithlifeFlameSvg,
 	FaithlifeTvSvg,
@@ -21,17 +23,24 @@ import {
 } from './svgs';
 import * as Styled from './styled';
 
-export const ProductDrawerDropdown = ({
-	styleOverrides,
-	resources,
-	isOpen,
-	handleCloseButtonClick,
-}) => (
-	<Styled.ProductDrawerDropdown styleOverrides={styleOverrides} onBlur={this.handleBlur}>
-		<Styled.DropdownClose>
+export const ProductDrawerDropdown = ({ resources, isOpen, handleCloseButtonClick }) => (
+	<Styled.ProductDrawerDropdown
+		onBlur={this.handleBlur}
+		position={['fixed', null, 'absolute']}
+		top={['0', null, 'auto']}
+		right={['0', null, 'auto']}
+		bottom={['0', null, 'auto']}
+		left={['0', null, 'auto']}
+		borderRadius="4px"
+		backgroundColor="white"
+		boxShadow="0 1px 6px 0 rgba(0, 0, 0, 0.23)"
+		zIndex="toast"
+		css={{ overflowY: ['scroll', null, 'auto'] }}
+	>
+		<Box position="absolute" top="0" right="0" border="none" backgroundColor="transparent">
 			<Button primaryTransparent large icon={<Close />} onClick={handleCloseButtonClick} />
-		</Styled.DropdownClose>
-		<Styled.DropdownColumns>
+		</Box>
+		<Box display="flex" flexDirection={['column', null, 'row']}>
 			<Styled.DropdownColumn>
 				<Styled.DropdownHeader>
 					<img alt="" src={IndividualsSvg} />
@@ -171,8 +180,8 @@ export const ProductDrawerDropdown = ({
 					</Styled.LearnMoreLink>
 				</Styled.DropdownFooter>
 			</Styled.DropdownColumn>
-		</Styled.DropdownColumns>
-		<Styled.DropdownSeeMore>
+		</Box>
+		<Paragraph textAlign="center" borderRadius="0 0 4px 4px">
 			<Styled.DropdownSeeMoreLink
 				href="https://faithlife.com/about"
 				target="_blank"
@@ -180,7 +189,7 @@ export const ProductDrawerDropdown = ({
 			>
 				{resources.more}
 			</Styled.DropdownSeeMoreLink>
-		</Styled.DropdownSeeMore>
+		</Paragraph>
 	</Styled.ProductDrawerDropdown>
 );
 
