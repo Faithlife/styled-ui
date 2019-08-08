@@ -14,6 +14,9 @@ const selectStyling = css`
 	color: ${colors.gray66};
 	${props => `color: ${props.isOpen ? colors.blueActive : colors.gray66}`};
 	font-family: inherit;
+	border-radius: 0;
+	line-height: 1;
+	padding-bottom: 2px;
 
 	&:hover {
 		&:not(:focus) {
@@ -65,6 +68,7 @@ export const InputContainer = styled.div`
 	z-index: 0;
 	position: absolute;
 	bottom: ${inputOffset};
+	padding: 0;
 
 	&& > input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button {

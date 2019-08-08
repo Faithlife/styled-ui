@@ -55,12 +55,15 @@ export const variationMap = {
 		height: ${({ styleOverrides }) => styleOverrides.fontSize || '20px'};
 		padding-bottom: ${thickness.four};
 		font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
+		line-height: 1;
+		padding-bottom: 0;
 
 		&:focus {
 			box-shadow: none;
+			border: none;
 			border-bottom: solid ${thickness.two}
 				${({ theme }) => theme.underlineColor || colors.blueBase};
-			outline: 0;
+			outline: none;
 		}
 	`,
 };
