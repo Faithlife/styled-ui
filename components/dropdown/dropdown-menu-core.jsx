@@ -49,7 +49,6 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 		}
 	}, [focusedMenuItem, focusedIndex, focusableChildList, setFocusedMenuItem]);
 
-	console.log(popoverProps);
 	return (
 		<Box id={menuId} {...ariaProps}>
 			<Popover
