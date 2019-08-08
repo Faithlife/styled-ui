@@ -184,6 +184,16 @@ export const SolidTriangleIcon = props => (
 	</svg>
 );
 
+export const DownArrow = props => (
+	<svg {...props} width="12" height="12" xmlns="http://www.w3.org/2000/svg">
+		<path
+			d="M3.01 4h5.98a.5.5 0 0 1 .397.803l-2.99 3.919a.5.5 0 0 1-.795 0l-2.99-3.919A.5.5 0 0 1 3.01 4z"
+			fill="white"
+			fillRule="evenodd"
+		/>
+	</svg>
+);
+
 export const FileIcon = props => (
 	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="22" height="24" viewBox="0 0 22 24">
 		<g fill="#444" fillRule="nonzero" opacity=".5">

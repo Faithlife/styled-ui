@@ -56,12 +56,11 @@ import {
 } from '../index';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
-import { GearIcon } from '../components/icons';
+import { GearIcon, DownArrow } from '../components/icons';
 import { colors } from '../components/shared-styles';
 import censusData from './grid/2010census.json';
 import { ProductDrawerWithResources } from './product-drawer';
 import { DocgenTable } from './docgen-table';
-import DownArrow from './svgs/arrow-down.svg';
 import { PopulationChange } from './grid/population-change';
 import { BaseTable } from '../components/grid/base-table';
 
@@ -810,7 +809,7 @@ const components = [
 					Label: styled.span`
 						margin-right: 8px;
 					`,
-					DownArrow: styled.img.attrs({ src: DownArrow })``,
+					DownArrow,
 				},
 			},
 			{
