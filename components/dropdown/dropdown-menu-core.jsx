@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { Box } from '../Box';
 import { Popover } from '../popover';
 import { useDropdownContext, getFocusableChildrenList, useKeyboardNav } from './dropdown-utils';
 import * as Styled from './styled';
@@ -12,7 +13,14 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 		setFocusedMenuItem,
 		handleCloseMenu,
 		dropdownToggleRef,
-		styleOverrides,
+		padding,
+		paddingY,
+		paddingX,
+		paddingTop,
+		paddingRight,
+		paddingBottom,
+		paddingLeft,
+		width,
 	} = useDropdownContext();
 
 	const closeMenu = useCallback(() => {
@@ -41,13 +49,53 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 		}
 	}, [focusedMenuItem, focusedIndex, focusableChildList, setFocusedMenuItem]);
 
+	console.log(popoverProps);
 	return (
-		<div id={menuId} {...ariaProps}>
+		<Box id={menuId} {...ariaProps}>
 			<Popover
 				isOpen={isOpen}
 				placement={'bottom-start' || popoverProps.placement}
 				hideArrow
-				styleOverrides={{ padding: '0', width: styleOverrides.width || '160px' }}
+				padding={isDefined(padding) ? padding : 0}
+				paddingY={isDefined(paddingY) ? paddingY : isDefined(padding) ? padding : ''}
+				paddingX={isDefined(paddingX) ? paddingX : isDefined(padding) ? padding : ''}
+				paddingTop={
+					isDefined(paddingTop)
+						? paddingTop
+						: isDefined(paddingY)
+						? paddingY
+						: isDefined(padding)
+						? padding
+						: ''
+				}
+				paddingRight={
+					isDefined(paddingRight)
+						? paddingRight
+						: isDefined(paddingX)
+						? paddingX
+						: isDefined(padding)
+						? padding
+						: ''
+				}
+				paddingBottom={
+					isDefined(paddingBottom)
+						? paddingBottom
+						: isDefined(paddingY)
+						? paddingY
+						: isDefined(padding)
+						? padding
+						: ''
+				}
+				paddingLeft={
+					isDefined(paddingLeft)
+						? paddingLeft
+						: isDefined(paddingX)
+						? paddingX
+						: isDefined(padding)
+						? padding
+						: ''
+				}
+				width={isDefined(width) ? width : '160px'}
 				{...popoverProps}
 			>
 				<Styled.DropdownMenuContent onKeyDown={handleKeyboardNav}>
@@ -60,7 +108,7 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 					)}
 				</Styled.DropdownMenuContent>
 			</Popover>
-		</div>
+		</Box>
 	);
 }
 
@@ -68,4 +116,8 @@ DropdownMenuCore.propTypes = {
 	children: PropTypes.node.isRequired,
 	popoverProps: PropTypes.object,
 	ariaProps: PropTypes.object,
+};
+
+const isDefined = function(value) {
+	return value !== undefined && value !== null;
 };

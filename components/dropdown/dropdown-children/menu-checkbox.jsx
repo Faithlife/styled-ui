@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ThemeProvider } from 'styled-components';
 import { CheckboxContent } from '../../check-box';
-import { useDropdownContext } from '../dropdown-utils';
 import * as Styled from '../styled';
 import { MenuItem } from './menu-item';
 
@@ -14,8 +12,6 @@ export function MenuCheckbox(props) {
 	// eslint-disable-next-line react/prop-types
 	const { onClick, disabled, index, isChecked, ...checkboxProps } = props;
 
-	const { theme } = useDropdownContext();
-
 	return (
 		<MenuItem
 			shouldKeepOpenOnClick
@@ -25,9 +21,7 @@ export function MenuCheckbox(props) {
 			role="menuitemcheckbox"
 			aria-checked={isChecked}
 		>
-			<ThemeProvider theme={{ primary: theme.checkboxPrimary, border: theme.checkboxBorder }}>
-				<CheckboxContent isChecked={isChecked} {...checkboxProps} />
-			</ThemeProvider>
+			<CheckboxContent isChecked={isChecked} {...checkboxProps} />
 		</MenuItem>
 	);
 }
