@@ -49,7 +49,7 @@ export class DropZone extends PureComponent {
 	};
 
 	render() {
-		const { children } = this.props;
+		const { children, ...props } = this.props;
 		const { showHighlight } = this.state;
 
 		return (
@@ -65,9 +65,10 @@ export class DropZone extends PureComponent {
 				padding={4}
 				border="2px dashed"
 				borderColor="gray22"
-				background={showHighlight && 'blue1'}
-				textStyle="h.16"
-				css={{ transition: 'background 1s ease' }}
+				backgroundColor={showHighlight && 'blue1'}
+				textStyle="c.16"
+				transition="background 1s ease"
+				{...props}
 			>
 				{children}
 			</DropZoneBox>
