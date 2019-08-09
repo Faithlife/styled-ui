@@ -141,14 +141,13 @@ export function BaseTable({
 			  tableHeightPadding +
 			  currentHeaderHeight
 			: noRowsDefaultTableHeight;
-	const tableHeight =
-		minHeight && calculatedTableHeight < minHeight
-			? minHeight
-			: maxHeight && calculatedTableHeight > maxHeight
-			? maxHeight
-			: calculatedTableHeight;
 	return (
-		<Styled.GridContainer className="ag-theme-faithlife" height={tableHeight}>
+		<Styled.GridContainer
+			className="ag-theme-faithlife"
+			height={calculatedTableHeight}
+			minHeight={minHeight}
+			maxHeight={maxHeight}
+		>
 			<AgGridReact
 				rowData={data}
 				onGridReady={handleGridReady}
