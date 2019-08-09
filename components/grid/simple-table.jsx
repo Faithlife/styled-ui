@@ -11,6 +11,8 @@ export function SimpleTable({
 	sortModel,
 	updateSortModel,
 	maxRows,
+	maxHeight,
+	minHeight,
 	rowSelectionType,
 	hideHeaders,
 	rowHeight,
@@ -31,6 +33,8 @@ export function SimpleTable({
 			updateSortModel={updateSortModel}
 			filterText={filterText}
 			maxRows={maxRows}
+			maxHeight={maxHeight}
+			minHeight={minHeight}
 			rowSelectionType={rowSelectionType}
 			hideHeaders={hideHeaders}
 			rowHeight={rowHeight}
