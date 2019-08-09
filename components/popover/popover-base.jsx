@@ -138,13 +138,7 @@ export class PopoverBase extends Component {
 			styleOverrides,
 			eventsEnabled,
 			positionFixed,
-			background,
-			boxShadow,
-			border,
-			textStyle,
-			position,
-			zIndex,
-			textAlign,
+			backgroundColor,
 			...props
 		} = this.props;
 		const { showPopper } = this.state;
@@ -166,20 +160,20 @@ export class PopoverBase extends Component {
 			>
 				{({ ref, style, placement, arrowProps }) => (
 					<PopoverBox
-						{...props}
 						ref={ref}
 						style={{
 							...style,
 							...(!hideArrow ? Styled.margins[Styled.getPlacement(placement)] : {}),
 						}}
 						onAnimationEnd={this.handleTransition}
-						background={background || 'white'}
+						backgroundColor={backgroundColor || 'white'}
 						width="auto"
-						boxShadow={boxShadow || 1}
-						textStyle={textStyle || 'c.16'}
-						position={position || 'absolute'}
-						zIndex={zIndex || 'menu'}
-						textAlign={textAlign || 'center'}
+						boxShadow={1}
+						textStyle="c.16"
+						position="absolute"
+						zIndex="menu"
+						textAlign="center"
+						{...props}
 					>
 						{children}
 						{!hideArrow && (
@@ -192,7 +186,7 @@ export class PopoverBase extends Component {
 								width="25px"
 								height="25px"
 								overflow="hidden"
-								arrowBackground="white"
+								arrowBackground={backgroundColor || 'white'}
 							/>
 						)}
 					</PopoverBox>
