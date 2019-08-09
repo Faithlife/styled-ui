@@ -56,7 +56,7 @@ export function ParameterSelect({
 							</Styled.Button>
 						)}
 					</ListboxToggle>
-					<ListboxMenu paddingY={2}>
+					<ListboxMenu paddingY={2} width="auto">
 						{options &&
 							Object.entries(options).map(([value, name]) => (
 								<ListItem key={value} id={value}>
