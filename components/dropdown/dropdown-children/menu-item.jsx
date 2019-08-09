@@ -1,7 +1,7 @@
 import React, { useRef, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { system } from 'styled-system';
+import { system, flexbox } from 'styled-system';
 import { Text } from '../../Text';
 import { useDropdownContext, useMenuItemKeyboardHandler } from '../dropdown-utils';
 import * as Styled from '../styled';
@@ -144,6 +144,8 @@ MenuItem.propTypes = {
 MenuItem.isFocusableMenuChild = true;
 
 const MenuItemContent = styled(Text).attrs({ tabIndex: '-1' })`
+	${flexbox};
+
 	&:focus {
 		${system({ focusOutline: { property: 'outline' } })};
 		${system({ focusBorder: { property: 'border', scale: 'borders' } })};
