@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.12.2
+
+- Fix `ParameterInputBox` styling on safari mobile
+- Add ref to `ParameterInputBox`
+
 ### 5.12.1
 
 - Removed padding from checkboxes and radios that was previously added to increase tap target size on mobile.
