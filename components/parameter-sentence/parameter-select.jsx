@@ -14,6 +14,7 @@ export function ParameterSelect({
 	useNativeSelect,
 	styleOverrides,
 	theme,
+	padding,
 	...props
 }) {
 	const [isOpen, setIsOpen] = useState(false);
@@ -58,7 +59,8 @@ export function ParameterSelect({
 						)}
 					</ListboxToggle>
 					<ListboxMenu
-						paddingY={props.padding !== undefined && props.padding !== null ? props.padding : 2}
+						padding={padding}
+						paddingY={padding !== undefined && padding !== null ? padding : 2}
 						width="auto"
 						{...props}
 					>
