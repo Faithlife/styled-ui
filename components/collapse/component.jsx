@@ -135,6 +135,7 @@ export const Collapse = forwardClassRef(
 										? 'overflow: hidden'
 										: ''}
 								`}
+								{...otherProps}
 							>
 								{children}
 							</Box>
