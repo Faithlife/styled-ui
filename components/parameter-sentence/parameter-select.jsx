@@ -14,6 +14,7 @@ export function ParameterSelect({
 	useNativeSelect,
 	styleOverrides,
 	theme,
+	...props
 }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const id = useId();
@@ -56,7 +57,11 @@ export function ParameterSelect({
 							</Styled.Button>
 						)}
 					</ListboxToggle>
-					<ListboxMenu paddingY={2} width="auto">
+					<ListboxMenu
+						paddingY={props.padding !== undefined && props.padding !== null ? props.padding : 2}
+						width="auto"
+						{...props}
+					>
 						{options &&
 							Object.entries(options).map(([value, name]) => (
 								<ListItem key={value} id={value}>
@@ -105,7 +110,6 @@ ParameterSelect.propTypes = {
 };
 
 ParameterSelect.defaultProps = {
-	width: '180px',
 	styleOverrides: {},
 	theme: {},
 };
