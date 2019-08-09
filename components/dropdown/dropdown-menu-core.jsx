@@ -12,14 +12,6 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 		setFocusedMenuItem,
 		handleCloseMenu,
 		dropdownToggleRef,
-		padding,
-		paddingY,
-		paddingX,
-		paddingTop,
-		paddingRight,
-		paddingBottom,
-		paddingLeft,
-		width,
 	} = useDropdownContext();
 
 	const closeMenu = useCallback(() => {
@@ -54,46 +46,8 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 				isOpen={isOpen}
 				placement={'bottom-start' || popoverProps.placement}
 				hideArrow
-				padding={isDefined(padding) ? padding : 0}
-				paddingY={isDefined(paddingY) ? paddingY : isDefined(padding) ? padding : ''}
-				paddingX={isDefined(paddingX) ? paddingX : isDefined(padding) ? padding : ''}
-				paddingTop={
-					isDefined(paddingTop)
-						? paddingTop
-						: isDefined(paddingY)
-						? paddingY
-						: isDefined(padding)
-						? padding
-						: ''
-				}
-				paddingRight={
-					isDefined(paddingRight)
-						? paddingRight
-						: isDefined(paddingX)
-						? paddingX
-						: isDefined(padding)
-						? padding
-						: ''
-				}
-				paddingBottom={
-					isDefined(paddingBottom)
-						? paddingBottom
-						: isDefined(paddingY)
-						? paddingY
-						: isDefined(padding)
-						? padding
-						: ''
-				}
-				paddingLeft={
-					isDefined(paddingLeft)
-						? paddingLeft
-						: isDefined(paddingX)
-						? paddingX
-						: isDefined(padding)
-						? padding
-						: ''
-				}
-				width={isDefined(width) ? width : '160px'}
+				padding={0}
+				width="160px"
 				{...popoverProps}
 			>
 				<Box
@@ -120,8 +74,4 @@ DropdownMenuCore.propTypes = {
 	children: PropTypes.node.isRequired,
 	popoverProps: PropTypes.object,
 	ariaProps: PropTypes.object,
-};
-
-const isDefined = function(value) {
-	return value !== undefined && value !== null;
 };

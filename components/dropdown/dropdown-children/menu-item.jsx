@@ -14,24 +14,6 @@ export function MenuItem(props) {
 		onFocus,
 		shouldKeepOpenOnClick,
 		disabled,
-		display,
-		flexDirection,
-		alignItems,
-		whiteSpace,
-		color,
-		textAlign,
-		background,
-		hoverBackgroundColor,
-		textStyle,
-		focusOutline,
-		focusBorder,
-		padding,
-		paddingY,
-		paddingX,
-		paddingTop,
-		paddingRight,
-		paddingBottom,
-		paddingLeft,
 		// eslint-disable-next-line react/prop-types
 		isSelected,
 		...ariaProps
@@ -76,56 +58,17 @@ export function MenuItem(props) {
 			{...(!disabled ? {} : { as: 'div' })}
 		>
 			<MenuItemContent
-				display={display || 'flex'}
-				flexDirection={flexDirection || 'flexDirection'}
-				alignItems={alignItems || 'center'}
-				color={color || (disabled && 'gray22')}
-				whiteSpace={whiteSpace || 'nowrap'}
-				textAlign={textAlign || 'left'}
-				background={background || 'transparent'}
-				hoverBackgroundColor={hoverBackgroundColor || 'gray4'}
-				textStyle={textStyle || 'c.16'}
-				focusOutline={isDefined(focusOutline) ? focusOutline : 'none'}
-				focusBorder={isDefined(focusBorder) ? focusBorder : '0'}
-				padding={isDefined(padding) ? padding : 3}
-				paddingY={isDefined(paddingY) ? paddingY : isDefined(padding) ? padding : ''}
-				paddingX={isDefined(paddingX) ? paddingX : isDefined(padding) ? padding : ''}
-				paddingTop={
-					isDefined(paddingTop)
-						? paddingTop
-						: isDefined(paddingY)
-						? paddingY
-						: isDefined(padding)
-						? padding
-						: ''
-				}
-				paddingRight={
-					isDefined(paddingRight)
-						? paddingRight
-						: isDefined(paddingX)
-						? paddingX
-						: isDefined(padding)
-						? padding
-						: ''
-				}
-				paddingBottom={
-					isDefined(paddingBottom)
-						? paddingBottom
-						: isDefined(paddingY)
-						? paddingY
-						: isDefined(padding)
-						? padding
-						: ''
-				}
-				paddingLeft={
-					isDefined(paddingLeft)
-						? paddingLeft
-						: isDefined(paddingX)
-						? paddingX
-						: isDefined(padding)
-						? padding
-						: ''
-				}
+				display="flex"
+				alignItems="center"
+				color={disabled && 'gray22'}
+				whiteSpace="nowrap"
+				background="transparent"
+				hoverBackgroundColor="gray4"
+				textStyle="c.16"
+				focusOutline="none"
+				focusBorder="0"
+				padding={3}
+				{...ariaProps}
 			>
 				{typeof children === 'function' ? children({ selected: isSelected, disabled }) : children}
 			</MenuItemContent>
@@ -155,7 +98,3 @@ const MenuItemContent = styled(Text).attrs({ tabIndex: '-1' })`
 		${system({ hoverBackgroundColor: { property: 'background-color', scale: 'colors' } })};
 	}
 `;
-
-const isDefined = function(value) {
-	return value !== undefined && value !== null;
-};
