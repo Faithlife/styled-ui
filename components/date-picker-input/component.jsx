@@ -135,7 +135,14 @@ export class DatePickerInput extends PureComponent {
 	);
 
 	render() {
-		const { disabled, defaultSelectedDate, placement, styleOverrides } = this.props;
+		const {
+			disabled,
+			defaultSelectedDate,
+			placement,
+			styleOverrides,
+			padding,
+			...props
+		} = this.props;
 		const { text, selectedDate, showCalendar } = this.state;
 
 		const defaultValue = defaultSelectedDate ? this.formatDate(defaultSelectedDate) : '';
@@ -174,9 +181,11 @@ export class DatePickerInput extends PureComponent {
 					<Popover
 						placement={placement}
 						isOpen={showCalendar}
-						paddingY={5}
-						paddingX="20px"
+						padding={padding}
+						paddingY={padding !== undefined && padding !== null ? padding : 5}
+						paddingX={padding !== undefined && padding !== null ? padding : '20px'}
 						styleOverrides={popoverStyleOverrides}
+						{...props}
 					>
 						{/*eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
 						<div onClick={this.handlePopoutClicked}>
