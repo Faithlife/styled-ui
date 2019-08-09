@@ -187,13 +187,13 @@ HelpBox.propTypes = {
 	handleClose: PropTypes.func,
 };
 
-HelpBox.Body = ({ children }) => (
-	<Box display="flex" flex="1" order="2">
+HelpBox.Body = ({ children, ...props }) => (
+	<Box display="flex" flex="1" order="2" {...props}>
 		{children}
 	</Box>
 );
 
-HelpBox.Footer = ({ children, stacked }) => (
+HelpBox.Footer = ({ children, stacked, ...props }) => (
 	<Box
 		display="flex"
 		order="2"
@@ -202,6 +202,7 @@ HelpBox.Footer = ({ children, stacked }) => (
 		marginRight={[0, stacked ? 5 : 0]}
 		marginBottom={[0, stacked ? 0 : '-6px']}
 		marginLeft={[0, stacked ? 0 : 5]}
+		{...props}
 	>
 		{children}
 	</Box>
