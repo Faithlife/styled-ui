@@ -40,7 +40,7 @@ export function CheckboxContent({ isChecked, title, children, disabled }) {
 				</Label>
 			)}
 			{children && (
-				<Label marginLeft="22px" siblingMarginLeft="6px">
+				<Label marginLeft="22px" siblingMarginLeft="6px" textStyle="c.14">
 					{children}
 				</Label>
 			)}
