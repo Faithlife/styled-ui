@@ -1,7 +1,5 @@
-import React, { useCallback, useState, useEffect, useRef } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useCopyRefs } from '../shared-hooks';
-import { Input } from '../input';
 import * as Styled from './styled';
 
 export const ParameterInputBox = React.forwardRef((props, ref) => {
@@ -14,55 +12,52 @@ export const ParameterInputBox = React.forwardRef((props, ref) => {
 		accessibilityLabel,
 		styleOverrides,
 		theme,
+		onFocus,
+		onBlur,
 		...inputProps
 	} = props;
 	const [isFocused, setIsFocused] = useState(false);
-	const inputRef = useRef();
-	const refGroup = useCopyRefs([ref, inputRef]);
-
-	/**
-	 * Due to a really strange firefox bug inputs with type=number will unfocus the input as soon as it is focused using the autofocus option.
-	 * Possibly related to https://github.com/angular/angular.js/issues/8365 though the described fixes did not work.
-	 */
-	useEffect(() => {
-		if (isFocused && inputRef.current) {
-			inputRef.current.focus();
-		}
-	}, [isFocused]);
 
 	const toggleFocus = useCallback(() => {
 		setIsFocused(state => !state);
 	}, []);
 
+	const handleFocus = useCallback(() => {
+		if (onFocus) {
+			onFocus();
+		}
+		toggleFocus();
+	}, [onFocus, toggleFocus]);
+
+	const handleBlur = useCallback(() => {
+		if (onBlur) {
+			onBlur();
+		}
+		toggleFocus();
+	}, [onBlur, toggleFocus]);
+
 	const displayValue = formatValue(value || defaultValue);
 
 	return (
-		<Styled.Container {...(isFocused ? { width } : {})}>
-			{!isFocused ? (
-				<Styled.Button onClick={toggleFocus} onFocus={toggleFocus}>
-					<Styled.ButtonContent theme={theme} styleOverrides={styleOverrides}>
-						{displayValue}
-					</Styled.ButtonContent>
-				</Styled.Button>
-			) : (
-				<Styled.InputContainer>
-					<Input
-						ref={refGroup}
-						small
-						inline
-						value={value}
-						onChange={onChange}
-						placeholder={defaultValue}
-						onEnter={toggleFocus}
-						onBlur={toggleFocus}
-						theme={theme}
-						styleOverrides={{ width, ...styleOverrides }}
-						aria-label={accessibilityLabel}
-						{...inputProps}
-					/>
-				</Styled.InputContainer>
-			)}
-		</Styled.Container>
+		<Styled.InputContainer
+			width={width}
+			isFocused={isFocused}
+			theme={theme}
+			styleOverrides={{ width, ...styleOverrides }}
+		>
+			<Styled.Input
+				ref={ref}
+				onChange={onChange}
+				placeholder={defaultValue}
+				onFocus={handleFocus}
+				onBlur={handleBlur}
+				value={!isFocused ? displayValue : value}
+				theme={theme}
+				aria-label={accessibilityLabel}
+				styleOverrides={{ width, ...styleOverrides }}
+				{...inputProps}
+			/>
+		</Styled.InputContainer>
 	);
 });
 

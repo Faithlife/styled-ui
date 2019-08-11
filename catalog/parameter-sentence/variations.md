@@ -20,9 +20,8 @@ state: {
 			value={state.percentage}
 			onChange={event => setState({ percentage: event.target.value })}
 			formatValue={val => `${val}%`}
-			width="35px"
+			width="30px"
 			accessibilityLabel={'Percent of income to tithe'}
-			type="number"
 		/>
 		{' of my '}
 		<ParameterSelect
