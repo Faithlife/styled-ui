@@ -36,7 +36,7 @@ export const ParameterInputBox = React.forwardRef((props, ref) => {
 		toggleFocus();
 	}, [onBlur, toggleFocus]);
 
-	const displayValue = formatValue(value || defaultValue);
+	const displayValue = formatValue ? formatValue(value || defaultValue) : value || defaultValue;
 
 	return (
 		<Styled.InputContainer
