@@ -85,21 +85,21 @@ Button.propTypes = {
 	]),
 	/** Enum with values: 'small', 'medium', and 'large' */
 	size: PropTypes.oneOf(['small', 'medium', 'large']),
-	/** Primary button variation */
+	/** Primary button variation (deprecated in favor of the variant prop) */
 	primary: PropTypes.bool,
-	/** Primary outline variation */
+	/** Primary outline variation (deprecated in favor of the variant prop) */
 	primaryOutline: PropTypes.bool,
-	/** Small variation */
+	/** Small variation (deprecated in favor of the size prop) */
 	small: PropTypes.bool,
-	/** Medium variation */
+	/** Medium variation (deprecated in favor of the size prop) */
 	medium: PropTypes.bool,
-	/** Large variation */
+	/** Large variation (deprecated in favor of the size prop) */
 	large: PropTypes.bool,
-	/** Transparent with primary text variation */
+	/** Transparent with primary text variation (deprecated in favor of the variant prop) */
 	primaryTransparent: PropTypes.bool,
-	/** Minor button variation */
+	/** Minor button variation (deprecated in favor of the variant prop) */
 	minor: PropTypes.bool,
-	/** Transparent with minor text variation */
+	/** Transparent with minor text variation (deprecated in favor of the variant prop) */
 	minorTransparent: PropTypes.bool,
 	/** Enables rendering a display: flex span, needed for rendering SVG icons */
 	icon: PropTypes.node,
