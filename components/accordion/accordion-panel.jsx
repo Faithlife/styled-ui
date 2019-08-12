@@ -4,7 +4,7 @@ import { Box } from '../Box';
 import { Collapse } from '../collapse';
 import { useAccordionItemContext } from './accordion-util';
 
-export function AccordionPanel({ children }) {
+export function AccordionPanel({ children, padding, ...props }) {
 	const { isExpanded, headerId, panelId } = useAccordionItemContext();
 	return (
 		<Box>
@@ -14,8 +14,9 @@ export function AccordionPanel({ children }) {
 					aria-labelledby={`accordion-header-${headerId}`}
 					id={`accordion-panel-${panelId}`}
 					gridArea="panel"
-					padding={6}
-					paddingTop={4}
+					padding={padding !== undefined && padding !== null ? padding : 6}
+					paddingTop={padding !== undefined && padding !== null ? padding : 4}
+					{...props}
 				>
 					{children}
 				</Box>

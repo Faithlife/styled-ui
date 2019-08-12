@@ -8,7 +8,16 @@ import ExpandedIcon from './svgs/expanded-icon.svg';
 import CollapsedIcon from './svgs/collapsed-icon.svg';
 import { useAccordionContext, useAccordionItemContext } from './accordion-util';
 
-export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, subtitle }) {
+export function AccordionHeader({
+	ariaLevel,
+	children,
+	renderCustomIndicator,
+	padding,
+	paddingX,
+	paddingRight,
+	paddingLeft,
+	...props
+}) {
 	const {
 		focusedMenuItem,
 		focusableChildList,
@@ -73,9 +82,27 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 						borderTop={1}
 						borderColor="gray14"
 						background="linear-gradient(180deg, #fafafa, hsla(0, 0%, 100%, 0))"
-						paddingY={5}
-						paddingX={[5, null, 6]}
+						paddingY={isDefined(padding) ? padding : 5}
+						paddingRight={
+							isDefined(paddingRight)
+								? paddingRight
+								: isDefined(paddingX)
+								? paddingX
+								: isDefined(padding)
+								? padding
+								: [5, null, 6]
+						}
+						paddingLeft={
+							isDefined(paddingLeft)
+								? paddingLeft
+								: isDefined(paddingX)
+								? paddingX
+								: isDefined(padding)
+								? padding
+								: [5, null, 6]
+						}
 						css={{ lineHeight: '1' }}
+						{...props}
 					>
 						<React.Fragment>
 							{!hideArrows && (
@@ -87,22 +114,7 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 								gridGap={6}
 								alignItems="center"
 							>
-								{children ? (
-									<Text
-										display="grid"
-										color="gray52"
-										textStyle="h.16"
-										textTransform="uppercase"
-										whiteSpace="nowrap"
-									>
-										{children}
-									</Text>
-								) : null}
-								{subtitle ? (
-									<Text display="grid" color="gray52" textStyle="c.14" whiteSpace="nowrap">
-										{subtitle}
-									</Text>
-								) : null}
+								{children}
 							</Box>
 						</React.Fragment>
 					</Box>
@@ -120,8 +132,6 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 AccordionHeader.propTypes = {
 	/** Children will be rendered as part of the header title. */
 	children: PropTypes.node,
-	/** The subtitle is separated from the header title by a small gap.*/
-	subtitle: PropTypes.node,
 	/** Defines the hierarchical level of an element within a structure. */
 	ariaLevel: PropTypes.number,
 	/** Receives an isExpanded boolean value. */
@@ -156,3 +166,26 @@ const HeadingButton = styled.button.attrs({
 	height: 100%;
 	text-align: left;
 `;
+
+AccordionHeader.Title = ({ children, ...props }) => (
+	<Text
+		display="grid"
+		color="gray52"
+		textStyle="h.16"
+		textTransform="uppercase"
+		whiteSpace="nowrap"
+		{...props}
+	>
+		{children}
+	</Text>
+);
+
+AccordionHeader.Subtitle = ({ children, ...props }) => (
+	<Text display="grid" color="gray52" textStyle="c.14" whiteSpace="nowrap" {...props}>
+		{children}
+	</Text>
+);
+
+const isDefined = function(value) {
+	return value !== undefined && value !== null;
+};

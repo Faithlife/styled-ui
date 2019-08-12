@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 import { Box } from '../Box';
 import { useKeyboardNav, AccordionContextProvider } from './accordion-util';
 
-export function Accordion({ children, expandedSections, hideArrows, onExpansion, styleOverrides }) {
+export function Accordion({
+	children,
+	expandedSections,
+	hideArrows,
+	onExpansion,
+	styleOverrides,
+	...props
+}) {
 	const [focusedMenuItem, setFocusedMenuItem] = useState(null);
 	const focusableChildList = useRef([]);
 	const handleKeyboardNav = useKeyboardNav(
@@ -47,7 +54,7 @@ export function Accordion({ children, expandedSections, hideArrows, onExpansion,
 	);
 
 	return (
-		<Box onKeyDown={handleKeyboardNav}>
+		<Box onKeyDown={handleKeyboardNav} {...props}>
 			<AccordionContextProvider value={context}>
 				{React.Children.map(children, (child, index) =>
 					React.isValidElement(child) ? React.cloneElement(child, { index }) : null,
