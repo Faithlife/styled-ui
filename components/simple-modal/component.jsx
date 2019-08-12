@@ -29,9 +29,6 @@ export class SimpleModal extends React.Component {
 	};
 
 	static defaultProps = {
-		theme: {
-			background: 'white',
-		},
 		styleOverrides: {
 			zIndex: 1050,
 		},
@@ -73,7 +70,7 @@ export class SimpleModal extends React.Component {
 	};
 
 	renderModal() {
-		const { onClose, children, styleOverrides } = this.props;
+		const { onClose, children, styleOverrides, ...props } = this.props;
 		const { modalWidth } = this.state;
 
 		const backdropStyleOverrides = {
@@ -99,6 +96,7 @@ export class SimpleModal extends React.Component {
 					maxHeight="80%"
 					borderRadius={1}
 					backgroundColor="white"
+					{...props}
 				>
 					<Box position="absolute" top="24px" right="24px">
 						<Button minorTransparent icon={<Close />} onClick={onClose} />
