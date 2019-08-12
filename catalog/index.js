@@ -53,6 +53,7 @@ import {
 	PaginatedTable,
 	SimpleTable,
 	Box,
+	Stack,
 } from '../index';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
@@ -117,6 +118,15 @@ const components = [
 				content: pageLoader(() => import('./layout/box.md')),
 				imports: {
 					Box,
+				},
+			},
+			{
+				path: '/layout/stack',
+				title: 'Stack',
+				content: pageLoader(() => import('./layout/stack.md')),
+				imports: {
+					Box,
+					Stack,
 				},
 			},
 		],
