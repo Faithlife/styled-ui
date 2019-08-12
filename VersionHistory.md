@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.12.3
+
+- Simplify `ParameterInputBox` to only use inputs
+
 ### 5.12.2
 
 - Fix `ParameterInputBox` styling on safari mobile
