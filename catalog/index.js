@@ -54,6 +54,9 @@ import {
 	SimpleTable,
 	Box,
 	Stack,
+	Text,
+	Paragraph,
+	theme,
 } from '../index';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
@@ -108,6 +111,10 @@ function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
 }
 
+const ThemeList = ({ items, render }) => {
+	return <>{[...Object.entries(items(theme))].map(render)}</>;
+};
+
 const components = [
 	{
 		title: 'Layout Primitives',
@@ -127,6 +134,18 @@ const components = [
 				imports: {
 					Box,
 					Stack,
+				},
+			},
+			{
+				path: '/layout/text',
+				title: 'Text',
+				content: pageLoader(() => import('./layout/Text.md')),
+				imports: {
+					Box,
+					Stack,
+					Text,
+					Paragraph,
+					ThemeList,
 				},
 			},
 		],
