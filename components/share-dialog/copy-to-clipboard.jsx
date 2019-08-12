@@ -51,9 +51,9 @@ export class CopyToClipboard extends React.Component {
 		const { showFeedback } = this.state;
 
 		return (
-			<Box display="flex" alignItems="center" my={2}>
+			<Box display="flex" alignItems="center" marginY={2}>
 				{!hideInput && (
-					<Box mx={3}>
+					<Box marginX={3}>
 						<Input small type="text" readOnly value={copyValue} onClick={this.selectSelf} />
 					</Box>
 				)}

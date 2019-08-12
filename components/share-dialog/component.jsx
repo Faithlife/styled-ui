@@ -36,14 +36,14 @@ export class ShareDialog extends React.Component {
 	}
 
 	render() {
-		const { shareUrl, message, onClose, isOpen, modalTitle, copyButtonText } = this.props;
+		const { shareUrl, message, onClose, isOpen, modalTitle, copyButtonText, ...props } = this.props;
 		const { onDesktop } = this.state;
 
 		const encodedShareUrl = encodeURIComponent(shareUrl);
 		const encodedMessage = message ? encodeURIComponent(message) : '';
 
 		const desktopModal = (
-			<Box display="flex" alignItems="center" my={2}>
+			<Box display="flex" alignItems="center" marginY={2}>
 				<FaithlifeShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
 				<TwitterShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
 				<FacebookShareButton encodedShareUrl={encodedShareUrl} />
@@ -53,20 +53,27 @@ export class ShareDialog extends React.Component {
 		);
 		const mobileModal = (
 			<Box>
-				<Box display="flex" alignItems="center" my={2}>
+				<Box display="flex" alignItems="center" marginY={2}>
 					<FaithlifeShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
 					<TwitterShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
 					<FacebookShareButton encodedShareUrl={encodedShareUrl} />
 					<EmailShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
 				</Box>
-				<Box display="flex" alignItems="center" my={2}>
+				<Box display="flex" alignItems="center" marginY={2}>
 					<CopyToClipboard copyValue={shareUrl} copyButtonText={copyButtonText} />
 				</Box>
 			</Box>
 		);
 
 		return (
-			<Modal withoutFooter isOpen={isOpen} onClose={onClose} title={modalTitle} container="body">
+			<Modal
+				withoutFooter
+				isOpen={isOpen}
+				onClose={onClose}
+				title={modalTitle}
+				container="body"
+				{...props}
+			>
 				{onDesktop ? desktopModal : mobileModal}
 			</Modal>
 		);
