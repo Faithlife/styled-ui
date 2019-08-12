@@ -6,20 +6,21 @@ import { Box } from '../Box';
 import { Text } from '../Text';
 import { SmallCheck } from '../icons';
 
-export function CheckboxContent({ isChecked, title, children, disabled }) {
+export function CheckboxContent({ isChecked, children, disabled, hoverBorderColor, ...props }) {
 	return (
 		<React.Fragment>
 			<HoverableBox
 				disabled={disabled}
 				border={1}
 				borderColor={disabled ? 'gray22' : '#95908f'}
-				hoverBorderColor={disabled || 'blue4'}
+				hoverBorderColor={hoverBorderColor || (disabled || 'blue4')}
 				borderRadius={1}
 				position="absolute"
 				width="14px"
 				height="14px"
 				background="transparent"
 				backgroundColor={disabled && 'gray8'}
+				{...props}
 			>
 				<Box position="absolute" top="0" left="0" width="14px" height="14px">
 					<IconBox
@@ -30,15 +31,10 @@ export function CheckboxContent({ isChecked, title, children, disabled }) {
 						height="9.6px"
 						width="9.6px"
 						opacity={isChecked ? '1' : '0'}
-						fill="blue4"
+						fill={hoverBorderColor || 'blue4'}
 					/>
 				</Box>
 			</HoverableBox>
-			{title && (
-				<Label marginLeft="22px" siblingMarginLeft="6px" textStyle="c.14">
-					{title}
-				</Label>
-			)}
 			{children && (
 				<Label marginLeft="22px" siblingMarginLeft="6px" textStyle="c.14">
 					{children}
@@ -50,7 +46,6 @@ export function CheckboxContent({ isChecked, title, children, disabled }) {
 
 CheckboxContent.propTypes = {
 	children: PropTypes.node,
-	title: PropTypes.string,
 	isChecked: PropTypes.bool,
 	disabled: PropTypes.bool,
 };

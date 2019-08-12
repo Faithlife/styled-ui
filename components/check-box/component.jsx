@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { resetStyles } from '../utils';
-import { colors as sharedColors } from '../shared-styles';
 import { CheckboxContent } from './checkbox-content';
 
 /** Styled checkbox control with consistent styling across platforms */
@@ -42,7 +41,7 @@ export class Checkbox extends Component {
 	componentRef = React.createRef();
 
 	render() {
-		const { onClick, title, isChecked, type, children, className, disabled } = this.props;
+		const { onClick, title, isChecked, type, children, className, disabled, ...props } = this.props;
 		return (
 			<CheckboxContainer
 				ref={this.componentRef}
@@ -54,7 +53,7 @@ export class Checkbox extends Component {
 				aria-checked={isChecked}
 				disabled={disabled}
 			>
-				<CheckboxContent isChecked={isChecked} title={title} disabled={disabled}>
+				<CheckboxContent isChecked={isChecked} title={title} disabled={disabled} {...props}>
 					{children}
 				</CheckboxContent>
 			</CheckboxContainer>
@@ -63,12 +62,6 @@ export class Checkbox extends Component {
 }
 
 Checkbox.defaultProps = {
-	theme: {
-		primary: sharedColors.blueBase,
-		border: '#95908f',
-		disabledBackground: sharedColors.gray8,
-		disabledBorder: sharedColors.gray22,
-	},
 	type: 'button',
 };
 
