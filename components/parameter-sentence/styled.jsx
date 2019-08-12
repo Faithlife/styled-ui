@@ -2,8 +2,6 @@ import styled, { css } from 'styled-components';
 import { colors, thickness } from '../shared-styles';
 import { resetStyles } from '../utils';
 
-const inputOffset = '-6px';
-
 const selectStyling = css`
 	white-space: nowrap;
 	min-height: fit-content;
@@ -64,23 +62,6 @@ export const Container = styled.div`
 	width: ${props => props.width};
 `;
 
-export const InputContainer = styled.div`
-	z-index: 0;
-	position: absolute;
-	bottom: ${inputOffset};
-	padding: 0;
-
-	&& > input::-webkit-outer-spin-button,
-	input::-webkit-inner-spin-button {
-		appearance: none;
-		margin: 0;
-	}
-
-	&& > input[type='number'] {
-		appearance: textfield; /* Firefox */
-	}
-`;
-
 export const ParameterSentence = styled.form.attrs({
 	role: props => (props.isSearchForm ? 'search' : 'form'),
 	'aria-labelledby': ({ labelledBy }) => labelledBy,
@@ -111,5 +92,53 @@ export const Select = styled.select`
 			box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
 		}
 		outline: none;
+	}
+`;
+
+export const InputContainer = styled.div`
+	display: inline-block;
+	position: relative;
+	width: ${props => props.width};
+
+	${selectStyling};
+
+	border-bottom: ${({ isFocused }) => (isFocused ? 'solid' : 'dashed')} ${thickness.two}
+		${({ theme }) => theme.underlineColor || colors.blueBase};
+
+	&& > input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		appearance: none;
+		margin: 0;
+	}
+
+	&& > input[type='number'] {
+		appearance: textfield; /* Firefox */
+	}
+`;
+
+export const Input = styled.input`
+	${resetStyles};
+
+	padding: 0;
+	padding-bottom: 0;
+
+	width: ${props => props.styleOverrides.width};
+	height: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
+	line-height: 1;
+	font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
+	font-weight: 600;
+	border-radius: 0;
+
+	background-color: transparent;
+	border: none;
+	box-shadow: none;
+	outline: none;
+
+	&:disabled {
+		opacity: 0.5;
+	}
+
+	&:read-only {
+		background: ${colors.gray8};
 	}
 `;
