@@ -34,7 +34,6 @@ export class SimpleToast extends PureComponent {
 
 	static defaultProps = {
 		showTime: 1000,
-		theme: {},
 		styleOverrides: {},
 	};
 
@@ -82,7 +81,15 @@ export class SimpleToast extends PureComponent {
 	};
 
 	render() {
-		const { theme, styleOverrides } = this.props;
+		const {
+			theme,
+			styleOverrides,
+			padding,
+			paddingY,
+			paddingTop,
+			paddingBottom,
+			...props
+		} = this.props;
 		const { messages, transitionIn } = this.state;
 		const hasMultipleMessages = messages.length > 1;
 
@@ -102,6 +109,44 @@ export class SimpleToast extends PureComponent {
 						theme={theme}
 						styleOverrides={styleOverrides}
 						onAnimationEnd={this.handleAnimationEnd}
+						display="grid"
+						gridAutoFlow="column"
+						gridColumnGap={3}
+						gridTemplateColumns="min-content"
+						position="fixed"
+						top={['55px', 'auto']}
+						right={[null, '24px']}
+						bottom={[null, '24px']}
+						left={['50%', 'auto']}
+						justifyItems={['center', 'left']}
+						zIndex="1000"
+						backgroundColor="white"
+						borderRadius={1}
+						boxShadow="0 19px 38px 0 rgba(0, 0, 0, 0.12), 0 15px 12px 0 rgba(0, 0, 0, 0.12)"
+						opacity="0"
+						textStyle="ui.18"
+						paddingTop={
+							isDefined(paddingTop)
+								? paddingTop
+								: isDefined(padding)
+								? padding
+								: isDefined(paddingY)
+								? paddingY
+								: ['10px', 5]
+						}
+						paddingBottom={
+							isDefined(paddingBottom)
+								? paddingBottom
+								: isDefined(padding)
+								? padding
+								: isDefined(paddingY)
+								? paddingY
+								: ['10px', 5]
+						}
+						paddingX={isDefined(padding) ? padding : 5}
+						height={['18px', '20px']}
+						minWidth="285px"
+						{...props}
 					>
 						{messages.length > 0 && messages[0].icon}
 						{messages.length > 0 && <Text whiteSpace="nowrap">{messages[0].message}</Text>}
@@ -114,3 +159,7 @@ export class SimpleToast extends PureComponent {
 		);
 	}
 }
+
+const isDefined = function(value) {
+	return value !== undefined && value !== null;
+};

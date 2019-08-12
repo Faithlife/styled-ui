@@ -1,13 +1,12 @@
 import styled, { keyframes, css } from 'styled-components';
+import { typography } from '../../theme/system';
 import { TransitionStatuses } from '../utils';
-import { fonts, colors, thickness, mediaSizes } from '../shared-styles';
+import { mediaSizes } from '../shared-styles';
 import { Box } from '../Box';
 
 const fixedHeaderHeight = 47; // px
 const fixedHeightOffset = 8; // px
 const toastOffset = { desktop: '24px', mobile: `${fixedHeaderHeight + fixedHeightOffset}px` };
-const toastMinWidth = '285px';
-const toastHeight = { desktop: '20px', mobile: '18px' };
 
 const slideIn = ({ styleOverrides }) => keyframes`
 	from {
@@ -22,23 +21,7 @@ const slideIn = ({ styleOverrides }) => keyframes`
 export const transitionTime = 250; // milliseconds
 
 export const ToastContainer = styled(Box)`
-	/** Shared Styles */
-	display: grid;
-	grid-auto-flow: column;
-	grid-column-gap: ${thickness.eight};
-
-	grid-template-columns: min-content;
-
-	position: fixed;
-	z-index: ${({ styleOverrides }) => styleOverrides.zIndex || 1000};
-	${({ styleOverrides }) => (styleOverrides.width ? `width: ${styleOverrides.width}` : '')};
-
-	${fonts.ui18};
-
-	background-color: ${({ theme }) => theme.backgroundColor || colors.white};
-	border-radius: 3px;
-	box-shadow: 0 19px 38px 0 rgba(0, 0, 0, 0.12), 0 15px 12px 0 rgba(0, 0, 0, 0.12);
-	opacity: 0;
+	${typography}
 
 	> svg {
 		height: 1em;
@@ -46,14 +29,7 @@ export const ToastContainer = styled(Box)`
 	}
 
 	/** Mobile Styles */
-	padding: 10px 16px;
-	height: ${({ styleOverrides }) => styleOverrides.height || toastHeight.mobile};
-	top: ${({ styleOverrides }) => styleOverrides.topOffset || toastOffset.mobile};
-	left: 50%;
 	transform: translateX(-50%);
-
-	justify-items: center;
-
 	${props => {
 		switch (props.state) {
 			case TransitionStatuses.ENTERING:
@@ -77,19 +53,7 @@ export const ToastContainer = styled(Box)`
 
 	/** Desktop */
 	@media (min-width: ${mediaSizes.tablet}) {
-		padding: 16px;
-		${({ styleOverrides }) => (!styleOverrides.width ? `min-width: ${toastMinWidth}` : '')};
-		height: ${({ styleOverrides }) => styleOverrides.height || toastHeight.desktop};
-
-		right: ${({ styleOverrides }) => styleOverrides.rightOffset || toastOffset.desktop};
-
-		top: auto;
-		left: auto;
 		transform: none;
-		justify-items: left;
-
-		bottom: ${({ styleOverrides }) => styleOverrides.bottomOffset || toastOffset.desktop};
-
 		${props => {
 			switch (props.state) {
 				case TransitionStatuses.ENTERING:
