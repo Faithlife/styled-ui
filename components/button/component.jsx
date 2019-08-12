@@ -1,32 +1,58 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { applyVariations } from '../utils';
 import * as Styled from './styled';
+
+function getVariation(variant, obj) {
+	if (variant) {
+		return variant;
+	}
+	return [...Object.entries(obj)].find(entry => entry[1])[0];
+}
 
 const Button = React.forwardRef(function Button(props, ref) {
 	// To make sure that Button and the AnchorButton components get the right props we export an object with the expected props for the Button
 	// The AnchorButton should get all props that are not explicity required by the child
 	// eslint-disable-next-line react/prop-types
-	const { children, theme, styleOverrides, icon, as, ...buttonProps } = props;
-
-	const { component: MappedStyledComponent, filteredProps } = applyVariations(
-		Styled.Button,
-		Styled.variationMap,
-		buttonProps,
-	);
+	const {
+		children,
+		theme,
+		styleOverrides,
+		icon,
+		variant,
+		size,
+		primary,
+		primaryOutline,
+		primaryTransparent,
+		minor,
+		minorTransparent,
+		small,
+		medium,
+		large,
+		as,
+		...buttonProps
+	} = props;
 
 	return (
-		<MappedStyledComponent
+		<Styled.Button
 			ref={ref}
 			as={as}
 			theme={theme}
-			{...filteredProps || {}}
 			styleOverrides={styleOverrides}
 			hasChildren={!!children}
+			variant={getVariation(variant, {
+				primary,
+				primaryOutline,
+				primaryTransparent,
+				minor,
+				minorTransparent,
+				none: true,
+			})}
+			size={getVariation(size, { small, medium, large, none: true })}
+			{...buttonProps}
 		>
 			{icon}
 			{children}
-		</MappedStyledComponent>
+		</Styled.Button>
 	);
 });
 
@@ -49,6 +75,16 @@ Button.propTypes = {
 		padding: PropTypes.string,
 		justifyContent: PropTypes.string,
 	}),
+	/** Enum with values: 'primary', 'primaryOutline', 'primaryTransparent', 'minor', and 'minorTransparent' */
+	variant: PropTypes.oneOf([
+		'primary',
+		'primaryOutline',
+		'primaryTransparent',
+		'minor',
+		'minorTransparent',
+	]),
+	/** Enum with values: 'small', 'medium', and 'large' */
+	size: PropTypes.oneOf(['small', 'medium', 'large']),
 	/** Primary button variation */
 	primary: PropTypes.bool,
 	/** Primary outline variation */
