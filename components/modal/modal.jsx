@@ -53,9 +53,6 @@ export class Modal extends React.Component {
 	};
 
 	static defaultProps = {
-		theme: {
-			background: 'white',
-		},
 		styleOverrides: {
 			zIndex: 1050,
 		},
@@ -106,6 +103,7 @@ export class Modal extends React.Component {
 			footerProps,
 			withoutFooter,
 			styleOverrides,
+			...props
 		} = this.props;
 
 		const { modalWidth } = this.state;
@@ -141,6 +139,7 @@ export class Modal extends React.Component {
 					padding={6}
 					borderRadius={1}
 					backgroundColor="white"
+					{...props}
 				>
 					<ModalHeader
 						title={title}
