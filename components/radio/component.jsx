@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { system } from 'styled-system';
 import { resetStyles } from '../utils';
-import { colors as sharedColors } from '../shared-styles';
 import { Box } from '../Box';
 import { Text } from '../Text';
 
@@ -30,12 +29,6 @@ export class Radio extends Component {
 	};
 
 	static defaultProps = {
-		theme: {
-			primary: sharedColors.blueBase,
-			border: '#95908f',
-			disabledBackground: sharedColors.gray8,
-			disabledBorder: sharedColors.gray22,
-		},
 		type: 'button',
 	};
 
@@ -53,7 +46,16 @@ export class Radio extends Component {
 	componentRef = React.createRef();
 
 	render() {
-		const { onClick, title, isChecked, type, children, className, disabled } = this.props;
+		const {
+			onClick,
+			isChecked,
+			type,
+			children,
+			className,
+			disabled,
+			hoverBorderColor,
+			...props
+		} = this.props;
 		return (
 			<RadioContainer
 				ref={this.componentRef}
@@ -72,9 +74,10 @@ export class Radio extends Component {
 					borderRadius="50%"
 					border={1}
 					borderColor={disabled ? 'gray22' : '#95908f'}
-					hoverBorderColor={disabled || 'blue4'}
+					hoverBorderColor={hoverBorderColor || (disabled || 'blue4')}
 					background="transparent"
 					backgroundColor={disabled && 'gray8'}
+					{...props}
 				>
 					<Box
 						position="absolute"
@@ -84,14 +87,9 @@ export class Radio extends Component {
 						height="8px"
 						borderRadius="50%"
 						opacity={isChecked ? '1' : '0'}
-						backgroundColor="blue4"
+						backgroundColor={hoverBorderColor || 'blue4'}
 					/>
 				</HoverableBox>
-				{title && (
-					<Label marginLeft="22px" siblingMarginLeft="6px" textStyle="c.14">
-						{title}
-					</Label>
-				)}
 				{children && (
 					<Label marginLeft="22px" siblingMarginLeft="6px">
 						{children}
