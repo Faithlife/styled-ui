@@ -8,7 +8,16 @@ import { Text } from '../Text';
 export function Tab(props) {
 	// PropType linting is diabled so out hidden props can be destuctured along with own consumer props
 	/* eslint-disable react/prop-types */
-	const { children, disabled, styleOverrides, index, selected, onSelectTab, panelId } = props;
+	const {
+		children,
+		disabled,
+		styleOverrides,
+		index,
+		selected,
+		onSelectTab,
+		panelId,
+		...otherProps
+	} = props;
 	const tabRef = useRef();
 
 	useEffect(() => {
@@ -49,6 +58,7 @@ export function Tab(props) {
 				textStyle={styleOverrides.fontSize || 'h16'}
 				fontWeight={selected ? 'semibold' : 'regular'}
 				css={{ cursor: 'pointer' }}
+				{...otherProps}
 			>
 				{typeof children === 'function' ? children({ selected, disabled }) : children}
 			</TabContent>

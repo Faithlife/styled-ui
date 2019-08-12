@@ -6,8 +6,8 @@ import { useId } from '../shared-hooks';
 import { Box } from '../Box';
 import { useTabContext, useKeyboardNav } from './tab-utils';
 
-export function TabList({ children }) {
-	const { onSelectTab, selectedTabIndex, theme, panelIdsMap } = useTabContext();
+export function TabList({ children, ...props }) {
+	const { onSelectTab, selectedTabIndex, panelIdsMap } = useTabContext();
 
 	const handleKeyboardNav = useKeyboardNav(selectedTabIndex, onSelectTab, children);
 
@@ -20,6 +20,7 @@ export function TabList({ children }) {
 			notLastSiblingMarginRight={3}
 			borderBottom={1}
 			borderColor="gray14"
+			{...props}
 		>
 			{React.Children.map(children, (child, index) =>
 				React.isValidElement(child)
@@ -27,7 +28,6 @@ export function TabList({ children }) {
 							selected: selectedTabIndex === index,
 							onSelectTab,
 							index,
-							theme,
 							panelId: panelIdsMap[index],
 					  })
 					: null,
@@ -46,10 +46,10 @@ const TabListBox = styled(Box)`
 	}
 `;
 
-export function TabPanels({ children }) {
+export function TabPanels({ children, ...props }) {
 	const { selectedTabIndex, registerPanelId, unRegisterPanelId } = useTabContext();
 	return (
-		<Box>
+		<Box {...props}>
 			{React.Children.map(children, (child, index) =>
 				React.isValidElement(child)
 					? React.cloneElement(child, {
@@ -71,7 +71,7 @@ TabPanels.propTypes = {
 export function TabPanel(props) {
 	// PropType linting is diabled so out hidden props can be destuctured along with own consumer props
 	// eslint-disable-next-line react/prop-types
-	const { children, selected, registerPanelId, unRegisterPanelId, index } = props;
+	const { children, selected, registerPanelId, unRegisterPanelId, index, ...otherProps } = props;
 	const id = useId();
 
 	useEffect(
@@ -96,6 +96,7 @@ export function TabPanel(props) {
 			position="relative"
 			padding={3}
 			focusOutline="none"
+			{...otherProps}
 		>
 			{children}
 		</TabPanelBox>
