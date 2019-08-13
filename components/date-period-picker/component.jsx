@@ -159,7 +159,7 @@ export class DatePeriodPicker extends PureComponent {
 							placeholder="mm/dd/yyyy"
 							value={start}
 							onChange={event => this.handleInputValueChange(event.target.value, 'start')}
-							small
+							variant="small"
 						/>
 					</Box>
 					<Box display="flex" flexDirection="column" minWidth="0px">
@@ -170,7 +170,7 @@ export class DatePeriodPicker extends PureComponent {
 							placeholder="mm/dd/yyyy"
 							value={end}
 							onChange={event => this.handleInputValueChange(event.target.value, 'end')}
-							small
+							variant="small"
 						/>
 					</Box>
 				</Box>

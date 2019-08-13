@@ -33,17 +33,13 @@ export class DatePickerInput extends PureComponent {
 		disabled: PropTypes.bool,
 		/** Where on the target the date picker renders */
 		placement: PlacementOptionsProps,
-		/** Style overrides, inputWidth is applied to the input */
-		styleOverrides: PropTypes.shape({
-			inputWidth: PropTypes.string,
-		}),
+		/** inputWidth is applied to the input */
+		inputWidth: PropTypes.string,
 	};
 
 	static defaultProps = {
 		placement: 'bottom-start',
-		styleOverrides: {
-			inputWidth: '100%',
-		},
+		inputWidth: '100%',
 	};
 
 	constructor(props) {
@@ -128,22 +124,12 @@ export class DatePickerInput extends PureComponent {
 	);
 
 	render() {
-		const {
-			disabled,
-			defaultSelectedDate,
-			placement,
-			styleOverrides,
-			padding,
-			...props
-		} = this.props;
+		const { disabled, defaultSelectedDate, placement, inputWidth, padding, ...props } = this.props;
 		const { text, selectedDate, showCalendar } = this.state;
 
 		const defaultValue = defaultSelectedDate ? this.formatDate(defaultSelectedDate) : '';
 		const formattedDate = selectedDate ? this.formatDate(selectedDate) : defaultValue;
 		const value = text ? text : formattedDate;
-		const inputStyleOverrides = {
-			width: styleOverrides.inputWidth,
-		};
 
 		return (
 			<Styled.Container>
@@ -155,7 +141,7 @@ export class DatePickerInput extends PureComponent {
 						onFocus={this.handleFocus}
 						value={value}
 						disabled={disabled}
-						styleOverrides={inputStyleOverrides}
+						width={inputWidth}
 					/>
 					<Styled.CalendarButton ref={this.icon} onClick={!disabled ? this.openCalendar : null}>
 						<Styled.CalendarIconContainer>
