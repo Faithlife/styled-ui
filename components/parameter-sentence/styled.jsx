@@ -117,28 +117,41 @@ export const InputContainer = styled.div`
 `;
 
 export const Input = styled.input`
-	${resetStyles};
+	&& {
+		${resetStyles};
 
-	padding: 0;
-	padding-bottom: 0;
+		padding: 0;
+		padding-bottom: 0;
 
-	width: ${props => props.styleOverrides.width};
-	height: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
-	line-height: 1;
-	font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
-	font-weight: 600;
-	border-radius: 0;
+		width: ${props => props.styleOverrides.width};
+		height: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
+		line-height: 1;
+		font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
+		font-weight: 600;
+		border-radius: 0;
 
-	background-color: transparent;
-	border: none;
-	box-shadow: none;
-	outline: none;
+		background-color: transparent;
+		border: none;
+		box-shadow: none;
+		outline: none;
 
-	&:disabled {
-		opacity: 0.5;
-	}
+		&:disabled {
+			opacity: 0.5;
+		}
 
-	&:read-only {
-		background: ${colors.gray8};
+		&:read-only {
+			background: ${colors.gray8};
+		}
+
+		&:focus,
+		&:focus-within,
+		&:focus-visible {
+			padding: 0;
+			padding-bottom: 0;
+			background-color: transparent;
+			border: none;
+			box-shadow: none;
+			outline: none;
+		}
 	}
 `;
