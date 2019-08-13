@@ -1,8 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { layout, textStyle, border } from 'styled-system';
+import { theme } from '../../theme';
+import { common, typography } from '../../theme/system';
 import { forwardClassRef, resetStyles } from '../utils';
-import { thickness, fonts, inputColors, colors } from '../shared-styles';
+import { thickness, inputColors, colors } from '../shared-styles';
 
 function getVariation(variant, obj) {
 	if (variant) {
@@ -41,7 +44,7 @@ export const Input = forwardClassRef(
 		};
 
 		static defaultProps = {
-			styleOverrides: {},
+			theme: theme,
 		};
 
 		handleChange = () => {
@@ -90,6 +93,12 @@ export const Input = forwardClassRef(
 					onClick={onClick}
 					onKeyPress={this.handleKeyPress}
 					ref={forwardedRef}
+					height="32px"
+					padding={3}
+					textStyle={variant === 'large' || large ? 'ui.18' : 'ui.16'}
+					border={1}
+					borderColor="inputBorderColor"
+					borderRadius={1}
 					{...inputProps}
 				/>
 			);
@@ -98,16 +107,13 @@ export const Input = forwardClassRef(
 );
 
 const StyledInput = styled.input`
+	${common};
+	${typography};
+	${layout};
+	${textStyle};
+	${border};
+
 	${resetStyles};
-
-	border-radius: 3px;
-	border: 1px solid ${inputColors.inputBorderColor};
-
-	padding: ${thickness.eight};
-	height: 32px;
-	${fonts.ui16};
-
-	width: ${props => props.styleOverrides.width};
 
 	&:focus {
 		border-color: ${inputColors.inputFocusedBorderColor};
@@ -129,19 +135,16 @@ const StyledInput = styled.input`
 				return css`
 					padding: ${thickness.eight};
 					height: 32px;
-					${fonts.ui16};
 				`;
 			case 'medium':
 				return css`
 					padding: 12px;
 					height: 40px;
-					${fonts.ui16};
 				`;
 			case 'large':
 				return css`
 					padding: 16px;
 					height: 56px;
-					${fonts.ui18};
 				`;
 			case 'inline':
 				return css`
@@ -150,11 +153,9 @@ const StyledInput = styled.input`
 					box-shadow: none;
 					border-radius: 0;
 					padding: 0;
-					border-bottom: solid ${thickness.two}
-						${({ theme }) => theme.underlineColor || colors.blueBase};
-					height: ${({ styleOverrides }) => styleOverrides.fontSize || '20px'};
+					border-bottom: solid ${thickness.two} ${colors.blueBase};
+					height: 20px;
 					padding-bottom: ${thickness.four};
-					font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
 
 					&:focus {
 						box-shadow: none;
