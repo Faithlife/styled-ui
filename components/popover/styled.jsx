@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { system } from 'styled-system';
-import { colors } from '../shared-styles';
 import { Box } from '../Box';
 
 const arrowWidth = '10px';
@@ -22,14 +21,14 @@ export const getPlacement = placement => {
 export const Arrow = styled(Box)`
 	&::after {
 		${system({ arrowBackground: { property: 'background', scale: 'colors' } })};
+		${system({ arrowShadow: { property: 'box-shadow', scale: 'shadows' } })};
+		${system({ arrowBorder: { property: 'border', scale: 'borders' } })};
 
 		content: '';
-		border: ${({ styleOverrides }) => (styleOverrides.border ? styleOverrides.border : 'none')};
 		position: absolute;
 		width: ${arrowWidth};
 		height: ${arrowWidth};
 		transform: translateX(-50%) translateY(-50%) rotate(45deg);
-		box-shadow: ${({ styleOverrides }) => (styleOverrides.hideShadow ? 'none' : colors.boxShadow)};
 	}
 	${({ placement }) => (placement ? arrowStyles[getPlacement(placement)] : arrowStyles.top)};
 `;

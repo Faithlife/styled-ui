@@ -45,26 +45,6 @@ export class PopoverBase extends Component {
 		delay: PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
 		eventsEnabled: PropTypes.bool,
 		positionFixed: PropTypes.bool,
-		styleOverrides: PropTypes.shape({
-			background: PropTypes.string,
-			border: PropTypes.string,
-			borderRadius: PropTypes.string,
-			hideShadow: PropTypes.bool,
-			fontSize: PropTypes.string,
-			fontWeight: PropTypes.string,
-			height: PropTypes.string,
-			lineHeight: PropTypes.string,
-			margin: PropTypes.string,
-			maxHeight: PropTypes.string,
-			maxWidth: PropTypes.string,
-			minHeight: PropTypes.string,
-			minWidth: PropTypes.string,
-			outline: PropTypes.string,
-			padding: PropTypes.string,
-			textAlign: PropTypes.string,
-			width: PropTypes.string,
-			zIndex: PropTypes.number,
-		}),
 		theme: PropTypes.shape({
 			backgroundColor: PropTypes.string,
 			textColor: PropTypes.string,
@@ -74,7 +54,6 @@ export class PopoverBase extends Component {
 	static defaultProps = {
 		placement: 'top',
 		modifiers: {},
-		styleOverrides: {},
 	};
 
 	state = {
@@ -135,10 +114,11 @@ export class PopoverBase extends Component {
 			placement: popoverPlacement,
 			hideArrow,
 			modifiers,
-			styleOverrides,
 			eventsEnabled,
 			positionFixed,
 			backgroundColor,
+			boxShadow,
+			border,
 			...props
 		} = this.props;
 		const { showPopper } = this.state;
@@ -168,7 +148,8 @@ export class PopoverBase extends Component {
 						onAnimationEnd={this.handleTransition}
 						backgroundColor={backgroundColor || 'white'}
 						width="auto"
-						boxShadow={1}
+						boxShadow={isDefined(boxShadow) ? boxShadow : 1}
+						border={border}
 						textStyle="c.16"
 						position="absolute"
 						zIndex="menu"
@@ -181,12 +162,13 @@ export class PopoverBase extends Component {
 								ref={arrowProps.ref}
 								placement={placement}
 								style={arrowProps.style}
-								styleOverrides={styleOverrides}
 								position="absolute"
 								width="25px"
 								height="25px"
 								overflow="hidden"
-								arrowBackground={backgroundColor || 'white'}
+								arrowBackground={isDefined(backgroundColor) ? backgroundColor : 'white'}
+								arrowShadow={isDefined(boxShadow) ? boxShadow : 1}
+								arrowBorder={isDefined(border) ? border : 'none'}
 							/>
 						)}
 					</PopoverBox>
@@ -213,3 +195,7 @@ const PopoverBox = styled(Box)`
 	${textStyle}
 	${typography}
 `;
+
+const isDefined = function(value) {
+	return value !== undefined && value !== null;
+};
