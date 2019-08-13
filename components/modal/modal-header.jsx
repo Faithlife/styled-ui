@@ -5,7 +5,7 @@ import { Text } from '../Text';
 import { Button } from '../button';
 import { Close } from '../icons';
 
-export const ModalHeader = ({ title, subtitle, onClose, styleOverrides }) => (
+export const ModalHeader = ({ title, subtitle, onClose, headerBottomBorder }) => (
 	<Box
 		display="flex"
 		flexDirection="column"
@@ -14,7 +14,7 @@ export const ModalHeader = ({ title, subtitle, onClose, styleOverrides }) => (
 		width="100%"
 		marginBottom={4}
 		paddingBottom={5}
-		borderBottom={styleOverrides.bottomBorder ? styleOverrides.bottomBorder : 1}
+		borderBottom={headerBottomBorder ? headerBottomBorder : 1}
 		borderColor="gray22"
 	>
 		<Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
@@ -35,5 +35,4 @@ ModalHeader.propTypes = {
 	title: PropTypes.string.isRequired,
 	onClose: PropTypes.func.isRequired,
 	subtitle: PropTypes.string,
-	styleOverrides: PropTypes.object.isRequired,
 };

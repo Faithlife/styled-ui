@@ -24,11 +24,6 @@ export class Modal extends React.Component {
 		children: PropTypes.node.isRequired,
 		/** Customizable theme properties */
 		theme: PropTypes.object,
-		/** Style overrides, the z-index is applied to the backdrop */
-		styleOverrides: PropTypes.shape({
-			bottomBorder: PropTypes.string,
-			zIndex: PropTypes.number,
-		}),
 		/** Values for rendering an FL standard footer */
 		footerProps: PropTypes.shape({
 			commitButton: PropTypes.shape({
@@ -44,18 +39,13 @@ export class Modal extends React.Component {
 				text: PropTypes.string.isRequired,
 			}),
 		}),
+		headerBottomBorder: PropTypes.string,
 		/** A default footer will be rendered if you don't supply a renderFooter function */
 		renderFooter: PropTypes.func,
 		/** No footer will be rendered if withoutFooter is true */
 		withoutFooter: PropTypes.bool,
 		/** Set to 'body' to attach the modal to body, otherwise will attach as a child element */
 		container: PropTypes.string,
-	};
-
-	static defaultProps = {
-		styleOverrides: {
-			zIndex: 1050,
-		},
 	};
 
 	state = {
@@ -99,10 +89,10 @@ export class Modal extends React.Component {
 			subtitle,
 			onClose,
 			children,
+			headerBottomBorder,
 			renderFooter,
 			footerProps,
 			withoutFooter,
-			styleOverrides,
 			...props
 		} = this.props;
 
@@ -114,12 +104,8 @@ export class Modal extends React.Component {
 			(modalWidth < 220 ||
 				(modalWidth < 320 && footerProps && Object.keys(footerProps).length === 3));
 
-		const backdropStyleOverrides = {
-			zIndex: styleOverrides.zIndex,
-		};
-
 		return (
-			<ModalBackdrop onClose={onClose} styleOverrides={backdropStyleOverrides}>
+			<ModalBackdrop onClose={onClose}>
 				<Box
 					ref={modal => {
 						this._modal = modal;
@@ -145,7 +131,7 @@ export class Modal extends React.Component {
 						title={title}
 						subtitle={subtitle}
 						onClose={onClose}
-						styleOverrides={styleOverrides}
+						headerBottomBorder={headerBottomBorder}
 					/>
 					<Box
 						maxWidth="100%"
