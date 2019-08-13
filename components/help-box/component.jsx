@@ -128,14 +128,7 @@ export function HelpBox({
 					marginLeft={!stacked ? -2 : large ? 4 : 5}
 					fill={chosenVariation.closeIconColor}
 				>
-					<Button
-						icon={<Close />}
-						onClick={handleClose}
-						styleOverrides={{
-							fontSize: '18px',
-							padding: '0px',
-						}}
-					/>
+					<Button icon={<Close />} onClick={handleClose} textStyle="c.18" padding={0} />
 				</IconBox>
 			)) ||
 				(showRightIcon && (

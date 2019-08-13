@@ -13,11 +13,6 @@ import {
 	mapMediaTypeToIcon,
 } from '../utils/file-utils';
 
-const fileLabelButtonWidthOverride = {
-	width: '100%',
-	justifyContent: 'left',
-};
-
 export class FileItem extends PureComponent {
 	static propTypes = {
 		file: PropTypes.shape({
@@ -94,9 +89,10 @@ export class FileItem extends PureComponent {
 				<Box paddingLeft={4} flexShrink="1" css={{ overflow: 'hidden' }}>
 					{onFileClicked ? (
 						<Button
-							styleOverrides={fileLabelButtonWidthOverride}
 							onClick={this.handleFileClick}
 							primaryTransparent
+							width="100%"
+							justifyContent="flex-start"
 						>
 							{fileInformation}
 						</Button>

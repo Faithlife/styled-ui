@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '../Box';
 import { Button } from '../button';
-import { colors } from '../shared-styles';
 import { ModalFooter } from './modal-footer';
 
 export const DefaultModalFooter = props => (
@@ -18,9 +17,9 @@ export const DefaultModalFooter = props => (
 				<Button
 					primary
 					medium
-					theme={{ width: props.useFullWidthButtons ? '100%' : null }}
 					tabIndex={props.commitButton.tabindex}
 					onClick={props.commitButton.onClick}
+					width={props.useFullWidthButtons ? '100%' : null}
 				>
 					{props.commitButton.text}
 				</Button>
@@ -34,9 +33,9 @@ export const DefaultModalFooter = props => (
 					<Button
 						primaryOutline
 						medium
-						theme={{ width: props.useFullWidthButtons ? '100%' : null }}
 						tabIndex={props.cancelButton.tabindex}
 						onClick={props.cancelButton.onClick}
+						width={props.useFullWidthButtons ? '100%' : null}
 					>
 						{props.cancelButton.text}
 					</Button>
@@ -51,14 +50,12 @@ export const DefaultModalFooter = props => (
 					<Button
 						primaryOutline
 						medium
-						theme={{
-							defaultColor: colors.redBase,
-							hoverColor: colors.redLight,
-							activeColor: colors.redDark,
-							disabledColor: colors.redTint,
-							width: props.useFullWidthButtons ? '100%' : null,
-						}}
 						onClick={props.deleteButton.onClick}
+						defaultColor="red4"
+						hoverColor="red3"
+						activeColor="red5"
+						disabledColor="red1"
+						width={props.useFullWidthButtons ? '100%' : null}
 					>
 						{props.deleteButton.text}
 					</Button>
