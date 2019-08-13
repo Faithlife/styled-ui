@@ -1,35 +1,10 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { colors, thickness } from '../shared-styles';
 import { resetStyles } from '../utils';
 import { Box } from '../Box';
+import { Text } from '../Text';
 
 const inputOffset = '-6px';
-
-const selectStyling = css`
-	white-space: nowrap;
-	min-height: fit-content;
-	font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
-	width: ${({ styleOverrides }) => styleOverrides.width};
-	border-bottom: dashed ${thickness.two} ${({ theme }) => theme.underlineColor || colors.blueBase};
-	font-weight: bold;
-	color: ${colors.gray66};
-	${props => `color: ${props.isOpen ? colors.blueActive : colors.gray66}`};
-	font-family: inherit;
-
-	&:hover {
-		&:not(:focus) {
-			color: ${({ theme }) => theme.hoverColor || colors.blueBase};
-		}
-	}
-
-	&:active {
-		color: ${({ theme }) => theme.activeColor || colors.blueActive};
-	}
-
-	&:focus {
-		outline: none;
-	}
-`;
 
 export const Button = styled.button`
 	${resetStyles};
@@ -52,8 +27,20 @@ export const Button = styled.button`
 	}
 `;
 
-export const ButtonContent = styled.div.attrs({ tabIndex: '-1' })`
-	${selectStyling};
+export const ButtonContent = styled(Text).attrs({ tabIndex: '-1' })`
+	&:hover {
+		&:not(:focus) {
+			color: ${({ theme }) => theme.hoverColor || colors.blueBase};
+		}
+	}
+
+	&:active {
+		color: ${({ theme }) => theme.activeColor || colors.blueActive};
+	}
+
+	&:focus {
+		outline: none;
+	}
 `;
 
 export const InputContainer = styled(Box)`
@@ -86,16 +73,34 @@ export const Fieldset = styled.fieldset`
 `;
 
 export const Select = styled.select`
+	white-space: nowrap;
+	min-height: fit-content;
+	font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
+	width: ${({ styleOverrides }) => styleOverrides.width};
+	font-weight: bold;
+	color: ${colors.gray66};
+	${props => `color: ${props.isOpen ? colors.blueActive : colors.gray66}`};
+	font-family: inherit;
+
 	appearance: none;
 	user-select: none;
 	cursor: pointer;
 	border: none;
+	border-bottom: dashed ${thickness.two} ${({ theme }) => theme.underlineColor || colors.blueBase};
 	background-color: transparent;
 	text-align-last: center;
 
-	${selectStyling};
-
 	transition: box-shadow 0.25s ease 0s;
+
+	&:hover {
+		&:not(:focus) {
+			color: ${({ theme }) => theme.hoverColor || colors.blueBase};
+		}
+	}
+
+	&:active {
+		color: ${({ theme }) => theme.activeColor || colors.blueActive};
+	}
 
 	&:focus {
 		&:not(:active) {

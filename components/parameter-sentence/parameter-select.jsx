@@ -52,7 +52,14 @@ export function ParameterSelect({
 								type="button"
 								{...ariaProps}
 							>
-								<Styled.ButtonContent isOpen={isOpen} theme={theme} styleOverrides={styleOverrides}>
+								<Styled.ButtonContent
+									whiteSpace="nowrap"
+									minHeight="fit-content"
+									textStyle="h.16"
+									borderBottom="dashed 2px"
+									borderColor="blue4"
+									color={isOpen ? '#1d6ca1' : 'gray66'}
+								>
 									{options[selectedId]}
 								</Styled.ButtonContent>
 							</Styled.Button>

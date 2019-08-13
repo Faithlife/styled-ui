@@ -12,7 +12,6 @@ export function ParameterInputBox(props) {
 		formatValue,
 		width,
 		accessibilityLabel,
-		styleOverrides,
 		theme,
 		...inputProps
 	} = props;
@@ -39,7 +38,14 @@ export function ParameterInputBox(props) {
 		<Box display="inline-block" position="relative" {...(isFocused ? { width } : {})}>
 			{!isFocused ? (
 				<Styled.Button onClick={toggleFocus} onFocus={toggleFocus}>
-					<Styled.ButtonContent theme={theme} styleOverrides={styleOverrides}>
+					<Styled.ButtonContent
+						whiteSpace="nowrap"
+						minHeight="fit-content"
+						textStyle="h.16"
+						borderBottom="dashed 2px"
+						borderColor="blue4"
+						color="gray66"
+					>
 						{displayValue}
 					</Styled.ButtonContent>
 				</Styled.Button>
@@ -47,15 +53,14 @@ export function ParameterInputBox(props) {
 				<Styled.InputContainer>
 					<Input
 						ref={inputRef}
-						small
-						inline
+						variant="inline"
 						value={value}
 						onChange={onChange}
 						placeholder={defaultValue}
 						onEnter={toggleFocus}
 						onBlur={toggleFocus}
 						theme={theme}
-						styleOverrides={{ width, ...styleOverrides }}
+						styleOverrides={{ width }}
 						aria-label={accessibilityLabel}
 						{...inputProps}
 					/>
@@ -77,12 +82,8 @@ ParameterInputBox.propTypes = {
 		activeColor: PropTypes.string,
 		underlineColor: PropTypes.string,
 	}),
-	styleOverrides: PropTypes.shape({
-		fontSize: PropTypes.string,
-	}),
 };
 
 ParameterInputBox.defaultProps = {
 	theme: {},
-	styleOverrides: {},
 };
