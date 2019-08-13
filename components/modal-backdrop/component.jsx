@@ -12,9 +12,6 @@ export class ModalBackdrop extends React.Component {
 		/** Contents of the modal */
 		children: PropTypes.node.isRequired,
 		/** Style overrides */
-		styleOverrides: PropTypes.shape({
-			zIndex: PropTypes.number,
-		}),
 	};
 
 	inPotentialCloseEvent = false;
@@ -42,7 +39,7 @@ export class ModalBackdrop extends React.Component {
 	};
 
 	render() {
-		const { children, styleOverrides } = this.props;
+		const { children } = this.props;
 
 		return (
 			<Box
@@ -63,7 +60,6 @@ export class ModalBackdrop extends React.Component {
 				left="0"
 				overflow="hidden"
 				background="rgba(0, 0, 0, 0.7)"
-				zIndex={styleOverrides.zIndex}
 			>
 				{children}
 			</Box>
