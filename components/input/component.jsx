@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { layout, textStyle, border } from 'styled-system';
+import systemPropTypes from '@styled-system/prop-types';
 import { theme } from '../../theme';
 import { common, typography } from '../../theme/system';
 import { forwardClassRef, resetStyles } from '../utils';
@@ -41,6 +42,11 @@ export const Input = forwardClassRef(
 			size: PropTypes.number,
 			/** Inline input variation */
 			inline: PropTypes.bool,
+			...common.propTypes,
+			...typography.propTypes,
+			...systemPropTypes.layout,
+			...systemPropTypes.border,
+			textStyle: PropTypes.string,
 		};
 
 		static defaultProps = {
