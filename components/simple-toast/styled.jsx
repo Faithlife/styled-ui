@@ -39,6 +39,8 @@ export const ToastContainer = styled.div`
 	box-shadow: 0 19px 38px 0 rgba(0, 0, 0, 0.12), 0 15px 12px 0 rgba(0, 0, 0, 0.12);
 	opacity: 0;
 
+	pointer-events: none;
+
 	> svg {
 		height: 1em;
 		width: 1em;
@@ -59,15 +61,18 @@ export const ToastContainer = styled.div`
 				return css`
 					transition: opacity ${transitionTime}ms linear;
 					opacity: 1;
+					pointer-events: all;
 				`;
 			case TransitionStatuses.EXITING:
 				return css`
 					transition: opacity ${transitionTime}ms linear;
 					opacity: 0;
+					pointer-events: all;
 				`;
 			case TransitionStatuses.ENTERED:
 				return css`
 					opacity: 1;
+					pointer-events: all;
 				`;
 			default:
 				return '';
@@ -94,15 +99,18 @@ export const ToastContainer = styled.div`
 				case TransitionStatuses.ENTERING:
 					return css`
 						animation: ${slideIn(props)} ${transitionTime}ms linear;
+						pointer-events: all;
 					`;
 				case TransitionStatuses.EXITING:
 					return css`
 						transition: opacity ${transitionTime}ms linear;
 						opacity: 0;
+						pointer-events: all;
 					`;
 				case TransitionStatuses.ENTERED:
 					return css`
 						opacity: 1;
+						pointer-events: all;
 					`;
 				default:
 					return '';
