@@ -52,24 +52,40 @@ export const Button = React.forwardRef(function Button(props, ref) {
 			display="inline-flex"
 			justifyContent="center"
 			alignItems="center"
-			textStyle={size === 'large' || 'c.16'}
-			fontSize={size === 'large' && '24px'}
+			textStyle={size === 'large' || large || 'c.16'}
+			fontSize={(size === 'large' || large) && '24px'}
 			boxShadow="none"
 			borderRadius={1}
 			backgroundColor="transparent"
 			border="none"
 			whiteSpace="nowrap"
 			defaultColor={
-				variant !== 'minor' ? (variant === 'minorTransparent' ? 'flgray' : '#278ed4') : ''
+				variant !== 'minor' || minor
+					? variant === 'minorTransparent' || minorTransparent
+						? 'flgray'
+						: '#278ed4'
+					: ''
 			}
 			disabledColor={
-				variant !== 'minor' ? (variant === 'minorTransparent' ? 'gray22' : '#bedcf2') : ''
+				variant !== 'minor' || minor
+					? variant === 'minorTransparent' || minorTransparent
+						? 'gray22'
+						: '#bedcf2'
+					: ''
 			}
 			hoverColor={
-				variant === 'minor' ? 'gray14' : variant === 'minorTransparent' ? 'blue4' : '#6db3e2'
+				variant === 'minor' || minor
+					? 'gray14'
+					: variant === 'minorTransparent' || minorTransparent
+					? 'blue4'
+					: '#6db3e2'
 			}
 			activeColor={
-				variant === 'minor' ? 'gray22' : variant === 'minorTransparent' ? 'blue3' : '#1d6ca1'
+				variant === 'minor' || minor
+					? 'gray22'
+					: variant === 'minorTransparent' || minorTransparent
+					? 'blue3'
+					: '#1d6ca1'
 			}
 			minorBorderColor={disabled ? 'gray8' : 'gray14'}
 			minorBackgroundColor={disabled ? 'white' : 'gray4'}
