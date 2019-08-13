@@ -3,14 +3,7 @@ import PropTypes from 'prop-types';
 import { Box } from '../Box';
 import { useKeyboardNav, AccordionContextProvider } from './accordion-util';
 
-export function Accordion({
-	children,
-	expandedSections,
-	hideArrows,
-	onExpansion,
-	styleOverrides,
-	...props
-}) {
+export function Accordion({ children, expandedSections, hideArrows, onExpansion, ...props }) {
 	const [focusedMenuItem, setFocusedMenuItem] = useState(null);
 	const focusableChildList = useRef([]);
 	const handleKeyboardNav = useKeyboardNav(
@@ -40,7 +33,6 @@ export function Accordion({
 			hideArrows,
 			onExpansion: handleExpansion,
 			setFocusedMenuItem,
-			styleOverrides,
 		}),
 		[
 			expandedSections,
@@ -49,7 +41,6 @@ export function Accordion({
 			hideArrows,
 			handleExpansion,
 			setFocusedMenuItem,
-			styleOverrides,
 		],
 	);
 
@@ -73,12 +64,8 @@ Accordion.propTypes = {
 	hideArrows: PropTypes.bool,
 	/** Will be called with an array of indexes for Accordion.Items which should be expanded. */
 	onExpansion: PropTypes.func.isRequired,
-	styleOverrides: PropTypes.shape({
-		panelPadding: PropTypes.string,
-	}),
 };
 
 Accordion.defaultProps = {
 	expandedSections: [],
-	styleOverrides: {},
 };
