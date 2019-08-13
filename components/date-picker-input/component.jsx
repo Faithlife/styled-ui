@@ -36,11 +36,6 @@ export class DatePickerInput extends PureComponent {
 		/** Style overrides, inputWidth is applied to the input */
 		styleOverrides: PropTypes.shape({
 			inputWidth: PropTypes.string,
-			hideShadow: PropTypes.bool,
-			width: PropTypes.string,
-			padding: PropTypes.string,
-			border: PropTypes.string,
-			zIndex: PropTypes.number,
 		}),
 	};
 
@@ -48,8 +43,6 @@ export class DatePickerInput extends PureComponent {
 		placement: 'bottom-start',
 		styleOverrides: {
 			inputWidth: '100%',
-			padding: '16px 20px',
-			zIndex: 3,
 		},
 	};
 
@@ -151,13 +144,6 @@ export class DatePickerInput extends PureComponent {
 		const inputStyleOverrides = {
 			width: styleOverrides.inputWidth,
 		};
-		const popoverStyleOverrides = {
-			hideShadow: styleOverrides.hideShadow,
-			width: styleOverrides.width,
-			padding: styleOverrides.padding,
-			border: styleOverrides.border,
-			zIndex: styleOverrides.zIndex,
-		};
 
 		return (
 			<Styled.Container>
@@ -184,7 +170,6 @@ export class DatePickerInput extends PureComponent {
 						padding={padding}
 						paddingY={padding !== undefined && padding !== null ? padding : 5}
 						paddingX={padding !== undefined && padding !== null ? padding : '20px'}
-						styleOverrides={popoverStyleOverrides}
 						{...props}
 					>
 						{/*eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
