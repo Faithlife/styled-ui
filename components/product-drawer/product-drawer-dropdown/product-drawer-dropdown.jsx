@@ -197,7 +197,4 @@ ProductDrawerDropdown.propTypes = {
 	isOpen: PropTypes.bool.isRequired,
 	handleCloseButtonClick: PropTypes.func.isRequired,
 	resources: PropTypes.object.isRequired,
-	styleOverrides: PropTypes.shape({
-		mobileTopOffset: PropTypes.string,
-	}),
 };
