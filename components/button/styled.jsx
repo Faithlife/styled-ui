@@ -1,14 +1,9 @@
 import styled, { css } from 'styled-components';
+import { system, layout, flexbox, position, textStyle, border, background } from 'styled-system';
 import 'focus-visible';
+import { common, typography } from '../../theme/system';
 import { colors } from '../shared-styles';
 import { resetStyles } from '../utils';
-
-const buttonColors = {
-	default: '#278ed4',
-	hover: '#6db3e2',
-	active: '#1d6ca1',
-	disabled: '#bedcf2',
-};
 
 const Anchor = css`
 	align-items: center;
@@ -17,26 +12,18 @@ const Anchor = css`
 `;
 
 export const Button = styled.button`
+	${common};
+	${typography};
+	${layout};
+	${flexbox};
+	${position};
+	${textStyle};
+	${border};
+	${background};
+
 	${resetStyles};
 
-	justify-content: ${props =>
-		props.styleOverrides.justifyContent === 'left'
-			? 'flex-start'
-			: props.styleOverrides.justifyContent === 'right'
-			? 'flex-end'
-			: props.styleOverrides.justifyContent || 'center'};
-	padding: ${props => props.styleOverrides.padding || Button.padding};
-	font-size: ${props => props.styleOverrides.fontSize || '16px'};
-	width: ${props => props.styleOverrides.width};
-	box-shadow: none;
-	border-radius: 3px;
 	cursor: pointer;
-	display: inline-flex;
-	background-color: transparent;
-	border: none;
-	transition: box-shadow 0.25s ease 0s;
-	white-space: nowrap;
-	align-items: center;
 
 	&:focus:not(.focus-visible) {
 		outline: none;
@@ -64,60 +51,86 @@ export const Button = styled.button`
 		switch (variant) {
 			case 'primary':
 				return css`
-					border: 1px solid ${props => props.theme.defaultColor || buttonColors.default};
-					background-color: ${props => props.theme.defaultColor || buttonColors.default};
+					border: 1px solid;
+					${system({
+						defaultColor: { properties: ['border-color', 'background-color'], scale: 'colors' },
+					})};
+					/* ${system({ defaultColor: { property: 'background-color', scale: 'colors' } })}; */
 					color: #fff;
 
 					${({ disabled }) =>
 						disabled
 							? css`
-									border-color: ${props => props.theme.disabledColor || buttonColors.disabled};
-									background-color: ${props => props.theme.disabledColor || buttonColors.disabled};
+									${system({
+										disabledColor: {
+											properties: ['border-color', 'background-color'],
+											scale: 'colors',
+										},
+									})};
 									cursor: default;
 									color: #fff;
 							  `
 							: css`
 									@media (hover: hover) {
 										&:hover {
-											border-color: ${props => props.theme.hoverColor || buttonColors.hover};
-											background-color: ${props => props.theme.hoverColor || buttonColors.hover};
+											${system({
+												hoverColor: {
+													properties: ['border-color', 'background-color'],
+													scale: 'colors',
+												},
+											})};
 											color: #fff;
 										}
 									}
 
 									&:active {
-										border-color: ${props => props.theme.activeColor || buttonColors.active};
-										background-color: ${props => props.theme.activeColor || buttonColors.active};
+										${system({
+											activeColor: {
+												properties: ['border-color', 'background-color'],
+												scale: 'colors',
+											},
+										})};
 										color: #fff;
 									}
 							  `};
 				`;
 			case 'primaryOutline':
 				return css`
-					border: 1px solid ${props => props.theme.defaultColor || buttonColors.default};
+					border: 1px solid;
+					${system({
+						defaultColor: { properties: ['border-color', 'color'], scale: 'colors' },
+					})};
 					background: none;
-					color: ${props => props.theme.defaultColor || buttonColors.default};
 
 					${({ disabled }) =>
 						disabled
 							? css`
-									border-color: ${props => props.theme.disabledColor || buttonColors.disabled};
+									${system({
+										disabledColor: { properties: ['border-color', 'color'], scale: 'colors' },
+									})};
 									background: none;
-									color: ${props => props.theme.disabledColor || buttonColors.disabled};
 									cursor: default;
 							  `
 							: css`
 									@media (hover: hover) {
 										&:hover {
-											border-color: ${props => props.theme.hoverColor || buttonColors.hover};
-											background-color: ${props => props.theme.hoverColor || buttonColors.hover};
+											${system({
+												hoverColor: {
+													properties: ['border-color', 'background-color'],
+													scale: 'colors',
+												},
+											})};
 											color: #fff;
 										}
 									}
 
 									&:active {
-										border-color: ${props => props.theme.activeColor || buttonColors.active};
-										background-color: ${props => props.theme.activeColor || buttonColors.active};
+										${system({
+											activeColor: {
+												properties: ['border-color', 'background-color'],
+												scale: 'colors',
+											},
+										})};
 										color: #fff;
 									}
 							  `};
@@ -126,53 +139,60 @@ export const Button = styled.button`
 				return css`
 					border: 1px solid transparent;
 					background: none;
-					color: ${props => props.theme.defaultColor || buttonColors.default};
+					${system({ defaultColor: { property: 'color', scale: 'colors' } })};
 					padding: 0;
 
 					${({ disabled }) =>
 						disabled
 							? css`
-									color: ${props => props.theme.disabledColor || buttonColors.disabled};
+									${system({ disabledColor: { property: 'color', scale: 'colors' } })};
 									cursor: default;
 							  `
 							: css`
 									@media (hover: hover) {
 										&:hover {
-											color: ${props => props.theme.hoverColor || buttonColors.hover};
+											${system({ hoverColor: { property: 'color', scale: 'colors' } })};
 										}
 									}
 
 									&:active {
-										color: ${props => props.theme.activeColor || buttonColors.active};
+										${system({ activeColor: { property: 'color', scale: 'colors' } })};
 									}
 							  `};
 				`;
 			case 'minor':
 				return css`
-					border: 1px solid ${props => props.theme.defaultColor || colors.gray14};
-					background: ${props => props.theme.defaultColor || colors.gray4};
+					border: 1px solid;
+					${system({ minorBorderColor: { property: 'border-color', scale: 'colors' } })};
+					${system({ minorBackgroundColor: { property: 'background-color', scale: 'colors' } })};
 					color: ${colors.flGray};
 
 					${({ disabled }) =>
 						disabled
 							? css`
-									border-color: ${props => props.theme.disabledColor || colors.gray8};
-									background-color: ${props => props.theme.disabledColor || `#fff`};
+									${system({
+										minorDisabledBorderColor: { property: 'border-color', scale: 'colors' },
+									})};
+									${system({
+										minorDisabledBackgroundColor: { property: 'background-color', scale: 'colors' },
+									})};
 									color: ${colors.gray22};
 									cursor: default;
 							  `
 							: css`
 									@media (hover: hover) {
 										&:hover {
-											border: 1px solid ${props => props.theme.hoverColor || colors.gray14};
-											background-color: ${props => props.theme.hoverColor || colors.gray14};
+											border: 1px solid;
+											${system({ hoverColor: { property: 'border-color', scale: 'colors' } })};
+											${system({ hoverColor: { property: 'background-color', scale: 'colors' } })};
 											color: ${colors.flGray};
 										}
 									}
 
 									&:active {
-										border: 1px solid ${props => props.theme.activeColor || colors.gray22};
-										background-color: ${props => props.theme.activeColor || colors.gray22};
+										border: 1px solid;
+										${system({ activeColor: { property: 'border-color', scale: 'colors' } })};
+										${system({ activeColor: { property: 'background-color', scale: 'colors' } })};
 										color: ${colors.flGray};
 									}
 							  `};
@@ -181,24 +201,24 @@ export const Button = styled.button`
 				return css`
 					border: 1px solid transparent;
 					background: none;
-					color: ${props => props.theme.defaultColor || colors.flGray};
+					${system({ defaultColor: { property: 'color', scale: 'colors' } })};
 					padding: 0;
 
 					${({ disabled }) =>
 						disabled
 							? css`
-									color: ${props => props.theme.disabledColor || colors.gray22};
+									${system({ disabledColor: { property: 'color', scale: 'colors' } })};
 									cursor: default;
 							  `
 							: css`
 									@media (hover: hover) {
 										&:hover {
-											color: ${props => props.theme.hoverColor || colors.blueBase};
+											${system({ hoverColor: { property: 'color', scale: 'colors' } })};
 										}
 									}
 
 									&:active {
-										color: ${props => props.theme.activeColor || colors.blueLight};
+										${system({ activeColor: { property: 'color', scale: 'colors' } })};
 									}
 							  `};
 				`;
@@ -223,7 +243,7 @@ export const Button = styled.button`
 				return css`
 					height: 56px;
 					padding: 0 ${props => (props.condensed ? '15px' : '23px')};
-					font-size: 24px;
+					/* font-size: 24px; */
 				`;
 			default:
 				return css``;

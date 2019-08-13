@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import systemPropTypes from '@styled-system/prop-types';
+import { theme } from '../../theme';
+import { common, typography } from '../../theme/system';
 import * as Styled from './styled';
 
 function getVariation(variant, obj) {
@@ -9,15 +12,14 @@ function getVariation(variant, obj) {
 	return [...Object.entries(obj)].find(entry => entry[1])[0];
 }
 
-const Button = React.forwardRef(function Button(props, ref) {
+export const Button = React.forwardRef(function Button(props, ref) {
 	// To make sure that Button and the AnchorButton components get the right props we export an object with the expected props for the Button
 	// The AnchorButton should get all props that are not explicity required by the child
 	// eslint-disable-next-line react/prop-types
 	const {
 		children,
-		theme,
-		styleOverrides,
 		icon,
+		disabled,
 		variant,
 		size,
 		primary,
@@ -36,8 +38,7 @@ const Button = React.forwardRef(function Button(props, ref) {
 		<Styled.Button
 			ref={ref}
 			as={as}
-			theme={theme}
-			styleOverrides={styleOverrides}
+			disabled={disabled}
 			hasChildren={!!children}
 			variant={getVariation(variant, {
 				primary,
@@ -48,6 +49,30 @@ const Button = React.forwardRef(function Button(props, ref) {
 				none: true,
 			})}
 			size={getVariation(size, { small, medium, large, none: true })}
+			display="inline-flex"
+			justifyContent="center"
+			alignItems="center"
+			textStyle={size === 'large' || 'c.16'}
+			fontSize={size === 'large' && '24px'}
+			boxShadow="none"
+			borderRadius={1}
+			backgroundColor="transparent"
+			border="none"
+			whiteSpace="nowrap"
+			defaultColor={
+				variant !== 'minor' ? (variant === 'minorTransparent' ? 'flgray' : '#278ed4') : ''
+			}
+			disabledColor={
+				variant !== 'minor' ? (variant === 'minorTransparent' ? 'gray22' : '#bedcf2') : ''
+			}
+			hoverColor={
+				variant === 'minor' ? 'gray14' : variant === 'minorTransparent' ? 'blue4' : '#6db3e2'
+			}
+			activeColor={
+				variant === 'minor' ? 'gray22' : variant === 'minorTransparent' ? 'blue3' : '#1d6ca1'
+			}
+			minorBorderColor={disabled ? 'gray8' : 'gray14'}
+			minorBackgroundColor={disabled ? 'white' : 'gray4'}
 			{...buttonProps}
 		>
 			{icon}
@@ -61,20 +86,6 @@ Button.propTypes = {
 	children: PropTypes.node,
 	/** Condensed button padding. Uses same padding for horizontal and vertical. */
 	condensed: PropTypes.bool,
-	/** An optional theme */
-	theme: PropTypes.shape({
-		defaultColor: PropTypes.string,
-		hoverColor: PropTypes.string,
-		activeColor: PropTypes.string,
-		disabledColor: PropTypes.string,
-	}),
-	/** Style overrides */
-	styleOverrides: PropTypes.shape({
-		width: PropTypes.string,
-		fontSize: PropTypes.string,
-		padding: PropTypes.string,
-		justifyContent: PropTypes.string,
-	}),
 	/** Enum with values: 'primary', 'primaryOutline', 'primaryTransparent', 'minor', and 'minorTransparent' */
 	variant: PropTypes.oneOf([
 		'primary',
@@ -105,10 +116,16 @@ Button.propTypes = {
 	icon: PropTypes.node,
 	/** This should only be used as a last resort if Theme and StyleOverrides will not do what you need */
 	className: PropTypes.string,
+	...common.propTypes,
+	...typography.propTypes,
+	...systemPropTypes.layout,
+	...systemPropTypes.flexbox,
+	...systemPropTypes.position,
+	...systemPropTypes.border,
+	...systemPropTypes.background,
+	textStyle: PropTypes.string,
 };
 
 Button.defaultProps = {
-	styleOverrides: {},
+	theme: theme,
 };
-
-export { Button };

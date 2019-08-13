@@ -60,13 +60,13 @@ Do not use the `style` prop to style this component (it will be ignored). Instea
 showSource: true
 ---
 <ButtonDemo>
-	<Button variant="primary" size="large" theme={{ defaultColor: 'plum', hoverColor: 'darkslateblue' }}>
+	<Button variant="primary" size="large" defaultColor="plum" hoverColor="darkslateblue">
 		Plum
 	</Button>
-	<Button variant="primary" size="large" styleOverrides={{ width: '200px' }}>
+	<Button variant="primary" size="large" width="200px">
 		200px Wide
 	</Button>
-	<Button variant="primary" styleOverrides={{ fontSize: '12px', padding: '8px' }}>
+	<Button variant="primary" textStyle="c.12" padding={3}>
 		12px Font, 8px Padding
 	</Button>
 </ButtonDemo>
@@ -146,16 +146,16 @@ showSource: true
 	<Button variant="primary" size="small">
 		Settings
 	</Button>
-	<Button variant="primary" size="small" icon={<GearIcon />} styleOverrides={{ justifyContent: 'flex-start' }}>
+	<Button variant="primary" size="small" icon={<GearIcon />} justifyContent="flex-start">
 		Settings
 	</Button>
-	<Button variant="primary" size="small" styleOverrides={{ justifyContent: 'flex-start' }}>
+	<Button variant="primary" size="small" justifyContent="flex-start">
 		Settings
 	</Button>
-	<Button variant="primary" size="small" icon={<GearIcon />} styleOverrides={{ justifyContent: 'flex-end' }}>
+	<Button variant="primary" size="small" icon={<GearIcon />} justifyContent="flex-end">
 		Settings
 	</Button>
-	<Button variant="primary" size="small" styleOverrides={{ justifyContent: 'flex-end' }}>
+	<Button variant="primary" size="small" justifyContent="flex-end">
 		Settings
 	</Button>
 	<Button variant="primary" condensed size="small" icon={<GearIcon />} />
