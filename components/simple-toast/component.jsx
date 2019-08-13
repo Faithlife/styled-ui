@@ -20,21 +20,10 @@ export class SimpleToast extends PureComponent {
 		theme: PropTypes.shape({
 			backgroundColor: PropTypes.string,
 		}),
-		styleOverrides: PropTypes.shape({
-			width: PropTypes.string,
-			height: PropTypes.string,
-			zIndex: PropTypes.number,
-			/** Only for mobile view */
-			topOffset: PropTypes.string,
-			/** Only used for desktop view */
-			rightOffset: PropTypes.string,
-			bottomOffset: PropTypes.string,
-		}),
 	};
 
 	static defaultProps = {
 		showTime: 1000,
-		styleOverrides: {},
 	};
 
 	state = {
@@ -81,15 +70,7 @@ export class SimpleToast extends PureComponent {
 	};
 
 	render() {
-		const {
-			theme,
-			styleOverrides,
-			padding,
-			paddingY,
-			paddingTop,
-			paddingBottom,
-			...props
-		} = this.props;
+		const { theme, padding, paddingY, paddingTop, paddingBottom, ...props } = this.props;
 		const { messages, transitionIn } = this.state;
 		const hasMultipleMessages = messages.length > 1;
 
@@ -107,7 +88,6 @@ export class SimpleToast extends PureComponent {
 					<Styled.ToastContainer
 						state={state}
 						theme={theme}
-						styleOverrides={styleOverrides}
 						onAnimationEnd={this.handleAnimationEnd}
 						display="grid"
 						gridAutoFlow="column"

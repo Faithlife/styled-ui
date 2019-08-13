@@ -8,13 +8,13 @@ const fixedHeaderHeight = 47; // px
 const fixedHeightOffset = 8; // px
 const toastOffset = { desktop: '24px', mobile: `${fixedHeaderHeight + fixedHeightOffset}px` };
 
-const slideIn = ({ styleOverrides }) => keyframes`
+const slideIn = ({ bottom }) => keyframes`
 	from {
 		bottom: 0;
 	}
 
 	to {
-		bottom: ${styleOverrides.bottomOffset || toastOffset.desktop};
+		bottom: ${bottom || toastOffset.desktop};
 	}
 `;
 
