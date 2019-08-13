@@ -7,7 +7,6 @@ export function Listbox({
 	onToggleMenu,
 	onItemSelect,
 	theme,
-	styleOverrides,
 	children,
 	labelledBy,
 	selectedId,
@@ -23,7 +22,6 @@ export function Listbox({
 			isOpen={isOpen}
 			onToggleMenu={onToggleMenu}
 			theme={theme}
-			styleOverrides={styleOverrides}
 			additionalContext={context}
 		>
 			{children}
@@ -41,11 +39,6 @@ Listbox.propTypes = {
 		checkboxPrimary: PropTypes.string,
 		checkboxBorder: PropTypes.string,
 	}),
-	styleOverrides: PropTypes.shape({
-		fontSize: PropTypes.string,
-		padding: PropTypes.string,
-		width: PropTypes.string,
-	}),
 	/** The id of an element containing the label for this component. Maybe omitted if the content is self-explanatory. */
 	labelledBy: PropTypes.string,
 	selectedId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -53,5 +46,4 @@ Listbox.propTypes = {
 
 Listbox.defaultProps = {
 	theme: {},
-	styleOverrides: {},
 };
