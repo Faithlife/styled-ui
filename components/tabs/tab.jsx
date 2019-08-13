@@ -8,16 +8,7 @@ import { Text } from '../Text';
 export function Tab(props) {
 	// PropType linting is diabled so out hidden props can be destuctured along with own consumer props
 	/* eslint-disable react/prop-types */
-	const {
-		children,
-		disabled,
-		styleOverrides,
-		index,
-		selected,
-		onSelectTab,
-		panelId,
-		...otherProps
-	} = props;
+	const { children, disabled, index, selected, onSelectTab, panelId, ...otherProps } = props;
 	const tabRef = useRef();
 
 	useEffect(() => {
@@ -41,11 +32,9 @@ export function Tab(props) {
 				ref={tabRef}
 				selected={selected}
 				display="inline-block"
-				width={styleOverrides.width}
 				minHeight="fit-content"
 				paddingY={3}
 				paddingX={5}
-				padding={styleOverrides.padding && styleOverrides.padding}
 				borderRight={selected ? 1 : ''}
 				borderLeft={selected ? 1 : ''}
 				borderColor={selected ? 'gray14' : ''}
@@ -55,7 +44,7 @@ export function Tab(props) {
 				backgroundColor={selected ? 'white' : 'gray4'}
 				beforeBackgroundColor={selected ? 'blue4' : ''}
 				afterBackgroundColor={selected ? 'white' : ''}
-				textStyle={styleOverrides.fontSize || 'h16'}
+				textStyle="h.16"
 				fontWeight={selected ? 'semibold' : 'regular'}
 				css={{ cursor: 'pointer' }}
 				{...otherProps}
@@ -70,15 +59,6 @@ Tab.propTypes = {
 	/** The tab's label */
 	children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
 	disabled: PropTypes.bool,
-	styleOverrides: PropTypes.shape({
-		fontSize: PropTypes.string,
-		width: PropTypes.string,
-		padding: PropTypes.string,
-	}),
-};
-
-Tab.defaultProps = {
-	styleOverrides: {},
 };
 
 const TabButton = styled.button.attrs({
