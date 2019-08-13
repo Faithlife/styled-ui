@@ -20,18 +20,8 @@ export class SimpleModal extends React.Component {
 		children: PropTypes.node.isRequired,
 		/** Customizable theme properties */
 		theme: PropTypes.object,
-		/** Style overrides, the z-index is applied to the backdrop */
-		styleOverrides: PropTypes.shape({
-			zIndex: PropTypes.number,
-		}),
 		/** Set to 'body' to attach the modal to body, otherwise will attach as a child element */
 		container: PropTypes.string,
-	};
-
-	static defaultProps = {
-		styleOverrides: {
-			zIndex: 1050,
-		},
 	};
 
 	state = {
@@ -70,15 +60,11 @@ export class SimpleModal extends React.Component {
 	};
 
 	renderModal() {
-		const { onClose, children, styleOverrides, ...props } = this.props;
+		const { onClose, children, ...props } = this.props;
 		const { modalWidth } = this.state;
 
-		const backdropStyleOverrides = {
-			zIndex: styleOverrides.zIndex,
-		};
-
 		return (
-			<ModalBackdrop onClose={onClose} styleOverrides={backdropStyleOverrides}>
+			<ModalBackdrop onClose={onClose}>
 				<Box
 					ref={modal => {
 						this._modal = modal;
