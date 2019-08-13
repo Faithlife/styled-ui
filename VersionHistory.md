@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.12.4
+
+- Add more specificity to `ParameterInputBox` styles to beat global styles
+
 ### 5.12.3
 
 - Simplify `ParameterInputBox` to only use inputs
