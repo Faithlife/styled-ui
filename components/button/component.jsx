@@ -3,14 +3,8 @@ import PropTypes from 'prop-types';
 import systemPropTypes from '@styled-system/prop-types';
 import { theme } from '../../theme';
 import { common, typography } from '../../theme/system';
+import { getVariation } from '../utils';
 import * as Styled from './styled';
-
-function getVariation(variant, obj) {
-	if (variant) {
-		return variant;
-	}
-	return [...Object.entries(obj)].find(entry => entry[1])[0];
-}
 
 export const Button = React.forwardRef(function Button(props, ref) {
 	// To make sure that Button and the AnchorButton components get the right props we export an object with the expected props for the Button

@@ -2,15 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes, css } from 'styled-components';
 import { system } from 'styled-system';
-import { resetStyles } from '../utils';
+import { resetStyles, getVariation } from '../utils';
 import { Box } from '../Box';
-
-function getVariation(variant, obj) {
-	if (variant) {
-		return variant;
-	}
-	return [...Object.entries(obj)].find(entry => entry[1])[0];
-}
 
 /** Loading spinner, frequently displayed as a placeholder when loading data */
 export function LoadingSpinner({ variant, small, medium, large, height, width, ...restProps }) {

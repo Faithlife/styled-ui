@@ -2,16 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { system } from 'styled-system';
+import { getVariation } from '../utils';
 import { Close, Exclamation, CircleCheck, Info, LightBulbH } from '../icons';
 import { Box } from '../Box';
 import { Button } from '../button';
-
-function getVariation(variant, obj) {
-	if (variant) {
-		return variant;
-	}
-	return [...Object.entries(obj)].find(entry => entry[1])[0];
-}
 
 const variations = {
 	success: {

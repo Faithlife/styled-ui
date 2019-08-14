@@ -5,15 +5,8 @@ import { layout, textStyle, border } from 'styled-system';
 import systemPropTypes from '@styled-system/prop-types';
 import { theme } from '../../theme';
 import { common, typography } from '../../theme/system';
-import { forwardClassRef, resetStyles } from '../utils';
+import { forwardClassRef, resetStyles, getVariation } from '../utils';
 import { thickness, inputColors, colors } from '../shared-styles';
-
-function getVariation(variant, obj) {
-	if (variant) {
-		return variant;
-	}
-	return [...Object.entries(obj)].find(entry => entry[1])[0];
-}
 
 /** Standard text input with no validation */
 export const Input = forwardClassRef(
