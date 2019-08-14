@@ -20,6 +20,7 @@ export function MenuCheckbox(props) {
 			index={index}
 			role="menuitemcheckbox"
 			aria-checked={isChecked}
+			{...checkboxProps}
 		>
 			<CheckboxContent isChecked={isChecked} {...checkboxProps} />
 		</MenuItem>
