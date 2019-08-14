@@ -78,9 +78,4 @@ ParameterInputBox.propTypes = {
 	formatValue: PropTypes.func,
 	width: PropTypes.string,
 	accessibilityLabel: PropTypes.string.isRequired,
-	theme: PropTypes.shape({
-		hoverColor: PropTypes.string,
-		activeColor: PropTypes.string,
-		underlineColor: PropTypes.string,
-	}),
 };
