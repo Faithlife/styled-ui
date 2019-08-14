@@ -38,12 +38,12 @@ export function Tab(props) {
 				borderRight={selected ? 1 : ''}
 				borderLeft={selected ? 1 : ''}
 				borderColor={selected ? 'gray14' : ''}
-				beforeBorderColor={selected ? 'blue4' : ''}
 				focusOutline="none"
 				color={disabled ? 'gray52' : ''}
-				backgroundColor={selected ? 'white' : 'gray4'}
-				beforeBackgroundColor={selected ? 'blue4' : ''}
-				afterBackgroundColor={selected ? 'white' : ''}
+				activeBackgroundColor="white"
+				inactiveBackgroundColor="gray4"
+				tabHighlightColor="blue4"
+				afterBackgroundColor="white"
 				textStyle="h.16"
 				fontWeight={selected ? 'semibold' : 'regular'}
 				css={{ cursor: 'pointer' }}
@@ -93,19 +93,14 @@ const TabContent = styled(Text)`
 		${system({ focusOutline: { property: 'outline' } })};
 	}
 
-	&::before {
-		${system({ beforeBorderColor: { property: 'border-color', scale: 'colors' } })};
-		${system({ beforeBackgroundColor: { property: 'background-color', scale: 'colors' } })};
-	}
-
-	&::after {
-		${system({ afterBackgroundColor: { property: 'background-color', scale: 'colors' } })};
-	}
+	${system({ inactiveBackgroundColor: { property: 'background-color', scale: 'colors' } })};
 
 	${({ selected }) => selected && selectedTab};
 `;
 
 const selectedTab = css`
+	${system({ activeBackgroundColor: { property: 'background-color', scale: 'colors' } })};
+
 	&::before {
 		content: '';
 		position: absolute;
@@ -116,6 +111,9 @@ const selectedTab = css`
 
 		border-right: 1px solid;
 		border-left: 1px solid;
+		${system({
+			tabHighlightColor: { properties: ['background-color', 'border-color'], scale: 'colors' },
+		})};
 		border-radius: 3px 3px 0 0;
 	}
 
@@ -126,5 +124,6 @@ const selectedTab = css`
 		left: 1px;
 		width: calc(100% - 2px);
 		height: 1px;
+		${system({ afterBackgroundColor: { property: 'background-color', scale: 'colors' } })};
 	}
 `;
