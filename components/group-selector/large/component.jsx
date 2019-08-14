@@ -255,7 +255,7 @@ export class LargeGroupSelector extends React.Component {
 						false
 					}
 					onClose={this.toggle}
-					theme={{ background: 'transparent' }}
+					background="transparent"
 				>
 					{this.state.modalContent === 'main' && !this.props.showInPlace && mainView}
 					{this.state.modalContent === 'admin' && (
