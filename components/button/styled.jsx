@@ -11,6 +11,29 @@ const Anchor = css`
 	text-align: center;
 `;
 
+const systemAliases = {
+	borderColor: {
+		property: 'border-color',
+		scale: 'colors',
+	},
+	backgroundColor: {
+		property: 'background-color',
+		scale: 'colors',
+	},
+	color: {
+		property: 'color',
+		scale: 'colors',
+	},
+	borderAndBackgroundColors: {
+		properties: ['border-color', 'background-color'],
+		scale: 'colors',
+	},
+	borderAndTextColors: {
+		properties: ['border-color', 'color'],
+		scale: 'colors',
+	},
+};
+
 export const Button = styled.button`
 	${common};
 	${typography};
@@ -52,44 +75,27 @@ export const Button = styled.button`
 			case 'primary':
 				return css`
 					border: 1px solid;
-					${system({
-						defaultColor: { properties: ['border-color', 'background-color'], scale: 'colors' },
-					})};
+					${system({ defaultColor: systemAliases.borderAndBackgroundColors })};
 					/* ${system({ defaultColor: { property: 'background-color', scale: 'colors' } })}; */
 					color: #fff;
 
 					${({ disabled }) =>
 						disabled
 							? css`
-									${system({
-										disabledColor: {
-											properties: ['border-color', 'background-color'],
-											scale: 'colors',
-										},
-									})};
+									${system({ disabledColor: systemAliases.borderAndBackgroundColors })};
 									cursor: default;
 									color: #fff;
 							  `
 							: css`
 									@media (hover: hover) {
 										&:hover {
-											${system({
-												hoverColor: {
-													properties: ['border-color', 'background-color'],
-													scale: 'colors',
-												},
-											})};
+											${system({ hoverColor: systemAliases.borderAndBackgroundColors })};
 											color: #fff;
 										}
 									}
 
 									&:active {
-										${system({
-											activeColor: {
-												properties: ['border-color', 'background-color'],
-												scale: 'colors',
-											},
-										})};
+										${system({ activeColor: systemAliases.borderAndBackgroundColors })};
 										color: #fff;
 									}
 							  `};
@@ -97,40 +103,26 @@ export const Button = styled.button`
 			case 'primaryOutline':
 				return css`
 					border: 1px solid;
-					${system({
-						defaultColor: { properties: ['border-color', 'color'], scale: 'colors' },
-					})};
+					${system({ defaultColor: systemAliases.borderAndTextColors })};
 					background: none;
 
 					${({ disabled }) =>
 						disabled
 							? css`
-									${system({
-										disabledColor: { properties: ['border-color', 'color'], scale: 'colors' },
-									})};
+									${system({ disabledColor: systemAliases.borderAndTextColors })};
 									background: none;
 									cursor: default;
 							  `
 							: css`
 									@media (hover: hover) {
 										&:hover {
-											${system({
-												hoverColor: {
-													properties: ['border-color', 'background-color'],
-													scale: 'colors',
-												},
-											})};
+											${system({ hoverColor: systemAliases.borderAndBackgroundColors })};
 											color: #fff;
 										}
 									}
 
 									&:active {
-										${system({
-											activeColor: {
-												properties: ['border-color', 'background-color'],
-												scale: 'colors',
-											},
-										})};
+										${system({ activeColor: systemAliases.borderAndBackgroundColors })};
 										color: #fff;
 									}
 							  `};
@@ -139,43 +131,39 @@ export const Button = styled.button`
 				return css`
 					border: 1px solid transparent;
 					background: none;
-					${system({ defaultColor: { property: 'color', scale: 'colors' } })};
+					${system({ defaultColor: systemAliases.color })};
 					padding: 0;
 
 					${({ disabled }) =>
 						disabled
 							? css`
-									${system({ disabledColor: { property: 'color', scale: 'colors' } })};
+									${system({ disabledColor: systemAliases.color })};
 									cursor: default;
 							  `
 							: css`
 									@media (hover: hover) {
 										&:hover {
-											${system({ hoverColor: { property: 'color', scale: 'colors' } })};
+											${system({ hoverColor: systemAliases.color })};
 										}
 									}
 
 									&:active {
-										${system({ activeColor: { property: 'color', scale: 'colors' } })};
+										${system({ activeColor: systemAliases.color })};
 									}
 							  `};
 				`;
 			case 'minor':
 				return css`
 					border: 1px solid;
-					${system({ minorBorderColor: { property: 'border-color', scale: 'colors' } })};
-					${system({ minorBackgroundColor: { property: 'background-color', scale: 'colors' } })};
+					${system({ minorBorderColor: systemAliases.borderColor })};
+					${system({ minorBackgroundColor: systemAliases.backgroundColor })};
 					color: ${colors.flGray};
 
 					${({ disabled }) =>
 						disabled
 							? css`
-									${system({
-										minorDisabledBorderColor: { property: 'border-color', scale: 'colors' },
-									})};
-									${system({
-										minorDisabledBackgroundColor: { property: 'background-color', scale: 'colors' },
-									})};
+									${system({ minorDisabledBorderColor: systemAliases.borderColor })};
+									${system({ minorDisabledBackgroundColor: systemAliases.backgroundColor })};
 									color: ${colors.gray22};
 									cursor: default;
 							  `
@@ -183,16 +171,16 @@ export const Button = styled.button`
 									@media (hover: hover) {
 										&:hover {
 											border: 1px solid;
-											${system({ hoverColor: { property: 'border-color', scale: 'colors' } })};
-											${system({ hoverColor: { property: 'background-color', scale: 'colors' } })};
+											${system({ hoverColor: systemAliases.borderColor })};
+											${system({ hoverColor: systemAliases.backgroundColor })};
 											color: ${colors.flGray};
 										}
 									}
 
 									&:active {
 										border: 1px solid;
-										${system({ activeColor: { property: 'border-color', scale: 'colors' } })};
-										${system({ activeColor: { property: 'background-color', scale: 'colors' } })};
+										${system({ activeColor: systemAliases.borderColor })};
+										${system({ activeColor: systemAliases.backgroundColor })};
 										color: ${colors.flGray};
 									}
 							  `};
@@ -201,24 +189,24 @@ export const Button = styled.button`
 				return css`
 					border: 1px solid transparent;
 					background: none;
-					${system({ defaultColor: { property: 'color', scale: 'colors' } })};
+					${system({ defaultColor: systemAliases.color })};
 					padding: 0;
 
 					${({ disabled }) =>
 						disabled
 							? css`
-									${system({ disabledColor: { property: 'color', scale: 'colors' } })};
+									${system({ disabledColor: systemAliases.color })};
 									cursor: default;
 							  `
 							: css`
 									@media (hover: hover) {
 										&:hover {
-											${system({ hoverColor: { property: 'color', scale: 'colors' } })};
+											${system({ hoverColor: systemAliases.color })};
 										}
 									}
 
 									&:active {
-										${system({ activeColor: { property: 'color', scale: 'colors' } })};
+										${system({ activeColor: systemAliases.color })};
 									}
 							  `};
 				`;
