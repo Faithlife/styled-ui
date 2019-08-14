@@ -81,8 +81,8 @@ state: {
 		onItemSelect={item => setState({ schedule: item })}
 		options={scheduleOptions}
 		accessibilityLabel={'Pay schedule of income'}
-		theme={{ underlineColor: 'plum' }}
-		styleOverrides={{ fontSize: '18px' }}
+		borderColor="plum"
+		textStyle="ui.18"
 	/>
 	<ParameterInputBox
 		defaultValue="10"
@@ -91,8 +91,8 @@ state: {
 		formatValue={val => `${val}%`}
 		width="35px"
 		accessibilityLabel={'Percent of income to tithe'}
-		theme={{ underlineColor: 'plum' }}
-		styleOverrides={{ fontSize: '18px' }}
+		borderColor="plum"
+		textStyle="ui.18"
 	/>
 </ParameterSentenceDemo>
 ```
