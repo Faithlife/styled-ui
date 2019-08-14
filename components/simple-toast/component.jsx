@@ -17,9 +17,6 @@ export class SimpleToast extends PureComponent {
 	static propTypes = {
 		/** In milliseconds */
 		showTime: PropTypes.number,
-		theme: PropTypes.shape({
-			backgroundColor: PropTypes.string,
-		}),
 	};
 
 	static defaultProps = {
@@ -70,7 +67,7 @@ export class SimpleToast extends PureComponent {
 	};
 
 	render() {
-		const { theme, padding, paddingY, paddingTop, paddingBottom, ...props } = this.props;
+		const { padding, paddingY, paddingTop, paddingBottom, ...props } = this.props;
 		const { messages, transitionIn } = this.state;
 		const hasMultipleMessages = messages.length > 1;
 
@@ -87,7 +84,6 @@ export class SimpleToast extends PureComponent {
 				{state => (
 					<Styled.ToastContainer
 						state={state}
-						theme={theme}
 						onAnimationEnd={this.handleAnimationEnd}
 						display="grid"
 						gridAutoFlow="column"
