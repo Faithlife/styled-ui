@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { theme } from '../../theme';
 import { Box } from '../Box';
 import { useId } from '../shared-hooks';
 import { VisuallyHiddenLabel } from '../hidden-label';
@@ -12,8 +13,6 @@ export function ParameterSelect({
 	onItemSelect,
 	accessibilityLabel,
 	useNativeSelect,
-	styleOverrides,
-	theme,
 	padding,
 	...props
 }) {
@@ -59,6 +58,12 @@ export function ParameterSelect({
 									borderBottom="dashed 2px"
 									borderColor="blue4"
 									color={isOpen ? '#1d6ca1' : 'gray66'}
+									padding={padding}
+									hoverColor="blue4"
+									activeColor="#1d6ca1"
+									focusOutline="none"
+									focusBoxShadow="0 0 0 0.2rem rgba(30, 145, 214, 0.5)"
+									{...props}
 								>
 									{options[selectedId]}
 								</Styled.ButtonContent>
@@ -83,9 +88,22 @@ export function ParameterSelect({
 				<Styled.Select
 					value={selectedId}
 					onChange={handleNativeSelect}
-					theme={theme}
-					styleOverrides={styleOverrides}
 					aria-labelledby={labelId}
+					whiteSpace="nowrap"
+					minHeight="fit-content"
+					textStyle="h.16"
+					color={isOpen ? '#1d6ca1' : 'gray66'}
+					padding={padding}
+					border="none"
+					borderBottom="dashed 2px"
+					borderColor="blue4"
+					backgroundColor="transparent"
+					transition="box-shadow 0.25s ease 0s"
+					hoverColor="blue4"
+					activeColor="#1d6ca1"
+					focusOutline="none"
+					focusBoxShadow="0 0 0 0.2rem rgba(30, 145, 214, 0.5)"
+					{...props}
 				>
 					{options &&
 						Object.entries(options).map(([value, name]) => (
@@ -108,17 +126,8 @@ ParameterSelect.propTypes = {
 	accessibilityLabel: PropTypes.string,
 	/** Use the native select controls (mobile only) */
 	useNativeSelect: PropTypes.bool,
-	theme: PropTypes.shape({
-		hoverColor: PropTypes.string,
-		activeColor: PropTypes.string,
-		underlineColor: PropTypes.string,
-	}),
-	styleOverrides: PropTypes.shape({
-		fontSize: PropTypes.string,
-	}),
 };
 
 ParameterSelect.defaultProps = {
-	styleOverrides: {},
-	theme: {},
+	theme: theme,
 };

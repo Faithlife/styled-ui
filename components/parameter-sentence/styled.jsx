@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { colors, thickness } from '../shared-styles';
+import { system, layout, textStyle, border } from 'styled-system';
+import { common, typography } from '../../theme/system';
 import { resetStyles } from '../utils';
 import { Box } from '../Box';
 import { Text } from '../Text';
@@ -30,16 +31,16 @@ export const Button = styled.button`
 export const ButtonContent = styled(Text).attrs({ tabIndex: '-1' })`
 	&:hover {
 		&:not(:focus) {
-			color: ${({ theme }) => theme.hoverColor || colors.blueBase};
+			${system({ hoverColor: { property: 'color', scale: 'colors' } })};
 		}
 	}
 
 	&:active {
-		color: ${({ theme }) => theme.activeColor || colors.blueActive};
+		${system({ activeColor: { property: 'color', scale: 'colors' } })};
 	}
 
 	&:focus {
-		outline: none;
+		${system({ focusOutline: { property: 'outline' } })};
 	}
 `;
 
@@ -73,39 +74,31 @@ export const Fieldset = styled.fieldset`
 `;
 
 export const Select = styled.select`
-	white-space: nowrap;
-	min-height: fit-content;
-	font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
-	width: ${({ styleOverrides }) => styleOverrides.width};
-	font-weight: bold;
-	color: ${colors.gray66};
-	${props => `color: ${props.isOpen ? colors.blueActive : colors.gray66}`};
-	font-family: inherit;
+	${common};
+	${typography};
+	${layout};
+	${textStyle};
+	${border};
 
 	appearance: none;
 	user-select: none;
 	cursor: pointer;
-	border: none;
-	border-bottom: dashed ${thickness.two} ${({ theme }) => theme.underlineColor || colors.blueBase};
-	background-color: transparent;
 	text-align-last: center;
-
-	transition: box-shadow 0.25s ease 0s;
 
 	&:hover {
 		&:not(:focus) {
-			color: ${({ theme }) => theme.hoverColor || colors.blueBase};
+			${system({ hoverColor: { property: 'color', scale: 'colors' } })};
 		}
 	}
 
 	&:active {
-		color: ${({ theme }) => theme.activeColor || colors.blueActive};
+		${system({ activeColor: { property: 'color', scale: 'colors' } })};
 	}
 
 	&:focus {
 		&:not(:active) {
-			box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
+			${system({ focusBoxShadow: { property: 'box-shadow', scale: 'shadows' } })};
 		}
-		outline: none;
+		${system({ focusOutline: { property: 'outline' } })};
 	}
 `;
