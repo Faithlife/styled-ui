@@ -12,12 +12,6 @@ export class Checkbox extends Component {
 		onMouseUp: PropTypes.func,
 		title: PropTypes.string,
 		isChecked: PropTypes.bool,
-		theme: PropTypes.shape({
-			primary: PropTypes.string,
-			border: PropTypes.string,
-			disabledBackground: PropTypes.string,
-			disabledBorder: PropTypes.string,
-		}),
 		type: PropTypes.string,
 		children: PropTypes.node,
 		/** See the docs for how to override styles properly  */
