@@ -1,17 +1,15 @@
 ```react
+showSource: true
 state: {
 	files: null,
-	tabs: [{
-		title: 'Stock Photos',
-		accountId: 6817140,
-		viewStyle: 'tinygrid',
-		filter: ''
-	}
-	],
 	localizedResources: {
 		reccomendedMinSize: 'reccomended minimum image size: 800 x 400',
 		uploadFile: 'Upload File',
-		uploadFiles: 'Upload Files'
+		uploadFiles: 'Upload Files',
+		addText: 'Insert',
+		cancelText: 'Cancel',
+		dragDropText: 'Drag and drop to upload image',
+		browseText: 'or browse files',
 	},
 }
 ---
@@ -19,11 +17,46 @@ state: {
 	<FilePickerDemo>
 		<FilePicker
 			onFilesSelected={files => { alert( files ); }}
-			tabs={state.tabs}
 			onCancel={() => alert('You called the onCancelFunction. This should be used to hide the component')}
 			allowMultiSelect
-			localizedResources={state.localizedResources}
-		/>
+		>
+			<TabManager>
+				<TabList>
+					<Tab>
+						{state.localizedResources.uploadFiles}
+					</Tab>
+					<Tab>{'Stock photos'}</Tab>
+				</TabList>
+				<TabPanels>
+					<TabPanel>
+						<FileUpload/>
+					</TabPanel>
+					<TabPanel>
+						<AmberContent
+							accountId={6817140}
+							filter={'kind:"image"'}
+							viewStyle={'tinygrid'}
+						/>
+					</TabPanel>
+				</TabPanels>
+			</TabManager>
+		</FilePicker>
 	</FilePickerDemo>
 </div>
+```
+
+# Localized Resources defaults
+
+```code
+lang: javascript
+---
+	localizedResources: {
+		reccomendedMinSize: 'reccomended minimum image size: 800 x 400',
+		uploadFile: 'Upload File',
+		uploadFiles: 'Upload Files',
+		addText: 'Insert',
+		cancelText: 'Cancel',
+		dragDropText: 'Drag and drop to upload image',
+		browseText: 'or browse files',
+	}
 ```

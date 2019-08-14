@@ -53,6 +53,7 @@ import {
 	ParameterInputBox,
 	ParameterSentence,
 	FilePicker,
+	FileUpload,
 	AmberContent,
 } from '../components/main';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
@@ -897,6 +898,13 @@ const components = [
 							margin: 8px;
 						}
 					`,
+					TabManager,
+					TabList,
+					Tab,
+					TabPanel,
+					TabPanels,
+					FileUpload,
+					AmberContent,
 				},
 			},
 			{

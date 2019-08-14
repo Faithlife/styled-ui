@@ -4,8 +4,16 @@ import { Button } from '../button';
 import { ImagePreview } from './image-preview';
 import * as Styled from './styled';
 import { LightboxDropZone } from './lightbox-drop-zone';
+import { useFilePickerContext } from './file-picker-helpers';
 
-export function UploadPage({ allowMultiSelect, onFilesSelected, localizedResources, onCancel }) {
+export function FileUpload() {
+	const {
+		allowMultiSelect,
+		onFilesSelected,
+		localizedResources,
+		onCancel,
+	} = useFilePickerContext();
+
 	const [selectedFiles, setSelectedFiles] = useState([]);
 
 	const handleRemoveFile = useCallback(
@@ -76,18 +84,10 @@ export function UploadPage({ allowMultiSelect, onFilesSelected, localizedResourc
 		</React.Fragment>
 	);
 }
-UploadPage.propTypes = {
-	allowMultiSelect: PropTypes.bool,
-	onFilesSelected: PropTypes.func.isRequired,
-	localizedResources: PropTypes.shape({
-		addText: PropTypes.string,
-		cancelText: PropTypes.string,
-		reccomendedMinSize: PropTypes.string,
-	}),
-	onCancel: PropTypes.func.isRequired,
-};
 
-function ButtonSection({ selectedFiles, onFilesSelected, localizedResources, onCancel }) {
+function ButtonSection({ selectedFiles }) {
+	const { onFilesSelected, localizedResources, onCancel } = useFilePickerContext();
+
 	const onSelect = useCallback(() => {
 		onFilesSelected(selectedFiles);
 	}, [onFilesSelected, selectedFiles]);
@@ -120,11 +120,4 @@ function ButtonSection({ selectedFiles, onFilesSelected, localizedResources, onC
 }
 ButtonSection.propTypes = {
 	selectedFiles: PropTypes.object,
-	onFilesSelected: PropTypes.func,
-	localizedResources: PropTypes.shape({
-		addText: PropTypes.string,
-		cancelText: PropTypes.string,
-		reccomendedMinSize: PropTypes.string,
-	}),
-	onCancel: PropTypes.func.isRequired,
 };

@@ -1,15 +1,11 @@
 import React, { useRef, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useFilePickerContext } from './file-picker-helpers';
 import * as Styled from './styled';
 
-export function AmberContent({
-	accountId,
-	filter,
-	viewStyle,
-	onFilesSelected,
-	allowMultiSelect,
-	onCancel,
-}) {
+export function AmberContent({ accountId, filter, viewStyle }) {
+	const { allowMultiSelect, onCancel, onFilesSelected } = useFilePickerContext();
+
 	const handleMessage = useCallback(
 		event => {
 			if (event.origin.includes('amber.faithlife.com') && event.isTrusted) {
@@ -59,7 +55,4 @@ AmberContent.propTypes = {
 	filter: PropTypes.string,
 	/** optional way to chose layout of the Amber embeded view */
 	viewStyle: PropTypes.string,
-	onFilesSelected: PropTypes.func.isRequired,
-	allowMultiSelect: PropTypes.bool,
-	onCancel: PropTypes.func.isRequired,
 };
