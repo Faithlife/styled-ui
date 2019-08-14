@@ -164,7 +164,7 @@ export class Slider extends PureComponent {
 	}, 250);
 
 	handleThrottledKeyDown = throttle(event => {
-		const { minValue, maxValue, stopCount } = this.props;
+		const { minValue, maxValue, stopCount, onSlide } = this.props;
 		const { value: currentValue } = this.state;
 
 		if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
@@ -173,8 +173,8 @@ export class Slider extends PureComponent {
 				newValue > maxValue ? maxValue : newValue > stopCount - 1 ? stopCount - 1 : newValue;
 			return this.setState({ value, isHovered: true }, () => {
 				this.handleDebouncedKeyInput();
-				if (this.props.onSlide) {
-					this.props.onSlide(value);
+				if (onSlide) {
+					onSlide(value);
 				}
 			});
 		} else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
@@ -182,8 +182,8 @@ export class Slider extends PureComponent {
 			const value = newValue < minValue ? minValue : newValue < 0 ? 0 : newValue;
 			return this.setState({ value, isHovered: true }, () => {
 				this.handleDebouncedKeyInput();
-				if (this.props.onSlide) {
-					this.props.onSlide(value);
+				if (onSlide) {
+					onSlide(value);
 				}
 			});
 		}
@@ -222,8 +222,15 @@ export class Slider extends PureComponent {
 	};
 
 	render() {
-		const { hideAvailableStops, maxValue, minValue } = this.props;
-		const { isHovered } = this.state;
+		const {
+			hideAvailableStops,
+			maxValue,
+			minValue,
+			stopCount,
+			backgroundColor,
+			...props
+		} = this.props;
+		const { isHovered, isSliding, value } = this.state;
 		const labels = this.props.labels || [];
 		const track = this.getTrack();
 		const stops = this.getStops();
@@ -262,21 +269,26 @@ export class Slider extends PureComponent {
 					{track.map(index => (
 						<Track
 							trackFirst={index === 0}
-							trackLast={
-								index === maxValue - 1 || (!maxValue && index === this.props.stopCount - 2)
-							}
+							trackLast={index === maxValue - 1 || (!maxValue && index === stopCount - 2)}
 							key={index}
 							flexGrow="1"
 							position="relative"
 							height="8px"
 							backgroundColor={
-								index < this.state.value
+								index < value
 									? 'transparent'
-									: this.props.maxValue && index >= this.props.maxValue
-									? 'white'
+									: maxValue && index >= maxValue
+									? backgroundColor !== undefined && backgroundColor !== null
+										? backgroundColor
+										: 'white'
 									: 'gray8'
 							}
-							beforeBackgroundColor="white"
+							beforeBackgroundColor={
+								backgroundColor !== undefined && backgroundColor !== null
+									? backgroundColor
+									: 'white'
+							}
+							{...props}
 						/>
 					))}
 				</Box>
@@ -298,9 +310,7 @@ export class Slider extends PureComponent {
 							width="3px"
 							backgroundColor={
 								(!hideAvailableStops &&
-									(index > this.state.value &&
-										!(index >= this.props.maxValue) &&
-										!(index === this.props.stopCount - 1))) ||
+									(index > value && !(index >= maxValue) && !(index === stopCount - 1))) ||
 								(index === minValue && minValue > 0)
 									? 'white'
 									: 'transparent'
@@ -325,29 +335,27 @@ export class Slider extends PureComponent {
 						<Box
 							key={index}
 							trackStart={index === 0}
-							trackEnd={index === this.props.stopCount - 1}
+							trackEnd={index === stopCount - 1}
 							position="relative"
 							height="8px"
 							width="3px"
 							left={index === 0 ? '6px' : 'auto'}
-							right={index === this.props.stopCount - 1 ? '6px' : 'auto'}
+							right={index === stopCount - 1 ? '6px' : 'auto'}
 						>
 							<PopoverManager>
 								<PopoverReference>
 									<Box
-										display={index !== this.state.value ? 'none' : 'block'}
+										display={index !== value ? 'none' : 'block'}
 										position="absolute"
 										top="50%"
 										right="50%"
 										left="auto"
-										height={this.state.isHovered ? '26px' : '20px'}
-										width={this.state.isHovered ? '26px' : '20px'}
+										height={isHovered ? '26px' : '20px'}
+										width={isHovered ? '26px' : '20px'}
 										backgroundColor="white"
 										borderRadius="50%"
 										boxShadow={
-											this.state.isSliding
-												? '0 1px 10px 0 #0174b9'
-												: '0 2px 6px 1px rgba(0, 0, 0, 0.3)'
+											isSliding ? '0 1px 10px 0 #0174b9' : '0 2px 6px 1px rgba(0, 0, 0, 0.3)'
 										}
 										transform="translate(50%, -50%)"
 										transition="height 100ms, width 100ms"
@@ -355,7 +363,7 @@ export class Slider extends PureComponent {
 								</PopoverReference>
 								<Popover
 									isOpen={
-										index === this.state.value &&
+										index === value &&
 										isHovered &&
 										labels[index] !== undefined &&
 										labels[index] !== ''
