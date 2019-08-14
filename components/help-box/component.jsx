@@ -152,13 +152,6 @@ HelpBox.propTypes = {
 	showRightIcon: PropTypes.bool,
 	/** Stacking will happen automatically on small viewports. */
 	stacked: PropTypes.bool,
-	/** Blue theme is the default.
-	 * The icons are colored by foregroundColor. */
-	theme: PropTypes.shape({
-		foregroundColor: PropTypes.string,
-		backgroundColor: PropTypes.string,
-		closeIconColor: PropTypes.string,
-	}),
 	/** Enum with values: 'success', 'danger', 'warning', and 'minor' */
 	variant: PropTypes.oneOf(['success', 'danger', 'warning', 'minor']),
 	/** Green theme (deprecated in favor of the variant prop) */
