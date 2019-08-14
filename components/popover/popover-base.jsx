@@ -45,10 +45,6 @@ export class PopoverBase extends Component {
 		delay: PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
 		eventsEnabled: PropTypes.bool,
 		positionFixed: PropTypes.bool,
-		theme: PropTypes.shape({
-			backgroundColor: PropTypes.string,
-			textColor: PropTypes.string,
-		}),
 	};
 
 	static defaultProps = {
