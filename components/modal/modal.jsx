@@ -22,8 +22,6 @@ export class Modal extends React.Component {
 		onClose: PropTypes.func.isRequired,
 		/** Contents of the modal */
 		children: PropTypes.node.isRequired,
-		/** Customizable theme properties */
-		theme: PropTypes.object,
 		/** Values for rendering an FL standard footer */
 		footerProps: PropTypes.shape({
 			commitButton: PropTypes.shape({
