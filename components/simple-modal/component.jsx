@@ -18,8 +18,6 @@ export class SimpleModal extends React.Component {
 		onClose: PropTypes.func.isRequired,
 		/** Contents of the modal */
 		children: PropTypes.node.isRequired,
-		/** Customizable theme properties */
-		theme: PropTypes.object,
 		/** Set to 'body' to attach the modal to body, otherwise will attach as a child element */
 		container: PropTypes.string,
 	};
