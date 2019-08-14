@@ -57,6 +57,7 @@ export const box = compose(
 	styledSystem.shadow,
 	styledSystem.border,
 	styledSystem.background,
+	styledSystem.lineHeight,
 );
 
 box.propTypes = {
@@ -68,4 +69,5 @@ box.propTypes = {
 	...systemPropTypes.shadow,
 	...systemPropTypes.border,
 	...systemPropTypes.background,
+	...systemPropTypes.lineHeight,
 };

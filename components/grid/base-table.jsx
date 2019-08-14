@@ -130,8 +130,18 @@ export function BaseTable({
 		[setGridApi, setColumnApi, sortModel, filterText],
 	);
 
+	// Set proper column sizes once gridApi is available and component has mounted
+	// setTimeout necessary in certain browsers (e.g. Safari) to ensure ag-grid components have mounted
+	// See 'Sizing Columns By Default' here: https://www.ag-grid.com/javascript-grid-resizing/
+	useEffect(() => {
+		if (gridApi) {
+			setTimeout(() => gridApi.sizeColumnsToFit(), 0);
+		}
+	}, [gridApi]);
+
 	const rowCount = data ? data.length : 0;
-	const currentHeaderHeight = hideHeaders ? 0 : headerHeight;
+	const currentHeaderHeight = hideHeaders ? 1 : headerHeight;
+
 	const tableHeight =
 		rowCount !== 0
 			? (maxRows && maxRows < rowCount ? maxRows : rowCount) * (rowHeight || defaultRowHeight) +
