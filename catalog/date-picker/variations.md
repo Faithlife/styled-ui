@@ -11,7 +11,7 @@ state: { selectedDate: null }
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Select Date</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="bottom" styleOverrides={{ maxWidth: '1000px' }}>
+		<Popover isOpen={state.isOpen} placement="bottom" maxWidth="1000px">
 			<DatePicker
 				selectedDate={state.selectedDate}
 				setSelectedDate={(date) => setState({ selectedDate: date })}
@@ -37,7 +37,7 @@ state: { selectedDateRange: null }
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Select Dates</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="bottom" styleOverrides={{ maxWidth: '1000px' }}>
+		<Popover isOpen={state.isOpen} placement="bottom" maxWidth="1000px">
 			<DatePicker
 				selectedDateRange={state.selectedDateRange}
 				setSelectedDate={(dateRange) => setState({ selectedDateRange: dateRange })}

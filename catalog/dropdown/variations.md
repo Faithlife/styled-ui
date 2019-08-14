@@ -43,16 +43,29 @@ showSource: true
 state: { isOpen: false, isChecked: false }
 ---
 <DropdownDemo>
-	<Dropdown
-		theme={{ hoverBackgroundColor: 'plum', checkboxPrimary: 'darkslateblue', checkboxBorder: 'purple' }}
-		styleOverrides={{ fontSize: '14px', padding: '4px' }}
-		isOpen={state.isOpen}
-		onToggleMenu={() => setState({ isOpen: !state.isOpen })}
+	<Dropdown isOpen={state.isOpen} onToggleMenu={() => setState({ isOpen: !state.isOpen })}
 	>
 		<DropdownToggle primary medium>Show a Dropdown!</DropdownToggle>
 		<DropdownMenu>
-			<MenuItem onClick={() => alert("Menu Item 1")}>Menu Item 1</MenuItem>
-			<MenuCheckbox onClick={() => setState({ isChecked: !state.isChecked })} isChecked={state.isChecked}>Menu Checkbox</MenuCheckbox>
+			<MenuItem
+				textStyle="ui.14"
+				padding={2}
+				hoverBackgroundColor="plum"
+				onClick={() => alert("Menu Item 1")}
+			>
+				Menu Item 1
+			</MenuItem>
+			<MenuCheckbox
+				textStyle="ui.14"
+				padding={2}
+				hoverBackgroundColor="plum"
+				hoverBorderColor="darkslateblue"
+				borderColor="purple"
+				onClick={() => setState({ isChecked: !state.isChecked })}
+				isChecked={state.isChecked}
+			>
+				Menu Checkbox
+			</MenuCheckbox>
 		</DropdownMenu>
 	</Dropdown>
 </DropdownDemo>

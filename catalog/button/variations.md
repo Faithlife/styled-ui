@@ -54,7 +54,7 @@ showSource: true
 
 ### Supported style customizations
 
-Do not use the `style` prop to style this component (it will be ignored). Instead, if there is missing customization that you need for this component, ask to have it added. The `theme` prop can be used to control color variations while the `styleOverrides` prop can be used for other styles.
+Do not use the `style` prop to style this component (it will be ignored). Instead, if there is missing customization that you need for this component, ask to have it added.
 
 ```react
 showSource: true
