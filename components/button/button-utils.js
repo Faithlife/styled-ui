@@ -2,7 +2,6 @@ export const buttonProps = Object.freeze({
 	children: 'children',
 	condensed: 'condensed',
 	theme: 'theme',
-	styleOverrides: 'styleOverrides',
 	primary: 'primary',
 	primaryOutline: 'primaryOutline',
 	small: 'small',
