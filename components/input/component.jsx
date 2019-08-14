@@ -36,9 +36,6 @@ export const Input = forwardClassRef(
 			small: PropTypes.bool,
 			/** Large variation (deprecated in favor of the variant prop) */
 			large: PropTypes.bool,
-			styleOverrides: PropTypes.shape({
-				width: PropTypes.string,
-			}),
 			size: PropTypes.number,
 			/** Inline input variation */
 			inline: PropTypes.bool,
