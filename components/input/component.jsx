@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { layout, textStyle, border } from 'styled-system';
+import { system, layout, textStyle, border } from 'styled-system';
 import systemPropTypes from '@styled-system/prop-types';
 import { theme } from '../../theme';
 import { common, typography } from '../../theme/system';
@@ -95,6 +95,7 @@ export const Input = forwardClassRef(
 					border={1}
 					borderColor="inputBorderColor"
 					borderRadius={1}
+					underlineColor="blue4"
 					{...inputProps}
 				/>
 			);
@@ -149,14 +150,15 @@ const StyledInput = styled.input`
 					box-shadow: none;
 					border-radius: 0;
 					padding: 0;
-					border-bottom: solid ${thickness.two} ${colors.blueBase};
+					border-bottom: solid ${thickness.two};
+					${system({ underlineColor: { property: 'border-color', scale: 'colors' } })};
 					height: 20px;
 					padding-bottom: ${thickness.four};
 
 					&:focus {
 						box-shadow: none;
-						border-bottom: solid ${thickness.two}
-							${({ theme }) => theme.underlineColor || colors.blueBase};
+						border-bottom: solid ${thickness.two};
+						${system({ underlineColor: { property: 'border-color', scale: 'colors' } })};
 						outline: 0;
 					}
 				`;
