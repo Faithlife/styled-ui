@@ -11,7 +11,6 @@ export class ModalBackdrop extends React.Component {
 		onClose: PropTypes.func.isRequired,
 		/** Contents of the modal */
 		children: PropTypes.node.isRequired,
-		/** Style overrides */
 	};
 
 	inPotentialCloseEvent = false;

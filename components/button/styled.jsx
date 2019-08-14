@@ -76,7 +76,6 @@ export const Button = styled.button`
 				return css`
 					border: 1px solid;
 					${system({ defaultColor: systemAliases.borderAndBackgroundColors })};
-					/* ${system({ defaultColor: { property: 'background-color', scale: 'colors' } })}; */
 					color: #fff;
 
 					${({ disabled }) =>
@@ -231,7 +230,6 @@ export const Button = styled.button`
 				return css`
 					height: 56px;
 					padding: 0 ${props => (props.condensed ? '15px' : '23px')};
-					/* font-size: 24px; */
 				`;
 			default:
 				return css``;
