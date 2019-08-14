@@ -105,6 +105,8 @@ export const InputContainer = styled.div`
 	border-bottom: ${({ isFocused }) => (isFocused ? 'solid' : 'dashed')} ${thickness.two}
 		${({ theme }) => theme.underlineColor || colors.blueBase};
 
+	height: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
+
 	&& > input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button {
 		appearance: none;
@@ -124,7 +126,8 @@ export const Input = styled.input`
 		padding-bottom: 0;
 
 		width: ${props => props.styleOverrides.width};
-		height: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
+		height: ${({ styleOverrides }) =>
+			styleOverrides.fontSize ? `calc(2px + ${styleOverrides.fontSize})` : '18px'};
 		line-height: 1;
 		font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
 		font-weight: 600;
