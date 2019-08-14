@@ -1,6 +1,8 @@
 import React, { lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { system, layout, flexbox, position, textStyle, border, background } from 'styled-system';
+import { common, typography } from '../../theme/system';
 import { Box } from '../Box';
 import { Text } from '../Text';
 import { LoadingSpinner } from '../loading-spinner';
@@ -49,15 +51,6 @@ export class ProductDrawer extends React.PureComponent {
 			ministryTeamMagazineLinkTitle: PropTypes.string.isRequired,
 			ministryTeamMagazineLinkDescription: PropTypes.string.isRequired,
 		}),
-		styleOverrides: PropTypes.shape({
-			mobileTopOffset: PropTypes.string,
-			toggleButtonColor: PropTypes.string,
-			toggleButtonHoverColor: PropTypes.string,
-		}),
-	};
-
-	static defaultProps = {
-		styleOverrides: {},
 	};
 
 	state = {
@@ -88,7 +81,7 @@ export class ProductDrawer extends React.PureComponent {
 	};
 
 	render() {
-		const { styleOverrides, resources } = this.props;
+		const { resources, ...props } = this.props;
 		const { isOpen } = this.state;
 
 		return (
@@ -96,11 +89,20 @@ export class ProductDrawer extends React.PureComponent {
 				<PopoverManager onFocusAway={() => this.setState({ isOpen: false })}>
 					<PopoverReference>
 						<ProductDrawerToggle
-							styleOverrides={styleOverrides}
 							onClick={this.handleToggleClick}
 							ref={el => {
 								this.toggle = el;
 							}}
+							display="flex"
+							alignItems="center"
+							padding={0}
+							border="none"
+							background="transparent"
+							focusOutline="none"
+							color="initial"
+							toggleButtonColor="initial"
+							toggleButtonHoverColor="initial"
+							{...props}
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +126,6 @@ export class ProductDrawer extends React.PureComponent {
 							<ProductDrawerDropdown
 								isOpen={isOpen}
 								resources={resources}
-								styleOverrides={styleOverrides}
 								handleCloseButtonClick={this.handleCloseButtonClick}
 							/>
 						</Suspense>
@@ -136,28 +137,30 @@ export class ProductDrawer extends React.PureComponent {
 }
 
 const ProductDrawerToggle = styled.button`
-	display: flex;
-	padding: 0;
-	align-items: center;
-	cursor: pointer;
-	background: transparent;
-	border: none;
+	${common};
+	${typography};
+	${layout};
+	${flexbox};
+	${position};
+	${textStyle};
+	${border};
+	${background};
 
-	color: ${({ styleOverrides }) => styleOverrides.toggleButtonColor || 'initial'};
+	cursor: pointer;
 
 	path {
-		fill: ${({ styleOverrides }) => styleOverrides.toggleButtonColor || 'initial'};
+		${system({ toggleButtonColor: { property: 'fill', scale: 'colors' } })};
 	}
 
 	&:hover {
-		color: ${({ styleOverrides }) => styleOverrides.toggleButtonHoverColor || 'initial'};
+		${system({ toggleButtonHoverColor: { property: 'color', scale: 'colors' } })};
 
 		path {
-			fill: ${({ styleOverrides }) => styleOverrides.toggleButtonHoverColor || 'initial'};
+			${system({ toggleButtonHoverColor: { property: 'fill', scale: 'colors' } })};
 		}
 	}
 
 	&:focus {
-		outline: none;
+		${system({ focusOutline: { property: 'outline' } })};
 	}
 `;

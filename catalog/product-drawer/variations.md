@@ -4,9 +4,10 @@
 ---
 <ProductDrawerWithResources/>
 ```
+
 ### Style Overrides
 
 ```react
 ---
-<ProductDrawerWithResources styleOverrides={{mobileTopOffset: '55px', toggleButtonColor: 'green', toggleButtonHoverColor: 'red'}} />
+<ProductDrawerWithResources toggleButtonColor="green" toggleButtonHoverColor="red" />
 ```
