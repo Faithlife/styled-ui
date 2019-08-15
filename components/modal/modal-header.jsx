@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '../Box';
 import { Text } from '../Text';
+import { Paragraph } from '../Paragraph';
 import { Button } from '../button';
 import { Close } from '../icons';
 
@@ -24,9 +25,9 @@ export const ModalHeader = ({ title, subtitle, onClose, headerBottomBorder }) =>
 			<Button primaryTransparent icon={<Close />} onClick={onClose} />
 		</Box>
 		{subtitle && (
-			<Text width="100%" paddingTop={4} textStyle="ui.14" color="gray66">
+			<Paragraph width="100%" paddingTop={4} textStyle="ui.14" textAlign="left" color="gray66">
 				{subtitle}
-			</Text>
+			</Paragraph>
 		)}
 	</Box>
 );
