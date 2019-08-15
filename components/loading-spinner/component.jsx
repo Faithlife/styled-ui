@@ -13,7 +13,7 @@ export function LoadingSpinner({ variant, small, medium, large, height, width, .
 			display="inline-block"
 			width={height || width}
 			height={height || width}
-			marginLeft="5px"
+			marginLeft={2}
 			border="4px solid"
 			borderColor="gray22"
 			spinningColor="blue4"
