@@ -30,8 +30,8 @@ state: { expandedSections: [0] }
 		</Accordion.Item>
 		<Accordion.Item>
 			<Accordion.Header>
-				<Accordion.Title>Section One Title</Accordion.Title>
-				<Accordion.Subtitle>Subtitle for Section One.</Accordion.Subtitle>
+				<Accordion.Title>Section Two Title</Accordion.Title>
+				<Accordion.Subtitle>Subtitle for Section Two.</Accordion.Subtitle>
 			</Accordion.Header>
 			<Accordion.Panel>
 				<Form>
