@@ -92,7 +92,7 @@ export class CalendarDate extends Component {
 					left="0"
 					right="0"
 					textStyle="c.14"
-					css={{ transform: 'translateY(-50%)' }}
+					transform="translateY(-50%)"
 				>
 					{asDateRangePicker && !isCurrentMonth ? null : format(date, 'd')}
 				</Paragraph>
