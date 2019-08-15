@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Box } from '../../Box';
 import { CalendarDate } from '../calendar-date';
 import { dateFunctionProps } from '../date-function-props';
 
-const StyledCalendarWeek = styled.div`
-	display: flex;
-
+const CalendarWeekBox = styled(Box)`
 	@media (hover: none) {
 		max-width: 308px;
 	}
@@ -29,7 +28,7 @@ export function CalendarWeek(props) {
 	} = props;
 
 	return (
-		<StyledCalendarWeek>
+		<CalendarWeekBox display="flex">
 			{days.map(day => (
 				<CalendarDate
 					key={`day-${day}`}
@@ -43,7 +42,7 @@ export function CalendarWeek(props) {
 					asDateRangePicker={asDateRangePicker}
 				/>
 			))}
-		</StyledCalendarWeek>
+		</CalendarWeekBox>
 	);
 }
 

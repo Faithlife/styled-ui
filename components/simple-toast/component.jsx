@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Transition from 'react-transition-group/Transition';
+import { Box } from '../Box';
+import { Text } from '../Text';
 import { Button } from '../button';
 import { Close } from '../icons';
 import * as Styled from './styled.jsx';
@@ -15,25 +17,10 @@ export class SimpleToast extends PureComponent {
 	static propTypes = {
 		/** In milliseconds */
 		showTime: PropTypes.number,
-		theme: PropTypes.shape({
-			backgroundColor: PropTypes.string,
-		}),
-		styleOverrides: PropTypes.shape({
-			width: PropTypes.string,
-			height: PropTypes.string,
-			zIndex: PropTypes.number,
-			/** Only for mobile view */
-			topOffset: PropTypes.string,
-			/** Only used for desktop view */
-			rightOffset: PropTypes.string,
-			bottomOffset: PropTypes.string,
-		}),
 	};
 
 	static defaultProps = {
 		showTime: 1000,
-		theme: {},
-		styleOverrides: {},
 	};
 
 	state = {
@@ -80,7 +67,7 @@ export class SimpleToast extends PureComponent {
 	};
 
 	render() {
-		const { theme, styleOverrides } = this.props;
+		const { padding, paddingY, paddingTop, paddingBottom, ...props } = this.props;
 		const { messages, transitionIn } = this.state;
 		const hasMultipleMessages = messages.length > 1;
 
@@ -97,20 +84,58 @@ export class SimpleToast extends PureComponent {
 				{state => (
 					<Styled.ToastContainer
 						state={state}
-						theme={theme}
-						styleOverrides={styleOverrides}
 						onAnimationEnd={this.handleAnimationEnd}
+						display="grid"
+						gridAutoFlow="column"
+						gridColumnGap={3}
+						gridTemplateColumns="min-content"
+						position="fixed"
+						top={['55px', 'auto']}
+						right={[null, '24px']}
+						bottom={[null, '24px']}
+						left={['50%', 'auto']}
+						justifyItems={['center', 'left']}
+						zIndex="1000"
+						backgroundColor="white"
+						borderRadius={1}
+						boxShadow="0 19px 38px 0 rgba(0, 0, 0, 0.12), 0 15px 12px 0 rgba(0, 0, 0, 0.12)"
+						opacity="0"
+						textStyle="ui.18"
+						paddingTop={
+							isDefined(paddingTop)
+								? paddingTop
+								: isDefined(padding)
+								? padding
+								: isDefined(paddingY)
+								? paddingY
+								: ['10px', 5]
+						}
+						paddingBottom={
+							isDefined(paddingBottom)
+								? paddingBottom
+								: isDefined(padding)
+								? padding
+								: isDefined(paddingY)
+								? paddingY
+								: ['10px', 5]
+						}
+						paddingX={isDefined(padding) ? padding : 5}
+						height={['18px', '20px']}
+						minWidth="285px"
+						{...props}
 					>
 						{messages.length > 0 && messages[0].icon}
-						{messages.length > 0 && (
-							<Styled.ToastContent>{messages[0].message}</Styled.ToastContent>
-						)}
-						<Styled.ToastClose>
+						{messages.length > 0 && <Text whiteSpace="nowrap">{messages[0].message}</Text>}
+						<Box justifySelf="right">
 							<Button minorTransparent icon={<Close />} onClick={this.triggerExit} />
-						</Styled.ToastClose>
+						</Box>
 					</Styled.ToastContainer>
 				)}
 			</Transition>
 		);
 	}
 }
+
+const isDefined = function(value) {
+	return value !== undefined && value !== null;
+};

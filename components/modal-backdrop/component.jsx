@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as Styled from './styled';
+import { Box } from '../Box';
 
 /**
  * Modal Backdrop
@@ -11,10 +11,6 @@ export class ModalBackdrop extends React.Component {
 		onClose: PropTypes.func.isRequired,
 		/** Contents of the modal */
 		children: PropTypes.node.isRequired,
-		/** Style overrides */
-		styleOverrides: PropTypes.shape({
-			zIndex: PropTypes.number,
-		}),
 	};
 
 	inPotentialCloseEvent = false;
@@ -42,10 +38,10 @@ export class ModalBackdrop extends React.Component {
 	};
 
 	render() {
-		const { children, styleOverrides } = this.props;
+		const { children } = this.props;
 
 		return (
-			<Styled.Backdrop
+			<Box
 				ref={backdrop => {
 					this._backdrop = backdrop;
 				}}
@@ -53,10 +49,19 @@ export class ModalBackdrop extends React.Component {
 				onMouseUp={this.handleBackdropCloseEventEnd}
 				onTouchStart={this.handleBackdropCloseEventStart}
 				onTouchEnd={this.handleBackdropCloseEventEnd}
-				styleOverrides={styleOverrides}
+				display="flex"
+				justifyContent="center"
+				alignItems="center"
+				position="fixed"
+				top="0"
+				right="0"
+				bottom="0"
+				left="0"
+				overflow="hidden"
+				background="rgba(0, 0, 0, 0.7)"
 			>
 				{children}
-			</Styled.Backdrop>
+			</Box>
 		);
 	}
 }

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { ThemeProvider } from 'styled-components';
 import { Popper } from 'react-popper';
-import { colors } from '../shared-styles';
+import styled from 'styled-components';
+import { textStyle } from 'styled-system';
+import { typography } from '../../theme/system';
+import { Box } from '../Box';
 import { PlacementOptionsProps, FocusHandlerInboundsElement } from './popper-helpers';
 import * as Styled from './styled';
 
@@ -43,39 +45,11 @@ export class PopoverBase extends Component {
 		delay: PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
 		eventsEnabled: PropTypes.bool,
 		positionFixed: PropTypes.bool,
-		styleOverrides: PropTypes.shape({
-			background: PropTypes.string,
-			border: PropTypes.string,
-			borderRadius: PropTypes.string,
-			hideShadow: PropTypes.bool,
-			fontSize: PropTypes.string,
-			fontWeight: PropTypes.string,
-			height: PropTypes.string,
-			lineHeight: PropTypes.string,
-			margin: PropTypes.string,
-			maxHeight: PropTypes.string,
-			maxWidth: PropTypes.string,
-			minHeight: PropTypes.string,
-			minWidth: PropTypes.string,
-			outline: PropTypes.string,
-			padding: PropTypes.string,
-			textAlign: PropTypes.string,
-			width: PropTypes.string,
-			zIndex: PropTypes.number,
-		}),
-		theme: PropTypes.shape({
-			backgroundColor: PropTypes.string,
-			textColor: PropTypes.string,
-		}),
 	};
 
 	static defaultProps = {
 		placement: 'top',
-		theme: {
-			backgroundColor: colors.white,
-		},
 		modifiers: {},
-		styleOverrides: {},
 	};
 
 	state = {
@@ -135,12 +109,13 @@ export class PopoverBase extends Component {
 			children,
 			placement: popoverPlacement,
 			hideArrow,
-			delay,
-			theme,
 			modifiers,
-			styleOverrides,
 			eventsEnabled,
 			positionFixed,
+			backgroundColor,
+			boxShadow,
+			border,
+			...props
 		} = this.props;
 		const { showPopper } = this.state;
 
@@ -160,30 +135,39 @@ export class PopoverBase extends Component {
 				positionFixed={positionFixed}
 			>
 				{({ ref, style, placement, arrowProps }) => (
-					<ThemeProvider theme={theme}>
-						<Styled.PopoverBase
-							ref={ref}
-							placement={placement}
-							style={{
-								...style,
-								...(!hideArrow ? Styled.margins[Styled.getPlacement(placement)] : {}),
-							}}
-							delay={delay}
-							onAnimationEnd={this.handleTransition}
-							hideArrow={hideArrow}
-							styleOverrides={styleOverrides}
-						>
-							{children}
-							{!hideArrow && (
-								<Styled.Arrow
-									ref={arrowProps.ref}
-									placement={placement}
-									style={arrowProps.style}
-									styleOverrides={styleOverrides}
-								/>
-							)}
-						</Styled.PopoverBase>
-					</ThemeProvider>
+					<PopoverBox
+						ref={ref}
+						style={{
+							...style,
+							...(!hideArrow ? Styled.margins[Styled.getPlacement(placement)] : {}),
+						}}
+						onAnimationEnd={this.handleTransition}
+						backgroundColor={backgroundColor || 'white'}
+						width="auto"
+						boxShadow={isDefined(boxShadow) ? boxShadow : 1}
+						border={border}
+						textStyle="c.16"
+						position="absolute"
+						zIndex="menu"
+						textAlign="center"
+						{...props}
+					>
+						{children}
+						{!hideArrow && (
+							<Styled.Arrow
+								ref={arrowProps.ref}
+								placement={placement}
+								style={arrowProps.style}
+								position="absolute"
+								width="25px"
+								height="25px"
+								overflow="hidden"
+								arrowBackground={isDefined(backgroundColor) ? backgroundColor : 'white'}
+								arrowShadow={isDefined(boxShadow) ? boxShadow : 1}
+								arrowBorder={isDefined(border) ? border : 'none'}
+							/>
+						)}
+					</PopoverBox>
 				)}
 			</Popper>
 		);
@@ -202,3 +186,12 @@ export class PopoverBase extends Component {
 		return null;
 	}
 }
+
+const PopoverBox = styled(Box)`
+	${textStyle}
+	${typography}
+`;
+
+const isDefined = function(value) {
+	return value !== undefined && value !== null;
+};

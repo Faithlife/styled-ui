@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Paragraph } from '../../Paragraph';
 import { dateFunctionProps } from '../date-function-props';
 import * as Styled from './styled';
 
@@ -85,9 +86,16 @@ export class CalendarDate extends Component {
 				tabIndex="-1"
 				disabled={this.props.validate && !this.props.validate(date)}
 			>
-				<Styled.CalendarDateLabel>
+				<Paragraph
+					position="absolute"
+					top="50%"
+					left="0"
+					right="0"
+					textStyle="c.14"
+					transform="translateY(-50%)"
+				>
 					{asDateRangePicker && !isCurrentMonth ? null : format(date, 'd')}
-				</Styled.CalendarDateLabel>
+				</Paragraph>
 				{((asDateRangePicker && isCurrentMonth) || !asDateRangePicker) && currentDayDot}
 			</CalendarWeekDay>
 		);

@@ -17,8 +17,9 @@ state: { expandedSections: [0] }
 <AccordionDemo>
 	<Accordion expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
 		<Accordion.Item>
-			<Accordion.Header subtitle="Subtitle for Section One.">
-				Section One Title
+			<Accordion.Header>
+				<Accordion.Title>Section One Title</Accordion.Title>
+				<Accordion.Subtitle>Subtitle for Section One.</Accordion.Subtitle>
 			</Accordion.Header>
 			<Accordion.Panel>
 				<Form>
@@ -29,7 +30,8 @@ state: { expandedSections: [0] }
 		</Accordion.Item>
 		<Accordion.Item>
 			<Accordion.Header>
-				Section Two Title
+				<Accordion.Title>Section Two Title</Accordion.Title>
+				<Accordion.Subtitle>Subtitle for Section Two.</Accordion.Subtitle>
 			</Accordion.Header>
 			<Accordion.Panel>
 				<Form>
@@ -40,7 +42,7 @@ state: { expandedSections: [0] }
 		</Accordion.Item>
 		<Accordion.Item>
 			<Accordion.Header>
-				Section Three Title
+				<Accordion.Title>Section Three Title</Accordion.Title>
 			</Accordion.Header>
 			<Accordion.Panel>
 				<Form>
@@ -66,7 +68,7 @@ state: { expandedSections: [0, 2] }
 	<Accordion hideArrows expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
 		<Accordion.Item>
 			<Accordion.Header renderCustomIndicator={AccordionCustomIndicator}>
-				Section One Title
+				<Accordion.Title>Section One Title</Accordion.Title>
 			</Accordion.Header>
 			<Accordion.Panel>
 				<Form>
@@ -77,7 +79,7 @@ state: { expandedSections: [0, 2] }
 		</Accordion.Item>
 		<Accordion.Item>
 			<Accordion.Header renderCustomIndicator={AccordionCustomIndicator}>
-				Section Two Title
+				<Accordion.Title>Section Two Title</Accordion.Title>
 			</Accordion.Header>
 			<Accordion.Panel>
 				<Form>
@@ -88,7 +90,7 @@ state: { expandedSections: [0, 2] }
 		</Accordion.Item>
 		<Accordion.Item>
 			<Accordion.Header renderCustomIndicator={AccordionCustomIndicator}>
-				Section Three Title
+				<Accordion.Title>Section Three Title</Accordion.Title>
 			</Accordion.Header>
 			<Accordion.Panel>
 				<Form>
@@ -113,27 +115,30 @@ state: { expandedSections: [] }
 <AccordionDemo>
 	<Accordion expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
 		<Accordion.Item>
-			<Accordion.Header subtitle="The first book of the Bible.">
-				Genesis
+			<Accordion.Header>
+				<Accordion.Title>Genesis</Accordion.Title>
+				<Accordion.Subtitle>The first book of the Bible.</Accordion.Subtitle>
 			</Accordion.Header>
 			<Accordion.Panel>
-				<div>In the beginning, God created the heavens and the earth.</div>
+				<Box>In the beginning, God created the heavens and the earth.</Box>
 			</Accordion.Panel>
 		</Accordion.Item>
 		<Accordion.Item>
-			<Accordion.Header subtitle="The second book of the Bible.">
-				Exodus
+			<Accordion.Header>
+				<Accordion.Title>Exodus</Accordion.Title>
+				<Accordion.Subtitle>The second book of the Bible.</Accordion.Subtitle>
 			</Accordion.Header>
 			<Accordion.Panel>
-				<div>And these are the names of the sons of Israel who came to Egypt; with Jacob, they each came with his ⌊family⌋:</div>
+				<Box>And these are the names of the sons of Israel who came to Egypt; with Jacob, they each came with his ⌊family⌋:</Box>
 			</Accordion.Panel>
 		</Accordion.Item>
 		<Accordion.Item>
-			<Accordion.Header subtitle="The third book of the Bible.">
-				Leviticus
+			<Accordion.Header>
+				<Accordion.Title>Leviticus</Accordion.Title>
+				<Accordion.Subtitle>The third book of the Bible.</Accordion.Subtitle>
 			</Accordion.Header>
 			<Accordion.Panel>
-				<div>Then Yahweh called to Moses and spoke to him from the tent of assembly, saying,</div>
+				<Box>Then Yahweh called to Moses and spoke to him from the tent of assembly, saying,</Box>
 			</Accordion.Panel>
 		</Accordion.Item>
 	</Accordion>

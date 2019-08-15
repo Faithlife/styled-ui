@@ -33,24 +33,13 @@ export class DatePickerInput extends PureComponent {
 		disabled: PropTypes.bool,
 		/** Where on the target the date picker renders */
 		placement: PlacementOptionsProps,
-		/** Style overrides, inputWidth is applied to the input */
-		styleOverrides: PropTypes.shape({
-			inputWidth: PropTypes.string,
-			hideShadow: PropTypes.bool,
-			width: PropTypes.string,
-			padding: PropTypes.string,
-			border: PropTypes.string,
-			zIndex: PropTypes.number,
-		}),
+		/** inputWidth is applied to the input */
+		inputWidth: PropTypes.string,
 	};
 
 	static defaultProps = {
 		placement: 'bottom-start',
-		styleOverrides: {
-			inputWidth: '100%',
-			padding: '16px 20px',
-			zIndex: 3,
-		},
+		inputWidth: '100%',
 	};
 
 	constructor(props) {
@@ -135,22 +124,12 @@ export class DatePickerInput extends PureComponent {
 	);
 
 	render() {
-		const { disabled, defaultSelectedDate, placement, styleOverrides } = this.props;
+		const { disabled, defaultSelectedDate, placement, inputWidth, padding, ...props } = this.props;
 		const { text, selectedDate, showCalendar } = this.state;
 
 		const defaultValue = defaultSelectedDate ? this.formatDate(defaultSelectedDate) : '';
 		const formattedDate = selectedDate ? this.formatDate(selectedDate) : defaultValue;
 		const value = text ? text : formattedDate;
-		const inputStyleOverrides = {
-			width: styleOverrides.inputWidth,
-		};
-		const popoverStyleOverrides = {
-			hideShadow: styleOverrides.hideShadow,
-			width: styleOverrides.width,
-			padding: styleOverrides.padding,
-			border: styleOverrides.border,
-			zIndex: styleOverrides.zIndex,
-		};
 
 		return (
 			<Styled.Container>
@@ -162,7 +141,7 @@ export class DatePickerInput extends PureComponent {
 						onFocus={this.handleFocus}
 						value={value}
 						disabled={disabled}
-						styleOverrides={inputStyleOverrides}
+						width={inputWidth}
 					/>
 					<Styled.CalendarButton ref={this.icon} onClick={!disabled ? this.openCalendar : null}>
 						<Styled.CalendarIconContainer>
@@ -174,7 +153,10 @@ export class DatePickerInput extends PureComponent {
 					<Popover
 						placement={placement}
 						isOpen={showCalendar}
-						styleOverrides={popoverStyleOverrides}
+						padding={padding}
+						paddingY={padding !== undefined && padding !== null ? padding : 5}
+						paddingX={padding !== undefined && padding !== null ? padding : '20px'}
+						{...props}
 					>
 						{/*eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
 						<div onClick={this.handlePopoutClicked}>

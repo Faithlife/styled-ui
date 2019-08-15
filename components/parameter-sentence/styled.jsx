@@ -1,34 +1,11 @@
-import styled, { css } from 'styled-components';
-import { colors, thickness } from '../shared-styles';
+import styled from 'styled-components';
+import { system, layout, textStyle, border } from 'styled-system';
+import { common, typography } from '../../theme/system';
 import { resetStyles } from '../utils';
+import { Box } from '../Box';
+import { Text } from '../Text';
 
 const inputOffset = '-6px';
-
-const selectStyling = css`
-	white-space: nowrap;
-	min-height: fit-content;
-	font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
-	width: ${({ styleOverrides }) => styleOverrides.width};
-	border-bottom: dashed ${thickness.two} ${({ theme }) => theme.underlineColor || colors.blueBase};
-	font-weight: bold;
-	color: ${colors.gray66};
-	${props => `color: ${props.isOpen ? colors.blueActive : colors.gray66}`};
-	font-family: inherit;
-
-	&:hover {
-		&:not(:focus) {
-			color: ${({ theme }) => theme.hoverColor || colors.blueBase};
-		}
-	}
-
-	&:active {
-		color: ${({ theme }) => theme.activeColor || colors.blueActive};
-	}
-
-	&:focus {
-		outline: none;
-	}
-`;
 
 export const Button = styled.button`
 	${resetStyles};
@@ -51,17 +28,23 @@ export const Button = styled.button`
 	}
 `;
 
-export const ButtonContent = styled.div.attrs({ tabIndex: '-1' })`
-	${selectStyling};
+export const ButtonContent = styled(Text).attrs({ tabIndex: '-1' })`
+	&:hover {
+		&:not(:focus) {
+			${system({ hoverColor: { property: 'color', scale: 'colors' } })};
+		}
+	}
+
+	&:active {
+		${system({ activeColor: { property: 'color', scale: 'colors' } })};
+	}
+
+	&:focus {
+		${system({ focusOutline: { property: 'outline' } })};
+	}
 `;
 
-export const Container = styled.div`
-	display: inline-block;
-	position: relative;
-	width: ${props => props.width};
-`;
-
-export const InputContainer = styled.div`
+export const InputContainer = styled(Box)`
 	z-index: 0;
 	position: absolute;
 	bottom: ${inputOffset};
@@ -91,21 +74,31 @@ export const Fieldset = styled.fieldset`
 `;
 
 export const Select = styled.select`
+	${common};
+	${typography};
+	${layout};
+	${textStyle};
+	${border};
+
 	appearance: none;
 	user-select: none;
 	cursor: pointer;
-	border: none;
-	background-color: transparent;
 	text-align-last: center;
 
-	${selectStyling};
+	&:hover {
+		&:not(:focus) {
+			${system({ hoverColor: { property: 'color', scale: 'colors' } })};
+		}
+	}
 
-	transition: box-shadow 0.25s ease 0s;
+	&:active {
+		${system({ activeColor: { property: 'color', scale: 'colors' } })};
+	}
 
 	&:focus {
 		&:not(:active) {
-			box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
+			${system({ focusBoxShadow: { property: 'box-shadow', scale: 'shadows' } })};
 		}
-		outline: none;
+		${system({ focusOutline: { property: 'outline' } })};
 	}
 `;

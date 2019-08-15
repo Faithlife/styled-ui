@@ -27,11 +27,11 @@ showSource: true
 showSource: true
 ---
 <TabDemo>
-	<TabManager theme={{ tabHighlightColor: 'plum' }}>
+	<TabManager>
 		<TabList>
-			<Tab styleOverrides={{ width: '200px' }}>First Tab</Tab>
+			<Tab tabHighlightColor="plum" width="200px">First Tab</Tab>
 			<Tab disabled>Disabled Tab</Tab>
-			<Tab>Third Tab</Tab>
+			<Tab tabHighlightColor="plum">Third Tab</Tab>
 		</TabList>
 		<TabPanels>
 			<TabPanel>First Tab!</TabPanel>

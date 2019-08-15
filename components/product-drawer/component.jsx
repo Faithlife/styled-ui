@@ -1,8 +1,12 @@
 import React, { lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { system, layout, flexbox, position, textStyle, border, background } from 'styled-system';
+import { common, typography } from '../../theme/system';
+import { Box } from '../Box';
+import { Text } from '../Text';
 import { LoadingSpinner } from '../loading-spinner';
 import { PopoverManager, PopoverReference } from '../popover';
-import * as Styled from './styled';
 
 const ProductDrawerDropdown = lazy(() => import('./product-drawer-dropdown'));
 
@@ -47,15 +51,6 @@ export class ProductDrawer extends React.PureComponent {
 			ministryTeamMagazineLinkTitle: PropTypes.string.isRequired,
 			ministryTeamMagazineLinkDescription: PropTypes.string.isRequired,
 		}),
-		styleOverrides: PropTypes.shape({
-			mobileTopOffset: PropTypes.string,
-			toggleButtonColor: PropTypes.string,
-			toggleButtonHoverColor: PropTypes.string,
-		}),
-	};
-
-	static defaultProps = {
-		styleOverrides: {},
 	};
 
 	state = {
@@ -86,19 +81,28 @@ export class ProductDrawer extends React.PureComponent {
 	};
 
 	render() {
-		const { styleOverrides, resources } = this.props;
+		const { resources, ...props } = this.props;
 		const { isOpen } = this.state;
 
 		return (
-			<Styled.ProductDrawer>
+			<Box position="relative">
 				<PopoverManager onFocusAway={() => this.setState({ isOpen: false })}>
 					<PopoverReference>
-						<Styled.ProductDrawerToggle
-							styleOverrides={styleOverrides}
+						<ProductDrawerToggle
 							onClick={this.handleToggleClick}
 							ref={el => {
 								this.toggle = el;
 							}}
+							display="flex"
+							alignItems="center"
+							padding={0}
+							border="none"
+							background="transparent"
+							focusOutline="none"
+							color="initial"
+							toggleButtonColor="initial"
+							toggleButtonHoverColor="initial"
+							{...props}
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -112,23 +116,51 @@ export class ProductDrawer extends React.PureComponent {
 									fillRule="evenodd"
 								/>
 							</svg>
-							<Styled.ProductDrawerToggleText styleOverrides={styleOverrides}>
+							<Text display={['none', null, 'inline']} marginLeft={3} textStyle="c.14">
 								{resources.products}
-							</Styled.ProductDrawerToggleText>
-						</Styled.ProductDrawerToggle>
+							</Text>
+						</ProductDrawerToggle>
 					</PopoverReference>
 					{isOpen ? (
 						<Suspense fallback={<LoadingSpinner />}>
 							<ProductDrawerDropdown
 								isOpen={isOpen}
 								resources={resources}
-								styleOverrides={styleOverrides}
 								handleCloseButtonClick={this.handleCloseButtonClick}
 							/>
 						</Suspense>
 					) : null}
 				</PopoverManager>
-			</Styled.ProductDrawer>
+			</Box>
 		);
 	}
 }
+
+const ProductDrawerToggle = styled.button`
+	${common};
+	${typography};
+	${layout};
+	${flexbox};
+	${position};
+	${textStyle};
+	${border};
+	${background};
+
+	cursor: pointer;
+
+	path {
+		${system({ toggleButtonColor: { property: 'fill', scale: 'colors' } })};
+	}
+
+	&:hover {
+		${system({ toggleButtonHoverColor: { property: 'color', scale: 'colors' } })};
+
+		path {
+			${system({ toggleButtonHoverColor: { property: 'fill', scale: 'colors' } })};
+		}
+	}
+
+	&:focus {
+		${system({ focusOutline: { property: 'outline' } })};
+	}
+`;

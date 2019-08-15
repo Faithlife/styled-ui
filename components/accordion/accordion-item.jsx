@@ -1,11 +1,12 @@
 import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { resetStyles } from '../utils';
 import { useId } from '../shared-hooks';
 import { useAccordionContext, AccordionItemContextProvider } from './accordion-util';
-import * as Styled from './styled-item';
 
 export function AccordionItem({ children, index }) {
-	const { expandedSections, onExpansion, styleOverrides } = useAccordionContext();
+	const { expandedSections, onExpansion } = useAccordionContext();
 
 	const isExpanded = expandedSections.includes(index);
 
@@ -23,15 +24,14 @@ export function AccordionItem({ children, index }) {
 			index,
 			isExpanded,
 			onExpansion: handleExpansion,
-			styleOverrides,
 		}),
-		[headerId, panelId, index, isExpanded, handleExpansion, styleOverrides],
+		[headerId, panelId, index, isExpanded, handleExpansion],
 	);
 
 	return (
-		<Styled.Item>
+		<Item>
 			<AccordionItemContextProvider value={context}>{children}</AccordionItemContextProvider>
-		</Styled.Item>
+		</Item>
 	);
 }
 
@@ -41,3 +41,12 @@ AccordionItem.propTypes = {
 	/** This is supplied by the Accordion component. */
 	index: PropTypes.number,
 };
+
+const Item = styled.section`
+	${resetStyles};
+
+	display: grid;
+	grid-template-areas:
+		'header'
+		'panel';
+`;

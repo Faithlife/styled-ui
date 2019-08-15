@@ -1,19 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Box } from '../Box';
 import { Collapse } from '../collapse';
 import { useAccordionItemContext } from './accordion-util';
-import * as Styled from './styled-panel';
 
-export function AccordionPanel({ children }) {
-	const { isExpanded, headerId, panelId, styleOverrides } = useAccordionItemContext();
+export function AccordionPanel({ children, padding, ...props }) {
+	const { isExpanded, headerId, panelId } = useAccordionItemContext();
 	return (
-		<Styled.PanelContainer>
+		<Box>
 			<Collapse isOpen={isExpanded}>
-				<Styled.Panel headerId={headerId} panelId={panelId} styleOverrides={styleOverrides}>
+				<Box
+					role="region"
+					aria-labelledby={`accordion-header-${headerId}`}
+					id={`accordion-panel-${panelId}`}
+					gridArea="panel"
+					padding={padding !== undefined && padding !== null ? padding : 6}
+					paddingTop={padding !== undefined && padding !== null ? padding : 4}
+					{...props}
+				>
 					{children}
-				</Styled.Panel>
+				</Box>
 			</Collapse>
-		</Styled.PanelContainer>
+		</Box>
 	);
 }
 

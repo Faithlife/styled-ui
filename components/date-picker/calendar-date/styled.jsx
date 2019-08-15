@@ -69,14 +69,6 @@ export const CalendarWeekDayGrayedOut = styled.div`
 	color: ${colors.gray22};
 `;
 
-export const CalendarDateLabel = styled.div`
-	position: absolute;
-	top: 50%;
-	left: 0;
-	right: 0;
-	transform: translateY(-50%);
-`;
-
 export const CalendarWeekDayCurrentDay = styled.div`
 	display: block;
 	position: absolute;

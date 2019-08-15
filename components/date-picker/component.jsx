@@ -1,9 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { system } from 'styled-system';
+import { Box } from '../Box';
+import { Text } from '../Text';
+import { Paragraph } from '../Paragraph';
 import { Caret } from '../icons';
 import { colors } from '../shared-styles';
 import { dateFunctionProps } from './date-function-props';
-import * as Styled from './styled';
 import { CalendarWeek } from './calendar-week';
 
 function generateWeek(sunday, { getYear, getMonth, getDate }) {
@@ -105,25 +109,34 @@ export class DatePicker extends Component {
 
 		return (
 			<Fragment>
-				<Styled.Header>
-					<Styled.ChangeMonth onClick={this.decrementMonth} tabIndex="-1">
+				<Box display="flex" justifyContent="space-between" alignItems="center" background="white">
+					<ChangeMonth onClick={this.decrementMonth} tabIndex="-1">
 						<Caret style={{ transform: 'scaleX(-1)', color: colors.gray66 }} />
-					</Styled.ChangeMonth>
-					<Styled.MonthLabel>{dateFunctions.format(currentMonth, 'MMMM yyyy')}</Styled.MonthLabel>
-					<Styled.ChangeMonth onClick={this.incrementMonth} tabIndex="-1">
+					</ChangeMonth>
+					<Text display="inline-block" color="gray66" whiteSpace="none" textStyle="h.16">
+						{dateFunctions.format(currentMonth, 'MMMM yyyy')}
+					</Text>
+					<ChangeMonth onClick={this.incrementMonth} tabIndex="-1">
 						<Caret style={{ color: colors.gray66 }} />
-					</Styled.ChangeMonth>
-				</Styled.Header>
-				<Styled.Week>
-					<Styled.WeekDay>S</Styled.WeekDay>
-					<Styled.WeekDay>M</Styled.WeekDay>
-					<Styled.WeekDay>T</Styled.WeekDay>
-					<Styled.WeekDay>W</Styled.WeekDay>
-					<Styled.WeekDay>T</Styled.WeekDay>
-					<Styled.WeekDay>F</Styled.WeekDay>
-					<Styled.WeekDay>S</Styled.WeekDay>
-				</Styled.Week>
-				<Styled.Month>
+					</ChangeMonth>
+				</Box>
+				<Paragraph
+					display="flex"
+					borderBottom={1}
+					borderColor="gray14"
+					paddingY={3}
+					background="white"
+					color="gray22"
+				>
+					<Label>S</Label>
+					<Label>M</Label>
+					<Label>T</Label>
+					<Label>W</Label>
+					<Label>T</Label>
+					<Label>F</Label>
+					<Label>S</Label>
+				</Paragraph>
+				<Month background="white" touchScreenWidth="308px">
 					{weeks.map(week => (
 						<CalendarWeek
 							currentMonth={dateFunctions.getMonth(currentMonth)}
@@ -137,8 +150,32 @@ export class DatePicker extends Component {
 							dateFunctions={dateFunctions}
 						/>
 					))}
-				</Styled.Month>
+				</Month>
 			</Fragment>
 		);
 	}
 }
+
+const ChangeMonth = styled.button`
+	display: flex;
+	justify-content: space-around;
+	border: none;
+	margin: 0;
+	padding: 0;
+	height: 34px;
+	width: 22px;
+	background: none;
+	cursor: pointer;
+`;
+
+const Label = ({ children }) => (
+	<Paragraph textStyle="ui.12" flex="1" textAlign="center">
+		{children}
+	</Paragraph>
+);
+
+const Month = styled(Box)`
+	@media (hover: none) {
+		${system({ touchScreenWidth: { property: 'width' } })};
+	}
+`;

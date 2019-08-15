@@ -8,9 +8,10 @@ state: { isChecked: false }
 	<Checkbox
 		onClick={() => setState({ isChecked: !state.isChecked })}
 		isChecked={state.isChecked}
-		title={'Click me'}
 		type="button"
-	/>
+	>
+		Click me
+	</Checkbox>
 </CheckboxDemo>
 ```
 
@@ -24,12 +25,11 @@ state: { isChecked: false }
 	<Checkbox
 		onClick={() => setState({ isChecked: !state.isChecked })}
 		isChecked={state.isChecked}
-		title={'Click me'}
-		theme={{
-			primary: 'darkslateblue',
-			border: 'plum',
-		}}
-	/>
+		borderColor="plum"
+		hoverBorderColor="darkslateblue"
+	>
+		Click me
+	</Checkbox>
 </CheckboxDemo>
 ```
 
@@ -60,9 +60,10 @@ state: { isChecked: false }
 	<Checkbox
 		onClick={() => setState({ isChecked: !state.isChecked })}
 		isChecked={state.isChecked}
-		title={'Click me'}
 		type="button"
 		disabled
-	/>
+	>
+		Click me
+	</Checkbox>
 </CheckboxDemo>
 ```

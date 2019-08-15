@@ -1,5 +1,6 @@
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { Box } from '../Box';
 import { Input } from '../input';
 import * as Styled from './styled';
 
@@ -11,8 +12,6 @@ export function ParameterInputBox(props) {
 		formatValue,
 		width,
 		accessibilityLabel,
-		styleOverrides,
-		theme,
 		...inputProps
 	} = props;
 	const [isFocused, setIsFocused] = useState(false);
@@ -35,10 +34,19 @@ export function ParameterInputBox(props) {
 	const displayValue = formatValue(value || defaultValue);
 
 	return (
-		<Styled.Container {...(isFocused ? { width } : {})}>
+		<Box display="inline-block" position="relative" {...(isFocused ? { width } : {})}>
 			{!isFocused ? (
 				<Styled.Button onClick={toggleFocus} onFocus={toggleFocus}>
-					<Styled.ButtonContent theme={theme} styleOverrides={styleOverrides}>
+					<Styled.ButtonContent
+						whiteSpace="nowrap"
+						minHeight="fit-content"
+						width={width}
+						textStyle="h.16"
+						borderBottom="dashed 2px"
+						borderColor="blue4"
+						color="gray66"
+						{...inputProps}
+					>
 						{displayValue}
 					</Styled.ButtonContent>
 				</Styled.Button>
@@ -46,21 +54,20 @@ export function ParameterInputBox(props) {
 				<Styled.InputContainer>
 					<Input
 						ref={inputRef}
-						small
-						inline
+						variant="inline"
 						value={value}
 						onChange={onChange}
 						placeholder={defaultValue}
 						onEnter={toggleFocus}
 						onBlur={toggleFocus}
-						theme={theme}
-						styleOverrides={{ width, ...styleOverrides }}
+						textStyle="h.16"
+						width={width}
 						aria-label={accessibilityLabel}
 						{...inputProps}
 					/>
 				</Styled.InputContainer>
 			)}
-		</Styled.Container>
+		</Box>
 	);
 }
 
@@ -71,17 +78,4 @@ ParameterInputBox.propTypes = {
 	formatValue: PropTypes.func,
 	width: PropTypes.string,
 	accessibilityLabel: PropTypes.string.isRequired,
-	theme: PropTypes.shape({
-		hoverColor: PropTypes.string,
-		activeColor: PropTypes.string,
-		underlineColor: PropTypes.string,
-	}),
-	styleOverrides: PropTypes.shape({
-		fontSize: PropTypes.string,
-	}),
-};
-
-ParameterInputBox.defaultProps = {
-	theme: {},
-	styleOverrides: {},
 };

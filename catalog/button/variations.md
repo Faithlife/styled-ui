@@ -8,13 +8,13 @@ Buttons allow users to command the computer to take some action. Buttons, like a
 showSource: true
 ---
 <ButtonDemo>
-	<Button primary small>
+	<Button variant="primary" size="small">
 		Small
 	</Button>
-	<Button primary medium>
+	<Button variant="primary" size="medium">
 		Medium
 	</Button>
-	<Button primary large>
+	<Button variant="primary" size="large">
 		Large
 	</Button>
 </ButtonDemo>
@@ -26,14 +26,14 @@ showSource: true
 showSource: true
 ---
 <ButtonDemo>
-	<Button primary large icon={<GearIcon />}>
+	<Button variant="primary" size="large" icon={<GearIcon />}>
 		Settings
 	</Button>
-	<Button primary small icon={<GearIcon />}>
+	<Button variant="primary" size="small" icon={<GearIcon />}>
 		Settings
 	</Button>
-	<Button primary condensed small icon={<GearIcon />} />
-	<Button minorTransparent condensed small icon={<GearIcon />} />
+	<Button variant="primary" condensed size="small" icon={<GearIcon />} />
+	<Button variant="minorTransparent" condensed size="small" icon={<GearIcon />} />
 </ButtonDemo>
 ```
 
@@ -43,10 +43,10 @@ showSource: true
 showSource: true
 ---
 <ButtonDemo>
-	<Button primary small onClick={() => buttonRef.current.focus()}>
+	<Button variant="primary" size="small" onClick={() => buttonRef.current.focus()}>
 		Focus
 	</Button>
-	<Button primaryOutline small ref={buttonRef}>
+	<Button variant="primaryOutline" size="small" ref={buttonRef}>
 		Target Button
 	</Button>
 </ButtonDemo>
@@ -54,19 +54,19 @@ showSource: true
 
 ### Supported style customizations
 
-Do not use the `style` prop to style this component (it will be ignored). Instead, if there is missing customization that you need for this component, ask to have it added. The `theme` prop can be used to control color variations while the `styleOverrides` prop can be used for other styles.
+Do not use the `style` prop to style this component (it will be ignored). Instead, if there is missing customization that you need for this component, ask to have it added.
 
 ```react
 showSource: true
 ---
 <ButtonDemo>
-	<Button primary large theme={{ defaultColor: 'plum', hoverColor: 'darkslateblue' }}>
+	<Button variant="primary" size="large" defaultColor="plum" hoverColor="darkslateblue">
 		Plum
 	</Button>
-	<Button primary large styleOverrides={{ width: '200px' }}>
+	<Button variant="primary" size="large" width="200px">
 		200px Wide
 	</Button>
-	<Button primary styleOverrides={{ fontSize: '12px', padding: '8px' }}>
+	<Button variant="primary" textStyle="c.12" padding={3}>
 		12px Font, 8px Padding
 	</Button>
 </ButtonDemo>
@@ -81,28 +81,28 @@ showSource: true
 ```react
 showSource: true
 ---
-<div>
+<Box>
 	<ButtonDemo>
-		<Button primary medium>
+		<Button variant="primary" size="medium">
 			Primary
 		</Button>
-		<Button primaryOutline medium>
+		<Button variant="primaryOutline" size="medium">
 			Primary Outline
 		</Button>
-		<Button minor medium>
+		<Button variant="minor" size="medium">
 			Minor
 		</Button>
-		<Button primaryTransparent medium condensed>
+		<Button variant="primaryTransparent" size="medium" condensed>
 			Primary Transparent
 		</Button>
-		<Button minorTransparent medium condensed>
+		<Button variant="minorTransparent" size="medium" condensed>
 			Minor Transparent
 		</Button>
 	</ButtonDemo>
-	<div>
-		Here is some text with an inline <Button primaryTransparent>primary</Button> and <Button minorTransparent>minor</Button>.
-	</div>
-</div>
+	<Box>
+		Here is some text with an inline <Button variant="primaryTransparent">primary</Button> and <Button variant="minorTransparent">minor</Button>.
+	</Box>
+</Box>
 ```
 
 - `primary` -- for the most important or most common action for a user to take in a given context/scope. This button variant grabs the user's attention. In marketing pages, this style is for the "call to action" on a page.
@@ -116,19 +116,19 @@ showSource: true
 showSource: true
 ---
 <ButtonDemo>
-	<Button primary medium disabled>
+	<Button variant="primary" size="medium" disabled>
 		Primary
 	</Button>
-	<Button primaryOutline medium disabled>
+	<Button variant="primaryOutline" size="medium" disabled>
 		Primary Outline
 	</Button>
-	<Button minor medium disabled>
+	<Button variant="minor" size="medium" disabled>
 		Minor
 	</Button>
-	<Button primaryTransparent medium disabled>
+	<Button variant="primaryTransparent" size="medium" disabled>
 		Primary Transparent
 	</Button>
-	<Button minorTransparent medium disabled>
+	<Button variant="minorTransparent" size="medium" disabled>
 		Minor Transparent
 	</Button>
 </ButtonDemo>
@@ -140,26 +140,26 @@ showSource: true
 showSource: true
 ---
 <ButtonGrid>
-	<Button primary small icon={<GearIcon />}>
+	<Button variant="primary" size="small" icon={<GearIcon />}>
 		Settings
 	</Button>
-	<Button primary small>
+	<Button variant="primary" size="small">
 		Settings
 	</Button>
-	<Button primary small icon={<GearIcon />} styleOverrides={{ justifyContent: 'flex-start' }}>
+	<Button variant="primary" size="small" icon={<GearIcon />} justifyContent="flex-start">
 		Settings
 	</Button>
-	<Button primary small styleOverrides={{ justifyContent: 'flex-start' }}>
+	<Button variant="primary" size="small" justifyContent="flex-start">
 		Settings
 	</Button>
-	<Button primary small icon={<GearIcon />} styleOverrides={{ justifyContent: 'flex-end' }}>
+	<Button variant="primary" size="small" icon={<GearIcon />} justifyContent="flex-end">
 		Settings
 	</Button>
-	<Button primary small styleOverrides={{ justifyContent: 'flex-end' }}>
+	<Button variant="primary" size="small" justifyContent="flex-end">
 		Settings
 	</Button>
-	<Button primary condensed small icon={<GearIcon />} />
-	<Button minorTransparent condensed small icon={<GearIcon />} />
+	<Button variant="primary" condensed size="small" icon={<GearIcon />} />
+	<Button variant="minorTransparent" condensed size="small" icon={<GearIcon />} />
 </ButtonGrid>
 ```
 
@@ -180,7 +180,7 @@ Button text should never wrap, and should generally never need ellipses. If you 
 showSource: true
 ---
 <ButtonDemo>
-	<Button primary small>
+	<Button variant="primary" size="small">
 		<div style={{ overflow:'hidden', textOverflow:'ellipsis', maxWidth: 230 }}>
 			Really long button text for demonstration purposes
 		</div>
@@ -196,13 +196,13 @@ A product sales page enables three possible user actions: Buy the product, rent 
 showSource: true
 ---
 <ButtonDemo>
-	<Button primary medium>
+	<Button variant="primary" size="medium">
 		Buy now
 	</Button>
-	<Button primaryOutline medium>
+	<Button variant="primaryOutline" size="medium">
 		Rent
 	</Button>
-	<Button minor medium>
+	<Button variant="minor" size="medium">
 		Learn more
 	</Button>
 </ButtonDemo>

@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import { mediaSizes } from '../../shared-styles';
+import { Box } from '../../Box';
 
 const dropdownSlideDownFadeIn = keyframes`
 	0% {
@@ -16,52 +17,20 @@ const dropdownSlideDownFadeIn = keyframes`
 	}
 `;
 
-export const ProductDrawerDropdown = styled.div`
-	position: fixed;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	top: ${({ styleOverrides }) => styleOverrides.mobileTopOffset || '0'};
+export const ProductDrawerDropdown = styled(Box)`
 	overflow-y: scroll;
+	white-space: nowrap;
 
 	&:focus {
 		outline: none;
 	}
 
 	@media (min-width: ${mediaSizes.tablet}) {
-		position: absolute;
-		left: auto;
-		bottom: auto;
-		top: auto;
 		overflow-y: auto;
 		animation-duration: 300ms;
 		animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
 		animation-fill-mode: forwards;
 		animation-name: ${dropdownSlideDownFadeIn};
-	}
-
-	right: 0;
-	white-space: nowrap;
-	border-radius: 4px;
-	background-color: white;
-	z-index: 999;
-	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.23);
-`;
-
-export const DropdownClose = styled.div`
-	position: absolute;
-	top: 0;
-	right: 0;
-	border: none;
-	background-color: transparent;
-`;
-
-export const DropdownColumns = styled.div`
-	display: flex;
-	flex-direction: column;
-
-	@media (min-width: ${mediaSizes.tablet}) {
-		flex-direction: row;
 	}
 `;
 
@@ -159,11 +128,6 @@ export const DropdownFooter = styled.div`
 		font-size: 14px;
 		line-height: 1.5;
 	}
-`;
-
-export const DropdownSeeMore = styled.div`
-	border-radius: 0 0 4px 4px;
-	text-align: center;
 `;
 
 export const DropdownSeeMoreLink = styled.a`

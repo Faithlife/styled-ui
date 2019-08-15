@@ -33,7 +33,7 @@ export class CreateGroup extends React.Component {
 						value={this.props.newChurchName}
 						onChange={this.props.onChurchNameInputChange}
 						placeholder="Church name"
-						small
+						variant="small"
 					/>
 				</Styled.InputWrapper>
 				<Styled.CreateGroupLabel>
@@ -47,7 +47,7 @@ export class CreateGroup extends React.Component {
 						value={this.props.newChurchLocation}
 						placeholder="City, State"
 						onChange={this.props.onChurchLocationInputChange}
-						small
+						variant="small"
 					/>
 				</Styled.InputWrapper>
 			</Styled.CreateGroup>

@@ -1,56 +1,67 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Box } from '../Box';
 import { Button } from '../button';
-import { colors } from '../shared-styles';
 import { ModalFooter } from './modal-footer';
-import * as Styled from './styled';
 
 export const DefaultModalFooter = props => (
 	<ModalFooter>
-		<Styled.FooterContainer>
+		<Box
+			display="flex"
+			flexDirection={props.useFullWidthButtons ? 'column-reverse' : 'row-reverse'}
+			justifyContent="flex-start"
+			alignItems="center"
+			width="100%"
+		>
 			{props.commitButton && (
 				<Button
 					primary
 					medium
-					theme={{ width: props.useFullWidthButtons ? '100%' : null }}
 					tabIndex={props.commitButton.tabindex}
 					onClick={props.commitButton.onClick}
+					width={props.useFullWidthButtons ? '100%' : null}
 				>
 					{props.commitButton.text}
 				</Button>
 			)}
 			{props.cancelButton && (
-				<Styled.CancelContainer>
+				<Box
+					width={props.useFullWidthButtons && '100%'}
+					marginBottom={props.useFullWidthButtons ? 5 : ''}
+					marginRight={props.useFullWidthButtons ? '' : 5}
+				>
 					<Button
 						primaryOutline
 						medium
-						theme={{ width: props.useFullWidthButtons ? '100%' : null }}
 						tabIndex={props.cancelButton.tabindex}
 						onClick={props.cancelButton.onClick}
+						width={props.useFullWidthButtons ? '100%' : null}
 					>
 						{props.cancelButton.text}
 					</Button>
-				</Styled.CancelContainer>
+				</Box>
 			)}
 			{props.deleteButton && (
-				<Styled.DeleteContainer>
+				<Box
+					width={props.useFullWidthButtons && '100%'}
+					marginBottom={props.useFullWidthButtons && 5}
+					marginRight={props.useFullWidthButtons || 'auto'}
+				>
 					<Button
 						primaryOutline
 						medium
-						theme={{
-							defaultColor: colors.redBase,
-							hoverColor: colors.redLight,
-							activeColor: colors.redDark,
-							disabledColor: colors.redTint,
-							width: props.useFullWidthButtons ? '100%' : null,
-						}}
 						onClick={props.deleteButton.onClick}
+						defaultColor="red4"
+						hoverColor="red3"
+						activeColor="red5"
+						disabledColor="red1"
+						width={props.useFullWidthButtons ? '100%' : null}
 					>
 						{props.deleteButton.text}
 					</Button>
-				</Styled.DeleteContainer>
+				</Box>
 			)}
-		</Styled.FooterContainer>
+		</Box>
 	</ModalFooter>
 );
 

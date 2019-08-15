@@ -1,10 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { system } from 'styled-system';
 import debounce from 'lodash.debounce';
+import { Box } from '../Box';
+import { Text } from '../Text';
 import { DatePicker } from '../date-picker';
 import { Input } from '../input';
 import { dateFunctionProps } from '../date-picker/date-function-props';
-import * as Styled from './styled';
 
 const DATE_FORMAT_STRING = 'M/d/yyyy';
 
@@ -121,38 +124,57 @@ export class DatePeriodPicker extends PureComponent {
 		} = this.state;
 
 		return (
-			<Styled.Container>
+			<Container
+				display="flex"
+				flexDirection="column"
+				maxWidth="250px"
+				touchScreenMaxWidth="324px"
+				paddingTop={2}
+				paddingBottom={4}
+				overflow="hidden"
+			>
 				{datePeriods.map(datePeriod => (
-					<Styled.DatePeriod
+					<DatePeriod
 						key={datePeriod.displayName}
 						onClick={() => {
 							setSelectedDate(datePeriod.dateRange);
 						}}
+						textStyle="ui.16"
+						padding={3}
+						background="white"
+						width="100%"
+						hoverBackground="blue4"
+						hoverColor="white"
+						hoverTransition="background 0.2s ease-out, color 0.2s ease-out"
 					>
 						{datePeriod.displayName}
-					</Styled.DatePeriod>
+					</DatePeriod>
 				))}
-				<Styled.DateInputContainer>
-					<Styled.Label>
-						<Styled.LabelText>From</Styled.LabelText>
+				<Box display="flex" borderTop={1} borderColor="gray14" paddingY={4} paddingX={3}>
+					<Box display="flex" flexDirection="column" minWidth="0px" paddingRight={3}>
+						<Text textStyle="ui.16" paddingBottom={2}>
+							From
+						</Text>
 						<Input
 							placeholder="mm/dd/yyyy"
 							value={start}
 							onChange={event => this.handleInputValueChange(event.target.value, 'start')}
-							small
+							variant="small"
 						/>
-					</Styled.Label>
-					<Styled.Label>
-						<Styled.LabelText>To</Styled.LabelText>
+					</Box>
+					<Box display="flex" flexDirection="column" minWidth="0px">
+						<Text textStyle="ui.16" paddingBottom={2}>
+							To
+						</Text>
 						<Input
 							placeholder="mm/dd/yyyy"
 							value={end}
 							onChange={event => this.handleInputValueChange(event.target.value, 'end')}
-							small
+							variant="small"
 						/>
-					</Styled.Label>
-				</Styled.DateInputContainer>
-				<Styled.DatePickerContainer>
+					</Box>
+				</Box>
+				<Box padding={3}>
 					<DatePicker
 						asDateRangePicker
 						selectedDateRange={selectedDateRange}
@@ -160,8 +182,24 @@ export class DatePeriodPicker extends PureComponent {
 						validate={validate}
 						dateFunctions={dateFunctions}
 					/>
-				</Styled.DatePickerContainer>
-			</Styled.Container>
+				</Box>
+			</Container>
 		);
 	}
 }
+
+const Container = styled(Box)`
+	@media (hover: none) {
+		${system({ touchScreenMaxWidth: { property: 'max-width', scale: 'size' } })};
+	}
+`;
+
+const DatePeriod = styled(Text)`
+	cursor: pointer;
+
+	&:hover {
+		${system({ hoverBackground: { property: 'background', scale: 'colors' } })};
+		${system({ hoverColor: { property: 'color', scale: 'colors' } })};
+		${system({ hoverTransition: { property: 'transition' } })};
+	}
+`;

@@ -1,32 +1,93 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { applyVariations } from '../utils';
+import systemPropTypes from '@styled-system/prop-types';
+import { theme } from '../../theme';
+import { common, typography } from '../../theme/system';
+import { getVariation } from '../utils';
 import * as Styled from './styled';
 
-const Button = React.forwardRef(function Button(props, ref) {
+export const Button = React.forwardRef(function Button(props, ref) {
 	// To make sure that Button and the AnchorButton components get the right props we export an object with the expected props for the Button
 	// The AnchorButton should get all props that are not explicity required by the child
 	// eslint-disable-next-line react/prop-types
-	const { children, theme, styleOverrides, icon, as, ...buttonProps } = props;
-
-	const { component: MappedStyledComponent, filteredProps } = applyVariations(
-		Styled.Button,
-		Styled.variationMap,
-		buttonProps,
-	);
+	const {
+		children,
+		icon,
+		disabled,
+		variant,
+		size,
+		primary,
+		primaryOutline,
+		primaryTransparent,
+		minor,
+		minorTransparent,
+		small,
+		medium,
+		large,
+		as,
+		...buttonProps
+	} = props;
 
 	return (
-		<MappedStyledComponent
+		<Styled.Button
 			ref={ref}
 			as={as}
-			theme={theme}
-			{...filteredProps || {}}
-			styleOverrides={styleOverrides}
+			disabled={disabled}
 			hasChildren={!!children}
+			variant={getVariation(variant, {
+				primary,
+				primaryOutline,
+				primaryTransparent,
+				minor,
+				minorTransparent,
+				none: true,
+			})}
+			size={getVariation(size, { small, medium, large, none: true })}
+			display="inline-flex"
+			justifyContent="center"
+			alignItems="center"
+			textStyle={size === 'large' || large || 'c.16'}
+			fontSize={(size === 'large' || large) && '24px'}
+			boxShadow="none"
+			borderRadius={1}
+			backgroundColor="transparent"
+			border="none"
+			whiteSpace="nowrap"
+			defaultColor={
+				variant !== 'minor' || minor
+					? variant === 'minorTransparent' || minorTransparent
+						? 'flgray'
+						: '#278ed4'
+					: ''
+			}
+			disabledColor={
+				variant !== 'minor' || minor
+					? variant === 'minorTransparent' || minorTransparent
+						? 'gray22'
+						: '#bedcf2'
+					: ''
+			}
+			hoverColor={
+				variant === 'minor' || minor
+					? 'gray14'
+					: variant === 'minorTransparent' || minorTransparent
+					? 'blue4'
+					: '#6db3e2'
+			}
+			activeColor={
+				variant === 'minor' || minor
+					? 'gray22'
+					: variant === 'minorTransparent' || minorTransparent
+					? 'blue3'
+					: '#1d6ca1'
+			}
+			minorBorderColor={disabled ? 'gray8' : 'gray14'}
+			minorBackgroundColor={disabled ? 'white' : 'gray4'}
+			{...buttonProps}
 		>
 			{icon}
 			{children}
-		</MappedStyledComponent>
+		</Styled.Button>
 	);
 });
 
@@ -35,44 +96,46 @@ Button.propTypes = {
 	children: PropTypes.node,
 	/** Condensed button padding. Uses same padding for horizontal and vertical. */
 	condensed: PropTypes.bool,
-	/** An optional theme */
-	theme: PropTypes.shape({
-		defaultColor: PropTypes.string,
-		hoverColor: PropTypes.string,
-		activeColor: PropTypes.string,
-		disabledColor: PropTypes.string,
-	}),
-	/** Style overrides */
-	styleOverrides: PropTypes.shape({
-		width: PropTypes.string,
-		fontSize: PropTypes.string,
-		padding: PropTypes.string,
-		justifyContent: PropTypes.string,
-	}),
-	/** Primary button variation */
+	/** Enum with values: 'primary', 'primaryOutline', 'primaryTransparent', 'minor', and 'minorTransparent' */
+	variant: PropTypes.oneOf([
+		'primary',
+		'primaryOutline',
+		'primaryTransparent',
+		'minor',
+		'minorTransparent',
+	]),
+	/** Enum with values: 'small', 'medium', and 'large' */
+	size: PropTypes.oneOf(['small', 'medium', 'large']),
+	/** Primary button variation (deprecated in favor of the variant prop) */
 	primary: PropTypes.bool,
-	/** Primary outline variation */
+	/** Primary outline variation (deprecated in favor of the variant prop) */
 	primaryOutline: PropTypes.bool,
-	/** Small variation */
+	/** Small variation (deprecated in favor of the size prop) */
 	small: PropTypes.bool,
-	/** Medium variation */
+	/** Medium variation (deprecated in favor of the size prop) */
 	medium: PropTypes.bool,
-	/** Large variation */
+	/** Large variation (deprecated in favor of the size prop) */
 	large: PropTypes.bool,
-	/** Transparent with primary text variation */
+	/** Transparent with primary text variation (deprecated in favor of the variant prop) */
 	primaryTransparent: PropTypes.bool,
-	/** Minor button variation */
+	/** Minor button variation (deprecated in favor of the variant prop) */
 	minor: PropTypes.bool,
-	/** Transparent with minor text variation */
+	/** Transparent with minor text variation (deprecated in favor of the variant prop) */
 	minorTransparent: PropTypes.bool,
 	/** Enables rendering a display: flex span, needed for rendering SVG icons */
 	icon: PropTypes.node,
-	/** This should only be used as a last resort if Theme and StyleOverrides will not do what you need */
+	/** This should only be used as a last resort if current available styling options will not do what you need */
 	className: PropTypes.string,
+	...common.propTypes,
+	...typography.propTypes,
+	...systemPropTypes.layout,
+	...systemPropTypes.flexbox,
+	...systemPropTypes.position,
+	...systemPropTypes.border,
+	...systemPropTypes.background,
+	textStyle: PropTypes.string,
 };
 
 Button.defaultProps = {
-	styleOverrides: {},
+	theme: theme,
 };
-
-export { Button };

@@ -1,8 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Close, Exclamation, CircleCheck, Info } from '../icons';
-import { applyVariations } from '../utils';
-import * as Styled from './styled';
+import styled from 'styled-components';
+import { system } from 'styled-system';
+import { getVariation } from '../utils';
+import { Close, Exclamation, CircleCheck, Info, LightBulbH } from '../icons';
+import { Box } from '../Box';
+import { Button } from '../button';
+
+const variations = {
+	success: {
+		bg: 'green1',
+		fg: 'green2',
+		icon: <CircleCheck />,
+		closeIconColor: 'green5',
+	},
+	danger: {
+		bg: 'red1',
+		fg: 'red3',
+		icon: <Exclamation />,
+		closeIconColor: 'red5',
+	},
+	warning: {
+		bg: 'yellow1',
+		fg: 'yellow3',
+		icon: <Info />,
+		closeIconColor: 'yellow5',
+	},
+	minor: {
+		bg: 'gray4',
+		fg: 'gray14',
+		icon: null,
+		closeIconColor: 'gray34',
+	},
+	original: {
+		bg: 'blue1',
+		fg: 'blue3',
+		icon: <Info />,
+		closeIconColor: 'blue5',
+	},
+};
 
 /** Rectangular box containing tips on how to use our products */
 export function HelpBox({
@@ -12,57 +48,95 @@ export function HelpBox({
 	showRightIcon,
 	stacked,
 	className,
-	theme,
 	handleClose,
+	variant,
+	success,
+	danger,
+	warning,
+	minor,
+	large,
 	...helpBoxProps
 }) {
-	const { component: HelpBoxVariation, filteredProps } = applyVariations(
-		Styled.HelpBox,
-		Styled.variationMap,
-		helpBoxProps,
-	);
+	const chosenVariation =
+		variations[getVariation(variant, { success, danger, warning, minor, original: true })];
+	const childrenWithProps =
+		typeof children === 'string'
+			? children
+			: React.Children.map(children, child => React.cloneElement(child, { stacked }));
 
 	return (
-		<HelpBoxVariation
-			className={className}
-			theme={theme}
-			success={helpBoxProps.success}
-			danger={helpBoxProps.danger}
-			warning={helpBoxProps.warning}
-			minor={helpBoxProps.minor}
+		<Box
 			stacked={stacked}
-			{...filteredProps}
+			backgroundColor={chosenVariation.bg}
+			border={1}
+			borderColor={chosenVariation.fg}
+			css={{ borderLeftWidth: '4px' }}
+			color="flGray"
+			position="relative"
+			display="flex"
+			borderRadius={1}
+			{...helpBoxProps}
 		>
-			{(showLightBulb && <Styled.BulbIcon />) ||
+			{(showLightBulb && (
+				<IconBox
+					as={LightBulbH}
+					flex="none"
+					height={large ? '42px' : '24px'}
+					width={large ? '42px' : '24px'}
+					marginTop="14px"
+					marginRight={0}
+					marginBottom={0}
+					marginLeft={5}
+					fill={chosenVariation.fg}
+				/>
+			)) ||
 				(!hideIcon && (
-					<Styled.IconDiv>
-						{helpBoxProps.danger ? (
-							<Exclamation />
-						) : helpBoxProps.success ? (
-							<CircleCheck />
-						) : helpBoxProps.minor ? null : (
-							<Info />
-						)}
-					</Styled.IconDiv>
+					<IconBox
+						height="18px"
+						margin="17px"
+						marginRight={-2}
+						marginLeft={4}
+						fill={chosenVariation.fg}
+					>
+						{chosenVariation.icon}
+					</IconBox>
 				))}
-			<Styled.HelpBoxContent>{children}</Styled.HelpBoxContent>
+			<Box
+				stacked={stacked}
+				display="flex"
+				flex="1"
+				alignItems={stacked || large || 'flex-start'}
+				height={large ? '230px' : ''}
+				padding={5}
+				paddingLeft={4}
+				flexDirection={stacked ? 'column' : ['column', 'row']}
+				css={{ fontSize: '16px', lineHeight: '1.25' }}
+			>
+				{childrenWithProps}
+			</Box>
 			{(handleClose && (
-				<Styled.CloseButton onClick={handleClose}>
-					<Close />
-				</Styled.CloseButton>
+				<IconBox
+					height="18px"
+					margin="17px"
+					marginRight={5}
+					marginLeft={!stacked ? -2 : large ? 4 : 5}
+					fill={chosenVariation.closeIconColor}
+				>
+					<Button icon={<Close />} onClick={handleClose} textStyle="c.18" padding={0} />
+				</IconBox>
 			)) ||
 				(showRightIcon && (
-					<Styled.RightIconDiv>
-						{helpBoxProps.danger ? (
-							<Exclamation />
-						) : helpBoxProps.success ? (
-							<CircleCheck />
-						) : helpBoxProps.minor ? null : (
-							<Info />
-						)}
-					</Styled.RightIconDiv>
+					<IconBox
+						height="18px"
+						margin="17px"
+						marginRight={5}
+						marginLeft={!stacked ? -2 : large ? 4 : 5}
+						fill={chosenVariation.fg}
+					>
+						{chosenVariation.icon}
+					</IconBox>
 				))}
-		</HelpBoxVariation>
+		</Box>
 	);
 }
 
@@ -78,27 +152,44 @@ HelpBox.propTypes = {
 	showRightIcon: PropTypes.bool,
 	/** Stacking will happen automatically on small viewports. */
 	stacked: PropTypes.bool,
-	/** Blue theme is the default.
-	 * The icons are colored by foregroundColor. */
-	theme: PropTypes.shape({
-		foregroundColor: PropTypes.string,
-		backgroundColor: PropTypes.string,
-		closeIconColor: PropTypes.string,
-	}),
-	/** Green theme */
+	/** Enum with values: 'success', 'danger', 'warning', and 'minor' */
+	variant: PropTypes.oneOf(['success', 'danger', 'warning', 'minor']),
+	/** Green theme (deprecated in favor of the variant prop) */
 	success: PropTypes.bool,
-	/** Red theme */
+	/** Red theme (deprecated in favor of the variant prop) */
 	danger: PropTypes.bool,
-	/** Yellow theme */
+	/** Yellow theme (deprecated in favor of the variant prop) */
 	warning: PropTypes.bool,
-	/** Gray theme */
+	/** Gray theme (deprecated in favor of the variant prop) */
 	minor: PropTypes.bool,
-	/** Height will be 230px */
 	large: PropTypes.bool,
 	/** If not handled, there will be no close icon. */
 	handleClose: PropTypes.func,
 };
 
-HelpBox.Body = Styled.HelpBoxBody;
+HelpBox.Body = ({ children, ...props }) => (
+	<Box display="flex" flex="1" order="2" {...props}>
+		{children}
+	</Box>
+);
 
-HelpBox.Footer = Styled.HelpBoxFooter;
+HelpBox.Footer = ({ children, stacked, ...props }) => (
+	<Box
+		display="flex"
+		order="2"
+		alignItems="center"
+		marginTop={[4, stacked ? 4 : '-6px']}
+		marginRight={[0, stacked ? 5 : 0]}
+		marginBottom={[0, stacked ? 0 : '-6px']}
+		marginLeft={[0, stacked ? 0 : 5]}
+		{...props}
+	>
+		{children}
+	</Box>
+);
+
+const IconBox = styled(Box)`
+	path {
+		${system({ fill: { property: 'fill', scale: 'colors' } })};
+	}
+`;

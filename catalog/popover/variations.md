@@ -45,18 +45,21 @@ state: { isOpen: false }
 		</PopoverReference>
 		<Popover isOpen={state.isOpen} placement="top">Hello!</Popover>
 	</PopoverManager>
+
 	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
 		<Popover isOpen={state.isOpen} placement="bottom">Hello!</Popover>
 	</PopoverManager>
+
 	<PopoverManager  onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
 		<Popover isOpen={state.isOpen} placement="left">Hello!</Popover>
 	</PopoverManager>
+
 	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
@@ -77,20 +80,23 @@ state: { isOpen: false }
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="top" theme={{ backgroundColor: '#ebf7ff' }}>Hello!</Popover>
+		<Popover isOpen={state.isOpen} placement="top" backgroundColor="plum">Hello!</Popover>
 	</PopoverManager>
+
 	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
-			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover with zIndex!</Button>
+			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover with style!</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="top" styleOverrides={{ padding: '18px', hideShadow: true, width: '200px', border: 'black solid 1px', zIndex: 10 }}>Hello!</Popover>
+		<Popover isOpen={state.isOpen} placement="top" boxShadow={0} padding={5} width="200px" border={1} borderColor="black">Hello!</Popover>
 	</PopoverManager>
+
 	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>
 		</PopoverReference>
 		<Popover isOpen={state.isOpen} placement="top" hideArrow>Hello!</Popover>
 	</PopoverManager>
+
 	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover w/ a delay!</Button>
@@ -114,6 +120,7 @@ state: { isOpen: false }
 		</PopoverReference>
 		<Popover isOpen={state.isOpen} placement="top">I'm inline</Popover>
 	</PopoverManager>
+
 	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })}>Show a Popover!</Button>

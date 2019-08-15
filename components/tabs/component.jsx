@@ -5,7 +5,7 @@ import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { TabContextProvider, usePanelIdsHandler } from './tab-utils';
 
-export function TabManager({ children, theme, selectedTab, onSelectedTabChange }) {
+export function TabManager({ children, selectedTab, onSelectedTabChange }) {
 	const [selectedTabIndex, setSelectedTabIndex] = useState(selectedTab || 0);
 	const { panelIdsMap, registerPanelId, unRegisterPanelId } = usePanelIdsHandler();
 
@@ -29,12 +29,11 @@ export function TabManager({ children, theme, selectedTab, onSelectedTabChange }
 		() => ({
 			selectedTabIndex,
 			onSelectTab: handleSelectTab,
-			theme,
 			panelIdsMap,
 			registerPanelId,
 			unRegisterPanelId,
 		}),
-		[selectedTabIndex, handleSelectTab, theme, panelIdsMap, registerPanelId, unRegisterPanelId],
+		[selectedTabIndex, handleSelectTab, panelIdsMap, registerPanelId, unRegisterPanelId],
 	);
 
 	return <TabContextProvider value={context}>{children}</TabContextProvider>;
@@ -44,13 +43,4 @@ TabManager.propTypes = {
 	children: PropTypes.node.isRequired,
 	selectedTab: PropTypes.number,
 	onSelectedTabChange: PropTypes.func,
-	theme: PropTypes.shape({
-		tabHighlightColor: PropTypes.string,
-		activeBackgroundColor: PropTypes.string,
-		inactiveBackgroundColor: PropTypes.string,
-	}),
-};
-
-TabManager.defaultProps = {
-	theme: {},
 };

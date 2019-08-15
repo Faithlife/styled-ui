@@ -60,12 +60,11 @@ import {
 } from '../index';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
-import { GearIcon } from '../components/icons';
+import { GearIcon, DownArrow } from '../components/icons';
 import { colors } from '../components/shared-styles';
 import censusData from './grid/2010census.json';
 import { ProductDrawerWithResources } from './product-drawer';
 import { DocgenTable } from './docgen-table';
-import DownArrow from './svgs/arrow-down.svg';
 import { PopulationChange } from './grid/population-change';
 import { BaseTable } from '../components/grid/base-table';
 
@@ -167,6 +166,7 @@ const components = [
 					Checkbox,
 					Form: FormDemo,
 					Input,
+					Box,
 				},
 			},
 			{
@@ -190,6 +190,7 @@ const components = [
 					ButtonGrid,
 					GearIcon,
 					buttonRef: React.createRef(),
+					Box,
 				},
 			},
 			{
@@ -274,7 +275,7 @@ const components = [
 				path: '/collapse/variations',
 				title: 'Collapse Variations',
 				content: pageLoader(() => import('./collapse/variations.md')),
-				imports: { Collapse, Button },
+				imports: { Collapse, Button, Box },
 			},
 			{
 				path: '/collapse/documentation',
@@ -377,6 +378,7 @@ const components = [
 				imports: {
 					HelpBox,
 					Button,
+					Stack,
 				},
 			},
 			{
@@ -426,6 +428,7 @@ const components = [
 					ModalDemoStackedContent: styled.div`
 						width: 240px;
 					`,
+					Box,
 				},
 			},
 			{
@@ -466,6 +469,8 @@ const components = [
 					SimpleModalDemoSuccess: styled.div`
 						width: 60px;
 					`,
+					Box,
+					Paragraph,
 				},
 			},
 			{
@@ -487,6 +492,7 @@ const components = [
 					FilesSection,
 					Button,
 					LoadingSpinner,
+					Box,
 				},
 			},
 			{
@@ -521,6 +527,8 @@ const components = [
 							margin: 0 12px;
 						}
 					`,
+					Box,
+					Text,
 				},
 			},
 			{
@@ -628,6 +636,7 @@ const components = [
 				content: pageLoader(() => import('./date-picker/variations.md')),
 				imports: {
 					Button,
+					PopoverBase,
 					Popover,
 					PopoverManager,
 					PopoverReference,
@@ -644,6 +653,7 @@ const components = [
 					dateFunctions: {
 						...dateFunctions,
 					},
+					Box,
 				},
 			},
 			{
@@ -670,6 +680,7 @@ const components = [
 						const parsed = chrono.parseDate(str);
 						return parsed;
 					},
+					Box,
 				},
 			},
 			{
@@ -689,6 +700,8 @@ const components = [
 				content: pageLoader(() => import('./slider/variations.md')),
 				imports: {
 					Slider,
+					Box,
+					Paragraph,
 					DocgenTable,
 				},
 			},
@@ -838,7 +851,7 @@ const components = [
 					Label: styled.span`
 						margin-right: 8px;
 					`,
-					DownArrow: styled.img.attrs({ src: DownArrow })``,
+					DownArrow,
 				},
 			},
 			{

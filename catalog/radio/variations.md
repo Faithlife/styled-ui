@@ -8,9 +8,10 @@ state: { isChecked: false }
 	<Radio
 		onClick={() => setState({ isChecked: !state.isChecked })}
 		isChecked={state.isChecked}
-		title={'Click me'}
 		type="button"
-	/>
+	>
+		Click me
+	</Radio>
 </RadioDemo>
 ```
 
@@ -24,12 +25,11 @@ state: { isChecked: false }
 	<Radio
 		onClick={() => setState({ isChecked: !state.isChecked })}
 		isChecked={state.isChecked}
-		title={'Click me'}
-		theme={{
-			primary: 'darkslateblue',
-			border: 'plum',
-		}}
-	/>
+		borderColor="plum"
+		hoverBorderColor="darkslateblue"
+	>
+		Click me
+	</Radio>
 </RadioDemo>
 ```
 
@@ -60,10 +60,10 @@ state: { isChecked: false }
 	<Radio
 		onClick={() => setState({ isChecked: !state.isChecked })}
 		isChecked={state.isChecked}
-		title={'You can\'t click me'}
 		type="button"
 		disabled
 	>
+		You can't click me
 	</Radio>
 </RadioDemo>
 ```
