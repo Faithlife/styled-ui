@@ -166,6 +166,7 @@ const components = [
 					Checkbox,
 					Form: FormDemo,
 					Input,
+					Box,
 				},
 			},
 			{
@@ -189,6 +190,7 @@ const components = [
 					ButtonGrid,
 					GearIcon,
 					buttonRef: React.createRef(),
+					Box,
 				},
 			},
 			{
@@ -273,7 +275,7 @@ const components = [
 				path: '/collapse/variations',
 				title: 'Collapse Variations',
 				content: pageLoader(() => import('./collapse/variations.md')),
-				imports: { Collapse, Button },
+				imports: { Collapse, Button, Box },
 			},
 			{
 				path: '/collapse/documentation',
@@ -376,6 +378,7 @@ const components = [
 				imports: {
 					HelpBox,
 					Button,
+					Stack,
 				},
 			},
 			{
@@ -425,6 +428,7 @@ const components = [
 					ModalDemoStackedContent: styled.div`
 						width: 240px;
 					`,
+					Box,
 				},
 			},
 			{
@@ -465,6 +469,8 @@ const components = [
 					SimpleModalDemoSuccess: styled.div`
 						width: 60px;
 					`,
+					Box,
+					Paragraph,
 				},
 			},
 			{
@@ -486,6 +492,7 @@ const components = [
 					FilesSection,
 					Button,
 					LoadingSpinner,
+					Box,
 				},
 			},
 			{
@@ -520,6 +527,8 @@ const components = [
 							margin: 0 12px;
 						}
 					`,
+					Box,
+					Text,
 				},
 			},
 			{
@@ -644,6 +653,7 @@ const components = [
 					dateFunctions: {
 						...dateFunctions,
 					},
+					Box,
 				},
 			},
 			{
@@ -670,6 +680,7 @@ const components = [
 						const parsed = chrono.parseDate(str);
 						return parsed;
 					},
+					Box,
 				},
 			},
 			{
@@ -689,6 +700,8 @@ const components = [
 				content: pageLoader(() => import('./slider/variations.md')),
 				imports: {
 					Slider,
+					Box,
+					Paragraph,
 					DocgenTable,
 				},
 			},

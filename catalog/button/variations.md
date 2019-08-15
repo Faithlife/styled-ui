@@ -81,7 +81,7 @@ showSource: true
 ```react
 showSource: true
 ---
-<div>
+<Box>
 	<ButtonDemo>
 		<Button variant="primary" size="medium">
 			Primary
@@ -99,10 +99,10 @@ showSource: true
 			Minor Transparent
 		</Button>
 	</ButtonDemo>
-	<div>
+	<Box>
 		Here is some text with an inline <Button variant="primaryTransparent">primary</Button> and <Button variant="minorTransparent">minor</Button>.
-	</div>
-</div>
+	</Box>
+</Box>
 ```
 
 - `primary` -- for the most important or most common action for a user to take in a given context/scope. This button variant grabs the user's attention. In marketing pages, this style is for the "call to action" on a page.

@@ -4,7 +4,7 @@
 showSource: true
 state: { modal: false, value: '' }
 ---
-<div>
+<Box>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -27,7 +27,7 @@ state: { modal: false, value: '' }
 			/>
 		</ModalDemoWideContent>
 	</Modal>
-</div>
+</Box>
 ```
 
 ## Modal attached as child
@@ -36,7 +36,7 @@ state: { modal: false, value: '' }
 showSource: true
 state: { modal: false, value: '' }
 ---
-<div>
+<Box>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -58,7 +58,7 @@ state: { modal: false, value: '' }
 			/>
 		</ModalDemoWideContent>
 	</Modal>
-</div>
+</Box>
 ```
 
 ## Modal with no delete option
@@ -67,7 +67,7 @@ state: { modal: false, value: '' }
 showSource: true
 state: { modal: false, value: '' }
 ---
-<div>
+<Box>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -90,7 +90,7 @@ state: { modal: false, value: '' }
 			/>
 		</ModalDemoWideContent>
 	</Modal>
-</div>
+</Box>
 ```
 
 ## Modal with only a delete option
@@ -99,7 +99,7 @@ state: { modal: false, value: '' }
 showSource: true
 state: { modal: false, value: '' }
 ---
-<div>
+<Box>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -121,7 +121,7 @@ state: { modal: false, value: '' }
 			/>
 		</ModalDemoWideContent>
 	</Modal>
-</div>
+</Box>
 ```
 
 ## Modal with stacked buttons
@@ -132,7 +132,7 @@ Modal buttons stack at 320px for 3 buttons configurations and 220px for 1 or 2 b
 showSource: true
 state: { modal: false, value: '' }
 ---
-<div>
+<Box>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -156,7 +156,7 @@ state: { modal: false, value: '' }
 			/>
 		</ModalDemoStackedContent>
 	</Modal>
-</div>
+</Box>
 ```
 
 ## Modal with custom footer
@@ -165,7 +165,7 @@ state: { modal: false, value: '' }
 showSource: true
 state: { modal: false, value: '' }
 ---
-<div>
+<Box>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -196,7 +196,7 @@ state: { modal: false, value: '' }
 			/>
 		</ModalDemoWideContent>
 	</Modal>
-</div>
+</Box>
 ```
 
 ## Modal with no footer
@@ -205,7 +205,7 @@ state: { modal: false, value: '' }
 showSource: true
 state: { modal: false, value: '' }
 ---
-<div>
+<Box>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -215,7 +215,7 @@ state: { modal: false, value: '' }
 		subtitle="Help us locate you"
 		withoutFooter
 	>
-		<div>
+		<Box>
 			<Input
 				value={state.value}
 				onChange={value => setState({ value: value, isValid: value !== '' })}
@@ -223,9 +223,9 @@ state: { modal: false, value: '' }
 				title="Location"
 				debounce={200}
 			/>
-		</div>
+		</Box>
 	</Modal>
-</div>
+</Box>
 ```
 
 ## Modal with really long content
@@ -234,7 +234,7 @@ state: { modal: false, value: '' }
 showSource: true
 state: { modal: false, value: '' }
 ---
-<div>
+<Box>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -242,11 +242,11 @@ state: { modal: false, value: '' }
 		onClose={() => setState({ modal: false })}
 		title="Lots of content"
 	>
-		<div>
+		<Box>
 			{JSON.stringify(new Array(1000))}
-		</div>
+		</Box>
 	</Modal>
-</div>
+</Box>
 ```
 
 ## Modal with no title border
@@ -255,7 +255,7 @@ state: { modal: false, value: '' }
 showSource: true
 state: { modal: false, value: '' }
 ---
-<div>
+<Box>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
@@ -264,9 +264,9 @@ state: { modal: false, value: '' }
 		title="Modal with no title border"
 		headerBottomBorder="none"
 	>
-		<div>
+		<Box>
 			This modal has no title border!
-		</div>
+		</Box>
 	</Modal>
-</div>
+</Box>
 ```

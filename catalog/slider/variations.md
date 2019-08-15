@@ -4,10 +4,10 @@
 showSource: true
 state: {}
 ---
-<div style={{background: "#fff", padding: 20}}>
+<Box background="white" padding="20px">
 	<Slider value={1} stopCount={5} />
 	<Slider value={1} stopCount={5} />
-</div>
+</Box>
 ```
 
 ### With minValue / maxValue
@@ -16,11 +16,11 @@ state: {}
 showSource: true
 state: {}
 ---
-<div style={{background: "#fff", padding: 20}}>
+<Box background="white" padding="20px">
 	<Slider value={2} minValue={0} maxValue={2} stopCount={5} />
 	<Slider value={3} minValue={1} maxValue={3} stopCount={5} />
 	<Slider value={4} minValue={2} maxValue={4} stopCount={5} />
-</div>
+</Box>
 ```
 
 ### With labels
@@ -29,11 +29,11 @@ state: {}
 showSource: true
 state: {}
 ---
-<div style={{background: "#fff", padding: 20}}>
+<Box background="white" padding="20px">
 	<Slider value={1} stopCount={5} labels={['Admins', 'Moderators', 'Members', 'Followers', 'Public']} />
 	<Slider value={1} stopCount={5} labels={['One', 'Two', 'Three', 'Four', 'Five']}/>
 	<Slider value={1} minValue={1} maxValue={3} stopCount={5} labels={['', 'Min', '', 'Max', '']}/>
-</div>
+</Box>
 ```
 
 ### Callback props: onStop vs onSlide
@@ -45,7 +45,7 @@ If you want to have incremental updates while the slider is moving, such as to k
 showSource: true
 state: { value: 1 }
 ---
-<div style={{background: "#fff", padding: 20}}>
+<Box background="white" padding="20px">
 	onStop:
 	<Slider
 		value={state.value}
@@ -58,7 +58,7 @@ state: { value: 1 }
 		stopCount={5}
 		onSlide={function (value) {setState({value: value})}}
 	/>
-</div>
+</Box>
 ```
 
 ### hideAvailableStops
@@ -70,8 +70,8 @@ This component has performances issues with many stops. Consider using no more t
 showSource: true
 state: { value: 50, labels: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98, 100] }
 ---
-<div style={{background: "#fff", padding: 20}}>
-	<div>Opacity: {state.value * 2}</div>
+<Box background="white" padding="20px">
+	<Paragraph>Opacity: {state.value * 2}</Paragraph>
 	<Slider
 		value={state.value}
 		onStop={function (value) {setState({value: value})}}
@@ -86,7 +86,7 @@ state: { value: 50, labels: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 
 		labels={state.labels}
 	/>
 	<img src="https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201" alt="Faithlife campus" style={{ maxWidth: '100%', opacity: (state.value * 2) / 100 }} />
-</div>
+</Box>
 ```
 
 ### Note on background colors
@@ -98,8 +98,8 @@ If your slider is not on a white background, use the `backgroundColor` prop to i
 showSource: true
 state: {}
 ---
-<div style={{background: "plum", padding: 20}}>
+<Box background="plum" padding="20px">
 	<Slider value={1} maxValue={3} stopCount={5} />
 	<Slider value={1} maxValue={3} stopCount={5} backgroundColor="plum" />
-</div>
+</Box>
 ```

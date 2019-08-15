@@ -1,7 +1,7 @@
 ## Colors and Their Meaning
 
 ```react
-<div>
+<Stack spacing={4}>
 	<HelpBox handleClose={() => true}>
 		<HelpBox.Body>This is a helpful alert.</HelpBox.Body>
 		<HelpBox.Footer><Button primary small>CTA</Button></HelpBox.Footer>
@@ -22,13 +22,13 @@
 		<HelpBox.Body>This is a minor alert.</HelpBox.Body>
 		<HelpBox.Footer><Button primary small>CTA</Button></HelpBox.Footer>
 	</HelpBox>
-</div>
+</Stack>
 ```
 
 ## Variations
 
 ```react
-<div>
+<Stack spacing={4}>
 	<HelpBox showLightBulb handleClose={() => true}>This is an alert with a light bulb.</HelpBox>
 	<HelpBox hideIcon handleClose={() => true}>This alert has its icon hidden.</HelpBox>
 	<HelpBox showRightIcon>This alert is showing its icon on both sides.</HelpBox>
@@ -40,14 +40,14 @@
 		<HelpBox.Body>This alert doesn't handle closing.</HelpBox.Body>
 		<HelpBox.Footer><Button primary small>CTA</Button></HelpBox.Footer>
 	</HelpBox>
-</div>
+</Stack>
 ```
 
 ## Large Alerts
 
 ```react
-<div>
+<Stack spacing={5}>
 	<HelpBox large handleClose={() => true}>This is a large alert.</HelpBox>
 	<HelpBox showLightBulb large handleClose={() => true}>This is a large alert with a light bulb.</HelpBox>
-</div>
+</Stack>
 ```

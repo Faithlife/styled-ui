@@ -10,7 +10,7 @@ state: {
 	fileNames: [],
 }
 ---
-<div>
+<Box>
 	<DropZone
 		onDrop={dropEvent => {
 			dropEvent.preventDefault();
@@ -30,9 +30,9 @@ state: {
 		Drop files
 	</DropZone>
 	<DroppedFiles>
-		{state.fileNames.map((name, i) => <div key={`${name}_{i}`}>Dropped file: {name}</div>)}
+		{state.fileNames.map((name, i) => <Text key={`${name}_{i}`}>Dropped file: {name}</Text>)}
 	</DroppedFiles>
-</div>
+</Box>
 ```
 
 ### With more complex children
@@ -43,7 +43,7 @@ state: {
 	fileNames: [],
 }
 ---
-<div>
+<Box>
 	<DropZone
 		onDrop={dropEvent => {
 			dropEvent.preventDefault();
@@ -85,7 +85,7 @@ state: {
 		<DropZoneMessage>Drag & drop to upload chord charts, tracks, etc.</DropZoneMessage>
 	</DropZone>
 	<DroppedFiles>
-		{state.fileNames.map((name, i) => <div key={`${name}_{i}`}>Dropped file: {name}</div>)}
+		{state.fileNames.map((name, i) => <Text key={`${name}_{i}`}>Dropped file: {name}</Text>)}
 	</DroppedFiles>
-</div>
+</Box>
 ```

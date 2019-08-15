@@ -6,7 +6,7 @@ Simple modal does not have any internal padding or features. Only contains an ab
 showSource: true
 state: { modal: false, value: '' }
 ---
-<div>
+<Box>
 	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<SimpleModal
 		isOpen={state.modal}
@@ -21,9 +21,9 @@ state: { modal: false, value: '' }
 					l140.894-140.898l31.309,31.309L174.199,322.918z"/>
 				</svg>
 			</SimpleModalDemoSuccess>
-			<div>Success!</div>
+			<Paragraph>Success!</Paragraph>
 			<SimpleModalDemoMessage>Wide content that goes all the way to the edge.</SimpleModalDemoMessage>
 		</SimpleModalDemoModalContent>
 	</SimpleModal>
-</div>
+</Box>
 ```

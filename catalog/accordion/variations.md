@@ -120,7 +120,7 @@ state: { expandedSections: [] }
 				<Accordion.Subtitle>The first book of the Bible.</Accordion.Subtitle>
 			</Accordion.Header>
 			<Accordion.Panel>
-				<div>In the beginning, God created the heavens and the earth.</div>
+				<Box>In the beginning, God created the heavens and the earth.</Box>
 			</Accordion.Panel>
 		</Accordion.Item>
 		<Accordion.Item>
@@ -129,7 +129,7 @@ state: { expandedSections: [] }
 				<Accordion.Subtitle>The second book of the Bible.</Accordion.Subtitle>
 			</Accordion.Header>
 			<Accordion.Panel>
-				<div>And these are the names of the sons of Israel who came to Egypt; with Jacob, they each came with his ⌊family⌋:</div>
+				<Box>And these are the names of the sons of Israel who came to Egypt; with Jacob, they each came with his ⌊family⌋:</Box>
 			</Accordion.Panel>
 		</Accordion.Item>
 		<Accordion.Item>
@@ -138,7 +138,7 @@ state: { expandedSections: [] }
 				<Accordion.Subtitle>The third book of the Bible.</Accordion.Subtitle>
 			</Accordion.Header>
 			<Accordion.Panel>
-				<div>Then Yahweh called to Moses and spoke to him from the tent of assembly, saying,</div>
+				<Box>Then Yahweh called to Moses and spoke to him from the tent of assembly, saying,</Box>
 			</Accordion.Panel>
 		</Accordion.Item>
 	</Accordion>
