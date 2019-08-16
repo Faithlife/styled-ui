@@ -96,14 +96,6 @@ Button.propTypes = {
 	children: PropTypes.node,
 	/** Condensed button padding. Uses same padding for horizontal and vertical. */
 	condensed: PropTypes.bool,
-	/** Enum with values: 'primary', 'primaryOutline', 'primaryTransparent', 'minor', and 'minorTransparent' */
-	variant: PropTypes.oneOf([
-		'primary',
-		'primaryOutline',
-		'primaryTransparent',
-		'minor',
-		'minorTransparent',
-	]),
 	/** Enum with values: 'small', 'medium', and 'large' */
 	size: PropTypes.oneOf(['small', 'medium', 'large']),
 	/** Primary button variation (deprecated in favor of the variant prop) */

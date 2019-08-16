@@ -1,15 +1,17 @@
 import styled, { css } from 'styled-components';
-import { system, layout, flexbox, position, textStyle, border, background } from 'styled-system';
+import {
+	system,
+	variant,
+	layout,
+	flexbox,
+	position,
+	textStyle,
+	border,
+	background,
+} from 'styled-system';
 import 'focus-visible';
 import { common, typography } from '../../theme/system';
-import { colors } from '../shared-styles';
 import { resetStyles } from '../utils';
-
-const Anchor = css`
-	align-items: center;
-	text-decoration: none;
-	text-align: center;
-`;
 
 const systemAliases = {
 	borderColor: {
@@ -34,6 +36,12 @@ const systemAliases = {
 	},
 };
 
+const Anchor = css`
+	align-items: center;
+	text-decoration: none;
+	text-align: center;
+`;
+
 export const Button = styled.button`
 	${common};
 	${typography};
@@ -46,7 +54,7 @@ export const Button = styled.button`
 
 	${resetStyles};
 
-	cursor: pointer;
+	cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 
 	&:focus:not(.focus-visible) {
 		outline: none;
@@ -70,74 +78,95 @@ export const Button = styled.button`
 
 	${({ as: baseTag }) => baseTag && baseTag === 'a' && Anchor};
 
+		${({ disabled }) =>
+			variant({
+				variants: {
+					primary: {
+						border: '1px solid',
+						color: 'white',
+					},
+					primaryOutline: {
+						border: '1px solid',
+						background: 'none',
+						'@media (hover: hover)': {
+							'&:hover': {
+								color: disabled || 'white',
+							},
+						},
+						'&:active': {
+							color: disabled || 'white',
+						},
+					},
+					primaryTransparent: {
+						border: '1px solid transparent',
+						background: 'none',
+						padding: '0px',
+					},
+					minor: {
+						border: '1px solid',
+						color: disabled ? 'gray22' : 'flgray',
+					},
+					minorTransparent: {
+						border: '1px solid transparent',
+						background: 'none',
+						padding: '0px',
+					},
+				},
+			})}
+
 	${({ variant }) => {
 		switch (variant) {
 			case 'primary':
 				return css`
-					border: 1px solid;
 					${system({ defaultColor: systemAliases.borderAndBackgroundColors })};
-					color: #fff;
 
 					${({ disabled }) =>
 						disabled
 							? css`
 									${system({ disabledColor: systemAliases.borderAndBackgroundColors })};
-									cursor: default;
-									color: #fff;
 							  `
 							: css`
 									@media (hover: hover) {
 										&:hover {
 											${system({ hoverColor: systemAliases.borderAndBackgroundColors })};
-											color: #fff;
 										}
 									}
 
 									&:active {
 										${system({ activeColor: systemAliases.borderAndBackgroundColors })};
-										color: #fff;
 									}
 							  `};
 				`;
 			case 'primaryOutline':
 				return css`
-					border: 1px solid;
 					${system({ defaultColor: systemAliases.borderAndTextColors })};
-					background: none;
 
 					${({ disabled }) =>
 						disabled
 							? css`
 									${system({ disabledColor: systemAliases.borderAndTextColors })};
-									background: none;
-									cursor: default;
 							  `
 							: css`
 									@media (hover: hover) {
 										&:hover {
 											${system({ hoverColor: systemAliases.borderAndBackgroundColors })};
-											color: #fff;
 										}
 									}
 
 									&:active {
 										${system({ activeColor: systemAliases.borderAndBackgroundColors })};
-										color: #fff;
 									}
 							  `};
 				`;
 			case 'primaryTransparent':
+			case 'minorTransparent':
 				return css`
-					border: 1px solid transparent;
-					background: none;
 					${system({ defaultColor: systemAliases.color })};
-					padding: 0;
 
 					${({ disabled }) =>
 						disabled
 							? css`
 									${system({ disabledColor: systemAliases.color })};
-									cursor: default;
 							  `
 							: css`
 									@media (hover: hover) {
@@ -153,59 +182,26 @@ export const Button = styled.button`
 				`;
 			case 'minor':
 				return css`
-					border: 1px solid;
 					${system({ minorBorderColor: systemAliases.borderColor })};
 					${system({ minorBackgroundColor: systemAliases.backgroundColor })};
-					color: ${colors.flGray};
 
 					${({ disabled }) =>
 						disabled
 							? css`
 									${system({ minorDisabledBorderColor: systemAliases.borderColor })};
 									${system({ minorDisabledBackgroundColor: systemAliases.backgroundColor })};
-									color: ${colors.gray22};
-									cursor: default;
 							  `
 							: css`
 									@media (hover: hover) {
 										&:hover {
-											border: 1px solid;
 											${system({ hoverColor: systemAliases.borderColor })};
 											${system({ hoverColor: systemAliases.backgroundColor })};
-											color: ${colors.flGray};
 										}
 									}
 
 									&:active {
-										border: 1px solid;
 										${system({ activeColor: systemAliases.borderColor })};
 										${system({ activeColor: systemAliases.backgroundColor })};
-										color: ${colors.flGray};
-									}
-							  `};
-				`;
-			case 'minorTransparent':
-				return css`
-					border: 1px solid transparent;
-					background: none;
-					${system({ defaultColor: systemAliases.color })};
-					padding: 0;
-
-					${({ disabled }) =>
-						disabled
-							? css`
-									${system({ disabledColor: systemAliases.color })};
-									cursor: default;
-							  `
-							: css`
-									@media (hover: hover) {
-										&:hover {
-											${system({ hoverColor: systemAliases.color })};
-										}
-									}
-
-									&:active {
-										${system({ activeColor: systemAliases.color })};
 									}
 							  `};
 				`;
@@ -214,25 +210,22 @@ export const Button = styled.button`
 		}
 	}}
 
-	${({ size }) => {
-		switch (size) {
-			case 'small':
-				return css`
-					height: 32px;
-					padding: 0 ${props => (props.condensed ? '7px' : '9px')};
-				`;
-			case 'medium':
-				return css`
-					height: 40px;
-					padding: 0 ${props => (props.condensed ? '11px' : '15px')};
-				`;
-			case 'large':
-				return css`
-					height: 56px;
-					padding: 0 ${props => (props.condensed ? '15px' : '23px')};
-				`;
-			default:
-				return css``;
-		}
-	}}
+	${({ condensed }) =>
+		variant({
+			prop: 'size',
+			variants: {
+				small: {
+					height: '32px',
+					paddingX: condensed ? '7px' : '9px',
+				},
+				medium: {
+					height: '40px',
+					paddingX: condensed ? '11px' : '15px',
+				},
+				large: {
+					height: '56px',
+					paddingX: condensed ? '15px' : '23px',
+				},
+			},
+		})}
 `;
