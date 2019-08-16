@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
-import { system, layout, textStyle, border } from 'styled-system';
+import styled from 'styled-components';
+import { system, variant, layout, textStyle, border } from 'styled-system';
 import systemPropTypes from '@styled-system/prop-types';
 import { theme } from '../../theme';
 import { common, typography } from '../../theme/system';
 import { forwardClassRef, resetStyles, getVariation } from '../utils';
-import { thickness, inputColors, colors } from '../shared-styles';
+import { inputColors, colors } from '../shared-styles';
 
 /** Standard text input with no validation */
 export const Input = forwardClassRef(
@@ -116,6 +116,9 @@ const StyledInput = styled.input`
 		border-color: ${inputColors.inputFocusedBorderColor};
 		box-shadow: 0 0 0 2px ${inputColors.inputFocusedShadowColor};
 		outline: 0;
+		${({ variant }) =>
+			variant === 'inline' &&
+			system({ underlineColor: { property: 'border-color', scale: 'colors' } })}
 	}
 
 	&:disabled {
@@ -126,42 +129,38 @@ const StyledInput = styled.input`
 		background: ${colors.gray8};
 	}
 
-	${({ variant }) => {
-		switch (variant) {
-			case 'small':
-				return css`
-					padding: ${thickness.eight};
-					height: 32px;
-				`;
-			case 'medium':
-				return css`
-					padding: 12px;
-					height: 40px;
-				`;
-			case 'large':
-				return css`
-					padding: 16px;
-					height: 56px;
-				`;
-			case 'inline':
-				return css`
-					background-color: transparent;
-					border: none;
-					box-shadow: none;
-					border-radius: 0;
-					padding: 0;
-					border-bottom: solid ${thickness.two};
-					${system({ underlineColor: { property: 'border-color', scale: 'colors' } })};
-					height: 20px;
-					padding-bottom: ${thickness.four};
+	${variant({
+		variants: {
+			small: {
+				padding: '8px',
+				height: '32px',
+			},
+			medium: {
+				padding: '12px',
+				height: '40px',
+			},
+			large: {
+				padding: '16px',
+				height: '56px',
+			},
+			inline: {
+				backgroundColor: 'transparent',
+				border: 'none',
+				boxShadow: 'none',
+				borderRadius: '0px',
+				padding: '0px',
+				borderBottom: '2px solid',
+				height: '20px',
+				paddingBottom: '4px',
+				'&:focus': {
+					boxShadow: 'none',
+					outline: '0',
+				},
+			},
+		},
+	})}
 
-					&:focus {
-						box-shadow: none;
-						border-bottom: solid ${thickness.two};
-						${system({ underlineColor: { property: 'border-color', scale: 'colors' } })};
-						outline: 0;
-					}
-				`;
-		}
-	}}
+	${({ variant }) =>
+		variant === 'inline' &&
+		system({ underlineColor: { property: 'border-color', scale: 'colors' } })}
 `;
