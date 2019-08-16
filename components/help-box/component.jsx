@@ -1,43 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { system } from 'styled-system';
+import { variant } from 'styled-system';
 import { getVariation } from '../utils';
 import { Close, Exclamation, CircleCheck, Info, LightBulbH } from '../icons';
 import { Box } from '../Box';
 import { Button } from '../button';
 
-const variations = {
-	success: {
-		bg: 'green1',
-		fg: 'green2',
-		icon: <CircleCheck />,
-		closeIconColor: 'green5',
-	},
-	danger: {
-		bg: 'red1',
-		fg: 'red3',
-		icon: <Exclamation />,
-		closeIconColor: 'red5',
-	},
-	warning: {
-		bg: 'yellow1',
-		fg: 'yellow3',
-		icon: <Info />,
-		closeIconColor: 'yellow5',
-	},
-	minor: {
-		bg: 'gray4',
-		fg: 'gray14',
-		icon: null,
-		closeIconColor: 'gray34',
-	},
-	original: {
-		bg: 'blue1',
-		fg: 'blue3',
-		icon: <Info />,
-		closeIconColor: 'blue5',
-	},
+const icons = {
+	success: <CircleCheck />,
+	danger: <Exclamation />,
+	warning: <Info />,
+	minor: null,
+	original: <Info />,
 };
 
 /** Rectangular box containing tips on how to use our products */
@@ -57,19 +32,18 @@ export function HelpBox({
 	large,
 	...helpBoxProps
 }) {
-	const chosenVariation =
-		variations[getVariation(variant, { success, danger, warning, minor, original: true })];
+	const iconVariant =
+		icons[getVariation(variant, { success, danger, warning, minor, original: true })];
 	const childrenWithProps =
 		typeof children === 'string'
 			? children
 			: React.Children.map(children, child => React.cloneElement(child, { stacked }));
 
 	return (
-		<Box
+		<Container
+			variant={variant ? variant : 'original'}
 			stacked={stacked}
-			backgroundColor={chosenVariation.bg}
 			border={1}
-			borderColor={chosenVariation.fg}
 			css={{ borderLeftWidth: '4px' }}
 			color="flGray"
 			position="relative"
@@ -78,7 +52,7 @@ export function HelpBox({
 			{...helpBoxProps}
 		>
 			{(showLightBulb && (
-				<IconBox
+				<Box
 					as={LightBulbH}
 					flex="none"
 					height={large ? '42px' : '24px'}
@@ -87,19 +61,12 @@ export function HelpBox({
 					marginRight={0}
 					marginBottom={0}
 					marginLeft={5}
-					fill={chosenVariation.fg}
 				/>
 			)) ||
 				(!hideIcon && (
-					<IconBox
-						height="18px"
-						margin="17px"
-						marginRight={-2}
-						marginLeft={4}
-						fill={chosenVariation.fg}
-					>
-						{chosenVariation.icon}
-					</IconBox>
+					<Box height="18px" margin="17px" marginRight={-2} marginLeft={4}>
+						{iconVariant}
+					</Box>
 				))}
 			<Box
 				stacked={stacked}
@@ -115,28 +82,21 @@ export function HelpBox({
 				{childrenWithProps}
 			</Box>
 			{(handleClose && (
-				<IconBox
-					height="18px"
-					margin="17px"
-					marginRight={5}
-					marginLeft={!stacked ? -2 : large ? 4 : 5}
-					fill={chosenVariation.closeIconColor}
-				>
+				<Box height="18px" margin="17px" marginRight={5} marginLeft={!stacked ? -2 : large ? 4 : 5}>
 					<Button icon={<Close />} onClick={handleClose} textStyle="c.18" padding={0} />
-				</IconBox>
+				</Box>
 			)) ||
 				(showRightIcon && (
-					<IconBox
+					<Box
 						height="18px"
 						margin="17px"
 						marginRight={5}
 						marginLeft={!stacked ? -2 : large ? 4 : 5}
-						fill={chosenVariation.fg}
 					>
-						{chosenVariation.icon}
-					</IconBox>
+						{iconVariant}
+					</Box>
 				))}
-		</Box>
+		</Container>
 	);
 }
 
@@ -188,8 +148,79 @@ HelpBox.Footer = ({ children, stacked, ...props }) => (
 	</Box>
 );
 
-const IconBox = styled(Box)`
-	path {
-		${system({ fill: { property: 'fill', scale: 'colors' } })};
-	}
+const Container = styled(Box)`
+	${variant({
+		variants: {
+			success: {
+				backgroundColor: 'green1',
+				borderColor: 'green2',
+				'& > *:last-child': {
+					path: {
+						fill: 'green5',
+					},
+				},
+				'& > *:not(:last-child)': {
+					path: {
+						fill: 'green2',
+					},
+				},
+			},
+			danger: {
+				backgroundColor: 'red1',
+				borderColor: 'red3',
+				'& > *:last-child': {
+					path: {
+						fill: 'red5',
+					},
+				},
+				'& > *:not(:last-child)': {
+					path: {
+						fill: 'red3',
+					},
+				},
+			},
+			warning: {
+				backgroundColor: 'yellow1',
+				borderColor: 'yellow3',
+				'& > *:last-child': {
+					path: {
+						fill: 'yellow5',
+					},
+				},
+				'& > *:not(:last-child)': {
+					path: {
+						fill: 'yellow3',
+					},
+				},
+			},
+			minor: {
+				backgroundColor: 'gray4',
+				borderColor: 'gray14',
+				'& > *:last-child': {
+					path: {
+						fill: 'gray34',
+					},
+				},
+				'& > *:not(:last-child)': {
+					path: {
+						fill: 'gray14',
+					},
+				},
+			},
+			original: {
+				backgroundColor: 'blue1',
+				borderColor: 'blue3',
+				'& > *:last-child': {
+					path: {
+						fill: 'blue5',
+					},
+				},
+				'& > *:not(:last-child)': {
+					path: {
+						fill: 'blue3',
+					},
+				},
+			},
+		},
+	})}
 `;
