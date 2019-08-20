@@ -19,6 +19,7 @@ export function BaseTable({
 	maxRows,
 	children,
 	data,
+	getRowHeight,
 	/** IGridOptions interface from ag-grid */
 	gridOptions,
 	sortModel,
@@ -42,7 +43,7 @@ export function BaseTable({
 		if (gridApi) {
 			gridApi.resetRowHeights();
 		}
-	}, [gridApi, rowHeight]);
+	}, [gridApi, rowHeight, getRowHeight]);
 
 	useEffect(() => {
 		if (gridApi) {
@@ -171,6 +172,7 @@ export function BaseTable({
 				getRowNodeId={handleGetRowId || getRowNodeId}
 				suppressRowClickSelection={suppressRowClick}
 				onCellClicked={suppressRowClick ? handleCellClicked : null}
+				getRowHeight={getRowHeight}
 				reactNext
 				{...gridOptions}
 			>

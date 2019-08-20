@@ -15,6 +15,7 @@ export function SimpleTable({
 	hideHeaders,
 	rowHeight,
 	handleGetRowId,
+	getRowHeight,
 }) {
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useTableState();
 
@@ -35,6 +36,7 @@ export function SimpleTable({
 			hideHeaders={hideHeaders}
 			rowHeight={rowHeight}
 			handleGetRowId={handleGetRowId}
+			getRowHeight={getRowHeight}
 		>
 			{children}
 		</BaseTable>
