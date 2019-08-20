@@ -1,5 +1,11 @@
 # Changelog
 
+### 5.12.5
+
+- Fix width prop not being passed through in `ParameterSelect`
+- Fix `SimpleToast` covering elements when not being shown
+- Fix `ParameterInputBox` cutting off dangling letters in safari
+
 ### 5.12.4
 
 - Add more specificity to `ParameterInputBox` styles to beat global styles
