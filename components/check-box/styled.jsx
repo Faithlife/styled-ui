@@ -57,7 +57,30 @@ export const CheckboxContainer = styled.button`
 `;
 
 export const isCheckedStyles = `&:after {
+background-repeat: no-repeat;
+content: '';
+position: absolute;
+top: 1.5px;
+left: 1.5px;
+height: 9.6px;
+width: 9.6px;
 opacity: 1;
+}`;
+
+export const isMixedStyles = `
+display: flex;
+justify-content: center;
+align-items: center;
+
+&:after {
+	top: -12px;
+	position: absolute;
+	font-size: 24px;
+	font-weight: bold;
+	left: 2px;
+	background-image: none;
+	content: '-';
+	opacity: 1;
 }`;
 
 export const CheckedIndicator = styled.div`
@@ -71,21 +94,15 @@ export const CheckedIndicator = styled.div`
 	${props => (props.disabled ? 'cursor: default;' : '')};
 
 	&:after {
-	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%208%208'%3E%3Cpath%20fill='${props =>
-		encodeURIComponent(
-			props.theme.primary,
-		)}'%20d='M6.564.75l-3.59%203.612-1.538-1.55L0%204.26%202.974%207.25%208%202.193z'/%3E%3C/svg%3E");
-		background-repeat: no-repeat;
-		content: '';
-		position: absolute;
-		top: 1.5px;
-		left: 1.5px;
-		height: 9.6px;
-		width: 9.6px;
+		background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%208%208'%3E%3Cpath%20fill='${props =>
+			encodeURIComponent(
+				props.theme.primary,
+			)}'%20d='M6.564.75l-3.59%203.612-1.538-1.55L0%204.26%202.974%207.25%208%202.193z'/%3E%3C/svg%3E");
+		color: ${props => props.theme.primary};
 		opacity: 0;
 	}
 
-	${props => (props.isChecked ? isCheckedStyles : '')};
+	${props => (props.isMixed ? isMixedStyles : props.isChecked ? isCheckedStyles : '')};
 `;
 
 export const Label = styled.div`

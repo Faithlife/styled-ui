@@ -13,6 +13,7 @@ export class Checkbox extends Component {
 		onMouseUp: PropTypes.func,
 		title: PropTypes.string,
 		isChecked: PropTypes.bool,
+		isMixed: PropTypes.bool,
 		theme: PropTypes.shape({
 			primary: PropTypes.string,
 			border: PropTypes.string,
@@ -42,7 +43,17 @@ export class Checkbox extends Component {
 	componentRef = React.createRef();
 
 	render() {
-		const { onClick, title, isChecked, theme, type, children, className, disabled } = this.props;
+		const {
+			onClick,
+			title,
+			isChecked,
+			isMixed,
+			theme,
+			type,
+			children,
+			className,
+			disabled,
+		} = this.props;
 		return (
 			<ThemeProvider theme={theme}>
 				<Styled.CheckboxContainer
@@ -52,10 +63,15 @@ export class Checkbox extends Component {
 					type={type}
 					className={className}
 					role={'checkbox'}
-					aria-checked={isChecked}
+					aria-checked={isMixed ? 'mixed' : isChecked}
 					disabled={disabled}
 				>
-					<CheckboxContent isChecked={isChecked} title={title} disabled={disabled}>
+					<CheckboxContent
+						isChecked={isChecked}
+						isMixed={isMixed}
+						title={title}
+						disabled={disabled}
+					>
 						{children}
 					</CheckboxContent>
 				</Styled.CheckboxContainer>
