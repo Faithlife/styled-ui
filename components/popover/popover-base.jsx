@@ -62,6 +62,8 @@ export class PopoverBase extends Component {
 			textAlign: PropTypes.string,
 			width: PropTypes.string,
 			zIndex: PropTypes.number,
+			overflowX: PropTypes.string,
+			overflowY: PropTypes.string,
 		}),
 		theme: PropTypes.shape({
 			backgroundColor: PropTypes.string,
