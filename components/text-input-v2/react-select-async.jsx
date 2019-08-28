@@ -170,8 +170,8 @@ export const makeAsyncSelect = (SelectComponent: ComponentType<*>) =>
 			const options = passEmptyOptions
 				? []
 				: inputValue && loadedInputValue
-					? loadedOptions
-					: defaultOptions || [];
+				? loadedOptions
+				: defaultOptions || [];
 			return (
 				// $FlowFixMe
 				<SelectComponent
