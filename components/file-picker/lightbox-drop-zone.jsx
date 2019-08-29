@@ -48,8 +48,8 @@ export function LightboxDropZone({ addFile, allowMultiSelect, showDetails, local
 						name="file"
 					/>
 				</Styled.FileInputLabel>
-				{showDetails && localizedResources.reccomendedMinSize && (
-					<Styled.MinSizeLabel>{localizedResources.reccomendedMinSize}</Styled.MinSizeLabel>
+				{showDetails && localizedResources.recommendedMinSize && (
+					<Styled.MinSizeLabel>{localizedResources.recommendedMinSize}</Styled.MinSizeLabel>
 				)}
 			</Styled.DragDropContainer>
 		</DropZone>
@@ -60,7 +60,7 @@ LightboxDropZone.propTypes = {
 	allowMultiSelect: PropTypes.bool,
 	showDetails: PropTypes.bool,
 	localizedResources: PropTypes.shape({
-		reccomendedMinSize: PropTypes.string,
+		recommendedMinSize: PropTypes.string,
 		dragDropText: PropTypes.string,
 		browseText: PropTypes.string,
 	}),

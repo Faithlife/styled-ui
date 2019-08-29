@@ -3,7 +3,7 @@ showSource: true
 state: {
 	files: null,
 	localizedResources: {
-		reccomendedMinSize: 'reccomended minimum image size: 800 x 400',
+		recommendedMinSize: 'recommended minimum image size: 800 x 400',
 		uploadFile: 'Upload File',
 		uploadFiles: 'Upload Files',
 		addText: 'Insert',
@@ -51,7 +51,7 @@ state: {
 lang: javascript
 ---
 	localizedResources: {
-		reccomendedMinSize: 'reccomended minimum image size: 800 x 400',
+		recommendedMinSize: 'recommended minimum image size: 800 x 400',
 		uploadFile: 'Upload File',
 		uploadFiles: 'Upload Files',
 		addText: 'Insert',

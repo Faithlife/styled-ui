@@ -4,7 +4,7 @@ import { FilePickerContextProvider } from './file-picker-helpers';
 import * as Styled from './styled';
 
 const defaultLocalizedResources = {
-	reccomendedMinSize: 'reccomended minimum image size: 800 x 400',
+	recommendedMinSize: 'recommended minimum image size: 800 x 400',
 	uploadFile: 'Upload File',
 	uploadFiles: 'Upload Files',
 	addText: 'Insert',
@@ -46,7 +46,7 @@ FilePicker.propTypes = {
 	localizedResources: PropTypes.shape({
 		addText: PropTypes.string,
 		cancelText: PropTypes.string,
-		reccomendedMinSize: PropTypes.string,
+		recommendedMinSize: PropTypes.string,
 		uploadFile: PropTypes.string,
 		uploadFiles: PropTypes.string,
 		dragDropText: PropTypes.string,
