@@ -18,6 +18,7 @@ state: {
 		<FilePicker
 			onFilesSelected={files => { alert( files ); }}
 			onCancel={() => alert('You called the onCancelFunction. This should be used to hide the component')}
+			onImageLoadError={imageSource => alert( `${imageSource} failed to load` )}
 			allowMultiSelect
 		>
 			<TabManager>

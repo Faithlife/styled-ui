@@ -17,6 +17,7 @@ export function FilePicker({
 	onFilesSelected,
 	allowMultiSelect,
 	onCancel,
+	onImageLoadError,
 	localizedResources,
 	children,
 }) {
@@ -25,9 +26,10 @@ export function FilePicker({
 			onFilesSelected,
 			allowMultiSelect,
 			onCancel,
+			onImageLoadError,
 			localizedResources: { ...defaultLocalizedResources, ...localizedResources },
 		}),
-		[onFilesSelected, allowMultiSelect, onCancel, localizedResources],
+		[onFilesSelected, allowMultiSelect, onCancel, onImageLoadError, localizedResources],
 	);
 
 	return (
