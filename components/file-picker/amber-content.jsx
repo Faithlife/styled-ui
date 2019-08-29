@@ -66,27 +66,32 @@ function useAmber() {
 		if (window.amberfile) {
 			setAmber(window.amberfile);
 		} else {
+			let amberScript = document.querySelector(
+				'script[src="https://amber.faithlife.com/scripts/api/embeddedBucket.js"]',
+			);
+
+			if (!amberScript) {
+				amberScript = document.createElement('script');
+				amberScript.src = 'https://amber.faithlife.com/scripts/api/embeddedBucket.js';
+				amberScript.async = true;
+				document.body.appendChild(amberScript);
+			}
+
 			const onScriptLoad = () => {
 				setAmber(window.amberfile);
 			};
-
 			const onScriptError = error => {
 				console.error(error);
 			};
 
-			const amberScript = document.createElement('script');
-			amberScript.src = 'https://amber.faithlife.com/scripts/api/embeddedBucket.js';
-			amberScript.async = true;
-
 			amberScript.addEventListener('load', onScriptLoad);
 			amberScript.addEventListener('error', onScriptError);
 
-			document.body.appendChild(amberScript);
+			return () => {
+				amberScript.removeEventListener('load', onScriptLoad);
+				amberScript.removeEventListener('error', onScriptError);
+			};
 		}
-		return () => {
-			amberScript.removeEventListener('load', onScriptLoad);
-			amberScript.removeEventListener('error', onScriptError);
-		};
 	}, []);
 
 	return amber;
