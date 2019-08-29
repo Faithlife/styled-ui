@@ -38,7 +38,7 @@ export function LightboxDropZone({ addFile, allowMultiSelect, showDetails, local
 				<Button primaryTransparent onClick={handleBrowseFilesClick}>
 					{localizedResources.browseText}
 				</Button>
-				<br />
+
 				<Styled.FileInputLabel>
 					<input
 						ref={fileInputRef}
