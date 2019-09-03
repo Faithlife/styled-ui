@@ -49,9 +49,6 @@ import {
 	ParameterSelect,
 	ParameterInputBox,
 	ParameterSentence,
-	TableHeading,
-	PaginatedTable,
-	SimpleTable,
 	Box,
 	Stack,
 	Text,
@@ -67,6 +64,7 @@ import { ProductDrawerWithResources } from './product-drawer';
 import { DocgenTable } from './docgen-table';
 import { PopulationChange } from './grid/population-change';
 import { BaseTable } from '../components/grid/base-table';
+import { TableHeading, PaginatedTable, SimpleTable } from '../components/grid';
 
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
