@@ -889,14 +889,7 @@ const components = [
 				imports: {
 					FilePicker,
 					FilePickerDemo: styled.div`
-						&& > * {
-							margin: 8px;
-						}
-					`,
-					FileContainer: styled.div`
-						&& > * {
-							margin: 8px;
-						}
+						height: 600px;
 					`,
 					TabManager,
 					TabList,

@@ -3,28 +3,12 @@ import { colors } from '../shared-styles';
 import { resetStyles } from '../utils';
 
 export const Container = styled.div`
-	background: ${colors.white};
-	width: 800px;
-	height: 600px;
-`;
-
-export const Title = styled.header`
-	font-size: 24px;
-	color: ${colors.gray66};
-	margin: 24px;
+	width: 100%;
+	height: 100%;
 `;
 
 export const Tab = styled.div`
-	background: ${colors.white};
 	height: 532px;
-	width: 772px;
-	margin: 8px;
-`;
-
-export const NativeContainer = styled.div`
-	height: 400px;
-	width: 732px;
-	margin: 24px 24px 60px 24px;
 `;
 
 export const ButtonSection = styled.div`
@@ -38,12 +22,6 @@ export const ButtonContainer = styled.div`
 
 export const DragDropText = styled.section`
 	font-size: 18px;
-	color: ${colors.gray52};
-	margin-top: 12px;
-`;
-
-export const DragDropSmallText = styled.section`
-	font-size: 16px;
 	color: ${colors.gray52};
 	margin-top: 12px;
 `;
@@ -69,28 +47,9 @@ export const SvgContainer = styled.div`
 	margin-top: 109px;
 `;
 
-export const FileContainer = styled.div`
-	display: flex;
-	flex-wrap: wrap;
-`;
-
-export const DragDropBox = styled.div`
-	height: 180px;
-	width: 180px;
-	border: 2px dashed ${colors.gray14};
-	margin: 6px;
-`;
-
-export const FileBox = styled.div`
-	height: 180px;
-	width: 180px;
-	border: 2px solid ${colors.gray14};
-	margin: 6px;
-`;
-
 export const BorderBox = styled.div`
 	border: 2px solid ${colors.gray14};
-	width: inherit;
+	min-height: inherit;
 	height: inherit;
 	position: relative;
 `;
@@ -105,14 +64,12 @@ export const MultiSelectContainer = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	overflow: auto;
-	height: 444px;
-	width: 781px;
+	min-height: 444px;
 `;
 
 export const SingleSelectContainer = styled.div`
 	overflow: hidden;
-	height: 444px;
-	width: 781px;
+	min-height: 444px;
 `;
 
 export const Image = styled.img`

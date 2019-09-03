@@ -62,6 +62,10 @@ AmberContent.propTypes = {
 	pickerMode: PropTypes.string,
 };
 
+AmberContent.defaultProps = {
+	pickerMode: 'asset',
+}
+
 function useAmber() {
 	const [amber, setAmber] = useState(null);
 
