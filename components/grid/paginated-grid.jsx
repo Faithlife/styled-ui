@@ -3,22 +3,10 @@ import PropTypes from 'prop-types';
 import { useGridState } from './grid-helpers';
 import { BaseGrid } from './base-grid';
 
-export function PaginatedGrid({
-	onRowClick,
-	maxRows,
-	children,
-	isSmallViewport,
-	filterText,
-	sortModel,
-	updateSortModel,
-	currentPageNumber,
-	onPageNumberChange,
-	data,
-	rowSelectionType,
-	hideHeaders,
-	rowHeight,
-	handleGetRowId,
-}) {
+export function PaginatedGrid(props) {
+	// First separate out the props that are this grid component specific
+	const { children, currentPageNumber, onPageNumberChange, maxRows, ...baseGridProps } = props;
+
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useGridState();
 
 	useEffect(() => {
@@ -45,23 +33,14 @@ export function PaginatedGrid({
 
 	return (
 		<BaseGrid
+			{...baseGridProps}
 			gridApi={gridApi}
 			setGridApi={setGridApi}
 			columnApi={columnApi}
 			setColumnApi={setColumnApi}
-			onRowClick={onRowClick}
-			isSmallViewport={isSmallViewport}
-			maxRows={maxRows}
-			filterText={filterText}
-			sortModel={sortModel}
 			gridOptions={gridOptions}
-			updateSortModel={updateSortModel}
-			rowSelectionType={rowSelectionType}
-			data={data}
-			hideHeaders={hideHeaders}
-			rowHeight={rowHeight}
+			maxRows={maxRows}
 			hasPagingBar
-			handleGetRowId={handleGetRowId}
 		>
 			{children}
 		</BaseGrid>

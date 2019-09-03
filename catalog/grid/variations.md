@@ -53,3 +53,49 @@ land: json
 	}
 ]
 ```
+
+### Tree Table
+
+A table to display tree data as well as supporting drag-drop reordering.
+
+```react
+showSource: true
+---
+<div>
+	<TreeGrid data={[
+	{
+		"id": 0,
+		"NAME": "Abilene, TX",
+		"CENSUS2010POP": 165252,
+		"NPOPCHG2010": 337,
+		"BIRTHS2010": 540,
+		"DEATHS2010": 406,
+		"path": ["Metropolitan Statistical Area", "Pop more than 100k", "Abilene, TX"]
+	}
+]} minHeight={'550px'} enableDragDrop>
+		<GridHeading displayName="Name" fieldName="NAME" minWidth={300} />
+		<GridHeading displayName="Population" fieldName="CENSUS2010POP" />
+		<GridHeading displayName="Net Population Change" fieldName="NPOPCHG2010" />
+		<GridHeading displayName="Births" fieldName="BIRTHS2010" />
+		<GridHeading displayName="Deaths" fieldName="DEATHS2010" />
+	</TreeGrid>
+</div>
+```
+
+### Example data for Tree Grid
+
+```code
+land: json
+---
+[
+	{
+		"id": 0,
+		"NAME": "Abilene, TX",
+		"CENSUS2010POP": 165252,
+		"NPOPCHG2010": 337,
+		"BIRTHS2010": 540,
+		"DEATHS2010": 406,
+		"path": ["Metropolitan Statistical Area", "Pop &gt; 100k", "Abilene, TX"]
+	}
+]
+```

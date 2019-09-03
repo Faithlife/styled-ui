@@ -57,6 +57,7 @@ import {
 	Text,
 	Paragraph,
 	theme,
+	TreeGrid,
 } from '../index';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
@@ -296,6 +297,7 @@ const components = [
 					GridHeading,
 					PaginatedGrid,
 					SimpleGrid,
+					TreeGrid,
 					Button,
 					censusData: censusDataWithId,
 				},
