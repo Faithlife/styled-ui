@@ -6,7 +6,7 @@ import * as Styled from './styled';
 
 const defaultRowHeight = 45;
 const headerHeight = defaultRowHeight - 5;
-const noRowsTableHeight = 200;
+const noRowsDefaultTableHeight = 200;
 
 /** A wrapper of ag-grid with some boilerplate code to handle initialization and sorting/ filtering */
 export function BaseTable({
@@ -17,6 +17,8 @@ export function BaseTable({
 	onRowClick,
 	isSmallViewport,
 	maxRows,
+	maxHeight,
+	minHeight,
 	children,
 	data,
 	/** IGridOptions interface from ag-grid */
@@ -142,14 +144,19 @@ export function BaseTable({
 	const rowCount = data ? data.length : 0;
 	const currentHeaderHeight = hideHeaders ? 1 : headerHeight;
 
-	const tableHeight =
+	const calculatedTableHeight =
 		rowCount !== 0
 			? (maxRows && maxRows < rowCount ? maxRows : rowCount) * (rowHeight || defaultRowHeight) +
 			  tableHeightPadding +
 			  currentHeaderHeight
-			: noRowsTableHeight;
+			: noRowsDefaultTableHeight;
 	return (
-		<Styled.GridContainer className="ag-theme-faithlife" height={tableHeight}>
+		<Styled.GridContainer
+			className="ag-theme-faithlife"
+			height={calculatedTableHeight}
+			minHeight={minHeight}
+			maxHeight={maxHeight}
+		>
 			<AgGridReact
 				rowData={data}
 				onGridReady={handleGridReady}
