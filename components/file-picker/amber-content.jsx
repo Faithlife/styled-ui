@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useFilePickerContext } from './file-picker-helpers';
 import * as Styled from './styled';
 
-export function AmberContent({ accountId, filter, viewStyle }) {
+export function AmberContent({ accountId, filter, viewStyle, pickerMode }) {
 	const { allowMultiSelect, onCancel, onFilesSelected } = useFilePickerContext();
 
 	const amber = useAmber();
@@ -39,13 +39,14 @@ export function AmberContent({ accountId, filter, viewStyle }) {
 			amber.embedded.load({
 				url: '/embed/',
 				container: amberRef.current,
-				groupId: accountId,
+				accountId: accountId,
 				multiSelect: allowMultiSelect,
 				viewStyle,
+				pickerMode,
 				filter,
 			});
 		}
-	}, [allowMultiSelect, filter, accountId, viewStyle, amber]);
+	}, [allowMultiSelect, filter, accountId, viewStyle, pickerMode, amber]);
 
 	return <Styled.Tab ref={amberRef} />;
 }
@@ -57,6 +58,8 @@ AmberContent.propTypes = {
 	filter: PropTypes.string,
 	/** optional way to chose layout of the Amber embeded view */
 	viewStyle: PropTypes.string,
+	/** optional way to control the data passed back from amber picker, options are file, asset and filter */
+	pickerMode: PropTypes.string,
 };
 
 function useAmber() {

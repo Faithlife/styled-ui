@@ -37,6 +37,7 @@ state: {
 							accountId={6817140}
 							filter={'kind:"image"'}
 							viewStyle={'tinygrid'}
+							pickerMode={'asset'}
 						/>
 					</TabPanel>
 				</TabPanels>
