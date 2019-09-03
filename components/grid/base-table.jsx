@@ -35,10 +35,21 @@ export function BaseTable({
 	const tableHeightPadding = hasPagingBar ? 50 : 2;
 
 	useEffect(() => {
-		if (columnApi) {
+		if (columnApi && gridApi) {
 			columnApi.resetColumnState();
+			if (largeOnlyColumns && isSmallViewport) {
+				columnApi.setColumnsVisible(largeOnlyColumns, false);
+				columnApi.setColumnsVisible(smallOnlyColumns, true);
+			} else if (smallOnlyColumns && !isSmallViewport) {
+				columnApi.setColumnsVisible(largeOnlyColumns, true);
+				columnApi.setColumnsVisible(smallOnlyColumns, false);
+			}
+			// Set proper column sizes once gridApi is available and component has mounted
+			// setTimeout necessary in certain browsers (e.g. Safari) to ensure ag-grid components have mounted
+			// See 'Sizing Columns By Default' here: https://www.ag-grid.com/javascript-grid-resizing/
+			setTimeout(() => gridApi.sizeColumnsToFit(), 0);
 		}
-	}, [columnApi, isSmallViewport]);
+	}, [columnApi, gridApi, isSmallViewport, largeOnlyColumns, smallOnlyColumns]);
 
 	useEffect(() => {
 		if (gridApi) {
@@ -85,19 +96,10 @@ export function BaseTable({
 	const suppressRowClick = headingChildren.some(child => child.props.hasInteractableElement);
 
 	const handleGridResize = useCallback(() => {
-		if (gridApi && columnApi) {
-			if (largeOnlyColumns) {
-				if (isSmallViewport) {
-					columnApi.setColumnsVisible(largeOnlyColumns, false);
-					columnApi.setColumnsVisible(smallOnlyColumns, true);
-				} else {
-					columnApi.setColumnsVisible(largeOnlyColumns, true);
-					columnApi.setColumnsVisible(smallOnlyColumns, false);
-				}
-			}
-			gridApi.sizeColumnsToFit();
+		if (gridApi) {
+			setTimeout(() => gridApi.sizeColumnsToFit(), 0);
 		}
-	}, [gridApi, columnApi, isSmallViewport, largeOnlyColumns, smallOnlyColumns]);
+	}, [gridApi]);
 
 	const handleSortChanged = useCallback(() => {
 		if (updateSortModel) {
@@ -131,15 +133,6 @@ export function BaseTable({
 		},
 		[setGridApi, setColumnApi, sortModel, filterText],
 	);
-
-	// Set proper column sizes once gridApi is available and component has mounted
-	// setTimeout necessary in certain browsers (e.g. Safari) to ensure ag-grid components have mounted
-	// See 'Sizing Columns By Default' here: https://www.ag-grid.com/javascript-grid-resizing/
-	useEffect(() => {
-		if (gridApi) {
-			setTimeout(() => gridApi.sizeColumnsToFit(), 0);
-		}
-	}, [gridApi]);
 
 	const rowCount = data ? data.length : 0;
 	const currentHeaderHeight = hideHeaders ? 1 : headerHeight;
