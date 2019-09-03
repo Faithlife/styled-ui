@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export function TableHeading({
+export function GridHeading({
 	displayName,
 	fieldName,
 	isSortable,
@@ -21,25 +21,25 @@ export function TableHeading({
 	return <div />;
 }
 
-TableHeading.defaultProps = {
+GridHeading.defaultProps = {
 	isSortable: true,
 	suppressMenu: true,
 	isResizable: true,
 };
 
-TableHeading.isTableHeading = true;
+GridHeading.isGridHeading = true;
 
-TableHeading.sortOptions = Object.freeze({
+GridHeading.sortOptions = Object.freeze({
 	none: '',
 	ascending: 'asc',
 	descending: 'desc',
 });
 
-TableHeading.propTypes = {
+GridHeading.propTypes = {
 	displayName: PropTypes.string,
 	fieldName: PropTypes.string,
 	isSortable: PropTypes.bool,
-	defaultSort: PropTypes.oneOf(Object.values(TableHeading.sortOptions)),
+	defaultSort: PropTypes.oneOf(Object.values(GridHeading.sortOptions)),
 	isRightAligned: PropTypes.bool,
 	/** A react component to render in the cell */
 	cellComponent: PropTypes.func,

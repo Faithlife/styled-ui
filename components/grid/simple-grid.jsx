@@ -1,8 +1,8 @@
 import React from 'react';
-import { useTableState } from './table-helpers';
-import { BaseTable } from './base-table';
+import { useGridState } from './grid-helpers';
+import { BaseGrid } from './base-grid';
 
-export function SimpleTable({
+export function SimpleGrid({
 	onRowClick,
 	children,
 	isSmallViewport,
@@ -19,10 +19,10 @@ export function SimpleTable({
 	handleGetRowId,
 	getRowHeight,
 }) {
-	const { gridApi, setGridApi, columnApi, setColumnApi } = useTableState();
+	const { gridApi, setGridApi, columnApi, setColumnApi } = useGridState();
 
 	return (
-		<BaseTable
+		<BaseGrid
 			gridApi={gridApi}
 			setGridApi={setGridApi}
 			columnApi={columnApi}
@@ -43,12 +43,12 @@ export function SimpleTable({
 			getRowHeight={getRowHeight}
 		>
 			{children}
-		</BaseTable>
+		</BaseGrid>
 	);
 }
 
-SimpleTable.rowSelectionOptions = BaseTable.rowSelectionOptions;
+SimpleGrid.rowSelectionOptions = BaseGrid.rowSelectionOptions;
 
-SimpleTable.propTypes = {
-	...BaseTable.props,
+SimpleGrid.propTypes = {
+	...BaseGrid.props,
 };

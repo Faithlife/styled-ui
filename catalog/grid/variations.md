@@ -8,13 +8,13 @@ The simplest use of the table. Each column is sortable and resizable. Leave `max
 showSource: true
 ---
 <div>
-	<SimpleTable data={censusData} maxRows={10} onRowClick={row => {alert(row[0].NAME)}}>
-		<TableHeading displayName="Name" fieldName="NAME" defaultSort={TableHeading.sortOptions.ascending} />
-		<TableHeading displayName="Population" fieldName="CENSUS2010POP" isRightAligned />
-		<TableHeading displayName="Net Population Change" fieldName="NPOPCHG2010" isRightAligned />
-		<TableHeading displayName="Births" fieldName="BIRTHS2010" isRightAligned width={100} isLargeViewportOnly />
-		<TableHeading displayName="Deaths" fieldName="DEATHS2010" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
-	</SimpleTable>
+	<SimpleGrid data={censusData} maxRows={10} onRowClick={row => {alert(row[0].NAME)}}>
+		<GridHeading displayName="Name" fieldName="NAME" defaultSort={GridHeading.sortOptions.ascending} />
+		<GridHeading displayName="Population" fieldName="CENSUS2010POP" isRightAligned />
+		<GridHeading displayName="Net Population Change" fieldName="NPOPCHG2010" isRightAligned />
+		<GridHeading displayName="Births" fieldName="BIRTHS2010" isRightAligned width={100} isLargeViewportOnly />
+		<GridHeading displayName="Deaths" fieldName="DEATHS2010" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
+	</SimpleGrid>
 </div>
 ```
 
@@ -26,17 +26,17 @@ Simple table with pagination.
 showSource: true
 ---
 <div>
-	<PaginatedTable data={censusData} maxRows={10}>
-		<TableHeading displayName="Name" fieldName="NAME" defaultSort={TableHeading.sortOptions.ascending} />
-		<TableHeading displayName="Population" fieldName="CENSUS2010POP" />
-		<TableHeading displayName="Net Population Change" fieldName="NPOPCHG2010" />
-		<TableHeading displayName="Births" fieldName="BIRTHS2010" />
-		<TableHeading displayName="Deaths" fieldName="DEATHS2010" />
-	</PaginatedTable>
+	<PaginatedGrid data={censusData} maxRows={10}>
+		<GridHeading displayName="Name" fieldName="NAME" defaultSort={GridHeading.sortOptions.ascending} />
+		<GridHeading displayName="Population" fieldName="CENSUS2010POP" />
+		<GridHeading displayName="Net Population Change" fieldName="NPOPCHG2010" />
+		<GridHeading displayName="Births" fieldName="BIRTHS2010" />
+		<GridHeading displayName="Deaths" fieldName="DEATHS2010" />
+	</PaginatedGrid>
 </div>
 ```
 
-### Example data
+### Example data for Simple and Paginated Table
 
 ```code
 land: json

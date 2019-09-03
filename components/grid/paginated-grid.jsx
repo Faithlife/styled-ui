@@ -1,9 +1,9 @@
 import React, { useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { useTableState } from './table-helpers';
-import { BaseTable } from './base-table';
+import { useGridState } from './grid-helpers';
+import { BaseGrid } from './base-grid';
 
-export function PaginatedTable({
+export function PaginatedGrid({
 	onRowClick,
 	maxRows,
 	children,
@@ -19,7 +19,7 @@ export function PaginatedTable({
 	rowHeight,
 	handleGetRowId,
 }) {
-	const { gridApi, setGridApi, columnApi, setColumnApi } = useTableState();
+	const { gridApi, setGridApi, columnApi, setColumnApi } = useGridState();
 
 	useEffect(() => {
 		if (gridApi && currentPageNumber !== null && currentPageNumber !== undefined) {
@@ -44,7 +44,7 @@ export function PaginatedTable({
 	);
 
 	return (
-		<BaseTable
+		<BaseGrid
 			gridApi={gridApi}
 			setGridApi={setGridApi}
 			columnApi={columnApi}
@@ -64,14 +64,14 @@ export function PaginatedTable({
 			handleGetRowId={handleGetRowId}
 		>
 			{children}
-		</BaseTable>
+		</BaseGrid>
 	);
 }
 
-PaginatedTable.rowSelectionOptions = BaseTable.rowSelectionOptions;
+PaginatedGrid.rowSelectionOptions = BaseGrid.rowSelectionOptions;
 
-PaginatedTable.propTypes = {
-	...BaseTable.propTypes,
+PaginatedGrid.propTypes = {
+	...BaseGrid.propTypes,
 	currentPageNumber: PropTypes.number,
 	onPageNumberChange: PropTypes.func,
 };

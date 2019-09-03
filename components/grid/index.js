@@ -1,4 +1,4 @@
 import './custom.scss';
-export { PaginatedTable } from './paginated-table';
-export { TableHeading } from './table-heading';
-export { SimpleTable } from './simple-table';
+export { PaginatedGrid } from './paginated-grid';
+export { GridHeading } from './grid-heading';
+export { SimpleGrid } from './simple-grid';

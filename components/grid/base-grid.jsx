@@ -9,7 +9,7 @@ const headerHeight = defaultRowHeight - 5;
 const noRowsDefaultTableHeight = 200;
 
 /** A wrapper of ag-grid with some boilerplate code to handle initialization and sorting/ filtering */
-export function BaseTable({
+export function BaseGrid({
 	gridApi,
 	setGridApi,
 	columnApi,
@@ -32,6 +32,7 @@ export function BaseTable({
 	rowHeight,
 	hasPagingBar,
 	handleGetRowId,
+	shouldShowDragHandles,
 }) {
 	const tableHeightPadding = hasPagingBar ? 50 : 2;
 
@@ -76,7 +77,7 @@ export function BaseTable({
 	}, [gridApi, onRowClick]);
 
 	const headingChildren = React.Children.toArray(children).filter(
-		child => child && child.type.isTableHeading,
+		child => child && child.type.isGridHeading,
 	);
 
 	const cellComponents = headingChildren
@@ -159,8 +160,8 @@ export function BaseTable({
 				onSelectionChanged={handleSelectionChanged}
 				rowSelection={
 					!onRowClick
-						? BaseTable.rowSelectionOptions.none
-						: rowSelectionType || BaseTable.rowSelectionOptions.single
+						? BaseGrid.rowSelectionOptions.none
+						: rowSelectionType || BaseGrid.rowSelectionOptions.single
 				}
 				frameworkComponents={cellComponents}
 				headerHeight={!hideHeaders ? headerHeight : 0}
@@ -176,7 +177,7 @@ export function BaseTable({
 				reactNext
 				{...gridOptions}
 			>
-				{headingChildren.map(child => {
+				{headingChildren.map((child, index) => {
 					const {
 						fieldName,
 						displayName,
@@ -206,6 +207,7 @@ export function BaseTable({
 							cellClass={`ag-faithlife-cell ${isRightAligned ? 'ag-cell-right-aligned' : ''}`}
 							rowGroup={groupByColumn}
 							hide={groupByColumn || hide}
+							rowDrag={index === 0 && shouldShowDragHandles}
 						/>
 					);
 				})}
@@ -214,13 +216,13 @@ export function BaseTable({
 	);
 }
 
-BaseTable.rowSelectionOptions = {
+BaseGrid.rowSelectionOptions = {
 	none: '',
 	single: 'single',
 	multi: 'multiple',
 };
 
-BaseTable.propTypes = {
+BaseGrid.propTypes = {
 	isSmallViewport: PropTypes.bool,
 	/** The Max amount of rows to show in the table */
 	maxRows: PropTypes.number,
@@ -233,7 +235,7 @@ BaseTable.propTypes = {
 	/** Text to filter the rows on */
 	filterText: PropTypes.string,
 	/** Whether to allow single or multi row select */
-	rowSelectionType: PropTypes.oneOf(Object.values(BaseTable.rowSelectionOptions)),
+	rowSelectionType: PropTypes.oneOf(Object.values(BaseGrid.rowSelectionOptions)),
 	/** Handler for selected rows */
 	onRowClick: PropTypes.func,
 	/** Hide headers */
@@ -245,4 +247,5 @@ BaseTable.propTypes = {
 	/** Your data should have an id property or this handler must be included */
 	handleGetRowId: PropTypes.func,
 	children: PropTypes.node,
+	shouldShowDragHandles: PropTypes.bool,
 };
