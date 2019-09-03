@@ -42,8 +42,6 @@ FocusHandlerInboundsElement.propTypes = {
 	children: PropTypes.node.isRequired,
 };
 
-/** Popover manager from react-popper */
-export const PopoverManager = Manager;
 export const PlainPopoverReference = Reference;
 export const PlacementOptionsProps = PropTypes.oneOf([
 	'top',

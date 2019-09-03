@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDebouncedCallback } from '../shared-hooks'; // Copied from react-ui. Import from there when made available.
 import { Popover } from './component';
-import { PopoverManager, PopoverReference } from './popper-helpers';
+import { PopoverManager } from './popover-manager';
+import { PopoverReference } from './popper-helpers';
 
 /** Simple tooltip that uses popovers internally. Does not support custom positioning. */
 export function Tooltip(props) {
