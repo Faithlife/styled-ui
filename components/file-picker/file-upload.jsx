@@ -89,7 +89,10 @@ function ButtonSection({ selectedFiles }) {
 	const { onFilesSelected, localizedResources, onCancel } = useFilePickerContext();
 
 	const onSelect = useCallback(() => {
-		onFilesSelected(selectedFiles);
+		onFilesSelected({
+			files: selectedFiles,
+			kind: 'files'
+		});
 	}, [onFilesSelected, selectedFiles]);
 
 	return (
@@ -119,5 +122,5 @@ function ButtonSection({ selectedFiles }) {
 	);
 }
 ButtonSection.propTypes = {
-	selectedFiles: PropTypes.object,
+	selectedFiles: PropTypes.array,
 };

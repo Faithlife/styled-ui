@@ -16,7 +16,10 @@ export function AmberContent({ accountId, filter, viewStyle, pickerMode }) {
 					if (parsedEvent.canceled) {
 						onCancel();
 					} else if (parsedEvent.assets) {
-						onFilesSelected(parsedEvent.assets);
+						onFilesSelected({
+							assets: parsedEvent.assets,
+							kind: 'assets'
+						});
 					}
 				}
 			}

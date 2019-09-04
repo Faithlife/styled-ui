@@ -15,7 +15,13 @@ state: {
 ---
 <FilePickerDemo>
 	<FilePicker
-		onFilesSelected={files => { alert( files ); }}
+		onFilesSelected={files => { 
+			if(files.kind ==='files') {
+				alert( files.files ); 
+			} else {
+				alert( files.assets );
+			}
+		}}
 		onCancel={() => alert('You called the onCancelFunction. This should be used to hide the component')}
 		onImageLoadError={imageSource => alert( `${imageSource} failed to load` )}
 		allowMultiSelect
