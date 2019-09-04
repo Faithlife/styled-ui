@@ -57,7 +57,7 @@ export const BorderBox = styled.div`
 export const ImageBox = styled.div`
 	width: 180px;
 	height: 180px;
-	margin: ${thickness.eight};;
+	margin: ${thickness.eight};
 `;
 
 export const MultiSelectContainer = styled.div`

@@ -91,7 +91,7 @@ function ButtonSection({ selectedFiles }) {
 	const onSelect = useCallback(() => {
 		onFilesSelected({
 			files: selectedFiles,
-			kind: 'files'
+			kind: 'files',
 		});
 	}, [onFilesSelected, selectedFiles]);
 

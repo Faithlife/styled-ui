@@ -18,7 +18,7 @@ export function AmberContent({ accountId, filter, viewStyle, pickerMode }) {
 					} else if (parsedEvent.assets) {
 						onFilesSelected({
 							assets: parsedEvent.assets,
-							kind: 'assets'
+							kind: 'assets',
 						});
 					}
 				}
@@ -67,7 +67,7 @@ AmberContent.propTypes = {
 
 AmberContent.defaultProps = {
 	pickerMode: 'asset',
-}
+};
 
 function useAmber() {
 	const [amber, setAmber] = useState(null);
