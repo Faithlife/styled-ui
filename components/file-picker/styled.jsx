@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { colors } from '../shared-styles';
+import { colors, thickness, fonts } from '../shared-styles';
 import { resetStyles } from '../utils';
 
 export const Container = styled.div`
+	background: ${colors.white};
 	width: 100%;
 	height: 100%;
 `;
@@ -12,22 +13,25 @@ export const Tab = styled.div`
 `;
 
 export const ButtonSection = styled.div`
-	margin: 48px 11px;
+	margin-top: ${thickness.twentyfour};
 `;
 
 export const ButtonContainer = styled.div`
 	float: right;
-	padding: 8px 10px;
+	padding: 0 ${thickness.twelve};
 `;
 
 export const DragDropText = styled.section`
-	font-size: 18px;
+	${fonts.ui18}
 	color: ${colors.gray52};
-	margin-top: 12px;
+	margin-top: ${thickness.twelve};
 `;
 
 export const DragDropContainer = styled.div`
-	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	height: ${props => props.height};
 `;
 
@@ -38,13 +42,9 @@ export const FileInputLabel = styled.section`
 `;
 
 export const MinSizeLabel = styled.section`
-	font-size: 16px;
+	${fonts.ui16}
 	color: ${colors.gray34};
-	margin-top: 24px;
-`;
-
-export const SvgContainer = styled.div`
-	margin-top: 109px;
+	margin-top: ${thickness.twentyfour};
 `;
 
 export const BorderBox = styled.div`
@@ -57,7 +57,7 @@ export const BorderBox = styled.div`
 export const ImageBox = styled.div`
 	width: 180px;
 	height: 180px;
-	margin: 7px;
+	margin: ${thickness.eight};;
 `;
 
 export const MultiSelectContainer = styled.div`
