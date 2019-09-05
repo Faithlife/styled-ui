@@ -18,8 +18,13 @@ state: {
 		onFilesSelected={files => {
 			if (files.kind === 'files') {
 				alert(files.files);
+			} else if (files.kind === 'assets') {
+				alert(JSON.stringify(files.assets));
+			} else if (files.kind === 'filter') {
+				alert(JSON.stringify(files.filterData));
 			} else {
-				alert(files.assets);
+				console.error(files);
+				alert('Invalid response');
 			}
 		}}
 		onCancel={() => alert('You called the onCancelFunction. This should be used to hide the component')}
@@ -32,6 +37,7 @@ state: {
 					{state.localizedResources.uploadFiles}
 				</Tab>
 				<Tab>{'Stock photos'}</Tab>
+				<Tab>{'Filter'}</Tab>
 			</TabList>
 			<TabPanels>
 				<TabPanel>
@@ -41,7 +47,17 @@ state: {
 					<AmberContent
 						accountId={6817140}
 						filter={'kind:"image"'}
-						footerText={'Custom footer text'}
+						footerText={'This panel selects assets'}
+						sort={'relevance'}
+						viewStyle={'tinygrid'}
+					/>
+				</TabPanel>
+				<TabPanel>
+					<AmberContent
+						accountId={6817140}
+						filter={'kind:"image"'}
+						footerText={'This panel returns a filter'}
+						pickerMode={'filter'}
 						sort={'relevance'}
 						viewStyle={'tinygrid'}
 					/>

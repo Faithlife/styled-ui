@@ -15,10 +15,15 @@ export function AmberContent({ accountId, filter, footerText, pickerMode, sort, 
 					const parsedEvent = JSON.parse(event.data);
 					if (parsedEvent.canceled) {
 						onCancel();
-					} else if (parsedEvent.assets) {
+					} else if (parsedEvent.type === 'assets') {
 						onFilesSelected({
 							assets: parsedEvent.assets,
 							kind: 'assets',
+						});
+					} else if (parsedEvent.type === 'filter') {
+						onFilesSelected({
+							filterData: parsedEvent.filterData,
+							kind: 'filter',
 						});
 					}
 				}
