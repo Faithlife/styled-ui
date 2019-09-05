@@ -10,7 +10,7 @@ export function AmberContent({ accountId, filter, viewStyle, pickerMode }) {
 
 	const handleMessage = useCallback(
 		event => {
-			if (event.origin.includes('amber.faithlife.com') && event.isTrusted) {
+			if (event.origin.endsWith('amber.faithlife.com') && event.isTrusted) {
 				if (event.data && typeof event.data === 'string') {
 					const parsedEvent = JSON.parse(event.data);
 					if (parsedEvent.canceled) {
