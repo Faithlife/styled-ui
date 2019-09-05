@@ -7,10 +7,12 @@ export function AmberContent({ accountId, filter, footerText, pickerMode, sort, 
 	const { allowMultiSelect, onCancel, onFilesSelected } = useFilePickerContext();
 
 	const amber = useAmber();
+	const amberRef = useRef();
 
 	const handleMessage = useCallback(
 		event => {
-			if (event.origin.endsWith('amber.faithlife.com') && event.isTrusted) {
+			const iframe = amberRef.current && amberRef.current.querySelector('iframe');
+			if (iframe && event.source === iframe.contentWindow && event.isTrusted) {
 				if (event.data && typeof event.data === 'string') {
 					const parsedEvent = JSON.parse(event.data);
 					if (parsedEvent.canceled) {
@@ -29,10 +31,8 @@ export function AmberContent({ accountId, filter, footerText, pickerMode, sort, 
 				}
 			}
 		},
-		[onFilesSelected, onCancel],
+		[amberRef, onFilesSelected, onCancel],
 	);
-
-	const amberRef = useRef();
 
 	useEffect(() => {
 		window.addEventListener('message', handleMessage);
