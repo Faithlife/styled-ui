@@ -18,13 +18,12 @@ state: { isChecked: false }
 
 ```react
 showSource: true
-state: { isMixed: true, isChecked: false }
+state: { isChecked: 'mixed' }
 ---
 <CheckboxDemo>
 	<Checkbox
-		onClick={() => setState({ isMixed: !state.isMixed && !state.isChecked, isChecked: state.isMixed })}
+		onClick={() => setState({ isChecked: ({ [true]: false, [false]: 'mixed', mixed: true })[state.isChecked] })}
 		isChecked={state.isChecked}
-		isMixed={state.isMixed}
 		title={'Click me'}
 		type="button"
 	/>

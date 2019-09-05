@@ -67,19 +67,20 @@ width: 9.6px;
 opacity: 1;
 }`;
 
-export const isMixedStyles = `
+export const isMixedStyles = props => `
 display: flex;
 justify-content: center;
 align-items: center;
 
 &:after {
-	top: -12px;
+	display: block;
+	width: 10px;
+	height: 2px;
 	position: absolute;
-	font-size: 24px;
-	font-weight: bold;
-	left: 2px;
-	background-image: none;
-	content: '-';
+	top: 5px;
+	left: 1px;
+	background: ${props.theme.primary};
+	content: '';
 	opacity: 1;
 }`;
 
@@ -102,7 +103,8 @@ export const CheckedIndicator = styled.div`
 		opacity: 0;
 	}
 
-	${props => (props.isMixed ? isMixedStyles : props.isChecked ? isCheckedStyles : '')};
+	${props =>
+		props.isChecked === 'mixed' ? isMixedStyles(props) : props.isChecked ? isCheckedStyles : ''};
 `;
 
 export const Label = styled.div`
