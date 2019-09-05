@@ -42,3 +42,4 @@ export {
 } from './dropdown';
 export { Listbox, ListboxToggle, ListboxMenu, ListItem } from './listbox';
 export { ParameterSelect, ParameterInputBox, ParameterSentence } from './parameter-sentence';
+export { FilePicker, AmberContent, FileUpload } from './file-picker';

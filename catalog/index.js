@@ -52,6 +52,9 @@ import {
 	ParameterSelect,
 	ParameterInputBox,
 	ParameterSentence,
+	FilePicker,
+	FileUpload,
+	AmberContent,
 } from '../components/main';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
@@ -873,6 +876,35 @@ const components = [
 				title: 'Parameter Sentence Documentation',
 				content: pageLoader(() => import('./parameter-sentence/documentation.md')),
 				imports: { ParameterSentence, ParameterSelect, ParameterInputBox, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'File Picker',
+		pages: [
+			{
+				path: '/file-picker/variations',
+				title: 'File Picker',
+				content: pageLoader(() => import('./file-picker/variations.md')),
+				imports: {
+					FilePicker,
+					FilePickerDemo: styled.div`
+						height: 600px;
+					`,
+					TabManager,
+					TabList,
+					Tab,
+					TabPanel,
+					TabPanels,
+					FileUpload,
+					AmberContent,
+				},
+			},
+			{
+				path: '/file-picker/documentation',
+				title: 'File Picker Documentation',
+				content: pageLoader(() => import('./file-picker/documentation.md')),
+				imports: { FilePicker, AmberContent, DocgenTable },
 			},
 		],
 	},
