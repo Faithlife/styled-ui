@@ -14,6 +14,22 @@ state: { isChecked: false }
 </CheckboxDemo>
 ```
 
+### Mixed value
+
+```react
+showSource: true
+state: { isChecked: 'mixed' }
+---
+<CheckboxDemo>
+	<Checkbox
+		onClick={() => setState({ isChecked: ({ [true]: false, [false]: 'mixed', mixed: true })[state.isChecked] })}
+		isChecked={state.isChecked}
+		title={'Click me'}
+		type="button"
+	/>
+</CheckboxDemo>
+```
+
 ### Custom theme
 
 ```react

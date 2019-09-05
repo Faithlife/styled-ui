@@ -12,7 +12,7 @@ export class Checkbox extends Component {
 		onClick: PropTypes.func.isRequired,
 		onMouseUp: PropTypes.func,
 		title: PropTypes.string,
-		isChecked: PropTypes.bool,
+		isChecked: PropTypes.oneOf([true, false, 'mixed']),
 		theme: PropTypes.shape({
 			primary: PropTypes.string,
 			border: PropTypes.string,

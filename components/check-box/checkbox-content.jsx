@@ -17,6 +17,6 @@ export function CheckboxContent({ isChecked, title, children, disabled }) {
 CheckboxContent.propTypes = {
 	children: PropTypes.node,
 	title: PropTypes.string,
-	isChecked: PropTypes.bool,
+	isChecked: PropTypes.oneOf([true, false, 'mixed']),
 	disabled: PropTypes.bool,
 };
