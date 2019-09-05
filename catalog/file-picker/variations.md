@@ -15,15 +15,15 @@ state: {
 ---
 <FilePickerDemo>
 	<FilePicker
-		onFilesSelected={files => { 
-			if(files.kind ==='files') {
-				alert( files.files ); 
+		onFilesSelected={files => {
+			if (files.kind === 'files') {
+				alert(files.files);
 			} else {
-				alert( files.assets );
+				alert(files.assets);
 			}
 		}}
 		onCancel={() => alert('You called the onCancelFunction. This should be used to hide the component')}
-		onImageLoadError={imageSource => alert( `${imageSource} failed to load` )}
+		onImageLoadError={imageSource => alert(`${imageSource} failed to load`)}
 		allowMultiSelect
 	>
 		<TabManager>
@@ -35,7 +35,7 @@ state: {
 			</TabList>
 			<TabPanels>
 				<TabPanel>
-					<FileUpload/>
+					<FileUpload />
 				</TabPanel>
 				<TabPanel>
 					<AmberContent

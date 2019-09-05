@@ -12,4 +12,4 @@ noSource: true
 <DocgenTable component={AmberContent} />
 ```
 
-For more information on the parameters passed into an imbeded Amber lightbox visit [the AssetDesk documentation](https://git.faithlife.dev/Logos/AssetDesk/blob/master/docs/EmbeddingAnAmberPicker.md)
+For more information on the parameters passed into an embedded Amber lightbox visit [the AssetDesk documentation](https://git.faithlife.dev/Logos/AssetDesk/blob/master/docs/EmbeddingAnAmberPicker.md)
