@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useFilePickerContext } from './file-picker-helpers';
 import * as Styled from './styled';
 
-export function AmberContent({ accountId, filter, viewStyle, pickerMode }) {
+export function AmberContent({ accountId, filter, pickerMode, sort, viewStyle }) {
 	const { allowMultiSelect, onCancel, onFilesSelected } = useFilePickerContext();
 
 	const amber = useAmber();
@@ -40,29 +40,32 @@ export function AmberContent({ accountId, filter, viewStyle, pickerMode }) {
 	useEffect(() => {
 		if (amberRef.current && amber) {
 			amber.embedded.load({
-				url: '/embed/',
+				accountId,
 				container: amberRef.current,
-				accountId: accountId,
-				multiSelect: allowMultiSelect,
-				viewStyle,
-				pickerMode,
 				filter,
+				multiSelect: allowMultiSelect,
+				pickerMode,
+				sort,
+				url: '/embed/',
+				viewStyle,
 			});
 		}
-	}, [allowMultiSelect, filter, accountId, viewStyle, pickerMode, amber]);
+	}, [accountId, allowMultiSelect, amber, filter, pickerMode, sort, viewStyle]);
 
 	return <Styled.Tab ref={amberRef} />;
 }
 
 AmberContent.propTypes = {
-	/** The id of the group who's files will be shown */
+	/** The id of the account whose assets will be shown */
 	accountId: PropTypes.number.isRequired,
-	/** optional way to filter files */
+	/** Option to filter assets */
 	filter: PropTypes.string,
-	/** optional way to chose layout of the Amber embeded view */
-	viewStyle: PropTypes.string,
-	/** optional way to control the data passed back from amber picker, options are file, asset and filter */
+	/** Optional to control the type of data passed back. Values are "file", "asset" and "filter". */
 	pickerMode: PropTypes.string,
+	/** Optional to set the sorting of the assets. Values are "relevance" or an asset field. */
+	sort: PropTypes.string,
+	/** Optional to set the layout of the assets */
+	viewStyle: PropTypes.string,
 };
 
 AmberContent.defaultProps = {
