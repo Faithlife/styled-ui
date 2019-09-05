@@ -13,7 +13,7 @@ import * as Styled from './styled';
 export class DatePickerInput extends PureComponent {
 	static propTypes = {
 		defaultSelectedDate: PropTypes.instanceOf(Date),
-		/** Functions that operate on a JS Date obejct.
+		/** Functions that operate on a JS Date object.
 		 * The following functions must be provided:
 		 *
 		 * startOfWeek, startOfMonth, endOfWeek, endOfMonth, getYear, getMonth, getDate, addWeeks, addMonths, subMonths, isBefore, format, isValid
