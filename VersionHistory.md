@@ -1,5 +1,11 @@
 # Changelog
 
+### 5.13.0
+
+- Add FilePicker component
+- Add support for `mixed` state to `CheckBox`
+- `DatePicker` no longer updates the selected date if the input is invalid
+
 ### 5.12.5
 
 - Fix width prop not being passed through in `ParameterSelect`
