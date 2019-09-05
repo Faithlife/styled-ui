@@ -41,8 +41,9 @@ state: {
 					<AmberContent
 						accountId={6817140}
 						filter={'kind:"image"'}
-						viewStyle={'tinygrid'}
+						footerText={'Custom footer text'}
 						sort={'relevance'}
+						viewStyle={'tinygrid'}
 					/>
 				</TabPanel>
 			</TabPanels>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useFilePickerContext } from './file-picker-helpers';
 import * as Styled from './styled';
 
-export function AmberContent({ accountId, filter, pickerMode, sort, viewStyle }) {
+export function AmberContent({ accountId, filter, footerText, pickerMode, sort, viewStyle }) {
 	const { allowMultiSelect, onCancel, onFilesSelected } = useFilePickerContext();
 
 	const amber = useAmber();
@@ -43,6 +43,7 @@ export function AmberContent({ accountId, filter, pickerMode, sort, viewStyle })
 				accountId,
 				container: amberRef.current,
 				filter,
+				footerText,
 				multiSelect: allowMultiSelect,
 				pickerMode,
 				sort,
@@ -50,7 +51,7 @@ export function AmberContent({ accountId, filter, pickerMode, sort, viewStyle })
 				viewStyle,
 			});
 		}
-	}, [accountId, allowMultiSelect, amber, filter, pickerMode, sort, viewStyle]);
+	}, [accountId, allowMultiSelect, amber, filter, footerText, pickerMode, sort, viewStyle]);
 
 	return <Styled.Tab ref={amberRef} />;
 }
@@ -60,6 +61,8 @@ AmberContent.propTypes = {
 	accountId: PropTypes.number.isRequired,
 	/** Option to filter assets */
 	filter: PropTypes.string,
+	/** Option to set footer text */
+	footerText: PropTypes.string,
 	/** Optional to control the type of data passed back. Values are "file", "asset" and "filter". */
 	pickerMode: PropTypes.string,
 	/** Optional to set the sorting of the assets. Values are "relevance" or an asset field. */
