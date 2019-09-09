@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import styled from 'styled-components';
 import { InferredSelect, InferredText, Select } from '../../../components/text-input-v2';
-import { Button } from '../../../components/main';
+import { Button } from '../../../index';
 
 const DemoContainer = styled.div`
 	&& > * {

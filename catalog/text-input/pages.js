@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { InferredTypeahead, Typeahead } from '../../components/text-input';
 import { Select, CreatableSelect } from '../../components/text-input-v2';
 import { DocgenTable } from '../docgen-table';
-import { Bootstrap, Button, Input, Modal } from '../../components/main';
+import { Bootstrap, Button, Input, Modal } from '../../index';
 import { InferredTextFocusDemo, InferredSelectFocusDemo, AsyncSelectDemo } from './demos';
 
 export const textInputPages = {

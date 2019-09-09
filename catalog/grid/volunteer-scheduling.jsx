@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-enterprise';
-import { Button } from '../../components/main';
+import { Button } from '../../index';
 import { getNextVolunteer, schedule } from './volunteers';
 
 const availability = {

@@ -55,7 +55,12 @@ import {
 	FilePicker,
 	FileUpload,
 	AmberContent,
-} from '../components/main';
+	Box,
+	Stack,
+	Text,
+	Paragraph,
+	theme,
+} from '../index';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
@@ -105,7 +110,45 @@ function delayPromise(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
 }
 
+const ThemeList = ({ items, render }) => {
+	return <>{[...Object.entries(items(theme))].map(render)}</>;
+};
+
 const components = [
+	{
+		title: 'Layout Primitives',
+		pages: [
+			{
+				path: '/layout/box',
+				title: 'Box',
+				content: pageLoader(() => import('./layout/box.md')),
+				imports: {
+					Box,
+				},
+			},
+			{
+				path: '/layout/stack',
+				title: 'Stack',
+				content: pageLoader(() => import('./layout/stack.md')),
+				imports: {
+					Box,
+					Stack,
+				},
+			},
+			{
+				path: '/layout/text',
+				title: 'Text',
+				content: pageLoader(() => import('./layout/Text.md')),
+				imports: {
+					Box,
+					Stack,
+					Text,
+					Paragraph,
+					ThemeList,
+				},
+			},
+		],
+	},
 	{
 		title: 'Accordion',
 		pages: [

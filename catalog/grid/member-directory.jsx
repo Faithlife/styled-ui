@@ -4,7 +4,7 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-enterprise';
 import styled from 'styled-components';
 import debounce from 'lodash.debounce';
-import { Button, Popover, PopoverReference, PopoverManager } from '../../components/main';
+import { Button, Popover, PopoverReference, PopoverManager } from '../../index';
 import { KebabVertical } from '../../components/icons';
 import { colors } from '../../components/shared-styles';
 import members from './members.json';

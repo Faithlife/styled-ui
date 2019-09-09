@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { PopoverManager, PopoverReference, Popover } from '../main';
+import { PopoverManager, PopoverReference, Popover } from '../popover';
 import { PlacementOptionsProps } from '../popover/popper-helpers';
 import { Calendar as CalendarIcon } from '../icons';
 import { Input } from '../input';

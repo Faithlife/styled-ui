@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar } from '../avatar';
-import { Button } from '../../main';
+import { Button } from '../../button';
 import { Tooltip } from '../../popover';
 import * as Styled from '../styled';
 
