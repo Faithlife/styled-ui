@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.14.0
+
+- Add new styled-system based layout and text primitives `Box`, `Stack`, `Paragraph`, `Text`.
+- Add theme.
+
 ### 5.13.0
 
 - Add FilePicker component
