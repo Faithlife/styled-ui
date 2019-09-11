@@ -1,108 +1,99 @@
-import React, { PureComponent } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { system, variant, layout, textStyle, border } from 'styled-system';
 import systemPropTypes from '@styled-system/prop-types';
 import { theme } from '../../theme';
 import { common, typography } from '../../theme/system';
-import { forwardClassRef, resetStyles, getVariation } from '../utils';
+import { resetStyles, getVariation } from '../utils';
 import { inputColors, colors } from '../shared-styles';
 
-/** Standard text input with no validation */
-export const Input = forwardClassRef(
-	class Input extends PureComponent {
-		static propTypes = {
-			value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-			placeholder: PropTypes.string,
-			type: PropTypes.string,
-			readOnly: PropTypes.bool,
-			autoFocus: PropTypes.bool,
-			disabled: PropTypes.bool,
-			onChange: PropTypes.func,
-			onClick: PropTypes.func,
-			onEnter: PropTypes.func,
-			/** Enum with values: 'small', 'medium', 'large', and 'inline' */
-			variant: PropTypes.oneOf(['small', 'medium', 'large', 'inline']),
-			/** Medium variation (deprecated in favor of the variant prop) */
-			medium: PropTypes.bool,
-			/** Small variation (deprecated in favor of the variant prop) */
-			small: PropTypes.bool,
-			/** Large variation (deprecated in favor of the variant prop) */
-			large: PropTypes.bool,
-			size: PropTypes.number,
-			/** Inline input variation */
-			inline: PropTypes.bool,
-			/** Textarea input variation */
-			textarea: PropTypes.bool,
-			...common.propTypes,
-			...typography.propTypes,
-			...systemPropTypes.layout,
-			...systemPropTypes.border,
-			textStyle: PropTypes.string,
-		};
+const Input = React.forwardRef(function Input(props, ref) {
+	const {
+		value,
+		placeholder,
+		readOnly,
+		type,
+		autoFocus,
+		onClick,
+		variant,
+		small,
+		medium,
+		large,
+		inline,
+		disabled,
+		onEnter,
+		textarea,
+		forwardedRef, // eslint-disable-line react/prop-types
+		...inputProps
+	} = props;
 
-		static defaultProps = {
-			theme: theme,
-		};
-
-		handleChange = () => {
-			const { onChange } = this.props;
-			if (onChange) {
-				onChange();
-			}
-		};
-
-		handleKeyPress = e => {
-			const { onEnter } = this.props;
+	const handleKeyPress = useCallback(
+		e => {
 			if (onEnter && e.key === 'Enter') {
 				onEnter();
 			}
-		};
+		},
+		[onEnter],
+	);
 
-		render() {
-			const {
-				value,
-				placeholder,
-				readOnly,
-				type,
-				autoFocus,
-				onClick,
-				variant,
-				small,
-				medium,
-				large,
-				inline,
-				disabled,
-				onEnter,
-				textarea,
-				forwardedRef, // eslint-disable-line react/prop-types
-				...inputProps
-			} = this.props;
+	const variation = getVariation(variant, { small, medium, large, inline, none: true });
 
-			const variation = getVariation(variant, { small, medium, large, inline, none: true });
+	return (
+		<StyledInput
+			as={textarea && 'textarea'}
+			type={type || 'text'}
+			autoFocus={autoFocus}
+			readOnly={readOnly}
+			variant={variation}
+			disabled={disabled}
+			value={value || ''}
+			placeholder={placeholder || ''}
+			onClick={onClick}
+			onKeyPress={handleKeyPress}
+			ref={ref || forwardedRef}
+			textStyle={variation === 'large' ? 'ui.18' : 'ui.16'}
+			underlineColor="blue4"
+			{...inputProps}
+		/>
+	);
+});
 
-			return (
-				<StyledInput
-					as={textarea && 'textarea'}
-					type={type || 'text'}
-					autoFocus={autoFocus}
-					readOnly={readOnly}
-					variant={variation}
-					disabled={disabled}
-					value={value || ''}
-					placeholder={placeholder || ''}
-					onChange={this.handleChange}
-					onClick={onClick}
-					onKeyPress={this.handleKeyPress}
-					ref={forwardedRef}
-					textStyle={variation === 'large' ? 'ui.18' : 'ui.16'}
-					underlineColor="blue4"
-					{...inputProps}
-				/>
-			);
-		}
-	},
-);
+Input.defaultProps = {
+	theme,
+};
+
+Input.propTypes = {
+	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	placeholder: PropTypes.string,
+	type: PropTypes.string,
+	readOnly: PropTypes.bool,
+	autoFocus: PropTypes.bool,
+	disabled: PropTypes.bool,
+	onChange: PropTypes.func,
+	onClick: PropTypes.func,
+	onEnter: PropTypes.func,
+	/** Enum with values: 'small', 'medium', 'large', and 'inline' */
+	variant: PropTypes.oneOf(['small', 'medium', 'large', 'inline']),
+	/** Medium variation (deprecated in favor of the variant prop) */
+	medium: PropTypes.bool,
+	/** Small variation (deprecated in favor of the variant prop) */
+	small: PropTypes.bool,
+	/** Large variation (deprecated in favor of the variant prop) */
+	large: PropTypes.bool,
+	size: PropTypes.number,
+	/** Inline input variation */
+	inline: PropTypes.bool,
+	/** Textarea input variation */
+	textarea: PropTypes.bool,
+	...common.propTypes,
+	...typography.propTypes,
+	...systemPropTypes.layout,
+	...systemPropTypes.border,
+	textStyle: PropTypes.string,
+};
+
+export { Input };
 
 const StyledInput = styled.input`
 	${resetStyles};
