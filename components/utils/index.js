@@ -10,6 +10,15 @@ export {
 export { FocusAwayHandler } from './focus-away-handler';
 export { filterChildProps } from './filter-props';
 
+export function getVariation(variant, obj) {
+	if (variant) {
+		return variant;
+	}
+	const match = [...Object.entries(obj)].find(entry => entry[1]);
+
+	return match ? match[0] : null;
+}
+
 const componentCache = new WeakMap();
 
 export function applyVariations(component, variationMap, props) {

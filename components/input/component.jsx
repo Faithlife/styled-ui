@@ -1,7 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { applyVariations, forwardClassRef } from '../utils';
-import * as Styled from './styled';
+import styled, { css } from 'styled-components';
+import { system, variant, layout, textStyle, border } from 'styled-system';
+import systemPropTypes from '@styled-system/prop-types';
+import { theme } from '../../theme';
+import { common, typography } from '../../theme/system';
+import { forwardClassRef, resetStyles, getVariation } from '../utils';
+import { inputColors, colors } from '../shared-styles';
 
 /** Standard text input with no validation */
 export const Input = forwardClassRef(
@@ -16,26 +21,28 @@ export const Input = forwardClassRef(
 			onChange: PropTypes.func,
 			onClick: PropTypes.func,
 			onEnter: PropTypes.func,
-			/** Medium variation */
+			/** Enum with values: 'small', 'medium', 'large', and 'inline' */
+			variant: PropTypes.oneOf(['small', 'medium', 'large', 'inline']),
+			/** Medium variation (deprecated in favor of the variant prop) */
 			medium: PropTypes.bool,
-			/** Small variation */
+			/** Small variation (deprecated in favor of the variant prop) */
 			small: PropTypes.bool,
-			/** Large variation */
+			/** Large variation (deprecated in favor of the variant prop) */
 			large: PropTypes.bool,
-			/** Height only applies to the Textarea variation */
-			styleOverrides: PropTypes.shape({
-				width: PropTypes.string,
-				height: PropTypes.string,
-			}),
 			size: PropTypes.number,
 			/** Inline input variation */
 			inline: PropTypes.bool,
 			/** Textarea input variation */
 			textarea: PropTypes.bool,
+			...common.propTypes,
+			...typography.propTypes,
+			...systemPropTypes.layout,
+			...systemPropTypes.border,
+			textStyle: PropTypes.string,
 		};
 
 		static defaultProps = {
-			styleOverrides: {},
+			theme: theme,
 		};
 
 		handleChange = () => {
@@ -60,6 +67,11 @@ export const Input = forwardClassRef(
 				type,
 				autoFocus,
 				onClick,
+				variant,
+				small,
+				medium,
+				large,
+				inline,
 				disabled,
 				onEnter,
 				textarea,
@@ -67,18 +79,15 @@ export const Input = forwardClassRef(
 				...inputProps
 			} = this.props;
 
-			const { component: MappedStyledComponent, filteredProps } = applyVariations(
-				Styled.Input,
-				Styled.variationMap,
-				inputProps,
-			);
+			const variation = getVariation(variant, { small, medium, large, inline, none: true });
 
 			return (
-				<MappedStyledComponent
+				<StyledInput
 					as={textarea && 'textarea'}
 					type={type || 'text'}
 					autoFocus={autoFocus}
 					readOnly={readOnly}
+					variant={variation}
 					disabled={disabled}
 					value={value || ''}
 					placeholder={placeholder || ''}
@@ -86,9 +95,95 @@ export const Input = forwardClassRef(
 					onClick={onClick}
 					onKeyPress={this.handleKeyPress}
 					ref={forwardedRef}
-					{...filteredProps || {}}
+					textStyle={variation === 'large' ? 'ui.18' : 'ui.16'}
+					underlineColor="blue4"
+					{...inputProps}
 				/>
 			);
 		}
 	},
 );
+
+const StyledInput = styled.input`
+	${resetStyles};
+	${textStyle};
+
+	height: 32px;
+	padding: ${({ theme }) => theme.space[3]}px;
+
+${({ theme, styleOverrides = {} }) => css`
+	border: 1px solid;
+	border-radius: ${theme.radii[1]};
+	border-color: ${theme.colors.inputBorderColor};
+
+	${'height' in styleOverrides &&
+		css`
+			height: ${styleOverrides.height};
+		`}
+
+	${'width' in styleOverrides &&
+		css`
+			width: ${styleOverrides.width};
+		`}
+`}
+
+	&:focus {
+		border-color: ${inputColors.inputFocusedBorderColor};
+		box-shadow: 0 0 0 2px ${inputColors.inputFocusedShadowColor};
+		outline: 0;
+		${({ variant }) =>
+			variant === 'inline' &&
+			system({ underlineColor: { property: 'border-color', scale: 'colors' } })}
+	}
+
+	&:disabled {
+		opacity: 0.5;
+	}
+
+	&:read-only {
+		background: ${colors.gray8};
+	}
+
+	${({ theme }) =>
+		variant({
+			variants: {
+				small: {
+					padding: '8px',
+					height: '32px',
+				},
+				medium: {
+					padding: '12px',
+					height: '40px',
+				},
+				large: {
+					padding: '16px',
+					height: '56px',
+				},
+				inline: {
+					backgroundColor: 'transparent',
+					border: 'none',
+					boxShadow: 'none',
+					borderRadius: '0px',
+					padding: '0px',
+					borderBottom: '2px solid',
+					borderColor: theme.colors.blue4,
+					height: '20px',
+					paddingBottom: '4px',
+					lineHeight: 1,
+					'&:focus': {
+						boxShadow: 'none',
+						outline: '0',
+					},
+				},
+			},
+		})}
+
+	${({ variant }) =>
+		variant === 'inline' &&
+		system({ underlineColor: { property: 'border-color', scale: 'colors' } })}
+
+	${common};
+	${typography};
+	${layout};
+	${border};
+`;
