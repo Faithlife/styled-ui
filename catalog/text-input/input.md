@@ -31,17 +31,6 @@ state: { value: 'Washington' }
 </InputSpacer>
 ```
 
-### Inline
-
-```react
-state: { value: 'Washington' }
----
-<InputSpacer>
-	<Input inline value={state.value} onChange={event => setState({ value: event.target.value })} />
-	<Button primary>Search</Button>
-</InputSpacer>
-```
-
 ### Textarea
 
 ```react
