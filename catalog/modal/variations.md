@@ -288,6 +288,7 @@ state: { modal: false, value: '' }
 			contentPaddingTop: 0,
 			contentPaddingBottom: 0,
 			contentPaddingHorizontal: 0,
+			zIndex: 1050,
 		}}
 		withoutFooter
 	>
