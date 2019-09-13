@@ -284,15 +284,11 @@ state: { modal: false, value: '' }
 		container="body"
 		onClose={() => setState({ modal: false })}
 		title="Modal with full width content"
-		styleOverrides={{
-			contentPaddingTop: 0,
-			contentPaddingBottom: 0,
-			contentPaddingHorizontal: 0,
-			zIndex: 1050,
-		}}
 		withoutFooter
 	>
-		<img src="https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201" alt="Faithlife campus" style={{ display: 'block' }} />
+		<ModalContent padding={0}>
+			<img src="https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201" alt="Faithlife campus" style={{ display: 'block' }} />
+		</ModalContent>
 	</Modal>
 </div>
 ```

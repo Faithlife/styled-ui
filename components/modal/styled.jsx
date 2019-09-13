@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { thickness, fonts, colors, mediaSizes } from '../shared-styles';
 import { resetStyles } from '../utils';
+import { Box } from '../Box';
 
 export const Label = styled.label`
 	display: block;
@@ -28,28 +29,12 @@ export const Modal = styled.div`
 	}
 `;
 
-export const ModalContent = styled.div`
+export const ModalContent = styled(Box)`
 	max-width: 100%;
 	max-height: 80%;
 	overflow-x: hidden;
 	overflow-y: auto;
 	overflow-wrap: break-word;
-	padding-top: ${props =>
-		props.styleOverrides.contentPaddingTop !== undefined
-			? props.styleOverrides.contentPaddingTop
-			: thickness.twelve};
-	padding-left: ${props =>
-		props.styleOverrides.contentPaddingHorizontal !== undefined
-			? props.styleOverrides.contentPaddingHorizontal
-			: thickness.twentyfour};
-	padding-right: ${props =>
-		props.styleOverrides.contentPaddingHorizontal !== undefined
-			? props.styleOverrides.contentPaddingHorizontal
-			: thickness.twentyfour};
-	padding-bottom: ${props =>
-		props.styleOverrides.contentPaddingBottom !== undefined
-			? props.styleOverrides.contentPaddingBottom
-			: thickness.twentyfour};
 `;
 
 export const ModalHeader = styled.div`
