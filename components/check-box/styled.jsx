@@ -1,12 +1,12 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { resetStyles } from '../utils';
 
 export const CheckboxDiv = styled.div`
 	position: absolute;
 	border: solid 1px ${props => props.theme.border};
 	border-radius: 3px;
-	width: 14px;
-	height: 14px;
+	width: 16px;
+	height: 16px;
 	background: transparent;
 
 	${props =>
@@ -56,40 +56,39 @@ export const CheckboxContainer = styled.button`
 	}
 `;
 
-export const isCheckedStyles = `&:after {
-background-repeat: no-repeat;
-content: '';
-position: absolute;
-top: 1.5px;
-left: 1.5px;
-height: 9.6px;
-width: 9.6px;
-opacity: 1;
-}`;
+export const isCheckedStyles = css`
+	&:after {
+		background-repeat: no-repeat;
+		content: '';
+		position: absolute;
+		top: 1px;
+		left: 1px;
+		bottom: 1px;
+		right: 1px;
+		opacity: 1;
+	}
+`;
 
-export const isMixedStyles = props => `
-display: flex;
-justify-content: center;
-align-items: center;
+export const isMixedStyles = css`
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-&:after {
-	display: block;
-	width: 10px;
-	height: 2px;
-	position: absolute;
-	top: 5px;
-	left: 1px;
-	background: ${props.theme.primary};
-	content: '';
-	opacity: 1;
-}`;
+	&:after {
+		width: 10px;
+		height: 2px;
+		background: ${props => props.theme.primary};
+		content: '';
+		opacity: 1;
+	}
+`;
 
 export const CheckedIndicator = styled.div`
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 14px;
-	height: 14px;
+	width: 100%;
+  height: 100%;
 	cursor: pointer;
 
 	${props => (props.disabled ? 'cursor: default;' : '')};
@@ -103,8 +102,7 @@ export const CheckedIndicator = styled.div`
 		opacity: 0;
 	}
 
-	${props =>
-		props.isChecked === 'mixed' ? isMixedStyles(props) : props.isChecked ? isCheckedStyles : ''};
+	${props => (props.isChecked === 'mixed' ? isMixedStyles : props.isChecked ? isCheckedStyles : '')};
 `;
 
 export const Label = styled.div`
