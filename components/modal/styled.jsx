@@ -15,7 +15,6 @@ export const Modal = styled.div`
 	height: fit-content;
 	max-width: calc(100% - ${thickness.sixteen});
 	max-height: 80%;
-	padding: ${thickness.twentyfour};
 	background-color: ${props => props.theme.background};
 	border-radius: 3px;
 
@@ -35,6 +34,22 @@ export const ModalContent = styled.div`
 	overflow-x: hidden;
 	overflow-y: auto;
 	overflow-wrap: break-word;
+	padding-top: ${props =>
+		props.styleOverrides.contentPaddingTop !== undefined
+			? props.styleOverrides.contentPaddingTop
+			: thickness.twelve};
+	padding-left: ${props =>
+		props.styleOverrides.contentPaddingHorizontal !== undefined
+			? props.styleOverrides.contentPaddingHorizontal
+			: thickness.twentyfour};
+	padding-right: ${props =>
+		props.styleOverrides.contentPaddingHorizontal !== undefined
+			? props.styleOverrides.contentPaddingHorizontal
+			: thickness.twentyfour};
+	padding-bottom: ${props =>
+		props.styleOverrides.contentPaddingBottom !== undefined
+			? props.styleOverrides.contentPaddingBottom
+			: thickness.twentyfour};
 `;
 
 export const ModalHeader = styled.div`
@@ -43,8 +58,8 @@ export const ModalHeader = styled.div`
 	justify-content: center;
 	align-items: center;
 	width: 100%;
+	padding: ${thickness.twentyfour};
 	padding-bottom: ${thickness.sixteen};
-	margin-bottom: ${thickness.twelve};
 	${props =>
 		props.styleOverrides.bottomBorder
 			? props.styleOverrides.bottomBorder
@@ -75,7 +90,8 @@ export const ModalSubtitle = styled.div`
 export const ModalFooter = styled.div`
 	display: flex;
 	justify-content: flex-end;
-	margin-top: ${thickness.twentyfour};
+	padding: ${thickness.twentyfour};
+	padding-top: 0;
 	width: 100%;
 `;
 

@@ -270,3 +270,28 @@ state: { modal: false, value: '' }
 	</Modal>
 </div>
 ```
+
+## Modal with custom content padding
+
+```react
+showSource: true
+state: { modal: false, value: '' }
+---
+<div>
+	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Modal
+		isOpen={state.modal}
+		container="body"
+		onClose={() => setState({ modal: false })}
+		title="Modal with full width content"
+		styleOverrides={{
+			contentPaddingTop: 0,
+			contentPaddingBottom: 0,
+			contentPaddingHorizontal: 0,
+		}}
+		withoutFooter
+	>
+		<img src="https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201" alt="Faithlife campus" style={{ display: 'block' }} />
+	</Modal>
+</div>
+```

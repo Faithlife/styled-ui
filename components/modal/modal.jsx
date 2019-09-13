@@ -29,6 +29,9 @@ export class Modal extends React.Component {
 		styleOverrides: PropTypes.shape({
 			bottomBorder: PropTypes.string,
 			zIndex: PropTypes.number,
+			contentPaddingTop: PropTypes.number,
+			contentPaddingBottom: PropTypes.number,
+			contentPaddingHorizontal: PropTypes.number,
 		}),
 		/** Values for rendering an FL standard footer */
 		footerProps: PropTypes.shape({
@@ -139,7 +142,7 @@ export class Modal extends React.Component {
 							onClose={onClose}
 							styleOverrides={styleOverrides}
 						/>
-						<Styled.ModalContent> {children} </Styled.ModalContent>
+						<Styled.ModalContent styleOverrides={styleOverrides}>{children}</Styled.ModalContent>
 						{!withoutFooter &&
 							(renderFooter ? (
 								renderFooter()
