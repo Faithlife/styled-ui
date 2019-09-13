@@ -1,5 +1,13 @@
 # Changelog
 
+### 5.15.0
+
+- Accept styled-system props in `Input` component.
+- Adjust sizing of `CheckBox` to a default of 16x16.
+- Export `DefaultThemeProvider`.
+- Deprecate `Input inline`.
+- Simplify `Collapse`, and accept styled-system props.
+
 ### 5.14.0
 
 - Add new styled-system based layout and text primitives `Box`, `Stack`, `Paragraph`, `Text`.
