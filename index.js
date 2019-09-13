@@ -58,3 +58,4 @@ export { Stack } from './components/Stack';
 export { Text } from './components/Text';
 export { Paragraph } from './components/Paragraph';
 export { theme } from './theme';
+export { DefaultThemeProvider } from './components/DefaultThemeProvider';
