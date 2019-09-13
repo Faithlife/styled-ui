@@ -39,6 +39,12 @@ const Input = React.forwardRef(function Input(props, ref) {
 
 	const variation = getVariation(variant, { small, medium, large, inline, none: true });
 
+	if (process.env.NODE_ENV !== 'production' && variation === 'inline') {
+		console.warn(
+			'Warning: The `inline` variation has been deprecated, and will be removed in a future release.',
+		);
+	}
+
 	return (
 		<StyledInput
 			as={textarea && 'textarea'}

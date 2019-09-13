@@ -7,8 +7,7 @@ export const BootstrapContainer = ({ children, styles }) => {
 	useEffect(() => {
 		if (process.env.NODE_ENV !== 'production') {
 			console.warn(
-				'Warning: You are using a deprecated Bootstrap element. \n',
-				'Styled-UI has replaced all Bootstrap elements: https://faithlife.github.io/styled-ui/#/ \n',
+				'Warning: You are using a deprecated Bootstrap element that will be removed in the next major release of Styled UI.',
 			);
 		}
 	}, []);
