@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { thickness, fonts, colors, mediaSizes } from '../shared-styles';
 import { resetStyles } from '../utils';
+import { Box } from '../Box';
 
 export const Label = styled.label`
 	display: block;
@@ -15,7 +16,6 @@ export const Modal = styled.div`
 	height: fit-content;
 	max-width: calc(100% - ${thickness.sixteen});
 	max-height: 80%;
-	padding: ${thickness.twentyfour};
 	background-color: ${props => props.theme.background};
 	border-radius: 3px;
 
@@ -29,7 +29,7 @@ export const Modal = styled.div`
 	}
 `;
 
-export const ModalContent = styled.div`
+export const ModalContent = styled(Box)`
 	max-width: 100%;
 	max-height: 80%;
 	overflow-x: hidden;
@@ -43,8 +43,8 @@ export const ModalHeader = styled.div`
 	justify-content: center;
 	align-items: center;
 	width: 100%;
+	padding: ${thickness.twentyfour};
 	padding-bottom: ${thickness.sixteen};
-	margin-bottom: ${thickness.twelve};
 	${props =>
 		props.styleOverrides.bottomBorder
 			? props.styleOverrides.bottomBorder
@@ -75,7 +75,8 @@ export const ModalSubtitle = styled.div`
 export const ModalFooter = styled.div`
 	display: flex;
 	justify-content: flex-end;
-	margin-top: ${thickness.twentyfour};
+	padding: ${thickness.twentyfour};
+	padding-top: 0;
 	width: 100%;
 `;
 

@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { debouncedResize } from '../utils';
 import { ModalBackdrop } from '../modal-backdrop';
 import { ModalHeader } from './modal-header';
+import { ModalContent } from './modal-content';
 import { DefaultModalFooter } from './default-modal-footer';
 import * as Styled from './styled';
 
@@ -122,6 +123,9 @@ export class Modal extends React.Component {
 			zIndex: styleOverrides.zIndex,
 		};
 
+		const doesChildrenIncludeModalContent =
+			React.Children.count(children) === 1 && React.Children.only(children).type === ModalContent;
+
 		return (
 			<ThemeProvider theme={{ ...theme, verticalButtons }}>
 				<ModalBackdrop onClose={onClose} styleOverrides={backdropStyleOverrides}>
@@ -139,7 +143,13 @@ export class Modal extends React.Component {
 							onClose={onClose}
 							styleOverrides={styleOverrides}
 						/>
-						<Styled.ModalContent> {children} </Styled.ModalContent>
+						{doesChildrenIncludeModalContent ? (
+							children
+						) : (
+							<ModalContent paddingTop={12} paddingLeft={24} paddingRight={24} paddingBottom={24}>
+								{children}
+							</ModalContent>
+						)}
 						{!withoutFooter &&
 							(renderFooter ? (
 								renderFooter()
