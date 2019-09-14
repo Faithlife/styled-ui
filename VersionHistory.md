@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.16.0
+
+- Export `ModalContent` component, accept styled-system props.
+
 ### 5.15.0
 
 - Accept styled-system props in `Input` component.
