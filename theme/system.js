@@ -1,3 +1,4 @@
+import { css } from 'styled-components';
 import * as styledSystem from 'styled-system';
 import PropTypes from 'prop-types';
 import systemPropTypes from '@styled-system/prop-types';
@@ -45,10 +46,6 @@ typography.propTypes = {
 };
 
 export const box = compose(
-	{
-		boxSizing: 'border-box',
-		minWidth: 0,
-	},
 	common,
 	styledSystem.layout,
 	styledSystem.flexbox,
