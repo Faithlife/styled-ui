@@ -1,6 +1,6 @@
 {
 	"name": "@faithlife/styled-ui",
-	"version": "5.16.0",
+	"version": "5.17.0",
 	"main": "dist/main.js",
 	"repository": "git@github.com:Faithlife/styled-ui.git",
 	"author": "Dustin Masters <dustin.masters@faithlife.com>",

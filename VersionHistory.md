@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.17.0
+
+- Add `ThemeProvider` to support local theme overrides.
+
 ### 5.16.0
 
 - Export `ModalContent` component, accept styled-system props.
