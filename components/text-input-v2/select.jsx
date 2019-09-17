@@ -11,7 +11,7 @@ const selectStyles = props => {
 	const ourStyles = {
 		control: (styles, state) => ({
 			...styles,
-			minHeight: '30px',
+			minHeight: '32px',
 			fontSize: '16px',
 			border: state.isFocused
 				? `1px solid ${inputColors.inputFocusedBorderColor}`

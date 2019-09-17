@@ -86,7 +86,7 @@ export const colors = {
 	redBase: '#d94848',
 	redDark: '#bd2929',
 
-	borderColor: '#C7C7C7',
+	borderColor: '#A8A8A8',
 
 	boxShadow: '0 4px 4px 0 rgba(0, 0, 0, 0.12), 0 0 4px 0 rgba(0, 0, 0, 0.12)',
 };
