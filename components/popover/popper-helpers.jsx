@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Manager, Reference } from 'react-popper';
+import { Reference } from 'react-popper';
 import { useAddInboundsElement } from '../shared-hooks';
 import * as Styled from './styled';
 
@@ -42,8 +42,6 @@ FocusHandlerInboundsElement.propTypes = {
 	children: PropTypes.node.isRequired,
 };
 
-/** Popover manager from react-popper */
-export const PopoverManager = Manager;
 export const PlainPopoverReference = Reference;
 export const PlacementOptionsProps = PropTypes.oneOf([
 	'top',
