@@ -183,7 +183,7 @@ export class VolunteerScheduling extends Component {
 	render() {
 		return (
 			<div>
-				<Button primaryOutline small onClick={this.updateGrid}>
+				<Button variant="primaryOutline" size="small" onClick={this.updateGrid}>
 					Update grid
 				</Button>
 				<div style={{ height: 525, width: '100%' }} className="ag-theme-faithlife">

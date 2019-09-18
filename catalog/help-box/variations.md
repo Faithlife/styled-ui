@@ -4,23 +4,23 @@
 <div>
 	<HelpBox handleClose={() => true}>
 		<HelpBox.Body>This is a helpful alert.</HelpBox.Body>
-		<HelpBox.Footer><Button primary small>CTA</Button></HelpBox.Footer>
+		<HelpBox.Footer><Button variant="primary" size="small">CTA</Button></HelpBox.Footer>
 	</HelpBox>
 	<HelpBox danger handleClose={() => true}>
 		<HelpBox.Body>This is an error alert.</HelpBox.Body>
-		<HelpBox.Footer><Button primary small>CTA</Button></HelpBox.Footer>
+		<HelpBox.Footer><Button variant="primary" size="small">CTA</Button></HelpBox.Footer>
 	</HelpBox>
 	<HelpBox success handleClose={() => true}>
 		<HelpBox.Body>This is a successful alert.</HelpBox.Body>
-		<HelpBox.Footer><Button primary small>CTA</Button></HelpBox.Footer>
+		<HelpBox.Footer><Button variant="primary" size="small">CTA</Button></HelpBox.Footer>
 	</HelpBox>
 	<HelpBox warning handleClose={() => true}>
 		<HelpBox.Body>This is a cautious alert.</HelpBox.Body>
-		<HelpBox.Footer><Button primary small>CTA</Button></HelpBox.Footer>
+		<HelpBox.Footer><Button variant="primary" size="small">CTA</Button></HelpBox.Footer>
 	</HelpBox>
 	<HelpBox minor handleClose={() => true}>
 		<HelpBox.Body>This is a minor alert.</HelpBox.Body>
-		<HelpBox.Footer><Button primary small>CTA</Button></HelpBox.Footer>
+		<HelpBox.Footer><Button variant="primary" size="small">CTA</Button></HelpBox.Footer>
 	</HelpBox>
 </div>
 ```

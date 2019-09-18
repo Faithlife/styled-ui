@@ -9,8 +9,8 @@ showSource: true
 state: { number: 0 }
 ---
 <ToastDemo>
-	<Button primary medium onClick={() => toastRef.current.showMessage({ message: 'Hello!' })}>Hello!</Button>
-	<Button primary medium onClick={() => toastRef.current.showMessage({ message: 'Hello w/ Icon!', icon: <LoadingSpinner small /> })}>Hello w/ Icon!</Button>
+	<Button variant="primary" size="medium" onClick={() => toastRef.current.showMessage({ message: 'Hello!' })}>Hello!</Button>
+	<Button variant="primary" size="medium" onClick={() => toastRef.current.showMessage({ message: 'Hello w/ Icon!', icon: <LoadingSpinner small /> })}>Hello w/ Icon!</Button>
 	<SimpleToast ref={toastRef} showTime={1000} />
 </ToastDemo>
 ```

@@ -5,7 +5,7 @@ showSource: true
 state: { modal: false, value: '' }
 ---
 <div>
-	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		container="body"
@@ -37,7 +37,7 @@ showSource: true
 state: { modal: false, value: '' }
 ---
 <div>
-	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		onClose={() => setState({ modal: false })}
@@ -68,7 +68,7 @@ showSource: true
 state: { modal: false, value: '' }
 ---
 <div>
-	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		container="body"
@@ -100,7 +100,7 @@ showSource: true
 state: { modal: false, value: '' }
 ---
 <div>
-	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		container="body"
@@ -133,7 +133,7 @@ showSource: true
 state: { modal: false, value: '' }
 ---
 <div>
-	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		container="body"
@@ -166,7 +166,7 @@ showSource: true
 state: { modal: false, value: '' }
 ---
 <div>
-	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		container="body"
@@ -175,15 +175,15 @@ state: { modal: false, value: '' }
 		subtitle="Help us locate you"
 		renderFooter={() => <ModalFooter>
 				<ModalDemoButtonContainer>
-					<Button primaryOutline medium onClick={() => setState({ modal: false })}>Option 1</Button>
+					<Button variant="primaryOutline" size="medium" onClick={() => setState({ modal: false })}>Option 1</Button>
 				</ModalDemoButtonContainer>
 				<ModalDemoButtonContainer>
-					<Button primaryOutline medium onClick={() => setState({ modal: false })}>Option 2</Button>
+					<Button variant="primaryOutline" size="medium" onClick={() => setState({ modal: false })}>Option 2</Button>
 				</ModalDemoButtonContainer>
 				<ModalDemoButtonContainer>
-					<Button primaryOutline medium onClick={() => setState({ modal: false })}>Option 3</Button>
+					<Button variant="primaryOutline" size="medium" onClick={() => setState({ modal: false })}>Option 3</Button>
 				</ModalDemoButtonContainer>
-				<Button primary medium onClick={() => {}}>Yes!</Button>
+				<Button variant="primary" size="medium" onClick={() => {}}>Yes!</Button>
 			</ModalFooter>}
 	>
 		<ModalDemoWideContent>
@@ -206,7 +206,7 @@ showSource: true
 state: { modal: false, value: '' }
 ---
 <div>
-	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		container="body"
@@ -235,7 +235,7 @@ showSource: true
 state: { modal: false, value: '' }
 ---
 <div>
-	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		container="body"
@@ -256,7 +256,7 @@ showSource: true
 state: { modal: false, value: '' }
 ---
 <div>
-	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		container="body"
@@ -278,7 +278,7 @@ showSource: true
 state: { modal: false, value: '' }
 ---
 <div>
-	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		container="body"

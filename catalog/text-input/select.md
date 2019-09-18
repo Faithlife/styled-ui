@@ -42,7 +42,7 @@ showSource: true
 state: { modal: false, value: '', selection: '' }
 ---
 <div>
-	<Button primary medium onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		container="body"

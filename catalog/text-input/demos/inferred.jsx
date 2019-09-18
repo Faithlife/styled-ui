@@ -19,7 +19,7 @@ export class InferredSelectFocusDemo extends Component {
 			<DemoContainer>
 				<div>{this.state.selected.value}</div>
 				<div>
-					<Button primary small onClick={() => this.inputRef.current.focus()}>
+					<Button variant="primary" size="small" onClick={() => this.inputRef.current.focus()}>
 						Focus input
 					</Button>
 				</div>
@@ -60,7 +60,7 @@ export class InferredTextFocusDemo extends Component {
 		return (
 			<DemoContainer>
 				<div>
-					<Button primary small onClick={() => this.inputRef.current.focus()}>
+					<Button variant="primary" size="small" onClick={() => this.inputRef.current.focus()}>
 						Focus input
 					</Button>
 				</div>

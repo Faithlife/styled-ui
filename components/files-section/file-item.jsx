@@ -71,7 +71,7 @@ export class FileItem extends PureComponent {
 		return (
 			<Styled.FileItem>
 				{onFileClicked ? (
-					<Button onClick={this.handleFileClick} primaryTransparent>
+					<Button onClick={this.handleFileClick} variant="primaryTransparent">
 						{fileIcon}
 					</Button>
 				) : (

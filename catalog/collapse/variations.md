@@ -5,7 +5,7 @@ state: { isOpen: false }
 showSource: true
 ---
 <div>
-		<Button primary medium onClick={() => setState({ isOpen: !state.isOpen })} style={{ marginBottom: '1rem' }}>Toggle</Button>
+		<Button variant="primary" size="medium" onClick={() => setState({ isOpen: !state.isOpen })} marginBottom={4}>Toggle</Button>
 		<Collapse
 			isOpen={state.isOpen}
 		>

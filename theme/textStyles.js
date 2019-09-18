@@ -101,5 +101,10 @@ export const textStyles = {
 			lineHeight: '18px',
 			fontWeight: fontWeights.normal,
 		},
+		'24': {
+			fontSize: '24px',
+			lineHeight: '24px',
+			fontWeight: fontWeights.normal,
+		},
 	},
 };

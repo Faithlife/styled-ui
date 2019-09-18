@@ -314,7 +314,12 @@ export class LargeGroupSelector extends React.Component {
 							<Styled.CreateGroupButtonText>
 								{localizedResources.dontSeeChurchText}
 							</Styled.CreateGroupButtonText>
-							<Button small primary disabled={disableButton} onClick={this.createGroupClick}>
+							<Button
+								size="small"
+								variant="primary"
+								disabled={disableButton}
+								onClick={this.createGroupClick}
+							>
 								Create
 							</Button>
 						</Styled.CreateGroupButtonWrapper>
@@ -356,11 +361,11 @@ export class LargeGroupSelector extends React.Component {
 							</Styled.SecondaryModalText>
 							<Styled.SecondaryModalButtonContainer>
 								<Styled.SecondaryModalButtonWrapper>
-									<Button small primary onClick={this.redirectToGroup}>
+									<Button size="small" variant="primary" onClick={this.redirectToGroup}>
 										{localizedResources.goToGroupButtonText}
 									</Button>
 								</Styled.SecondaryModalButtonWrapper>
-								<Button small onClick={this.resetModalState}>
+								<Button size="small" onClick={this.resetModalState}>
 									Cancel
 								</Button>
 							</Styled.SecondaryModalButtonContainer>
@@ -377,11 +382,11 @@ export class LargeGroupSelector extends React.Component {
 							</Styled.SecondaryModalText>
 							<Styled.SecondaryModalButtonContainer>
 								<Styled.SecondaryModalButtonWrapper>
-									<Button small primary onClick={this.redirectToGroup}>
+									<Button size="small" variant="primary" onClick={this.redirectToGroup}>
 										Change to {formattedGroupLevels}
 									</Button>
 								</Styled.SecondaryModalButtonWrapper>
-								<Button small onClick={this.resetModalState}>
+								<Button size="small" onClick={this.resetModalState}>
 									Cancel
 								</Button>
 							</Styled.SecondaryModalButtonContainer>

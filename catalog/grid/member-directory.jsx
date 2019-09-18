@@ -150,10 +150,10 @@ export class MemberDirectory extends Component {
 		return (
 			<div>
 				<ButtonWrapper>
-					<Button primaryOutline small onClick={this.updateGrid}>
+					<Button variant="primaryOutline" size="small" onClick={this.updateGrid}>
 						Update grid
 					</Button>
-					<Button primaryOutline small onClick={this.toggleToolPanel}>
+					<Button variant="primaryOutline" size="small" onClick={this.toggleToolPanel}>
 						Toggle tool panel
 					</Button>
 				</ButtonWrapper>

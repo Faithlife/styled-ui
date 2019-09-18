@@ -18,7 +18,6 @@ AnchorButton.propTypes = {
 	...Button.propTypes,
 	/** The destination the AnchorButton should link to. */
 	href: PropTypes.string,
-	/** This should only be used as a last resort if Theme and StyleOverrides will not do what you need */
 	className: PropTypes.string,
 };
 

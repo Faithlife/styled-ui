@@ -1,13 +1,39 @@
 import styled, { css } from 'styled-components';
+import {
+	system,
+	variant,
+	layout,
+	flexbox,
+	position,
+	textStyle,
+	border,
+	background,
+} from 'styled-system';
 import 'focus-visible';
-import { colors } from '../shared-styles';
+import { common, typography } from '../../theme/system';
 import { resetStyles } from '../utils';
 
-const buttonColors = {
-	default: '#278ed4',
-	hover: '#6db3e2',
-	active: '#1d6ca1',
-	disabled: '#bedcf2',
+const systemAliases = {
+	borderColor: {
+		property: 'border-color',
+		scale: 'colors',
+	},
+	backgroundColor: {
+		property: 'background-color',
+		scale: 'colors',
+	},
+	color: {
+		property: 'color',
+		scale: 'colors',
+	},
+	borderAndBackgroundColors: {
+		properties: ['border-color', 'background-color'],
+		scale: 'colors',
+	},
+	borderAndTextColors: {
+		properties: ['border-color', 'color'],
+		scale: 'colors',
+	},
 };
 
 const Anchor = css`
@@ -18,25 +44,10 @@ const Anchor = css`
 
 export const Button = styled.button`
 	${resetStyles};
+	border-radius: ${props => props.theme.radii[1]};
+	border: ${props => props.theme.borders[1]};
 
-	justify-content: ${props =>
-		props.styleOverrides.justifyContent === 'left'
-			? 'flex-start'
-			: props.styleOverrides.justifyContent === 'right'
-			? 'flex-end'
-			: props.styleOverrides.justifyContent || 'center'};
-	padding: ${props => props.styleOverrides.padding || Button.padding};
-	font-size: ${props => props.styleOverrides.fontSize || '16px'};
-	width: ${props => props.styleOverrides.width};
-	box-shadow: none;
-	border-radius: 3px;
-	cursor: pointer;
-	display: inline-flex;
-	background-color: transparent;
-	border: none;
-	transition: box-shadow 0.25s ease 0s;
-	white-space: nowrap;
-	align-items: center;
+	cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 
 	&:focus:not(.focus-visible) {
 		outline: none;
@@ -59,155 +70,162 @@ export const Button = styled.button`
 	}
 
 	${({ as: baseTag }) => baseTag && baseTag === 'a' && Anchor};
+
+		${({ disabled }) =>
+			variant({
+				variants: {
+					primary: {
+						border: '1px solid',
+						color: 'white',
+					},
+					primaryOutline: {
+						border: '1px solid',
+						background: 'none',
+						'@media (hover: hover)': {
+							'&:hover': {
+								color: disabled || 'white',
+							},
+						},
+						'&:active': {
+							color: disabled || 'white',
+						},
+					},
+					primaryTransparent: {
+						border: '1px solid transparent',
+						background: 'none',
+						padding: '0px',
+					},
+					minor: {
+						border: '1px solid',
+						color: disabled ? 'gray22' : 'flgray',
+					},
+					minorTransparent: {
+						border: '1px solid transparent',
+						background: 'none',
+						padding: '0px',
+					},
+				},
+			})}
+
+	${({ variant }) => {
+		switch (variant) {
+			case 'primary':
+				return css`
+					${system({ defaultColor: systemAliases.borderAndBackgroundColors })};
+
+					${({ disabled }) =>
+						disabled
+							? css`
+									${system({ disabledColor: systemAliases.borderAndBackgroundColors })};
+							  `
+							: css`
+									@media (hover: hover) {
+										&:hover {
+											${system({ hoverColor: systemAliases.borderAndBackgroundColors })};
+										}
+									}
+
+									&:active {
+										${system({ activeColor: systemAliases.borderAndBackgroundColors })};
+									}
+							  `};
+				`;
+			case 'primaryOutline':
+				return css`
+					${system({ defaultColor: systemAliases.borderAndTextColors })};
+
+					${({ disabled }) =>
+						disabled
+							? css`
+									${system({ disabledColor: systemAliases.borderAndTextColors })};
+							  `
+							: css`
+									@media (hover: hover) {
+										&:hover {
+											${system({ hoverColor: systemAliases.borderAndBackgroundColors })};
+										}
+									}
+
+									&:active {
+										${system({ activeColor: systemAliases.borderAndBackgroundColors })};
+									}
+							  `};
+				`;
+			case 'primaryTransparent':
+			case 'minorTransparent':
+				return css`
+					${system({ defaultColor: systemAliases.color })};
+
+					${({ disabled }) =>
+						disabled
+							? css`
+									${system({ disabledColor: systemAliases.color })};
+							  `
+							: css`
+									@media (hover: hover) {
+										&:hover {
+											${system({ hoverColor: systemAliases.color })};
+										}
+									}
+
+									&:active {
+										${system({ activeColor: systemAliases.color })};
+									}
+							  `};
+				`;
+			case 'minor':
+				return css`
+					${system({ minorBorderColor: systemAliases.borderColor })};
+					${system({ minorBackgroundColor: systemAliases.backgroundColor })};
+
+					${({ disabled }) =>
+						disabled
+							? css`
+									${system({ minorDisabledBorderColor: systemAliases.borderColor })};
+									${system({ minorDisabledBackgroundColor: systemAliases.backgroundColor })};
+							  `
+							: css`
+									@media (hover: hover) {
+										&:hover {
+											${system({ hoverColor: systemAliases.borderColor })};
+											${system({ hoverColor: systemAliases.backgroundColor })};
+										}
+									}
+
+									&:active {
+										${system({ activeColor: systemAliases.borderColor })};
+										${system({ activeColor: systemAliases.backgroundColor })};
+									}
+							  `};
+				`;
+		}
+	}}
+
+	${({ condensed }) =>
+		variant({
+			prop: 'size',
+			variants: {
+				small: {
+					height: '32px',
+					paddingX: condensed ? '7px' : '9px',
+				},
+				medium: {
+					height: '40px',
+					paddingX: condensed ? '11px' : '15px',
+				},
+				large: {
+					height: '56px',
+					paddingX: condensed ? '15px' : '23px',
+				},
+			},
+		})}
+
+	${textStyle};
+	${common};
+	${typography};
+	${layout};
+	${flexbox};
+	${position};
+	${border};
+	${background};
 `;
-
-export const variationMap = {
-	primary: component => styled(component)`
-		border: 1px solid ${props => props.theme.defaultColor || buttonColors.default};
-		background-color: ${props => props.theme.defaultColor || buttonColors.default};
-		color: #fff;
-
-		${({ disabled }) =>
-			disabled
-				? css`
-						border-color: ${props => props.theme.disabledColor || buttonColors.disabled};
-						background-color: ${props => props.theme.disabledColor || buttonColors.disabled};
-						cursor: default;
-						color: #fff;
-				  `
-				: css`
-						@media (hover: hover) {
-							&:hover {
-								border-color: ${props => props.theme.hoverColor || buttonColors.hover};
-								background-color: ${props => props.theme.hoverColor || buttonColors.hover};
-								color: #fff;
-							}
-						}
-
-						&:active {
-							border-color: ${props => props.theme.activeColor || buttonColors.active};
-							background-color: ${props => props.theme.activeColor || buttonColors.active};
-							color: #fff;
-						}
-				  `};
-	`,
-	primaryOutline: component => styled(component)`
-		border: 1px solid ${props => props.theme.defaultColor || buttonColors.default};
-		background: none;
-		color: ${props => props.theme.defaultColor || buttonColors.default};
-
-		${({ disabled }) =>
-			disabled
-				? css`
-						border-color: ${props => props.theme.disabledColor || buttonColors.disabled};
-						background: none;
-						color: ${props => props.theme.disabledColor || buttonColors.disabled};
-						cursor: default;
-				  `
-				: css`
-						@media (hover: hover) {
-							&:hover {
-								border-color: ${props => props.theme.hoverColor || buttonColors.hover};
-								background-color: ${props => props.theme.hoverColor || buttonColors.hover};
-								color: #fff;
-							}
-						}
-
-						&:active {
-							border-color: ${props => props.theme.activeColor || buttonColors.active};
-							background-color: ${props => props.theme.activeColor || buttonColors.active};
-							color: #fff;
-						}
-				  `};
-	`,
-	minor: component => styled(component)`
-		border: 1px solid ${props => props.theme.defaultColor || colors.gray14};
-		background: ${props => props.theme.defaultColor || colors.gray4};
-		color: ${colors.flGray};
-
-		${({ disabled }) =>
-			disabled
-				? css`
-						border-color: ${props => props.theme.disabledColor || colors.gray8};
-						background-color: ${props => props.theme.disabledColor || `#fff`};
-						color: ${colors.gray22};
-						cursor: default;
-				  `
-				: css`
-						@media (hover: hover) {
-							&:hover {
-								border: 1px solid ${props => props.theme.hoverColor || colors.gray14};
-								background-color: ${props => props.theme.hoverColor || colors.gray14};
-								color: ${colors.flGray};
-							}
-						}
-
-						&:active {
-							border: 1px solid ${props => props.theme.activeColor || colors.gray22};
-							background-color: ${props => props.theme.activeColor || colors.gray22};
-							color: ${colors.flGray};
-						}
-				  `};
-	`,
-	primaryTransparent: component => styled(component)`
-		border: 1px solid transparent;
-		background: none;
-		color: ${props => props.theme.defaultColor || buttonColors.default};
-		padding: 0;
-
-		${({ disabled }) =>
-			disabled
-				? css`
-						color: ${props => props.theme.disabledColor || buttonColors.disabled};
-						cursor: default;
-				  `
-				: css`
-						@media (hover: hover) {
-							&:hover {
-								color: ${props => props.theme.hoverColor || buttonColors.hover};
-							}
-						}
-
-						&:active {
-							color: ${props => props.theme.activeColor || buttonColors.active};
-						}
-				  `};
-	`,
-	minorTransparent: component => styled(component)`
-		border: 1px solid transparent;
-		background: none;
-		color: ${props => props.theme.defaultColor || colors.flGray};
-		padding: 0;
-
-		${({ disabled }) =>
-			disabled
-				? css`
-						color: ${props => props.theme.disabledColor || colors.gray22};
-						cursor: default;
-				  `
-				: css`
-						@media (hover: hover) {
-							&:hover {
-								color: ${props => props.theme.hoverColor || colors.blueBase};
-							}
-						}
-
-						&:active {
-							color: ${props => props.theme.activeColor || colors.blueLight};
-						}
-				  `};
-	`,
-	small: component => styled(component)`
-		height: 32px;
-		padding: 0 ${props => (props.condensed ? '7px' : '9px')};
-	`,
-	medium: component => styled(component)`
-		height: 40px;
-		padding: 0 ${props => (props.condensed ? '11px' : '15px')};
-	`,
-	large: component => styled(component)`
-		height: 56px;
-		padding: 0 ${props => (props.condensed ? '15px' : '23px')};
-		font-size: 24px;
-	`,
-};

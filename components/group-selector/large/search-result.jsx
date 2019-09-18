@@ -113,7 +113,7 @@ export class SearchResult extends React.PureComponent {
 				</Tooltip>
 			);
 			button = (
-				<Button small outline primary onClick={this.claimGroup}>
+				<Button size="small" variant="primary" onClick={this.claimGroup}>
 					{localizedResources.claimButtonText}
 				</Button>
 			);
@@ -132,7 +132,7 @@ export class SearchResult extends React.PureComponent {
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
-				<Button small outline primary onClick={this.joinGroup}>
+				<Button size="small" variant="primary" onClick={this.joinGroup}>
 					{localizedResources.joinButtonText}
 				</Button>
 			);
@@ -151,7 +151,7 @@ export class SearchResult extends React.PureComponent {
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
-				<Button small outline primary onClick={this.requestAccess}>
+				<Button size="small" variant="primary" onClick={this.requestAccess}>
 					{localizedResources.requestButtonText}
 				</Button>
 			);
@@ -182,7 +182,7 @@ export class SearchResult extends React.PureComponent {
 					</Styled.SearchResultMembershipLine>
 				);
 			button = (
-				<Button small outline primary onClick={this.requestAccess}>
+				<Button size="small" variant="primary" onClick={this.requestAccess}>
 					{localizedResources.requestButtonText}
 				</Button>
 			);
@@ -201,7 +201,7 @@ export class SearchResult extends React.PureComponent {
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
-				<Button small outline primary onClick={this.editGroupType}>
+				<Button size="small" variant="primary" onClick={this.editGroupType}>
 					Edit
 				</Button>
 			);
@@ -213,7 +213,7 @@ export class SearchResult extends React.PureComponent {
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
-				<Button small outline primary onClick={this.joinGroup}>
+				<Button size="small" variant="primary" onClick={this.joinGroup}>
 					{localizedResources.joinButtonText}
 				</Button>
 			);
@@ -225,7 +225,7 @@ export class SearchResult extends React.PureComponent {
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
-				<Button small outline primary onClick={this.requestAccess}>
+				<Button size="small" variant="primary" onClick={this.requestAccess}>
 					{localizedResources.requestButtonText}
 				</Button>
 			);
@@ -237,7 +237,7 @@ export class SearchResult extends React.PureComponent {
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
-				<Button small primaryOutline onClick={this.getStarted}>
+				<Button size="small" variant="primaryOutline" onClick={this.getStarted}>
 					{localizedResources.selectButtonText}
 				</Button>
 			);

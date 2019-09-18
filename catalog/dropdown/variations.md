@@ -6,7 +6,7 @@ state: { isOpen: false }
 ---
 <DropdownDemo>
 	<Dropdown isOpen={state.isOpen} onToggleMenu={() => setState({ isOpen: !state.isOpen })}>
-		<DropdownToggle primary medium>Show a Dropdown!</DropdownToggle>
+		<DropdownToggle variant="primary" size="medium">Show a Dropdown!</DropdownToggle>
 		<DropdownMenu>
 			<MenuItem onClick={() => alert("Menu Item 1")}>Menu Item 1</MenuItem>
 			<MenuItem onClick={() => alert("Menu Item 2")}>Menu Item 2</MenuItem>
@@ -24,7 +24,7 @@ state: { isOpen: false, isChecked: false }
 ---
 <DropdownDemo>
 	<Dropdown isOpen={state.isOpen} onToggleMenu={() => setState({ isOpen: !state.isOpen })}>
-		<DropdownToggle primary medium>Show a Dropdown!</DropdownToggle>
+		<DropdownToggle variant="primary" size="medium">Show a Dropdown!</DropdownToggle>
 		<DropdownMenu>
 			<h3>Dropdown</h3>
 			<MenuSeparator />
@@ -49,7 +49,7 @@ state: { isOpen: false, isChecked: false }
 		isOpen={state.isOpen}
 		onToggleMenu={() => setState({ isOpen: !state.isOpen })}
 	>
-		<DropdownToggle primary medium>Show a Dropdown!</DropdownToggle>
+		<DropdownToggle variant="primary" size="medium">Show a Dropdown!</DropdownToggle>
 		<DropdownMenu>
 			<MenuItem onClick={() => alert("Menu Item 1")}>Menu Item 1</MenuItem>
 			<MenuCheckbox onClick={() => setState({ isChecked: !state.isChecked })} isChecked={state.isChecked}>Menu Checkbox</MenuCheckbox>
@@ -68,7 +68,7 @@ state: { isOpen: false }
 	<Dropdown isOpen={state.isOpen} onToggleMenu={() => setState({ isOpen: !state.isOpen })}>
 		<DropdownToggle>
 			{({ref, onKeyDown, onClick, ariaProps}) =>
-				<Button primary medium ref={ref} onKeyDown={onKeyDown} onClick={onClick} {...ariaProps}>Show a Dropdown!</Button>}
+				<Button variant="primary" size="medium" ref={ref} onKeyDown={onKeyDown} onClick={onClick} {...ariaProps}>Show a Dropdown!</Button>}
 		</DropdownToggle>
 		<DropdownMenu>
 			<MenuItem onClick={() => alert("Menu Item 1")}>Menu Item 1</MenuItem>

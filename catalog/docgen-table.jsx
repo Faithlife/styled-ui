@@ -60,7 +60,7 @@ class CollapsableText extends Component {
 		return (
 			<PopoverManager>
 				<PopoverReference>
-					<Button primaryOutline small onClick={this.handleOpenTooltip}>
+					<Button variant="primaryOutline" size="small" onClick={this.handleOpenTooltip}>
 						Reveal
 					</Button>
 				</PopoverReference>

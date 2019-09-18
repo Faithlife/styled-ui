@@ -50,7 +50,7 @@ state: { currentTab: 0 }
 ---
 <TabDemo>
 	The current tab index is {state.currentTab}
-	<Button primary medium onClick={() => setState({ currentTab: 0 })}>First tab</Button>
+	<Button variant="primary" size="medium" onClick={() => setState({ currentTab: 0 })}>First tab</Button>
 	<TabManager selectedTab={state.currentTab} onSelectedTabChange={tabIndex => setState({ currentTab: tabIndex })}>
 		<TabList>
 			<Tab>First Tab</Tab>

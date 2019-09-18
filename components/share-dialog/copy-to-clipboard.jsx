@@ -57,7 +57,7 @@ export class CopyToClipboard extends React.Component {
 					</Styled.CopyContainer>
 				)}
 				<div>
-					<Button small ref={this.button} data-clipboard-text={copyValue} primary>
+					<Button size="small" ref={this.button} data-clipboard-text={copyValue} variant="primary">
 						{copyButtonText || 'Copy'}
 					</Button>
 					{showFeedback && <Styled.Copied>Copied!</Styled.Copied>}

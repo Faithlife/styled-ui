@@ -1,6 +1,7 @@
 AnchorButtons allow users to command the computer to navigate.
 
 ## Component Variations
+
 AnchorButton supports same variations as Button. See [Button Variations](/button/variations) for details.
 
 ### Sample
@@ -9,11 +10,11 @@ AnchorButton supports same variations as Button. See [Button Variations](/button
 showSource: true
 ---
 <ButtonDemo>
-	<AnchorButton href="#settings" primary small icon={<GearIcon />}>
+	<AnchorButton href="#settings" variant="primary" size="small" icon={<GearIcon />}>
 		Settings
 	</AnchorButton>
-	<AnchorButton href="#settings" primary condensed small icon={<GearIcon />} />
-	<AnchorButton href="#settings" primary small>Settings</AnchorButton>
-	<AnchorButton href="#settings" primaryTransparent small>Settings</AnchorButton>
+	<AnchorButton href="#settings" variant="primary" condensed size="small" icon={<GearIcon />} />
+	<AnchorButton href="#settings" variant="primary" size="small">Settings</AnchorButton>
+	<AnchorButton href="#settings" primaryTransparent size="small">Settings</AnchorButton>
 </ButtonDemo>
 ```

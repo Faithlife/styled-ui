@@ -93,7 +93,7 @@ export class SimpleModal extends React.Component {
 						}}
 					>
 						<Styled.ModalClose>
-							<Button minorTransparent icon={<Close />} onClick={onClose} />
+							<Button variant="minorTransparent" icon={<Close />} onClick={onClose} />
 						</Styled.ModalClose>
 						{children}
 					</Styled.SimpleModal>
