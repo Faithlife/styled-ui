@@ -77,7 +77,6 @@ state: { isOpen: false }
 </div>
 ```
 
-
 ## Forms
 
 ```react
@@ -133,6 +132,7 @@ showSource: false
 ### Popover
 
 ```react
+showSource: true
 state: { isOpen: false }
 ---
 <div>

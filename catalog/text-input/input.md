@@ -1,6 +1,7 @@
 ### Small
 
 ```react
+showSource: true
 state: { value: 'Washington' }
 ---
 <InputSpacer>
@@ -12,6 +13,7 @@ state: { value: 'Washington' }
 ### Medium
 
 ```react
+showSource: true
 state: { value: 'Washington' }
 ---
 <InputSpacer>
@@ -23,6 +25,7 @@ state: { value: 'Washington' }
 ### Large
 
 ```react
+showSource: true
 state: { value: 'Washington' }
 ---
 <InputSpacer>
@@ -34,6 +37,7 @@ state: { value: 'Washington' }
 ### Textarea
 
 ```react
+showSource: true
 state: { value: '' }
 ---
 <InputSpacer>
