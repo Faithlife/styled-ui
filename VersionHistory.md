@@ -1,5 +1,12 @@
 # Changelog
 
+### 5.18.0
+
+- Port `Button` to styled-system.
+- Port `Modal` to styled-system.
+- Update `Input` border color.
+- Fix height of autocomplete inputs to match `Input`.
+
 ### 5.17.0
 
 - Add `ThemeProvider` to support local theme overrides.
