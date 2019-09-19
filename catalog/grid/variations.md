@@ -9,11 +9,11 @@ showSource: true
 ---
 <div>
 	<SimpleGrid data={censusData} maxRows={10} onRowClick={row => {alert(row[0].NAME)}}>
-		<GridHeading displayName="Name" fieldName="NAME" defaultSort={GridHeading.sortOptions.ascending} />
-		<GridHeading displayName="Population" fieldName="CENSUS2010POP" isRightAligned />
-		<GridHeading displayName="Net Population Change" fieldName="NPOPCHG2010" isRightAligned />
-		<GridHeading displayName="Births" fieldName="BIRTHS2010" isRightAligned width={100} isLargeViewportOnly />
-		<GridHeading displayName="Deaths" fieldName="DEATHS2010" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
+		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+		<GridColumn displayName="Population" fieldName="population" isRightAligned />
+		<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
+		<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
+		<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
 	</SimpleGrid>
 </div>
 ```
@@ -27,11 +27,11 @@ showSource: true
 ---
 <div>
 	<PaginatedGrid data={censusData} maxRows={10}>
-		<GridHeading displayName="Name" fieldName="NAME" defaultSort={GridHeading.sortOptions.ascending} />
-		<GridHeading displayName="Population" fieldName="CENSUS2010POP" />
-		<GridHeading displayName="Net Population Change" fieldName="NPOPCHG2010" />
-		<GridHeading displayName="Births" fieldName="BIRTHS2010" />
-		<GridHeading displayName="Deaths" fieldName="DEATHS2010" />
+		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+		<GridColumn displayName="Population" fieldName="population" />
+		<GridColumn displayName="Net Population Change" fieldName="populationChange" />
+		<GridColumn displayName="Births" fieldName="births" />
+		<GridColumn displayName="Deaths" fieldName="deaths" />
 	</PaginatedGrid>
 </div>
 ```
@@ -44,12 +44,12 @@ land: json
 [
 	{
 		"id": 0,
-		"NAME": "Abilene, TX",
-		"LSAD": "Metropolitan Statistical Area",
-		"CENSUS2010POP": 165252,
-		"NPOPCHG2010": 337,
-		"BIRTHS2010": 540,
-		"DEATHS2010": 406
+		"value": "Abilene, TX",
+		"areaDesc": "Metropolitan Statistical Area",
+		"population": 165252,
+		"populationChange": 337,
+		"births": 540,
+		"deaths": 406
 	}
 ]
 ```
@@ -62,22 +62,12 @@ A table to display tree data as well as supporting drag-drop reordering.
 showSource: true
 ---
 <div>
-	<TreeGrid data={[
-	{
-		"id": 0,
-		"NAME": "Abilene, TX",
-		"CENSUS2010POP": 165252,
-		"NPOPCHG2010": 337,
-		"BIRTHS2010": 540,
-		"DEATHS2010": 406,
-		"path": ["Metropolitan Statistical Area", "Pop more than 100k", "Abilene, TX"]
-	}
-]} minHeight={'550px'} enableDragDrop>
-		<GridHeading displayName="Name" fieldName="NAME" minWidth={300} />
-		<GridHeading displayName="Population" fieldName="CENSUS2010POP" />
-		<GridHeading displayName="Net Population Change" fieldName="NPOPCHG2010" />
-		<GridHeading displayName="Births" fieldName="BIRTHS2010" />
-		<GridHeading displayName="Deaths" fieldName="DEATHS2010" />
+	<TreeGrid data={censusDataFolders} maxRows={15} shouldAutoExpandGroups>
+		<GridColumn displayName="Name" groupByColumn />
+		<GridColumn displayName="Population" fieldName="population" />
+		<GridColumn displayName="Net Population Change" fieldName="populationChange" />
+		<GridColumn displayName="Births" fieldName="births" />
+		<GridColumn displayName="Deaths" fieldName="deaths" />
 	</TreeGrid>
 </div>
 ```
@@ -88,14 +78,30 @@ showSource: true
 land: json
 ---
 [
+	enableDragDrop shouldExpandGroups
 	{
-		"id": 0,
-		"NAME": "Abilene, TX",
-		"CENSUS2010POP": 165252,
-		"NPOPCHG2010": 337,
-		"BIRTHS2010": 540,
-		"DEATHS2010": 406,
-		"path": ["Metropolitan Statistical Area", "Pop &gt; 100k", "Abilene, TX"]
+		"value": "Metropolitan Statistical Area",
+		children: [
+			{
+				"value": "Pop more than 100k",
+				children: [
+					{
+						"value": "Abilene, TX",
+						"population": 165252,
+						"populationChange": 337,
+						"births": 540,
+						"deaths": 406,
+						"path": ["Metropolitan Statistical Area", "Pop more than 100k", "Abilene, TX"]
+					},
+					{
+						"value":"Bellingham, WA",
+						"population":201140,
+						"births":608,
+						"deaths":356
+					}
+				]
+			}
+		]
 	}
 ]
 ```

@@ -34,5 +34,5 @@ noSource: true
 ```react
 noSource: true
 ---
-<DocgenTable component={GridHeading} />
+<DocgenTable component={GridColumn} />
 ```

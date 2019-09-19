@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export function GridHeading({
+export function GridColumn({
 	displayName,
 	fieldName,
 	isSortable,
@@ -21,25 +21,25 @@ export function GridHeading({
 	return <div />;
 }
 
-GridHeading.defaultProps = {
+GridColumn.defaultProps = {
 	isSortable: true,
 	suppressMenu: true,
 	isResizable: true,
 };
 
-GridHeading.isGridHeading = true;
+GridColumn.isGridHeading = true;
 
-GridHeading.sortOptions = Object.freeze({
+GridColumn.sortOptions = Object.freeze({
 	none: '',
 	ascending: 'asc',
 	descending: 'desc',
 });
 
-GridHeading.propTypes = {
+GridColumn.propTypes = {
 	displayName: PropTypes.string,
 	fieldName: PropTypes.string,
 	isSortable: PropTypes.bool,
-	defaultSort: PropTypes.oneOf(Object.values(GridHeading.sortOptions)),
+	defaultSort: PropTypes.oneOf(Object.values(GridColumn.sortOptions)),
 	isRightAligned: PropTypes.bool,
 	/** A react component to render in the cell */
 	cellComponent: PropTypes.func,

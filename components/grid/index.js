@@ -1,5 +1,5 @@
 import './custom.scss';
 export { PaginatedGrid } from './paginated-grid';
-export { GridHeading } from './grid-heading';
+export { GridColumn } from './grid-column';
 export { SimpleGrid } from './simple-grid';
 export { TreeGrid } from './tree-grid';

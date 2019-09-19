@@ -11,11 +11,11 @@ state: { data: null }
 <div>
 	<Button primary medium onClick={() => setState({ data: (state.data && state.data.slice(50)) || censusData.slice(50) })}>Update Data</Button>
 	<SimpleGrid data={state.data || censusData} maxRows={10} handleGetRowId={data => data.NAME}>
-		<GridHeading displayName="Name" fieldName="NAME" defaultSort={GridHeading.sortOptions.ascending} />
-		<GridHeading displayName="Population" fieldName="CENSUS2010POP" isRightAligned />
-		<GridHeading displayName="Net Population Change" fieldName="NPOPCHG2010" isRightAligned />
-		<GridHeading displayName="Births" fieldName="BIRTHS2010" isRightAligned width={100} isLargeViewportOnly />
-		<GridHeading displayName="Deaths" fieldName="DEATHS2010" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
+		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+		<GridColumn displayName="Population" fieldName="population" isRightAligned />
+		<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
+		<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
+		<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
 	</SimpleGrid>
 </div>
 ```
@@ -29,10 +29,10 @@ showSource: true
 ---
 <div>
 	<SimpleGrid data={censusData} maxRows={10} onRowClick={() => alert('Click')}>
-		<GridHeading displayName="Name" fieldName="NAME" defaultSort={GridHeading.sortOptions.ascending} />
-		<GridHeading displayName="Population" fieldName="CENSUS2010POP" isRightAligned />
-		<GridHeading displayName="Net Population Change" fieldName="NPOPCHG2010" isRightAligned />
-		<GridHeading
+		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+		<GridColumn displayName="Population" fieldName="population" isRightAligned />
+		<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
+		<GridColumn
 			hasInteractableElement
 			displayName=""
 			fieldName="edit"
@@ -55,10 +55,10 @@ showSource: true
 ---
 <div>
 	<SimpleGrid data={censusData} maxRows={10}>
-		<GridHeading displayName="Area Description" fieldName="LSAD" groupByColumn width={200} />
-		<GridHeading displayName="Name" fieldName="NAME" defaultSort={GridHeading.sortOptions.ascending} />
-		<GridHeading displayName="Population" fieldName="CENSUS2010POP" />
-		<GridHeading displayName="Net Population Change" fieldName="NPOPCHG2010" />
+		<GridColumn displayName="Area Description" fieldName="areaDesc" groupByColumn width={200} />
+		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+		<GridColumn displayName="Population" fieldName="population" />
+		<GridColumn displayName="Net Population Change" fieldName="populationChange" />
 	</SimpleGrid>
 </div>
 ```
@@ -72,11 +72,11 @@ state: { filterText: 'WA' }
 <div>
 	<Input placeholder="Search" value={state.filterText} onChange={(e => setState({ filterText: e.target.value }))} />
 	<SimpleGrid data={censusData} maxRows={10} onRowClick={row => {alert(row[0].NAME)}} filterText={state.filterText}>
-		<GridHeading displayName="Name" fieldName="NAME" defaultSort={GridHeading.sortOptions.ascending} />
-		<GridHeading displayName="Population" fieldName="CENSUS2010POP" isRightAligned />
-		<GridHeading displayName="Net Population Change" fieldName="NPOPCHG2010" isRightAligned />
-		<GridHeading displayName="Births" fieldName="BIRTHS2010" isRightAligned width={100} isLargeViewportOnly />
-		<GridHeading displayName="Deaths" fieldName="DEATHS2010" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
+		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+		<GridColumn displayName="Population" fieldName="population" isRightAligned />
+		<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
+		<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
+		<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
 	</SimpleGrid>
 </div>
 ```
@@ -90,11 +90,11 @@ showSource: true
 ---
 <div>
 	<SimpleGrid data={censusData} maxRows={10} onRowClick={row => {alert(row[0].NAME)}}>
-		<GridHeading displayName="Name" fieldName="NAME" defaultSort={GridHeading.sortOptions.ascending} />
-		<GridHeading displayName="Population" fieldName="CENSUS2010POP" isRightAligned />
-		<GridHeading displayName="Net Population Change" fieldName="NPOPCHG2010" cellComponent={PopulationChange} isRightAligned />
-		<GridHeading displayName="Births" fieldName="BIRTHS2010" isRightAligned width={100} isLargeViewportOnly />
-		<GridHeading displayName="Deaths" fieldName="DEATHS2010" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
+		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+		<GridColumn displayName="Population" fieldName="population" isRightAligned />
+		<GridColumn displayName="Net Population Change" fieldName="populationChange" cellComponent={PopulationChange} isRightAligned />
+		<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
+		<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
 	</SimpleGrid>
 </div>
 ```
