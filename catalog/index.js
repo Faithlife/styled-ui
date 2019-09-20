@@ -78,6 +78,24 @@ const censusDataWithId = censusData.map((data, index) => ({
 	id: index,
 }));
 
+const censusDataFolders = censusData.reduce((list, row) => {
+	const subFolderName = row.population > 100000 ? 'Pop more than 100k' : 'Pop less than 100k';
+	const folder = list.find(x => x.value === row.areaDesc);
+
+	if (folder) {
+		const subFolder = folder.children.find(x => x.value === subFolderName);
+		if (subFolder) {
+			subFolder.children.push(row);
+		} else {
+			folder.children.push({ value: subFolderName, children: [row] });
+		}
+	} else {
+		list.push({ value: row.areaDesc, children: [{ value: subFolderName, children: [row] }] });
+	}
+
+	return list;
+}, []);
+
 const ButtonDemo = styled.div`
 	display: inline-grid;
 	grid-auto-flow: column;
@@ -300,6 +318,7 @@ const components = [
 					TreeGrid,
 					Button,
 					censusData: censusDataWithId,
+					censusDataFolders,
 				},
 			},
 			{
@@ -313,6 +332,7 @@ const components = [
 					PopulationChange,
 					Button,
 					censusData: censusDataWithId,
+					censusDataFolders,
 				},
 			},
 			{

@@ -2,20 +2,58 @@ import React, { useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useGridState } from './grid-helpers';
 import { BaseGrid } from './base-grid';
+import { TreeGroupColumn } from './tree-grid-group-column';
+
+const treeGroupColumnComponent = 'treeGroupColumn';
 
 export function TreeGrid(props) {
 	// First separate out the props that are this grid component specific
-	const { children, enableDragDrop, ...baseGridProps } = props;
+	const { children, enableDragDrop, data, autoGroupExpansion, ...baseGridProps } = props;
 
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useGridState();
 
+	const heading = React.Children.toArray(children).find(child => child && child.type.isTreeGroup);
+	useEffect(() => {
+		if (!heading && !enableDragDrop) {
+			console.warn(
+				'You are using a tree grid, but are not including a `<TreeGrid.GroupColumn> child',
+			);
+		}
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+	let groupComponent;
+	let groupColumnSettings;
+	if (heading) {
+		const {
+			displayName,
+			cellComponent,
+			isSortable,
+			defaultSort,
+			isResizable,
+			hideChildrenCount,
+			...groupProps
+		} = heading.props;
+
+		console.log('cellComponent', cellComponent);
+		groupComponent = cellComponent ? { [treeGroupColumnComponent]: cellComponent } : {};
+		groupColumnSettings = {
+			rowDrag: enableDragDrop,
+			headerName: heading.props.displayName,
+			sortable: isSortable,
+			sort: defaultSort,
+			resizable: isResizable,
+			cellRendererParams: {
+				suppressCount: hideChildrenCount,
+				innerRenderer: cellComponent ? treeGroupColumnComponent : '',
+			},
+			cellClass: 'ag-faithlife-cell',
+			...groupProps,
+		};
+	}
+
 	useEffect(() => {
 		if (gridApi) {
-			if (enableDragDrop) {
-				gridApi.setSuppressRowDrag(false);
-			} else {
-				gridApi.setSuppressRowDrag(true);
-			}
+			gridApi.setSuppressRowDrag(!enableDragDrop);
 		}
 	}, [gridApi, enableDragDrop]);
 
@@ -29,12 +67,13 @@ export function TreeGrid(props) {
 		onRowDragEnd={this.onRowDragEnd.bind(this)}
 	 */
 
-	const getDataPath = useCallback(data => data.path, []);
-
 	const handleRowDrag = useCallback(event => {
 		console.log(event);
 	}, []);
 
+	const treeData = useMemo(() => getRows([], '', data), [data]);
+
+	console.log(groupColumnSettings, groupComponent);
 	const gridOptions = useMemo(
 		() => ({
 			treeData: true,
@@ -43,8 +82,11 @@ export function TreeGrid(props) {
 			onRowDragMove: handleRowDrag,
 			onRowDragLeave: handleRowDrag,
 			onRowDragEnd: handleRowDrag,
+			groupDefaultExpanded: autoGroupExpansion || TreeGrid.expandedRowsOptions.none,
+			additionalCellComponents: groupComponent,
+			autoGroupColumnDef: groupColumnSettings,
 		}),
-		[getDataPath, handleRowDrag],
+		[handleRowDrag, autoGroupExpansion, groupColumnSettings, groupComponent],
 	);
 
 	return (
@@ -56,6 +98,8 @@ export function TreeGrid(props) {
 			setColumnApi={setColumnApi}
 			gridOptions={gridOptions}
 			shouldShowDragHandles
+			data={treeData}
+			disableGroupUsesWholeRow
 		>
 			{children}
 		</BaseGrid>
@@ -64,20 +108,60 @@ export function TreeGrid(props) {
 
 TreeGrid.rowSelectionOptions = BaseGrid.rowSelectionOptions;
 
+TreeGrid.rowTypes = {
+	folder: 'folder',
+	item: 'item',
+};
+
+TreeGrid.expandedRowsOptions = {
+	// Why ag-grid?
+	all: -1,
+	none: 0,
+	topLevel: 1,
+};
+
+TreeGrid.GroupColumn = TreeGroupColumn;
+
 TreeGrid.propTypes = {
 	...BaseGrid.propTypes,
 	currentPageNumber: PropTypes.number,
 	onPageNumberChange: PropTypes.func,
+	data: PropTypes.arrayOf(
+		PropTypes.shape({
+			value: PropTypes.string.isRequired,
+			children: PropTypes.array,
+		}),
+	),
+	autoGroupExpansion: PropTypes.oneOf(Object.values(TreeGrid.expandedRowsOptions)),
 };
 
-/**
- * 
- * import React, { Component } from "react";
-import { render } from "react-dom";
+function getRows(pathTo, parentId, tree) {
+	const rows = [];
+	let idCounter = 0;
+	for (const item of tree) {
+		const id = parentId ? `${parentId}.${idCounter++}` : `${idCounter++}`;
+		const path = pathTo.concat(item.value);
+
+		if (item.children && item.children.length) {
+			rows.push({ id, ...item, treeNodeType: TreeGrid.rowTypes.folder, path });
+			rows.push(...getRows(path, id, item.children));
+		} else {
+			rows.push({ id, ...item, treeNodeType: TreeGrid.rowTypes.item, path });
+		}
+	}
+
+	return rows;
+}
+
+function getDataPath(data) {
+	return data.path;
+}
+
+/*
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-enterprise";
 
-class GridExample extends Component {
+export class GridExample extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -370,6 +454,4 @@ function getFileIcon(filename) {
 		? "fa fa-file-pdf-o"
 		: "fa fa-folder";
 }
-
-render(<GridExample />, document.querySelector("#root"));
- */
+*/

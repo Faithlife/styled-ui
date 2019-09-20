@@ -62,12 +62,10 @@ A table to display tree data as well as supporting drag-drop reordering.
 showSource: true
 ---
 <div>
-	<TreeGrid data={censusDataFolders} maxRows={15} shouldAutoExpandGroups>
-		<GridColumn displayName="Name" groupByColumn />
+	<TreeGrid data={censusDataFolders} maxRows={15} autoGroupExpansion={TreeGrid.expandedRowsOptions.topLevel}>
+		<TreeGrid.GroupColumn displayName="Name" width={500} />
 		<GridColumn displayName="Population" fieldName="population" />
 		<GridColumn displayName="Net Population Change" fieldName="populationChange" />
-		<GridColumn displayName="Births" fieldName="births" />
-		<GridColumn displayName="Deaths" fieldName="deaths" />
 	</TreeGrid>
 </div>
 ```

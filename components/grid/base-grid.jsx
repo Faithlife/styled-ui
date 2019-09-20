@@ -33,6 +33,8 @@ export function BaseGrid({
 	hasPagingBar,
 	handleGetRowId,
 	shouldShowDragHandles,
+	disableGroupUsesWholeRow,
+	additionalCellComponents,
 }) {
 	const tableHeightPadding = hasPagingBar ? 50 : 2;
 
@@ -76,26 +78,15 @@ export function BaseGrid({
 		onRowClick && onRowClick(selectedRows);
 	}, [gridApi, onRowClick]);
 
-	const headingChildren = React.Children.toArray(children).filter(
-		child => child && child.type.isGridHeading,
-	);
+	const {
+		headingChildren,
+		cellComponents,
+		largeOnlyColumns,
+		smallOnlyColumns,
+		suppressRowClick,
+	} = useParseChildrenSettings(children, additionalCellComponents);
 
-	const cellComponents = headingChildren
-		.filter(child => !!child.props.cellComponent)
-		.reduce((components, child) => {
-			components[child.props.fieldName] = child.props.cellComponent;
-			return components;
-		}, {});
-
-	const largeOnlyColumns = headingChildren
-		.filter(child => child.props.isLargeViewportOnly)
-		.map(child => child.props.fieldName);
-
-	const smallOnlyColumns = headingChildren
-		.filter(child => child.props.isSmallViewportOnly)
-		.map(child => child.props.fieldName);
-
-	const suppressRowClick = headingChildren.some(child => child.props.hasInteractableElement);
+	console.log(cellComponents);
 
 	const handleGridResize = useCallback(() => {
 		if (gridApi) {
@@ -168,7 +159,7 @@ export function BaseGrid({
 				rowHeight={rowHeight || defaultRowHeight}
 				suppressHorizontalScroll
 				rowClass={onRowClick ? 'ag-grid-clickable-row' : ''}
-				groupUseEntireRow
+				groupUseEntireRow={!disableGroupUsesWholeRow}
 				deltaRowDataMode
 				getRowNodeId={handleGetRowId || getRowNodeId}
 				suppressRowClickSelection={suppressRowClick}
@@ -190,6 +181,7 @@ export function BaseGrid({
 						groupByColumn,
 						hide,
 						isLargeViewportOnly,
+						isSmallViewportOnly,
 						...columnProps
 					} = child.props;
 					return (
@@ -227,7 +219,11 @@ BaseGrid.propTypes = {
 	/** The Max amount of rows to show in the table */
 	maxRows: PropTypes.number,
 	/** An array of the data for the rows */
-	data: PropTypes.array.isRequired,
+	data: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+		}),
+	),
 	/** The current sort model for the table */
 	sortModel: PropTypes.object,
 	/** Called when `sortModel` is updated by the table */
@@ -247,5 +243,35 @@ BaseGrid.propTypes = {
 	/** Your data should have an id property or this handler must be included */
 	handleGetRowId: PropTypes.func,
 	children: PropTypes.node,
-	shouldShowDragHandles: PropTypes.bool,
 };
+
+function useParseChildrenSettings(children, additionalCellComponents = []) {
+	const headingChildren = React.Children.toArray(children).filter(
+		child => child && child.type.isGridHeading,
+	);
+
+	const cellComponents = headingChildren
+		.filter(child => !!child.props.cellComponent)
+		.reduce((components, child) => {
+			components[child.props.fieldName] = child.props.cellComponent;
+			return components;
+		}, {});
+
+	const largeOnlyColumns = headingChildren
+		.filter(child => child.props.isLargeViewportOnly)
+		.map(child => child.props.fieldName);
+
+	const smallOnlyColumns = headingChildren
+		.filter(child => child.props.isSmallViewportOnly)
+		.map(child => child.props.fieldName);
+
+	const suppressRowClick = headingChildren.some(child => child.props.hasInteractableElement);
+
+	return {
+		headingChildren,
+		cellComponents: { ...cellComponents, ...additionalCellComponents },
+		largeOnlyColumns,
+		smallOnlyColumns,
+		suppressRowClick,
+	};
+}
