@@ -8,7 +8,7 @@ const breakpoints = indexed(mediaSizes);
 
 const mediaQueries = mapMediaQueries(mediaSizes);
 
-const space = [0, 2, 4, 8, 12, 16, 24, 32, 64, 96];
+const space = ['0px', '2px', '4px', '8px', '12px', '16px', '24px', '32px', '64px', '96px'];
 
 const fontSizes = [
 	'12px',
