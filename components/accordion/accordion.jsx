@@ -1,9 +1,16 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Box } from '../Box';
 import { useKeyboardNav, AccordionContextProvider } from './accordion-util';
-import * as Styled from './styled-accordion';
 
-export function Accordion({ children, expandedSections, hideArrows, onExpansion, styleOverrides }) {
+export function Accordion({
+	children,
+	expandedSections,
+	hideArrows,
+	onExpansion,
+	styleOverrides,
+	...props
+}) {
 	const [focusedMenuItem, setFocusedMenuItem] = useState(null);
 	const focusableChildList = useRef([]);
 	const handleKeyboardNav = useKeyboardNav(
@@ -47,13 +54,13 @@ export function Accordion({ children, expandedSections, hideArrows, onExpansion,
 	);
 
 	return (
-		<Styled.Accordion onKeyDown={handleKeyboardNav}>
+		<Box {...props} onKeyDown={handleKeyboardNav}>
 			<AccordionContextProvider value={context}>
 				{React.Children.map(children, (child, index) =>
 					React.isValidElement(child) ? React.cloneElement(child, { index }) : null,
 				)}
 			</AccordionContextProvider>
-		</Styled.Accordion>
+		</Box>
 	);
 }
 

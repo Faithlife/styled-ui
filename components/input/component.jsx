@@ -106,7 +106,7 @@ const StyledInput = styled.input`
 	${textStyle};
 
 	height: 32px;
-	padding: ${({ theme }) => theme.space[3]}px;
+	padding: ${({ theme }) => theme.space[3]};
 
 ${({ theme, styleOverrides = {} }) => css`
 	border: 1px solid;

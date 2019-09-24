@@ -1,9 +1,12 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { Text } from '../Text';
+import { Box } from '../Box';
 import ExpandedIcon from './svgs/expanded-icon.svg';
 import CollapsedIcon from './svgs/collapsed-icon.svg';
 import { useAccordionContext, useAccordionItemContext } from './accordion-util';
-import * as Styled from './styled-header';
+import { resetStyles } from '../utils';
 
 export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, subtitle }) {
 	const {
@@ -44,10 +47,17 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 			focusableChildList.current.push(headerId);
 		}
 	}, [headerId, focusableChildList]);
+
 	return (
-		<Styled.HeadingWrapper renderCustomIndicator={renderCustomIndicator}>
-			<Styled.Heading ariaLevel={ariaLevel}>
-				<Styled.Button
+		<Box
+			display="grid"
+			gridArea="header"
+			gridTemplateColumns={
+				renderCustomIndicator ? '[title] 1fr [indicator] min-content' : '[title] auto [space] 0'
+			}
+		>
+			<Heading ariaLevel={ariaLevel}>
+				<Button
 					isExpanded={isExpanded}
 					onBlur={handleBlur}
 					onClick={handleExpansion}
@@ -56,25 +66,45 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 					panelId={panelId}
 					headerId={headerId}
 				>
-					<Styled.ButtonContentWrapper hideArrows={hideArrows} subtitle={subtitle}>
-						<React.Fragment>
+					<ButtonContentWrapper
+						paddingY={5}
+						paddingX={[5, 6]}
+						gridColumnGap={4}
+						hideArrows={hideArrows}
+						subtitle={subtitle}
+					>
+						<>
 							{!hideArrows && (
 								<img src={isExpanded ? ExpandedIcon : CollapsedIcon} role="presentation" alt="" />
 							)}
-							<Styled.ButtonContent>
-								{children ? <Styled.Title>{children}</Styled.Title> : null}
-								{subtitle ? <Styled.Subtitle>{subtitle}</Styled.Subtitle> : null}
-							</Styled.ButtonContent>
-						</React.Fragment>
-					</Styled.ButtonContentWrapper>
-				</Styled.Button>
-			</Styled.Heading>
+							<ButtonContent>
+								{children ? (
+									<Text
+										textStyle="ui.16"
+										textTransform="uppercase"
+										display="grid"
+										color="gray52"
+										fontWeight="semibold"
+									>
+										{children}
+									</Text>
+								) : null}
+								{subtitle ? (
+									<Text textStyle="ui.14" display="grid" color="gray52">
+										{subtitle}
+									</Text>
+								) : null}
+							</ButtonContent>
+						</>
+					</ButtonContentWrapper>
+				</Button>
+			</Heading>
 			{renderCustomIndicator ? (
-				<Styled.Indicator>
+				<Box gridColumn="indicator" gridRow={1} marginTop={5} marginRight={[5, 6]}>
 					{renderCustomIndicator({ isExpanded, onExpansion: handleExpansion })}
-				</Styled.Indicator>
+				</Box>
 			) : null}
-		</Styled.HeadingWrapper>
+		</Box>
 	);
 }
 
@@ -88,3 +118,47 @@ AccordionHeader.propTypes = {
 	/** Receives an isExpanded boolean value. */
 	renderCustomIndicator: PropTypes.func,
 };
+
+const Heading = styled.header.attrs(({ ariaLevel }) => ({
+	role: 'heading',
+	'aria-level': ariaLevel,
+}))`
+	grid-column: 1 / span 2;
+	grid-row: 1;
+	min-width: 0;
+	width: 100%;
+`;
+
+const Button = styled.button.attrs(({ isExpanded, panelId, headerId }) => ({
+	role: 'button',
+	'aria-expanded': isExpanded,
+	'aria-controls': `accordion-panel-${panelId}`,
+	id: `accordion-header-${headerId}`,
+}))`
+	${resetStyles};
+
+	padding: 0;
+	border: 0;
+	background: 0;
+	appearance: none;
+	width: 100%;
+	height: 100%;
+	text-align: left;
+`;
+
+const ButtonContentWrapper = styled(Box)`
+	display: grid;
+	align-items: center;
+	grid-template-columns: ${props => (props.hideArrows ? 'auto' : 'min-content auto')};
+
+	line-height: 1;
+	border-top: 1px solid ${({ theme }) => theme.colors.gray14};
+	background: linear-gradient(180deg, #fafafa, hsla(0, 0%, 100%, 0));
+`;
+
+const ButtonContent = styled(Box).attrs(() => ({ gridGap: 6 }))`
+	display: inline-grid;
+	grid-template-columns: min-content auto;
+	align-items: center;
+	white-space: nowrap;
+`;

@@ -1,19 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Collapse } from '../collapse';
+import { Box } from '../Box';
 import { useAccordionItemContext } from './accordion-util';
-import * as Styled from './styled-panel';
 
-export function AccordionPanel({ children }) {
+export function AccordionPanel({ children, ...props }) {
 	const { isExpanded, headerId, panelId, styleOverrides } = useAccordionItemContext();
+	const paddingProps = {};
+	if ('panelPadding' in styleOverrides) {
+		paddingProps.padding = styleOverrides.panelPadding;
+	} else if (!('padding' in props)) {
+		paddingProps.padding = 6;
+		paddingProps.paddingTop = 4;
+	}
+
 	return (
-		<Styled.PanelContainer>
-			<Collapse isOpen={isExpanded}>
-				<Styled.Panel headerId={headerId} panelId={panelId} styleOverrides={styleOverrides}>
-					{children}
-				</Styled.Panel>
-			</Collapse>
-		</Styled.PanelContainer>
+		<Collapse isOpen={isExpanded}>
+			<Panel headerId={headerId} panelId={panelId} {...paddingProps} {...props}>
+				{children}
+			</Panel>
+		</Collapse>
 	);
 }
 
@@ -21,3 +28,9 @@ AccordionPanel.propTypes = {
 	/** Children will be rendered as contents of the panel. */
 	children: PropTypes.node,
 };
+
+const Panel = styled(Box).attrs(({ headerId, panelId }) => ({
+	role: 'region',
+	'aria-labelledby': `accordion-header-${headerId}`,
+	id: `accordion-panel-${panelId}`,
+}))``;

@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useId } from '../shared-hooks';
+import { Box } from '../Box';
 import { useAccordionContext, AccordionItemContextProvider } from './accordion-util';
-import * as Styled from './styled-item';
 
 export function AccordionItem({ children, index }) {
 	const { expandedSections, onExpansion, styleOverrides } = useAccordionContext();
@@ -29,9 +29,15 @@ export function AccordionItem({ children, index }) {
 	);
 
 	return (
-		<Styled.Item>
+		<Box
+			display="grid"
+			gridTemplateAreas={`
+				'header'
+				'panel'
+			`}
+		>
 			<AccordionItemContextProvider value={context}>{children}</AccordionItemContextProvider>
-		</Styled.Item>
+		</Box>
 	);
 }
 
