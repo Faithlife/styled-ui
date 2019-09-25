@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Reference } from 'react-popper';
 import { useAddInboundsElement } from '../shared-hooks';
-import * as Styled from './styled';
+import { Box } from '../Box';
 
 export const PopoverContext = React.createContext();
 
@@ -16,9 +16,9 @@ export function usePopoverContext() {
 export const PopoverReference = ({ children, ...referenceProps }) => (
 	<Reference>
 		{({ ref }) => (
-			<Styled.ReferenceContainer {...referenceProps} ref={ref}>
+			<Box display="inline-block" {...referenceProps} ref={ref}>
 				{children}
-			</Styled.ReferenceContainer>
+			</Box>
 		)}
 	</Reference>
 );

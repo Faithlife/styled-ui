@@ -126,7 +126,3 @@ const arrowStyles = {
 		}
 	`,
 };
-
-export const ReferenceContainer = styled.div`
-	display: inline-block;
-`;
