@@ -97,7 +97,7 @@ export const Button = styled.button`
 					},
 					minor: {
 						border: '1px solid',
-						color: disabled ? 'gray22' : 'flgray',
+						color: disabled ? 'gray34' : 'gray66',
 					},
 					minorTransparent: {
 						border: '1px solid transparent',

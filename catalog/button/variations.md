@@ -101,13 +101,13 @@ showSource: true
 		<Button variant="primaryOutline" size="medium">
 			Primary Outline
 		</Button>
-		<Button minor size="medium">
+		<Button variant="minor" size="medium">
 			Minor
 		</Button>
 		<Button variant="primaryTransparent" size="medium" condensed>
 			Primary Transparent
 		</Button>
-		<Button minorTransparent size="medium" condensed>
+		<Button variant="minorTransparent" size="medium" condensed>
 			Minor Transparent
 		</Button>
 	</ButtonDemo>

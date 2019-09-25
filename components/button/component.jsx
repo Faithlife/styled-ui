@@ -12,7 +12,7 @@ export const Button = React.forwardRef(function Button(props, ref) {
 		children,
 		icon,
 		disabled,
-		variant,
+		variant: propsVariant,
 		size,
 		primary,
 		primaryOutline,
@@ -31,6 +31,15 @@ export const Button = React.forwardRef(function Button(props, ref) {
 	const isCoreTheme = propTheme === theme;
 
 	const themedProps = { ...buttonProps, ...(isCoreTheme ? {} : propTheme) };
+
+	const variant = getVariation(propsVariant, {
+		primary,
+		primaryOutline,
+		primaryTransparent,
+		minor,
+		minorTransparent,
+		none: true,
+	});
 
 	return (
 		<DefaultThemeProvider>
@@ -55,32 +64,28 @@ export const Button = React.forwardRef(function Button(props, ref) {
 				boxShadow="none"
 				whiteSpace="nowrap"
 				defaultColor={
-					variant !== 'minor' || minor
-						? variant === 'minorTransparent' || minorTransparent
-							? 'flgray'
-							: '#278ed4'
-						: ''
+					{
+						minor: 'gray8',
+						minorTransparent: 'gray66',
+					}[variant] || 'blue4'
 				}
 				disabledColor={
-					variant !== 'minor' || minor
-						? variant === 'minorTransparent' || minorTransparent
-							? 'gray22'
-							: '#bedcf2'
-						: ''
+					{
+						minor: 'gray4',
+						minorTransparent: 'gray22',
+					}[variant] || 'blue2'
 				}
 				hoverColor={
-					variant === 'minor' || minor
-						? 'gray14'
-						: variant === 'minorTransparent' || minorTransparent
-						? 'blue4'
-						: '#6db3e2'
+					{
+						primaryOutline: 'blue4',
+						minor: 'gray14',
+						minorTransparent: 'blue4',
+					}[variant] || 'blue5'
 				}
 				activeColor={
-					variant === 'minor' || minor
-						? 'gray22'
-						: variant === 'minorTransparent' || minorTransparent
-						? 'blue3'
-						: '#1d6ca1'
+					{
+						minor: 'gray22',
+					}[variant] || '#015d95'
 				}
 				minorBorderColor={disabled ? 'gray8' : 'gray14'}
 				minorBackgroundColor={disabled ? 'white' : 'gray4'}
