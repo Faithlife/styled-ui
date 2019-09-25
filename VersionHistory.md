@@ -1,5 +1,13 @@
 # Changelog
 
+### 5.19.0
+
+- Port `SimpleModal` to styled-system.
+- Port `Popover` to styled-system.
+- Port `Accordion` to styled-system.
+- Intentional style change: gradients and uppercasing have been removed from `AccordionHeader` components.
+- Button colors updated for active, focused, disabled state.
+
 ### 5.18.0
 
 - Port `Button` to styled-system.
