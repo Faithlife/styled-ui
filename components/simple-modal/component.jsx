@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
-import { ThemeProvider } from 'styled-components';
+import { Box } from '../Box';
 import { Button } from '../button';
 import { ModalBackdrop } from '../modal-backdrop';
 import { Close } from '../icons';
 import { debouncedResize } from '../utils';
-import * as Styled from './styled';
 
 /**
  * Simple modal with just a close icon and no padding. For a standardized modal layout, please see: Modal
@@ -19,23 +18,8 @@ export class SimpleModal extends React.Component {
 		onClose: PropTypes.func.isRequired,
 		/** Contents of the modal */
 		children: PropTypes.node.isRequired,
-		/** Customizable theme properties */
-		theme: PropTypes.object,
-		/** Style overrides, the z-index is applied to the backdrop */
-		styleOverrides: PropTypes.shape({
-			zIndex: PropTypes.number,
-		}),
 		/** Set to 'body' to attach the modal to body, otherwise will attach as a child element */
 		container: PropTypes.string,
-	};
-
-	static defaultProps = {
-		theme: {
-			background: 'white',
-		},
-		styleOverrides: {
-			zIndex: 1050,
-		},
 	};
 
 	state = {
@@ -77,28 +61,33 @@ export class SimpleModal extends React.Component {
 		const { theme, onClose, children, styleOverrides } = this.props;
 		const { modalWidth } = this.state;
 
-		const backdropStyleOverrides = {
-			zIndex: styleOverrides.zIndex,
-		};
-
 		return (
-			<ThemeProvider theme={{ ...theme }}>
-				<ModalBackdrop onClose={onClose} styleOverrides={backdropStyleOverrides}>
-					<Styled.SimpleModal
-						ref={modal => {
-							this._modal = modal;
-							if (modal && modalWidth === null) {
-								this.setState({ modalWidth: modal.clientWidth });
-							}
-						}}
-					>
-						<Styled.ModalClose>
-							<Button variant="minorTransparent" icon={<Close />} onClick={onClose} />
-						</Styled.ModalClose>
-						{children}
-					</Styled.SimpleModal>
-				</ModalBackdrop>
-			</ThemeProvider>
+			<ModalBackdrop onClose={onClose} zIndex={(styleOverrides && styleOverrides.zIndex) || 1050}>
+				<Box
+					ref={modal => {
+						this._modal = modal;
+						if (modal && modalWidth === null) {
+							this.setState({ modalWidth: modal.clientWidth });
+						}
+					}}
+					display="flex"
+					position="relative"
+					flexDirection="column"
+					justifyContent="center"
+					alignItems="center"
+					margin="auto"
+					width="fit-content"
+					height="fit-content"
+					maxHeight={['calc(100% - 16px)', null, '80%']}
+					borderRadius={1}
+					backgroundColor={(theme && theme.background) || 'white'}
+				>
+					<Box position="absolute" top={24} right={24} cursor="pointer" zIndex={200}>
+						<Button variant="minorTransparent" icon={<Close />} onClick={onClose} />
+					</Box>
+					{children}
+				</Box>
+			</ModalBackdrop>
 		);
 	}
 
