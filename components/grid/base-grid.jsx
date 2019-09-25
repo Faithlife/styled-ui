@@ -33,8 +33,8 @@ export function BaseGrid({
 	hasPagingBar,
 	handleGetRowId,
 	shouldShowDragHandles,
-	disableGroupUsesWholeRow,
 	additionalCellComponents,
+	additionalColumnOptions,
 }) {
 	const tableHeightPadding = hasPagingBar ? 50 : 2;
 
@@ -159,7 +159,7 @@ export function BaseGrid({
 				rowHeight={rowHeight || defaultRowHeight}
 				suppressHorizontalScroll
 				rowClass={onRowClick ? 'ag-grid-clickable-row' : ''}
-				groupUseEntireRow={!disableGroupUsesWholeRow}
+				groupUseEntireRow
 				deltaRowDataMode
 				getRowNodeId={handleGetRowId || getRowNodeId}
 				suppressRowClickSelection={suppressRowClick}
@@ -186,6 +186,7 @@ export function BaseGrid({
 					} = child.props;
 					return (
 						<AgGridColumn
+							{...additionalColumnOptions}
 							{...columnProps}
 							key={fieldName}
 							headerName={displayName}

@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useGridState } from './grid-helpers';
 import { BaseGrid } from './base-grid';
@@ -6,11 +6,22 @@ import { TreeGroupColumn } from './tree-grid-group-column';
 
 const treeGroupColumnComponent = 'treeGroupColumn';
 
+const dragDirections = {
+	up: 'up',
+	down: 'down',
+};
+
 export function TreeGrid(props) {
 	// First separate out the props that are this grid component specific
 	const { children, enableDragDrop, data, autoGroupExpansion, ...baseGridProps } = props;
 
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useGridState();
+
+	// For styling the drop target rows
+	const previousHoveredRowNode = useRef();
+	const hoveredRowNode = useRef();
+	const draggedNode = useRef();
+	const dragDirection = useRef();
 
 	const heading = React.Children.toArray(children).find(child => child && child.type.isTreeGroup);
 	useEffect(() => {
@@ -20,6 +31,15 @@ export function TreeGrid(props) {
 			);
 		}
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+	const getShouldShowDropTarget = useCallback(
+		onDirection => ({ rowIndex }) =>
+			hoveredRowNode.current &&
+			hoveredRowNode.current.rowIndex === rowIndex &&
+			draggedNode.current.rowIndex !== hoveredRowNode.current.rowIndex &&
+			dragDirection.current === onDirection,
+		[],
+	);
 
 	let groupComponent;
 	let groupColumnSettings;
@@ -34,7 +54,6 @@ export function TreeGrid(props) {
 			...groupProps
 		} = heading.props;
 
-		console.log('cellComponent', cellComponent);
 		groupComponent = cellComponent ? { [treeGroupColumnComponent]: cellComponent } : {};
 		groupColumnSettings = {
 			rowDrag: enableDragDrop,
@@ -47,6 +66,10 @@ export function TreeGrid(props) {
 				innerRenderer: cellComponent ? treeGroupColumnComponent : '',
 			},
 			cellClass: 'ag-faithlife-cell',
+			cellClassRules: {
+				'ag-faithlife-drop-target-row_below': getShouldShowDropTarget(dragDirections.down),
+				'ag-faithlife-drop-target-row_above': getShouldShowDropTarget(dragDirections.up),
+			},
 			...groupProps,
 		};
 	}
@@ -58,20 +81,33 @@ export function TreeGrid(props) {
 	}, [gridApi, enableDragDrop]);
 
 	/**
-	 *  getDataPath={this.state.getDataPath}
-		getRowNodeId={this.state.getRowNodeId}
-		autoGroupColumnDef={this.state.autoGroupColumnDef}
-		onGridReady={this.onGridReady}
-		onRowDragMove={this.onRowDragMove.bind(this)}
+	 *  onRowDragMove={this.onRowDragMove.bind(this)}
 		onRowDragLeave={this.onRowDragLeave.bind(this)}
 		onRowDragEnd={this.onRowDragEnd.bind(this)}
 	 */
 
-	const handleRowDrag = useCallback(event => {
-		console.log(event);
-	}, []);
+	const handleRowDrag = useCallback(
+		event => {
+			console.log(event);
 
-	const treeData = useMemo(() => getRows([], '', data), [data]);
+			hoveredRowNode.current = event.overNode;
+			draggedNode.current = event.node;
+			dragDirection.current = event.vDirection;
+
+			if (gridApi) {
+				const rowNodes = [hoveredRowNode.current];
+				if (previousHoveredRowNode.current) {
+					rowNodes.push(previousHoveredRowNode.current);
+				}
+
+				gridApi.refreshCells({ rowNodes });
+				previousHoveredRowNode.current = hoveredRowNode.current;
+			}
+		},
+		[gridApi],
+	);
+
+	const treeData = useMemo(() => getRowsFromTreeShape([], '', data), [data]);
 
 	console.log(groupColumnSettings, groupComponent);
 	const gridOptions = useMemo(
@@ -85,6 +121,7 @@ export function TreeGrid(props) {
 			groupDefaultExpanded: autoGroupExpansion || TreeGrid.expandedRowsOptions.none,
 			additionalCellComponents: groupComponent,
 			autoGroupColumnDef: groupColumnSettings,
+			groupUseEntireRow: false,
 		}),
 		[handleRowDrag, autoGroupExpansion, groupColumnSettings, groupComponent],
 	);
@@ -99,7 +136,12 @@ export function TreeGrid(props) {
 			gridOptions={gridOptions}
 			shouldShowDragHandles
 			data={treeData}
-			disableGroupUsesWholeRow
+			additionalColumnOptions={{
+				cellClassRules: {
+					'ag-faithlife-drop-target-row_below': getShouldShowDropTarget(dragDirections.down),
+					'ag-faithlife-drop-target-row_above': getShouldShowDropTarget(dragDirections.up),
+				},
+			}}
 		>
 			{children}
 		</BaseGrid>
@@ -107,6 +149,7 @@ export function TreeGrid(props) {
 }
 
 TreeGrid.rowSelectionOptions = BaseGrid.rowSelectionOptions;
+`	`;
 
 TreeGrid.rowTypes = {
 	folder: 'folder',
@@ -135,7 +178,7 @@ TreeGrid.propTypes = {
 	autoGroupExpansion: PropTypes.oneOf(Object.values(TreeGrid.expandedRowsOptions)),
 };
 
-function getRows(pathTo, parentId, tree) {
+function getRowsFromTreeShape(pathTo, parentId, tree) {
 	const rows = [];
 	let idCounter = 0;
 	for (const item of tree) {
@@ -144,7 +187,7 @@ function getRows(pathTo, parentId, tree) {
 
 		if (item.children && item.children.length) {
 			rows.push({ id, ...item, treeNodeType: TreeGrid.rowTypes.folder, path });
-			rows.push(...getRows(path, id, item.children));
+			rows.push(...getRowsFromTreeShape(path, id, item.children));
 		} else {
 			rows.push({ id, ...item, treeNodeType: TreeGrid.rowTypes.item, path });
 		}
