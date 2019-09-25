@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { ThemeProvider } from 'styled-components';
 import { Popper } from 'react-popper';
 import { colors } from '../shared-styles';
 import { PlacementOptionsProps, FocusHandlerInboundsElement } from './popper-helpers';
@@ -62,10 +61,6 @@ export class PopoverBase extends Component {
 			textAlign: PropTypes.string,
 			width: PropTypes.string,
 			zIndex: PropTypes.number,
-		}),
-		theme: PropTypes.shape({
-			backgroundColor: PropTypes.string,
-			textColor: PropTypes.string,
 		}),
 	};
 
@@ -160,30 +155,30 @@ export class PopoverBase extends Component {
 				positionFixed={positionFixed}
 			>
 				{({ ref, style, placement, arrowProps }) => (
-					<ThemeProvider theme={theme}>
-						<Styled.PopoverBase
-							ref={ref}
-							placement={placement}
-							style={{
-								...style,
-								...(!hideArrow ? Styled.margins[Styled.getPlacement(placement)] : {}),
-							}}
-							delay={delay}
-							onAnimationEnd={this.handleTransition}
-							hideArrow={hideArrow}
-							styleOverrides={styleOverrides}
-						>
-							{children}
-							{!hideArrow && (
-								<Styled.Arrow
-									ref={arrowProps.ref}
-									placement={placement}
-									style={arrowProps.style}
-									styleOverrides={styleOverrides}
-								/>
-							)}
-						</Styled.PopoverBase>
-					</ThemeProvider>
+					<Styled.PopoverBase
+						ref={ref}
+						placement={placement}
+						style={{
+							...style,
+							...(!hideArrow ? Styled.margins[Styled.getPlacement(placement)] : {}),
+						}}
+						delay={delay}
+						onAnimationEnd={this.handleTransition}
+						hideArrow={hideArrow}
+						styleOverrides={styleOverrides}
+						theme={theme}
+					>
+						{children}
+						{!hideArrow && (
+							<Styled.Arrow
+								ref={arrowProps.ref}
+								placement={placement}
+								style={arrowProps.style}
+								styleOverrides={styleOverrides}
+								theme={theme}
+							/>
+						)}
+					</Styled.PopoverBase>
 				)}
 			</Popper>
 		);
