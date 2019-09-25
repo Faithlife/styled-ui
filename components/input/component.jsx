@@ -113,6 +113,11 @@ ${({ theme, styleOverrides = {} }) => css`
 	border-radius: ${theme.radii[1]};
 	border-color: ${theme.colors.inputBorderColor};
 
+	${'borderColor' in styleOverrides &&
+		css`
+			border-color: ${styleOverrides.borderColor};
+		`}
+
 	${'height' in styleOverrides &&
 		css`
 			height: ${styleOverrides.height};

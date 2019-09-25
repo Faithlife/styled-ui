@@ -36,6 +36,7 @@ export class DatePickerInput extends PureComponent {
 		/** Style overrides, inputWidth is applied to the input */
 		styleOverrides: PropTypes.shape({
 			inputWidth: PropTypes.string,
+			inputBorderColor: PropTypes.string,
 			hideShadow: PropTypes.bool,
 			width: PropTypes.string,
 			padding: PropTypes.string,
@@ -152,6 +153,7 @@ export class DatePickerInput extends PureComponent {
 		const value = text ? text : formattedDate;
 		const inputStyleOverrides = {
 			width: styleOverrides.inputWidth,
+			borderColor: styleOverrides.inputBorderColor,
 		};
 		const popoverStyleOverrides = {
 			hideShadow: styleOverrides.hideShadow,
