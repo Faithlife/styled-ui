@@ -132,6 +132,7 @@ export class PopoverBase extends Component {
 			styleOverrides,
 			eventsEnabled,
 			positionFixed,
+			...props
 		} = this.props;
 		const { showPopper } = this.state;
 
@@ -164,6 +165,7 @@ export class PopoverBase extends Component {
 						styleOverrides={styleOverrides}
 						theme={theme}
 						backgroundColor={theme && theme.backgroundColor ? theme.backgroundColor : 'white'}
+						{...props}
 					>
 						{children}
 						{!hideArrow && (
