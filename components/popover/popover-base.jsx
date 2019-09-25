@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { ThemeProvider } from 'styled-components';
 import { Popper } from 'react-popper';
-import { colors } from '../shared-styles';
-import { PlacementOptionsProps, FocusHandlerInboundsElement } from './popper-helpers';
-import * as Styled from './styled';
+import { Box } from '../Box';
+import {
+	PlacementOptionsProps,
+	FocusHandlerInboundsElement,
+	arrowWidth,
+	maxWidth,
+	maxHeight,
+	margins,
+	getPlacement,
+	arrowStyles,
+} from './popper-helpers';
 
 /** Positioning helper used to display content above another element.
  *  Refs are not supported, please use PopoverManager and PopoverReference to handle positioning.
@@ -63,17 +70,10 @@ export class PopoverBase extends Component {
 			width: PropTypes.string,
 			zIndex: PropTypes.number,
 		}),
-		theme: PropTypes.shape({
-			backgroundColor: PropTypes.string,
-			textColor: PropTypes.string,
-		}),
 	};
 
 	static defaultProps = {
 		placement: 'top',
-		theme: {
-			backgroundColor: colors.white,
-		},
 		modifiers: {},
 		styleOverrides: {},
 	};
@@ -141,6 +141,7 @@ export class PopoverBase extends Component {
 			styleOverrides,
 			eventsEnabled,
 			positionFixed,
+			...props
 		} = this.props;
 		const { showPopper } = this.state;
 
@@ -160,30 +161,79 @@ export class PopoverBase extends Component {
 				positionFixed={positionFixed}
 			>
 				{({ ref, style, placement, arrowProps }) => (
-					<ThemeProvider theme={theme}>
-						<Styled.PopoverBase
-							ref={ref}
-							placement={placement}
-							style={{
-								...style,
-								...(!hideArrow ? Styled.margins[Styled.getPlacement(placement)] : {}),
-							}}
-							delay={delay}
-							onAnimationEnd={this.handleTransition}
-							hideArrow={hideArrow}
-							styleOverrides={styleOverrides}
-						>
-							{children}
-							{!hideArrow && (
-								<Styled.Arrow
-									ref={arrowProps.ref}
-									placement={placement}
-									style={arrowProps.style}
-									styleOverrides={styleOverrides}
-								/>
-							)}
-						</Styled.PopoverBase>
-					</ThemeProvider>
+					<Box
+						ref={ref}
+						placement={placement}
+						style={{
+							...style,
+							...(!hideArrow ? margins[getPlacement(placement)] : {}),
+						}}
+						delay={delay}
+						onAnimationEnd={this.handleTransition}
+						hideArrow={hideArrow}
+						background={
+							styleOverrides.background
+								? styleOverrides.background
+								: theme && theme.backgroundColor
+								? theme.backgroundColor
+								: 'white'
+						}
+						backgroundColor={theme && theme.backgroundColor ? theme.backgroundColor : 'white'}
+						border={styleOverrides.border ? styleOverrides.border : 'none'}
+						borderRadius={styleOverrides.borderRadius ? styleOverrides.borderRadius : 0}
+						boxShadow={styleOverrides.hideShadow ? 0 : 1}
+						color={theme && theme.textColor ? theme.textColor : ''}
+						fontSize={styleOverrides.fontSize ? styleOverrides.fontSize : 'medium'}
+						fontWeight={styleOverrides.fontWeight ? styleOverrides.fontWeight : 'normal'}
+						height={styleOverrides.height ? styleOverrides.height : 'auto'}
+						lineHeight={styleOverrides.lineHeight ? styleOverrides.lineHeight : 'normal'}
+						margin={styleOverrides.margin ? styleOverrides.margin : 0}
+						maxHeight={styleOverrides.maxHeight ? styleOverrides.maxHeight : maxHeight}
+						maxWidth={styleOverrides.maxWidth ? styleOverrides.maxWidth : maxWidth}
+						minHeight={styleOverrides.minHeight ? styleOverrides.minHeight : ''}
+						minWidth={styleOverrides.minWidth ? styleOverrides.minWidth : ''}
+						outline={styleOverrides.outline ? styleOverrides.outline : ''}
+						padding={styleOverrides.padding ? styleOverrides.padding : 0}
+						position="absolute"
+						whiteSpace="normal"
+						width={styleOverrides.width ? styleOverrides.width : 'auto'}
+						zIndex={styleOverrides.zIndex ? styleOverrides.zIndex : 'menu'}
+						css={`
+							text-align: ${styleOverrides.textAlign ? styleOverrides.textAlign : 'center'};
+							${styleOverrides.overflow ? `overflow: ${styleOverrides.overflow}` : ''};
+						`}
+						{...props}
+					>
+						{children}
+						{!hideArrow && (
+							<Box
+								ref={arrowProps.ref}
+								placement={placement}
+								style={arrowProps.style}
+								width="25px"
+								height="25px"
+								position="absolute"
+								overflow="hidden"
+								pointerEvents="none"
+								css={`
+									&::after {
+										content: '';
+										border: ${styleOverrides.border ? styleOverrides.border : 'none'};
+										position: absolute;
+										width: ${arrowWidth};
+										height: ${arrowWidth};
+										background: ${theme && theme.backgroundColor ? theme.backgroundColor : 'white'};
+										transform: translateX(-50%) translateY(-50%) rotate(45deg);
+										box-shadow: ${styleOverrides.hideShadow
+											? 'none'
+											: '0 4px 4px 0 rgba(0, 0, 0, 0.12), 0 0 4px 0 rgba(0, 0, 0, 0.12)'};
+									}
+									${({ placement }) =>
+										placement ? arrowStyles[getPlacement(placement)] : arrowStyles.top};
+								`}
+							/>
+						)}
+					</Box>
 				)}
 			</Popper>
 		);
