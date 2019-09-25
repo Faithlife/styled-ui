@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { colors } from '../shared-styles';
+import { Box } from '../Box';
 
 const arrowWidth = '10px';
 const maxWidth = '1000px';
@@ -19,7 +20,7 @@ export const getPlacement = placement => {
 	return placement.split('-')[0];
 };
 
-export const PopoverBase = styled.div`
+export const PopoverBase = styled(Box)`
 	background: ${({ styleOverrides }) =>
 		styleOverrides.background
 			? styleOverrides.background
@@ -74,7 +75,7 @@ export const PopoverBase = styled.div`
 		styleOverrides.overflow ? `overflow: ${styleOverrides.overflow}` : ''};
 `;
 
-export const Arrow = styled.div`
+export const Arrow = styled(Box)`
 	width: 25px;
 	height: 25px;
 	position: absolute;

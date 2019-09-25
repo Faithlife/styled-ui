@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Popper } from 'react-popper';
-import { colors } from '../shared-styles';
 import { PlacementOptionsProps, FocusHandlerInboundsElement } from './popper-helpers';
 import * as Styled from './styled';
 
@@ -66,9 +65,6 @@ export class PopoverBase extends Component {
 
 	static defaultProps = {
 		placement: 'top',
-		theme: {
-			backgroundColor: colors.white,
-		},
 		modifiers: {},
 		styleOverrides: {},
 	};
@@ -167,6 +163,7 @@ export class PopoverBase extends Component {
 						hideArrow={hideArrow}
 						styleOverrides={styleOverrides}
 						theme={theme}
+						backgroundColor={theme && theme.backgroundColor ? theme.backgroundColor : 'white'}
 					>
 						{children}
 						{!hideArrow && (
