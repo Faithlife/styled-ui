@@ -29,7 +29,7 @@ PopoverManager.propTypes = {
 	onFocusAway: PropTypes.func,
 };
 
-const FocusCatcher = styled(Box).attrs({ tabIndex: '-1' })`
+const FocusCatcher = styled(Box)`
 	&:focus {
 		outline: none;
 		box-shadow: none;
