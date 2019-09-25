@@ -57,3 +57,54 @@ export const PlacementOptionsProps = PropTypes.oneOf([
 	'left-start',
 	'left-end',
 ]);
+
+export const arrowWidth = '10px';
+export const maxWidth = '1000px';
+export const maxHeight = '1000px';
+
+export const margins = {
+	top: { marginBottom: arrowWidth },
+	right: { marginLeft: arrowWidth },
+	left: { marginRight: arrowWidth },
+	bottom: { marginTop: arrowWidth },
+};
+
+export const getPlacement = placement => {
+	if (!placement) {
+		return 'top';
+	}
+	return placement.split('-')[0];
+};
+
+export const arrowStyles = {
+	top: `
+		top: 100%;
+
+		&::after {
+			top: 0;
+		}
+	`,
+	right: `
+		right: 100%;
+
+		&::after {
+			top: 50%;
+			left: 100%;
+		}
+	`,
+	left: `
+		left: 100%;
+
+		&::after {
+			top: 50%;
+			left: 0;
+		}
+	`,
+	bottom: `
+		bottom: 100%;
+
+		&::after {
+			top: 100%;
+		}
+	`,
+};
