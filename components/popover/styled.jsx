@@ -130,12 +130,3 @@ const arrowStyles = {
 export const ReferenceContainer = styled.div`
 	display: inline-block;
 `;
-
-export const FocusCatcher = styled.div.attrs({ tabIndex: '-1' })`
-	display: inline-block;
-
-	&:focus {
-		outline: none;
-		box-shadow: none;
-	}
-`;
