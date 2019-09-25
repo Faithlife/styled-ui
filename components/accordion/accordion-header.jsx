@@ -79,13 +79,7 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 							)}
 							<ButtonContent>
 								{children ? (
-									<Text
-										textStyle="ui.16"
-										textTransform="uppercase"
-										display="grid"
-										color="gray52"
-										fontWeight="semibold"
-									>
+									<Text textStyle="ui.16" display="grid" color="gray52" fontWeight="semibold">
 										{children}
 									</Text>
 								) : null}
@@ -153,7 +147,6 @@ const ButtonContentWrapper = styled(Box)`
 
 	line-height: 1;
 	border-top: 1px solid ${({ theme }) => theme.colors.gray14};
-	background: linear-gradient(180deg, #fafafa, hsla(0, 0%, 100%, 0));
 `;
 
 const ButtonContent = styled(Box).attrs(() => ({ gridGap: 6 }))`
