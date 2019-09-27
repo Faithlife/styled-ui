@@ -77,6 +77,11 @@ export const Button = styled.button`
 					primary: {
 						border: '1px solid',
 						color: 'white',
+						'@media (hover: hover)': {
+							'&:hover': {
+								color: disabled || 'white',
+							},
+						},
 					},
 					primaryOutline: {
 						border: '1px solid',
@@ -98,6 +103,11 @@ export const Button = styled.button`
 					minor: {
 						border: '1px solid',
 						color: disabled ? 'gray34' : 'gray66',
+						'@media (hover: hover)': {
+							'&:hover': {
+								color: disabled || 'gray66',
+							},
+						},
 					},
 					minorTransparent: {
 						border: '1px solid transparent',
