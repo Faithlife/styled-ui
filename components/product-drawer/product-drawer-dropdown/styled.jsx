@@ -33,11 +33,16 @@ export const ProductDrawerDropdown = styled.div`
 		left: auto;
 		bottom: auto;
 		top: auto;
+		transform: translateX(22%);
 		overflow-y: auto;
 		animation-duration: 300ms;
 		animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
 		animation-fill-mode: forwards;
 		animation-name: ${dropdownSlideDownFadeIn};
+	}
+
+	@media (min-width: ${mediaSizes.desktop}) {
+		transform: translateX(0);
 	}
 
 	right: 0;
