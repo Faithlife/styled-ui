@@ -71,7 +71,7 @@ export const Button = React.forwardRef(function Button(props, ref) {
 				}
 				disabledColor={
 					{
-						minor: 'gray4',
+						minor: 'gray22',
 						minorTransparent: 'gray22',
 					}[variant] || 'blue2'
 				}

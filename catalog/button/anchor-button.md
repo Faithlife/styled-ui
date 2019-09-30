@@ -15,6 +15,9 @@ showSource: true
 	</AnchorButton>
 	<AnchorButton href="#settings" variant="primary" condensed size="small" icon={<GearIcon />} />
 	<AnchorButton href="#settings" variant="primary" size="small">Settings</AnchorButton>
-	<AnchorButton href="#settings" primaryTransparent size="small">Settings</AnchorButton>
+	<AnchorButton href="#settings" variant="minor" size="small">Settings</AnchorButton>
+	<AnchorButton href="#settings" variant="minorTransparent" size="small">Settings</AnchorButton>
+	<AnchorButton href="#settings" variant="primaryOutline" size="small">Settings</AnchorButton>
+	<AnchorButton href="#settings" variant="primaryTransparent" size="small">Settings</AnchorButton>
 </ButtonDemo>
 ```
