@@ -144,5 +144,10 @@ state: { isOpen: false }
 	<Tooltip content={<StyledDiv>Hello!</StyledDiv>}>
 		<Button variant="primary" size="medium">Tooltip with jsx</Button>
 	</Tooltip>
+	<Box minWidth="min-content">
+	<Tooltip content={<StyledDiv>Hello!</StyledDiv>}>
+		<GearIcon />
+	</Tooltip>
+	</Box>
 </PopoverDemo>
 ```

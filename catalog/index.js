@@ -598,16 +598,21 @@ const components = [
 				title: 'Popover Variations',
 				content: pageLoader(() => import('./popover/variations.md')),
 				imports: {
+					Box,
 					Button,
+					GearIcon,
 					Popover,
 					PopoverBase,
 					Tooltip,
 					PopoverManager,
 					PopoverReference,
 					PopoverDemo: styled.div`
-						display: flex;
-						align-items: flex-start;
+						display: grid;
+						grid-auto-flow: column;
+						grid-gap: 12px;
+						grid-auto-columns: min-content;
 						justify-content: space-between;
+						align-items: center;
 					`,
 					PopoverOverflowDemo: styled.div`
 						display: flex;
