@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.19.2
+
+- Add support for pointerEvents styled-system prop.
+
 ### 5.19.1
 
 - Fix bug allowing hover colors to be inheritted by `AnchorButton`.
