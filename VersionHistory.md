@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.19.1
+
+- Fix bug allowing hover colors to be inheritted by `AnchorButton`.
+
 ### 5.19.0
 
 - Port `SimpleModal` to styled-system.
