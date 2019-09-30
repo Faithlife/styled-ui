@@ -19,6 +19,7 @@ export const common = compose(
 	styledSystem.color,
 	styledSystem.display,
 	styledSystem.system({
+		pointerEvents: true,
 		transform: true,
 		transition: true,
 	}),
