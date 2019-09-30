@@ -79,7 +79,7 @@ export const Button = styled.button`
 						color: 'white',
 						'@media (hover: hover)': {
 							'&:hover': {
-								color: disabled || 'white',
+								color: 'white',
 							},
 						},
 					},
@@ -88,7 +88,7 @@ export const Button = styled.button`
 						background: 'none',
 						'@media (hover: hover)': {
 							'&:hover': {
-								color: disabled || 'white',
+								color: disabled ? 'blue2' : 'white',
 							},
 						},
 						'&:active': {
@@ -102,10 +102,10 @@ export const Button = styled.button`
 					},
 					minor: {
 						border: '1px solid',
-						color: disabled ? 'gray34' : 'gray66',
+						color: disabled ? 'gray22' : 'gray66',
 						'@media (hover: hover)': {
 							'&:hover': {
-								color: disabled || 'gray66',
+								color: disabled ? 'gray22' : 'gray66',
 							},
 						},
 					},
