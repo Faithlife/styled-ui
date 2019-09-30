@@ -36,6 +36,7 @@ export class DatePickerInput extends PureComponent {
 		/** Style overrides, inputWidth is applied to the input */
 		styleOverrides: PropTypes.shape({
 			inputWidth: PropTypes.string,
+			inputBorderColor: PropTypes.string,
 			hideShadow: PropTypes.bool,
 			width: PropTypes.string,
 			padding: PropTypes.string,
@@ -150,9 +151,7 @@ export class DatePickerInput extends PureComponent {
 		const defaultValue = defaultSelectedDate ? this.formatDate(defaultSelectedDate) : '';
 		const formattedDate = selectedDate ? this.formatDate(selectedDate) : defaultValue;
 		const value = text ? text : formattedDate;
-		const inputStyleOverrides = {
-			width: styleOverrides.inputWidth,
-		};
+		const inputStyleOverrides = { width: styleOverrides.inputWidth };
 		const popoverStyleOverrides = {
 			hideShadow: styleOverrides.hideShadow,
 			width: styleOverrides.width,
@@ -171,6 +170,7 @@ export class DatePickerInput extends PureComponent {
 						onFocus={this.handleFocus}
 						value={value}
 						disabled={disabled}
+						borderColor={styleOverrides.inputBorderColor}
 						styleOverrides={inputStyleOverrides}
 					/>
 					<Styled.CalendarButton ref={this.icon} onClick={!disabled ? this.openCalendar : null}>
