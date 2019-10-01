@@ -26,47 +26,39 @@ function getHeight(node) {
 /** Collapsable accordion component. Useful for nodes that have 'height: auto'. Ported from reactstrap */
 export const Collapse = forwardClassRef(
 	class Collapse extends Component {
-		constructor(props) {
-			super(props);
-
-			this.state = {
-				height: null,
-			};
-
-			['onEntering', 'onEntered', 'onExit', 'onExiting', 'onExited'].forEach(name => {
-				this[name] = this[name].bind(this);
-			});
-		}
-
 		static propTypes = propTypes;
 		static defaultProps = defaultProps;
 
-		onEntering(node, isAppearing) {
+		state = {
+			height: null,
+		};
+
+		onEntering = (node, isAppearing) => {
 			this.setState({ height: getHeight(node) });
 			this.props.onEntering(node, isAppearing);
-		}
+		};
 
-		onEntered(node, isAppearing) {
+		onEntered = (node, isAppearing) => {
 			this.setState({ height: null });
 			this.props.onEntered(node, isAppearing);
-		}
+		};
 
-		onExit(node) {
+		onExit = node => {
 			this.setState({ height: getHeight(node) });
 			this.props.onExit(node);
-		}
+		};
 
-		onExiting(node) {
+		onExiting = node => {
 			// getting this variable triggers a reflow
 			const _unused = node.offsetHeight; // eslint-disable-line
 			this.setState({ height: 0 });
 			this.props.onExiting(node);
-		}
+		};
 
-		onExited(node) {
+		onExited = node => {
 			this.setState({ height: null });
 			this.props.onExited(node);
-		}
+		};
 
 		render() {
 			const {
@@ -112,7 +104,6 @@ export const Collapse = forwardClassRef(
 						return (
 							<Box
 								{...otherProps}
-								onClick={this.handleClick}
 								transitionStatus={status}
 								style={{ ...otherProps.style, ...style }}
 								ref={forwardedRef}
