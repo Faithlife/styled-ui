@@ -20,7 +20,7 @@ $row-height: $grid-size * 5 !default;
 $row-border-width: 1px !default;
 $toolpanel-indent-size: $grid-size + $icon-size !default;
 $row-group-indent-size: $grid-size * 3 + $icon-size !default;
-$cell-horizontal-padding: $grid-size * 2 !default;
+$cell-horizontal-padding: $grid-size !default;
 $virtual-item-height: $grid-size * 5;
 $header-icon-size: 14px !default;
 
@@ -53,7 +53,7 @@ $header-cell-hover-background-color: $header-background-color !default;
 $header-cell-moving-background-color: $header-cell-hover-background-color !default;
 $header-foreground-color: $secondary-foreground-color !default;
 
-$border-color: #e0dfdf !default;
+$border-color: #c7c7c7 !default;
 $primary-color: black !default;
 $accent-color: black !default;
 $icon-color: #333 !default;
@@ -330,5 +330,21 @@ $params: (
 				border-top: $drop-target-border;
 			}
 		}
+	}
+
+	.ag-header-cell:not(:last-child)::after,
+	.ag-header-group-cell:not(:last-child)::after {
+		right: 0;
+		border-right: 1px solid $border-color !important;
+		content: ' ';
+		height: $header-height;
+		position: absolute;
+		text-indent: -2000px;
+		top: 0;
+	}
+
+	.ag-header-cell:last-child::after,
+	.ag-header-group-cell:last-child::after {
+		display: none;
 	}
 }
