@@ -22,17 +22,17 @@ This documentation is automatically generated from jsdoc comments.
 ```react
 noSource: true
 ---
-<DocgenTable component={BaseTable} displayName="Shared props between all tables" />
+<DocgenTable component={BaseGrid} displayName="Shared props between all tables" />
 ```
 
 ```react
 noSource: true
 ---
-<DocgenTable component={PaginatedTable} />
+<DocgenTable component={PaginatedGrid} />
 ```
 
 ```react
 noSource: true
 ---
-<DocgenTable component={TableHeading} />
+<DocgenTable component={GridColumn} />
 ```

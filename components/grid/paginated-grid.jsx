@@ -1,25 +1,13 @@
 import React, { useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { useTableState } from './table-helpers';
-import { BaseTable } from './base-table';
+import { useGridState } from './grid-helpers';
+import { BaseGrid } from './base-grid';
 
-export function PaginatedTable({
-	onRowClick,
-	maxRows,
-	children,
-	isSmallViewport,
-	filterText,
-	sortModel,
-	updateSortModel,
-	currentPageNumber,
-	onPageNumberChange,
-	data,
-	rowSelectionType,
-	hideHeaders,
-	rowHeight,
-	handleGetRowId,
-}) {
-	const { gridApi, setGridApi, columnApi, setColumnApi } = useTableState();
+export function PaginatedGrid(props) {
+	// First separate out the props that are this grid component specific
+	const { children, currentPageNumber, onPageNumberChange, maxRows, ...baseGridProps } = props;
+
+	const { gridApi, setGridApi, columnApi, setColumnApi } = useGridState();
 
 	useEffect(() => {
 		if (gridApi && currentPageNumber !== null && currentPageNumber !== undefined) {
@@ -44,34 +32,25 @@ export function PaginatedTable({
 	);
 
 	return (
-		<BaseTable
+		<BaseGrid
+			{...baseGridProps}
 			gridApi={gridApi}
 			setGridApi={setGridApi}
 			columnApi={columnApi}
 			setColumnApi={setColumnApi}
-			onRowClick={onRowClick}
-			isSmallViewport={isSmallViewport}
-			maxRows={maxRows}
-			filterText={filterText}
-			sortModel={sortModel}
 			gridOptions={gridOptions}
-			updateSortModel={updateSortModel}
-			rowSelectionType={rowSelectionType}
-			data={data}
-			hideHeaders={hideHeaders}
-			rowHeight={rowHeight}
+			maxRows={maxRows}
 			hasPagingBar
-			handleGetRowId={handleGetRowId}
 		>
 			{children}
-		</BaseTable>
+		</BaseGrid>
 	);
 }
 
-PaginatedTable.rowSelectionOptions = BaseTable.rowSelectionOptions;
+PaginatedGrid.rowSelectionOptions = BaseGrid.rowSelectionOptions;
 
-PaginatedTable.propTypes = {
-	...BaseTable.propTypes,
+PaginatedGrid.propTypes = {
+	...BaseGrid.propTypes,
 	currentPageNumber: PropTypes.number,
 	onPageNumberChange: PropTypes.func,
 };

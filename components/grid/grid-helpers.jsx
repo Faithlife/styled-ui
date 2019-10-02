@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export function useTableState() {
+export function useGridState() {
 	const [gridApi, setGridApi] = useState(null);
 	const [columnApi, setColumnApi] = useState(null);
 

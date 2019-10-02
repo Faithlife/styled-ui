@@ -9,7 +9,7 @@ const headerHeight = defaultRowHeight - 5;
 const noRowsDefaultTableHeight = 200;
 
 /** A wrapper of ag-grid with some boilerplate code to handle initialization and sorting/ filtering */
-export function BaseTable({
+export function BaseGrid({
 	gridApi,
 	setGridApi,
 	columnApi,
@@ -32,6 +32,8 @@ export function BaseTable({
 	rowHeight,
 	hasPagingBar,
 	handleGetRowId,
+	additionalCellComponents,
+	additionalColumnOptions,
 }) {
 	const tableHeightPadding = hasPagingBar ? 50 : 2;
 
@@ -75,26 +77,13 @@ export function BaseTable({
 		onRowClick && onRowClick(selectedRows);
 	}, [gridApi, onRowClick]);
 
-	const headingChildren = React.Children.toArray(children).filter(
-		child => child && child.type.isTableHeading,
-	);
-
-	const cellComponents = headingChildren
-		.filter(child => !!child.props.cellComponent)
-		.reduce((components, child) => {
-			components[child.props.fieldName] = child.props.cellComponent;
-			return components;
-		}, {});
-
-	const largeOnlyColumns = headingChildren
-		.filter(child => child.props.isLargeViewportOnly)
-		.map(child => child.props.fieldName);
-
-	const smallOnlyColumns = headingChildren
-		.filter(child => child.props.isSmallViewportOnly)
-		.map(child => child.props.fieldName);
-
-	const suppressRowClick = headingChildren.some(child => child.props.hasInteractableElement);
+	const {
+		headingChildren,
+		cellComponents,
+		largeOnlyColumns,
+		smallOnlyColumns,
+		suppressRowClick,
+	} = parseChildrenSettings(children, additionalCellComponents);
 
 	const handleGridResize = useCallback(() => {
 		if (gridApi) {
@@ -159,8 +148,8 @@ export function BaseTable({
 				onSelectionChanged={handleSelectionChanged}
 				rowSelection={
 					!onRowClick
-						? BaseTable.rowSelectionOptions.none
-						: rowSelectionType || BaseTable.rowSelectionOptions.single
+						? BaseGrid.rowSelectionOptions.none
+						: rowSelectionType || BaseGrid.rowSelectionOptions.single
 				}
 				frameworkComponents={cellComponents}
 				headerHeight={!hideHeaders ? headerHeight : 0}
@@ -176,7 +165,7 @@ export function BaseTable({
 				reactNext
 				{...gridOptions}
 			>
-				{headingChildren.map(child => {
+				{headingChildren.map((child, index) => {
 					const {
 						fieldName,
 						displayName,
@@ -189,10 +178,12 @@ export function BaseTable({
 						groupByColumn,
 						hide,
 						isLargeViewportOnly,
+						isSmallViewportOnly,
 						...columnProps
 					} = child.props;
 					return (
 						<AgGridColumn
+							{...additionalColumnOptions}
 							{...columnProps}
 							key={fieldName}
 							headerName={displayName}
@@ -214,18 +205,22 @@ export function BaseTable({
 	);
 }
 
-BaseTable.rowSelectionOptions = {
+BaseGrid.rowSelectionOptions = {
 	none: '',
 	single: 'single',
 	multi: 'multiple',
 };
 
-BaseTable.propTypes = {
+BaseGrid.propTypes = {
 	isSmallViewport: PropTypes.bool,
 	/** The Max amount of rows to show in the table */
 	maxRows: PropTypes.number,
 	/** An array of the data for the rows */
-	data: PropTypes.array.isRequired,
+	data: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+		}),
+	),
 	/** The current sort model for the table */
 	sortModel: PropTypes.object,
 	/** Called when `sortModel` is updated by the table */
@@ -233,7 +228,7 @@ BaseTable.propTypes = {
 	/** Text to filter the rows on */
 	filterText: PropTypes.string,
 	/** Whether to allow single or multi row select */
-	rowSelectionType: PropTypes.oneOf(Object.values(BaseTable.rowSelectionOptions)),
+	rowSelectionType: PropTypes.oneOf(Object.values(BaseGrid.rowSelectionOptions)),
 	/** Handler for selected rows */
 	onRowClick: PropTypes.func,
 	/** Hide headers */
@@ -246,3 +241,34 @@ BaseTable.propTypes = {
 	handleGetRowId: PropTypes.func,
 	children: PropTypes.node,
 };
+
+function parseChildrenSettings(children, additionalCellComponents = {}) {
+	const headingChildren = React.Children.toArray(children).filter(
+		child => child && child.type.isGridHeading,
+	);
+
+	const cellComponents = headingChildren
+		.filter(child => !!child.props.cellComponent)
+		.reduce((components, child) => {
+			components[child.props.fieldName] = child.props.cellComponent;
+			return components;
+		}, {});
+
+	const largeOnlyColumns = headingChildren
+		.filter(child => child.props.isLargeViewportOnly)
+		.map(child => child.props.fieldName);
+
+	const smallOnlyColumns = headingChildren
+		.filter(child => child.props.isSmallViewportOnly)
+		.map(child => child.props.fieldName);
+
+	const suppressRowClick = headingChildren.some(child => child.props.hasInteractableElement);
+
+	return {
+		headingChildren,
+		cellComponents: { ...cellComponents, ...additionalCellComponents },
+		largeOnlyColumns,
+		smallOnlyColumns,
+		suppressRowClick,
+	};
+}
