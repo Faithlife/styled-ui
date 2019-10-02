@@ -83,7 +83,7 @@ export function BaseGrid({
 		largeOnlyColumns,
 		smallOnlyColumns,
 		suppressRowClick,
-	} = useParseChildrenSettings(children, additionalCellComponents);
+	} = parseChildrenSettings(children, additionalCellComponents);
 
 	const handleGridResize = useCallback(() => {
 		if (gridApi) {
@@ -242,7 +242,7 @@ BaseGrid.propTypes = {
 	children: PropTypes.node,
 };
 
-function useParseChildrenSettings(children, additionalCellComponents = {}) {
+function parseChildrenSettings(children, additionalCellComponents = {}) {
 	const headingChildren = React.Children.toArray(children).filter(
 		child => child && child.type.isGridHeading,
 	);

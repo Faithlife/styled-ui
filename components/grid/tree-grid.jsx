@@ -39,29 +39,38 @@ export function TreeGrid(props) {
 
 	const heading = React.Children.toArray(children).find(child => child && child.type.isTreeGroup);
 	useEffect(() => {
-		if (!heading && !enableDragDrop) {
-			console.warn(
-				'You are using a tree grid, but are not including a `<TreeGrid.GroupColumn> child',
-			);
-		}
-		if (enableDragDrop && !onDataChange) {
-			console.warn(
-				'You are using dragdrop for the tree grid, but did not supply a onDataChange function',
-			);
+		if (process.env.NODE_ENV !== 'production') {
+			if (!heading && !enableDragDrop) {
+				console.warn(
+					'You are using a tree grid, but are not including a `<TreeGrid.GroupColumn> child',
+				);
+			}
+			if (enableDragDrop && !onDataChange) {
+				console.warn(
+					'You are using dragdrop for the tree grid, but did not supply a onDataChange function',
+				);
+			}
 		}
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const getShouldShowDropTarget = useCallback(
-		onDirection => ({ rowIndex }) =>
-			hoveredRowNode.current &&
-			hoveredRowNode.current.rowIndex === rowIndex &&
-			draggedNode.current.rowIndex !== hoveredRowNode.current.rowIndex &&
-			dragDirection.current === onDirection &&
-			(!isValidDropTarget ||
-				isValidDropTarget(
+		onDirection => ({ rowIndex }) => {
+			if (
+				isValidDropTarget &&
+				!isValidDropTarget(
 					draggedNode.current.node.data,
 					getNewPath(hoveredRowNode.current.node, dragDirection.current),
-				)),
+				)
+			) {
+				return false;
+			}
+			return (
+				hoveredRowNode.current &&
+				hoveredRowNode.current.rowIndex === rowIndex &&
+				draggedNode.current.rowIndex !== hoveredRowNode.current.rowIndex &&
+				dragDirection.current === onDirection
+			);
+		},
 		[isValidDropTarget],
 	);
 
@@ -208,7 +217,6 @@ TreeGrid.rowTypes = {
 };
 
 TreeGrid.expandedRowsOptions = {
-	// Why ag-grid?
 	all: -1,
 	none: 0,
 	topLevel: 1,
@@ -259,13 +267,9 @@ function getTreeWithoutId(id, tree) {
 		return filteredTree;
 	}
 
-	for (const item of filteredTree) {
-		if (item.children && item.children.length) {
-			item.children = getTreeWithoutId(id, item.children);
-		}
-	}
-
-	return filteredTree;
+	return filteredTree.map(item =>
+		!item.children ? item : { ...item, children: getTreeWithoutId(id, item.children) },
+	);
 }
 
 function insertDataIntoTree(data, parentId, direction, tree) {
@@ -280,13 +284,11 @@ function insertDataIntoTree(data, parentId, direction, tree) {
 		return newTree;
 	}
 
-	for (const item of newTree) {
-		if (item.children) {
-			item.children = insertDataIntoTree(data, parentId, direction, item.children);
-		}
-	}
-
-	return newTree;
+	return newTree.map(item =>
+		!item.children
+			? item
+			: { ...item, children: insertDataIntoTree(data, parentId, direction, item.children) },
+	);
 }
 
 function getNewPath(parentNode, direction) {
@@ -294,7 +296,7 @@ function getNewPath(parentNode, direction) {
 	if (isParentFolder && parentNode.expanded && direction === dragDirections.down) {
 		return [...parentNode.data.path];
 	} else {
-		return [...parentNode.data.path.slice(0, -1)];
+		return parentNode.data.path.slice(0, -1);
 	}
 }
 
