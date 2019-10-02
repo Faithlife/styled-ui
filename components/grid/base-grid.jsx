@@ -32,7 +32,6 @@ export function BaseGrid({
 	rowHeight,
 	hasPagingBar,
 	handleGetRowId,
-	shouldShowDragHandles,
 	additionalCellComponents,
 	additionalColumnOptions,
 }) {
@@ -243,7 +242,7 @@ BaseGrid.propTypes = {
 	children: PropTypes.node,
 };
 
-function useParseChildrenSettings(children, additionalCellComponents = []) {
+function useParseChildrenSettings(children, additionalCellComponents = {}) {
 	const headingChildren = React.Children.toArray(children).filter(
 		child => child && child.type.isGridHeading,
 	);

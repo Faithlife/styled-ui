@@ -171,11 +171,10 @@ export function TreeGrid(props) {
 			onRowDragLeave: handleRowDrag,
 			onRowDragEnd: handleRowDrag,
 			groupDefaultExpanded: autoGroupExpansion || TreeGrid.expandedRowsOptions.none,
-			additionalCellComponents: groupComponent,
 			autoGroupColumnDef: groupColumnSettings,
 			groupUseEntireRow: false,
 		}),
-		[handleRowDrag, autoGroupExpansion, groupColumnSettings, groupComponent],
+		[handleRowDrag, autoGroupExpansion, groupColumnSettings],
 	);
 
 	return (
@@ -194,6 +193,7 @@ export function TreeGrid(props) {
 					'ag-faithlife-drop-target-row_above': getShouldShowDropTarget(dragDirections.up),
 				},
 			}}
+			additionalCellComponents={groupComponent}
 		>
 			{children}
 		</BaseGrid>
