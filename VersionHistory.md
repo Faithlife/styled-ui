@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.19.3
+
+- Add support for inputBorderColor style override on DatePickerInput.
+
 ### 5.19.2
 
 - Add support for pointerEvents styled-system prop.
