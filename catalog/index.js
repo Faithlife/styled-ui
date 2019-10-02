@@ -78,19 +78,33 @@ const censusDataWithId = censusData.map((data, index) => ({
 	id: index,
 }));
 
-const censusDataFolders = censusData.reduce((list, row) => {
+const censusDataFolders = censusData.reduce((list, row, index) => {
 	const subFolderName = row.population > 100000 ? 'Pop more than 100k' : 'Pop less than 100k';
 	const folder = list.find(x => x.value === row.areaDesc);
 
 	if (folder) {
 		const subFolder = folder.children.find(x => x.value === subFolderName);
 		if (subFolder) {
-			subFolder.children.push(row);
+			subFolder.children.push({ id: `${index}`, ...row });
 		} else {
-			folder.children.push({ value: subFolderName, children: [row] });
+			folder.children.push({
+				id: `${row.areaDesc}:${subFolderName}`,
+				value: subFolderName,
+				children: [{ id: `${index}`, ...row }],
+			});
 		}
 	} else {
-		list.push({ value: row.areaDesc, children: [{ value: subFolderName, children: [row] }] });
+		list.push({
+			id: `${row.areaDesc}`,
+			value: row.areaDesc,
+			children: [
+				{
+					id: `${row.areaDesc}:${subFolderName}`,
+					value: subFolderName,
+					children: [{ id: `${index}`, ...row }],
+				},
+			],
+		});
 	}
 
 	return list;

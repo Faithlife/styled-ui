@@ -60,12 +60,14 @@ A table to display tree data as well as supporting drag-drop reordering.
 
 ```react
 showSource: true
+state: { }
 ---
 <div>
 	<TreeGrid
-		data={censusDataFolders}
+		data={state.data || censusDataFolders}
 		maxRows={10}
 		autoGroupExpansion={TreeGrid.expandedRowsOptions.topLevel}
+		onDataChange={data => setState({ data })}
 		enableDragDrop
 	>
 		<TreeGrid.GroupColumn displayName="Name" width={500} />
@@ -81,14 +83,16 @@ showSource: true
 land: json
 ---
 [
-	enableDragDrop shouldExpandGroups
 	{
+		"id": 1,
 		"value": "Metropolitan Statistical Area",
 		children: [
 			{
+				"id": 2,
 				"value": "Pop more than 100k",
 				children: [
 					{
+						"id": 3,
 						"value": "Abilene, TX",
 						"population": 165252,
 						"populationChange": 337,
@@ -97,6 +101,7 @@ land: json
 						"path": ["Metropolitan Statistical Area", "Pop more than 100k", "Abilene, TX"]
 					},
 					{
+						"id": 4,
 						"value":"Bellingham, WA",
 						"population":201140,
 						"births":608,

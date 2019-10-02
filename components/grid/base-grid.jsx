@@ -86,8 +86,6 @@ export function BaseGrid({
 		suppressRowClick,
 	} = useParseChildrenSettings(children, additionalCellComponents);
 
-	console.log(cellComponents);
-
 	const handleGridResize = useCallback(() => {
 		if (gridApi) {
 			setTimeout(() => gridApi.sizeColumnsToFit(), 0);
@@ -200,7 +198,6 @@ export function BaseGrid({
 							cellClass={`ag-faithlife-cell ${isRightAligned ? 'ag-cell-right-aligned' : ''}`}
 							rowGroup={groupByColumn}
 							hide={groupByColumn || hide}
-							rowDrag={index === 0 && shouldShowDragHandles}
 						/>
 					);
 				})}
