@@ -123,6 +123,10 @@ export function TreeGrid(props) {
 					draggedNode.current = event.node;
 					dragDirection.current = event.vDirection;
 
+					if (draggedNode.current.expanded) {
+						draggedNode.current.setExpanded(false);
+					}
+
 					break;
 				}
 				case dragEventTypes.drop: {
@@ -132,7 +136,8 @@ export function TreeGrid(props) {
 
 					const newPath = getNewPath(newParentNode, dragDirection.current);
 					if (
-						draggedNode.rowIndex !== newParentNode.rowIndex &&
+						draggedNode.current &&
+						draggedNode.current.rowIndex !== newParentNode.rowIndex &&
 						(!isValidDropTarget || isValidDropTarget(draggedNode.data, newPath))
 					) {
 						const cleanTree = getTreeWithoutId(draggedNode.current.id, data);

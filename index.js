@@ -55,12 +55,10 @@ export {
 export { FilePicker, AmberContent, FileUpload } from './components/file-picker';
 export { SimpleGrid, GridColumn, PaginatedGrid, TreeGrid } from './components/grid';
 
-export { theme } from './theme';
 export { Box } from './components/Box';
 export { Stack } from './components/Stack';
 export { Text } from './components/Text';
 export { Paragraph } from './components/Paragraph';
-export { SimpleTable, TableHeading, PaginatedTable } from './components/grid';
 export { theme } from './theme';
 export { DefaultThemeProvider } from './components/DefaultThemeProvider';
 export { ThemeProvider } from './components/ThemeProvider';
