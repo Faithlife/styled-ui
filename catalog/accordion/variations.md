@@ -139,3 +139,49 @@ state: { expandedSections: [] }
 	</Accordion>
 </AccordionDemo>
 ```
+
+### minimal variant
+
+```react
+plain: true
+showSource: true
+state: { expandedSections: [0] }
+---
+<AccordionDemo>
+	<Accordion variant="minimal" expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
+		<Accordion.Item pinned>
+			<Accordion.Header subtitle="Subtitle for Section One.">
+				Section One Title
+			</Accordion.Header>
+			<Accordion.Panel>
+				<Form>
+					<Input small placeholder="Name" />
+					<Input small placeholder="Email" />
+				</Form>
+			</Accordion.Panel>
+		</Accordion.Item>
+		<Accordion.Item>
+			<Accordion.Header>
+				Section Two Title
+			</Accordion.Header>
+			<Accordion.Panel>
+				<Form>
+					<Input small placeholder="Home address" />
+					<Input small placeholder="Zip code" />
+				</Form>
+			</Accordion.Panel>
+		</Accordion.Item>
+		<Accordion.Item>
+			<Accordion.Header>
+				Section Three Title
+			</Accordion.Header>
+			<Accordion.Panel>
+				<Form>
+					<Input small placeholder="Mother's maiden name" />
+					<Input small placeholder="Name of your first pet" />
+				</Form>
+			</Accordion.Panel>
+		</Accordion.Item>
+	</Accordion>
+</AccordionDemo>
+```

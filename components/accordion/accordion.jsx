@@ -9,6 +9,7 @@ export function Accordion({
 	hideArrows,
 	onExpansion,
 	styleOverrides,
+	variant,
 	...props
 }) {
 	const [focusedMenuItem, setFocusedMenuItem] = useState(null);
@@ -41,16 +42,9 @@ export function Accordion({
 			onExpansion: handleExpansion,
 			setFocusedMenuItem,
 			styleOverrides,
+			variant,
 		}),
-		[
-			expandedSections,
-			focusedMenuItem,
-			focusableChildList,
-			hideArrows,
-			handleExpansion,
-			setFocusedMenuItem,
-			styleOverrides,
-		],
+		[expandedSections, focusedMenuItem, hideArrows, handleExpansion, styleOverrides, variant],
 	);
 
 	return (

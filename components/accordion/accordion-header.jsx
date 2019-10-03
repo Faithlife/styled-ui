@@ -14,8 +14,10 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 		focusableChildList,
 		hideArrows,
 		setFocusedMenuItem,
+		variant,
 	} = useAccordionContext();
 	const { isExpanded, onExpansion, headerId, panelId, isPinned } = useAccordionItemContext();
+	const shouldHideArrows = hideArrows || isPinned;
 
 	const handleExpansion = useCallback(() => {
 		onExpansion(!isExpanded);
@@ -68,19 +70,24 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 					disabled={isPinned}
 				>
 					<ButtonContentWrapper
-						paddingY={5}
-						paddingX={[5, 6]}
+						paddingY={variant === 'minimal' ? 4 : 5}
+						paddingX={variant === 'minimal' ? 4 : [5, 6]}
 						gridColumnGap={4}
-						hideArrows={hideArrows}
+						hideArrows={shouldHideArrows}
 						subtitle={subtitle}
 					>
 						<>
-							{!hideArrows && (
+							{!shouldHideArrows && (
 								<img src={isExpanded ? ExpandedIcon : CollapsedIcon} role="presentation" alt="" />
 							)}
 							<ButtonContent>
 								{children ? (
-									<Text textStyle="ui.16" display="grid" color="gray52" fontWeight="semibold">
+									<Text
+										textStyle={variant === 'minimal' ? 'ui.14' : 'ui.16'}
+										display="grid"
+										color="gray52"
+										fontWeight="semibold"
+									>
 										{children}
 									</Text>
 								) : null}
