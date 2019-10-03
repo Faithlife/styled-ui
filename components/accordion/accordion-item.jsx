@@ -4,7 +4,7 @@ import { useId } from '../shared-hooks';
 import { Box } from '../Box';
 import { useAccordionContext, AccordionItemContextProvider } from './accordion-util';
 
-export function AccordionItem({ children, index }) {
+export function AccordionItem({ children, index, pinned: isPinned }) {
 	const { expandedSections, onExpansion, styleOverrides } = useAccordionContext();
 
 	const isExpanded = expandedSections.includes(index);
@@ -24,8 +24,9 @@ export function AccordionItem({ children, index }) {
 			isExpanded,
 			onExpansion: handleExpansion,
 			styleOverrides,
+			isPinned,
 		}),
-		[headerId, panelId, index, isExpanded, handleExpansion, styleOverrides],
+		[headerId, panelId, index, isExpanded, handleExpansion, styleOverrides, isPinned],
 	);
 
 	return (

@@ -15,7 +15,7 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 		hideArrows,
 		setFocusedMenuItem,
 	} = useAccordionContext();
-	const { isExpanded, onExpansion, headerId, panelId } = useAccordionItemContext();
+	const { isExpanded, onExpansion, headerId, panelId, isPinned } = useAccordionItemContext();
 
 	const handleExpansion = useCallback(() => {
 		onExpansion(!isExpanded);
@@ -59,12 +59,13 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 			<Heading ariaLevel={ariaLevel}>
 				<Button
 					isExpanded={isExpanded}
-					onBlur={handleBlur}
-					onClick={handleExpansion}
-					onFocus={handleFocus}
+					onBlur={isPinned ? undefined : handleBlur}
+					onClick={isPinned ? undefined : handleExpansion}
+					onFocus={isPinned ? undefined : handleFocus}
 					ref={buttonRef}
 					panelId={panelId}
 					headerId={headerId}
+					disabled={isPinned}
 				>
 					<ButtonContentWrapper
 						paddingY={5}

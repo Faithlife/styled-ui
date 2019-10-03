@@ -16,7 +16,7 @@ state: { expandedSections: [0] }
 ---
 <AccordionDemo>
 	<Accordion expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
-		<Accordion.Item>
+		<Accordion.Item pinned>
 			<Accordion.Header subtitle="Subtitle for Section One.">
 				Section One Title
 			</Accordion.Header>
