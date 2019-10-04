@@ -1,5 +1,11 @@
 # Changelog
 
+### 5.20.0
+
+- Add `minimal` variation to `Accordion`.
+- Support `pinned` prop on `Accordion.Item` to disable expand/collapse interaction
+- Support `hideArrow` prop on `Accordion.Item`.
+
 ### 5.19.3
 
 - Add support for inputBorderColor style override on DatePickerInput.
