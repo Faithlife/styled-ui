@@ -103,6 +103,9 @@ export function TreeGrid(props) {
 				'ag-faithlife-drop-target-row_below': getShouldShowDropTarget(dragDirections.down),
 				'ag-faithlife-drop-target-row_above': getShouldShowDropTarget(dragDirections.up),
 			},
+			headerClass: enableDragDrop
+				? 'ag-faithlife-tree-group-header-with-drag'
+				: 'ag-faithlife-tree-group-header',
 			...groupProps,
 		};
 	}

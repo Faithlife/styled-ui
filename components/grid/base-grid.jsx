@@ -4,8 +4,9 @@ import { AgGridReact, AgGridColumn } from 'ag-grid-react';
 import 'ag-grid-enterprise';
 import * as Styled from './styled';
 
-const defaultRowHeight = 45;
-const headerHeight = defaultRowHeight - 5;
+const gridHeight = 8;
+const defaultRowHeight = gridHeight * 5;
+const headerHeight = gridHeight * 5;
 const noRowsDefaultTableHeight = 200;
 
 /** A wrapper of ag-grid with some boilerplate code to handle initialization and sorting/ filtering */
@@ -35,7 +36,7 @@ export function BaseGrid({
 	additionalCellComponents,
 	additionalColumnOptions,
 }) {
-	const tableHeightPadding = hasPagingBar ? 50 : 2;
+	const tableHeightPadding = hasPagingBar ? 42 : 2;
 
 	useEffect(() => {
 		if (columnApi && gridApi) {

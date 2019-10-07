@@ -1,5 +1,6 @@
 @import '~ag-grid-community/src/styles/ag-grid.scss';
 @import '~ag-grid-community/src/styles/ag-theme-material/resources/material-legacy-var-names';
+@import '../shared-styles/colors.scss';
 
 // Most styled are modified from the ag-theme-material theme.
 
@@ -15,16 +16,17 @@ $disabled-foreground-color-opacity: 0.38 !default;
 // Sizing
 $grid-size: 8px !default;
 $icon-size: 18px !default;
-$header-height: $grid-size * 6 !default;
+$header-height: $grid-size * 5 !default;
 $row-height: $grid-size * 5 !default;
 $row-border-width: 1px !default;
 $toolpanel-indent-size: $grid-size + $icon-size !default;
 $row-group-indent-size: $grid-size * 3 + $icon-size !default;
-$cell-horizontal-padding: $grid-size !default;
+$cell-horizontal-padding: $grid-size * 2 !default;
 $virtual-item-height: $grid-size * 5;
 $header-icon-size: 14px !default;
-
-// Icons
+$drag-handle-width: 34px;
+$group-header-padding: 48px;
+$group-header-padding-with-drag: 83px;
 
 // Fonts
 $font-family: 'Source Sans Pro' !default; // legacy: font
@@ -41,22 +43,22 @@ $card-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14)
 $card-radius: 2px;
 
 // Colors
-$background-color: white !default;
-$foreground-color: #3d3d3d !default;
+$background-color: $white !default;
+$foreground-color: $gray66 !default;
 $secondary-foreground-color: $foreground-color !default;
 $disabled-foreground-color: rgba(
-	#000,
+	$Black,
 	$disabled-foreground-color-opacity
 ) !default; // foreground-disabled
-$header-background-color: #f5f5f5 !default;
+$header-background-color: $gray4 !default;
 $header-cell-hover-background-color: $header-background-color !default;
 $header-cell-moving-background-color: $header-cell-hover-background-color !default;
 $header-foreground-color: $secondary-foreground-color !default;
 
-$border-color: #c7c7c7 !default;
-$primary-color: black !default;
-$accent-color: black !default;
-$icon-color: #333 !default;
+$border-color: $gray22 !default;
+$primary-color: $Black !default;
+$accent-color: $Black !default;
+$icon-color: $gray52 !default;
 $alt-icon-color: transparent !default;
 
 $editor-background-color: #f6f6f6 !default;
@@ -73,11 +75,11 @@ $ag-range-selected-color-2: rgba(80, 80, 80, 0.4) !default;
 $ag-range-selected-color-3: rgba(40, 40, 40, 0.4) !default;
 $ag-range-selected-color-4: rgba(0, 0, 0, 0.4) !default;
 
-$hover-color: white !default;
-$selected-color: #d5ecfc !default;
-$cell-data-changed-color: white !default;
+$hover-color: $white !default;
+$selected-color: $blueLight !default;
+$cell-data-changed-color: $white !default;
 
-$drop-target-border: 3px solid #79cafb;
+$drop-target-border: 3px solid $blueLight;
 
 // delta changes
 $value-change-delta-up-color: #43a047 !default;
@@ -337,14 +339,32 @@ $params: (
 		right: 0;
 		border-right: 1px solid $border-color !important;
 		content: ' ';
-		height: $header-height;
+		height: $header-height - $grid-size * 2;
 		position: absolute;
 		text-indent: -2000px;
 		top: 0;
+		margin: $grid-size 0;
 	}
 
 	.ag-header-cell:last-child::after,
 	.ag-header-group-cell:last-child::after {
 		display: none;
+	}
+
+	.ag-row-drag {
+		min-width: 34px !important;
+		cursor: grab;
+
+		& > span {
+			color: $gray22;
+		}
+	}
+
+	.ag-faithlife-tree-group-header {
+		padding-left: $group-header-padding;
+	}
+
+	.ag-faithlife-tree-group-header-with-drag {
+		padding-left: $group-header-padding-with-drag;
 	}
 }
