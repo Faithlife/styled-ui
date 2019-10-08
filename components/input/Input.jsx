@@ -125,8 +125,8 @@ ${({ theme, styleOverrides = {} }) => css`
 `}
 
 	&:focus {
-		border-color: ${inputColors.inputFocusedBorderColor};
-		box-shadow: 0 0 0 2px ${inputColors.inputFocusedShadowColor};
+		border-color: ${({ theme }) => theme.colors.inputFocusedBorderColor};
+		box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.inputFocusedShadowColor};
 		outline: 0;
 		${({ variant }) =>
 			variant === 'inline' &&

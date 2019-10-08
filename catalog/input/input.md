@@ -45,3 +45,16 @@ state: { value: '' }
 	<Button variant="primary" size="small">Search</Button>
 </InputSpacer>
 ```
+
+## FilterInput
+
+Use in UI that needs to inline-filter a list.
+
+```react
+showSource: true
+state: { value: 'Washington' }
+---
+<InputSpacer>
+	<FilterInput variant="medium" value={state.value} onChange={event => setState({ value: event.target.value })} onClear={() => setState({ value: '' })} />
+</InputSpacer>
+```

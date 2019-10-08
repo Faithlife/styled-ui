@@ -69,7 +69,7 @@ import { colors } from '../components/shared-styles';
 import { ProductDrawerWithResources } from './product-drawer';
 import { DocgenTable } from './docgen-table';
 import { MemberDirectory, VolunteerScheduling } from './grid';
-import { textInputPages } from './text-input/pages';
+import { textInputPages } from './input/pages';
 import DownArrow from './svgs/arrow-down.svg';
 
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,

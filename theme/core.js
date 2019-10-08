@@ -111,7 +111,10 @@ const lineHeights = ['0px', '16px', '18px', '20px', '22px', '24px', '28px', '34p
 // UI elements have a line-height matching the font-size
 lineHeights.ui = 1;
 
-const sizes = []; // todo
+const sizes = [];
+sizes.inputs = {
+	shortText: '128px',
+};
 
 const borders = [0, '1px solid'];
 
