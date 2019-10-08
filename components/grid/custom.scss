@@ -20,13 +20,14 @@ $header-height: $grid-size * 5 !default;
 $row-height: $grid-size * 5 !default;
 $row-border-width: 1px !default;
 $toolpanel-indent-size: $grid-size + $icon-size !default;
-$row-group-indent-size: $grid-size * 3 + $icon-size !default;
+$row-group-indent-size: $grid-size * 2 + $icon-size !default;
 $cell-horizontal-padding: $grid-size * 2 !default;
 $virtual-item-height: $grid-size * 5;
 $header-icon-size: 14px !default;
 $drag-handle-width: 34px;
 $group-header-padding: 48px;
 $group-header-padding-with-drag: 83px;
+$group-indent: 30px;
 
 // Fonts
 $font-family: 'Source Sans Pro' !default; // legacy: font
@@ -366,5 +367,15 @@ $params: (
 
 	.ag-faithlife-tree-group-header-with-drag {
 		padding-left: $group-header-padding-with-drag;
+	}
+
+	@for $i from 1 through 5 {
+		.ag-ltr .ag-row-group-indent-#{$i} {
+			padding-left: $group-indent * $i;
+		}
+	}
+
+	.ag-ltr .ag-row-group-leaf-indent {
+		margin-left: 5px;
 	}
 }
