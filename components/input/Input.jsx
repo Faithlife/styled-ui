@@ -6,7 +6,6 @@ import systemPropTypes from '@styled-system/prop-types';
 import { theme } from '../../theme';
 import { common, typography } from '../../theme/system';
 import { resetStyles, getVariation } from '../utils';
-import { inputColors, colors } from '../shared-styles';
 
 const Input = React.forwardRef(function Input(props, ref) {
 	const {
@@ -111,7 +110,6 @@ const StyledInput = styled.input`
 ${({ theme, styleOverrides = {} }) => css`
 	border: 1px solid;
 	border-radius: ${theme.radii[1]};
-	border-color: ${theme.colors.inputBorderColor};
 
 	${'height' in styleOverrides &&
 		css`
@@ -138,7 +136,7 @@ ${({ theme, styleOverrides = {} }) => css`
 	}
 
 	&:read-only {
-		background: ${colors.gray8};
+		background: ${({ theme }) => theme.colors.gray8};
 	}
 
 	${({ theme }) =>
