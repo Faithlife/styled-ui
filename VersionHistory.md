@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.21.0
+
+- Add `FilterInput` component.
+- Accept styled system props in `PopoverManager`.
+
 ### 5.20.0
 
 - Add `minimal` variation to `Accordion`.
