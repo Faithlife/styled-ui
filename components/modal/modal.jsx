@@ -135,8 +135,6 @@ export class Modal extends React.Component {
 						subtitle={subtitle}
 						onClose={onClose}
 						headerBottomBorder={headerBottomBorder}
-						width="100%"
-						padding={6}
 					/>
 					{doesChildrenIncludeModalContent ? (
 						children
