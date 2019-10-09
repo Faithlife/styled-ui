@@ -110,6 +110,7 @@ const StyledInput = styled.input`
 ${({ theme, styleOverrides = {} }) => css`
 	border: 1px solid;
 	border-radius: ${theme.radii[1]};
+	border-color: ${theme.colors.inputBorderColor};
 
 	${'height' in styleOverrides &&
 		css`
