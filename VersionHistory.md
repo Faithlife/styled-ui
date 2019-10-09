@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.21.2
+
+- Fix input border color.
+- Use correct chevron icons for accordion.
+
 ### 5.21.1
 
 - Remove accidental bottom margin from ModalHeader, added in 5.18.0.
