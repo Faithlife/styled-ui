@@ -13,8 +13,7 @@ export const ModalHeader = ({ title, subtitle, onClose, headerBottomBorder, ...p
 		justifyContent="space-between"
 		alignItems="center"
 		width="100%"
-		marginBottom={4}
-		paddingBottom={4}
+		padding={6}
 		borderBottom={headerBottomBorder ? headerBottomBorder : 1}
 		borderColor="gray22"
 		{...props}
