@@ -75,8 +75,18 @@ export const Calendar = props => (
 	</svg>
 );
 
+export const ChevronCollapse = props => (
+	<svg {...props} width="12" height="12" xmlns="http://www.w3.org/2000/svg">
+		<path
+			fill={colors.gray52}
+			d="M8.482 8.185L5.889 5.593 3.296 8.185 2 6.89 5.89 3l3.888 3.889z"
+			fillRule="evenodd"
+		/>
+	</svg>
+);
+
 export const ChevronExpand = props => (
-	<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
+	<svg {...props} width="12" height="12" xmlns="http://www.w3.org/2000/svg">
 		<path
 			fill={colors.gray52}
 			d="M3.296 3L5.89 5.593 8.482 3l1.296 1.296-3.889 3.89L2 4.295z"
@@ -85,10 +95,20 @@ export const ChevronExpand = props => (
 	</svg>
 );
 
+export const ChevronRight = props => (
+	<svg {...props} width="12" height="12" xmlns="http://www.w3.org/2000/svg">
+		<path
+			fill={colors.gray52}
+			d="M3.593 8.482l2.592-2.593-2.592-2.593L4.889 2l3.89 3.89-3.89 3.888z"
+			fillRule="evenodd"
+		/>
+	</svg>
+);
+
 export const Caret = props => (
 	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
 		<g fill="currentColor" transform="matrix(0 1 1 0 1 -1)">
-			<polygon id="caret-right-1px-a" points="10 13 3 6.304 4.273 5 10 10.478 15.727 5 17 6.304" />
+			<polygon points="10 13 3 6.304 4.273 5 10 10.478 15.727 5 17 6.304" />
 		</g>
 	</svg>
 );

@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text } from '../Text';
 import { Box } from '../Box';
-import ExpandedIcon from './svgs/expanded-icon.svg';
-import CollapsedIcon from './svgs/collapsed-icon.svg';
+import { ChevronRight, ChevronExpand } from '../icons';
 import { useAccordionContext, useAccordionItemContext } from './accordion-util';
 import { resetStyles } from '../utils';
 
@@ -77,9 +76,7 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 						subtitle={subtitle}
 					>
 						<>
-							{!shouldHideArrows && (
-								<img src={isExpanded ? ExpandedIcon : CollapsedIcon} role="presentation" alt="" />
-							)}
+							{!shouldHideArrows && (isExpanded ? <ChevronExpand /> : <ChevronRight />)}
 							<ButtonContent>
 								{children ? (
 									<Text
