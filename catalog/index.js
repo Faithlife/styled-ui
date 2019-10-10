@@ -134,6 +134,8 @@ const components = [
 				imports: {
 					Box,
 					Stack,
+					Paragraph,
+					Text,
 				},
 			},
 			{
