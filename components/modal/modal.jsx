@@ -139,9 +139,7 @@ export class Modal extends React.Component {
 					{doesChildrenIncludeModalContent ? (
 						children
 					) : (
-						<ModalContent padding={6}>
-							{children}
-						</ModalContent>
+						<ModalContent padding={6}>{children}</ModalContent>
 					)}
 					{!withoutFooter &&
 						(renderFooter ? (
