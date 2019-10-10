@@ -33,12 +33,25 @@
 	"peerDependencies": {
 		"react": "^16.8.0",
 		"react-dom": "^16.8.0",
-		"styled-components": "^4.0.2"
+		"styled-components": "^4.0.2",
+		"ag-grid-community": "21.2.2",
+		"ag-grid-enterprise": "21.2.2",
+		"ag-grid-react": "21.2.2"
+	},
+	"peerDependenciesMeta": {
+		"ag-grid-community": {
+			"optional": true
+		},
+		"ag-grid-enterprise": {
+			"optional": true
+		},
+		"ag-grid-react": {
+			"optional": true
+		}
 	},
 	"dependencies": {
 		"@styled-system/prop-types": "^5.1.1",
 		"@styled-system/theme-get": "^5.1.1",
-		"ag-grid-community": "^21.0.1",
 		"clipboard": "^2.0.1",
 		"focus-visible": "^5.0.1",
 		"lodash.debounce": "^4.0.8",
@@ -61,8 +74,9 @@
 		"@babel/preset-react": "^7.0.0",
 		"@babel/register": "^7.4.4",
 		"@storybook/storybook-deployer": "^2.3.0",
-		"ag-grid-enterprise": "^21.0.1",
-		"ag-grid-react": "^21.0.1",
+		"ag-grid-community": "^21.2.2",
+		"ag-grid-enterprise": "^21.2.2",
+		"ag-grid-react": "^21.2.2",
 		"assert": "^1.4.1",
 		"autoprefixer": "^8.2.0",
 		"babel-core": "^7.0.0-bridge.0",
