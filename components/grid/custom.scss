@@ -1,141 +1,387 @@
-@import '~ag-grid/dist/styles/ag-grid';
-@import '~ag-grid/src/styles/ag-theme-classic-common';
-@import '~ag-grid/src/styles/ag-theme-classic-vars';
+@import '~ag-grid-community/src/styles/ag-grid.scss';
+@import '~ag-grid-community/src/styles/ag-theme-material/resources/material-legacy-var-names';
+@import '../shared-styles/colors.scss';
 
-$icons-path: '~ag-grid/src/styles/balham-icons/';
+// Most styled are modified from the ag-theme-material theme.
 
-$secondary-font-family: 'Source Sans Pro';
-$secondary-font-weight: 600;
-$secondary-font-size: 16px;
-$font-family: 'Source Sans Pro';
-$font-size: 16px;
-$grid-size: 8px;
-$row-height: 36px;
-$header-height: $row-height;
+// opacity values used for black values, taken from material spec
+$foreground-opacity: 0.87 !default;
+$secondary-foreground-color-opacity: 0.54 !default;
+$disabled-foreground-color-opacity: 0.38 !default;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// The variables below can be overriden to adjust the look up to the app color scheme
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Sizing
+$grid-size: 8px !default;
+$icon-size: 18px !default;
+$header-height: $grid-size * 5 !default;
+$row-height: $grid-size * 5 !default;
+$row-border-width: 1px !default;
+$toolpanel-indent-size: $grid-size + $icon-size !default;
+$row-group-indent-size: $grid-size * 2 + $icon-size !default;
+$cell-horizontal-padding: $grid-size * 2 !default;
+$virtual-item-height: $grid-size * 5;
+$header-icon-size: 14px !default;
+$drag-handle-width: 34px;
+$group-header-padding: 48px;
+$group-header-padding-with-drag: 83px;
+$group-indent: 30px;
+
+// Fonts
+$font-family: 'Source Sans Pro' !default; // legacy: font
+$font-size: 16px !default;
+$font-weight: 400 !default;
+
+$secondary-font-family: 'Source Sans Pro' !default; //font-secondary
+$secondary-font-size: 16px !default; // font-secondary-size
+$secondary-font-weight: 700 !default; // font-secondary-weight
+
+// Misc
+$card-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+	0 1px 5px 0 rgba(0, 0, 0, 0.12) !default;
+$card-radius: 2px;
 
 // Colors
-$icon-color: #333 !default;
-$foreground-color: #3d3d3d;
-$secondary-foreground-color: $foreground-color;
-$disabled-foreground-color: rgba(black, $disabled-foreground-color-opacity) !default;
-$menu-option-active-color: #d5ecfc !default;
+$background-color: $white !default;
+$foreground-color: $gray66 !default;
+$secondary-foreground-color: $foreground-color !default;
+$disabled-foreground-color: rgba(
+	$Black,
+	$disabled-foreground-color-opacity
+) !default; // foreground-disabled
+$header-background-color: $gray4 !default;
+$header-cell-hover-background-color: $header-background-color !default;
+$header-cell-moving-background-color: $header-cell-hover-background-color !default;
+$header-foreground-color: $secondary-foreground-color !default;
 
-$card-background-color: #f6f6f6 !default;
-$border-color: transparent !default;
-$primary-color: black !default;
-$accent-color: black !default;
-
-$background-color: white !default;
-$odd-row-background-color: white;
+$border-color: $gray22 !default;
+$primary-color: $Black !default;
+$accent-color: $Black !default;
+$icon-color: $gray52 !default;
+$alt-icon-color: transparent !default;
 
 $editor-background-color: #f6f6f6 !default;
-
-$header-background-color: #f5f5f5 !default;
-$header-background-image: none !default;
-$panel-background-color: #f6f6f6 !default;
-
+$panel-background-color: #f5f5f5 !default;
 $tool-panel-background-color: #f6f6f6 !default;
-
 $chip-background-color: #ecf0f1 !default;
 
 $range-selection-background-color: rgba(120, 120, 120, 0.4) !default;
+$range-selection-chart-category-background-color: rgba(0, 255, 132, 0.1) !default;
+$range-selection-chart-background-color: rgba(0, 88, 255, 0.1) !default;
 $range-selection-highlight-color: rgba(255, 255, 255, 0.4) !default;
-
-$hover-color: inherit !default;
-
-$selected-color: $menu-option-active-color !default;
-
-$cell-data-changed-color: white !default;
-
-$focused-cell-border-color: darkgrey !default;
-
-$tab-background-color: #e6e6e6;
-
-$cell-highlight-border: 2px solid darkgreen !default;
-$cell-horizontal-border: none !default;
-
 $ag-range-selected-color-1: rgba(120, 120, 120, 0.4) !default;
 $ag-range-selected-color-2: rgba(80, 80, 80, 0.4) !default;
 $ag-range-selected-color-3: rgba(40, 40, 40, 0.4) !default;
 $ag-range-selected-color-4: rgba(0, 0, 0, 0.4) !default;
 
-$row-floating-background-color: #f0f0f0 !default;
-$row-stub-background-color: #f0f0f0 !default;
+$hover-color: $white !default;
+$selected-color: $blueLight !default;
+$cell-data-changed-color: $white !default;
+
+$drop-target-border: 3px solid $blueLight;
 
 // delta changes
-$value-change-delta-up-color: darkgreen !default;
-$value-change-delta-down-color: darkred !default;
-$value-change-value-highlight-background-color: #cec !default;
+$value-change-delta-up-color: #43a047 !default;
+$value-change-delta-down-color: #e53935 !default;
+$value-change-value-highlight-background-color: #00acc1 !default;
+
+// Icons
+
+$icon-font-family: 'agGridMaterial' !default;
+$icons-data: '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' !default;
+
+@import '~ag-grid-community/src/styles/ag-theme-base/vars/ag-theme-base-vars';
 
 $params: (
-  grid-size: $grid-size,
-  icon-size: $icon-size,
-  header-icon-size: $header-icon-size,
-  row-height: $row-height,
-  header-height: $header-height,
-  virtual-item-height: $virtual-item-height,
-  rich-select-item-height: $row-height,
-  cell-horizontal-padding: $cell-horizontal-padding,
-  toolpanel-indent-size: $toolpanel-indent-size,
-  row-group-indent-size: $row-group-indent-size,
-  icons-path: $icons-path,
-  font-family: $font-family,
-  font-size: $font-size,
-  font-weight: $font-weight,
-  secondary-font-family: $secondary-font-family,
-  secondary-font-size: $secondary-font-size,
-  secondary-font-weight: $secondary-font-weight,
-  foreground-color: $foreground-color,
-  foreground-opacity: $foreground-opacity,
-  secondary-foreground-color-opacity: $secondary-foreground-color-opacity,
-  secondary-foreground-color: $secondary-foreground-color,
-  disabled-foreground-color-opacity: $disabled-foreground-color-opacity,
-  disabled-foreground-color: $disabled-foreground-color,
-  background-color: $background-color,
-  tab-background-color: $tab-background-color,
-  odd-row-background-color: $odd-row-background-color,
-  header-cell-moving-background-color: $header-cell-moving-background-color,
-  icon-color: $icon-color,
-  border-color: $border-color,
-  button-background-color: transparent,
-  cell-data-changed-color: $cell-data-changed-color,
-  chip-background-color: $chip-background-color,
-  editor-background-color: $editor-background-color,
-  range-selection-background-color: $range-selection-background-color,
-  range-selection-highlight-color: $range-selection-highlight-color,
-  header-background-color: $header-background-color,
-  header-background-image: $header-background-image,
-  panel-background-color: $panel-background-color,
-  tool-panel-background-color: $tool-panel-background-color,
-  card-background-color: $card-background-color,
-  accent-color: $accent-color,
-  primary-color: $primary-color,
-  hover-color: $hover-color,
-  selected-color: $selected-color,
-  icon-opacity: $foreground-opacity,
-  button-text-transform: uppercase,
-  card-radius: $card-radius,
-  card-shadow: $card-shadow,
-  input-height: $grid-size * 4,
-  focused-cell-border-color: $focused-cell-border-color,
-  menu-option-active-color: $menu-option-active-color,
-  ag-range-selected-color-1: $ag-range-selected-color-1,
-  ag-range-selected-color-2: $ag-range-selected-color-2,
-  ag-range-selected-color-3: $ag-range-selected-color-3,
-  ag-range-selected-color-4: $ag-range-selected-color-4,
-  cell-highlight-border: $cell-highlight-border,
-  cell-horizontal-border: $cell-horizontal-border,
-  value-change-delta-up-color: $value-change-delta-up-color,
-  value-change-delta-down-color: $value-change-delta-down-color,
-  value-change-value-highlight-background-color: $value-change-value-highlight-background-color,
-  row-floating-background-color: $row-floating-background-color,
-  row-stub-background-color: $row-stub-background-color,
+	font-family: $font-family,
+	font-size: $font-size,
+	font-weight: $font-weight,
+	secondary-font-family: $secondary-font-family,
+	secondary-font-size: $secondary-font-size,
+	secondary-font-weight: $secondary-font-weight,
+	accent-color: $accent-color,
+	primary-color: $primary-color,
+	hover-color: $hover-color,
+	selected-color: $selected-color,
+	background-color: $background-color,
+	foreground-color: $foreground-color,
+	foreground-opacity: $foreground-opacity,
+	secondary-foreground-color-opacity: $secondary-foreground-color-opacity,
+	secondary-foreground-color: $secondary-foreground-color,
+	disabled-foreground-color-opacity: $disabled-foreground-color-opacity,
+	disabled-foreground-color: $disabled-foreground-color,
+	border-color: $border-color,
+	scroll-spacer-border: $scroll-spacer-border,
+	panel-background-color: $panel-background-color,
+	tool-panel-background-color: $tool-panel-background-color,
+	header-background-color: $header-background-color,
+	header-cell-hover-background-color: $header-cell-hover-background-color,
+	header-cell-moving-background-color: $header-cell-moving-background-color,
+	header-foreground-color: $header-foreground-color,
+	focused-textbox-border: 2px solid $primary-color,
+	input-bottom-border: 2px solid $border-color,
+	input-bottom-border-disabled: 1px solid $border-color,
+	value-change-delta-up-color: $value-change-delta-up-color,
+	value-change-delta-down-color: $value-change-delta-down-color,
+	value-change-value-highlight-background-color: $value-change-value-highlight-background-color,
+	button-background-color: transparent,
+	icon-color: $icon-color,
+	cell-data-changed-color: $cell-data-changed-color,
+	chip-background-color: $chip-background-color,
+	card-background-color: $background-color,
+	editor-background-color-color: $editor-background-color,
+	range-selection-background-color: $range-selection-background-color,
+	range-selection-chart-background-color: $range-selection-chart-background-color,
+	range-selection-chart-category-background-color: $range-selection-chart-category-background-color,
+	range-selection-highlight-color: $range-selection-highlight-color,
+	ag-range-selected-color-1: $ag-range-selected-color-1,
+	ag-range-selected-color-2: $ag-range-selected-color-2,
+	ag-range-selected-color-3: $ag-range-selected-color-3,
+	ag-range-selected-color-4: $ag-range-selected-color-4,
+	icon-opacity: $foreground-opacity,
+	grid-size: $grid-size,
+	input-height: $grid-size * 5,
+	input-border-width: 0,
+	icon-size: $icon-size,
+	header-icon-size: $header-icon-size,
+	row-height: $row-height,
+	row-border-width: $row-border-width,
+	header-height: $header-height,
+	virtual-item-height: $virtual-item-height,
+	rich-select-item-height: $row-height,
+	cell-horizontal-padding: $cell-horizontal-padding,
+	cell-horizontal-border: $cell-horizontal-border,
+	toolpanel-indent-size: $toolpanel-indent-size,
+	row-group-indent-size: $row-group-indent-size,
+	icons-data: $icons-data,
+	button-text-transform: uppercase,
+	card-radius: $card-radius,
+	card-shadow: $card-shadow,
+	use-icons-for-pager-buttons: true,
+	customize-inputs: true,
+	customize-buttons: true,
+	full-width-tabs: true,
+	tooltip-background-color: $tooltip-background-color,
+	tooltip-foreground-color: $tooltip-foreground-color,
+	tooltip-padding: $tooltip-padding,
+	tooltip-border-radius: $tooltip-border-radius,
+	tooltip-border-color: $tooltip-border-color,
+	tooltip-border-width: $tooltip-border-width,
+	tooltip-border-style: $tooltip-border-style,
+	dialog-background-color: $dialog-background-color,
+	dialog-border-size: $dialog-border-size,
+	dialog-border-style: $dialog-border-style,
+	dialog-border-color: $dialog-border-color,
+	dialog-title-background-color: $dialog-title-background-color,
+	dialog-title-foreground-color: $dialog-title-foreground-color,
+	dialog-title-height: $dialog-title-height,
+	dialog-title-font-family: $dialog-title-font-family,
+	dialog-title-font-size: $dialog-title-font-size,
+	dialog-title-font-weight: $dialog-title-font-weight,
+	dialog-title-padding: $dialog-title-padding,
+	dialog-title-icon-size: $dialog-title-icon-size,
 );
 
-.ag-theme-faithlife {
-  @include ag-theme-classic($params);
+@import '~ag-grid-community/src/styles/ag-theme-base/sass/ag-theme-base';
 
-  %card {
-      border: 1px solid #ccc;
-  }
+.ag-theme-faithlife {
+	%selected-tab {
+		border-bottom: 2px solid $primary-color;
+	}
+
+	@include ag-grid-theme($params);
+
+	.ag-icon-checkbox-checked,
+	.ag-icon-checkbox-checked-readonly,
+	.ag-icon-checkbox-unchecked,
+	.ag-icon-checkbox-unchecked-readonly,
+	.ag-icon-checkbox-indeterminate,
+	.ag-icon-checkbox-indeterminate-readonly,
+	.ag-icon-radio-button-on,
+	.ag-icon-radio-button-off {
+		height: $icon-size + 6;
+		width: $icon-size + 6;
+		font-size: $icon-size + 6;
+		line-height: $icon-size + 6;
+	}
+
+	.ag-icon.ag-icon-contracted {
+		&:before {
+			content: '\E933' !important;
+		}
+	}
+
+	.ag-header-cell,
+	.ag-header-group-cell {
+		transition: background-color 0.5s;
+	}
+
+	.ag-cell-highlight {
+		background-color: $range-selection-highlight-color !important;
+	}
+
+	.ag-cell-highlight-animation {
+		transition: background-color 1s;
+	}
+
+	.ag-menu-option {
+		height: $grid-size * 5 - 2;
+	}
+
+	.ag-side-bar {
+		border-bottom: 0;
+		border-right: 0;
+		border-top: 0;
+
+		.ag-side-buttons button {
+			border: 0;
+			color: $secondary-foreground-color;
+			font-family: $secondary-font-family;
+			font-size: $secondary-font-size;
+			font-weight: $secondary-font-weight;
+			background: transparent;
+		}
+
+		.ag-side-buttons .ag-side-button button {
+			background-color: transparent;
+			border-width: 0;
+		}
+
+		.ag-side-buttons .ag-selected button {
+			border-left: 2px solid $primary-color;
+			background-color: $tool-panel-background-color;
+			margin-left: -2px;
+			padding-left: 1px;
+		}
+
+		.ag-filter-toolpanel-body {
+			background-color: $background-color;
+		}
+	}
+
+	.ag-status-bar {
+		border-top-width: 1px;
+	}
+
+	.ag-rtl .ag-side-bar {
+		.ag-side-buttons .ag-selected button {
+			border-left: 0;
+			margin-left: 0;
+			padding-left: 0;
+
+			border-right: 2px solid $primary-color;
+			margin-right: -2px;
+			padding-right: 1px;
+		}
+	}
+
+	.ag-header-right-aligned .ag-header-cell-label {
+		justify-content: flex-end;
+	}
+
+	.ag-cell-right-aligned {
+		text-align: right;
+	}
+
+	.ag-header-viewport {
+		@extend .ag-header-container;
+
+		border-style: solid;
+		border-color: $border-color;
+		border-width: 1px 0 0 0;
+	}
+
+	.ag-header-cell-sortable {
+		&.ag-column-hover {
+			&:hover {
+				cursor: pointer;
+				background-color: darken($header-background-color, 5%) !important;
+			}
+		}
+	}
+
+	.ag-faithlife-cell {
+		border: none !important;
+	}
+
+	.ag-grid-clickable-row {
+		&:hover {
+			cursor: pointer;
+			background-color: darken($header-background-color, 5%) !important;
+		}
+	}
+
+	.ag-faithlife-drop-target-row {
+		&_below {
+			&::after {
+				position: absolute;
+				content: '';
+				bottom: 0;
+				left: 0;
+				right: 0;
+				width: 100%;
+				height: 1px;
+				border-bottom: $drop-target-border;
+			}
+		}
+
+		&_above {
+			&::after {
+				position: absolute;
+				content: '';
+				top: 0;
+				left: 0;
+				right: 0;
+				width: 100%;
+				height: 1px;
+				border-top: $drop-target-border;
+			}
+		}
+	}
+
+	.ag-header-cell:not(:last-child)::after,
+	.ag-header-group-cell:not(:last-child)::after {
+		right: 0;
+		border-right: 1px solid $border-color !important;
+		content: ' ';
+		height: $header-height - $grid-size * 2;
+		position: absolute;
+		text-indent: -2000px;
+		top: 0;
+		margin: $grid-size 0;
+	}
+
+	.ag-header-cell:last-child::after,
+	.ag-header-group-cell:last-child::after {
+		display: none;
+	}
+
+	.ag-row-drag {
+		min-width: 34px !important;
+		cursor: grab;
+
+		& > span {
+			color: $gray22;
+		}
+	}
+
+	.ag-faithlife-tree-group-header {
+		padding-left: $group-header-padding;
+	}
+
+	.ag-faithlife-tree-group-header-with-drag {
+		padding-left: $group-header-padding-with-drag;
+	}
+
+	@for $i from 1 through 5 {
+		.ag-ltr .ag-row-group-indent-#{$i} {
+			padding-left: $group-indent * $i;
+		}
+	}
+
+	.ag-ltr .ag-row-group-leaf-indent {
+		margin-left: 5px;
+	}
 }
