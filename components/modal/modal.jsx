@@ -135,15 +135,11 @@ export class Modal extends React.Component {
 						subtitle={subtitle}
 						onClose={onClose}
 						headerBottomBorder={headerBottomBorder}
-						width="100%"
-						padding={6}
 					/>
 					{doesChildrenIncludeModalContent ? (
 						children
 					) : (
-						<ModalContent padding={6} paddingTop={4}>
-							{children}
-						</ModalContent>
+						<ModalContent padding={6}>{children}</ModalContent>
 					)}
 					{!withoutFooter &&
 						(renderFooter ? (

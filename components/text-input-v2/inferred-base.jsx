@@ -96,11 +96,12 @@ export class InferredBase extends Component {
 		const tooltipContents = (
 			<TooltipContents>
 				<StyledParagraph>
-					Value guessed with {Math.round(confidence * 100)}% confidence.
-					<br />
-					Click OK if you can confirm value is correct, or delete or change the value.
+					{confidence && (
+						<span>Value guessed with {Math.round(confidence * 100)}% confidence.</span>
+					)}
+					<span>Click OK if you can confirm value is correct, or delete or change the value.</span>
 				</StyledParagraph>
-				<StyledParagraph>Source: {confidenceSource}</StyledParagraph>
+				{confidenceSource && <StyledParagraph>Source: {confidenceSource}</StyledParagraph>}
 			</TooltipContents>
 		);
 

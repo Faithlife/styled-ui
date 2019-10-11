@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text } from '../Text';
 import { Box } from '../Box';
-import ExpandedIcon from './svgs/expanded-icon.svg';
-import CollapsedIcon from './svgs/collapsed-icon.svg';
+import { ChevronRight, ChevronExpand } from '../icons';
 import { useAccordionContext, useAccordionItemContext } from './accordion-util';
 import { resetStyles } from '../utils';
 
@@ -14,8 +13,10 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 		focusableChildList,
 		hideArrows,
 		setFocusedMenuItem,
+		variant,
 	} = useAccordionContext();
-	const { isExpanded, onExpansion, headerId, panelId } = useAccordionItemContext();
+	const { isExpanded, onExpansion, headerId, panelId, isPinned } = useAccordionItemContext();
+	const shouldHideArrows = hideArrows || isPinned;
 
 	const handleExpansion = useCallback(() => {
 		onExpansion(!isExpanded);
@@ -59,27 +60,31 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 			<Heading ariaLevel={ariaLevel}>
 				<Button
 					isExpanded={isExpanded}
-					onBlur={handleBlur}
-					onClick={handleExpansion}
-					onFocus={handleFocus}
+					onBlur={isPinned ? undefined : handleBlur}
+					onClick={isPinned ? undefined : handleExpansion}
+					onFocus={isPinned ? undefined : handleFocus}
 					ref={buttonRef}
 					panelId={panelId}
 					headerId={headerId}
+					disabled={isPinned}
 				>
 					<ButtonContentWrapper
-						paddingY={5}
-						paddingX={[5, 6]}
+						paddingY={variant === 'minimal' ? 4 : 5}
+						paddingX={variant === 'minimal' ? 4 : [5, 6]}
 						gridColumnGap={4}
-						hideArrows={hideArrows}
+						hideArrows={shouldHideArrows}
 						subtitle={subtitle}
 					>
 						<>
-							{!hideArrows && (
-								<img src={isExpanded ? ExpandedIcon : CollapsedIcon} role="presentation" alt="" />
-							)}
+							{!shouldHideArrows && (isExpanded ? <ChevronExpand /> : <ChevronRight />)}
 							<ButtonContent>
 								{children ? (
-									<Text textStyle="ui.16" display="grid" color="gray52" fontWeight="semibold">
+									<Text
+										textStyle={variant === 'minimal' ? 'ui.14' : 'ui.16'}
+										display="grid"
+										color="gray52"
+										fontWeight="semibold"
+									>
 										{children}
 									</Text>
 								) : null}

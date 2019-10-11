@@ -4,15 +4,17 @@ import styled from 'styled-components';
 import { Collapse } from '../collapse';
 import { Box } from '../Box';
 import { useAccordionItemContext } from './accordion-util';
+import { useAccordionContext } from './accordion-util';
 
 export function AccordionPanel({ children, ...props }) {
+	const { variant } = useAccordionContext();
 	const { isExpanded, headerId, panelId, styleOverrides } = useAccordionItemContext();
 	const paddingProps = {};
 	if ('panelPadding' in styleOverrides) {
 		paddingProps.padding = styleOverrides.panelPadding;
 	} else if (!('padding' in props)) {
-		paddingProps.padding = 6;
-		paddingProps.paddingTop = 4;
+		paddingProps.padding = variant === 'minimal' ? 4 : 6;
+		paddingProps.paddingTop = variant === 'minimal' ? 2 : 4;
 	}
 
 	return (

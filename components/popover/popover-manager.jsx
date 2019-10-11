@@ -5,7 +5,7 @@ import { useFocusAwayHandler } from '../shared-hooks';
 import { Box } from '../Box';
 import { PopoverContext } from './popper-helpers';
 
-export function PopoverManager({ children, onFocusAway }) {
+export function PopoverManager({ children, onFocusAway, ...props }) {
 	const { targetRef, addInboundsElement, removeInboundsElement } = useFocusAwayHandler(onFocusAway);
 	return (
 		<Manager>
@@ -21,6 +21,7 @@ export function PopoverManager({ children, onFocusAway }) {
 						ref={targetRef}
 						display="inline-block"
 						tabIndex="-1"
+						{...props}
 					>
 						{children}
 					</Box>

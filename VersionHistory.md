@@ -1,5 +1,29 @@
 # Changelog
 
+### 5.21.2
+
+- Fix input border color.
+- Use correct chevron icons for accordion.
+
+### 5.21.1
+
+- Remove accidental bottom margin from ModalHeader, added in 5.18.0.
+
+### 5.21.0
+
+- Add `FilterInput` component.
+- Accept styled system props in `PopoverManager`.
+
+### 5.20.0
+
+- Add `minimal` variation to `Accordion`.
+- Support `pinned` prop on `Accordion.Item` to disable expand/collapse interaction
+- Support `hideArrow` prop on `Accordion.Item`.
+
+### 5.19.3
+
+- Add support for inputBorderColor style override on DatePickerInput.
+
 ### 5.19.2
 
 - Add support for pointerEvents styled-system prop.

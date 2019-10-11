@@ -73,7 +73,7 @@ import { colors } from '../components/shared-styles';
 import censusData from './grid/2010census.json';
 import { ProductDrawerWithResources } from './product-drawer';
 import { DocgenTable } from './docgen-table';
-import { textInputPages } from './text-input/pages';
+import { textInputPages } from './input/pages';
 import DownArrow from './svgs/arrow-down.svg';
 import { PopulationChange } from './grid/population-change';
 import { BaseGrid } from '../components/grid/base-grid';
@@ -177,6 +177,8 @@ const components = [
 				imports: {
 					Box,
 					Stack,
+					Paragraph,
+					Text,
 				},
 			},
 			{

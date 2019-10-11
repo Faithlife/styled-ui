@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { InferredTypeahead, Typeahead } from '../../components/text-input';
 import { Select, CreatableSelect } from '../../components/text-input-v2';
 import { DocgenTable } from '../docgen-table';
-import { Bootstrap, Button, Input, Modal } from '../../index';
+import { Bootstrap, Button, Input, Modal, FilterInput } from '../../index';
 import { InferredTextFocusDemo, InferredSelectFocusDemo, AsyncSelectDemo } from './demos';
 
 export const textInputPages = {
-	title: 'Text Input',
+	title: 'Input',
 	pages: [
 		{
 			path: '/text-input/input',
@@ -15,6 +15,7 @@ export const textInputPages = {
 			content: pageLoader(() => import('./input.md')),
 			imports: {
 				Input,
+				FilterInput,
 				Button,
 				InputSpacer: styled.div`
 					display: flex;

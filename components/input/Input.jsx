@@ -6,7 +6,6 @@ import systemPropTypes from '@styled-system/prop-types';
 import { theme } from '../../theme';
 import { common, typography } from '../../theme/system';
 import { resetStyles, getVariation } from '../utils';
-import { inputColors, colors } from '../shared-styles';
 
 const Input = React.forwardRef(function Input(props, ref) {
 	const {
@@ -125,8 +124,8 @@ ${({ theme, styleOverrides = {} }) => css`
 `}
 
 	&:focus {
-		border-color: ${inputColors.inputFocusedBorderColor};
-		box-shadow: 0 0 0 2px ${inputColors.inputFocusedShadowColor};
+		border-color: ${({ theme }) => theme.colors.inputFocusedBorderColor};
+		box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.inputFocusedShadowColor};
 		outline: 0;
 		${({ variant }) =>
 			variant === 'inline' &&
@@ -138,7 +137,7 @@ ${({ theme, styleOverrides = {} }) => css`
 	}
 
 	&:read-only {
-		background: ${colors.gray8};
+		background: ${({ theme }) => theme.colors.gray8};
 	}
 
 	${({ theme }) =>

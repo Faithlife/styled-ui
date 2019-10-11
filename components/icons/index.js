@@ -1,6 +1,15 @@
 import React from 'react';
 import { colors } from '../shared-styles';
 
+export const Search = props => (
+	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+		<path
+			fill="#888"
+			d="M12.9379707,11.0620293 L13,11 L17,15.5 L15.5,17 L11,13 L11.0620293,12.9379707 C10.0390157,13.6094361 8.81511839,14 7.5,14 C3.91014913,14 1,11.0898509 1,7.5 C1,3.91014913 3.91014913,1 7.5,1 C11.0898509,1 14,3.91014913 14,7.5 C14,8.81511839 13.6094361,10.0390157 12.9379705,11.0620296 L12.9379707,11.0620293 Z M7.5,11.5 C9.709139,11.5 11.5,9.709139 11.5,7.5 C11.5,5.290861 9.709139,3.5 7.5,3.5 C5.290861,3.5 3.5,5.290861 3.5,7.5 C3.5,9.709139 5.290861,11.5 7.5,11.5 Z"
+		/>
+	</svg>
+);
+
 export const Check = props => (
 	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
 		<path
@@ -66,8 +75,18 @@ export const Calendar = props => (
 	</svg>
 );
 
+export const ChevronCollapse = props => (
+	<svg {...props} width="12" height="12" xmlns="http://www.w3.org/2000/svg">
+		<path
+			fill={colors.gray52}
+			d="M8.482 8.185L5.889 5.593 3.296 8.185 2 6.89 5.89 3l3.888 3.889z"
+			fillRule="evenodd"
+		/>
+	</svg>
+);
+
 export const ChevronExpand = props => (
-	<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
+	<svg {...props} width="12" height="12" xmlns="http://www.w3.org/2000/svg">
 		<path
 			fill={colors.gray52}
 			d="M3.296 3L5.89 5.593 8.482 3l1.296 1.296-3.889 3.89L2 4.295z"
@@ -76,10 +95,20 @@ export const ChevronExpand = props => (
 	</svg>
 );
 
+export const ChevronRight = props => (
+	<svg {...props} width="12" height="12" xmlns="http://www.w3.org/2000/svg">
+		<path
+			fill={colors.gray52}
+			d="M3.593 8.482l2.592-2.593-2.592-2.593L4.889 2l3.89 3.89-3.89 3.888z"
+			fillRule="evenodd"
+		/>
+	</svg>
+);
+
 export const Caret = props => (
 	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
 		<g fill="currentColor" transform="matrix(0 1 1 0 1 -1)">
-			<polygon id="caret-right-1px-a" points="10 13 3 6.304 4.273 5 10 10.478 15.727 5 17 6.304" />
+			<polygon points="10 13 3 6.304 4.273 5 10 10.478 15.727 5 17 6.304" />
 		</g>
 	</svg>
 );

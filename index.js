@@ -15,7 +15,7 @@ export { DatePeriodPicker } from './components/date-period-picker';
 export { DropZone } from './components/drop-zone';
 export { FilesSection } from './components/files-section';
 export { HelpBox } from './components/help-box';
-export { Input } from './components/input';
+export { Input, FilterInput } from './components/input';
 export { LoadingSpinner } from './components/loading-spinner';
 export { Modal, ModalContent, ModalFooter } from './components/modal';
 export {
