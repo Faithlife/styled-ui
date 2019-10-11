@@ -134,6 +134,34 @@ function noOptionsMessage({ inputValue }) {
 	return inputValue ? 'No options' : null;
 }
 
+function handleKeyDown(e) {
+	const evt = { ...e };
+	switch (evt.key) {
+		case 'Home': {
+			evt.preventDefault();
+			if (evt.shiftKey) {
+				evt.target.selectionStart = 0;
+			} else {
+				evt.target.setSelectionRange(0, 0);
+			}
+			break;
+		}
+		case 'End': {
+			evt.preventDefault();
+			const len = evt.target.value.length;
+			if (evt.shiftKey) {
+				evt.target.selectionEnd = len;
+			} else {
+				evt.target.setSelectionRange(len, len);
+			}
+			break;
+		}
+		default: {
+			break;
+		}
+	}
+}
+
 /** Autocomplete control based on react-select */
 export const Select = React.forwardRef(({ components = {}, ...props }, ref) => {
 	const body = useBody();
@@ -145,6 +173,7 @@ export const Select = React.forwardRef(({ components = {}, ...props }, ref) => {
 			theme={selectTheme}
 			components={{ DropdownIndicator, ...defaultComponents, ...components }}
 			noOptionsMessage={noOptionsMessage}
+			onKeyDown={handleKeyDown}
 			menuPortalTarget={body}
 			{...props}
 			styles={selectStyles(props)}
@@ -164,6 +193,7 @@ export const CreatableSelect = React.forwardRef(({ components = {}, ...props }, 
 			formatCreateLabel={node => <span>New entry: {node}</span>}
 			components={{ DropdownIndicator, ...defaultComponents, ...components }}
 			noOptionsMessage={noOptionsMessage}
+			onKeyDown={handleKeyDown}
 			menuPortalTarget={body}
 			{...props}
 			styles={selectStyles(props)}
@@ -184,6 +214,7 @@ export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...prop
 			components={{ DropdownIndicator, ...defaultComponents, ...components }}
 			formatCreateLabel={node => <span>New entry: {node}</span>}
 			noOptionsMessage={noOptionsMessage}
+			onKeyDown={handleKeyDown}
 			menuPortalTarget={body}
 			{...props}
 			styles={selectStyles(props)}
@@ -202,6 +233,7 @@ export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref)
 			theme={selectTheme}
 			components={{ DropdownIndicator, ...defaultComponents, ...components }}
 			noOptionsMessage={noOptionsMessage}
+			onKeyDown={handleKeyDown}
 			menuPortalTarget={body}
 			{...props}
 			styles={selectStyles(props)}
