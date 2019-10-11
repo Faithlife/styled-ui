@@ -1,5 +1,12 @@
 # Changelog
 
+### 5.22.0
+
+- Add documentation on horizontal stacks
+- Make `ModalContainer` padding consistent
+- Update `InferTooltip` content
+- Add Grid Components: `SimpleGrid`, `PaginatedGrid`, `TreeGrid`
+
 ### 5.21.2
 
 - Fix input border color.

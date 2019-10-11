@@ -1,6 +1,6 @@
 {
 	"name": "@faithlife/styled-ui",
-	"version": "5.21.2",
+	"version": "2.22.0",
 	"main": "dist/main.js",
 	"repository": "git@github.com:Faithlife/styled-ui.git",
 	"author": "Dustin Masters <dustin.masters@faithlife.com>",
@@ -31,12 +31,12 @@
 		"not op_mini all"
 	],
 	"peerDependencies": {
-		"react": "^16.8.0",
-		"react-dom": "^16.8.0",
-		"styled-components": "^4.0.2",
 		"ag-grid-community": "21.2.2",
 		"ag-grid-enterprise": "21.2.2",
-		"ag-grid-react": "21.2.2"
+		"ag-grid-react": "21.2.2",
+		"react": "^16.8.0",
+		"react-dom": "^16.8.0",
+		"styled-components": "^4.0.2"
 	},
 	"peerDependenciesMeta": {
 		"ag-grid-community": {
