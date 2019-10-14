@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.22.1
+
+- Export `Grid` components as separate entry point
+
 ### 5.22.0
 
 - Add documentation on horizontal stacks
