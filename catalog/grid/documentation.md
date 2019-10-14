@@ -18,7 +18,7 @@ LicenseManager.setLicenseKey('secret-license-key');
 ## How to import
 
 ```
-import { SimpleGrid } from '@faithlife/styled-ui/dist/grid';
+import { SimpleGrid } from '@faithlife/styled-ui/grid';
 ```
 
 ## Component Documentation
