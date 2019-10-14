@@ -53,7 +53,6 @@ export {
 	ParameterSentence,
 } from './components/parameter-sentence';
 export { FilePicker, AmberContent, FileUpload } from './components/file-picker';
-export { SimpleGrid, GridColumn, PaginatedGrid, TreeGrid } from './components/grid';
 
 export { Box } from './components/Box';
 export { Stack } from './components/Stack';

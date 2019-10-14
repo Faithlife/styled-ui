@@ -56,10 +56,6 @@ import {
 	FilePicker,
 	FileUpload,
 	AmberContent,
-	GridColumn,
-	PaginatedGrid,
-	SimpleGrid,
-	TreeGrid,
 	Box,
 	Stack,
 	Text,
@@ -77,6 +73,7 @@ import { textInputPages } from './input/pages';
 import DownArrow from './svgs/arrow-down.svg';
 import { PopulationChange } from './grid/population-change';
 import { BaseGrid } from '../components/grid/base-grid';
+import { SimpleGrid, GridColumn, PaginatedGrid, TreeGrid } from '../components/grid';
 
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.

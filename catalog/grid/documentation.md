@@ -4,7 +4,7 @@ Install ag-grid to your project as a dependency. If you are developing a library
 yarn add ag-grid-community ag-grid-enterprise ag-grid-react
 ```
 
-You will need to include the license for enterprise at the top of your application as well as the css. If you are building for faithlife.com then this is not necessary.
+You will need to include the license for enterprise at the top of your application as well as the css. If you are building for faithlife.com include it in the top of the file where your component is imported.
 
 ```code
 lang: js
@@ -13,6 +13,12 @@ import { LicenseManager } from 'ag-grid-enterprise'
 import '@faithlife/styled-ui/dist/ag-grid.css';
 
 LicenseManager.setLicenseKey('secret-license-key');
+```
+
+## How to import
+
+```
+import { SimpleGrid } from '@faithlife/styled-ui/grid';
 ```
 
 ## Component Documentation
