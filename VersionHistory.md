@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.22.2
+
+- Specify a unique name for `ProductDrawer`'s webpack JSONP function.
+
 ### 5.22.1
 
 - Export `Grid` components as separate entry point
