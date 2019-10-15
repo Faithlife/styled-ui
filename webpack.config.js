@@ -21,6 +21,7 @@ module.exports = {
 		filename: '[name].js',
 		path: path.resolve('./dist'),
 		libraryTarget: 'commonjs2',
+		jsonpFunction: 'styledUIJsonp',
 	},
 	externals: [nodeExternals()],
 	plugins: [
