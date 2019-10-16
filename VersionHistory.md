@@ -1,7 +1,8 @@
 # Changelog
 
-### 5.22.3
+### 5.23.0
 
+- Add `Heading` component for convenient application of heading text styles.
 - Set default text color on `Text` and `Paragraph`.
 
 ### 5.22.2
