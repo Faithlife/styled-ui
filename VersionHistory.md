@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.23.1
+
+- Fix element rendered by `Heading`.
+
 ### 5.23.0
 
 - Add `Heading` component for convenient application of heading text styles.
