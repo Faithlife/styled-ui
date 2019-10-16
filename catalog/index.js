@@ -60,6 +60,7 @@ import {
 	Stack,
 	Text,
 	Paragraph,
+	Heading,
 	theme,
 } from '../index';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
@@ -187,6 +188,7 @@ const components = [
 					Stack,
 					Text,
 					Paragraph,
+					Heading,
 					ThemeList,
 				},
 			},

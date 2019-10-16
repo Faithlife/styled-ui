@@ -20,6 +20,14 @@ Use for headlines.
 </Stack>
 ```
 
+The `Heading` component is also available for convenience. It's a simple wrapper around `Parargaph`, rendering a `heading` element by default. Pass a `level` prop corresponding to the named `h.{level}` names listed above.
+
+```react
+showSource: true
+---
+<Heading level={18}>My Heading</Heading>
+```
+
 #### Content
 
 Use for body copy and miscellaneous content.

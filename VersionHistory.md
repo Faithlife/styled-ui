@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.22.3
+
+- Set default text color on `Text` and `Paragraph`.
+
 ### 5.22.2
 
 - Specify a unique name for `ProductDrawer`'s webpack JSONP function.
