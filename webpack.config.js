@@ -15,6 +15,7 @@ module.exports = {
 		'group-selector': './components/group-selector/index.js',
 		'share-dialog': './components/share-dialog/index.js',
 		'product-drawer': './components/product-drawer/index.js',
+		grid: './grid.js',
 	},
 	devtool: 'sourcemap',
 	output: {

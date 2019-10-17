@@ -1,6 +1,6 @@
 {
 	"name": "@faithlife/styled-ui",
-	"version": "5.23.1",
+	"version": "5.23.2",
 	"main": "dist/main.js",
 	"repository": "git@github.com:Faithlife/styled-ui.git",
 	"author": "Dustin Masters <dustin.masters@faithlife.com>",
@@ -8,7 +8,8 @@
 	"description": "UI components for use in Faithlife applications.",
 	"sideEffects": [
 		"dist/main.css",
-		"dist/text-input.css"
+		"dist/text-input.css",
+		"dist/ag-grid.css"
 	],
 	"scripts": {
 		"deploy-site": "npm run catalog-build && storybook-to-ghpages --ci --existing-output-dir=catalog/build",

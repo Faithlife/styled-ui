@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.23.2
+
+- Add `@faithlife/styled-ui/grid` as an entry point
+
 ### 5.23.1
 
 - Fix element rendered by `Heading`.
