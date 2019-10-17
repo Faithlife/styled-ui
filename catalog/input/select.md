@@ -35,6 +35,29 @@ state: { selection: '' }
 </div>
 ```
 
+### Single select without search
+
+```react
+showSource: true
+state: { selection: '' }
+---
+<div>
+	<div>Current selection: {state.selection}</div>
+	<Select
+		onChange={({ value }) => {
+			setState({ selection: value });
+		}}
+		isSearchable={false}
+		options={[
+			{ value: "washington", label: "Washington" },
+			{ value: "california", label: "California" },
+			{ value: "Texas", label: "Texas" }
+		]}
+		placeholder="Choose a state..."
+	/>
+</div>
+```
+
 ### Single select in a modal
 
 ```react
