@@ -25,7 +25,8 @@
 		"catalog-build-netlify": "npm run prepublishOnly && catalog build"
 	},
 	"files": [
-		"dist/**"
+		"dist/**",
+		"grid.js"
 	],
 	"browserslist": [
 		"> 1%",
