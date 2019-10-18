@@ -35,6 +35,7 @@ export function BaseGrid({
 	handleGetRowId,
 	additionalCellComponents,
 	additionalColumnOptions,
+	onRowSelect,
 }) {
 	const tableHeightPadding = hasPagingBar ? 42 : 2;
 
@@ -75,8 +76,15 @@ export function BaseGrid({
 
 	const handleSelectionChanged = useCallback(() => {
 		const selectedRows = gridApi.getSelectedRows();
-		onRowClick && onRowClick(selectedRows);
-	}, [gridApi, onRowClick]);
+		onRowSelect && onRowSelect(selectedRows);
+	}, [gridApi, onRowSelect]);
+
+	const handleShowCheckbox = useCallback(
+		shouldShowCheckbox => params => {
+			shouldShowCheckbox(params.node.group, params.node.data);
+		},
+		[],
+	);
 
 	const {
 		headingChildren,
@@ -104,8 +112,15 @@ export function BaseGrid({
 	const handleCellClicked = useCallback(
 		event => {
 			if (!event.column.colDef.hasInteractableElement) {
-				onRowClick && onRowClick([event.data]);
+				onRowClick && onRowClick(event.data);
 			}
+		},
+		[onRowClick],
+	);
+
+	const handleRowClicked = useCallback(
+		event => {
+			onRowClick && onRowClick(event.data);
 		},
 		[onRowClick],
 	);
@@ -163,6 +178,7 @@ export function BaseGrid({
 				suppressRowClickSelection={suppressRowClick}
 				onCellClicked={suppressRowClick ? handleCellClicked : null}
 				getRowHeight={getRowHeight}
+				onRowClicked={suppressRowClick ? null : handleRowClicked}
 				reactNext
 				{...gridOptions}
 			>
@@ -180,6 +196,8 @@ export function BaseGrid({
 						hide,
 						isLargeViewportOnly,
 						isSmallViewportOnly,
+						showCheckbox,
+						shouldShowCheckbox,
 						...columnProps
 					} = child.props;
 					return (
@@ -198,6 +216,9 @@ export function BaseGrid({
 							cellClass={`ag-faithlife-cell ${isRightAligned ? 'ag-cell-right-aligned' : ''}`}
 							rowGroup={groupByColumn}
 							hide={groupByColumn || hide}
+							checkboxSelection={
+								shouldShowCheckbox ? handleShowCheckbox(shouldShowCheckbox) : showCheckbox
+							}
 						/>
 					);
 				})}
@@ -228,7 +249,7 @@ BaseGrid.propTypes = {
 	updateSortModel: PropTypes.func,
 	/** Text to filter the rows on */
 	filterText: PropTypes.string,
-	/** Whether to allow single or multi row select */
+	/** Whether to allow single or multi row select, Use 'GridComponent'.rowSelectionOptions */
 	rowSelectionType: PropTypes.oneOf(Object.values(BaseGrid.rowSelectionOptions)),
 	/** Handler for selected rows */
 	onRowClick: PropTypes.func,
@@ -241,6 +262,8 @@ BaseGrid.propTypes = {
 	/** Your data should have an id property or this handler must be included */
 	handleGetRowId: PropTypes.func,
 	children: PropTypes.node,
+	/** Called when a row is selected with a checkbox */
+	onRowSelect: PropTypes.func,
 };
 
 function parseChildrenSettings(children, additionalCellComponents = {}) {
@@ -263,7 +286,12 @@ function parseChildrenSettings(children, additionalCellComponents = {}) {
 		.filter(child => child.props.isSmallViewportOnly)
 		.map(child => child.props.fieldName);
 
-	const suppressRowClick = headingChildren.some(child => child.props.hasInteractableElement);
+	const suppressRowClick = headingChildren.some(
+		child =>
+			child.props.hasInteractableElement ||
+			child.props.showCheckbox ||
+			child.props.shouldShowCheckbox,
+	);
 
 	return {
 		headingChildren,

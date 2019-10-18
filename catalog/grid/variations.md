@@ -8,7 +8,7 @@ The simplest use of the table. Each column is sortable and resizable. Leave `max
 showSource: true
 ---
 <div>
-	<SimpleGrid data={censusData} maxRows={10} onRowClick={row => {alert(row[0].NAME)}}>
+	<SimpleGrid data={censusData} maxRows={10} onRowClick={row => {alert(row.value)}}>
 		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
 		<GridColumn displayName="Population" fieldName="population" isRightAligned />
 		<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />

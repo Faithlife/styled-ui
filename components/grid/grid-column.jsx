@@ -17,6 +17,8 @@ export function GridColumn({
 	maxWidth,
 	groupByColumn,
 	hasInteractableElement,
+	showCheckbox,
+	showShowCheckbox,
 }) {
 	return <div />;
 }
@@ -58,4 +60,7 @@ GridColumn.propTypes = {
 	groupByColumn: PropTypes.bool,
 	/** Suppress the entire row receiving the click when you have an interactable element */
 	hasInteractableElement: PropTypes.bool,
+	showCheckbox: PropTypes.bool,
+	/** Expects boolean return. Called with (isGroup: bool, rowData: object) */
+	shouldShowCheckbox: PropTypes.func,
 };

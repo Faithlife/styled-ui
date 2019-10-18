@@ -71,7 +71,7 @@ state: { filterText: 'WA' }
 ---
 <div>
 	<Input placeholder="Search" value={state.filterText} onChange={(e => setState({ filterText: e.target.value }))} />
-	<SimpleGrid data={censusData} maxRows={10} onRowClick={row => {alert(row[0].NAME)}} filterText={state.filterText}>
+	<SimpleGrid data={censusData} maxRows={10} onRowClick={row => {alert(row.value)}} filterText={state.filterText}>
 		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
 		<GridColumn displayName="Population" fieldName="population" isRightAligned />
 		<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
@@ -89,7 +89,7 @@ Cell components can be any valid react component. The `value` prop will be what 
 showSource: true
 ---
 <div>
-	<SimpleGrid data={censusData} maxRows={10} onRowClick={row => {alert(row[0].NAME)}}>
+	<SimpleGrid data={censusData} maxRows={10} onRowClick={row => {alert(row.value)}}>
 		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
 		<GridColumn displayName="Population" fieldName="population" isRightAligned />
 		<GridColumn displayName="Net Population Change" fieldName="populationChange" cellComponent={PopulationChange} isRightAligned />
@@ -129,5 +129,27 @@ state: { }
 		<GridColumn displayName="Population" fieldName="population" />
 		<GridColumn displayName="Net Population Change" fieldName="populationChange" />
 	</TreeGrid>
+</div>
+```
+
+### Checkbox Selection
+
+```react
+showSource: true
+---
+<div>
+	<SimpleGrid
+		data={censusData}
+		maxRows={10}
+		onRowClick={row => {console.log(row)}}
+		onRowSelect={rows => {console.log(rows)}}
+		rowSelectionType={SimpleGrid.rowSelectionOptions.multi}
+	>
+		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} showCheckbox />
+		<GridColumn displayName="Population" fieldName="population" isRightAligned />
+		<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
+		<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
+		<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
+	</SimpleGrid>
 </div>
 ```
