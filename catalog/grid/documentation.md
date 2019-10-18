@@ -40,5 +40,11 @@ noSource: true
 ```react
 noSource: true
 ---
+<DocgenTable component={TreeGrid} />
+```
+
+```react
+noSource: true
+---
 <DocgenTable component={GridColumn} />
 ```

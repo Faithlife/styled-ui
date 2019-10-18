@@ -110,3 +110,24 @@ function PopulationChange({ value }) {
 	);
 }
 ```
+
+### Drag and Drop in TreeGrid
+
+```react
+showSource: true
+state: { }
+---
+<div>
+	<TreeGrid
+		data={state.data || censusDataFolders}
+		maxRows={10}
+		autoGroupExpansion={TreeGrid.expandedRowsOptions.topLevel}
+		onDataChange={data => setState({ data })}
+		enableDragDrop
+	>
+		<TreeGrid.GroupColumn displayName="Name" width={500} />
+		<GridColumn displayName="Population" fieldName="population" />
+		<GridColumn displayName="Net Population Change" fieldName="populationChange" />
+	</TreeGrid>
+</div>
+```

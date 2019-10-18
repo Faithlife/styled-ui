@@ -234,8 +234,6 @@ TreeGrid.GroupColumn = TreeGroupColumn;
 
 TreeGrid.propTypes = {
 	...BaseGrid.propTypes,
-	currentPageNumber: PropTypes.number,
-	onPageNumberChange: PropTypes.func,
 	data: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -243,10 +241,11 @@ TreeGrid.propTypes = {
 			children: PropTypes.array,
 		}),
 	),
+	/** Use one of TreeGrid.expandedRowsOptions */
 	autoGroupExpansion: PropTypes.oneOf(Object.values(TreeGrid.expandedRowsOptions)),
-	/** Called after a drag-drop */
+	/** Called after a drag-drop with the updated child tree */
 	onDataChange: PropTypes.func,
-	/** Is the current drop target a valid parent calls with the row data and the new path */
+	/** Is the current drop target a valid parent called with the row data and the new path */
 	isValidDropTarget: PropTypes.func,
 };
 
