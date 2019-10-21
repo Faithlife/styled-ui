@@ -2,6 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { AgGridReact, AgGridColumn } from 'ag-grid-react';
 import 'ag-grid-enterprise';
+import { handleShowCheckbox } from './grid-helpers';
 import * as Styled from './styled';
 
 const gridHeight = 8;
@@ -78,13 +79,6 @@ export function BaseGrid({
 		const selectedRows = gridApi.getSelectedRows();
 		onRowSelect && onRowSelect(selectedRows);
 	}, [gridApi, onRowSelect]);
-
-	const handleShowCheckbox = useCallback(
-		shouldShowCheckbox => params => {
-			shouldShowCheckbox(params.node.group, params.node.data);
-		},
-		[],
-	);
 
 	const {
 		headingChildren,

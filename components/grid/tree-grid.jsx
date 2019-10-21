@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { useGridState } from './grid-helpers';
+import { useGridState, handleShowCheckbox } from './grid-helpers';
 import { BaseGrid } from './base-grid';
 import { TreeGroupColumn } from './tree-grid-group-column';
 
@@ -84,6 +84,8 @@ export function TreeGrid(props) {
 			defaultSort,
 			isResizable,
 			hideChildrenCount,
+			showCheckbox,
+			shouldShowCheckbox,
 			...groupProps
 		} = heading.props;
 
@@ -97,6 +99,7 @@ export function TreeGrid(props) {
 			cellRendererParams: {
 				suppressCount: hideChildrenCount,
 				innerRenderer: cellComponent ? treeGroupColumnComponent : '',
+				checkbox: shouldShowCheckbox ? handleShowCheckbox(shouldShowCheckbox) : showCheckbox,
 			},
 			cellClass: 'ag-faithlife-cell',
 			cellClassRules: {

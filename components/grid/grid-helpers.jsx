@@ -6,3 +6,9 @@ export function useGridState() {
 
 	return { gridApi, setGridApi, columnApi, setColumnApi };
 }
+
+export function handleShowCheckbox(shouldShowCheckbox) {
+	return params => {
+		shouldShowCheckbox(params.node.group, params.node.data);
+	};
+}

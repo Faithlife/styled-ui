@@ -43,4 +43,6 @@ TreeGroupColumn.propTypes = {
 	maxWidth: PropTypes.number,
 	/** Do not show the number of children */
 	hideChildrenCount: PropTypes.bool,
+	showCheckbox: PropTypes.bool,
+	shouldShowCheckbox: PropTypes.func,
 };
