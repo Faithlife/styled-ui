@@ -210,7 +210,7 @@ export function BaseGrid({
 							headerClass={isRightAligned && 'ag-header-right-aligned'}
 							cellClass={`ag-faithlife-cell ${isRightAligned ? 'ag-cell-right-aligned' : ''}`}
 							rowGroup={groupByColumn}
-							hide={groupByColumn || hide}
+							hide={hide}
 							checkboxSelection={
 								shouldShowCheckbox ? handleShowCheckbox(shouldShowCheckbox) : showCheckbox
 							}
