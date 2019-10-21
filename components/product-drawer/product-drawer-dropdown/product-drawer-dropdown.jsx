@@ -26,8 +26,9 @@ export const ProductDrawerDropdown = ({
 	resources,
 	isOpen,
 	handleCloseButtonClick,
+	handleBlur,
 }) => (
-	<Styled.ProductDrawerDropdown styleOverrides={styleOverrides} onBlur={this.handleBlur}>
+	<Styled.ProductDrawerDropdown styleOverrides={styleOverrides} onBlur={handleBlur}>
 		<Styled.DropdownClose>
 			<Button
 				variant="primaryTransparent"

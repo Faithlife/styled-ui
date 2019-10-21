@@ -124,6 +124,7 @@ export class ProductDrawer extends React.PureComponent {
 								resources={resources}
 								styleOverrides={styleOverrides}
 								handleCloseButtonClick={this.handleCloseButtonClick}
+								handleBlur={this.handleBlur}
 							/>
 						</Suspense>
 					) : null}
