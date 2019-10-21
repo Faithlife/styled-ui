@@ -12,3 +12,9 @@ export function handleShowCheckbox(shouldShowCheckbox) {
 		shouldShowCheckbox(params.node.group, params.node.data);
 	};
 }
+
+export function handleIsDraggable(isDraggable) {
+	return params => {
+		isDraggable(params.node.group, params.node.data);
+	};
+}

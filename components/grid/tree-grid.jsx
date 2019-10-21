@@ -1,6 +1,11 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { useGridState, handleShowCheckbox, TreeGroupColumn } from './grid-helpers';
+import {
+	useGridState,
+	handleShowCheckbox,
+	handleIsDraggable,
+	TreeGroupColumn,
+} from './grid-helpers';
 import { BaseGrid } from './base-grid';
 
 const treeGroupColumnComponent = 'treeGroupColumn';
@@ -25,6 +30,7 @@ export function TreeGrid(props) {
 		autoGroupExpansion,
 		onDataChange,
 		isValidDropTarget,
+		isDraggableRow,
 		...baseGridProps
 	} = props;
 
@@ -39,12 +45,12 @@ export function TreeGrid(props) {
 	const heading = React.Children.toArray(children).find(child => child && child.type.isTreeGroup);
 	useEffect(() => {
 		if (process.env.NODE_ENV !== 'production') {
-			if (!heading && !enableDragDrop) {
+			if (!heading && !(enableDragDrop || isDraggableRow)) {
 				console.warn(
 					'You are using a tree grid, but are not including a `<TreeGrid.GroupColumn> child',
 				);
 			}
-			if (enableDragDrop && !onDataChange) {
+			if ((enableDragDrop || isDraggableRow) && !onDataChange) {
 				console.warn(
 					'You are using dragdrop for the tree grid, but did not supply a onDataChange function',
 				);
@@ -90,7 +96,7 @@ export function TreeGrid(props) {
 
 		groupComponent = cellComponent ? { [treeGroupColumnComponent]: cellComponent } : {};
 		groupColumnSettings = {
-			rowDrag: enableDragDrop,
+			rowDrag: isDraggableRow ? handleIsDraggable(isDraggableRow) : enableDragDrop,
 			headerName: heading.props.displayName,
 			sortable: isSortable,
 			sort: defaultSort,
@@ -105,18 +111,19 @@ export function TreeGrid(props) {
 				'ag-faithlife-drop-target-row_below': getShouldShowDropTarget(dragDirections.down),
 				'ag-faithlife-drop-target-row_above': getShouldShowDropTarget(dragDirections.up),
 			},
-			headerClass: enableDragDrop
-				? 'ag-faithlife-tree-group-header-with-drag'
-				: 'ag-faithlife-tree-group-header',
+			headerClass:
+				enableDragDrop || isDraggableRow
+					? 'ag-faithlife-tree-group-header-with-drag'
+					: 'ag-faithlife-tree-group-header',
 			...groupProps,
 		};
 	}
 
 	useEffect(() => {
 		if (gridApi) {
-			gridApi.setSuppressRowDrag(!enableDragDrop);
+			gridApi.setSuppressRowDrag(!(enableDragDrop || isDraggableRow));
 		}
-	}, [gridApi, enableDragDrop]);
+	}, [gridApi, enableDragDrop, isDraggableRow]);
 
 	const rows = useMemo(() => getRowsFromTreeShape([], '', data), [data]);
 
@@ -249,6 +256,8 @@ TreeGrid.propTypes = {
 	onDataChange: PropTypes.func,
 	/** Is the current drop target a valid parent called with the row data and the new path */
 	isValidDropTarget: PropTypes.func,
+	/** Optional callback called for each row to see if it should be draggable. Passes (isGroup: boolean, rowData: object) */
+	isDraggableRow: PropTypes.func,
 };
 
 function getRowsFromTreeShape(pathTo, parentId, tree) {
