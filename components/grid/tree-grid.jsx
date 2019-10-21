@@ -1,8 +1,7 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { useGridState, handleShowCheckbox } from './grid-helpers';
+import { useGridState, handleShowCheckbox, TreeGroupColumn } from './grid-helpers';
 import { BaseGrid } from './base-grid';
-import { TreeGroupColumn } from './tree-grid-group-column';
 
 const treeGroupColumnComponent = 'treeGroupColumn';
 
