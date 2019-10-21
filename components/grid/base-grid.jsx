@@ -173,6 +173,7 @@ export function BaseGrid({
 				onCellClicked={suppressRowClick ? handleCellClicked : null}
 				getRowHeight={getRowHeight}
 				onRowClicked={suppressRowClick ? null : handleRowClicked}
+				suppressContextMenu={true}
 				reactNext
 				{...gridOptions}
 			>
