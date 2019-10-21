@@ -2,18 +2,11 @@ import React, { useRef, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import {
 	useGridState,
-	handleShowCheckbox,
-	handleIsDraggable,
-	TreeGroupColumn,
+	AggregationGroupColumn,
+	getAggregationColumn,
+	dragDirections,
 } from './grid-helpers';
 import { BaseGrid } from './base-grid';
-
-const treeGroupColumnComponent = 'treeGroupColumn';
-
-const dragDirections = {
-	up: 'up',
-	down: 'down',
-};
 
 const dragEventTypes = {
 	drag: 'rowDragMove',
@@ -42,22 +35,6 @@ export function TreeGrid(props) {
 	const draggedNode = useRef();
 	const dragDirection = useRef();
 
-	const heading = React.Children.toArray(children).find(child => child && child.type.isTreeGroup);
-	useEffect(() => {
-		if (process.env.NODE_ENV !== 'production') {
-			if (!heading && !(enableDragDrop || isDraggableRow)) {
-				console.warn(
-					'You are using a tree grid, but are not including a `<TreeGrid.GroupColumn> child',
-				);
-			}
-			if ((enableDragDrop || isDraggableRow) && !onDataChange) {
-				console.warn(
-					'You are using dragdrop for the tree grid, but did not supply a onDataChange function',
-				);
-			}
-		}
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps
-
 	const getShouldShowDropTarget = useCallback(
 		onDirection => ({ rowIndex }) => {
 			if (
@@ -79,45 +56,27 @@ export function TreeGrid(props) {
 		[isValidDropTarget],
 	);
 
-	let groupComponent;
-	let groupColumnSettings;
-	if (heading) {
-		const {
-			displayName,
-			cellComponent,
-			isSortable,
-			defaultSort,
-			isResizable,
-			hideChildrenCount,
-			showCheckbox,
-			shouldShowCheckbox,
-			...groupProps
-		} = heading.props;
+	const { heading, groupComponent, groupColumnSettings } = getAggregationColumn({
+		children,
+		getShouldShowDropTarget,
+		isDraggableRow,
+		enableDragDrop,
+	});
 
-		groupComponent = cellComponent ? { [treeGroupColumnComponent]: cellComponent } : {};
-		groupColumnSettings = {
-			rowDrag: isDraggableRow ? handleIsDraggable(isDraggableRow) : enableDragDrop,
-			headerName: heading.props.displayName,
-			sortable: isSortable,
-			sort: defaultSort,
-			resizable: isResizable,
-			cellRendererParams: {
-				suppressCount: hideChildrenCount,
-				innerRenderer: cellComponent ? treeGroupColumnComponent : '',
-				checkbox: shouldShowCheckbox ? handleShowCheckbox(shouldShowCheckbox) : showCheckbox,
-			},
-			cellClass: 'ag-faithlife-cell',
-			cellClassRules: {
-				'ag-faithlife-drop-target-row_below': getShouldShowDropTarget(dragDirections.down),
-				'ag-faithlife-drop-target-row_above': getShouldShowDropTarget(dragDirections.up),
-			},
-			headerClass:
-				enableDragDrop || isDraggableRow
-					? 'ag-faithlife-tree-group-header-with-drag'
-					: 'ag-faithlife-tree-group-header',
-			...groupProps,
-		};
-	}
+	useEffect(() => {
+		if (process.env.NODE_ENV !== 'production') {
+			if (!heading && !(enableDragDrop || isDraggableRow)) {
+				console.warn(
+					'You are using a tree grid, but are not including a `<TreeGrid.GroupColumn> child',
+				);
+			}
+			if ((enableDragDrop || isDraggableRow) && !onDataChange) {
+				console.warn(
+					'You are using dragdrop for the tree grid, but did not supply a onDataChange function',
+				);
+			}
+		}
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	useEffect(() => {
 		if (gridApi) {
@@ -198,7 +157,6 @@ export function TreeGrid(props) {
 			onRowDragEnd: handleRowDrag,
 			groupDefaultExpanded: autoGroupExpansion || TreeGrid.expandedRowsOptions.none,
 			autoGroupColumnDef: groupColumnSettings,
-			groupUseEntireRow: false,
 		}),
 		[handleRowDrag, autoGroupExpansion, groupColumnSettings],
 	);
@@ -239,7 +197,7 @@ TreeGrid.expandedRowsOptions = {
 	topLevel: 1,
 };
 
-TreeGrid.GroupColumn = TreeGroupColumn;
+TreeGrid.GroupColumn = AggregationGroupColumn;
 
 TreeGrid.propTypes = {
 	...BaseGrid.propTypes,

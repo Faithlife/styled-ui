@@ -1,5 +1,5 @@
-import React from 'react';
-import { useGridState } from './grid-helpers';
+import React, { useMemo } from 'react';
+import { useGridState, AggregationGroupColumn, getAggregationColumn } from './grid-helpers';
 import { BaseGrid } from './base-grid';
 
 export function SimpleGrid(props) {
@@ -8,6 +8,20 @@ export function SimpleGrid(props) {
 
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useGridState();
 
+	const { groupComponent, groupColumnSettings } = getAggregationColumn({
+		children,
+		getShouldShowDropTarget() {
+			return false;
+		},
+	});
+
+	const gridOptions = useMemo(
+		() => ({
+			autoGroupColumnDef: groupColumnSettings,
+		}),
+		[groupColumnSettings],
+	);
+
 	return (
 		<BaseGrid
 			{...baseGridProps}
@@ -15,6 +29,8 @@ export function SimpleGrid(props) {
 			setGridApi={setGridApi}
 			columnApi={columnApi}
 			setColumnApi={setColumnApi}
+			gridOptions={gridOptions}
+			additionalCellComponents={groupComponent}
 		>
 			{children}
 		</BaseGrid>
@@ -22,6 +38,8 @@ export function SimpleGrid(props) {
 }
 
 SimpleGrid.rowSelectionOptions = BaseGrid.rowSelectionOptions;
+
+SimpleGrid.GroupColumn = AggregationGroupColumn;
 
 SimpleGrid.propTypes = {
 	...BaseGrid.props,

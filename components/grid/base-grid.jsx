@@ -166,14 +166,13 @@ export function BaseGrid({
 				rowHeight={rowHeight || defaultRowHeight}
 				suppressHorizontalScroll
 				rowClass={onRowClick ? 'ag-grid-clickable-row' : ''}
-				groupUseEntireRow
 				deltaRowDataMode
 				getRowNodeId={handleGetRowId || getRowNodeId}
 				suppressRowClickSelection={suppressRowClick}
 				onCellClicked={suppressRowClick ? handleCellClicked : null}
 				getRowHeight={getRowHeight}
 				onRowClicked={suppressRowClick ? null : handleRowClicked}
-				suppressContextMenu={true}
+				suppressContextMenu
 				reactNext
 				{...gridOptions}
 			>
