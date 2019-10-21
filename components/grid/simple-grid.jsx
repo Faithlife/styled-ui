@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { useGridState, AggregationGroupColumn, getAggregationColumn } from './grid-helpers';
 import { BaseGrid } from './base-grid';
 
 export function SimpleGrid(props) {
 	// First separate out the props that are this grid component specific
-	const { children, ...baseGridProps } = props;
+	const { children, autoGroupExpansion, ...baseGridProps } = props;
 
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useGridState();
 
@@ -18,8 +19,10 @@ export function SimpleGrid(props) {
 	const gridOptions = useMemo(
 		() => ({
 			autoGroupColumnDef: groupColumnSettings,
+			groupDefaultExpanded: autoGroupExpansion || SimpleGrid.expandedRowsOptions.none,
+			animateRows: true,
 		}),
-		[groupColumnSettings],
+		[groupColumnSettings, autoGroupExpansion],
 	);
 
 	return (
@@ -39,8 +42,12 @@ export function SimpleGrid(props) {
 
 SimpleGrid.rowSelectionOptions = BaseGrid.rowSelectionOptions;
 
+SimpleGrid.expandedRowsOptions = BaseGrid.expandedRowsOptions;
+
 SimpleGrid.GroupColumn = AggregationGroupColumn;
 
 SimpleGrid.propTypes = {
 	...BaseGrid.props,
+	/** Use one of SimpleGrid.expandedRowsOptions */
+	autoGroupExpansion: PropTypes.oneOf(Object.values(SimpleGrid.expandedRowsOptions)),
 };

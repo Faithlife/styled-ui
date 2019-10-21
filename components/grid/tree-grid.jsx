@@ -191,11 +191,7 @@ TreeGrid.rowTypes = {
 	item: 'item',
 };
 
-TreeGrid.expandedRowsOptions = {
-	all: -1,
-	none: 0,
-	topLevel: 1,
-};
+TreeGrid.expandedRowsOptions = BaseGrid.expandedRowsOptions;
 
 TreeGrid.GroupColumn = AggregationGroupColumn;
 

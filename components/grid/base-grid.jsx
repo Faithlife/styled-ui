@@ -227,6 +227,12 @@ BaseGrid.rowSelectionOptions = {
 	multi: 'multiple',
 };
 
+BaseGrid.expandedRowsOptions = {
+	all: -1,
+	none: 0,
+	topLevel: 1,
+};
+
 BaseGrid.propTypes = {
 	isSmallViewport: PropTypes.bool,
 	/** The Max amount of rows to show in the table */
