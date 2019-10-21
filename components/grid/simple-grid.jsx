@@ -5,11 +5,17 @@ import { BaseGrid } from './base-grid';
 
 export function SimpleGrid(props) {
 	// First separate out the props that are this grid component specific
-	const { children, autoGroupExpansion, ...baseGridProps } = props;
+	const {
+		children,
+		autoGroupExpansion,
+		groupSelectsChildren,
+		groupSelectsFilteredChildren,
+		...baseGridProps
+	} = props;
 
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useGridState();
 
-	const { groupComponent, groupColumnSettings } = getAggregationColumn({
+	const { groupComponent, groupColumnSettings, rowClickSelects } = getAggregationColumn({
 		children,
 		getShouldShowDropTarget() {
 			return false;
@@ -20,9 +26,17 @@ export function SimpleGrid(props) {
 		() => ({
 			autoGroupColumnDef: groupColumnSettings,
 			groupDefaultExpanded: autoGroupExpansion || SimpleGrid.expandedRowsOptions.none,
-			animateRows: true,
+			groupSelectsChildren: groupSelectsChildren,
+			groupSelectsFiltered: groupSelectsFilteredChildren,
+			...(!rowClickSelects && { suppressRowClickSelection: true }),
 		}),
-		[groupColumnSettings, autoGroupExpansion],
+		[
+			groupColumnSettings,
+			autoGroupExpansion,
+			groupSelectsChildren,
+			groupSelectsFilteredChildren,
+			rowClickSelects,
+		],
 	);
 
 	return (
@@ -46,8 +60,16 @@ SimpleGrid.expandedRowsOptions = BaseGrid.expandedRowsOptions;
 
 SimpleGrid.GroupColumn = AggregationGroupColumn;
 
+SimpleGrid.defaultProps = {
+	groupSelectsChildren: true,
+};
+
 SimpleGrid.propTypes = {
 	...BaseGrid.props,
 	/** Use one of SimpleGrid.expandedRowsOptions */
 	autoGroupExpansion: PropTypes.oneOf(Object.values(SimpleGrid.expandedRowsOptions)),
+	/** If you select a group it will select all its children */
+	groupSelectsChildren: PropTypes.bool,
+	/** Only works if groupSelectsChildren is true. Groups will only select children that are present after a filter is applied */
+	groupSelectsFilteredChildren: PropTypes.bool,
 };

@@ -157,7 +157,7 @@ export function BaseGrid({
 				onSortChanged={handleSortChanged}
 				onSelectionChanged={handleSelectionChanged}
 				rowSelection={
-					!onRowClick
+					!onRowClick && !onRowSelect
 						? BaseGrid.rowSelectionOptions.none
 						: rowSelectionType || BaseGrid.rowSelectionOptions.single
 				}
@@ -173,6 +173,7 @@ export function BaseGrid({
 				getRowHeight={getRowHeight}
 				onRowClicked={suppressRowClick ? null : handleRowClicked}
 				suppressContextMenu
+				animateRows
 				reactNext
 				{...gridOptions}
 			>

@@ -38,6 +38,7 @@ export function getAggregationColumn({
 
 	let groupComponent;
 	let groupColumnSettings;
+	let rowClickSelects;
 	if (heading) {
 		const {
 			displayName,
@@ -52,6 +53,7 @@ export function getAggregationColumn({
 			...groupProps
 		} = heading.props;
 
+		rowClickSelects = !showCheckbox && !shouldShowCheckbox;
 		groupComponent = cellComponent ? { [treeGroupColumnComponent]: cellComponent } : {};
 		groupColumnSettings = {
 			rowDrag: isDraggableRow ? handleIsDraggable(isDraggableRow) : enableDragDrop,
@@ -78,5 +80,5 @@ export function getAggregationColumn({
 		};
 	}
 
-	return { heading, groupComponent, groupColumnSettings };
+	return { heading, groupComponent, groupColumnSettings, rowClickSelects };
 }

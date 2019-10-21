@@ -150,7 +150,6 @@ export function TreeGrid(props) {
 	const gridOptions = useMemo(
 		() => ({
 			treeData: true,
-			animateRows: true,
 			getDataPath,
 			onRowDragMove: handleRowDrag,
 			onRowDragLeave: handleRowDrag,
