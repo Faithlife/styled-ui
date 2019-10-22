@@ -6,7 +6,7 @@
 export { Accordion } from './components/accordion';
 export { AnchorButton } from './components/button/anchor-button';
 export { Bootstrap } from './components/bootstrap';
-export { Button } from './components/button';
+export { Button, UtilityButton } from './components/button';
 export { Checkbox } from './components/check-box';
 export { Collapse } from './components/collapse';
 export { DatePicker } from './components/date-picker';

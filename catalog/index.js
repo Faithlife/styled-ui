@@ -11,6 +11,7 @@ import {
 	AnchorButton,
 	Bootstrap,
 	Button,
+	UtilityButton,
 	Checkbox,
 	Collapse,
 	DropZone,
@@ -279,6 +280,16 @@ const components = [
 					ButtonGrid,
 					GearIcon,
 					buttonRef: React.createRef(),
+				},
+			},
+			{
+				path: '/button/utility-button',
+				title: 'Utility Button',
+				content: pageLoader(() => import('./button/utility-button.md')),
+				imports: {
+					UtilityButton,
+					Box,
+					Text,
 				},
 			},
 			{
