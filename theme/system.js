@@ -1,4 +1,3 @@
-import { css } from 'styled-components';
 import * as styledSystem from 'styled-system';
 import PropTypes from 'prop-types';
 import systemPropTypes from '@styled-system/prop-types';
