@@ -62,3 +62,9 @@ export { Heading } from './components/Heading';
 export { theme } from './theme';
 export { DefaultThemeProvider } from './components/DefaultThemeProvider';
 export { ThemeProvider } from './components/ThemeProvider';
+export {
+	AutoSizedRowMasonry,
+	MasonryRow,
+	MasonryCell,
+	getRowLayout,
+} from './components/row-masonry';

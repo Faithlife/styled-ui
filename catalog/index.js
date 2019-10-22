@@ -61,6 +61,7 @@ import {
 	Text,
 	Paragraph,
 	Heading,
+	AutoSizedRowMasonry,
 	theme,
 } from '../index';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
@@ -190,6 +191,20 @@ const components = [
 					Paragraph,
 					Heading,
 					ThemeList,
+				},
+			},
+		],
+	},
+	{
+		title: 'Row Masonry',
+		pages: [
+			{
+				path: '/row-masonry',
+				title: 'Row Masonry',
+				content: pageLoader(() => import('./row-masonry/documentation.md')),
+				imports: {
+					Box,
+					AutoSizedRowMasonry,
 				},
 			},
 		],
