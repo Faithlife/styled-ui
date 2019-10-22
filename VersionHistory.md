@@ -1,5 +1,12 @@
 # Changelog
 
+### 5.24.0
+
+- Add `UtilityButton` component.
+- Add row masonry components.
+- Fix accordion header color.
+- Fix blur handler in `ProductDrawer`.
+
 ### 5.23.2
 
 - Add `@faithlife/styled-ui/grid` as an entry point
