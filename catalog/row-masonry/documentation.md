@@ -2,7 +2,7 @@ A component for layout out elements in a horizontal masonry style. This layout u
 
 NOTE: This is a JavaScript-based layout that requires a known container width. It may not be appropriate for uses cases where server-rendered content is required.
 
-## `Automatic layout for in-memory collections`
+## Automatic layout for in-memory collections
 
 `AutoSizedRowMasonry` is a high-level component that uses a `ResizeObserver` to track the size of the container and automatically handle rendering.
 
