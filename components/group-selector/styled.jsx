@@ -139,6 +139,7 @@ export const LargeScrollView = styled(ScrollArea)`
 
 	.${LargeScrollViewContentClass} {
 		padding-top: ${props => (props.hideTitle ? '0' : '30px')};
+		padding-bottom: 4px;
 		position: unset;
 	}
 `;
