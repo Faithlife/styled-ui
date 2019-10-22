@@ -7,10 +7,11 @@ import {
 	dragDirections,
 	dragEventTypes,
 	useGridDragDrop,
+	useGridHandles,
 } from './grid-helpers';
 import { BaseGrid } from './base-grid';
 
-export function TreeGrid(props) {
+export const TreeGrid = React.forwardRef((props, ref) => {
 	// First separate out the props that are this grid component specific
 	const {
 		children,
@@ -24,6 +25,8 @@ export function TreeGrid(props) {
 	} = props;
 
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useGridState();
+
+	useGridHandles(gridApi, ref);
 
 	const {
 		previousHoveredRowNode,
@@ -158,7 +161,7 @@ export function TreeGrid(props) {
 			{children}
 		</BaseGrid>
 	);
-}
+});
 
 TreeGrid.rowSelectionOptions = BaseGrid.rowSelectionOptions;
 

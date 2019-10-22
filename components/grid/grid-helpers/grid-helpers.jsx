@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useImperativeHandle, useState, useCallback, useRef } from 'react';
 
 const treeGroupColumnComponent = 'treeGroupColumn';
 
@@ -18,6 +18,35 @@ export function useGridState() {
 	const [columnApi, setColumnApi] = useState(null);
 
 	return { gridApi, setGridApi, columnApi, setColumnApi };
+}
+
+export function useGridHandles(gridApi, ref) {
+	useImperativeHandle(
+		ref,
+		() => ({
+			selectAllRows() {
+				if (gridApi) {
+					gridApi.selectAll();
+				}
+			},
+			deselectAllRows() {
+				if (gridApi) {
+					gridApi.deselectAll();
+				}
+			},
+			selectFilteredRows() {
+				if (gridApi) {
+					gridApi.selectAllFiltered();
+				}
+			},
+			deselectFilteredRows() {
+				if (gridApi) {
+					gridApi.deselectAllFiltered();
+				}
+			},
+		}),
+		[gridApi],
+	);
 }
 
 export function handleShowCheckbox(shouldShowCheckbox) {

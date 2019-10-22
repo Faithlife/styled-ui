@@ -388,6 +388,7 @@ const components = [
 					censusData: censusDataWithId,
 					censusDataFolders,
 					TreeGrid,
+					gridRef: React.createRef(),
 				},
 			},
 			{

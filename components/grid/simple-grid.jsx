@@ -7,10 +7,11 @@ import {
 	useGridDragDrop,
 	dragDirections,
 	dragEventTypes,
+	useGridHandles,
 } from './grid-helpers';
 import { BaseGrid } from './base-grid';
 
-export function SimpleGrid(props) {
+export const SimpleGrid = React.forwardRef((props, ref) => {
 	// First separate out the props that are this grid component specific
 	const {
 		children,
@@ -26,6 +27,8 @@ export function SimpleGrid(props) {
 	} = props;
 
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useGridState();
+
+	useGridHandles(gridApi, ref);
 
 	useEffect(() => {
 		if (gridApi) {
@@ -154,7 +157,7 @@ export function SimpleGrid(props) {
 			{children}
 		</BaseGrid>
 	);
-}
+});
 
 SimpleGrid.rowSelectionOptions = BaseGrid.rowSelectionOptions;
 
