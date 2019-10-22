@@ -55,8 +55,8 @@ showSource: true
 ---
 <div>
 	<SimpleGrid data={censusData} maxRows={10}>
-		<GridColumn displayName="Area Description" fieldName="areaDesc" groupByColumn width={200} />
-		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+		<SimpleGrid.GroupColumn displayName="Name" fieldName="value" />
+		<GridColumn hide fieldName="areaDesc" groupByColumn width={200} />
 		<GridColumn displayName="Population" fieldName="population" />
 		<GridColumn displayName="Net Population Change" fieldName="populationChange" />
 	</SimpleGrid>
@@ -111,7 +111,9 @@ function PopulationChange({ value }) {
 }
 ```
 
-### Drag and Drop in TreeGrid
+### Drag and Drop
+
+This example uses the TreeGrid, but SimpleGrid supports it as well.
 
 ```react
 showSource: true
@@ -134,11 +136,29 @@ state: { }
 
 ### Checkbox Selection
 
+Also supported by Paginated and TreeGrid.
+
+Ref handles available when using checkboxes are `selectAllRows`, `selectFilteredRows`, `deselectAllRows`, and `deselectFilteredRows`.
+
 ```react
 showSource: true
+state: { selected: false }
 ---
 <div>
+	<Button
+		primary
+		medium
+		onClick={() => {
+			!state.selected ?
+				gridRef.current.selectAllRows() :
+				gridRef.current.deselectAllRows();
+			setState({ selected: !state.selected });
+			}}
+	>
+		Select/ Deselect
+	</Button>
 	<SimpleGrid
+		ref={gridRef}
 		data={censusData}
 		maxRows={10}
 		onRowClick={row => {console.log(row)}}
