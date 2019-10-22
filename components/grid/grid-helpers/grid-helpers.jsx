@@ -1,10 +1,16 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 
 const treeGroupColumnComponent = 'treeGroupColumn';
 
 export const dragDirections = {
 	up: 'up',
 	down: 'down',
+};
+
+export const dragEventTypes = {
+	drag: 'rowDragMove',
+	drop: 'rowDragEnd',
+	leave: 'rowDragLeave',
 };
 
 export function useGridState() {
@@ -81,4 +87,40 @@ export function getAggregationColumn({
 	}
 
 	return { heading, groupComponent, groupColumnSettings, rowClickSelects };
+}
+
+export function useGridDragDrop(isValidDropTarget, getNewPath) {
+	const previousHoveredRowNode = useRef();
+	const hoveredRowNode = useRef();
+	const draggedNode = useRef();
+	const dragDirection = useRef();
+
+	const getShouldShowDropTarget = useCallback(
+		onDirection => ({ rowIndex }) => {
+			if (
+				isValidDropTarget &&
+				!isValidDropTarget(
+					draggedNode.current.node.data,
+					getNewPath(hoveredRowNode.current.node, dragDirection.current),
+				)
+			) {
+				return false;
+			}
+			return (
+				hoveredRowNode.current &&
+				hoveredRowNode.current.rowIndex === rowIndex &&
+				draggedNode.current.rowIndex !== hoveredRowNode.current.rowIndex &&
+				dragDirection.current === onDirection
+			);
+		},
+		[isValidDropTarget, getNewPath],
+	);
+
+	return {
+		previousHoveredRowNode,
+		hoveredRowNode,
+		draggedNode,
+		dragDirection,
+		getShouldShowDropTarget,
+	};
 }

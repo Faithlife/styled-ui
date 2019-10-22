@@ -37,6 +37,7 @@ export function BaseGrid({
 	additionalCellComponents,
 	additionalColumnOptions,
 	onRowSelect,
+	showDragHandle,
 }) {
 	const tableHeightPadding = hasPagingBar ? 42 : 2;
 
@@ -76,8 +77,10 @@ export function BaseGrid({
 	}, [gridApi, sortModel]);
 
 	const handleSelectionChanged = useCallback(() => {
-		const selectedRows = gridApi.getSelectedRows();
-		onRowSelect && onRowSelect(selectedRows);
+		if (onRowSelect) {
+			const selectedRows = gridApi.getSelectedRows();
+			onRowSelect(selectedRows);
+		}
 	}, [gridApi, onRowSelect]);
 
 	const {
@@ -199,6 +202,7 @@ export function BaseGrid({
 						<AgGridColumn
 							{...additionalColumnOptions}
 							{...columnProps}
+							rowDrag={showDragHandle && index === 0}
 							key={fieldName}
 							headerName={displayName}
 							field={fieldName}
@@ -242,7 +246,7 @@ BaseGrid.propTypes = {
 	data: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-		}),
+		}).isRequired,
 	),
 	/** The current sort model for the table */
 	sortModel: PropTypes.object,

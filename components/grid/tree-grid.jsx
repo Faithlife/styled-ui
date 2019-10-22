@@ -1,18 +1,14 @@
-import React, { useRef, useEffect, useCallback, useMemo } from 'react';
+import React, { useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import {
 	useGridState,
 	AggregationGroupColumn,
 	getAggregationColumn,
 	dragDirections,
+	dragEventTypes,
+	useGridDragDrop,
 } from './grid-helpers';
 import { BaseGrid } from './base-grid';
-
-const dragEventTypes = {
-	drag: 'rowDragMove',
-	drop: 'rowDragEnd',
-	leave: 'rowDragLeave',
-};
 
 export function TreeGrid(props) {
 	// First separate out the props that are this grid component specific
@@ -29,32 +25,13 @@ export function TreeGrid(props) {
 
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useGridState();
 
-	// For styling the drop target rows
-	const previousHoveredRowNode = useRef();
-	const hoveredRowNode = useRef();
-	const draggedNode = useRef();
-	const dragDirection = useRef();
-
-	const getShouldShowDropTarget = useCallback(
-		onDirection => ({ rowIndex }) => {
-			if (
-				isValidDropTarget &&
-				!isValidDropTarget(
-					draggedNode.current.node.data,
-					getNewPath(hoveredRowNode.current.node, dragDirection.current),
-				)
-			) {
-				return false;
-			}
-			return (
-				hoveredRowNode.current &&
-				hoveredRowNode.current.rowIndex === rowIndex &&
-				draggedNode.current.rowIndex !== hoveredRowNode.current.rowIndex &&
-				dragDirection.current === onDirection
-			);
-		},
-		[isValidDropTarget],
-	);
+	const {
+		previousHoveredRowNode,
+		hoveredRowNode,
+		draggedNode,
+		dragDirection,
+		getShouldShowDropTarget,
+	} = useGridDragDrop(isValidDropTarget, getNewPath);
 
 	const { heading, groupComponent, groupColumnSettings } = getAggregationColumn({
 		children,
@@ -144,7 +121,7 @@ export function TreeGrid(props) {
 				previousHoveredRowNode.current = hoveredRowNode.current;
 			}
 		},
-		[gridApi, onDataChange, isValidDropTarget, data],
+		[gridApi, onDataChange, isValidDropTarget, data], // eslint-disable-line react-hooks/exhaustive-deps
 	);
 
 	const gridOptions = useMemo(
@@ -211,6 +188,7 @@ TreeGrid.propTypes = {
 	isValidDropTarget: PropTypes.func,
 	/** Optional callback called for each row to see if it should be draggable. Passes (isGroup: boolean, rowData: object) */
 	isDraggableRow: PropTypes.func,
+	enableDragDrop: PropTypes.bool,
 };
 
 function getRowsFromTreeShape(pathTo, parentId, tree) {
