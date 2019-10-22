@@ -82,7 +82,7 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 									<Text
 										textStyle={variant === 'minimal' ? 'ui.14' : 'ui.16'}
 										display="grid"
-										color="gray52"
+										color="gray66"
 										fontWeight="semibold"
 									>
 										{children}
