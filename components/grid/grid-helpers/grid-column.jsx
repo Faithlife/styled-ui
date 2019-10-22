@@ -18,7 +18,8 @@ export function GridColumn({
 	groupByColumn,
 	hasInteractableElement,
 	showCheckbox,
-	showShowCheckbox,
+	shouldShowCheckbox,
+	isEditable,
 }) {
 	return <div />;
 }
@@ -63,4 +64,8 @@ GridColumn.propTypes = {
 	showCheckbox: PropTypes.bool,
 	/** Expects boolean return. Called with (isGroup: bool, rowData: object) */
 	shouldShowCheckbox: PropTypes.func,
+	/** Makes the rows in this column editable */
+	isEditable: PropTypes.bool,
+	/** Expects boolean return. Called with (isGroup: bool, rowData: object) */
+	shouldBeEditable: PropTypes.func,
 };

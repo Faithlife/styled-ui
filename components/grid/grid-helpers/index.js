@@ -8,5 +8,6 @@ export {
 	useGridHandles,
 	handleShowCheckbox,
 	handleIsDraggable,
+	handleIsEditable,
 } from './grid-helpers';
 export { AggregationGroupColumn } from './aggregation-group-column';

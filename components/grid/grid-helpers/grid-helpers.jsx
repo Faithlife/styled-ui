@@ -61,6 +61,12 @@ export function handleIsDraggable(isDraggable) {
 	};
 }
 
+export function handleIsEditable(shouldBeEditable) {
+	return ({ node }) => {
+		shouldBeEditable(node.group, node.data);
+	};
+}
+
 export function getAggregationColumn({
 	children,
 	getShouldShowDropTarget,

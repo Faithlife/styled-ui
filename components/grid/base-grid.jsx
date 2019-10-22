@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { AgGridReact, AgGridColumn } from 'ag-grid-react';
 import 'ag-grid-enterprise';
-import { handleShowCheckbox } from './grid-helpers';
+import { handleShowCheckbox, handleIsEditable } from './grid-helpers';
 import * as Styled from './styled';
 
 const gridHeight = 8;
@@ -196,6 +196,8 @@ export function BaseGrid({
 						isSmallViewportOnly,
 						showCheckbox,
 						shouldShowCheckbox,
+						isEditable,
+						shouldBeEditable,
 						...columnProps
 					} = child.props;
 					return (
@@ -218,6 +220,8 @@ export function BaseGrid({
 							checkboxSelection={
 								shouldShowCheckbox ? handleShowCheckbox(shouldShowCheckbox) : showCheckbox
 							}
+							editable={shouldBeEditable ? handleIsEditable(shouldBeEditable) : isEditable}
+							singleClickEdit={shouldBeEditable || isEditable}
 						/>
 					);
 				})}

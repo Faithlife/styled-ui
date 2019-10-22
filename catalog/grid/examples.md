@@ -173,3 +173,25 @@ state: { selected: false }
 	</SimpleGrid>
 </div>
 ```
+
+### Editable Fields
+
+Also supported by Paginated and TreeGrid.
+
+```react
+showSource: true
+state: { selected: false }
+---
+<div>
+	<SimpleGrid
+		data={censusData}
+		maxRows={10}
+	>
+		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+		<GridColumn displayName="Population" fieldName="population" isEditable />
+		<GridColumn displayName="Net Population Change" fieldName="populationChange" />
+		<GridColumn displayName="Births" fieldName="births" width={100} isLargeViewportOnly />
+		<GridColumn displayName="Deaths" fieldName="deaths" width={100} isSortable={false} isLargeViewportOnly/>
+	</SimpleGrid>
+</div>
+```

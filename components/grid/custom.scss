@@ -421,4 +421,31 @@ $icon-path: './icons/';
 	.ag-ltr .ag-row-group-leaf-indent {
 		margin-left: 5px;
 	}
+
+	.ag-faithlife-cell.ag-cell-focus.ag-cell-inline-editing {
+		height: 100%;
+		box-shadow: none;
+		background-color: transparent;
+		border: none;
+		border-radius: 0;
+
+		&:after {
+			position: absolute;
+			content: '';
+			bottom: -1px;
+			left: 0;
+			right: 0;
+			width: 100%;
+			height: 1px;
+			border: 1px solid $blueBase;
+		}
+
+		& .ag-cell-edit-input {
+			padding: 0 0 0 7px;
+
+			&::selection {
+				background: $blueTint;
+			}
+		}
+	}
 }
