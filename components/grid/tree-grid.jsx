@@ -157,6 +157,7 @@ export const TreeGrid = React.forwardRef((props, ref) => {
 				},
 			}}
 			additionalCellComponents={groupComponent}
+			onDataChange={onDataChange}
 		>
 			{children}
 		</BaseGrid>

@@ -38,6 +38,7 @@ export function BaseGrid({
 	additionalColumnOptions,
 	onRowSelect,
 	showDragHandle,
+	onDataChange,
 }) {
 	const tableHeightPadding = hasPagingBar ? 42 : 2;
 
@@ -122,6 +123,18 @@ export function BaseGrid({
 		[onRowClick],
 	);
 
+	const handleCellEdit = useCallback(
+		({ data: rowData }) => {
+			const newData = [...data];
+			const index = newData.findIndex(row => row.id === rowData.id);
+
+			newData.splice(index, 1, rowData);
+
+			onDataChange(newData);
+		},
+		[data, onDataChange],
+	);
+
 	const handleGridReady = useCallback(
 		({ api, columnApi }) => {
 			setGridApi(api);
@@ -175,6 +188,7 @@ export function BaseGrid({
 				onCellClicked={suppressRowClick ? handleCellClicked : null}
 				getRowHeight={getRowHeight}
 				onRowClicked={suppressRowClick ? null : handleRowClicked}
+				onCellEditingStopped={handleCellEdit}
 				suppressContextMenu
 				animateRows
 				reactNext
@@ -275,6 +289,8 @@ BaseGrid.propTypes = {
 	children: PropTypes.node,
 	/** Called when a row is selected with a checkbox */
 	onRowSelect: PropTypes.func,
+	/** Called with new data after the existing data has been edited. Required for dragDrop and cell editing */
+	handleCellEdit: PropTypes.func,
 };
 
 function parseChildrenSettings(children, additionalCellComponents = {}) {

@@ -186,6 +186,7 @@ state: { selected: false }
 	<SimpleGrid
 		data={censusData}
 		maxRows={10}
+		onDataChange={newData => console.log(newData)}
 	>
 		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
 		<GridColumn displayName="Population" fieldName="population" isEditable />

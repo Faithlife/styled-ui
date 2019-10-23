@@ -153,6 +153,7 @@ export const SimpleGrid = React.forwardRef((props, ref) => {
 					'ag-faithlife-drop-target-row_above': getShouldShowDropTarget(dragDirections.up),
 				},
 			}}
+			onDataChange={onDataChange}
 		>
 			{children}
 		</BaseGrid>
