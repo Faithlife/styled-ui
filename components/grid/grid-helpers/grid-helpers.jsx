@@ -77,7 +77,7 @@ export function getAggregationColumn({
 		child => child && child.type.isAggregationGroupColumn,
 	);
 
-	let groupComponent;
+	const groupComponent = {};
 	let groupColumnSettings;
 	let rowClickSelects;
 	if (heading) {
@@ -91,11 +91,21 @@ export function getAggregationColumn({
 			showCheckbox,
 			shouldShowCheckbox,
 			fieldName,
+			isEditable,
+			shouldBeEditable,
+			editComponent,
 			...groupProps
 		} = heading.props;
 
 		rowClickSelects = !showCheckbox && !shouldShowCheckbox;
-		groupComponent = cellComponent ? { [treeGroupColumnComponent]: cellComponent } : {};
+
+		if (cellComponent) {
+			groupComponent[treeGroupColumnComponent] = cellComponent;
+		}
+		if (editComponent) {
+			groupComponent[`${treeGroupColumnComponent}Editor`] = editComponent;
+		}
+
 		groupColumnSettings = {
 			rowDrag: isDraggableRow ? handleIsDraggable(isDraggableRow) : enableDragDrop,
 			headerName: displayName,
@@ -103,6 +113,9 @@ export function getAggregationColumn({
 			sortable: isSortable,
 			sort: defaultSort,
 			resizable: isResizable,
+			editable: shouldBeEditable ? handleIsEditable(shouldBeEditable) : isEditable,
+			singleClickEdit: shouldBeEditable || isEditable,
+			cellEditor: editComponent ? `${treeGroupColumnComponent}Editor` : null,
 			cellRendererParams: {
 				suppressCount: hideChildrenCount,
 				innerRenderer: cellComponent ? treeGroupColumnComponent : '',

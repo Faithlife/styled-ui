@@ -15,6 +15,9 @@ export function AggregationGroupColumn({
 	maxWidth,
 	cellComponents,
 	fieldName,
+	isEditable,
+	shouldBeEditable,
+	editComponent,
 }) {
 	return <div />;
 }
@@ -49,4 +52,6 @@ AggregationGroupColumn.propTypes = {
 	hideChildrenCount: PropTypes.bool,
 	showCheckbox: PropTypes.bool,
 	shouldShowCheckbox: PropTypes.func,
+	isEditable: PropTypes.bool,
+	editComponent: PropTypes.bool,
 };
