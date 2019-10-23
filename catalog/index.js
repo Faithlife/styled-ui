@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import ResizeObserver from 'resize-observer-polyfill';
 import { Catalog, pageLoader } from 'catalog';
 import * as dateFunctions from 'date-fns';
 import chrono from 'chrono-node';
@@ -83,6 +84,8 @@ import { SimpleGrid, GridColumn, PaginatedGrid, TreeGrid } from '../components/g
 import '../dist/main.css';
 import '../dist/text-input.css';
 import '../dist/ag-grid.css';
+
+window.ResizeObserver = ResizeObserver;
 
 const censusDataWithId = censusData.map((data, index) => ({
 	...data,
