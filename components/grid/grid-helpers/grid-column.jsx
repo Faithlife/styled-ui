@@ -20,6 +20,8 @@ export function GridColumn({
 	showCheckbox,
 	shouldShowCheckbox,
 	isEditable,
+	shouldBeEditable,
+	editorComponent,
 }) {
 	return <div />;
 }

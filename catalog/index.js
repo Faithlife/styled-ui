@@ -73,6 +73,7 @@ import { DocgenTable } from './docgen-table';
 import { textInputPages } from './input/pages';
 import DownArrow from './svgs/arrow-down.svg';
 import { PopulationChange } from './grid/population-change';
+import { IncrementButton } from './grid/cell-editors';
 import { BaseGrid } from '../components/grid/base-grid';
 import { SimpleGrid, GridColumn, PaginatedGrid, TreeGrid } from '../components/grid';
 
@@ -389,6 +390,7 @@ const components = [
 					censusDataFolders,
 					TreeGrid,
 					gridRef: React.createRef(),
+					IncrementButton,
 				},
 			},
 			{

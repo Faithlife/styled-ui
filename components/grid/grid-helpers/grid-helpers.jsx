@@ -159,3 +159,20 @@ export function useGridDragDrop(isValidDropTarget, getNewPath) {
 		getShouldShowDropTarget,
 	};
 }
+
+export function useCellEditor(ref, cellValue, isPopover = false) {
+	const [showAsPopover] = useState(isPopover);
+
+	useImperativeHandle(
+		ref,
+		() => ({
+			getValue() {
+				return cellValue;
+			},
+			isPopup() {
+				return showAsPopover;
+			},
+		}),
+		[cellValue, showAsPopover],
+	);
+}

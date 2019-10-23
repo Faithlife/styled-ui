@@ -198,6 +198,7 @@ export function BaseGrid({
 						shouldShowCheckbox,
 						isEditable,
 						shouldBeEditable,
+						editorComponent,
 						...columnProps
 					} = child.props;
 					return (
@@ -210,6 +211,7 @@ export function BaseGrid({
 							field={fieldName}
 							sortable={isSortable}
 							cellRenderer={cellComponent ? fieldName : null}
+							cellEditor={editorComponent ? `${fieldName}Editor` : null}
 							comparator={sortFunction}
 							resizable={isResizable}
 							sort={defaultSort}
@@ -281,9 +283,14 @@ function parseChildrenSettings(children, additionalCellComponents = {}) {
 	);
 
 	const cellComponents = headingChildren
-		.filter(child => !!child.props.cellComponent)
+		.filter(child => !!child.props.cellComponent || !!child.props.editorComponent)
 		.reduce((components, child) => {
-			components[child.props.fieldName] = child.props.cellComponent;
+			if (child.props.cellComponent) {
+				components[child.props.fieldName] = child.props.cellComponent;
+			}
+			if (child.props.editorComponent) {
+				components[`${child.props.fieldName}Editor`] = child.props.editorComponent;
+			}
 			return components;
 		}, {});
 

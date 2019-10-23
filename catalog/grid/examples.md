@@ -189,9 +189,28 @@ state: { selected: false }
 	>
 		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
 		<GridColumn displayName="Population" fieldName="population" isEditable />
-		<GridColumn displayName="Net Population Change" fieldName="populationChange" />
+		<GridColumn displayName="Net Population Change" fieldName="populationChange" isEditable editorComponent={IncrementButton} />
 		<GridColumn displayName="Births" fieldName="births" width={100} isLargeViewportOnly />
 		<GridColumn displayName="Deaths" fieldName="deaths" width={100} isSortable={false} isLargeViewportOnly/>
 	</SimpleGrid>
 </div>
+```
+
+```code
+lang: js
+---
+import { useCellEditor } from '@faithlife/styled-ui/grid';
+
+const IncrementButton = React.forwardRef(({ value }, ref) => {
+	const [count, setCount] = useState(value);
+	useCellEditor(ref, count, true);
+
+	return (
+		<Button
+			variant="primaryOutline"
+			size="medium"
+			onClick={() => setCount(c => c + 1)}
+		>{`${count} +`}</Button>
+	);
+});
 ```
