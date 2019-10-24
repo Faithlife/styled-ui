@@ -173,7 +173,7 @@ export function useGridDragDrop(isValidDropTarget, getNewPath) {
 	};
 }
 
-export function useCellEditor(ref, cellValue, isPopover = false) {
+export function useCellEditor(ref, cellValue, isPopover = true) {
 	const [showAsPopover] = useState(isPopover);
 
 	useImperativeHandle(
