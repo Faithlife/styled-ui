@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { Box } from '../Box';
 import { useKeyboardNav, AccordionContextProvider } from './accordion-util';
 
@@ -49,13 +48,13 @@ export function Accordion({
 	);
 
 	return (
-		<AccordionWrapper {...props} onKeyDown={handleKeyboardNav}>
+		<Box {...props} onKeyDown={handleKeyboardNav} borderBottom={1} borderColor="gray14">
 			<AccordionContextProvider value={context}>
 				{React.Children.map(children, (child, index) =>
 					React.isValidElement(child) ? React.cloneElement(child, { index }) : null,
 				)}
 			</AccordionContextProvider>
-		</AccordionWrapper>
+		</Box>
 	);
 }
 
@@ -77,7 +76,3 @@ Accordion.defaultProps = {
 	expandedSections: [],
 	styleOverrides: {},
 };
-
-const AccordionWrapper = styled(Box)`
-	border-bottom: 1px solid ${({ theme }) => theme.colors.gray14};
-`;
