@@ -1,10 +1,9 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { LoadingSpinner } from '../loading-spinner';
 import { PopoverManager, PopoverReference } from '../popover';
 import * as Styled from './styled';
 
-const ProductDrawerDropdown = lazy(() => import('./product-drawer-dropdown'));
+import ProductDrawerDropdown from './product-drawer-dropdown';
 
 export class ProductDrawer extends React.PureComponent {
 	static propTypes = {
@@ -118,15 +117,13 @@ export class ProductDrawer extends React.PureComponent {
 						</Styled.ProductDrawerToggle>
 					</PopoverReference>
 					{isOpen ? (
-						<Suspense fallback={<LoadingSpinner />}>
-							<ProductDrawerDropdown
-								isOpen={isOpen}
-								resources={resources}
-								styleOverrides={styleOverrides}
-								handleCloseButtonClick={this.handleCloseButtonClick}
-								handleBlur={this.handleBlur}
-							/>
-						</Suspense>
+						<ProductDrawerDropdown
+							isOpen={isOpen}
+							resources={resources}
+							styleOverrides={styleOverrides}
+							handleCloseButtonClick={this.handleCloseButtonClick}
+							handleBlur={this.handleBlur}
+						/>
 					) : null}
 				</PopoverManager>
 			</Styled.ProductDrawer>
