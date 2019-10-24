@@ -52,7 +52,7 @@ const Input = React.forwardRef(function Input(props, ref) {
 			readOnly={readOnly}
 			variant={variation}
 			disabled={disabled}
-			value={value || ''}
+			value={value !== null && value !== undefined ? value : ''}
 			placeholder={placeholder || ''}
 			onClick={onClick}
 			onKeyPress={handleKeyPress}
