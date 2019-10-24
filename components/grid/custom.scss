@@ -448,4 +448,9 @@ $icon-path: './icons/';
 			}
 		}
 	}
+
+	.ag-pinned-left-header {
+		border-right: none;
+		border-top: 1px solid $border-color;
+	}
 }
