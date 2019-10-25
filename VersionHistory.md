@@ -1,5 +1,12 @@
 # Changelog
 
+### 5.25.0
+
+- Allow empty values in date picker input.
+- Add bottom border to `Accordion`.
+- Allow falsy value to be set in `Input`.
+- Don't lazy load product drawer dropdown.
+
 ### 5.24.0
 
 - Add `UtilityButton` component.
