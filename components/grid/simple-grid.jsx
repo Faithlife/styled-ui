@@ -82,7 +82,7 @@ export const SimpleGrid = React.forwardRef((props, ref) => {
 							draggedNode.current,
 							dragDirection.current,
 						);
-						onDataChange(newData);
+						onDataChange(newData, draggedNode.current.id, draggedNode.current.data);
 					}
 
 					break;
@@ -153,7 +153,6 @@ export const SimpleGrid = React.forwardRef((props, ref) => {
 					'ag-faithlife-drop-target-row_above': getShouldShowDropTarget(dragDirections.up),
 				},
 			}}
-			onDataChange={onDataChange}
 		>
 			{children}
 		</BaseGrid>

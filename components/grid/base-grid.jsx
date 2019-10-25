@@ -38,7 +38,7 @@ export function BaseGrid({
 	additionalColumnOptions,
 	onRowSelect,
 	showDragHandle,
-	onDataChange,
+	onRowDataChange,
 }) {
 	const tableHeightPadding = hasPagingBar ? 42 : 2;
 
@@ -125,14 +125,9 @@ export function BaseGrid({
 
 	const handleCellEdit = useCallback(
 		({ data: rowData }) => {
-			const newData = [...data];
-			const index = newData.findIndex(row => row.id === rowData.id);
-
-			newData.splice(index, 1, rowData);
-
-			onDataChange(newData);
+			onRowDataChange(rowData);
 		},
-		[data, onDataChange],
+		[onRowDataChange],
 	);
 
 	const handleGridReady = useCallback(
@@ -291,6 +286,8 @@ BaseGrid.propTypes = {
 	onRowSelect: PropTypes.func,
 	/** Called with new data after the existing data has been edited. Required for dragDrop and cell editing */
 	handleCellEdit: PropTypes.func,
+	/** Called after a row is updated with the new row data */
+	onRowDataChange: PropTypes.func,
 };
 
 function parseChildrenSettings(children, additionalCellComponents = {}) {

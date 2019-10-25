@@ -99,7 +99,7 @@ export const TreeGrid = React.forwardRef((props, ref) => {
 							cleanTree,
 						);
 
-						onDataChange(newData);
+						onDataChange(newData, draggedNode.current.id, draggedNode.current.data);
 					}
 
 					break;
@@ -157,7 +157,6 @@ export const TreeGrid = React.forwardRef((props, ref) => {
 				},
 			}}
 			additionalCellComponents={groupComponent}
-			onDataChange={onDataChange}
 		>
 			{children}
 		</BaseGrid>

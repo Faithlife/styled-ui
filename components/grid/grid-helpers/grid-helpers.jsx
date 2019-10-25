@@ -50,21 +50,29 @@ export function useGridHandles(gridApi, ref) {
 }
 
 export function handleShowCheckbox(shouldShowCheckbox) {
-	return params => {
-		shouldShowCheckbox(params.node.group, params.node.data);
-	};
+	return params =>
+		shouldShowCheckbox(
+			params.node.group,
+			params.node.data ||
+				(params.node.groupData && { groupName: params.node.groupData['ag-Grid-AutoColumn'] }),
+		);
 }
 
 export function handleIsDraggable(isDraggable) {
-	return params => {
-		isDraggable(params.node.group, params.node.data);
-	};
+	return params =>
+		isDraggable(
+			params.node.group,
+			params.node.data ||
+				(params.node.groupData && { groupName: params.node.groupData['ag-Grid-AutoColumn'] }),
+		);
 }
 
 export function handleIsEditable(shouldBeEditable) {
-	return ({ node }) => {
-		shouldBeEditable(node.group, node.data);
-	};
+	return ({ node }) =>
+		shouldBeEditable(
+			node.group,
+			node.data || (node.groupData && { groupName: node.groupData['ag-Grid-AutoColumn'] }),
+		);
 }
 
 export function getAggregationColumn({
