@@ -150,7 +150,7 @@ export class DatePickerInput extends PureComponent {
 
 		const defaultValue = defaultSelectedDate ? this.formatDate(defaultSelectedDate) : '';
 		const formattedDate = selectedDate ? this.formatDate(selectedDate) : defaultValue;
-		const value = text ? text : formattedDate;
+		const value = text !== null && text !== undefined ? text : formattedDate;
 		const inputStyleOverrides = { width: styleOverrides.inputWidth };
 		const popoverStyleOverrides = {
 			hideShadow: styleOverrides.hideShadow,
