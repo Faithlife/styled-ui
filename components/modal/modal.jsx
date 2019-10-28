@@ -7,6 +7,7 @@ import { ModalBackdrop } from '../modal-backdrop';
 import { ModalHeader } from './modal-header';
 import { DefaultModalFooter } from './default-modal-footer';
 import { ModalContent } from './modal-content';
+import { ModalSpacingContextProvider } from './use-modal-spacing';
 
 /**
  * Modal with flexible contents. See also: SimpleModal
@@ -45,6 +46,12 @@ export class Modal extends React.Component {
 		withoutFooter: PropTypes.bool,
 		/** Set to 'body' to attach the modal to body, otherwise will attach as a child element */
 		container: PropTypes.string,
+		/** 16px (default) or 24px */
+		variant: PropTypes.string,
+	};
+
+	static defaultProps = {
+		variant: '16px',
 	};
 
 	state = {
@@ -94,6 +101,7 @@ export class Modal extends React.Component {
 			withoutFooter,
 			theme,
 			styleOverrides,
+			variant,
 			...props
 		} = this.props;
 
@@ -110,44 +118,42 @@ export class Modal extends React.Component {
 
 		return (
 			<ModalBackdrop onClose={onClose} zIndex={(styleOverrides && styleOverrides.zIndex) || 1050}>
-				<Box
-					ref={modal => {
-						this._modal = modal;
-						if (modal && modalWidth === null) {
-							this.setState({ modalWidth: modal.clientWidth });
-						}
-					}}
-					display="flex"
-					flexDirection="column"
-					justifyContent="center"
-					alignItems="center"
-					width="fit-content"
-					height="fit-content"
-					maxWidth="calc(100% - 16px)"
-					maxHeight={['calc(100% - 16px)', null, '80%']}
-					margin="auto"
-					borderRadius={1}
-					backgroundColor={(theme && theme.background) || 'white'}
-					{...props}
-				>
-					<ModalHeader
-						title={title}
-						subtitle={subtitle}
-						onClose={onClose}
-						headerBottomBorder={headerBottomBorder}
-					/>
-					{doesChildrenIncludeModalContent ? (
-						children
-					) : (
-						<ModalContent padding={6}>{children}</ModalContent>
-					)}
-					{!withoutFooter &&
-						(renderFooter ? (
-							renderFooter()
-						) : (
-							<DefaultModalFooter useFullWidthButtons={verticalButtons} {...footerProps} />
-						))}
-				</Box>
+				<ModalSpacingContextProvider value={variant === '24px' ? 6 : 5}>
+					<Box
+						ref={modal => {
+							this._modal = modal;
+							if (modal && modalWidth === null) {
+								this.setState({ modalWidth: modal.clientWidth });
+							}
+						}}
+						display="flex"
+						flexDirection="column"
+						justifyContent="center"
+						alignItems="center"
+						width="fit-content"
+						height="fit-content"
+						maxWidth="calc(100% - 16px)"
+						maxHeight={['calc(100% - 16px)', null, '80%']}
+						margin="auto"
+						borderRadius={1}
+						backgroundColor={(theme && theme.background) || 'white'}
+						{...props}
+					>
+						<ModalHeader
+							title={title}
+							subtitle={subtitle}
+							onClose={onClose}
+							headerBottomBorder={headerBottomBorder}
+						/>
+						{doesChildrenIncludeModalContent ? children : <ModalContent>{children}</ModalContent>}
+						{!withoutFooter &&
+							(renderFooter ? (
+								renderFooter()
+							) : (
+								<DefaultModalFooter useFullWidthButtons={verticalButtons} {...footerProps} />
+							))}
+					</Box>
+				</ModalSpacingContextProvider>
 			</ModalBackdrop>
 		);
 	}

@@ -30,6 +30,39 @@ state: { modal: false, value: '' }
 </div>
 ```
 
+## Modal with spacious variant
+
+```react
+showSource: true
+state: { modal: false, value: '' }
+---
+<div>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Modal
+		isOpen={state.modal}
+		container="body"
+		onClose={() => setState({ modal: false })}
+		title="Location"
+		subtitle="Help us locate you"
+		footerProps={{
+			commitButton: { text: 'Save', onClick: () => alert('Saved') },
+			cancelButton: { text: 'Cancel', onClick: () => setState({ modal: !state.modal }) },
+			deleteButton: { text: 'Delete Forever', onClick: () => alert('Deleted') }
+		}}
+		variant="24px"
+	>
+		<ModalDemoWideContent>
+			<Input
+				value={state.value}
+				onChange={value => setState({ value: value.value, isValid: value !== '' })}
+				placeholder="Bellingham"
+				title="Location"
+			/>
+		</ModalDemoWideContent>
+	</Modal>
+</div>
+```
+
 ## Modal attached as child
 
 ```react
@@ -215,7 +248,7 @@ state: { modal: false, value: '' }
 		subtitle="Help us locate you"
 		withoutFooter
 	>
-		<div>
+		<ModalContent paddingX={5} paddingBottom={5}>
 			<Input
 				value={state.value}
 				onChange={value => setState({ value: value, isValid: value !== '' })}
@@ -223,7 +256,7 @@ state: { modal: false, value: '' }
 				title="Location"
 				debounce={200}
 			/>
-		</div>
+		</ModalContent>
 	</Modal>
 </div>
 ```
@@ -244,28 +277,6 @@ state: { modal: false, value: '' }
 	>
 		<div>
 			{JSON.stringify(new Array(1000))}
-		</div>
-	</Modal>
-</div>
-```
-
-## Modal with no title border
-
-```react
-showSource: true
-state: { modal: false, value: '' }
----
-<div>
-	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
-	<Modal
-		isOpen={state.modal}
-		container="body"
-		onClose={() => setState({ modal: false })}
-		title="Modal with no title border"
-		styleOverrides={{ bottomBorder: 'none' }}
-	>
-		<div>
-			This modal has no title border!
 		</div>
 	</Modal>
 </div>
