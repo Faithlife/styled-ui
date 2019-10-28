@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.25.1
+
+- Update grid styles to fix style issues in chms grids
+- Update `react-select` component to v2.4.4
+
 ### 5.25.0
 
 - Allow empty values in date picker input.
