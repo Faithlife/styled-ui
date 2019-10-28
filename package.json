@@ -98,7 +98,7 @@
 		"es7-object-polyfill": "^0.0.7",
 		"eslint": "^5.16.0",
 		"eslint-config-faithlife": "^6.0.0",
-		"esm": "^3.0.24",
+		"esm": "^3.1.0",
 		"image-webpack-loader": "^4.3.1",
 		"micro-graphql-react": "^0.3.0-beta2",
 		"mini-css-extract-plugin": "^0.4.1",
