@@ -48,10 +48,13 @@ export class Modal extends React.Component {
 		container: PropTypes.string,
 		/** 16px (default) or 24px */
 		variant: PropTypes.string,
+		/** h.16, h.18 (default), or h.24 */
+		headerVariant: PropTypes.string,
 	};
 
 	static defaultProps = {
 		variant: '16px',
+		headerVariant: 'h.18',
 	};
 
 	state = {
@@ -102,6 +105,7 @@ export class Modal extends React.Component {
 			theme,
 			styleOverrides,
 			variant,
+			headerVariant,
 			...props
 		} = this.props;
 
@@ -144,6 +148,7 @@ export class Modal extends React.Component {
 							subtitle={subtitle}
 							onClose={onClose}
 							headerBottomBorder={headerBottomBorder}
+							variant={headerVariant}
 						/>
 						{doesChildrenIncludeModalContent ? children : <ModalContent>{children}</ModalContent>}
 						{!withoutFooter &&

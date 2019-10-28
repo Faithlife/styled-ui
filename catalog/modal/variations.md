@@ -1,4 +1,4 @@
-## Modal with default footer
+## Modal with default header and footer
 
 ```react
 showSource: true
@@ -30,7 +30,7 @@ state: { modal: false, value: '' }
 </div>
 ```
 
-## Modal with spacious variant
+## Modal with 24px variant and 24px header variant
 
 ```react
 showSource: true
@@ -50,6 +50,7 @@ state: { modal: false, value: '' }
 			deleteButton: { text: 'Delete Forever', onClick: () => alert('Deleted') }
 		}}
 		variant="24px"
+		headerVariant="h.24"
 	>
 		<ModalDemoWideContent>
 			<Input
@@ -59,6 +60,36 @@ state: { modal: false, value: '' }
 				title="Location"
 			/>
 		</ModalDemoWideContent>
+	</Modal>
+</div>
+```
+
+## Modal with small header variant
+
+```react
+showSource: true
+state: { modal: false, value: '' }
+---
+<div>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Modal
+		isOpen={state.modal}
+		container="body"
+		onClose={() => setState({ modal: false })}
+		title="Location"
+		subtitle="Help us locate you"
+		footerProps={{
+			commitButton: { text: 'Done', onClick: () => alert('Done') },
+		}}
+		variant="16px"
+		headerVariant="h.16"
+	>
+		<Input
+			value={state.value}
+			onChange={value => setState({ value: value.value, isValid: value !== '' })}
+			placeholder="Bellingham"
+			title="Location"
+		/>
 	</Modal>
 </div>
 ```

@@ -7,7 +7,14 @@ import { Button } from '../button';
 import { Close } from '../icons';
 import { useModalSpacingContext } from './use-modal-spacing';
 
-export const ModalHeader = ({ title, subtitle, onClose, headerBottomBorder, ...props }) => {
+export const ModalHeader = ({
+	title,
+	subtitle,
+	onClose,
+	headerBottomBorder,
+	variant,
+	...props
+}) => {
 	const modalSpacing = useModalSpacingContext();
 	return (
 		<Box
@@ -20,13 +27,13 @@ export const ModalHeader = ({ title, subtitle, onClose, headerBottomBorder, ...p
 			{...props}
 		>
 			<Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
-				<Text textStyle="h.24" color="gray66">
+				<Text textStyle={variant} color="gray66">
 					{title}
 				</Text>
 				<Button variant="primaryTransparent" icon={<Close />} onClick={onClose} />
 			</Box>
 			{subtitle && (
-				<Paragraph width="100%" paddingTop={4} textStyle="ui.14" textAlign="left" color="gray66">
+				<Paragraph width="100%" paddingTop={3} textStyle="ui.14" textAlign="left" color="gray66">
 					{subtitle}
 				</Paragraph>
 			)}
