@@ -50,6 +50,8 @@ export class Modal extends React.Component {
 		variant: PropTypes.string,
 		/** h.16, h.18 (default), or h.24 */
 		headerVariant: PropTypes.string,
+		/** Intended for modals with lots of functionality, such as media galleries or editors */
+		fullscreen: PropTypes.bool,
 	};
 
 	static defaultProps = {
@@ -106,6 +108,7 @@ export class Modal extends React.Component {
 			styleOverrides,
 			variant,
 			headerVariant,
+			fullscreen,
 			...props
 		} = this.props;
 
@@ -132,12 +135,12 @@ export class Modal extends React.Component {
 						}}
 						display="flex"
 						flexDirection="column"
-						justifyContent="center"
+						justifyContent={fullscreen ? 'flex-start' : 'center'}
 						alignItems="center"
-						width="fit-content"
-						height="fit-content"
+						width={fullscreen ? ['100vw', '90vw'] : 'fit-content'}
+						height={fullscreen ? '90vh' : 'fit-content'}
 						maxWidth="calc(100% - 16px)"
-						maxHeight={['calc(100% - 16px)', null, '80%']}
+						maxHeight={fullscreen ? 'none' : ['calc(100% - 16px)', null, '80%']}
 						margin="auto"
 						borderRadius={1}
 						backgroundColor={(theme && theme.background) || 'white'}
