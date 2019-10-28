@@ -96,6 +96,8 @@ state: { modal: false, value: '' }
 
 ## Modal attached as child
 
+This `<Modal>` component doesn't specify a `container` prop, so it is added as a child of its parent in the DOM.
+
 ```react
 showSource: true
 state: { modal: false, value: '' }
@@ -264,6 +266,8 @@ state: { modal: false, value: '' }
 ```
 
 ## Modal with no footer
+
+Depending on your use case, you may need to add bottom padding to your modal content.
 
 ```react
 showSource: true
