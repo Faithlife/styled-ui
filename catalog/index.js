@@ -166,6 +166,19 @@ const components = [
 		title: 'Layout Primitives',
 		pages: [
 			{
+				path: '/layout/theme',
+				title: 'Theme',
+				content: pageLoader(() => import('./theme/documentation.md')),
+				imports: {
+					Box,
+					Stack,
+					Text,
+					Paragraph,
+					Heading,
+					ThemeList,
+				},
+			},
+			{
 				path: '/layout/box',
 				title: 'Box',
 				content: pageLoader(() => import('./layout/box.md')),
