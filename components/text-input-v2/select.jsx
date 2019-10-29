@@ -134,11 +134,17 @@ function noOptionsMessage({ inputValue }) {
 	return inputValue ? 'No options' : null;
 }
 
-function handleKeyDown(e) {
+function handleKeyDown(e, onConsumerKeyDown) {
 	const evt = { ...e };
+	if (evt.defaultPrevented) {
+		if (onConsumerKeyDown) {
+			onConsumerKeyDown(e);
+		}
+		return;
+	}
+
 	switch (evt.key) {
 		case 'Home': {
-			evt.preventDefault();
 			if (evt.shiftKey) {
 				evt.target.selectionStart = 0;
 			} else {
@@ -147,7 +153,6 @@ function handleKeyDown(e) {
 			break;
 		}
 		case 'End': {
-			evt.preventDefault();
 			const len = evt.target.value.length;
 			if (evt.shiftKey) {
 				evt.target.selectionEnd = len;
@@ -157,6 +162,9 @@ function handleKeyDown(e) {
 			break;
 		}
 		default: {
+			if (onConsumerKeyDown) {
+				onConsumerKeyDown(e);
+			}
 			break;
 		}
 	}
@@ -165,6 +173,7 @@ function handleKeyDown(e) {
 /** Autocomplete control based on react-select */
 export const Select = React.forwardRef(({ components = {}, ...props }, ref) => {
 	const body = useBody();
+	const onConsumerKeyDown = props.onKeyDown;
 
 	return (
 		<ReactSelect
@@ -173,10 +182,10 @@ export const Select = React.forwardRef(({ components = {}, ...props }, ref) => {
 			theme={selectTheme}
 			components={{ DropdownIndicator, ...defaultComponents, ...components }}
 			noOptionsMessage={noOptionsMessage}
-			onKeyDown={handleKeyDown}
 			menuPortalTarget={body}
 			{...props}
 			styles={selectStyles(props)}
+			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 		/>
 	);
 });
