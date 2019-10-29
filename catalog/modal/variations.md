@@ -369,3 +369,26 @@ state: { modal: false, value: '' }
 	</Modal>
 </div>
 ```
+
+## Fullscreen modal with really long content
+
+```react
+showSource: true
+state: { modal: false, value: '' }
+---
+<div>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Modal
+		isOpen={state.modal}
+		container="body"
+		onClose={() => setState({ modal: false })}
+		title="Lots of content"
+		fullscreen
+		headerVariant="h.24"
+	>
+		<div>
+			{JSON.stringify(new Array(3000))}
+		</div>
+	</Modal>
+</div>
+```
