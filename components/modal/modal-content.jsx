@@ -9,8 +9,6 @@ export const ModalContent = ({ children, ...props }) => {
 	return (
 		<Box
 			maxWidth="100%"
-			maxHeight="80%"
-			overflowX="hidden"
 			overflowY="auto"
 			css={`
 				overflow-wrap: break-word;
