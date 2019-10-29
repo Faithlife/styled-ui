@@ -310,9 +310,9 @@ state: { modal: false, value: '' }
 		onClose={() => setState({ modal: false })}
 		title="Lots of content"
 	>
-		<div>
+		<ModalContent overflowY="auto">
 			{JSON.stringify(new Array(1000))}
-		</div>
+		</ModalContent>
 	</Modal>
 </div>
 ```
@@ -386,9 +386,9 @@ state: { modal: false, value: '' }
 		fullscreen
 		headerVariant="h.24"
 	>
-		<div>
+		<ModalContent overflowY="auto">
 			{JSON.stringify(new Array(3000))}
-		</div>
+		</ModalContent>
 	</Modal>
 </div>
 ```
