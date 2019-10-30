@@ -161,23 +161,28 @@ const ThemeList = ({ items, render }) => {
 	return <>{[...Object.entries(items(theme))].map(render)}</>;
 };
 
-const components = [
+const pages = [
+	{
+		path: '/',
+		title: 'Welcome',
+		content: pageLoader(() => import('./WELCOME.md')),
+	},
+	{
+		path: '/theme',
+		title: 'Theme',
+		content: pageLoader(() => import('./theme/documentation.md')),
+		imports: {
+			Box,
+			Stack,
+			Text,
+			Paragraph,
+			Heading,
+			ThemeList,
+		},
+	},
 	{
 		title: 'Layout Primitives',
 		pages: [
-			{
-				path: '/layout/theme',
-				title: 'Theme',
-				content: pageLoader(() => import('./theme/documentation.md')),
-				imports: {
-					Box,
-					Stack,
-					Text,
-					Paragraph,
-					Heading,
-					ThemeList,
-				},
-			},
 			{
 				path: '/layout/box',
 				title: 'Box',
@@ -1062,23 +1067,6 @@ const components = [
 			},
 		],
 	},
-].sort((a, b) => {
-	if (a.title < b.title) {
-		return -1;
-	}
-	if (a.title > b.title) {
-		return 1;
-	}
-	return 0;
-});
-
-const pages = [
-	{
-		path: '/',
-		title: 'Welcome',
-		content: pageLoader(() => import('./WELCOME.md')),
-	},
-	...components,
 ];
 
 ReactDOM.render(
