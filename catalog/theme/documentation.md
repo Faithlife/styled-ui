@@ -1,4 +1,4 @@
-Styled-UI includes a Styled Components theme object. The theme is designed to work with Styled System. Most components accept theme-aware style props that can be used to easily access theme data. When possible, prefer to reference the theme rather than hard code specific color codes, pixel values, font families, etc.
+Styled-UI includes a [Styled Components](https://www.styled-components.com/docs/advanced#theming) theme object. The theme is designed to work with [Styled System](https://styled-system.com/theme-specification). Most components accept theme-aware style props that can be used to easily access theme data. When possible, prefer to reference the theme rather than hard code specific color codes, pixel values, font families, etc.
 
 ### Spacing scale
 
