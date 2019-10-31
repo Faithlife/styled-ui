@@ -42,4 +42,5 @@ export const ProductDrawerToggleText = styled.span`
 		font-family: ${({ styleOverrides }) => styleOverrides.toggleTextFontFamily || 'inherit'};
 		font-size: ${({ styleOverrides }) => styleOverrides.toggleTextFontSize || 'inherit'};
 		color: ${({ styleOverrides }) => styleOverrides.toggleTextColor || 'inherit'};
+	}
 `;
