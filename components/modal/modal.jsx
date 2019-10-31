@@ -137,10 +137,10 @@ export class Modal extends React.Component {
 						flexDirection="column"
 						justifyContent={fullscreen ? 'flex-start' : 'center'}
 						alignItems="center"
-						width={fullscreen ? ['100vw', '90vw'] : 'fit-content'}
-						height={fullscreen ? '90vh' : 'fit-content'}
-						maxWidth="calc(100% - 16px)"
-						maxHeight={fullscreen ? 'none' : ['calc(100% - 16px)', null, '80%']}
+						width={fullscreen ? ['100vw', '90vw'] : ['100vw', 'fit-content']}
+						height={fullscreen ? ['100vh', '90vh'] : 'fit-content'}
+						maxWidth={['100%', 'calc(100% - 32px)']}
+						maxHeight={fullscreen ? '100%' : ['100%', 'calc(100% - 32px)']}
 						margin="auto"
 						borderRadius={1}
 						backgroundColor={(theme && theme.background) || 'white'}
