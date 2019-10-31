@@ -20,7 +20,7 @@ export const ProductDrawerToggle = styled.button`
 		fill: ${({ styleOverrides }) => styleOverrides.toggleButtonColor || 'initial'};
 	}
 
-	&:hover {
+	&:hover > * {
 		color: ${({ styleOverrides }) => styleOverrides.toggleButtonHoverColor || 'initial'};
 
 		path {
@@ -36,8 +36,10 @@ export const ProductDrawerToggle = styled.button`
 export const ProductDrawerToggleText = styled.span`
 	display: none;
 
-	@media (min-width: ${mediaSizes.tablet}) {
+	@media (min-width: ${mediaSizes.phone}) {
 		display: inline;
 		margin-left: 8px;
-	}
+		font-family: ${({ styleOverrides }) => styleOverrides.toggleTextFontFamily || 'inherit'};
+		font-size: ${({ styleOverrides }) => styleOverrides.toggleTextFontSize || 'inherit'};
+		color: ${({ styleOverrides }) => styleOverrides.toggleTextColor || 'inherit'};
 `;

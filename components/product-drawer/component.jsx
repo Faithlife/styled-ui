@@ -50,6 +50,9 @@ export class ProductDrawer extends React.PureComponent {
 			mobileTopOffset: PropTypes.string,
 			toggleButtonColor: PropTypes.string,
 			toggleButtonHoverColor: PropTypes.string,
+			toggleTextColor: PropTypes.string,
+			toggleTextFontFamily: PropTypes.string,
+			toggleTextFontSize: PropTypes.string,
 		}),
 	};
 
