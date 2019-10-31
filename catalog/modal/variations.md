@@ -332,7 +332,7 @@ state: { modal: false, value: '' }
 		title="Modal with full width content"
 		withoutFooter
 	>
-		<ModalContent padding={0}>
+		<ModalContent padding={0} overflowY="auto">
 			<img src="https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201" alt="Faithlife campus" style={{ display: 'block' }} />
 		</ModalContent>
 	</Modal>
