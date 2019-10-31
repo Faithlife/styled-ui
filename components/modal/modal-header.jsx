@@ -33,7 +33,14 @@ export const ModalHeader = ({
 				<Button variant="primaryTransparent" icon={<Close />} onClick={onClose} />
 			</Box>
 			{subtitle && (
-				<Paragraph width="100%" paddingTop={3} textStyle="ui.14" textAlign="left" color="gray66">
+				<Paragraph
+					width="100%"
+					paddingTop={3}
+					paddingBottom={0}
+					textStyle="ui.14"
+					textAlign="left"
+					color="gray66"
+				>
 					{subtitle}
 				</Paragraph>
 			)}
