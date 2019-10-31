@@ -29,14 +29,17 @@ export class Modal extends React.Component {
 			commitButton: PropTypes.shape({
 				onClick: PropTypes.func.isRequired,
 				text: PropTypes.string.isRequired,
+				disabled: PropTypes.bool,
 			}),
 			cancelButton: PropTypes.shape({
 				onClick: PropTypes.func.isRequired,
 				text: PropTypes.string.isRequired,
+				disabled: PropTypes.bool,
 			}),
 			deleteButton: PropTypes.shape({
 				onClick: PropTypes.func.isRequired,
 				text: PropTypes.string.isRequired,
+				disabled: PropTypes.bool,
 			}),
 		}),
 		headerBottomBorder: PropTypes.string,
