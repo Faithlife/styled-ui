@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.26.0
+
+- Add additional `styleOverrides` to `ProductDrawer`.
+- Fix icon fill in `HelpBox`.
+
 ### 5.25.1
 
 - Update grid styles to fix style issues in chms grids
