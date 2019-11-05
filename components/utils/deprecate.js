@@ -1,17 +1,14 @@
 import React from 'react';
 
-var hits = {};
+var hits = new Set();
 
 export const deprecate = (Component, message) => {
 	return function(props) {
-		if (hits[Component]) {
-			return <Component {...props} />;
-		}
-
-		hits[Component] = true;
-
-		if (process.env.NODE_ENV !== 'production') {
-			console.warn(message);
+		if (!hits.has(Component)) {
+			hits.add(Component);
+			if (process.env.NODE_ENV !== 'production') {
+				console.warn(message);
+			}
 		}
 
 		return <Component {...props} />;
