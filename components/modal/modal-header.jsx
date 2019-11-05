@@ -12,7 +12,7 @@ export const ModalHeader = ({
 	subtitle,
 	onClose,
 	headerBottomBorder,
-	variant,
+	textStyle,
 	...props
 }) => {
 	const modalSpacing = useModalSpacingContext();
@@ -27,7 +27,7 @@ export const ModalHeader = ({
 			{...props}
 		>
 			<Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
-				<Text textStyle={variant} color="gray66">
+				<Text textStyle={textStyle} color="gray66">
 					{title}
 				</Text>
 				<Button variant="primaryTransparent" icon={<Close />} onClick={onClose} />
@@ -52,4 +52,8 @@ ModalHeader.propTypes = {
 	title: PropTypes.string.isRequired,
 	onClose: PropTypes.func.isRequired,
 	subtitle: PropTypes.string,
+};
+
+ModalHeader.defaultProps = {
+	textStyle: 'h.18',
 };
