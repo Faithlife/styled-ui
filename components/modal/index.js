@@ -11,7 +11,7 @@ Modal.Content = ModalContent;
 Modal.Footer = ModalFooter;
 Modal.FooterButtons = ModalFooterButtons;
 
-const v6ImportHelpText = `You can opt into this new API by importing { modal } from @faithlife/styled-ui/v6
+const v6ImportHelpText = `You can opt into this new API by importing { Modal } from @faithlife/styled-ui/v6
 Learn more at https://faithlife.github.io/styled-ui/#/modal/v6`;
 
 const LegacyModalContent = deprecate(
