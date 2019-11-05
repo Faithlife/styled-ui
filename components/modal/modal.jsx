@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import { Box } from '../Box';
 import { debouncedResize } from '../utils';
 import { ModalBackdrop } from '../modal-backdrop';
-import { ModalSpacingContextProvider } from './use-modal-spacing';
+import { ModalContextProvider } from './use-modal-context';
 
 /** A flexible component built on styled-system primitives. */
 export class Modal extends React.Component {
@@ -77,7 +77,7 @@ export class Modal extends React.Component {
 
 		return (
 			<ModalBackdrop onClose={onClose} zIndex={(styleOverrides && styleOverrides.zIndex) || 1050}>
-				<ModalSpacingContextProvider value={contentSpacing}>
+				<ModalContextProvider value={contentSpacing}>
 					<Box
 						ref={modal => {
 							this._modal = modal;
@@ -100,7 +100,7 @@ export class Modal extends React.Component {
 					>
 						{children}
 					</Box>
-				</ModalSpacingContextProvider>
+				</ModalContextProvider>
 			</ModalBackdrop>
 		);
 	}

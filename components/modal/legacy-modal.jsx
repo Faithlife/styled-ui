@@ -7,7 +7,7 @@ import { ModalBackdrop } from '../modal-backdrop';
 import { Modal } from './index';
 import { LegacyModalContent, v6ImportHelpText } from './legacy-utils';
 import { ModalContent } from './modal-content';
-import { ModalSpacingContextProvider } from './use-modal-spacing';
+import { ModalContextProvider } from './use-modal-context';
 
 /**
  * Modal with flexible contents. See also: SimpleModal
@@ -141,7 +141,7 @@ export class LegacyModal extends React.Component {
 
 		return (
 			<ModalBackdrop onClose={onClose} zIndex={(styleOverrides && styleOverrides.zIndex) || 1050}>
-				<ModalSpacingContextProvider value={5}>
+				<ModalContextProvider value={5}>
 					<Box
 						ref={modal => {
 							this._modal = modal;
@@ -173,7 +173,7 @@ export class LegacyModal extends React.Component {
 								</Modal.Footer>
 							))}
 					</Box>
-				</ModalSpacingContextProvider>
+				</ModalContextProvider>
 			</ModalBackdrop>
 		);
 	}

@@ -5,11 +5,11 @@ import { Text } from '../Text';
 import { Paragraph } from '../Paragraph';
 import { Button } from '../button';
 import { Close } from '../icons';
-import { useModalSpacingContext } from './use-modal-spacing';
+import { useModalContext } from './use-modal-context';
 
 /** A flexible component built on styled-system primitives. */
 export const ModalHeader = ({ title, subtitle, onClose, textStyle, ...props }) => {
-	const modalSpacing = useModalSpacingContext();
+	const modalSpacing = useModalContext();
 	return (
 		<Box
 			display="flex"
