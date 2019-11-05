@@ -26,9 +26,9 @@ export const ModalFooterButtons = props => (
 		)}
 		{props.cancelButton && (
 			<Box
-				width={props.useFullWidthButtons && '100%'}
-				marginBottom={props.useFullWidthButtons ? 5 : ''}
-				marginRight={props.useFullWidthButtons ? '' : 5}
+				width={props.useFullWidthButtons ? '100%' : null}
+				marginBottom={props.useFullWidthButtons ? 5 : null}
+				marginRight={props.useFullWidthButtons ? null : 5}
 			>
 				<Button
 					primaryOutline
@@ -44,9 +44,9 @@ export const ModalFooterButtons = props => (
 		)}
 		{props.deleteButton && (
 			<Box
-				width={props.useFullWidthButtons && '100%'}
-				marginBottom={props.useFullWidthButtons && 5}
-				marginRight={props.useFullWidthButtons || 'auto'}
+				width={props.useFullWidthButtons ? '100%' : null}
+				marginBottom={props.useFullWidthButtons ? 5 : null}
+				marginRight={props.useFullWidthButtons ? null : 'auto'}
 			>
 				<Button
 					primaryOutline
