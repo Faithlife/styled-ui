@@ -94,6 +94,7 @@ const colors = {
 	inputBorderColor: '#C7C7C7',
 	inputFocusedBorderColor: '#278ed4',
 	inputFocusedShadowColor: '#d0e6f6',
+	inputPlaceholderColor: '#C7C7C7',
 };
 
 const fonts = {
