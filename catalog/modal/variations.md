@@ -1,3 +1,5 @@
+The Modal component has been reworked for v6, but you can opt-in to use the new API now: [/v6 Modal Examples](/modal/v6)
+
 ## Modal with default header and footer
 
 ```react
