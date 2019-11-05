@@ -50,17 +50,6 @@ export class LegacyModal extends React.Component {
 		withoutFooter: PropTypes.bool,
 		/** Set to 'body' to attach the modal to body, otherwise will attach as a child element */
 		container: PropTypes.string,
-		/** 16px (default) or 24px */
-		variant: PropTypes.string,
-		/** h.16, h.18 (default), or h.24 */
-		headerVariant: PropTypes.string,
-		/** Intended for modals with lots of functionality, such as media galleries or editors */
-		fullscreen: PropTypes.bool,
-	};
-
-	static defaultProps = {
-		variant: '16px',
-		headerVariant: 'h.18',
 	};
 
 	state = {
@@ -110,9 +99,6 @@ export class LegacyModal extends React.Component {
 			withoutFooter,
 			theme,
 			styleOverrides,
-			variant,
-			headerVariant,
-			fullscreen,
 			...props
 		} = this.props;
 
@@ -161,7 +147,7 @@ export class LegacyModal extends React.Component {
 
 		return (
 			<ModalBackdrop onClose={onClose} zIndex={(styleOverrides && styleOverrides.zIndex) || 1050}>
-				<ModalSpacingContextProvider value={variant === '24px' ? 6 : 5}>
+				<ModalSpacingContextProvider value={5}>
 					<Box
 						ref={modal => {
 							this._modal = modal;
@@ -171,12 +157,12 @@ export class LegacyModal extends React.Component {
 						}}
 						display="flex"
 						flexDirection="column"
-						justifyContent={fullscreen ? 'flex-start' : 'center'}
+						justifyContent={'center'}
 						alignItems="center"
-						width={fullscreen ? ['100vw', '90vw'] : ['100vw', 'fit-content']}
-						height={fullscreen ? ['100vh', '90vh'] : 'fit-content'}
+						width={['100vw', 'fit-content']}
+						height={'fit-content'}
 						maxWidth={['100%', 'calc(100% - 32px)']}
-						maxHeight={fullscreen ? '100%' : ['100%', 'calc(100% - 32px)']}
+						maxHeight={['100%', 'calc(100% - 32px)']}
 						margin="auto"
 						borderRadius={1}
 						backgroundColor={(theme && theme.background) || 'white'}
@@ -187,7 +173,6 @@ export class LegacyModal extends React.Component {
 							subtitle={subtitle}
 							onClose={onClose}
 							headerBottomBorder={headerBottomBorder}
-							variant={headerVariant}
 						/>
 						{doesChildrenIncludeModalContent ? children : <ModalContent>{children}</ModalContent>}
 						{!withoutFooter &&
