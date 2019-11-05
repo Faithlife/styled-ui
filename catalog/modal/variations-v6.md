@@ -65,6 +65,39 @@ state: { modal: false, value: '' }
 </div>
 ```
 
+## Modal with 16px title
+
+```react
+showSource: true
+state: { modal: false, value: '' }
+---
+<div>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Modal
+		isOpen={state.modal}
+		container="body"
+		onClose={() => setState({ modal: false })}
+	>
+		<Modal.Header title="Location" subtitle="Help us locate you" textStyle={'h.16'} />
+		<Modal.Content width={['100vw', 400]}>
+			<Input
+				value={state.value}
+				onChange={value => setState({ value: value.value, isValid: value !== '' })}
+				placeholder="Bellingham"
+				title="Location"
+			/>
+		</Modal.Content>
+		<Modal.Footer>
+			<Modal.FooterButtons
+				commitButton={{ text: 'Save', onClick: () => alert('Saved') }}
+				cancelButton={{ text: 'Cancel', onClick: () => setState({ modal: !state.modal }) }}
+				deleteButton={{ text: 'Delete Forever', onClick: () => alert('Deleted') }}
+			/>
+		</Modal.Footer>
+	</Modal>
+</div>
+```
+
 ## Fullscreen modal
 
 ```react
