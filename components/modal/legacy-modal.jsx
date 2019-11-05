@@ -168,12 +168,7 @@ export class LegacyModal extends React.Component {
 						backgroundColor={(theme && theme.background) || 'white'}
 						{...props}
 					>
-						<ModalHeader
-							title={title}
-							subtitle={subtitle}
-							onClose={onClose}
-							headerBottomBorder={headerBottomBorder}
-						/>
+						<ModalHeader title={title} subtitle={subtitle} onClose={onClose} />
 						{doesChildrenIncludeModalContent ? children : <ModalContent>{children}</ModalContent>}
 						{!withoutFooter &&
 							(renderFooter ? (
