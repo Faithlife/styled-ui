@@ -59,7 +59,7 @@ export { Stack } from './components/Stack';
 export { Text } from './components/Text';
 export { Paragraph } from './components/Paragraph';
 export { Heading } from './components/Heading';
-export { theme } from './theme';
+export { theme, useTheme } from './theme';
 export { DefaultThemeProvider } from './components/DefaultThemeProvider';
 export { ThemeProvider } from './components/ThemeProvider';
 export {
