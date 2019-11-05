@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import { Box } from '../Box';
-import { debouncedResize } from '../utils';
+import { debouncedResize, deprecateProp } from '../utils';
 import { ModalBackdrop } from '../modal-backdrop';
 import { ModalHeader } from './modal-header';
 import { DefaultModalFooter } from './default-modal-footer';
-import { LegacyModalContent } from './index';
+import { LegacyModalContent, v6ImportHelpText } from './legacy-utils';
 import { ModalContent } from './modal-content';
 import { ModalSpacingContextProvider } from './use-modal-spacing';
 
@@ -115,6 +115,11 @@ export class LegacyModal extends React.Component {
 			fullscreen,
 			...props
 		} = this.props;
+
+		deprecateProp(
+			title,
+			`[Modal] the title prop is being moved to the new <Modal.Header /> component.\n${v6ImportHelpText}`,
+		);
 
 		const { modalWidth } = this.state;
 
