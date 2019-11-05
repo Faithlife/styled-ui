@@ -66,6 +66,7 @@ import {
 	AutoSizedRowMasonry,
 	theme,
 } from '../index';
+import { Modal as V6Modal } from '../index-v6';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
@@ -540,6 +541,16 @@ const components = [
 				title: 'Modal Documentation',
 				content: pageLoader(() => import('./modal/documentation.md')),
 				imports: { Modal, ModalContent, DocgenTable },
+			},
+			{
+				path: '/modal/v6',
+				title: 'Modal v6 Documentation',
+				content: pageLoader(() => import('./modal/variations-v6.md')),
+				imports: {
+					Modal: V6Modal,
+					Input,
+					Button,
+				},
 			},
 		],
 	},

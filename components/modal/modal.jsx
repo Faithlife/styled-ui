@@ -4,9 +4,6 @@ import { createPortal } from 'react-dom';
 import { Box } from '../Box';
 import { debouncedResize } from '../utils';
 import { ModalBackdrop } from '../modal-backdrop';
-import { ModalHeader } from './modal-header';
-import { DefaultModalFooter } from './default-modal-footer';
-import { ModalContent } from './modal-content';
 import { ModalSpacingContextProvider } from './use-modal-spacing';
 
 /**
@@ -16,50 +13,20 @@ export class Modal extends React.Component {
 	static propTypes = {
 		/** Controls state of modal */
 		isOpen: PropTypes.bool.isRequired,
-		/** Title of the modal */
-		title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-		/** Any explaining text to include in the modal header */
-		subtitle: PropTypes.string,
-		/** Callback function for when the modal is close  */
+		/** Callback function for when the modal is closed  */
 		onClose: PropTypes.func.isRequired,
 		/** Contents of the modal */
 		children: PropTypes.node.isRequired,
-		/** Values for rendering an FL standard footer */
-		footerProps: PropTypes.shape({
-			commitButton: PropTypes.shape({
-				onClick: PropTypes.func.isRequired,
-				text: PropTypes.string.isRequired,
-				disabled: PropTypes.bool,
-			}),
-			cancelButton: PropTypes.shape({
-				onClick: PropTypes.func.isRequired,
-				text: PropTypes.string.isRequired,
-				disabled: PropTypes.bool,
-			}),
-			deleteButton: PropTypes.shape({
-				onClick: PropTypes.func.isRequired,
-				text: PropTypes.string.isRequired,
-				disabled: PropTypes.bool,
-			}),
-		}),
-		headerBottomBorder: PropTypes.string,
-		/** A default footer will be rendered if you don't supply a renderFooter function */
-		renderFooter: PropTypes.func,
-		/** No footer will be rendered if withoutFooter is true */
-		withoutFooter: PropTypes.bool,
 		/** Set to 'body' to attach the modal to body, otherwise will attach as a child element */
 		container: PropTypes.string,
-		/** 16px (default) or 24px */
-		variant: PropTypes.string,
-		/** h.16, h.18 (default), or h.24 */
-		headerVariant: PropTypes.string,
+		/** Uses the spacing scale from the theme. Default is 5 (16px in our theme) */
+		contentSpacing: PropTypes.number,
 		/** Intended for modals with lots of functionality, such as media galleries or editors */
 		fullscreen: PropTypes.bool,
 	};
 
 	static defaultProps = {
-		variant: '16px',
-		headerVariant: 'h.18',
+		contentSpacing: 5,
 	};
 
 	state = {
@@ -99,36 +66,20 @@ export class Modal extends React.Component {
 
 	renderModal() {
 		const {
-			title,
-			subtitle,
 			onClose,
 			children,
-			headerBottomBorder,
-			renderFooter,
-			footerProps,
-			withoutFooter,
 			theme,
 			styleOverrides,
-			variant,
-			headerVariant,
+			contentSpacing,
 			fullscreen,
 			...props
 		} = this.props;
 
 		const { modalWidth } = this.state;
 
-		const verticalButtons =
-			modalWidth &&
-			!renderFooter &&
-			(modalWidth < 220 ||
-				(modalWidth < 320 && footerProps && Object.keys(footerProps).length === 3));
-
-		const doesChildrenIncludeModalContent =
-			React.Children.count(children) === 1 && React.Children.only(children).type === ModalContent;
-
 		return (
 			<ModalBackdrop onClose={onClose} zIndex={(styleOverrides && styleOverrides.zIndex) || 1050}>
-				<ModalSpacingContextProvider value={variant === '24px' ? 6 : 5}>
+				<ModalSpacingContextProvider value={contentSpacing}>
 					<Box
 						ref={modal => {
 							this._modal = modal;
@@ -149,20 +100,7 @@ export class Modal extends React.Component {
 						backgroundColor={(theme && theme.background) || 'white'}
 						{...props}
 					>
-						<ModalHeader
-							title={title}
-							subtitle={subtitle}
-							onClose={onClose}
-							headerBottomBorder={headerBottomBorder}
-							variant={headerVariant}
-						/>
-						{doesChildrenIncludeModalContent ? children : <ModalContent>{children}</ModalContent>}
-						{!withoutFooter &&
-							(renderFooter ? (
-								renderFooter()
-							) : (
-								<DefaultModalFooter useFullWidthButtons={verticalButtons} {...footerProps} />
-							))}
+						{children}
 					</Box>
 				</ModalSpacingContextProvider>
 			</ModalBackdrop>
