@@ -4,8 +4,7 @@ import { createPortal } from 'react-dom';
 import { Box } from '../Box';
 import { debouncedResize, deprecateProp } from '../utils';
 import { ModalBackdrop } from '../modal-backdrop';
-import { ModalHeader } from './modal-header';
-import { DefaultModalFooter } from './default-modal-footer';
+import { Modal } from './index';
 import { LegacyModalContent, v6ImportHelpText } from './legacy-utils';
 import { ModalContent } from './modal-content';
 import { ModalSpacingContextProvider } from './use-modal-spacing';
@@ -134,16 +133,11 @@ export class LegacyModal extends React.Component {
 
 		const { modalWidth } = this.state;
 
-		const verticalButtons =
-			modalWidth &&
-			!renderFooter &&
-			(modalWidth < 220 ||
-				(modalWidth < 320 && footerProps && Object.keys(footerProps).length === 3));
-
 		const doesChildrenIncludeModalContent =
 			React.Children.count(children) === 1 &&
 			(React.Children.only(children).type === ModalContent ||
-				React.Children.only(children).type === LegacyModalContent);
+				React.Children.only(children).type === LegacyModalContent ||
+				React.Children.only(children).type === Modal.Content);
 
 		return (
 			<ModalBackdrop onClose={onClose} zIndex={(styleOverrides && styleOverrides.zIndex) || 1050}>
@@ -168,13 +162,15 @@ export class LegacyModal extends React.Component {
 						backgroundColor={(theme && theme.background) || 'white'}
 						{...props}
 					>
-						<ModalHeader title={title} subtitle={subtitle} onClose={onClose} />
-						{doesChildrenIncludeModalContent ? children : <ModalContent>{children}</ModalContent>}
+						<Modal.Header title={title} subtitle={subtitle} />
+						{doesChildrenIncludeModalContent ? children : <Modal.Content>{children}</Modal.Content>}
 						{!withoutFooter &&
 							(renderFooter ? (
 								renderFooter()
 							) : (
-								<DefaultModalFooter useFullWidthButtons={verticalButtons} {...footerProps} />
+								<Modal.Footer>
+									<Modal.FooterButtons {...footerProps} />
+								</Modal.Footer>
 							))}
 					</Box>
 				</ModalSpacingContextProvider>
