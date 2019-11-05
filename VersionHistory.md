@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.27.0
+
+- Add `useTheme` hook.
+
 ### 5.26.0
 
 - Add additional `styleOverrides` to `ProductDrawer`.
