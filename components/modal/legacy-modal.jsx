@@ -6,13 +6,14 @@ import { debouncedResize } from '../utils';
 import { ModalBackdrop } from '../modal-backdrop';
 import { ModalHeader } from './modal-header';
 import { DefaultModalFooter } from './default-modal-footer';
+import { LegacyModalContent } from './index';
 import { ModalContent } from './modal-content';
 import { ModalSpacingContextProvider } from './use-modal-spacing';
 
 /**
  * Modal with flexible contents. See also: SimpleModal
  */
-export class Modal extends React.Component {
+export class LegacyModal extends React.Component {
 	static propTypes = {
 		/** Controls state of modal */
 		isOpen: PropTypes.bool.isRequired,
@@ -124,7 +125,9 @@ export class Modal extends React.Component {
 				(modalWidth < 320 && footerProps && Object.keys(footerProps).length === 3));
 
 		const doesChildrenIncludeModalContent =
-			React.Children.count(children) === 1 && React.Children.only(children).type === ModalContent;
+			React.Children.count(children) === 1 &&
+			(React.Children.only(children).type === ModalContent ||
+				React.Children.only(children).type === LegacyModalContent);
 
 		return (
 			<ModalBackdrop onClose={onClose} zIndex={(styleOverrides && styleOverrides.zIndex) || 1050}>

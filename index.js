@@ -17,7 +17,11 @@ export { FilesSection } from './components/files-section';
 export { HelpBox } from './components/help-box';
 export { Input, FilterInput } from './components/input';
 export { LoadingSpinner } from './components/loading-spinner';
-export { Modal, ModalContent, ModalFooter } from './components/modal';
+export {
+	LegacyModal as Modal,
+	LegacyModalContent as ModalContent,
+	LegacyModalFooter as ModalFooter,
+} from './components/modal';
 export {
 	Popover,
 	PopoverBase,
