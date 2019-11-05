@@ -32,70 +32,6 @@ state: { modal: false, value: '' }
 </div>
 ```
 
-## Modal with 24px variant and 24px header variant
-
-```react
-showSource: true
-state: { modal: false, value: '' }
----
-<div>
-	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
-	<Modal
-		isOpen={state.modal}
-		container="body"
-		onClose={() => setState({ modal: false })}
-		title="Location"
-		subtitle="Help us locate you"
-		footerProps={{
-			commitButton: { text: 'Save', onClick: () => alert('Saved') },
-			cancelButton: { text: 'Cancel', onClick: () => setState({ modal: !state.modal }) },
-			deleteButton: { text: 'Delete Forever', onClick: () => alert('Deleted') }
-		}}
-		variant="24px"
-		headerVariant="h.24"
-	>
-		<ModalDemoWideContent>
-			<Input
-				value={state.value}
-				onChange={value => setState({ value: value.value, isValid: value !== '' })}
-				placeholder="Bellingham"
-				title="Location"
-			/>
-		</ModalDemoWideContent>
-	</Modal>
-</div>
-```
-
-## Modal with small header variant
-
-```react
-showSource: true
-state: { modal: false, value: '' }
----
-<div>
-	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
-	<Modal
-		isOpen={state.modal}
-		container="body"
-		onClose={() => setState({ modal: false })}
-		title="Location"
-		subtitle="Help us locate you"
-		footerProps={{
-			commitButton: { text: 'Done', onClick: () => alert('Done') },
-		}}
-		variant="16px"
-		headerVariant="h.16"
-	>
-		<Input
-			value={state.value}
-			onChange={value => setState({ value: value.value, isValid: value !== '' })}
-			placeholder="Bellingham"
-			title="Location"
-		/>
-	</Modal>
-</div>
-```
-
 ## Modal attached as child
 
 This `<Modal>` component doesn't specify a `container` prop, so it is added as a child of its parent in the DOM.
@@ -336,60 +272,6 @@ state: { modal: false, value: '' }
 	>
 		<ModalContent padding={0} overflowY="auto">
 			<img src="https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201" alt="Faithlife campus" style={{ display: 'block' }} />
-		</ModalContent>
-	</Modal>
-</div>
-```
-
-## Fullscreen modal
-
-```react
-showSource: true
-state: { modal: false, value: '' }
----
-<div>
-	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
-	<Modal
-		isOpen={state.modal}
-		container="body"
-		onClose={() => setState({ modal: false })}
-		title="Fullscreen modal"
-		withoutFooter
-		fullscreen
-		headerVariant="h.24"
-	>
-		<ModalContent
-			height="100%"
-			width="100%"
-			padding={0}
-			backgroundImage="url(https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201)"
-			backgroundSize="cover"
-			maxHeight="none"
-		>
-			&nbsp;
-		</ModalContent>
-	</Modal>
-</div>
-```
-
-## Fullscreen modal with really long content
-
-```react
-showSource: true
-state: { modal: false, value: '' }
----
-<div>
-	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
-	<Modal
-		isOpen={state.modal}
-		container="body"
-		onClose={() => setState({ modal: false })}
-		title="Lots of content"
-		fullscreen
-		headerVariant="h.24"
-	>
-		<ModalContent overflowY="auto">
-			{JSON.stringify(new Array(3000))}
 		</ModalContent>
 	</Modal>
 </div>
