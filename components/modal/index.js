@@ -1,4 +1,4 @@
-import { deprecate } from '../utils';
+import { deprecateComponent } from '../utils';
 import { Modal } from './modal';
 import { ModalHeader } from './modal-header';
 import { ModalContent } from './modal-content';
@@ -14,12 +14,12 @@ Modal.FooterButtons = ModalFooterButtons;
 const v6ImportHelpText = `You can opt into this new API by importing { Modal } from @faithlife/styled-ui/v6
 Learn more at https://faithlife.github.io/styled-ui/#/modal/v6`;
 
-const LegacyModalContent = deprecate(
+const LegacyModalContent = deprecateComponent(
 	ModalContent,
 	`ModalContent will be moving to Modal.Content in Styled-UI version 6.\n${v6ImportHelpText}`,
 );
 
-const LegacyModalFooter = deprecate(
+const LegacyModalFooter = deprecateComponent(
 	ModalFooter,
 	`ModalFooter will be moving to Modal.Footer in Styled-UI version 6.\n${v6ImportHelpText}`,
 );
