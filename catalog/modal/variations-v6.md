@@ -43,7 +43,7 @@ state: { modal: false, value: '' }
 		isOpen={state.modal}
 		container="body"
 		onClose={() => setState({ modal: false })}
-		contentSpacing={6}
+		contentPadding={6}
 	>
 		<Modal.Header title="Location" subtitle="Help us locate you" textStyle={'h.24'} />
 		<Modal.Content width={['100vw', 400]}>
@@ -110,7 +110,7 @@ state: { modal: false, value: '' }
 		isOpen={state.modal}
 		container="body"
 		onClose={() => setState({ modal: false })}
-		contentSpacing={6}
+		contentPadding={6}
 		fullscreen
 	>
 		<Modal.Header title="Fullscreen modal" textStyle="h.24" />

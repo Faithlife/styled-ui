@@ -18,13 +18,13 @@ export class Modal extends React.Component {
 		/** Set to 'body' to attach the modal to body, otherwise will attach as a child element. */
 		container: PropTypes.string,
 		/** Will apply padding to Modal.Header, Modal.Content, and Modal.Footer child components. Uses the spacing scale from the theme. */
-		contentSpacing: PropTypes.number,
+		contentPadding: PropTypes.number,
 		/** Intended for modals with lots of functionality, such as media galleries or editors. */
 		fullscreen: PropTypes.bool,
 	};
 
 	static defaultProps = {
-		contentSpacing: 5,
+		contentPadding: 5,
 	};
 
 	state = {
@@ -68,7 +68,7 @@ export class Modal extends React.Component {
 			children,
 			theme,
 			styleOverrides,
-			contentSpacing,
+			contentPadding,
 			fullscreen,
 			...props
 		} = this.props;
@@ -77,7 +77,7 @@ export class Modal extends React.Component {
 
 		return (
 			<ModalBackdrop onClose={onClose} zIndex={(styleOverrides && styleOverrides.zIndex) || 1050}>
-				<ModalContextProvider value={contentSpacing}>
+				<ModalContextProvider value={contentPadding}>
 					<Box
 						ref={modal => {
 							this._modal = modal;
