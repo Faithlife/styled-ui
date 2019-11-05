@@ -285,7 +285,7 @@ state: { modal: false, value: '' }
 		subtitle="Help us locate you"
 		withoutFooter
 	>
-		<ModalContent paddingX={5} paddingBottom={5}>
+		<ModalContent paddingBottom={5}>
 			<Input
 				value={state.value}
 				onChange={value => setState({ value: value, isValid: value !== '' })}
