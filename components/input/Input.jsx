@@ -140,6 +140,10 @@ ${({ theme, styleOverrides = {} }) => css`
 		background: ${({ theme }) => theme.colors.gray8};
 	}
 
+	&::placeholder {
+		color: ${({ theme }) => theme.colors.inputPlaceholderColor};
+	}
+
 	${({ theme }) =>
 		variant({
 			variants: {
