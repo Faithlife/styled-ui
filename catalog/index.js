@@ -544,13 +544,19 @@ const components = [
 			},
 			{
 				path: '/modal/v6',
-				title: 'Modal v6 Documentation',
+				title: 'v6 Modal Examples',
 				content: pageLoader(() => import('./modal/variations-v6.md')),
 				imports: {
 					Modal: V6Modal,
 					Input,
 					Button,
 				},
+			},
+			{
+				path: '/modal/documentation/v6',
+				title: 'v6 Modal Documentation',
+				content: pageLoader(() => import('./modal/documentation-v6.md')),
+				imports: { Modal: V6Modal, DocgenTable },
 			},
 		],
 	},

@@ -7,14 +7,8 @@ import { Button } from '../button';
 import { Close } from '../icons';
 import { useModalSpacingContext } from './use-modal-spacing';
 
-export const ModalHeader = ({
-	title,
-	subtitle,
-	onClose,
-	headerBottomBorder,
-	textStyle,
-	...props
-}) => {
+/** A flexible component built on styled-system primitives. */
+export const ModalHeader = ({ title, subtitle, onClose, textStyle, ...props }) => {
 	const modalSpacing = useModalSpacingContext();
 	return (
 		<Box
@@ -49,8 +43,9 @@ export const ModalHeader = ({
 };
 
 ModalHeader.propTypes = {
+	/** Select a text style from our theme for the header title. */
+	textStyle: PropTypes.string,
 	title: PropTypes.string.isRequired,
-	onClose: PropTypes.func.isRequired,
 	subtitle: PropTypes.string,
 };
 

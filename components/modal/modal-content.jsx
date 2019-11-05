@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Box } from '../Box';
 import { useModalSpacingContext } from './use-modal-spacing';
 
-/** Modal content, used within a parent Modal. Often used inside a render prop. */
+/** A flexible component built on styled-system primitives. */
 export const ModalContent = ({ children, ...props }) => {
 	const modalSpacing = useModalSpacingContext();
 	return (

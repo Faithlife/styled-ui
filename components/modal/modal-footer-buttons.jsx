@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Box } from '../Box';
 import { Button } from '../button';
 
+/** A helper component intended for use inside a <Modal.Footer>. Matches the shape of the v5 Modal "footerProps". */
 export const ModalFooterButtons = props => (
 	<Box
 		display="flex"
@@ -83,5 +84,4 @@ ModalFooterButtons.propTypes = {
 		text: PropTypes.string.isRequired,
 		disabled: PropTypes.bool,
 	}),
-	useFullWidthButtons: PropTypes.bool,
 };
