@@ -121,6 +121,31 @@ export class LegacyModal extends React.Component {
 			`[Modal] the title prop is being moved to the new <Modal.Header /> component.\n${v6ImportHelpText}`,
 		);
 
+		deprecateProp(
+			subtitle,
+			`[Modal] the subtitle prop is being moved to the new <Modal.Header /> component.\n${v6ImportHelpText}`,
+		);
+
+		deprecateProp(
+			headerBottomBorder,
+			`[Modal] the headerBottomBorder prop is deprecated. The default modal styles no longer have a bottom-border on the modal header, but if you need one you can supply a borderBottom prop to the <Modal.Header /> component.\n${v6ImportHelpText}`,
+		);
+
+		deprecateProp(
+			renderFooter,
+			`[Modal] the renderFooter prop is deprecated. Please use the new <Modal.Footer /> component.\n${v6ImportHelpText}`,
+		);
+
+		deprecateProp(
+			withoutFooter,
+			`[Modal] the withoutFooter prop is deprecated and no longer needed. If you do not need a <Modal.Footer /> component, you don't have to supply one.\n${v6ImportHelpText}`,
+		);
+
+		deprecateProp(
+			footerProps,
+			`[Modal] the footerProps prop is deprecated. Please use the new <Modal.Footer /> component. The <Modal.FooterButtons /> component accepts the same props that were included in the footerProps object.\n${v6ImportHelpText}`,
+		);
+
 		const { modalWidth } = this.state;
 
 		const verticalButtons =
