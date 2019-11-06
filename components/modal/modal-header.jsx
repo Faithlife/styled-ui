@@ -8,8 +8,8 @@ import { Close } from '../icons';
 import { useModalContext } from './use-modal-context';
 
 /** A flexible component built on styled-system primitives. */
-export const ModalHeader = ({ title, subtitle, onClose, textStyle, ...props }) => {
-	const { contentPadding } = useModalContext();
+export const ModalHeader = ({ title, subtitle, textStyle, ...props }) => {
+	const { contentPadding, onClose } = useModalContext();
 	return (
 		<Box
 			display="flex"

@@ -39,9 +39,10 @@ export const Modal = ({
 	const modalContext = useMemo(
 		() => ({
 			contentPadding,
+			onClose,
 			modalWidth: size ? size.width : null,
 		}),
-		[contentPadding, size],
+		[contentPadding, onClose, size],
 	);
 
 	if (!isOpen || !canUseDom) {
