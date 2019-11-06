@@ -8,72 +8,79 @@ import { ModalContent } from './modal-content';
 /**
  * Modal with flexible contents. See also: SimpleModal
  */
-export const LegacyModal = ({
-	isOpen,
-	container,
-	title,
-	subtitle,
-	onClose,
-	children,
-	headerBottomBorder,
-	renderFooter,
-	footerProps,
-	withoutFooter,
-	theme,
-	styleOverrides,
-	...props
-}) => {
-	deprecateProp(
-		title,
-		`[Modal] the title prop is being moved to the new <Modal.Header /> component.\n${v6ImportHelpText}`,
-	);
+export const LegacyModal = React.forwardRef(
+	(
+		{
+			isOpen,
+			container,
+			title,
+			subtitle,
+			onClose,
+			children,
+			headerBottomBorder,
+			renderFooter,
+			footerProps,
+			withoutFooter,
+			theme,
+			styleOverrides,
+			...props
+		},
+		ref,
+	) => {
+		deprecateProp(
+			title,
+			`[Modal] the title prop is being moved to the new <Modal.Header /> component.\n${v6ImportHelpText}`,
+		);
 
-	deprecateProp(
-		subtitle,
-		`[Modal] the subtitle prop is being moved to the new <Modal.Header /> component.\n${v6ImportHelpText}`,
-	);
+		deprecateProp(
+			subtitle,
+			`[Modal] the subtitle prop is being moved to the new <Modal.Header /> component.\n${v6ImportHelpText}`,
+		);
 
-	deprecateProp(
-		headerBottomBorder,
-		`[Modal] the headerBottomBorder prop is deprecated. The default modal styles no longer have a bottom-border on the modal header, but if you need one you can supply a borderBottom prop to the <Modal.Header /> component.\n${v6ImportHelpText}`,
-	);
+		deprecateProp(
+			headerBottomBorder,
+			`[Modal] the headerBottomBorder prop is deprecated. The default modal styles no longer have a bottom-border on the modal header, but if you need one you can supply a borderBottom prop to the <Modal.Header /> component.\n${v6ImportHelpText}`,
+		);
 
-	deprecateProp(
-		renderFooter,
-		`[Modal] the renderFooter prop is deprecated. Please use the new <Modal.Footer /> component.\n${v6ImportHelpText}`,
-	);
+		deprecateProp(
+			renderFooter,
+			`[Modal] the renderFooter prop is deprecated. Please use the new <Modal.Footer /> component.\n${v6ImportHelpText}`,
+		);
 
-	deprecateProp(
-		withoutFooter,
-		`[Modal] the withoutFooter prop is deprecated and no longer needed. If you do not need a <Modal.Footer /> component, you don't have to supply one.\n${v6ImportHelpText}`,
-	);
+		deprecateProp(
+			withoutFooter,
+			`[Modal] the withoutFooter prop is deprecated and no longer needed. If you do not need a <Modal.Footer /> component, you don't have to supply one.\n${v6ImportHelpText}`,
+		);
 
-	deprecateProp(
-		footerProps,
-		`[Modal] the footerProps prop is deprecated. Please use the new <Modal.Footer /> component. The <Modal.FooterButtons /> component accepts the same props that were included in the footerProps object.\n${v6ImportHelpText}`,
-	);
+		deprecateProp(
+			footerProps,
+			`[Modal] the footerProps prop is deprecated. Please use the new <Modal.Footer /> component. The <Modal.FooterButtons /> component accepts the same props that were included in the footerProps object.\n${v6ImportHelpText}`,
+		);
 
-	const doesChildrenIncludeModalContent =
-		React.Children.count(children) === 1 &&
-		(React.Children.only(children).type === ModalContent ||
-			React.Children.only(children).type === LegacyModalContent ||
-			React.Children.only(children).type === Modal.Content);
+		const doesChildrenIncludeModalContent =
+			React.Children.count(children) === 1 &&
+			(React.Children.only(children).type === ModalContent ||
+				React.Children.only(children).type === LegacyModalContent ||
+				React.Children.only(children).type === Modal.Content);
 
-	return (
-		<Modal isOpen={isOpen} onClose={onClose} container={container} {...props}>
-			<Modal.Header title={title} subtitle={subtitle} />
-			{doesChildrenIncludeModalContent ? children : <Modal.Content>{children}</Modal.Content>}
-			{!withoutFooter &&
-				(renderFooter ? (
-					renderFooter()
-				) : (
-					<Modal.Footer>
-						<Modal.FooterButtons {...footerProps} />
-					</Modal.Footer>
-				))}
-		</Modal>
-	);
-};
+		return (
+			<Modal ref={ref} isOpen={isOpen} onClose={onClose} container={container} {...props}>
+				<Modal.Header title={title} subtitle={subtitle} />
+				{doesChildrenIncludeModalContent ? children : <Modal.Content>{children}</Modal.Content>}
+				{!withoutFooter &&
+					(renderFooter ? (
+						renderFooter()
+					) : (
+						<Modal.Footer>
+							<Modal.FooterButtons {...footerProps} />
+						</Modal.Footer>
+					))}
+			</Modal>
+		);
+	},
+);
+
+LegacyModal.displayName = 'LegacyModal';
 
 LegacyModal.propTypes = {
 	/** Controls state of modal */
