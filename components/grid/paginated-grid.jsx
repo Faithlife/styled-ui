@@ -16,9 +16,12 @@ export function PaginatedGrid(props) {
 	}, [gridApi, currentPageNumber]);
 
 	const handlePaginationChanged = useCallback(() => {
-		if (gridApi && onPageNumberChange) {
-			const pageNumber = gridApi.paginationGetCurrentPage();
-			onPageNumberChange(pageNumber);
+		if (gridApi) {
+			gridApi.sizeColumnsToFit();
+			if (onPageNumberChange) {
+				const pageNumber = gridApi.paginationGetCurrentPage();
+				onPageNumberChange(pageNumber);
+			}
 		}
 	}, [gridApi, onPageNumberChange]);
 
