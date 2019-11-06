@@ -33,6 +33,7 @@ export const ProductDrawerDropdown = styled.div`
 		left: auto;
 		bottom: auto;
 		top: auto;
+		right: ${({ styleOverrides }) => styleOverrides.tabletRightOffset || '0'};
 		overflow-y: auto;
 		animation-duration: 300ms;
 		animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
@@ -40,7 +41,10 @@ export const ProductDrawerDropdown = styled.div`
 		animation-name: ${dropdownSlideDownFadeIn};
 	}
 
-	right: 0;
+	@media (min-width: ${mediaSizes.desktop}) {
+		right: 0;
+	}
+
 	white-space: nowrap;
 	border-radius: 4px;
 	background-color: white;

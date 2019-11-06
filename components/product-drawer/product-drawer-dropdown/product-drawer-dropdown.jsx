@@ -196,5 +196,6 @@ ProductDrawerDropdown.propTypes = {
 	resources: PropTypes.object.isRequired,
 	styleOverrides: PropTypes.shape({
 		mobileTopOffset: PropTypes.string,
+		tabletRightOffset: PropTypes.string,
 	}),
 };
