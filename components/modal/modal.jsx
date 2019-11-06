@@ -13,7 +13,6 @@ export const Modal = ({
 	container: containerProp,
 	onClose,
 	children,
-	theme,
 	contentPadding,
 	fullscreen,
 	zIndex,
@@ -50,7 +49,7 @@ export const Modal = ({
 					maxHeight={fullscreen ? '100%' : ['100%', 'calc(100% - 32px)']}
 					margin="auto"
 					borderRadius={1}
-					backgroundColor={(theme && theme.background) || 'white'}
+					backgroundColor="white"
 					{...props}
 				>
 					{children}

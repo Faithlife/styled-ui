@@ -62,6 +62,11 @@ export const LegacyModal = React.forwardRef(
 			`[Modal] the styleOverrides prop is deprecated. The v6 Modal component accepts a zIndex prop if you need it.\n${v6ImportHelpText}`,
 		);
 
+		deprecateProp(
+			theme,
+			`[Modal] the theme prop is deprecated. The v6 Modal component accepts the styled-system backgroundColor prop if you need it.\n${v6ImportHelpText}`,
+		);
+
 		const doesChildrenIncludeModalContent =
 			React.Children.count(children) === 1 &&
 			(React.Children.only(children).type === ModalContent ||
@@ -69,7 +74,15 @@ export const LegacyModal = React.forwardRef(
 				React.Children.only(children).type === Modal.Content);
 
 		return (
-			<Modal ref={ref} isOpen={isOpen} onClose={onClose} container={container} {...props}>
+			<Modal
+				ref={ref}
+				isOpen={isOpen}
+				onClose={onClose}
+				container={container}
+				zIndex={styleOverrides && styleOverrides.zIndex ? styleOverrides.zIndex : 1050}
+				backgroundColor={theme && theme.background ? theme.background : 'white'}
+				{...props}
+			>
 				<Modal.Header title={title} subtitle={subtitle} />
 				{doesChildrenIncludeModalContent ? children : <Modal.Content>{children}</Modal.Content>}
 				{!withoutFooter &&
