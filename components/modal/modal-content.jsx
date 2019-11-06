@@ -5,7 +5,7 @@ import { useModalContext } from './use-modal-context';
 
 /** A flexible component built on styled-system primitives. */
 export const ModalContent = ({ children, ...props }) => {
-	const modalSpacing = useModalContext();
+	const { contentPadding } = useModalContext();
 	return (
 		<Box
 			maxWidth="100%"
@@ -13,7 +13,7 @@ export const ModalContent = ({ children, ...props }) => {
 			css={`
 				overflow-wrap: break-word;
 			`}
-			paddingX={modalSpacing}
+			paddingX={contentPadding}
 			{...props}
 		>
 			{children}

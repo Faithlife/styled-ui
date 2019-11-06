@@ -2,69 +2,75 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '../Box';
 import { Button } from '../button';
+import { useModalContext } from './use-modal-context';
 
 /** A helper component intended for use inside a <Modal.Footer>. Matches the shape of the v5 Modal "footerProps". */
-export const ModalFooterButtons = props => (
-	<Box
-		display="flex"
-		flexDirection={props.useFullWidthButtons ? 'column-reverse' : 'row-reverse'}
-		justifyContent="flex-start"
-		alignItems="center"
-		width="100%"
-	>
-		{props.commitButton && (
-			<Button
-				primary
-				medium
-				tabIndex={props.commitButton.tabindex}
-				onClick={props.commitButton.onClick}
-				width={props.useFullWidthButtons ? '100%' : null}
-				disabled={props.commitButton.disabled}
-			>
-				{props.commitButton.text}
-			</Button>
-		)}
-		{props.cancelButton && (
-			<Box
-				width={props.useFullWidthButtons ? '100%' : null}
-				marginBottom={props.useFullWidthButtons ? 5 : null}
-				marginRight={props.useFullWidthButtons ? null : 5}
-			>
+export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton }) => {
+	const { modalWidth } = useModalContext();
+	const hasThreeButtons = !!(commitButton && cancelButton && deleteButton);
+	const useFullWidthButtons = hasThreeButtons ? modalWidth < 320 : modalWidth < 220;
+	return (
+		<Box
+			display="flex"
+			flexDirection={useFullWidthButtons ? 'column-reverse' : 'row-reverse'}
+			justifyContent="flex-start"
+			alignItems="center"
+			width="100%"
+		>
+			{commitButton && (
 				<Button
-					primaryOutline
+					primary
 					medium
-					tabIndex={props.cancelButton.tabindex}
-					onClick={props.cancelButton.onClick}
-					width={props.useFullWidthButtons ? '100%' : null}
-					disabled={props.cancelButton.disabled}
+					tabIndex={commitButton.tabindex}
+					onClick={commitButton.onClick}
+					width={useFullWidthButtons ? '100%' : null}
+					disabled={commitButton.disabled}
 				>
-					{props.cancelButton.text}
+					{commitButton.text}
 				</Button>
-			</Box>
-		)}
-		{props.deleteButton && (
-			<Box
-				width={props.useFullWidthButtons ? '100%' : null}
-				marginBottom={props.useFullWidthButtons ? 5 : null}
-				marginRight={props.useFullWidthButtons ? null : 'auto'}
-			>
-				<Button
-					primaryOutline
-					medium
-					onClick={props.deleteButton.onClick}
-					defaultColor="red4"
-					hoverColor="red3"
-					activeColor="red5"
-					disabledColor="red1"
-					width={props.useFullWidthButtons ? '100%' : null}
-					disabled={props.deleteButton.disabled}
+			)}
+			{cancelButton && (
+				<Box
+					width={useFullWidthButtons ? '100%' : null}
+					marginBottom={useFullWidthButtons ? 5 : null}
+					marginRight={useFullWidthButtons ? null : 5}
 				>
-					{props.deleteButton.text}
-				</Button>
-			</Box>
-		)}
-	</Box>
-);
+					<Button
+						primaryOutline
+						medium
+						tabIndex={cancelButton.tabindex}
+						onClick={cancelButton.onClick}
+						width={useFullWidthButtons ? '100%' : null}
+						disabled={cancelButton.disabled}
+					>
+						{cancelButton.text}
+					</Button>
+				</Box>
+			)}
+			{deleteButton && (
+				<Box
+					width={useFullWidthButtons ? '100%' : null}
+					marginBottom={useFullWidthButtons ? 5 : null}
+					marginRight={useFullWidthButtons ? null : 'auto'}
+				>
+					<Button
+						primaryOutline
+						medium
+						onClick={deleteButton.onClick}
+						defaultColor="red4"
+						hoverColor="red3"
+						activeColor="red5"
+						disabledColor="red1"
+						width={useFullWidthButtons ? '100%' : null}
+						disabled={deleteButton.disabled}
+					>
+						{deleteButton.text}
+					</Button>
+				</Box>
+			)}
+		</Box>
+	);
+};
 
 ModalFooterButtons.propTypes = {
 	commitButton: PropTypes.shape({

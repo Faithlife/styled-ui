@@ -5,9 +5,9 @@ import { useModalContext } from './use-modal-context';
 
 /** A flexible component built on styled-system primitives. */
 export const ModalFooter = ({ children, ...props }) => {
-	const modalSpacing = useModalContext();
+	const { contentPadding } = useModalContext();
 	return (
-		<Box display="flex" justifyContent="flex-end" width="100%" padding={modalSpacing} {...props}>
+		<Box display="flex" justifyContent="flex-end" width="100%" padding={contentPadding} {...props}>
 			{children}
 		</Box>
 	);

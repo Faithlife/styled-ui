@@ -9,7 +9,7 @@ import { useModalContext } from './use-modal-context';
 
 /** A flexible component built on styled-system primitives. */
 export const ModalHeader = ({ title, subtitle, onClose, textStyle, ...props }) => {
-	const modalSpacing = useModalContext();
+	const { contentPadding } = useModalContext();
 	return (
 		<Box
 			display="flex"
@@ -17,7 +17,7 @@ export const ModalHeader = ({ title, subtitle, onClose, textStyle, ...props }) =
 			justifyContent="space-between"
 			alignItems="center"
 			width="100%"
-			padding={modalSpacing}
+			padding={contentPadding}
 			{...props}
 		>
 			<Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
