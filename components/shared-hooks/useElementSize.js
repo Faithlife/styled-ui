@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 export function useElementSize() {
 	const [size, setSize] = useState(null);
 	const [el, setEl] = useState(null);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		let observer;
 		if (el) {
 			setSize(el.getBoundingClientRect());
