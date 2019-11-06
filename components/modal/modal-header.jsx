@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '../Box';
+import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { Paragraph } from '../Paragraph';
 import { Button } from '../button';
@@ -20,24 +21,21 @@ export const ModalHeader = ({ title, subtitle, textStyle, ...props }) => {
 			padding={contentPadding}
 			{...props}
 		>
-			<Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
-				<Text textStyle={textStyle} color="gray66">
-					{title}
-				</Text>
-				<Button variant="primaryTransparent" icon={<Close />} onClick={onClose} />
-			</Box>
-			{subtitle && (
-				<Paragraph
-					width="100%"
-					paddingTop={3}
-					paddingBottom={0}
-					textStyle="ui.14"
-					textAlign="left"
-					color="gray66"
-				>
-					{subtitle}
-				</Paragraph>
-			)}
+			<Stack spacing={3} width="100%">
+				<Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
+					<Text textStyle={textStyle} color="gray66">
+						{title}
+					</Text>
+					<Button variant="primaryTransparent" icon={<Close />} onClick={onClose} />
+				</Box>
+				{subtitle && (
+					<Box width="100%">
+						<Paragraph width="100%" padding={0} textStyle="ui.14" textAlign="left" color="gray66">
+							{subtitle}
+						</Paragraph>
+					</Box>
+				)}
+			</Stack>
 		</Box>
 	);
 };
