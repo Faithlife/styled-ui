@@ -7,7 +7,14 @@ import { useModalContext } from './use-modal-context';
 export const ModalFooter = ({ children, ...props }) => {
 	const { contentPadding } = useModalContext();
 	return (
-		<Box display="flex" justifyContent="flex-end" width="100%" padding={contentPadding} {...props}>
+		<Box
+			display="flex"
+			justifyContent="flex-end"
+			width="100%"
+			padding={contentPadding}
+			paddingTop={0}
+			{...props}
+		>
 			{children}
 		</Box>
 	);

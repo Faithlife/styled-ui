@@ -548,6 +548,7 @@ const components = [
 				content: pageLoader(() => import('./modal/variations-v6.md')),
 				imports: {
 					Modal: V6Modal,
+					Box,
 					Input,
 					Button,
 				},

@@ -115,14 +115,16 @@ state: { modal: false, value: '' }
 	>
 		<Modal.Header title="Fullscreen modal" textStyle="h.24" />
 		<Modal.Content
-			height="100%"
-			width="100%"
-			padding={0}
-			backgroundImage="url(https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201)"
-			backgroundSize="cover"
-			maxHeight="none"
+			paddingX={0}
+			paddingBottom={0}
 		>
-			&nbsp;
+			<Box
+				backgroundImage="url(https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201)"
+				backgroundSize="cover"
+				height="100%"
+			>
+				&nbsp;
+			</Box>
 		</Modal.Content>
 	</Modal>
 </div>

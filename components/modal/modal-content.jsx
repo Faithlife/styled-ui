@@ -13,7 +13,8 @@ export const ModalContent = ({ children, ...props }) => {
 			css={`
 				overflow-wrap: break-word;
 			`}
-			paddingX={contentPadding}
+			padding={contentPadding}
+			overflowY="auto"
 			{...props}
 		>
 			{children}

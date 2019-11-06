@@ -205,8 +205,6 @@ state: { modal: false, value: '' }
 
 ## Modal with no footer
 
-Depending on your use case, you may need to add bottom padding to your modal content.
-
 ```react
 showSource: true
 state: { modal: false, value: '' }
@@ -247,6 +245,7 @@ state: { modal: false, value: '' }
 		container="body"
 		onClose={() => setState({ modal: false })}
 		title="Lots of content"
+		withoutFooter
 	>
 		<ModalContent overflowY="auto">
 			{JSON.stringify(new Array(1000))}
@@ -270,7 +269,7 @@ state: { modal: false, value: '' }
 		title="Modal with full width content"
 		withoutFooter
 	>
-		<ModalContent padding={0} overflowY="auto">
+		<ModalContent paddingX={0} paddingBottom={0} overflowY="auto">
 			<img src="https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201" alt="Faithlife campus" style={{ display: 'block' }} />
 		</ModalContent>
 	</Modal>
