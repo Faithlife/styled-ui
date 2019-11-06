@@ -19,8 +19,10 @@ export const Modal = ({
 	...props
 }) => {
 	const [size, containerRef] = useElementSize();
-	const [container, setContainer] = useState(null);
 
+	// React SSR does not support hydrating Portals, so we set the Portal container in a useEffect
+	// that will only run in the browser. See: https://github.com/facebook/react/issues/13097
+	const [container, setContainer] = useState(null);
 	useEffect(() => {
 		if (containerProp) {
 			if (typeof containerProp === 'string') {
