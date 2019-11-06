@@ -1,14 +1,9 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { createPortal } from 'react-dom';
-import { Box } from '../Box';
 import { deprecateProp } from '../utils';
-import { useElementSize } from '../shared-hooks/useElementSize';
-import { ModalBackdrop } from '../modal-backdrop';
 import { Modal } from './index';
 import { LegacyModalContent, v6ImportHelpText } from './legacy-utils';
 import { ModalContent } from './modal-content';
-import { ModalContextProvider } from './use-modal-context';
 
 /**
  * Modal with flexible contents. See also: SimpleModal
@@ -28,24 +23,6 @@ export const LegacyModal = ({
 	styleOverrides,
 	...props
 }) => {
-	const [size, containerRef] = useElementSize();
-	const [canUseDom, setCanUseDom] = useState(false);
-	const targetContainer = useRef(null);
-
-	useEffect(() => {
-		if (container) {
-			if (typeof container === 'string') {
-				// must be an id or body
-				targetContainer.current =
-					container === 'body' ? document.body : document.getElementById(container);
-			} else {
-				// must be a ref
-				targetContainer.current = typeof container === 'object' ? container.current : container();
-			}
-		}
-		setCanUseDom(true);
-	}, [container]);
-
 	deprecateProp(
 		title,
 		`[Modal] the title prop is being moved to the new <Modal.Header /> component.\n${v6ImportHelpText}`,
@@ -82,56 +59,20 @@ export const LegacyModal = ({
 			React.Children.only(children).type === LegacyModalContent ||
 			React.Children.only(children).type === Modal.Content);
 
-	const modalContext = useMemo(
-		() => ({
-			contentPadding: 5,
-			modalWidth: size ? size.width : null,
-		}),
-		[size],
+	return (
+		<Modal isOpen={isOpen} onClose={onClose} container={container} {...props}>
+			<Modal.Header title={title} subtitle={subtitle} />
+			{doesChildrenIncludeModalContent ? children : <Modal.Content>{children}</Modal.Content>}
+			{!withoutFooter &&
+				(renderFooter ? (
+					renderFooter()
+				) : (
+					<Modal.Footer>
+						<Modal.FooterButtons {...footerProps} />
+					</Modal.Footer>
+				))}
+		</Modal>
 	);
-
-	if (!isOpen || !canUseDom) {
-		return null;
-	}
-
-	const modal = (
-		<ModalBackdrop onClose={onClose} zIndex={(styleOverrides && styleOverrides.zIndex) || 1050}>
-			<ModalContextProvider value={modalContext}>
-				<Box
-					ref={containerRef}
-					display="flex"
-					flexDirection="column"
-					justifyContent={'center'}
-					alignItems="center"
-					width={['100vw', 'fit-content']}
-					height={'fit-content'}
-					maxWidth={['100%', 'calc(100% - 32px)']}
-					maxHeight={['100%', 'calc(100% - 32px)']}
-					margin="auto"
-					borderRadius={1}
-					backgroundColor={(theme && theme.background) || 'white'}
-					{...props}
-				>
-					<Modal.Header title={title} subtitle={subtitle} />
-					{doesChildrenIncludeModalContent ? children : <Modal.Content>{children}</Modal.Content>}
-					{!withoutFooter &&
-						(renderFooter ? (
-							renderFooter()
-						) : (
-							<Modal.Footer>
-								<Modal.FooterButtons {...footerProps} />
-							</Modal.Footer>
-						))}
-				</Box>
-			</ModalContextProvider>
-		</ModalBackdrop>
-	);
-
-	if (targetContainer && targetContainer.current) {
-		return createPortal(modal, targetContainer.current);
-	}
-
-	return modal;
 };
 
 LegacyModal.propTypes = {
