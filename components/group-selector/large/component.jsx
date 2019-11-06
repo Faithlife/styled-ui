@@ -345,7 +345,7 @@ export class LargeGroupSelector extends React.Component {
 					isOpen={(!showInPlace && isOpen) || (showInPlace && secondaryModalOpen) || false}
 					onClose={this.toggle}
 					theme={{ background: 'transparent' }}
-					styleOverrides={styleOverrides && { zIndex: styleOverrides.modalZIndex }}
+					zIndex={styleOverrides && styleOverrides.modalZIndex ? styleOverrides.modalZIndex : 1050}
 				>
 					{modalContent === 'main' && !showInPlace && mainView}
 					{modalContent === 'admin' && (
