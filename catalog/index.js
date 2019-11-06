@@ -305,6 +305,18 @@ const pages = [
 				},
 			},
 			{
+				path: '/button/variations2',
+				title: 'Button Variations 2',
+				content: pageLoader(() => import('./button/variations2.md')),
+				imports: {
+					Button: Button2,
+					ButtonDemo,
+					ButtonGrid,
+					GearIcon,
+					buttonRef: React.createRef(),
+				},
+			},
+			{
 				path: '/button/utility-button',
 				title: 'Utility Button',
 				content: pageLoader(() => import('./button/utility-button.md')),

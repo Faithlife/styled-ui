@@ -97,6 +97,34 @@ const colors = {
 	inputPlaceholderColor: '#C7C7C7',
 };
 
+colors.button = {
+	primaryForeground: colors.white,
+	primaryForegroundDisabled: colors.white,
+	primaryBackground: colors.blue4,
+	primaryHover: colors.blue5,
+	primaryActive: '#015d95',
+	primaryDisabled: colors.blue2,
+
+	minorForeground: colors.gray66,
+	minorForegroundDisabled: colors.gray34,
+	minorBackground: colors.gray8,
+	minorHover: colors.gray14,
+	minorActive: colors.gray22,
+	minorDisabled: colors.gray4,
+
+	transparentHover: colors.blue1,
+
+	dangerForeground: colors.white,
+	dangerForegroundDisabled: colors.white,
+	dangerBackground: colors.red4,
+	dangerHover: colors.red3,
+	dangerActive: colors.red5,
+	dangerDisabled: colors.red1,
+
+	focusBorder: colors.blue1,
+	focusShadow: colors.blue3,
+};
+
 const fonts = {
 	normal: '"Source Sans Pro", sans-serif',
 };
