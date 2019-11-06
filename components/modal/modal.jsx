@@ -13,9 +13,9 @@ export const Modal = ({
 	onClose,
 	children,
 	theme,
-	styleOverrides,
 	contentPadding,
 	fullscreen,
+	zIndex,
 	...props
 }) => {
 	const [size, containerRef] = useElementSize();
@@ -50,7 +50,7 @@ export const Modal = ({
 	}
 
 	const modal = (
-		<ModalBackdrop onClose={onClose} zIndex={(styleOverrides && styleOverrides.zIndex) || 1050}>
+		<ModalBackdrop onClose={onClose} zIndex={zIndex}>
 			<ModalContextProvider value={modalContext}>
 				<Box
 					ref={containerRef}
@@ -91,10 +91,13 @@ Modal.propTypes = {
 	container: PropTypes.string,
 	/** Will apply padding to Modal.Header, Modal.Content, and Modal.Footer child components. Uses the spacing scale from the theme. */
 	contentPadding: PropTypes.number,
+	/** Will apply to the Modal Backdrop. */
+	zIndex: PropTypes.number,
 	/** Intended for modals with lots of functionality, such as media galleries or editors. */
 	fullscreen: PropTypes.bool,
 };
 
 Modal.defaultProps = {
 	contentPadding: 5,
+	zIndex: 1050,
 };
