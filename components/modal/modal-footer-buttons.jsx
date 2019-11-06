@@ -19,8 +19,8 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 		>
 			{commitButton && (
 				<Button
-					primary
-					medium
+					variant="primary"
+					size="medium"
 					tabIndex={commitButton.tabindex}
 					onClick={commitButton.onClick}
 					width={useFullWidthButtons ? '100%' : null}
@@ -36,8 +36,8 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 					marginRight={useFullWidthButtons ? null : 5}
 				>
 					<Button
-						primaryOutline
-						medium
+						variant="primaryOutline"
+						size="medium"
 						tabIndex={cancelButton.tabindex}
 						onClick={cancelButton.onClick}
 						width={useFullWidthButtons ? '100%' : null}
@@ -54,8 +54,8 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 					marginRight={useFullWidthButtons ? null : 'auto'}
 				>
 					<Button
-						primaryOutline
-						medium
+						variant="primaryOutline"
+						size="medium"
 						onClick={deleteButton.onClick}
 						defaultColor="red4"
 						hoverColor="red3"
