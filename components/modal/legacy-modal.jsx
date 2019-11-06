@@ -57,6 +57,11 @@ export const LegacyModal = React.forwardRef(
 			`[Modal] the footerProps prop is deprecated. Please use the new <Modal.Footer /> component. The <Modal.FooterButtons /> component accepts the same props that were included in the footerProps object.\n${v6ImportHelpText}`,
 		);
 
+		deprecateProp(
+			styleOverrides,
+			`[Modal] the styleOverrides prop is deprecated. The v6 Modal component accepts a zIndex prop if you need it.\n${v6ImportHelpText}`,
+		);
+
 		const doesChildrenIncludeModalContent =
 			React.Children.count(children) === 1 &&
 			(React.Children.only(children).type === ModalContent ||
