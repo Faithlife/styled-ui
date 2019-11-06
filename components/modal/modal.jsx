@@ -54,10 +54,10 @@ export const Modal = ({
 			<ModalContextProvider value={modalContext}>
 				<Box
 					ref={containerRef}
-					display="flex"
-					flexDirection="column"
-					justifyContent={fullscreen ? 'flex-start' : 'center'}
-					alignItems="center"
+					display="grid"
+					gridTemplateRows="auto 1fr"
+					justifyContent="stretch"
+					alignItems="stretch"
 					width={fullscreen ? ['100vw', '90vw'] : ['100vw', 'fit-content']}
 					height={fullscreen ? ['100vh', '90vh'] : 'fit-content'}
 					maxWidth={['100%', 'calc(100% - 32px)']}
