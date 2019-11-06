@@ -21,7 +21,6 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 				<Button
 					variant="primary"
 					size="medium"
-					tabIndex={commitButton.tabindex}
 					onClick={commitButton.onClick}
 					width={useFullWidthButtons ? '100%' : null}
 					disabled={commitButton.disabled}
@@ -38,7 +37,6 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 					<Button
 						variant="primaryOutline"
 						size="medium"
-						tabIndex={cancelButton.tabindex}
 						onClick={cancelButton.onClick}
 						width={useFullWidthButtons ? '100%' : null}
 						disabled={cancelButton.disabled}
@@ -76,13 +74,11 @@ ModalFooterButtons.propTypes = {
 	commitButton: PropTypes.shape({
 		onClick: PropTypes.func.isRequired,
 		text: PropTypes.string.isRequired,
-		tabindex: PropTypes.string,
 		disabled: PropTypes.bool,
 	}),
 	cancelButton: PropTypes.shape({
 		onClick: PropTypes.func.isRequired,
 		text: PropTypes.string.isRequired,
-		tabindex: PropTypes.string,
 		disabled: PropTypes.bool,
 	}),
 	deleteButton: PropTypes.shape({
