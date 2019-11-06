@@ -9,7 +9,7 @@ import { ModalContextProvider } from './use-modal-context';
 /** A flexible component built on styled-system primitives. */
 export const Modal = ({
 	isOpen,
-	container,
+	container: containerProp,
 	onClose,
 	children,
 	theme,
@@ -19,22 +19,21 @@ export const Modal = ({
 	...props
 }) => {
 	const [size, containerRef] = useElementSize();
-	const [canUseDom, setCanUseDom] = useState(false);
-	const targetContainer = useRef(null);
+	const [container, setContainer] = useState(null);
 
 	useEffect(() => {
-		if (container) {
-			if (typeof container === 'string') {
+		if (containerProp) {
+			if (typeof containerProp === 'string') {
 				// must be an id or body
-				targetContainer.current =
-					container === 'body' ? document.body : document.getElementById(container);
+				setContainer(
+					containerProp === 'body' ? document.body : document.getElementById(containerProp),
+				);
 			} else {
 				// must be a ref
-				targetContainer.current = typeof container === 'object' ? container.current : container();
+				setContainer(typeof containerProp === 'object' ? containerProp.current : containerProp());
 			}
 		}
-		setCanUseDom(true);
-	}, [container]);
+	}, [containerProp]);
 
 	const modalContext = useMemo(
 		() => ({
@@ -45,7 +44,7 @@ export const Modal = ({
 		[contentPadding, onClose, size],
 	);
 
-	if (!isOpen || !canUseDom) {
+	if (!isOpen) {
 		return null;
 	}
 
@@ -73,8 +72,8 @@ export const Modal = ({
 		</ModalBackdrop>
 	);
 
-	if (targetContainer && targetContainer.current) {
-		return createPortal(modal, targetContainer.current);
+	if (container) {
+		return createPortal(modal, container);
 	}
 
 	return modal;
