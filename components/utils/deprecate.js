@@ -1,6 +1,6 @@
 import React from 'react';
 
-var hits = new Set();
+const hits = new Set();
 
 export const deprecateComponent = (Component, message) => {
 	const name = Component.displayName || Component.name;
