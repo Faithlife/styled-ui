@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import { Box } from '../Box';
 import { useElementSize } from '../shared-hooks/useElementSize';
+import { usePortalContainer } from '../shared-hooks/usePortalContainer';
 import { ModalBackdrop } from '../modal-backdrop';
 import { ModalContextProvider } from './use-modal-context';
 
@@ -19,23 +20,7 @@ export const Modal = ({
 	...props
 }) => {
 	const [size, containerRef] = useElementSize();
-
-	// React SSR does not support hydrating Portals, so we set the Portal container in a useEffect
-	// that will only run in the browser. See: https://github.com/facebook/react/issues/13097
-	const [container, setContainer] = useState(null);
-	useEffect(() => {
-		if (containerProp) {
-			if (typeof containerProp === 'string') {
-				// must be an id or body
-				setContainer(
-					containerProp === 'body' ? document.body : document.getElementById(containerProp),
-				);
-			} else {
-				// must be a ref
-				setContainer(typeof containerProp === 'object' ? containerProp.current : containerProp());
-			}
-		}
-	}, [containerProp]);
+	const container = usePortalContainer(containerProp);
 
 	const modalContext = useMemo(
 		() => ({
