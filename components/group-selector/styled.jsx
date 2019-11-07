@@ -292,6 +292,7 @@ export const SearchResultMessage = styled.div`
 	color: #a8a8a8;
 	font-size: 12px;
 	padding-top: 4px;
+	padding-right: 4px;
 `;
 
 export const UnderlinedSearchResultMessage = styled(SearchResultMessage)`
