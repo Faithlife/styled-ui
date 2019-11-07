@@ -4,7 +4,7 @@ import { Box } from '../Box';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { Paragraph } from '../Paragraph';
-import { Button } from '../button';
+import { UtilityButton } from '../button';
 import { Close } from '../icons';
 import { useModalContext } from './use-modal-context';
 
@@ -27,7 +27,9 @@ export const ModalHeader = ({ title, subtitle, textStyle, ...props }) => {
 					<Text textStyle={textStyle} color="gray66">
 						{title}
 					</Text>
-					<Button variant="secondary" icon={<Close />} onClick={onClose} />
+					<UtilityButton onClick={onClose}>
+						<Close />
+					</UtilityButton>
 				</Box>
 				{subtitle && (
 					<Box width="100%">

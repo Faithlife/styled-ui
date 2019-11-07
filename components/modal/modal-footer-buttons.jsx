@@ -35,7 +35,7 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 					marginRight={useFullWidthButtons ? null : 5}
 				>
 					<Button
-						variant="primaryOutline"
+						variant="secondary"
 						size="medium"
 						onClick={cancelButton.onClick}
 						width={useFullWidthButtons ? '100%' : null}
