@@ -66,7 +66,7 @@ import {
 	AutoSizedRowMasonry,
 	theme,
 } from '../index';
-import { Modal as V6Modal } from '../index-v6';
+import { Modal as V6Modal, Button as V6Button, SegmentedButtonGroup } from '../index-v6';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
@@ -305,11 +305,11 @@ const pages = [
 				},
 			},
 			{
-				path: '/button/variations2',
-				title: 'Button Variations 2',
-				content: pageLoader(() => import('./button/variations2.md')),
+				path: '/button/variationsv6',
+				title: 'Button Variations v6',
+				content: pageLoader(() => import('./button/variations-v6.md')),
 				imports: {
-					Button: Button2,
+					Button: V6Button,
 					SegmentedButtonGroup,
 					ButtonDemo,
 					ButtonGrid,
