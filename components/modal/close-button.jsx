@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '../Box';
-import { Button } from '../button';
+import { UtilityButton } from '../button';
 import { Close } from '../icons';
 
 /**
@@ -9,7 +9,9 @@ import { Close } from '../icons';
  */
 export const CloseButton = ({ onClose }) => (
 	<Box position="absolute" top={24} right={24} cursor="pointer" zIndex={200}>
-		<Button variant="minorTransparent" icon={<Close />} onClick={onClose} />
+		<UtilityButton onClick={onClose}>
+			<Close />
+		</UtilityButton>
 	</Box>
 );
 
