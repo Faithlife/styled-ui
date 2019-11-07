@@ -590,11 +590,6 @@ const pages = [
 				content: pageLoader(() => import('./modal/documentation-v6.md')),
 				imports: { Modal: V6Modal, DocgenTable },
 			},
-		],
-	},
-	{
-		title: 'Simple Modal',
-		pages: [
 			{
 				path: '/simple-modal/variations',
 				title: 'Simple Modal Variations',
