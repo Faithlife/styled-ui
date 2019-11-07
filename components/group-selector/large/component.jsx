@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../../button';
 import { Modal, CloseButton } from '../../modal';
+import { Text } from '../../Text';
+import { Paragraph } from '../../Paragraph';
 import * as Styled from '../styled';
 import { SearchResult } from './search-result';
 import { CreateGroup } from './create-group';
@@ -348,51 +350,54 @@ export class LargeGroupSelector extends React.Component {
 					zIndex={styleOverrides && styleOverrides.modalZIndex ? styleOverrides.modalZIndex : 1050}
 					position="relative"
 				>
-					<CloseButton onClose={this.toggle} />
+					{modalContent === 'main' && <CloseButton onClose={this.toggle} />}
 					{modalContent === 'main' && !showInPlace && mainView}
 					{modalContent === 'admin' && (
-						<Styled.SecondaryModalContent>
-							<Styled.SecondaryModalText>
-								<Styled.SearchResultBoldText>
-									{formattedMembershiplevels}
-								</Styled.SearchResultBoldText>
-								<span> membership is necessary to perform this action.</span>
-							</Styled.SecondaryModalText>
-							<Styled.SecondaryModalText>
-								Contact a group administrator to request access.
-							</Styled.SecondaryModalText>
-							<Styled.SecondaryModalButtonContainer>
-								<Styled.SecondaryModalButtonWrapper>
-									<Button size="small" variant="primary" onClick={this.redirectToGroup}>
-										{localizedResources.goToGroupButtonText}
-									</Button>
-								</Styled.SecondaryModalButtonWrapper>
-								<Button size="small" onClick={this.resetModalState}>
-									Cancel
-								</Button>
-							</Styled.SecondaryModalButtonContainer>
-						</Styled.SecondaryModalContent>
+						<>
+							<Modal.Header title="Group Membership Required" />
+							<Modal.Content width={['100vw', 375]}>
+								<Text display="inline-block">
+									<Text color="flGray" fontWeight="bold">
+										{formattedMembershiplevels}
+									</Text>
+									<span> membership is necessary to perform this action.</span>
+								</Text>
+								<Text>Contact a group administrator to request access.</Text>
+							</Modal.Content>
+							<Modal.Footer>
+								<Modal.FooterButtons
+									cancelButton={{ onClick: this.resetModalState, text: 'Cancel' }}
+									commitButton={{
+										onClick: this.redirectToGroup,
+										text: localizedResources.goToGroupButtonText,
+									}}
+								/>
+							</Modal.Footer>
+						</>
 					)}
 					{modalContent === 'change' && (
-						<Styled.SecondaryModalContent>
-							<Styled.SecondaryModalText>
-								This group type must be set to{' '}
-								<Styled.SearchResultBoldText>{formattedGroupLevels}</Styled.SearchResultBoldText>
-							</Styled.SecondaryModalText>
-							<Styled.SecondaryModalText>
-								Visit the group settings page to change
-							</Styled.SecondaryModalText>
-							<Styled.SecondaryModalButtonContainer>
-								<Styled.SecondaryModalButtonWrapper>
-									<Button size="small" variant="primary" onClick={this.redirectToGroup}>
-										Change to {formattedGroupLevels}
-									</Button>
-								</Styled.SecondaryModalButtonWrapper>
-								<Button size="small" onClick={this.resetModalState}>
-									Cancel
-								</Button>
-							</Styled.SecondaryModalButtonContainer>
-						</Styled.SecondaryModalContent>
+						<>
+							<Modal.Header title="" />
+							<Modal.Content width={['100vw', 375]}>
+								<Paragraph>
+									This group type must be set to{' '}
+									<Text color="flGray" fontWeight="bold">
+										{formattedGroupLevels}
+									</Text>
+									.
+								</Paragraph>
+								<Paragraph>Visit the group settings page to change.</Paragraph>
+							</Modal.Content>
+							<Modal.Footer>
+								<Modal.FooterButtons
+									cancelButton={{ onClick: this.resetModalState, text: 'Cancel' }}
+									commitButton={{
+										onClick: this.redirectToGroup,
+										text: `Edit group type`,
+									}}
+								/>
+							</Modal.Footer>
+						</>
 					)}
 				</Modal>
 			</Styled.LargeGroupSelector>
