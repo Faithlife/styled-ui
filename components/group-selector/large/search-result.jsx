@@ -245,7 +245,7 @@ export class SearchResult extends React.PureComponent {
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
-				<Button size="small" variant="primaryOutline" onClick={this.getStarted}>
+				<Button size="small" variant="secondary" onClick={this.getStarted}>
 					{localizedResources.selectButtonText}
 				</Button>
 			);
