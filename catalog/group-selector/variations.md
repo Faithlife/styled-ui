@@ -121,7 +121,7 @@ state: {
 		churchLocationText: 'Church or Ministry Location',
 		churchLocationPlaceholder: 'City, State',
 	},
-	authorizedMembershipLevels: ['admin', 'member', 'follower'],
+	authorizedMembershipLevels: ['admin', 'moderator', 'member', 'follower'],
 	authorizedGroupKinds: ['church', 'ministry', 'general'],
 	styleOverrides: { modalZIndex: 7000, tooltipMargin: '0 0 0 20px' },
 	groups: [{
