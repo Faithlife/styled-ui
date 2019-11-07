@@ -145,6 +145,7 @@ export const LargeScrollView = styled(ScrollArea)`
 `;
 
 export const LargeTopGradient = styled.div`
+	box-sizing: border-box;
 	padding-left: 24px;
 	padding-right: 24px;
 	padding-top: 24px;
@@ -203,6 +204,7 @@ export const CreateGroupBackground = styled.div`
 
 export const SearchResultsContainer = styled.div`
 	position: relative;
+	box-sizing: border-box;
 	width: 100%;
 	padding-left: 12px;
 	padding-right: 12px;
