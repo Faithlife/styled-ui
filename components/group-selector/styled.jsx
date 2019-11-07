@@ -285,12 +285,13 @@ export const SearchResultNameText = styled.div`
 export const SearchResultInfoButtonRow = styled.div`
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-end;
 `;
 
 export const SearchResultMessage = styled.div`
 	color: #a8a8a8;
 	font-size: 12px;
+	padding-top: 4px;
 `;
 
 export const UnderlinedSearchResultMessage = styled(SearchResultMessage)`
@@ -315,7 +316,7 @@ export const SearchResultBoldText = styled.span`
 `;
 
 export const SearchResultGroupKind = styled.div`
-	padding-top: 4px;
+	padding: 4px 0;
 	color: #a8a8a8;
 	font-size: 12px;
 	line-height: 1em;
