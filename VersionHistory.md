@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.28.1
+
+- Add `v6` entry point to published files.
+
 ### 5.28.0
 
 - Add `v6` entry point with new APIs.
