@@ -1,18 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from '../modal';
-import { Box } from '../Box';
-import { Button } from '../button';
-import { Close } from '../icons';
+import { Modal } from '.';
+import { CloseButton } from './close-button';
 
 /**
  * Simple modal with just a close icon and no padding. For a standardized modal layout, please see: Modal
  */
 export const SimpleModal = React.forwardRef(({ children, onClose, ...props }, ref) => (
 	<Modal ref={ref} onClose={onClose} position="relative" {...props}>
-		<Box position="absolute" top={24} right={24} cursor="pointer" zIndex={200}>
-			<Button variant="minorTransparent" icon={<Close />} onClick={onClose} />
-		</Box>
+		<CloseButton onClose={onClose} />
 		{children}
 	</Modal>
 ));

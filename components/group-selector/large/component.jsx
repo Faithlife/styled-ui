@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../../button';
-import { SimpleModal } from '../../simple-modal';
+import { Modal, CloseButton } from '../../modal';
 import * as Styled from '../styled';
 import { SearchResult } from './search-result';
 import { CreateGroup } from './create-group';
@@ -340,13 +340,15 @@ export class LargeGroupSelector extends React.Component {
 		return (
 			<Styled.LargeGroupSelector ref={this.nodeRef}>
 				{showInPlace && mainView}
-				<SimpleModal
+				<Modal
 					container="body"
 					isOpen={(!showInPlace && isOpen) || (showInPlace && secondaryModalOpen) || false}
 					onClose={this.toggle}
 					theme={{ background: 'transparent' }}
 					zIndex={styleOverrides && styleOverrides.modalZIndex ? styleOverrides.modalZIndex : 1050}
+					position="relative"
 				>
+					<CloseButton onClose={this.toggle} />
 					{modalContent === 'main' && !showInPlace && mainView}
 					{modalContent === 'admin' && (
 						<Styled.SecondaryModalContent>
@@ -392,7 +394,7 @@ export class LargeGroupSelector extends React.Component {
 							</Styled.SecondaryModalButtonContainer>
 						</Styled.SecondaryModalContent>
 					)}
-				</SimpleModal>
+				</Modal>
 			</Styled.LargeGroupSelector>
 		);
 	}

@@ -21,6 +21,8 @@ export {
 	LegacyModal as Modal,
 	LegacyModalContent as ModalContent,
 	LegacyModalFooter as ModalFooter,
+	SimpleModal,
+	CloseButton,
 } from './components/modal';
 export {
 	Popover,
@@ -30,7 +32,6 @@ export {
 	Tooltip,
 } from './components/popover';
 export { Radio } from './components/radio';
-export { SimpleModal } from './components/simple-modal';
 export { Slider } from './components/slider';
 export { SimpleToast } from './components/simple-toast';
 export {
