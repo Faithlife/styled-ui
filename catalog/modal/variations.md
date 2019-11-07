@@ -1,4 +1,6 @@
-## Modal with default footer
+The Modal component has been reworked for v6, but you can opt-in to use the new API now: [/v6 Modal Examples](/modal/v6)
+
+## Modal with default header and footer
 
 ```react
 showSource: true
@@ -31,6 +33,8 @@ state: { modal: false, value: '' }
 ```
 
 ## Modal attached as child
+
+This `<Modal>` component doesn't specify a `container` prop, so it is added as a child of its parent in the DOM.
 
 ```react
 showSource: true
@@ -215,7 +219,7 @@ state: { modal: false, value: '' }
 		subtitle="Help us locate you"
 		withoutFooter
 	>
-		<div>
+		<ModalContent paddingBottom={5}>
 			<Input
 				value={state.value}
 				onChange={value => setState({ value: value, isValid: value !== '' })}
@@ -223,7 +227,7 @@ state: { modal: false, value: '' }
 				title="Location"
 				debounce={200}
 			/>
-		</div>
+		</ModalContent>
 	</Modal>
 </div>
 ```
@@ -241,32 +245,11 @@ state: { modal: false, value: '' }
 		container="body"
 		onClose={() => setState({ modal: false })}
 		title="Lots of content"
+		withoutFooter
 	>
-		<div>
+		<ModalContent overflowY="auto">
 			{JSON.stringify(new Array(1000))}
-		</div>
-	</Modal>
-</div>
-```
-
-## Modal with no title border
-
-```react
-showSource: true
-state: { modal: false, value: '' }
----
-<div>
-	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
-	<Modal
-		isOpen={state.modal}
-		container="body"
-		onClose={() => setState({ modal: false })}
-		title="Modal with no title border"
-		styleOverrides={{ bottomBorder: 'none' }}
-	>
-		<div>
-			This modal has no title border!
-		</div>
+		</ModalContent>
 	</Modal>
 </div>
 ```
@@ -286,7 +269,7 @@ state: { modal: false, value: '' }
 		title="Modal with full width content"
 		withoutFooter
 	>
-		<ModalContent padding={0}>
+		<ModalContent paddingX={0} paddingBottom={0} overflowY="auto">
 			<img src="https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201" alt="Faithlife campus" style={{ display: 'block' }} />
 		</ModalContent>
 	</Modal>

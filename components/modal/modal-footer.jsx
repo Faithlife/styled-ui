@@ -1,13 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '../Box';
+import { useModalContext } from './use-modal-context';
 
-/** Modal footer, used within a parent Modal. Often used inside a render prop. */
-export const ModalFooter = ({ children, ...props }) => (
-	<Box display="flex" justifyContent="flex-end" width="100%" padding={6} paddingTop={0} {...props}>
-		{children}
-	</Box>
-);
+/** A flexible component built on styled-system primitives. */
+export const ModalFooter = ({ children, ...props }) => {
+	const { contentPadding } = useModalContext();
+	return (
+		<Box
+			display="flex"
+			justifyContent="flex-end"
+			width="100%"
+			padding={contentPadding}
+			paddingTop={0}
+			{...props}
+		>
+			{children}
+		</Box>
+	);
+};
 
 ModalFooter.propTypes = {
 	children: PropTypes.node.isRequired,

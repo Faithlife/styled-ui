@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Box } from '../Box';
-import { useElementSize } from './useElementSize';
+import { useElementSize } from '../shared-hooks/useElementSize';
 
 export function AutoSizedRowMasonry({
 	items,
