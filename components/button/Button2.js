@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { variant, layout, flexbox, position, textStyle, border, background } from 'styled-system';
 import 'focus-visible';
+import { Box } from '../Box';
 import { common, typography } from '../../theme/system';
 import { buttonSizes, buttons } from '../../theme/buttons';
 import { theme } from '../../theme';
@@ -18,7 +19,7 @@ const buttonVariant = variant({
 	variants: buttons,
 });
 
-const ButtonCore = styled.button`
+const ButtonCore = styled.button.attrs(({ active }) => ({ className: active ? 'active' : null }))`
 	box-sizing: border-box;
 	font-family: inherit;
 	background: transparent;
@@ -84,4 +85,24 @@ const Button = React.forwardRef(({ children, icon, ...props }, ref) => (
 	</ButtonCore>
 ));
 
-export { Button };
+const SegmentedButtonGroup = styled(Box).attrs(() => ({
+	border: 1,
+	borderColor: 'gray14',
+	borderRadius: 1,
+}))`
+	${ButtonCore} {
+		margin: 0;
+
+		&:nth-child(n + 2) {
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+
+		&:nth-child(-n + 2) {
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+	}
+`;
+
+export { Button, SegmentedButtonGroup };

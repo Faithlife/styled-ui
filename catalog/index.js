@@ -310,6 +310,7 @@ const pages = [
 				content: pageLoader(() => import('./button/variations2.md')),
 				imports: {
 					Button: Button2,
+					SegmentedButtonGroup,
 					ButtonDemo,
 					ButtonGrid,
 					GearIcon,

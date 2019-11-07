@@ -89,7 +89,7 @@ const buttons = {
 			backgroundColor: 'button.transparentHover',
 			borderColor: 'button.transparentHover',
 		},
-		'&:active': {
+		'&:active,&.active': {
 			backgroundColor: 'button.primaryDisabled',
 			borderColor: 'button.primaryDisabled',
 			color: 'button.primaryActive',

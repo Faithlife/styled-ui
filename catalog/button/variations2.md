@@ -1,5 +1,27 @@
 Buttons allow users to command the computer to take some action. Buttons, like all standard form components, usually have 16 px space between them.
 
+## Button Groups
+
+```react
+showSource: true
+---
+<div>
+	<ButtonDemo>
+		<SegmentedButtonGroup>
+			<Button variant="transparent" active size="medium">
+				Primary
+			</Button>
+			<Button variant="transparent" size="medium">
+				Secondary
+			</Button>
+			<Button variant="transparent" size="medium">
+				Minor
+			</Button>
+		</SegmentedButtonGroup>
+	</ButtonDemo>
+</div>
+```
+
 ## Component Variations
 
 ### Variants
