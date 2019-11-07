@@ -128,7 +128,7 @@ export class FilesSection extends PureComponent {
 					<DropZone onDrop={onUploadFiles}>
 						<Styled.DropZoneText>{dropZoneText}</Styled.DropZoneText>
 
-						<Button variant="primaryTransparent" onClick={this.handleBrowseFilesClick}>
+						<Button variant="secondary" onClick={this.handleBrowseFilesClick}>
 							{browseFilesButtonText}
 						</Button>
 						<Styled.FileInputLabel>
