@@ -105,7 +105,7 @@ export class SearchResult extends React.PureComponent {
 							</Styled.TooltipContentBlock>
 						</>
 					}
-					styleOverrides={{ margin: styleOverrides.tooltipMargin }}
+					styleOverrides={{ margin: styleOverrides ? styleOverrides.tooltipMargin : null }}
 				>
 					<Styled.UnderlinedSearchResultMessage>
 						This is an unclaimed group
