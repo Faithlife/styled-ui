@@ -1,60 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { createPortal } from 'react-dom';
+import { Modal } from '../modal';
 import { Box } from '../Box';
 import { Button } from '../button';
-import { ModalBackdrop } from '../modal-backdrop';
 import { Close } from '../icons';
-import { usePortalContainer } from '../shared-hooks/usePortalContainer';
 
 /**
  * Simple modal with just a close icon and no padding. For a standardized modal layout, please see: Modal
  */
-export const SimpleModal = ({
-	isOpen,
-	onClose,
-	children,
-	container: containerProp,
-	zIndex,
-	theme,
-	...props
-}) => {
-	const container = usePortalContainer(containerProp);
+export const SimpleModal = React.forwardRef(({ children, onClose, ...props }, ref) => (
+	<Modal ref={ref} onClose={onClose} position="relative" {...props}>
+		<Box position="absolute" top={24} right={24} cursor="pointer" zIndex={200}>
+			<Button variant="minorTransparent" icon={<Close />} onClick={onClose} />
+		</Box>
+		{children}
+	</Modal>
+));
 
-	if (!isOpen) {
-		return null;
-	}
-
-	const modal = (
-		<ModalBackdrop onClose={onClose} zIndex={zIndex}>
-			<Box
-				display="flex"
-				position="relative"
-				flexDirection="column"
-				justifyContent="center"
-				alignItems="center"
-				margin="auto"
-				width="fit-content"
-				height="fit-content"
-				maxHeight={['calc(100% - 16px)', null, '80%']}
-				borderRadius={1}
-				backgroundColor={(theme && theme.background) || 'white'}
-				{...props}
-			>
-				<Box position="absolute" top={24} right={24} cursor="pointer" zIndex={200}>
-					<Button variant="minorTransparent" icon={<Close />} onClick={onClose} />
-				</Box>
-				{children}
-			</Box>
-		</ModalBackdrop>
-	);
-
-	if (container) {
-		return createPortal(modal, container);
-	}
-
-	return modal;
-};
+SimpleModal.displayName = 'SimpleModal';
 
 SimpleModal.propTypes = {
 	/** controls state of modal */
