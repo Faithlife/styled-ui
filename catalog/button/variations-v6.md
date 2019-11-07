@@ -1,4 +1,4 @@
-`import { Button } from '@faithlife/styled-ui/v6;`
+`import { Button } from '@faithlife/styled-ui/v6';`
 
 Buttons allow users to command the computer to take some action. Buttons, like all standard form components, usually have 16 px space between them.
 
