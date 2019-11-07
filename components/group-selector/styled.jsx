@@ -323,33 +323,6 @@ export const SearchResultGroupKind = styled.div`
 	line-height: 1em;
 `;
 
-export const SecondaryModalContent = styled.div`
-	padding-left: 12px;
-	padding-right: 12px;
-	padding-top: 36px;
-	padding-bottom: 12px;
-	background: white;
-	border-radius: 4px;
-	width: 375px;
-`;
-
-export const SecondaryModalText = styled.div`
-	font-size: 14px;
-	margin: 0px;
-`;
-
-export const SecondaryModalButtonWrapper = styled.div`
-	margin-left: 6px;
-`;
-
-export const SecondaryModalButtonContainer = styled.div`
-	margin-top: 24px;
-	display: flex;
-	flex-direction: row-reverse;
-	width: 100%;
-	justify-content: flex-start;
-`;
-
 export const TooltipContentBlock = styled.p`
 	text-align: left;
 	margin: 0 16px 16px 16px;
