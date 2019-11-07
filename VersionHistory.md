@@ -1,5 +1,14 @@
 # Changelog
 
+### 5.28.0
+
+- Add `v6` entry point with new APIs.
+- Add v6 `Modal` component.
+- Add v6 `Button` component.
+- Add v6 `SegmentedButtonGroup` component.
+- Update input placeholder color.
+- Resize columns in PaginatedGrid on page change to account for scrollbars.
+
 ### 5.27.0
 
 - Add `useTheme` hook.
