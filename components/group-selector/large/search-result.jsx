@@ -167,8 +167,10 @@ export class SearchResult extends React.PureComponent {
 					membership required
 				</Styled.SearchResultMessage>
 			);
+
+			// observer is an obsolete membership kind
 			membershipLine =
-				membershipKind === 'admin' ? (
+				membershipKind === 'admin' || membershipKind === 'observer' ? (
 					<Styled.SearchResultMembershipLine>
 						You are an <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>
 					</Styled.SearchResultMembershipLine>
@@ -232,7 +234,13 @@ export class SearchResult extends React.PureComponent {
 		} else {
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
-					You are{membershipKind === 'admin' ? ' an ' : membershipKind === 'invited' ? ' ' : ' a '}
+					You are
+					{/* observer is an obsolete membership kind */}
+					{membershipKind === 'admin' || membershipKind === 'observer'
+						? ' an '
+						: membershipKind === 'invited'
+						? ' '
+						: ' a '}
 					<Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>
 				</Styled.SearchResultMembershipLine>
 			);
