@@ -26,7 +26,8 @@
 	},
 	"files": [
 		"dist/**",
-		"grid.js"
+		"grid.js",
+		"v6.js"
 	],
 	"browserslist": [
 		"> 1%",
