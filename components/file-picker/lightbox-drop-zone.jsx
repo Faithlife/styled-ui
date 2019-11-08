@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../button';
+import { LegacyButton as Button } from '../button';
 import { DropZone } from '../drop-zone';
 import { CameraSvg } from './svgs';
 import * as Styled from './styled';

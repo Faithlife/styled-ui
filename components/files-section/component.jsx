@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../button';
+import { LegacyButton as Button } from '../button';
 import { DropZone } from '../drop-zone';
 import { FileItem } from './file-item';
 import * as Styled from './styled';
