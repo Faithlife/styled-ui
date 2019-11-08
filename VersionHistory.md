@@ -1,8 +1,12 @@
 # Changelog
 
+### 5.28.4
+
+- Use LegacyButton in a few more internal components. Fixes a regression in 5.28.0.
+
 ### 5.28.3
 
-- Use LegacyButton in a few internal components.
+- Use LegacyButton in a few internal components. Fixes a regression in 5.28.0.
 
 ### 5.28.2
 
