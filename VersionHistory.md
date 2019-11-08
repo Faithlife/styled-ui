@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.28.2
+
+- Updated GroupSelector styles.
+
 ### 5.28.1
 
 - Add `v6` entry point to published files.
