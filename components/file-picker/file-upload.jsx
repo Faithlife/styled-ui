@@ -99,18 +99,22 @@ function ButtonSection({ selectedFiles }) {
 		<Styled.ButtonSection>
 			<Styled.ButtonContainer>
 				<Button
-					variant="primary"
-					size="small"
+					primary
+					small
 					disabled={!selectedFiles.length}
 					onClick={onSelect}
-					textStyle="ui.14"
-					width="76px"
+					styleOverrides={{ width: '76px', fontSize: '14px' }}
 				>
 					{localizedResources.addText}
 				</Button>
 			</Styled.ButtonContainer>
 			<Styled.ButtonContainer>
-				<Button variant="secondary" size="small" onClick={onCancel} textStyle="ui.14" width="76px">
+				<Button
+					primaryOutline
+					small
+					onClick={onCancel}
+					styleOverrides={{ width: '76px', fontSize: '14px' }}
+				>
 					{localizedResources.cancelText}
 				</Button>
 			</Styled.ButtonContainer>

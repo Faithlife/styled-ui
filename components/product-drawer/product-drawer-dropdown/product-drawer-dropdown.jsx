@@ -30,7 +30,12 @@ export const ProductDrawerDropdown = ({
 }) => (
 	<Styled.ProductDrawerDropdown styleOverrides={styleOverrides} onBlur={handleBlur}>
 		<Styled.DropdownClose>
-			<Button variant="secondary" size="large" icon={<Close />} onClick={handleCloseButtonClick} />
+			<Button
+				variant="primaryTransparent"
+				size="large"
+				icon={<Close />}
+				onClick={handleCloseButtonClick}
+			/>
 		</Styled.DropdownClose>
 		<Styled.DropdownColumns>
 			<Styled.DropdownColumn>

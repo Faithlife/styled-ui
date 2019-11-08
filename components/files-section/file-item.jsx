@@ -9,6 +9,11 @@ import {
 } from '../utils/file-utils';
 import * as Styled from './styled';
 
+const fileLabelButtonWidthOverride = {
+	width: '100%',
+	justifyContent: 'left',
+};
+
 export class FileItem extends PureComponent {
 	static propTypes = {
 		file: PropTypes.shape({
@@ -66,7 +71,7 @@ export class FileItem extends PureComponent {
 		return (
 			<Styled.FileItem>
 				{onFileClicked ? (
-					<Button onClick={this.handleFileClick} variant="secondary">
+					<Button onClick={this.handleFileClick} variant="primaryTransparent">
 						{fileIcon}
 					</Button>
 				) : (
@@ -75,10 +80,9 @@ export class FileItem extends PureComponent {
 				<Styled.FileInformation>
 					{onFileClicked ? (
 						<Button
-							width="100%"
-							justifyContent="left"
+							styleOverrides={fileLabelButtonWidthOverride}
 							onClick={this.handleFileClick}
-							variant="secondary"
+							primaryTransparent
 						>
 							{fileInformation}
 						</Button>
