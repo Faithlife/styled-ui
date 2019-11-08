@@ -116,6 +116,26 @@ const buttons = {
 	},
 	danger: {
 		border: 1,
+		color: 'button.dangerBackground',
+		backgroundColor: 'button.dangerForeground',
+		borderColor: 'button.dangerBackground',
+		'&:hover': {
+			color: 'button.dangerForeground',
+			backgroundColor: 'button.dangerBackground',
+			borderColor: 'button.dangerBackground',
+		},
+		'&:active': {
+			backgroundColor: 'button.dangerActive',
+			borderColor: 'button.dangerActive',
+		},
+		'&:disabled': {
+			color: 'button.dangerDisabled',
+			backgroundColor: 'button.dangerForeground',
+			borderColor: 'button.dangerDisabled',
+		},
+	},
+	dangerSpecial: {
+		border: 1,
 		color: 'button.dangerForeground',
 		backgroundColor: 'button.dangerBackground',
 		borderColor: 'button.dangerBackground',

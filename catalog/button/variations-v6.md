@@ -29,6 +29,9 @@ showSource: true
 		<Button variant="danger" size="medium">
 			Danger
 		</Button>
+		<Button variant="dangerSpecial" size="medium">
+			Danger (Special)
+		</Button>
 	</ButtonDemo>
 </div>
 ```
@@ -123,7 +126,10 @@ showSource: true
 			Link
 		</Button>
 		<Button variant="danger" size="medium" disabled>
-			Danger
+			danger
+		</Button>
+		<Button variant="dangerSpecial" size="medium" disabled>
+			Danger (Special)
 		</Button>
 	</ButtonDemo>
 </div>

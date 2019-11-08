@@ -117,9 +117,9 @@ colors.button = {
 	dangerForeground: colors.white,
 	dangerForegroundDisabled: colors.white,
 	dangerBackground: colors.red4,
-	dangerHover: colors.red3,
-	dangerActive: colors.red5,
-	dangerDisabled: colors.red1,
+	dangerHover: colors.red5,
+	dangerActive: '#a11313',
+	dangerDisabled: colors.red2,
 
 	focusBorder: colors.blue1,
 	focusShadow: colors.blue3,
