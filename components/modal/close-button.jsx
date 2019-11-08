@@ -9,7 +9,7 @@ import { Close } from '../icons';
  */
 export const CloseButton = ({ onClose }) => (
 	<Box position="absolute" top={24} right={24} cursor="pointer" zIndex={200}>
-		<UtilityButton onClick={onClose}>
+		<UtilityButton onClick={onClose} display="inline-grid">
 			<Close />
 		</UtilityButton>
 	</Box>
