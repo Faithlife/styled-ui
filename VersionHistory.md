@@ -1,8 +1,12 @@
 # Changelog
 
+### 5.28.3
+
+- Use LegacyButton in a few internal components.
+
 ### 5.28.2
 
-- Updated GroupSelector styles.
+- Update GroupSelector styles.
 
 ### 5.28.1
 
