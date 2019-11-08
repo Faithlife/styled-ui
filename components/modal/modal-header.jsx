@@ -27,7 +27,7 @@ export const ModalHeader = ({ title, subtitle, textStyle, ...props }) => {
 					<Text textStyle={textStyle} color="gray66">
 						{title}
 					</Text>
-					<UtilityButton onClick={onClose}>
+					<UtilityButton onClick={onClose} display="inline-grid">
 						<Close />
 					</UtilityButton>
 				</Box>
