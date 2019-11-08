@@ -16,7 +16,7 @@ module.exports = {
 		'group-selector': './components/group-selector/index.js',
 		'share-dialog': './components/share-dialog/index.js',
 		'product-drawer': './components/product-drawer/index.js',
-		icons: './components/icons/icons',
+		icons: './components/icons',
 	},
 	devtool: 'sourcemap',
 	output: {
