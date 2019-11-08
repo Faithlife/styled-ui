@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../../index';
+import { Button } from '../button';
 import * as Styled from './styled';
 import { SimpleGroup } from './simple-group';
 
