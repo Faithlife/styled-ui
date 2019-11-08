@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Transition from 'react-transition-group/Transition';
-import { Button } from '../button';
+import { LegacyButton as Button } from '../button';
 import { Close } from '../icons';
 import * as Styled from './styled.jsx';
 

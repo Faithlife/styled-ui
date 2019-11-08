@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../button';
+import { LegacyButton as Button } from '../button';
 import { PopoverReference } from '../popover';
 import { useDropdownContext } from './dropdown-utils';
 
