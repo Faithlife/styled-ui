@@ -52,13 +52,9 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 					marginRight={useFullWidthButtons ? null : 'auto'}
 				>
 					<Button
-						variant="primaryOutline"
+						variant="danger"
 						size="medium"
 						onClick={deleteButton.onClick}
-						defaultColor="red4"
-						hoverColor="red3"
-						activeColor="red5"
-						disabledColor="red1"
 						width={useFullWidthButtons ? '100%' : null}
 						disabled={deleteButton.disabled}
 					>
