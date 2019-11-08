@@ -16,6 +16,7 @@ module.exports = {
 		'group-selector': './components/group-selector/index.js',
 		'share-dialog': './components/share-dialog/index.js',
 		'product-drawer': './components/product-drawer/index.js',
+		icons: './components/icons/icons',
 	},
 	devtool: 'sourcemap',
 	output: {
@@ -43,41 +44,7 @@ module.exports = {
 			},
 			{
 				test: /\.(svg)$/,
-				use: [
-					{
-						loader: 'url-loader',
-						options: {
-							limit: 8192,
-						},
-					},
-					{
-						loader: 'image-webpack-loader',
-						options: {
-							svgo: {
-								plugins: [
-									{ cleanupAttrs: true },
-									{ removeDoctype: true },
-									{ removeComments: true },
-									{ removeMetadata: true },
-									{ removeTitle: true },
-									{ removeDesc: true },
-									{ removeEditorsNSData: true },
-									{ removeUselessStrokeAndFill: true },
-									{ cleanupIDs: true },
-									{ collapseGroups: true },
-									{ convertShapeToPath: true },
-								],
-							},
-						},
-					},
-					{
-						loader: 'svg-colorize-loader',
-						options: {
-							color1: '#000000',
-							color2: '#FFFFFF',
-						},
-					},
-				],
+				use: ['@svgr/webpack'],
 			},
 		],
 	},
