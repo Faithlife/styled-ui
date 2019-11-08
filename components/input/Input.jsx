@@ -133,7 +133,9 @@ ${({ theme, styleOverrides = {} }) => css`
 	}
 
 	&:disabled {
-		opacity: 0.5;
+		background-color: ${theme.colors.gray4};
+		color: ${theme.colors.gray34};
+		border-color: ${theme.colors.gray14};
 	}
 
 	&:read-only {
