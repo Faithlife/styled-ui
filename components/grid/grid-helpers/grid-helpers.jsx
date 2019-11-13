@@ -54,7 +54,10 @@ export function handleShowCheckbox(shouldShowCheckbox) {
 		shouldShowCheckbox(
 			params.node.group,
 			params.node.data ||
-				(params.node.groupData && { groupName: params.node.groupData['ag-Grid-AutoColumn'] }),
+				(params.node.groupData && {
+					isGroup: true,
+					groupName: params.node.groupData['ag-Grid-AutoColumn'],
+				}),
 		);
 }
 
@@ -63,7 +66,10 @@ export function handleIsDraggable(isDraggable) {
 		isDraggable(
 			params.node.group,
 			params.node.data ||
-				(params.node.groupData && { groupName: params.node.groupData['ag-Grid-AutoColumn'] }),
+				(params.node.groupData && {
+					isGroup: true,
+					groupName: params.node.groupData['ag-Grid-AutoColumn'],
+				}),
 		);
 }
 
@@ -71,7 +77,8 @@ export function handleIsEditable(shouldBeEditable) {
 	return ({ node }) =>
 		shouldBeEditable(
 			node.group,
-			node.data || (node.groupData && { groupName: node.groupData['ag-Grid-AutoColumn'] }),
+			node.data ||
+				(node.groupData && { isGroup: true, groupName: node.groupData['ag-Grid-AutoColumn'] }),
 		);
 }
 
@@ -154,10 +161,14 @@ export function useGridDragDrop(isValidDropTarget, getNewPath) {
 	const getShouldShowDropTarget = useCallback(
 		onDirection => ({ rowIndex }) => {
 			if (
+				draggedNode.current &&
+				hoveredRowNode.current &&
 				isValidDropTarget &&
 				!isValidDropTarget(
-					draggedNode.current.node.data,
-					getNewPath(hoveredRowNode.current.node, dragDirection.current),
+					draggedNode.current.data
+						? draggedNode.current.data
+						: { isGroup: true, groupName: draggedNode.current.groupData['ag-Grid-AutoColumn'] },
+					getNewPath(hoveredRowNode.current, dragDirection.current),
 				)
 			) {
 				return false;

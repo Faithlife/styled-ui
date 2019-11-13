@@ -74,7 +74,16 @@ export const SimpleGrid = React.forwardRef((props, ref) => {
 					if (
 						draggedNode.current &&
 						draggedNode.current.rowIndex !== newParentNode.rowIndex &&
-						(!isValidDropTarget || isValidDropTarget(draggedNode.data, newPath))
+						(!isValidDropTarget ||
+							isValidDropTarget(
+								!draggedNode.current.group
+									? draggedNode.current.data
+									: {
+											isGroup: true,
+											groupName: draggedNode.current.groupData['ag-Grid-AutoColumn'],
+									  },
+								newPath,
+							))
 					) {
 						const newData = updateRowLocation(
 							data,
@@ -187,11 +196,14 @@ SimpleGrid.propTypes = {
 };
 
 function getNewPath(parentNode, direction) {
-	const isParentFolder = parentNode.group;
-	if (isParentFolder && parentNode.expanded && direction === dragDirections.down) {
-		return [parentNode.groupData['ag-Grid-AutoColumn']];
+	if (parentNode.group) {
+		if (!parentNode.expanded || direction === dragDirections.up) {
+			return [];
+		} else {
+			return [parentNode.groupData['ag-Grid-AutoColumn']];
+		}
 	} else {
-		return [];
+		return parentNode.parent.field ? [parentNode.data[parentNode.parent.field]] : [];
 	}
 }
 
@@ -222,7 +234,11 @@ function updateRowLocation(data, newParentNode, draggedNode, direction) {
 		return newData;
 	}
 
-	const aggName = draggedNode.parent.field;
+	const aggName =
+		draggedNode.parent.field ||
+		(newParentNode.group
+			? newParentNode.groupData['ag-Grid-AutoColumn']
+			: newParentNode.parent.field);
 	const newData = data.filter(row => row.id !== draggedNode.id);
 	const newRowData = { ...draggedNode.data };
 
@@ -232,6 +248,8 @@ function updateRowLocation(data, newParentNode, draggedNode, direction) {
 		} else {
 			newRowData[aggName] = newParentNode.groupData['ag-Grid-AutoColumn'];
 		}
+	} else {
+		newRowData[aggName] = newParentNode.data[aggName];
 	}
 
 	if (parentIndex === 0 && direction === dragDirections.up) {

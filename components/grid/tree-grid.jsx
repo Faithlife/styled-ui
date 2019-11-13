@@ -89,7 +89,7 @@ export const TreeGrid = React.forwardRef((props, ref) => {
 					if (
 						draggedNode.current &&
 						draggedNode.current.rowIndex !== newParentNode.rowIndex &&
-						(!isValidDropTarget || isValidDropTarget(draggedNode.data, newPath))
+						(!isValidDropTarget || isValidDropTarget(draggedNode.current.data, newPath))
 					) {
 						const cleanTree = getTreeWithoutId(draggedNode.current.id, data);
 						const newData = insertDataIntoTree(
