@@ -1069,10 +1069,10 @@ const pages = [
 				title: 'File Picker',
 				content: pageLoader(() => import('./file-picker/variations.md')),
 				imports: {
+					Box,
+					Button,
+					Modal: V6Modal,
 					FilePicker,
-					FilePickerDemo: styled.div`
-						height: 600px;
-					`,
 					TabManager,
 					TabList,
 					Tab,
