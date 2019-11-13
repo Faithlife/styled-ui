@@ -6,19 +6,10 @@ export const Container = styled.div`
 	background: ${colors.white};
 	width: 100%;
 	height: 100%;
-`;
-
-export const Tab = styled.div`
-	height: 532px;
-`;
-
-export const ButtonSection = styled.div`
-	margin-top: ${thickness.twentyfour};
-`;
-
-export const ButtonContainer = styled.div`
-	float: right;
-	padding: 0 ${thickness.twelve};
+	display: grid;
+	grid-template-rows: min-content 1fr;
+	justify-content: stretch;
+	align-items: stretch;
 `;
 
 export const DragDropText = styled.section`
