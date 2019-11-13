@@ -1,1 +1,0 @@
-export { SimpleModal } from './component';

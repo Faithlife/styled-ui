@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import ResizeObserver from 'resize-observer-polyfill';
 import { Catalog, pageLoader } from 'catalog';
 import * as dateFunctions from 'date-fns';
 import chrono from 'chrono-node';
@@ -11,6 +12,7 @@ import {
 	AnchorButton,
 	Bootstrap,
 	Button,
+	UtilityButton,
 	Checkbox,
 	Collapse,
 	DropZone,
@@ -61,8 +63,10 @@ import {
 	Text,
 	Paragraph,
 	Heading,
+	AutoSizedRowMasonry,
 	theme,
 } from '../index';
+import { Modal as V6Modal, Button as V6Button, SegmentedButtonGroup } from '../index-v6';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
@@ -82,6 +86,8 @@ import { SimpleGrid, GridColumn, PaginatedGrid, TreeGrid } from '../components/g
 import '../dist/main.css';
 import '../dist/text-input.css';
 import '../dist/ag-grid.css';
+
+window.ResizeObserver = ResizeObserver;
 
 const censusDataWithId = censusData.map((data, index) => ({
 	...data,
@@ -157,7 +163,25 @@ const ThemeList = ({ items, render }) => {
 	return <>{[...Object.entries(items(theme))].map(render)}</>;
 };
 
-const components = [
+const pages = [
+	{
+		path: '/',
+		title: 'Welcome',
+		content: pageLoader(() => import('./WELCOME.md')),
+	},
+	{
+		path: '/theme',
+		title: 'Theme',
+		content: pageLoader(() => import('./theme/documentation.md')),
+		imports: {
+			Box,
+			Stack,
+			Text,
+			Paragraph,
+			Heading,
+			ThemeList,
+		},
+	},
 	{
 		title: 'Layout Primitives',
 		pages: [
@@ -191,6 +215,20 @@ const components = [
 					Paragraph,
 					Heading,
 					ThemeList,
+				},
+			},
+		],
+	},
+	{
+		title: 'Row Masonry',
+		pages: [
+			{
+				path: '/row-masonry',
+				title: 'Row Masonry',
+				content: pageLoader(() => import('./row-masonry/documentation.md')),
+				imports: {
+					Box,
+					AutoSizedRowMasonry,
 				},
 			},
 		],
@@ -265,6 +303,29 @@ const components = [
 					ButtonGrid,
 					GearIcon,
 					buttonRef: React.createRef(),
+				},
+			},
+			{
+				path: '/button/variationsv6',
+				title: 'Button Variations v6',
+				content: pageLoader(() => import('./button/variations-v6.md')),
+				imports: {
+					Button: V6Button,
+					SegmentedButtonGroup,
+					ButtonDemo,
+					ButtonGrid,
+					GearIcon,
+					buttonRef: React.createRef(),
+				},
+			},
+			{
+				path: '/button/utility-button',
+				title: 'Utility Button',
+				content: pageLoader(() => import('./button/utility-button.md')),
+				imports: {
+					UtilityButton,
+					Box,
+					Text,
 				},
 			},
 			{
@@ -516,11 +577,23 @@ const components = [
 				content: pageLoader(() => import('./modal/documentation.md')),
 				imports: { Modal, ModalContent, DocgenTable },
 			},
-		],
-	},
-	{
-		title: 'Simple Modal',
-		pages: [
+			{
+				path: '/modal/v6',
+				title: 'v6 Modal Examples',
+				content: pageLoader(() => import('./modal/variations-v6.md')),
+				imports: {
+					Modal: V6Modal,
+					Box,
+					Input,
+					Button,
+				},
+			},
+			{
+				path: '/modal/documentation/v6',
+				title: 'v6 Modal Documentation',
+				content: pageLoader(() => import('./modal/documentation-v6.md')),
+				imports: { Modal: V6Modal, DocgenTable },
+			},
 			{
 				path: '/simple-modal/variations',
 				title: 'Simple Modal Variations',
@@ -1024,23 +1097,6 @@ const components = [
 			},
 		],
 	},
-].sort((a, b) => {
-	if (a.title < b.title) {
-		return -1;
-	}
-	if (a.title > b.title) {
-		return 1;
-	}
-	return 0;
-});
-
-const pages = [
-	{
-		path: '/',
-		title: 'Welcome',
-		content: pageLoader(() => import('./WELCOME.md')),
-	},
-	...components,
 ];
 
 ReactDOM.render(

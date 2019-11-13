@@ -1,6 +1,7 @@
 ## Simple Modal
 
 Simple modal does not have any internal padding or features. Only contains an absolute positioned close button in the corner.
+Consider using the new v6 Modal: [/v6 Modal Examples](/modal/v6)
 
 ```react
 showSource: true

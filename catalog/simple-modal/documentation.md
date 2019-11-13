@@ -1,4 +1,4 @@
-This documentation is automatically generated from jsdoc comments.
+Consider using the v6 Modal: [/v6 Modal Documentation](/modal/documentation/v6)
 
 ```react
 noSource: true

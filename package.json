@@ -1,6 +1,6 @@
 {
 	"name": "@faithlife/styled-ui",
-	"version": "5.23.2",
+	"version": "5.28.4",
 	"main": "dist/main.js",
 	"repository": "git@github.com:Faithlife/styled-ui.git",
 	"author": "Dustin Masters <dustin.masters@faithlife.com>",
@@ -26,7 +26,8 @@
 	},
 	"files": [
 		"dist/**",
-		"grid.js"
+		"grid.js",
+		"v6.js"
 	],
 	"browserslist": [
 		"> 1%",
@@ -63,7 +64,7 @@
 		"react-bootstrap-typeahead": "^3.4.5",
 		"react-popper": "^1.3.3",
 		"react-scrollbar": "^0.5.4",
-		"react-select": "^2.1.2",
+		"react-select": "2.4.4",
 		"react-transition-group": "^4.2.1",
 		"reactstrap": "^6.1.0",
 		"styled-system": "^5.1.1"
@@ -110,6 +111,7 @@
 		"react": "^16.8.0",
 		"react-dom": "^16.8.0",
 		"react-dom-factories": "^1.0.2",
+		"resize-observer-polyfill": "^1.5.1",
 		"rimraf": "^2.6.2",
 		"sass-loader": "^7.0.3",
 		"style-loader": "^0.21.0",

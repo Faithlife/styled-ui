@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaithlifeConnectAnimatedImage, FaithlifeEquipAnimatedImage } from './animated-image';
 import { ProductLinkList, ProductLink } from './product-link';
-import { Button } from '../../button';
+import { LegacyButton as Button } from '../../button';
 import { Close } from '../../icons';
 import {
 	FaithlifeFlameSvg,
@@ -26,8 +26,9 @@ export const ProductDrawerDropdown = ({
 	resources,
 	isOpen,
 	handleCloseButtonClick,
+	handleBlur,
 }) => (
-	<Styled.ProductDrawerDropdown styleOverrides={styleOverrides} onBlur={this.handleBlur}>
+	<Styled.ProductDrawerDropdown styleOverrides={styleOverrides} onBlur={handleBlur}>
 		<Styled.DropdownClose>
 			<Button
 				variant="primaryTransparent"

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../button';
+import { LegacyButton as Button } from '../button';
 import { ImagePreview } from './image-preview';
 import * as Styled from './styled';
 import { LightboxDropZone } from './lightbox-drop-zone';

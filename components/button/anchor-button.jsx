@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from './component';
+import { Button } from './LegacyButton';
 
 /** Standard button with transition styles */
 const AnchorButton = React.forwardRef(function AnchorButton(props, ref) {

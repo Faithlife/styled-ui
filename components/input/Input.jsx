@@ -52,7 +52,7 @@ const Input = React.forwardRef(function Input(props, ref) {
 			readOnly={readOnly}
 			variant={variation}
 			disabled={disabled}
-			value={value || ''}
+			value={value !== null && value !== undefined ? value : ''}
 			placeholder={placeholder || ''}
 			onClick={onClick}
 			onKeyPress={handleKeyPress}
@@ -138,6 +138,10 @@ ${({ theme, styleOverrides = {} }) => css`
 
 	&:read-only {
 		background: ${({ theme }) => theme.colors.gray8};
+	}
+
+	&::placeholder {
+		color: ${({ theme }) => theme.colors.inputPlaceholderColor};
 	}
 
 	${({ theme }) =>

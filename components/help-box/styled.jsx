@@ -127,8 +127,10 @@ function variantCreator(backgroundColor, foregroundColor, closeIconColor) {
 		border: solid 1px ${props => props.theme.foregroundColor || foregroundColor};
 		border-left: solid ${thickness.four} ${props => props.theme.foregroundColor || foregroundColor};
 
-		path {
-			fill: ${props => props.theme.foregroundColor || foregroundColor};
+		${IconDiv} {
+			path {
+				fill: ${props => props.theme.foregroundColor || foregroundColor};
+			}
 		}
 
 		button {

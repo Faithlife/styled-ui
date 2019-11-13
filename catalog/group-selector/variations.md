@@ -49,6 +49,25 @@ state: {
 		claimable: false,
 	}
 	],
+	demoSearchResults: [{
+		name: 'Wrong Kind',
+		groupId: 1,
+		kind: 'general',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
+	},
+	{
+		name: 'Search result 7',
+		groupId: 7,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
+	}
+	],
 }
 ---
 <LargeGroupSelectorDemo>
@@ -56,25 +75,7 @@ state: {
 		isOpen={false}
 		onChangeModalState={() => {}}
 		onSearchInputChange={(search) => {
-			setState({ groupSearchResults: [{
-				name: 'Wrong Kind',
-				groupId: 1,
-				kind: 'general',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			},
-			{
-				name: 'Search result 7',
-				groupId: 7,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			}
-			]});
+			setState({ groupSearchResults: state.demoSearchResults});
 		}}
 		groups={state.groups}
 		groupSearchResults={state.groupSearchResults || state.groups}
@@ -112,16 +113,16 @@ state: {
 		title: 'Find your church or ministry',
 		subTitle: '',
 		requestButtonText: 'Request',
-		joinButtonText: 'Join Me',
-		claimButtonText: 'Claim Me',
-		selectButtonText: 'Select Me',
+		joinButtonText: 'Join',
+		claimButtonText: 'Claim',
+		selectButtonText: 'Select',
 		dontSeeChurchText: "Don't see your church or ministry?",
 		goToGroupButtonText: 'Go to group',
 		churchNameText: 'Church or Ministry Name',
 		churchLocationText: 'Church or Ministry Location',
 		churchLocationPlaceholder: 'City, State',
 	},
-	authorizedMembershipLevels: ['admin', 'member', 'follower'],
+	authorizedMembershipLevels: ['admin', 'moderator', 'member', 'follower'],
 	authorizedGroupKinds: ['church', 'ministry', 'general'],
 	styleOverrides: { modalZIndex: 7000, tooltipMargin: '0 0 0 20px' },
 	groups: [{
@@ -189,6 +190,68 @@ state: {
 		joinable: false,
 	}
 	],
+	demoSearchResults: [{
+		name: 'Wrong Kind',
+		groupId: 1,
+		kind: 'general',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
+	},
+	{
+		name: 'Claimable Church',
+		groupId: 2,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'none',
+		claimable: true,
+	},
+	{
+		name: 'Not a Member',
+		groupId: 3,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'none',
+		claimable: false,
+	},
+	{
+		name: 'Member but Not Admin',
+		groupId: 4,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'member',
+		claimable: false,
+	},
+	{
+		name: 'Search result 5',
+		groupId: 5,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
+	},
+	{
+		name: 'Search result 6',
+		groupId: 6,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
+	},
+	{
+		name: 'Search result 7',
+		groupId: 7,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
+	}
+	],
 }
 ---
 <LargeGroupSelectorDemo>
@@ -196,68 +259,7 @@ state: {
 		isOpen={false}
 		onChangeModalState={() => {}}
 		onSearchInputChange={(search) => {
-			setState({ groupSearchResults: [{
-				name: 'Wrong Kind',
-				groupId: 1,
-				kind: 'general',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			},
-			{
-				name: 'Claimable Church',
-				groupId: 2,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'none',
-				claimable: true,
-			},
-			{
-				name: 'Not a Member',
-				groupId: 3,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'none',
-				claimable: false,
-			},
-			{
-				name: 'Member but Ain\'t Admin',
-				groupId: 4,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'member',
-				claimable: false,
-			},
-			{
-				name: 'Search result 5',
-				groupId: 5,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			},
-			{
-				name: 'Search result 6',
-				groupId: 6,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			},
-			{
-				name: 'Search result 7',
-				groupId: 7,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			}
-			]});
+			setState({ groupSearchResults: state.demoSearchResults});
 		}}
 		groups={state.groups}
 		groupSearchResults={state.groupSearchResults || state.groups}
@@ -298,7 +300,7 @@ state: {
 		name: 'Michaels Test Church',
 		groupId: 1,
 		kind: 'church',
-		avatarUrl: 'https://avatars.logoscdn.com/451/6830451_f896e509e7504b33812f0f6bf086ffa8.jpg',
+		avatarUrl: '',
 		relationshipKind: 'participant',
 		membershipKind: 'admin',
 		claimable: false,
@@ -333,74 +335,74 @@ state: {
 	],
 	selectedGroupId: 1,
 	mobile: false,
+	demoSearchResults: [{
+		name: 'Wrong Kind',
+		groupId: 1,
+		kind: 'general',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
+	},
+	{
+		name: 'Claimable Church',
+		groupId: 2,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'none',
+		claimable: true,
+	},
+	{
+		name: 'Not a Member',
+		groupId: 3,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'none',
+		claimable: false,
+	},
+	{
+		name: 'Member but Not Admin',
+		groupId: 4,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'member',
+		claimable: false,
+	},
+	{
+		name: 'Search result 5',
+		groupId: 5,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
+	},
+	{
+		name: 'Search result 6',
+		groupId: 6,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
+	},
+	{
+		name: 'Search result 7',
+		groupId: 7,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
+	}
+	],
 }
 ---
 <GroupSelectorDemo>
 	<GroupSelector
 		onSearchInputChange={(search) => {
-			setState({ groupSearchResults: [{
-				name: 'Wrong Kind',
-				groupId: 1,
-				kind: 'general',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			},
-			{
-				name: 'Claimable Church',
-				groupId: 2,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'none',
-				claimable: true,
-			},
-			{
-				name: 'Not a Member',
-				groupId: 3,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'none',
-				claimable: false,
-			},
-			{
-				name: 'Member but Ain\'t Admin',
-				groupId: 4,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'member',
-				claimable: false,
-			},
-			{
-				name: 'Search result 5',
-				groupId: 5,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			},
-			{
-				name: 'Search result 6',
-				groupId: 6,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			},
-			{
-				name: 'Search result 7',
-				groupId: 7,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			}
-
-			]});
+			setState({ groupSearchResults: state.demoSearchResults});
 		}}
 		onCreateGroup={(name, location) => {
 			const newGroup = {
@@ -503,6 +505,68 @@ state: {
 	}
 	],
 	isOpen: false,
+	demoSearchResults: [{
+		name: 'Wrong Kind',
+		groupId: 1,
+		kind: 'general',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
+	},
+	{
+		name: 'Claimable Church',
+		groupId: 2,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'none',
+		claimable: true,
+	},
+	{
+		name: 'Not a Member',
+		groupId: 3,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'none',
+		claimable: false,
+	},
+	{
+		name: 'Member but Not Admin',
+		groupId: 4,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'member',
+		claimable: false,
+	},
+	{
+		name: 'Search result 5',
+		groupId: 5,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
+	},
+	{
+		name: 'Search result 6',
+		groupId: 6,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
+	},
+	{
+		name: 'Search result 7',
+		groupId: 7,
+		kind: 'church',
+		avatarUrl: '',
+		relationshipKind: 'participant',
+		membershipKind: 'admin',
+		claimable: false,
+	}
+	]
 }
 ---
 <LargeGroupSelectorDemo>
@@ -510,69 +574,7 @@ state: {
 		isOpen={state.isOpen}
 		onChangeModalState={() => setState({ isOpen: !state.isOpen }) }
 		onSearchInputChange={(search) => {
-			setState({ groupSearchResults: [{
-				name: 'Wrong Kind',
-				groupId: 1,
-				kind: 'general',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			},
-			{
-				name: 'Claimable Church',
-				groupId: 2,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'none',
-				claimable: true,
-			},
-			{
-				name: 'Not a Member',
-				groupId: 3,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'none',
-				claimable: false,
-			},
-			{
-				name: 'Member but Ain\'t Admin',
-				groupId: 4,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'member',
-				claimable: false,
-			},
-			{
-				name: 'Search result 5',
-				groupId: 5,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			},
-			{
-				name: 'Search result 6',
-				groupId: 6,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			},
-			{
-				name: 'Search result 7',
-				groupId: 7,
-				kind: 'church',
-				avatarUrl: '',
-				relationshipKind: 'participant',
-				membershipKind: 'admin',
-				claimable: false,
-			}
-
-			]});
+			setState({ groupSearchResults: state.demoSearchResults });
 		}}
 		groups={state.groups}
 		groupSearchResults={state.groupSearchResults || state.groups}

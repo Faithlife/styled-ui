@@ -3,9 +3,10 @@ import ReactSelect, {
 	Creatable as ReactSelectCreatable,
 	components as reactSelectComponents,
 } from 'react-select';
-import { colors, inputColors } from '../shared-styles';
+import { colors } from '../shared-styles';
 import { ChevronExpand } from '../icons';
 import { ReactSelectAsyncCreatable, ReactSelectAsync } from './react-select-async';
+import { theme } from '../../theme';
 
 const selectStyles = props => {
 	const ourStyles = {
@@ -14,9 +15,9 @@ const selectStyles = props => {
 			minHeight: '32px',
 			fontSize: '16px',
 			border: state.isFocused
-				? `1px solid ${inputColors.inputFocusedBorderColor}`
-				: `1px solid ${inputColors.inputBorderColor}`,
-			boxShadow: state.isFocused ? `0 0 0 2px ${inputColors.inputFocusedShadowColor}` : 'none',
+				? `1px solid ${theme.colors.inputFocusedBorderColor}`
+				: `1px solid ${theme.colors.inputBorderColor}`,
+			boxShadow: state.isFocused ? `0 0 0 2px ${theme.colors.inputFocusedShadowColor}` : 'none',
 		}),
 		valueContainer: styles => ({
 			...styles,
@@ -46,6 +47,7 @@ const selectStyles = props => {
 			...styles,
 			lineHeight: 1,
 			whiteSpace: 'nowrap',
+			color: `${theme.colors.inputPlaceholderColor}`,
 		}),
 		singleValue: styles => ({
 			...styles,

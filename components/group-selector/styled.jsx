@@ -139,11 +139,13 @@ export const LargeScrollView = styled(ScrollArea)`
 
 	.${LargeScrollViewContentClass} {
 		padding-top: ${props => (props.hideTitle ? '0' : '30px')};
+		padding-bottom: 4px;
 		position: unset;
 	}
 `;
 
 export const LargeTopGradient = styled.div`
+	box-sizing: border-box;
 	padding-left: 24px;
 	padding-right: 24px;
 	padding-top: 24px;
@@ -202,6 +204,7 @@ export const CreateGroupBackground = styled.div`
 
 export const SearchResultsContainer = styled.div`
 	position: relative;
+	box-sizing: border-box;
 	width: 100%;
 	padding-left: 12px;
 	padding-right: 12px;
@@ -223,8 +226,7 @@ export const CreateGroupButtonWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 93%;
-	padding-left: 12px;
+	width: 100%;
 	margin: 16px 0 16px 0;
 `;
 
@@ -283,12 +285,14 @@ export const SearchResultNameText = styled.div`
 export const SearchResultInfoButtonRow = styled.div`
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-end;
 `;
 
 export const SearchResultMessage = styled.div`
 	color: #a8a8a8;
 	font-size: 12px;
+	padding-top: 4px;
+	padding-right: 4px;
 `;
 
 export const UnderlinedSearchResultMessage = styled(SearchResultMessage)`
@@ -313,37 +317,10 @@ export const SearchResultBoldText = styled.span`
 `;
 
 export const SearchResultGroupKind = styled.div`
-	padding-top: 4px;
+	padding: 4px 0;
 	color: #a8a8a8;
 	font-size: 12px;
 	line-height: 1em;
-`;
-
-export const SecondaryModalContent = styled.div`
-	padding-left: 12px;
-	padding-right: 12px;
-	padding-top: 36px;
-	padding-bottom: 12px;
-	background: white;
-	border-radius: 4px;
-	width: 375px;
-`;
-
-export const SecondaryModalText = styled.div`
-	font-size: 14px;
-	margin: 0px;
-`;
-
-export const SecondaryModalButtonWrapper = styled.div`
-	margin-left: 6px;
-`;
-
-export const SecondaryModalButtonContainer = styled.div`
-	margin-top: 24px;
-	display: flex;
-	flex-direction: row-reverse;
-	width: 100%;
-	justify-content: flex-start;
 `;
 
 export const TooltipContentBlock = styled.p`

@@ -105,10 +105,10 @@ export class SearchResult extends React.PureComponent {
 							</Styled.TooltipContentBlock>
 						</>
 					}
-					styleOverrides={{ margin: styleOverrides.tooltipMargin }}
+					styleOverrides={{ margin: styleOverrides ? styleOverrides.tooltipMargin : null }}
 				>
 					<Styled.UnderlinedSearchResultMessage>
-						This is an unclaimed group
+						This is an unclaimed group.
 					</Styled.UnderlinedSearchResultMessage>
 				</Tooltip>
 			);
@@ -123,12 +123,12 @@ export class SearchResult extends React.PureComponent {
 					<Styled.SearchResultHightlightText>
 						{formattedMembershiplevels}
 					</Styled.SearchResultHightlightText>{' '}
-					membership required. By selecting, you&apos;ll join this group.
+					membership required.
 				</Styled.SearchResultMessage>
 			);
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
-					You are <Styled.SearchResultBoldText>not</Styled.SearchResultBoldText> a member
+					You are <Styled.SearchResultBoldText>not</Styled.SearchResultBoldText> a member.
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
@@ -142,12 +142,12 @@ export class SearchResult extends React.PureComponent {
 					<Styled.SearchResultHightlightText>
 						{formattedMembershiplevels}
 					</Styled.SearchResultHightlightText>{' '}
-					membership required
+					membership required.
 				</Styled.SearchResultMessage>
 			);
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
-					You are <Styled.SearchResultBoldText>not</Styled.SearchResultBoldText> a member
+					You are <Styled.SearchResultBoldText>not</Styled.SearchResultBoldText> a member.
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
@@ -164,21 +164,23 @@ export class SearchResult extends React.PureComponent {
 					<Styled.SearchResultHightlightText>
 						{formattedMembershiplevels}
 					</Styled.SearchResultHightlightText>{' '}
-					membership required
+					membership required.
 				</Styled.SearchResultMessage>
 			);
+
+			// observer is an obsolete membership kind
 			membershipLine =
-				membershipKind === 'admin' ? (
+				membershipKind === 'admin' || membershipKind === 'observer' ? (
 					<Styled.SearchResultMembershipLine>
-						You are an <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>
+						You are an <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>.
 					</Styled.SearchResultMembershipLine>
 				) : membershipKind === 'invited' ? (
 					<Styled.SearchResultMembershipLine>
-						You are <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>
+						You are <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>.
 					</Styled.SearchResultMembershipLine>
 				) : (
 					<Styled.SearchResultMembershipLine>
-						You are a <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>
+						You are a <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>.
 					</Styled.SearchResultMembershipLine>
 				);
 			button = (
@@ -197,7 +199,7 @@ export class SearchResult extends React.PureComponent {
 			);
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
-					You are an <Styled.SearchResultBoldText>Admin</Styled.SearchResultBoldText>
+					You are an <Styled.SearchResultBoldText>Admin</Styled.SearchResultBoldText>.
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
@@ -209,7 +211,7 @@ export class SearchResult extends React.PureComponent {
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
 					You are not a{' '}
-					<Styled.SearchResultHightlightText>Member</Styled.SearchResultHightlightText>
+					<Styled.SearchResultHightlightText>Member</Styled.SearchResultHightlightText>.
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
@@ -221,7 +223,7 @@ export class SearchResult extends React.PureComponent {
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
 					You are not a{' '}
-					<Styled.SearchResultHightlightText>Member</Styled.SearchResultHightlightText>
+					<Styled.SearchResultHightlightText>Member</Styled.SearchResultHightlightText>.
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
@@ -232,12 +234,18 @@ export class SearchResult extends React.PureComponent {
 		} else {
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
-					You are{membershipKind === 'admin' ? ' an ' : membershipKind === 'invited' ? ' ' : ' a '}
-					<Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>
+					You are
+					{/* observer is an obsolete membership kind */}
+					{membershipKind === 'admin' || membershipKind === 'observer'
+						? ' an '
+						: membershipKind === 'invited'
+						? ' '
+						: ' a '}
+					<Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>.
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
-				<Button size="small" variant="primaryOutline" onClick={this.getStarted}>
+				<Button size="small" variant="secondary" onClick={this.getStarted}>
 					{localizedResources.selectButtonText}
 				</Button>
 			);

@@ -18,9 +18,12 @@ export const PaginatedGrid = React.forwardRef((props, ref) => {
 	}, [gridApi, currentPageNumber]);
 
 	const handlePaginationChanged = useCallback(() => {
-		if (gridApi && onPageNumberChange) {
-			const pageNumber = gridApi.paginationGetCurrentPage();
-			onPageNumberChange(pageNumber);
+		if (gridApi) {
+			gridApi.sizeColumnsToFit();
+			if (onPageNumberChange) {
+				const pageNumber = gridApi.paginationGetCurrentPage();
+				onPageNumberChange(pageNumber);
+			}
 		}
 	}, [gridApi, onPageNumberChange]);
 

@@ -1,5 +1,58 @@
 # Changelog
 
+### 5.28.4
+
+- Use LegacyButton in a few more internal components. Fixes a regression in 5.28.0.
+
+### 5.28.3
+
+- Use LegacyButton in a few internal components. Fixes a regression in 5.28.0.
+
+### 5.28.2
+
+- Update GroupSelector styles.
+
+### 5.28.1
+
+- Add `v6` entry point to published files.
+
+### 5.28.0
+
+- Add `v6` entry point with new APIs.
+- Add v6 `Modal` component.
+- Add v6 `Button` component.
+- Add v6 `SegmentedButtonGroup` component.
+- Update input placeholder color.
+- Resize columns in PaginatedGrid on page change to account for scrollbars.
+
+### 5.27.0
+
+- Add `useTheme` hook.
+
+### 5.26.0
+
+- Add additional `styleOverrides` to `ProductDrawer`.
+- Fix icon fill in `HelpBox`.
+
+### 5.25.1
+
+- Update grid styles to fix style issues in chms grids
+- Update `react-select` component to v2.4.4
+
+### 5.25.0
+
+- Allow empty values in date picker input.
+- Add bottom border to `Accordion`.
+- Allow falsy value to be set in `Input`.
+- Don't lazy load product drawer dropdown.
+
+### 5.24.0
+
+- Add `UtilityButton` component.
+- Add row masonry components.
+- Fix accordion header color.
+- Fix blur handler in `ProductDrawer`.
+
 ### 5.23.2
 
 - Add `@faithlife/styled-ui/grid` as an entry point

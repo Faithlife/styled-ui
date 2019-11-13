@@ -1,6 +1,8 @@
 ## Colors and Their Meaning
 
 ```react
+showSource: true
+---
 <div>
 	<HelpBox handleClose={() => true}>
 		<HelpBox.Body>This is a helpful alert.</HelpBox.Body>
@@ -28,6 +30,8 @@
 ## Variations
 
 ```react
+showSource: true
+---
 <div>
 	<HelpBox showLightBulb handleClose={() => true}>This is an alert with a light bulb.</HelpBox>
 	<HelpBox hideIcon handleClose={() => true}>This alert has its icon hidden.</HelpBox>
@@ -46,6 +50,8 @@
 ## Large Alerts
 
 ```react
+showSource: true
+---
 <div>
 	<HelpBox large handleClose={() => true}>This is a large alert.</HelpBox>
 	<HelpBox showLightBulb large handleClose={() => true}>This is a large alert with a light bulb.</HelpBox>

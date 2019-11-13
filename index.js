@@ -6,7 +6,7 @@
 export { Accordion } from './components/accordion';
 export { AnchorButton } from './components/button/anchor-button';
 export { Bootstrap } from './components/bootstrap';
-export { Button } from './components/button';
+export { LegacyButton as Button, UtilityButton } from './components/button';
 export { Checkbox } from './components/check-box';
 export { Collapse } from './components/collapse';
 export { DatePicker } from './components/date-picker';
@@ -17,7 +17,13 @@ export { FilesSection } from './components/files-section';
 export { HelpBox } from './components/help-box';
 export { Input, FilterInput } from './components/input';
 export { LoadingSpinner } from './components/loading-spinner';
-export { Modal, ModalContent, ModalFooter } from './components/modal';
+export {
+	LegacyModal as Modal,
+	LegacyModalContent as ModalContent,
+	LegacyModalFooter as ModalFooter,
+	SimpleModal,
+	CloseButton,
+} from './components/modal';
 export {
 	Popover,
 	PopoverBase,
@@ -26,7 +32,6 @@ export {
 	Tooltip,
 } from './components/popover';
 export { Radio } from './components/radio';
-export { SimpleModal } from './components/simple-modal';
 export { Slider } from './components/slider';
 export { SimpleToast } from './components/simple-toast';
 export {
@@ -59,6 +64,12 @@ export { Stack } from './components/Stack';
 export { Text } from './components/Text';
 export { Paragraph } from './components/Paragraph';
 export { Heading } from './components/Heading';
-export { theme } from './theme';
+export { theme, useTheme } from './theme';
 export { DefaultThemeProvider } from './components/DefaultThemeProvider';
 export { ThemeProvider } from './components/ThemeProvider';
+export {
+	AutoSizedRowMasonry,
+	MasonryRow,
+	MasonryCell,
+	getRowLayout,
+} from './components/row-masonry';
