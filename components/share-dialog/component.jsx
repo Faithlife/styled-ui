@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from '../modal/modal';
+import { Modal } from '../modal/';
 import {
 	FaithlifeShareButton,
 	TwitterShareButton,
@@ -27,47 +27,32 @@ export class ShareDialog extends React.Component {
 		modalTitle: 'Share this page',
 	};
 
-	state = {
-		onDesktop: false,
-	};
-
-	componentDidMount() {
-		this.setState({ onDesktop: window.matchMedia('(hover: hover)').matches });
-	}
-
 	render() {
 		const { shareUrl, message, onClose, isOpen, modalTitle, copyButtonText } = this.props;
-		const { onDesktop } = this.state;
 
 		const encodedShareUrl = encodeURIComponent(shareUrl);
 		const encodedMessage = message ? encodeURIComponent(message) : '';
 
-		const desktopModal = (
-			<Styled.ShareContainer>
-				<FaithlifeShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
-				<TwitterShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
-				<FacebookShareButton encodedShareUrl={encodedShareUrl} />
-				<EmailShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
-				<CopyToClipboard copyValue={shareUrl} copyButtonText={copyButtonText} />
-			</Styled.ShareContainer>
-		);
-		const mobileModal = (
-			<div>
-				<Styled.ShareContainer>
-					<FaithlifeShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
-					<TwitterShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
-					<FacebookShareButton encodedShareUrl={encodedShareUrl} />
-					<EmailShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
-				</Styled.ShareContainer>
-				<Styled.ShareContainer>
-					<CopyToClipboard copyValue={shareUrl} copyButtonText={copyButtonText} />
-				</Styled.ShareContainer>
-			</div>
-		);
-
 		return (
-			<Modal withoutFooter isOpen={isOpen} onClose={onClose} title={modalTitle} container="body">
-				{onDesktop ? desktopModal : mobileModal}
+			<Modal isOpen={isOpen} onClose={onClose} container="body" contentPadding={6}>
+				<Modal.Header title={modalTitle} textStyle="h.24" />
+				<Modal.Content>
+					<Styled.ShareContainer>
+						<Styled.ButtonContainer>
+							<FaithlifeShareButton
+								encodedShareUrl={encodedShareUrl}
+								encodedMessage={encodedMessage}
+							/>
+							<TwitterShareButton
+								encodedShareUrl={encodedShareUrl}
+								encodedMessage={encodedMessage}
+							/>
+							<FacebookShareButton encodedShareUrl={encodedShareUrl} />
+							<EmailShareButton encodedShareUrl={encodedShareUrl} encodedMessage={encodedMessage} />
+						</Styled.ButtonContainer>
+						<CopyToClipboard copyValue={shareUrl} copyButtonText={copyButtonText} />
+					</Styled.ShareContainer>
+				</Modal.Content>
 			</Modal>
 		);
 	}

@@ -40,7 +40,7 @@ module.exports = {
 				ignore: ['after-comment'],
 			},
 		],
-		'unit-whitelist': ['em', 'rem', '%', 's', 'px', 'deg', 'ms', 'vh', 'vw'],
+		'unit-whitelist': ['em', 'rem', '%', 's', 'px', 'deg', 'ms', 'vh', 'vw', 'fr'],
 		'value-no-vendor-prefix': true,
 	},
 };
