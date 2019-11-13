@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Box } from '../Box';
 import { LegacyButton as Button } from '../button';
 import { ImagePreview } from './image-preview';
 import * as Styled from './styled';
@@ -32,7 +33,7 @@ export function FileUpload() {
 
 	if (selectedFiles.length) {
 		return (
-			<React.Fragment>
+			<Box display="grid" gridTemplateRows="auto min-content" gridGap={6}>
 				{allowMultiSelect ? (
 					<Styled.MultiSelectContainer>
 						<Styled.ImageBox>
@@ -62,26 +63,24 @@ export function FileUpload() {
 					localizedResources={localizedResources}
 					onCancel={onCancel}
 				/>
-			</React.Fragment>
+			</Box>
 		);
 	}
 	return (
-		<React.Fragment>
-			<div>
-				<LightboxDropZone
-					addFile={addFile}
-					allowMultiSelect={allowMultiSelect}
-					showDetails
-					localizedResources={localizedResources}
-				/>
-			</div>
+		<Box display="grid" gridTemplateRows="auto min-content" gridGap={6}>
+			<LightboxDropZone
+				addFile={addFile}
+				allowMultiSelect={allowMultiSelect}
+				showDetails
+				localizedResources={localizedResources}
+			/>
 			<ButtonSection
 				selectedFiles={selectedFiles}
 				onFilesSelected={onFilesSelected}
 				localizedResources={localizedResources}
 				onCancel={onCancel}
 			/>
-		</React.Fragment>
+		</Box>
 	);
 }
 
@@ -96,29 +95,31 @@ function ButtonSection({ selectedFiles }) {
 	}, [onFilesSelected, selectedFiles]);
 
 	return (
-		<Styled.ButtonSection>
-			<Styled.ButtonContainer>
-				<Button
-					primary
-					small
-					disabled={!selectedFiles.length}
-					onClick={onSelect}
-					styleOverrides={{ width: '76px', fontSize: '14px' }}
-				>
-					{localizedResources.addText}
-				</Button>
-			</Styled.ButtonContainer>
-			<Styled.ButtonContainer>
-				<Button
-					primaryOutline
-					small
-					onClick={onCancel}
-					styleOverrides={{ width: '76px', fontSize: '14px' }}
-				>
-					{localizedResources.cancelText}
-				</Button>
-			</Styled.ButtonContainer>
-		</Styled.ButtonSection>
+		<Box
+			display="grid"
+			gridAutoFlow="column"
+			gridAutoColumns="min-content"
+			justifyContent="end"
+			gridGap="5"
+		>
+			<Button
+				primaryOutline
+				small
+				onClick={onCancel}
+				styleOverrides={{ width: '76px', fontSize: '14px' }}
+			>
+				{localizedResources.cancelText}
+			</Button>
+			<Button
+				primary
+				small
+				disabled={!selectedFiles.length}
+				onClick={onSelect}
+				styleOverrides={{ width: '76px', fontSize: '14px' }}
+			>
+				{localizedResources.addText}
+			</Button>
+		</Box>
 	);
 }
 ButtonSection.propTypes = {

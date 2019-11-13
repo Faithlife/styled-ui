@@ -27,7 +27,7 @@ export function LightboxDropZone({ addFile, allowMultiSelect, showDetails, local
 	}, []);
 
 	return (
-		<DropZone onDrop={handleUploadWithFileInput}>
+		<DropZone onDrop={handleUploadWithFileInput} display="grid">
 			<Styled.DragDropContainer height={showDetails ? '415px' : '156px'}>
 				{showDetails && (
 					<div>

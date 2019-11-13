@@ -1,9 +1,17 @@
 import React, { useRef, useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Box } from '../Box';
 import { useFilePickerContext } from './file-picker-helpers';
-import * as Styled from './styled';
 
-export function AmberContent({ accountId, filter, footerText, pickerMode, sort, viewStyle }) {
+export function AmberContent({
+	accountId,
+	filter,
+	footerText,
+	pickerMode,
+	sort,
+	viewStyle,
+	...props
+}) {
 	const { allowMultiSelect, onCancel, onFilesSelected } = useFilePickerContext();
 
 	const amber = useAmber();
@@ -58,7 +66,7 @@ export function AmberContent({ accountId, filter, footerText, pickerMode, sort, 
 		}
 	}, [accountId, allowMultiSelect, amber, filter, footerText, pickerMode, sort, viewStyle]);
 
-	return <Styled.Tab ref={amberRef} />;
+	return <Box ref={amberRef} height={532} {...props} />;
 }
 
 AmberContent.propTypes = {
