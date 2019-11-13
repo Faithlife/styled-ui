@@ -904,18 +904,15 @@ const pages = [
 				title: 'Tabs Variations',
 				content: pageLoader(() => import('./tabs/variations.md')),
 				imports: {
+					Paragraph,
 					TabManager,
 					Tab,
 					TabList,
 					TabPanel,
 					TabPanels,
-					TabDemo: styled.div`
-						padding: 8px;
+					TabDemo: styled(Stack)`
+						padding: 16px;
 						background-color: white;
-
-						&& > * {
-							margin: 16px;
-						}
 					`,
 					Button,
 					createPortal: component => ReactDOM.createPortal(component, document.body),

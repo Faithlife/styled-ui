@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Box } from '../Box';
 import { useId } from '../shared-hooks';
 import { useTabContext, useKeyboardNav, useSequencedKeyboardNav } from './tab-utils';
 import * as Styled from './styled';
 
 export function TabList({ children }) {
-	const { onSelectTab, selectedTabIndex, theme, panelIdsMap } = useTabContext();
+	const { onSelectTab, selectedTabIndex, panelIdsMap } = useTabContext();
 
 	const handleKeyboardNav = useKeyboardNav(selectedTabIndex, onSelectTab, children);
 	return (
@@ -16,7 +17,6 @@ export function TabList({ children }) {
 							selected: selectedTabIndex === index,
 							onSelectTab,
 							index,
-							theme,
 							panelId: panelIdsMap[index],
 					  })
 					: null,
@@ -30,7 +30,7 @@ TabList.propTypes = {
 };
 
 export function SequencedTabList({ children }) {
-	const { onSelectTab, selectedTabIndex, theme, panelIdsMap } = useTabContext();
+	const { onSelectTab, selectedTabIndex, panelIdsMap } = useTabContext();
 
 	const [touchedTabs, setTouchedTabs] = useState(new Set());
 
@@ -60,7 +60,6 @@ export function SequencedTabList({ children }) {
 										: child.props.completed || selectedTabIndex > index)),
 							onSelectTab,
 							index,
-							theme,
 							panelId: panelIdsMap[index],
 					  })
 					: null,
@@ -73,10 +72,10 @@ SequencedTabList.propTypes = {
 	children: PropTypes.node.isRequired,
 };
 
-export function TabPanels({ children }) {
+export function TabPanels({ children, ...props }) {
 	const { selectedTabIndex, registerPanelId, unRegisterPanelId } = useTabContext();
 	return (
-		<div>
+		<Box {...props}>
 			{React.Children.map(children, (child, index) =>
 				React.isValidElement(child)
 					? React.cloneElement(child, {
@@ -87,7 +86,7 @@ export function TabPanels({ children }) {
 					  })
 					: null,
 			)}
-		</div>
+		</Box>
 	);
 }
 
@@ -95,27 +94,27 @@ TabPanels.propTypes = {
 	children: PropTypes.node.isRequired,
 };
 
-export function TabPanel(props) {
-	// PropType linting is diabled so out hidden props can be destuctured along with own consumer props
-	// eslint-disable-next-line react/prop-types
-	const { children, selected, registerPanelId, unRegisterPanelId, index } = props;
+export function TabPanel({
+	children,
+	selected,
+	registerPanelId,
+	unRegisterPanelId,
+	index,
+	...props
+}) {
 	const id = useId();
 
-	useEffect(
-		// eslint-disable-next-line consistent-return
-		() => {
-			if (id) {
-				registerPanelId(index, id);
-				return () => {
-					unRegisterPanelId(index);
-				};
-			}
-		},
-		[index, id, registerPanelId, unRegisterPanelId],
-	);
+	useEffect(() => {
+		if (id) {
+			registerPanelId(index, id);
+			return () => {
+				unRegisterPanelId(index);
+			};
+		}
+	}, [index, id, registerPanelId, unRegisterPanelId]);
 
 	return (
-		<Styled.TabPanel panelId={id} selected={selected}>
+		<Styled.TabPanel panelId={id} selected={selected} position="relative" padding={3} {...props}>
 			{children}
 		</Styled.TabPanel>
 	);

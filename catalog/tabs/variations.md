@@ -11,11 +11,13 @@ showSource: true
 			<Tab>First Tab</Tab>
 			<Tab>Second Tab</Tab>
 			<Tab>Third Tab</Tab>
+			<Tab disabled>Disabled Tab</Tab>
 		</TabList>
 		<TabPanels>
 			<TabPanel>First Tab!</TabPanel>
 			<TabPanel>Second Tab!</TabPanel>
 			<TabPanel>Third Tab!</TabPanel>
+			<TabPanel>Disabled Tab!</TabPanel>
 		</TabPanels>
 	</TabManager>
 </TabDemo>
@@ -23,18 +25,20 @@ showSource: true
 
 ### Style Variations
 
+Both the Tab and TabPanel components extend the Box component and accept styled-system props.
+
 ```react
 showSource: true
 ---
 <TabDemo>
-	<TabManager theme={{ tabHighlightColor: 'plum' }}>
+	<TabManager>
 		<TabList>
-			<Tab styleOverrides={{ width: '200px' }}>First Tab</Tab>
+			<Tab width="200px">First Tab</Tab>
 			<Tab disabled>Disabled Tab</Tab>
 			<Tab>Third Tab</Tab>
 		</TabList>
 		<TabPanels>
-			<TabPanel>First Tab!</TabPanel>
+			<TabPanel backgroundColor="gray4" padding={5}>First Tab!</TabPanel>
 			<TabPanel>Second Tab!</TabPanel>
 			<TabPanel>Third Tab!</TabPanel>
 		</TabPanels>
@@ -48,20 +52,22 @@ showSource: true
 showSource: true
 state: { currentTab: 0 }
 ---
-<TabDemo>
-	The current tab index is {state.currentTab}
+<TabDemo spacing={5}>
 	<Button variant="primary" size="medium" onClick={() => setState({ currentTab: 0 })}>First tab</Button>
-	<TabManager selectedTab={state.currentTab} onSelectedTabChange={tabIndex => setState({ currentTab: tabIndex })}>
-		<TabList>
-			<Tab>First Tab</Tab>
-			<Tab>Second Tab</Tab>
-			<Tab>Third Tab</Tab>
-		</TabList>
-		<TabPanels>
-			<TabPanel>First Tab!</TabPanel>
-			<TabPanel>Second Tab!</TabPanel>
-			<TabPanel>Third Tab!</TabPanel>
-		</TabPanels>
-	</TabManager>
+	<Paragraph>The current tab index is {state.currentTab}</Paragraph>
+	<div>
+		<TabManager selectedTab={state.currentTab} onSelectedTabChange={tabIndex => setState({ currentTab: tabIndex })}>
+			<TabList>
+				<Tab>First Tab</Tab>
+				<Tab>Second Tab</Tab>
+				<Tab>Third Tab</Tab>
+			</TabList>
+			<TabPanels>
+				<TabPanel>First Tab!</TabPanel>
+				<TabPanel>Second Tab!</TabPanel>
+				<TabPanel>Third Tab!</TabPanel>
+			</TabPanels>
+		</TabManager>
+	</div>
 </TabDemo>
 ```

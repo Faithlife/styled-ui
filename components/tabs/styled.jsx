@@ -3,8 +3,10 @@
 
 import styled, { css } from 'styled-components';
 import 'focus-visible';
+import { Box } from '../Box';
+import { Text } from '../Text';
 import { resetStyles } from '../utils';
-import { colors, thickness } from '../shared-styles';
+import { thickness } from '../shared-styles';
 import { mediaSizes } from '../shared-styles';
 
 const borderRadius = '3px 3px 0 0';
@@ -19,10 +21,10 @@ const selectedTab = css`
 		left: 0;
 		width: 100%;
 		height: 3px;
-		background-color: ${({ theme }) => theme.tabHighlightColor || colors.blueBase};
+		background-color: ${({ theme }) => theme.colors.blue4};
 
-		border-right: 1px solid ${({ theme }) => theme.tabHighlightColor || colors.blueBase};
-		border-left: 1px solid ${({ theme }) => theme.tabHighlightColor || colors.blueBase};
+		border-right: 1px solid ${({ theme }) => theme.colors.blue4};
+		border-left: 1px solid ${({ theme }) => theme.colors.blue4};
 		border-radius: ${borderRadius};
 	}
 
@@ -33,12 +35,12 @@ const selectedTab = css`
 		left: 1px;
 		width: calc(100% - 2px);
 		height: 1px;
-		background-color: ${({ theme }) => theme.activeBackgroundColor || 'white'};
+		background-color: ${({ theme }) => theme.colors.white};
 	}
 
-	background-color: ${({ theme }) => theme.activeBackgroundColor || 'white'};
-	border-right: 1px solid ${colors.gray14};
-	border-left: 1px solid ${colors.gray14};
+	background-color: ${({ theme }) => theme.colors.white};
+	border-right: 1px solid ${({ theme }) => theme.colors.gray14};
+	border-left: 1px solid ${({ theme }) => theme.colors.gray14};
 `;
 
 export const Tab = styled.button.attrs({
@@ -78,28 +80,24 @@ export const Tab = styled.button.attrs({
 	}
 `;
 
-export const TabContent = styled.span.attrs({ tabIndex: -1 })`
+export const TabContent = styled(Text).attrs({ tabIndex: -1 })`
 	border-radius: ${borderRadius};
 	cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 	white-space: nowrap;
 	min-height: fit-content;
 	display: inline-block;
-	font-size: ${({ styleOverrides }) => styleOverrides.fontSize || thickness.sixteen};
-	width: ${({ styleOverrides }) => styleOverrides.width};
-	padding: ${({ styleOverrides }) =>
-		styleOverrides.padding || `${thickness.eight} ${thickness.sixteen}`};
-	background-color: ${({ theme }) => theme.inactiveBackgroundColor || colors.gray4};
+	background-color: ${({ theme }) => theme.colors.gray4};
 
 	&:focus {
 		outline: none;
 	}
 
-	${({ disabled }) => (disabled ? `color: ${colors.gray52}` : '')};
+	${({ disabled, theme }) => (disabled ? `color: ${theme.colors.gray52}` : '')};
 	${({ selected }) => selected && selectedTab};
 `;
 
-export const TabList = styled.div.attrs({ role: 'tablist' })`
-	border-bottom: 1px solid ${colors.gray14};
+export const TabList = styled(Box).attrs({ role: 'tablist' })`
+	border-bottom: 1px solid ${({ theme }) => theme.colors.gray14};
 	display: flex;
 	flex-direction: row;
 
@@ -108,14 +106,11 @@ export const TabList = styled.div.attrs({ role: 'tablist' })`
 	}
 `;
 
-export const TabPanel = styled.div.attrs({
+export const TabPanel = styled(Box).attrs({
 	role: 'tabpanel',
 	id: ({ panelId }) => `panel:${panelId}`,
 	'aria-expanded': ({ selected }) => selected,
 })`
-	position: relative;
-	padding: ${thickness.eight};
-
 	&:focus {
 		outline: none;
 	}
@@ -136,7 +131,7 @@ export const SequencedTab = styled(Tab)`
 	flex-grow: 1;
 	flex-basis: 0;
 	cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
-	background: ${({ selected }) => (selected ? colors.blueTint : 'white')};
+	background: ${({ selected, theme }) => (selected ? theme.colors.blue1 : theme.colors.white)};
 	height: 54px;
 	border-radius: 0;
 
@@ -147,15 +142,15 @@ export const SequencedTab = styled(Tab)`
 	}
 `;
 
-export const SequencedTabContent = styled.span.attrs(() => ({ tabIndex: -1 }))`
+export const SequencedTabContent = styled(Text).attrs(() => ({ tabIndex: -1 }))`
 	overflow: wrap;
 	min-height: fit-content;
 	display: none;
 	font-size: 14px;
 	font-weight: 600;
 	text-transform: uppercase;
-	color: ${({ selected, disabled }) =>
-		selected ? colors.blueBase : disabled ? colors.gray22 : colors.gray52};
+	color: ${({ selected, disabled, theme }) =>
+		selected ? theme.colors.blue4 : disabled ? theme.colors.gray22 : theme.colors.gray52};
 	padding-right: 16px;
 
 	@media (min-width: ${mediaSizes.phone}) {
@@ -172,8 +167,12 @@ export const Circle = styled.div`
 	justify-content: center;
 	align-items: center;
 	border: solid 2px
-		${({ selected, completed, disabled }) =>
-			selected || completed ? colors.blueLight : disabled ? colors.gray14 : colors.gray34};
+		${({ selected, completed, disabled, theme }) =>
+			selected || completed
+				? theme.colors.blue3
+				: disabled
+				? theme.colors.gray14
+				: theme.colors.gray34};
 	border-radius: 50%;
 	width: 24px;
 	min-width: 24px;
@@ -181,9 +180,9 @@ export const Circle = styled.div`
 	margin: 0px;
 	font-size: 14px;
 	font-weight: bold;
-	color: ${({ selected, disabled }) =>
-		selected ? colors.blueBase : disabled ? colors.gray22 : colors.gray52};
-	background: ${({ completed }) => completed && colors.blueLight};
+	color: ${({ selected, disabled, theme }) =>
+		selected ? theme.colors.blue4 : disabled ? theme.colors.gray22 : theme.colors.gray52};
+	background: ${({ completed, theme }) => completed && theme.colors.blue3};
 
 	@media (min-width: ${mediaSizes.phone}) {
 		margin: 0px 8px 0px 14px;
