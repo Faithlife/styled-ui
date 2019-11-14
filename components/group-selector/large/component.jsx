@@ -8,7 +8,7 @@ import * as Styled from '../styled';
 import { SearchResult } from './search-result';
 import { CreateGroup } from './create-group';
 
-const defaultResultsTopMargin = -64;
+const defaultResultsTopMargin = 0;
 
 /** Large group selector for searching Faithlife groups. Can be displayed inline or inside a modal. */
 export class LargeGroupSelector extends React.Component {
@@ -245,7 +245,7 @@ export class LargeGroupSelector extends React.Component {
 		if (scrollTopPosition >= 82 || groupResultsCount < 4) {
 			this.setState({
 				createGroupFixed: !showInPlace,
-				resultsTopMargin: showInPlace ? 0 : 232,
+				resultsTopMargin: showInPlace ? 0 : 150,
 				fixedCreateWrapper: true,
 			});
 		} else if (scrollTopPosition < 82) {
@@ -309,7 +309,7 @@ export class LargeGroupSelector extends React.Component {
 							onChurchLocationInputChange={this.handleChurchLocationInputChange}
 							newChurchName={newChurchName}
 							newChurchLocation={newChurchLocation}
-							showRequiredStars={createGroupFixed}
+							showRequiredStars={true}
 							localizedResources={localizedResources}
 						/>
 						<Styled.CreateGroupButtonWrapper>
