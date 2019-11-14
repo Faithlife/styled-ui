@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.29.0
+
+- Update `AmberContent` and `Tab` components to accept styled-system props.
+
 ### 5.28.5
 
 - Use v6 `Modal` in ShareDialog component.
