@@ -183,15 +183,22 @@ export const LargeSubtitle = styled.div`
 `;
 
 export const CreateGroupWrapper = styled.div`
-	position: relative;
+	position: ${props => (props.fixed ? 'absolute' : 'relative')};
 	width: 100%;
 	z-index: 1;
+
+	${props =>
+		props.fixed &&
+		`
+		top: 14px;
+		`};
 `;
 
 export const CreateGroupBackground = styled.div`
 	background-color: white;
 	padding-left: 24px;
 	padding-right: 24px;
+	margin-right: ${props => props.scrollWidthDelta}px;
 	box-shadow: 0px 10px 8px -4px white;
 `;
 
@@ -201,6 +208,7 @@ export const SearchResultsContainer = styled.div`
 	width: 100%;
 	padding-left: 12px;
 	padding-right: 12px;
+	z-index: ${props => (props.fixed ? 0 : 2)};
 	height: 100%;
 `;
 

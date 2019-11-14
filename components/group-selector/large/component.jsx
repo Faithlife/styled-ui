@@ -8,6 +8,8 @@ import * as Styled from '../styled';
 import { SearchResult } from './search-result';
 import { CreateGroup } from './create-group';
 
+const defaultResultsTopMargin = -64;
+
 /** Large group selector for searching Faithlife groups. Can be displayed inline or inside a modal. */
 export class LargeGroupSelector extends React.Component {
 	static propTypes = {
@@ -86,7 +88,26 @@ export class LargeGroupSelector extends React.Component {
 		newChurchLocation: '',
 		modalContent: 'main',
 		selectedGroupId: -1,
+		createGroupFixed: false,
+		resultsTopMargin: defaultResultsTopMargin,
+		scrollWidthDelta: 0,
 	};
+
+	componentDidMount() {
+		if (this.props.showInPlace) {
+			const scrollableNode = getScrollParent(this.nodeRef.current);
+			scrollableNode.addEventListener('scroll', this.handleScroll);
+		}
+	}
+
+	componentWillUnmount() {
+		const scrollableNode = getScrollParent(this.nodeRef.current);
+		scrollableNode.removeEventListener('scroll', this.handleScroll);
+	}
+
+	nodeRef = React.createRef();
+	searchResultsRef = React.createRef();
+	fixedCreateWrapper = false;
 
 	createGroupClick = () => {
 		this.toggle();
@@ -144,6 +165,8 @@ export class LargeGroupSelector extends React.Component {
 
 	toggle = () => {
 		this.setState({
+			createGroupFixed: false,
+			resultsTopMargin: defaultResultsTopMargin,
 			modalContent: 'main',
 		});
 
@@ -205,6 +228,35 @@ export class LargeGroupSelector extends React.Component {
 		this.props.onClaimGroupClick(groupId);
 	};
 
+	handleScroll = scrollData => {
+		if (this.state.fixedCreateWrapper) {
+			return;
+		}
+
+		const { showInPlace, groupSearchResults } = this.props;
+
+		const scrollTopPosition =
+			showInPlace && scrollData.srcElement
+				? scrollData.srcElement.scrollingElement.scrollTop
+				: scrollData.topPosition;
+
+		const groupResultsCount = groupSearchResults ? groupSearchResults.length : 99;
+
+		if (scrollTopPosition >= 82 || groupResultsCount < 4) {
+			this.setState({
+				createGroupFixed: !showInPlace,
+				resultsTopMargin: showInPlace ? 0 : 232,
+				fixedCreateWrapper: true,
+			});
+		} else if (scrollTopPosition < 82) {
+			this.setState({
+				createGroupFixed: false,
+				resultsTopMargin: defaultResultsTopMargin + scrollTopPosition,
+				fixedCreateWrapper: false,
+			});
+		}
+	};
+
 	render() {
 		const {
 			authorizedMembershipLevels,
@@ -216,7 +268,14 @@ export class LargeGroupSelector extends React.Component {
 			localizedResources,
 		} = this.props;
 
-		const { newChurchName, newChurchLocation, modalContent } = this.state;
+		const {
+			newChurchName,
+			newChurchLocation,
+			createGroupFixed,
+			scrollWidthDelta,
+			resultsTopMargin,
+			modalContent,
+		} = this.state;
 
 		const disableButton = newChurchName === '' || newChurchLocation === '';
 
@@ -227,6 +286,7 @@ export class LargeGroupSelector extends React.Component {
 			<Styled.LargeScrollView
 				horizontal={false}
 				contentClassName={Styled.LargeScrollViewContentClass}
+				onScroll={!showInPlace && this.handleScroll}
 				showInPlace={showInPlace}
 				hideTitle={hideTitle}
 				verticalScrollbarStyle={{
@@ -242,14 +302,14 @@ export class LargeGroupSelector extends React.Component {
 						<Styled.LargeSubtitle>{localizedResources.subTitle}</Styled.LargeSubtitle>
 					</div>
 				)}
-				<Styled.CreateGroupWrapper>
-					<Styled.CreateGroupBackground>
+				<Styled.CreateGroupWrapper fixed={createGroupFixed}>
+					<Styled.CreateGroupBackground scrollWidthDelta={scrollWidthDelta}>
 						<CreateGroup
 							onChurchNameInputChange={this.handleChurchNameInputChange}
 							onChurchLocationInputChange={this.handleChurchLocationInputChange}
 							newChurchName={newChurchName}
 							newChurchLocation={newChurchLocation}
-							showRequiredStars={true}
+							showRequiredStars={createGroupFixed}
 							localizedResources={localizedResources}
 						/>
 						<Styled.CreateGroupButtonWrapper>
@@ -267,14 +327,20 @@ export class LargeGroupSelector extends React.Component {
 						</Styled.CreateGroupButtonWrapper>
 					</Styled.CreateGroupBackground>
 				</Styled.CreateGroupWrapper>
-				<Styled.SearchResultsContainer>{this.getSearchResults()}</Styled.SearchResultsContainer>
+				<Styled.SearchResultsContainer
+					style={{ marginTop: resultsTopMargin }}
+					fixed={createGroupFixed}
+					ref={this.searchResultsRef}
+				>
+					{this.getSearchResults()}
+				</Styled.SearchResultsContainer>
 			</Styled.LargeScrollView>
 		);
 
 		const secondaryModalOpen = modalContent === 'admin' || modalContent === 'change';
 
 		return (
-			<Styled.LargeGroupSelector>
+			<Styled.LargeGroupSelector ref={this.nodeRef}>
 				{showInPlace && mainView}
 				<Modal
 					container="body"
@@ -347,4 +413,28 @@ const formatStringList = arrayOfStrings => {
 					arrayOfStrings.length < 2 ? '' : ' or ',
 			  );
 	return result.charAt(0).toUpperCase() + result.slice(1);
+};
+
+// Adapted from JQuery's getScrollParent method
+const getScrollParent = (element, includeHidden) => {
+	let style = getComputedStyle(element);
+	const excludeStaticParent = style.position === 'absolute';
+	const overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
+
+	if (style.position === 'fixed') {
+		return document.body;
+	}
+
+	let parent = element;
+	while ((parent = parent.parentElement)) {
+		style = getComputedStyle(parent);
+		if (excludeStaticParent && style.position === 'static') {
+			continue;
+		}
+		if (overflowRegex.test(style.overflow + style.overflowY + style.overflowX)) {
+			return parent;
+		}
+	}
+
+	return window;
 };
