@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { AgGridReact, AgGridColumn } from 'ag-grid-react';
 import 'ag-grid-enterprise';
@@ -37,23 +37,17 @@ export function BaseGrid({
 	additionalColumnOptions,
 }) {
 	const tableHeightPadding = hasPagingBar ? 42 : 2;
+	const prevViewportSize = useRef(isSmallViewport);
 
 	useEffect(() => {
-		if (columnApi && gridApi) {
-			columnApi.resetColumnState();
-			if (largeOnlyColumns && isSmallViewport) {
-				columnApi.setColumnsVisible(largeOnlyColumns, false);
-				columnApi.setColumnsVisible(smallOnlyColumns, true);
-			} else if (smallOnlyColumns && !isSmallViewport) {
-				columnApi.setColumnsVisible(largeOnlyColumns, true);
-				columnApi.setColumnsVisible(smallOnlyColumns, false);
-			}
+		if (gridApi && isSmallViewport !== prevViewportSize.current) {
 			// Set proper column sizes once gridApi is available and component has mounted
 			// setTimeout necessary in certain browsers (e.g. Safari) to ensure ag-grid components have mounted
 			// See 'Sizing Columns By Default' here: https://www.ag-grid.com/javascript-grid-resizing/
 			setTimeout(() => gridApi.sizeColumnsToFit(), 0);
+			prevViewportSize.current = isSmallViewport;
 		}
-	}, [columnApi, gridApi, isSmallViewport, largeOnlyColumns, smallOnlyColumns]);
+	}, [gridApi, isSmallViewport]);
 
 	useEffect(() => {
 		if (gridApi) {
@@ -78,13 +72,10 @@ export function BaseGrid({
 		onRowClick && onRowClick(selectedRows);
 	}, [gridApi, onRowClick]);
 
-	const {
-		headingChildren,
-		cellComponents,
-		largeOnlyColumns,
-		smallOnlyColumns,
-		suppressRowClick,
-	} = parseChildrenSettings(children, additionalCellComponents);
+	const { headingChildren, cellComponents, suppressRowClick } = parseChildrenSettings(
+		children,
+		additionalCellComponents,
+	);
 
 	const handleGridResize = useCallback(() => {
 		if (gridApi) {
@@ -180,6 +171,7 @@ export function BaseGrid({
 						hide,
 						isLargeViewportOnly,
 						isSmallViewportOnly,
+						hasInteractableElement,
 						...columnProps
 					} = child.props;
 					return (
@@ -197,7 +189,11 @@ export function BaseGrid({
 							headerClass={isRightAligned && 'ag-header-right-aligned'}
 							cellClass={`ag-faithlife-cell ${isRightAligned ? 'ag-cell-right-aligned' : ''}`}
 							rowGroup={groupByColumn}
-							hide={groupByColumn || hide}
+							hide={
+								groupByColumn ||
+								hide ||
+								(isSmallViewport ? isLargeViewportOnly : isSmallViewportOnly)
+							}
 						/>
 					);
 				})}
@@ -255,21 +251,11 @@ function parseChildrenSettings(children, additionalCellComponents = {}) {
 			return components;
 		}, {});
 
-	const largeOnlyColumns = headingChildren
-		.filter(child => child.props.isLargeViewportOnly)
-		.map(child => child.props.fieldName);
-
-	const smallOnlyColumns = headingChildren
-		.filter(child => child.props.isSmallViewportOnly)
-		.map(child => child.props.fieldName);
-
 	const suppressRowClick = headingChildren.some(child => child.props.hasInteractableElement);
 
 	return {
 		headingChildren,
 		cellComponents: { ...cellComponents, ...additionalCellComponents },
-		largeOnlyColumns,
-		smallOnlyColumns,
 		suppressRowClick,
 	};
 }
