@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.29.1
+
+- Update all grid components to correctly handle `isLarge/SmallViewportOnly` and `hide` props together correctly.
+
 ### 5.29.0
 
 - Update `AmberContent` and `Tab` components to accept styled-system props.
