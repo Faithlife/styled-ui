@@ -3,19 +3,7 @@ import PropTypes from 'prop-types';
 import { SmallCheck } from '../icons';
 import * as Styled from './styled.jsx';
 
-export function Tab(props) {
-	// PropType linting is diabled so our hidden props can be destuctured along with own consumer props
-	/* eslint-disable react/prop-types */
-	const {
-		children,
-		disabled,
-		styleOverrides,
-		index,
-		selected,
-		onSelectTab,
-		theme,
-		panelId,
-	} = props;
+export function Tab({ children, disabled, index, selected, onSelectTab, panelId, ...props }) {
 	const tabRef = useRef();
 
 	useEffect(() => {
@@ -38,9 +26,11 @@ export function Tab(props) {
 			<Styled.TabContent
 				ref={tabRef}
 				disabled={disabled}
-				theme={theme}
-				styleOverrides={styleOverrides}
+				fontSize={3}
+				paddingX={5}
+				paddingY={3}
 				selected={selected}
+				{...props}
 			>
 				{typeof children === 'function' ? children({ selected, disabled }) : children}
 			</Styled.TabContent>
@@ -52,31 +42,22 @@ Tab.propTypes = {
 	/** The tab's label */
 	children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
 	disabled: PropTypes.bool,
-	styleOverrides: PropTypes.shape({
-		fontSize: PropTypes.string,
-		width: PropTypes.string,
-		padding: PropTypes.string,
-	}),
 };
 
 Tab.defaultProps = {
 	styleOverrides: {},
 };
 
-export function SequencedTab(props) {
-	// PropType linting is diabled so our hidden props can be destuctured along with own consumer props
-	/* eslint-disable react/prop-types */
-	const {
-		children,
-		disabled,
-		completed,
-		styleOverrides,
-		index,
-		selected,
-		onSelectTab,
-		theme,
-		panelId,
-	} = props;
+export function SequencedTab({
+	children,
+	disabled,
+	completed,
+	index,
+	selected,
+	onSelectTab,
+	panelId,
+	...props
+}) {
 	const tabRef = useRef();
 
 	useEffect(() => {
@@ -102,9 +83,11 @@ export function SequencedTab(props) {
 			<Styled.SequencedTabContent
 				ref={tabRef}
 				disabled={disabled}
-				theme={theme}
-				styleOverrides={styleOverrides}
 				selected={selected}
+				fontSize={3}
+				paddingX={5}
+				paddingY={3}
+				{...props}
 			>
 				{typeof children === 'function' ? children({ selected, disabled }) : children}
 			</Styled.SequencedTabContent>

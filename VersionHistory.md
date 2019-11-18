@@ -1,5 +1,14 @@
 # Changelog
 
+### 5.29.0
+
+- Update `AmberContent` and `Tab` components to accept styled-system props.
+
+### 5.28.5
+
+- Use v6 `Modal` in ShareDialog component.
+- Update GroupSelector to always show the Create button.
+
 ### 5.28.4
 
 - Use LegacyButton in a few more internal components. Fixes a regression in 5.28.0.

@@ -908,18 +908,15 @@ const pages = [
 				title: 'Tabs Variations',
 				content: pageLoader(() => import('./tabs/variations.md')),
 				imports: {
+					Paragraph,
 					TabManager,
 					Tab,
 					TabList,
 					TabPanel,
 					TabPanels,
-					TabDemo: styled.div`
-						padding: 8px;
+					TabDemo: styled(Stack)`
+						padding: 16px;
 						background-color: white;
-
-						&& > * {
-							margin: 16px;
-						}
 					`,
 					Button,
 					createPortal: component => ReactDOM.createPortal(component, document.body),
@@ -1076,10 +1073,10 @@ const pages = [
 				title: 'File Picker',
 				content: pageLoader(() => import('./file-picker/variations.md')),
 				imports: {
+					Box,
+					Button,
+					Modal: V6Modal,
 					FilePicker,
-					FilePickerDemo: styled.div`
-						height: 600px;
-					`,
 					TabManager,
 					TabList,
 					Tab,
