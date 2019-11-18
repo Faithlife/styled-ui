@@ -37,6 +37,7 @@ export const typography = compose(
 	styledSystem.system({
 		textTransform: true,
 		whiteSpace: true,
+		textOverflow: true,
 	}),
 );
 
