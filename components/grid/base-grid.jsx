@@ -180,6 +180,7 @@ export function BaseGrid({
 				suppressContextMenu
 				animateRows
 				reactNext
+				colResizeDefault="shift"
 				{...gridOptions}
 			>
 				{headingChildren.map((child, index) => {
