@@ -39,6 +39,7 @@ export function BaseGrid({
 	onRowSelect,
 	showDragHandle,
 	onRowDataChange,
+	context,
 }) {
 	const tableHeightPadding = hasPagingBar ? 42 : 2;
 
@@ -163,6 +164,7 @@ export function BaseGrid({
 		>
 			<AgGridReact
 				rowData={data}
+				context={context}
 				onGridReady={handleGridReady}
 				onGridSizeChanged={handleGridResize}
 				onSortChanged={handleSortChanged}
@@ -288,6 +290,8 @@ BaseGrid.propTypes = {
 	handleCellEdit: PropTypes.func,
 	/** Called after a row is updated with the new row data */
 	onRowDataChange: PropTypes.func,
+	/** An object that will be passed to cell components */
+	context: PropTypes.object,
 };
 
 function parseChildrenSettings(children, additionalCellComponents = {}) {
