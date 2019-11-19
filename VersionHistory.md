@@ -1,5 +1,15 @@
 # Changelog
 
+### 5.30.0
+
+- Add checkbox support to all grids.
+- Disable right click context menu for shared grids.
+- Add drag and drop to `SimpleGrid` and `TreeGrid`.
+- Add ref handles for checkbox selection.
+- Add in grid editing.
+- Add context prop to all grids.
+- Enable autoSizing when no maxRows is specified for all grids.
+
 ### 5.29.2
 
 - Fix icon size on `small` `FilterInput` components.
