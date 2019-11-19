@@ -13,6 +13,8 @@ import * as Styled from './styled';
 export class DatePickerInput extends PureComponent {
 	static propTypes = {
 		defaultSelectedDate: PropTypes.instanceOf(Date),
+		/** Sets the selected date */
+		selectedDate: PropTypes.instanceOf(Date),
 		/** Functions that operate on a JS Date object.
 		 * The following functions must be provided:
 		 *
@@ -62,6 +64,13 @@ export class DatePickerInput extends PureComponent {
 			showCalendar: false,
 			selectedDate: this.props.defaultSelectedDate,
 		};
+	}
+
+	static getDerivedStateFromProps(nextProps, prevState) {
+		if (nextProps.selectedDate && prevState.selectedDate !== nextProps.selectedDate) {
+			return { ...prevState, selectedDate: nextProps.selectedDate };
+		}
+		return null;
 	}
 
 	componentDidUpdate(prevState) {
