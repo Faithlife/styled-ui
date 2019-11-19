@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.29.2
+
+- Fix icon size on `small` `FilterInput` components.
+
 ### 5.29.1
 
 - Update all grid components to correctly handle `isLarge/SmallViewportOnly` and `hide` props together correctly.
