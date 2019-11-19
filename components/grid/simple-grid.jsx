@@ -236,14 +236,15 @@ function updateRowLocation(data, newParentNode, draggedNode, direction) {
 
 	const aggName =
 		draggedNode.parent.field ||
-		(newParentNode.group
-			? newParentNode.groupData['ag-Grid-AutoColumn']
-			: newParentNode.parent.field);
+		(newParentNode.group ? newParentNode.field : newParentNode.parent.field);
 	const newData = data.filter(row => row.id !== draggedNode.id);
 	const newRowData = { ...draggedNode.data };
 
 	if (newParentNode.group) {
-		if (direction === dragDirections.up) {
+		if (
+			direction === dragDirections.up ||
+			(direction === dragDirections.down && !newParentNode.expanded)
+		) {
 			delete newRowData[aggName];
 		} else {
 			newRowData[aggName] = newParentNode.groupData['ag-Grid-AutoColumn'];
