@@ -1,13 +1,15 @@
 import React, { useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { useGridState } from './grid-helpers';
+import { useGridState, useGridHandles } from './grid-helpers';
 import { BaseGrid } from './base-grid';
 
-export function PaginatedGrid(props) {
+export const PaginatedGrid = React.forwardRef((props, ref) => {
 	// First separate out the props that are this grid component specific
 	const { children, currentPageNumber, onPageNumberChange, maxRows, ...baseGridProps } = props;
 
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useGridState();
+
+	useGridHandles(gridApi, ref);
 
 	useEffect(() => {
 		if (gridApi && currentPageNumber !== null && currentPageNumber !== undefined) {
@@ -48,7 +50,7 @@ export function PaginatedGrid(props) {
 			{children}
 		</BaseGrid>
 	);
-}
+});
 
 PaginatedGrid.rowSelectionOptions = BaseGrid.rowSelectionOptions;
 

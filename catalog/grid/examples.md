@@ -55,8 +55,8 @@ showSource: true
 ---
 <div>
 	<SimpleGrid data={censusData} maxRows={10}>
-		<GridColumn displayName="Area Description" fieldName="areaDesc" groupByColumn width={200} />
-		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+		<SimpleGrid.GroupColumn displayName="Name" fieldName="value" />
+		<GridColumn hide fieldName="areaDesc" groupByColumn width={200} />
 		<GridColumn displayName="Population" fieldName="population" />
 		<GridColumn displayName="Net Population Change" fieldName="populationChange" />
 	</SimpleGrid>
@@ -71,7 +71,7 @@ state: { filterText: 'WA' }
 ---
 <div>
 	<Input placeholder="Search" value={state.filterText} onChange={(e => setState({ filterText: e.target.value }))} />
-	<SimpleGrid data={censusData} maxRows={10} onRowClick={row => {alert(row[0].NAME)}} filterText={state.filterText}>
+	<SimpleGrid data={censusData} maxRows={10} onRowClick={row => {alert(row.value)}} filterText={state.filterText}>
 		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
 		<GridColumn displayName="Population" fieldName="population" isRightAligned />
 		<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
@@ -89,7 +89,7 @@ Cell components can be any valid react component. The `value` prop will be what 
 showSource: true
 ---
 <div>
-	<SimpleGrid data={censusData} maxRows={10} onRowClick={row => {alert(row[0].NAME)}}>
+	<SimpleGrid data={censusData} maxRows={10} onRowClick={row => {alert(row.value)}}>
 		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
 		<GridColumn displayName="Population" fieldName="population" isRightAligned />
 		<GridColumn displayName="Net Population Change" fieldName="populationChange" cellComponent={PopulationChange} isRightAligned />
@@ -109,4 +109,109 @@ function PopulationChange({ value }) {
 		</div>
 	);
 }
+```
+
+### Drag and Drop
+
+This example uses the TreeGrid, but SimpleGrid supports it as well.
+
+```react
+showSource: true
+state: { }
+---
+<div>
+	<TreeGrid
+		data={state.data || censusDataFolders}
+		maxRows={10}
+		autoGroupExpansion={TreeGrid.expandedRowsOptions.topLevel}
+		onDataChange={data => setState({ data })}
+		enableDragDrop
+	>
+		<TreeGrid.GroupColumn displayName="Name" width={500} />
+		<GridColumn displayName="Population" fieldName="population" />
+		<GridColumn displayName="Net Population Change" fieldName="populationChange" />
+	</TreeGrid>
+</div>
+```
+
+### Checkbox Selection
+
+Also supported by Paginated and TreeGrid.
+
+Ref handles available when using checkboxes are `selectAllRows`, `selectFilteredRows`, `deselectAllRows`, and `deselectFilteredRows`.
+
+```react
+showSource: true
+state: { selected: false }
+---
+<div>
+	<Button
+		primary
+		medium
+		onClick={() => {
+			!state.selected ?
+				gridRef.current.selectAllRows() :
+				gridRef.current.deselectAllRows();
+			setState({ selected: !state.selected });
+			}}
+	>
+		Select/ Deselect
+	</Button>
+	<SimpleGrid
+		ref={gridRef}
+		data={censusData}
+		maxRows={10}
+		onRowClick={row => {console.log(row)}}
+		onRowSelect={rows => {console.log(rows)}}
+		rowSelectionType={SimpleGrid.rowSelectionOptions.multi}
+	>
+		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} showCheckbox />
+		<GridColumn displayName="Population" fieldName="population" isRightAligned />
+		<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
+		<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
+		<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
+	</SimpleGrid>
+</div>
+```
+
+### Editable Fields
+
+Also supported by Paginated and TreeGrid.
+
+```react
+showSource: true
+state: { selected: false }
+---
+<div>
+	<SimpleGrid
+		data={censusData}
+		maxRows={10}
+		onDataChange={newData => console.log(newData)}
+	>
+		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+		<GridColumn displayName="Population" fieldName="population" isEditable />
+		<GridColumn displayName="Net Population Change" fieldName="populationChange" isEditable editorComponent={IncrementButton} />
+		<GridColumn displayName="Births" fieldName="births" width={100} isLargeViewportOnly />
+		<GridColumn displayName="Deaths" fieldName="deaths" width={100} isSortable={false} isLargeViewportOnly/>
+	</SimpleGrid>
+</div>
+```
+
+```code
+lang: js
+---
+import { useCellEditor } from '@faithlife/styled-ui/grid';
+
+const IncrementButton = React.forwardRef(({ value }, ref) => {
+	const [count, setCount] = useState(value);
+	useCellEditor(ref, count, true);
+
+	return (
+		<Button
+			variant="primaryOutline"
+			size="medium"
+			onClick={() => setCount(c => c + 1)}
+		>{`${count} +`}</Button>
+	);
+});
 ```

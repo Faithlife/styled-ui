@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { GridColumn } from './grid-column';
 
-export function TreeGroupColumn({
+// This is maintained separately from the GridColumn because while there is overlap they do have some differences.
+export function AggregationGroupColumn({
 	displayName,
 	isSortable,
 	defaultSort,
@@ -13,25 +14,31 @@ export function TreeGroupColumn({
 	minWidth,
 	maxWidth,
 	cellComponents,
+	fieldName,
+	isEditable,
+	shouldBeEditable,
+	editComponent,
 }) {
 	return <div />;
 }
 
-TreeGroupColumn.defaultProps = {
+AggregationGroupColumn.defaultProps = {
 	isSortable: true,
 	suppressMenu: true,
 	isResizable: true,
 	cellComponents: false,
 };
 
-TreeGroupColumn.isTreeGroup = true;
+AggregationGroupColumn.isAggregationGroupColumn = true;
 
-TreeGroupColumn.sortOptions = GridColumn.sortOptions;
+AggregationGroupColumn.sortOptions = GridColumn.sortOptions;
 
-TreeGroupColumn.propTypes = {
+AggregationGroupColumn.propTypes = {
 	displayName: PropTypes.string,
+	/** Not used in TreeGrid */
+	fieldName: PropTypes.string,
 	isSortable: PropTypes.bool,
-	defaultSort: PropTypes.oneOf(Object.values(TreeGroupColumn.sortOptions)),
+	defaultSort: PropTypes.oneOf(Object.values(AggregationGroupColumn.sortOptions)),
 	/** A react component to render in the cell */
 	cellComponent: PropTypes.func,
 	/** Where to hide the ag-grid options menu */
@@ -43,4 +50,8 @@ TreeGroupColumn.propTypes = {
 	maxWidth: PropTypes.number,
 	/** Do not show the number of children */
 	hideChildrenCount: PropTypes.bool,
+	showCheckbox: PropTypes.bool,
+	shouldShowCheckbox: PropTypes.func,
+	isEditable: PropTypes.bool,
+	editComponent: PropTypes.bool,
 };

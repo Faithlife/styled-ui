@@ -8,7 +8,7 @@ The simplest use of the table. Each column is sortable and resizable. Leave `max
 showSource: true
 ---
 <div>
-	<SimpleGrid data={censusData} maxRows={10} onRowClick={row => {alert(row[0].NAME)}}>
+	<SimpleGrid data={censusData} maxRows={10} onRowClick={row => {alert(row.value)}}>
 		<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
 		<GridColumn displayName="Population" fieldName="population" isRightAligned />
 		<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
@@ -56,7 +56,7 @@ land: json
 
 ### Tree Table
 
-A table to display tree data as well as supporting drag-drop reordering.
+A table to display tree data. See [Simple Examples](/grid/simple-examples#drag-and-drop-in-treegrid) to see how to enable drag and drop re-ordering.
 
 ```react
 showSource: true
@@ -64,11 +64,9 @@ state: { }
 ---
 <div>
 	<TreeGrid
-		data={state.data || censusDataFolders}
+		data={censusDataFolders}
 		maxRows={10}
 		autoGroupExpansion={TreeGrid.expandedRowsOptions.topLevel}
-		onDataChange={data => setState({ data })}
-		enableDragDrop
 	>
 		<TreeGrid.GroupColumn displayName="Name" width={500} />
 		<GridColumn displayName="Population" fieldName="population" />

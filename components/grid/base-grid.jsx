@@ -2,7 +2,8 @@ import React, { useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { AgGridReact, AgGridColumn } from 'ag-grid-react';
 import 'ag-grid-enterprise';
-import * as Styled from './styled';
+import { Box } from '../Box';
+import { handleShowCheckbox, handleIsEditable, editorComponent } from './grid-helpers';
 
 const gridHeight = 8;
 const defaultRowHeight = gridHeight * 5;
@@ -35,6 +36,10 @@ export function BaseGrid({
 	handleGetRowId,
 	additionalCellComponents,
 	additionalColumnOptions,
+	onRowSelect,
+	showDragHandle,
+	onRowDataChange,
+	context,
 }) {
 	const tableHeightPadding = hasPagingBar ? 42 : 2;
 	const prevViewportSize = useRef(isSmallViewport);
@@ -67,10 +72,18 @@ export function BaseGrid({
 		}
 	}, [gridApi, sortModel]);
 
+	useEffect(() => {
+		if (gridApi && !maxRows) {
+			gridApi.setDomLayout('autoHeight');
+		}
+	}, [gridApi, maxRows]);
+
 	const handleSelectionChanged = useCallback(() => {
-		const selectedRows = gridApi.getSelectedRows();
-		onRowClick && onRowClick(selectedRows);
-	}, [gridApi, onRowClick]);
+		if (onRowSelect) {
+			const selectedRows = gridApi.getSelectedRows();
+			onRowSelect(selectedRows);
+		}
+	}, [gridApi, onRowSelect]);
 
 	const { headingChildren, cellComponents, suppressRowClick } = parseChildrenSettings(
 		children,
@@ -95,10 +108,24 @@ export function BaseGrid({
 	const handleCellClicked = useCallback(
 		event => {
 			if (!event.column.colDef.hasInteractableElement) {
-				onRowClick && onRowClick([event.data]);
+				onRowClick && onRowClick(event.data);
 			}
 		},
 		[onRowClick],
+	);
+
+	const handleRowClicked = useCallback(
+		event => {
+			onRowClick && onRowClick(event.data);
+		},
+		[onRowClick],
+	);
+
+	const handleCellEdit = useCallback(
+		({ data: rowData }) => {
+			onRowDataChange(rowData);
+		},
+		[onRowDataChange],
 	);
 
 	const handleGridReady = useCallback(
@@ -119,14 +146,20 @@ export function BaseGrid({
 	const rowCount = data ? data.length : 0;
 	const currentHeaderHeight = hideHeaders ? 1 : headerHeight;
 
-	const calculatedTableHeight =
-		rowCount !== 0
-			? (maxRows && maxRows < rowCount ? maxRows : rowCount) * (rowHeight || defaultRowHeight) +
-			  tableHeightPadding +
-			  currentHeaderHeight
-			: noRowsDefaultTableHeight;
+	let calculatedTableHeight;
+	if (maxRows) {
+		calculatedTableHeight =
+			rowCount !== 0
+				? (maxRows && maxRows < rowCount ? maxRows : rowCount) * (rowHeight || defaultRowHeight) +
+				  tableHeightPadding +
+				  currentHeaderHeight
+				: noRowsDefaultTableHeight;
+	} else {
+		calculatedTableHeight = '100%';
+	}
+
 	return (
-		<Styled.GridContainer
+		<Box
 			className="ag-theme-faithlife"
 			height={calculatedTableHeight}
 			minHeight={minHeight}
@@ -134,12 +167,13 @@ export function BaseGrid({
 		>
 			<AgGridReact
 				rowData={data}
+				context={context}
 				onGridReady={handleGridReady}
 				onGridSizeChanged={handleGridResize}
 				onSortChanged={handleSortChanged}
 				onSelectionChanged={handleSelectionChanged}
 				rowSelection={
-					!onRowClick
+					!onRowClick && !onRowSelect
 						? BaseGrid.rowSelectionOptions.none
 						: rowSelectionType || BaseGrid.rowSelectionOptions.single
 				}
@@ -148,13 +182,17 @@ export function BaseGrid({
 				rowHeight={rowHeight || defaultRowHeight}
 				suppressHorizontalScroll
 				rowClass={onRowClick ? 'ag-grid-clickable-row' : ''}
-				groupUseEntireRow
 				deltaRowDataMode
 				getRowNodeId={handleGetRowId || getRowNodeId}
 				suppressRowClickSelection={suppressRowClick}
 				onCellClicked={suppressRowClick ? handleCellClicked : null}
 				getRowHeight={getRowHeight}
+				onRowClicked={suppressRowClick ? null : handleRowClicked}
+				onCellEditingStopped={handleCellEdit}
+				suppressContextMenu
+				animateRows
 				reactNext
+				colResizeDefault="shift"
 				{...gridOptions}
 			>
 				{headingChildren.map((child, index) => {
@@ -171,6 +209,11 @@ export function BaseGrid({
 						hide,
 						isLargeViewportOnly,
 						isSmallViewportOnly,
+						showCheckbox,
+						shouldShowCheckbox,
+						isEditable,
+						shouldBeEditable,
+						editorComponent,
 						hasInteractableElement,
 						...columnProps
 					} = child.props;
@@ -178,11 +221,13 @@ export function BaseGrid({
 						<AgGridColumn
 							{...additionalColumnOptions}
 							{...columnProps}
+							rowDrag={showDragHandle && index === 0}
 							key={fieldName}
 							headerName={displayName}
 							field={fieldName}
 							sortable={isSortable}
 							cellRenderer={cellComponent ? fieldName : null}
+							cellEditor={editorComponent ? `${fieldName}${editorComponent}` : null}
 							comparator={sortFunction}
 							resizable={isResizable}
 							sort={defaultSort}
@@ -194,11 +239,16 @@ export function BaseGrid({
 								hide ||
 								(isSmallViewport ? isLargeViewportOnly : isSmallViewportOnly)
 							}
+							checkboxSelection={
+								shouldShowCheckbox ? handleShowCheckbox(shouldShowCheckbox) : showCheckbox
+							}
+							editable={shouldBeEditable ? handleIsEditable(shouldBeEditable) : isEditable}
+							singleClickEdit={shouldBeEditable || isEditable}
 						/>
 					);
 				})}
 			</AgGridReact>
-		</Styled.GridContainer>
+		</Box>
 	);
 }
 
@@ -208,15 +258,21 @@ BaseGrid.rowSelectionOptions = {
 	multi: 'multiple',
 };
 
+BaseGrid.expandedRowsOptions = {
+	all: -1,
+	none: 0,
+	topLevel: 1,
+};
+
 BaseGrid.propTypes = {
 	isSmallViewport: PropTypes.bool,
-	/** The Max amount of rows to show in the table */
+	/** The Max amount of rows to show in the table. Leave blank to enable auto height/ infinite scroll */
 	maxRows: PropTypes.number,
 	/** An array of the data for the rows */
 	data: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-		}),
+		}).isRequired,
 	),
 	/** The current sort model for the table */
 	sortModel: PropTypes.object,
@@ -224,7 +280,7 @@ BaseGrid.propTypes = {
 	updateSortModel: PropTypes.func,
 	/** Text to filter the rows on */
 	filterText: PropTypes.string,
-	/** Whether to allow single or multi row select */
+	/** Whether to allow single or multi row select, Use 'GridComponent'.rowSelectionOptions */
 	rowSelectionType: PropTypes.oneOf(Object.values(BaseGrid.rowSelectionOptions)),
 	/** Handler for selected rows */
 	onRowClick: PropTypes.func,
@@ -237,6 +293,14 @@ BaseGrid.propTypes = {
 	/** Your data should have an id property or this handler must be included */
 	handleGetRowId: PropTypes.func,
 	children: PropTypes.node,
+	/** Called when a row is selected with a checkbox */
+	onRowSelect: PropTypes.func,
+	/** Called with new data after the existing data has been edited. Required for dragDrop and cell editing */
+	handleCellEdit: PropTypes.func,
+	/** Called after a row is updated with the new row data */
+	onRowDataChange: PropTypes.func,
+	/** An object that will be passed to cell components */
+	context: PropTypes.object,
 };
 
 function parseChildrenSettings(children, additionalCellComponents = {}) {
@@ -245,13 +309,23 @@ function parseChildrenSettings(children, additionalCellComponents = {}) {
 	);
 
 	const cellComponents = headingChildren
-		.filter(child => !!child.props.cellComponent)
+		.filter(child => !!child.props.cellComponent || !!child.props.editorComponent)
 		.reduce((components, child) => {
-			components[child.props.fieldName] = child.props.cellComponent;
+			if (child.props.cellComponent) {
+				components[child.props.fieldName] = child.props.cellComponent;
+			}
+			if (child.props.editorComponent) {
+				components[`${child.props.fieldName}${editorComponent}`] = child.props.editorComponent;
+			}
 			return components;
 		}, {});
 
-	const suppressRowClick = headingChildren.some(child => child.props.hasInteractableElement);
+	const suppressRowClick = headingChildren.some(
+		child =>
+			child.props.hasInteractableElement ||
+			child.props.showCheckbox ||
+			child.props.shouldShowCheckbox,
+	);
 
 	return {
 		headingChildren,

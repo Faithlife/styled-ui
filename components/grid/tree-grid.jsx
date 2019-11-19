@@ -1,23 +1,17 @@
-import React, { useRef, useEffect, useCallback, useMemo } from 'react';
+import React, { useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { useGridState } from './grid-helpers';
+import {
+	useGridState,
+	AggregationGroupColumn,
+	getAggregationColumn,
+	dragDirections,
+	dragEventTypes,
+	useGridDragDrop,
+	useGridHandles,
+} from './grid-helpers';
 import { BaseGrid } from './base-grid';
-import { TreeGroupColumn } from './tree-grid-group-column';
 
-const treeGroupColumnComponent = 'treeGroupColumn';
-
-const dragDirections = {
-	up: 'up',
-	down: 'down',
-};
-
-const dragEventTypes = {
-	drag: 'rowDragMove',
-	drop: 'rowDragEnd',
-	leave: 'rowDragLeave',
-};
-
-export function TreeGrid(props) {
+export const TreeGrid = React.forwardRef((props, ref) => {
 	// First separate out the props that are this grid component specific
 	const {
 		children,
@@ -26,26 +20,37 @@ export function TreeGrid(props) {
 		autoGroupExpansion,
 		onDataChange,
 		isValidDropTarget,
+		isDraggableRow,
 		...baseGridProps
 	} = props;
 
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useGridState();
 
-	// For styling the drop target rows
-	const previousHoveredRowNode = useRef();
-	const hoveredRowNode = useRef();
-	const draggedNode = useRef();
-	const dragDirection = useRef();
+	useGridHandles(gridApi, ref);
 
-	const heading = React.Children.toArray(children).find(child => child && child.type.isTreeGroup);
+	const {
+		previousHoveredRowNode,
+		hoveredRowNode,
+		draggedNode,
+		dragDirection,
+		getShouldShowDropTarget,
+	} = useGridDragDrop(isValidDropTarget, getNewPath);
+
+	const { heading, groupComponent, groupColumnSettings } = getAggregationColumn({
+		children,
+		getShouldShowDropTarget,
+		isDraggableRow,
+		enableDragDrop,
+	});
+
 	useEffect(() => {
 		if (process.env.NODE_ENV !== 'production') {
-			if (!heading && !enableDragDrop) {
+			if (!heading && !(enableDragDrop || isDraggableRow)) {
 				console.warn(
 					'You are using a tree grid, but are not including a `<TreeGrid.GroupColumn> child',
 				);
 			}
-			if (enableDragDrop && !onDataChange) {
+			if ((enableDragDrop || isDraggableRow) && !onDataChange) {
 				console.warn(
 					'You are using dragdrop for the tree grid, but did not supply a onDataChange function',
 				);
@@ -53,68 +58,11 @@ export function TreeGrid(props) {
 		}
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-	const getShouldShowDropTarget = useCallback(
-		onDirection => ({ rowIndex }) => {
-			if (
-				isValidDropTarget &&
-				!isValidDropTarget(
-					draggedNode.current.node.data,
-					getNewPath(hoveredRowNode.current.node, dragDirection.current),
-				)
-			) {
-				return false;
-			}
-			return (
-				hoveredRowNode.current &&
-				hoveredRowNode.current.rowIndex === rowIndex &&
-				draggedNode.current.rowIndex !== hoveredRowNode.current.rowIndex &&
-				dragDirection.current === onDirection
-			);
-		},
-		[isValidDropTarget],
-	);
-
-	let groupComponent;
-	let groupColumnSettings;
-	if (heading) {
-		const {
-			displayName,
-			cellComponent,
-			isSortable,
-			defaultSort,
-			isResizable,
-			hideChildrenCount,
-			...groupProps
-		} = heading.props;
-
-		groupComponent = cellComponent ? { [treeGroupColumnComponent]: cellComponent } : {};
-		groupColumnSettings = {
-			rowDrag: enableDragDrop,
-			headerName: heading.props.displayName,
-			sortable: isSortable,
-			sort: defaultSort,
-			resizable: isResizable,
-			cellRendererParams: {
-				suppressCount: hideChildrenCount,
-				innerRenderer: cellComponent ? treeGroupColumnComponent : '',
-			},
-			cellClass: 'ag-faithlife-cell',
-			cellClassRules: {
-				'ag-faithlife-drop-target-row_below': getShouldShowDropTarget(dragDirections.down),
-				'ag-faithlife-drop-target-row_above': getShouldShowDropTarget(dragDirections.up),
-			},
-			headerClass: enableDragDrop
-				? 'ag-faithlife-tree-group-header-with-drag'
-				: 'ag-faithlife-tree-group-header',
-			...groupProps,
-		};
-	}
-
 	useEffect(() => {
 		if (gridApi) {
-			gridApi.setSuppressRowDrag(!enableDragDrop);
+			gridApi.setSuppressRowDrag(!(enableDragDrop || isDraggableRow));
 		}
-	}, [gridApi, enableDragDrop]);
+	}, [gridApi, enableDragDrop, isDraggableRow]);
 
 	const rows = useMemo(() => getRowsFromTreeShape([], '', data), [data]);
 
@@ -141,7 +89,7 @@ export function TreeGrid(props) {
 					if (
 						draggedNode.current &&
 						draggedNode.current.rowIndex !== newParentNode.rowIndex &&
-						(!isValidDropTarget || isValidDropTarget(draggedNode.data, newPath))
+						(!isValidDropTarget || isValidDropTarget(draggedNode.current.data, newPath))
 					) {
 						const cleanTree = getTreeWithoutId(draggedNode.current.id, data);
 						const newData = insertDataIntoTree(
@@ -151,7 +99,7 @@ export function TreeGrid(props) {
 							cleanTree,
 						);
 
-						onDataChange(newData);
+						onDataChange(newData, draggedNode.current.id, draggedNode.current.data);
 					}
 
 					break;
@@ -176,20 +124,18 @@ export function TreeGrid(props) {
 				previousHoveredRowNode.current = hoveredRowNode.current;
 			}
 		},
-		[gridApi, onDataChange, isValidDropTarget, data],
+		[gridApi, onDataChange, isValidDropTarget, data], // eslint-disable-line react-hooks/exhaustive-deps
 	);
 
 	const gridOptions = useMemo(
 		() => ({
 			treeData: true,
-			animateRows: true,
 			getDataPath,
 			onRowDragMove: handleRowDrag,
 			onRowDragLeave: handleRowDrag,
 			onRowDragEnd: handleRowDrag,
 			groupDefaultExpanded: autoGroupExpansion || TreeGrid.expandedRowsOptions.none,
 			autoGroupColumnDef: groupColumnSettings,
-			groupUseEntireRow: false,
 		}),
 		[handleRowDrag, autoGroupExpansion, groupColumnSettings],
 	);
@@ -215,7 +161,7 @@ export function TreeGrid(props) {
 			{children}
 		</BaseGrid>
 	);
-}
+});
 
 TreeGrid.rowSelectionOptions = BaseGrid.rowSelectionOptions;
 
@@ -224,18 +170,12 @@ TreeGrid.rowTypes = {
 	item: 'item',
 };
 
-TreeGrid.expandedRowsOptions = {
-	all: -1,
-	none: 0,
-	topLevel: 1,
-};
+TreeGrid.expandedRowsOptions = BaseGrid.expandedRowsOptions;
 
-TreeGrid.GroupColumn = TreeGroupColumn;
+TreeGrid.GroupColumn = AggregationGroupColumn;
 
 TreeGrid.propTypes = {
 	...BaseGrid.propTypes,
-	currentPageNumber: PropTypes.number,
-	onPageNumberChange: PropTypes.func,
 	data: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -243,11 +183,15 @@ TreeGrid.propTypes = {
 			children: PropTypes.array,
 		}),
 	),
+	/** Use one of TreeGrid.expandedRowsOptions */
 	autoGroupExpansion: PropTypes.oneOf(Object.values(TreeGrid.expandedRowsOptions)),
-	/** Called after a drag-drop */
+	/** Called after a drag-drop with the updated child tree */
 	onDataChange: PropTypes.func,
-	/** Is the current drop target a valid parent calls with the row data and the new path */
+	/** Is the current drop target a valid parent called with the row data and the new path */
 	isValidDropTarget: PropTypes.func,
+	/** Optional callback called for each row to see if it should be draggable. Passes (isGroup: boolean, rowData: object) */
+	isDraggableRow: PropTypes.func,
+	enableDragDrop: PropTypes.bool,
 };
 
 function getRowsFromTreeShape(pathTo, parentId, tree) {

@@ -77,6 +77,7 @@ import { DocgenTable } from './docgen-table';
 import { textInputPages } from './input/pages';
 import DownArrow from './svgs/arrow-down.svg';
 import { PopulationChange } from './grid/population-change';
+import { IncrementButton } from './grid/cell-editors';
 import { BaseGrid } from '../components/grid/base-grid';
 import { SimpleGrid, GridColumn, PaginatedGrid, TreeGrid } from '../components/grid';
 
@@ -448,13 +449,16 @@ const pages = [
 					Button,
 					censusData: censusDataWithId,
 					censusDataFolders,
+					TreeGrid,
+					gridRef: React.createRef(),
+					IncrementButton,
 				},
 			},
 			{
 				title: 'Documentation',
 				path: '/grid/documentation',
 				content: pageLoader(() => import('./grid/documentation.md')),
-				imports: { DocgenTable, GridColumn, SimpleGrid, BaseGrid, PaginatedGrid },
+				imports: { DocgenTable, GridColumn, SimpleGrid, BaseGrid, PaginatedGrid, TreeGrid },
 			},
 		],
 	},
