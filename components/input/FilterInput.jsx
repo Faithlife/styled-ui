@@ -43,7 +43,8 @@ const FilterInput = React.forwardRef(function FilterInput(
 					paddingRight={6}
 				/>
 				<Button
-					variant="minorTransparent"
+					variant="link"
+					size="small"
 					disabled={!value}
 					icon={value ? <Close /> : <Search />}
 					position="absolute"
