@@ -2,8 +2,8 @@ import React, { useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { AgGridReact, AgGridColumn } from 'ag-grid-react';
 import 'ag-grid-enterprise';
+import { Box } from '../Box';
 import { handleShowCheckbox, handleIsEditable } from './grid-helpers';
-import * as Styled from './styled';
 
 const gridHeight = 8;
 const defaultRowHeight = gridHeight * 5;
@@ -71,6 +71,12 @@ export function BaseGrid({
 			gridApi.setSortModel(sortModel);
 		}
 	}, [gridApi, sortModel]);
+
+	useEffect(() => {
+		if (gridApi && !maxRows) {
+			gridApi.setDomLayout('autoHeight');
+		}
+	}, [gridApi, maxRows]);
 
 	const handleSelectionChanged = useCallback(() => {
 		if (onRowSelect) {
@@ -140,14 +146,20 @@ export function BaseGrid({
 	const rowCount = data ? data.length : 0;
 	const currentHeaderHeight = hideHeaders ? 1 : headerHeight;
 
-	const calculatedTableHeight =
-		rowCount !== 0
-			? (maxRows && maxRows < rowCount ? maxRows : rowCount) * (rowHeight || defaultRowHeight) +
-			  tableHeightPadding +
-			  currentHeaderHeight
-			: noRowsDefaultTableHeight;
+	let calculatedTableHeight;
+	if (maxRows) {
+		calculatedTableHeight =
+			rowCount !== 0
+				? (maxRows && maxRows < rowCount ? maxRows : rowCount) * (rowHeight || defaultRowHeight) +
+				  tableHeightPadding +
+				  currentHeaderHeight
+				: noRowsDefaultTableHeight;
+	} else {
+		calculatedTableHeight = '100%';
+	}
+
 	return (
-		<Styled.GridContainer
+		<Box
 			className="ag-theme-faithlife"
 			height={calculatedTableHeight}
 			minHeight={minHeight}
@@ -236,7 +248,7 @@ export function BaseGrid({
 					);
 				})}
 			</AgGridReact>
-		</Styled.GridContainer>
+		</Box>
 	);
 }
 
@@ -254,7 +266,7 @@ BaseGrid.expandedRowsOptions = {
 
 BaseGrid.propTypes = {
 	isSmallViewport: PropTypes.bool,
-	/** The Max amount of rows to show in the table */
+	/** The Max amount of rows to show in the table. Leave blank to enable auto height/ infinite scroll */
 	maxRows: PropTypes.number,
 	/** An array of the data for the rows */
 	data: PropTypes.arrayOf(
