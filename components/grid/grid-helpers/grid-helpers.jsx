@@ -2,6 +2,8 @@ import React, { useImperativeHandle, useState, useCallback, useRef } from 'react
 
 const treeGroupColumnComponent = 'treeGroupColumn';
 
+export const editorComponent = 'Editor';
+
 export const dragDirections = {
 	up: 'up',
 	down: 'down',
@@ -118,7 +120,7 @@ export function getAggregationColumn({
 			groupComponent[treeGroupColumnComponent] = cellComponent;
 		}
 		if (editComponent) {
-			groupComponent[`${treeGroupColumnComponent}Editor`] = editComponent;
+			groupComponent[`${treeGroupColumnComponent}${editorComponent}`] = editComponent;
 		}
 
 		groupColumnSettings = {
@@ -130,7 +132,7 @@ export function getAggregationColumn({
 			resizable: isResizable,
 			editable: shouldBeEditable ? handleIsEditable(shouldBeEditable) : isEditable,
 			singleClickEdit: shouldBeEditable || isEditable,
-			cellEditor: editComponent ? `${treeGroupColumnComponent}Editor` : null,
+			cellEditor: editComponent ? `${treeGroupColumnComponent}${editorComponent}` : null,
 			cellRendererParams: {
 				suppressCount: hideChildrenCount,
 				innerRenderer: cellComponent ? treeGroupColumnComponent : '',

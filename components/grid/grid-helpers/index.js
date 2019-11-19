@@ -10,5 +10,6 @@ export {
 	handleIsDraggable,
 	handleIsEditable,
 	useCellEditor,
+	editorComponent,
 } from './grid-helpers';
 export { AggregationGroupColumn } from './aggregation-group-column';
