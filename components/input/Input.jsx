@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { system, variant, layout, textStyle, border } from 'styled-system';
+import { system, variant as createVariant, layout, textStyle, border } from 'styled-system';
 import systemPropTypes from '@styled-system/prop-types';
 import { theme } from '../../theme';
 import { common, typography } from '../../theme/system';
@@ -100,17 +100,17 @@ Input.propTypes = {
 
 export { Input };
 
-const StyledInput = styled.input`
+const StyledInput = styled.input(
+	({ theme, variant, styleOverrides = {} }) => css`
 	${resetStyles};
 	${textStyle};
 
 	height: 32px;
-	padding: ${({ theme }) => theme.space[3]};
+	padding: ${theme.space[3]};
 
-${({ theme, styleOverrides = {} }) => css`
 	border: 1px solid;
 	border-radius: ${theme.radii[1]};
-	border-color: ${theme.colors.inputBorderColor};
+	border-color: ${theme.colors.inputBorderColor || theme.colors.input.borderColor};
 
 	${'height' in styleOverrides &&
 		css`
@@ -121,71 +121,71 @@ ${({ theme, styleOverrides = {} }) => css`
 		css`
 			width: ${styleOverrides.width};
 		`}
-`}
 
 	&:focus {
-		border-color: ${({ theme }) => theme.colors.inputFocusedBorderColor};
-		box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.inputFocusedShadowColor};
+		border-color: ${theme.colors.inputFocusedBorderColor || theme.colors.input.focusedBorderColor};
+		box-shadow: 0 0 0 2px ${theme.colors.inputFocusedShadowColor ||
+			theme.colors.input.focusedBoxShadowColor};
 		outline: 0;
-		${({ variant }) =>
-			variant === 'inline' &&
-			system({ underlineColor: { property: 'border-color', scale: 'colors' } })}
-	}
-
-	&:disabled {
-		background-color: ${theme.colors.gray4};
-		color: ${theme.colors.gray34};
-		border-color: ${theme.colors.gray14};
+		${variant === 'inline' && system({ underlineColor: { property: 'border-color', scale: 'colors' } })}
 	}
 
 	&:read-only {
-		background: ${({ theme }) => theme.colors.gray8};
+		background: ${theme.colors.input.readOnlyBackgroundColor};
 	}
 
 	&::placeholder {
-		color: ${({ theme }) => theme.colors.inputPlaceholderColor};
+		color: ${theme.colors.inputPlaceholderColor || theme.colors.input.placeholderColor};
 	}
 
-	${({ theme }) =>
-		variant({
-			variants: {
-				small: {
-					padding: '8px',
-					height: '32px',
-				},
-				medium: {
-					padding: '12px',
-					height: '40px',
-				},
-				large: {
-					padding: '16px',
-					height: '56px',
-				},
-				inline: {
-					backgroundColor: 'transparent',
-					border: 'none',
+	&:disabled {
+		color: ${theme.colors.input.disabledTextColor};
+		background-color: ${theme.colors.input.disabledBackgroundColor};
+		border-color: ${theme.colors.input.disabledBorderColor};
+
+		&::placeholder {
+			color: ${theme.colors.input.disabledPlaceholderColor};
+		}
+	}
+
+	${createVariant({
+		variants: {
+			small: {
+				padding: '8px',
+				height: '32px',
+			},
+			medium: {
+				padding: '12px',
+				height: '40px',
+			},
+			large: {
+				padding: '16px',
+				height: '56px',
+			},
+			inline: {
+				backgroundColor: 'transparent',
+				border: 'none',
+				boxShadow: 'none',
+				borderRadius: '0px',
+				padding: '0px',
+				borderBottom: '2px solid',
+				borderColor: theme.colors.blue4,
+				height: '20px',
+				paddingBottom: '4px',
+				lineHeight: 1,
+				'&:focus': {
 					boxShadow: 'none',
-					borderRadius: '0px',
-					padding: '0px',
-					borderBottom: '2px solid',
-					borderColor: theme.colors.blue4,
-					height: '20px',
-					paddingBottom: '4px',
-					lineHeight: 1,
-					'&:focus': {
-						boxShadow: 'none',
-						outline: '0',
-					},
+					outline: '0',
 				},
 			},
-		})}
+		},
+	})}
 
-	${({ variant }) =>
-		variant === 'inline' &&
-		system({ underlineColor: { property: 'border-color', scale: 'colors' } })}
+	${variant === 'inline' && system({ underlineColor: { property: 'border-color', scale: 'colors' } })}
 
 	${common};
 	${typography};
 	${layout};
 	${border};
-`;
+`,
+);

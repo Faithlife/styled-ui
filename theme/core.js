@@ -91,10 +91,10 @@ const colors = {
 	yellow5: '#b58300',
 
 	borderColor: '#C7C7C7',
-	inputBorderColor: '#C7C7C7',
+	inputBorderColor: '#a8a8a8',
 	inputFocusedBorderColor: '#278ed4',
 	inputFocusedShadowColor: '#d0e6f6',
-	inputPlaceholderColor: '#C7C7C7',
+	inputPlaceholderColor: '#a8a8a8',
 };
 
 colors.button = {
@@ -123,6 +123,23 @@ colors.button = {
 
 	focusBorder: colors.blue1,
 	focusShadow: colors.blue3,
+};
+
+colors.input = {
+	textColor: colors.gray66,
+	backgroundColor: colors.white,
+	borderColor: colors.gray34,
+	placeholderColor: colors.gray34,
+
+	disabledTextColor: colors.gray66,
+	disabledBackgroundColor: colors.gray4,
+	disabledBorderColor: colors.gray14,
+	disabledPlaceholderColor: colors.gray34,
+
+	readOnlyBackgroundColor: colors.gray8,
+
+	focusedBorderColor: '#278ed4',
+	focusedBoxShadowColor: '#d0e6f6',
 };
 
 const fonts = {
