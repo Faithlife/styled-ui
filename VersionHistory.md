@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.31.0
+
+- Add `tabletRightOffset` styleOverride to `ProductDrawer`.
+
 ### 5.30.0
 
 - Add checkbox support to all grids.
