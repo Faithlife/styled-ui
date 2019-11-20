@@ -1,0 +1,47 @@
+{
+  "private": true,
+  "dependencies": {
+    "@faithlife/flcom-addin-scripts": "4.9.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "flcom-addin-scripts start",
+    "build": "flcom-addin-scripts build",
+    "create-package": "flcom-addin-scripts create-package",
+    "create-example": "flcom-addin-scripts create-example",
+    "lint": "flcom-addin-scripts lint",
+    "ship": "flcom-addin-scripts ship",
+    "ship-to": "flcom-addin-scripts ship-to",
+    "get-versions": "flcom-addin-scripts get-versions"
+  },
+  "browserslist": [
+    "extends @faithlife/browserslist-config-flcom-addin"
+  ],
+  "eslintConfig": {
+    "root": true,
+    "extends": "@faithlife/eslint-config-flcom-addin",
+    "overrides": [
+      {
+        "files": [
+          "examples/**"
+        ],
+        "rules": {
+          "react/jsx-no-literals": "off"
+        }
+      }
+    ]
+  },
+  "eslintIgnore": [
+    "**/dist",
+    "**/node_modules"
+  ],
+  "devDependencies": {
+    "typescript": "^3.7.2"
+  }
+}

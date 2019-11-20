@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"module": "ESNext",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": false,
+		"noEmit": true,
+		"jsx": "preserve",
+		"target": "es5",
+		"strict": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true
+	}
+}
