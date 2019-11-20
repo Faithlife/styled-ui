@@ -48,6 +48,7 @@ export class ProductDrawer extends React.PureComponent {
 		}),
 		styleOverrides: PropTypes.shape({
 			mobileTopOffset: PropTypes.string,
+			tabletRightOffset: PropTypes.string,
 			toggleButtonColor: PropTypes.string,
 			toggleButtonHoverColor: PropTypes.string,
 			toggleTextColor: PropTypes.string,
