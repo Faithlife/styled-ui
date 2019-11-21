@@ -64,7 +64,7 @@
     "prettier": "^1.18.2",
     "react-svg-loader": "^2.1.0",
     "style-loader": "^1.0.0",
-    "styled-components": "4.3.0",
+    "styled-components": "^4.3.0",
     "ts-loader": "^6.2.0",
     "tslint": "^5.0.0",
     "typescript": "3.5.1",
