@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
-import { GroupSelector } from '@faithlife/group-selector';
+import { LargeGroupSelector, GroupSelector } from '@faithlife/group-selector';
 import { Accordion } from '@faithlife/styled-ui';
 
 export class App extends PureComponent {
@@ -108,51 +108,105 @@ export class App extends PureComponent {
 				claimable: false,
 			},
 		],
+		expandedSections: [0, 2],
 	};
 	render() {
 		return (
 			<header>
-				<GroupSelector
-					onSearchInputChange={search => {
-						this.setState({ groupSearchResults: this.state.demoSearchResults });
-					}}
-					onCreateGroup={(name, location) => {
-						const newGroup = {
-							name,
-							groupId: 5,
-							kind: 'church',
-							avatarUrl: '',
-							relationshipKind: 'participant',
-							membershipKind: 'admin',
-							claimable: false,
-						};
+				<Accordion
+					expandedSections={this.state.expandedSections}
+					onExpansion={expandedSections => this.setState({ expandedSections })}
+				>
+					<Accordion.Item>
+						<Accordion.Header>In Place Large Group Selector</Accordion.Header>
+						<Accordion.Panel>
+							<LargeGroupSelector
+								isOpen={false}
+								onChangeModalState={() => {}}
+								onSearchInputChange={search => {
+									this.setState({ groupSearchResults: this.state.demoSearchResults });
+								}}
+								groups={this.state.groups}
+								groupSearchResults={this.state.groupSearchResults || this.state.groups}
+								onCreateGroup={(name, location) => {
+									const newGroup = {
+										name,
+										groupId: 6,
+										kind: 'church',
+										avatarUrl: '',
+										relationshipKind: 'participant',
+										membershipKind: 'admin',
+										claimable: false,
+									};
 
-						this.setState({
-							groups: [...this.state.groups, newGroup],
-							selectedGroupId: newGroup.groupId,
-						});
-					}}
-					onSelectionChange={(groupId, name) => {
-						this.setState({ selectedGroupId: groupId });
-					}}
-					groups={this.state.groups}
-					selectedGroupId={this.state.selectedGroupId}
-					groupSearchResults={this.state.groupSearchResults || this.state.groups}
-					groupSelectorView={'groups'}
-					onGetStartedClick={() => {
-						alert('Lets get started.');
-					}}
-					onClaimGroupClick={() => {
-						alert('Claim the group!');
-					}}
-					onJoinGroupClick={() => {
-						alert('Should Join the group, or request');
-					}}
-					onAdminRequestClick={() => {
-						alert('Admin access requested');
-					}}
-					isMobile={false}
-				/>
+									this.setState({
+										groups: [...this.state.groups, newGroup],
+										isOpen: false,
+									});
+								}}
+								onGetStartedClick={() => {
+									alert('Lets get started.');
+								}}
+								onClaimGroupClick={() => {
+									alert('Claim the group!');
+								}}
+								onJoinGroupClick={() => {
+									alert('Should Join the group, or request');
+								}}
+								onAdminRequestClick={() => {
+									alert('Admin access requested');
+								}}
+								showInPlace
+							/>
+						</Accordion.Panel>
+					</Accordion.Item>
+					<Accordion.Item>
+						<Accordion.Header>Group Selector with Groups</Accordion.Header>
+						<Accordion.Panel>
+							<GroupSelector
+								onSearchInputChange={search => {
+									this.setState({ groupSearchResults: this.state.demoSearchResults });
+								}}
+								onCreateGroup={(name, location) => {
+									const newGroup = {
+										name,
+										groupId: 5,
+										kind: 'church',
+										avatarUrl: '',
+										relationshipKind: 'participant',
+										membershipKind: 'admin',
+										claimable: false,
+									};
+
+									this.setState({
+										groups: [...this.state.groups, newGroup],
+										selectedGroupId: newGroup.groupId,
+									});
+								}}
+								onSelectionChange={(groupId, name) => {
+									this.setState({ selectedGroupId: groupId });
+								}}
+								groups={this.state.groups}
+								selectedGroupId={this.state.selectedGroupId}
+								groupSearchResults={this.state.groupSearchResults || this.state.groups}
+								groupSelectorView={'groups'}
+								onGetStartedClick={() => {
+									alert('Lets get started.');
+								}}
+								onClaimGroupClick={() => {
+									alert('Claim the group!');
+								}}
+								onJoinGroupClick={() => {
+									alert('Should Join the group, or request');
+								}}
+								onAdminRequestClick={() => {
+									alert('Admin access requested');
+								}}
+								isMobile={false}
+							/>
+						</Accordion.Panel>
+					</Accordion.Item>
+				</Accordion>
 			</header>
 		);
 	}

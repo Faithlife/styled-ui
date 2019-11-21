@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@faithlife/styled-ui';
+import { Button } from '@faithlife/styled-ui/v6';
 import * as Styled from './styled';
 import { GroupDropdown } from './dropdown';
 import { LargeGroupSelector } from './large';
