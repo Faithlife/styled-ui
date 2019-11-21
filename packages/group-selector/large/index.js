@@ -1,0 +1,1 @@
+export { LargeGroupSelector } from './component';

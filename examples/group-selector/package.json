@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "group-selector",
+  "version": "1.0.0",
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "prop-types": "^15.7.2",
+    "@faithlife/group-selector": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.4",
+    "@faithlife/styled-ui": "^5.31.0",
+    "styled-components": "^4.4.1"
+  }
+}
