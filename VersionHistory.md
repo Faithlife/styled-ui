@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.31.1
+
+- Fix infinite `TabPanel` render bug.
+- Fix errors with certain `LegacyModal` children.
+
 ### 5.31.0
 
 - Add `tabletRightOffset` styleOverride to `ProductDrawer`.
