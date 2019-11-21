@@ -6,7 +6,6 @@
 		"jsx": "react",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
-		"isolatedModules": false,
 		"noEmit": true,
 		"typeRoots": ["./node_modules/@types"],
 		"noImplicitAny": false,

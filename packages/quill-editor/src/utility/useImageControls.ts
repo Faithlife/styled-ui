@@ -72,7 +72,7 @@ export const useImageControls = (
 				height: imageRect.height + overlayMarginPixels * 2,
 			});
 		}
-	}, [getEditor, getSelectedImage]);
+	}, [getEditor, getSelectedImage, quillEditorQuery]);
 
 	const simulateEditorScroll = useCallback(
 		(deltaX, deltaY) => {

@@ -10,13 +10,13 @@ import ReactQuill from 'react-quill';
 import { Delta } from 'quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
+import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import { LocalizationProvider } from '../components/Localization';
 import localizedResources from '../locales/en-US/resources.json';
 import { FilePickerModal } from '../components/FilePickerModal';
 import { useImageControls } from '../utility/useImageControls';
 import { ResizableOverlay } from '../components/ResizableOverlay';
 import { throttle } from '../utility/throttle';
-import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 
 export interface IQuillRichTextEditorProps {
 	groupId?: string;
@@ -25,7 +25,7 @@ export interface IQuillRichTextEditorProps {
 	toolbarHandlers?: { [key: string]: any };
 	modules?: { [key: string]: any };
 	placeholder?: string;
-	onContentChange: (delta: Delta | null) => void;
+	onContentChange: () => void;
 	onClick?: (e: React.MouseEvent) => void;
 	onBlur?: () => void;
 	className?: string;
@@ -346,7 +346,16 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			clipboard: { matchVisual: false },
 			...modules,
 		}),
-		[insertTemplate, imageHandler, textHandler, handleLinkInsert]
+		[
+			insertTemplate,
+			imageHandler,
+			textHandler,
+			handleLinkInsert,
+			editorId,
+			modules,
+			quillEditorId,
+			toolbarHandlers,
+		]
 	);
 
 	useEffect(() => {
@@ -360,7 +369,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		return () => editorElement && editorElement.removeEventListener('click', onEditorClick);
 	}, [onEditorClick]);
 
-	/*const handleTextChange = useCallback(
+	const handleTextChange = useCallback(
 		test => {
 			console.log(test);
 			onContentChange && onContentChange();
@@ -378,7 +387,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			}
 		}
 		return () => editor && editor.off('text-change', handleTextChange);
-	}, [handleTextChange]);*/
+	}, [handleTextChange]);
 
 	const deleteText = useCallback((start?: number, end?: number, source: Source = 'user') => {
 		if (quillRef.current) {
@@ -426,7 +435,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			getHTML,
 			getEditor: () => quillRef.current && quillRef.current.getEditor(),
 		}),
-		[]
+		[insertText, deleteText, getHTML]
 	);
 
 	const allowedFormats = formats || [
@@ -443,10 +452,6 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		'image',
 		'width',
 	];
-
-	const handleChange = useCallback(content => {
-		onContentChange && onContentChange(content);
-	}, []);
 
 	return (
 		<LocalizationProvider localizedResources={localizedResources}>
@@ -467,7 +472,6 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 					formats={allowedFormats}
 					bounds={quillEditorQuery}
 					onBlur={onBlur}
-					onChange={handleChange}
 					{...otherProps}
 				/>
 				{overlayCoordinates && (

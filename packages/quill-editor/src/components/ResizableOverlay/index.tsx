@@ -102,17 +102,20 @@ export const ResizableOverlay: React.FunctionComponent<IResizableOverlayProps> =
 	const overlayRef = useRef<any>();
 	const mouseDownRef = useRef<any>();
 
-	const setResizeCursor = value => {
-		document.body.style.cursor = value;
-		const container = overlayRef.current && overlayRef.current.closest(quillEditorQuery);
-		const editor = container && container.querySelector('.ql-editor');
-		if (editor && value === '') {
-			editor.classList.remove('nwse-resize');
-			editor.classList.remove('nesw-resize');
-		} else if (editor) {
-			editor.classList.add(value);
-		}
-	};
+	const setResizeCursor = useCallback(
+		value => {
+			document.body.style.cursor = value;
+			const container = overlayRef.current && overlayRef.current.closest(quillEditorQuery);
+			const editor = container && container.querySelector('.ql-editor');
+			if (editor && value === '') {
+				editor.classList.remove('nwse-resize');
+				editor.classList.remove('nesw-resize');
+			} else if (editor) {
+				editor.classList.add(value);
+			}
+		},
+		[quillEditorQuery]
+	);
 
 	const handleMousedown = useCallback(
 		(
@@ -131,7 +134,7 @@ export const ResizableOverlay: React.FunctionComponent<IResizableOverlayProps> =
 			setIsMouseDown(true);
 			setResizeCursor(direction === 'nw' || direction === 'se' ? 'nwse-resize' : 'nesw-resize');
 		},
-		[overlayCoordinates.height, overlayCoordinates.width]
+		[overlayCoordinates.height, overlayCoordinates.width, setResizeCursor]
 	);
 
 	const setAndReportOverlayDimensions = useCallback(
@@ -170,7 +173,7 @@ export const ResizableOverlay: React.FunctionComponent<IResizableOverlayProps> =
 		setIsMouseDown(false);
 		onOverlayResizeComplete();
 		setResizeCursor('');
-	}, [onOverlayResizeComplete]);
+	}, [onOverlayResizeComplete, setResizeCursor]);
 
 	useEffect(() => {
 		const overlayElement = overlayRef.current;

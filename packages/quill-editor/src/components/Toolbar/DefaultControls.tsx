@@ -65,92 +65,89 @@ const headerOptions: ISelectOption[] = [
 	{ display: 'heading2', value: '2' },
 ];
 
+const Header: React.FunctionComponent = props => (
+	<LocalizedSelect name="header" tooltipKey="textStyles" options={headerOptions} {...props} />
+);
+const Bold: React.FunctionComponent = props => (
+	<LocalizedButton name="bold" tooltipKey="bold" tabIndex={-1} {...props} />
+);
+const Italic: React.FunctionComponent = props => (
+	<LocalizedButton name="italic" tooltipKey="italic" tabIndex={-1} {...props} />
+);
+const Underline: React.FunctionComponent = props => (
+	<LocalizedButton
+		name="underline"
+		tooltipKey="underline"
+		style={{ marginTop: '1px' }}
+		tabIndex={-1}
+		{...props}
+	/>
+);
+const Strikethrough: React.FunctionComponent = props => (
+	<LocalizedButton name="strike" tooltipKey="strikethrough" tabIndex={-1} {...props} />
+);
+const Blockquote: React.FunctionComponent = props => (
+	<LocalizedButton name="blockquote" tooltipKey="blockquote" tabIndex={-1} {...props} />
+);
+const Clean: React.FunctionComponent = props => (
+	<LocalizedButton
+		name="clean"
+		tooltipKey="clearFormatting"
+		style={{ marginTop: '2px' }}
+		tabIndex={-1}
+		{...props}
+	/>
+);
+const OrderedList: React.FunctionComponent = props => (
+	<LocalizedButton name="list" tooltipKey="numberedList" value="ordered" tabIndex={-1} {...props} />
+);
+const BulletList: React.FunctionComponent = props => (
+	<LocalizedButton name="list" tooltipKey="bulletedList" value="bullet" tabIndex={-1} {...props} />
+);
+const DecreaseIndent: React.FunctionComponent = props => (
+	<LocalizedButton name="indent" tooltipKey="decreaseIndent" value="-1" tabIndex={-1} {...props} />
+);
+const IncreaseIndent: React.FunctionComponent = props => (
+	<LocalizedButton name="indent" tooltipKey="increaseIndent" value="+1" tabIndex={-1} {...props} />
+);
+const Align: React.FunctionComponent = props => (
+	<LocalizedSelect name="align" tooltipKey="align" {...props} />
+);
+const Link: React.FunctionComponent = props => (
+	<LocalizedButton
+		name="insertLink"
+		tooltipKey="insertLink"
+		disabled={true}
+		tabIndex={-1}
+		{...props}
+	>
+		<InsertLinkIcon />
+	</LocalizedButton>
+);
+const Image: React.FunctionComponent = props => (
+	<LocalizedButton name="insertImage" tooltipKey="insertImage" tabIndex={-1} {...props}>
+		<InsertImageIcon />
+	</LocalizedButton>
+);
+const TextSnippet: React.FunctionComponent = props => (
+	<LocalizedButton name="textSnippet" tooltipKey="textSnippet" tabIndex={-1} {...props}>
+		<TextSnippetIcon />
+	</LocalizedButton>
+);
 export const DefaultControls: { [key in ControlKind]: React.FunctionComponent } = {
-	Header: props => (
-		<LocalizedSelect name="header" tooltipKey="textStyles" options={headerOptions} {...props} />
-	),
-	Bold: props => <LocalizedButton name="bold" tooltipKey="bold" tabIndex={-1} {...props} />,
-	Italic: props => <LocalizedButton name="italic" tooltipKey="italic" tabIndex={-1} {...props} />,
-	Underline: props => (
-		<LocalizedButton
-			name="underline"
-			tooltipKey="underline"
-			style={{ marginTop: '1px' }}
-			tabIndex={-1}
-			{...props}
-		/>
-	),
-	Strikethrough: props => (
-		<LocalizedButton name="strike" tooltipKey="strikethrough" tabIndex={-1} {...props} />
-	),
-	Blockquote: props => (
-		<LocalizedButton name="blockquote" tooltipKey="blockquote" tabIndex={-1} {...props} />
-	),
-	Clean: props => (
-		<LocalizedButton
-			name="clean"
-			tooltipKey="clearFormatting"
-			style={{ marginTop: '2px' }}
-			tabIndex={-1}
-			{...props}
-		/>
-	),
-	OrderedList: props => (
-		<LocalizedButton
-			name="list"
-			tooltipKey="numberedList"
-			value="ordered"
-			tabIndex={-1}
-			{...props}
-		/>
-	),
-	BulletList: props => (
-		<LocalizedButton
-			name="list"
-			tooltipKey="bulletedList"
-			value="bullet"
-			tabIndex={-1}
-			{...props}
-		/>
-	),
-	DecreaseIndent: props => (
-		<LocalizedButton
-			name="indent"
-			tooltipKey="decreaseIndent"
-			value="-1"
-			tabIndex={-1}
-			{...props}
-		/>
-	),
-	IncreaseIndent: props => (
-		<LocalizedButton
-			name="indent"
-			tooltipKey="increaseIndent"
-			value="+1"
-			tabIndex={-1}
-			{...props}
-		/>
-	),
-	Align: props => <LocalizedSelect name="align" tooltipKey="align" {...props} />,
-	Link: props => (
-		<LocalizedButton
-			name="insertLink"
-			tooltipKey="insertLink"
-			disabled={true}
-			tabIndex={-1}
-			{...props}
-		>
-			<InsertLinkIcon />
-		</LocalizedButton>
-	),
-	Image: props => (
-		<LocalizedButton name="insertImage" tooltipKey="insertImage" tabIndex={-1} {...props}>
-			<InsertImageIcon />
-		</LocalizedButton>
-	),
-	TextSnippet: props => (
-		<LocalizedButton name="textSnippet" tooltipKey="textSnippet" tabIndex={-1} {...props}>
-			<TextSnippetIcon />
-		</LocalizedButton>
-	),
+	Header,
+	Bold,
+	Italic,
+	Underline,
+	Strikethrough,
+	Blockquote,
+	Clean,
+	OrderedList,
+	BulletList,
+	DecreaseIndent,
+	IncreaseIndent,
+	Align,
+	Link,
+	Image,
+	TextSnippet,
 };

@@ -1,8 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react';
 import ReactDOM from 'react-dom';
-import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import { LocalizationProvider } from '@faithlife/react-ui';
-import { Delta } from 'quill';
 import styled from 'styled-components';
 import QuillEditor, { Toolbar } from '@faithlife/quill-editor';
 import localizedResources from '@faithlife/quill-editor/src/locales/en-US/resources.json';
@@ -13,13 +11,13 @@ const Spacing = styled.div`
 
 const exampleCommunityChurchGroupId = '5698187';
 
-const App: React.FunctionComponent = () => {
+const TestApp: React.FunctionComponent = () => {
 	const quillRef = useRef<any>(null);
 	const [htmlContent, setHtmlContent] = useState('<p/>');
-	const [deltaContent, setDeltaContent] = useState<Partial<Delta>>({ ops: [{ insert: 'hello' }] });
-	const setAllContent = useCallback((content: Delta) => {
+	const [deltaContent, setDeltaContent] = useState<any>({ ops: [{ insert: 'hello' }] });
+	const setAllContent = useCallback((content: any) => {
 		if (content.ops) {
-			const converter = new QuillDeltaToHtmlConverter(content.ops, {
+			const converter = quillRef.current.getHTML({
 				inlineStyles: true,
 				encodeHtml: false, // Disabled because the liquid templating engine can't understand html encoded quotes "
 			});
@@ -29,12 +27,15 @@ const App: React.FunctionComponent = () => {
 		}
 	}, []);
 
-	const handleChange = useCallback(content => {
-		if (quillRef.current) {
-			const deltas = quillRef.current.getEditor().getContents();
-			setAllContent(deltas);
-		}
-	}, []);
+	const handleChange = useCallback(
+		content => {
+			if (quillRef.current) {
+				const deltas = quillRef.current.getEditor().getContents();
+				setAllContent(deltas);
+			}
+		},
+		[setAllContent]
+	);
 
 	return (
 		<LocalizationProvider localizedResources={localizedResources}>
@@ -65,4 +66,4 @@ const QuillEditorStyled = styled(QuillEditor)`
 	min-height: 150px;
 `;
 
-ReactDOM.render(<App />, document.getElementById('app'), null);
+ReactDOM.render(<TestApp />, document.getElementById('app'));
