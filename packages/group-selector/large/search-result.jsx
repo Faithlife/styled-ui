@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Avatar } from '../avatar';
 import { Button } from '@faithlife/styled-ui/v6';
 import { Tooltip } from '@faithlife/styled-ui';
+import { Avatar } from '../avatar';
 import * as Styled from '../styled';
 
 /* eslint-disable react/jsx-no-literals */
