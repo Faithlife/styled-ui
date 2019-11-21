@@ -41,9 +41,7 @@
   },
   "dependencies": {
     "@faithlife/react-ui": "^7.4.2",
-    "@faithlife/styled-ui": "^5.19.0",
     "quill": "^1.3.7",
-    "quill-delta-to-html": "^0.10.13",
     "react-quill": "1.3.3"
   },
   "devDependencies": {

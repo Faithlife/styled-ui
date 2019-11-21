@@ -7,16 +7,18 @@ import React, {
 	useImperativeHandle,
 } from 'react';
 import ReactQuill from 'react-quill';
-import { Delta } from 'quill';
+import Quill, { Delta } from 'quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
-import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
+/* eslint-disable-next-line */
+import QuillDeltaToHtmlConverter from '../utility/QuillDeltaToHtmlConverter';
 import { LocalizationProvider } from '../components/Localization';
 import localizedResources from '../locales/en-US/resources.json';
 import { FilePickerModal } from '../components/FilePickerModal';
 import { useImageControls } from '../utility/useImageControls';
 import { ResizableOverlay } from '../components/ResizableOverlay';
 import { throttle } from '../utility/throttle';
+import ImageBlot from '../components/Blots/ImageBlot';
 
 export interface IQuillRichTextEditorProps {
 	groupId?: string;
@@ -97,6 +99,11 @@ const ReactQuillStyled = styled(ReactQuill)`
 	img {
 		cursor: move;
 	}
+
+	img[align="left"] {
+		margin-right: 16px;
+		margin-bottom: 8px;
+	}
 `;
 
 const QuillContainer = styled.div`
@@ -144,6 +151,8 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				history.clear(); // Don't allow undo of initial content insertion
 			}
 		}
+
+		Quill.register({ 'formats/image': ImageBlot });
 	}, []);
 
 	const insertTemplate = useCallback((textToInsert: string) => {
@@ -186,17 +195,19 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 						case 'image': {
 							// todo: optimize link based on size (e.g. HTML width) of embedded image
 							// various formats are available at asset.formats, with dimensions of format at asset.formats[x].file.dimensions
-							quillApi.insertEmbed(insertLocation, 'image', asset.file.url);
 							const originalWidth =
 								asset.file && asset.file.dimensions && asset.file.dimensions.width;
-							quillApi.formatText(
+							const imageWidth = originalWidth
+								? `${Math.min(editorMaxContentWidthPixels, originalWidth)}px`
+								: `${editorMaxContentWidthPixels}px`;
+
+							quillApi.insertEmbed(
 								insertLocation,
-								1,
-								'width',
-								originalWidth
-									? `${Math.min(editorMaxContentWidthPixels, originalWidth)}px`
-									: `${editorMaxContentWidthPixels}px`
+								'image',
+								{ url: asset.file.url, width: imageWidth, align: '' },
+								'user'
 							);
+
 							insertLocation++;
 							quillApi.setSelection({ index: insertLocation, length: 0 });
 							break;
@@ -303,6 +314,8 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		handleMouseWheelOnOverlay,
 		handleOverlayResize,
 		handleOverlayResizeComplete,
+		handleAlignmentChange,
+		currentAlignment,
 	} = useImageControls(quillEditorQuery);
 
 	const onEditorClick = useCallback(
@@ -369,14 +382,10 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		return () => editorElement && editorElement.removeEventListener('click', onEditorClick);
 	}, [onEditorClick]);
 
-	const handleTextChange = useCallback(
-		test => {
-			console.log(test);
-			onContentChange && onContentChange();
-			handleTextChangeOnEditor();
-		},
-		[handleTextChangeOnEditor, onContentChange]
-	);
+	const handleTextChange = useCallback(() => {
+		onContentChange && onContentChange();
+		handleTextChangeOnEditor();
+	}, [handleTextChangeOnEditor, onContentChange]);
 
 	useEffect(() => {
 		let editor;
@@ -451,6 +460,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		'link',
 		'image',
 		'width',
+		'align',
 	];
 
 	return (
@@ -466,7 +476,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 					ref={quillRef}
 					linkHelpText={localizedResources.toolbar.enterLink}
 					linkSaveText={localizedResources.toolbar.save}
-					value={defaultValue}
+					defaultValue={defaultValue}
 					placeholder={placeholder}
 					modules={moduleConfiguration}
 					formats={allowedFormats}
@@ -485,6 +495,8 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 						initialWidth={overlayCoordinates.width}
 						initialHeight={overlayCoordinates.height}
 						quillEditorQuery={quillEditorQuery}
+						currentAlignment={currentAlignment}
+						onAlignmentChange={handleAlignmentChange}
 					/>
 				)}
 				<FilePickerModal

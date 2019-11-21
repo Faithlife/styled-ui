@@ -29,14 +29,20 @@ export const useImageControls = (
 	handleMouseWheelOnOverlay: (event: React.WheelEvent) => void;
 	handleOverlayResizeComplete: () => void;
 	handleOverlayResize: (dimensions: IOverlayDimensions) => void;
+	handleAlignmentChange: (alignement: string) => void;
+	currentAlignment: string;
 } => {
 	const editor = useRef<Quill>();
 	const [overlayCoordinates, setOverlayCoordinates] = useState<IOverlayCoordinates | null>(null);
 	const [hasResizeOccurred, setHasResizeOccurred] = useState(false);
 	const getEditor = useCallback(() => editor.current, []);
 	const selectedImage = useRef<HTMLImageElement | null>();
+	const [currentAlignment, setCurrentAlignment] = useState('');
 	const selectImage = useCallback((element: HTMLImageElement | null) => {
 		selectedImage.current = element;
+		if (element) {
+			setCurrentAlignment(element.getAttribute('align') || '');
+		}
 	}, []);
 	const getSelectedImage = useCallback(() => {
 		if (selectedImage.current) {
@@ -227,6 +233,19 @@ export const useImageControls = (
 		dragTimer.current = setTimeout(() => setHasResizeOccurred(false), 0);
 	}, []);
 
+	const handleAlignmentChange = useCallback(
+		alignment => {
+			const selectedImage = getSelectedImage();
+			const editor = getEditor();
+			if (editor && selectedImage) {
+				const image = Parchment.find(selectedImage);
+				image.format('align', alignment);
+				setCurrentAlignment(alignment);
+			}
+		},
+		[setCurrentAlignment, getEditor, getSelectedImage]
+	);
+
 	return useMemo(
 		() => ({
 			overlayCoordinates,
@@ -237,6 +256,8 @@ export const useImageControls = (
 			handleMouseWheelOnOverlay,
 			handleOverlayResize,
 			handleOverlayResizeComplete,
+			handleAlignmentChange,
+			currentAlignment,
 		}),
 		[
 			overlayCoordinates,
@@ -247,6 +268,8 @@ export const useImageControls = (
 			handleMouseWheelOnOverlay,
 			handleOverlayResize,
 			handleOverlayResizeComplete,
+			handleAlignmentChange,
+			currentAlignment,
 		]
 	);
 };

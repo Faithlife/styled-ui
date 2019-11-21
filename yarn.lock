@@ -1547,10 +1547,10 @@
   dependencies:
     prop-types "^15.7.2"
 
-"@faithlife/styled-ui@^5.19.0", "@faithlife/styled-ui@^5.31.0":
-  version "5.31.0"
-  resolved "http://npm.faithlife.io/@faithlife%2fstyled-ui/-/styled-ui-5.31.0.tgz#1365c79be851cb523cfee217be631d5f2710be4e"
-  integrity sha512-FVyxEzS/riQXXHbnKBvVaI/Mr0ej1CqPqAIfjv6bMoUtDUErxuuAt9I3PCMOfhrSB/6dfegEQml3t45Yz5SREw==
+"@faithlife/styled-ui@^5.25.0":
+  version "5.30.0"
+  resolved "http://npm.faithlife.io/@faithlife%2fstyled-ui/-/styled-ui-5.30.0.tgz#720828aeab0796d11dfb6a4bad8e4145b219a36d"
+  integrity sha512-L/PuGT4EZCVAKHycO5KeELT8zso65Ecf3MvL0XR5o9xKn2c7b9cUymvLDIsBwOxpWIj2oPgx2tKIvqhZhKzAqg==
   dependencies:
     "@styled-system/prop-types" "^5.1.1"
     "@styled-system/theme-get" "^5.1.1"
@@ -1568,10 +1568,10 @@
     reactstrap "^6.1.0"
     styled-system "^5.1.1"
 
-"@faithlife/styled-ui@^5.25.0":
-  version "5.30.0"
-  resolved "http://npm.faithlife.io/@faithlife%2fstyled-ui/-/styled-ui-5.30.0.tgz#720828aeab0796d11dfb6a4bad8e4145b219a36d"
-  integrity sha512-L/PuGT4EZCVAKHycO5KeELT8zso65Ecf3MvL0XR5o9xKn2c7b9cUymvLDIsBwOxpWIj2oPgx2tKIvqhZhKzAqg==
+"@faithlife/styled-ui@^5.31.0":
+  version "5.31.0"
+  resolved "http://npm.faithlife.io/@faithlife%2fstyled-ui/-/styled-ui-5.31.0.tgz#1365c79be851cb523cfee217be631d5f2710be4e"
+  integrity sha512-FVyxEzS/riQXXHbnKBvVaI/Mr0ej1CqPqAIfjv6bMoUtDUErxuuAt9I3PCMOfhrSB/6dfegEQml3t45Yz5SREw==
   dependencies:
     "@styled-system/prop-types" "^5.1.1"
     "@styled-system/theme-get" "^5.1.1"
@@ -9060,11 +9060,6 @@ quick-lru@^1.0.0:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-1.1.0.tgz#4360b17c61136ad38078397ff11416e186dcfbb8"
   integrity sha1-Q2CxfGETatOAeDl/8RQW4Ybc+7g=
 
-quill-delta-to-html@^0.10.13:
-  version "0.10.13"
-  resolved "https://registry.yarnpkg.com/quill-delta-to-html/-/quill-delta-to-html-0.10.13.tgz#b5991036e042bbfd230a9b42c14f57c4dd1c5520"
-  integrity sha512-6BBiyg5PjPyUd0PaOS5uQp7T9RZMLxRjCyBpHXwdc03367luITUW3Xd680z7ta00njLWBC+FYISuZycnSkuvmQ==
-
 quill-delta@^3.6.2:
   version "3.6.3"
   resolved "https://registry.yarnpkg.com/quill-delta/-/quill-delta-3.6.3.tgz#b19fd2b89412301c60e1ff213d8d860eac0f1032"
@@ -10511,7 +10506,7 @@ styled-components@4.3.0:
     stylis-rule-sheet "^0.0.10"
     supports-color "^5.5.0"
 
-styled-components@^4.2.0, styled-components@^4.4.0, styled-components@^4.4.1:
+styled-components@^4.4.0, styled-components@^4.4.1:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-4.4.1.tgz#e0631e889f01db67df4de576fedaca463f05c2f2"
   integrity sha512-RNqj14kYzw++6Sr38n7197xG33ipEOktGElty4I70IKzQF1jzaD1U4xQ+Ny/i03UUhHlC5NWEO+d8olRCDji6g==

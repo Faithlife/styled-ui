@@ -5,10 +5,6 @@ import styled from 'styled-components';
 import QuillEditor, { Toolbar } from '@faithlife/quill-editor';
 import localizedResources from '@faithlife/quill-editor/src/locales/en-US/resources.json';
 
-const Spacing = styled.div`
-	padding: 10px;
-`;
-
 const exampleCommunityChurchGroupId = '5698187';
 
 const TestApp: React.FunctionComponent = () => {
@@ -17,41 +13,35 @@ const TestApp: React.FunctionComponent = () => {
 	const [deltaContent, setDeltaContent] = useState<any>({ ops: [{ insert: 'hello' }] });
 	const setAllContent = useCallback((content: any) => {
 		if (content.ops) {
-			const converter = quillRef.current.getHTML({
+			const html = quillRef.current.getHTML({
 				inlineStyles: true,
 				encodeHtml: false, // Disabled because the liquid templating engine can't understand html encoded quotes "
 			});
-			const html = converter.convert();
 			setHtmlContent(html);
 			setDeltaContent(content);
 		}
 	}, []);
 
-	const handleChange = useCallback(
-		content => {
-			if (quillRef.current) {
-				const deltas = quillRef.current.getEditor().getContents();
-				setAllContent(deltas);
-			}
-		},
-		[setAllContent]
-	);
+	const handleChange = useCallback(() => {
+		if (quillRef.current) {
+			const deltas = quillRef.current.getEditor().getContents();
+			setAllContent(deltas);
+		}
+	}, [setAllContent]);
 
 	return (
 		<LocalizationProvider localizedResources={localizedResources}>
 			<>
-				<Spacing>
-					<QuillEditorStyled
-						placeholder={'Your message here...'}
-						editorId="message"
-						groupId={exampleCommunityChurchGroupId}
-						ref={quillRef}
-						defaultValue={deltaContent}
-						onContentChange={handleChange}
-					>
-						<Toolbar editorId="message" />
-					</QuillEditorStyled>
-				</Spacing>
+				<QuillEditorStyled
+					placeholder={'Your message here...'}
+					editorId="message"
+					groupId={exampleCommunityChurchGroupId}
+					ref={quillRef}
+					defaultValue={deltaContent}
+					onContentChange={handleChange}
+				>
+					<Toolbar editorId="message" />
+				</QuillEditorStyled>
 				<br />
 				{htmlContent}
 				<br />

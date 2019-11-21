@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { useLocalization } from '../Localization';
 
 const Overlay = styled.div.attrs(({ left, top, width, height }: IOverlayCoordinates) => ({
 	style: {
@@ -39,6 +40,33 @@ const DragHandle = styled.div.attrs(({ location, cursorStyle }: IHandleProps) =>
 	background-color: #278ed4;
 `;
 
+const AlignmentControls = styled.div<{ top: number; left: number }>`
+	position: absolute;
+	padding: 5px;
+	white-space: nowrap;
+	background-color: white;
+	border: 1px solid #d4d0cf;
+	top: ${({ top }) => top + 8}px;
+`;
+
+const AlignmentButton = styled.a<{ isActive: boolean }>`
+	${({ isActive }) =>
+		isActive
+			? css`
+					color: #585250;
+					cursor: default;
+					font-weight: 700;
+					&:hover {
+						color: #585250;
+					}
+			  `
+			: css`
+					&:hover {
+						text-decoration: underline;
+					}
+			  `}
+`;
+
 export interface IOverlayCoordinates {
 	left: number;
 	top: number;
@@ -61,6 +89,8 @@ interface IResizableOverlayProps {
 	initialWidth: number;
 	initialHeight: number;
 	quillEditorQuery: string;
+	currentAlignment: string;
+	onAlignmentChange: (alignment: string) => void;
 }
 
 // prevent scrolling on document body when hovering overlay
@@ -80,7 +110,11 @@ export const ResizableOverlay: React.FunctionComponent<IResizableOverlayProps> =
 	initialWidth,
 	initialHeight,
 	quillEditorQuery,
+	currentAlignment,
+	onAlignmentChange,
 }) => {
+	const res = useLocalization();
+
 	const [isMouseDown, setIsMouseDown] = useState(false);
 	const [overlayCoordinates, setOverlayCoordinates] = useState<IOverlayCoordinates>({
 		top,
@@ -210,6 +244,14 @@ export const ResizableOverlay: React.FunctionComponent<IResizableOverlayProps> =
 		[handleMousedown]
 	);
 
+	const alignInline = useCallback(() => {
+		onAlignmentChange('');
+	}, [onAlignmentChange]);
+
+	const alignWrap = useCallback(() => {
+		onAlignmentChange('left');
+	}, [onAlignmentChange]);
+
 	return (
 		<Overlay
 			ref={overlayRef}
@@ -239,6 +281,25 @@ export const ResizableOverlay: React.FunctionComponent<IResizableOverlayProps> =
 				location={{ left: handleOffsetPixels, bottom: handleOffsetPixels }}
 				onMouseDown={handleMouseDownOnSWHandle}
 			/>
+			<AlignmentControls top={overlayCoordinates.height}>
+				<AlignmentButton
+					isActive={currentAlignment === ''}
+					disabled={currentAlignment === ''}
+					minorTransparent
+					onClick={alignInline}
+				>
+					{res.image.inline}
+				</AlignmentButton>
+				{' | '}
+				<AlignmentButton
+					isActive={currentAlignment === 'left'}
+					disabled={currentAlignment === 'left'}
+					minorTransparent
+					onClick={alignWrap}
+				>
+					{res.image.wordWrap}
+				</AlignmentButton>
+			</AlignmentControls>
 		</Overlay>
 	);
 };

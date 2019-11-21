@@ -30,6 +30,8 @@
 		"stockImages": "Stock Images",
 		"unsplash": "Unsplash",
 		"textSnippets": "Church Documents Library",
-		"groupTextFiles": "Group Files"
+		"groupTextFiles": "Group Files",
+		"inline": "In line",
+		"wordWrap": "Wrap text"
 	}
 }
