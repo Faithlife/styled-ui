@@ -68,10 +68,10 @@ export const LegacyModal = React.forwardRef(
 		);
 
 		const doesChildrenIncludeModalContent =
-			React.Children.count(children) === 1 &&
-			(React.Children.only(children).type === ModalContent ||
-				React.Children.only(children).type === LegacyModalContent ||
-				React.Children.only(children).type === Modal.Content);
+			React.isValidElement(children) &&
+			(children.type === ModalContent ||
+				children.type === LegacyModalContent ||
+				children.type === Modal.Content);
 
 		return (
 			<Modal
