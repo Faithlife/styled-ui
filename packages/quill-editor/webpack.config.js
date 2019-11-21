@@ -135,6 +135,6 @@ module.exports = {
 };
 
 function processLocales(content) {
-	const enUS = require('./src/locales/en-US/resources.json');
+	const enUS = require('./src/locales/en-US/resources.json.js');
 	return JSON.stringify(merge({}, enUS, JSON.parse(content)), null, '\t');
 }

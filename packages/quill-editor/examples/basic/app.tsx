@@ -5,7 +5,7 @@ import { LocalizationProvider } from '@faithlife/react-ui';
 import { Delta } from 'quill';
 import styled from 'styled-components';
 import QuillEditor, { Toolbar } from '../../src';
-import localizedResources from '../../src/locales/en-US/resources.json';
+import localizedResources from '../../src/locales/en-US/resources.json.js';
 
 const Spacing = styled.div`
 	padding: 10px;

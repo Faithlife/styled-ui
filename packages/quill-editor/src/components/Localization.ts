@@ -1,5 +1,5 @@
 import { GetTypedLocalization } from '@faithlife/react-ui';
-import localizedResources from '../locales/en-US/resources.json';
+import localizedResources from '../locales/en-US/resources.json.js';
 
 const { LocalizationProvider, Localize, Text, useLocalization } = GetTypedLocalization<
 	typeof localizedResources

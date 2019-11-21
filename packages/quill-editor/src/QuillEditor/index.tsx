@@ -11,7 +11,7 @@ import { Delta } from 'quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
 import { LocalizationProvider } from '../components/Localization';
-import localizedResources from '../locales/en-US/resources.json';
+import localizedResources from '../locales/en-US/resources.json.js';
 import { FilePickerModal } from '../components/FilePickerModal';
 import { useImageControls } from '../utility/useImageControls';
 import { ResizableOverlay } from '../components/ResizableOverlay';
@@ -211,7 +211,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 							);
 							const format = htmlFormat || plaintextFormat;
 							const fileUrl =
-								(format && (format.file && format.file.url)) ||
+								(format && format.file && format.file.url) ||
 								(format.firstFile && format.firstFile.url);
 							if (fileUrl) {
 								const response = await fetch(fileUrl);
