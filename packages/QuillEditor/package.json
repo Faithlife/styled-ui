@@ -1,15 +1,79 @@
 {
-  "name": "@faithlife/QuillEditor",
-  "version": "0.1.0",
-  "license": "UNLICENSED",
-  "main": "dist/index.js",
+  "name": "@faithlife/quill-editor",
+  "version": "0.1.9",
+  "description": "The quill-editor React component",
+  "main": "dist/quill-editor.js",
   "files": [
-    "dist/**"
+    "dist/"
   ],
-  "devDependencies": {
-    "react": "^16.8.4"
+  "keywords": [],
+  "author": "Daniel Stephenson <daniel.stephenson@faithlife.com>",
+  "types": "dist/index.d.ts",
+  "license": "UNLICENSED",
+  "scripts": {
+    "prettier": "prettier --write \"./**/*.{ts,tsx,less}\" && yarn lint --fix",
+    "lint": "eslint \"./src/**/*.{ts,tsx}\" --fix",
+    "typecheck": "tsc --noEmit --watch",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "build:dev": "webpack --config webpack.config.js",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post ; exit 0",
+    "watch": "webpack --config webpack.config.js --watch --watch-poll",
+    "start": "webpack-dev-server --inline --config webpack.examples.js --content-base examples --port 8086 --mode development",
+    "pub": "yarn build && yalc publish",
+    "end": "yalc installations clean @faithlife/quill-editor"
+  },
+  "browserslist": [
+    "> 2% in US"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@git:Logos/QuillEditor.git"
+  },
+  "publishConfig": {
+    "tag": "latest",
+    "registry": "http://npm.faithlife.io"
   },
   "peerDependencies": {
-    "react": "^16.8.4"
+    "@faithlife/styled-ui": "^5.19.0",
+    "react": "^16.8.4",
+    "styled-components": "^4.2.0"
+  },
+  "dependencies": {
+    "@faithlife/react-ui": "^7.4.2",
+    "@faithlife/styled-ui": "^5.19.0",
+    "quill": "^1.3.7",
+    "quill-delta-to-html": "^0.10.13",
+    "react-quill": "1.3.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@types/react": "^16.8.13",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "clean-webpack-plugin": "^1.0.1",
+    "copy-webpack-plugin": "^4.0.1",
+    "cross-env": "^6.0.3",
+    "css-loader": "^2.1.1",
+    "eslint": "^6.5.1",
+    "eslint-config-faithlife": "^6.1.0",
+    "eslint-import-resolver-babel-module": "^5.1.0",
+    "eslint-plugin-react": "^7.16.0",
+    "faithlife-html-component-tools": "^2.5.0",
+    "fork-ts-checker-webpack-plugin": "^0.5.2",
+    "lodash.merge": "^4.6.2",
+    "mini-css-extract-plugin": "^0.6.0",
+    "postcss-loader": "^3.0.0",
+    "prettier": "^1.18.2",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-svg-loader": "^2.1.0",
+    "style-loader": "^1.0.0",
+    "styled-components": "4.3.0",
+    "ts-loader": "^6.2.0",
+    "tslint": "^5.0.0",
+    "typescript": "3.5.1",
+    "webpack": "^4.29.1",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.1.14",
+    "webpack-node-externals": "^1.7.2"
   }
 }

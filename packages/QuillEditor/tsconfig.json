@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"target": "es2017",
+		"module": "esnext",
+		"lib": ["es2017.object", "es2016.array.include", "es6", "esnext", "dom"],
+		"moduleResolution": "node",
+		"jsx": "react",
+		"noImplicitAny": false,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"typeRoots": ["./typings", "./node_modules/@types"],
+		"resolveJsonModule": true
+	},
+	"includes": ["./externals.ts"],
+	"exclude": ["node_modules", "dist"]
+}
