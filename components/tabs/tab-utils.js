@@ -114,21 +114,21 @@ export function useSequencedKeyboardNav(selectedIndex, onSelectTab, children) {
 }
 
 export function usePanelIdsHandler() {
-	const panelIdsMap = useBasicMap();
+	const { map, add, remove } = useBasicMap();
 
 	const registerPanelId = useCallback(
 		(index, id) => {
-			panelIdsMap.add(index, id);
+			add(index, id);
 		},
-		[panelIdsMap],
+		[add],
 	);
 
 	const unRegisterPanelId = useCallback(
 		index => {
-			panelIdsMap.remove(index);
+			remove(index);
 		},
-		[panelIdsMap],
+		[remove],
 	);
 
-	return { panelIdsMap: panelIdsMap.map, registerPanelId, unRegisterPanelId };
+	return { panelIdsMap: map, registerPanelId, unRegisterPanelId };
 }
