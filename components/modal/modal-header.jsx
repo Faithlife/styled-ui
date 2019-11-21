@@ -46,7 +46,7 @@ export const ModalHeader = ({ title, subtitle, textStyle, ...props }) => {
 ModalHeader.propTypes = {
 	/** Select a text style from our theme for the header title. */
 	textStyle: PropTypes.string,
-	title: PropTypes.string.isRequired,
+	title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 	subtitle: PropTypes.string,
 };
 
