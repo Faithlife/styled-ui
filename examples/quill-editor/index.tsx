@@ -4,8 +4,8 @@ import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import { LocalizationProvider } from '@faithlife/react-ui';
 import { Delta } from 'quill';
 import styled from 'styled-components';
-import QuillEditor, { Toolbar } from '../../src';
-import localizedResources from '../../src/locales/en-US/resources.json.js';
+import QuillEditor, { Toolbar } from '@faithlife/quill-editor';
+import localizedResources from '@faithlife/quill-editor/src/locales/en-US/resources.json';
 
 const Spacing = styled.div`
 	padding: 10px;
@@ -65,8 +65,4 @@ const QuillEditorStyled = styled(QuillEditor)`
 	min-height: 150px;
 `;
 
-const lang = 'en-US';
-
-import(`quill-editor/locales/${lang}/resources.json`).then(localizedResources => {
-	ReactDOM.render(<App />, document.getElementById('app'), null);
-});
+ReactDOM.render(<App />, document.getElementById('app'), null);

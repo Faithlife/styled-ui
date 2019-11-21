@@ -11,7 +11,7 @@ import { Delta } from 'quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
 import { LocalizationProvider } from '../components/Localization';
-import localizedResources from '../locales/en-US/resources.json.js';
+import localizedResources from '../locales/en-US/resources.json';
 import { FilePickerModal } from '../components/FilePickerModal';
 import { useImageControls } from '../utility/useImageControls';
 import { ResizableOverlay } from '../components/ResizableOverlay';

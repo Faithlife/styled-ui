@@ -1,14 +1,18 @@
 {
 	"compilerOptions": {
+		"target": "es5",
 		"module": "ESNext",
+		"lib": ["es2017.object", "es2016.array.include", "es6", "esnext", "dom"],
+		"jsx": "react",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"isolatedModules": false,
 		"noEmit": true,
-		"jsx": "preserve",
-		"target": "es5",
+		"typeRoots": ["./node_modules/@types"],
+		"noImplicitAny": false,
 		"strict": true,
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true
-	}
+	},
+	"exclude": ["node_modules"]
 }
