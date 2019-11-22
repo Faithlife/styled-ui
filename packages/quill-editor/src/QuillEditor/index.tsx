@@ -142,6 +142,16 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const [filePickerKind, setFilePickerKind] = useState(FilePickerKind.Image);
 	const [storedValue, setStoredValue] = useState(value);
 
+	const [quillEditorId] = useState(
+		() =>
+			editorId ||
+			`ql-${Math.random()
+				.toString(36)
+				.substring(7)}`
+	);
+
+	const [quillEditorQuery] = useState(() => `.${quillEditorId}`);
+
 	useEffect(() => {
 		if (!defaultValue && value && value !== storedValue && quillRef.current) {
 			quillRef.current.getEditor().setContents(value, 'user');
@@ -165,19 +175,11 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		Quill.register({ 'formats/image': ImageBlot });
 	}, []);
 
-	const insertTemplate = useCallback((textToInsert: string) => {
-		if (quillRef.current) {
-			const quillApi = quillRef.current.getEditor();
-			const selection = quillApi.getSelection(true);
-			quillApi.deleteText(selection.index, selection.length);
-			quillApi.insertText(selection.index, textToInsert);
-		}
-	}, []);
-
 	const [imageInsertRange, setImageInsertRange] = useState<{
 		index: number;
 		length: number;
 	} | null>();
+
 	const openFilePicker = useCallback(() => {
 		if (quillRef.current) {
 			const quillApi = quillRef.current.getEditor();
@@ -270,50 +272,12 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		[imageInsertRange]
 	);
 
-	const handleSelectionChange = useCallback(
-		throttle(() => {
-			if (quillContainerRef.current) {
-				const selection = window.getSelection();
-				const textNodeType = 3;
-				const childNode: any =
-					selection &&
-					selection.focusNode &&
-					((selection.focusNode.nodeType === textNodeType && selection.focusNode.parentElement) ||
-						selection.focusNode);
-				const editorNode: any = childNode && childNode.closest && childNode.closest('.ql-editor');
-				const linkNodes = quillContainerRef.current.querySelectorAll('.ql-insertLink');
-				if (selection && editorNode && !selection.isCollapsed) {
-					linkNodes.forEach(link => link.removeAttribute('disabled'));
-				} else {
-					linkNodes.forEach(link => link.setAttribute('disabled', 'disabled'));
-				}
-			}
-		}, 200),
-		[]
-	);
-	useEffect(() => {
-		document.addEventListener('selectionchange', handleSelectionChange);
-		return () => {
-			document.removeEventListener('selectionchange', handleSelectionChange);
-		};
-	}, [handleSelectionChange]);
-
 	const closeFilePicker = useCallback(() => {
 		setShowFilePicker(false);
 		if (quillRef.current) {
 			quillRef.current.focus();
 		}
 	}, []);
-
-	const [quillEditorId] = useState(
-		() =>
-			editorId ||
-			`ql-${Math.random()
-				.toString(36)
-				.substring(7)}`
-	);
-
-	const [quillEditorQuery] = useState(() => `.${quillEditorId}`);
 
 	const {
 		overlayCoordinates,
@@ -335,6 +299,116 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		[handleClickOnEditor]
 	);
 
+	const handleSelectionChange = useCallback(
+		throttle(() => {
+			if (quillContainerRef.current) {
+				const selection = window.getSelection();
+				const textNodeType = 3;
+				const childNode: any =
+					selection &&
+					selection.focusNode &&
+					((selection.focusNode.nodeType === textNodeType && selection.focusNode.parentElement) ||
+						selection.focusNode);
+				const editorNode: any = childNode && childNode.closest && childNode.closest('.ql-editor');
+				const linkNodes = quillContainerRef.current.querySelectorAll('.ql-insertLink');
+				if (selection && editorNode && !selection.isCollapsed) {
+					linkNodes.forEach(link => link.removeAttribute('disabled'));
+				} else {
+					linkNodes.forEach(link => link.setAttribute('disabled', 'disabled'));
+				}
+			}
+		}, 200),
+		[]
+	);
+
+	useEffect(() => {
+		document.addEventListener('selectionchange', handleSelectionChange);
+		return () => {
+			document.removeEventListener('selectionchange', handleSelectionChange);
+		};
+	}, [handleSelectionChange]);
+
+	const handleTextChange = useCallback(() => {
+		const content =
+			defaultValue || (quillRef.current && quillRef.current.getEditor().getContents());
+		if (content) {
+			setStoredValue(content);
+		}
+		onContentChange && onContentChange(content);
+		handleTextChangeOnEditor();
+	}, [handleTextChangeOnEditor, onContentChange, defaultValue]);
+
+	useEffect(() => {
+		let editor;
+		if (quillRef.current) {
+			editor = quillRef.current.getEditor();
+			if (editor) {
+				editor.on('text-change', handleTextChange);
+			}
+		}
+		return () => editor && editor.off('text-change', handleTextChange);
+	}, [handleTextChange]);
+
+	useEffect(() => {
+		let editorElement;
+		if (quillContainerRef.current) {
+			editorElement = quillContainerRef.current.querySelector('.ql-editor');
+			if (editorElement) {
+				editorElement.addEventListener('click', onEditorClick);
+			}
+		}
+		return () => editorElement && editorElement.removeEventListener('click', onEditorClick);
+	}, [onEditorClick]);
+
+	const insertText = useCallback(
+		(text: string, start?: number, end?: number, source: Source = 'user') => {
+			if (quillRef.current) {
+				const quillApi = quillRef.current.getEditor();
+				const selection = quillApi.getSelection(true);
+				const from = start || selection.index;
+				const to = end || start || selection.index + selection.length;
+
+				quillApi.deleteText(from, to - from, source);
+				quillApi.insertText(from, text, source);
+				quillApi.setSelection(from + text.length, 0, source);
+			}
+		},
+		[]
+	);
+
+	const deleteText = useCallback((start?: number, end?: number, source: Source = 'user') => {
+		if (quillRef.current) {
+			const quillApi = quillRef.current.getEditor();
+			const selection = quillApi.getSelection(true);
+			const from = start || selection.index;
+			const to = end || start || selection.index + selection.length;
+
+			quillApi.deleteText(from, to - from, source);
+		}
+	}, []);
+
+	const getHTML = useCallback((options: any) => {
+		if (quillRef.current) {
+			const deltas = quillRef.current.getEditor().getContents();
+			if (deltas.ops) {
+				const converter = new QuillDeltaToHtmlConverter(deltas.ops, options);
+				const html = converter.convert();
+				return html;
+			}
+		}
+	}, []);
+
+	useImperativeHandle(
+		ref,
+		() => ({
+			insertText,
+			deleteText,
+			getHTML,
+			getEditor: () => quillRef.current && quillRef.current.getEditor(),
+		}),
+		[insertText, deleteText, getHTML]
+	);
+
 	const handleLinkInsert = useCallback(function(this: any) {
 		const tooltip = this.quill.theme.tooltip;
 		tooltip.textbox.dataset.link = 'https://example.com';
@@ -350,6 +424,15 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		setFilePickerKind(FilePickerKind.Text);
 		openFilePicker();
 	}, [openFilePicker]);
+
+	const insertTemplate = useCallback((textToInsert: string) => {
+		if (quillRef.current) {
+			const quillApi = quillRef.current.getEditor();
+			const selection = quillApi.getSelection(true);
+			quillApi.deleteText(selection.index, selection.length);
+			quillApi.insertText(selection.index, textToInsert);
+		}
+	}, []);
 
 	const moduleConfiguration = useMemo(
 		() => ({
@@ -379,87 +462,6 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			quillEditorId,
 			toolbarHandlers,
 		]
-	);
-
-	useEffect(() => {
-		let editorElement;
-		if (quillContainerRef.current) {
-			editorElement = quillContainerRef.current.querySelector('.ql-editor');
-			if (editorElement) {
-				editorElement.addEventListener('click', onEditorClick);
-			}
-		}
-		return () => editorElement && editorElement.removeEventListener('click', onEditorClick);
-	}, [onEditorClick]);
-
-	const handleTextChange = useCallback(() => {
-		const content =
-			defaultValue || (quillRef.current && quillRef.current.getEditor().getContents());
-		if (content) {
-			setStoredValue(content);
-		}
-		onContentChange && onContentChange(content);
-		handleTextChangeOnEditor();
-	}, [handleTextChangeOnEditor, onContentChange, defaultValue]);
-
-	useEffect(() => {
-		let editor;
-		if (quillRef.current) {
-			editor = quillRef.current.getEditor();
-			if (editor) {
-				editor.on('text-change', handleTextChange);
-			}
-		}
-		return () => editor && editor.off('text-change', handleTextChange);
-	}, [handleTextChange]);
-
-	const deleteText = useCallback((start?: number, end?: number, source: Source = 'user') => {
-		if (quillRef.current) {
-			const quillApi = quillRef.current.getEditor();
-			const selection = quillApi.getSelection(true);
-			const from = start || selection.index;
-			const to = end || start || selection.index + selection.length;
-
-			quillApi.deleteText(from, to - from, source);
-		}
-	}, []);
-
-	const insertText = useCallback(
-		(text: string, start?: number, end?: number, source: Source = 'user') => {
-			if (quillRef.current) {
-				const quillApi = quillRef.current.getEditor();
-				const selection = quillApi.getSelection(true);
-				const from = start || selection.index;
-				const to = end || start || selection.index + selection.length;
-
-				quillApi.deleteText(from, to - from, source);
-				quillApi.insertText(from, text, source);
-				quillApi.setSelection(from + text.length, 0, source);
-			}
-		},
-		[]
-	);
-
-	const getHTML = useCallback((options: any) => {
-		if (quillRef.current) {
-			const deltas = quillRef.current.getEditor().getContents();
-			if (deltas.ops) {
-				const converter = new QuillDeltaToHtmlConverter(deltas.ops, options);
-				const html = converter.convert();
-				return html;
-			}
-		}
-	}, []);
-
-	useImperativeHandle(
-		ref,
-		() => ({
-			insertText,
-			deleteText,
-			getHTML,
-			getEditor: () => quillRef.current && quillRef.current.getEditor(),
-		}),
-		[insertText, deleteText, getHTML]
 	);
 
 	const allowedFormats = formats || [
