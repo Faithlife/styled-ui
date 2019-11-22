@@ -19,6 +19,7 @@ import { useImageControls } from '../utility/useImageControls';
 import { ResizableOverlay } from '../components/ResizableOverlay';
 import { throttle } from '../utility/throttle';
 import ImageBlot from '../components/Blots/ImageBlot';
+import { useImageDrop } from '../utility/useImageDrop';
 
 export interface IQuillRichTextEditorProps {
 	groupId?: string;
@@ -38,6 +39,7 @@ export interface IQuillRichTextEditorProps {
 	onKeyPress?: () => void;
 	onKeyUp?: () => void;
 	onChangeSelection?: () => void;
+	onImageUpload?: (file: File) => void;
 }
 
 export interface IQuillContainerProps {
@@ -131,6 +133,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		onBlur,
 		className,
 		editorId,
+		onImageUpload,
 		children,
 		...otherProps
 	},
@@ -359,6 +362,14 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		}
 		return () => editorElement && editorElement.removeEventListener('click', onEditorClick);
 	}, [onEditorClick]);
+
+	const handleImageDrop = useImageDrop(quillRef, onImageUpload);
+	useEffect(() => {
+		const editorElement = quillRef.current && quillRef.current.getEditor().root;
+		editorElement && editorElement.addEventListener('drop', handleImageDrop);
+		return () =>
+			(editorElement && editorElement.removeEventListener('drop', handleImageDrop)) || undefined;
+	}, [handleImageDrop]);
 
 	const insertText = useCallback(
 		(text: string, start?: number, end?: number, source: Source = 'user') => {
