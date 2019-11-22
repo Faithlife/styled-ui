@@ -61,6 +61,8 @@ const AlignmentButton = styled.a<{ isActive: boolean }>`
 					}
 			  `
 			: css`
+					cursor: pointer;
+					color: #1e91d6;
 					&:hover {
 						text-decoration: underline;
 					}
