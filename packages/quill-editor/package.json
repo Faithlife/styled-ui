@@ -34,7 +34,7 @@
     "registry": "http://npm.faithlife.io"
   },
   "peerDependencies": {
-    "@faithlife/styled-ui": "^5.19.0",
+    "@faithlife/styled-ui": "5.31.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "styled-components": "^4.2.0"

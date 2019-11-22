@@ -1422,13 +1422,12 @@
   resolved "https://registry.yarnpkg.com/@emotion/utils/-/utils-0.8.2.tgz#576ff7fb1230185b619a75d258cbc98f0867a8dc"
   integrity sha512-rLu3wcBWH4P5q1CGoSSH/i9hrXs7SlbRLkoq9IGuoPYNGQvDJ3pt/wmOM+XgYjIDRMVIdkUWt0RsfzF50JfnCw==
 
-"@faithlife/brand-bar@^1.4.1":
-  version "1.12.1"
-  resolved "http://npm.faithlife.io/@faithlife%2fbrand-bar/-/brand-bar-1.12.1.tgz#856cd8e801aa067e8b9f0e9f2282675c95ae0d14"
-  integrity sha512-349wNRTSjTWKOVduz/wbKLd/jMhw1JAmXXL+wUjtqtPyURbx85wnnKg57kK1g66IFgk/Mj2RQwOoTPoI/9dZBQ==
+"@faithlife/brand-bar@^1.12.2":
+  version "1.12.2"
+  resolved "http://npm.faithlife.io/@faithlife%2fbrand-bar/-/brand-bar-1.12.2.tgz#025700211b3d63f6f111824df4ed72595c9e6056"
+  integrity sha512-0nGJMIPIEgLM2TiHOHJb49Nmh7bCMPJxAgh+Cddl9f2xvDn3C9LBFzxrkALCWanIHOwmD/d3CXfpXSfopZXL+Q==
   dependencies:
     "@faithlife/command-sentence-control" "^1.0.4"
-    "@faithlife/styled-ui" "^5.25.0"
     mini-css-extract-plugin "0.4.1"
     prop-types "^15.5.10"
     styled-components "^4.4.0"
@@ -1457,7 +1456,7 @@
     eslint-config-faithlife "^6.0.0"
     eslint-plugin-css-modules "^2.11.0"
 
-"@faithlife/express-util@^1.4.0":
+"@faithlife/express-util@^1.7.1":
   version "1.7.1"
   resolved "http://npm.faithlife.io/@faithlife%2fexpress-util/-/express-util-1.7.1.tgz#0678e86d95d717268d31739f6c19d93257183497"
   integrity sha512-gImlc6bhTNqihezdSxA7BCb0GOErDc+pgp9B5K44MP+lX8met3FbFWW81pPPcLKqSG4R574NFmcJV5/+wjBRAA==
@@ -1467,37 +1466,37 @@
     querystring "^0.2.0"
     request "^2.88.0"
 
-"@faithlife/flcom-addin-brand-bar-host@1.1.0":
-  version "1.1.0"
-  resolved "http://npm.faithlife.io/@faithlife%2fflcom-addin-brand-bar-host/-/flcom-addin-brand-bar-host-1.1.0.tgz#eefa67edb881a7cf7409ed55c84cbae47015d310"
-  integrity sha512-CF3wdw9lSeKY+OrEgXBGcL7kXJWL8hXZvdTYbnR8lsVqi3Pikp0EJafhCRJnwebUpwf7rdXI8ArCcSb8XqgbEQ==
+"@faithlife/flcom-addin-brand-bar-host@1.1.1":
+  version "1.1.1"
+  resolved "http://npm.faithlife.io/@faithlife%2fflcom-addin-brand-bar-host/-/flcom-addin-brand-bar-host-1.1.1.tgz#1dab27db35b4609e7bb5f2c38de528f8f686b2e3"
+  integrity sha512-PewMWTdpUT9op6S7OkbQatYHcyxXtZ7Aq6IhqmwsMd6QrMBzXrWehgLAVMTG4tN0rd5v5po2m7lvM4vAXD2suw==
   dependencies:
-    "@faithlife/brand-bar" "^1.4.1"
+    "@faithlife/brand-bar" "^1.12.2"
     request "^2.88.0"
 
-"@faithlife/flcom-addin-example-server@1.3.0":
-  version "1.3.0"
-  resolved "http://npm.faithlife.io/@faithlife%2fflcom-addin-example-server/-/flcom-addin-example-server-1.3.0.tgz#98c262e3aab06e41e1b647fe83aa44c909b1fbc9"
-  integrity sha512-IV45Rg6sbhyPYCuf/fb+vMKYUO3tRXPy/aeweZnTtYz57X7G/fncjSeRAKCpO+io5QP3fWqjZ+9GgfpJSwK39A==
+"@faithlife/flcom-addin-example-server@1.3.2":
+  version "1.3.2"
+  resolved "http://npm.faithlife.io/@faithlife%2fflcom-addin-example-server/-/flcom-addin-example-server-1.3.2.tgz#5c800f0e55cef6fb70d60ab427139967d65a44e4"
+  integrity sha512-KtACsKtKEpW8L9UT85Md6VlgtJWE1NmUXYor/hrsYZn4nNJOKTQW+Po/C7vBcmNpP/qz5V+2wpigYwr+oX5yYA==
   dependencies:
-    "@faithlife/express-util" "^1.4.0"
-    "@faithlife/flcom-addin-brand-bar-host" "1.1.0"
+    "@faithlife/express-util" "^1.7.1"
+    "@faithlife/flcom-addin-brand-bar-host" "1.1.1"
     client-sessions "^0.8.0"
     express "^4.16.4"
     react "^16.8.4"
     react-dom "^16.8.4"
     request "^2.88.0"
 
-"@faithlife/flcom-addin-scripts@4.9.0":
-  version "4.9.0"
-  resolved "http://npm.faithlife.io/@faithlife%2fflcom-addin-scripts/-/flcom-addin-scripts-4.9.0.tgz#fc11bc95e77ce3580396ffe235610601ee3cf4f0"
-  integrity sha512-tdHX3bmfJi7+3u6Q8us9ogitftHUURazL36gcI676QvqO/CDQkplES/hWkT9gmTi1OzA1pRzw1EFw++v1MG3jg==
+"@faithlife/flcom-addin-scripts@4.9.2":
+  version "4.9.2"
+  resolved "http://npm.faithlife.io/@faithlife%2fflcom-addin-scripts/-/flcom-addin-scripts-4.9.2.tgz#59414034a1d2cf927034077a07ec6bc57dbbdf45"
+  integrity sha512-bXsIhtl12IUzPGUlaa/r6ToPIvNNZXwxSeXSk+2Y5iVmTG0TiVFnmWhLSegIYgmttJhp2orpFxRAzwtt/+GupA==
   dependencies:
     "@babel/core" "^7.4.4"
     "@faithlife/browserslist-config-flcom-addin" "1.0.1"
     "@faithlife/eslint-config-flcom-addin" "3.0.0"
-    "@faithlife/flcom-addin-brand-bar-host" "1.1.0"
-    "@faithlife/flcom-addin-example-server" "1.3.0"
+    "@faithlife/flcom-addin-brand-bar-host" "1.1.1"
+    "@faithlife/flcom-addin-example-server" "1.3.2"
     "@svgr/webpack" "^4.2.0"
     autoprefixer "^9.5.1"
     babel-eslint "^10.0.1"
@@ -1535,31 +1534,10 @@
   dependencies:
     prop-types "^15.7.2"
 
-"@faithlife/styled-ui@^5.25.0":
-  version "5.30.0"
-  resolved "http://npm.faithlife.io/@faithlife%2fstyled-ui/-/styled-ui-5.30.0.tgz#720828aeab0796d11dfb6a4bad8e4145b219a36d"
-  integrity sha512-L/PuGT4EZCVAKHycO5KeELT8zso65Ecf3MvL0XR5o9xKn2c7b9cUymvLDIsBwOxpWIj2oPgx2tKIvqhZhKzAqg==
-  dependencies:
-    "@styled-system/prop-types" "^5.1.1"
-    "@styled-system/theme-get" "^5.1.1"
-    clipboard "^2.0.1"
-    focus-visible "^5.0.1"
-    lodash.debounce "^4.0.8"
-    lodash.throttle "^4.1.1"
-    memoize-one "^5.0.0"
-    prop-types "^15.6.1"
-    react-bootstrap-typeahead "^3.4.5"
-    react-popper "^1.3.3"
-    react-scrollbar "^0.5.4"
-    react-select "2.4.4"
-    react-transition-group "^4.2.1"
-    reactstrap "^6.1.0"
-    styled-system "^5.1.1"
-
-"@faithlife/styled-ui@^5.31.0":
-  version "5.31.0"
-  resolved "http://npm.faithlife.io/@faithlife%2fstyled-ui/-/styled-ui-5.31.0.tgz#1365c79be851cb523cfee217be631d5f2710be4e"
-  integrity sha512-FVyxEzS/riQXXHbnKBvVaI/Mr0ej1CqPqAIfjv6bMoUtDUErxuuAt9I3PCMOfhrSB/6dfegEQml3t45Yz5SREw==
+"@faithlife/styled-ui@5.31.1":
+  version "5.31.1"
+  resolved "http://npm.faithlife.io/@faithlife%2fstyled-ui/-/styled-ui-5.31.1.tgz#f42c4091ff9f2e1a9e976e3df73eaa23889b2ceb"
+  integrity sha512-B0Gt2P/snxkU0RhHx5OB38jxsipc+Rmm3OxHv3LBIua46xVOJtn10/J+772zF/+EJQ7bvvSXLMllRzhquc0NWw==
   dependencies:
     "@styled-system/prop-types" "^5.1.1"
     "@styled-system/theme-get" "^5.1.1"
@@ -9270,7 +9248,7 @@ react-scrollbar@^0.5.4, react-scrollbar@^0.5.6:
 
 react-select@2.4.4:
   version "2.4.4"
-  resolved "https://registry.yarnpkg.com/react-select/-/react-select-2.4.4.tgz#ba72468ef1060c7d46fbb862b0748f96491f1f73"
+  resolved "http://npm.faithlife.io/react-select/-/react-select-2.4.4.tgz#ba72468ef1060c7d46fbb862b0748f96491f1f73"
   integrity sha512-C4QPLgy9h42J/KkdrpVxNmkY6p4lb49fsrbDk/hRcZpX7JvZPNb6mGj+c5SzyEtBv1DmQ9oPH4NmhAFvCrg8Jw==
   dependencies:
     classnames "^2.2.5"

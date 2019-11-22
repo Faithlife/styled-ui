@@ -7,13 +7,13 @@
     "dist/**"
   ],
   "devDependencies": {
-    "@faithlife/styled-ui": "^5.31.0",
+    "@faithlife/styled-ui": "5.31.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "styled-components": "^4.4.1"
   },
   "peerDependencies": {
-    "@faithlife/styled-ui": "^5.31.0",
+    "@faithlife/styled-ui": "5.31.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "styled-components": "^4.4.1"

@@ -10,7 +10,7 @@
     "react-dom": "^16.12.0",
     "styled-components": "^4.2.0",
     "@faithlife/react-ui": "^7.4.2",
-    "@faithlife/styled-ui": "^5.19.0"
+    "@faithlife/styled-ui": "5.31.1"
   },
   "devDependencies": {
     "@types/react": "^16.9.11",
