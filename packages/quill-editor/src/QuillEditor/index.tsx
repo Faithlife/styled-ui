@@ -23,11 +23,12 @@ import ImageBlot from '../components/Blots/ImageBlot';
 export interface IQuillRichTextEditorProps {
 	groupId?: string;
 	defaultValue?: Delta;
+	value?: Delta;
 	formats?: string[];
 	toolbarHandlers?: { [key: string]: any };
 	modules?: { [key: string]: any };
 	placeholder?: string;
-	onContentChange: () => void;
+	onContentChange: (delta: Delta | null) => void;
 	onClick?: (e: React.MouseEvent) => void;
 	onBlur?: () => void;
 	className?: string;
@@ -120,6 +121,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	{
 		groupId,
 		defaultValue,
+		value,
 		formats,
 		toolbarHandlers,
 		modules,
@@ -138,6 +140,14 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const quillContainerRef = useRef<any>(null);
 	const [showFilePicker, setShowFilePicker] = useState<boolean>(false);
 	const [filePickerKind, setFilePickerKind] = useState(FilePickerKind.Image);
+	const [storedValue, setStoredValue] = useState(value);
+
+	useEffect(() => {
+		if (!defaultValue && value && value !== storedValue && quillRef.current) {
+			quillRef.current.getEditor().setContents(value, 'user');
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [value]);
 
 	useEffect(() => {
 		const elements = quillContainerRef.current.querySelectorAll('.ql-picker-label');
@@ -383,9 +393,14 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	}, [onEditorClick]);
 
 	const handleTextChange = useCallback(() => {
-		onContentChange && onContentChange();
+		const content =
+			defaultValue || (quillRef.current && quillRef.current.getEditor().getContents());
+		if (content) {
+			setStoredValue(content);
+		}
+		onContentChange && onContentChange(content);
 		handleTextChangeOnEditor();
-	}, [handleTextChangeOnEditor, onContentChange]);
+	}, [handleTextChangeOnEditor, onContentChange, defaultValue]);
 
 	useEffect(() => {
 		let editor;
@@ -476,7 +491,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 					ref={quillRef}
 					linkHelpText={localizedResources.toolbar.enterLink}
 					linkSaveText={localizedResources.toolbar.save}
-					defaultValue={defaultValue}
+					defaultValue={defaultValue || value}
 					placeholder={placeholder}
 					modules={moduleConfiguration}
 					formats={allowedFormats}

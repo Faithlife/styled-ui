@@ -10,7 +10,7 @@ const exampleCommunityChurchGroupId = '5698187';
 const TestApp: React.FunctionComponent = () => {
 	const quillRef = useRef<any>(null);
 	const [htmlContent, setHtmlContent] = useState('<p/>');
-	const [deltaContent, setDeltaContent] = useState<any>({ ops: [{ insert: 'hello' }] });
+	const [deltaContent, setDeltaContent] = useState<any>({ ops: [{ insert: 'hello\n' }] });
 	const setAllContent = useCallback((content: any) => {
 		if (content.ops) {
 			const html = quillRef.current.getHTML({
@@ -22,12 +22,12 @@ const TestApp: React.FunctionComponent = () => {
 		}
 	}, []);
 
-	const handleChange = useCallback(() => {
-		if (quillRef.current) {
-			const deltas = quillRef.current.getEditor().getContents();
-			setAllContent(deltas);
-		}
-	}, [setAllContent]);
+	const handleChange = useCallback(
+		content => {
+			setAllContent(content);
+		},
+		[setAllContent]
+	);
 
 	return (
 		<LocalizationProvider localizedResources={localizedResources}>
@@ -37,7 +37,7 @@ const TestApp: React.FunctionComponent = () => {
 					editorId="message"
 					groupId={exampleCommunityChurchGroupId}
 					ref={quillRef}
-					defaultValue={deltaContent}
+					value={deltaContent}
 					onContentChange={handleChange}
 				>
 					<Toolbar editorId="message" />
