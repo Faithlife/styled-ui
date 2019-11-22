@@ -54,6 +54,7 @@ const TestApp: React.FunctionComponent = () => {
 const QuillEditorStyled = styled(QuillEditor)`
 	background: white;
 	min-height: 150px;
+	font-family: Source Sans Pro;
 `;
 
 ReactDOM.render(<TestApp />, document.getElementById('app'));
