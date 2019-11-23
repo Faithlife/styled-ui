@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.31.2
+
+- Update `Slider` component to accept styled-system props.
+
 ### 5.31.1
 
 - Fix infinite `TabPanel` render bug.
