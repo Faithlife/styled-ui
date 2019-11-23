@@ -31,3 +31,7 @@ This repository was created with [`create-flcom-addin`](https://git.faithlife.de
   - `yarn lint` to fix style errors before committing
 - When you're ready to commit your work, create a new branch for your contribution, and then sync your branch with Github
 - Open a pull request via the Github Web UI to request review
+
+### Additional documentation
+
+- [QuillEditor](https://git.faithlife.dev/Logos/FaithlifeEquipment/tree/master/packages/quill-editor)
