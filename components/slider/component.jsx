@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import throttle from 'lodash.throttle';
 import memoize from 'memoize-one';
+import { Box } from '../Box';
 import { PopoverManager, PopoverReference, Popover } from '../popover';
 import * as Styled from './styled';
 
@@ -225,20 +226,33 @@ export class Slider extends PureComponent {
 	};
 
 	render() {
-		const { hideAvailableStops, maxValue, minValue, styleOverrides } = this.props;
+		const { hideAvailableStops, maxValue, minValue, styleOverrides, ...props } = this.props;
 		const { isHovered } = this.state;
 		const labels = this.props.labels || [];
 		const track = this.getTrack();
 		const stops = this.getStops();
 
 		return (
-			<Styled.SliderContainer
+			<Box
 				onDragStart={event => event.preventDefault()}
 				onKeyDown={this.handleKeyDown}
 				onMouseDown={this.handleMouseDown}
 				onTouchStart={this.handleTouchStart}
 				tabIndex="0"
 				ref={this._slider}
+				position="relative"
+				width="100%"
+				minHeight="28px"
+				css={`
+					cursor: pointer;
+					touch-action: none;
+
+					&:focus {
+						box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
+						outline: none;
+					}
+				`}
+				{...props}
 			>
 				<Styled.TrackContainer>
 					<Styled.TrackGradient />
@@ -305,7 +319,7 @@ export class Slider extends PureComponent {
 						</Styled.ThumbAnchor>
 					))}
 				</Styled.ThumbContainer>
-			</Styled.SliderContainer>
+			</Box>
 		);
 	}
 }

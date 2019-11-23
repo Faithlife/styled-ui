@@ -1,18 +1,5 @@
 import styled from 'styled-components';
 
-export const SliderContainer = styled.div`
-	position: relative;
-	width: 100%;
-	min-height: 28px;
-	cursor: pointer;
-	touch-action: none;
-
-	&:focus {
-		box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
-		outline: none;
-	}
-`;
-
 export const TrackContainer = styled.div`
 	z-index: 1;
 	display: flex;
