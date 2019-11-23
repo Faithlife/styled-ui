@@ -2,19 +2,71 @@
 
 The purpose of this quill editor is to provide a unified rich text editor experience across Faithlife apps.
 
+- [Getting Started](#getting-started)
+  - [Controlled vs Uncontrolled](#controlled-vs-uncontrolled)
+- [Scope](#scope)
+- [API reference](#api-reference)
+  1. [Exports](#exports)
+  2. [Props](#props)
+     - [QuillEditor](#quilleditor)
+     - [Toolbar](#toolbar)
+  3. [Methods](#methods)
+  4. [Plain text mode](#plain-text-mode)
+
+## Getting started
+
+Follow these steps to get started with the quill editor:
+
+1. Import the component
+
+```
+    import QuillEditor, { Toolbar } from '@faithlife/quill-editor';
+    import '@faithlife/quill-editor/dist/quill-editor.css';
+```
+
+2. Import the stylesheet
+
+```
+    import '@faithlife/quill-editor/dist/quill-editor.css';
+```
+
+3. Use the component
+
+```
+const MyComponent: React.FunctionComponent = () => {
+    const [content, setContent] = useState();
+
+    const handleChange = (value) => {
+        setContent(value)
+    }
+
+    return (
+        <QuillEditor editorId="my-editor" value={content} onContentChange={handleChange}>
+            <Toolbar editorId="my-editor" />
+        </QuillEditor>
+    );
+}
+```
+
+### Controlled vs Uncontrolled mode
+
+If `defaultValue` is defined, `QuillEditor` will be put into Uncontrolled mode. In this mode `onContentChange` will only return the initial value (for performance reasons). To retrieve the latest changes call `getEditor().getContents()`. (see [Methods](#methods))
+
+A known limitation in Controlled mode: If `value` is updated to a non-user generated value while the editor is focused, the editor will lose focus. (e.g. If a consumer manually imposed a max character limit)
+
 ## Scope
 
 The following are the current known instances that will be merged with this editor:
 
--   CommunicationsApi - [QuillRichTextEditor](https://git.faithlife.dev/Logos/CommunicationsApi/blob/master/frontend/packages/communications-ui/components/edit-communication/EmailEditor/QuillRichTextEditor.tsx)
--   Sites.Admin - [TextEditor](https://git.faithlife.dev/Logos/Sites.Admin/blob/master/src/Sites.Admin/Private/scripts/components/text-editor/index.jsx)
--   Faithlife - [QuillEditor](https://git.faithlife.dev/Logos/Faithlife/blob/master/src/Faithlife.Web/Scripts/src/components/shared/quill-editor.jsx)
--   ChMS - [RichText](https://git.faithlife.dev/Logos/ChurchManagement/blob/master/chms-tool/src/components/EditRecordWizard/FormComponents/RichText/index.tsx)
+- CommunicationsApi - [QuillRichTextEditor](https://git.faithlife.dev/Logos/CommunicationsApi/blob/master/frontend/packages/communications-ui/components/edit-communication/EmailEditor/QuillRichTextEditor.tsx)
+- Sites.Admin - [TextEditor](https://git.faithlife.dev/Logos/Sites.Admin/blob/master/src/Sites.Admin/Private/scripts/components/text-editor/index.jsx)
+- Faithlife - [QuillEditor](https://git.faithlife.dev/Logos/Faithlife/blob/master/src/Faithlife.Web/Scripts/src/components/shared/quill-editor.jsx)
+- ChMS - [RichText](https://git.faithlife.dev/Logos/ChurchManagement/blob/master/chms-tool/src/components/EditRecordWizard/FormComponents/RichText/index.tsx)
 
 The following editors have very specific needs, and are outside the scope of this project:
 
--   Sermon Editor
--   Notes Tool
+- Sermon Editor
+- Notes Tool
 
 ## API reference
 
@@ -41,7 +93,7 @@ import '@faithlife/quill-editor/dist/quill-editor.css';
 
 `DefaultControls`: Default toolbar options are available through this export.
 
--   includes: `Header`, `Bold`, `,Italic`, `Underline`, `Strikethrough`, `Blockquote`, `Clean`, `OrderedList`, `BulletList`, `DecreaseIndent`, `IncreaseIndent`, `Align`, `Link`, `Image`, `TextSnippet`
+- includes: `Header`, `Bold`, `,Italic`, `Underline`, `Strikethrough`, `Blockquote`, `Clean`, `OrderedList`, `BulletList`, `DecreaseIndent`, `IncreaseIndent`, `Align`, `Link`, `Image`, `TextSnippet`
 
 The recommended pattern is to use the `Toolbar` component as a child of the `QuillEditor` component like so:
 
@@ -54,13 +106,6 @@ The recommended pattern is to use the `Toolbar` component as a child of the `Qui
 ### Props
 
 #### QuillEditor
-
-`ref`: The React reference includes several imperative commands:
-
--   `insertText(text, start, end, source)` - Inserts text at the desired location, replacing the content between the start and end indexes. `start` and `end` default to the selection indexes, or to the end of content if no selection is available.
--   `deleteText(start, end, source)` - Deletes text at between the given indexes. `start` and `end` default to the selection indexes, or to the end of content if no selection is available.
--   `getHTML(options)` - Returns the html representation of the editor contents.
--   `getEditor()` - Returns a reference to the quill editor api.
 
 `editorId` - `string`: `editorId` must match the `editorId` of an available toolbar. `editorId` pairs must be unique.
 
@@ -155,17 +200,15 @@ An example of a quill editor with custom toolbar controls:
 </QuillEditor>
 ```
 
-### Plain Text mode
+### Methods
+
+#### QuillEditor
+
+- `insertText(text, start, end, source)` - Inserts text at the desired location, replacing the content between the start and end indexes. `start` and `end` default to the selection indexes, or to the end of content if no selection is available.
+- `deleteText(start, end, source)` - Deletes text at between the given indexes. `start` and `end` default to the selection indexes, or to the end of content if no selection is available.
+- `getHTML(options)` - Returns the html representation of the editor contents.
+- `getEditor()` - Returns a reference to the quill editor api. (See the [Quill docs](https://quilljs.com/docs/api/))
+
+### Plain text mode
 
 To put the editor into plain text mode, simply pass an empty array to the `formats` prop. The editor may still have a toolbar, but all default controls, except `TextSnippet` will not work.
-
-## Running locally
-
-Simply clone this repository, and run the following commands in the root directory:
-
-```
-yarn
-yarn start
-```
-
-After building, the example app will run at `localhost:8086`.
