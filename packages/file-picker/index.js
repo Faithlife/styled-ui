@@ -1,3 +1,6 @@
-import React from 'react';
+import { FilePicker } from './FilePicker';
+import { Tab } from './Tab';
 
-export const FilePicker = () => <p>{'Hello from @faithlife/file-picker'}</p>;
+FilePicker.Tab = Tab;
+
+export { FilePicker };
