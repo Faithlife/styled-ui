@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.31.3
+
+- Fix error in `SequencedTab` use of styled-system props.
+
 ### 5.31.2
 
 - Update `Slider` component to accept styled-system props.
