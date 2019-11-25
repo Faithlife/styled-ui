@@ -115,11 +115,11 @@ The recommended pattern is to use the `Toolbar` component as a child of the `Qui
 
 `placeholder` - `string`: The placeholder text for an empty editor.
 
-`formats - string[]`: Whitelist for formats to be enabled during editing. Pass an empty array to only allow plain text. See [link](link). The default list of enabled formats is: `['header', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'indent', 'align', 'link', 'image', 'width']`
+`formats - string[]`: Whitelist for formats to be enabled during editing. Pass an empty array to only allow plain text. See [Quill Formats](https://quilljs.com/docs/formats/) for the complete list of options. The default list of enabled formats is: `['header', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'indent', 'align', 'link', 'image', 'width']`
 
-`modules`: Key value pairs of additional modules to include or override. See [link](link).
+`modules`: Key value pairs of additional modules to include or override. See [Quill Modules](https://quilljs.com/docs/modules/) for more information.
 
-`toolbarHandlers`: Key value pairs of additional toolbar handlers to include or override. See [link](link). If any custom toolbar controls are added, they will require a custom toolbar handler.
+`toolbarHandlers`: Key value pairs of additional toolbar handlers to include or override. This is a convenience prop, since toolbar is a quill module, which can also be overriden using the `modules` prop. See [Quill Toolbar Module](https://quilljs.com/docs/modules/toolbar/) for more information. If any custom toolbar controls are added, they will require a custom toolbar handler.
 
 `onChange()`: Event that is fired when content is changed. To retrieve the Delta representation of the editor's contents, use the imperative handler `quill.getEditor().getContents()`.
 
