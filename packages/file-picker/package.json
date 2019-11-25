@@ -7,10 +7,13 @@
     "dist/**"
   ],
   "devDependencies": {
+    "@faithlife/smart-media-editor": "^3.18.8",
     "@faithlife/styled-ui": "5.31.1",
     "react": "^16.8.4"
   },
   "peerDependencies": {
+    "@faithlife/smart-media-editor": "^3.18.8",
+    "@faithlife/styled-ui": "5.31.1",
     "react": "^16.8.4"
   },
   "dependencies": {
