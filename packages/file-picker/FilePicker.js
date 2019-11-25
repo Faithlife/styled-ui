@@ -24,7 +24,7 @@ export const FilePicker = ({ children, title, isOpen, onClose }) => {
 						<TabPanels display="grid">
 							{React.Children.map(children, tab => (
 								<TabPanel display="grid" padding={tab.props.padding || 0}>
-									{React.cloneElement(tab, { title: null })}
+									{React.cloneElement(tab, { title: null, padding: null })}
 								</TabPanel>
 							))}
 						</TabPanels>
