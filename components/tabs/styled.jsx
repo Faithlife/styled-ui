@@ -4,6 +4,7 @@
 import styled, { css } from 'styled-components';
 import 'focus-visible';
 import { Box } from '../Box';
+import { UtilityButton } from '../button';
 import { Text } from '../Text';
 import { resetStyles } from '../utils';
 import { thickness } from '../shared-styles';
@@ -43,7 +44,7 @@ const selectedTab = css`
 	border-left: 1px solid ${({ theme }) => theme.colors.gray14};
 `;
 
-export const Tab = styled.button.attrs({
+export const Tab = styled(UtilityButton).attrs({
 	role: 'tab',
 	'aria-selected': ({ selected }) => selected,
 	'aria-controls': ({ panelId }) => `panel:${panelId}`,
@@ -162,7 +163,7 @@ export const SequencedTabContent = styled(Text).attrs(() => ({ tabIndex: -1 }))`
 	}
 `;
 
-export const Circle = styled.div`
+export const Circle = styled(Box)`
 	display: flex;
 	justify-content: center;
 	align-items: center;
