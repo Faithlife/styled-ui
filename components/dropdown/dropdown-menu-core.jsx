@@ -62,10 +62,12 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 				<Styled.DropdownMenuContent onKeyDown={handleKeyboardNav}>
 					{React.Children.map(children, (child, index) =>
 						React.isValidElement(child)
-							? React.cloneElement(child, {
-									isSelected: index === focusedMenuItem,
-									onFocusedMenuItemChange: handleFocusedMenuItemChange(index),
-							  })
+							? child.type.isFocusableMenuChild
+								? React.cloneElement(child, {
+										isSelected: index === focusedMenuItem,
+										onFocusedMenuItemChange: handleFocusedMenuItemChange(index),
+								  })
+								: child
 							: null,
 					)}
 				</Styled.DropdownMenuContent>
