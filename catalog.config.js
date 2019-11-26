@@ -8,7 +8,9 @@ const newRules = [
 module.exports = {
 	webpack: catalogWebpackConfig => {
 		const modifiedConfig = { ...catalogWebpackConfig };
-		modifiedConfig.module.rules[0].oneOf = [...newRules, ...modifiedConfig.module.rules[0].oneOf];
+		modifiedConfig.module.rules[0].oneOf = modifiedConfig.module.rules[0].oneOf.unshift(
+			...newRules,
+		);
 		return catalogWebpackConfig;
 	},
 };

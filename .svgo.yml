@@ -32,7 +32,7 @@ plugins:
   - removeHiddenElems: true
   - removeMetadata: true
   - removeNonInheritableGroupAttrs: true
-  - removeRasterImages
+  - removeRasterImages: true
   - removeStyleElement: true
   - removeTitle: true
   - removeUnknownsAndDefaults: true
@@ -45,7 +45,3 @@ plugins:
   - sortAttrs: true
   - transformsWithOnePath: true
   - prefixIds: 'styled-ui'
-
-js2svg:
-  pretty: true
-  indent: '  '
