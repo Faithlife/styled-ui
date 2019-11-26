@@ -11,6 +11,7 @@
   "types": "dist/index.d.ts",
   "license": "UNLICENSED",
   "scripts": {
+    "test": "echo 'no tests yet'",
     "prettier": "prettier --write \"./**/*.{ts,tsx,less}\" && yarn lint --fix",
     "lint": "eslint \"./src/**/*.{ts,tsx}\" --fix",
     "typecheck": "tsc --noEmit --watch",

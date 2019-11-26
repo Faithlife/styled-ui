@@ -6,6 +6,9 @@
   "files": [
     "dist/**"
   ],
+  "scripts": {
+    "test": "echo 'no tests yet'"
+  },
   "devDependencies": {
     "@faithlife/smart-media-editor": "^3.18.8",
     "@faithlife/styled-ui": "5.31.1",

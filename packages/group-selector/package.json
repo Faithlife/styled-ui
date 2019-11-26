@@ -6,6 +6,9 @@
   "files": [
     "dist/**"
   ],
+  "scripts": {
+    "test": "echo 'no tests yet'"
+  },
   "devDependencies": {
     "@faithlife/styled-ui": "5.31.1",
     "prop-types": "^15.7.2",
