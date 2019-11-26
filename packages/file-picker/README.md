@@ -5,10 +5,6 @@ The purpose of this component is to provide a unified AmberPicker experience acr
 - [Getting Started](#getting-started)
 - [Scope](#scope)
 - [API reference](#api-reference)
-  1. [Exports](#exports)
-  2. [Props](#props)
-     - [FilePicker](#filepicker)
-     - [Tab](#tab)
 
 ## Getting started
 
@@ -23,7 +19,7 @@ import { FilePicker } from '@faithlife/file-picker';
 ```jsx
 const MyComponent = () => {
 	...
-    return (
+	return (
 		<FilePicker
 			title={localization.filePicker}
 			isOpen={isOpen}
@@ -33,8 +29,8 @@ const MyComponent = () => {
 			<FilePicker.AmberTab title={localization.groupVault} accountId={12345678} />
 			<FilePicker.FaithlifeStockTab />
 			<FilePicker.UnsplashTab />
-        </FilePicker>
-    );
+		</FilePicker>
+	);
 }
 ```
 
