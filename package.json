@@ -18,7 +18,8 @@
     "lint": "flcom-addin-scripts lint",
     "ship": "flcom-addin-scripts ship",
     "ship-to": "flcom-addin-scripts ship-to",
-    "get-versions": "flcom-addin-scripts get-versions"
+    "get-versions": "flcom-addin-scripts get-versions",
+    "publish": "echo 'not yet implemented'"
   },
   "browserslist": [
     "extends @faithlife/browserslist-config-flcom-addin"
