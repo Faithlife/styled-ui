@@ -24,7 +24,12 @@ import { FilePicker } from '@faithlife/file-picker';
 const MyComponent = () => {
 	...
     return (
-        <FilePicker title={localization.filePicker} isOpen={isOpen} onFilesSelected={onFilesSelected} onCancel={onCancel}>
+		<FilePicker
+			title={localization.filePicker}
+			isOpen={isOpen}
+			onFilesSelected={onFilesSelected}
+			onCancel={onCancel}
+		>
 			<FilePicker.AmberTab title={localization.groupVault} accountId={12345678} />
 			<FilePicker.FaithlifeStockTab />
 			<FilePicker.UnsplashTab />
@@ -55,7 +60,7 @@ The recommended pattern is to use the various `Tab` components as children of th
 
 ```
 <FilePicker>
-    <FilePicker.Tab title="Title" />
+	<FilePicker.Tab title="Title" />
 	<FilePicker.AmberTab title="Group Vault" accountId={12345678} />
 </FilePicker>
 ```
