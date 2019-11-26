@@ -36,7 +36,7 @@ export class ProductDrawer extends React.PureComponent {
 			equipDescription: PropTypes.string.isRequired,
 			comingSoon: PropTypes.string.isRequired,
 			more: PropTypes.string.isRequired,
-			products: PropTypes.string.isRequired,
+			drawerToggleText: PropTypes.string.isRequired,
 			faithlifeStudyBibleLinkTitle: PropTypes.string.isRequired,
 			faithlifeStudyBibleLinkDescription: PropTypes.string.isRequired,
 			givingLinkTitle: PropTypes.string.isRequired,
@@ -55,6 +55,7 @@ export class ProductDrawer extends React.PureComponent {
 			toggleTextFontFamily: PropTypes.string,
 			toggleTextFontSize: PropTypes.string,
 		}),
+		title: PropTypes.string,
 	};
 
 	static defaultProps = {
@@ -116,7 +117,7 @@ export class ProductDrawer extends React.PureComponent {
 								/>
 							</svg>
 							<Styled.ProductDrawerToggleText styleOverrides={styleOverrides}>
-								{resources.products}
+								{resources.drawerToggleText}
 							</Styled.ProductDrawerToggleText>
 						</Styled.ProductDrawerToggle>
 					</PopoverReference>
