@@ -3,7 +3,7 @@
   "name": "quill-editor",
   "version": "1.0.1",
   "dependencies": {
-    "@faithlife/quill-editor": "^0.1.9"
+    "@faithlife/quill-editor": "^0.2.0"
   },
   "peerDependencies": {
     "react": "^16.12.0",
