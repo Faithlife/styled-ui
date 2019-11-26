@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "file-picker",
+  "name": "file-picker-example",
   "version": "1.1.0",
   "dependencies": {
     "@faithlife/file-picker": "^0.3.0",

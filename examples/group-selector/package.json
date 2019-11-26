@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "group-selector",
+  "name": "group-selector-example",
   "version": "1.0.1",
   "dependencies": {
     "@faithlife/group-selector": "^0.2.0",
