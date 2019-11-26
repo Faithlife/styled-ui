@@ -9,12 +9,12 @@ import {
 } from '@faithlife/styled-ui';
 import { Modal } from '@faithlife/styled-ui/v6';
 
-export const FilePicker = ({ children, title, isOpen, onClose }) => {
+export const FilePicker = ({ children, title, isOpen, onClose, onFilesSelected, onCancel }) => {
 	return (
 		<Modal isOpen={isOpen} onClose={onClose} container="body" fullscreen>
 			<Modal.Header title={title} textStyle="h.24" />
 			<Modal.Content>
-				<FilePickerProvider>
+				<FilePickerProvider onFilesSelected={onFilesSelected} onCancel={onCancel}>
 					<TabManager>
 						<TabList>
 							{React.Children.map(children, tab => (
