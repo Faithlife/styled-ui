@@ -44,13 +44,13 @@ const selectedTab = css`
 	border-left: 1px solid ${({ theme }) => theme.colors.gray14};
 `;
 
-export const Tab = styled(UtilityButton).attrs({
+export const Tab = styled(UtilityButton).attrs(({ selected, panelId, disabled }) => ({
 	role: 'tab',
-	'aria-selected': ({ selected }) => selected,
-	'aria-controls': ({ panelId }) => `panel:${panelId}`,
-	'aria-disabled': ({ disabled }) => disabled,
-	tabIndex: ({ selected }) => (selected ? 0 : -1),
-})`
+	'aria-selected': selected,
+	'aria-controls': `panel:${panelId}`,
+	'aria-disabled': disabled,
+	tabIndex: selected ? 0 : -1,
+}))`
 	${resetStyles};
 
 	box-shadow: none;
@@ -81,7 +81,7 @@ export const Tab = styled(UtilityButton).attrs({
 	}
 `;
 
-export const TabContent = styled(Text).attrs({ tabIndex: -1 })`
+export const TabContent = styled(Text).attrs(() => ({ tabIndex: -1 }))`
 	border-radius: ${borderRadius};
 	cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 	white-space: nowrap;
@@ -97,7 +97,7 @@ export const TabContent = styled(Text).attrs({ tabIndex: -1 })`
 	${({ selected }) => selected && selectedTab};
 `;
 
-export const TabList = styled(Box).attrs({ role: 'tablist' })`
+export const TabList = styled(Box).attrs(() => ({ role: 'tablist' }))`
 	border-bottom: 1px solid ${({ theme }) => theme.colors.gray14};
 	display: flex;
 	flex-direction: row;
@@ -107,11 +107,11 @@ export const TabList = styled(Box).attrs({ role: 'tablist' })`
 	}
 `;
 
-export const TabPanel = styled(Box).attrs({
+export const TabPanel = styled(Box).attrs(() => ({
 	role: 'tabpanel',
 	id: ({ panelId }) => `panel:${panelId}`,
 	'aria-expanded': ({ selected }) => selected,
-})`
+}))`
 	&:focus {
 		outline: none;
 	}
