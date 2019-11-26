@@ -19,7 +19,7 @@
     "ship": "flcom-addin-scripts ship",
     "ship-to": "flcom-addin-scripts ship-to",
     "get-versions": "flcom-addin-scripts get-versions",
-    "publish": "echo 'not yet implemented'"
+    "publish": "lerna publish --conventional-commits --github-release --registry http://npm.faithlife.io --yes"
   },
   "browserslist": [
     "extends @faithlife/browserslist-config-flcom-addin"
