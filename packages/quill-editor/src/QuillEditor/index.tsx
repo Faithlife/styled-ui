@@ -10,6 +10,7 @@ import ReactQuill from 'react-quill';
 import Quill, { Delta } from 'quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
+import './styles.css';
 /* eslint-disable-next-line */
 import QuillDeltaToHtmlConverter from '../utility/QuillDeltaToHtmlConverter';
 import { LocalizationProvider } from '../components/Localization';
