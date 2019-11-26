@@ -25,11 +25,6 @@ const StyledSelect = styled.select<{ label: string; placement?: string }>`
 	&:not(.ql-align) .ql-picker-item:not([data-value]) {
 		display: none;
 	}
-
-	&.ql-expanded .ql-picker-label,
-	&.ql-expanded .ql-picker-options {
-		border-color: transparent !important;
-	}
 `;
 
 const FormatContainer = styled.div`
@@ -37,19 +32,11 @@ const FormatContainer = styled.div`
 	height: 24px;
 
 	& .ql-picker.ql-expanded ~ ${TooltipTitle} {
-		display: none !important;
+		display: none;
 	}
 
 	& button:disabled {
 		opacity: 0.5;
-	}
-
-	& button:disabled .ql-stroke {
-		stroke: #444 !important;
-	}
-
-	& svg {
-		height: initial !important;
 	}
 
 	& button:hover svg.custom-icon path {

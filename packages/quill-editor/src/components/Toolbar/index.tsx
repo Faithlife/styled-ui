@@ -5,10 +5,17 @@ import { ToolbarGrouping } from './ToolbarControls';
 import { DefaultControls } from './DefaultControls';
 
 const ToolbarContainer = styled.div`
-	border: none !important;
-	border-bottom: 1px solid #c7c7c7 !important;
+	&.ql-toolbar.ql-snow {
+		border: none;
+		border-bottom: 1px solid #c7c7c7;
+	}
 	display: flex;
 	flex: 0 0 auto;
+
+	&.ql-snow .ql-picker.ql-expanded .ql-picker-label,
+	&.ql-snow .ql-picker.ql-expanded .ql-picker-options {
+		border-color: transparent;
+	}
 `;
 
 export type ToolbarControlLayout = (ControlKind | ControlKind[])[];

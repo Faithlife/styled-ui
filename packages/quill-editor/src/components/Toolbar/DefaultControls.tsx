@@ -115,6 +115,7 @@ const Align: React.FunctionComponent = props => (
 );
 const Link: React.FunctionComponent = props => (
 	<LocalizedButton
+		style={{ height: '22px' }}
 		name="insertLink"
 		tooltipKey="insertLink"
 		disabled={true}
@@ -125,12 +126,24 @@ const Link: React.FunctionComponent = props => (
 	</LocalizedButton>
 );
 const Image: React.FunctionComponent = props => (
-	<LocalizedButton name="insertImage" tooltipKey="insertImage" tabIndex={-1} {...props}>
+	<LocalizedButton
+		style={{ height: '22px' }}
+		name="insertImage"
+		tooltipKey="insertImage"
+		tabIndex={-1}
+		{...props}
+	>
 		<InsertImageIcon />
 	</LocalizedButton>
 );
 const TextSnippet: React.FunctionComponent = props => (
-	<LocalizedButton name="textSnippet" tooltipKey="textSnippet" tabIndex={-1} {...props}>
+	<LocalizedButton
+		style={{ height: '22px' }}
+		name="textSnippet"
+		tooltipKey="textSnippet"
+		tabIndex={-1}
+		{...props}
+	>
 		<TextSnippetIcon />
 	</LocalizedButton>
 );
