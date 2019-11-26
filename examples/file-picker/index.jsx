@@ -8,19 +8,18 @@ const App = () => {
 	const toggleIsOpen = useCallback(() => {
 		setIsOpen(previousState => !previousState);
 	}, []);
-
-	const [selectedFile, setSelectedFile] = useState(null);
-	const updateSelectedFile = useCallback(asset => {
-		setSelectedFile(asset);
+	const handleCancel = useCallback(() => {
 		setIsOpen(false);
 	}, []);
 
-	const selectedFileBackground =
-		selectedFile &&
-		selectedFile.assets &&
-		selectedFile.assets[0] &&
-		selectedFile.assets[0].file &&
-		selectedFile.assets[0].file.url;
+	const [selectedFile, setSelectedFile] = useState(null);
+	const updateSelectedFile = useCallback(selectedFiles => {
+		const firstAsset = selectedFiles.assets[0];
+		setSelectedFile(firstAsset);
+		setIsOpen(false);
+	}, []);
+
+	const selectedFileBackground = selectedFile && selectedFile.file && selectedFile.file.url;
 
 	return (
 		<Box
@@ -35,8 +34,8 @@ const App = () => {
 		>
 			<Box
 				onClick={toggleIsOpen}
-				width={300}
-				height={200}
+				width={480}
+				height={270}
 				border="2px dashed"
 				borderColor="blue4"
 				display="grid"
@@ -53,10 +52,10 @@ const App = () => {
 			</Box>
 			<FilePicker
 				isOpen={isOpen}
-				onClose={toggleIsOpen}
+				onClose={handleCancel}
 				title="File Picker"
 				onFilesSelected={updateSelectedFile}
-				onCancel={toggleIsOpen}
+				onCancel={handleCancel}
 			>
 				<FilePicker.AmberTab title="Group Vault" accountId={9863513}>
 					Hi there!
