@@ -15,6 +15,7 @@
     "build": "flcom-addin-scripts build",
     "create-package": "flcom-addin-scripts create-package",
     "create-example": "flcom-addin-scripts create-example",
+    "clean": "rm -rf packages/*/dist",
     "lint": "flcom-addin-scripts lint",
     "ship": "flcom-addin-scripts ship",
     "ship-to": "flcom-addin-scripts ship-to",

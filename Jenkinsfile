@@ -6,6 +6,10 @@ flowdock.withNotification('a611b96b1517142a58a87c1b58aacdd8', '#build') {
 			checkout scm
 		}
 
+		stage('Clean') {
+			sh script: 'yarn clean'
+		}
+
 		stage('Get dependencies') {
 			sh script: 'yarn'
 		}
