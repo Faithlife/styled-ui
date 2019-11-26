@@ -4,5 +4,6 @@ import { AmberTab } from './AmberTab';
 
 FilePicker.Tab = Tab;
 FilePicker.AmberTab = AmberTab;
+FilePicker.TestTab = Tab;
 
 export { FilePicker };
