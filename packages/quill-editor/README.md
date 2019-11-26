@@ -109,6 +109,8 @@ The recommended pattern is to use the `Toolbar` component as a child of the `Qui
 
 `editorId` - `string`: `editorId` must match the `editorId` of an available toolbar. `editorId` pairs must be unique.
 
+`groupId` - `string`: Group id to access amber vault. Required for the amber file pickers.
+
 `className` - `string`: Classes to apply to the container surrounding the editor. \*Does not attach classes directly to the react-quill component.
 
 `defaultValue` - `Delta`: Initial value for the uncontrolled editor. Must be a Quill Delta.
