@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.32.0
+
+- Allow `ListBoxMenu` to accept children other than `ListBoxItem`.
+
 ### 5.31.3
 
 - Fix error in `SequencedTab` use of styled-system props.
