@@ -55,6 +55,7 @@ export class ProductDrawer extends React.PureComponent {
 			toggleTextFontFamily: PropTypes.string,
 			toggleTextFontSize: PropTypes.string,
 		}),
+		title: PropTypes.string,
 	};
 
 	static defaultProps = {
@@ -89,7 +90,7 @@ export class ProductDrawer extends React.PureComponent {
 	};
 
 	render() {
-		const { styleOverrides, resources } = this.props;
+		const { styleOverrides, resources, title } = this.props;
 		const { isOpen } = this.state;
 
 		return (
@@ -116,7 +117,7 @@ export class ProductDrawer extends React.PureComponent {
 								/>
 							</svg>
 							<Styled.ProductDrawerToggleText styleOverrides={styleOverrides}>
-								{resources.products}
+								{title || resources.products}
 							</Styled.ProductDrawerToggleText>
 						</Styled.ProductDrawerToggle>
 					</PopoverReference>

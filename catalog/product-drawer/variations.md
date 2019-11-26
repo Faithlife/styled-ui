@@ -11,5 +11,5 @@ showSource: true
 ```react
 showSource: true
 ---
-<ProductDrawerWithResources styleOverrides={{mobileTopOffset: '55px', toggleButtonColor: 'green', toggleButtonHoverColor: 'red', toggleTextColor: 'blue', toggleTextFontFamily: 'Arial', toggleTextFontSize: '16px' }} />
+<ProductDrawerWithResources title={"Tools"} styleOverrides={{mobileTopOffset: '55px', toggleButtonColor: 'green', toggleButtonHoverColor: 'red', toggleTextColor: 'blue', toggleTextFontFamily: 'Arial', toggleTextFontSize: '16px' }} />
 ```
