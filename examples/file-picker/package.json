@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "file-picker-example",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "dependencies": {
     "@faithlife/file-picker": "^0.3.0",
     "@faithlife/smart-media-editor": "^3.18.8",
