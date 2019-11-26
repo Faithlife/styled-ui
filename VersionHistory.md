@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.33.0
+
+- Add localization override for `drawerToggleText` to `ProductDrawer`.
+- Fix styled-components `attr` deprecation warnings.
+
 ### 5.32.0
 
 - Allow `ListBoxMenu` to accept children other than `ListBoxItem`.
