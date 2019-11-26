@@ -9,6 +9,19 @@ const App = () => {
 		setIsOpen(previousState => !previousState);
 	}, []);
 
+	const [selectedFile, setSelectedFile] = useState(null);
+	const updateSelectedFile = useCallback(asset => {
+		setSelectedFile(asset);
+		setIsOpen(false);
+	}, []);
+
+	const selectedFileBackground =
+		selectedFile &&
+		selectedFile.assets &&
+		selectedFile.assets[0] &&
+		selectedFile.assets[0].file &&
+		selectedFile.assets[0].file.url;
+
 	return (
 		<Box
 			display="grid"
@@ -31,14 +44,23 @@ const App = () => {
 				justifyContent="center"
 				color="blue4"
 				fontWeight="bold"
+				backgroundImage={selectedFileBackground ? `url(${selectedFileBackground})` : null}
+				backgroundPosition="center"
+				backgroundSize="cover"
+				backgroundRepeat="no-repeat"
 			>
-				+ Add photo
+				{!selectedFileBackground && '+ Add photo'}
 			</Box>
-			<FilePicker isOpen={isOpen} onClose={toggleIsOpen} title="File Picker">
-				<FilePicker.Tab title="one" padding={4}>
-					Heyo
-				</FilePicker.Tab>
-				<FilePicker.Tab title="two">Hi there!</FilePicker.Tab>
+			<FilePicker
+				isOpen={isOpen}
+				onClose={toggleIsOpen}
+				title="File Picker"
+				onFilesSelected={updateSelectedFile}
+				onCancel={toggleIsOpen}
+			>
+				<FilePicker.AmberTab title="Group Vault" accountId={9863513}>
+					Hi there!
+				</FilePicker.AmberTab>
 				<FilePicker.Tab title="three">Привет!</FilePicker.Tab>
 			</FilePicker>
 		</Box>
