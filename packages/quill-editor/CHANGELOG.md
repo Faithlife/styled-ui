@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.3](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@0.3.2...@faithlife/quill-editor@0.3.3) (2019-11-27)
+
+
+### Bug Fixes
+
+* Move quill and react-quill to peer dependencies. ([ce2ab2e](https://git/Logos/FaithlifeEquipment/commits/ce2ab2e8724fa3897a495525c6cc6f8c4634997b))
+* Revert copied quill delta to html module. ([7456289](https://git/Logos/FaithlifeEquipment/commits/7456289b79359367c2af6229574d9922a9fe46ef))
+
+
+
+
+
 ## [0.3.2](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@0.3.1...@faithlife/quill-editor@0.3.2) (2019-11-27)
 
 
