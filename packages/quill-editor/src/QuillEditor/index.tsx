@@ -11,8 +11,7 @@ import Quill, { Delta } from 'quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
 import './styles.css';
-/* eslint-disable-next-line */
-import QuillDeltaToHtmlConverter from '../utility/QuillDeltaToHtmlConverter';
+import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import { LocalizationProvider } from '../components/Localization';
 import localizedResources from '../locales/en-US/resources.json';
 import { FilePickerModal } from '../components/FilePickerModal';
