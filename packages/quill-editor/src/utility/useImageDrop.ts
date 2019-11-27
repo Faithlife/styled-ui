@@ -30,7 +30,7 @@ export const useImageDrop = (quillRef, onImageUpload) => {
 				}
 
 				const reader = new FileReader();
-				reader.onload = evt => {
+				reader.onload = (evt: any) => {
 					insert(file, evt.target && evt.target.result);
 				};
 
