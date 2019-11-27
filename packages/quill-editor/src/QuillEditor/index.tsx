@@ -6,8 +6,7 @@ import React, {
 	useState,
 	useImperativeHandle,
 } from 'react';
-import ReactQuill from 'react-quill';
-import Quill, { Delta } from 'quill';
+import ReactQuill, { Quill } from 'react-quill';
 import styled from 'styled-components';
 import './styles.css';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
@@ -22,13 +21,13 @@ import { useImageDrop } from '../utility/useImageDrop';
 
 export interface IQuillRichTextEditorProps {
 	groupId?: string;
-	defaultValue?: Delta;
-	value?: Delta;
+	defaultValue?: any;
+	value?: any;
 	formats?: string[];
 	toolbarHandlers?: { [key: string]: any };
 	modules?: { [key: string]: any };
 	placeholder?: string;
-	onContentChange: (delta: Delta | null) => void;
+	onContentChange: (delta: any | null) => void;
 	onClick?: (e: React.MouseEvent) => void;
 	onBlur?: () => void;
 	className?: string;
@@ -175,7 +174,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			}
 		}
 
-		Quill.register({ 'formats/image': ImageBlot });
+		Quill && Quill.register({ 'formats/image': ImageBlot });
 	}, []);
 
 	const [imageInsertRange, setImageInsertRange] = useState<{
