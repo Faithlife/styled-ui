@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.4](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@0.3.3...@faithlife/quill-editor@0.3.4) (2019-11-27)
+
+
+### Bug Fixes
+
+* Remove references to Quill and remove dependency. ([b8fe899](https://git/Logos/FaithlifeEquipment/commits/b8fe899a433ad3f882468ed0f8579d062edafbe1))
+
+
+
+
+
 ## [0.3.3](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@0.3.2...@faithlife/quill-editor@0.3.3) (2019-11-27)
 
 
