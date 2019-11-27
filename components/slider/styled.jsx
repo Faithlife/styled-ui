@@ -100,8 +100,8 @@ export const Thumb = styled.div`
 	transform: translate(50%, -50%);
 	transition: height 100ms, width 100ms;
 	border-radius: 50%;
-	height: ${props => (props.hovered ? '26px' : '20px')};
-	width: ${props => (props.hovered ? '26px' : '20px')};
+	height: ${props => (props.hovered && !props.disabled ? '26px' : '20px')};
+	width: ${props => (props.hovered && !props.disabled ? '26px' : '20px')};
 	background: #fff;
 	box-shadow: ${props =>
 		props.active ? '0 1px 10px 0 #0174b9' : '0 2px 6px 1px rgba(0, 0, 0, 0.3)'};
