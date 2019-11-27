@@ -8,7 +8,6 @@ import React, {
 } from 'react';
 import ReactQuill from 'react-quill';
 import Quill, { Delta } from 'quill';
-import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
 import './styles.css';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
