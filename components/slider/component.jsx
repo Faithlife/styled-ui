@@ -41,6 +41,7 @@ export class Slider extends PureComponent {
 
 	static defaultProps = {
 		hideAvailableStops: false,
+		labels: [],
 		styleOverrides: {},
 	};
 
@@ -226,9 +227,20 @@ export class Slider extends PureComponent {
 	};
 
 	render() {
-		const { hideAvailableStops, maxValue, minValue, styleOverrides, ...props } = this.props;
+		const {
+			value,
+			labels,
+			minValue,
+			maxValue,
+			onSlide,
+			onStop,
+			stopCount,
+			hideAvailableStops,
+			styleOverrides,
+			...props
+		} = this.props;
+
 		const { isHovered } = this.state;
-		const labels = this.props.labels || [];
 		const track = this.getTrack();
 		const stops = this.getStops();
 
