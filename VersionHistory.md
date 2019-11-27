@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.33.1
+
+- Fix `Slider` propType warnings from props that shouldn't have been spread.
+
 ### 5.33.0
 
 - Add localization override for `drawerToggleText` to `ProductDrawer`.
