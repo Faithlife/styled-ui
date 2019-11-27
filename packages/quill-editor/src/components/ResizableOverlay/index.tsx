@@ -40,7 +40,7 @@ const DragHandle = styled.div.attrs(({ location, cursorStyle }: IHandleProps) =>
 	background-color: #278ed4;
 `;
 
-const AlignmentControls = styled.div<{ top: number; left: number }>`
+const AlignmentControls = styled.div<{ top: number }>`
 	position: absolute;
 	padding: 5px;
 	white-space: nowrap;
