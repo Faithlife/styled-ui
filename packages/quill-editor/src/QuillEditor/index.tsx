@@ -39,6 +39,7 @@ export interface IQuillRichTextEditorProps {
 	onKeyUp?: () => void;
 	onChangeSelection?: () => void;
 	onImageUpload?: (file: File) => void;
+	children?: React.ReactNode;
 }
 
 export interface IQuillContainerProps {
