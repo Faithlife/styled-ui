@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text } from '../Text';
 import { Box } from '../Box';
+import { UtilityButton } from '../button';
 import { ChevronRight, ChevronExpand } from '../icons';
 import { useAccordionContext, useAccordionItemContext } from './accordion-util';
-import { resetStyles } from '../utils';
 
 export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, subtitle }) {
 	const {
@@ -56,6 +56,8 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 			gridTemplateColumns={
 				renderCustomIndicator ? '[title] 1fr [indicator] min-content' : '[title] auto [space] 0'
 			}
+			borderTop={1}
+			borderTopColor="gray14"
 		>
 			<Heading ariaLevel={ariaLevel}>
 				<Button
@@ -128,21 +130,14 @@ const Heading = styled.header.attrs(({ ariaLevel }) => ({
 	width: 100%;
 `;
 
-const Button = styled.button.attrs(({ isExpanded, panelId, headerId }) => ({
+const Button = styled(UtilityButton).attrs(({ isExpanded, panelId, headerId }) => ({
 	role: 'button',
 	'aria-expanded': isExpanded,
 	'aria-controls': `accordion-panel-${panelId}`,
 	id: `accordion-header-${headerId}`,
 }))`
-	${resetStyles};
-
-	padding: 0;
-	border: 0;
-	background: 0;
-	appearance: none;
 	width: 100%;
 	height: 100%;
-	text-align: left;
 `;
 
 const ButtonContentWrapper = styled(Box)`
@@ -151,7 +146,6 @@ const ButtonContentWrapper = styled(Box)`
 	grid-template-columns: ${props => (props.hideArrows ? 'auto' : 'min-content auto')};
 
 	line-height: 1;
-	border-top: 1px solid ${({ theme }) => theme.colors.gray14};
 `;
 
 const ButtonContent = styled(Box).attrs(() => ({ gridGap: 6 }))`
