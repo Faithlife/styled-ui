@@ -164,6 +164,12 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	}, [value]);
 
 	useEffect(() => {
+		if (quillRef.current) {
+			quillRef.current.getEditor().root.dataset.placeholder = placeholder;
+		}
+	}, [placeholder]);
+
+	useEffect(() => {
 		const elements = quillContainerRef.current.querySelectorAll('.ql-picker-label');
 		elements.forEach(element => {
 			element.removeAttribute('tabindex');
