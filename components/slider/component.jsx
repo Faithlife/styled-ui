@@ -19,6 +19,7 @@ function createDerivedValue(getDependencies, calculateValue) {
 
 export class Slider extends PureComponent {
 	static propTypes = {
+		disabled: PropTypes.bool,
 		value: PropTypes.number.isRequired,
 		/** Array of numbers or strings to be used as tooltip labels */
 		labels: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
@@ -85,6 +86,10 @@ export class Slider extends PureComponent {
 	getTrack = createDerivedValue(() => [this.props.stopCount], stopCount => range(0, stopCount - 1));
 
 	handleTouchStart = event => {
+		if (this.props.disabled) {
+			return;
+		}
+
 		event.preventDefault();
 		document.addEventListener('touchmove', this.handleTouchMove);
 		document.addEventListener('touchend', this.handleTouchEnd);
@@ -93,6 +98,10 @@ export class Slider extends PureComponent {
 	};
 
 	handleTouchMove = event => {
+		if (this.props.disabled) {
+			return;
+		}
+
 		event.preventDefault();
 		const value = this.calculateValue(event.touches[0].clientX);
 		if (this.state.value !== value) {
@@ -104,6 +113,10 @@ export class Slider extends PureComponent {
 	};
 
 	handleTouchEnd = event => {
+		if (this.props.disabled) {
+			return;
+		}
+
 		event.preventDefault();
 		document.removeEventListener('touchmove', this.handleTouchMove);
 		document.removeEventListener('touchend', this.handleTouchEnd);
@@ -117,6 +130,10 @@ export class Slider extends PureComponent {
 	};
 
 	handleMouseDown = event => {
+		if (this.props.disabled) {
+			return;
+		}
+
 		if (event.button !== 0 || this.state.isSliding) {
 			return;
 		}
@@ -128,6 +145,10 @@ export class Slider extends PureComponent {
 	};
 
 	handleMouseMove = event => {
+		if (this.props.disabled) {
+			return;
+		}
+
 		event.preventDefault();
 		const value = this.calculateValue(event.clientX);
 		if (this.state.value !== value) {
@@ -139,6 +160,10 @@ export class Slider extends PureComponent {
 	};
 
 	handleMouseUp = event => {
+		if (this.props.disabled) {
+			return;
+		}
+
 		event.preventDefault();
 		document.removeEventListener('mousemove', this.handleMouseMove);
 		document.removeEventListener('mouseup', this.handleMouseUp);
@@ -169,8 +194,15 @@ export class Slider extends PureComponent {
 	}, 250);
 
 	handleThrottledKeyDown = throttle(event => {
-		const { minValue, maxValue, stopCount } = this.props;
+		const { disabled, minValue, maxValue, stopCount } = this.props;
 		const { value: currentValue } = this.state;
+
+		if (disabled) {
+			this.setState({ isHovered: true }, () => {
+				this.handleTogglePopover(false, 400);
+			});
+			return;
+		}
 
 		if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
 			const newValue = currentValue + 1;
@@ -256,7 +288,7 @@ export class Slider extends PureComponent {
 				width="100%"
 				minHeight="28px"
 				css={`
-					cursor: pointer;
+					cursor: ${({ disabled }) => (disabled ? 'normal' : 'pointer')};
 					touch-action: none;
 
 					&:focus {
@@ -311,6 +343,7 @@ export class Slider extends PureComponent {
 									<Styled.Thumb
 										active={this.state.isSliding}
 										hovered={this.state.isHovered}
+										disabled={this.props.disabled}
 										hidden={index !== this.state.value}
 									/>
 								</PopoverReference>

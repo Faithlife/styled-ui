@@ -30,7 +30,7 @@ showSource: true
 state: {}
 ---
 <div style={{background: "#fff", padding: 20}}>
-	<Slider value={1} stopCount={5} labels={['Admins', 'Moderators', 'Members', 'Followers', 'Public']} />
+	<Slider value={1} stopCount={5} labels={['Admins', 'Moderators', 'Members', 'Followers', 'Public']} disabled />
 	<Slider value={1} stopCount={5} labels={['One', 'Two', 'Three', 'Four', 'Five']}/>
 	<Slider value={1} minValue={1} maxValue={3} stopCount={5} labels={['', 'Min', '', 'Max', '']}/>
 </div>
