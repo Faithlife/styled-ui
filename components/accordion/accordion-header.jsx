@@ -138,6 +138,7 @@ const Button = styled(UtilityButton).attrs(({ isExpanded, panelId, headerId }) =
 }))`
 	width: 100%;
 	height: 100%;
+	text-align: left;
 `;
 
 const ButtonContentWrapper = styled(Box)`
