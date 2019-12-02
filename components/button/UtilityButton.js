@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { box, typography } from '../../theme/system';
 import { theme } from '../../theme';
 
@@ -15,7 +15,10 @@ const UtilityButton = styled.button`
 
 	&.focus-visible {
 		&:not(:active) {
-			box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
+			${({ theme }) => css`
+				outline: none;
+				box-shadow: 0 0 0 2px ${theme.colors.button.focusShadow};
+			`}
 		}
 	}
 
