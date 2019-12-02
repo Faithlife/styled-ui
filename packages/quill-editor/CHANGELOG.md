@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@0.3.4...@faithlife/quill-editor@0.4.0) (2019-12-02)
+
+
+### Bug Fixes
+
+* Only access Quill if it's available. ([7d8bd17](https://git/Logos/FaithlifeEquipment/commits/7d8bd17596bc15e4e77de3995c509d268cb8bc0c))
+
+
+### Features
+
+* Allow a classNames prop on QuillEditor. ([17a75a4](https://git/Logos/FaithlifeEquipment/commits/17a75a498f8e9edd5a3294afd4c6696195783d02))
+
+
+
+
+
 ## [0.3.4](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@0.3.3...@faithlife/quill-editor@0.3.4) (2019-11-27)
 
 
