@@ -31,6 +31,7 @@ export interface IQuillRichTextEditorProps {
 	onClick?: (e: React.MouseEvent) => void;
 	onBlur?: () => void;
 	className?: string;
+	classNames?: string[];
 	editorId?: string;
 	onFocus?: () => void;
 	onKeyDown?: () => void;
@@ -131,6 +132,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		onClick,
 		onBlur,
 		className,
+		classNames,
 		editorId,
 		onImageUpload,
 		children,
@@ -498,7 +500,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				ref={quillContainerRef}
 				onClick={onClick}
 				onScroll={handleScrollOnEditor}
-				className={[className, quillEditorId]}
+				className={[...(classNames || []), className, quillEditorId]}
 			>
 				{children}
 				{SafeQuill ? (
