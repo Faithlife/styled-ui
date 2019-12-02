@@ -57,7 +57,7 @@ export function Tooltip(props) {
 			>
 				{children}
 			</PopoverReference>
-			<Popover {...otherProps} isOpen={tooltipIsOpen || isOpen}>
+			<Popover {...otherProps} isOpen={isOpen === undefined ? tooltipIsOpen : isOpen}>
 				{content || text}
 			</Popover>
 		</PopoverManager>
