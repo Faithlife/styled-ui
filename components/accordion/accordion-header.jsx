@@ -58,6 +58,7 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 			}
 			borderTop={1}
 			borderTopColor="gray14"
+			alignItems="center"
 		>
 			<Heading ariaLevel={ariaLevel}>
 				<Button
@@ -101,7 +102,7 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 				</Button>
 			</Heading>
 			{renderCustomIndicator ? (
-				<Box gridColumn="indicator" gridRow={1} marginTop={5} marginRight={[5, 6]}>
+				<Box gridColumn="indicator" gridRow={1} marginRight={[5, 6]}>
 					{renderCustomIndicator({ isExpanded, onExpansion: handleExpansion })}
 				</Box>
 			) : null}
