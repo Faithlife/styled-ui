@@ -20,6 +20,10 @@ export function Tooltip(props) {
 		setToolTipIsOpen(false);
 	}, 200);
 
+	const handleMobileTouch = () => {
+		setToolTipIsOpen(!tooltipIsOpen);
+	};
+
 	useEffect(() => {
 		setIsOnMobile(window.matchMedia('(hover: none)').matches);
 		return () => {
@@ -28,14 +32,12 @@ export function Tooltip(props) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	return isOnMobile ? (
-		children
-	) : (
+	return (
 		<PopoverManager>
 			<PopoverReference
-				onMouseEnter={handleMouseEnter}
-				onMouseLeave={handleMouseLeave}
-				onClick={() => setToolTipIsOpen(false)}
+				onMouseEnter={isOnMobile ? null : handleMouseEnter}
+				onMouseLeave={isOnMobile ? null : handleMouseLeave}
+				onClick={isOnMobile ? handleMobileTouch : () => setToolTipIsOpen(false)}
 			>
 				{children}
 			</PopoverReference>
