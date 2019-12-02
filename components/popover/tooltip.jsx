@@ -7,7 +7,7 @@ import { PopoverReference } from './popper-helpers';
 
 /** Simple tooltip that uses popovers internally. Does not support custom positioning. */
 export function Tooltip(props) {
-	const { children, text, content, isOpen, onConfirm, ...otherProps } = props;
+	const { children, text, content, isOpen, ...otherProps } = props;
 	const [tooltipIsOpen, setToolTipIsOpen] = useState(false);
 	const [isOnMobile, setIsOnMobile] = useState(false);
 
@@ -20,17 +20,30 @@ export function Tooltip(props) {
 		setToolTipIsOpen(false);
 	}, 200);
 
-	const handleMobileTouch = e => {
+	const handleTap = e => {
 		if (!tooltipIsOpen) {
 			e.stopPropagation();
 		}
 		setToolTipIsOpen(!tooltipIsOpen);
 	};
 
+	const handleOutsideTap = e => {
+		e.currentTarget.focus();
+		setToolTipIsOpen(false);
+	};
+
 	useEffect(() => {
-		setIsOnMobile(window.matchMedia('(hover: none)').matches);
+		const isOnMobile = window.matchMedia('(hover: none)').matches;
+		if (isOnMobile) {
+			setIsOnMobile(true);
+			window.addEventListener('click', handleOutsideTap);
+		}
+
 		return () => {
 			handleMouseLeave.cancel();
+			if (isOnMobile) {
+				window.removeEventListener('click', handleOutsideTap);
+			}
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
@@ -40,7 +53,7 @@ export function Tooltip(props) {
 			<PopoverReference
 				onMouseEnter={isOnMobile ? null : handleMouseEnter}
 				onMouseLeave={isOnMobile ? null : handleMouseLeave}
-				onClick={isOnMobile ? handleMobileTouch : () => setToolTipIsOpen(false)}
+				onClick={isOnMobile ? handleTap : () => setToolTipIsOpen(false)}
 			>
 				{children}
 			</PopoverReference>
