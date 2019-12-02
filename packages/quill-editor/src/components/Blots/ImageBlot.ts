@@ -1,6 +1,6 @@
-import { Quill } from 'react-quill';
+import { SafeQuill } from '../../QuillEditor/SafeQuill';
 
-const Embed = Quill && Quill.import('blots/embed');
+const Embed = SafeQuill && SafeQuill.import('blots/embed');
 const ATTRIBUTES = ['alt', 'height', 'width', 'align'];
 
 let ImageBlot;

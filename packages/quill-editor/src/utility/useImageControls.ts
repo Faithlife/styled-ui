@@ -1,8 +1,9 @@
 import { useCallback, useMemo, useRef, useEffect, useState } from 'react';
-import ReactQuill, { Quill } from 'react-quill';
-const Parchment = Quill.import('parchment');
 import { throttle } from './throttle';
 import { IOverlayCoordinates, IOverlayDimensions } from '../components/ResizableOverlay';
+import { SafeQuill } from '../QuillEditor/SafeQuill';
+
+const Parchment = SafeQuill && SafeQuill.import('parchment');
 
 const overlayMarginPixels = 2;
 
@@ -22,7 +23,7 @@ export const useImageControls = (
 	quillEditorQuery
 ): {
 	overlayCoordinates: IOverlayCoordinates | null;
-	handleClickOnEditor: (target: HTMLElement, editorRef: ReactQuill | null) => void;
+	handleClickOnEditor: (target: HTMLElement, editorRef: any | null) => void;
 	handleTextChangeOnEditor: () => void;
 	handleScrollOnEditor: () => void;
 	handleKeyUpOnBody: (event: KeyboardEvent) => void;
@@ -32,7 +33,7 @@ export const useImageControls = (
 	handleAlignmentChange: (alignement: string) => void;
 	currentAlignment: string;
 } => {
-	const editor = useRef<Quill>();
+	const editor = useRef<any>();
 	const [overlayCoordinates, setOverlayCoordinates] = useState<IOverlayCoordinates | null>(null);
 	const [hasResizeOccurred, setHasResizeOccurred] = useState(false);
 	const getEditor = useCallback(() => editor.current, []);
@@ -166,7 +167,7 @@ export const useImageControls = (
 	);
 
 	const handleClickOnEditor = useCallback(
-		(target: HTMLElement, editorRef: ReactQuill | null) => {
+		(target: HTMLElement, editorRef: any | null) => {
 			if (editorRef) {
 				editor.current = editorRef.getEditor();
 				const selectedImage = getSelectedImage();

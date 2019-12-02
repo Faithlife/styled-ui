@@ -6,7 +6,6 @@ import React, {
 	useState,
 	useImperativeHandle,
 } from 'react';
-import ReactQuill, { Quill } from 'react-quill';
 import styled from 'styled-components';
 import './styles.css';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
@@ -18,6 +17,7 @@ import { ResizableOverlay } from '../components/ResizableOverlay';
 import { throttle } from '../utility/throttle';
 import ImageBlot from '../components/Blots/ImageBlot';
 import { useImageDrop } from '../utility/useImageDrop';
+import { SafeQuill, SafeReactQuill } from './SafeQuill';
 
 export interface IQuillRichTextEditorProps {
 	groupId?: string;
@@ -53,7 +53,7 @@ export enum FilePickerKind {
 
 type Source = 'user' | 'api' | 'silent';
 
-const ReactQuillStyled = styled(ReactQuill)`
+const ReactQuillStyled = styled(SafeReactQuill)`
 	flex: 1;
 	display: flex;
 	flex-direction: column;
@@ -138,7 +138,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	},
 	ref
 ) => {
-	const quillRef = useRef<ReactQuill>(null);
+	const quillRef = useRef<any>(null);
 	const quillContainerRef = useRef<any>(null);
 	const [showFilePicker, setShowFilePicker] = useState<boolean>(false);
 	const [filePickerKind, setFilePickerKind] = useState(FilePickerKind.Image);
@@ -174,7 +174,9 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			}
 		}
 
-		Quill && Quill.register({ 'formats/image': ImageBlot });
+		if (SafeQuill) {
+			SafeQuill.register({ 'formats/image': ImageBlot });
+		}
 	}, []);
 
 	const [imageInsertRange, setImageInsertRange] = useState<{
@@ -499,18 +501,22 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				className={[className, quillEditorId]}
 			>
 				{children}
-				<ReactQuillStyled
-					ref={quillRef}
-					linkHelpText={localizedResources.toolbar.enterLink}
-					linkSaveText={localizedResources.toolbar.save}
-					defaultValue={defaultValue || value}
-					placeholder={placeholder}
-					modules={moduleConfiguration}
-					formats={allowedFormats}
-					bounds={quillEditorQuery}
-					onBlur={onBlur}
-					{...otherProps}
-				/>
+				{SafeQuill ? (
+					<ReactQuillStyled
+						ref={quillRef}
+						linkHelpText={localizedResources.toolbar.enterLink}
+						linkSaveText={localizedResources.toolbar.save}
+						defaultValue={defaultValue || value}
+						placeholder={placeholder}
+						modules={moduleConfiguration}
+						formats={allowedFormats}
+						bounds={quillEditorQuery}
+						onBlur={onBlur}
+						{...otherProps}
+					/>
+				) : (
+					<ReactQuillStyled>{defaultValue || value}</ReactQuillStyled>
+				)}
 				{overlayCoordinates && (
 					<ResizableOverlay
 						onOverlayResizeComplete={handleOverlayResizeComplete}
