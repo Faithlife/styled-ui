@@ -140,15 +140,6 @@ const ButtonGrid = styled.div`
 	width: 200px;
 `;
 
-const AccordionIndicatorDemo = ({ isExpanded, onExpansion }) => (
-	<input type="checkbox" checked={isExpanded} onChange={onExpansion} tabIndex={-1} />
-);
-
-AccordionIndicatorDemo.propTypes = {
-	isExpanded: PropTypes.bool,
-	onExpansion: PropTypes.func,
-};
-
 const FormDemo = styled.form`
 	display: inline-grid;
 	grid-auto-flow: row;
@@ -246,7 +237,6 @@ const pages = [
 						background: #fff;
 						border: 16px solid #f2f2f2;
 					`,
-					AccordionCustomIndicator: AccordionIndicatorDemo,
 					Checkbox,
 					Form: FormDemo,
 					Input,

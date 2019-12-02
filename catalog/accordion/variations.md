@@ -65,7 +65,10 @@ state: { expandedSections: [0, 2] }
 <AccordionDemo>
 	<Accordion hideArrows expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
 		<Accordion.Item>
-			<Accordion.Header renderCustomIndicator={AccordionCustomIndicator}>
+			<Accordion.Header renderCustomIndicator={({ isExpanded, onExpansion }) => (
+					<Checkbox isChecked={isExpanded} onClick={onExpansion} tabIndex={-1} />
+				)
+			}>
 				Section One Title
 			</Accordion.Header>
 			<Accordion.Panel>
@@ -76,7 +79,7 @@ state: { expandedSections: [0, 2] }
 			</Accordion.Panel>
 		</Accordion.Item>
 		<Accordion.Item>
-			<Accordion.Header renderCustomIndicator={AccordionCustomIndicator}>
+			<Accordion.Header>
 				Section Two Title
 			</Accordion.Header>
 			<Accordion.Panel>
@@ -87,7 +90,7 @@ state: { expandedSections: [0, 2] }
 			</Accordion.Panel>
 		</Accordion.Item>
 		<Accordion.Item>
-			<Accordion.Header renderCustomIndicator={AccordionCustomIndicator}>
+			<Accordion.Header>
 				Section Three Title
 			</Accordion.Header>
 			<Accordion.Panel>
