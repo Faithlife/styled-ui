@@ -7,7 +7,7 @@ import { PopoverReference } from './popper-helpers';
 
 /** Simple tooltip that uses popovers internally. Does not support custom positioning. */
 export function Tooltip(props) {
-	const { children, text, content, isOpen, ...otherProps } = props;
+	const { children, text, content, isOpen, onConfirm, ...otherProps } = props;
 	const [tooltipIsOpen, setToolTipIsOpen] = useState(false);
 	const [isOnMobile, setIsOnMobile] = useState(false);
 
@@ -20,7 +20,10 @@ export function Tooltip(props) {
 		setToolTipIsOpen(false);
 	}, 200);
 
-	const handleMobileTouch = () => {
+	const handleMobileTouch = e => {
+		if (!tooltipIsOpen) {
+			e.stopPropagation();
+		}
 		setToolTipIsOpen(!tooltipIsOpen);
 	};
 
