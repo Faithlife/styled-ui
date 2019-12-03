@@ -2,7 +2,7 @@ import React, { useImperativeHandle, useState, useCallback, useRef } from 'react
 
 const treeGroupColumnComponent = 'treeGroupColumn';
 
-export const editorComponent = 'Editor';
+export const editorComponentTag = 'Editor';
 
 export const dragDirections = {
 	up: 'up',
@@ -60,6 +60,7 @@ export function handleShowCheckbox(shouldShowCheckbox) {
 					isGroup: true,
 					groupName: params.node.groupData['ag-Grid-AutoColumn'],
 				}),
+			params,
 		);
 }
 
@@ -72,15 +73,20 @@ export function handleIsDraggable(isDraggable) {
 					isGroup: true,
 					groupName: params.node.groupData['ag-Grid-AutoColumn'],
 				}),
+			params,
 		);
 }
 
 export function handleIsEditable(shouldBeEditable) {
-	return ({ node }) =>
+	return params =>
 		shouldBeEditable(
-			node.group,
-			node.data ||
-				(node.groupData && { isGroup: true, groupName: node.groupData['ag-Grid-AutoColumn'] }),
+			params.node.group,
+			params.node.data ||
+				(params.node.groupData && {
+					isGroup: true,
+					groupName: params.node.groupData['ag-Grid-AutoColumn'],
+				}),
+			params,
 		);
 }
 
@@ -120,7 +126,7 @@ export function getAggregationColumn({
 			groupComponent[treeGroupColumnComponent] = cellComponent;
 		}
 		if (editComponent) {
-			groupComponent[`${treeGroupColumnComponent}${editorComponent}`] = editComponent;
+			groupComponent[`${treeGroupColumnComponent}${editorComponentTag}`] = editComponent;
 		}
 
 		groupColumnSettings = {
@@ -132,7 +138,7 @@ export function getAggregationColumn({
 			resizable: isResizable,
 			editable: shouldBeEditable ? handleIsEditable(shouldBeEditable) : isEditable,
 			singleClickEdit: shouldBeEditable || isEditable,
-			cellEditor: editComponent ? `${treeGroupColumnComponent}${editorComponent}` : null,
+			cellEditor: editComponent ? `${treeGroupColumnComponent}${editorComponentTag}` : null,
 			cellRendererParams: {
 				suppressCount: hideChildrenCount,
 				innerRenderer: cellComponent ? treeGroupColumnComponent : '',

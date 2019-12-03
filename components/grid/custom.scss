@@ -250,6 +250,13 @@ $icon-path: './icons/';
 		}
 	}
 
+	.ag-icon.ag-icon-grip {
+		@include icon-background($icon-path, 'grab-handle', 18px);
+		&:before {
+			content: '' !important;
+		}
+	}
+
 	.ag-header-cell,
 	.ag-header-group-cell {
 		transition: background-color 0.5s;
