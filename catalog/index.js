@@ -64,6 +64,7 @@ import {
 	Paragraph,
 	Heading,
 	AutoSizedRowMasonry,
+	Switch,
 	theme,
 } from '../index';
 import { Modal as V6Modal, Button as V6Button, SegmentedButtonGroup } from '../index-v6';
@@ -368,6 +369,14 @@ const pages = [
 				imports: { Checkbox, DocgenTable },
 			},
 		],
+	},
+	{
+		path: '/Switch/variations',
+		title: 'Switch',
+		content: pageLoader(() => import('./switch/variations.md')),
+		imports: {
+			Switch,
+		},
 	},
 	{
 		title: 'Radio',

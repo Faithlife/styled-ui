@@ -73,3 +73,4 @@ export {
 	MasonryCell,
 	getRowLayout,
 } from './components/row-masonry';
+export { Switch } from './components/Switch';
