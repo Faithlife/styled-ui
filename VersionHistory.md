@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.34.2
+
+- Update grid drag icon to spec
+- Fix custom editor components in grid not being found
+
 ### 5.34.1
 
 - Fix accordion header alignment.
