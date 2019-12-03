@@ -1,6 +1,11 @@
 # Changelog
 
-## 5.34.0
+### 5.34.1
+
+- Fix accordion header alignment.
+- Increase Switch transition animation speed.
+
+### 5.34.0
 
 - Hide browser's default focus outline on active buttons (we handle this state with a shadow).
 - Add Switch component.
