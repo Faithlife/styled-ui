@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.34.0
+
+- Hide browser's default focus outline on active buttons (we handle this state with a shadow).
+- Add Switch component.
+- Vertically center accordion header custom indicators.
+- Fix focus styling on Accordion section header buttons.
+
 ### 5.33.1
 
 - Fix `Slider` propType warnings from props that shouldn't have been spread.
