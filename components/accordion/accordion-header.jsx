@@ -102,7 +102,7 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 				</Button>
 			</Heading>
 			{renderCustomIndicator ? (
-				<Box gridColumn="indicator" gridRow={1} marginRight={[5, 6]}>
+				<Box gridColumn="indicator" gridRow={1} marginRight={variant === 'minimal' ? 4 : [5, 6]}>
 					{renderCustomIndicator({ isExpanded, onExpansion: handleExpansion })}
 				</Box>
 			) : null}
