@@ -62,7 +62,7 @@ export const Switch = styled(UtilityButton).attrs(({ isChecked }) => ({
 		position: absolute;
 		top: 0;
 		left: var(--handle-offset-x);
-		transition: transform 0.2s ease-out;
+		transition: transform 100ms ease-out;
 		transform: translateX(0);
 	}
 
