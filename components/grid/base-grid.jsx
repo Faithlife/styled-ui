@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { AgGridReact, AgGridColumn } from 'ag-grid-react';
 import 'ag-grid-enterprise';
 import { Box } from '../Box';
-import { handleShowCheckbox, handleIsEditable, editorComponent } from './grid-helpers';
+import { handleShowCheckbox, handleIsEditable, editorComponentTag } from './grid-helpers';
 
 const gridHeight = 8;
 const defaultRowHeight = gridHeight * 5;
@@ -227,7 +227,7 @@ export function BaseGrid({
 							field={fieldName}
 							sortable={isSortable}
 							cellRenderer={cellComponent ? fieldName : null}
-							cellEditor={editorComponent ? `${fieldName}${editorComponent}` : null}
+							cellEditor={editorComponent ? `${fieldName}${editorComponentTag}` : null}
 							comparator={sortFunction}
 							resizable={isResizable}
 							sort={defaultSort}
@@ -315,7 +315,7 @@ function parseChildrenSettings(children, additionalCellComponents = {}) {
 				components[child.props.fieldName] = child.props.cellComponent;
 			}
 			if (child.props.editorComponent) {
-				components[`${child.props.fieldName}${editorComponent}`] = child.props.editorComponent;
+				components[`${child.props.fieldName}${editorComponentTag}`] = child.props.editorComponent;
 			}
 			return components;
 		}, {});
