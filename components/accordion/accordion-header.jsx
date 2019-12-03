@@ -50,16 +50,7 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 	}, [headerId, focusableChildList]);
 
 	return (
-		<Box
-			display="grid"
-			gridArea="header"
-			gridTemplateColumns={
-				renderCustomIndicator ? '[title] 1fr [indicator] min-content' : '[title] auto [space] 0'
-			}
-			borderTop={1}
-			borderTopColor="gray14"
-			alignItems="center"
-		>
+		<Box display="flex" gridArea="header" borderTop={1} borderTopColor="gray14" alignItems="center">
 			<Heading ariaLevel={ariaLevel}>
 				<Button
 					isExpanded={isExpanded}
@@ -70,39 +61,41 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 					panelId={panelId}
 					headerId={headerId}
 					disabled={isPinned}
+					paddingY={variant === 'minimal' ? 4 : 5}
+					paddingX={variant === 'minimal' ? 4 : [5, 6]}
+					gridColumnGap={4}
+					hideArrows={shouldHideArrows}
 				>
-					<ButtonContentWrapper
-						paddingY={variant === 'minimal' ? 4 : 5}
-						paddingX={variant === 'minimal' ? 4 : [5, 6]}
-						gridColumnGap={4}
-						hideArrows={shouldHideArrows}
-						subtitle={subtitle}
-					>
-						<>
-							{!shouldHideArrows && (isExpanded ? <ChevronExpand /> : <ChevronRight />)}
-							<ButtonContent>
-								{children ? (
-									<Text
-										textStyle={variant === 'minimal' ? 'ui.14' : 'ui.16'}
-										display="grid"
-										color="gray66"
-										fontWeight="semibold"
-									>
-										{children}
-									</Text>
-								) : null}
-								{subtitle ? (
-									<Text textStyle="ui.14" display="grid" color="gray52">
-										{subtitle}
-									</Text>
-								) : null}
-							</ButtonContent>
-						</>
-					</ButtonContentWrapper>
+					{!shouldHideArrows && (
+						<Box marginRight={4}>{isExpanded ? <ChevronExpand /> : <ChevronRight />}</Box>
+					)}
+					<ButtonContent>
+						{children ? (
+							<Text
+								textStyle={variant === 'minimal' ? 'ui.14' : 'ui.16'}
+								display="grid"
+								color="gray66"
+								fontWeight="semibold"
+							>
+								{children}
+							</Text>
+						) : null}
+						{subtitle ? (
+							<Text
+								textStyle="ui.14"
+								display="block"
+								color="gray52"
+								overflow="hidden"
+								textOverflow="ellipsis"
+							>
+								{subtitle}
+							</Text>
+						) : null}
+					</ButtonContent>
 				</Button>
 			</Heading>
 			{renderCustomIndicator ? (
-				<Box gridColumn="indicator" gridRow={1} marginRight={variant === 'minimal' ? 4 : [5, 6]}>
+				<Box display="flex" gridRow={1} marginRight={variant === 'minimal' ? 4 : [5, 6]}>
 					{renderCustomIndicator({ isExpanded, onExpansion: handleExpansion })}
 				</Box>
 			) : null}
@@ -125,8 +118,7 @@ const Heading = styled.header.attrs(({ ariaLevel }) => ({
 	role: 'heading',
 	'aria-level': ariaLevel,
 }))`
-	grid-column: 1 / span 2;
-	grid-row: 1;
+	flex: 1;
 	min-width: 0;
 	width: 100%;
 `;
@@ -140,13 +132,8 @@ const Button = styled(UtilityButton).attrs(({ isExpanded, panelId, headerId }) =
 	width: 100%;
 	height: 100%;
 	text-align: left;
-`;
-
-const ButtonContentWrapper = styled(Box)`
-	display: grid;
+	display: flex;
 	align-items: center;
-	grid-template-columns: ${props => (props.hideArrows ? 'auto' : 'min-content auto')};
-
 	line-height: 1;
 `;
 

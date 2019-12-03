@@ -240,6 +240,7 @@ const pages = [
 					Checkbox,
 					Form: FormDemo,
 					Input,
+					Switch,
 				},
 			},
 			{
