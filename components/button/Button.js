@@ -32,21 +32,15 @@ const ButtonCore = styled.button.attrs(({ active }) => ({ className: active ? 'a
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
+	outline: none;
 
 	cursor: ${x => x.cursor || (x.disabled ? 'default' : 'pointer')};
 
-	&:focus:not(.focus-visible) {
-		outline: none;
-	}
-
 	&.focus-visible {
-		&:not(:active) {
-			${({ theme }) => css`
-				outline: none;
-				border: 1px solid ${theme.colors.button.focusBorder};
-				box-shadow: 0 0 0 2px ${theme.colors.button.focusShadow};
-			`}
-		}
+		${({ theme }) => css`
+			border: 1px solid ${theme.colors.button.focusBorder};
+			box-shadow: 0 0 0 2px ${theme.colors.button.focusShadow};
+		`}
 	}
 
 	&::-moz-focus-inner {

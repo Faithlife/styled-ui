@@ -8,15 +8,11 @@ const UtilityButton = styled.button`
 	padding: 0;
 	color: inherit;
 	cursor: ${x => x.cursor || (x.disabled ? 'default' : 'pointer')};
-
-	&:focus:not(.focus-visible) {
-		outline: none;
-	}
+	outline: none;
 
 	&.focus-visible {
 		&:not(:active) {
 			${({ theme }) => css`
-				outline: none;
 				box-shadow: 0 0 0 2px ${theme.colors.button.focusShadow};
 			`}
 		}
