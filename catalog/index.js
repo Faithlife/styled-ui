@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-indent */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ResizeObserver from 'resize-observer-polyfill';
 import { Catalog, pageLoader } from 'catalog';
