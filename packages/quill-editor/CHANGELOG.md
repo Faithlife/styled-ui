@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@0.4.0...@faithlife/quill-editor@0.5.0) (2019-12-04)
+
+
+### Bug Fixes
+
+* Fix DOM differences between server rendered and client rendered. ([61a2f4d](https://git/Logos/FaithlifeEquipment/commits/61a2f4d18a07a7ffa830a34d003ad151e7048dab))
+
+
+### Features
+
+* Allow placeholder to update dynamically. ([a203b72](https://git/Logos/FaithlifeEquipment/commits/a203b721a869d028995cb46da6db4a54193d6e80))
+
+
+
+
+
 # [0.4.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@0.3.4...@faithlife/quill-editor@0.4.0) (2019-12-02)
 
 
