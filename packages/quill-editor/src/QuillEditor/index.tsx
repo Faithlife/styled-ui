@@ -237,14 +237,14 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 								? `${Math.min(editorMaxContentWidthPixels, originalWidth)}px`
 								: `${editorMaxContentWidthPixels}px`;
 
+							quillApi.insertText(insertLocation++, '\n', 'user');
 							quillApi.insertEmbed(
-								insertLocation,
+								insertLocation++,
 								'image',
 								{ url: asset.file.url, width: imageWidth, align: '' },
 								'user'
 							);
 
-							insertLocation++;
 							quillApi.setSelection({ index: insertLocation, length: 0 });
 							break;
 						}
@@ -434,6 +434,32 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			if (quillRef.current) {
 				const deltas = quillRef.current.getEditor().getContents();
 				const converter = new QuillDeltaToHtmlConverter(deltas.ops, options || htmlOptions || {});
+				converter.beforeRender(function handleCustomDeltas(groupType: string, data: any) {
+					// Override to render custom image attributes
+					if (
+						groupType === 'block' &&
+						data.op &&
+						data.op.insert &&
+						data.op.insert.type === 'image' &&
+						data.op.attributes
+					) {
+						let inlines = '';
+						if (data.ops && data.ops.length) {
+							const nestedConverter = new QuillDeltaToHtmlConverter(
+								data.ops.map(op => ({ attributes: op.attributes, insert: op.insert.value })),
+								options || htmlOptions || {}
+							);
+							inlines = nestedConverter.convert();
+						}
+						const str = `${inlines}<img ${Object.entries(data.op.attributes).reduce(
+							(attrs, [key, value]) => `${attrs} ${key}="${value}"`,
+							''
+						)} src="${data.op.insert.value}" />`;
+
+						return str;
+					}
+					return '';
+				});
 				const html = converter.convert();
 				return html;
 			}
