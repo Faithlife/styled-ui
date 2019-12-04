@@ -64,7 +64,6 @@ state: { value: 1 }
 ### hideAvailableStops
 
 For sliders with many stops, consider using the `hideAvailableStops` option.
-This component has performances issues with many stops. Consider using no more than 51 stops for percentile sliders.
 
 ```react
 showSource: true
@@ -82,7 +81,7 @@ state: { value: 50, labels: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 
 		hideAvailableStops
 		value={state.value}
 		onStop={function (value) {setState({value: value})}}
-		stopCount={51}
+		stopCount={50}
 		labels={state.labels}
 	/>
 	<img src="https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201" alt="Faithlife campus" style={{ maxWidth: '100%', opacity: (state.value * 2) / 100 }} />
