@@ -42,7 +42,13 @@ export const FilePickerModal: React.FunctionComponent<IFilePickerModalProps> = (
 	const res = useLocalization().image;
 	const isInternal = useIsInternal();
 	return (
-		<Modal isOpen={showFilePicker} onClose={closeFilePicker} fullscreen={true} withoutFooter>
+		<Modal
+			container="body"
+			isOpen={showFilePicker}
+			onClose={closeFilePicker}
+			fullscreen={true}
+			withoutFooter
+		>
 			<Modal.Header
 				title={pickerKind === FilePickerKind.Image ? res.imageTitle : res.textTitle}
 				subtitle={pickerKind === FilePickerKind.Image ? res.subtitle : null}
