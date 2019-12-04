@@ -1,10 +1,11 @@
 # QuillEditor
 
 The purpose of this quill editor is to provide a unified rich text editor experience across Faithlife apps.
+QuillEditor is a React component that wraps [ReactQuill](https://github.com/zenoamaro/react-quill), which is built on top of the [Quill](https://github.com/quilljs/quill) editor.
 
+- [Scope](#scope)
 - [Getting Started](#getting-started)
   - [Controlled vs Uncontrolled](#controlled-vs-uncontrolled)
-- [Scope](#scope)
 - [API reference](#api-reference)
   1. [Exports](#exports)
   2. [Props](#props)
@@ -12,6 +13,23 @@ The purpose of this quill editor is to provide a unified rich text editor experi
      - [Toolbar](#toolbar)
   3. [Methods](#methods)
   4. [Plain text mode](#plain-text-mode)
+
+## Scope
+
+The following are the current known instances that will be merged with this editor:
+
+- CommunicationsApi - [QuillRichTextEditor](https://git.faithlife.dev/Logos/CommunicationsApi/blob/master/frontend/packages/communications-ui/components/edit-communication/EmailEditor/QuillRichTextEditor.tsx)
+- Sites.Admin - [TextEditor](https://git.faithlife.dev/Logos/Sites.Admin/blob/master/src/Sites.Admin/Private/scripts/components/text-editor/index.jsx)
+- Faithlife - [QuillEditor](https://git.faithlife.dev/Logos/Faithlife/blob/master/src/Faithlife.Web/Scripts/src/components/shared/quill-editor.jsx)
+- Faithlife - [TextEditor](https://git.faithlife.dev/Logos/Faithlife/blob/master/src/Faithlife.Web/Scripts/src/components/shared/text-editor.jsx)
+- ChMS - [RichText](https://git.faithlife.dev/Logos/ChurchManagement/blob/master/chms-tool/src/components/EditRecordWizard/FormComponents/RichText/index.tsx)
+
+The following editors have very specific needs, and are outside the scope of this project:
+
+- Sermon Editor
+- Notes Tool
+
+The React framework is required. This editor will not support plain html/js.
 
 ## Getting started
 
@@ -53,20 +71,6 @@ const MyComponent: React.FunctionComponent = () => {
 If `defaultValue` is defined, `QuillEditor` will be put into Uncontrolled mode. In this mode `onContentChange` will only return the initial value (for performance reasons). To retrieve the latest changes call `getEditor().getContents()`. (see [Methods](#methods))
 
 A known limitation in Controlled mode: If `value` is updated to a non-user generated value while the editor is focused, the editor will lose focus. (e.g. If a consumer manually imposed a max character limit)
-
-## Scope
-
-The following are the current known instances that will be merged with this editor:
-
-- CommunicationsApi - [QuillRichTextEditor](https://git.faithlife.dev/Logos/CommunicationsApi/blob/master/frontend/packages/communications-ui/components/edit-communication/EmailEditor/QuillRichTextEditor.tsx)
-- Sites.Admin - [TextEditor](https://git.faithlife.dev/Logos/Sites.Admin/blob/master/src/Sites.Admin/Private/scripts/components/text-editor/index.jsx)
-- Faithlife - [QuillEditor](https://git.faithlife.dev/Logos/Faithlife/blob/master/src/Faithlife.Web/Scripts/src/components/shared/quill-editor.jsx)
-- ChMS - [RichText](https://git.faithlife.dev/Logos/ChurchManagement/blob/master/chms-tool/src/components/EditRecordWizard/FormComponents/RichText/index.tsx)
-
-The following editors have very specific needs, and are outside the scope of this project:
-
-- Sermon Editor
-- Notes Tool
 
 ## API reference
 
