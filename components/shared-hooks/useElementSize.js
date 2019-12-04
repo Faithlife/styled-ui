@@ -1,4 +1,5 @@
 import { useLayoutEffect, useState } from 'react';
+import ResizeObserver from 'resize-observer-polyfill';
 
 export function useElementSize() {
 	const [size, setSize] = useState(null);
