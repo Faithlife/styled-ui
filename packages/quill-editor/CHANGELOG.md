@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.1](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@0.6.0...@faithlife/quill-editor@0.6.1) (2019-12-04)
+
+
+### Bug Fixes
+
+* Attach file picker to body element. ([f2e50b7](https://git/Logos/FaithlifeEquipment/commits/f2e50b75c140984a7f0bcbc519ce09653cb0afad))
+
+
+
+
+
 # [0.6.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@0.5.0...@faithlife/quill-editor@0.6.0) (2019-12-04)
 
 
