@@ -39,6 +39,7 @@ export interface IQuillRichTextEditorProps {
 	onKeyUp?: () => void;
 	onChangeSelection?: () => void;
 	onImageUpload?: (file: File) => void;
+	htmlOptions?: { [key: string]: any };
 	children?: React.ReactNode;
 }
 
@@ -145,6 +146,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		classNames,
 		editorId,
 		onImageUpload,
+		htmlOptions,
 		children,
 		...otherProps
 	},
@@ -351,14 +353,24 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	}, [handleSelectionChange]);
 
 	const handleTextChange = useCallback(() => {
-		const content =
-			defaultValue || (quillRef.current && quillRef.current.getEditor().getContents());
+		let content = defaultValue;
+
+		if (!content && quillRef.current) {
+			const deltaContent = quillRef.current.getEditor().getContents();
+			if (value.ops) {
+				content = deltaContent;
+			} else {
+				const converter = new QuillDeltaToHtmlConverter(deltaContent.ops, htmlOptions || {});
+				content = converter.convert();
+			}
+		}
+
 		if (content) {
 			setStoredValue(content);
 		}
 		onContentChange && onContentChange(content);
 		handleTextChangeOnEditor();
-	}, [handleTextChangeOnEditor, onContentChange, defaultValue]);
+	}, [handleTextChangeOnEditor, onContentChange, defaultValue, value, htmlOptions]);
 
 	useEffect(() => {
 		let editor;
@@ -417,16 +429,17 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		}
 	}, []);
 
-	const getHTML = useCallback((options: any) => {
-		if (quillRef.current) {
-			const deltas = quillRef.current.getEditor().getContents();
-			if (deltas.ops) {
-				const converter = new QuillDeltaToHtmlConverter(deltas.ops, options);
+	const getHTML = useCallback(
+		(options?: any) => {
+			if (quillRef.current) {
+				const deltas = quillRef.current.getEditor().getContents();
+				const converter = new QuillDeltaToHtmlConverter(deltas.ops, options || htmlOptions || {});
 				const html = converter.convert();
 				return html;
 			}
-		}
-	}, []);
+		},
+		[htmlOptions]
+	);
 
 	useImperativeHandle(
 		ref,
