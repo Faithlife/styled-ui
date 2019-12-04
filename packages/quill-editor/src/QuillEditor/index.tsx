@@ -55,10 +55,20 @@ export enum FilePickerKind {
 type Source = 'user' | 'api' | 'silent';
 
 const ReactQuillStyled = styled(SafeReactQuill)`
+	min-height: 32px;
 	flex: 1;
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
+
+	& > [data-placeholder]:empty {
+		padding: 7px 6px 6px;
+	}
+
+	& > [data-placeholder]:empty::before {
+		content: attr(data-placeholder);
+		color: #a8a8a8;
+	}
 
 	.ql-container.ql-snow {
 		border: none;
@@ -73,8 +83,14 @@ const ReactQuillStyled = styled(SafeReactQuill)`
 		font-family: Source Sans Pro;
 		font-size: 16px;
 		line-height: normal;
-
+		padding: 8px;
 		flex: 1;
+	}
+
+	// Placeholder styling
+	.ql-editor.ql-blank::before {
+		font-style: normal;
+		color: #a8a8a8;
 	}
 
 	.ql-editor.nwse-resize > * {
@@ -85,25 +101,11 @@ const ReactQuillStyled = styled(SafeReactQuill)`
 		cursor: nesw-resize !important;
 	}
 
-	// Placeholder styling
-	.ql-editor.ql-blank::before {
-		font-style: normal;
-		color: #a8a8a8;
-	}
-
-	.ql-snow .ql-tooltip[data-mode=link]::before {
-		content: '${({ linkHelpText }) => linkHelpText}';
-	}
-
-	.ql-snow .ql-tooltip[data-mode=link] .ql-action::after {
-		content: '${({ linkSaveText }) => linkSaveText}';
-	}
-
 	img {
 		cursor: move;
 	}
 
-	img[align="left"] {
+	img[align='left'] {
 		margin-right: 16px;
 		margin-bottom: 8px;
 	}
@@ -117,6 +119,14 @@ const QuillContainer = styled.div`
 	border: 1px solid #a8a8a8;
 	border-radius: 3px;
 	box-sizing: border-box;
+
+	.ql-snow .ql-tooltip[data-mode=link]::before {
+		content: '${({ linkHelpText }) => linkHelpText}';
+	}
+
+	.ql-snow .ql-tooltip[data-mode=link] .ql-action::after {
+		content: '${({ linkSaveText }) => linkSaveText}';
+	}
 `;
 
 const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
@@ -500,6 +510,10 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		'align',
 	];
 
+	const [placeholderDiv] = useState(() => (
+		<div data-placeholder={defaultValue || value || placeholder} />
+	));
+
 	return (
 		<LocalizationProvider localizedResources={localizedResources}>
 			<QuillContainer
@@ -507,13 +521,13 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				onClick={onClick}
 				onScroll={handleScrollOnEditor}
 				className={[...(classNames || []), className, quillEditorId]}
+				linkHelpText={localizedResources.toolbar.enterLink}
+				linkSaveText={localizedResources.toolbar.save}
 			>
 				{children}
 				{SafeQuill ? (
 					<ReactQuillStyled
 						ref={quillRef}
-						linkHelpText={localizedResources.toolbar.enterLink}
-						linkSaveText={localizedResources.toolbar.save}
 						defaultValue={defaultValue || value}
 						placeholder={placeholder}
 						modules={moduleConfiguration}
@@ -521,9 +535,11 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 						bounds={quillEditorQuery}
 						onBlur={onBlur}
 						{...otherProps}
-					/>
+					>
+						{placeholderDiv}
+					</ReactQuillStyled>
 				) : (
-					<ReactQuillStyled>{defaultValue || value}</ReactQuillStyled>
+					<ReactQuillStyled className="quill">{placeholderDiv}</ReactQuillStyled>
 				)}
 				{overlayCoordinates && (
 					<ResizableOverlay
