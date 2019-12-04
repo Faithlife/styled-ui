@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@0.5.0...@faithlife/quill-editor@0.6.0) (2019-12-04)
+
+
+### Bug Fixes
+
+* Handle custom image attributes when converting to html. ([0e53e04](https://git/Logos/FaithlifeEquipment/commits/0e53e0419174d2f5c3007d3d79d4a2cf10b4d837))
+
+
+### Features
+
+* Allow html input. ([3fa0d59](https://git/Logos/FaithlifeEquipment/commits/3fa0d59deb363caa9d48216795f17f997c335e5b))
+
+
+
+
+
 # [0.5.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@0.4.0...@faithlife/quill-editor@0.5.0) (2019-12-04)
 
 
