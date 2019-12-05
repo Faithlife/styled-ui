@@ -28,7 +28,7 @@ state: { expandedSections: [0] }
 			</Accordion.Panel>
 		</Accordion.Item>
 		<Accordion.Item>
-			<Accordion.Header>
+			<Accordion.Header subtitle="This is a pretty long subtitle with some descenders.">
 				Section Two Title
 			</Accordion.Header>
 			<Accordion.Panel>
@@ -175,7 +175,7 @@ state: { expandedSections: [0] }
 			</Accordion.Panel>
 		</Accordion.Item>
 		<Accordion.Item>
-			<Accordion.Header subtitle="This is a subtitle for the section with a switch indicator." renderCustomIndicator={({isExpanded, onExpansion }) => (<Switch isChecked={isExpanded} onClick={onExpansion} />)}>
+			<Accordion.Header subtitle="This is a really long subtitle for the section with a switch indicator." renderCustomIndicator={({isExpanded, onExpansion }) => (<Switch isChecked={isExpanded} onClick={onExpansion} />)}>
 				Section Three Title
 			</Accordion.Header>
 			<Accordion.Panel>

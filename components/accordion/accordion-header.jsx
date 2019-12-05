@@ -76,6 +76,7 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 								display="grid"
 								color="gray66"
 								fontWeight="semibold"
+								lineHeight="16px"
 							>
 								{children}
 							</Text>
@@ -87,6 +88,7 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 								color="gray52"
 								overflow="hidden"
 								textOverflow="ellipsis"
+								lineHeight="16px"
 							>
 								{subtitle}
 							</Text>
@@ -133,7 +135,7 @@ const Button = styled(UtilityButton).attrs(({ isExpanded, panelId, headerId }) =
 	height: 100%;
 	text-align: left;
 	display: flex;
-	align-items: center;
+	align-items: baseline;
 	line-height: 1;
 `;
 
