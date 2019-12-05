@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.34.3
+
+- Fix bug causing accordion header subtitles to be clipped.
+
 ### 5.34.2
 
 - Update grid drag icon to spec
