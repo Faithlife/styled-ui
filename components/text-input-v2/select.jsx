@@ -135,15 +135,15 @@ function noOptionsMessage({ inputValue }) {
 }
 
 function handleKeyDown(e, onConsumerKeyDown) {
+	const { nodeName, type } = e.target;
 	if (onConsumerKeyDown) {
 		onConsumerKeyDown(e);
 		if (e.defaultPrevented) {
 			return;
 		}
 	}
-
 	switch (e.key) {
-		case 'Home': {
+		case nodeName === 'input' && type === 'text' && 'Home': {
 			if (e.shiftKey) {
 				e.target.selectionStart = 0;
 			} else {
@@ -151,7 +151,7 @@ function handleKeyDown(e, onConsumerKeyDown) {
 			}
 			break;
 		}
-		case 'End': {
+		case nodeName === 'input' && type === 'text' && 'End': {
 			const len = e.target.value.length;
 			if (e.shiftKey) {
 				e.target.selectionEnd = len;
