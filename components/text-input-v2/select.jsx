@@ -135,29 +135,28 @@ function noOptionsMessage({ inputValue }) {
 }
 
 function handleKeyDown(e, onConsumerKeyDown) {
-	const evt = { ...e };
 	if (onConsumerKeyDown) {
 		onConsumerKeyDown(e);
-		if (evt.defaultPrevented) {
+		if (e.defaultPrevented) {
 			return;
 		}
 	}
 
-	switch (evt.key) {
+	switch (e.key) {
 		case 'Home': {
-			if (evt.shiftKey) {
-				evt.target.selectionStart = 0;
+			if (e.shiftKey) {
+				e.target.selectionStart = 0;
 			} else {
-				evt.target.setSelectionRange(0, 0);
+				e.target.setSelectionRange(0, 0);
 			}
 			break;
 		}
 		case 'End': {
-			const len = evt.target.value.length;
-			if (evt.shiftKey) {
-				evt.target.selectionEnd = len;
+			const len = e.target.value.length;
+			if (e.shiftKey) {
+				e.target.selectionEnd = len;
 			} else {
-				evt.target.setSelectionRange(len, len);
+				e.target.setSelectionRange(len, len);
 			}
 			break;
 		}
