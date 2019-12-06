@@ -136,6 +136,7 @@ const StyledInput = styled.input(
 
 	&::placeholder {
 		color: ${theme.colors.inputPlaceholderColor || theme.colors.input.placeholderColor};
+		font-style: italic;
 	}
 
 	&:disabled {
@@ -145,6 +146,7 @@ const StyledInput = styled.input(
 
 		&::placeholder {
 			color: ${theme.colors.input.disabledPlaceholderColor};
+			font-style: italic;
 		}
 	}
 
