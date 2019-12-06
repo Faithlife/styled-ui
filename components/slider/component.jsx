@@ -277,6 +277,8 @@ export class Slider extends PureComponent {
 		const track = this.getTrack();
 		const stops = this.getStops();
 
+		const activeStopIndex = Math.min(Math.round(pendingValue), stopCount - 1);
+
 		return (
 			<Box
 				onDragStart={event => event.preventDefault()}
@@ -303,7 +305,7 @@ export class Slider extends PureComponent {
 					<Styled.TrackGradient />
 					{track.map(index => (
 						<Styled.Track
-							active={index < pendingValue}
+							active={index < activeStopIndex}
 							invalid={maxValue && index >= maxValue}
 							trackFirst={index === 0}
 							trackLast={index === maxValue - 1 || (!maxValue && index === stopCount - 2)}
@@ -317,7 +319,7 @@ export class Slider extends PureComponent {
 						<Styled.Stop
 							available={
 								!hideAvailableStops &&
-								(index > pendingValue && !(index >= maxValue) && !(index === stopCount - 1))
+								(index > activeStopIndex && !(index >= maxValue) && !(index === stopCount - 1))
 							}
 							minimumAvailable={index === minValue && minValue > 0}
 							key={index}
@@ -336,7 +338,7 @@ export class Slider extends PureComponent {
 							stopCount={stopCount}
 							isSliding={isSliding}
 							isHovered={isHovered}
-							active={index === pendingValue}
+							active={index === activeStopIndex}
 							label={labels[index]}
 							disabled={disabled}
 							trackStart={index === 0}
@@ -354,7 +356,7 @@ const Stop = React.memo(({ isSliding, isHovered, active, label, disabled, ...pro
 		<Styled.Thumb active={isSliding} hovered={isHovered} disabled={disabled} hidden={!active} />
 	);
 
-	const isPopupOpen = !!(active && isHovered && label);
+	const isPopupOpen = !!(active && isHovered && (label !== null && label !== undefined));
 	return (
 		<Styled.ThumbAnchor {...props}>
 			{isPopupOpen ? (
