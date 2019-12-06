@@ -136,11 +136,11 @@ function noOptionsMessage({ inputValue }) {
 
 function handleKeyDown(e, onConsumerKeyDown) {
 	const evt = { ...e };
-	if (evt.defaultPrevented) {
-		if (onConsumerKeyDown) {
-			onConsumerKeyDown(e);
+	if (onConsumerKeyDown) {
+		onConsumerKeyDown(e);
+		if (evt.defaultPrevented) {
+			return;
 		}
-		return;
 	}
 
 	switch (evt.key) {
