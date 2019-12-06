@@ -251,7 +251,7 @@ export const ResizableOverlay: React.FunctionComponent<IResizableOverlayProps> =
 	}, [onAlignmentChange]);
 
 	const alignWrap = useCallback(() => {
-		onAlignmentChange('left');
+		onAlignmentChange('wrap');
 	}, [onAlignmentChange]);
 
 	return (
@@ -294,8 +294,8 @@ export const ResizableOverlay: React.FunctionComponent<IResizableOverlayProps> =
 				</AlignmentButton>
 				{' | '}
 				<AlignmentButton
-					isActive={currentAlignment === 'left'}
-					disabled={currentAlignment === 'left'}
+					isActive={currentAlignment === 'wrap'}
+					disabled={currentAlignment === 'wrap'}
 					minorTransparent
 					onClick={alignWrap}
 				>

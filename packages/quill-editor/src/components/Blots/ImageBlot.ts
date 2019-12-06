@@ -1,19 +1,18 @@
 import { SafeQuill } from '../../QuillEditor/SafeQuill';
 
 const Embed = SafeQuill && SafeQuill.import('blots/embed');
-const ATTRIBUTES = ['alt', 'height', 'width', 'align'];
+const ATTRIBUTES = ['alt', 'height', 'width'];
 
 let ImageBlot;
 if (Embed) {
 	ImageBlot = class ImageBlot extends Embed {
-		static blotName = 'image';
+		static blotName = 'faithlifeImage';
 		static tagName = 'img';
 
 		static create(data) {
 			const node = super.create();
 			node.setAttribute('src', data.url);
 			node.setAttribute('width', data.width);
-			node.setAttribute('align', data.align);
 			if (data.title) {
 				node.setAttribute('alt', data.title);
 				node.setAttribute('title', data.title);
@@ -31,7 +30,9 @@ if (Embed) {
 		}
 
 		static value(node) {
-			return node.getAttribute('src') || true;
+			return {
+				url: node.getAttribute('src'),
+			};
 		}
 
 		format(name, value) {

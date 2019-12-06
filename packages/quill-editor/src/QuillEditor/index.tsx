@@ -8,7 +8,6 @@ import React, {
 } from 'react';
 import styled from 'styled-components';
 import './styles.css';
-import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import { LocalizationProvider } from '../components/Localization';
 import localizedResources from '../locales/en-US/resources.json';
 import { FilePickerModal } from '../components/FilePickerModal';
@@ -18,6 +17,7 @@ import { throttle } from '../utility/throttle';
 import ImageBlot from '../components/Blots/ImageBlot';
 import { useImageDrop } from '../utility/useImageDrop';
 import { SafeQuill, SafeReactQuill } from './SafeQuill';
+import { getRenderedHtmlContent } from '../utility/getRenderedHtmlContent';
 
 export interface IQuillRichTextEditorProps {
 	groupId?: string;
@@ -39,7 +39,6 @@ export interface IQuillRichTextEditorProps {
 	onKeyUp?: () => void;
 	onChangeSelection?: () => void;
 	onImageUpload?: (file: File) => void;
-	htmlOptions?: { [key: string]: any };
 	children?: React.ReactNode;
 }
 
@@ -106,9 +105,15 @@ const ReactQuillStyled = styled(SafeReactQuill)`
 		cursor: move;
 	}
 
-	img[align='left'] {
+	.ql-image-wrap img {
+		float: left;
 		margin-right: 16px;
 		margin-bottom: 8px;
+	}
+
+	.ql-align-right .ql-image-wrap img {
+		float: right;
+		margin-left: 16px;
 	}
 `;
 
@@ -130,6 +135,15 @@ const QuillContainer = styled.div`
 	}
 `;
 
+if (SafeQuill) {
+	const Parchment = SafeQuill.import('parchment');
+	const ImageAlignClass = new Parchment.Attributor.Class('imageAlign', 'ql-image', {
+		scope: Parchment.Scope.INLINE,
+	});
+	SafeQuill.register(ImageAlignClass);
+	SafeQuill.register({ 'formats/faithlifeImage': ImageBlot });
+}
+
 const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	{
 		groupId,
@@ -146,7 +160,6 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		classNames,
 		editorId,
 		onImageUpload,
-		htmlOptions,
 		children,
 		...otherProps
 	},
@@ -170,7 +183,11 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 
 	useEffect(() => {
 		if (!defaultValue && value && value !== storedValue && quillRef.current) {
-			quillRef.current.getEditor().setContents(value, 'user');
+			if (value.ops) {
+				quillRef.current.getEditor().setContents(value, 'user');
+			} else {
+				quillRef.current.getEditor().clipboard.dangerouslyPasteHTML(0, value);
+			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
@@ -193,10 +210,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				history.clear(); // Don't allow undo of initial content insertion
 			}
 		}
-
-		if (SafeQuill) {
-			SafeQuill.register({ 'formats/image': ImageBlot });
-		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const [imageInsertRange, setImageInsertRange] = useState<{
@@ -240,8 +254,8 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 							quillApi.insertText(insertLocation++, '\n', 'user');
 							quillApi.insertEmbed(
 								insertLocation++,
-								'image',
-								{ url: asset.file.url, width: imageWidth, align: '' },
+								'faithlifeImage',
+								{ url: asset.file.url, width: imageWidth, imageAlign: '' },
 								'user'
 							);
 
@@ -360,8 +374,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			if (value.ops) {
 				content = deltaContent;
 			} else {
-				const converter = new QuillDeltaToHtmlConverter(deltaContent.ops, htmlOptions || {});
-				content = converter.convert();
+				content = quillRef.current.getEditor().root.innerHTML;
 			}
 		}
 
@@ -370,7 +383,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		}
 		onContentChange && onContentChange(content);
 		handleTextChangeOnEditor();
-	}, [handleTextChangeOnEditor, onContentChange, defaultValue, value, htmlOptions]);
+	}, [handleTextChangeOnEditor, onContentChange, defaultValue, value]);
 
 	useEffect(() => {
 		let editor;
@@ -429,43 +442,17 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		}
 	}, []);
 
-	const getHTML = useCallback(
-		(options?: any) => {
-			if (quillRef.current) {
-				const deltas = quillRef.current.getEditor().getContents();
-				const converter = new QuillDeltaToHtmlConverter(deltas.ops, options || htmlOptions || {});
-				converter.beforeRender(function handleCustomDeltas(groupType: string, data: any) {
-					// Override to render custom image attributes
-					if (
-						groupType === 'block' &&
-						data.op &&
-						data.op.insert &&
-						data.op.insert.type === 'image' &&
-						data.op.attributes
-					) {
-						let inlines = '';
-						if (data.ops && data.ops.length) {
-							const nestedConverter = new QuillDeltaToHtmlConverter(
-								data.ops.map(op => ({ attributes: op.attributes, insert: op.insert.value })),
-								options || htmlOptions || {}
-							);
-							inlines = nestedConverter.convert();
-						}
-						const str = `${inlines}<img ${Object.entries(data.op.attributes).reduce(
-							(attrs, [key, value]) => `${attrs} ${key}="${value}"`,
-							''
-						)} src="${data.op.insert.value}" />`;
-
-						return str;
-					}
-					return '';
-				});
-				const html = converter.convert();
-				return html;
+	const getHTML = useCallback((options?: { [key: string]: any }) => {
+		if (quillRef.current) {
+			const deltas = quillRef.current.getEditor().getContents();
+			const { format, ...converterOptions } = options || {};
+			if (format === 'inline') {
+				return getRenderedHtmlContent(deltas.ops, converterOptions);
+			} else {
+				return quillRef.current.getEditor().root.innerHTML;
 			}
-		},
-		[htmlOptions]
-	);
+		}
+	}, []);
 
 	useImperativeHandle(
 		ref,
@@ -542,11 +529,12 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		'blockquote',
 		'list',
 		'indent',
-		'align',
 		'link',
 		'image',
+		'faithlifeImage',
 		'width',
 		'align',
+		'imageAlign',
 	];
 
 	const [placeholderDiv] = useState(() => (
