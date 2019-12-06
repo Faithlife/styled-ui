@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.34.4
+
+- Improve `Slider` performance.
+- Fix bug where `Slider` handle would not render when value did not exactly match a stop.
+
 ### 5.34.3
 
 - Fix bug causing accordion header subtitles to be clipped.
