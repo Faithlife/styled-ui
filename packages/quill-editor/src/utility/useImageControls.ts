@@ -39,12 +39,21 @@ export const useImageControls = (
 	const getEditor = useCallback(() => editor.current, []);
 	const selectedImage = useRef<HTMLImageElement | null>();
 	const [currentAlignment, setCurrentAlignment] = useState('');
+
 	const selectImage = useCallback((element: HTMLImageElement | null) => {
 		selectedImage.current = element;
 		if (element) {
-			setCurrentAlignment(element.getAttribute('align') || '');
+			const blot = Parchment.find(element);
+			const parentBlot = Parchment.find(element.parentElement);
+			setCurrentAlignment(
+				(blot.attributes && blot.attributes.attributes.imageAlign) ||
+					(parentBlot.attributes && parentBlot.attributes.attributes.imageAlign)
+					? 'wrap'
+					: ''
+			);
 		}
 	}, []);
+
 	const getSelectedImage = useCallback(() => {
 		if (selectedImage.current) {
 			if (document.body.contains(selectedImage.current)) {
@@ -57,6 +66,13 @@ export const useImageControls = (
 			setOverlayCoordinates(null);
 		}
 	}, [selectImage]);
+
+	const getSelectedImageParent = useCallback(() => {
+		const selectedImage = getSelectedImage();
+		if (selectedImage) {
+			return selectedImage.parentElement;
+		}
+	}, [getSelectedImage]);
 
 	const repositionOverlay = useCallback(() => {
 		const editor = getEditor();
@@ -128,12 +144,17 @@ export const useImageControls = (
 			const offsetAdjust = select === 'after' ? 1 : 0;
 			const length = select === 'highlight' ? 1 : 0;
 			if (selectedImage && editor) {
-				const quillImage = Parchment.find(selectedImage);
-				quillImage &&
-					editor.setSelection(quillImage.offset(editor.scroll) + offsetAdjust, length, 'user');
+				const imageBlot = Parchment.find(selectedImage);
+				const parent = getSelectedImageParent();
+				const parentIsLink = parent && parent.tagName === 'A';
+				editor.setSelection(
+					imageBlot.offset(editor.scroll) + offsetAdjust,
+					parentIsLink ? 0 : length,
+					'user'
+				);
 			}
 		},
-		[getEditor, getSelectedImage]
+		[getEditor, getSelectedImage, getSelectedImageParent]
 	);
 
 	// must programatically delete selected image on backspace / delete since overlay element has focus
@@ -239,12 +260,15 @@ export const useImageControls = (
 			const selectedImage = getSelectedImage();
 			const editor = getEditor();
 			if (editor && selectedImage) {
-				const image = Parchment.find(selectedImage);
-				image.format('align', alignment);
+				const parent = getSelectedImageParent();
+				const blotElement = parent && parent.tagName === 'SPAN' ? parent : selectedImage;
+				const blot = Parchment.find(blotElement);
+				blot.format('imageAlign', alignment);
 				setCurrentAlignment(alignment);
+				repositionOverlay();
 			}
 		},
-		[setCurrentAlignment, getEditor, getSelectedImage]
+		[setCurrentAlignment, getEditor, getSelectedImage, getSelectedImageParent, repositionOverlay]
 	);
 
 	return useMemo(
