@@ -94,7 +94,7 @@ const colors = {
 	inputBorderColor: '#a8a8a8',
 	inputFocusedBorderColor: '#278ed4',
 	inputFocusedShadowColor: '#d0e6f6',
-	inputPlaceholderColor: '#a8a8a8',
+	inputPlaceholderColor: '#C7C7C7',
 };
 
 colors.button = {
@@ -128,13 +128,13 @@ colors.button = {
 colors.input = {
 	textColor: colors.gray66,
 	backgroundColor: colors.white,
-	borderColor: colors.gray34,
-	placeholderColor: colors.gray34,
+	borderColor: '#a8a8a8',
+	placeholderColor: '#c7c7c7',
 
 	disabledTextColor: colors.gray66,
 	disabledBackgroundColor: colors.gray4,
-	disabledBorderColor: colors.gray14,
-	disabledPlaceholderColor: colors.gray34,
+	disabledBorderColor: '#a8a8a8',
+	disabledPlaceholderColor: '#c7c7c7',
 
 	readOnlyBackgroundColor: colors.gray8,
 
