@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@0.6.1...@faithlife/quill-editor@1.0.0) (2019-12-06)
+
+
+### Bug Fixes
+
+* Fix image alignment controls. ([010e34e](https://git/Logos/FaithlifeEquipment/commits/010e34eecd48fb761e7e24582c21e605823cad1b))
+* Use custom blot name for images and image alignment to allow html rendering. ([0b7548c](https://git/Logos/FaithlifeEquipment/commits/0b7548c2c54d9cc7b59aae796dfe0ae95b6f5286))
+
+
+### BREAKING CHANGES
+
+* Removed the htmlOptions prop since inline html will never be returned by onContentChange.
+
+
+
+
+
 ## [0.6.1](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@0.6.0...@faithlife/quill-editor@0.6.1) (2019-12-04)
 
 
