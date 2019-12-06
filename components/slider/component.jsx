@@ -269,10 +269,11 @@ export class Slider extends PureComponent {
 			stopCount,
 			hideAvailableStops,
 			styleOverrides,
+			disabled,
 			...props
 		} = this.props;
 
-		const { isHovered } = this.state;
+		const { isHovered, isSliding, value: pendingValue } = this.state;
 		const track = this.getTrack();
 		const stops = this.getStops();
 
@@ -302,12 +303,10 @@ export class Slider extends PureComponent {
 					<Styled.TrackGradient />
 					{track.map(index => (
 						<Styled.Track
-							active={index < this.state.value}
-							invalid={this.props.maxValue && index >= this.props.maxValue}
+							active={index < pendingValue}
+							invalid={maxValue && index >= maxValue}
 							trackFirst={index === 0}
-							trackLast={
-								index === maxValue - 1 || (!maxValue && index === this.props.stopCount - 2)
-							}
+							trackLast={index === maxValue - 1 || (!maxValue && index === stopCount - 2)}
 							key={index}
 							styleOverrides={styleOverrides}
 						/>
@@ -318,9 +317,7 @@ export class Slider extends PureComponent {
 						<Styled.Stop
 							available={
 								!hideAvailableStops &&
-								(index > this.state.value &&
-									!(index >= this.props.maxValue) &&
-									!(index === this.props.stopCount - 1))
+								(index > pendingValue && !(index >= maxValue) && !(index === stopCount - 1))
 							}
 							minimumAvailable={index === minValue && minValue > 0}
 							key={index}
@@ -333,38 +330,48 @@ export class Slider extends PureComponent {
 					onMouseLeave={this.handleMouseLeave}
 				>
 					{stops.map(index => (
-						<Styled.ThumbAnchor
+						<Stop
 							key={index}
+							index={index}
+							stopCount={stopCount}
+							isSliding={isSliding}
+							isHovered={isHovered}
+							active={index === pendingValue}
+							label={labels[index]}
+							disabled={disabled}
 							trackStart={index === 0}
-							trackEnd={index === this.props.stopCount - 1}
-						>
-							<PopoverManager>
-								<PopoverReference>
-									<Styled.Thumb
-										active={this.state.isSliding}
-										hovered={this.state.isHovered}
-										disabled={this.props.disabled}
-										hidden={index !== this.state.value}
-									/>
-								</PopoverReference>
-								<Popover
-									isOpen={
-										index === this.state.value &&
-										isHovered &&
-										labels[index] !== undefined &&
-										labels[index] !== ''
-									}
-									placement={'top'}
-									container="body"
-									modifiers={{ offset: { offset: '0, 33' } }}
-								>
-									{`${labels[index]}`}
-								</Popover>
-							</PopoverManager>
-						</Styled.ThumbAnchor>
+							trackEnd={index === stopCount - 1}
+						/>
 					))}
 				</Styled.ThumbContainer>
 			</Box>
 		);
 	}
 }
+
+const Stop = React.memo(({ isSliding, isHovered, active, label, disabled, ...props }) => {
+	const thumb = (
+		<Styled.Thumb active={isSliding} hovered={isHovered} disabled={disabled} hidden={!active} />
+	);
+
+	const isPopupOpen = !!(active && isHovered && label);
+	return (
+		<Styled.ThumbAnchor {...props}>
+			{isPopupOpen ? (
+				<PopoverManager>
+					<PopoverReference>{thumb}</PopoverReference>
+					<Popover
+						isOpen
+						placement={'top'}
+						container="body"
+						modifiers={{ offset: { offset: '0, 33' } }}
+					>
+						{`${label}`}
+					</Popover>
+				</PopoverManager>
+			) : (
+				thumb
+			)}
+		</Styled.ThumbAnchor>
+	);
+});
