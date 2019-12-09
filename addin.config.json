@@ -1,7 +1,11 @@
 {
-  "oauthCredentials": {
-    "consumerToken": "D177DDEACC44CAB147F7C6CAD947FF31F629CDC8",
-    "consumerSecret": "7D05B97F1012638DC2B2A1572B54C7F4BD96F289"
-  },
-  "proxies": {}
+	"oauthCredentials": {
+		"consumerToken": "D177DDEACC44CAB147F7C6CAD947FF31F629CDC8",
+		"consumerSecret": "7D05B97F1012638DC2B2A1572B54C7F4BD96F289"
+	},
+	"proxies": {
+		"accounts": "https://test.accountsapi.logos.com",
+		"orders": "https://test.ordersapi.logos.com",
+		"locations": "https://test.locationsapi.logos.com"
+	}
 }

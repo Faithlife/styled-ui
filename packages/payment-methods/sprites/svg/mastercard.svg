@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 32">
+  <defs>
+    <rect id="mastercard-a" width="18" height="18" y=".813" rx="9"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <rect width="47" height="31" x=".5" y=".5" stroke="#C7C7C7" rx="3"/>
+    <g transform="translate(10 6.188)">
+      <rect width="18" height="18" x="10" y=".813" fill="#F79F1A" rx="9"/>
+      <mask id="mastercard-b" fill="#fff">
+        <use xlink:href="#mastercard-a"/>
+      </mask>
+      <use fill="#EA001B" xlink:href="#mastercard-a"/>
+      <rect width="18" height="18" x="10" y=".813" fill="#FF5F01" mask="url(#mastercard-b)" rx="9"/>
+    </g>
+  </g>
+</svg>
+
