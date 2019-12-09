@@ -1582,6 +1582,19 @@
   resolved "http://npm.faithlife.io/@faithlife%2fgiving-payment-gateway-util/-/giving-payment-gateway-util-1.0.0.tgz#59596bc6880891459b7ae8c25bae225fe60f59da"
   integrity sha512-iZCshD1NeynvHA7j/zyp9+fRKrvzh9DgiOXjdRU5t11wTLcB+D9P1Km1TYg9M0lO+k4pckVqUkukwzz6WKc/Vw==
 
+"@faithlife/payment-methods@^0.0.1-beta4":
+  version "0.0.1-beta4"
+  resolved "http://npm.faithlife.io/@faithlife%2fpayment-methods/-/payment-methods-0.0.1-beta4.tgz#2e9fa031ed6fb7e0f77bafd53ce76c3988ec2185"
+  integrity sha512-fYqUuK3lqG5Zt1K2zv/nCwof+txeUjy+COMcHgyk+KZ8uY4Ohbui6NZIfLaduguz+VF8eOCTx7yHO/qv7BITQQ==
+  dependencies:
+    "@faithlife/giving-payment-gateway-util" "^1.0.0"
+    "@faithlife/react-ui" "^7.7.0"
+    cleave.js "^1.5.3"
+    jquery "^3.4.1"
+    react "^16.8.4"
+    react-select "^2.1.2"
+    styled-components "4.3.1"
+
 "@faithlife/react-ui@^7.4.2", "@faithlife/react-ui@^7.7.0":
   version "7.7.0"
   resolved "http://npm.faithlife.io/@faithlife%2freact-ui/-/react-ui-7.7.0.tgz#06c2429b13b810195a6f20d77e7287c20dacdd17"
