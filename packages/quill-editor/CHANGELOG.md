@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.0.0...@faithlife/quill-editor@1.1.0) (2019-12-09)
+
+
+### Features
+
+* Allow links on images. ([6bd3cf6](https://git/Logos/FaithlifeEquipment/commits/6bd3cf605307f1995e8b8c805cf8fd35e5c2d596))
+
+
+
+
+
 # [1.0.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@0.6.1...@faithlife/quill-editor@1.0.0) (2019-12-06)
 
 
