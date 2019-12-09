@@ -7,7 +7,13 @@ import { UtilityButton } from '../button';
 import { ChevronRight, ChevronExpand } from '../icons';
 import { useAccordionContext, useAccordionItemContext } from './accordion-util';
 
-export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, subtitle }) {
+export function AccordionHeader({
+	ariaLevel,
+	children,
+	renderCustomIndicator,
+	subtitle,
+	...props
+}) {
 	const {
 		focusedMenuItem,
 		focusableChildList,
@@ -50,7 +56,14 @@ export function AccordionHeader({ ariaLevel, children, renderCustomIndicator, su
 	}, [headerId, focusableChildList]);
 
 	return (
-		<Box display="flex" gridArea="header" borderTop={1} borderTopColor="gray14" alignItems="center">
+		<Box
+			display="flex"
+			gridArea="header"
+			borderTop={1}
+			borderTopColor="gray14"
+			alignItems="center"
+			{...props}
+		>
 			<Heading ariaLevel={ariaLevel}>
 				<Button
 					isExpanded={isExpanded}
