@@ -137,6 +137,11 @@ const QuillContainer = styled.div`
 	.ql-snow .ql-tooltip[data-mode=link] .ql-action::after {
 		content: '${({ linkSaveText }) => linkSaveText}';
 	}
+
+	.ql-header .ql-picker-item {
+		min-height: 43px;
+		line-height: 2em;
+	}
 `;
 
 if (SafeQuill) {
