@@ -20,7 +20,8 @@ const leftCode = 37;
 // loosely inspired by faithlife sites image controls:
 // https://git.faithlife.dev/Logos/Sites.Admin/tree/dc55976323022c4f47ebca57fc07b263ef695155/src/Sites.Admin/Private/scripts/components/text-editor/modules/ImageControls
 export const useImageControls = (
-	quillEditorQuery
+	quillEditorQuery,
+	setAllowImageLink
 ): {
 	overlayCoordinates: IOverlayCoordinates | null;
 	handleClickOnEditor: (target: HTMLElement, editorRef: any | null) => void;
@@ -40,19 +41,25 @@ export const useImageControls = (
 	const selectedImage = useRef<HTMLImageElement | null>();
 	const [currentAlignment, setCurrentAlignment] = useState('');
 
-	const selectImage = useCallback((element: HTMLImageElement | null) => {
-		selectedImage.current = element;
-		if (element) {
-			const blot = Parchment.find(element);
-			const parentBlot = Parchment.find(element.parentElement);
-			setCurrentAlignment(
-				(blot.attributes && blot.attributes.attributes.imageAlign) ||
-					(parentBlot.attributes && parentBlot.attributes.attributes.imageAlign)
-					? 'wrap'
-					: ''
-			);
-		}
-	}, []);
+	const selectImage = useCallback(
+		(element: HTMLImageElement | null) => {
+			selectedImage.current = element;
+			if (element) {
+				const blot = Parchment.find(element);
+				const parentBlot = Parchment.find(element.parentElement);
+				setCurrentAlignment(
+					(blot.attributes && blot.attributes.attributes.imageAlign) ||
+						(parentBlot.attributes && parentBlot.attributes.attributes.imageAlign)
+						? 'wrap'
+						: ''
+				);
+				setAllowImageLink(true);
+			} else {
+				setAllowImageLink(false);
+			}
+		},
+		[setAllowImageLink]
+	);
 
 	const getSelectedImage = useCallback(() => {
 		if (selectedImage.current) {
@@ -148,7 +155,7 @@ export const useImageControls = (
 				const parent = getSelectedImageParent();
 				const parentIsLink = parent && parent.tagName === 'A';
 				editor.setSelection(
-					imageBlot.offset(editor.scroll) + offsetAdjust,
+					imageBlot.offset(editor.scroll) + (parentIsLink ? 0 : offsetAdjust),
 					parentIsLink ? 0 : length,
 					'user'
 				);
@@ -192,13 +199,20 @@ export const useImageControls = (
 			if (editorRef) {
 				editor.current = editorRef.getEditor();
 				const selectedImage = getSelectedImage();
-				if (target === selectedImage || hasResizeOccurred) {
+				if (hasResizeOccurred) {
 					return;
 				}
 				if (target && target.tagName && target.tagName.toLowerCase() === 'img') {
 					selectImage(target as HTMLImageElement);
-					setSelectionOnImage();
-					repositionOverlay();
+					const parent = getSelectedImageParent();
+					const parentIsLink = parent && parent.tagName === 'A';
+					if (parentIsLink) {
+						repositionOverlay();
+						setSelectionOnImage();
+					} else {
+						setSelectionOnImage();
+						repositionOverlay();
+					}
 				} else {
 					selectedImage && selectImage(null);
 					overlayCoordinates && setOverlayCoordinates(null);
@@ -212,6 +226,7 @@ export const useImageControls = (
 			repositionOverlay,
 			selectImage,
 			setSelectionOnImage,
+			getSelectedImageParent,
 		]
 	);
 
@@ -261,7 +276,8 @@ export const useImageControls = (
 			const editor = getEditor();
 			if (editor && selectedImage) {
 				const parent = getSelectedImageParent();
-				const blotElement = parent && parent.tagName === 'SPAN' ? parent : selectedImage;
+				const parentIsContainer = parent && (parent.tagName === 'SPAN' || parent.tagName === 'A');
+				const blotElement = parentIsContainer ? parent : selectedImage;
 				const blot = Parchment.find(blotElement);
 				blot.format('imageAlign', alignment);
 				setCurrentAlignment(alignment);

@@ -19,10 +19,13 @@ const renderAlignAttribute = (alignment, context) => {
 };
 
 const renderFaithlifeImage = (op, context) => {
-	const { imageAlign, ...otherAttributes } = op.attributes as any;
-	return `<img src="${op.insert.value.url}" 
+	const { imageAlign, link, ...otherAttributes } = op.attributes as any;
+
+	return `${link ? `<a href="${link}" target="_blank" rel="noreferrer noopener">` : ''}<img src="${
+		op.insert.value.url
+	}" 
 		${renderAttributes(otherAttributes)}
-		${renderAlignAttribute(imageAlign, context)} />`;
+		${renderAlignAttribute(imageAlign, context)} />${link ? `</a>` : ''}`;
 };
 
 export const getRenderedHtmlContent = (ops, options) => {

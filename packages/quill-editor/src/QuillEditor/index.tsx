@@ -126,6 +126,10 @@ const QuillContainer = styled.div`
 	border-radius: 3px;
 	box-sizing: border-box;
 
+	.ql-snow .ql-tooltip {
+		z-index: 1;
+	}
+
 	.ql-snow .ql-tooltip[data-mode=link]::before {
 		content: '${({ linkHelpText }) => linkHelpText}';
 	}
@@ -170,7 +174,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const [showFilePicker, setShowFilePicker] = useState<boolean>(false);
 	const [filePickerKind, setFilePickerKind] = useState(FilePickerKind.Image);
 	const [storedValue, setStoredValue] = useState(value);
-
+	const [allowImageLink, setAllowImageLink] = useState(false);
 	const [quillEditorId] = useState(
 		() =>
 			editorId ||
@@ -328,7 +332,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		handleOverlayResizeComplete,
 		handleAlignmentChange,
 		currentAlignment,
-	} = useImageControls(quillEditorQuery);
+	} = useImageControls(quillEditorQuery, setAllowImageLink);
 
 	const onEditorClick = useCallback(
 		event => {
@@ -337,27 +341,31 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		[handleClickOnEditor]
 	);
 
-	const handleSelectionChange = useCallback(
-		throttle(() => {
-			if (quillContainerRef.current) {
-				const selection = window.getSelection();
-				const textNodeType = 3;
-				const childNode: any =
-					selection &&
-					selection.focusNode &&
-					((selection.focusNode.nodeType === textNodeType && selection.focusNode.parentElement) ||
-						selection.focusNode);
-				const editorNode: any = childNode && childNode.closest && childNode.closest('.ql-editor');
-				const linkNodes = quillContainerRef.current.querySelectorAll('.ql-insertLink');
-				if (selection && editorNode && !selection.isCollapsed) {
-					linkNodes.forEach(link => link.removeAttribute('disabled'));
-				} else {
-					linkNodes.forEach(link => link.setAttribute('disabled', 'disabled'));
-				}
+	const updateLinkButton = useCallback(() => {
+		if (quillContainerRef.current) {
+			const selection = window.getSelection();
+			const textNodeType = 3;
+			const childNode: any =
+				selection &&
+				selection.focusNode &&
+				((selection.focusNode.nodeType === textNodeType && selection.focusNode.parentElement) ||
+					selection.focusNode);
+			const editorNode: any = childNode && childNode.closest && childNode.closest('.ql-editor');
+			const linkNodes = quillContainerRef.current.querySelectorAll('.ql-insertLink');
+			if ((selection && editorNode && !selection.isCollapsed) || allowImageLink) {
+				linkNodes.forEach(link => link.removeAttribute('disabled'));
+			} else {
+				linkNodes.forEach(link => link.setAttribute('disabled', 'disabled'));
 			}
-		}, 200),
-		[]
-	);
+		}
+	}, [allowImageLink]);
+
+	useEffect(() => {
+		updateLinkButton();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [allowImageLink]);
+
+	const handleSelectionChange = useCallback(throttle(updateLinkButton, 200), [allowImageLink]);
 
 	useEffect(() => {
 		document.addEventListener('selectionchange', handleSelectionChange);
