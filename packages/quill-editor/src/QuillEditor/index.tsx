@@ -516,9 +516,9 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 						},
 				  }
 				: false,
-			keyboard: { bindings: { tab: false } },
-			clipboard: { matchVisual: false },
 			...modules,
+			keyboard: { bindings: { tab: false }, ...((modules && modules.keyboard) || {}) },
+			clipboard: { matchVisual: false, ...((modules && modules.clipboard) || {}) },
 		}),
 		[
 			insertTemplate,
