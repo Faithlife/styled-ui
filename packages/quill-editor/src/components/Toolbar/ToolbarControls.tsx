@@ -37,6 +37,7 @@ const FormatContainer = styled.div`
 
 	& button:disabled {
 		opacity: 0.5;
+		cursor: default;
 	}
 
 	& button:hover svg.custom-icon path {
