@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.35.0
+
+- Accept styled system props in more Accordion components.
+- Add `selectOnFocus` prop to `Input`.
+
 ### 5.34.4
 
 - Improve `Slider` performance.
