@@ -139,8 +139,7 @@ const QuillContainer = styled.div`
 	}
 
 	.ql-header .ql-picker-item {
-		min-height: 43px;
-		line-height: 2em;
+		line-height: 1.4em;
 	}
 `;
 
