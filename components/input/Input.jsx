@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { system, variant, layout, textStyle, border } from 'styled-system';
@@ -22,6 +22,8 @@ const Input = React.forwardRef(function Input(props, ref) {
 		inline,
 		disabled,
 		onEnter,
+		onFocus,
+		selectOnFocus,
 		textarea,
 		forwardedRef, // eslint-disable-line react/prop-types
 		...inputProps
@@ -44,6 +46,22 @@ const Input = React.forwardRef(function Input(props, ref) {
 		);
 	}
 
+	const handleFocus = useMemo(() => {
+		if (!selectOnFocus) {
+			return onFocus;
+		}
+
+		return e => {
+			if (onFocus) {
+				onFocus(e);
+			}
+
+			if (!e.defaultPrevented) {
+				return e => e.target.select();
+			}
+		};
+	}, [onFocus, selectOnFocus]);
+
 	return (
 		<StyledInput
 			as={textarea && 'textarea'}
@@ -56,6 +74,7 @@ const Input = React.forwardRef(function Input(props, ref) {
 			placeholder={placeholder || ''}
 			onClick={onClick}
 			onKeyPress={handleKeyPress}
+			onFocus={handleFocus}
 			ref={ref || forwardedRef}
 			textStyle={variation === 'large' ? 'ui.18' : 'ui.16'}
 			underlineColor="blue4"

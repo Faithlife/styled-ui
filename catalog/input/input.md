@@ -41,7 +41,7 @@ showSource: true
 state: { value: '' }
 ---
 <InputSpacer>
-	<Input textarea placeholder='My favorite state is...' value={state.value} onChange={event => setState({ value: event.target.value })} styleOverrides={{ height: '120px', width: '280px' }} />
+	<Input textarea placeholder='My favorite state is...' value={state.value} onChange={event => setState({ value: event.target.value })} height="120px" width="280px" />
 	<Button variant="primary" size="small">Search</Button>
 </InputSpacer>
 ```
@@ -54,7 +54,14 @@ Use in UI that needs to inline-filter a list.
 showSource: true
 state: { value: 'Washington' }
 ---
-<InputSpacer>
-	<FilterInput variant="medium" value={state.value} onChange={event => setState({ value: event.target.value })} onClear={() => setState({ value: '' })} />
-</InputSpacer>
+<FilterInput variant="medium" value={state.value} onChange={event => setState({ value: event.target.value })} onClear={() => setState({ value: '' })} />
+```
+
+## Select on Focus
+
+```react
+showSource: true
+state: { value: 'Washington' }
+---
+<Input selectOnFocus placeholder='My favorite state is...' value={state.value} onChange={event => setState({ value: event.target.value })} />
 ```
