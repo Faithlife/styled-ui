@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.2.0...@faithlife/quill-editor@1.2.1) (2019-12-09)
+
+
+### Bug Fixes
+
+* Fix null reference error. ([412d4a0](https://git/Logos/FaithlifeEquipment/commits/412d4a035f6ab820acd7912d37fbd2409e0802cd))
+* Use default cursor when toolbar button is disabled. ([95ed9d2](https://git/Logos/FaithlifeEquipment/commits/95ed9d2ed81d521cfe7da9c30bc2a5218576878c))
+
+
+
+
+
 # [1.2.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.1.1...@faithlife/quill-editor@1.2.0) (2019-12-09)
 
 
