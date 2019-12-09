@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.1.0...@faithlife/quill-editor@1.1.1) (2019-12-09)
+
+
+### Bug Fixes
+
+* Don't hide menu when not hovering it. ([66e1a52](https://git/Logos/FaithlifeEquipment/commits/66e1a52686f0f90cc4399fe5388c87128e7ee795))
+* Equalize header option line heights. ([1c671b4](https://git/Logos/FaithlifeEquipment/commits/1c671b49265d1d906313a188f0b40986decbe9cc))
+
+
+
+
+
 # [1.1.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.0.0...@faithlife/quill-editor@1.1.0) (2019-12-09)
 
 
