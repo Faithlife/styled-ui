@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.2.1...@faithlife/quill-editor@1.3.0) (2019-12-09)
+
+
+### Features
+
+* Allow consumers to override keyboard and clipboard modules without blowing away defaults. ([20705c1](https://git/Logos/FaithlifeEquipment/commits/20705c1420e3ead952eda9b94e685b7a5d2024c7))
+
+
+
+
+
 ## [1.2.1](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.2.0...@faithlife/quill-editor@1.2.1) (2019-12-09)
 
 
