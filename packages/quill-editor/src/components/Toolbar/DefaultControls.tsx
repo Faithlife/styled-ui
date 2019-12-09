@@ -63,6 +63,7 @@ const headerOptions: ISelectOption[] = [
 	{ display: 'normal', value: '0' },
 	{ display: 'heading1', value: '1' },
 	{ display: 'heading2', value: '2' },
+	{ display: 'heading3', value: '3' },
 ];
 
 const Header: React.FunctionComponent = props => (
