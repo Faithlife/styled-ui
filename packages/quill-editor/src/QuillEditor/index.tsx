@@ -383,7 +383,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 
 		if (!content && quillRef.current) {
 			const deltaContent = quillRef.current.getEditor().getContents();
-			if (value.ops) {
+			if (value && value.ops) {
 				content = deltaContent;
 			} else {
 				content = quillRef.current.getEditor().root.innerHTML;
