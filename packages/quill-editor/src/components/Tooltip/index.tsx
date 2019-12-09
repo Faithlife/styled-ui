@@ -39,11 +39,9 @@ export const TooltipTitle = styled.div`
 
 const TooltipWrapper = styled.div<{ hideTooltip?: boolean }>`
 	position: relative;
-	overflow: hidden;
 	display: inline-block;
 
 	&:hover {
-		overflow: visible;
 		${({ hideTooltip }) =>
 			!hideTooltip &&
 			css`
