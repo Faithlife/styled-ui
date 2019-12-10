@@ -125,13 +125,31 @@ The recommended pattern is to use the `Toolbar` component as a child of the `Qui
 
 `modules`: Key value pairs of additional modules to include or override. See [Quill Modules](https://quilljs.com/docs/modules/) for more information.
 
+- Tabs: The following can be used to change tab behavior to insert tab characters:
+
+```
+modules = {
+   keyboard: {
+       tab: () => true;
+   }
+}
+```
+
+- `tab: false` (default) will exit the editor when tab is pressed
+- `tab: () => true` will allow inserting tab characters.
+
 `toolbarHandlers`: Key value pairs of additional toolbar handlers to include or override. This is a convenience prop, since toolbar is a quill module, which can also be overriden using the `modules` prop. See [Quill Toolbar Module](https://quilljs.com/docs/modules/toolbar/) for more information. If any custom toolbar controls are added, they will require a custom toolbar handler.
 
 `onChange()`: Event that is fired when content is changed. To retrieve the Delta representation of the editor's contents, use the imperative handler `quill.getEditor().getContents()`.
 
-`onClick()`: Event that is fired when any part of the editor is clicked.
+Additional available events:
+(Note: these only apply to the text editing area _not_ the toolbar)
 
-`onBlur()`: Event that is fired when editor text area loses focus.
+`onClick`
+`onBlur`
+`onFocus`
+`onKeyDown`
+`onKeyUp`
 
 #### Toolbar
 
@@ -213,6 +231,8 @@ An example of a quill editor with custom toolbar controls:
 - `insertText(text, start, end, source)` - Inserts text at the desired location, replacing the content between the start and end indexes. `start` and `end` default to the selection indexes, or to the end of content if no selection is available.
 - `deleteText(start, end, source)` - Deletes text at between the given indexes. `start` and `end` default to the selection indexes, or to the end of content if no selection is available.
 - `getHTML(options)` - Returns the html representation of the editor contents.
+  - Passing `format: 'inline'` as an option will create html with inline styles instead of class names. \
+    DO NOT return this content to either `value` or `defaultValue`, as it will not be read correctly by quill.
 - `getEditor()` - Returns a reference to the quill editor api. (See the [Quill docs](https://quilljs.com/docs/api/))
 
 ### Plain text mode
