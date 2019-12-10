@@ -57,7 +57,7 @@ const Input = React.forwardRef(function Input(props, ref) {
 			}
 
 			if (!e.defaultPrevented) {
-				return e => e.target.select();
+				e.target.select();
 			}
 		};
 	}, [onFocus, selectOnFocus]);
