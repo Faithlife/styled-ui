@@ -1,3 +1,9 @@
+For the next major version of Styled-UI, the Modal component has been rebuilt to use styled-system primitives.
+
+You can opt-in to the new API now by importing `{ Modal } from @faithlife/styled-ui/v6`
+
+When v6 is released, the `/v6` entrypoint will continue to be supported with a deprecation warning until v7 is released.
+
 ## Possible polyfill requirements
 
 This component assumes the availability of the following APIs, which may require polyfills in your application:
