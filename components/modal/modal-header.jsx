@@ -36,7 +36,7 @@ export const ModalHeader = ({ title, subtitle, message, textStyle, ...props }) =
 					</Text>
 					{message && (
 						<Text
-							display="block"
+							display={['none', 'block']}
 							textStyle={'c.13'}
 							color="gray52"
 							marginLeft={5}
