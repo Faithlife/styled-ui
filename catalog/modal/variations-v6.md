@@ -114,7 +114,7 @@ state: { modal: false, value: '' }
 
 ```react
 showSource: true
-state: { modal: true, value: '' }
+state: { modal: false, value: '' }
 ---
 <div>
 	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
