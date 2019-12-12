@@ -110,11 +110,11 @@ state: { modal: false, value: '' }
 </div>
 ```
 
-## Fullscreen modal
+## Fullscreen modal with custom header actions
 
 ```react
 showSource: true
-state: { modal: false, value: '' }
+state: { modal: true, value: '' }
 ---
 <div>
 	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
@@ -129,6 +129,14 @@ state: { modal: false, value: '' }
 			title="Fullscreen modal"
 			textStyle="h.24"
 			message={`Autosaved at ${new Date().toString()}`}
+			actions={<Box display="grid" gridAutoFlow="column" gridAutoColumns="min-content" gridGap={[3,5]}>
+				<Button size={['medium', 'small']} minWidth={78} variant="secondary" onClick={() => setState({ modal: !state.modal })}>
+					Cancel
+				</Button>
+				<Button size={['medium', 'small']} minWidth={78} variant="primary" onClick={() => setState({ modal: !state.modal })}>
+					Save
+				</Button>
+			</Box>}
 		/>
 		<Modal.Content
 			paddingX={0}

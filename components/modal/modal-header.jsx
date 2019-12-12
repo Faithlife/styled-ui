@@ -9,7 +9,7 @@ import { Close } from '../icons';
 import { useModalContext } from './use-modal-context';
 
 /** A flexible component built on styled-system primitives. */
-export const ModalHeader = ({ title, subtitle, message, textStyle, ...props }) => {
+export const ModalHeader = ({ title, subtitle, message, actions, textStyle, ...props }) => {
 	const { contentPadding, onClose } = useModalContext();
 	return (
 		<Box
@@ -47,10 +47,14 @@ export const ModalHeader = ({ title, subtitle, message, textStyle, ...props }) =
 							{message}
 						</Text>
 					)}
-					<Box display="grid" flex="1 0 auto" justifyContent="flex-end">
-						<UtilityButton onClick={onClose} display="inline-grid" marginLeft={5}>
-							<Close />
-						</UtilityButton>
+					<Box display="grid" flex="1 0 auto" justifyContent="flex-end" marginLeft={5}>
+						{actions ? (
+							actions
+						) : (
+							<UtilityButton onClick={onClose} display="inline-grid">
+								<Close />
+							</UtilityButton>
+						)}
 					</Box>
 				</Box>
 				{subtitle && (
@@ -71,6 +75,7 @@ ModalHeader.propTypes = {
 	title: PropTypes.node.isRequired,
 	subtitle: PropTypes.node,
 	message: PropTypes.node,
+	actions: PropTypes.node,
 };
 
 ModalHeader.defaultProps = {
