@@ -4,8 +4,6 @@ This component assumes the availability of the following APIs, which may require
 
 - `ResizeObserver`
 
-## Automatic layout for in-memory collections
-
 ## Modal with v6 API
 
 ```react
