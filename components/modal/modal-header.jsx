@@ -74,7 +74,9 @@ ModalHeader.propTypes = {
 	textStyle: PropTypes.string,
 	title: PropTypes.node.isRequired,
 	subtitle: PropTypes.node,
+	/** Used for status updates, such as auto-saving. Not visible on mobile. */
 	message: PropTypes.node,
+	/** Can be used to render custom header action buttons. */
 	actions: PropTypes.node,
 };
 
