@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.36.0
+
+- Add `message` and `actions` props to the `Modal.Header` component.
+
 ### 5.35.1
 
 - Fix `selectOnFocus`.
