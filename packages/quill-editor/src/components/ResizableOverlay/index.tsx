@@ -38,6 +38,7 @@ const DragHandle = styled.div.attrs(({ location, cursorStyle }: IHandleProps) =>
 	height: 8px;
 	width: 8px;
 	background-color: #278ed4;
+	pointer-events: all;
 `;
 
 const AlignmentControls = styled.div<{ top: number }>`
@@ -47,6 +48,7 @@ const AlignmentControls = styled.div<{ top: number }>`
 	background-color: white;
 	border: 1px solid #d4d0cf;
 	top: ${({ top }) => top + 8}px;
+	pointer-events: all;
 `;
 
 const AlignmentButton = styled.a<{ isActive: boolean }>`
@@ -84,8 +86,6 @@ export interface IOverlayDimensions {
 interface IResizableOverlayProps {
 	onOverlayResizeComplete: () => void;
 	onOverlayResize: (dimensions: IOverlayDimensions) => void;
-	onWheel: (event: React.WheelEvent) => void;
-	onKeyUp: (event: KeyboardEvent) => void;
 	top: number;
 	left: number;
 	initialWidth: number;
@@ -95,18 +95,12 @@ interface IResizableOverlayProps {
 	onAlignmentChange: (alignment: string) => void;
 }
 
-// prevent scrolling on document body when hovering overlay
-// react onWheel is passive so cannot prevent default in onWheel hander within component
-const preventMousewheel = event => event.preventDefault();
-
 const handleOffsetPixels = -4;
 const minimumOverlayWidthPixels = 10;
 
 export const ResizableOverlay: React.FunctionComponent<IResizableOverlayProps> = ({
 	onOverlayResizeComplete,
 	onOverlayResize,
-	onWheel,
-	onKeyUp,
 	top,
 	left,
 	initialWidth,
@@ -212,22 +206,13 @@ export const ResizableOverlay: React.FunctionComponent<IResizableOverlayProps> =
 	}, [onOverlayResizeComplete, setResizeCursor]);
 
 	useEffect(() => {
-		const overlayElement = overlayRef.current;
-		if (overlayElement && onWheel) {
-			overlayElement.addEventListener('mousewheel', preventMousewheel, false);
-		}
 		document.body.addEventListener('mousemove', handleDrag, false);
 		document.body.addEventListener('mouseup', handleMouseup, false);
-		document.body.addEventListener('keyup', onKeyUp, false);
 		return () => {
-			if (overlayElement) {
-				overlayElement.removeEventListener('mousewheel', preventMousewheel, false);
-			}
 			document.body.removeEventListener('mousemove', handleDrag, false);
 			document.body.removeEventListener('mouseup', handleMouseup, false);
-			document.body.removeEventListener('keyup', onKeyUp, false);
 		};
-	}, [handleDrag, handleMouseup, onKeyUp, onWheel]);
+	}, [handleDrag, handleMouseup]);
 
 	const handleMouseDownOnNWHandle = useCallback(
 		(e: React.MouseEvent) => handleMousedown(e, 'left', 'nw'),
@@ -257,7 +242,6 @@ export const ResizableOverlay: React.FunctionComponent<IResizableOverlayProps> =
 	return (
 		<Overlay
 			ref={overlayRef}
-			onWheel={onWheel}
 			left={overlayCoordinates.left}
 			top={overlayCoordinates.top}
 			width={overlayCoordinates.width}

@@ -1,5 +1,4 @@
 import { useCallback, useMemo, useRef, useEffect, useState } from 'react';
-import { throttle } from './throttle';
 import { IOverlayCoordinates, IOverlayDimensions } from '../components/ResizableOverlay';
 import { SafeQuill } from '../QuillEditor/SafeQuill';
 
@@ -7,15 +6,12 @@ const Parchment = SafeQuill && SafeQuill.import('parchment');
 
 const overlayMarginPixels = 2;
 
-const scroll = {
-	speed: 3,
-	throttle: 25,
-};
-
 const backspaceCode = 8;
 const deleteCode = 46;
 const rightCode = 39;
 const leftCode = 37;
+const upCode = 38;
+const downCode = 40;
 
 // loosely inspired by faithlife sites image controls:
 // https://git.faithlife.dev/Logos/Sites.Admin/tree/dc55976323022c4f47ebca57fc07b263ef695155/src/Sites.Admin/Private/scripts/components/text-editor/modules/ImageControls
@@ -27,8 +23,6 @@ export const useImageControls = (
 	handleClickOnEditor: (target: HTMLElement, editorRef: any | null) => void;
 	handleTextChangeOnEditor: () => void;
 	handleScrollOnEditor: () => void;
-	handleKeyUpOnBody: (event: KeyboardEvent) => void;
-	handleMouseWheelOnOverlay: (event: React.WheelEvent) => void;
 	handleOverlayResizeComplete: () => void;
 	handleOverlayResize: (dimensions: IOverlayDimensions) => void;
 	handleAlignmentChange: (alignement: string) => void;
@@ -87,62 +81,26 @@ export const useImageControls = (
 		if (!editor || !selectedImage) {
 			return;
 		}
-		if (editor.hasFocus()) {
-			editor.blur();
-		}
+
 		const bounds = editor.root.closest(quillEditorQuery);
 		const parent = editor.root.parentElement;
+		const toolbarHeight = 42;
 		if (bounds && parent) {
 			const imageRect = selectedImage.getBoundingClientRect();
 			const containerRect = bounds.getBoundingClientRect();
 			setOverlayCoordinates({
-				left: imageRect.left + parent.scrollLeft - containerRect.left - overlayMarginPixels * 2,
-				top: imageRect.top + parent.scrollTop - containerRect.top - overlayMarginPixels * 2,
+				left: imageRect.left + bounds.scrollLeft - containerRect.left - overlayMarginPixels * 2,
+				top:
+					imageRect.top +
+					bounds.scrollTop -
+					containerRect.top -
+					toolbarHeight -
+					overlayMarginPixels * 2,
 				width: imageRect.width + overlayMarginPixels * 2,
 				height: imageRect.height + overlayMarginPixels * 2,
 			});
 		}
 	}, [getEditor, getSelectedImage, quillEditorQuery]);
-
-	const simulateEditorScroll = useCallback(
-		(deltaX, deltaY) => {
-			const editor = getEditor();
-			if (editor && editor.root) {
-				const top = Math.abs(deltaY) > Math.abs(deltaX) ? deltaY * scroll.speed : 0;
-				const left = Math.abs(deltaX) >= Math.abs(deltaY) ? deltaX * scroll.speed : 0;
-				editor.root.scrollBy({ top, left });
-			}
-		},
-		[getEditor]
-	);
-	const throttledScroll = useRef<any>();
-	useEffect(() => {
-		throttledScroll.current = throttle(
-			(deltaX, deltaY) => simulateEditorScroll(deltaX, deltaY),
-			scroll.throttle
-		);
-		return () => throttledScroll.current.cancel();
-	}, [simulateEditorScroll]);
-
-	const handleMouseWheelOnOverlay = useCallback((event: React.WheelEvent) => {
-		const deltaX = event.deltaX;
-		const deltaY = event.deltaY;
-		throttledScroll.current(deltaX, deltaY);
-	}, []);
-
-	const interpretKeyboardEvent = useCallback(
-		(keyCode: number) => {
-			const editor = getEditor();
-			const selectedImage = getSelectedImage();
-			const isSelected = !!(selectedImage && editor);
-			const deleteWhileSelected =
-				isSelected && (keyCode === backspaceCode || keyCode === deleteCode);
-			const rightWhileSelected = isSelected && keyCode === rightCode;
-			const leftWhileSelected = isSelected && keyCode === leftCode;
-			return { deleteWhileSelected, rightWhileSelected, leftWhileSelected };
-		},
-		[getEditor, getSelectedImage]
-	);
 
 	const setSelectionOnImage = useCallback(
 		(select: 'highlight' | 'before' | 'after' = 'highlight') => {
@@ -155,7 +113,7 @@ export const useImageControls = (
 				const parent = getSelectedImageParent();
 				const parentIsLink = parent && parent.tagName === 'A';
 				editor.setSelection(
-					imageBlot.offset(editor.scroll) + (parentIsLink ? 0 : offsetAdjust),
+					imageBlot.offset(editor.scroll) + offsetAdjust,
 					parentIsLink ? 0 : length,
 					'user'
 				);
@@ -164,35 +122,126 @@ export const useImageControls = (
 		[getEditor, getSelectedImage, getSelectedImageParent]
 	);
 
+	const interpretKeyboardEvent = useCallback(
+		(keyCode: number) => {
+			const editor = getEditor();
+			const selectedImage = getSelectedImage();
+			const isSelected = !!(selectedImage && editor);
+			const deleteWhileSelected =
+				isSelected && (keyCode === backspaceCode || keyCode === deleteCode);
+
+			const isRight = keyCode === rightCode;
+			const isLeft = keyCode === leftCode;
+			const isUp = keyCode === upCode;
+			const isDown = keyCode === downCode;
+
+			const selection = editor.getSelection();
+			const previousDelta =
+				(isRight || isLeft) &&
+				selection &&
+				editor.getContents({
+					index: selection.index + (isRight ? -1 : 0),
+					length: 1,
+				});
+
+			const ontoImage =
+				!isSelected &&
+				previousDelta &&
+				previousDelta.ops.length &&
+				!!previousDelta.ops[0].insert.faithlifeImage;
+
+			let imageBlot;
+			if (ontoImage) {
+				const nativeSelection = editor.selection.getNativeRange();
+				const selectedNode = nativeSelection && nativeSelection.end.node;
+				const nodeAsImg = node => node && node.tagName === 'IMG' && node;
+
+				// Picking the correct img node to select required a trial and error method of determining where selection lands
+				if (selectedNode) {
+					let resultNode;
+					if (isLeft) {
+						resultNode = nodeAsImg(selectedNode.nextSibling);
+						resultNode = resultNode || nodeAsImg(selectedNode.parentElement);
+						resultNode =
+							resultNode ||
+							(selectedNode.parentElement && nodeAsImg(selectedNode.parentElement.nextSibling));
+						resultNode =
+							resultNode ||
+							(selectedNode.nextSibling && nodeAsImg(selectedNode.nextSibling.firstElementChild));
+					} else {
+						resultNode = nodeAsImg(selectedNode) || nodeAsImg(selectedNode.previousSibling);
+						resultNode =
+							resultNode ||
+							(selectedNode.parentElement && nodeAsImg(selectedNode.parentElement.previousSibling));
+					}
+					imageBlot = resultNode && Parchment.find(resultNode);
+				}
+			}
+
+			const offImage = isSelected && (isRight || isLeft || isUp || isDown);
+			return { deleteWhileSelected, offImage, isLeft, isRight, ontoImage, imageBlot };
+		},
+		[getEditor, getSelectedImage]
+	);
+
 	// must programatically delete selected image on backspace / delete since overlay element has focus
 	// if image is highlighted but overlay remains present, quill editor keeps focus so just need to remove overlay
 	// also including functionality to move left or right of selected image on arrow key press
 	const handleKeyUpOnBody: (event: KeyboardEvent) => void = useCallback(
-		({ keyCode, target }) => {
+		event => {
 			const selectedImage = getSelectedImage();
-			if (target !== document.body || !selectedImage) {
-				return;
-			}
-			const { deleteWhileSelected, rightWhileSelected, leftWhileSelected } = interpretKeyboardEvent(
-				keyCode
-			);
+			const {
+				deleteWhileSelected,
+				offImage,
+				isLeft,
+				isRight,
+				ontoImage,
+				imageBlot,
+			} = interpretKeyboardEvent(event.keyCode);
 			const editor = getEditor();
-			if (editor && deleteWhileSelected) {
+			if (editor && ontoImage && imageBlot) {
+				selectImage(imageBlot.domNode as HTMLImageElement);
+				const parent = getSelectedImageParent();
+				const parentIsLink = parent && parent.tagName === 'A';
+				if (parentIsLink) {
+					repositionOverlay();
+					setSelectionOnImage();
+				} else {
+					setSelectionOnImage();
+					repositionOverlay();
+				}
+			} else if (editor && deleteWhileSelected) {
 				const image = Parchment.find(selectedImage);
 				const removeIndex = image.offset(editor.scroll);
 				editor.deleteText(removeIndex, 1);
 				editor.setSelection(removeIndex, 0);
 				selectImage(null);
 				setOverlayCoordinates(null);
-			} else if (editor && (rightWhileSelected || leftWhileSelected)) {
-				setSelectionOnImage(leftWhileSelected ? 'before' : 'after');
+			} else if (editor && offImage) {
+				if (isLeft || isRight) {
+					setSelectionOnImage(isLeft ? 'before' : 'after');
+				}
 				selectImage(null);
 				setOverlayCoordinates(null);
 				editor.focus();
 			}
 		},
-		[getEditor, getSelectedImage, interpretKeyboardEvent, selectImage, setSelectionOnImage]
+		[
+			getEditor,
+			getSelectedImage,
+			interpretKeyboardEvent,
+			selectImage,
+			repositionOverlay,
+			setSelectionOnImage,
+			getSelectedImageParent,
+		]
 	);
+
+	useEffect(() => {
+		document.body.addEventListener('keyup', handleKeyUpOnBody, false);
+
+		return () => document.body.removeEventListener('keyup', handleKeyUpOnBody, false);
+	}, [handleKeyUpOnBody]);
 
 	const handleClickOnEditor = useCallback(
 		(target: HTMLElement, editorRef: any | null) => {
@@ -293,8 +342,6 @@ export const useImageControls = (
 			handleClickOnEditor,
 			handleTextChangeOnEditor,
 			handleScrollOnEditor,
-			handleKeyUpOnBody,
-			handleMouseWheelOnOverlay,
 			handleOverlayResize,
 			handleOverlayResizeComplete,
 			handleAlignmentChange,
@@ -305,8 +352,6 @@ export const useImageControls = (
 			handleClickOnEditor,
 			handleTextChangeOnEditor,
 			handleScrollOnEditor,
-			handleKeyUpOnBody,
-			handleMouseWheelOnOverlay,
 			handleOverlayResize,
 			handleOverlayResizeComplete,
 			handleAlignmentChange,

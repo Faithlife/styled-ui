@@ -141,6 +141,13 @@ const QuillContainer = styled.div`
 	.ql-header .ql-picker-item {
 		line-height: 1.4em;
 	}
+
+	${({ imageIsSelected }) =>
+		imageIsSelected &&
+		`img::selection {
+			background: rgba(0, 0, 0, 0);
+		}
+	`}
 `;
 
 if (SafeQuill) {
@@ -330,8 +337,6 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		handleClickOnEditor,
 		handleTextChangeOnEditor,
 		handleScrollOnEditor,
-		handleKeyUpOnBody,
-		handleMouseWheelOnOverlay,
 		handleOverlayResize,
 		handleOverlayResizeComplete,
 		handleAlignmentChange,
@@ -562,6 +567,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				className={[...(classNames || []), className, quillEditorId]}
 				linkHelpText={localizedResources.toolbar.enterLink}
 				linkSaveText={localizedResources.toolbar.save}
+				imageIsSelected={!!overlayCoordinates}
 			>
 				{children}
 				{SafeQuill ? (
@@ -572,7 +578,6 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 						modules={moduleConfiguration}
 						formats={allowedFormats}
 						bounds={quillEditorQuery}
-						onBlur={onBlur}
 						{...otherProps}
 					>
 						{placeholderDiv}
@@ -580,21 +585,21 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				) : (
 					<ReactQuillStyled className="quill">{placeholderDiv}</ReactQuillStyled>
 				)}
-				{overlayCoordinates && (
-					<ResizableOverlay
-						onOverlayResizeComplete={handleOverlayResizeComplete}
-						onOverlayResize={handleOverlayResize}
-						onWheel={handleMouseWheelOnOverlay}
-						onKeyUp={handleKeyUpOnBody}
-						top={overlayCoordinates.top}
-						left={overlayCoordinates.left}
-						initialWidth={overlayCoordinates.width}
-						initialHeight={overlayCoordinates.height}
-						quillEditorQuery={quillEditorQuery}
-						currentAlignment={currentAlignment}
-						onAlignmentChange={handleAlignmentChange}
-					/>
-				)}
+				<OverlayContainer>
+					{overlayCoordinates && (
+						<ResizableOverlay
+							onOverlayResizeComplete={handleOverlayResizeComplete}
+							onOverlayResize={handleOverlayResize}
+							top={overlayCoordinates.top}
+							left={overlayCoordinates.left}
+							initialWidth={overlayCoordinates.width}
+							initialHeight={overlayCoordinates.height}
+							quillEditorQuery={quillEditorQuery}
+							currentAlignment={currentAlignment}
+							onAlignmentChange={handleAlignmentChange}
+						/>
+					)}
+				</OverlayContainer>
 				<FilePickerModal
 					showFilePicker={showFilePicker}
 					insertFile={insertFile}
@@ -606,5 +611,15 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		</LocalizationProvider>
 	);
 };
+
+const OverlayContainer = styled.div`
+	overflow: auto;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 42px;
+	bottom: 0;
+	pointer-events: none;
+`;
 
 export const QuillEditor = React.forwardRef(QuillEditorCore);
