@@ -1,3 +1,11 @@
+## Possible polyfill requirements
+
+This component assumes the availability of the following APIs, which may require polyfills in your application:
+
+- `ResizeObserver`
+
+## Automatic layout for in-memory collections
+
 ## Modal with v6 API
 
 ```react
