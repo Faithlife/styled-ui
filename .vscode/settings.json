@@ -1,10 +1,10 @@
 {
 	"workbench.colorCustomizations": {
-        "titleBar.activeBackground": "#FFC83D",
-        "titleBar.inactiveBackground": "#FFC83D99",
-        "titleBar.activeForeground": "#3d3d3d",
-        "titleBar.inactiveForeground": "#3d3d3d99"
-    },
+		"titleBar.activeBackground": "#FFC83D",
+		"titleBar.inactiveBackground": "#FFC83D99",
+		"titleBar.activeForeground": "#3d3d3d",
+		"titleBar.inactiveForeground": "#3d3d3d99"
+	},
 	"prettier.requireConfig": true,
 	"[typescript]": {
 		"editor.formatOnSave": true
