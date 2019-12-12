@@ -29,7 +29,7 @@ export const ModalHeader = ({ title, subtitle, message, actions, textStyle, ...p
 						textStyle={textStyle}
 						color="gray66"
 						whiteSpace="nowrap"
-						overflow="hidden"
+						overflow={['hidden', 'visible']}
 						textOverflow="ellipsis"
 					>
 						{title}
