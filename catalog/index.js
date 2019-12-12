@@ -584,7 +584,7 @@ const pages = [
 					Modal: V6Modal,
 					Box,
 					Input,
-					Button,
+					Button: V6Button,
 				},
 			},
 			{

@@ -1,3 +1,9 @@
+For the next major version of Styled-UI, the Modal component has been rebuilt to use styled-system primitives.
+
+You can opt-in to the new API now by importing `{ Modal } from @faithlife/styled-ui/v6`
+
+When v6 is released, the `/v6` entrypoint will continue to be supported with a deprecation warning until v7 is released.
+
 ## Possible polyfill requirements
 
 This component assumes the availability of the following APIs, which may require polyfills in your application:
@@ -104,7 +110,7 @@ state: { modal: false, value: '' }
 </div>
 ```
 
-## Fullscreen modal
+## Fullscreen modal with custom header actions
 
 ```react
 showSource: true
@@ -119,7 +125,19 @@ state: { modal: false, value: '' }
 		contentPadding={6}
 		fullscreen
 	>
-		<Modal.Header title="Fullscreen modal" textStyle="h.24" />
+		<Modal.Header
+			title="Fullscreen modal"
+			textStyle="h.24"
+			message={`Autosaved at ${new Date().toString()}`}
+			actions={<Box display="grid" gridAutoFlow="column" gridAutoColumns="min-content" gridGap={[3,5]}>
+				<Button size={['medium', 'small']} minWidth={78} variant="secondary" onClick={() => setState({ modal: !state.modal })}>
+					Cancel
+				</Button>
+				<Button size={['medium', 'small']} minWidth={78} variant="primary" onClick={() => setState({ modal: !state.modal })}>
+					Save
+				</Button>
+			</Box>}
+		/>
 		<Modal.Content
 			paddingX={0}
 			paddingBottom={0}

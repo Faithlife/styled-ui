@@ -9,7 +9,7 @@ import { Close } from '../icons';
 import { useModalContext } from './use-modal-context';
 
 /** A flexible component built on styled-system primitives. */
-export const ModalHeader = ({ title, subtitle, textStyle, ...props }) => {
+export const ModalHeader = ({ title, subtitle, message, actions, textStyle, ...props }) => {
 	const { contentPadding, onClose } = useModalContext();
 	return (
 		<Box
@@ -23,13 +23,39 @@ export const ModalHeader = ({ title, subtitle, textStyle, ...props }) => {
 			{...props}
 		>
 			<Stack spacing={3} width="100%">
-				<Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
-					<Text textStyle={textStyle} color="gray66">
+				<Box display="flex" alignItems="baseline" overflow="hidden" width="100%">
+					<Text
+						display="block"
+						textStyle={textStyle}
+						color="gray66"
+						whiteSpace="nowrap"
+						overflow={['hidden', 'visible']}
+						textOverflow="ellipsis"
+					>
 						{title}
 					</Text>
-					<UtilityButton onClick={onClose} display="inline-grid">
-						<Close />
-					</UtilityButton>
+					{message && (
+						<Text
+							display={['none', 'block']}
+							textStyle={'c.13'}
+							color="gray52"
+							marginLeft={5}
+							whiteSpace="nowrap"
+							overflow="hidden"
+							textOverflow="ellipsis"
+						>
+							{message}
+						</Text>
+					)}
+					<Box display="grid" flex="1 0 auto" justifyContent="flex-end" marginLeft={5}>
+						{actions ? (
+							actions
+						) : (
+							<UtilityButton onClick={onClose} display="inline-grid">
+								<Close />
+							</UtilityButton>
+						)}
+					</Box>
 				</Box>
 				{subtitle && (
 					<Box width="100%">
@@ -46,8 +72,10 @@ export const ModalHeader = ({ title, subtitle, textStyle, ...props }) => {
 ModalHeader.propTypes = {
 	/** Select a text style from our theme for the header title. */
 	textStyle: PropTypes.string,
-	title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-	subtitle: PropTypes.string,
+	title: PropTypes.node.isRequired,
+	subtitle: PropTypes.node,
+	message: PropTypes.node,
+	actions: PropTypes.node,
 };
 
 ModalHeader.defaultProps = {
