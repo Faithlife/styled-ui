@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.35.1
+
+- Fix `selectOnFocus`.
+
 ### 5.35.0
 
 - Accept styled system props in more Accordion components.
