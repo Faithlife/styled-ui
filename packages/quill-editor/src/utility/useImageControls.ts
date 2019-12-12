@@ -135,7 +135,7 @@ export const useImageControls = (
 			const isUp = keyCode === upCode;
 			const isDown = keyCode === downCode;
 
-			const selection = editor.getSelection();
+			const selection = editor && editor.getSelection();
 			const previousDelta =
 				(isRight || isLeft) &&
 				selection &&
