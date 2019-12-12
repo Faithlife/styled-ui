@@ -125,7 +125,11 @@ state: { modal: false, value: '' }
 		contentPadding={6}
 		fullscreen
 	>
-		<Modal.Header title="Fullscreen modal" textStyle="h.24" />
+		<Modal.Header
+			title="Fullscreen modal"
+			textStyle="h.24"
+			message={`Autosaved at ${new Date().toString()}`}
+		/>
 		<Modal.Content
 			paddingX={0}
 			paddingBottom={0}
