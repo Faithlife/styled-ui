@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.3.1...@faithlife/quill-editor@1.4.0) (2019-12-12)
+
+
+### Features
+
+* Fixup and add better image selection behavior. ([359751c](https://git/Logos/FaithlifeEquipment/commits/359751c54c8a5a8e9c423bef7c7cbe1c0c9b5f16))
+
+
+
+
+
 ## [1.3.1](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.3.0...@faithlife/quill-editor@1.3.1) (2019-12-10)
 
 **Note:** Version bump only for package @faithlife/quill-editor
