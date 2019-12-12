@@ -110,7 +110,7 @@ const StyledInput = styled.input(
 
 	border: 1px solid;
 	border-radius: ${theme.radii[1]};
-	border-color: ${theme.colors.inputBorderColor || theme.colors.input.borderColor};
+	border-color: ${theme.colors.input.borderColor};
 
 	${'height' in styleOverrides &&
 		css`
@@ -123,9 +123,8 @@ const StyledInput = styled.input(
 		`}
 
 	&:focus {
-		border-color: ${theme.colors.inputFocusedBorderColor || theme.colors.input.focusedBorderColor};
-		box-shadow: 0 0 0 2px ${theme.colors.inputFocusedShadowColor ||
-			theme.colors.input.focusedBoxShadowColor};
+		border-color: ${theme.colors.input.focusedBorderColor};
+		box-shadow: 0 0 0 2px ${theme.colors.input.focusedBoxShadowColor};
 		outline: 0;
 		${variant === 'inline' && system({ underlineColor: { property: 'border-color', scale: 'colors' } })}
 	}
@@ -135,7 +134,7 @@ const StyledInput = styled.input(
 	}
 
 	&::placeholder {
-		color: ${theme.colors.inputPlaceholderColor || theme.colors.input.placeholderColor};
+		color: ${theme.colors.input.placeholderColor};
 		font-style: italic;
 	}
 

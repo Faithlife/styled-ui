@@ -91,10 +91,6 @@ const colors = {
 	yellow5: '#b58300',
 
 	borderColor: '#C7C7C7',
-	inputBorderColor: '#a8a8a8',
-	inputFocusedBorderColor: '#278ed4',
-	inputFocusedShadowColor: '#d0e6f6',
-	inputPlaceholderColor: '#C7C7C7',
 };
 
 colors.button = {

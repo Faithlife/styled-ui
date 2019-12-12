@@ -91,12 +91,6 @@ export const colors = {
 	boxShadow: '0 4px 4px 0 rgba(0, 0, 0, 0.12), 0 0 4px 0 rgba(0, 0, 0, 0.12)',
 };
 
-export const inputColors = {
-	inputBorderColor: colors.borderColor,
-	inputFocusedBorderColor: '#278ed4',
-	inputFocusedShadowColor: '#d0e6f6',
-};
-
 export const mediaSizes = {
 	desktop: '992px',
 	tablet: '768px',

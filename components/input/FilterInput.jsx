@@ -66,7 +66,7 @@ FilterInput.propTypes = {
 const Wrapper = styled(Box)`
 	${({ theme }) => css`
 		path {
-			fill: ${theme.colors.inputBorderColor};
+			fill: ${theme.colors.input.borderColor};
 		}
 
 		&:focus-within {
