@@ -59,6 +59,7 @@ export interface IToolbarControlProps {
 
 export interface IToolbarButtonProps extends IToolbarControlProps {
 	value?: string;
+	className?: string;
 }
 
 export interface ISelectOption {
@@ -70,6 +71,7 @@ export interface IToolbarSelectProps extends IToolbarControlProps {
 	options?: ISelectOption[];
 	defaultValue?: string;
 	label?: string;
+	className?: string;
 }
 
 export interface IToolbarGroupingProps {
@@ -96,11 +98,12 @@ export const ToolbarButton: React.FunctionComponent<IToolbarButtonProps> = ({
 	tooltip,
 	value,
 	isRoot,
+	className,
 	children,
 	...props
 }) => (
 	<QuillFormat tooltip={tooltip} isRoot={isRoot}>
-		<button className={`ql-${name}`} value={value} {...props}>
+		<button className={`${className || ''} ql-${name}`} value={value} {...props}>
 			{children}
 		</button>
 	</QuillFormat>
@@ -113,10 +116,16 @@ export const ToolbarSelect: React.FunctionComponent<IToolbarSelectProps> = ({
 	label,
 	defaultValue = '',
 	isRoot,
+	className,
 	...props
 }) => (
 	<QuillFormat tooltip={tooltip} isRoot={isRoot}>
-		<StyledSelect className={`ql-${name}`} defaultValue={defaultValue} label={label} {...props}>
+		<StyledSelect
+			className={[className, `ql-${name}`]}
+			defaultValue={defaultValue}
+			label={label}
+			{...props}
+		>
 			{options && <option hidden disabled />}
 			{options &&
 				options.map(option => (
