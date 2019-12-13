@@ -47,6 +47,7 @@ const TestApp: React.FunctionComponent = () => {
 					ref={quillRef}
 					value={htmlContent}
 					onContentChange={handleChange}
+					autofocus
 				>
 					<Toolbar editorId="message" />
 				</QuillEditorStyled>
@@ -72,6 +73,7 @@ const TestApp: React.FunctionComponent = () => {
 const QuillEditorStyled = styled(QuillEditor)`
 	background: white;
 	min-height: 150px;
+	max-height: 400px;
 	font-family: Source Sans Pro;
 `;
 
