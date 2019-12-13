@@ -18,6 +18,7 @@ import ImageBlot from '../components/Blots/ImageBlot';
 import { useImageDrop } from '../utility/useImageDrop';
 import { SafeQuill, SafeReactQuill } from './SafeQuill';
 import { getRenderedHtmlContent } from '../utility/getRenderedHtmlContent';
+import { getShortcuts } from './shortcuts';
 
 export interface IQuillRichTextEditorProps {
 	groupId?: string;
@@ -536,8 +537,12 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				: false,
 			...modules,
 			keyboard: {
-				...(tabMode === 'insert' ? {} : { bindings: { tab: false } }),
 				...((modules && modules.keyboard) || {}),
+				bindings: {
+					...(tabMode === 'insert' ? {} : { tab: false }),
+					...getShortcuts(quillRef),
+					...((modules && modules.keyboard && modules.keyboard.bindings) || {}),
+				},
 			},
 			clipboard: { matchVisual: false, ...((modules && modules.clipboard) || {}) },
 		}),
