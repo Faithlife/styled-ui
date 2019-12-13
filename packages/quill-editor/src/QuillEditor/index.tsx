@@ -162,19 +162,19 @@ const QuillContainer = styled.div<{ isEmpty: boolean }>`
 		`}
 `;
 
-const OverlayContainer = styled.div`
+const OverlayContainer = styled.div<{ hasToolbar: boolean }>`
 	overflow: auto;
 	position: absolute;
 	left: 0;
 	right: 0;
-	top: 42px;
+	top: ${({ hasToolbar }) => (hasToolbar ? '41px' : '0')};
 	bottom: 0;
 	pointer-events: none;
 `;
 
 const ReplacementPlaceholder = styled.div`
 	position: absolute;
-	top: 49px;
+	top: 8px;
 	left: 8px;
 	color: #a8a8a8;
 	font-size: 16px;
@@ -693,8 +693,8 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				) : (
 					<ReactQuillStyled className="quill">{placeholderDiv}</ReactQuillStyled>
 				)}
-				{isEmpty && <ReplacementPlaceholder>{placeholder}</ReplacementPlaceholder>}
-				<OverlayContainer>
+				<OverlayContainer hasToolbar={!!editorId}>
+					{isEmpty && <ReplacementPlaceholder>{placeholder}</ReplacementPlaceholder>}
 					{overlayCoordinates && (
 						<ResizableOverlay
 							onOverlayResizeComplete={handleOverlayResizeComplete}

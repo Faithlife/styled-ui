@@ -84,18 +84,12 @@ export const useImageControls = (
 
 		const bounds = editor.root.closest(quillEditorQuery);
 		const parent = editor.root.parentElement;
-		const toolbarHeight = 42;
 		if (bounds && parent) {
 			const imageRect = selectedImage.getBoundingClientRect();
-			const containerRect = bounds.getBoundingClientRect();
+			const parentRect = parent.getBoundingClientRect();
 			setOverlayCoordinates({
-				left: imageRect.left + bounds.scrollLeft - containerRect.left - overlayMarginPixels * 2,
-				top:
-					imageRect.top +
-					bounds.scrollTop -
-					containerRect.top -
-					toolbarHeight -
-					overlayMarginPixels * 2,
+				left: imageRect.left + bounds.scrollLeft - parentRect.left - overlayMarginPixels * 2 + 1,
+				top: imageRect.top + bounds.scrollTop - parentRect.top - overlayMarginPixels * 2 + 1,
 				width: imageRect.width + overlayMarginPixels * 2,
 				height: imageRect.height + overlayMarginPixels * 2,
 			});
