@@ -1484,6 +1484,18 @@
   optionalDependencies:
     fsevents "^1.1.3"
 
+"@faithlife/brand-bar@^1.12.4":
+  version "1.12.4"
+  resolved "http://npm.faithlife.io/@faithlife%2fbrand-bar/-/brand-bar-1.12.4.tgz#41978554707c0b75d722fad1845e7a4f3d54affd"
+  integrity sha512-Qvqq7EVI7zCnaQfMg6UyZ8zXpgNy++scO87sdCNE4qPzx4YjPgai5G+9HtvQsZJJzKasCmt5RVIBAl868aWrOQ==
+  dependencies:
+    "@faithlife/command-sentence-control" "^1.0.4"
+    mini-css-extract-plugin "0.4.1"
+    prop-types "^15.5.10"
+    styled-components "^4.4.0"
+  optionalDependencies:
+    fsevents "^1.1.3"
+
 "@faithlife/browserslist-config-flcom-addin@1.0.1":
   version "1.0.1"
   resolved "http://npm.faithlife.io/@faithlife%2fbrowserslist-config-flcom-addin/-/browserslist-config-flcom-addin-1.0.1.tgz#4c310c8ca9e0ffef59a0503e8400efbbcc0c7957"
@@ -1638,6 +1650,27 @@
   version "5.34.3"
   resolved "http://npm.faithlife.io/@faithlife%2fstyled-ui/-/styled-ui-5.34.3.tgz#1f5dfc650f5646877e4332b6180b7251eae1e18e"
   integrity sha512-zw5Dv2K/PaOMiwKzAUI139a60yxJlP11TglHTvGsyC9BVgQZhzjic73IQTQzQKwclJzMDsoO88+j/2I+N1U4CQ==
+  dependencies:
+    "@styled-system/prop-types" "^5.1.1"
+    "@styled-system/theme-get" "^5.1.1"
+    clipboard "^2.0.1"
+    focus-visible "^5.0.1"
+    lodash.debounce "^4.0.8"
+    lodash.throttle "^4.1.1"
+    memoize-one "^5.0.0"
+    prop-types "^15.6.1"
+    react-bootstrap-typeahead "^3.4.5"
+    react-popper "^1.3.3"
+    react-scrollbar "^0.5.4"
+    react-select "2.4.4"
+    react-transition-group "^4.2.1"
+    reactstrap "^6.1.0"
+    styled-system "^5.1.1"
+
+"@faithlife/styled-ui@^5.31.0":
+  version "5.31.0"
+  resolved "http://npm.faithlife.io/@faithlife%2fstyled-ui/-/styled-ui-5.31.0.tgz#1365c79be851cb523cfee217be631d5f2710be4e"
+  integrity sha512-FVyxEzS/riQXXHbnKBvVaI/Mr0ej1CqPqAIfjv6bMoUtDUErxuuAt9I3PCMOfhrSB/6dfegEQml3t45Yz5SREw==
   dependencies:
     "@styled-system/prop-types" "^5.1.1"
     "@styled-system/theme-get" "^5.1.1"

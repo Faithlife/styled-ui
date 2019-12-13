@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+  <g stroke-width="2" fill="none" fill-rule="evenodd">
+    <path d="M22 12.91V2" stroke="#62BB46" stroke-linecap="square"/>
+    <path d="M18.364 5.636h7.272" stroke="#62BB46" stroke-linecap="square"/>
+    <path d="M12 33.818V19.273" stroke="#575251"/>
+    <path d="M32 33.818V19.273" stroke="#575251"/>
+    <path stroke="#575251" stroke-linecap="square" d="M5.636 33.818v-8.182L18.364 12.91h7.272l12.728 12.727v8.182"/>
+    <path stroke="#575251" stroke-linecap="square" d="M17.455 33.818H2V42h40v-8.182H26.545"/>
+    <path stroke="#575251" stroke-linecap="square" d="M26.545 42v-8.182L22 30.182l-4.545 3.636V42"/>
+    <path d="M18.364 25.636h7.272" stroke="#575251" stroke-linecap="square"/>
+    <path d="M18.364 21.09h7.272" stroke="#575251" stroke-linecap="square"/>
+  </g>
+</svg>

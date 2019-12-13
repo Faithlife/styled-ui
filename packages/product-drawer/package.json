@@ -1,0 +1,22 @@
+{
+  "name": "@faithlife/product-drawer",
+  "version": "0.1.0",
+  "license": "UNLICENSED",
+  "main": "dist/index.js",
+  "files": [
+    "dist/**"
+  ],
+  "devDependencies": {
+    "@faithlife/react-ui": "^7.7.0",
+    "@faithlife/styled-ui": "^5.31.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4",
+    "styled-components": "^4.4.1"
+  },
+  "peerDependencies": {
+    "@faithlife/styled-ui": "^5.31.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4",
+    "styled-components": "^4.4.1"
+  }
+}

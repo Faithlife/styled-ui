@@ -36,3 +36,4 @@ This repository was created with [`create-flcom-addin`](https://git.faithlife.de
 
 - [FilePicker](https://git.faithlife.dev/Logos/FaithlifeEquipment/tree/master/packages/file-picker)
 - [QuillEditor](https://git.faithlife.dev/Logos/FaithlifeEquipment/tree/master/packages/quill-editor)
+- [ProductDrawer](https://git.faithlife.dev/Logos/FaithlifeEquipment/tree/master/packages/product-drawer)
