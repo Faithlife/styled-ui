@@ -39,6 +39,7 @@ export interface IQuillRichTextEditorProps {
 	onKeyUp?: () => void;
 	onChangeSelection?: () => void;
 	onImageUpload?: (file: File) => void;
+	autofocus?: string;
 	children?: React.ReactNode;
 }
 
@@ -175,6 +176,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		classNames,
 		editorId,
 		onImageUpload,
+		autofocus,
 		children,
 		...otherProps
 	},
@@ -223,6 +225,13 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			const history = (quillRef.current.getEditor() as any).history;
 			if (history) {
 				history.clear(); // Don't allow undo of initial content insertion
+			}
+
+			if (autofocus) {
+				quillRef.current.getEditor().focus();
+				if (autofocus === 'end') {
+					quillRef.current.getEditor().setSelection(quillRef.current.getEditor().getLength(), 0);
+				}
 			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
