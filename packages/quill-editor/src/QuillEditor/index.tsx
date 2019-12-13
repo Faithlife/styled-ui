@@ -447,7 +447,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		}
 		onContentChange && onContentChange(content);
 		handleTextChangeOnEditor();
-		setIsEmpty(quillRef.current && quillRef.current.getEditor().root.innerText === '\n');
+		setIsEmpty(quillRef.current && quillRef.current.getEditor().getLength() === 1);
 	}, [handleTextChangeOnEditor, onContentChange, defaultValue, value]);
 
 	useEffect(() => {
