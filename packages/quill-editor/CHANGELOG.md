@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.2](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.7.1...@faithlife/quill-editor@1.7.2) (2019-12-13)
+
+
+### Bug Fixes
+
+* Disable firefox native image resizing. ([228ca6a](https://git/Logos/FaithlifeEquipment/commits/228ca6a641a2123d8864eb5783f504df467a9ae7))
+
+
+
+
+
 ## [1.7.1](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.7.0...@faithlife/quill-editor@1.7.1) (2019-12-13)
 
 
