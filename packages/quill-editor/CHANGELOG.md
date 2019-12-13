@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.4.0...@faithlife/quill-editor@1.5.0) (2019-12-13)
+
+
+### Bug Fixes
+
+* Fix null reference error if editing too early. ([4d70ddb](https://git/Logos/FaithlifeEquipment/commits/4d70ddbf31d265b644d91871a142ecbecf0991ed))
+
+
+### Features
+
+* Add autofocus string prop. Use 'end' to focus the end of the document. ([c07c8b4](https://git/Logos/FaithlifeEquipment/commits/c07c8b49bd08491947f6509defb8e8020f51df79))
+
+
+
+
+
 # [1.4.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.3.1...@faithlife/quill-editor@1.4.0) (2019-12-12)
 
 
