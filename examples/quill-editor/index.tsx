@@ -48,6 +48,7 @@ const TestApp: React.FunctionComponent = () => {
 					value={htmlContent}
 					onContentChange={handleChange}
 					autofocus
+					tabMode="insert"
 				>
 					<Toolbar editorId="message" />
 				</QuillEditorStyled>
