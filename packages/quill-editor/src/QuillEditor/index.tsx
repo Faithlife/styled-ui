@@ -555,6 +555,55 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		}
 	}, []);
 
+	const handleClean = useCallback((a, b) => {
+		if (quillRef.current) {
+			const selection = quillRef.current.getEditor().getSelection();
+			const cleanBlot = blot => {
+				if (!blot || !blot.domNode) {
+					return;
+				}
+				const img = blot.domNode.tagName === 'IMG';
+				const attributes = blot.attributes && blot.attributes.attributes;
+				const formats = blot.formats && blot.formats();
+				const formatsToClean = img
+					? ['link', 'imageAlign']
+					: [
+							'imageAlign',
+							'list',
+							...(attributes ? Object.keys(attributes) : []),
+							...(formats ? Object.keys(formats) : []),
+					  ];
+
+				const childrenToClean = blot.children;
+
+				if (blot.format) {
+					formatsToClean.forEach(format => {
+						blot.format(format, false);
+					});
+				}
+
+				if (childrenToClean) {
+					childrenToClean.forEach(child => {
+						cleanBlot(child);
+					});
+				}
+			};
+			if (selection.length > 0) {
+				quillRef.current
+					.getEditor()
+					.getLines(selection)
+					.forEach(line => {
+						cleanBlot(line);
+					});
+			} else {
+				const line = quillRef.current.getEditor().getLine(selection.index)[0];
+				cleanBlot(line);
+				const lineRefreshed = quillRef.current.getEditor().getLine(selection.index)[0];
+				cleanBlot(lineRefreshed);
+			}
+		}
+	}, []);
+
 	const moduleConfiguration = useMemo(
 		() => ({
 			toolbar: editorId
@@ -565,6 +614,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 							insertImage: imageHandler,
 							textSnippet: textHandler,
 							insertLink: handleLinkInsert,
+							clean: handleClean,
 							...toolbarHandlers,
 						},
 				  }
@@ -590,6 +640,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			quillEditorId,
 			toolbarHandlers,
 			tabMode,
+			handleClean,
 		]
 	);
 
