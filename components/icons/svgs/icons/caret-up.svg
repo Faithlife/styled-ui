@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18" viewBox="0 0 18 18">
+  <defs>
+    <polygon id="caret-up-1px-a" points="9 5 16 11.696 14.727 13 9 7.522 3.273 13 2 11.696"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <use fill="#888" fill-rule="nonzero" xlink:href="#caret-up-1px-a"/>
+  </g>
+</svg>
