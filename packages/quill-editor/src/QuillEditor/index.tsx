@@ -40,6 +40,7 @@ export interface IQuillRichTextEditorProps {
 	onChangeSelection?: () => void;
 	onImageUpload?: (file: File) => void;
 	autofocus?: string;
+	tabMode?: 'insert' | 'exit';
 	children?: React.ReactNode;
 }
 
@@ -177,6 +178,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		editorId,
 		onImageUpload,
 		autofocus,
+		tabMode,
 		children,
 		...otherProps
 	},
@@ -531,7 +533,10 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				  }
 				: false,
 			...modules,
-			keyboard: { bindings: { tab: false }, ...((modules && modules.keyboard) || {}) },
+			keyboard: {
+				...(tabMode === 'insert' ? {} : { bindings: { tab: false } }),
+				...((modules && modules.keyboard) || {}),
+			},
 			clipboard: { matchVisual: false, ...((modules && modules.clipboard) || {}) },
 		}),
 		[
@@ -543,6 +548,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			modules,
 			quillEditorId,
 			toolbarHandlers,
+			tabMode,
 		]
 	);
 
