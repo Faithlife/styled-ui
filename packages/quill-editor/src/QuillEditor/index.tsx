@@ -268,6 +268,10 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				}
 			}
 		}
+
+		// Disable Firefox native image resizing
+		document.execCommand('enableObjectResizing', false, 'false');
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
