@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.1](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.8.0...@faithlife/quill-editor@1.8.1) (2019-12-13)
+
+
+### Bug Fixes
+
+* Fix image selection and placeholder alignment when there's no toolbar. ([674dea8](https://git/Logos/FaithlifeEquipment/commits/674dea8719bc921e1965ed2715c5c6c2f3435bc0))
+
+
+
+
+
 # [1.8.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.7.3...@faithlife/quill-editor@1.8.0) (2019-12-13)
 
 
