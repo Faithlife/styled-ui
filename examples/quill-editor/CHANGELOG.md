@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.20](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/quill-editor-example@1.2.19...quill-editor-example@1.2.20) (2019-12-13)
+
+**Note:** Version bump only for package quill-editor-example
+
+
+
+
+
 ## [1.2.19](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/quill-editor-example@1.2.18...quill-editor-example@1.2.19) (2019-12-13)
 
 **Note:** Version bump only for package quill-editor-example

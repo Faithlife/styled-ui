@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.6.0...@faithlife/quill-editor@1.7.0) (2019-12-13)
+
+
+### Features
+
+* Add shortcuts for formats. ([cb1cdf7](https://git/Logos/FaithlifeEquipment/commits/cb1cdf764fcad0e3f42b676870db5eb69b52b057))
+
+
+
+
+
 # [1.6.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.5.0...@faithlife/quill-editor@1.6.0) (2019-12-13)
 
 
