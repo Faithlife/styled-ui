@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.5.0...@faithlife/quill-editor@1.6.0) (2019-12-13)
+
+
+### Bug Fixes
+
+* Prevent overriding toolbar element classNames. ([2ed5cb7](https://git/Logos/FaithlifeEquipment/commits/2ed5cb7270ff7ebb79caebceeca6ff7697e7be39))
+
+
+### Features
+
+* Add disableImageControls prop to prevent resizing and wrapping images. ([80fe799](https://git/Logos/FaithlifeEquipment/commits/80fe79923377897335807e93eeab9c9b419be8a4))
+* Add tabMode prop to easily choose between inserting tabs and exiting the editor with the tab key. ([1536378](https://git/Logos/FaithlifeEquipment/commits/15363784cc3f83308a8faf7c603e2b02b6b35248))
+
+
+
+
+
 # [1.5.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.4.0...@faithlife/quill-editor@1.5.0) (2019-12-13)
 
 
