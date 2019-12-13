@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.7.3...@faithlife/quill-editor@1.8.0) (2019-12-13)
+
+
+### Features
+
+* Implement image-safe clean method. ([7bf8b8a](https://git/Logos/FaithlifeEquipment/commits/7bf8b8a7c687676c807b164d1ed52acfc3c511cf))
+
+
+
+
+
 ## [1.7.3](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.7.2...@faithlife/quill-editor@1.7.3) (2019-12-13)
 
 

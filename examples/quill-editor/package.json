@@ -1,9 +1,9 @@
 {
   "private": true,
   "name": "quill-editor-example",
-  "version": "1.2.23",
+  "version": "1.2.24",
   "dependencies": {
-    "@faithlife/quill-editor": "^1.7.3"
+    "@faithlife/quill-editor": "^1.8.0"
   },
   "peerDependencies": {
     "@faithlife/react-ui": "^7.4.2",
