@@ -41,6 +41,7 @@ export interface IQuillRichTextEditorProps {
 	onImageUpload?: (file: File) => void;
 	autofocus?: string;
 	tabMode?: 'insert' | 'exit';
+	disableImageControls?: boolean;
 	children?: React.ReactNode;
 }
 
@@ -179,6 +180,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		onImageUpload,
 		autofocus,
 		tabMode,
+		disableImageControls,
 		children,
 		...otherProps
 	},
@@ -612,6 +614,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 							quillEditorQuery={quillEditorQuery}
 							currentAlignment={currentAlignment}
 							onAlignmentChange={handleAlignmentChange}
+							disableImageControls={disableImageControls}
 						/>
 					)}
 				</OverlayContainer>

@@ -93,6 +93,7 @@ interface IResizableOverlayProps {
 	quillEditorQuery: string;
 	currentAlignment: string;
 	onAlignmentChange: (alignment: string) => void;
+	disableImageControls?: boolean;
 }
 
 const handleOffsetPixels = -4;
@@ -108,6 +109,7 @@ export const ResizableOverlay: React.FunctionComponent<IResizableOverlayProps> =
 	quillEditorQuery,
 	currentAlignment,
 	onAlignmentChange,
+	disableImageControls,
 }) => {
 	const res = useLocalization();
 
@@ -247,45 +249,49 @@ export const ResizableOverlay: React.FunctionComponent<IResizableOverlayProps> =
 			width={overlayCoordinates.width}
 			height={overlayCoordinates.height}
 		>
-			<DragHandle
-				cursorStyle={'nwse-resize'}
-				location={{ left: handleOffsetPixels, top: handleOffsetPixels }}
-				onMouseDown={handleMouseDownOnNWHandle}
-			/>
-			<DragHandle
-				cursorStyle={'nesw-resize'}
-				location={{ right: handleOffsetPixels, top: handleOffsetPixels }}
-				onMouseDown={handleMouseDownOnNEHandle}
-			/>
-			<DragHandle
-				cursorStyle={'nwse-resize'}
-				location={{ right: handleOffsetPixels, bottom: handleOffsetPixels }}
-				onMouseDown={handleMouseDownOnSEHandle}
-			/>
-			<DragHandle
-				cursorStyle={'nesw-resize'}
-				location={{ left: handleOffsetPixels, bottom: handleOffsetPixels }}
-				onMouseDown={handleMouseDownOnSWHandle}
-			/>
-			<AlignmentControls top={overlayCoordinates.height}>
-				<AlignmentButton
-					isActive={currentAlignment === ''}
-					disabled={currentAlignment === ''}
-					minorTransparent
-					onClick={alignInline}
-				>
-					{res.image.inline}
-				</AlignmentButton>
-				{' | '}
-				<AlignmentButton
-					isActive={currentAlignment === 'wrap'}
-					disabled={currentAlignment === 'wrap'}
-					minorTransparent
-					onClick={alignWrap}
-				>
-					{res.image.wordWrap}
-				</AlignmentButton>
-			</AlignmentControls>
+			{!disableImageControls && (
+				<>
+					<DragHandle
+						cursorStyle={'nwse-resize'}
+						location={{ left: handleOffsetPixels, top: handleOffsetPixels }}
+						onMouseDown={handleMouseDownOnNWHandle}
+					/>
+					<DragHandle
+						cursorStyle={'nesw-resize'}
+						location={{ right: handleOffsetPixels, top: handleOffsetPixels }}
+						onMouseDown={handleMouseDownOnNEHandle}
+					/>
+					<DragHandle
+						cursorStyle={'nwse-resize'}
+						location={{ right: handleOffsetPixels, bottom: handleOffsetPixels }}
+						onMouseDown={handleMouseDownOnSEHandle}
+					/>
+					<DragHandle
+						cursorStyle={'nesw-resize'}
+						location={{ left: handleOffsetPixels, bottom: handleOffsetPixels }}
+						onMouseDown={handleMouseDownOnSWHandle}
+					/>
+					<AlignmentControls top={overlayCoordinates.height}>
+						<AlignmentButton
+							isActive={currentAlignment === ''}
+							disabled={currentAlignment === ''}
+							minorTransparent
+							onClick={alignInline}
+						>
+							{res.image.inline}
+						</AlignmentButton>
+						{' | '}
+						<AlignmentButton
+							isActive={currentAlignment === 'wrap'}
+							disabled={currentAlignment === 'wrap'}
+							minorTransparent
+							onClick={alignWrap}
+						>
+							{res.image.wordWrap}
+						</AlignmentButton>
+					</AlignmentControls>
+				</>
+			)}
 		</Overlay>
 	);
 };
