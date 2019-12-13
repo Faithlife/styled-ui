@@ -4,7 +4,7 @@ import { Popover } from '../popover';
 import { useDropdownContext, getFocusableChildrenList, useKeyboardNav } from './dropdown-utils';
 import * as Styled from './styled';
 
-export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
+export function DropdownMenuCore({ children, popoverProps = {}, ariaProps }) {
 	const {
 		isOpen,
 		menuId,
@@ -50,7 +50,7 @@ export function DropdownMenuCore({ children, popoverProps, ariaProps }) {
 		<div id={menuId} {...ariaProps}>
 			<Popover
 				isOpen={isOpen}
-				placement={'bottom-start' || popoverProps.placement}
+				placement={popoverProps.placement || 'bottom-start'}
 				hideArrow
 				styleOverrides={{
 					padding: '0',
