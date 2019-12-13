@@ -6,7 +6,7 @@ import React, {
 	useState,
 	useImperativeHandle,
 } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import './styles.css';
 import { LocalizationProvider } from '../components/Localization';
 import localizedResources from '../locales/en-US/resources.json';
@@ -121,7 +121,7 @@ const ReactQuillStyled = styled(SafeReactQuill)`
 	}
 `;
 
-const QuillContainer = styled.div`
+const QuillContainer = styled.div<{ isEmpty: boolean }>`
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -152,6 +152,34 @@ const QuillContainer = styled.div`
 			background: rgba(0, 0, 0, 0);
 		}
 	`}
+
+	${({ isEmpty }) =>
+		isEmpty &&
+		css`
+			.ql-editor::before {
+				content: '';
+			}
+		`}
+`;
+
+const OverlayContainer = styled.div`
+	overflow: auto;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 42px;
+	bottom: 0;
+	pointer-events: none;
+`;
+
+const ReplacementPlaceholder = styled.div`
+	position: absolute;
+	top: 49px;
+	left: 8px;
+	color: #a8a8a8;
+	font-size: 16px;
+	font-family: Source Sans Pro, sans-serif;
+	pointer-events: none;
 `;
 
 if (SafeQuill) {
@@ -202,6 +230,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	);
 
 	const [quillEditorQuery] = useState(() => `.${quillEditorId}`);
+	const [isEmpty, setIsEmpty] = useState(!(defaultValue || value));
 
 	useEffect(() => {
 		if (!defaultValue && value && value !== storedValue && quillRef.current) {
@@ -414,6 +443,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		}
 		onContentChange && onContentChange(content);
 		handleTextChangeOnEditor();
+		setIsEmpty(quillRef.current && quillRef.current.getEditor().root.innerText === '\n');
 	}, [handleTextChangeOnEditor, onContentChange, defaultValue, value]);
 
 	useEffect(() => {
@@ -590,6 +620,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				linkHelpText={localizedResources.toolbar.enterLink}
 				linkSaveText={localizedResources.toolbar.save}
 				imageIsSelected={!!overlayCoordinates}
+				isEmpty={isEmpty}
 			>
 				{children}
 				{SafeQuill ? (
@@ -607,6 +638,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				) : (
 					<ReactQuillStyled className="quill">{placeholderDiv}</ReactQuillStyled>
 				)}
+				{isEmpty && <ReplacementPlaceholder>{placeholder}</ReplacementPlaceholder>}
 				<OverlayContainer>
 					{overlayCoordinates && (
 						<ResizableOverlay
@@ -634,15 +666,5 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		</LocalizationProvider>
 	);
 };
-
-const OverlayContainer = styled.div`
-	overflow: auto;
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 42px;
-	bottom: 0;
-	pointer-events: none;
-`;
 
 export const QuillEditor = React.forwardRef(QuillEditorCore);
