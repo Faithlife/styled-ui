@@ -1,45 +1,70 @@
 #!groovy​
 @Library('FlowdockNotifier') _
+
+isPr = env.JOB_NAME == 'FaithlifeEquipment-PR'
+
+def setGitHubStatus(buildName, state, message = '') {
+	def sha1 = isPr ? ghprbActualCommit : sh(returnStdout: true, script: 'git rev-parse HEAD')
+	step([
+		$class: 'GitHubCommitStatusSetter',
+		commitShaSource: [$class: 'ManuallyEnteredShaSource', sha: "${sha1}"],
+		reposSource: [$class: 'ManuallyEnteredRepositorySource', url: "https://git.faithlife.dev/Logos/FaithlifeEquipment" ],
+		contextSource: [$class: 'ManuallyEnteredCommitContextSource', context: buildName],
+		statusResultSource: [$class: 'ConditionalStatusResultSource',
+		results: [[$class: 'AnyBuildResult', message: message, state: state]]]
+	])
+}
+
 flowdock.withNotification('a611b96b1517142a58a87c1b58aacdd8', '#build') {
 	node('com-dev-docker01') {
-		stage('Checkout') {
-			checkout scm
-		}
+		def buildResult = 'FAILURE'
+		setGitHubStatus('Build', 'PENDING', 'Building')
+		try {
+			stage('Checkout') {
+				checkout scm
+			}
 
-		stage('Clean') {
-			sh script: 'yarn clean'
-		}
+			stage('Clean') {
+				sh script: 'yarn clean'
+			}
 
-		stage('Get dependencies') {
-			sh script: 'yarn'
-		}
+			stage('Get dependencies') {
+				sh script: 'yarn'
+			}
 
-		stage('Lint') {
-			sh script: 'yarn lint'
-		}
+			stage('Lint') {
+				sh script: 'yarn lint'
+			}
 
-		stage('Test') {
-			sh script: 'yarn test'
-		}
+			stage('Test') {
+				sh script: 'yarn test'
+			}
 
-		stage('Build') {
-			sh script: 'yarn build'
-		}
+			stage('Build') {
+				sh script: 'yarn build'
+			}
 
-		stage('Publish') {
-			withCredentials([
-				string(credentialsId: '6e22d829-5047-4509-b8d8-9f3ed6ff6bfa', variable: 'GH_TOKEN'),
-			]) {
-				withEnv([
-					"NODE_TLS_REJECT_UNAUTHORIZED=0",
-					"GHE_API_URL=https://git/api/v3",
-					"GHE_VERSION=2.16",
-					"EMAIL=autobuild@logos.com",
-					"GIT_AUTHOR_NAME=AutoBuild"
-				]) {
-					sh script: 'yarn run publish'
+			if (!isPr) {
+				stage('Publish') {
+					withCredentials([
+						string(credentialsId: '6e22d829-5047-4509-b8d8-9f3ed6ff6bfa', variable: 'GH_TOKEN'),
+					]) {
+						withEnv([
+							"NODE_TLS_REJECT_UNAUTHORIZED=0",
+							"GHE_API_URL=https://git/api/v3",
+							"GHE_VERSION=2.16",
+							"EMAIL=autobuild@logos.com",
+							"GIT_AUTHOR_NAME=AutoBuild"
+						]) {
+							sh script: 'yarn run publish'
+						}
+					}
 				}
 			}
+
+			buildResult = 'SUCCESS';
+		} finally {
+			setGitHubStatus('Build', buildResult)
 		}
 	}
 }
