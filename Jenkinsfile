@@ -18,12 +18,12 @@ def setGitHubStatus(buildName, state, message = '') {
 flowdock.withNotification('a611b96b1517142a58a87c1b58aacdd8', '#build') {
 	node('com-dev-docker01') {
 		def buildResult = 'FAILURE'
-		setGitHubStatus('Build', 'PENDING', 'Building')
 		try {
 			stage('Checkout') {
 				checkout scm
 			}
 
+			setGitHubStatus('Build', 'PENDING', 'Building')
 			stage('Clean') {
 				sh script: 'yarn clean'
 			}
