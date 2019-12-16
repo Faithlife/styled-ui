@@ -17,7 +17,7 @@ import { throttle } from '../utility/throttle';
 import ImageBlot from '../components/Blots/ImageBlot';
 import { useImageDrop } from '../utility/useImageDrop';
 import { SafeQuill, SafeReactQuill } from './SafeQuill';
-import { getRenderedHtmlContent } from '../utility/getRenderedHtmlContent';
+import { convertDeltaToInlineHtml } from '../utility/htmlUtility';
 import { getShortcuts } from './shortcuts';
 
 export interface IQuillRichTextEditorProps {
@@ -513,7 +513,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			const deltas = quillRef.current.getEditor().getContents();
 			const { format, ...converterOptions } = options || {};
 			if (format === 'inline') {
-				return getRenderedHtmlContent(deltas.ops, converterOptions);
+				return convertDeltaToInlineHtml(deltas.ops, converterOptions);
 			} else {
 				return quillRef.current.getEditor().root.innerHTML;
 			}
