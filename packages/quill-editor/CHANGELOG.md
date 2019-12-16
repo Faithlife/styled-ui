@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.3](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.8.1...@faithlife/quill-editor@1.8.3) (2019-12-16)
+
+
+### Bug Fixes
+
+* Fix clean method. ([cac6f5b](https://git/Logos/FaithlifeEquipment/commits/cac6f5b0ad0bdcdce217dcb6ecfab3e6b14649ef))
+* Manually bump versions after failed build. ([ef96a58](https://git/Logos/FaithlifeEquipment/commits/ef96a582c0d879f8206121abc6ee7b5a86936b65))
+
+
+
+
+
 ## [1.8.1](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.8.0...@faithlife/quill-editor@1.8.1) (2019-12-13)
 
 
