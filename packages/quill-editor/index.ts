@@ -9,3 +9,4 @@ export {
 	ToolbarSelect,
 	ToolbarGrouping,
 } from './src/components/Toolbar/ToolbarControls';
+export { convertDeltaToInlineHtml } from './src/utility/htmlUtility';

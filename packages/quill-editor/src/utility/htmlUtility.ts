@@ -28,7 +28,7 @@ const renderFaithlifeImage = (op, context) => {
 		${renderAlignAttribute(imageAlign, context)} />${link ? `</a>` : ''}`;
 };
 
-export const getRenderedHtmlContent = (ops, options) => {
+export const convertDeltaToInlineHtml = (ops, options) => {
 	const defaultOptions = {
 		inlineStyles: true,
 		encodeHtml: false, // Disabled because the liquid templating engine can't understand html encoded quotes "
