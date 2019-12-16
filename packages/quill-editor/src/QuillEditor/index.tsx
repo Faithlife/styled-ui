@@ -65,15 +65,6 @@ const ReactQuillStyled = styled(SafeReactQuill)`
 	flex-direction: column;
 	overflow: hidden;
 
-	& > [data-placeholder]:empty {
-		padding: 7px 6px 6px;
-	}
-
-	& > [data-placeholder]:empty::before {
-		content: attr(data-placeholder);
-		color: #a8a8a8;
-	}
-
 	.ql-container.ql-snow {
 		border: none;
 
@@ -156,8 +147,10 @@ const QuillContainer = styled.div<{ isEmpty: boolean }>`
 	${({ isEmpty }) =>
 		isEmpty &&
 		css`
-			.ql-editor::before {
-				content: '';
+			& .ql-editor[data-placeholder]::before {
+				position: absolute;
+				content: attr(data-placeholder);
+				color: #a8a8a8;
 			}
 		`}
 `;
@@ -169,16 +162,6 @@ const OverlayContainer = styled.div<{ hasToolbar: boolean }>`
 	right: 0;
 	top: ${({ hasToolbar }) => (hasToolbar ? '41px' : '0')};
 	bottom: 0;
-	pointer-events: none;
-`;
-
-const ReplacementPlaceholder = styled.div`
-	position: absolute;
-	top: 8px;
-	left: 8px;
-	color: #a8a8a8;
-	font-size: 16px;
-	font-family: Source Sans Pro, sans-serif;
 	pointer-events: none;
 `;
 
@@ -699,7 +682,6 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 					<ReactQuillStyled className="quill">{placeholderDiv}</ReactQuillStyled>
 				)}
 				<OverlayContainer hasToolbar={!!moduleConfiguration.toolbar}>
-					{isEmpty && <ReplacementPlaceholder>{placeholder}</ReplacementPlaceholder>}
 					{overlayCoordinates && (
 						<ResizableOverlay
 							onOverlayResizeComplete={handleOverlayResizeComplete}
