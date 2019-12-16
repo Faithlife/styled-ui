@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.8.4...@faithlife/quill-editor@1.9.0) (2019-12-16)
+
+
+### Features
+
+* Expose convertDeltaToInlineHtml to allow consumers to render deltas without a quill editor. ([ab37c9e](https://git/Logos/FaithlifeEquipment/commits/ab37c9ea938a2b947856109c7b4326f30f24d454))
+
+
+
+
+
 ## [1.8.4](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.8.3...@faithlife/quill-editor@1.8.4) (2019-12-16)
 
 
