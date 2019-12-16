@@ -698,7 +698,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				) : (
 					<ReactQuillStyled className="quill">{placeholderDiv}</ReactQuillStyled>
 				)}
-				<OverlayContainer hasToolbar={!!editorId}>
+				<OverlayContainer hasToolbar={!!moduleConfiguration.toolbar}>
 					{isEmpty && <ReplacementPlaceholder>{placeholder}</ReplacementPlaceholder>}
 					{overlayCoordinates && (
 						<ResizableOverlay
