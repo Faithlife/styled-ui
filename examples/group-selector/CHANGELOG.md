@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.3](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/group-selector-example@1.0.2...group-selector-example@1.0.3) (2019-12-16)
+
+
+### Bug Fixes
+
+* Add Source Sans Pro to group-selector example. ([b6fa94a](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/b6fa94af7125c3cae91e56af62f9d3c2952983ae))
+
+
+
+
+
 ## 1.0.2 (2019-11-26)
 
 
