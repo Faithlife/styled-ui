@@ -27,6 +27,7 @@ export const useImageControls = (
 	handleOverlayResize: (dimensions: IOverlayDimensions) => void;
 	handleAlignmentChange: (alignement: string) => void;
 	currentAlignment: string;
+	updateImageFormat: (name: string, value: string | boolean, image?: HTMLImageElement) => void;
 } => {
 	const editor = useRef<any>();
 	const [overlayCoordinates, setOverlayCoordinates] = useState<IOverlayCoordinates | null>(null);
@@ -313,21 +314,35 @@ export const useImageControls = (
 		dragTimer.current = setTimeout(() => setHasResizeOccurred(false), 0);
 	}, []);
 
-	const handleAlignmentChange = useCallback(
-		alignment => {
+	const updateImageFormat = useCallback(
+		(name, value, image = null) => {
 			const selectedImage = getSelectedImage();
+			const imageToUpdate = image || selectedImage;
 			const editor = getEditor();
-			if (editor && selectedImage) {
-				const parent = getSelectedImageParent();
+			if (editor && imageToUpdate) {
+				const parent = imageToUpdate.parentElement;
 				const parentIsContainer = parent && (parent.tagName === 'SPAN' || parent.tagName === 'A');
-				const blotElement = parentIsContainer ? parent : selectedImage;
+				const blotElement = parentIsContainer ? parent : imageToUpdate;
 				const blot = Parchment.find(blotElement);
-				blot.format('imageAlign', alignment);
-				setCurrentAlignment(alignment);
-				repositionOverlay();
+				if (blot) {
+					blot.format(name, value);
+					if (imageToUpdate === selectedImage) {
+						if (name === 'imageAlign') {
+							setCurrentAlignment(value);
+						}
+						repositionOverlay();
+					}
+				}
 			}
 		},
-		[setCurrentAlignment, getEditor, getSelectedImage, getSelectedImageParent, repositionOverlay]
+		[setCurrentAlignment, getEditor, getSelectedImage, repositionOverlay]
+	);
+
+	const handleAlignmentChange = useCallback(
+		alignment => {
+			updateImageFormat('imageAlign', alignment);
+		},
+		[updateImageFormat]
 	);
 
 	return useMemo(
@@ -340,6 +355,7 @@ export const useImageControls = (
 			handleOverlayResizeComplete,
 			handleAlignmentChange,
 			currentAlignment,
+			updateImageFormat,
 		}),
 		[
 			overlayCoordinates,
@@ -350,6 +366,7 @@ export const useImageControls = (
 			handleOverlayResizeComplete,
 			handleAlignmentChange,
 			currentAlignment,
+			updateImageFormat,
 		]
 	);
 };
