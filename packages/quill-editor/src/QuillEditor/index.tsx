@@ -388,6 +388,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		handleOverlayResizeComplete,
 		handleAlignmentChange,
 		currentAlignment,
+		updateImageFormat,
 	} = useImageControls(quillEditorQuery, setAllowImageLink);
 
 	const onEditorClick = useCallback(
@@ -555,51 +556,55 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		}
 	}, []);
 
-	const handleClean = useCallback((a, b) => {
+	// If handleClean updates, then quill re-renders the entire component
+	// We avoid that by using a ref for the one method it needs
+	const updateImageFormatRef = useRef(updateImageFormat);
+	useEffect(() => {
+		updateImageFormatRef.current = updateImageFormat;
+	}, [updateImageFormat]);
+
+	const handleClean = useCallback(() => {
+		const getImages = blot => {
+			if (blot.domNode.tagName === 'IMG') {
+				return [blot];
+			}
+			return (
+				(blot.children && blot.children.reduce((all, blot) => [...all, ...getImages(blot)], [])) ||
+				[]
+			);
+		};
 		if (quillRef.current) {
-			const selection = quillRef.current.getEditor().getSelection();
-			const cleanBlot = blot => {
-				if (!blot || !blot.domNode) {
-					return;
-				}
-				const img = blot.domNode.tagName === 'IMG';
-				const attributes = blot.attributes && blot.attributes.attributes;
-				const formats = blot.formats && blot.formats();
-				const formatsToClean = img
-					? ['link', 'imageAlign']
-					: [
-							'imageAlign',
-							'list',
-							...(attributes ? Object.keys(attributes) : []),
-							...(formats ? Object.keys(formats) : []),
-					  ];
+			const editor = quillRef.current.getEditor();
+			const range = editor.getSelection();
+			if (!range) {
+				return;
+			}
 
-				const childrenToClean = blot.children;
-
-				if (blot.format) {
-					formatsToClean.forEach(format => {
-						blot.format(format, false);
-					});
-				}
-
-				if (childrenToClean) {
-					childrenToClean.forEach(child => {
-						cleanBlot(child);
-					});
-				}
-			};
-			if (selection.length > 0) {
-				quillRef.current
-					.getEditor()
-					.getLines(selection)
-					.forEach(line => {
-						cleanBlot(line);
-					});
+			if (range.length === 0) {
+				updateImageFormatRef.current('imageAlign', '');
+				updateImageFormatRef.current('link', false);
+				const { width, ...otherFormats } = editor.getFormat();
+				Object.keys(otherFormats).forEach(name => {
+					editor.format(name, false, 'user');
+				});
 			} else {
-				const line = quillRef.current.getEditor().getLine(selection.index)[0];
-				cleanBlot(line);
-				const lineRefreshed = quillRef.current.getEditor().getLine(selection.index)[0];
-				cleanBlot(lineRefreshed);
+				const lines = editor.getLines(range);
+				const images = lines
+					.reduce((all, line) => [...all, ...getImages(line)], [])
+					.map(image => [image.offset(editor.scroll), image])
+					.filter(
+						([imageIndex]) => imageIndex >= range.index && imageIndex <= range.index + range.length
+					);
+
+				images.forEach(([_, image]) => {
+					updateImageFormatRef.current('imageAlign', '', image.domNode);
+					updateImageFormatRef.current('link', '', image.domNode);
+				});
+
+				images.concat([[range.index + range.length]]).reduce((last, [curr]) => {
+					editor.removeFormat(last, curr - last, 'user');
+					return curr + 1;
+				}, range.index);
 			}
 		}
 	}, []);
