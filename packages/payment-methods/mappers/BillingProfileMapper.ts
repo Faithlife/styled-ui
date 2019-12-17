@@ -59,7 +59,10 @@ export default class BillingProfileMapper {
 	}
 
 	public static mapForEditing(profile: IBillingProfileDto): IEditBillingProfile {
-		const expirationMonth = '0' + profile.cardInfo.expirationMonth.toString().slice(-2);
+		const expirationMonth = profile.cardInfo.expirationMonth
+			.toString()
+			.slice(-2)
+			.padStart(2, '0');
 		const expirationYear = profile.cardInfo.expirationYear.toString().slice(-2);
 
 		return {
