@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@0.1.0...@faithlife/payment-methods@0.1.1) (2019-12-17)
+
+
+### Bug Fixes
+
+* Remove extra leading zero in expiration month SITES-6091 ([#10](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/10)) ([81269aa](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/81269aae4659d03572444415ff9fa2e40b6ae9f8))
+
+
+
+
+
 # 0.1.0 (2019-12-09)
 
 
