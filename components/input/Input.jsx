@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { system, variant, layout, textStyle, border } from 'styled-system';
+import { system, variant as createVariant, layout, textStyle, border } from 'styled-system';
 import systemPropTypes from '@styled-system/prop-types';
 import { theme } from '../../theme';
 import { common, typography } from '../../theme/system';
@@ -119,14 +119,14 @@ Input.propTypes = {
 
 export { Input };
 
-const StyledInput = styled.input`
+const StyledInput = styled.input(
+	({ theme, variant, styleOverrides = {} }) => css`
 	${resetStyles};
 	${textStyle};
 
 	height: 32px;
-	padding: ${({ theme }) => theme.space[3]};
+	padding: ${theme.space[2]} ${theme.space[3]};
 
-${({ theme, styleOverrides = {} }) => css`
 	border: 1px solid;
 	border-radius: ${theme.radii[1]};
 	border-color: ${theme.colors.inputBorderColor};
@@ -140,11 +140,10 @@ ${({ theme, styleOverrides = {} }) => css`
 		css`
 			width: ${styleOverrides.width};
 		`}
-`}
 
 	&:focus {
-		border-color: ${({ theme }) => theme.colors.inputFocusedBorderColor};
-		box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.inputFocusedShadowColor};
+		border-color: ${theme.colors.inputFocusedBorderColor};
+		box-shadow: 0 0 0 2px ${theme.colors.inputFocusedShadowColor};
 		outline: 0;
 		${({ variant }) =>
 			variant === 'inline' &&
@@ -156,53 +155,54 @@ ${({ theme, styleOverrides = {} }) => css`
 	}
 
 	&:read-only {
-		background: ${({ theme }) => theme.colors.gray8};
+		background: ${theme.colors.gray8};
 	}
 
 	&::placeholder {
-		color: ${({ theme }) => theme.colors.inputPlaceholderColor};
+		color: ${theme.colors.inputPlaceholderColor};
 	}
 
-	${({ theme }) =>
-		variant({
-			variants: {
-				small: {
-					padding: '8px',
-					height: '32px',
-				},
-				medium: {
-					padding: '12px',
-					height: '40px',
-				},
-				large: {
-					padding: '16px',
-					height: '56px',
-				},
-				inline: {
-					backgroundColor: 'transparent',
-					border: 'none',
+	${createVariant({
+		variants: {
+			small: {
+				paddingX: 3,
+				paddingY: 2,
+				height: '32px',
+			},
+			medium: {
+				paddingX: 4,
+				paddingY: 3,
+				height: '40px',
+			},
+			large: {
+				paddingX: 5,
+				paddingY: 4,
+				height: '56px',
+			},
+			inline: {
+				backgroundColor: 'transparent',
+				border: 'none',
+				boxShadow: 'none',
+				borderRadius: 0,
+				padding: 0,
+				borderBottom: '2px solid',
+				borderColor: 'blue',
+				height: '20px',
+				paddingBottom: '4px',
+				lineHeight: 1,
+				'&:focus': {
 					boxShadow: 'none',
-					borderRadius: '0px',
-					padding: '0px',
-					borderBottom: '2px solid',
-					borderColor: theme.colors.blue4,
-					height: '20px',
-					paddingBottom: '4px',
-					lineHeight: 1,
-					'&:focus': {
-						boxShadow: 'none',
-						outline: '0',
-					},
+					outline: '0',
 				},
 			},
-		})}
+		},
+	})}
 
-	${({ variant }) =>
-		variant === 'inline' &&
-		system({ underlineColor: { property: 'border-color', scale: 'colors' } })}
+	${variant === 'inline' && system({ underlineColor: { property: 'border-color', scale: 'colors' } })}
 
 	${common};
 	${typography};
 	${layout};
 	${border};
-`;
+`,
+);
