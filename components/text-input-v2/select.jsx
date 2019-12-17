@@ -136,9 +136,32 @@ function noOptionsMessage({ inputValue }) {
 	return inputValue ? 'No options' : null;
 }
 
+function handleKeyDown(e, onConsumerKeyDown) {
+	const { nodeName, type, value } = e.target;
+	if (onConsumerKeyDown) {
+		onConsumerKeyDown(e);
+		if (e.defaultPrevented) {
+			return;
+		}
+	}
+
+	if (nodeName === 'input' && type === 'text') {
+		const selectionIndex = e.key === 'Home' ? 0 : e.key === 'End' ? value.length : null;
+
+		if (selectionIndex !== null) {
+			if (e.shiftKey) {
+				e.target.selectionEnd = selectionIndex;
+			} else {
+				e.target.setSelectionRange(selectionIndex, selectionIndex);
+			}
+		}
+	}
+}
+
 /** Autocomplete control based on react-select */
 export const Select = React.forwardRef(({ components = {}, ...props }, ref) => {
 	const body = useBody();
+	const onConsumerKeyDown = props.onKeyDown;
 
 	return (
 		<ReactSelect
@@ -150,6 +173,7 @@ export const Select = React.forwardRef(({ components = {}, ...props }, ref) => {
 			menuPortalTarget={body}
 			{...props}
 			styles={selectStyles(props)}
+			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 		/>
 	);
 });
@@ -157,6 +181,7 @@ export const Select = React.forwardRef(({ components = {}, ...props }, ref) => {
 /** The same as `Select`, but allows new entries. */
 export const CreatableSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
 	const body = useBody();
+	const onConsumerKeyDown = props.onKeyDown;
 
 	return (
 		<ReactSelectCreatable
@@ -169,6 +194,7 @@ export const CreatableSelect = React.forwardRef(({ components = {}, ...props }, 
 			menuPortalTarget={body}
 			{...props}
 			styles={selectStyles(props)}
+			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 		/>
 	);
 });
@@ -176,6 +202,7 @@ export const CreatableSelect = React.forwardRef(({ components = {}, ...props }, 
 /** The same as `Select`, but allows new entries and fetches data asynchronously. */
 export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
 	const body = useBody();
+	const onConsumerKeyDown = props.onKeyDown;
 
 	return (
 		<ReactSelectAsyncCreatable
@@ -189,6 +216,7 @@ export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...prop
 			menuPortalTarget={body}
 			{...props}
 			styles={selectStyles(props)}
+			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 		/>
 	);
 });
@@ -196,6 +224,7 @@ export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...prop
 /** The same as `Select`, but fetches options asynchronously. */
 export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
 	const body = useBody();
+	const onConsumerKeyDown = props.onKeyDown;
 
 	return (
 		<ReactSelectAsync
@@ -207,6 +236,7 @@ export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref)
 			menuPortalTarget={body}
 			{...props}
 			styles={selectStyles(props)}
+			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 		/>
 	);
 });
