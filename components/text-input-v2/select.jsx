@@ -135,36 +135,23 @@ function noOptionsMessage({ inputValue }) {
 }
 
 function handleKeyDown(e, onConsumerKeyDown) {
-	const { nodeName, type } = e.target;
+	const { nodeName, type, value } = e.target;
 	if (onConsumerKeyDown) {
 		onConsumerKeyDown(e);
 		if (e.defaultPrevented) {
 			return;
 		}
 	}
-	switch (e.key) {
-		case nodeName === 'input' && type === 'text' && 'Home': {
+
+	if (nodeName === 'input' && type === 'text') {
+		const selectionIndex = e.key === 'Home' ? 0 : e.key === 'End' ? value.length : null;
+
+		if (selectionIndex !== null) {
 			if (e.shiftKey) {
-				e.target.selectionStart = 0;
+				e.target.selectionEnd = selectionIndex;
 			} else {
-				e.target.setSelectionRange(0, 0);
+				e.target.setSelectionRange(selectionIndex, selectionIndex);
 			}
-			break;
-		}
-		case nodeName === 'input' && type === 'text' && 'End': {
-			const len = e.target.value.length;
-			if (e.shiftKey) {
-				e.target.selectionEnd = len;
-			} else {
-				e.target.setSelectionRange(len, len);
-			}
-			break;
-		}
-		default: {
-			if (onConsumerKeyDown) {
-				onConsumerKeyDown(e);
-			}
-			break;
 		}
 	}
 }
