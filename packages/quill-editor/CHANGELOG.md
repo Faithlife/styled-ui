@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.3](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.9.2...@faithlife/quill-editor@1.9.3) (2019-12-17)
+
+
+### Bug Fixes
+
+* Fix placeholder in more cases. ([0817199](https://git/Logos/FaithlifeEquipment/commits/0817199ff9a9c83ae8c795ec982d1d76ec2bd0fa))
+
+
+
+
+
 ## [1.9.2](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.9.1...@faithlife/quill-editor@1.9.2) (2019-12-17)
 
 
