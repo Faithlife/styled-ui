@@ -179,6 +179,7 @@ export const Select = React.forwardRef(({ components = {}, ...props }, ref) => {
 /** The same as `Select`, but allows new entries. */
 export const CreatableSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
 	const body = useBody();
+	const onConsumerKeyDown = props.onKeyDown;
 
 	return (
 		<ReactSelectCreatable
@@ -188,10 +189,10 @@ export const CreatableSelect = React.forwardRef(({ components = {}, ...props }, 
 			formatCreateLabel={node => <span>New entry: {node}</span>}
 			components={{ DropdownIndicator, ...defaultComponents, ...components }}
 			noOptionsMessage={noOptionsMessage}
-			onKeyDown={handleKeyDown}
 			menuPortalTarget={body}
 			{...props}
 			styles={selectStyles(props)}
+			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 		/>
 	);
 });
@@ -199,6 +200,7 @@ export const CreatableSelect = React.forwardRef(({ components = {}, ...props }, 
 /** The same as `Select`, but allows new entries and fetches data asynchronously. */
 export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
 	const body = useBody();
+	const onConsumerKeyDown = props.onKeyDown;
 
 	return (
 		<ReactSelectAsyncCreatable
@@ -209,10 +211,10 @@ export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...prop
 			components={{ DropdownIndicator, ...defaultComponents, ...components }}
 			formatCreateLabel={node => <span>New entry: {node}</span>}
 			noOptionsMessage={noOptionsMessage}
-			onKeyDown={handleKeyDown}
 			menuPortalTarget={body}
 			{...props}
 			styles={selectStyles(props)}
+			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 		/>
 	);
 });
@@ -220,6 +222,7 @@ export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...prop
 /** The same as `Select`, but fetches options asynchronously. */
 export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
 	const body = useBody();
+	const onConsumerKeyDown = props.onKeyDown;
 
 	return (
 		<ReactSelectAsync
@@ -228,10 +231,10 @@ export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref)
 			theme={selectTheme}
 			components={{ DropdownIndicator, ...defaultComponents, ...components }}
 			noOptionsMessage={noOptionsMessage}
-			onKeyDown={handleKeyDown}
 			menuPortalTarget={body}
 			{...props}
 			styles={selectStyles(props)}
+			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 		/>
 	);
 });
