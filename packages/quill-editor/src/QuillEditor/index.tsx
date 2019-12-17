@@ -64,6 +64,7 @@ const ReactQuillStyled = styled(SafeReactQuill)`
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
+	position: relative;
 
 	.ql-container.ql-snow {
 		border: none;
@@ -80,12 +81,6 @@ const ReactQuillStyled = styled(SafeReactQuill)`
 		line-height: normal;
 		padding: 8px;
 		flex: 1;
-	}
-
-	// Placeholder styling
-	.ql-editor.ql-blank::before {
-		font-style: normal;
-		color: #a8a8a8;
 	}
 
 	.ql-editor.nwse-resize > * {
@@ -144,13 +139,19 @@ const QuillContainer = styled.div<{ isEmpty: boolean }>`
 		}
 	`}
 
+	& [data-placeholder]::before {
+		position: absolute;
+		font-style: normal;
+		color: #a8a8a8;
+		font-size: 16px;
+		font-family: Source Sans Pro, sans-serif;
+	}
+
 	${({ isEmpty }) =>
 		isEmpty &&
 		css`
-			& [data-placeholder]::before {
-				position: absolute;
+			& [data-placeholder]:not(.ql-container)::before {
 				content: attr(data-placeholder);
-				color: #a8a8a8;
 			}
 		`}
 `;
@@ -163,10 +164,6 @@ const OverlayContainer = styled.div<{ hasToolbar: boolean }>`
 	top: ${({ hasToolbar }) => (hasToolbar ? '41px' : '0')};
 	bottom: 0;
 	pointer-events: none;
-`;
-
-const Placeholder = styled.div`
-	padding: 8px;
 `;
 
 if (SafeQuill) {
@@ -653,7 +650,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		'imageAlign',
 	];
 
-	const [placeholderDiv] = useState(() => <Placeholder data-placeholder={placeholder} />);
+	const [placeholderDiv] = useState(() => <div data-placeholder={placeholder} />);
 
 	return (
 		<LocalizationProvider localizedResources={localizedResources}>
