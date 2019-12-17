@@ -147,7 +147,7 @@ const QuillContainer = styled.div<{ isEmpty: boolean }>`
 	${({ isEmpty }) =>
 		isEmpty &&
 		css`
-			& .ql-editor[data-placeholder]::before {
+			& [data-placeholder]::before {
 				position: absolute;
 				content: attr(data-placeholder);
 				color: #a8a8a8;
@@ -163,6 +163,10 @@ const OverlayContainer = styled.div<{ hasToolbar: boolean }>`
 	top: ${({ hasToolbar }) => (hasToolbar ? '41px' : '0')};
 	bottom: 0;
 	pointer-events: none;
+`;
+
+const Placeholder = styled.div`
+	padding: 8px;
 `;
 
 if (SafeQuill) {
@@ -213,7 +217,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	);
 
 	const [quillEditorQuery] = useState(() => `.${quillEditorId}`);
-	const [isEmpty, setIsEmpty] = useState(!(defaultValue || value));
+	const [isEmpty, setIsEmpty] = useState(!SafeQuill || !(defaultValue || value));
 
 	useEffect(() => {
 		if (!defaultValue && value && value !== storedValue && quillRef.current) {
@@ -649,9 +653,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		'imageAlign',
 	];
 
-	const [placeholderDiv] = useState(() => (
-		<div data-placeholder={defaultValue || value || placeholder} />
-	));
+	const [placeholderDiv] = useState(() => <Placeholder data-placeholder={placeholder} />);
 
 	return (
 		<LocalizationProvider localizedResources={localizedResources}>
