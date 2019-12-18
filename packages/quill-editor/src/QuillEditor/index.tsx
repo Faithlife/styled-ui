@@ -139,6 +139,11 @@ const QuillContainer = styled.div<{ isEmpty: boolean }>`
 		}
 	`}
 
+	& [data-placeholder]:not(.ql-editor)::before {
+		top: 7px;
+		left: 6px;
+	}
+
 	& [data-placeholder]::before {
 		position: absolute;
 		font-style: normal;
@@ -224,6 +229,8 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				quillRef.current.getEditor().clipboard.dangerouslyPasteHTML(0, value);
 			}
 		}
+
+		setIsEmpty(quillRef.current && quillRef.current.getEditor().getLength() === 1);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
 
