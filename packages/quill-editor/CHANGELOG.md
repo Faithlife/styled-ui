@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.9.4...@faithlife/quill-editor@2.0.0) (2019-12-19)
+
+
+### Features
+
+* Automatically generate an editorId if the only child is a Toolbar. ([23a7449](https://git/Logos/FaithlifeEquipment/commits/23a7449509e1437861407b5b92d69b878a3abd9d))
+
+
+### BREAKING CHANGES
+
+* The QuillEditor component now only accepts a single child.
+
+
+
+
+
 ## [1.9.4](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@1.9.3...@faithlife/quill-editor@1.9.4) (2019-12-18)
 
 
