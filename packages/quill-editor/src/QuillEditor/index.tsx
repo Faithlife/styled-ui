@@ -227,7 +227,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const [isEmpty, setIsEmpty] = useState(!SafeQuill || !(defaultValue || value));
 
 	useEffect(() => {
-		if (!defaultValue && value && value !== storedValue && quillRef.current) {
+		if (defaultValue === null && value !== null && value !== storedValue && quillRef.current) {
 			if (value.ops) {
 				quillRef.current.getEditor().setContents(value, 'user');
 			} else {
