@@ -227,15 +227,17 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const [isEmpty, setIsEmpty] = useState(!SafeQuill || !(defaultValue || value));
 
 	useEffect(() => {
-		if (defaultValue === null && value !== null && value !== storedValue && quillRef.current) {
+		const editor = quillRef.current && quillRef.current.getEditor();
+		if (!defaultValue && value !== null && value !== storedValue && editor) {
 			if (value.ops) {
-				quillRef.current.getEditor().setContents(value, 'user');
+				editor.setContents(value, 'user');
 			} else {
-				quillRef.current.getEditor().clipboard.dangerouslyPasteHTML(0, value);
+				editor.setText('');
+				editor.clipboard.dangerouslyPasteHTML(0, value);
 			}
 		}
 
-		setIsEmpty(quillRef.current && quillRef.current.getEditor().getLength() === 1);
+		editor && setIsEmpty(editor.getLength() === 1);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
 
@@ -446,17 +448,6 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		handleTextChangeOnEditor();
 		setIsEmpty(quillRef.current && quillRef.current.getEditor().getLength() === 1);
 	}, [handleTextChangeOnEditor, onContentChange, defaultValue, value]);
-
-	useEffect(() => {
-		let editor;
-		if (quillRef.current) {
-			editor = quillRef.current.getEditor();
-			if (editor) {
-				editor.on('text-change', handleTextChange);
-			}
-		}
-		return () => editor && editor.off('text-change', handleTextChange);
-	}, [handleTextChange]);
 
 	useEffect(() => {
 		let editorElement;
@@ -688,6 +679,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 						modules={moduleConfiguration}
 						formats={allowedFormats}
 						bounds={quillEditorQuery}
+						onChange={handleTextChange}
 						{...otherProps}
 					>
 						{placeholderDiv}
