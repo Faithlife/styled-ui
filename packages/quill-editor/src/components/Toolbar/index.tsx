@@ -21,7 +21,7 @@ const ToolbarContainer = styled.div`
 export type ToolbarControlLayout = (ControlKind | ControlKind[])[];
 
 export interface IToolbarProps {
-	editorId: string;
+	editorId?: string;
 	controls?: ToolbarControlLayout;
 	className?: string;
 }

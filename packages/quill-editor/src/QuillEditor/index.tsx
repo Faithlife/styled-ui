@@ -19,6 +19,7 @@ import { useImageDrop } from '../utility/useImageDrop';
 import { SafeQuill, SafeReactQuill } from './SafeQuill';
 import { convertDeltaToInlineHtml } from '../utility/htmlUtility';
 import { getShortcuts } from './shortcuts';
+import { Toolbar } from '../components/Toolbar';
 
 export interface IQuillRichTextEditorProps {
 	groupId?: string;
@@ -43,7 +44,7 @@ export interface IQuillRichTextEditorProps {
 	autofocus?: string;
 	tabMode?: 'insert' | 'exit';
 	disableImageControls?: boolean;
-	children?: React.ReactNode;
+	children?: React.ReactElement;
 }
 
 export interface IQuillContainerProps {
@@ -210,12 +211,16 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const [filePickerKind, setFilePickerKind] = useState(FilePickerKind.Image);
 	const [storedValue, setStoredValue] = useState(value);
 	const [allowImageLink, setAllowImageLink] = useState(false);
-	const [quillEditorId] = useState(
-		() =>
-			editorId ||
-			`ql-${Math.random()
-				.toString(36)
-				.substring(7)}`
+
+	const onlyChild: any = children && React.Children.only(children);
+	const onlyChildIsToolbar = onlyChild && onlyChild.type === Toolbar;
+
+	const [quillEditorId] = useState(() =>
+		onlyChildIsToolbar
+			? `ql-${Math.random()
+					.toString(36)
+					.substring(7)}`
+			: editorId
 	);
 
 	const [quillEditorQuery] = useState(() => `.${quillEditorId}`);
@@ -602,19 +607,20 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 
 	const moduleConfiguration = useMemo(
 		() => ({
-			toolbar: editorId
-				? {
-						container: `#${quillEditorId}`,
-						handlers: {
-							insertTemplate,
-							insertImage: imageHandler,
-							textSnippet: textHandler,
-							insertLink: handleLinkInsert,
-							clean: handleClean,
-							...toolbarHandlers,
-						},
-				  }
-				: false,
+			toolbar:
+				onlyChildIsToolbar || editorId
+					? {
+							container: `#${quillEditorId}`,
+							handlers: {
+								insertTemplate,
+								insertImage: imageHandler,
+								textSnippet: textHandler,
+								insertLink: handleLinkInsert,
+								clean: handleClean,
+								...toolbarHandlers,
+							},
+					  }
+					: false,
 			...modules,
 			keyboard: {
 				...((modules && modules.keyboard) || {}),
@@ -637,6 +643,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			toolbarHandlers,
 			tabMode,
 			handleClean,
+			onlyChildIsToolbar,
 		]
 	);
 
@@ -671,7 +678,8 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				imageIsSelected={!!overlayCoordinates}
 				isEmpty={isEmpty}
 			>
-				{children}
+				{onlyChild &&
+					React.cloneElement(onlyChild, { ...onlyChild.props, editorId: quillEditorId })}
 				{SafeQuill ? (
 					<ReactQuillStyled
 						ref={quillRef}
