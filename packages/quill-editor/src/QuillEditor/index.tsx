@@ -17,7 +17,7 @@ import { throttle } from '../utility/throttle';
 import ImageBlot from '../components/Blots/ImageBlot';
 import { useImageDrop } from '../utility/useImageDrop';
 import { SafeQuill, SafeReactQuill } from './SafeQuill';
-import { convertDeltaToInlineHtml } from '../utility/htmlUtility';
+import { convertDeltaToHtml } from '../utility/htmlUtility';
 import { getShortcuts } from './shortcuts';
 import { Toolbar } from '../components/Toolbar';
 
@@ -450,7 +450,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			if (value && value.ops) {
 				content = deltaContent;
 			} else {
-				content = quillRef.current.getEditor().root.innerHTML;
+				content = convertDeltaToHtml(deltaContent);
 			}
 		}
 
@@ -511,12 +511,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const getHTML = useCallback((options?: { [key: string]: any }) => {
 		if (quillRef.current) {
 			const deltas = quillRef.current.getEditor().getContents();
-			const { format, ...converterOptions } = options || {};
-			if (format === 'inline') {
-				return convertDeltaToInlineHtml(deltas.ops, converterOptions);
-			} else {
-				return quillRef.current.getEditor().root.innerHTML;
-			}
+			return convertDeltaToHtml(deltas, options);
 		}
 	}, []);
 
