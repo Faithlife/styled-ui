@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@2.0.1...@faithlife/quill-editor@2.0.2) (2019-12-20)
+
+
+### Bug Fixes
+
+* Fix controlled content. ([cc55daf](https://git/Logos/FaithlifeEquipment/commits/cc55daf2194a689b1221a42ee7d260566bb2e8e2))
+* Fix selection for controlled content. ([8e4aa0a](https://git/Logos/FaithlifeEquipment/commits/8e4aa0a0bcbeeb66611572a8e6055d419a5f6d8e))
+
+
+
+
+
 ## [2.0.1](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@2.0.0...@faithlife/quill-editor@2.0.1) (2019-12-19)
 
 
