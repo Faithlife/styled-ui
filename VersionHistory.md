@@ -1,5 +1,11 @@
 # Changelog
 
+### 5.37.0
+
+- Stop auto-focusing `GroupSelector` when using the showInPlace option.
+- Minor code cleanup in `Input` and `Dropdown` components.
+- Add `Home` and `End` key support to `Select` components.
+
 ### 5.36.0
 
 - Add `message` and `actions` props to the `Modal.Header` component.
