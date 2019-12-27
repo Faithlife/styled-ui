@@ -1,16 +1,19 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { createHttpClient as createAmberClient } from '@faithlife/amber-api';
 import formatUri from '@faithlife/format-uri';
 import { useAmberBucket } from './useAmberBucket';
 import { fetchJson } from './request';
 
-const amberClient = createAmberClient({
-	fetch: fetch,
-	baseUri: '/proxy/files/v1',
-});
-
 export const useAmberClient = accountId => {
 	const bucketId = useAmberBucket(accountId);
+
+	const amberClient = useRef(null);
+	useEffect(() => {
+		amberClient.current = createAmberClient({
+			fetch: fetch,
+			baseUri: '/proxy/files/v1',
+		});
+	}, []);
 
 	const createSmartMediaAsset = useCallback(
 		async (asset, blob, metadata) => {
@@ -30,7 +33,7 @@ export const useAmberClient = accountId => {
 						}
 				  );
 
-			const startUploadResponse = await amberClient.createDirectUpload();
+			const startUploadResponse = await amberClient.current.createDirectUpload();
 			if (startUploadResponse.error) {
 				throw startUploadResponse.error;
 			}
@@ -44,7 +47,7 @@ export const useAmberClient = accountId => {
 				body: blob,
 			});
 
-			const finishUploadResponse = await amberClient.finishUpload({
+			const finishUploadResponse = await amberClient.current.finishUpload({
 				uploadId: startUploadResponse.value.uploadId,
 				finishUploadSettings: {
 					fileName: 'Smart Media',
@@ -56,7 +59,7 @@ export const useAmberClient = accountId => {
 				throw finishUploadResponse.error;
 			}
 
-			const createAssetResponse = await amberClient.createAssetWithOperations({
+			const createAssetResponse = await amberClient.current.createAssetWithOperations({
 				assetEditRequest: {
 					bucket: bucketId,
 					forceJob: true,
@@ -79,7 +82,7 @@ export const useAmberClient = accountId => {
 			let errorCount = 0;
 			let newAsset = false;
 			while (!newAsset) {
-				const getJobResponse = await amberClient.getJob({
+				const getJobResponse = await amberClient.current.getJob({
 					id: jobId,
 				});
 				if (getJobResponse.error && errorCount++ > 3) {
@@ -97,7 +100,7 @@ export const useAmberClient = accountId => {
 				}
 			}
 
-			const getNewAssetWithLinksResponse = await amberClient.getAsset({
+			const getNewAssetWithLinksResponse = await amberClient.current.getAsset({
 				id: newAsset.id,
 			});
 			if (getNewAssetWithLinksResponse.error) {
