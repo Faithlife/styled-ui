@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.2](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@1.0.1...@faithlife/file-picker@1.0.2) (2019-12-27)
+
+
+### Bug Fixes
+
+* Remove direct dependency on SME. ([8c57148](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/8c571484cd0c8e47d8de06b16b2d603412d19b14))
+
+
+
+
+
 ## [1.0.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@1.0.0...@faithlife/file-picker@1.0.1) (2019-12-27)
 
 
