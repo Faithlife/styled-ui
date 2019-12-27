@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@1.0.0...@faithlife/file-picker@1.0.1) (2019-12-27)
+
+
+### Bug Fixes
+
+* Create amberClient after server render. ([0a20026](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/0a200263cb9f78d0bb168da0cf88d9753a023e26))
+
+
+
+
+
 # [1.0.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@0.3.3...@faithlife/file-picker@1.0.0) (2019-12-27)
 
 
