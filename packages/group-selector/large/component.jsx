@@ -315,6 +315,7 @@ export class LargeGroupSelector extends React.Component {
 				<Styled.CreateGroupWrapper fixed={createGroupFixed}>
 					<Styled.CreateGroupBackground scrollWidthDelta={scrollWidthDelta}>
 						<CreateGroup
+							showInPlace={showInPlace}
 							onChurchNameInputChange={this.handleChurchNameInputChange}
 							onChurchLocationInputChange={this.handleChurchLocationInputChange}
 							newChurchName={newChurchName}

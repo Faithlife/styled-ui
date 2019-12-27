@@ -6,6 +6,7 @@ import * as Styled from '../styled';
 
 export class CreateGroup extends React.Component {
 	static propTypes = {
+		showInPlace: PropTypes.bool,
 		onChurchNameInputChange: PropTypes.func.isRequired,
 		newChurchName: PropTypes.string,
 		onChurchLocationInputChange: PropTypes.func.isRequired,
@@ -17,7 +18,9 @@ export class CreateGroup extends React.Component {
 	churchNameInput = React.createRef();
 
 	componentDidMount() {
-		this.churchNameInput.current.focus();
+		if (!this.props.showInPlace) {
+			this.churchNameInput.current.focus();
+		}
 	}
 
 	render() {
