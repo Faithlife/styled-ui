@@ -14,9 +14,8 @@ This repository was created with [`create-flcom-addin`](https://git.faithlife.de
 ### Goals
 
 - Style modifications should be approved by the design team before they are merged into this project.
-- Components should have a prose description and live demo of different component states (using real data)
-- UI components are accompanied by documentation to show how the component should be used within a real app. The UI components should rely on a parent component to contain state, however in some cases local state may be used to handle UI-specific concerns (such the location of a popup or visibility)
-- Semantic versioning / version history updates when making releases
+- Components should have a prose description and live demo of different component states (using real data).
+- Commits should use [conventional commit tags](https://www.conventionalcommits.org/en/v1.0.0/) for automatic versioning and changelogs.
 
 ### How to contribute
 
