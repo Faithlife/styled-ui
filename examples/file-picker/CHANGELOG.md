@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/file-picker-example@1.2.3...file-picker-example@2.0.0) (2019-12-27)
+
+
+* Add SmartMediaEditor to FilePicker (#4) ([b7b1643](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/b7b1643022f01f18c9a8a139ef3d413a0743ca24)), closes [#4](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/4)
+
+
+### BREAKING CHANGES
+
+* This component is now ready for public use.
+
+
+
+
+
 ## [1.2.3](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/file-picker-example@1.2.2...file-picker-example@1.2.3) (2019-11-26)
 
 **Note:** Version bump only for package file-picker-example

@@ -1,9 +1,9 @@
 {
   "private": true,
   "name": "file-picker-example",
-  "version": "1.2.3",
+  "version": "2.0.0",
   "dependencies": {
-    "@faithlife/file-picker": "^0.3.3",
+    "@faithlife/file-picker": "^1.0.0",
     "@faithlife/smart-media-editor": "^4.9.0",
     "@faithlife/styled-ui": "^5.36.0",
     "react": "^16.12.0",
