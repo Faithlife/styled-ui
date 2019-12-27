@@ -6,6 +6,8 @@
 	"proxies": {
 		"accounts": "https://test.accountsapi.logos.com",
 		"orders": "https://test.ordersapi.logos.com",
-		"locations": "https://test.locationsapi.logos.com"
+		"locations": "https://test.locationsapi.logos.com",
+		"amber": "https://internal.files.logos.com/",
+		"files": "https://internal.files.logos.com/"
 	}
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AmberContent } from '@faithlife/styled-ui';
+import { AmberContent } from './AmberContent';
 import { Tab } from './Tab';
 
 export const AmberTab = ({ title, accountId, filter, footerText, pickerMode, sort, viewStyle }) => {
@@ -12,7 +12,6 @@ export const AmberTab = ({ title, accountId, filter, footerText, pickerMode, sor
 				pickerMode={pickerMode}
 				sort={sort}
 				viewStyle={viewStyle}
-				height="100%"
 			/>
 		</Tab>
 	);

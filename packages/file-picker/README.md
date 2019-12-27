@@ -55,15 +55,20 @@ const { Tab, AmberTab, FaithlifeStockTab, UnsplashTab } = FilePicker;
 The recommended pattern is to use the various `Tab` components as children of the `FilePicker` component like so:
 
 ```
-<FilePicker>
+<FilePicker accountId={12345678}>
 	<FilePicker.Tab title="Title" />
 	<FilePicker.AmberTab title="Group Vault" accountId={12345678} />
+	<FilePicker.UnsplashTab />
 </FilePicker>
 ```
 
 ### Props
 
 #### FilePicker
+
+`children` - `array`: The FilePicker expects that its children are iterable, and that they have `title` props to be displayed in the Tab List. The recommended pattern is to use the Tab helper components exported by this package.
+
+`accountId` - `number`: Either a Group ID or a User ID. This Account ID will be used to look up an Amber vault, and any assets edited by the Smart Media Editor will be saved to that User's or Group's vault.
 
 `title` - `string`: Title for the Modal component.
 
@@ -73,7 +78,7 @@ The recommended pattern is to use the various `Tab` components as children of th
 
 `onCancel` - `function`: Called when the user clicks the Cancel button within the Amber Iframe, or otherwise closes the Modal without inserting a file.
 
-`children` - `array`: The FilePicker expects that its children are iterable, and that they have `title` props to be displayed in the Tab List. The recommended pattern is to use the Tab helper components exported by this package.
+`allowMultiSelect` - `boolean`: Controls whether the File Picker can select multiple files.
 
 #### FilePicker.Tab
 
@@ -90,6 +95,10 @@ Accepts the props necessary for rendering an Amber IFrame, as well as a `title` 
 #### FilePicker.FaithlifeStockTab
 
 Has default props for rendering the correct Amber Vault for Faithlife Stock.
+
+#### FilePicker.GroupVaultTab
+
+Has default props for rendering the correct Amber Vault for the Group ID passed in to the FilePicker component.
 
 #### FilePicker.UnsplashTab
 
