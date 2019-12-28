@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.38.0
+
+- Add deprecation notices to the `FilePicker`, `GroupSelector`, and `ProductDrawer` components.
+- These components are now available from individual packages in the [FaithlifeEquipment](https://git.faithlife.dev/Logos/FaithlifeEquipment) repo.
+
 ### 5.37.0
 
 - Stop auto-focusing `GroupSelector` when using the showInPlace option.
