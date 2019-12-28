@@ -252,36 +252,6 @@ const pages = [
 		],
 	},
 	{
-		title: 'Bootstrap',
-		pages: [
-			{
-				path: '/bootstrap/components',
-				title: 'Standard Components',
-				content: pageLoader(() => import('./bootstrap/components.md')),
-				imports: {
-					...Bootstrap,
-					RowWithMargin: styled(Bootstrap.Row)`
-						margin-bottom: 1rem;
-					`,
-					LayoutGridDemo: styled.div`
-						.container .row > [class^='col'] {
-							padding-top: 0.75rem;
-							padding-bottom: 0.75rem;
-							background-color: #e5edf5;
-							border: 1px solid #c9c1d5;
-							color: #5f5f5f;
-						}
-					`,
-				},
-			},
-			{
-				path: '/bootstrap/stylesheet',
-				title: 'Stylesheet',
-				content: pageLoader(() => import('./bootstrap/stylesheet.md')),
-			},
-		],
-	},
-	{
 		title: 'Button',
 		pages: [
 			{
@@ -371,38 +341,6 @@ const pages = [
 		],
 	},
 	{
-		path: '/Switch/variations',
-		title: 'Switch',
-		content: pageLoader(() => import('./switch/variations.md')),
-		imports: {
-			Switch,
-		},
-	},
-	{
-		title: 'Radio',
-		pages: [
-			{
-				path: '/radio/variations',
-				title: 'Radio Variations',
-				content: pageLoader(() => import('./radio/variations.md')),
-				imports: {
-					Radio,
-					RadioDemo: styled.div`
-						&& > * {
-							margin: 8px;
-						}
-					`,
-				},
-			},
-			{
-				path: '/radio/documentation',
-				title: 'Radio Documentation',
-				content: pageLoader(() => import('./radio/documentation.md')),
-				imports: { Radio, DocgenTable },
-			},
-		],
-	},
-	{
 		title: 'Collapse',
 		pages: [
 			{
@@ -416,6 +354,158 @@ const pages = [
 				title: 'Collapse Documentation',
 				content: pageLoader(() => import('./collapse/documentation.md')),
 				imports: { Collapse, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Date Picker',
+		pages: [
+			{
+				path: '/date-picker/variations',
+				title: 'Date Picker Variations',
+				content: pageLoader(() => import('./date-picker/variations.md')),
+				imports: {
+					Button,
+					Popover,
+					PopoverManager,
+					PopoverReference,
+					DatePickerDemo: styled.div`
+						font-family: Source Sans Pro;
+
+						& button {
+							font-family: Source Sans pro;
+							font-size: 14px;
+						}
+					`,
+					DatePicker,
+					DatePeriodPicker,
+					dateFunctions: {
+						...dateFunctions,
+					},
+				},
+			},
+			{
+				path: 'date-picker/documentation',
+				title: 'Date Picker Documentation',
+				content: pageLoader(() => import('./date-picker/documentation.md')),
+				imports: { DatePicker, DatePeriodPicker, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Date Picker Input',
+		pages: [
+			{
+				path: '/date-picker-input/variations',
+				title: 'Date Picker Input Variations',
+				content: pageLoader(() => import('./date-picker-input/variations.md')),
+				imports: {
+					DatePickerInput,
+					dateFunctions: {
+						...dateFunctions,
+					},
+					parseUserDateString: str => {
+						const parsed = chrono.parseDate(str);
+						return parsed;
+					},
+				},
+			},
+			{
+				path: 'date-picker-input/documentation',
+				title: 'Date Picker Input Documentation',
+				content: pageLoader(() => import('./date-picker-input/documentation.md')),
+				imports: { DatePickerInput, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Drop Zone',
+		pages: [
+			{
+				path: '/drop-zone/variations',
+				title: 'Drop Zone Variations',
+				content: pageLoader(() => import('./drop-zone/variations.md')),
+				imports: {
+					DropZone,
+					DroppedFiles: styled.div`
+						margin-top: 16px;
+					`,
+					DropZoneMessage: styled.div`
+						font-size: 20px;
+						max-width: 240px;
+						text-align: center;
+					`,
+					IconsContainer: styled.div`
+						color: #a8a8a8;
+
+						> * {
+							margin: 0 12px;
+						}
+					`,
+				},
+			},
+			{
+				path: 'drop-zone/documentation',
+				title: 'Drop Zone Documentation',
+				content: pageLoader(() => import('./drop-zone/documentation.md')),
+				imports: { DropZone, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Dropdown',
+		pages: [
+			{
+				path: '/dropdown/variations',
+				title: 'Dropdown',
+				content: pageLoader(() => import('./dropdown/variations.md')),
+				imports: {
+					Dropdown,
+					DropdownToggle,
+					DropdownMenu,
+					MenuItem,
+					MenuSeparator,
+					MenuCheckbox,
+					DropdownDemo: styled.div`
+						display: flex;
+						align-items: flex-start;
+						justify-content: space-between;
+					`,
+					Button,
+				},
+			},
+			{
+				path: '/dropdown/documentation',
+				title: 'Dropdown Documentation',
+				content: pageLoader(() => import('./dropdown/documentation.md')),
+				imports: { Dropdown, DropdownToggle, DocgenTable },
+			},
+			{
+				path: '/dropdown/documentation/items',
+				title: 'Dropdown Child Documentation',
+				content: pageLoader(() => import('./dropdown/item-documentation.md')),
+				imports: { MenuItem, MenuCheckbox, MenuSeparator, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'Files Section',
+		pages: [
+			{
+				path: '/files-section/variations',
+				title: 'Files Section Variations',
+				content: pageLoader(() => import('./files-section/variations.md')),
+				imports: {
+					FilesSection,
+					Button,
+					LoadingSpinner,
+				},
+			},
+			{
+				path: 'files-section/documentation',
+				title: 'Files Section Documentation',
+				content: pageLoader(() => import('./files-section/documentation.md')),
+				imports: { FilesSection, DocgenTable },
 			},
 		],
 	},
@@ -462,53 +552,6 @@ const pages = [
 		],
 	},
 	{
-		title: 'Group Selector',
-		pages: [
-			{
-				path: '/group-selector/variations',
-				title: 'Group Selector Variations',
-				content: pageLoader(() => import('./group-selector/variations.md')),
-				imports: {
-					GroupSelector,
-					Button,
-					GroupSelectorDemo: styled.div`
-						.wide-content {
-							width: 600px;
-						}
-
-						.button-container {
-							margin-right: 16px;
-						}
-
-						.stacked-content {
-							width: 240px;
-						}
-					`,
-					LargeGroupSelector,
-					LargeGroupSelectorDemo: styled.div`
-						.wide-content {
-							width: 600px;
-						}
-
-						.button-container {
-							margin-right: 16px;
-						}
-
-						.stacked-content {
-							width: 240px;
-						}
-					`,
-				},
-			},
-			{
-				path: '/group-selector/documentation',
-				title: 'Group Selector Documentation',
-				content: pageLoader(() => import('./group-selector/documentation.md')),
-				imports: { GroupSelector, LargeGroupSelector, DocgenTable },
-			},
-		],
-	},
-	{
 		title: 'Help Box',
 		pages: [
 			{
@@ -525,6 +568,39 @@ const pages = [
 				title: 'Help Box Documentation',
 				content: pageLoader(() => import('./help-box/documentation.md')),
 				imports: { HelpBox, DocgenTable },
+			},
+		],
+	},
+	textInputPages,
+	{
+		title: 'Listbox',
+		pages: [
+			{
+				path: '/Listbox/variations',
+				title: 'Listbox',
+				content: pageLoader(() => import('./listbox/variations.md')),
+				imports: {
+					Listbox,
+					ListboxToggle,
+					ListboxMenu,
+					ListItem,
+					ListboxDemo: styled.div`
+						display: flex;
+						align-items: baseline;
+					`,
+					Button,
+					browserList: ['Firefox', 'Chrome', 'Opera', 'Edge'],
+					Label: styled.span`
+						margin-right: 8px;
+					`,
+					DownArrow: styled.img.attrs({ src: DownArrow })``,
+				},
+			},
+			{
+				path: '/listbox/documentation',
+				title: 'Listbox Documentation',
+				content: pageLoader(() => import('./listbox/documentation.md')),
+				imports: { Listbox, ListboxToggle, ListItem, DocgenTable },
 			},
 		],
 	},
@@ -630,96 +706,43 @@ const pages = [
 			},
 		],
 	},
-	textInputPages,
 	{
-		title: 'Files Section',
+		title: 'Parameter Sentence',
 		pages: [
 			{
-				path: '/files-section/variations',
-				title: 'Files Section Variations',
-				content: pageLoader(() => import('./files-section/variations.md')),
+				path: '/parameter-sentence/variations',
+				title: 'Parameter Sentence',
+				content: pageLoader(() => import('./parameter-sentence/variations.md')),
 				imports: {
-					FilesSection,
-					Button,
-					LoadingSpinner,
+					ParameterSelect,
+					ParameterSentenceDemo: styled.div`
+						display: flex;
+						align-items: baseline;
+						${({ addMargin }) => addMargin && '&& > * { margin-right: 16px; }'};
+					`,
+					scheduleOptions: {
+						weekly: 'weekly',
+						biweekly: 'biweekly',
+						twiceMonthly: 'twice-monthly',
+						monthly: 'monthly',
+						quarterly: 'quarterly',
+						annual: 'annual',
+					},
+					ParameterInputBox,
+					ParameterSentence,
 				},
 			},
 			{
-				path: 'files-section/documentation',
-				title: 'Files Section Documentation',
-				content: pageLoader(() => import('./files-section/documentation.md')),
-				imports: { FilesSection, DocgenTable },
-			},
-		],
-	},
-	{
-		title: 'Drop Zone',
-		pages: [
-			{
-				path: '/drop-zone/variations',
-				title: 'Drop Zone Variations',
-				content: pageLoader(() => import('./drop-zone/variations.md')),
-				imports: {
-					DropZone,
-					DroppedFiles: styled.div`
-						margin-top: 16px;
-					`,
-					DropZoneMessage: styled.div`
-						font-size: 20px;
-						max-width: 240px;
-						text-align: center;
-					`,
-					IconsContainer: styled.div`
-						color: #a8a8a8;
-
-						> * {
-							margin: 0 12px;
-						}
-					`,
-				},
+				path: '/parameter-sentence/command-sentence',
+				title: 'Command Sentence',
+				content: pageLoader(() => import('./parameter-sentence/command-sentence.md')),
+				imports: {},
 			},
 			{
-				path: 'drop-zone/documentation',
-				title: 'Drop Zone Documentation',
-				content: pageLoader(() => import('./drop-zone/documentation.md')),
-				imports: { DropZone, DocgenTable },
-			},
-		],
-	},
-	{
-		title: 'Share Dialog',
-		pages: [
-			{
-				path: '/share-dialog/variations',
-				title: 'Share Dialog Variations',
-				content: pageLoader(() => import('./share-dialog/variations.md')),
-				imports: {
-					Input,
-					Modal,
-					ModalFooter,
-					Button,
-					delayPromise,
-					ShareDialog,
-					ModalDemo: styled.div`
-						.wide-content {
-							width: 600px;
-						}
-
-						.button-container {
-							margin-right: 16px;
-						}
-
-						.stacked-content {
-							width: 240px;
-						}
-					`,
-				},
-			},
-			{
-				path: 'share-dialog/documentation',
-				title: 'Share Dialog Documentation',
-				content: pageLoader(() => import('./share-dialog/documentation.md')),
-				imports: { ShareDialog, DocgenTable },
+				path: '/parameter-sentence/documentation',
+				title: 'Parameter Sentence Documentation',
+				content: pageLoader(() => import('./parameter-sentence/documentation.md')),
+				imports: { ParameterSentence, ParameterSelect, ParameterInputBox, DocgenTable },
 			},
 		],
 	},
@@ -765,83 +788,63 @@ const pages = [
 		],
 	},
 	{
-		title: 'Date Picker',
+		title: 'Radio',
 		pages: [
 			{
-				path: '/date-picker/variations',
-				title: 'Date Picker Variations',
-				content: pageLoader(() => import('./date-picker/variations.md')),
+				path: '/radio/variations',
+				title: 'Radio Variations',
+				content: pageLoader(() => import('./radio/variations.md')),
 				imports: {
-					Button,
-					Popover,
-					PopoverManager,
-					PopoverReference,
-					DatePickerDemo: styled.div`
-						font-family: Source Sans Pro;
-
-						& button {
-							font-family: Source Sans pro;
-							font-size: 14px;
+					Radio,
+					RadioDemo: styled.div`
+						&& > * {
+							margin: 8px;
 						}
 					`,
-					DatePicker,
-					DatePeriodPicker,
-					dateFunctions: {
-						...dateFunctions,
-					},
 				},
 			},
 			{
-				path: 'date-picker/documentation',
-				title: 'Date Picker Documentation',
-				content: pageLoader(() => import('./date-picker/documentation.md')),
-				imports: { DatePicker, DatePeriodPicker, DocgenTable },
+				path: '/radio/documentation',
+				title: 'Radio Documentation',
+				content: pageLoader(() => import('./radio/documentation.md')),
+				imports: { Radio, DocgenTable },
 			},
 		],
 	},
 	{
-		title: 'Date Picker Input',
+		title: 'Share Dialog',
 		pages: [
 			{
-				path: '/date-picker-input/variations',
-				title: 'Date Picker Input Variations',
-				content: pageLoader(() => import('./date-picker-input/variations.md')),
+				path: '/share-dialog/variations',
+				title: 'Share Dialog Variations',
+				content: pageLoader(() => import('./share-dialog/variations.md')),
 				imports: {
-					DatePickerInput,
-					dateFunctions: {
-						...dateFunctions,
-					},
-					parseUserDateString: str => {
-						const parsed = chrono.parseDate(str);
-						return parsed;
-					},
+					Input,
+					Modal,
+					ModalFooter,
+					Button,
+					delayPromise,
+					ShareDialog,
+					ModalDemo: styled.div`
+						.wide-content {
+							width: 600px;
+						}
+
+						.button-container {
+							margin-right: 16px;
+						}
+
+						.stacked-content {
+							width: 240px;
+						}
+					`,
 				},
 			},
 			{
-				path: 'date-picker-input/documentation',
-				title: 'Date Picker Input Documentation',
-				content: pageLoader(() => import('./date-picker-input/documentation.md')),
-				imports: { DatePickerInput, DocgenTable },
-			},
-		],
-	},
-	{
-		title: 'Slider',
-		pages: [
-			{
-				path: '/slider/variations',
-				title: 'Slider Variations',
-				content: pageLoader(() => import('./slider/variations.md')),
-				imports: {
-					Slider,
-					DocgenTable,
-				},
-			},
-			{
-				path: 'slider/documentation',
-				title: 'Slider Documentation',
-				content: pageLoader(() => import('./slider/documentation.md')),
-				imports: { Slider, DocgenTable },
+				path: 'share-dialog/documentation',
+				title: 'Share Dialog Documentation',
+				content: pageLoader(() => import('./share-dialog/documentation.md')),
+				imports: { ShareDialog, DocgenTable },
 			},
 		],
 	},
@@ -873,21 +876,32 @@ const pages = [
 		],
 	},
 	{
-		title: 'Product Drawer',
+		title: 'Slider',
 		pages: [
 			{
-				path: '/product-drawer/variations',
-				title: 'Product Drawer',
-				content: pageLoader(() => import('./product-drawer/variations.md')),
-				imports: { ProductDrawerWithResources },
+				path: '/slider/variations',
+				title: 'Slider Variations',
+				content: pageLoader(() => import('./slider/variations.md')),
+				imports: {
+					Slider,
+					DocgenTable,
+				},
 			},
 			{
-				path: '/product-drawer/documentation',
-				title: 'Product Drawer Documentation',
-				content: pageLoader(() => import('./product-drawer/documentation.md')),
-				imports: { ProductDrawerWithResources, DocgenTable },
+				path: 'slider/documentation',
+				title: 'Slider Documentation',
+				content: pageLoader(() => import('./slider/documentation.md')),
+				imports: { Slider, DocgenTable },
 			},
 		],
+	},
+	{
+		path: '/Switch/variations',
+		title: 'Switch',
+		content: pageLoader(() => import('./switch/variations.md')),
+		imports: {
+			Switch,
+		},
 	},
 	{
 		title: 'Tabs',
@@ -947,116 +961,33 @@ const pages = [
 		],
 	},
 	{
-		title: 'Dropdown',
+		title: 'Deprecated',
 		pages: [
 			{
-				path: '/dropdown/variations',
-				title: 'Dropdown',
-				content: pageLoader(() => import('./dropdown/variations.md')),
+				path: '/bootstrap/components',
+				title: 'Bootstrap Components',
+				content: pageLoader(() => import('./bootstrap/components.md')),
 				imports: {
-					Dropdown,
-					DropdownToggle,
-					DropdownMenu,
-					MenuItem,
-					MenuSeparator,
-					MenuCheckbox,
-					DropdownDemo: styled.div`
-						display: flex;
-						align-items: flex-start;
-						justify-content: space-between;
+					...Bootstrap,
+					RowWithMargin: styled(Bootstrap.Row)`
+						margin-bottom: 1rem;
 					`,
-					Button,
+					LayoutGridDemo: styled.div`
+						.container .row > [class^='col'] {
+							padding-top: 0.75rem;
+							padding-bottom: 0.75rem;
+							background-color: #e5edf5;
+							border: 1px solid #c9c1d5;
+							color: #5f5f5f;
+						}
+					`,
 				},
 			},
 			{
-				path: '/dropdown/documentation',
-				title: 'Dropdown Documentation',
-				content: pageLoader(() => import('./dropdown/documentation.md')),
-				imports: { Dropdown, DropdownToggle, DocgenTable },
+				path: '/bootstrap/stylesheet',
+				title: 'Bootstrap Stylesheet',
+				content: pageLoader(() => import('./bootstrap/stylesheet.md')),
 			},
-			{
-				path: '/dropdown/documentation/items',
-				title: 'Dropdown Child Documentation',
-				content: pageLoader(() => import('./dropdown/item-documentation.md')),
-				imports: { MenuItem, MenuCheckbox, MenuSeparator, DocgenTable },
-			},
-		],
-	},
-	{
-		title: 'Listbox',
-		pages: [
-			{
-				path: '/Listbox/variations',
-				title: 'Listbox',
-				content: pageLoader(() => import('./listbox/variations.md')),
-				imports: {
-					Listbox,
-					ListboxToggle,
-					ListboxMenu,
-					ListItem,
-					ListboxDemo: styled.div`
-						display: flex;
-						align-items: baseline;
-					`,
-					Button,
-					browserList: ['Firefox', 'Chrome', 'Opera', 'Edge'],
-					Label: styled.span`
-						margin-right: 8px;
-					`,
-					DownArrow: styled.img.attrs({ src: DownArrow })``,
-				},
-			},
-			{
-				path: '/listbox/documentation',
-				title: 'Listbox Documentation',
-				content: pageLoader(() => import('./listbox/documentation.md')),
-				imports: { Listbox, ListboxToggle, ListItem, DocgenTable },
-			},
-		],
-	},
-	{
-		title: 'Parameter Sentence',
-		pages: [
-			{
-				path: '/parameter-sentence/variations',
-				title: 'Parameter Sentence',
-				content: pageLoader(() => import('./parameter-sentence/variations.md')),
-				imports: {
-					ParameterSelect,
-					ParameterSentenceDemo: styled.div`
-						display: flex;
-						align-items: baseline;
-						${({ addMargin }) => addMargin && '&& > * { margin-right: 16px; }'};
-					`,
-					scheduleOptions: {
-						weekly: 'weekly',
-						biweekly: 'biweekly',
-						twiceMonthly: 'twice-monthly',
-						monthly: 'monthly',
-						quarterly: 'quarterly',
-						annual: 'annual',
-					},
-					ParameterInputBox,
-					ParameterSentence,
-				},
-			},
-			{
-				path: '/parameter-sentence/command-sentence',
-				title: 'Command Sentence',
-				content: pageLoader(() => import('./parameter-sentence/command-sentence.md')),
-				imports: {},
-			},
-			{
-				path: '/parameter-sentence/documentation',
-				title: 'Parameter Sentence Documentation',
-				content: pageLoader(() => import('./parameter-sentence/documentation.md')),
-				imports: { ParameterSentence, ParameterSelect, ParameterInputBox, DocgenTable },
-			},
-		],
-	},
-	{
-		title: 'File Picker',
-		pages: [
 			{
 				path: '/file-picker/variations',
 				title: 'File Picker',
@@ -1080,6 +1011,54 @@ const pages = [
 				title: 'File Picker Documentation',
 				content: pageLoader(() => import('./file-picker/documentation.md')),
 				imports: { FilePicker, AmberContent, DocgenTable },
+			},
+			{
+				path: '/group-selector/variations',
+				title: 'Group Selector Variations',
+				content: pageLoader(() => import('./group-selector/variations.md')),
+				imports: {
+					GroupSelector,
+					Button,
+					GroupSelectorDemo: styled.div`
+						.wide-content {
+							width: 600px;
+						}
+
+						.button-container {
+							margin-right: 16px;
+						}
+
+						.stacked-content {
+							width: 240px;
+						}
+					`,
+					LargeGroupSelector,
+					LargeGroupSelectorDemo: styled.div`
+						.wide-content {
+							width: 600px;
+						}
+
+						.button-container {
+							margin-right: 16px;
+						}
+
+						.stacked-content {
+							width: 240px;
+						}
+					`,
+				},
+			},
+			{
+				path: '/group-selector/documentation',
+				title: 'Group Selector Documentation',
+				content: pageLoader(() => import('./group-selector/documentation.md')),
+				imports: { GroupSelector, LargeGroupSelector, DocgenTable },
+			},
+			{
+				path: '/product-drawer/variations',
+				title: 'Product Drawer',
+				content: pageLoader(() => import('./product-drawer/variations.md')),
+				imports: { ProductDrawerWithResources },
 			},
 		],
 	},
