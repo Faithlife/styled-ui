@@ -98,12 +98,12 @@ function useAmber() {
 			setAmber(window.amberfile);
 		} else {
 			let amberScript = document.querySelector(
-				'script[src="http://amber.faithlife.com/scripts/api/embeddedBucket.js"]'
+				'script[src="https://amber.faithlife.com/scripts/api/embeddedBucket.js"]'
 			);
 
 			if (!amberScript) {
 				amberScript = document.createElement('script');
-				amberScript.src = 'http://amber.faithlife.com/scripts/api/embeddedBucket.js';
+				amberScript.src = 'https://amber.faithlife.com/scripts/api/embeddedBucket.js';
 				amberScript.async = true;
 				document.body.appendChild(amberScript);
 			}
