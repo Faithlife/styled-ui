@@ -239,15 +239,20 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				editor.clipboard.dangerouslyPasteHTML(0, value);
 			}
 			const postLength = editor.getLength();
-			setTimeout(() => {
-				if (shouldFocus) {
-					editor.focus();
-				}
-				editor.setSelection({
-					index: preSelection.index + postLength - preLength,
-					length: preSelection.length,
-				});
-			}, 0);
+			if (shouldFocus || preSelection) {
+				setTimeout(() => {
+					if (shouldFocus) {
+						editor.focus();
+					}
+
+					if (preSelection) {
+						editor.setSelection({
+							index: preSelection.index + postLength - preLength,
+							length: preSelection.length,
+						});
+					}
+				}, 0);
+			}
 		}
 
 		editor && setIsEmpty(editor.getLength() === 1);
@@ -434,13 +439,6 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	}, [allowImageLink]);
 
 	const handleSelectionChange = useCallback(throttle(updateLinkButton, 200), [allowImageLink]);
-
-	useEffect(() => {
-		document.addEventListener('selectionchange', handleSelectionChange);
-		return () => {
-			document.removeEventListener('selectionchange', handleSelectionChange);
-		};
-	}, [handleSelectionChange]);
 
 	const handleTextChange = useCallback(() => {
 		let content = defaultValue;
@@ -688,6 +686,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 						formats={allowedFormats}
 						bounds={quillEditorQuery}
 						onChange={handleTextChange}
+						onChangeSelection={handleSelectionChange}
 						{...otherProps}
 					>
 						{placeholderDiv}
