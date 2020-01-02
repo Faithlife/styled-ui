@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@2.0.2...@faithlife/quill-editor@3.0.0) (2020-01-02)
+
+
+### Bug Fixes
+
+* Initial selection when changing formats while typing. ([23322f3](https://git/Logos/FaithlifeEquipment/commits/23322f3c99e2f6caac3afff0661154e72d556ae1))
+
+
+### Features
+
+* Provide imperative api for correctly converting deltas (with images) to html. ([9c412bc](https://git/Logos/FaithlifeEquipment/commits/9c412bc20f763b49d3a834a46a04fadd3c943ac1))
+
+
+### BREAKING CHANGES
+
+* Html output may be slightly different than previous versions. (e.g. <br/> vs <br>)
+
+
+
+
+
 ## [2.0.2](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@2.0.1...@faithlife/quill-editor@2.0.2) (2019-12-20)
 
 
