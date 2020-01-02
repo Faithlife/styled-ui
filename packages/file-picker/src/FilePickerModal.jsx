@@ -16,16 +16,18 @@ export const FilePickerModal = ({ isOpen, onClose, title, children }) => (
 		>
 			<TabManager>
 				<TabList>
-					{React.Children.map(children, tab => (
-						<Tab paddingX={4}>{tab.props.title}</Tab>
-					))}
+					{React.Children.map(children, tab =>
+						tab ? <Tab paddingX={4}>{tab.props.title}</Tab> : null
+					)}
 				</TabList>
 				<TabPanels display="grid">
-					{React.Children.map(children, tab => (
-						<TabPanel display="grid" padding={tab.props.padding || 0}>
-							{React.cloneElement(tab)}
-						</TabPanel>
-					))}
+					{React.Children.map(children, tab =>
+						tab ? (
+							<TabPanel display="grid" padding={tab.props.padding || 0}>
+								{React.cloneElement(tab)}
+							</TabPanel>
+						) : null
+					)}
 				</TabPanels>
 			</TabManager>
 		</Modal.Content>
