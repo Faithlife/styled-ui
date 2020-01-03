@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.4](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@1.0.3...@faithlife/file-picker@1.0.4) (2020-01-03)
+
+
+### Bug Fixes
+
+* Load amber embeddedBucket.js over https ([529176f](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/529176f7cfc9ef64bd28bc8ed78dd69071fd699a))
+
+
+
+
+
 ## [1.0.3](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@1.0.2...@faithlife/file-picker@1.0.3) (2020-01-02)
 
 
