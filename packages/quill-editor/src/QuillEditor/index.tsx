@@ -237,8 +237,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			if (value.ops) {
 				editor.setContents(value, 'user');
 			} else {
-				editor.setText('');
-				editor.clipboard.dangerouslyPasteHTML(0, value);
+				editor.setContents(editor.clipboard.convert(value), 'user');
 			}
 			const postLength = editor.getLength();
 			if (shouldFocus || preSelection) {
