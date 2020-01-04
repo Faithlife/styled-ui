@@ -44,6 +44,7 @@ export interface IQuillRichTextEditorProps {
 	autofocus?: string;
 	tabMode?: 'insert' | 'exit';
 	disableImageControls?: boolean;
+	htmlOptions?: { [key: string]: any };
 	children?: React.ReactElement;
 }
 
@@ -200,6 +201,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		autofocus,
 		tabMode,
 		disableImageControls,
+		htmlOptions,
 		children,
 		...otherProps
 	},
@@ -506,12 +508,15 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		}
 	}, []);
 
-	const getHTML = useCallback((options?: { [key: string]: any }) => {
-		if (quillRef.current) {
-			const deltas = quillRef.current.getEditor().getContents();
-			return convertDeltaToHtml(deltas, options);
-		}
-	}, []);
+	const getHTML = useCallback(
+		(options?: { [key: string]: any }) => {
+			if (quillRef.current) {
+				const deltas = quillRef.current.getEditor().getContents();
+				return convertDeltaToHtml(deltas, { ...options, ...htmlOptions });
+			}
+		},
+		[htmlOptions]
+	);
 
 	useImperativeHandle(
 		ref,
