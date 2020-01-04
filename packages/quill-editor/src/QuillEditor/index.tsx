@@ -227,10 +227,12 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 
 	const [quillEditorQuery] = useState(() => `.${quillEditorId}`);
 	const [isEmpty, setIsEmpty] = useState(!SafeQuill || !(defaultValue || value));
+	const suppressNextUpdate = useRef(!!value);
 
 	useEffect(() => {
 		const editor = quillRef.current && quillRef.current.getEditor();
-		if (!defaultValue && value !== null && value !== storedValue && editor) {
+		if (!defaultValue && value !== null && (value !== storedValue || value === '') && editor) {
+			suppressNextUpdate.current = true;
 			const preSelection = editor.getSelection();
 			const preLength = editor.getLength();
 			const shouldFocus = editor.hasFocus();
@@ -456,7 +458,10 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		if (content) {
 			setStoredValue(content);
 		}
-		onContentChange && onContentChange(content);
+
+		!suppressNextUpdate.current && onContentChange && onContentChange(content);
+		suppressNextUpdate.current = false;
+
 		handleTextChangeOnEditor();
 		setIsEmpty(quillRef.current && quillRef.current.getEditor().getLength() === 1);
 	}, [handleTextChangeOnEditor, onContentChange, defaultValue, value]);
