@@ -217,12 +217,12 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const onlyChild: any = children && React.Children.only(children);
 	const onlyChildIsToolbar = onlyChild && onlyChild.type === Toolbar;
 
-	const [quillEditorId] = useState(() =>
-		onlyChildIsToolbar
-			? `ql-${Math.random()
-					.toString(36)
-					.substring(7)}`
-			: editorId
+	const [quillEditorId] = useState(
+		() =>
+			editorId ||
+			`ql-${Math.random()
+				.toString(36)
+				.substring(7)}`
 	);
 
 	const [quillEditorQuery] = useState(() => `.${quillEditorId}`);
