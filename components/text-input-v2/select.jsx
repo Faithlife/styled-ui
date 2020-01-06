@@ -145,7 +145,7 @@ function handleKeyDown(e, onConsumerKeyDown) {
 		}
 	}
 
-	if (nodeName === 'input' && type === 'text') {
+	if (nodeName.toLowerCase() === 'input' && type.toLowerCase() === 'text') {
 		const selectionIndex = e.key === 'Home' ? 0 : e.key === 'End' ? value.length : null;
 
 		if (selectionIndex !== null) {
