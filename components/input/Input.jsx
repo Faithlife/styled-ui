@@ -97,8 +97,11 @@ Input.propTypes = {
 	onChange: PropTypes.func,
 	onClick: PropTypes.func,
 	onEnter: PropTypes.func,
-	/** Enum with values: 'small', 'medium', 'large', and 'inline' */
-	variant: PropTypes.oneOf(['small', 'medium', 'large', 'inline']),
+	/** Enum with values: 'small', 'medium', 'large' */
+	variant: PropTypes.oneOfType([
+		PropTypes.oneOf(['small', 'medium', 'large']),
+		PropTypes.arrayOf(PropTypes.oneOf(['small', 'medium', 'large'])),
+	]),
 	/** Medium variation (deprecated in favor of the variant prop) */
 	medium: PropTypes.bool,
 	/** Small variation (deprecated in favor of the variant prop) */
