@@ -187,7 +187,7 @@ const validateSimpleMissingValues = (
 		let value = '';
 		if (Object.prototype.hasOwnProperty.call(profile, property)) {
 			value = profile[property];
-		} else if (Object.prototype.hasOwnProperty.call(profile, property)) {
+		} else if (Object.prototype.hasOwnProperty.call(profile.cardInfo, property)) {
 			value = profile.cardInfo[property];
 		}
 		if (isNullOrWhitespace(value)) {
