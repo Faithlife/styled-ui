@@ -5,7 +5,7 @@ showSource: true
 state: { value: 'Washington' }
 ---
 <InputSpacer>
-	<Input small value={state.value} onChange={event => setState({ value: event.target.value })} />
+	<Input variant="small" value={state.value} onChange={event => setState({ value: event.target.value })} />
 	<Button variant="primary" size="small">Search</Button>
 </InputSpacer>
 ```
@@ -17,7 +17,7 @@ showSource: true
 state: { value: 'Washington' }
 ---
 <InputSpacer>
-	<Input medium value={state.value} onChange={event => setState({ value: event.target.value })} />
+	<Input variant="medium" value={state.value} onChange={event => setState({ value: event.target.value })} />
 	<Button variant="primary" size="medium">Search</Button>
 </InputSpacer>
 ```
@@ -29,8 +29,20 @@ showSource: true
 state: { value: 'Washington' }
 ---
 <InputSpacer>
-	<Input large value={state.value} onChange={event => setState({ value: event.target.value })} />
+	<Input variant="large" value={state.value} onChange={event => setState({ value: event.target.value })} />
 	<Button variant="primary" size="large">Search</Button>
+</InputSpacer>
+```
+
+### Responsive
+
+```react
+showSource: true
+state: { value: 'Washington' }
+---
+<InputSpacer>
+	<Input variant={['medium', 'small']} value={state.value} onChange={event => setState({ value: event.target.value })} />
+	<Button variant="primary" size={['medium', 'small']}>Search</Button>
 </InputSpacer>
 ```
 
