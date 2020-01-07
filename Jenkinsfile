@@ -65,7 +65,7 @@ flowdock.withNotification('a611b96b1517142a58a87c1b58aacdd8', '#build') {
 				}
 			}
 
-		} catch {
+		} catch(Exception e) {
 			buildResult = 'FAILURE'
 		} finally {
 			setGitHubStatus('Build', buildResult)
