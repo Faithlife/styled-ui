@@ -44,6 +44,9 @@ flowdock.withNotification('a611b96b1517142a58a87c1b58aacdd8', '#build') {
 				sh script: 'yarn build'
 			}
 
+			buildResult = 'SUCCESS'
+			setGitHubStatus('Build', buildResult)
+
 			if (!isPr) {
 				stage('Publish') {
 					withCredentials([
@@ -62,7 +65,8 @@ flowdock.withNotification('a611b96b1517142a58a87c1b58aacdd8', '#build') {
 				}
 			}
 
-			buildResult = 'SUCCESS';
+		} catch {
+			buildResult = 'FAILURE'
 		} finally {
 			setGitHubStatus('Build', buildResult)
 		}
