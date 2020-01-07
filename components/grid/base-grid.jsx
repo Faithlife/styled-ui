@@ -40,6 +40,7 @@ export function BaseGrid({
 	showDragHandle,
 	onRowDataChange,
 	context,
+	filters,
 }) {
 	const tableHeightPadding = hasPagingBar ? 42 : 2;
 	const prevViewportSize = useRef(isSmallViewport);
@@ -78,6 +79,13 @@ export function BaseGrid({
 		}
 	}, [gridApi, maxRows]);
 
+	useEffect(() => {
+		if (gridApi) {
+			gridApi.setFilterModel(filters);
+			gridApi.onFilterChanged();
+		}
+	}, [gridApi, filters]);
+
 	const handleSelectionChanged = useCallback(() => {
 		if (onRowSelect) {
 			const selectedRows = gridApi.getSelectedRows();
@@ -107,7 +115,7 @@ export function BaseGrid({
 
 	const handleCellClicked = useCallback(
 		event => {
-			if (!event.column.colDef.hasInteractableElement) {
+			if (!event.column.colDef.hasInteractableElement && !event.column.colDef.checkboxSelection) {
 				onRowClick && onRowClick(event.data);
 			}
 		},
@@ -214,7 +222,6 @@ export function BaseGrid({
 						isEditable,
 						shouldBeEditable,
 						editorComponent,
-						hasInteractableElement,
 						...columnProps
 					} = child.props;
 					return (
@@ -301,6 +308,8 @@ BaseGrid.propTypes = {
 	onRowDataChange: PropTypes.func,
 	/** An object that will be passed to cell components */
 	context: PropTypes.object,
+	/** An object of filters see examples and https://www.ag-grid.com/javascript-grid-filter-provided-simple/#filterOptions */
+	filters: PropTypes.object,
 };
 
 function parseChildrenSettings(children, additionalCellComponents = {}) {
