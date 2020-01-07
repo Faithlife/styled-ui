@@ -81,6 +81,29 @@ state: { filterText: 'WA' }
 </div>
 ```
 
+### Advanced Filtering
+
+See https://www.ag-grid.com/javascript-grid-filter-provided-simple/#filterOptions for more `type` options
+
+```react
+showSource: true
+state: { filter: null }
+---
+<div>
+	<Button primary medium onClick={() => setState({ filter: { population: { type: 'greaterThan', filter: '200000' } } })}>Pop > 200,000</Button>
+	<Button primary medium onClick={() => setState({ filter: { population: { type: 'lessThan', filter: '200000' } } })}>{'Pop < 200,000'}</Button>
+	<Button primary medium onClick={() => setState({ filter: null })}>None</Button>
+	{JSON.stringify(state.filter)}
+	<SimpleGrid filters={state.filter} data={censusData} maxRows={10} onRowClick={row => {alert(row.value)}} filterText={state.filterText}>
+		<GridColumn displayName="Name" fieldName="value" />
+		<GridColumn displayName="Population" fieldName="population" isRightAligned filter={GridColumn.filterByOptions.number} />
+		<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
+		<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
+		<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
+	</SimpleGrid>
+</div>
+```
+
 ### Custom Cell Component
 
 Cell components can be any valid react component. The `value` prop will be what the value of the field would be normally.

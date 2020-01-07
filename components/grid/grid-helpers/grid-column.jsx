@@ -22,6 +22,7 @@ export function GridColumn({
 	isEditable,
 	shouldBeEditable,
 	editorComponent,
+	filter,
 }) {
 	return <div />;
 }
@@ -38,6 +39,12 @@ GridColumn.sortOptions = Object.freeze({
 	none: '',
 	ascending: 'asc',
 	descending: 'desc',
+});
+
+GridColumn.filterByOptions = Object.freeze({
+	text: 'agTextColumnFilter',
+	number: 'agNumberColumnFilter',
+	date: 'agDateColumnFilter',
 });
 
 GridColumn.propTypes = {
@@ -70,4 +77,6 @@ GridColumn.propTypes = {
 	isEditable: PropTypes.bool,
 	/** Expects boolean return. Called with (isGroup: bool, rowData: object) */
 	shouldBeEditable: PropTypes.func,
+	/** What to filter by in this column */
+	filter: PropTypes.oneOf(Object.values(GridColumn.filterByOptions)),
 };
