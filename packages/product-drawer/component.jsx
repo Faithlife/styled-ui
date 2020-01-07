@@ -1,11 +1,10 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { LoadingSpinner, PopoverManager, PopoverReference } from '@faithlife/styled-ui';
+import { PopoverManager, PopoverReference } from '@faithlife/styled-ui';
 import { Localize, LocalizationProvider } from '@faithlife/react-ui';
 import * as Styled from './styled';
 import defaultResources from './locales/en-US/resources.json';
-
-const ProductDrawerDropdown = lazy(() => import('./product-drawer-dropdown'));
+import ProductDrawerDropdown from './product-drawer-dropdown';
 
 export class ProductDrawer extends React.PureComponent {
 	static propTypes = {
@@ -132,15 +131,13 @@ export class ProductDrawer extends React.PureComponent {
 							</Styled.ProductDrawerToggle>
 						</PopoverReference>
 						{isOpen ? (
-							<Suspense fallback={<LoadingSpinner />}>
-								<ProductDrawerDropdown
-									isOpen={isOpen}
-									resources={resources}
-									styleOverrides={styleOverrides}
-									handleCloseButtonClick={this.handleCloseButtonClick}
-									handleBlur={this.handleBlur}
-								/>
-							</Suspense>
+							<ProductDrawerDropdown
+								isOpen={isOpen}
+								resources={resources}
+								styleOverrides={styleOverrides}
+								handleCloseButtonClick={this.handleCloseButtonClick}
+								handleBlur={this.handleBlur}
+							/>
 						) : null}
 					</PopoverManager>
 				</Styled.ProductDrawer>
