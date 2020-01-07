@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.38.2
+
+- Add complex filter support to simple and paginated grid
+- Fix `hasInteractableElement` prop not correctly blocking rowClick
+
 ### 5.38.1
 
 - Correct home/end key handling logic in text input components.
