@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.38.1
+
+- Correct home/end key handling logic in text input components.
+- Fix `Input` proptypes to allow responsive `variant`.
+
 ### 5.38.0
 
 - Add deprecation notices to the `FilePicker`, `GroupSelector`, and `ProductDrawer` components.
