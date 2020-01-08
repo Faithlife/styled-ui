@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@3.0.0...@faithlife/quill-editor@4.0.0) (2020-01-08)
+
+
+### Bug Fixes
+
+* Don't override editorId even if the only child is Toolbar. ([ecf4079](https://git/Logos/FaithlifeEquipment/commits/ecf40799d801a671b09fe73340d4b34a72a21d89))
+* Don't trigger a change event when controlled value is updated. ([886c3d3](https://git/Logos/FaithlifeEquipment/commits/886c3d39258e992b9f904d3cde18ea8748b49880))
+* Fix server rendered placeholder. ([3b00a90](https://git/Logos/FaithlifeEquipment/commits/3b00a90f852056b858a80e7863ef82dd756284e2))
+* Override contents with clipboard module so quill doesn't steal focus. ([519b2e4](https://git/Logos/FaithlifeEquipment/commits/519b2e441df4cff415abfbd603e3837c70007c4f))
+
+
+### Features
+
+* Allow default html option overrides. ([23d12a5](https://git/Logos/FaithlifeEquipment/commits/23d12a5a7df872dcc889acb91b7bc4fb3a653720))
+
+
+### BREAKING CHANGES
+
+* Controlled change won't trigger change events.
+* The format of delta contents will likely be different when overriding content. This should not change how it's rendered.
+
+
+
+
+
 # [3.0.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@2.0.2...@faithlife/quill-editor@3.0.0) (2020-01-02)
 
 
