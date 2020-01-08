@@ -226,7 +226,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	);
 
 	const [quillEditorQuery] = useState(() => `.${quillEditorId}`);
-	const [isEmpty, setIsEmpty] = useState(!SafeQuill || !(defaultValue || value));
+	const [isEmpty, setIsEmpty] = useState(!(defaultValue || value));
 	const suppressNextUpdate = useRef(!!value);
 
 	useEffect(() => {
