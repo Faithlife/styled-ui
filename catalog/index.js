@@ -900,6 +900,13 @@ const pages = [
 		title: 'Switch',
 		content: pageLoader(() => import('./switch/variations.md')),
 		imports: {
+			GlobalBorderBox: styled.div`
+				*,
+				*:after,
+				*:before {
+					box-sizing: border-box;
+				}
+			`,
 			Switch,
 		},
 	},

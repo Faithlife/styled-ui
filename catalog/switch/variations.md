@@ -4,10 +4,12 @@
 showSource: true
 state: { isChecked: false }
 ---
+	<GlobalBorderBox>
 	<Switch
 		onClick={() => setState({ isChecked: !state.isChecked })}
 		isChecked={state.isChecked}
 	/>
+	</GlobalBorderBox>
 ```
 
 ### Binary choice
@@ -16,9 +18,11 @@ state: { isChecked: false }
 showSource: true
 state: { isChecked: false }
 ---
+	<GlobalBorderBox>
 	<Switch
 		variant="binaryChoice"
 		onClick={() => setState({ isChecked: !state.isChecked })}
 		isChecked={state.isChecked}
 	/>
+	</GlobalBorderBox>
 ```
