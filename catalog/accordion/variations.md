@@ -143,6 +143,54 @@ state: { expandedSections: [] }
 </AccordionDemo>
 ```
 
+### Pinned and Disabled items
+
+It is up to the consumer to disable any controls within the AccordionPanel of the disabled AccordionItem.
+
+```react
+plain: true
+showSource: true
+state: { expandedSections: [0, 1] }
+---
+<AccordionDemo>
+	<Accordion expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
+		<Accordion.Item pinned>
+			<Accordion.Header subtitle="Subtitle for Section One.">
+				Pinned Item
+			</Accordion.Header>
+			<Accordion.Panel>
+				<Form>
+					<Input small placeholder="Name" />
+					<Input small placeholder="Email" />
+				</Form>
+			</Accordion.Panel>
+		</Accordion.Item>
+		<Accordion.Item pinned disabled>
+			<Accordion.Header subtitle="This is a pretty long subtitle with some descenders.">
+				Pinned and Disabled Item
+			</Accordion.Header>
+			<Accordion.Panel>
+				<Form>
+					<Input small placeholder="Home address" disabled />
+					<Input small placeholder="Zip code" disabled />
+				</Form>
+			</Accordion.Panel>
+		</Accordion.Item>
+		<Accordion.Item disabled>
+			<Accordion.Header renderCustomIndicator={({isExpanded, onExpansion }) => (<Switch isChecked={isExpanded} onClick={onExpansion} />)}>
+				Disabled Item
+			</Accordion.Header>
+			<Accordion.Panel>
+				<Form>
+					<Input small placeholder="Mother's maiden name" disabled />
+					<Input small placeholder="Name of your first pet" disabled />
+				</Form>
+			</Accordion.Panel>
+		</Accordion.Item>
+	</Accordion>
+</AccordionDemo>
+```
+
 ### minimal variant
 
 ```react

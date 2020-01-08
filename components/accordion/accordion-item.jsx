@@ -4,7 +4,7 @@ import { useId } from '../shared-hooks';
 import { Box } from '../Box';
 import { useAccordionContext, AccordionItemContextProvider } from './accordion-util';
 
-export function AccordionItem({ children, index, pinned: isPinned }) {
+export function AccordionItem({ children, index, pinned: isPinned, disabled: isDisabled }) {
 	const { expandedSections, onExpansion, styleOverrides } = useAccordionContext();
 
 	const isExpanded = expandedSections.includes(index);
@@ -25,13 +25,17 @@ export function AccordionItem({ children, index, pinned: isPinned }) {
 			onExpansion: handleExpansion,
 			styleOverrides,
 			isPinned,
+			isDisabled,
 		}),
-		[headerId, panelId, index, isExpanded, handleExpansion, styleOverrides, isPinned],
+		[headerId, panelId, index, isExpanded, handleExpansion, styleOverrides, isPinned, isDisabled],
 	);
 
 	return (
 		<Box
 			display="grid"
+			css={`
+				opacity: ${isDisabled ? 0.5 : 1};
+			`}
 			gridTemplateAreas={`
 				'header'
 				'panel'
