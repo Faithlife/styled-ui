@@ -145,12 +145,13 @@ state: { expandedSections: [] }
 
 ### Pinned and Disabled items
 
-It is up to the consumer to disable any controls within the AccordionPanel of the disabled AccordionItem.
+Disabled items are normally closed, unless they are also pinned.
+It is up to the consumer to disable any controls within the AccordionPanel of the pinned and disabled AccordionItem, or any custom indicators in the AccordionHeader.
 
 ```react
 plain: true
 showSource: true
-state: { expandedSections: [0, 1] }
+state: { expandedSections: [0, 1, 2] }
 ---
 <AccordionDemo>
 	<Accordion expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
@@ -177,7 +178,7 @@ state: { expandedSections: [0, 1] }
 			</Accordion.Panel>
 		</Accordion.Item>
 		<Accordion.Item disabled>
-			<Accordion.Header renderCustomIndicator={({isExpanded, onExpansion }) => (<Switch isChecked={isExpanded} onClick={onExpansion} />)}>
+			<Accordion.Header renderCustomIndicator={({isExpanded, onExpansion }) => (<Switch isChecked={isExpanded} disabled />)}>
 				Disabled Item
 			</Accordion.Header>
 			<Accordion.Panel>

@@ -21,7 +21,7 @@ export function AccordionItem({ children, index, pinned: isPinned, disabled: isD
 			headerId,
 			panelId,
 			index,
-			isExpanded,
+			isExpanded: isPinned || (isExpanded && !isDisabled),
 			onExpansion: handleExpansion,
 			styleOverrides,
 			isPinned,

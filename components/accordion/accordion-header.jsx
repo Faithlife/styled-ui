@@ -21,8 +21,16 @@ export function AccordionHeader({
 		setFocusedMenuItem,
 		variant,
 	} = useAccordionContext();
-	const { isExpanded, onExpansion, headerId, panelId, isPinned } = useAccordionItemContext();
-	const shouldHideArrows = hideArrows || isPinned;
+	const {
+		isExpanded,
+		onExpansion,
+		headerId,
+		panelId,
+		isPinned: isItemPinned,
+		isDisabled: isItemDisabled,
+	} = useAccordionItemContext();
+	const isDisabled = isItemPinned || isItemDisabled;
+	const shouldHideArrows = hideArrows || isItemPinned;
 
 	const handleExpansion = useCallback(() => {
 		onExpansion(!isExpanded);
@@ -67,13 +75,13 @@ export function AccordionHeader({
 			<Heading ariaLevel={ariaLevel}>
 				<Button
 					isExpanded={isExpanded}
-					onBlur={isPinned ? undefined : handleBlur}
-					onClick={isPinned ? undefined : handleExpansion}
-					onFocus={isPinned ? undefined : handleFocus}
+					onBlur={isDisabled ? undefined : handleBlur}
+					onClick={isDisabled ? undefined : handleExpansion}
+					onFocus={isDisabled ? undefined : handleFocus}
 					ref={buttonRef}
 					panelId={panelId}
 					headerId={headerId}
-					disabled={isPinned}
+					disabled={isDisabled}
 					paddingY={variant === 'minimal' ? 4 : 5}
 					paddingX={variant === 'minimal' ? 4 : [5, 6]}
 					gridColumnGap={4}
