@@ -48,8 +48,6 @@ const ButtonCore = styled.button.attrs(({ active }) => ({ className: active ? 'a
 	}
 
 	> svg {
-		height: 1em;
-		width: 1em;
 		margin-right: ${props => (props.hasChildren ? props.theme.space[2] : '')};
 	}
 

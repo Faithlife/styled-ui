@@ -218,14 +218,26 @@ export const Button = styled.button`
 				small: {
 					height: '32px',
 					paddingX: condensed ? '7px' : '9px',
+					'> svg': {
+						height: '18px',
+						width: '18px',
+					},
 				},
 				medium: {
 					height: '40px',
 					paddingX: condensed ? '11px' : '15px',
+					'> svg': {
+						height: '18px',
+						width: '18px',
+					},
 				},
 				large: {
 					height: '56px',
 					paddingX: condensed ? '15px' : '23px',
+					'> svg': {
+						height: '24px',
+						width: '24px',
+					},
 				},
 			},
 		})}
