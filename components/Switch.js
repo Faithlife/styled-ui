@@ -52,6 +52,7 @@ export const Switch = styled(UtilityButton).attrs(({ isChecked }) => ({
 	position: relative;
 
 	&::after {
+		box-sizing: content-box !important;
 		width: var(--handle-width);
 		height: var(--handle-width);
 		border: solid;
