@@ -49,6 +49,7 @@ export function Tooltip(props) {
 Tooltip.propTypes = {
 	...Popover.propTypes,
 
+	children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
 	/** Content for the tooltip */
 	content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 	/** Text for the tooltip (deprecated) */

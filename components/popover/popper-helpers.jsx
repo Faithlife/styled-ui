@@ -15,16 +15,20 @@ export function usePopoverContext() {
 /** Popover reference container from react-popper */
 export const PopoverReference = ({ children, ...referenceProps }) => (
 	<Reference>
-		{({ ref }) => (
-			<Box display="inline-block" {...referenceProps} ref={ref}>
-				{children}
-			</Box>
-		)}
+		{({ ref }) =>
+			typeof children === 'function' ? (
+				children({ ref, ...referenceProps })
+			) : (
+				<Box display="inline-block" {...referenceProps} ref={ref}>
+					{children}
+				</Box>
+			)
+		}
 	</Reference>
 );
 
 PopoverReference.propTypes = {
-	children: PropTypes.node,
+	children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
 };
 
 export function FocusHandlerInboundsElement({ children }) {
