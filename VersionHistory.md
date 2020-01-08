@@ -1,5 +1,11 @@
 # Changelog
 
+### 5.39.0
+
+- `PopoverReference` and `Tooltip` can now accept function children. The function is passed a props object with a `ref` object and event handlers. These props must be spread onto the element to attach the `PopoverReference` or `Tooltip` to, allowing consumers to avoid the extra wrapping DOM element that is used by default.
+- Fix scaling of icon SVGs within `Button` components. v6 `Buttons` no longer scale svgs at all; it is up to the consumer to choose a properly sized icon. Legacy `Buttons` now use `18px` sizing for small and medium sizes instead of `16px`, to conform with design standards.
+- Fix but preventing `Switch` components from rendering properly when the host environment globally sets `box-sizing: border-box` on `:after` pseudo-elements.
+
 ### 5.38.2
 
 - Add complex filter support to simple and paginated grid
