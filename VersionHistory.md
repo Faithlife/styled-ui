@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.39.1
+
+- Adjust button padding to ensure icon-only buttons remain square.
+- Make `UtilityButton` inherit `font-family`.
+
 ### 5.39.0
 
 - `PopoverReference` and `Tooltip` can now accept function children. The function is passed a props object with a `ref` object and event handlers. These props must be spread onto the element to attach the `PopoverReference` or `Tooltip` to, allowing consumers to avoid the extra wrapping DOM element that is used by default.
