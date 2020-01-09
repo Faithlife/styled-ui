@@ -217,7 +217,7 @@ export const Button = styled.button`
 			variants: {
 				small: {
 					height: '32px',
-					paddingX: condensed ? '7px' : '9px',
+					paddingX: condensed ? '6px' : '8px',
 					'> svg': {
 						height: '18px',
 						width: '18px',
@@ -225,7 +225,7 @@ export const Button = styled.button`
 				},
 				medium: {
 					height: '40px',
-					paddingX: condensed ? '11px' : '15px',
+					paddingX: condensed ? '10px' : '14px',
 					'> svg': {
 						height: '18px',
 						width: '18px',
@@ -233,7 +233,7 @@ export const Button = styled.button`
 				},
 				large: {
 					height: '56px',
-					paddingX: condensed ? '15px' : '23px',
+					paddingX: condensed ? '14px' : '22px',
 					'> svg': {
 						height: '24px',
 						width: '24px',

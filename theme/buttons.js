@@ -4,19 +4,19 @@ const buttonSizes = {
 	small: {
 		...textStyles.ui['16'],
 		height: '32px',
-		paddingX: 3,
+		paddingX: '6px', // we want a square button with an 18x18 icon
 		borderRadius: 1,
 	},
 	medium: {
 		...textStyles.ui['16'],
 		height: '40px',
-		paddingX: 5,
+		paddingX: '10px', // we want a square button with an 18x18 icon
 		borderRadius: 1,
 	},
 	large: {
 		...textStyles.ui['24'],
 		height: '48px',
-		paddingX: 6,
+		paddingX: '11px', // we want a square button with a 24x24 icon
 		borderRadius: 2,
 	},
 };
