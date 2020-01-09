@@ -3,6 +3,7 @@ import { box, typography } from '../../theme/system';
 import { theme } from '../../theme';
 
 const UtilityButton = styled.button`
+	font-family: inherit;
 	background: transparent;
 	border: none;
 	padding: 0;
