@@ -451,7 +451,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			if (value && value.ops) {
 				content = deltaContent;
 			} else {
-				content = convertDeltaToHtml(deltaContent);
+				content = convertDeltaToHtml(deltaContent, htmlOptions);
 			}
 		}
 
@@ -464,7 +464,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 
 		handleTextChangeOnEditor();
 		setIsEmpty(quillRef.current && quillRef.current.getEditor().getLength() === 1);
-	}, [handleTextChangeOnEditor, onContentChange, defaultValue, value]);
+	}, [handleTextChangeOnEditor, onContentChange, defaultValue, value, htmlOptions]);
 
 	useEffect(() => {
 		let editorElement;
@@ -516,7 +516,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		(options?: { [key: string]: any }) => {
 			if (quillRef.current) {
 				const deltas = quillRef.current.getEditor().getContents();
-				return convertDeltaToHtml(deltas, { ...options, ...htmlOptions });
+				return convertDeltaToHtml(deltas, { ...htmlOptions, ...options });
 			}
 		},
 		[htmlOptions]
