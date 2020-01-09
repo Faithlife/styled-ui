@@ -199,7 +199,7 @@ export class PopoverBase extends Component {
 						width={styleOverrides.width ? styleOverrides.width : 'auto'}
 						zIndex={styleOverrides.zIndex ? styleOverrides.zIndex : 'menu'}
 						css={`
-							text-align: ${styleOverrides.textAlign ? styleOverrides.textAlign : 'center'};
+							text-align: ${styleOverrides.textAlign ? styleOverrides.textAlign : 'left'};
 							${styleOverrides.overflow ? `overflow: ${styleOverrides.overflow}` : ''};
 						`}
 						{...props}
