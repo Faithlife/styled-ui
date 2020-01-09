@@ -7,7 +7,7 @@ import { PopoverReference } from './popper-helpers';
 
 /** Simple tooltip that uses popovers internally. Does not support custom positioning. */
 export function Tooltip(props) {
-	const { children, text, content, isOpen, ...otherProps } = props;
+	const { children, text, content, isOpen, toggleOnClick, ...otherProps } = props;
 	const [tooltipIsOpen, setToolTipIsOpen] = useState(false);
 	const [isOnMobile, setIsOnMobile] = useState(false);
 
@@ -20,6 +20,11 @@ export function Tooltip(props) {
 		setToolTipIsOpen(false);
 	}, 200);
 
+	const toggle = () => {
+		handleMouseLeave.cancel();
+		setToolTipIsOpen(x => !x);
+	};
+
 	useEffect(() => {
 		setIsOnMobile(window.matchMedia('(hover: none)').matches);
 		return () => {
@@ -28,14 +33,16 @@ export function Tooltip(props) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	return isOnMobile ? (
+	return isOnMobile && !toggleOnClick ? (
 		children
 	) : (
 		<PopoverManager>
 			<PopoverReference
 				onMouseEnter={handleMouseEnter}
 				onMouseLeave={handleMouseLeave}
-				onClick={() => setToolTipIsOpen(false)}
+				onClick={() => {
+					isOnMobile ? toggle() : setToolTipIsOpen(false);
+				}}
 			>
 				{children}
 			</PopoverReference>
@@ -54,4 +61,8 @@ Tooltip.propTypes = {
 	content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 	/** Text for the tooltip (deprecated) */
 	text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+	/** true if the tooltip should be toggled on click.
+	 * By default tooltips are disabled on touch devices to prevent them from opening when tapping links or buttons.
+	 * Use this if you're attaching a tooltip to something like an info icon that is not otherwise interactive. */
+	toggleOnClick: PropTypes.bool,
 };

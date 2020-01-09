@@ -208,6 +208,12 @@ state: { isOpen: false }
 			Tooltip with jsx
 		</Button>
 	</Tooltip>
+
+	<Tooltip content={<StyledDiv>Hello!</StyledDiv>} toggleOnClick>
+		<Button variant="primary" size="medium">
+			Tooltip that opens on tap
+		</Button>
+	</Tooltip>
 </PopoverDemo>
 ```
 
