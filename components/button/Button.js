@@ -47,6 +47,10 @@ const ButtonCore = styled.button.attrs(({ active }) => ({ className: active ? 'a
 		border: 0;
 	}
 
+	&:disabled {
+		pointer-events: none;
+	}
+
 	> svg {
 		margin-right: ${props => (props.hasChildren ? props.theme.space[2] : '')};
 	}

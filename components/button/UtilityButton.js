@@ -23,6 +23,10 @@ const UtilityButton = styled.button`
 		border: 0;
 	}
 
+	&:disabled {
+		pointer-events: none;
+	}
+
 	${box}
 	${typography}
 `;

@@ -63,6 +63,10 @@ export const Button = styled.button`
 		border: 0;
 	}
 
+	&:disabled {
+		pointer-events: none;
+	}
+
 	> svg {
 		height: 1em;
 		width: 1em;
