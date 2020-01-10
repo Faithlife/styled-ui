@@ -53,13 +53,11 @@ const mapControls = (controls: ToolbarControlLayout) =>
 		);
 	});
 
-export const Toolbar: React.FunctionComponent<IToolbarProps> = ({
-	controls,
-	editorId,
-	className,
-	children,
-}) => (
-	<ToolbarContainer id={editorId} className={['ql-toolbar', 'ql-snow', className]}>
+export const ToolbarCore: React.FunctionComponent<IToolbarProps> = (
+	{ controls, editorId, className, children },
+	ref
+) => (
+	<ToolbarContainer id={editorId} ref={ref} className={['ql-toolbar', 'ql-snow', className]}>
 		{controls && mapControls(controls)}
 		{children &&
 			React.Children.map(children, child =>
@@ -68,3 +66,5 @@ export const Toolbar: React.FunctionComponent<IToolbarProps> = ({
 		{!controls && !children && mapControls(DefaultToolbarLayout)}
 	</ToolbarContainer>
 );
+
+export const Toolbar: React.FunctionComponent<IToolbarProps> = React.forwardRef(ToolbarCore);

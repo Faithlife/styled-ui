@@ -19,7 +19,6 @@ import { useImageDrop } from '../utility/useImageDrop';
 import { SafeQuill, SafeReactQuill } from './SafeQuill';
 import { convertDeltaToHtml } from '../utility/htmlUtility';
 import { getShortcuts } from './shortcuts';
-import { Toolbar } from '../components/Toolbar';
 
 export interface IQuillRichTextEditorProps {
 	groupId?: string;
@@ -214,10 +213,10 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const [storedValue, setStoredValue] = useState(value);
 	const [allowImageLink, setAllowImageLink] = useState(false);
 
-	const onlyChild: any = children && React.Children.only(children);
-	const onlyChildIsToolbar = onlyChild && onlyChild.type === Toolbar;
+	const onlyChild: any = useMemo(() => children && React.Children.only(children), [children]);
+	const hasOnlyChild = useMemo(() => !!onlyChild, [onlyChild]);
 
-	const [quillEditorId] = useState(
+	const [quillEditorId] = useState<any>(
 		() =>
 			editorId ||
 			`ql-${Math.random()
@@ -227,12 +226,10 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 
 	const [quillEditorQuery] = useState(() => `.${quillEditorId}`);
 	const [isEmpty, setIsEmpty] = useState(!(defaultValue || value));
-	const suppressNextUpdate = useRef(!!value);
 
 	useEffect(() => {
 		const editor = quillRef.current && quillRef.current.getEditor();
 		if (!defaultValue && value !== null && (value !== storedValue || value === '') && editor) {
-			suppressNextUpdate.current = true;
 			const preSelection = editor.getSelection();
 			const preLength = editor.getLength();
 			const shouldFocus = editor.hasFocus();
@@ -444,9 +441,12 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const handleSelectionChange = useCallback(throttle(updateLinkButton, 200), [allowImageLink]);
 
 	const handleTextChange = useCallback(() => {
+		if (!quillRef.current) {
+			return;
+		}
 		let content = defaultValue;
 
-		if (!content && quillRef.current) {
+		if (!content) {
 			const deltaContent = quillRef.current.getEditor().getContents();
 			if (value && value.ops) {
 				content = deltaContent;
@@ -459,8 +459,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			setStoredValue(content);
 		}
 
-		!suppressNextUpdate.current && onContentChange && onContentChange(content);
-		suppressNextUpdate.current = false;
+		onContentChange && onContentChange(content);
 
 		handleTextChangeOnEditor();
 		setIsEmpty(quillRef.current && quillRef.current.getEditor().getLength() === 1);
@@ -614,7 +613,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const moduleConfiguration = useMemo(
 		() => ({
 			toolbar:
-				onlyChildIsToolbar || editorId
+				quillEditorId && hasOnlyChild
 					? {
 							container: `#${quillEditorId}`,
 							handlers: {
@@ -643,13 +642,12 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			imageHandler,
 			textHandler,
 			handleLinkInsert,
-			editorId,
 			modules,
 			quillEditorId,
 			toolbarHandlers,
 			tabMode,
 			handleClean,
-			onlyChildIsToolbar,
+			hasOnlyChild,
 		]
 	);
 
@@ -672,6 +670,15 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 
 	const [placeholderDiv] = useState(() => <div data-placeholder={placeholder} />);
 
+	const setToolbarRef = useCallback(
+		ref => {
+			if (ref) {
+				ref.id = quillEditorId;
+			}
+		},
+		[quillEditorId]
+	);
+
 	return (
 		<LocalizationProvider localizedResources={localizedResources}>
 			<QuillContainer
@@ -684,8 +691,12 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				imageIsSelected={!!overlayCoordinates}
 				isEmpty={isEmpty}
 			>
-				{onlyChild &&
-					React.cloneElement(onlyChild, { ...onlyChild.props, editorId: quillEditorId })}
+				{hasOnlyChild &&
+					React.cloneElement(onlyChild, {
+						...onlyChild.props,
+						editorId: onlyChild.props.editorId || quillEditorId,
+						ref: setToolbarRef,
+					})}
 				{SafeQuill ? (
 					<ReactQuillStyled
 						ref={quillRef}
