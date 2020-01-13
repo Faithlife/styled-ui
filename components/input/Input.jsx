@@ -76,7 +76,7 @@ const Input = React.forwardRef(function Input(props, ref) {
 			onKeyPress={handleKeyPress}
 			onFocus={handleFocus}
 			ref={ref || forwardedRef}
-			textStyle={variation === 'large' ? 'ui.18' : 'ui.16'}
+			textStyle={variation === 'large' ? 'c.18' : 'c.16'}
 			underlineColor="blue4"
 			{...inputProps}
 		/>
