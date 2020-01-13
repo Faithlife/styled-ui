@@ -28,7 +28,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, ref) {
 	const buttonPadding = variant === 'small' ? 2 : 3;
 
 	return (
-		<Box display="inline-block" position="relative" alignSelf="center">
+		<InputContainer>
 			<Input
 				paddingRight="24px"
 				{...rest}
@@ -59,7 +59,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, ref) {
 				paddingBottom={buttonPadding}
 				icon={<ChevronExpand />}
 			/>
-		</Box>
+		</InputContainer>
 	);
 });
 
@@ -71,6 +71,18 @@ NumberInput.propTypes = {
 	...Input.PropTypes,
 };
 
+const InputContainer = ({ children, ...props }) => (
+	<Box
+		display="inline-block"
+		position="relative"
+		alignSelf="center"
+		className="input-container"
+		{...props}
+	>
+		{children}
+	</Box>
+);
+
 const StepButton = props => (
 	<Button
 		tabIndex={-1}
@@ -80,6 +92,12 @@ const StepButton = props => (
 		size="small"
 		css={`
 			height: 50%;
+			visibility: hidden;
+
+			.input-container:hover &,
+			.input-container:focus-within & {
+				visibility: visible;
+			}
 		`}
 		{...props}
 	/>
