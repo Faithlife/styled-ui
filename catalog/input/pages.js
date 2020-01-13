@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { InferredTypeahead, Typeahead } from '../../components/text-input';
 import { Select, CreatableSelect } from '../../components/text-input-v2';
 import { DocgenTable } from '../docgen-table';
-import { Bootstrap, Button, Input, Modal, FilterInput } from '../../index';
+import { Bootstrap, Button, Input, NumberInput, Modal, FilterInput } from '../../index';
 import { InferredTextFocusDemo, InferredSelectFocusDemo, AsyncSelectDemo } from './demos';
 
 export const textInputPages = {
@@ -16,6 +16,7 @@ export const textInputPages = {
 			imports: {
 				Input,
 				FilterInput,
+				NumberInput,
 				Button,
 				InputSpacer: styled.div`
 					display: flex;

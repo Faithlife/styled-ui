@@ -69,6 +69,24 @@ state: { value: 'Washington' }
 <FilterInput variant="medium" value={state.value} onChange={event => setState({ value: event.target.value })} onClear={() => setState({ value: '' })} />
 ```
 
+## NumberInput
+
+```react
+showSource: true
+state: { value: 42 }
+---
+<InputSpacer>
+	<InputSpacer>
+		<NumberInput variant="small" value={state.value} onChange={event => setState({ value: event.target.value })} min={0} max={100} />
+	</InputSpacer>
+
+	<InputSpacer>
+		<NumberInput variant="medium" value={state.value} onChange={event => setState({ value: event.target.value })} min={0} max={100} />
+	</InputSpacer>
+</InputSpacer>
+
+```
+
 ## Select on Focus
 
 ```react
