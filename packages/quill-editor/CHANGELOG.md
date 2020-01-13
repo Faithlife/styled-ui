@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.1](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.0.0...@faithlife/quill-editor@4.0.1) (2020-01-13)
+
+
+### Bug Fixes
+
+* Fix inclusion of htmlOptions when getting html. ([126fd83](https://git/Logos/FaithlifeEquipment/commits/126fd839e7c5cae5e4f87ea5a741557803900cc5))
+* Handle toolbarId changes. ([b4cf78f](https://git/Logos/FaithlifeEquipment/commits/b4cf78f434dd841c7221890f2dffc97695f10355))
+
+
+
+
+
 # [4.0.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@3.0.0...@faithlife/quill-editor@4.0.0) (2020-01-08)
 
 
