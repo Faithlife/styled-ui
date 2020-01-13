@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.5](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@1.0.4...@faithlife/file-picker@1.0.5) (2020-01-13)
+
+
+### Bug Fixes
+
+* Get dimensions for Smart Media more reliably. ([#32](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/32)) ([2577610](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/2577610143515accc1d619886c5db5f4590c90b6))
+
+
+
+
+
 ## [1.0.4](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@1.0.3...@faithlife/file-picker@1.0.4) (2020-01-03)
 
 
