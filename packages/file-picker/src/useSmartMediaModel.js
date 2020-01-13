@@ -46,6 +46,42 @@ function getOrInitSmartMediaMetadata(asset) {
 }
 
 function getDimensions(asset) {
-	const file = asset && (asset.source || asset.file);
-	return file && file.metadata && file.metadata.image;
+	const metadata = getOrInitSmartMediaMetadata(asset);
+	const metadataDimensions = getDimensionsFromSmartMediaMetadata(metadata);
+	if (metadataDimensions) {
+		return metadataDimensions;
+	}
+
+	const sourceDimensions = getDimensionsFromAssetFile(asset.source);
+	if (sourceDimensions) {
+		return sourceDimensions;
+	}
+
+	const fileDimensions = getDimensionsFromAssetFile(asset.file);
+	if (fileDimensions) {
+		return fileDimensions;
+	}
+
+	return { width: 1920, height: 1080 };
+}
+
+function getDimensionsFromAssetFile(assetFile) {
+	const image = assetFile?.metadata?.image;
+
+	if (!image || !image.width || !image.height) {
+		return null;
+	}
+
+	return { width: image.width, height: image.height };
+}
+
+function getDimensionsFromSmartMediaMetadata(metadata) {
+	if (metadata) {
+		const backgroundImage = metadata?.data?.styles[0]?.model?.data?.backgroundImage ?? {};
+		if (backgroundImage.width && backgroundImage.height) {
+			return { width: backgroundImage.width, height: backgroundImage.height };
+		}
+	}
+
+	return null;
 }

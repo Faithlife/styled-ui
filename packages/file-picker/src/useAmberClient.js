@@ -65,7 +65,7 @@ export const useAmberClient = accountId => {
 					forceJob: true,
 					waitForIndexing: true,
 					ops: [
-						{ op: 'setFile', fileId: finishUploadResponse.value.ok.id },
+						{ op: 'setFile', fileId: finishUploadResponse.value.ok.id, update: true },
 						{ op: 'adoptFileMetadata' },
 						{ op: 'addToMetadataArray', path: 'families', value: 'smartMedia' },
 						{ op: 'setMetadata', path: 'smartMedia', value: metadata },
