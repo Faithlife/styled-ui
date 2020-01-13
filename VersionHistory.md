@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.40.0
+
+- Add `NumberInput` component with styled step buttons.
+
 ### 5.39.1
 
 - Adjust button padding to ensure icon-only buttons remain square.
