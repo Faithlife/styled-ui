@@ -11,7 +11,7 @@ This allows users to feel more at ease with providing their location details.
 1. Import the component
 
 ```jsx
-import { LocationPreprompt } from '@faithlife/file-picker';
+import { LocationPreprompt } from '@faithlife/location-preprompt';
 ```
 
 2. Use the component
