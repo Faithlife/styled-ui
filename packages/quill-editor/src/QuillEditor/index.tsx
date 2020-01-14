@@ -232,6 +232,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		if (!defaultValue && value !== null && (value !== storedValue || value === '') && editor) {
 			const preSelection = editor.getSelection();
 			const preLength = editor.getLength();
+			const preSelectionAtEnd = preSelection.length === 0 && preSelection.index === preLength - 1;
 			const shouldFocus = editor.hasFocus();
 			if (value.ops) {
 				editor.setContents(value, 'api');
@@ -243,13 +244,12 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				setTimeout(() => {
 					if (shouldFocus) {
 						editor.focus();
-					}
-
-					if (preSelection) {
-						editor.setSelection({
-							index: preSelection.index + postLength - preLength,
-							length: preSelection.length,
-						});
+						if (preSelectionAtEnd && postLength > 0) {
+							editor.setSelection({
+								index: editor.getLength() - 1,
+								length: 0,
+							});
+						}
 					}
 				}, 0);
 			}
