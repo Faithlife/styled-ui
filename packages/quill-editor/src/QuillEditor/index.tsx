@@ -234,9 +234,9 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			const preLength = editor.getLength();
 			const shouldFocus = editor.hasFocus();
 			if (value.ops) {
-				editor.setContents(value, 'user');
+				editor.setContents(value, 'api');
 			} else {
-				editor.setContents(editor.clipboard.convert(value), 'user');
+				editor.setContents(editor.clipboard.convert(value), 'api');
 			}
 			const postLength = editor.getLength();
 			if (shouldFocus || preSelection) {
@@ -440,30 +440,35 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 
 	const handleSelectionChange = useCallback(throttle(updateLinkButton, 200), [allowImageLink]);
 
-	const handleTextChange = useCallback(() => {
-		if (!quillRef.current) {
-			return;
-		}
-		let content = defaultValue;
-
-		if (!content) {
-			const deltaContent = quillRef.current.getEditor().getContents();
-			if (value && value.ops) {
-				content = deltaContent;
-			} else {
-				content = convertDeltaToHtml(deltaContent, htmlOptions);
+	const handleTextChange = useCallback(
+		(_, _1, source) => {
+			if (!quillRef.current) {
+				return;
 			}
-		}
+			let content = defaultValue;
 
-		if (content) {
-			setStoredValue(content);
-		}
+			if (!content) {
+				const deltaContent = quillRef.current.getEditor().getContents();
+				if (value && value.ops) {
+					content = deltaContent;
+				} else {
+					content = convertDeltaToHtml(deltaContent, htmlOptions);
+				}
+			}
 
-		onContentChange && onContentChange(content);
+			if (content) {
+				setStoredValue(content);
+			}
 
-		handleTextChangeOnEditor();
-		setIsEmpty(quillRef.current && quillRef.current.getEditor().getLength() === 1);
-	}, [handleTextChangeOnEditor, onContentChange, defaultValue, value, htmlOptions]);
+			if (source !== 'api' && onContentChange) {
+				onContentChange(content);
+			}
+
+			handleTextChangeOnEditor();
+			setIsEmpty(quillRef.current && quillRef.current.getEditor().getLength() === 1);
+		},
+		[handleTextChangeOnEditor, onContentChange, defaultValue, value, htmlOptions]
+	);
 
 	useEffect(() => {
 		let editorElement;
