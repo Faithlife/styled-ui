@@ -30,7 +30,8 @@ const TabSpace = styled.span`
 const stockImagesAmberAccount = 6817140;
 const unsplashAmberAccount = 7259195;
 const unsplashInternalAmberAccount = 10808484;
-const textSnippetsAmberAccount = 7838557;
+const textSnippetsInternalAmberAccount = 7838557;
+const textSnippetsAmberAccount = 6824228;
 
 export const FilePickerModal: React.FunctionComponent<IFilePickerModalProps> = ({
 	showFilePicker,
@@ -104,7 +105,9 @@ export const FilePickerModal: React.FunctionComponent<IFilePickerModalProps> = (
 							<TabPanels display="grid">
 								<TabPanel display="grid">
 									<AmberContent
-										accountId={textSnippetsAmberAccount}
+										accountId={
+											isInternal ? textSnippetsInternalAmberAccount : textSnippetsAmberAccount
+										}
 										viewStyle={'tinygrid'}
 										footerText={' '}
 										height="100%"
