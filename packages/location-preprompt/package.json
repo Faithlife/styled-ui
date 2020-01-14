@@ -1,6 +1,6 @@
 {
   "name": "@faithlife/location-preprompt",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "UNLICENSED",
   "main": "dist/index.js",
   "files": [
