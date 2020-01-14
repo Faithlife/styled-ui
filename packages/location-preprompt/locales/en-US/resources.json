@@ -1,0 +1,9 @@
+{
+	"title": "Find your flock.",
+	"description": "Faithlife uses your location to provide better suggestions for addresses and other location-based information.",
+	"instructionTemplate": "Please click %CONFIRM% in the location prompt.",
+	"allow": "Allow",
+	"allowMobile": "OK",
+	"decline": "Not now",
+	"accept": "Got it"
+}

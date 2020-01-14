@@ -1955,6 +1955,13 @@
   dependencies:
     prop-types "^15.5.10"
 
+"@faithlife/command-sentence-control@^2.0.0":
+  version "2.0.0"
+  resolved "http://npm.faithlife.io/@faithlife%2fcommand-sentence-control/-/command-sentence-control-2.0.0.tgz#897a1bb00acb8f779dd1392f2b0fc2a5c7b7506d"
+  integrity sha512-Y6CrCc7eIM5QQOLxmn0YKHiHlJc5yM4Rm7bJcughI+n9zbpbW/o2R64EQyYuR/ZvfdV+adoJ01sbbhVRX+eUvA==
+  dependencies:
+    prop-types "^15.5.10"
+
 "@faithlife/eslint-config-flcom-addin@3.0.0":
   version "3.0.0"
   resolved "http://npm.faithlife.io/@faithlife%2feslint-config-flcom-addin/-/eslint-config-flcom-addin-3.0.0.tgz#e1d9970627d3e7da1142496c43a233da62043f82"
@@ -2098,7 +2105,7 @@
     react-virtualized-auto-sizer "^1.0.2"
     react-window "^1.8.5"
 
-"@faithlife/styled-ui@5.31.1", "@faithlife/styled-ui@^5.31.0", "@faithlife/styled-ui@^5.34.3", "@faithlife/styled-ui@^5.36.0":
+"@faithlife/styled-ui@5.31.1", "@faithlife/styled-ui@^5.31.0", "@faithlife/styled-ui@^5.34.3", "@faithlife/styled-ui@^5.36.0", "@faithlife/styled-ui@^5.39.1":
   version "5.36.0"
   resolved "http://npm.faithlife.io/@faithlife%2fstyled-ui/-/styled-ui-5.36.0.tgz#4da04931c284f1088272c6e56254bc755afb5b8c"
   integrity sha512-hREK15JuTlmqlK+SJU9Xsjxh7/6RepUEa+cEsT/UHyode8KmlCkRZrlLwpiGgWK97msq5KQ+/bLl0tdruCsopw==
