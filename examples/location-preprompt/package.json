@@ -1,10 +1,10 @@
 {
   "private": true,
   "name": "location-preprompt",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "dependencies": {
-    "@faithlife/location-preprompt": "^0.1.0",
     "@faithlife/command-sentence-control": "^2.0.0",
+    "@faithlife/location-preprompt": "^0.2.0",
     "@faithlife/styled-ui": "^5.39.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
