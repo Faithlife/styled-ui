@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.0.1...@faithlife/quill-editor@4.1.0) (2020-01-14)
+
+
+### Features
+
+* Don't trigger update event when source is api. ([f4e8eaf](https://git/Logos/FaithlifeEquipment/commits/f4e8eaf06da4f317fc948bdf5f8a14c0ab7b0a0c))
+
+
+
+
+
 ## [4.0.1](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.0.0...@faithlife/quill-editor@4.0.1) (2020-01-13)
 
 
