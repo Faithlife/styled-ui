@@ -563,8 +563,9 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		if (quillRef.current) {
 			const quillApi = quillRef.current.getEditor();
 			const selection = quillApi.getSelection(true);
-			quillApi.deleteText(selection.index, selection.length);
-			quillApi.insertText(selection.index, textToInsert);
+			quillApi.deleteText(selection.index, selection.length, 'user');
+			quillApi.insertText(selection.index, textToInsert, 'user');
+			quillApi.setSelection({ index: selection.index + textToInsert.length, length: 0 });
 		}
 	}, []);
 
