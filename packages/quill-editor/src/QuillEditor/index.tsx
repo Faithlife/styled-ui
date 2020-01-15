@@ -44,6 +44,7 @@ export interface IQuillRichTextEditorProps {
 	tabMode?: 'insert' | 'exit';
 	disableImageControls?: boolean;
 	htmlOptions?: { [key: string]: any };
+	plainTextMode?: boolean;
 	children?: React.ReactElement;
 }
 
@@ -201,6 +202,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		tabMode,
 		disableImageControls,
 		htmlOptions,
+		plainTextMode,
 		children,
 		...otherProps
 	},
@@ -446,14 +448,17 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			if (!quillRef.current) {
 				return;
 			}
+			const editor = quillRef.current.getEditor();
 			let content = defaultValue;
 
 			if (!content) {
-				const deltaContent = quillRef.current.getEditor().getContents();
+				const deltaContent = editor.getContents();
 				if (value && value.ops) {
 					content = deltaContent;
 				} else {
-					content = convertDeltaToHtml(deltaContent, htmlOptions);
+					content = plainTextMode
+						? editor.getText()
+						: convertDeltaToHtml(deltaContent, htmlOptions);
 				}
 			}
 
@@ -466,9 +471,9 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			}
 
 			handleTextChangeOnEditor();
-			setIsEmpty(quillRef.current && quillRef.current.getEditor().getLength() === 1);
+			setIsEmpty(editor.getLength() === 1);
 		},
-		[handleTextChangeOnEditor, onContentChange, defaultValue, value, htmlOptions]
+		[defaultValue, onContentChange, handleTextChangeOnEditor, value, plainTextMode, htmlOptions]
 	);
 
 	useEffect(() => {
@@ -657,22 +662,24 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		]
 	);
 
-	const allowedFormats = formats || [
-		'header',
-		'bold',
-		'italic',
-		'underline',
-		'strike',
-		'blockquote',
-		'list',
-		'indent',
-		'link',
-		'image',
-		'faithlifeImage',
-		'width',
-		'align',
-		'imageAlign',
-	];
+	const allowedFormats = plainTextMode
+		? []
+		: formats || [
+				'header',
+				'bold',
+				'italic',
+				'underline',
+				'strike',
+				'blockquote',
+				'list',
+				'indent',
+				'link',
+				'image',
+				'faithlifeImage',
+				'width',
+				'align',
+				'imageAlign',
+		  ];
 
 	const [placeholderDiv] = useState(() => <div data-placeholder={placeholder} />);
 
