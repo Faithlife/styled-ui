@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.6](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@1.0.5...@faithlife/file-picker@1.0.6) (2020-01-15)
+
+
+### Bug Fixes
+
+* Treat Beta PR environments as not internal. ([bd0a140](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/bd0a1401ee44b1a641236c6e38aba78faba43f48))
+
+
+
+
+
 ## [1.0.5](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@1.0.4...@faithlife/file-picker@1.0.5) (2020-01-13)
 
 

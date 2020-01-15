@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.4](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.1.3...@faithlife/quill-editor@4.1.4) (2020-01-15)
+
+
+### Bug Fixes
+
+* Treat Beta PR environments as not internal. ([bd0a140](https://git/Logos/FaithlifeEquipment/commits/bd0a1401ee44b1a641236c6e38aba78faba43f48))
+
+
+
+
+
 ## [4.1.3](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.1.2...@faithlife/quill-editor@4.1.3) (2020-01-14)
 
 
