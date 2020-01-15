@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.2.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.1.4...@faithlife/quill-editor@4.2.0) (2020-01-15)
+
+
+### Bug Fixes
+
+* Set selection after inserted template. ([4bba042](https://git/Logos/FaithlifeEquipment/commits/4bba042630ef2d178d01581f8f67c3f1c4804027))
+
+
+### Features
+
+* Add a plainTextMode prop to apply all settings required for plain text editing. ([5a06dc0](https://git/Logos/FaithlifeEquipment/commits/5a06dc09289d85491d7d81f68c653236c96c1866))
+
+
+
+
+
 ## [4.1.4](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.1.3...@faithlife/quill-editor@4.1.4) (2020-01-15)
 
 
