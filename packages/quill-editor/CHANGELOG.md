@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.3.1](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.3.0...@faithlife/quill-editor@4.3.1) (2020-01-16)
+
+
+### Bug Fixes
+
+* Handle plain text newlines. ([fa53083](https://git/Logos/FaithlifeEquipment/commits/fa5308350c1cc7a59bee134952d65f9a82f3cdcd))
+
+
+
+
+
 # [4.3.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.2.0...@faithlife/quill-editor@4.3.0) (2020-01-16)
 
 
