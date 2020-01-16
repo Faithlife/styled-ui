@@ -476,7 +476,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 					content = deltaContent;
 				} else {
 					content = plainTextMode
-						? editor.getText()
+						? editor.getText().slice(0, -1)
 						: convertDeltaToHtml(deltaContent, htmlOptions);
 				}
 			}
