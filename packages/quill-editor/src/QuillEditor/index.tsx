@@ -218,37 +218,49 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const onlyChild: any = useMemo(() => children && React.Children.only(children), [children]);
 	const hasOnlyChild = useMemo(() => !!onlyChild, [onlyChild]);
 
-	const setContents = useCallback(contents => {
-		const editor = quillRef.current && quillRef.current.getEditor();
-		if (editor) {
-			const preSelection = editor.getSelection();
-			const preLength = editor.getLength();
-			const preSelectionAtEnd =
-				preSelection && preSelection.length === 0 && preSelection.index === preLength - 1;
-			const shouldFocus = editor.hasFocus();
+	const plainTextOverride = useMemo(
+		() => plainTextMode && (defaultValue || value).replace(/\n/g, '<br/>'), // Newlines are not understood by quill when loading default value
+		[defaultValue, plainTextMode, value]
+	);
 
-			if (contents.ops) {
-				editor.setContents(contents, 'api');
-			} else {
-				editor.setContents(editor.clipboard.convert(contents), 'api');
-			}
+	const setContents = useCallback(
+		contents => {
+			const editor = quillRef.current && quillRef.current.getEditor();
+			if (editor) {
+				const preSelection = editor.getSelection();
+				const preLength = editor.getLength();
+				const preSelectionAtEnd =
+					preSelection && preSelection.length === 0 && preSelection.index === preLength - 1;
+				const shouldFocus = editor.hasFocus();
 
-			const postLength = editor.getLength();
-			if (shouldFocus || preSelection) {
-				setTimeout(() => {
-					if (shouldFocus) {
-						editor.focus();
-						if (preSelectionAtEnd && postLength > 0) {
-							editor.setSelection({
-								index: postLength - 1,
-								length: 0,
-							});
-						}
+				if (contents.ops) {
+					editor.setContents(contents, 'api');
+				} else {
+					if (plainTextMode) {
+						editor.setContents({ ops: [{ insert: contents }] }, 'api');
+					} else {
+						editor.setContents(editor.clipboard.convert(contents), 'api');
 					}
-				}, 0);
+				}
+
+				const postLength = editor.getLength();
+				if (shouldFocus || preSelection) {
+					setTimeout(() => {
+						if (shouldFocus) {
+							editor.focus();
+							if (preSelectionAtEnd && postLength > 0) {
+								editor.setSelection({
+									index: postLength - 1,
+									length: 0,
+								});
+							}
+						}
+					}, 0);
+				}
 			}
-		}
-	}, []);
+		},
+		[plainTextMode]
+	);
 
 	const setText = useCallback(
 		plainText => {
@@ -735,7 +747,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				{SafeQuill ? (
 					<ReactQuillStyled
 						ref={quillRef}
-						defaultValue={defaultValue || value}
+						defaultValue={plainTextOverride || defaultValue || value}
 						placeholder={placeholder}
 						modules={moduleConfiguration}
 						formats={allowedFormats}
