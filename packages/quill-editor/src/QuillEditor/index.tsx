@@ -218,6 +218,48 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const onlyChild: any = useMemo(() => children && React.Children.only(children), [children]);
 	const hasOnlyChild = useMemo(() => !!onlyChild, [onlyChild]);
 
+	const setContents = useCallback(contents => {
+		const editor = quillRef.current && quillRef.current.getEditor();
+		if (editor) {
+			const preSelection = editor.getSelection();
+			const preLength = editor.getLength();
+			const preSelectionAtEnd =
+				preSelection && preSelection.length === 0 && preSelection.index === preLength - 1;
+			const shouldFocus = editor.hasFocus();
+
+			if (contents.ops) {
+				editor.setContents(contents, 'api');
+			} else {
+				editor.setContents(editor.clipboard.convert(contents), 'api');
+			}
+
+			const postLength = editor.getLength();
+			if (shouldFocus || preSelection) {
+				setTimeout(() => {
+					if (shouldFocus) {
+						editor.focus();
+						if (preSelectionAtEnd && postLength > 0) {
+							editor.setSelection({
+								index: postLength - 1,
+								length: 0,
+							});
+						}
+					}
+				}, 0);
+			}
+		}
+	}, []);
+
+	const setText = useCallback(
+		plainText => {
+			if (plainText.ops) {
+				throw new Error('Cannot call setText with a Delta');
+			}
+			setContents(plainText);
+		},
+		[setContents]
+	);
+
 	const [quillEditorId] = useState<any>(
 		() =>
 			editorId ||
@@ -232,30 +274,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	useEffect(() => {
 		const editor = quillRef.current && quillRef.current.getEditor();
 		if (!defaultValue && value !== null && (value !== storedValue || value === '') && editor) {
-			const preSelection = editor.getSelection();
-			const preLength = editor.getLength();
-			const preSelectionAtEnd =
-				preSelection && preSelection.length === 0 && preSelection.index === preLength - 1;
-			const shouldFocus = editor.hasFocus();
-			if (value.ops) {
-				editor.setContents(value, 'api');
-			} else {
-				editor.setContents(editor.clipboard.convert(value), 'api');
-			}
-			const postLength = editor.getLength();
-			if (shouldFocus || preSelection) {
-				setTimeout(() => {
-					if (shouldFocus) {
-						editor.focus();
-						if (preSelectionAtEnd && postLength > 0) {
-							editor.setSelection({
-								index: editor.getLength() - 1,
-								length: 0,
-							});
-						}
-					}
-				}, 0);
-			}
+			setContents(value);
 		}
 
 		editor && setIsEmpty(editor.getLength() === 1);
@@ -538,9 +557,11 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			insertText,
 			deleteText,
 			getHTML,
+			setText,
+			setContents,
 			getEditor: () => quillRef.current && quillRef.current.getEditor(),
 		}),
-		[insertText, deleteText, getHTML]
+		[insertText, deleteText, getHTML, setText, setContents]
 	);
 
 	const handleLinkInsert = useCallback(function(this: any) {
