@@ -41,3 +41,10 @@ export const ProductDrawerToggleText = styled.span`
 		margin-left: 8px;
 	}
 `;
+
+export const ToggleButtonIcon = styled.svg`
+	& > path {
+		width: ${props => props.width}px;
+		height: ${props => props.height}px;
+	}
+`;

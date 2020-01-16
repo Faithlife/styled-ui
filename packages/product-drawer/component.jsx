@@ -6,6 +6,8 @@ import * as Styled from './styled';
 import defaultResources from './locales/en-US/resources.json';
 import ProductDrawerDropdown from './product-drawer-dropdown';
 
+const defaultToggleButtonSize = 16;
+
 export class ProductDrawer extends React.PureComponent {
 	static propTypes = {
 		resources: PropTypes.shape({
@@ -52,11 +54,14 @@ export class ProductDrawer extends React.PureComponent {
 			tabletRightOffset: PropTypes.string,
 			toggleButtonColor: PropTypes.string,
 			toggleButtonHoverColor: PropTypes.string,
+			toggleButtonSize: PropTypes.number,
 		}),
 	};
 
 	static defaultProps = {
-		styleOverrides: {},
+		styleOverrides: {
+			toggleButtonSize: defaultToggleButtonSize,
+		},
 	};
 
 	state = {
@@ -110,18 +115,10 @@ export class ProductDrawer extends React.PureComponent {
 								<Localize
 									render={resources => (
 										<>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="16"
-												height="16"
-												title={resources.toggleButtonAltText}
-											>
-												<path
-													d="M0 0h4v4H0zm0 6h4v4H0zm0 6h4v4H0zM6 0h4v4H6zm0 6h4v4H6zm0 6h4v4H6zm6-12h4v4h-4zm0 6h4v4h-4zm0 6h4v4h-4z"
-													fill="#878787"
-													fillRule="evenodd"
-												/>
-											</svg>
+											<AppDrawerIcon
+												width={styleOverrides.toggleButtonSize || defaultToggleButtonSize}
+												height={styleOverrides.toggleButtonSize || defaultToggleButtonSize}
+											/>
 											<Styled.ProductDrawerToggleText styleOverrides={styleOverrides}>
 												{resources.drawerToggleText}
 											</Styled.ProductDrawerToggleText>
@@ -144,4 +141,15 @@ export class ProductDrawer extends React.PureComponent {
 			</LocalizationProvider>
 		);
 	}
+}
+
+function AppDrawerIcon(props) {
+	return (
+		<svg width={18} height={18} viewBox="0 0 18 18" {...props}>
+			<path
+				fill="#888"
+				d="M2 2h4v4H2V2zm5 0h4v4H7V2zm5 0h4v4h-4V2zM2 7h4v4H2V7zm5 0h4v4H7V7zm5 0h4v4h-4V7zM2 12h4v4H2v-4zm5 0h4v4H7v-4zm5 0h4v4h-4v-4z"
+			/>
+		</svg>
+	);
 }

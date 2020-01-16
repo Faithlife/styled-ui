@@ -19,6 +19,7 @@ const MyComponent = () => (
 	- `tabletRightOffset: string` - The right margin of the component on tablet
 	- `toggleButtonColor: string` - The color of the drop down toggle button
 	- `toggleButtonHoverColor: string` - The color of the drop down toggle button when hovered
+	- `toggleButtonSize: string` - The height and width of the drop down toggle button icon
 - `resources: object` - Overrides default localization (if a property is not supplied, the default will be used)
 	- `closeButtonAltText: string`
 	- `toggleButtonAltText: string`
