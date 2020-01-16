@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.3.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.2.0...@faithlife/quill-editor@4.3.0) (2020-01-16)
+
+
+### Bug Fixes
+
+* Don't include the quill-appended `\n` when returning plain text content. ([f168938](https://git/Logos/FaithlifeEquipment/commits/f1689381cf8132b42e5bf5da3ca845e7647c095b))
+
+
+### Features
+
+* Add methods setText and setContents to the imperative interface. ([426e106](https://git/Logos/FaithlifeEquipment/commits/426e1061f16d04f663361e79d52a72019b9ceddf))
+
+
+
+
+
 # [4.2.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.1.4...@faithlife/quill-editor@4.2.0) (2020-01-15)
 
 
