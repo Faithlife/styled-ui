@@ -23,8 +23,8 @@ const renderFaithlifeImage = (op, context, isInline) => {
 
 	// prettier-ignore
 	return `${link ? `<a href="${link}" target="_blank" rel="noreferrer noopener" ${!isInline && imageAlign === 'wrap' ? 'class="ql-image-wrap" ' : ''}>` 
-				   : !isInline && imageAlign ? '<span class="ql-image-wrap"/>' : ''
-			}<img src="${op.insert.value.url}" ${renderAttributes(otherAttributes)}${isInline ? renderAlignAttribute(imageAlign, context):''}/>${link ? `</a>` : ''}`;
+				   : !isInline && imageAlign ? '<span class="ql-image-wrap">' : ''
+			}<img src="${op.insert.value.url}" ${renderAttributes(otherAttributes)}${isInline ? renderAlignAttribute(imageAlign, context):''}/>${link ? `</a>` : !isInline && imageAlign ? '</span>' : ''}`;
 };
 
 export const convertDeltaToHtml = (content, options: any = {}) => {
