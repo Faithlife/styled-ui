@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.1](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.4.0...@faithlife/quill-editor@4.4.1) (2020-01-17)
+
+
+### Bug Fixes
+
+* Fix rendered html for image wrapping. ([f1e55a3](https://git/Logos/FaithlifeEquipment/commits/f1e55a35a60fabcfa57cff136b2b63d6a98814f3))
+
+
+
+
+
 # [4.4.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.3.1...@faithlife/quill-editor@4.4.0) (2020-01-17)
 
 
