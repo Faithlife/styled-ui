@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.4.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.3.1...@faithlife/quill-editor@4.4.0) (2020-01-17)
+
+
+### Features
+
+* Add 'raw' option for quill to return innerHTML of editor. ([2fd7946](https://git/Logos/FaithlifeEquipment/commits/2fd794611c76efeb424f74009d722deaeff64fbe))
+
+
+
+
+
 ## [4.3.1](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.3.0...@faithlife/quill-editor@4.3.1) (2020-01-16)
 
 
