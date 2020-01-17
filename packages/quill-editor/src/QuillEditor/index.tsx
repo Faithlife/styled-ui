@@ -486,10 +486,12 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				const deltaContent = editor.getContents();
 				if (value && value.ops) {
 					content = deltaContent;
+				} else if (plainTextMode) {
+					content = editor.getText().slice(0, -1);
+				} else if (htmlOptions?.format === 'raw') {
+					content = editor.root.innerHTML;
 				} else {
-					content = plainTextMode
-						? editor.getText().slice(0, -1)
-						: convertDeltaToHtml(deltaContent, htmlOptions);
+					content = convertDeltaToHtml(deltaContent, htmlOptions);
 				}
 			}
 
@@ -557,7 +559,12 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		(options?: { [key: string]: any }) => {
 			if (quillRef.current) {
 				const deltas = quillRef.current.getEditor().getContents();
-				return convertDeltaToHtml(deltas, { ...htmlOptions, ...options });
+				const finalOptions: any = { ...htmlOptions, ...options };
+				if (finalOptions.format === 'raw') {
+					return quillRef.current.getEditor().root.innerHTML;
+				} else {
+					return convertDeltaToHtml(deltas, finalOptions);
+				}
 			}
 		},
 		[htmlOptions]
