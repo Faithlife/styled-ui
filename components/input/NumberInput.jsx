@@ -7,7 +7,7 @@ import { theme } from '../../theme';
 import { useCopyRefs } from '../shared-hooks/use-copy-refs';
 
 const NumberInput = React.forwardRef(function NumberInput(props, ref) {
-	const { step, variant, ...rest } = props;
+	const { variant, width, ...rest } = props;
 	const inputRef = useRef();
 	const innerRef = useCopyRefs(useMemo(() => [ref, inputRef], [inputRef, ref]));
 
@@ -28,9 +28,10 @@ const NumberInput = React.forwardRef(function NumberInput(props, ref) {
 	const buttonPadding = variant === 'small' ? 2 : 3;
 
 	return (
-		<InputContainer>
+		<InputContainer width={width}>
 			<Input
 				paddingRight="24px"
+				width={width && '100%'}
 				{...rest}
 				ref={innerRef}
 				variant={variant}
