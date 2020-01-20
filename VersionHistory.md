@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.40.1
+
+- Fix bug where `step` prop was not forwarded by `NumberInput`.
+
 ### 5.40.0
 
 - Add `NumberInput` component with styled step buttons.
