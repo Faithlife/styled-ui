@@ -276,9 +276,10 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const [quillEditorId] = useState<any>(
 		() =>
 			editorId ||
-			`ql-${Math.random()
-				.toString(36)
-				.substring(7)}`
+			(hasOnlyChild &&
+				`ql-${Math.random()
+					.toString(36)
+					.substring(7)}`)
 	);
 
 	const [quillEditorQuery] = useState(() => `.${quillEditorId}`);
