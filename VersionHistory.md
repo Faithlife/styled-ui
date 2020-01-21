@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.40.2
+
+- Fix rendering bugs in`Slider` causing the right edge to be clipped under certain circumstances.
+
 ### 5.40.1
 
 - Fix bug where `step` prop was not forwarded by `NumberInput`.
