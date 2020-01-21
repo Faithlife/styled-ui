@@ -83,7 +83,6 @@ export class Slider extends PureComponent {
 	};
 
 	getStops = createDerivedValue(() => [this.props.stopCount], stopCount => range(0, stopCount));
-	getTrack = createDerivedValue(() => [this.props.stopCount], stopCount => range(0, stopCount - 1));
 
 	handleTouchStart = event => {
 		if (this.props.disabled) {
@@ -274,7 +273,6 @@ export class Slider extends PureComponent {
 		} = this.props;
 
 		const { isHovered, isSliding, value: pendingValue } = this.state;
-		const track = this.getTrack();
 		const stops = this.getStops();
 
 		const activeStopIndex = Math.min(Math.round(pendingValue), stopCount - 1);
@@ -301,19 +299,27 @@ export class Slider extends PureComponent {
 				`}
 				{...props}
 			>
-				<Styled.TrackContainer>
-					<Styled.TrackGradient />
-					{track.map(index => (
-						<Styled.Track
-							active={index < activeStopIndex}
-							invalid={maxValue && index >= maxValue}
-							trackFirst={index === 0}
-							trackLast={index === maxValue - 1 || (!maxValue && index === stopCount - 2)}
-							key={index}
-							styleOverrides={styleOverrides}
-						/>
-					))}
-				</Styled.TrackContainer>
+				<TrackPart
+					height="8px"
+					top="50%"
+					transform="translateY(-50%)"
+					backgroundImage="linear-gradient(to left, #79cafb, #1e91d6)"
+				>
+					<TrackPart
+						left={`${getPercentage(activeStopIndex, stopCount - 1)}%`}
+						right={0}
+						bg={(styleOverrides && styleOverrides.backgroundColor) || '#fff'}
+					/>
+					<TrackPart
+						bg="#ebebeb"
+						left={`${getPercentage(activeStopIndex, stopCount - 1)}%`}
+						right={`${100 -
+							getPercentage(
+								typeof maxValue === 'number' ? maxValue : stopCount - 1,
+								stopCount - 1,
+							)}%`}
+					/>
+				</TrackPart>
 				<Styled.StopContainer>
 					{stops.map(index => (
 						<Styled.Stop
@@ -332,7 +338,7 @@ export class Slider extends PureComponent {
 					onMouseLeave={this.handleMouseLeave}
 				>
 					{stops.map(index => (
-						<Stop
+						<Thumb
 							key={index}
 							index={index}
 							stopCount={stopCount}
@@ -351,7 +357,25 @@ export class Slider extends PureComponent {
 	}
 }
 
-const Stop = React.memo(({ isSliding, isHovered, active, label, disabled, ...props }) => {
+const TrackPart = ({ children, ...props }) => (
+	<Box
+		position="absolute"
+		left={0}
+		right={0}
+		height="100%"
+		overflow="hidden"
+		borderRadius={100}
+		{...props}
+	>
+		{children}
+	</Box>
+);
+
+function getPercentage(index, max) {
+	return (index / max) * 100;
+}
+
+const Thumb = React.memo(({ isSliding, isHovered, active, label, disabled, ...props }) => {
 	const thumb = (
 		<Styled.Thumb active={isSliding} hovered={isHovered} disabled={disabled} hidden={!active} />
 	);
