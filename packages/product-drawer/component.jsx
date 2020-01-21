@@ -145,7 +145,13 @@ export class ProductDrawer extends React.PureComponent {
 
 function AppDrawerIcon(props) {
 	return (
-		<svg viewBox={`0 0 ${defaultToggleButtonSize} ${defaultToggleButtonSize}`} {...props}>
+		<svg
+			viewBox={`0 0 ${(props.styleOverrides && props.styleOverrides.toggleButtonSize) ||
+				defaultToggleButtonSize} ${(props.styleOverrides &&
+				props.styleOverrides.toggleButtonSize) ||
+				defaultToggleButtonSize}`}
+			{...props}
+		>
 			<path
 				fill="#888"
 				d="M2 2h4v4H2V2zm5 0h4v4H7V2zm5 0h4v4h-4V2zM2 7h4v4H2V7zm5 0h4v4H7V7zm5 0h4v4h-4V7zM2 12h4v4H2v-4zm5 0h4v4H7v-4zm5 0h4v4h-4v-4z"
