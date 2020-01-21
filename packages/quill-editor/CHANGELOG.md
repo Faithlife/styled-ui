@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.3](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.4.2...@faithlife/quill-editor@4.4.3) (2020-01-21)
+
+
+### Bug Fixes
+
+* Allow no editor id if toolbar is not a child of quill. ([b08cf4d](https://git/Logos/FaithlifeEquipment/commits/b08cf4da5f3949b1ce3ff5448680e009b5864b38))
+
+
+
+
+
 ## [4.4.2](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.4.1...@faithlife/quill-editor@4.4.2) (2020-01-21)
 
 
