@@ -193,7 +193,6 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		placeholder,
 		onContentChange,
 		onClick,
-		onBlur,
 		className,
 		classNames,
 		editorId,
@@ -336,10 +335,9 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			const range = quillApi.getSelection();
 			setImageInsertRange(range ? range : null);
 			quillRef.current.blur();
-			onBlur && onBlur();
 		}
 		setShowFilePicker(true);
-	}, [onBlur]);
+	}, []);
 
 	const insertFile = useCallback(
 		async data => {
