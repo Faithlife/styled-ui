@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.2](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.4.1...@faithlife/quill-editor@4.4.2) (2020-01-21)
+
+
+### Bug Fixes
+
+* Pass onBlur directly to quill component. ([02dcdfe](https://git/Logos/FaithlifeEquipment/commits/02dcdfee44910f9c90f576bed3997d8150022f42))
+* Update isEmpty any time contents are set. ([57d2c11](https://git/Logos/FaithlifeEquipment/commits/57d2c11b5ed3952d70d0091b68be823860a1f260))
+
+
+
+
+
 ## [4.4.1](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.4.0...@faithlife/quill-editor@4.4.1) (2020-01-17)
 
 
