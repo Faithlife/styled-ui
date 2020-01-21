@@ -257,6 +257,8 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 						}
 					}, 0);
 				}
+
+				editor && setIsEmpty(editor.getLength() === 1);
 			}
 		},
 		[plainTextMode]
@@ -288,8 +290,6 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		if (!defaultValue && value !== null && (value !== storedValue || value === '') && editor) {
 			setContents(value);
 		}
-
-		editor && setIsEmpty(editor.getLength() === 1);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
 
