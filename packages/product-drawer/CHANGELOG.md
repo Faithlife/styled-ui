@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.2.1...@faithlife/product-drawer@0.3.0) (2020-01-21)
+
+
+### Bug Fixes
+
+* Make size default; remove dead code. ([8694724](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/8694724d52af17e38d0388c7d5c9ba1148641a5a))
+* Pass styleoverrides to icon size. ([ca32d39](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/ca32d398e31bc4b61d7dba3384aadb52148fa94f))
+* Properly pass width and height. ([03e3f80](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/03e3f8098ba7bf282dec79800cb3dd4af70d5698))
+
+
+### Features
+
+* Add toggle button size style override. ([5236834](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/52368340fc8ae6069851b839ebc0fec71b253970))
+
+
+
+
+
 ## [0.2.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.2.0...@faithlife/product-drawer@0.2.1) (2020-01-07)
 
 
