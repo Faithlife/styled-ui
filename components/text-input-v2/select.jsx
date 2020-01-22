@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import ReactSelect, {
-	Creatable as ReactSelectCreatable,
-	components as reactSelectComponents,
-} from 'react-select';
+import React, { useState, useEffect, useCallback } from 'react';
+import ReactSelect, { components as reactSelectComponents } from 'react-select';
+import ReactSelectCreatable from 'react-select/creatable';
 import { colors } from '../shared-styles';
 import { ChevronExpand } from '../icons';
-import { ReactSelectAsyncCreatable, ReactSelectAsync } from './react-select-async';
+import { DebouncedSelectAsync, DebouncedSelectAsyncCreatable } from './debounced-async';
 import { theme } from '../../theme';
 
 const selectStyles = props => {
@@ -163,6 +161,8 @@ export const Select = React.forwardRef(({ components = {}, ...props }, ref) => {
 	const body = useBody();
 	const onConsumerKeyDown = props.onKeyDown;
 
+	const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
+
 	return (
 		<ReactSelect
 			ref={ref}
@@ -172,6 +172,7 @@ export const Select = React.forwardRef(({ components = {}, ...props }, ref) => {
 			noOptionsMessage={noOptionsMessage}
 			menuPortalTarget={body}
 			{...props}
+			onChange={onChange}
 			styles={selectStyles(props)}
 			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 		/>
@@ -183,6 +184,8 @@ export const CreatableSelect = React.forwardRef(({ components = {}, ...props }, 
 	const body = useBody();
 	const onConsumerKeyDown = props.onKeyDown;
 
+	const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
+
 	return (
 		<ReactSelectCreatable
 			ref={ref}
@@ -193,6 +196,7 @@ export const CreatableSelect = React.forwardRef(({ components = {}, ...props }, 
 			noOptionsMessage={noOptionsMessage}
 			menuPortalTarget={body}
 			{...props}
+			onChange={onChange}
 			styles={selectStyles(props)}
 			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 		/>
@@ -204,8 +208,10 @@ export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...prop
 	const body = useBody();
 	const onConsumerKeyDown = props.onKeyDown;
 
+	const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
+
 	return (
-		<ReactSelectAsyncCreatable
+		<DebouncedSelectAsync
 			ref={ref}
 			allowCreateWhileLoading={false}
 			classNamePrefix="fl-select"
@@ -215,6 +221,7 @@ export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...prop
 			noOptionsMessage={noOptionsMessage}
 			menuPortalTarget={body}
 			{...props}
+			onChange={onChange}
 			styles={selectStyles(props)}
 			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 		/>
@@ -226,8 +233,10 @@ export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref)
 	const body = useBody();
 	const onConsumerKeyDown = props.onKeyDown;
 
+	const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
+
 	return (
-		<ReactSelectAsync
+		<DebouncedSelectAsyncCreatable
 			ref={ref}
 			classNamePrefix="fl-select"
 			theme={selectTheme}
@@ -235,6 +244,7 @@ export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref)
 			noOptionsMessage={noOptionsMessage}
 			menuPortalTarget={body}
 			{...props}
+			onChange={onChange}
 			styles={selectStyles(props)}
 			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 		/>
@@ -248,4 +258,17 @@ function useBody() {
 	}, []);
 
 	return body;
+}
+
+// TODO: Remove in version 6.0
+// This undoes the change type normalization introduced in react-select 3
+function useLegacyChangeHandler(onChange, isMulti) {
+	return useCallback(
+		(values, change) => {
+			if (onChange) {
+				return onChange(isMulti ? values || [] : values, change);
+			}
+		},
+		[isMulti, onChange],
+	);
 }

@@ -16,7 +16,6 @@
 			}
 		],
 		"react-docgen",
-		"babel-plugin-transform-flow-strip-types",
 		"@babel/plugin-proposal-class-properties",
 		"@babel/plugin-syntax-dynamic-import"
 	],
@@ -30,7 +29,6 @@
 						"ssr": true
 					}
 				],
-				"babel-plugin-transform-flow-strip-types",
 				"@babel/plugin-proposal-class-properties",
 				"@babel/plugin-syntax-dynamic-import"
 			]
