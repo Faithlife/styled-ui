@@ -3,6 +3,7 @@
 ### 5.40.2
 
 - Fix rendering bugs in`Slider` causing the right edge to be clipped under certain circumstances.
+- Fix popover arrow styling.
 
 ### 5.40.1
 
