@@ -208,14 +208,15 @@ export class PopoverBase extends Component {
 						{!hideArrow && (
 							<Box
 								ref={arrowProps.ref}
-								placement={placement}
 								style={arrowProps.style}
-								width="25px"
-								height="25px"
-								position="absolute"
-								overflow="hidden"
-								pointerEvents="none"
 								css={`
+									width: 25px;
+									height: 25px;
+									position: absolute;
+									overflow: hidden;
+									pointer-events: none;
+									text-align: center;
+
 									&::after {
 										content: '';
 										border: ${styleOverrides.border ? styleOverrides.border : 'none'};
@@ -228,8 +229,7 @@ export class PopoverBase extends Component {
 											? 'none'
 											: '0 4px 4px 0 rgba(0, 0, 0, 0.12), 0 0 4px 0 rgba(0, 0, 0, 0.12)'};
 									}
-									${({ placement }) =>
-										placement ? arrowStyles[getPlacement(placement)] : arrowStyles.top};
+									${placement ? arrowStyles[getPlacement(placement)] : arrowStyles.top};
 								`}
 							/>
 						)}
