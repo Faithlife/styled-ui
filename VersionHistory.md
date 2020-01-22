@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.41.0
+
+- Upgrade react-select to version 3, improving SSR support for select components.
+
 ### 5.40.2
 
 - Fix rendering bugs in`Slider` causing the right edge to be clipped under certain circumstances.
