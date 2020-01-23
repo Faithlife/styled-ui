@@ -72,6 +72,13 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 	const [isProcessing, setIsProcessing] = useState<boolean>(false);
 	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
+	const initialCountryOption =
+		billingProfile &&
+		countries &&
+		countries
+			.map(country => ({ label: country.name, value: country.countryId }))
+			.find(country => country.value === billingProfile.countryId);
+
 	const initialStateOption =
 		billingProfile &&
 		statesByCountryId &&
@@ -435,7 +442,7 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 								}
 							}}
 							options={countryOptions}
-							defaultValue={defaultCountryOption}
+							defaultValue={initialCountryOption || defaultCountryOption}
 							styles={countrySelectStyles}
 						/>
 					</Styled.Label>
