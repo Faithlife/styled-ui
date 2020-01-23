@@ -124,7 +124,6 @@ export const validateBillingProfile = (
 		'countryId',
 		'addressLine1',
 		'city',
-		'postalCode',
 	]);
 
 	if (

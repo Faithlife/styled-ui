@@ -6,9 +6,10 @@ export default interface ICreateOrdersBillingProfileDto {
 	address1: string;
 	address2: string;
 	city: string;
+	suburb?: string;
+	stateId: string;
 	postalCode: string;
 	countryId: string;
-	stateId: string;
 	makeDefault: boolean;
 	useOnPendingPrepubs: boolean;
 	useOnActiveSubscriptions: boolean;

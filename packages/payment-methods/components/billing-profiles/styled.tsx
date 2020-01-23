@@ -105,8 +105,11 @@ export const Title = styled.div`
 
 export const CreditCardInfoRow = styled.div`
 	display: flex;
-	width: 276px;
 	padding-bottom: 12px;
+`;
+
+export const CityStateInfoRow = styled(CreditCardInfoRow)`
+	flex-wrap: wrap;
 `;
 
 export const Label = styled.label`
@@ -202,17 +205,17 @@ export const BillingAddressInfoSection = styled.div`
 `;
 
 export const CityContainer = styled.div`
-	width: 131px;
+	flex: 2 1 100px;
 `;
 
 export const StateContainer = styled.div`
-	padding-left: ${({ theme }) => theme.thickness2};
-	width: 60px;
+	flex: 1 1 50px;
+	margin-left: ${({ theme }) => theme.thickness1};
 `;
 
 export const PostalCodeContainer = styled.div`
-	width: 74px;
-	padding-left: ${({ theme }) => theme.thickness2};
+	flex: 1 1 80px;
+	margin-left: ${({ theme }) => theme.thickness1};
 `;
 
 export const Checkbox = styled(UnstyledCheckbox)`

@@ -19,6 +19,7 @@ export default class BillingProfileMapper {
 			city,
 			stateId,
 			countryId,
+			suburb,
 			makeDefault,
 			useOnPendingPrepubs,
 			useOnActiveSubscriptions,
@@ -35,6 +36,7 @@ export default class BillingProfileMapper {
 			address2: address2 || '',
 			city: city || '',
 			stateId: stateId || '',
+			suburb: suburb || '',
 			countryId: countryId || '',
 			cardInfo: {
 				expirationMonth: parseInt(expirationMonth),
@@ -48,7 +50,6 @@ export default class BillingProfileMapper {
 			},
 			nameOnCard: nameOnCard || '',
 			postalCode: postalCode || '',
-			// TODO: pass these in
 			makeDefault: makeDefault || false,
 			useOnPendingPrepubs: useOnPendingPrepubs || false,
 			useOnActiveSubscriptions: useOnActiveSubscriptions || false,
@@ -77,8 +78,9 @@ export default class BillingProfileMapper {
 				provider: profile.cardInfo.creditCardProvider,
 			},
 			city: profile.city,
+			suburb: profile.suburb,
 			countryId: profile.countryId.toString(),
-			stateId: profile.stateId.toString(),
+			stateId: profile.stateId ? profile.stateId.toString() : '',
 		};
 	}
 
@@ -91,6 +93,7 @@ export default class BillingProfileMapper {
 			address3: undefined,
 			address4: undefined,
 			city: profile.city || '',
+			suburb: profile.suburb,
 			countryId: profile.countryId || '',
 			expirationMonth: parseInt(sanitizedExpiration.slice(0, 2)),
 			expirationYear: parseInt(
@@ -102,7 +105,6 @@ export default class BillingProfileMapper {
 			nameOnCard: profile.cardInfo.nameOnCard || '',
 			postalCode: profile.cardInfo.postalCode || '',
 			stateId: profile.stateId || '',
-			suburb: '',
 		};
 	}
 }
