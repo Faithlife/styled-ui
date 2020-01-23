@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@0.2.0...@faithlife/payment-methods@0.2.1) (2020-01-23)
+
+
+### Bug Fixes
+
+* Fix initial country selection. ([#46](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/46)) ([0859b87](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/0859b87472716d92562b1175e34810a3d8c8f966))
+
+
+
+
+
 # [0.2.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@0.1.2...@faithlife/payment-methods@0.2.0) (2020-01-23)
 
 
