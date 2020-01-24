@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.41.1
+
+- Export `reactSelectComponents` for real.
+
 ### 5.42.0
 
 - Expose `reactSelectComponents` from `ReactSelect` to help with the creation of custom `Option` and `Input` components.
