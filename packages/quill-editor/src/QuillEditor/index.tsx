@@ -30,15 +30,15 @@ export interface IQuillRichTextEditorProps {
 	placeholder?: string;
 	onContentChange: (delta: any | null) => void;
 	onClick?: (e: React.MouseEvent) => void;
-	onBlur?: () => void;
+	onBlur?: (previousRange?: any, source?: string, editor?: any) => void;
 	className?: string;
 	classNames?: string[];
 	editorId?: string;
-	onFocus?: () => void;
+	onFocus?: (range?: any, source?: string, editor?: any) => void;
 	onKeyDown?: () => void;
 	onKeyPress?: () => void;
 	onKeyUp?: () => void;
-	onChangeSelection?: () => void;
+	onChangeSelection?: (range?: any, source?: string, editor?: any) => void;
 	onImageUpload?: (file: File) => void;
 	autofocus?: string;
 	tabMode?: 'insert' | 'exit';
@@ -192,6 +192,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		modules,
 		placeholder,
 		onContentChange,
+		onChangeSelection,
 		onClick,
 		className,
 		classNames,
@@ -471,7 +472,15 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [allowImageLink]);
 
-	const handleSelectionChange = useCallback(throttle(updateLinkButton, 200), [allowImageLink]);
+	const throttledSelectionChange = useCallback(throttle(updateLinkButton, 200), [allowImageLink]);
+
+	const handleSelectionChange = useCallback(
+		(...args) => {
+			onChangeSelection && onChangeSelection(...args);
+			throttledSelectionChange();
+		},
+		[onChangeSelection, throttledSelectionChange]
+	);
 
 	const handleTextChange = useCallback(
 		(_, _1, source) => {
