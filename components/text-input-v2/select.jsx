@@ -158,7 +158,7 @@ function handleKeyDown(e, onConsumerKeyDown) {
 	}
 }
 
-export reactSelectComponents;
+export { reactSelectComponents };
 
 /** Autocomplete control based on react-select */
 export const Select = React.forwardRef(({ components = {}, ...props }, ref) => {
