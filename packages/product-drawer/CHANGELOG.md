@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.2](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.3.1...@faithlife/product-drawer@0.3.2) (2020-01-24)
+
+
+### Bug Fixes
+
+* Fix viewport size. ([097ad29](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/097ad29de6e93434400f1c78772e28e40afdd1d0))
+* Update viewbox size to 18. ([98364b6](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/98364b6f7c57566cc82afb17aadf19b9d1baab36))
+* Use new menu icon. ([f3fe1f2](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/f3fe1f26f168c4ec8e159acbdd43ca794e1845b3))
+
+
+
+
+
 ## [0.3.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.3.0...@faithlife/product-drawer@0.3.1) (2020-01-23)
 
 
