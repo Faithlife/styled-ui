@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.4](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.4.3...@faithlife/quill-editor@4.4.4) (2020-01-24)
+
+
+### Bug Fixes
+
+* Don't override internal selection handler if a consumer passes in their own. ([4961819](https://git/Logos/FaithlifeEquipment/commits/4961819e69e25dc10b33a7b2240883f3d3bbbbb2))
+
+
+
+
+
 ## [4.4.3](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.4.2...@faithlife/quill-editor@4.4.3) (2020-01-21)
 
 
