@@ -72,6 +72,7 @@ export interface IToolbarSelectProps extends IToolbarControlProps {
 	defaultValue?: string;
 	label?: string;
 	className?: string;
+	placement?: string;
 }
 
 export interface IToolbarGroupingProps {

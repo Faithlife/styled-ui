@@ -6,6 +6,7 @@ import React, {
 	useState,
 	useImperativeHandle,
 } from 'react';
+import ReactQuill from 'react-quill';
 import styled, { css } from 'styled-components';
 import './styles.css';
 import { LocalizationProvider } from '../components/Localization';
@@ -208,8 +209,8 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	},
 	ref
 ) => {
-	const quillRef = useRef<any>(null);
-	const quillContainerRef = useRef<any>(null);
+	const quillRef = useRef<ReactQuill>(null);
+	const quillContainerRef = useRef<HTMLDivElement>(null);
 	const [showFilePicker, setShowFilePicker] = useState<boolean>(false);
 	const [filePickerKind, setFilePickerKind] = useState(FilePickerKind.Image);
 	const [storedValue, setStoredValue] = useState(value);
@@ -237,7 +238,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 					editor.setContents(contents, 'api');
 				} else {
 					if (plainTextMode) {
-						editor.setContents({ ops: [{ insert: contents }] }, 'api');
+						editor.setText(contents, 'api');
 					} else {
 						editor.setContents(editor.clipboard.convert(contents), 'api');
 					}
@@ -301,10 +302,12 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	}, [placeholder]);
 
 	useEffect(() => {
-		const elements = quillContainerRef.current.querySelectorAll('.ql-picker-label');
-		elements.forEach(element => {
-			element.removeAttribute('tabindex');
-		});
+		if (quillContainerRef.current) {
+			const elements = quillContainerRef.current.querySelectorAll('.ql-picker-label');
+			elements.forEach(element => {
+				element.removeAttribute('tabindex');
+			});
+		}
 
 		if (quillRef.current) {
 			const history = (quillRef.current.getEditor() as any).history;
