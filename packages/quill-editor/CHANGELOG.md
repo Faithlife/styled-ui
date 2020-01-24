@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.3](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.4.2...@faithlife/quill-editor@4.4.3) (2020-01-21)
+
+
+### Bug Fixes
+
+* Allow no editor id if toolbar is not a child of quill. ([b08cf4d](https://git/Logos/FaithlifeEquipment/commits/b08cf4da5f3949b1ce3ff5448680e009b5864b38))
+
+
+
+
+
+## [4.4.2](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.4.1...@faithlife/quill-editor@4.4.2) (2020-01-21)
+
+
+### Bug Fixes
+
+* Pass onBlur directly to quill component. ([02dcdfe](https://git/Logos/FaithlifeEquipment/commits/02dcdfee44910f9c90f576bed3997d8150022f42))
+* Update isEmpty any time contents are set. ([57d2c11](https://git/Logos/FaithlifeEquipment/commits/57d2c11b5ed3952d70d0091b68be823860a1f260))
+
+
+
+
+
+## [4.4.1](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.4.0...@faithlife/quill-editor@4.4.1) (2020-01-17)
+
+
+### Bug Fixes
+
+* Fix rendered html for image wrapping. ([f1e55a3](https://git/Logos/FaithlifeEquipment/commits/f1e55a35a60fabcfa57cff136b2b63d6a98814f3))
+
+
+
+
+
+# [4.4.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.3.1...@faithlife/quill-editor@4.4.0) (2020-01-17)
+
+
+### Features
+
+* Add 'raw' option for quill to return innerHTML of editor. ([2fd7946](https://git/Logos/FaithlifeEquipment/commits/2fd794611c76efeb424f74009d722deaeff64fbe))
+
+
+
+
+
+## [4.3.1](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.3.0...@faithlife/quill-editor@4.3.1) (2020-01-16)
+
+
+### Bug Fixes
+
+* Handle plain text newlines. ([fa53083](https://git/Logos/FaithlifeEquipment/commits/fa5308350c1cc7a59bee134952d65f9a82f3cdcd))
+
+
+
+
+
 # [4.3.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.2.0...@faithlife/quill-editor@4.3.0) (2020-01-16)
 
 

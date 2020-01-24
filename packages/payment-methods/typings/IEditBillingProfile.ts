@@ -6,6 +6,7 @@ export default interface IEditBillingProfile {
 	cardInfo: IEditCardInfo;
 	city: string | null;
 	stateId: string | null;
+	suburb?: string;
 	countryId: string | null;
 	makeDefault?: boolean;
 	useOnPendingPrepubs?: boolean;

@@ -16,8 +16,10 @@ import IError from '../../clients/typings/orders/IError';
 import IBillingProfileInfo from '../../typings/IBillingProfileInfo';
 import { ISystemMessage } from '../../typings/ISystemMessage';
 import IUsageInfoDto from '../../clients/typings/orders/UsageInfoDto';
+import IAddressFormatItem from '../../clients/typings/locations/IAddressFormatItem';
 
 type billingProfileChangeKind = 'selected' | 'deleted';
+const unitedStatesCountryId = '840';
 
 interface IBillingProfilesProps {
 	onSelectedBillingProfileChange: (
@@ -48,6 +50,7 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 	const [editingBillingProfileId, setEditingBillingProfileId] = useState<string | null>(null);
 	const [countries, setCountries] = useState<ICountryDto[]>([]);
 	const [statesByCountryId, setStatesByCountryId] = useState<Record<string, IStateDto[]>>({});
+	const [addressFormatItems, setAddressFormatItems] = useState<IAddressFormatItem[]>([]);
 
 	const strings = useLocalization();
 
@@ -71,6 +74,7 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 		actAndHandleException(loadCountries, strings.fetchCountries);
 	}, [setCountries, actAndHandleException, strings.fetchCountries]);
 
+	// Todo: rename
 	const fetchStatesForCountry = useCallback(
 		async (countryId: string) => {
 			if (!Object.prototype.hasOwnProperty.call(statesByCountryId, countryId)) {
@@ -85,13 +89,40 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 				await actAndHandleException(getStates, strings.fetchStates);
 			}
 		},
-		[statesByCountryId, actAndHandleException, strings.fetchStates]
+		[statesByCountryId, actAndHandleException, strings]
 	);
+
+	const getAddressFormatForCountry = useCallback(
+		async (countryId: string) => {
+			const getAddressFormatForCountry = async () => {
+				const addressFormatItems = await LocationsClient.getAddressFormatForCountry(countryId);
+
+				setAddressFormatItems(addressFormatItems);
+			};
+			await actAndHandleException(getAddressFormatForCountry, strings.fetchAddressFormat);
+		},
+		[setAddressFormatItems, actAndHandleException, strings]
+	);
+
+	const handleCountryChanged = useCallback(
+		async (countryId: string) => {
+			await getAddressFormatForCountry(countryId);
+			await fetchStatesForCountry(countryId);
+		},
+		[getAddressFormatForCountry, fetchStatesForCountry]
+	);
+
+	// load list initial address format for usa
+	useEffect(() => {
+		const getAddressFormat = async () => {
+			await getAddressFormatForCountry(unitedStatesCountryId);
+		};
+		actAndHandleException(getAddressFormat, strings.fetchCountries);
+	}, [getAddressFormatForCountry, actAndHandleException, strings.fetchCountries]);
 
 	// load list of states for editing billing profiles
 	useEffect(() => {
 		const loadCountries = async () => {
-			const unitedStatesCountryId = '840';
 			await fetchStatesForCountry(unitedStatesCountryId);
 		};
 
@@ -219,6 +250,29 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 		[editingBillingProfileId, setEditingBillingProfileId]
 	);
 
+	const handleOnUpdateBillingProfile = useCallback(
+		(billingProfile: IBillingProfileDto): void => {
+			handleCountryChanged(billingProfile.countryId.toString());
+			fetchStatesForCountry(billingProfile.countryId.toString());
+			toggleEditBillingProfile(billingProfile.profileId);
+		},
+		[handleCountryChanged, toggleEditBillingProfile, fetchStatesForCountry]
+	);
+
+	const resetEditingBillingProfile = useCallback(() => {
+		setIsAddingNewBillingProfile(false);
+		setEditingBillingProfileId(null);
+		setAddressFormatItems([]);
+
+		// Reset the editor back to US defaults
+		handleCountryChanged(unitedStatesCountryId);
+	}, [
+		setIsAddingNewBillingProfile,
+		setEditingBillingProfileId,
+		setAddressFormatItems,
+		handleCountryChanged,
+	]);
+
 	const displayProfiles = showAllPaymentMethods ? billingProfiles : billingProfiles.slice(0, 3);
 	return (
 		<Styled.BillingProfilesContainer>
@@ -237,13 +291,17 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 					</Styled.CreditCardRow>
 					{isAddingNewBillingProfile && (
 						<EditBillingProfile
-							onCommitBillingProfile={createOrdersApiBillingProfile}
-							onCancelEditingBillingProfile={() => setIsAddingNewBillingProfile(false)}
+							onCommitBillingProfile={(profile: IEditBillingProfile) => {
+								createOrdersApiBillingProfile(profile);
+								resetEditingBillingProfile();
+							}}
+							onCancelEditingBillingProfile={resetEditingBillingProfile}
 							serverValidationErrors={billingProfileValidationErrors}
 							countries={countries}
 							statesByCountryId={statesByCountryId}
-							onSelectedCountryChanged={fetchStatesForCountry}
+							onSelectedCountryChanged={handleCountryChanged}
 							usageInfo={usageInfo}
+							addressFormatItems={addressFormatItems}
 						/>
 					)}
 					{displayProfiles
@@ -252,7 +310,7 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 									<BillingProfile
 										billingProfile={p}
 										onDelete={onDeleteBillingProfile}
-										onUpdate={() => toggleEditBillingProfile(p.profileId)}
+										onUpdate={handleOnUpdateBillingProfile}
 										isSelected={selectedBillingProfileId === p.profileId}
 										onSelected={() => onSelectBillingProfile(p)}
 										index={i}
@@ -265,15 +323,17 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 													p => p.profileId === editingBillingProfileId
 												) as IBillingProfileDto
 											)}
-											onCommitBillingProfile={profile =>
-												updateBillingProfile(editingBillingProfileId, profile)
-											}
-											onCancelEditingBillingProfile={() => setEditingBillingProfileId(null)}
+											onCommitBillingProfile={profile => {
+												updateBillingProfile(editingBillingProfileId, profile);
+												resetEditingBillingProfile();
+											}}
+											onCancelEditingBillingProfile={resetEditingBillingProfile}
 											serverValidationErrors={billingProfileValidationErrors}
 											countries={countries}
 											statesByCountryId={statesByCountryId}
-											onSelectedCountryChanged={fetchStatesForCountry}
+											onSelectedCountryChanged={handleCountryChanged}
 											usageInfo={usageInfo}
+											addressFormatItems={addressFormatItems}
 										/>
 									)}
 								</Fragment>

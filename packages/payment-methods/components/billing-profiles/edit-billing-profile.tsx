@@ -21,6 +21,7 @@ import IEditCardInfo from '../../typings/IEditCardInfo';
 import ISelectOption from '../../typings/ISelectOption';
 import * as Styled from './styled';
 import IUsageInfoDto from '../../clients/typings/orders/UsageInfoDto';
+import IAddressFormatItem from '../../clients/typings/locations/IAddressFormatItem';
 
 interface IEditBillingProfileProps {
 	billingProfile?: IEditBillingProfile;
@@ -31,9 +32,10 @@ interface IEditBillingProfileProps {
 	statesByCountryId: Record<string, IStateDto[]>;
 	onSelectedCountryChanged: Function;
 	usageInfo?: IUsageInfoDto;
+	addressFormatItems: IAddressFormatItem[];
 }
-
-const defaultCountryOption = { label: 'United States', value: '840' };
+const usaCountryId = '840';
+const defaultCountryOption = { label: 'United States', value: usaCountryId };
 
 const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 	billingProfile,
@@ -44,6 +46,7 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 	statesByCountryId,
 	onSelectedCountryChanged,
 	usageInfo,
+	addressFormatItems,
 }) => {
 	const commitButtonRef = useRef<Button>(null);
 	const [shouldCloseStateSelect, setShouldCloseStateSelect] = useState<boolean>(false);
@@ -68,6 +71,13 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 	);
 	const [isProcessing, setIsProcessing] = useState<boolean>(false);
 	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+	const initialCountryOption =
+		billingProfile &&
+		countries &&
+		countries
+			.map(country => ({ label: country.name, value: country.countryId }))
+			.find(country => country.value === billingProfile.countryId);
 
 	const initialStateOption =
 		billingProfile &&
@@ -233,6 +243,20 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 			''
 		);
 	};
+
+	const useStateSelector =
+		Object.prototype.hasOwnProperty.call(
+			statesByCountryId,
+			uncommittedBillingProfile.countryId as string
+		) && statesByCountryId[uncommittedBillingProfile.countryId as string].length > 0;
+
+	const stateAddressFormat = addressFormatItems.find(
+		item => item.kind === 'State' || item.kind === 'Suburb'
+	) as IAddressFormatItem;
+
+	const postalCodeAddressFormat = addressFormatItems.find(
+		item => item.kind === 'PostalCode'
+	) as IAddressFormatItem;
 
 	const strings = useLocalization();
 
@@ -418,7 +442,7 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 								}
 							}}
 							options={countryOptions}
-							defaultValue={defaultCountryOption}
+							defaultValue={initialCountryOption || defaultCountryOption}
 							styles={countrySelectStyles}
 						/>
 					</Styled.Label>
@@ -447,14 +471,14 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 					/>
 				</Styled.CreditCardInfoRow>
 
-				<Styled.CreditCardInfoRow>
+				<Styled.CityStateInfoRow>
 					<Styled.CityContainer>
 						<Styled.Label>
 							<Styled.LabelText>{strings.city}</Styled.LabelText>
 							<Styled.Input
 								name={nameof<IEditBillingProfile>('city')}
 								autoComplete="address-level2"
-								placeholder={'City'}
+								placeholder={strings.city}
 								isValid={isValidField('city')}
 								onChange={updateBillingProfile}
 								value={getUncommittedBillingProfileValueOrDefault('city')}
@@ -462,88 +486,114 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 							/>
 						</Styled.Label>
 					</Styled.CityContainer>
-					<Styled.StateContainer data-test-id="state-selector-container">
-						<Styled.Label>
-							<Styled.LabelText>{strings.state}</Styled.LabelText>
-							<Select
-								name={nameof<IEditBillingProfile>('stateId')}
-								components={{
-									Input: StateInput,
-								}}
-								placeholder="—"
-								menuIsOpen={isMenuOpen}
-								onInputChange={(value, { action }) => {
-									// HACK: close the menu after the browser auto-fills the address
-									// see https://github.com/JedWatson/react-select/issues/765
-									if (action === 'input-change') {
-										if (optionByState[value.toLowerCase()]) {
-											setStateOption(optionByState[value.toLowerCase()]);
-											setIsMenuOpen(false);
-										} else {
-											if (!isMenuOpen) {
-												setIsMenuOpen(true);
+					{useStateSelector ? (
+						<Styled.StateContainer data-test-id="state-selector-container">
+							<Styled.Label>
+								<Styled.LabelText>{strings[toCamelCase(stateAddressFormat.name)]}</Styled.LabelText>
+								<Select
+									name={nameof<IEditBillingProfile>('stateId')}
+									components={{
+										Input: StateInput,
+									}}
+									placeholder="—"
+									menuIsOpen={isMenuOpen}
+									onInputChange={(value, { action }) => {
+										// HACK: close the menu after the browser auto-fills the address
+										// see https://github.com/JedWatson/react-select/issues/765
+										if (action === 'input-change') {
+											if (optionByState[value.toLowerCase()]) {
+												setStateOption(optionByState[value.toLowerCase()]);
+												setIsMenuOpen(false);
+											} else {
+												if (!isMenuOpen) {
+													setIsMenuOpen(true);
+												}
 											}
 										}
-									}
-								}}
-								onMenuOpen={() => {
-									/* HACK: don't let auto-fill open the menu */
-								}}
-								onMenuClose={() => {
-									setIsMenuOpen(false);
-								}}
-								onChange={(option, { action, name }) => {
-									if (action === 'select-option') {
-										setStateOption(option);
-										updateBillingProfile({
-											target: {
-												name,
-												value: option.value,
-											},
-										});
-									}
-								}}
-								onBlur={e => {
-									setIsMenuOpen(false);
-									const selectedOption = optionByState[e.target.value.toLowerCase()];
+									}}
+									onMenuOpen={() => {
+										/* HACK: don't let auto-fill open the menu */
+									}}
+									onMenuClose={() => {
+										setIsMenuOpen(false);
+									}}
+									onChange={(option, { action, name }) => {
+										if (action === 'select-option') {
+											setStateOption(option);
+											updateBillingProfile({
+												target: {
+													name,
+													value: option.value,
+												},
+											});
+										}
+									}}
+									onBlur={e => {
+										setIsMenuOpen(false);
+										const selectedOption = optionByState[e.target.value.toLowerCase()];
 
-									if (selectedOption) {
-										setStateOption(selectedOption);
-										updateBillingProfile({
-											target: {
-												name: nameof<IEditBillingProfile>('stateId'),
-												value: selectedOption.value,
-											},
-										});
-									}
-								}}
-								onFocus={() => setIsMenuOpen(true)}
-								options={stateOptions}
-								value={stateOption}
-								styles={stateSelectStyles(
-									!Object.prototype.hasOwnProperty.call(
-										errorByFieldName,
-										nameof<IEditBillingProfile>('stateId')
-									)
-								)}
-							/>
-						</Styled.Label>
-					</Styled.StateContainer>
-					<Styled.PostalCodeContainer>
-						<Styled.Label>
-							<Styled.LabelText>{'Zip Code'}</Styled.LabelText>
-							<Styled.Cleave
-								name={nameof<IEditCardInfo>('postalCode')}
-								autoComplete="postal-code"
-								isValid={isValidField('postalCode')}
-								placeholder={strings.placeholders.postalCode}
-								onChange={updateCardInfo}
-								options={{ blocks: [10] }}
-								value={getUncommittedCardInfoValueOrDefault('postalCode')}
-							/>
-						</Styled.Label>
-					</Styled.PostalCodeContainer>
-				</Styled.CreditCardInfoRow>
+										if (selectedOption) {
+											setStateOption(selectedOption);
+											updateBillingProfile({
+												target: {
+													name: nameof<IEditBillingProfile>('stateId'),
+													value: selectedOption.value,
+												},
+											});
+										}
+									}}
+									onFocus={() => setIsMenuOpen(true)}
+									options={stateOptions}
+									value={stateOption}
+									styles={stateSelectStyles(
+										!Object.prototype.hasOwnProperty.call(
+											errorByFieldName,
+											nameof<IEditBillingProfile>('stateId')
+										)
+									)}
+								/>
+							</Styled.Label>
+						</Styled.StateContainer>
+					) : (
+						stateAddressFormat &&
+						!stateAddressFormat.isOptional && (
+							<Styled.StateContainer>
+								<Styled.Label>
+									<Styled.LabelText>
+										{strings[toCamelCase(stateAddressFormat.name)]}
+									</Styled.LabelText>
+									<Styled.Input
+										name={nameof<IEditBillingProfile>('suburb')}
+										autoComplete="suburb"
+										placeholder={stateAddressFormat.name}
+										isValid={isValidField('suburb')}
+										onChange={updateBillingProfile}
+										value={getUncommittedBillingProfileValueOrDefault('suburb')}
+										border={'1px solid #a8a8a8'}
+									></Styled.Input>
+								</Styled.Label>
+							</Styled.StateContainer>
+						)
+					)}
+					{postalCodeAddressFormat && !postalCodeAddressFormat.isOptional && (
+						<Styled.PostalCodeContainer>
+							<Styled.Label>
+								<Styled.LabelText>
+									{strings[toCamelCase(postalCodeAddressFormat.name)]}
+								</Styled.LabelText>
+								<Styled.Cleave
+									name={nameof<IEditCardInfo>('postalCode')}
+									autoComplete="postal-code"
+									isValid={isValidField('postalCode')}
+									placeholder={strings.placeholders.postalCode}
+									onChange={updateCardInfo}
+									options={{ blocks: [10] }}
+									value={getUncommittedCardInfoValueOrDefault('postalCode')}
+								/>
+							</Styled.Label>
+						</Styled.PostalCodeContainer>
+					)}
+				</Styled.CityStateInfoRow>
 			</Styled.BillingAddressInfoSection>
 			<Styled.NewProfileButtons>
 				<Button minor medium onClick={onCancelEditingBillingProfile}>
@@ -608,5 +658,7 @@ const mapStateToOption = (state: IStateDto) => ({
 	label: state.abbreviation.toUpperCase(),
 	value: state.stateId,
 });
+
+const toCamelCase = (source: string) => source.charAt(0).toLowerCase() + source.slice(1);
 
 export default EditBillingProfile;

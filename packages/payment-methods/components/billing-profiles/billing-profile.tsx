@@ -87,7 +87,7 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 						condensed
 						size="small"
 						icon={<ArrowCycle className={''} />}
-						onClick={onUpdate}
+						onClick={() => onUpdate(billingProfile)}
 						styleOverrides={{ padding: '0 2px 0 0' }}
 						border={'0'}
 					/>
@@ -108,7 +108,7 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 					primaryTransparent
 					condensed
 					size="small"
-					onClick={onUpdate}
+					onClick={() => onUpdate(billingProfile)}
 					disabled={isEditDisabled}
 				>
 					<Styled.ChevronContainer isEditing={isEditing}>

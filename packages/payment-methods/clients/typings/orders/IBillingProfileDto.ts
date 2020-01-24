@@ -16,7 +16,8 @@ export default interface IBillingProfileDto {
 	address3: string;
 	address4: string;
 	city: string;
-	suburb: string;
+	suburb?: string;
+	county?: string;
 	postalCode: string;
 	countryId: number;
 	countryDisplay: string;

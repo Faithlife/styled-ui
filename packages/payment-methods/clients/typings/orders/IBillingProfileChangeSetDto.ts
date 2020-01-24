@@ -10,5 +10,6 @@ export default interface IOrdersBillingProfileChangeSetDto {
 	countryId: string;
 	postalCode: string;
 	stateId: string;
-	suburb: string;
+	suburb?: string;
+	county?: string;
 }

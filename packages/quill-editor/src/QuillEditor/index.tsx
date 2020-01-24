@@ -193,7 +193,6 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		placeholder,
 		onContentChange,
 		onClick,
-		onBlur,
 		className,
 		classNames,
 		editorId,
@@ -218,37 +217,51 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const onlyChild: any = useMemo(() => children && React.Children.only(children), [children]);
 	const hasOnlyChild = useMemo(() => !!onlyChild, [onlyChild]);
 
-	const setContents = useCallback(contents => {
-		const editor = quillRef.current && quillRef.current.getEditor();
-		if (editor) {
-			const preSelection = editor.getSelection();
-			const preLength = editor.getLength();
-			const preSelectionAtEnd =
-				preSelection && preSelection.length === 0 && preSelection.index === preLength - 1;
-			const shouldFocus = editor.hasFocus();
+	const plainTextOverride = useMemo(
+		() => plainTextMode && (defaultValue || value).replace(/\n/g, '<br/>'), // Newlines are not understood by quill when loading default value
+		[defaultValue, plainTextMode, value]
+	);
 
-			if (contents.ops) {
-				editor.setContents(contents, 'api');
-			} else {
-				editor.setContents(editor.clipboard.convert(contents), 'api');
-			}
+	const setContents = useCallback(
+		contents => {
+			const editor = quillRef.current && quillRef.current.getEditor();
+			if (editor) {
+				const preSelection = editor.getSelection();
+				const preLength = editor.getLength();
+				const preSelectionAtEnd =
+					preSelection && preSelection.length === 0 && preSelection.index === preLength - 1;
+				const shouldFocus = editor.hasFocus();
 
-			const postLength = editor.getLength();
-			if (shouldFocus || preSelection) {
-				setTimeout(() => {
-					if (shouldFocus) {
-						editor.focus();
-						if (preSelectionAtEnd && postLength > 0) {
-							editor.setSelection({
-								index: postLength - 1,
-								length: 0,
-							});
-						}
+				if (contents.ops) {
+					editor.setContents(contents, 'api');
+				} else {
+					if (plainTextMode) {
+						editor.setContents({ ops: [{ insert: contents }] }, 'api');
+					} else {
+						editor.setContents(editor.clipboard.convert(contents), 'api');
 					}
-				}, 0);
+				}
+
+				const postLength = editor.getLength();
+				if (shouldFocus || preSelection) {
+					setTimeout(() => {
+						if (shouldFocus) {
+							editor.focus();
+							if (preSelectionAtEnd && postLength > 0) {
+								editor.setSelection({
+									index: postLength - 1,
+									length: 0,
+								});
+							}
+						}
+					}, 0);
+				}
+
+				editor && setIsEmpty(editor.getLength() === 1);
 			}
-		}
-	}, []);
+		},
+		[plainTextMode]
+	);
 
 	const setText = useCallback(
 		plainText => {
@@ -263,9 +276,10 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const [quillEditorId] = useState<any>(
 		() =>
 			editorId ||
-			`ql-${Math.random()
-				.toString(36)
-				.substring(7)}`
+			(hasOnlyChild &&
+				`ql-${Math.random()
+					.toString(36)
+					.substring(7)}`)
 	);
 
 	const [quillEditorQuery] = useState(() => `.${quillEditorId}`);
@@ -276,8 +290,6 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		if (!defaultValue && value !== null && (value !== storedValue || value === '') && editor) {
 			setContents(value);
 		}
-
-		editor && setIsEmpty(editor.getLength() === 1);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
 
@@ -324,10 +336,9 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			const range = quillApi.getSelection();
 			setImageInsertRange(range ? range : null);
 			quillRef.current.blur();
-			onBlur && onBlur();
 		}
 		setShowFilePicker(true);
-	}, [onBlur]);
+	}, []);
 
 	const insertFile = useCallback(
 		async data => {
@@ -474,10 +485,12 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				const deltaContent = editor.getContents();
 				if (value && value.ops) {
 					content = deltaContent;
+				} else if (plainTextMode) {
+					content = editor.getText().slice(0, -1);
+				} else if (htmlOptions?.format === 'raw') {
+					content = editor.root.innerHTML;
 				} else {
-					content = plainTextMode
-						? editor.getText().slice(0, -1)
-						: convertDeltaToHtml(deltaContent, htmlOptions);
+					content = convertDeltaToHtml(deltaContent, htmlOptions);
 				}
 			}
 
@@ -545,7 +558,12 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		(options?: { [key: string]: any }) => {
 			if (quillRef.current) {
 				const deltas = quillRef.current.getEditor().getContents();
-				return convertDeltaToHtml(deltas, { ...htmlOptions, ...options });
+				const finalOptions: any = { ...htmlOptions, ...options };
+				if (finalOptions.format === 'raw') {
+					return quillRef.current.getEditor().root.innerHTML;
+				} else {
+					return convertDeltaToHtml(deltas, finalOptions);
+				}
 			}
 		},
 		[htmlOptions]
@@ -735,7 +753,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				{SafeQuill ? (
 					<ReactQuillStyled
 						ref={quillRef}
-						defaultValue={defaultValue || value}
+						defaultValue={plainTextOverride || defaultValue || value}
 						placeholder={placeholder}
 						modules={moduleConfiguration}
 						formats={allowedFormats}

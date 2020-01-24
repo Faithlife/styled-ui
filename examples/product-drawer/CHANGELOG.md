@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/product-drawer@1.1.0...product-drawer@1.2.0) (2020-01-21)
+
+
+### Features
+
+* Add toggle button size style override. ([5236834](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/52368340fc8ae6069851b839ebc0fec71b253970))
+
+
+
+
+
 # 1.1.0 (2019-12-13)
 
 
