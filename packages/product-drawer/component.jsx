@@ -145,10 +145,10 @@ export class ProductDrawer extends React.PureComponent {
 
 function AppDrawerIcon(props) {
 	return (
-		<svg viewBox={`0 0 16 16`} {...props}>
+		<svg viewBox={`0 0 24 24`} {...props}>
 			<path
 				fill="#888"
-				d="M2 2h4v4H2V2zm5 0h4v4H7V2zm5 0h4v4h-4V2zM2 7h4v4H2V7zm5 0h4v4H7V7zm5 0h4v4h-4V7zM2 12h4v4H2v-4zm5 0h4v4H7v-4zm5 0h4v4h-4v-4z"
+				d="M8,16 L8,20 L4,20 L4,16 L8,16 Z M14,16 L14,20 L10,20 L10,16 L14,16 Z M20,16 L20,20 L16,20 L16,16 L20,16 Z M8,10 L8,14 L4,14 L4,10 L8,10 Z M14,10 L14,14 L10,14 L10,10 L14,10 Z M20,10 L20,14 L16,14 L16,10 L20,10 Z M8,4 L8,8 L4,8 L4,4 L8,4 Z M14,4 L14,8 L10,8 L10,4 L14,4 Z M20,4 L20,8 L16,8 L16,4 L20,4 Z"
 			/>
 		</svg>
 	);
