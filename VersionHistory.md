@@ -1,5 +1,13 @@
 # Changelog
 
+### 5.42.0
+
+- Expose `reactSelectComponents` from `ReactSelect` to help with the creation of custom `Option` and `Input` components.
+
+### 5.41.1
+
+- Temporarily downgrade react-select back to version 2, until we are able to address problems with ReactJS.NET server-side rendering.
+
 ### 5.41.0
 
 - Upgrade react-select to version 3, improving SSR support for select components.
