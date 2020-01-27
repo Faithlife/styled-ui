@@ -1,10 +1,10 @@
 # Changelog
 
-### 5.41.2
+### 5.42.2
 
 - Fix `NumberInput` not properly respecting `disabled` attribute.
 
-### 5.41.1
+### 5.42.1
 
 - Export `reactSelectComponents` for real.
 
