@@ -1,4 +1,5 @@
 import React, { useCallback, useRef, useMemo } from 'react';
+import { css } from 'styled-components';
 import { Box } from '../Box';
 import { Input } from './Input';
 import { Button } from '../button';
@@ -53,12 +54,14 @@ const NumberInput = React.forwardRef(function NumberInput(props, ref) {
 				top={0}
 				paddingTop={buttonPadding}
 				icon={<ChevronCollapse />}
+				disabled={props.disabled}
 			/>
 			<StepButton
 				onClick={handleStepDown}
 				bottom={0}
 				paddingBottom={buttonPadding}
 				icon={<ChevronExpand />}
+				disabled={props.disabled}
 			/>
 		</InputContainer>
 	);
@@ -95,10 +98,13 @@ const StepButton = props => (
 			height: 50%;
 			visibility: hidden;
 
-			.input-container:hover &,
-			.input-container:focus-within & {
-				visibility: visible;
-			}
+			${!props.disabled &&
+				css`
+					.input-container:hover &,
+					.input-container:focus-within & {
+						visibility: visible;
+					}
+				`}
 		`}
 		{...props}
 	/>
