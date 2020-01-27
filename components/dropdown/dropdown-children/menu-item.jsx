@@ -29,17 +29,20 @@ export function MenuItem(props) {
 		}
 	}, [onFocus, isSelected]);
 
-	const handleClick = useCallback(() => {
-		if (!disabled) {
-			if (onClick) {
-				onClick();
-			}
+	const handleClick = useCallback(
+		e => {
+			if (!disabled) {
+				if (onClick) {
+					onClick(e);
+				}
 
-			if (!shouldKeepOpenOnClick) {
-				handleCloseMenu();
+				if (!shouldKeepOpenOnClick) {
+					handleCloseMenu();
+				}
 			}
-		}
-	}, [onClick, handleCloseMenu, shouldKeepOpenOnClick, disabled]);
+		},
+		[onClick, handleCloseMenu, shouldKeepOpenOnClick, disabled],
+	);
 	// catch keyup event for spacebar in firefox. Opening the menu with spacebar will trigger the first option with the onKeyUp event from the spacebar
 	const [handleKeyDown, handleKeyUp] = useMenuItemKeyboardHandler(handleClick);
 
