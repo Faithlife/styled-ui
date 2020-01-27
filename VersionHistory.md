@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.43.0
+
+- Hide browser-specific validation styling on `Input`.
+
 ### 5.42.2
 
 - Fix `NumberInput` not properly respecting `disabled` attribute.
