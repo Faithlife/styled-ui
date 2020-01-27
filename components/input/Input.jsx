@@ -144,6 +144,7 @@ const StyledInput = styled.input(
 			width: ${styleOverrides.width};
 		`}
 
+	box-shadow: none;
 	&:focus {
 		border-color: ${theme.colors.inputFocusedBorderColor};
 		box-shadow: 0 0 0 2px ${theme.colors.inputFocusedShadowColor};
