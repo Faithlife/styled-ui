@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { textStyle } from 'styled-system';
 import { box, typography } from '../../theme/system';
 import { theme } from '../../theme';
 
@@ -28,6 +29,7 @@ const UtilityButton = styled.button`
 	}
 
 	${box}
+	${textStyle}
 	${typography}
 `;
 
