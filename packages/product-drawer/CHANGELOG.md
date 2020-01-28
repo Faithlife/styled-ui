@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.3.2...@faithlife/product-drawer@0.4.0) (2020-01-28)
+
+
+### Features
+
+* Add ability to override top margin of dropdown. ([#49](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/49)) ([c508396](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/c5083962168e077839fd204b2d4dacce97320874))
+
+
+
+
+
 ## [0.3.2](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.3.1...@faithlife/product-drawer@0.3.2) (2020-01-24)
 
 
