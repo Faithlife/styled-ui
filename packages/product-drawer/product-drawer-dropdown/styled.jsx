@@ -43,6 +43,7 @@ export const ProductDrawerDropdown = styled.div`
 
 	@media (min-width: ${mediaSizes.desktop}) {
 		right: 0;
+		margin-top: ${({ styleOverrides }) => styleOverrides.fullscreenTopOffset || '0'};
 	}
 
 	white-space: nowrap;

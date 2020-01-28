@@ -55,6 +55,7 @@ export class ProductDrawer extends React.PureComponent {
 			toggleButtonColor: PropTypes.string,
 			toggleButtonHoverColor: PropTypes.string,
 			toggleButtonSize: PropTypes.number,
+			fullscreenTopOffset: PropTypes.string,
 		}),
 	};
 
