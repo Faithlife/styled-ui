@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.44.0
+
+- Add support for `textStyle` prop to `UtilityButton`.
+- Forward event object to `MenuItem` `onClick` callback.
+
 ### 5.43.0
 
 - Hide browser-specific validation styling on `Input`.
