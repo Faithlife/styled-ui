@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "product-drawer",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "dependencies": {
     "@faithlife/brand-bar": "^1.12.4",
     "react": "^16.11.0",
