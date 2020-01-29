@@ -7,7 +7,7 @@ import localizedResources from '@faithlife/brand-bar/dist/locales/en-US/resource
 import { ProductDrawer } from '@faithlife/product-drawer';
 
 const ProductDrawerContainer = styled.div`
-	margin: 10px 32px;
+	margin: 8px 32px;
 `;
 
 const App = () => (

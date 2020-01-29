@@ -21,6 +21,7 @@ const MyComponent = () => (
 	- `toggleButtonHoverColor: string` - The color of the drop down toggle button when hovered
 	- `toggleButtonSize: string` - The height and width of the drop down toggle button icon
 	- `fullscreenTopOffset: string` - The top margin/offset of the dropdown on a large viewport
+	- `toggleTextLeftMargin: string` - The margin between the menu icon and the text
 
 - `resources: object` - Overrides default localization (if a property is not supplied, the default will be used)
 	- `closeButtonAltText: string`

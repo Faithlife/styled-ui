@@ -56,6 +56,7 @@ export class ProductDrawer extends React.PureComponent {
 			toggleButtonHoverColor: PropTypes.string,
 			toggleButtonSize: PropTypes.number,
 			fullscreenTopOffset: PropTypes.string,
+			toggleTextLeftMargin: PropTypes.string,
 		}),
 	};
 
@@ -149,7 +150,7 @@ function AppDrawerIcon(props) {
 		<svg viewBox={`0 0 24 24`} {...props}>
 			<path
 				fill="#888"
-				d="M8,16 L8,20 L4,20 L4,16 L8,16 Z M14,16 L14,20 L10,20 L10,16 L14,16 Z M20,16 L20,20 L16,20 L16,16 L20,16 Z M8,10 L8,14 L4,14 L4,10 L8,10 Z M14,10 L14,14 L10,14 L10,10 L14,10 Z M20,10 L20,14 L16,14 L16,10 L20,10 Z M8,4 L8,8 L4,8 L4,4 L8,4 Z M14,4 L14,8 L10,8 L10,4 L14,4 Z M20,4 L20,8 L16,8 L16,4 L20,4 Z"
+				d="M8,16 L8,21 L3,21 L3,16 L8,16 Z M15,16 L15,21 L10,21 L10,16 L15,16 Z M22,16 L22,21 L17,21 L17,16 L22,16 Z M8,9 L8,14 L3,14 L3,9 L8,9 Z M15,9 L15,14 L10,14 L10,9 L15,9 Z M22,9 L22,14 L17,14 L17,9 L22,9 Z M8,2 L8,7 L3,7 L3,2 L8,2 Z M15,2 L15,7 L10,7 L10,2 L15,2 Z M22,2 L22,7 L17,7 L17,2 L22,2 Z"
 			/>
 		</svg>
 	);
