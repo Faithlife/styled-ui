@@ -26,6 +26,8 @@ export const InferredTypeahead = forwardClassRef(
 		static propTypes = {
 			/** Decimal percent value for the confidence value. E.g. 0.75 */
 			confidence: PropTypes.number,
+			/** Show percentage text in tooltip.  Defaults to true. */
+			shouldShowPercentageText: PropTypes.bool,
 			/** String to display in the confidence tooltip. Defaults to Heuristic algorithm */
 			confidenceSource: PropTypes.string,
 			/** Function called when the input value is changed */
@@ -38,11 +40,13 @@ export const InferredTypeahead = forwardClassRef(
 
 		static defaultProps = {
 			confidenceSource: 'Heuristic Algorithm',
+			shouldShowPercentageText: true,
 		};
 
 		render() {
 			const {
 				confidence,
+				shouldShowPercentageText,
 				confidenceSource,
 				className,
 				onConfirm,
@@ -56,6 +60,7 @@ export const InferredTypeahead = forwardClassRef(
 					<InferredBase
 						className={className}
 						confidence={confidence}
+						shouldShowPercentageText={shouldShowPercentageText}
 						confidenceSource={confidenceSource}
 						onConfirm={onConfirm}
 					>

@@ -13,6 +13,8 @@ export class InferredSelect extends Component {
 	static propTypes = {
 		/** Decimal percent value for the confidence value. E.g. 0.75 */
 		confidence: PropTypes.number,
+		/** Show percentage text in tooltip.  Defaults to true. */
+		shouldShowPercentageText: PropTypes.bool,
 		/** String to display in the confidence tooltip. Defaults to Heuristic algorithm */
 		confidenceSource: PropTypes.string,
 		/** Function called when the OK button is clicked. Confidence should be set to null to clear the lightbulb indicator. */
@@ -25,14 +27,23 @@ export class InferredSelect extends Component {
 
 	static defaultProps = {
 		confidenceSource: 'Heuristic Algorithm',
+		shouldShowPercentageText: true,
 	};
 
 	render() {
-		const { confidence, confidenceSource, className, onConfirm, renderSelect } = this.props;
+		const {
+			confidence,
+			shouldShowPercentageText,
+			confidenceSource,
+			className,
+			onConfirm,
+			renderSelect,
+		} = this.props;
 		return (
 			<InferredBase
 				className={className}
 				confidence={confidence}
+				shouldShowPercentageText={shouldShowPercentageText}
 				confidenceSource={confidenceSource}
 				onConfirm={onConfirm}
 			>
