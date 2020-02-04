@@ -215,7 +215,7 @@ export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...prop
 	const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
 
 	return (
-		<DebouncedSelectAsync
+		<DebouncedSelectAsyncCreatable
 			ref={ref}
 			allowCreateWhileLoading={false}
 			classNamePrefix="fl-select"
@@ -240,7 +240,7 @@ export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref)
 	const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
 
 	return (
-		<DebouncedSelectAsyncCreatable
+		<DebouncedSelectAsync
 			ref={ref}
 			classNamePrefix="fl-select"
 			theme={selectTheme}
