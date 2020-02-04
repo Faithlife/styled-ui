@@ -4,11 +4,11 @@ import { useBasicMap } from './use-basic-map';
 
 export function useFocusAwayHandler(onFocusAwayCallback) {
 	const targetRef = useRef();
-	const inboundsElements = useBasicMap();
+	const { map, add, remove } = useBasicMap();
 
 	const onBlur = useCallback(
 		event => {
-			const inboundsElementsList = Object.values(inboundsElements.map).filter(ref => !!ref.current);
+			const inboundsElementsList = Object.values(map).filter(ref => !!ref.current);
 			if (targetRef.current || inboundsElementsList.length > 0) {
 				const relatedTarget =
 					event.relatedTarget || event.explicitOriginalTarget || document.activeElement;
@@ -24,17 +24,16 @@ export function useFocusAwayHandler(onFocusAwayCallback) {
 				}
 			}
 		},
-		[onFocusAwayCallback, inboundsElements.map],
+		[onFocusAwayCallback, map],
 	);
 
 	useEffect(
 		// There is no reason to return a cleanup function if an event listener is not created
 		// eslint-disable-next-line consistent-return
 		() => {
-			const targetList = [
-				targetRef.current,
-				...Object.values(inboundsElements.map).map(x => x.current),
-			].filter(x => x !== null && x !== undefined);
+			const targetList = [targetRef.current, ...Object.values(map).map(x => x.current)].filter(
+				x => x !== null && x !== undefined,
+			);
 			if (targetList.length > 0) {
 				for (const target of targetList) {
 					target.addEventListener('focusout', onBlur);
@@ -46,13 +45,11 @@ export function useFocusAwayHandler(onFocusAwayCallback) {
 				};
 			}
 		},
-		[onBlur, inboundsElements.map],
+		[onBlur, map],
 	);
 
-	const addInboundsElement = useCallback((id, ref) => inboundsElements.add(id, ref), [
-		inboundsElements,
-	]);
-	const removeInboundsElement = useCallback(id => inboundsElements.remove(id), [inboundsElements]);
+	const addInboundsElement = useCallback((id, ref) => add(id, ref), [add]);
+	const removeInboundsElement = useCallback(id => remove(id), [remove]);
 
 	return { targetRef, addInboundsElement, removeInboundsElement };
 }
