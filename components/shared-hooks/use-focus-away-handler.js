@@ -50,9 +50,11 @@ export function useFocusAwayHandler(onFocusAwayCallback) {
 	);
 
 	const addInboundsElement = useCallback((id, ref) => inboundsElements.add(id, ref), [
-		inboundsElements,
+		inboundsElements.add,
 	]);
-	const removeInboundsElement = useCallback(id => inboundsElements.remove(id), [inboundsElements]);
+	const removeInboundsElement = useCallback(id => inboundsElements.remove(id), [
+		inboundsElements.remove,
+	]);
 
 	return { targetRef, addInboundsElement, removeInboundsElement };
 }
