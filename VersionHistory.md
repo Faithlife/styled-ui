@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.44.2
+
+- Fix crash when using `AsyncSelect` and `AsyncCreatableSelect`.
+
 ### 5.44.1
 
 - Fix hook dependencies in useFocusAwayHandler.
