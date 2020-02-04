@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.44.1
+
+- Fix hook dependencies in useFocusAwayHandler.
+
 ### 5.44.0
 
 - Add support for `textStyle` prop to `UtilityButton`.
