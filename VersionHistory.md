@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.45.0
+
+- Allow use with `styled-components@^5`.
+
 ### 5.44.2
 
 - Fix crash when using `AsyncSelect` and `AsyncCreatableSelect`.
