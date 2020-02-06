@@ -7,81 +7,83 @@ import { theme } from '../../theme';
 import { common, typography } from '../../theme/system';
 import { resetStyles, getVariation } from '../utils';
 
-const Input = React.forwardRef(function Input(props, ref) {
-	const {
-		value,
-		placeholder,
-		readOnly,
-		type,
-		autoFocus,
-		onClick,
-		variant,
-		small,
-		medium,
-		large,
-		inline,
-		disabled,
-		onEnter,
-		onFocus,
-		selectOnFocus,
-		textarea,
-		forwardedRef, // eslint-disable-line react/prop-types
-		...inputProps
-	} = props;
+const Input = React.memo(
+	React.forwardRef(function Input(props, ref) {
+		const {
+			value,
+			placeholder,
+			readOnly,
+			type,
+			autoFocus,
+			onClick,
+			variant,
+			small,
+			medium,
+			large,
+			inline,
+			disabled,
+			onEnter,
+			onFocus,
+			selectOnFocus,
+			textarea,
+			forwardedRef, // eslint-disable-line react/prop-types
+			...inputProps
+		} = props;
 
-	const handleKeyPress = useCallback(
-		e => {
-			if (onEnter && e.key === 'Enter') {
-				onEnter();
-			}
-		},
-		[onEnter],
-	);
-
-	const variation = getVariation(variant, { small, medium, large, inline, none: true });
-
-	if (process.env.NODE_ENV !== 'production' && variation === 'inline') {
-		console.warn(
-			'Warning: The `inline` variation has been deprecated, and will be removed in a future release.',
+		const handleKeyPress = useCallback(
+			e => {
+				if (onEnter && e.key === 'Enter') {
+					onEnter();
+				}
+			},
+			[onEnter],
 		);
-	}
 
-	const handleFocus = useMemo(() => {
-		if (!selectOnFocus) {
-			return onFocus;
+		const variation = getVariation(variant, { small, medium, large, inline, none: true });
+
+		if (process.env.NODE_ENV !== 'production' && variation === 'inline') {
+			console.warn(
+				'Warning: The `inline` variation has been deprecated, and will be removed in a future release.',
+			);
 		}
 
-		return e => {
-			if (onFocus) {
-				onFocus(e);
+		const handleFocus = useMemo(() => {
+			if (!selectOnFocus) {
+				return onFocus;
 			}
 
-			if (!e.defaultPrevented) {
-				e.target.select();
-			}
-		};
-	}, [onFocus, selectOnFocus]);
+			return e => {
+				if (onFocus) {
+					onFocus(e);
+				}
 
-	return (
-		<StyledInput
-			as={textarea && 'textarea'}
-			type={type || 'text'}
-			autoFocus={autoFocus}
-			readOnly={readOnly}
-			variant={variation}
-			disabled={disabled}
-			value={value !== null && value !== undefined ? value : ''}
-			placeholder={placeholder || ''}
-			onClick={onClick}
-			onKeyPress={handleKeyPress}
-			onFocus={handleFocus}
-			ref={ref || forwardedRef}
-			textStyle={variation === 'large' ? 'c.18' : 'c.16'}
-			underlineColor="blue4"
-			{...inputProps}
-		/>
-	);
-});
+				if (!e.defaultPrevented) {
+					e.target.select();
+				}
+			};
+		}, [onFocus, selectOnFocus]);
+
+		return (
+			<StyledInput
+				as={textarea && 'textarea'}
+				type={type || 'text'}
+				autoFocus={autoFocus}
+				readOnly={readOnly}
+				variant={variation}
+				disabled={disabled}
+				value={value !== null && value !== undefined ? value : ''}
+				placeholder={placeholder || ''}
+				onClick={onClick}
+				onKeyPress={handleKeyPress}
+				onFocus={handleFocus}
+				ref={ref || forwardedRef}
+				textStyle={variation === 'large' ? 'c.18' : 'c.16'}
+				underlineColor="blue4"
+				{...inputProps}
+			/>
+		);
+	}),
+);
 
 Input.defaultProps = {
 	theme,

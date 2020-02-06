@@ -7,65 +7,67 @@ import { ChevronExpand, ChevronCollapse } from '../icons';
 import { theme } from '../../theme';
 import { useCopyRefs } from '../shared-hooks/use-copy-refs';
 
-const NumberInput = React.forwardRef(function NumberInput(props, ref) {
-	const { variant, width, ...rest } = props;
-	const inputRef = useRef();
-	const innerRef = useCopyRefs(useMemo(() => [ref, inputRef], [inputRef, ref]));
+const NumberInput = React.memo(
+	React.forwardRef(function NumberInput(props, ref) {
+		const { variant, width, ...rest } = props;
+		const inputRef = useRef();
+		const innerRef = useCopyRefs(useMemo(() => [ref, inputRef], [inputRef, ref]));
 
-	const dispatchChangeEvent = useCallback(() => {
-		inputRef.current.dispatchEvent(new Event('input', { bubbles: true }));
-	}, []);
+		const dispatchChangeEvent = useCallback(() => {
+			inputRef.current.dispatchEvent(new Event('input', { bubbles: true }));
+		}, []);
 
-	const handleStepUp = useCallback(() => {
-		inputRef.current.stepUp();
-		dispatchChangeEvent();
-	}, [dispatchChangeEvent]);
+		const handleStepUp = useCallback(() => {
+			inputRef.current.stepUp();
+			dispatchChangeEvent();
+		}, [dispatchChangeEvent]);
 
-	const handleStepDown = useCallback(() => {
-		inputRef.current.stepDown();
-		dispatchChangeEvent();
-	}, [dispatchChangeEvent]);
+		const handleStepDown = useCallback(() => {
+			inputRef.current.stepDown();
+			dispatchChangeEvent();
+		}, [dispatchChangeEvent]);
 
-	const buttonPadding = variant === 'small' ? 2 : 3;
+		const buttonPadding = variant === 'small' ? 2 : 3;
 
-	return (
-		<InputContainer width={width}>
-			<Input
-				paddingRight="24px"
-				width={width && '100%'}
-				{...rest}
-				ref={innerRef}
-				variant={variant}
-				type="number"
-				css={`
-					-webkit-appearance: textfield;
-					-moz-appearance: textfield;
-					appearance: textfield;
+		return (
+			<InputContainer width={width}>
+				<Input
+					paddingRight="24px"
+					width={width && '100%'}
+					{...rest}
+					ref={innerRef}
+					variant={variant}
+					type="number"
+					css={`
+						-webkit-appearance: textfield;
+						-moz-appearance: textfield;
+						appearance: textfield;
 
-					&::-webkit-inner-spin-button,
-					&::-webkit-outer-spin-button {
-						-webkit-appearance: none;
-						margin: 0;
-					}
-				`}
-			/>
-			<StepButton
-				onClick={handleStepUp}
-				top={0}
-				paddingTop={buttonPadding}
-				icon={<ChevronCollapse />}
-				disabled={props.disabled}
-			/>
-			<StepButton
-				onClick={handleStepDown}
-				bottom={0}
-				paddingBottom={buttonPadding}
-				icon={<ChevronExpand />}
-				disabled={props.disabled}
-			/>
-		</InputContainer>
-	);
-});
+						&::-webkit-inner-spin-button,
+						&::-webkit-outer-spin-button {
+							-webkit-appearance: none;
+							margin: 0;
+						}
+					`}
+				/>
+				<StepButton
+					onClick={handleStepUp}
+					top={0}
+					paddingTop={buttonPadding}
+					icon={<ChevronCollapse />}
+					disabled={props.disabled}
+				/>
+				<StepButton
+					onClick={handleStepDown}
+					bottom={0}
+					paddingBottom={buttonPadding}
+					icon={<ChevronExpand />}
+					disabled={props.disabled}
+				/>
+			</InputContainer>
+		);
+	}),
+);
 
 NumberInput.defaultProps = {
 	theme,
