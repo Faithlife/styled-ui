@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.46.0
+
+- Add `mountOnEnter` and `unmountOnExit` props to `Accordion`.
+- Memoize `Input` and `NumberInput`.
+
 ### 5.45.0
 
 - Allow use with `styled-components@^5`.
