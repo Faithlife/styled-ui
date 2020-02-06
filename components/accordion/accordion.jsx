@@ -10,6 +10,8 @@ export function Accordion({
 	onExpansion,
 	styleOverrides,
 	variant,
+	mountOnEnter,
+	unmountOnExit,
 	...props
 }) {
 	const [focusedMenuItem, setFocusedMenuItem] = useState(null);
@@ -43,8 +45,19 @@ export function Accordion({
 			setFocusedMenuItem,
 			styleOverrides,
 			variant,
+			mountOnEnter,
+			unmountOnExit,
 		}),
-		[expandedSections, focusedMenuItem, hideArrows, handleExpansion, styleOverrides, variant],
+		[
+			expandedSections,
+			focusedMenuItem,
+			hideArrows,
+			handleExpansion,
+			styleOverrides,
+			variant,
+			mountOnEnter,
+			unmountOnExit,
+		],
 	);
 
 	return (
@@ -67,6 +80,10 @@ Accordion.propTypes = {
 	hideArrows: PropTypes.bool,
 	/** Will be called with an array of indexes for Accordion.Items which should be expanded. */
 	onExpansion: PropTypes.func.isRequired,
+	/** true if panel contents should not be mounted until the section is open **/
+	mountOnEnter: PropTypes.bool,
+	/** true if panel contents should be unmounted when the section is closed **/
+	unmountOnExit: PropTypes.bool,
 	styleOverrides: PropTypes.shape({
 		panelPadding: PropTypes.string,
 	}),
