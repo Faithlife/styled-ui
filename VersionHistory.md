@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.46.1
+
+- Create fewer elements in `Slider`.
+
 ### 5.46.0
 
 - Add `mountOnEnter` and `unmountOnExit` props to `Accordion`.
