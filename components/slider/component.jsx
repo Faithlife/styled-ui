@@ -352,7 +352,7 @@ export class Slider extends PureComponent {
 	}
 }
 
-const TrackPart = ({ children, ...props }) => (
+const TrackPart = ({ children, left, right, ...props }) => (
 	<Box
 		position="absolute"
 		left={0}
@@ -360,6 +360,7 @@ const TrackPart = ({ children, ...props }) => (
 		height="100%"
 		overflow="hidden"
 		borderRadius={100}
+		style={{ left, right }}
 		{...props}
 	>
 		{children}
