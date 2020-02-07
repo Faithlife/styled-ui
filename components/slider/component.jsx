@@ -320,37 +320,32 @@ export class Slider extends PureComponent {
 							)}%`}
 					/>
 				</TrackPart>
-				<Styled.StopContainer>
-					{stops.map(index => (
-						<Styled.Stop
-							available={
-								!hideAvailableStops &&
-								(index > activeStopIndex && !(index >= maxValue) && !(index === stopCount - 1))
-							}
-							minimumAvailable={index === minValue && minValue > 0}
-							key={index}
-							styleOverrides={styleOverrides}
-						/>
-					))}
-				</Styled.StopContainer>
+				{!hideAvailableStops || minValue ? (
+					<Styled.StopContainer>
+						{stops.map(index => (
+							<Styled.Stop
+								available={
+									!hideAvailableStops &&
+									(index > activeStopIndex && !(index >= maxValue) && !(index === stopCount - 1))
+								}
+								minimumAvailable={index === minValue && minValue > 0}
+								key={index}
+								styleOverrides={styleOverrides}
+							/>
+						))}
+					</Styled.StopContainer>
+				) : null}
 				<Styled.ThumbContainer
 					onMouseEnter={this.handleMouseEnter}
 					onMouseLeave={this.handleMouseLeave}
 				>
-					{stops.map(index => (
-						<Thumb
-							key={index}
-							index={index}
-							stopCount={stopCount}
-							isSliding={isSliding}
-							isHovered={isHovered}
-							active={index === activeStopIndex}
-							label={labels[index]}
-							disabled={disabled}
-							trackStart={index === 0}
-							trackEnd={index === stopCount - 1}
-						/>
-					))}
+					<Thumb
+						isSliding={isSliding}
+						isHovered={isHovered}
+						position={getPercentage(activeStopIndex, stopCount - 1)}
+						label={labels[activeStopIndex]}
+						disabled={disabled}
+					/>
 				</Styled.ThumbContainer>
 			</Box>
 		);
@@ -375,29 +370,24 @@ function getPercentage(index, max) {
 	return (index / max) * 100;
 }
 
-const Thumb = React.memo(({ isSliding, isHovered, active, label, disabled, ...props }) => {
-	const thumb = (
-		<Styled.Thumb active={isSliding} hovered={isHovered} disabled={disabled} hidden={!active} />
-	);
+const Thumb = React.memo(({ isSliding, isHovered, position, label, disabled }) => {
+	const thumb = <Styled.Thumb active={isSliding} hovered={isHovered} disabled={disabled} />;
 
-	const isPopupOpen = !!(active && isHovered && (label !== null && label !== undefined));
+	const isPopupOpen = !!(isHovered && (label || label === 0));
 	return (
-		<Styled.ThumbAnchor {...props}>
-			{isPopupOpen ? (
-				<PopoverManager>
-					<PopoverReference>{thumb}</PopoverReference>
-					<Popover
-						isOpen
-						placement={'top'}
-						container="body"
-						modifiers={{ offset: { offset: '0, 33' } }}
-					>
-						{`${label}`}
-					</Popover>
-				</PopoverManager>
-			) : (
-				thumb
-			)}
+		<Styled.ThumbAnchor style={{ left: `${position}%` }}>
+			<PopoverManager>
+				<PopoverReference>{thumb}</PopoverReference>
+				<Popover
+					key={position}
+					isOpen={isPopupOpen}
+					placement="top"
+					container="body"
+					modifiers={{ offset: { offset: '0, 33' } }}
+				>
+					{`${label}`}
+				</Popover>
+			</PopoverManager>
 		</Styled.ThumbAnchor>
 	);
 });

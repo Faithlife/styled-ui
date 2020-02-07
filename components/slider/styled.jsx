@@ -19,8 +19,8 @@ export const ThumbContainer = styled.div`
 	align-items: center;
 	position: absolute;
 	top: 0;
-	left: 0;
-	right: 0;
+	left: 8px;
+	right: 8px;
 	bottom: 0;
 `;
 
@@ -34,9 +34,7 @@ export const Stop = styled.div`
 export const ThumbAnchor = styled.div`
 	position: relative;
 	height: 8px;
-	width: 3px;
-	left: ${props => (props.trackStart ? '6px' : 'auto')};
-	right: ${props => (props.trackEnd ? '6px' : 'auto')};
+	width: 0px;
 `;
 
 export const Thumb = styled.div`
