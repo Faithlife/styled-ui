@@ -31,6 +31,18 @@ This repository was created with [`create-flcom-addin`](https://git.faithlife.de
 - When you're ready to commit your work, create a new branch for your contribution, and then sync your branch with Github
 - Open a pull request via the Github Web UI to request review
 
+### Seeing your changes locally
+
+- Open up a terminal in your VS Code and type `yarn start`
+- Navigate to localhost:3000 to see the components live
+
+### Publishing versions
+- Our auto build is set up to publish a new version after a PR is merged in, so you don't have to worry about it!
+
+### Checking your version
+- If you instaled your package with yarn, you can check your `yarn.lock`
+- If you instaled with [Helmsman](https://git.faithlife.dev/Logos/helmsman), you can run `yarn get-versions`
+
 ### Additional documentation
 
 - [FilePicker](https://git.faithlife.dev/Logos/FaithlifeEquipment/tree/master/packages/file-picker)
