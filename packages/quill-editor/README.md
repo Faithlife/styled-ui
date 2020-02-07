@@ -39,13 +39,14 @@ Follow these steps to get started with the quill editor:
 
 ```
     import QuillEditor, { Toolbar } from '@faithlife/quill-editor';
-    import '@faithlife/quill-editor/dist/quill-editor.css';
+    import '@faithlife/quill-editor/dist/index.css';
+
 ```
 
 2. Import the stylesheet
 
 ```
-    import '@faithlife/quill-editor/dist/quill-editor.css';
+    import '@faithlife/quill-editor/dist/index.css';
 ```
 
 3. Use the component
@@ -78,7 +79,7 @@ A known limitation in Controlled mode: If `value` is updated to a non-user gener
 
 ```
 import QuillEditor, { Toolbar, ToolbarGrouping, ToolbarButton, ToolbarSelect, Tooltip, DefaultControls } from '@faithlife/quill-editor';
-import '@faithlife/quill-editor/dist/quill-editor.css';
+import '@faithlife/quill-editor/dist/index.css';
 ```
 
 \*\*\* `quill-editor.css` must be imported, or quill-editor will not display correctly
