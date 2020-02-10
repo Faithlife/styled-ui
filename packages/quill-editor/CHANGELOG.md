@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.7](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.4.6...@faithlife/quill-editor@4.4.7) (2020-02-10)
+
+
+### Bug Fixes
+
+* **Quill:** Prevent autofocus when rendering. ([eb3a447](https://git/Logos/FaithlifeEquipment/commits/eb3a447e8af0f421f540eeab2bd87f1dde54848b))
+
+
+
+
+
 ## [4.4.6](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.4.5...@faithlife/quill-editor@4.4.6) (2020-02-07)
 
 **Note:** Version bump only for package @faithlife/quill-editor
