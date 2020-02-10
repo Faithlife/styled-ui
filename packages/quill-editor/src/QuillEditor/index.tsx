@@ -46,6 +46,7 @@ export interface IQuillRichTextEditorProps {
 	disableImageControls?: boolean;
 	htmlOptions?: { [key: string]: any };
 	plainTextMode?: boolean;
+	readOnly?: boolean;
 	children?: React.ReactElement;
 }
 
@@ -204,6 +205,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		disableImageControls,
 		htmlOptions,
 		plainTextMode,
+		readOnly,
 		children,
 		...otherProps
 	},
@@ -215,6 +217,11 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const [filePickerKind, setFilePickerKind] = useState(FilePickerKind.Image);
 	const [storedValue, setStoredValue] = useState(value);
 	const [allowImageLink, setAllowImageLink] = useState(false);
+
+	const [hasMounted, setHasMounted] = useState<boolean>(false);
+	useEffect(() => {
+		setHasMounted(true);
+	}, []);
 
 	const onlyChild: any = useMemo(() => children && React.Children.only(children), [children]);
 	const hasOnlyChild = useMemo(() => !!onlyChild, [onlyChild]);
@@ -772,6 +779,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 						bounds={quillEditorQuery}
 						onChange={handleTextChange}
 						onChangeSelection={handleSelectionChange}
+						readOnly={readOnly || !hasMounted}
 						{...otherProps}
 					>
 						{placeholderDiv}
