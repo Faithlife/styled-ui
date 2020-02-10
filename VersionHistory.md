@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.47.0
+
+- Port `LoadingSpinner` to styled system, avoiding unnecessary styled components creations.
+
 ### 5.46.1
 
 - Create fewer elements in `Slider`.
