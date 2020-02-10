@@ -11,7 +11,7 @@ showSource: true
 ```react
 showSource: true
 ---
-<LoadingSpinner small />
+<LoadingSpinner variant="small" />
 ```
 
 ### Medium
@@ -19,7 +19,7 @@ showSource: true
 ```react
 showSource: true
 ---
-<LoadingSpinner medium />
+<LoadingSpinner variant="medium" />
 ```
 
 ### Medium with Custom Height
@@ -27,7 +27,7 @@ showSource: true
 ```react
 showSource: true
 ---
-<LoadingSpinner medium height={80} />
+<LoadingSpinner variant="medium" height={80} />
 ```
 
 ### Large
@@ -35,5 +35,5 @@ showSource: true
 ```react
 showSource: true
 ---
-<LoadingSpinner large />
+<LoadingSpinner variant="large" />
 ```
