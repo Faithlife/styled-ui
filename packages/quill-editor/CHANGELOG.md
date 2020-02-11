@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.8](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.4.7...@faithlife/quill-editor@4.4.8) (2020-02-11)
+
+
+### Bug Fixes
+
+* **Quill:** Restore autofocus option. ([d3c137e](https://git/Logos/FaithlifeEquipment/commits/d3c137e4b4affa955adc6bd2526730e27469b2d4))
+
+
+
+
+
 ## [4.4.7](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.4.6...@faithlife/quill-editor@4.4.7) (2020-02-10)
 
 
