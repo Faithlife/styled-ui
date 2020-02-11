@@ -218,6 +218,9 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const [storedValue, setStoredValue] = useState(value);
 	const [allowImageLink, setAllowImageLink] = useState(false);
 
+	// hasMounted is an anti-pattern, used here only to workaround a bug in ReactQuill.
+	// ReactQuill has a bug that will autofocus unless set to readOnly on initial render.
+	// See https://github.com/zenoamaro/react-quill/issues/317
 	const [hasMounted, setHasMounted] = useState<boolean>(false);
 	useEffect(() => {
 		setHasMounted(true);
@@ -779,7 +782,10 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 						bounds={quillEditorQuery}
 						onChange={handleTextChange}
 						onChangeSelection={handleSelectionChange}
-						readOnly={readOnly || !hasMounted}
+						// ReactQuill has a bug that will autofocus unless set to readOnly on initial render.
+						// See https://github.com/zenoamaro/react-quill/issues/317
+						// We still want to allow normal autofocus behavior if the autofocus prop is set.
+						readOnly={readOnly || (!hasMounted && !autofocus)}
 						{...otherProps}
 					>
 						{placeholderDiv}
