@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import * as Styled from './styled';
+import { Box } from '../Box';
+import { Paragraph } from '../Paragraph';
 
 /** A bordered drop zone that makes drag & drop easy. */
 export class DropZone extends PureComponent {
@@ -51,15 +52,28 @@ export class DropZone extends PureComponent {
 		const { showHighlight } = this.state;
 
 		return (
-			<Styled.DropZone
+			<Paragraph
+				as={Box}
 				onDragEnter={this.handleDragEnter}
 				onDragLeave={this.handleDragLeave}
 				onDragOver={this.handleDragOver}
 				onDrop={this.handleDrop}
 				showHighlight={showHighlight}
+				textStyle="content.16"
+				transition="background 300ms ease"
+				border="2px dashed"
+				borderColor={showHighlight ? 'blue4' : 'gray34'}
+				borderRadius={1}
+				padding={4}
+				display="flex"
+				flexDirection="column"
+				justifyXontent="center"
+				alignItems="center"
+				backgroundColor={showHighlight && 'blue2'}
+				color={showHighlight && 'blue4'}
 			>
 				{children}
-			</Styled.DropZone>
+			</Paragraph>
 		);
 	}
 }
