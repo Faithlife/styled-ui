@@ -8,4 +8,5 @@ export default interface IPaymentMethodsProps {
 		actionDescription: string
 	) => Promise<T | undefined>;
 	setSystemMessage: (systemMessage: ISystemMessage) => void;
+	selectedBillingProfileId?: string;
 }

@@ -31,21 +31,26 @@ interface IBillingProfilesProps {
 		actionDescription: string
 	) => Promise<T | undefined>;
 	setSystemMessage: (systemMessage: ISystemMessage) => void;
+	selectedProfileId?: string;
 }
 
 const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 	onSelectedBillingProfileChange,
 	actAndHandleException,
 	setSystemMessage,
+	selectedProfileId,
 }) => {
 	const [billingProfiles, setBillingProfiles] = useState<IBillingProfileDto[]>([]);
 	const [usageInfo, setUsageInfo] = useState<IUsageInfoDto>();
 	const [billingProfileValidationErrors, setBillingProfileValidationErrors] = useState<IError[]>(
 		[]
 	);
+
 	const [showAllPaymentMethods, setShowAllPaymentMethods] = useState<boolean>(false);
 	const [shouldRefreshBillingProfiles, setShouldRefreshBillingProfiles] = useState(true);
-	const [selectedBillingProfileId, setSelectedBillingProfileId] = useState<string | null>(null);
+	const [selectedBillingProfileId, setSelectedBillingProfileId] = useState<string | undefined>(
+		selectedProfileId
+	);
 	const [isAddingNewBillingProfile, setIsAddingNewBillingProfile] = useState(false);
 	const [editingBillingProfileId, setEditingBillingProfileId] = useState<string | null>(null);
 	const [countries, setCountries] = useState<ICountryDto[]>([]);
@@ -138,9 +143,10 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 				const freshProfiles = await OrdersClient.getBillingProfiles();
 
 				setBillingProfiles(freshProfiles.billingProfiles);
+				setUsageInfo(freshProfiles.usageInfo);
 				if (freshProfiles.billingProfiles.length > 0) {
 					const defaultProfile = freshProfiles.billingProfiles.filter(p => p.isDefault)[0];
-					if (defaultProfile) {
+					if (defaultProfile && !selectedBillingProfileId) {
 						setSelectedBillingProfileId(defaultProfile.profileId);
 					}
 				}
@@ -148,7 +154,13 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 
 			actAndHandleException(getBillingProfiles, strings.fetchBillingProfiles);
 		}
-	}, [shouldRefreshBillingProfiles, actAndHandleException, strings.fetchBillingProfiles]);
+	}, [
+		shouldRefreshBillingProfiles,
+		actAndHandleException,
+		strings.fetchBillingProfiles,
+		selectedBillingProfileId,
+		setUsageInfo,
+	]);
 
 	const onSelectBillingProfile = useCallback(
 		(billingProfile: IBillingProfileDto) => {
