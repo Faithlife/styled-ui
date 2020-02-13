@@ -8,7 +8,7 @@ import EquipSvg from './equip.svg';
 import ProclaimSvg from './proclaim.svg';
 import SermonsSvg from './sermons.svg';
 import GivingSvg from './giving.svg';
-import BibleScreenSvg from './bible-screen.svg';
+import FaithlifeTvChurchSvg from './faithlife-tv-church.svg';
 
 export {
 	FaithlifeSvg,
@@ -21,5 +21,5 @@ export {
 	ProclaimSvg,
 	SermonsSvg,
 	GivingSvg,
-	BibleScreenSvg,
+	FaithlifeTvChurchSvg,
 };

@@ -11,8 +11,8 @@ import ChurchesSvg from './churches.svg';
 import SitesSvg from './sites.svg';
 import FaithlifeStudyBibleSvg from './faithlife-study-bible.svg';
 import GivingSvg from './giving.svg';
-import BibleScreenSvg from './bible-screen.svg';
 import CloseIcon from './close-icon.svg';
+import FaithlifeTvChurchSvg from './faithlife-tv-church.svg';
 
 export {
 	FaithlifeFlameSvg,
@@ -28,6 +28,6 @@ export {
 	SitesSvg,
 	FaithlifeStudyBibleSvg,
 	GivingSvg,
-	BibleScreenSvg,
 	CloseIcon,
+	FaithlifeTvChurchSvg,
 };

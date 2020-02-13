@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="24" viewBox="20 -20 156 156" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61 (89581) - https://sketch.com -->
+    <title>tv copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M103.682272,120 L16.3177275,120 C7.34350342,120 0,112.656497 0,103.682272 L0,16.3177275 C0,7.34350342 7.34350342,0 16.3177275,0 L103.682272,0 C112.656497,0 120,7.34350342 120,16.3177275 L120,103.682272 C120,112.656497 112.656497,120 103.682272,120 Z" id="path-1"></path>
+    </defs>
+    <g id="tv-copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="TV-/-On-shape" transform="translate(18.000000, 18.000000)">
+            <g id="BG-Gradient-Shape" stroke-width="1">
+                <g>
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Fill-14" fill="#F5F5F5" xlink:href="#path-1"></use>
+                    <g id="Group" mask="url(#mask-2)">
+                        <polygon id="Rectangle-3" fill="#8CD86C" points="0 0 120 0 120 39 0 39"></polygon>
+                        <polygon id="Rectangle-3" fill="#62B946" points="0 39 120 39 120 81 0 81"></polygon>
+                        <polygon id="Rectangle-3" fill="#42991D" points="0 81 120 81 120 120 0 120"></polygon>
+                    </g>
+                </g>
+            </g>
+            <path d="M60,24 C79.882251,24 96,40.117749 96,60 C96,79.882251 79.882251,96 60,96 C40.117749,96 24,79.882251 24,60 C24,40.117749 40.117749,24 60,24 Z M54,44.6055513 C52.3431458,44.6055513 51,45.948697 51,47.6055513 L51,47.6055513 L51,72.3944487 C51,72.9867237 51.1753141,73.5657468 51.5038491,74.0585493 C52.4229065,75.4371354 54.2855145,75.809657 55.6641006,74.8905996 L55.6641006,74.8905996 L74.2557737,62.4961509 C74.5853305,62.2764463 74.8681194,61.9936575 75.087824,61.6641006 C76.0068813,60.2855145 75.6343597,58.4229065 74.2557737,57.5038491 L74.2557737,57.5038491 L55.6641006,45.1094004 C55.171298,44.7808654 54.592275,44.6055513 54,44.6055513 Z" id="Oval" fill="#FFFFFF"></path>
+        </g>
+    </g>
+</svg>

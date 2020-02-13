@@ -8,7 +8,7 @@ import {
 	GivingSvg,
 	FaithlifeTvSvg,
 	MobileEdSvg,
-	BibleScreenSvg,
+	FaithlifeTvChurchSvg,
 } from './svgs';
 import * as Styled from './styled';
 
@@ -38,7 +38,7 @@ export const FaithlifeEquipAnimatedImage = ({ isVisible }) => (
 			<MobileEdSvg />
 		</Styled.AnimatedImageIcon>
 		<Styled.AnimatedImageIcon role="presentation">
-			<BibleScreenSvg />
+			<FaithlifeTvChurchSvg />
 		</Styled.AnimatedImageIcon>
 	</Styled.AnimatedImageEquip>
 );
