@@ -34,6 +34,7 @@ const NumberInput = React.memo(
 				<Input
 					paddingRight="24px"
 					width={width && '100%'}
+					textAlign="right"
 					{...rest}
 					ref={innerRef}
 					variant={variant}
@@ -93,7 +94,7 @@ const StepButton = props => (
 	<Button
 		tabIndex={-1}
 		position="absolute"
-		right={0}
+		right="1px"
 		variant="minorTransparent"
 		size="small"
 		css={`
