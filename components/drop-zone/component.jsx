@@ -69,8 +69,8 @@ export class DropZone extends PureComponent {
 				flexDirection="column"
 				justifyContent="center"
 				alignItems="center"
-				backgroundColor={showHighlight && 'blue2'}
-				color={showHighlight && 'blue4'}
+				backgroundColor={showHighlight ? 'blue2' : null}
+				color={showHighlight ? 'blue4' : null}
 			>
 				{children}
 			</Paragraph>
