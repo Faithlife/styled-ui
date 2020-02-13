@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.2](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.4.1...@faithlife/product-drawer@0.4.2) (2020-02-13)
+
+
+### Bug Fixes
+
+* Replace BibleScreen with Faithlife TV Church in product drawer, … ([#56](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/56)) ([ba2cb8a](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/ba2cb8a9c05b30b01dcbbca5c3501bdd88d01e12))
+
+
+
+
+
 ## [0.4.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.4.0...@faithlife/product-drawer@0.4.1) (2020-01-29)
 
 
