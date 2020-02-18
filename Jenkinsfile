@@ -63,6 +63,9 @@ flowdock.withNotification('a611b96b1517142a58a87c1b58aacdd8', '#build') {
 						}
 					}
 				}
+				stage('CrowdIn Upload'){
+					sh script: 'yarn run crowdin-upload'
+				}
 			}
 
 		} catch(Exception e) {
