@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.3](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.4.2...@faithlife/product-drawer@0.4.3) (2020-02-18)
+
+
+### Bug Fixes
+
+* Return BibleScreen logo to bottom of the product drawer. ([#58](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/58)) ([2a745d4](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/2a745d4dcb0332b77ffb72b7105edce9581dc9f8))
+
+
+
+
+
 ## [0.4.2](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.4.1...@faithlife/product-drawer@0.4.2) (2020-02-13)
 
 
