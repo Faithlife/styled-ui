@@ -21,7 +21,9 @@
     "ship-to": "flcom-addin-scripts ship-to",
     "get-versions": "flcom-addin-scripts get-versions",
     "test": "lerna run test",
-    "publish": "lerna publish --conventional-commits --github-release --registry http://npm.faithlife.io --yes"
+    "publish": "lerna publish --conventional-commits --github-release --registry http://npm.faithlife.io --yes",
+    "crowdin-upload": "java -jar ./tools/crowdin/crowdin-cli.jar upload",
+    "crowdin-download": "java -jar ./tools/crowdin/crowdin-cli.jar download"
   },
   "browserslist": [
     "extends @faithlife/browserslist-config-flcom-addin"
