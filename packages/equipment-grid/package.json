@@ -1,0 +1,27 @@
+{
+  "name": "@faithlife/equipment-grid",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "main": "dist/index.js",
+  "files": [
+    "dist/**"
+  ],
+  "devDependencies": {
+    "@faithlife/styled-ui": "^5.31.1",
+    "ag-grid-community": "21.2.2",
+    "ag-grid-enterprise": "21.2.2",
+    "ag-grid-react": "21.2.2",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4",
+    "styled-components": "^4.4.1"
+  },
+  "peerDependencies": {
+    "@faithlife/styled-ui": "^5.x.x",
+    "ag-grid-community": "21.2.2",
+    "ag-grid-enterprise": "21.2.2",
+    "ag-grid-react": "21.2.2",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4",
+    "styled-components": "^4.4.1"
+  }
+}
