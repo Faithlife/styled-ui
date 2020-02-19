@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@0.2.3...@faithlife/payment-methods@0.3.0) (2020-02-19)
+
+
+### Features
+
+* **locales:** download changes from CrowdIn Build: 10. ([ea2e6d6](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/ea2e6d6b1797f0f5a987ace39428c088a896c8f2))
+
+
+
+
+
 ## [0.2.3](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@0.2.2...@faithlife/payment-methods@0.2.3) (2020-02-18)
 
 
