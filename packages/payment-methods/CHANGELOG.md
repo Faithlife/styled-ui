@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@0.3.0...@faithlife/payment-methods@0.3.1) (2020-02-19)
+
+
+### Bug Fixes
+
+* **payment-methods:** Add error modal when user attempts to delete disabled-delete payment method ([#62](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/62)) ([2a391d8](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/2a391d8bacfa062a33abdf324c5d9f8aa80385b4))
+
+
+
+
+
 # [0.3.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@0.2.3...@faithlife/payment-methods@0.3.0) (2020-02-19)
 
 
