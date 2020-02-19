@@ -12,6 +12,7 @@ const PaymentMethods: React.FunctionComponent<IPaymentMethodsProps> = ({
 	actAndHandleException,
 	setSystemMessage,
 	selectedBillingProfileId,
+	isCalledPreorder = false,
 }) => {
 	return (
 		<LocalizationProvider localizedResources={localizedResources}>
@@ -21,6 +22,7 @@ const PaymentMethods: React.FunctionComponent<IPaymentMethodsProps> = ({
 					actAndHandleException={actAndHandleException}
 					onSelectedBillingProfileChange={onSelectedBillingProfileChange}
 					selectedProfileId={selectedBillingProfileId}
+					isCalledPreorder={isCalledPreorder}
 				></BillingProfiles>
 			</ThemeProvider>
 		</LocalizationProvider>

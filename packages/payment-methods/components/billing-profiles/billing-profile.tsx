@@ -1,5 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Button, Radio } from '@faithlife/styled-ui';
+import { Modal } from '@faithlife/styled-ui/v6';
+import { useLocalization } from '../../Localization';
 import IBillingProfileDto from '../../clients/typings/orders/IBillingProfileDto';
 import {
 	Amex,
@@ -21,6 +23,7 @@ interface IBillingProfileProps {
 	onSelected: Function;
 	index: number;
 	isEditing: boolean;
+	isCalledPreorder: boolean;
 }
 
 const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
@@ -31,8 +34,10 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 	onSelected,
 	index,
 	isEditing,
+	isCalledPreorder,
 }) => {
 	const now = new Date();
+	const strings = useLocalization();
 
 	// TODO: this will disable trash can/delete button if there are usages on the card. We need a screen to warn the user and help them move usage to another card.
 	const [isEditDisabled, setIsEditDisabled] = useState(false);
@@ -41,6 +46,7 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 			billingProfile.usageInfo.outstandingPaymentPlansCount > 0 ||
 			billingProfile.usageInfo.pendingPrepubCount > 0
 	);
+	const [showErrorModal, setShowErrorModal] = useState(false);
 
 	// Date.getMonth() is zero-indexed
 	const isExpired =
@@ -55,6 +61,8 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 		onDelete(billingProfile.profileId);
 		setIsEditDisabled(false);
 	}, [billingProfile.profileId, onDelete]);
+
+	const handleModalClose = useCallback(() => setShowErrorModal(false), [setShowErrorModal]);
 
 	if (billingProfile.type.toLowerCase() === 'paypal') {
 		return (
@@ -123,9 +131,40 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 					condensed
 					size="small"
 					icon={<Trash />}
-					onClick={deleteBillingProfile}
-					disabled={trashDisabled}
+					onClick={trashDisabled ? () => setShowErrorModal(true) : deleteBillingProfile}
 				/>
+				{trashDisabled && (
+					<Modal isOpen={showErrorModal} onClose={handleModalClose}>
+						<Modal.Header title={strings.beforeRemoving}></Modal.Header>
+						<Modal.Content width={['100vw', 400]}>
+							{billingProfile.usageInfo.activeSubscriptionCount > 0 && (
+								<p>
+									{'- '}
+									{strings.moveSubscriptionsToAlternate}
+								</p>
+							)}
+							{billingProfile.usageInfo.outstandingPaymentPlansCount > 0 && (
+								<p>
+									{'- '}
+									{strings.movePaymentPlansToAlternate}
+								</p>
+							)}
+							{billingProfile.usageInfo.pendingPrepubCount > 0 && (
+								<p>
+									{'- '}
+									{isCalledPreorder
+										? strings.movePreordersToAlternate
+										: strings.movePrepubsToAlternate}
+								</p>
+							)}
+						</Modal.Content>
+						<Modal.Footer>
+							<Modal.FooterButtons
+								cancelButton={{ text: 'Cancel', onClick: () => setShowErrorModal(false) }}
+							/>
+						</Modal.Footer>
+					</Modal>
+				)}
 			</Styled.Delete>
 		</Styled.CreditCardRow>
 	);

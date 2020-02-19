@@ -33,6 +33,7 @@ interface IEditBillingProfileProps {
 	onSelectedCountryChanged: Function;
 	usageInfo?: IUsageInfoDto;
 	addressFormatItems: IAddressFormatItem[];
+	isCalledPreorder: boolean;
 }
 const usaCountryId = '840';
 const defaultCountryOption = { label: 'United States', value: usaCountryId };
@@ -47,6 +48,7 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 	onSelectedCountryChanged,
 	usageInfo,
 	addressFormatItems,
+	isCalledPreorder,
 }) => {
 	const commitButtonRef = useRef<Button>(null);
 	const [shouldCloseStateSelect, setShouldCloseStateSelect] = useState<boolean>(false);
@@ -410,7 +412,7 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 						})
 					}
 					isChecked={getUncommittedBillingProfileBoolOrDefault('useOnPendingPrepubs')}
-					title={strings.movePrepubOrders}
+					title={isCalledPreorder ? strings.movePreorders : strings.movePrepubOrders}
 					type="button"
 				></Styled.Checkbox>
 			)}

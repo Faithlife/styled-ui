@@ -105,6 +105,10 @@ export default class BillingProfileMapper {
 			nameOnCard: profile.cardInfo.nameOnCard || '',
 			postalCode: profile.cardInfo.postalCode || '',
 			stateId: profile.stateId || '',
+			makeDefault: profile.makeDefault,
+			useOnPendingPrepubs: profile.useOnPendingPrepubs,
+			useOnActiveSubscriptions: profile.useOnActiveSubscriptions,
+			useOnOutstandingPaymentPlans: profile.useOnOutstandingPaymentPlans,
 		};
 	}
 }

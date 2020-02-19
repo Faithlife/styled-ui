@@ -32,6 +32,7 @@ interface IBillingProfilesProps {
 	) => Promise<T | undefined>;
 	setSystemMessage: (systemMessage: ISystemMessage) => void;
 	selectedProfileId?: string;
+	isCalledPreorder: boolean;
 }
 
 const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
@@ -39,6 +40,7 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 	actAndHandleException,
 	setSystemMessage,
 	selectedProfileId,
+	isCalledPreorder,
 }) => {
 	const [billingProfiles, setBillingProfiles] = useState<IBillingProfileDto[]>([]);
 	const [usageInfo, setUsageInfo] = useState<IUsageInfoDto>();
@@ -314,6 +316,7 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 							onSelectedCountryChanged={handleCountryChanged}
 							usageInfo={usageInfo}
 							addressFormatItems={addressFormatItems}
+							isCalledPreorder={isCalledPreorder}
 						/>
 					)}
 					{displayProfiles
@@ -327,6 +330,7 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 										onSelected={() => onSelectBillingProfile(p)}
 										index={i}
 										isEditing={editingBillingProfileId === p.profileId}
+										isCalledPreorder={isCalledPreorder}
 									/>
 									{editingBillingProfileId === p.profileId && (
 										<EditBillingProfile
@@ -346,6 +350,7 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 											onSelectedCountryChanged={handleCountryChanged}
 											usageInfo={usageInfo}
 											addressFormatItems={addressFormatItems}
+											isCalledPreorder={isCalledPreorder}
 										/>
 									)}
 								</Fragment>

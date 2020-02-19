@@ -12,4 +12,8 @@ export default interface IOrdersBillingProfileChangeSetDto {
 	stateId: string;
 	suburb?: string;
 	county?: string;
+	makeDefault?: boolean;
+	useOnPendingPrepubs?: boolean;
+	useOnActiveSubscriptions?: boolean;
+	useOnOutstandingPaymentPlans?: boolean;
 }

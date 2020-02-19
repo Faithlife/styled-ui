@@ -9,4 +9,5 @@ export default interface IPaymentMethodsProps {
 	) => Promise<T | undefined>;
 	setSystemMessage: (systemMessage: ISystemMessage) => void;
 	selectedBillingProfileId?: string;
+	isCalledPreorder?: boolean;
 }
