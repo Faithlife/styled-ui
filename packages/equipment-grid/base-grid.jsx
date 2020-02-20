@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useMemo, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { AgGridReact, AgGridColumn } from 'ag-grid-react';
 import 'ag-grid-enterprise';
@@ -9,6 +9,15 @@ const gridHeight = 8;
 const defaultRowHeight = gridHeight * 5;
 const headerHeight = gridHeight * 5;
 const noRowsDefaultTableHeight = 200;
+
+const defaultLocalization = {
+	noRowsMessage: 'No Rows to Show',
+	pageControls: {
+		to: 'to',
+		of: 'of',
+		page: 'Page',
+	},
+};
 
 /** A wrapper of ag-grid with some boilerplate code to handle initialization and sorting/ filtering */
 export function BaseGrid({
@@ -41,9 +50,24 @@ export function BaseGrid({
 	onRowDataChange,
 	context,
 	filters,
+	localization,
 }) {
 	const tableHeightPadding = hasPagingBar ? 42 : 2;
 	const prevViewportSize = useRef(isSmallViewport);
+
+	// Additional options are here: https://www.ag-grid.com/javascript-grid-internationalisation/
+	const localeText = useMemo(
+		() => ({
+			noRowsToShow:
+				(localization && localization.noRowsMessage) || defaultLocalization.noRowsMessage,
+			to: (localization && localization.pageControls.to) || defaultLocalization.pageControls.to,
+			from:
+				(localization && localization.pageControls.from) || defaultLocalization.pageControls.from,
+			page:
+				(localization && localization.pageControls.page) || defaultLocalization.pageControls.page,
+		}),
+		[localization]
+	);
 
 	useEffect(() => {
 		if (gridApi && isSmallViewport !== prevViewportSize.current) {
@@ -201,6 +225,7 @@ export function BaseGrid({
 				animateRows
 				reactNext
 				colResizeDefault="shift"
+				localeText={localeText}
 				{...gridOptions}
 			>
 				{headingChildren.map((child, index) => {
@@ -310,6 +335,15 @@ BaseGrid.propTypes = {
 	context: PropTypes.object,
 	/** An object of filters see examples and https://www.ag-grid.com/javascript-grid-filter-provided-simple/#filterOptions */
 	filters: PropTypes.object,
+	/** Localization options */
+	localization: PropTypes.shape({
+		noRowsMessage: PropTypes.string.isRequired,
+		pageControls: PropTypes.shape({
+			to: PropTypes.string.isRequired,
+			of: PropTypes.string.isRequired,
+			page: PropTypes.string.isRequired,
+		}).isRequired,
+	}).isRequired,
 };
 
 function parseChildrenSettings(children, additionalCellComponents = {}) {
