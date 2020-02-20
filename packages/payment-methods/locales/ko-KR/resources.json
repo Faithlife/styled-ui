@@ -28,6 +28,7 @@
 	},
 	"makeDefault": "Make this my default billing profile.",
 	"movePrepubOrders": "Move all pending Pre-Pub orders to this card.",
+	"movePreorders": "Move all pending Preorders to this card.",
 	"movePaymentPlans": "Move all outstanding payment plans to this card.",
 	"moveSubscriptions": "Move all current subscriptions to this card.",
 	"fetchCountries": "fetch list of countries",
@@ -59,5 +60,10 @@
 	"state": "State",
 	"state_au": "State/Territory",
 	"suburb": "Suburb",
-	"zipCode": "Zip Code"
+	"zipCode": "Zip Code",
+	"beforeRemoving": "Before removing your card, be sure to:",
+	"moveSubscriptionsToAlternate": "Cancel or move current subscriptions to an alternate credit card.",
+	"movePaymentPlansToAlternate": "Move outstanding payment plans to an alternate credit card.",
+	"movePreordersToAlternate": "Cancel or move pre-orders to an alternate credit card.",
+	"movePrepubsToAlternate": "Cancel or move pre-pub orders to an alternate credit card."
 }
