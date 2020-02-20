@@ -1,6 +1,6 @@
 {
   "name": "@faithlife/payment-methods",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "license": "UNLICENSED",
   "main": "dist/index.js",
   "files": [
