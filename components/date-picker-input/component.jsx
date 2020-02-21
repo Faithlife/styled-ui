@@ -120,7 +120,7 @@ export class DatePickerInput extends PureComponent {
 			return;
 		}
 
-		this.setState({ selectedDate, text: null });
+		this.setState({ selectedDate, text: null, showCalendar: false });
 		this.props.onChange(selectedDate);
 	};
 
