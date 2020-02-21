@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@0.5.0...@faithlife/payment-methods@1.0.0) (2020-02-21)
+
+
+### Features
+
+* Add localization for payment methods. ([#63](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/63)) ([7b5ec42](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/7b5ec42f31efdf5091a2b51072aac1c314c8e957))
+
+
+### BREAKING CHANGES
+
+* Consumer is now required to pass in localized resources.
+
+
+
+
+
 # [0.5.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@0.4.0...@faithlife/payment-methods@0.5.0) (2020-02-20)
 
 
