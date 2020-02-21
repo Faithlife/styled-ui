@@ -80,6 +80,10 @@ The recommended pattern is to use the various `Tab` components as children of th
 
 `allowMultiSelect` - `boolean`: Controls whether the File Picker can select multiple files.
 
+`disableEditor` - `boolean`: Disables the Smart Media Editor. Defaults to false.
+
+`localizedResources` - `object`: Localized text for the Smart Media Editor. Required when the editor is enabled.
+
 #### FilePicker.Tab
 
 `title` - `node`: Will be rendered in the list of Tabs.

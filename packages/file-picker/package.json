@@ -14,8 +14,8 @@
     "react": "^16.8.4"
   },
   "peerDependencies": {
-    "@faithlife/smart-media-editor": "^4.9.0",
-    "@faithlife/styled-ui": "^5.36.0",
+    "@faithlife/smart-media-editor": "^7.0.0",
+    "@faithlife/styled-ui": "^5.47.0",
     "react": "^16.8.4"
   },
   "dependencies": {

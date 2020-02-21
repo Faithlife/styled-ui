@@ -1,11 +1,10 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
+import { loadSmartMediaModelForAmberSmartMediaFamily } from '@faithlife/smart-media-editor';
 import { SmartMediaEditorModal } from './SmartMediaEditorModal';
 import { FilePickerModal } from './FilePickerModal';
 import { FilePickerProvider } from './FilePickerContext';
-import { defaultLocalizedResources } from './defaultLocalizedResources';
 import { useAmberClient } from './useAmberClient';
-import { useSmartMediaModel } from './useSmartMediaModel';
 
 export const FilePicker = ({
 	children,
@@ -15,18 +14,18 @@ export const FilePicker = ({
 	onFilesSelected,
 	onCancel,
 	allowMultiSelect,
+	disableEditor,
 	localizedResources,
 }) => {
 	const [asset, setAsset] = useState(null);
-	const [isEditing, setIsEditing] = useState(false);
-	const { model, dimensions, setModel } = useSmartMediaModel(asset, isEditing);
+	const [model, setModel] = useState();
 
 	const handleFilesSelected = useCallback(
 		data => {
 			const firstAsset = data.assets[0];
 			setAsset(firstAsset);
 			if (data.openInExternalEditor) {
-				setIsEditing(true);
+				setModel(loadSmartMediaModel(firstAsset));
 			} else {
 				onFilesSelected({ assets: [firstAsset] });
 			}
@@ -37,7 +36,6 @@ export const FilePicker = ({
 	const handleCancel = useCallback(() => {
 		setAsset(null);
 		setModel(null);
-		setIsEditing(false);
 		onCancel();
 	}, [onCancel, setModel]);
 
@@ -53,13 +51,11 @@ export const FilePicker = ({
 
 	const handleSmartMediaDone = useCallback(() => {
 		setModel(null);
-		setIsEditing(false);
 		onFilesSelected({ assets: [asset] });
 	}, [asset, onFilesSelected, setModel]);
 
 	const handleSmartMediaCancel = useCallback(() => {
 		setModel(null);
-		setIsEditing(false);
 	}, [setModel]);
 
 	const context = useMemo(
@@ -68,9 +64,17 @@ export const FilePicker = ({
 			onFilesSelected: handleFilesSelected,
 			onCancel: handleCancel,
 			allowMultiSelect,
-			localizedResources: { ...defaultLocalizedResources, ...localizedResources },
+			disableEditor,
+			localizedResources,
 		}),
-		[accountId, handleFilesSelected, handleCancel, allowMultiSelect, localizedResources]
+		[
+			accountId,
+			handleFilesSelected,
+			handleCancel,
+			allowMultiSelect,
+			disableEditor,
+			localizedResources,
+		]
 	);
 
 	return (
@@ -78,21 +82,23 @@ export const FilePicker = ({
 			<FilePickerModal isOpen={isOpen} onClose={handleCancel} title={title}>
 				{children}
 			</FilePickerModal>
-			<SmartMediaEditorModal
-				isOpen={isOpen && !!model}
-				model={model}
-				dimensions={dimensions}
-				onCancel={handleSmartMediaCancel}
-				onDone={handleSmartMediaDone}
-				onSave={handleSmartMediaSave}
-				title={title}
-			/>
+			{!disableEditor && (
+				<SmartMediaEditorModal
+					isOpen={isOpen && !!model}
+					model={model}
+					onCancel={handleSmartMediaCancel}
+					onDone={handleSmartMediaDone}
+					onSave={handleSmartMediaSave}
+					title={title}
+				/>
+			)}
 		</FilePickerProvider>
 	);
 };
 
 FilePicker.defaultProps = {
 	title: 'File Picker',
+	disableEditor: false,
 };
 
 FilePicker.propTypes = {
@@ -110,16 +116,34 @@ FilePicker.propTypes = {
 	onCancel: PropTypes.func.isRequired,
 	/** Controls whether the File Picker can select multiple files. */
 	allowMultiSelect: PropTypes.bool,
-	/** Localized text for the File Picker and for the Smart Media Editor. */
-	localizedResources: PropTypes.shape({
-		uploadTab: {
-			addText: PropTypes.string,
-			cancelText: PropTypes.string,
-			recommendedMinSize: PropTypes.string,
-			uploadFile: PropTypes.string,
-			uploadFiles: PropTypes.string,
-			dragDropText: PropTypes.string,
-			browseText: PropTypes.string,
-		},
-	}),
+	/** Disables the Smart Media Editor. Defaults to false. */
+	disableEditor: PropTypes.bool,
+	/** Localized text for the Smart Media Editor. */
+	localizedResources: PropTypes.object,
 };
+
+const loadSmartMediaModel = asset => {
+	const selectedFileBackground = asset && asset.file && asset.file.linkUri;
+	const smartMediaMetadata = getOrInitSmartMediaMetadata(asset);
+
+	if (!asset || !selectedFileBackground || !smartMediaMetadata) {
+		return;
+	}
+
+	const model = loadSmartMediaModelForAmberSmartMediaFamily(
+		smartMediaMetadata.data,
+		asset.file,
+		selectedFileBackground,
+		'anonymous'
+	);
+
+	return model;
+};
+
+function getOrInitSmartMediaMetadata(asset) {
+	return (
+		(asset && asset.families && asset.families.find(x => x.name === 'smartMedia')) || {
+			data: { styles: [{ version: 1, data: { textFields: [] } }] },
+		}
+	);
+}

@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Box } from '@faithlife/styled-ui';
 import { FilePicker } from '@faithlife/file-picker';
+import localizedResources from '@faithlife/smart-media-editor/dist/locales/en-US/resources.json';
 
 const App = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -49,6 +50,7 @@ const App = () => {
 				isOpen={isOpen}
 				onFilesSelected={handleFilesSelected}
 				onCancel={handleCancel}
+				localizedResources={localizedResources}
 			>
 				<FilePicker.GroupVaultTab />
 				<FilePicker.FaithlifeStockTab />

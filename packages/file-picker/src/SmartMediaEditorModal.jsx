@@ -4,31 +4,26 @@ import {
 	smartMediaToolbarFeatures,
 	fetchFontFamilies,
 	SmartMediaEditorProvider,
-	loadSmartMediaModelForAmberSmartMediaFamily,
 	toAmberSmartMediaFamily,
+	useFabric,
 } from '@faithlife/smart-media-editor';
 import { Box, LoadingSpinner } from '@faithlife/styled-ui';
 import { Button, Modal } from '@faithlife/styled-ui/v6';
-import { useDebouncedCallback } from '@faithlife/react-ui';
 import formatUri from '@faithlife/format-uri';
 import { useFilePickerContext } from './FilePickerContext';
 
 const undesiredFeatures = ['assetPicker', 'background', 'bold', 'italic'];
 
-const toolbarFeatures = smartMediaToolbarFeatures.filter(
-	feature => !undesiredFeatures.includes(feature)
-);
-
 export const SmartMediaEditorModal = ({
 	isOpen,
 	title,
 	model: modelProp,
-	dimensions,
 	onCancel,
 	onDone,
 	onSave,
 }) => {
 	const editorRef = useRef();
+	const fabric = useFabric();
 	const [model, setModel] = useState(modelProp);
 	const [isModified, setIsModified] = useState(false);
 	const [isSaving, setIsSaving] = useState(false);
@@ -69,34 +64,8 @@ export const SmartMediaEditorModal = ({
 			});
 	}, [onSave, model]);
 
-	// Debounce Amber search requests
-	const lastSuccessfulSearchText = useRef('');
-	const debounceSearch = useDebouncedCallback(
-		useCallback(
-			(onFinish, searchText) => {
-				if (
-					lastSuccessfulSearchText.current !== undefined &&
-					lastSuccessfulSearchText.current === searchText
-				) {
-					return;
-				}
-
-				const previewerTemplates = fetchAndBuildAmberTemplates(searchText);
-				Promise.resolve(previewerTemplates).then(templates => {
-					onFinish(
-						templates.map(({ model: newModel, id }) => {
-							return {
-								id,
-								model: model.withApplySmartMedia(newModel),
-							};
-						})
-					);
-					lastSuccessfulSearchText.current = searchText;
-				});
-			},
-			[model]
-		),
-		1000
+	const toolbarFeatures = smartMediaToolbarFeatures.filter(
+		feature => !undesiredFeatures.includes(feature)
 	);
 
 	return (
@@ -142,11 +111,10 @@ export const SmartMediaEditorModal = ({
 				>
 					<SmartMediaEditor
 						ref={editorRef}
+						fabric={model && fabric}
 						model={model}
-						dimensions={dimensions}
 						onChange={handleChange}
 						toolbarFeatures={toolbarFeatures}
-						getPreviewerTemplates={debounceSearch}
 						getForegroundItems={getForegroundImages}
 						getElements={getElements}
 						preferArtboard
@@ -255,54 +223,3 @@ function proxyUrl(originalUrl) {
 
 	return null;
 }
-
-async function getSmartMediaAssets(queryParameters = '', width = 1920, height = 1080) {
-	const splitQueryParameters = queryParameters
-		? queryParameters
-				.trim()
-				.split(' ')
-				.map(
-					(parameter, index, array) => `"${parameter}" ${index !== array.length - 1 ? 'OR ' : ''}`
-				)
-				.join(' ')
-		: '';
-
-	const query = `${splitQueryParameters} family:=smartMedia width:${width} height:${height}`;
-
-	const formattedUri = formatUri('/proxy/files/v1/assets/search', {
-		bucket: 'LogosInternal',
-		q: query,
-		limit: 20,
-		explain: true,
-	});
-
-	const firstResponse = await fetch(formattedUri);
-
-	const response = await firstResponse.json();
-
-	return response.hits.map(hit => hit.asset);
-}
-
-const fetchAndBuildAmberTemplates = async search => {
-	const amberAssets = await getSmartMediaAssets(search);
-	const amberTemplates = [];
-
-	for (const amberSmartMedia of amberAssets) {
-		const amberFileURL =
-			amberSmartMedia.file && amberSmartMedia.file.link && amberSmartMedia.file.link.uri;
-		let proxiedAmberFileUrl = null;
-		if (amberFileURL) {
-			const url = new URL(amberFileURL);
-			proxiedAmberFileUrl = `/proxy/files${url.pathname}${url.search}`;
-		}
-
-		const model = await loadSmartMediaModelForAmberSmartMediaFamily(
-			amberSmartMedia.metadata.smartMedia,
-			amberSmartMedia.file,
-			proxiedAmberFileUrl
-		);
-
-		amberTemplates.push({ id: amberSmartMedia.id, model });
-	}
-	return amberTemplates;
-};

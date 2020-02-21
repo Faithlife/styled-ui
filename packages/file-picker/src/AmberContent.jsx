@@ -12,7 +12,7 @@ export function AmberContent({
 	viewStyle,
 	...props
 }) {
-	const { allowMultiSelect, onCancel, onFilesSelected } = useFilePickerContext();
+	const { allowMultiSelect, onCancel, onFilesSelected, disableEditor } = useFilePickerContext();
 
 	const amber = useAmber();
 	const amberRef = useRef();
@@ -63,10 +63,20 @@ export function AmberContent({
 				sort,
 				url: '/embed/',
 				viewStyle,
-				externalEditorKinds: ['image'],
+				externalEditorKinds: disableEditor ? [] : ['image'],
 			});
 		}
-	}, [accountId, allowMultiSelect, amber, filter, footerText, pickerMode, sort, viewStyle]);
+	}, [
+		accountId,
+		allowMultiSelect,
+		amber,
+		filter,
+		footerText,
+		pickerMode,
+		sort,
+		viewStyle,
+		disableEditor,
+	]);
 
 	return <Box ref={amberRef} height="100%" {...props} />;
 }
