@@ -65,5 +65,6 @@
 	"moveSubscriptionsToAlternate": "Cancel or move current subscriptions to an alternate credit card.",
 	"movePaymentPlansToAlternate": "Move outstanding payment plans to an alternate credit card.",
 	"movePreordersToAlternate": "Cancel or move pre-orders to an alternate credit card.",
-	"movePrepubsToAlternate": "Cancel or move pre-pub orders to an alternate credit card."
+	"movePrepubsToAlternate": "Cancel or move pre-pub orders to an alternate credit card.",
+	"edit": "Edit"
 }

@@ -1,5 +1,6 @@
 import IBillingProfileInfo from './IBillingProfileInfo';
 import { ISystemMessage } from './ISystemMessage';
+import ILocalizedResources from './ILocalizedResources';
 
 export default interface IPaymentMethodsProps {
 	onSelectedBillingProfileChange: (billingProfile: IBillingProfileInfo, action: any) => void;
@@ -10,4 +11,5 @@ export default interface IPaymentMethodsProps {
 	setSystemMessage: (systemMessage: ISystemMessage) => void;
 	selectedBillingProfileId?: string;
 	isCalledPreorder?: boolean;
+	localizedResources: ILocalizedResources;
 }

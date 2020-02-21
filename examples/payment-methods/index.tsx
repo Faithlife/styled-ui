@@ -2,6 +2,7 @@ import React, { useCallback, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import PaymentMethods from '@faithlife/payment-methods';
 import { SimpleToast } from '@faithlife/styled-ui';
+import localizedResources from '@faithlife/payment-methods/dist/locales/en-US/resources.json';
 
 const App = () => {
 	const toastRef = useRef<SimpleToast>();
@@ -42,6 +43,7 @@ const App = () => {
 				}
 				actAndHandleException={actAndHandleException}
 				setSystemMessage={setSystemMessage}
+				localizedResources={localizedResources}
 			/>
 			<SimpleToast ref={toastRef} showTime={2000} />
 		</>

@@ -599,7 +599,7 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 			</Styled.BillingAddressInfoSection>
 			<Styled.NewProfileButtons>
 				<Button minor medium onClick={onCancelEditingBillingProfile}>
-					{'Cancel'}
+					{strings.cancel}
 				</Button>
 				<div data-test-id="create-billing-profile-button">
 					<Button

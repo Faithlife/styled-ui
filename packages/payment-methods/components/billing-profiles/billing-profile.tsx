@@ -122,7 +122,7 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 					<Styled.ChevronContainer isEditing={isEditing}>
 						<Chevron />
 					</Styled.ChevronContainer>
-					<Styled.EditText>{'Edit'}</Styled.EditText>
+					<Styled.EditText>{strings.edit}</Styled.EditText>
 				</Button>
 			</Styled.Edit>
 			<Styled.Delete data-test-id="delete-button-container">

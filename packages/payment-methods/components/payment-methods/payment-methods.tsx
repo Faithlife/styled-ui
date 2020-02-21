@@ -1,7 +1,6 @@
 import React from 'react';
 import { theme as styledUITheme } from '@faithlife/styled-ui';
 import { ThemeProvider } from 'styled-components';
-import localizedResources from '../../locales/en-US/resources.json';
 import { LocalizationProvider } from '../../Localization';
 import BillingProfiles from '../billing-profiles/billing-profiles';
 import theme from '../theme';
@@ -13,6 +12,7 @@ const PaymentMethods: React.FunctionComponent<IPaymentMethodsProps> = ({
 	setSystemMessage,
 	selectedBillingProfileId,
 	isCalledPreorder = false,
+	localizedResources,
 }) => {
 	return (
 		<LocalizationProvider localizedResources={localizedResources}>
