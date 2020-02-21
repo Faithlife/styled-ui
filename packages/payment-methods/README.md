@@ -17,7 +17,8 @@ import PaymentMethods from '@faithlife/payment-methods';
 2. Use the component
 
 ```jsx
-const MyComponent = () => {
+const MyComponent = ({ locale }) => {
+	const [localizedResources, setLocalizedResources] = useState(null);
 
 	// Provides a hook into consuming apps messaging system
 	const setSystemMessage = useCallback((systemMessage: any) => {
@@ -64,16 +65,29 @@ const MyComponent = () => {
 		},
 		[resources]
 	);
+
+	// Dynamically import language files.
+	useEffect(() => {
+		const importResourcesAsync = async () => {
+			const localizedResources = await import(/* webpackChunkName: "checkoutPaymentsResources" */ `@faithlife/payment-methods/dist/locales/${locale}/resources.json`);
+			setLocalizedResources(localizedResources);
+		};
+		importResourcesAsync();
+	}, [locale, setLocalizedResources]);
+
 	...
 	return (
 		<FaithlifePaymentMethods
 			onSelectedBillingProfileChange={handleSelectedProfileChanged}
 			actAndHandleException={actAndHandleException}
 			setSystemMessage={setSystemMessage}
+			localizedResources={localizedResources}
 		/>
 	);
 }
 ```
+
+Available languages (locales): English (en-US), German (de-DE), Spanish (es-MX), Korean (ko-KR), Portugese (pt-BR), Chinese Traditional (zh-TW), Chinese Simplified(zh-CN).
 
 ## Scope
 
