@@ -65,5 +65,6 @@
 	"moveSubscriptionsToAlternate": "Cancelar o mover las suscripciones activas a una tarjeta de crédito alternativa.",
 	"movePaymentPlansToAlternate": "Mover planes de pago activos a una tarjeta de crédito alternativa.",
 	"movePreordersToAlternate": "Cancelar o mover pre-órdenes activas a una tarjeta de crédito alternativa.",
-	"movePrepubsToAlternate": "Cancelar o mover las órdenes de pre-publicación activas a una tarjeta de crédito alternativa."
+	"movePrepubsToAlternate": "Cancelar o mover las órdenes de pre-publicación activas a una tarjeta de crédito alternativa.",
+	"edit": "Editar"
 }

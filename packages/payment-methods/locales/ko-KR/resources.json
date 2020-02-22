@@ -65,5 +65,6 @@
 	"moveSubscriptionsToAlternate": "구독 중인 제품들을 취소하거나 다른 카드로 옮깁니다.",
 	"movePaymentPlansToAlternate": "미결제된 할부 제도 금액을 다른 카드로 옮깁니다.",
 	"movePreordersToAlternate": "사전 주문한 제품들을 다른 카드로 옮깁니다.",
-	"movePrepubsToAlternate": "사전 주문한 Pre-Pub 제품들을 다른 카드로 옮깁니다."
+	"movePrepubsToAlternate": "사전 주문한 Pre-Pub 제품들을 다른 카드로 옮깁니다.",
+	"edit": "편집"
 }
