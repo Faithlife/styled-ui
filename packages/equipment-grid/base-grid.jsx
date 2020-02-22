@@ -1,9 +1,8 @@
 import React, { useRef, useState, useMemo, useEffect, useCallback } from 'react';
-import { renderToString } from 'react-dom/server';
 import PropTypes from 'prop-types';
 import { AgGridReact, AgGridColumn } from 'ag-grid-react';
 import 'ag-grid-enterprise';
-import { Box, LoadingSpinner } from '@faithlife/styled-ui';
+import { Box, LoadingSpinner, Text } from '@faithlife/styled-ui';
 import { handleShowCheckbox, handleIsEditable, editorComponentTag } from './grid-helpers';
 
 const gridHeight = 8;
@@ -16,12 +15,15 @@ const clientSideRowModel = 'clientSide';
 
 const defaultLocalization = {
 	noRowsMessage: 'No Rows to Show',
+	loadingRows: 'Loading...',
 	pageControls: {
 		to: 'to',
 		of: 'of',
 		page: 'Page',
 	},
 };
+
+export const filterTextField = 'baseGridFilterText';
 
 /** A wrapper of ag-grid with some boilerplate code to handle initialization and sorting/ filtering */
 export function BaseGrid({
@@ -87,17 +89,25 @@ export function BaseGrid({
 		}
 	}, [gridApi, data, hasWarned, rowModelType, datasourceProps]);
 
+	const prevIsLoading = useRef(false);
 	useEffect(() => {
 		if (gridApi && rowModelType === serverSideRowModel) {
-			if (data.isLoading) {
-				gridApi.showLoadingOverlay();
-			} else if (data.rowCount === 0 && !data.isMoreRows) {
+			if (data.rowCount === 0 && !data.isMoreRows) {
 				gridApi.showNoRowsOverlay();
+				prevIsLoading.current = false;
 			} else {
 				gridApi.hideOverlay();
+				prevIsLoading.current = false;
 			}
 		}
 	}, [gridApi, rowModelType, data]);
+
+	useEffect(() => {
+		if (gridApi && rowModelType === serverSideRowModel) {
+			const filterModel = gridApi.getFilterModel();
+			gridApi.setFilterModel({ ...filterModel, [filterTextField]: { filter: filterText } });
+		}
+	}, [gridApi, rowModelType, filterText]);
 
 	// Additional options are here: https://www.ag-grid.com/javascript-grid-internationalisation/
 	const localeText = useMemo(
@@ -109,6 +119,7 @@ export function BaseGrid({
 				(localization && localization.pageControls.from) || defaultLocalization.pageControls.from,
 			page:
 				(localization && localization.pageControls.page) || defaultLocalization.pageControls.page,
+			loadingRows: (localization && localization.loadingRows) || defaultLocalization.loadingRows,
 		}),
 		[localization]
 	);
@@ -130,10 +141,10 @@ export function BaseGrid({
 	}, [gridApi, rowHeight, getRowHeight]);
 
 	useEffect(() => {
-		if (gridApi) {
+		if (gridApi && rowModelType === clientSideRowModel) {
 			gridApi.setQuickFilter(filterText);
 		}
-	}, [gridApi, filterText]);
+	}, [gridApi, filterText, rowModelType]);
 
 	useEffect(() => {
 		if (gridApi && sortModel) {
@@ -184,7 +195,7 @@ export function BaseGrid({
 	const handleCellClicked = useCallback(
 		event => {
 			if (!event.column.colDef.hasInteractableElement && !event.column.colDef.checkboxSelection) {
-				onRowClick && onRowClick(event.data);
+				onRowClick && event.data && onRowClick(event.data);
 			}
 		},
 		[onRowClick]
@@ -192,7 +203,7 @@ export function BaseGrid({
 
 	const handleRowClicked = useCallback(
 		event => {
-			onRowClick && onRowClick(event.data);
+			onRowClick && event.data && onRowClick(event.data);
 		},
 		[onRowClick]
 	);
@@ -212,8 +223,15 @@ export function BaseGrid({
 			if (sortModel) {
 				api.setSortModel(sortModel);
 			}
+
 			if (filterText) {
-				api.setQuickFilter(filterText);
+				if (rowModelType === clientSideRowModel) {
+					api.setQuickFilter(filterText);
+				} else if (rowModelType === serverSideRowModel) {
+					const filterModel = api.getFilterModel();
+					api.setFilterModel({ ...filterModel, [filterTextField]: { filter: filterText } });
+					api.onFilterChanged();
+				}
 			}
 
 			if (rowModelType === serverSideRowModel) {
@@ -244,7 +262,6 @@ export function BaseGrid({
 	} else {
 		calculatedTableHeight = '100%';
 	}
-	// const calculatedMinHeight = minHeight || (!hideHeaders ? headerHeight : 0) + defaultRowHeight;
 
 	if (!datasourceProps) {
 		return null;
@@ -257,7 +274,6 @@ export function BaseGrid({
 			maxHeight={maxHeight}
 		>
 			<AgGridReact
-				// rowData={data}
 				{...datasourceProps}
 				context={context}
 				onGridReady={handleGridReady}
@@ -288,7 +304,7 @@ export function BaseGrid({
 				reactNext
 				colResizeDefault="shift"
 				localeText={localeText}
-				overlayLoadingTemplate={renderToString(<LoadingSpinner medium />)}
+				loadingCellRendererParams={{ loadingMessage: localeText.loadingRows }}
 				loadingCellRenderer={loadingCellComponent}
 				{...gridOptions}
 			>
@@ -343,6 +359,7 @@ export function BaseGrid({
 						/>
 					);
 				})}
+				<AgGridColumn field={filterTextField} hide filter="agTextColumnFilter" />
 			</AgGridReact>
 		</Box>
 	);
@@ -409,6 +426,7 @@ BaseGrid.propTypes = {
 	/** Localization options */
 	localization: PropTypes.shape({
 		noRowsMessage: PropTypes.string,
+		loadingRows: PropTypes.string,
 		pageControls: PropTypes.shape({
 			to: PropTypes.string,
 			of: PropTypes.string,
@@ -417,8 +435,15 @@ BaseGrid.propTypes = {
 	}),
 };
 
-function LoadingCell() {
-	return <div />;
+function LoadingCell({ loadingMessage }) {
+	return (
+		<Box display="flex" alignItems="center" paddingY={3}>
+			<LoadingSpinner small />
+			<Text textStyle="ui.16" paddingLeft={3}>
+				{loadingMessage}
+			</Text>
+		</Box>
+	);
 }
 
 function parseChildrenSettings(children, additionalCellComponents = {}) {
