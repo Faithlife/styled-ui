@@ -2,7 +2,8 @@ import { useRef, useMemo, useEffect, useCallback, useState } from 'react';
 import { filterTextField } from '../base-grid';
 
 export function useGridServerDatasource(
-	requestFunction: (request: IGetRowsRequest) => Promise<[any[], boolean]>
+	requestFunction: (request: IGetRowsRequest) => Promise<[any[], boolean]>,
+	options?: IOptions
 ): IServerSideDatasource {
 	const [rowState, setRowState] = useState({
 		rowCount: 0,
@@ -82,8 +83,9 @@ export function useGridServerDatasource(
 			rowCount: rowCount,
 			isMoreRows: moreRows,
 			isLoading: isLoading,
+			options,
 		}),
-		[rowCount, moreRows, isLoading, setFilterText] //eslint-disable-line react-hooks/exhaustive-deps
+		[rowCount, moreRows, isLoading, setFilterText, options] //eslint-disable-line react-hooks/exhaustive-deps
 	);
 
 	return serverDatasource;
@@ -112,6 +114,11 @@ function mapAgGridRequest(request: IServerSideGetRowsRequest): IGetRowsRequest {
 		filterModel: { ...restFilters, filterText: filterTextObject && filterTextObject.filter },
 		sortModel: request.sortModel,
 	};
+}
+
+export interface IOptions {
+	fetchLimit?: number;
+	maxPagesToCache?: number;
 }
 
 export interface IColumn {

@@ -9,6 +9,7 @@ const gridHeight = 8;
 const defaultRowHeight = gridHeight * 5;
 const headerHeight = gridHeight * 5;
 const noRowsDefaultTableHeight = 200;
+const defaultFetchLimit = 100;
 const loadingCellComponent = 'loadingCellComponent';
 const serverSideRowModel = 'serverSide';
 const clientSideRowModel = 'clientSide';
@@ -81,13 +82,17 @@ export function BaseGrid({
 		}
 
 		if (!datasourceProps && determineRowModelType(data) === serverSideRowModel) {
-			setDatasourceProps({ rowModelType });
+			setDatasourceProps({
+				rowModelType,
+				cacheBlockSize: (data.options && data.options.fetchLimit) || maxRows || defaultFetchLimit,
+				maxBlocksInCache: data.options && data.options.maxPagesToCache,
+			});
 		}
 
 		if (!datasourceProps && determineRowModelType(data) === clientSideRowModel) {
 			setDatasourceProps({ rowData: data });
 		}
-	}, [gridApi, data, hasWarned, rowModelType, datasourceProps]);
+	}, [gridApi, data, hasWarned, rowModelType, datasourceProps, maxRows]);
 
 	const prevIsLoading = useRef(false);
 	useEffect(() => {
@@ -278,8 +283,6 @@ export function BaseGrid({
 				context={context}
 				onGridReady={handleGridReady}
 				onGridSizeChanged={handleGridResize}
-				cacheBlockSize={100}
-				maxBlocksInCache={10}
 				onSortChanged={handleSortChanged}
 				onSelectionChanged={handleSelectionChanged}
 				rowSelection={
