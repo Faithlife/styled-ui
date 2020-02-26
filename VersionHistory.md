@@ -1,5 +1,13 @@
 # Changelog
 
+### 5.48.0
+
+- Adjust minimal accordion header style.
+- Remove padding top from minimal accordion panels.
+- Close `DatePickerInput` after a date is selected.
+- Right align `NumberInput`s.
+- Update `DropZone` borders.
+
 ### 5.47.0
 
 - Port `LoadingSpinner` to styled system, avoiding unnecessary styled components creations.
