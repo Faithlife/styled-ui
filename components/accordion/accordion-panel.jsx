@@ -14,7 +14,7 @@ export function AccordionPanel({ children, mountOnEnter, unmountOnExit, ...props
 		paddingProps.padding = styleOverrides.panelPadding;
 	} else if (!('padding' in props)) {
 		paddingProps.padding = ctx.variant === 'minimal' ? 4 : 6;
-		paddingProps.paddingTop = ctx.variant === 'minimal' ? 2 : 4;
+		paddingProps.paddingTop = ctx.variant === 'minimal' ? 0 : 4;
 	}
 
 	return (
