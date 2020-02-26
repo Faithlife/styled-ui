@@ -80,7 +80,9 @@ export function AccordionHeader({
 					hideArrows={shouldHideArrows}
 				>
 					{!shouldHideArrows && (
-						<Box marginRight={4}>{isExpanded ? <ChevronExpand /> : <ChevronRight />}</Box>
+						<Box marginRight={variant === 'minimal' ? 3 : 4} lineHeight={0} alignSelf="center">
+							{isExpanded ? <ChevronExpand /> : <ChevronRight />}
+						</Box>
 					)}
 					<ButtonContent>
 						{children ? (
