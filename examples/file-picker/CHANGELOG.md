@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/file-picker-example@2.0.6...file-picker-example@3.0.0) (2020-02-27)
+
+
+### Features
+
+* **file-picker:** Smart Media Editor compatibility. ([f9dfb33](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/f9dfb332f43d407d12d99ae18024640dc6f4908f))
+
+
+### BREAKING CHANGES
+
+* **file-picker:** `localizedResources` is now a required prop to FilePicker
+for the Smart Media Editor, unless `disableEditor` is set to true.
+
+
+
+
+
 ## [2.0.6](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/file-picker-example@2.0.5...file-picker-example@2.0.6) (2020-01-15)
 
 **Note:** Version bump only for package file-picker-example
