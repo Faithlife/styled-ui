@@ -49,7 +49,7 @@ function BaseGridComponent({
 	useEffect(() => {
 		if (process.env.NODE_ENV !== 'production') {
 			console.warn(
-				'Warning: You are using a deprecated Bootstrap element that will be removed in the next major release of Styled UI.',
+				'Warning: You are using a deprecated Grid component that will be removed in the next major release of Styled UI.',
 			);
 		}
 	}, []);
