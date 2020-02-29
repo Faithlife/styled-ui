@@ -14,9 +14,9 @@ const initialState: {
 };
 
 export function useGridServerDatasource(
-	requestFunction: (request: IGetRowsRequest) => Promise<[any[], boolean]>,
-	options?: IOptions
-): IServerSideDatasource {
+	requestFunction: (request: GetRowsRequest) => Promise<[any[], boolean]>,
+	options?: Options
+): ServerSideDatasource {
 	const [rowState, setRowState] = useState(initialState);
 	const datasource = useCurrentFunction(requestFunction);
 
@@ -32,7 +32,7 @@ export function useGridServerDatasource(
 
 	const handleRequest = useCurrentFunction(
 		useCallback(
-			async ({ request, successCallback, failCallback }: IServerSideGetRowsParams) => {
+			async ({ request, successCallback, failCallback }: ServerSideGetRowsParams) => {
 				if (abortController.current) {
 					abortController.current.abort();
 				}
@@ -112,9 +112,9 @@ function useCurrentFunction(func: Function) {
 	return funcRef;
 }
 
-function mapAgGridRequest(request: IServerSideGetRowsRequest): IGetRowsRequest {
+function mapAgGridRequest(request: ServerSideGetRowsRequest): GetRowsRequest {
 	const { [filterTextField]: filterTextObject, ...restFilters } = request.filterModel;
-	const filterModel: IFilterModel = {
+	const filterModel: FilterModel = {
 		filterText: filterTextObject && filterTextObject.filter,
 		filters: null,
 	};
@@ -143,17 +143,17 @@ function mapAgGridRequest(request: IServerSideGetRowsRequest): IGetRowsRequest {
 	};
 }
 
-export interface IOptions {
+interface Options {
 	fetchLimit?: number;
 	maxPagesToCache?: number;
 }
 
-export interface IColumn {
+interface Column {
 	id: string;
 	fieldName: string;
 }
 
-export interface IFilterModel {
+interface FilterModel {
 	filterText: string | number | undefined;
 	filters: {
 		[key: string]: {
@@ -165,57 +165,57 @@ export interface IFilterModel {
 	} | null;
 }
 
-export interface ISortModel {
+interface SortModel {
 	fieldName: string;
 	sort: 'asc' | 'desc';
 }
 
-export interface IGetRowsRequest {
+interface GetRowsRequest {
 	startRow: number;
 	endRow: number;
-	rowGroupColumns: IColumn[];
-	valueColumns: IColumn[];
-	pivotColumns: IColumn[];
+	rowGroupColumns: Column[];
+	valueColumns: Column[];
+	pivotColumns: Column[];
 	isInPivotMode: boolean;
 	groupingKeys: string[];
-	filterModel: IFilterModel;
-	sortModel: ISortModel[];
+	filterModel: FilterModel;
+	sortModel: SortModel[];
 }
 
-export interface IAGColumn {
+interface AGColumn {
 	id: string;
 	displayName: string;
 	field: string;
 	aggFunc: string;
 }
 
-export interface IServerSideDatasource {
+interface ServerSideDatasource {
 	getRows: Function;
 	rowCount: number;
 	isMoreRows: boolean;
 	isLoading: boolean;
 }
 
-interface IServerSideGetRowsRequest {
-	rowGroupCols: IAGColumn[];
-	valueCols: IAGColumn[];
-	pivotCols: IAGColumn[];
+interface ServerSideGetRowsRequest {
+	rowGroupCols: AGColumn[];
+	valueCols: AGColumn[];
+	pivotCols: AGColumn[];
 	pivotMode: boolean;
 	groupKeys: string[];
-	filterModel: { [key: string]: IAGFilter };
+	filterModel: { [key: string]: AGFilter };
 	sortModel: any;
 	startRow: number;
 	endRow: number;
 }
 
-interface IServerSideGetRowsParams {
-	request: IServerSideGetRowsRequest;
+interface ServerSideGetRowsParams {
+	request: ServerSideGetRowsRequest;
 	parentNode: any;
 	successCallback: (rowsThisPage: any[], lastRow: number) => void;
 	failCallback: () => void;
 }
 
-interface IAGFilter {
+interface AGFilter {
 	filterType: string;
 	type: string;
 	filter: string | number;
