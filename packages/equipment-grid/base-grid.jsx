@@ -84,8 +84,8 @@ export function BaseGrid({
 		if (!datasourceProps && determineRowModelType(data) === serverSideRowModel) {
 			setDatasourceProps({
 				rowModelType,
-				cacheBlockSize: (data.options && data.options.fetchLimit) || maxRows || defaultFetchLimit,
-				maxBlocksInCache: data.options && data.options.maxPagesToCache,
+				cacheBlockSize: data.fetchLimit || maxRows || defaultFetchLimit,
+				maxBlocksInCache: data.maxPagesToCache,
 			});
 		}
 
@@ -110,7 +110,10 @@ export function BaseGrid({
 	useEffect(() => {
 		if (gridApi && rowModelType === serverSideRowModel) {
 			const filterModel = gridApi.getFilterModel();
-			gridApi.setFilterModel({ ...filterModel, [filterTextField]: { filter: filterText } });
+			gridApi.setFilterModel({
+				...filterModel,
+				[filterTextField]: { type: '', filter: filterText },
+			});
 		}
 	}, [gridApi, rowModelType, filterText]);
 
@@ -165,8 +168,9 @@ export function BaseGrid({
 
 	useEffect(() => {
 		if (gridApi) {
-			gridApi.setFilterModel(filters);
-			gridApi.onFilterChanged();
+			const filterModel = gridApi.getFilterModel();
+			const { [filterTextField]: filterText } = filterModel;
+			gridApi.setFilterModel({ ...filters, [filterTextField]: filterText });
 		}
 	}, [gridApi, filters]);
 
@@ -234,7 +238,10 @@ export function BaseGrid({
 					api.setQuickFilter(filterText);
 				} else if (rowModelType === serverSideRowModel) {
 					const filterModel = api.getFilterModel();
-					api.setFilterModel({ ...filterModel, [filterTextField]: { filter: filterText } });
+					api.setFilterModel({
+						...filterModel,
+						[filterTextField]: { type: '', filter: filterText },
+					});
 					api.onFilterChanged();
 				}
 			}
@@ -330,6 +337,7 @@ export function BaseGrid({
 						isEditable,
 						shouldBeEditable,
 						editorComponent,
+						filterParams,
 						...columnProps
 					} = child.props;
 					return (
@@ -359,6 +367,10 @@ export function BaseGrid({
 							}
 							editable={shouldBeEditable ? handleIsEditable(shouldBeEditable) : isEditable}
 							singleClickEdit={shouldBeEditable || isEditable}
+							filterParams={{
+								...filterParams,
+								values: (filterParams && filterParams.values) || ['wat'],
+							}}
 						/>
 					);
 				})}

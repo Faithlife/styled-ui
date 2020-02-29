@@ -1,16 +1,23 @@
 import { useRef, useMemo, useEffect, useCallback, useState } from 'react';
 import { filterTextField } from '../base-grid';
 
+const initialState: {
+	rowCount: number;
+	moreRows: boolean;
+	isLoading: boolean;
+	filterText: string | number;
+} = {
+	rowCount: 0,
+	moreRows: true,
+	isLoading: false,
+	filterText: '',
+};
+
 export function useGridServerDatasource(
 	requestFunction: (request: IGetRowsRequest) => Promise<[any[], boolean]>,
 	options?: IOptions
 ): IServerSideDatasource {
-	const [rowState, setRowState] = useState({
-		rowCount: 0,
-		moreRows: true,
-		isLoading: false,
-		filterText: '',
-	});
+	const [rowState, setRowState] = useState(initialState);
 	const datasource = useCurrentFunction(requestFunction);
 
 	const abortController: React.MutableRefObject<AbortController | null> = useRef(null);
@@ -50,19 +57,21 @@ export function useGridServerDatasource(
 						return;
 					}
 
-					const [rows, moreRows] = response;
-					if (!rows || !Array.isArray(rows)) {
-						failCallback();
+					if (response) {
+						const [rows, moreRows] = response;
+						if (!rows || !Array.isArray(rows)) {
+							failCallback();
+						}
+						setRowState(state => {
+							successCallback(rows, moreRows ? -1 : state.rowCount + rows.length);
+							return {
+								...state,
+								rowCount: state.rowCount + rows.length,
+								moreRows,
+								isLoading: false,
+							};
+						});
 					}
-					setRowState(state => {
-						successCallback(rows, moreRows ? -1 : state.rowCount + rows.length);
-						return {
-							...state,
-							rowCount: state.rowCount + rows.length,
-							moreRows,
-							isLoading: false,
-						};
-					});
 				} catch (error) {
 					failCallback();
 					console.error(error);
@@ -77,15 +86,17 @@ export function useGridServerDatasource(
 	}, []);
 
 	const { rowCount, moreRows, isLoading } = rowState;
+	const { fetchLimit, maxPagesToCache } = options || {};
 	const serverDatasource = useMemo(
 		() => ({
 			getRows: request => handleRequest.current(request),
 			rowCount: rowCount,
 			isMoreRows: moreRows,
 			isLoading: isLoading,
-			options,
+			fetchLimit,
+			maxPagesToCache,
 		}),
-		[rowCount, moreRows, isLoading, setFilterText, options] //eslint-disable-line react-hooks/exhaustive-deps
+		[rowCount, moreRows, isLoading, setFilterText, fetchLimit, maxPagesToCache] //eslint-disable-line react-hooks/exhaustive-deps
 	);
 
 	return serverDatasource;
@@ -103,6 +114,22 @@ function useCurrentFunction(func: Function) {
 
 function mapAgGridRequest(request: IServerSideGetRowsRequest): IGetRowsRequest {
 	const { [filterTextField]: filterTextObject, ...restFilters } = request.filterModel;
+	const filterModel: IFilterModel = {
+		filterText: filterTextObject && filterTextObject.filter,
+		filters: null,
+	};
+	if (restFilters) {
+		for (const [key, filter] of Object.entries(restFilters)) {
+			filterModel.filters = filterModel.filters || {};
+			filterModel.filters[key] = {
+				filterType: filter.filterType,
+				filterKind: filter.type,
+				filter: filter.filter,
+				filterTo: filter.filterTo,
+			};
+		}
+	}
+
 	return {
 		startRow: request.startRow,
 		endRow: request.endRow,
@@ -111,8 +138,8 @@ function mapAgGridRequest(request: IServerSideGetRowsRequest): IGetRowsRequest {
 		pivotColumns: request.pivotCols.map(x => ({ id: x.id, fieldName: x.field })),
 		isInPivotMode: request.pivotMode,
 		groupingKeys: request.groupKeys,
-		filterModel: { ...restFilters, filterText: filterTextObject && filterTextObject.filter },
-		sortModel: request.sortModel,
+		filterModel,
+		sortModel: request.sortModel.map(x => ({ fieldName: x.colId, sort: x.sort })),
 	};
 }
 
@@ -127,7 +154,15 @@ export interface IColumn {
 }
 
 export interface IFilterModel {
-	filterText: string;
+	filterText: string | number | undefined;
+	filters: {
+		[key: string]: {
+			filterType: string;
+			filterKind: string;
+			filter: string | number;
+			filterTo: string | number;
+		};
+	} | null;
 }
 
 export interface ISortModel {
@@ -167,7 +202,7 @@ interface IServerSideGetRowsRequest {
 	pivotCols: IAGColumn[];
 	pivotMode: boolean;
 	groupKeys: string[];
-	filterModel: any;
+	filterModel: { [key: string]: IAGFilter };
 	sortModel: any;
 	startRow: number;
 	endRow: number;
@@ -178,4 +213,11 @@ interface IServerSideGetRowsParams {
 	parentNode: any;
 	successCallback: (rowsThisPage: any[], lastRow: number) => void;
 	failCallback: () => void;
+}
+
+interface IAGFilter {
+	filterType: string;
+	type: string;
+	filter: string | number;
+	filterTo: string | number;
 }
