@@ -56,6 +56,7 @@ export function SequencedTab({
 	selected,
 	onSelectTab,
 	panelId,
+	hideCircle,
 	...props
 }) {
 	const tabRef = useRef();
@@ -77,9 +78,11 @@ export function SequencedTab({
 			selected={selected}
 			onClick={handleSelectTab}
 		>
-			<Styled.Circle selected={selected} completed={completed} disabled={disabled}>
-				{completed ? <SmallCheck /> : index + 1}
-			</Styled.Circle>
+			{!hideCircle && (
+				<Styled.Circle selected={selected} completed={completed} disabled={disabled}>
+					{completed ? <SmallCheck /> : index + 1}
+				</Styled.Circle>
+			)}
 			<Styled.SequencedTabContent
 				ref={tabRef}
 				disabled={disabled}
