@@ -1,7 +1,17 @@
 const newRules = [
 	{
 		test: /\.svg$/,
-		use: ['@svgr/webpack'],
+		use: [
+			{
+				loader: '@svgr/webpack',
+				options: {
+					replaceAttrValues: {
+						'#7A7A7A': '{props.color || "#7A7A7A"}',
+						'#888': '{props.color || "#7A7A7A"}',
+					},
+				},
+			},
+		],
 	},
 ];
 

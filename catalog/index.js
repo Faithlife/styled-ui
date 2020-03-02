@@ -80,7 +80,8 @@ import { PopulationChange } from './grid/population-change';
 import { IncrementButton } from './grid/cell-editors';
 import { BaseGrid } from '../components/grid/base-grid';
 import { SimpleGrid, GridColumn, PaginatedGrid, TreeGrid } from '../components/grid';
-import { IconTable } from './icon-table';
+import { IconGroup } from './icon-table';
+import { FavoriteFilled } from '../components/icons/18px';
 
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
@@ -215,7 +216,7 @@ const pages = [
 		path: '/icons',
 		title: 'Icons',
 		content: pageLoader(() => import('./design-styles/icons.md')),
-		imports: { IconTable },
+		imports: { IconGroup, FavoriteFilled, Box },
 	},
 	{
 		title: 'Row Masonry',

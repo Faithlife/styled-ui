@@ -1,7 +1,51 @@
 import React from 'react';
+import { colors } from '../shared-styles';
 
-export * from './svgs/icons';
-export * from './svgs/small-icons';
+export const Search = props => (
+	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+		<path
+			fill="#888"
+			d="M12.9379707,11.0620293 L13,11 L17,15.5 L15.5,17 L11,13 L11.0620293,12.9379707 C10.0390157,13.6094361 8.81511839,14 7.5,14 C3.91014913,14 1,11.0898509 1,7.5 C1,3.91014913 3.91014913,1 7.5,1 C11.0898509,1 14,3.91014913 14,7.5 C14,8.81511839 13.6094361,10.0390157 12.9379705,11.0620296 L12.9379707,11.0620293 Z M7.5,11.5 C9.709139,11.5 11.5,9.709139 11.5,7.5 C11.5,5.290861 9.709139,3.5 7.5,3.5 C5.290861,3.5 3.5,5.290861 3.5,7.5 C3.5,9.709139 5.290861,11.5 7.5,11.5 Z"
+		/>
+	</svg>
+);
+
+export const Check = props => (
+	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+		<path
+			fill="none"
+			fillRule="evenodd"
+			stroke="#62BB46"
+			strokeWidth="2.2"
+			d="M3.57 8.51l4.453 4.428L15.962 5"
+		/>
+	</svg>
+);
+
+export const SmallCheck = props => (
+	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="12" height="12">
+		<path fill="white" d="M10.293 2.293l1.414 1.414L4.5 10.914.293 6.707l1.414-1.414L4.5 8.086z" />
+	</svg>
+);
+
+export const Exclamation = props => (
+	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+		<path
+			fill="#D94848"
+			fillRule="nonzero"
+			d="M9 1c4.4 0 8 3.6 8 8s-3.6 8-8 8-8-3.6-8-8 3.6-8 8-8zm0 14.4c3.52 0 6.4-2.88 6.4-6.4 0-3.52-2.88-6.4-6.4-6.4-3.52 0-6.4 2.88-6.4 6.4 0 3.52 2.88 6.4 6.4 6.4zM8 5h2v5H8V5zm1 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"
+		/>
+	</svg>
+);
+
+export const Info = props => (
+	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+		<path
+			fill="#888"
+			d="M17 9A8 8 0 1 1 1 9a8 8 0 0 1 16 0zm-1.6 0A6.4 6.4 0 1 0 2.6 9a6.4 6.4 0 0 0 12.8 0zm-7.2-.8h1.6V13H8.2V8.2zM9 5a.8.8 0 1 1 0 1.6A.8.8 0 0 1 9 5z"
+		/>
+	</svg>
+);
 
 export const CircleCheck = props => (
 	<svg
@@ -18,6 +62,72 @@ export const CircleCheck = props => (
 			/>
 		</defs>
 		<use fill="#888" fillRule="nonzero" href="#a" />
+	</svg>
+);
+
+export const Calendar = props => (
+	<svg {...props} width="18px" height="18px" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+		<path
+			fill="currentColor"
+			d="M3,3 L3,2 C3,1.44771525 3.44771525,1 4,1 C4.55228475,1 5,1.44771525 5,2 L5,3 L8,3 L8,2 C8,1.44771525 8.44771525,1 9,1 C9.55228475,1 10,1.44771525 10,2 L10,3 L13,3 L13,2 C13,1.44771525 13.4477153,1 14,1 C14.5522847,1 15,1.44771525 15,2 L15,3 L16,3 C16.5522847,3 17,3.44771525 17,4 L17,16 C17,16.5522847 16.5522847,17 16,17 L2,17 C1.44771525,17 1,16.5522847 1,16 L1,4 C1,3.44771525 1.44771525,3 2,3 L3,3 Z M15,15 L15,8 L3,8 L3,15 L15,15 Z"
+			id="path-1"
+		/>
+	</svg>
+);
+
+export const ChevronCollapse = props => (
+	<svg {...props} width="12" height="12" xmlns="http://www.w3.org/2000/svg">
+		<path
+			fill={colors.gray52}
+			d="M8.482 8.185L5.889 5.593 3.296 8.185 2 6.89 5.89 3l3.888 3.889z"
+			fillRule="evenodd"
+		/>
+	</svg>
+);
+
+export const ChevronExpand = props => (
+	<svg {...props} width="12" height="12" xmlns="http://www.w3.org/2000/svg">
+		<path
+			fill={colors.gray52}
+			d="M3.296 3L5.89 5.593 8.482 3l1.296 1.296-3.889 3.89L2 4.295z"
+			fillRule="evenodd"
+		/>
+	</svg>
+);
+
+export const ChevronRight = props => (
+	<svg {...props} width="12" height="12" xmlns="http://www.w3.org/2000/svg">
+		<path
+			fill={colors.gray52}
+			d="M3.593 8.482l2.592-2.593-2.592-2.593L4.889 2l3.89 3.89-3.89 3.888z"
+			fillRule="evenodd"
+		/>
+	</svg>
+);
+
+export const Caret = props => (
+	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+		<g fill="currentColor" transform="matrix(0 1 1 0 1 -1)">
+			<polygon points="10 13 3 6.304 4.273 5 10 10.478 15.727 5 17 6.304" />
+		</g>
+	</svg>
+);
+
+export const Close = props => (
+	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+		<g fill="none" fillRule="evenodd">
+			<path
+				fill="#979797"
+				fillRule="nonzero"
+				d="M9,7.58578644 L13.2928932,3.29289322 L14.7071068,4.70710678 L10.4142136,9 L14.7071068,13.2928932 L13.2928932,14.7071068 L9,10.4142136 L4.70710678,14.7071068 L3.29289322,13.2928932 L7.58578644,9 L3.29289322,4.70710678 L4.70710678,3.29289322 L9,7.58578644 Z"
+			/>
+			<g>
+				<mask id="x-b" fill="#A8A8A8">
+					<path d="M9,7.58578644 L13.2928932,3.29289322 L14.7071068,4.70710678 L10.4142136,9 L14.7071068,13.2928932 L13.2928932,14.7071068 L9,10.4142136 L4.70710678,14.7071068 L3.29289322,13.2928932 L7.58578644,9 L3.29289322,4.70710678 L4.70710678,3.29289322 L9,7.58578644 Z" />
+				</mask>
+				<rect width="18" height="18" />
+			</g>
+		</g>
 	</svg>
 );
 
@@ -91,6 +201,18 @@ export const KebabVertical = props => (
 		/>
 	</svg>
 );
+
+export function GearIcon(props) {
+	return React.createElement(
+		'svg',
+		{ width: '18', height: '18', viewBox: '0 0 18 18', ...props },
+		React.createElement('path', {
+			fill: 'currentColor',
+			d:
+				'M14.3 6.2l1.1-2.1L14 2.7l-2.1 1.1c-.3-.2-.7-.3-1.1-.4L10 1H8l-.8 2.3c-.3.1-.7.2-1 .4L4.1 2.6 2.6 4.1l1.1 2.1c-.2.3-.3.7-.4 1L1 8v2l2.3.8c.1.4.3.7.4 1.1L2.6 14 4 15.4l2.1-1.1c.3.2.7.3 1.1.4L8 17h2l.8-2.3c.4-.1.7-.3 1.1-.4l2.1 1.1 1.4-1.4-1.1-2.1c.2-.3.3-.7.4-1.1L17 10V8l-2.3-.8c-.1-.3-.2-.7-.4-1zM9 12c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z',
+		}),
+	);
+}
 
 export const SolidTriangleIcon = props => (
 	<svg {...props} width="12" height="12" viewBox="0 0 12 12">
@@ -180,6 +302,15 @@ export const ShareToEmailIcon = props => (
 				fill="#fff"
 				d="M4 7a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v1.174L12 12 4 8.087V7zm7.5 6.665c.28.123.72.123 1 0L20 10v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7l7.5 3.665z"
 			/>
+		</g>
+	</svg>
+);
+
+export const ShareIcon = props => (
+	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
+		<g fill="#505050" fillRule="nonzero">
+			<path d="M11.25 0H6v1.5h3.45L4.725 6.225l1.05 1.05L10.5 2.55V6H12V.75c0-.45-.3-.75-.75-.75z" />
+			<path d="M10.5 12H.75C.3 12 0 11.7 0 11.25V1.5C0 1.05.3.75.75.75h3v1.5H1.5v8.25h8.25V8.25h1.5v3c0 .45-.3.75-.75.75z" />
 		</g>
 	</svg>
 );

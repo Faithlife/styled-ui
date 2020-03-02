@@ -16,7 +16,8 @@ module.exports = {
 		'group-selector': './components/group-selector/index.js',
 		'share-dialog': './components/share-dialog/index.js',
 		'product-drawer': './components/product-drawer/index.js',
-		icons: './components/icons',
+		icons12: './components/icons/12px/index.js',
+		icons18: './components/icons/18px/index.js',
 	},
 	devtool: 'sourcemap',
 	output: {
@@ -44,7 +45,17 @@ module.exports = {
 			},
 			{
 				test: /\.(svg)$/,
-				use: ['@svgr/webpack'],
+				use: [
+					{
+						loader: '@svgr/webpack',
+						options: {
+							replaceAttrValues: {
+								'#7A7A7A': '{props.color || "#7A7A7A"}',
+								'#888': '{props.color || "#7A7A7A"}',
+							},
+						},
+					},
+				],
 			},
 		],
 	},
