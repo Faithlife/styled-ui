@@ -1,0 +1,63 @@
+import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions'; // eslint-disable-line import/no-extraneous-dependencies
+import { BaseGrid } from '../../../packages/equipment-grid/base-grid';
+import { SimpleGrid, PaginatedGrid, GridColumn } from '@faithlife/equipment-grid';
+import {censusData} from './helpers';
+
+import '@faithlife/equipment-grid/dist/index.css';
+
+<Meta title="Equipment Grid" component={BaseGrid} />
+
+# Equipment Grid
+
+### Simple Table
+
+The simplest use of the table. Each column is sortable and resizable. Leave `maxRows` blank for an infinite scroll table.
+
+<Preview>
+	<Story name="Simple Grid">
+		<>
+			<SimpleGrid data={censusData} maxRows={10} onRowClick={action('row click')}>
+				<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+				<GridColumn displayName="Population" fieldName="population" isRightAligned />
+				<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
+				<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
+				<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly />
+			</SimpleGrid>
+		</>
+	</Story>
+</Preview>
+
+### Paginated Table
+
+Simple table with pagination.
+
+<Preview>
+	<Story name="Paginated Grid">
+		<>
+			<PaginatedGrid data={censusData} maxRows={10} onRowClick={action('row click')}>
+				<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+				<GridColumn displayName="Population" fieldName="population" />
+				<GridColumn displayName="Net Population Change" fieldName="populationChange" />
+				<GridColumn displayName="Births" fieldName="births" />
+				<GridColumn displayName="Deaths" fieldName="deaths" />
+			</PaginatedGrid>
+		</>
+	</Story>
+</Preview>
+
+### Example data for Simple and Paginated Table
+
+```json
+	[
+		{
+			"id": 0,
+			"value": "Abilene, TX",
+			"areaDesc": "Metropolitan Statistical Area",
+			"population": 165252,
+			"populationChange": 337,
+			"births": 540,
+			"deaths": 406
+		}
+	]
+```
