@@ -2,8 +2,8 @@
   "private": true,
   "dependencies": {
     "@faithlife/flcom-addin-scripts": "4.12.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
   },
   "workspaces": {
     "packages": [
@@ -29,8 +29,8 @@
     "publish": "lerna publish --conventional-commits --github-release --registry http://npm.faithlife.io --yes",
     "crowdin-upload": "java -jar ./tools/crowdin/crowdin-cli.jar upload",
     "crowdin-download": "java -jar ./tools/crowdin/crowdin-cli.jar download",
-    "storybook": "yarn workspace storybook storybook",
-    "build-storybook": "yarn workspace storybook build-storybook"
+    "storybook": "start-storybook -p 3000",
+    "build-storybook": "build-storybook"
   },
   "browserslist": [
     "extends @faithlife/browserslist-config-flcom-addin"
@@ -54,10 +54,18 @@
     "**/node_modules"
   ],
   "devDependencies": {
+    "@babel/core": "^7.8.6",
     "@commitlint/cli": "^8.2.0",
+    "@storybook/addon-actions": "5.3.14",
+    "@storybook/addon-docs": "^5.3.14",
+    "@storybook/addon-knobs": "5.3.14",
+    "@storybook/addon-links": "5.3.14",
+    "@storybook/react": "5.3.14",
+    "babel-loader": "^8.0.6",
     "commitlint-config-faithlife": "^1.0.0",
     "husky": "^3.1.0",
     "lerna": "^3.19.0",
+    "react-is": "^16.13.0",
     "typescript": "^3.7.2"
   },
   "resolutions": {
