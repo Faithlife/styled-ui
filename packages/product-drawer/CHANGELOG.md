@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.4](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.4.3...@faithlife/product-drawer@0.4.4) (2020-03-03)
+
+
+### Bug Fixes
+
+* Change "Products" to "Tools". ([bd88ac5](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/bd88ac5feb2d54a9e3ca68d97ca6f5ffe8aadc80))
+
+
+
+
+
 ## [0.4.3](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.4.2...@faithlife/product-drawer@0.4.3) (2020-02-18)
 
 
