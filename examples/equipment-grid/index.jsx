@@ -1,11 +1,8 @@
-/* eslint-disable */
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { renderToString } from 'react-dom/server';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { LicenseManager } from 'ag-grid-enterprise';
-import { Box, Heading, Text, Input, LoadingSpinner } from '@faithlife/styled-ui';
+import { Box, Heading, Input } from '@faithlife/styled-ui';
 import { Button, SegmentedButtonGroup } from '@faithlife/styled-ui/v6';
 import {
 	SimpleGrid,
@@ -20,10 +17,6 @@ import rawCensusData from './2010census.json';
 import { variations, examples, serverSideExamples } from './markdown';
 
 import '@faithlife/equipment-grid/dist/index.css'; // eslint-disable-line
-
-LicenseManager.setLicenseKey(
-	'Faithlife_Corporation_MultiApp_4Devs_3Deployment_26_September_2020__MTYwMTA3NDgwMDAwMA==39f1a3354b35f48186eec1739954e621'
-);
 
 const censusData = rawCensusData.map((item, index) => ({ ...item, id: index }));
 

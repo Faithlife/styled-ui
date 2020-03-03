@@ -1,9 +1,14 @@
 import React, { useRef, useState, useMemo, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { AgGridReact, AgGridColumn } from 'ag-grid-react';
+import { LicenseManager } from 'ag-grid-enterprise';
 import 'ag-grid-enterprise';
 import { Box, LoadingSpinner, Text } from '@faithlife/styled-ui';
 import { handleShowCheckbox, handleIsEditable, editorComponentTag } from './grid-helpers';
+
+LicenseManager.setLicenseKey(
+	'Faithlife_Corporation_MultiApp_4Devs_3Deployment_26_September_2020__MTYwMTA3NDgwMDAwMA==39f1a3354b35f48186eec1739954e621'
+);
 
 const gridHeight = 8;
 const defaultRowHeight = gridHeight * 5;
