@@ -16,7 +16,7 @@
     "styled-components": "^4.4.1"
   },
   "peerDependencies": {
-    "@faithlife/styled-ui": "^5.x.x",
+    "@faithlife/styled-ui": "^5.14.0",
     "ag-grid-community": "21.2.2",
     "ag-grid-enterprise": "21.2.2",
     "ag-grid-react": "21.2.2",
