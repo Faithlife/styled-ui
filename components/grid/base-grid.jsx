@@ -4,6 +4,7 @@ import { AgGridReact, AgGridColumn } from 'ag-grid-react';
 import 'ag-grid-enterprise';
 import { Box } from '../Box';
 import { handleShowCheckbox, handleIsEditable, editorComponentTag } from './grid-helpers';
+import { deprecateComponent } from '../utils';
 
 const gridHeight = 8;
 const defaultRowHeight = gridHeight * 5;
@@ -11,7 +12,7 @@ const headerHeight = gridHeight * 5;
 const noRowsDefaultTableHeight = 200;
 
 /** A wrapper of ag-grid with some boilerplate code to handle initialization and sorting/ filtering */
-export function BaseGrid({
+function BaseGridComponent({
 	gridApi,
 	setGridApi,
 	columnApi,
@@ -44,6 +45,14 @@ export function BaseGrid({
 }) {
 	const tableHeightPadding = hasPagingBar ? 42 : 2;
 	const prevViewportSize = useRef(isSmallViewport);
+
+	useEffect(() => {
+		if (process.env.NODE_ENV !== 'production') {
+			console.warn(
+				'Warning: You are using a deprecated Grid component that will be removed in the next major release of Styled UI.',
+			);
+		}
+	}, []);
 
 	useEffect(() => {
 		if (gridApi && isSmallViewport !== prevViewportSize.current) {
@@ -259,6 +268,11 @@ export function BaseGrid({
 	);
 }
 
+const BaseGrid = deprecateComponent(
+	BaseGridComponent,
+	'This Grid component is leaving Styled-UI and is now available from the @faithlife/equipment-grid package.\nPlease see the FaithlifeEquipment repo for more details: https://git.faithlife.dev/Logos/FaithlifeEquipment',
+);
+
 BaseGrid.rowSelectionOptions = {
 	none: '',
 	single: 'single',
@@ -342,3 +356,5 @@ function parseChildrenSettings(children, additionalCellComponents = {}) {
 		suppressRowClick,
 	};
 }
+
+export { BaseGrid };
