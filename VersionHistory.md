@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.49.0
+
+- Add deprecation notice to `Grid` component. `@faithlife/equipment-grid` is now available from the [FaithlifeEquipment](https://git.faithlife.dev/Logos/FaithlifeEquipment) repo.
+
 ### 5.48.0
 
 - Adjust minimal accordion header style.
