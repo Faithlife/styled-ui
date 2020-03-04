@@ -5,7 +5,8 @@ import { DefaultThemeProvider } from '../DefaultThemeProvider';
 import { Box } from '../Box';
 import { Button } from '../button';
 import { Input } from './Input';
-import { Close, Search } from '../icons';
+import { Search } from '../icons';
+import { X as Close } from '../icons/18px';
 import { useCopyRefs } from '../shared-hooks/use-copy-refs';
 
 const FilterInput = React.forwardRef(function FilterInput(

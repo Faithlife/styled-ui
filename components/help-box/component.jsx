@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Close, Exclamation, CircleCheck, Info } from '../icons';
+import {
+	X as Close,
+	ErrorCircle as Exclamation,
+	CorrectCircle as CircleCheck,
+	WarningCircle as Info,
+} from '../icons/12px';
 import { applyVariations } from '../utils';
 import * as Styled from './styled';
 

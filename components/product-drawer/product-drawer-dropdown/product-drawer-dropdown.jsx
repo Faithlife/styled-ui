@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FaithlifeConnectAnimatedImage, FaithlifeEquipAnimatedImage } from './animated-image';
 import { ProductLinkList, ProductLink } from './product-link';
 import { LegacyButton as Button } from '../../button';
-import { Close } from '../../icons';
+import { X as Close } from '../../icons/18px';
 import {
 	FaithlifeFlameSvg,
 	FaithlifeTvSvg,

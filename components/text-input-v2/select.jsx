@@ -4,7 +4,7 @@ import ReactSelect, {
 	components as reactSelectComponents,
 } from 'react-select';
 import { colors } from '../shared-styles';
-import { ChevronExpand } from '../icons';
+import { ChevronDown } from '../icons/12px';
 import { DebouncedSelectAsync, DebouncedSelectAsyncCreatable } from './debounced-async';
 import { theme } from '../../theme';
 
@@ -127,7 +127,7 @@ const defaultComponents = {
 const DropdownIndicator = props => {
 	return (
 		<reactSelectComponents.DropdownIndicator {...props}>
-			<ChevronExpand />
+			<ChevronDown />
 		</reactSelectComponents.DropdownIndicator>
 	);
 };

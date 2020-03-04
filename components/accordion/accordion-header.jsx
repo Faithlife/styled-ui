@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Text } from '../Text';
 import { Box } from '../Box';
 import { UtilityButton } from '../button';
-import { ChevronRight, ChevronExpand } from '../icons';
+import { ChevronRight, ChevronDown } from '../icons/12px';
 import { useAccordionContext, useAccordionItemContext } from './accordion-util';
 
 export function AccordionHeader({
@@ -81,7 +81,7 @@ export function AccordionHeader({
 				>
 					{!shouldHideArrows && (
 						<Box marginRight={variant === 'minimal' ? 3 : 4} lineHeight={0} alignSelf="center">
-							{isExpanded ? <ChevronExpand /> : <ChevronRight />}
+							{isExpanded ? <ChevronDown /> : <ChevronRight />}
 						</Box>
 					)}
 					<ButtonContent>
