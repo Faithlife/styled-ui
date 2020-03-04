@@ -197,10 +197,6 @@ export const DropdownSeeMoreLink = styled.a`
 	}
 `;
 
-export const ProductLinkIcon = styled.img`
-	vertical-align: top;
-`;
-
 export const FooterDivider = styled.hr`
 	margin: 0 40px 12px;
 	border: 0;
