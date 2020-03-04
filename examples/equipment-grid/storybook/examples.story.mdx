@@ -18,15 +18,13 @@ All data must include an `id` property or `handleGetRowId` must be provided
 
 <Preview>
 	<Story name="Row Id">
-		<>
-			<SimpleGrid data={censusData} maxRows={10} handleGetRowId={data => data.id}>
-				<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
-				<GridColumn displayName="Population" fieldName="population" isRightAligned />
-				<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
-				<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
-				<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
-			</SimpleGrid>
-		</>
+<SimpleGrid data={censusData} maxRows={10} handleGetRowId={data => data.id}>
+	<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+	<GridColumn displayName="Population" fieldName="population" isRightAligned />
+	<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
+	<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
+	<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
+</SimpleGrid>
 	</Story>
 </Preview>
 
@@ -36,25 +34,23 @@ The `hasInteractableElement` allows you to use interactable in rows without trig
 
 <Preview>
 	<Story name="Interactable Element">
-		<>
-			<SimpleGrid data={censusData} maxRows={10} onRowClick={action('row-click')}>
-			<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
-			<GridColumn displayName="Population" fieldName="population" isRightAligned />
-			<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
-			<GridColumn
-				hasInteractableElement
-				displayName=""
-				fieldName="edit"
-				width={100}
-				cellComponent={ ({data}) =>
-					(<Button primary small onClick={() => action('interactable-button')(data)}>
-						Edit
-					</Button>)
-				}
-				isLargeViewportOnly
-			/>
-		</SimpleGrid>
-		</>
+<SimpleGrid data={censusData} maxRows={10} onRowClick={action('row-click')}>
+	<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+	<GridColumn displayName="Population" fieldName="population" isRightAligned />
+	<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
+	<GridColumn
+		hasInteractableElement
+		displayName=""
+		fieldName="edit"
+		width={100}
+		cellComponent={ ({data}) =>
+			(<Button primary small onClick={() => action('interactable-button')(data)}>
+				Edit
+			</Button>)
+		}
+		isLargeViewportOnly
+	/>
+</SimpleGrid>
 	</Story>
 </Preview>
 
@@ -62,14 +58,12 @@ The `hasInteractableElement` allows you to use interactable in rows without trig
 
 <Preview>
 	<Story name="Simple Aggregations">
-		<>
-			<SimpleGrid data={censusData} maxRows={10}>
-				<SimpleGrid.GroupColumn displayName="Name" fieldName="value" />
-				<GridColumn hide fieldName="areaDesc" groupByColumn width={200} />
-				<GridColumn displayName="Population" fieldName="population" />
-				<GridColumn displayName="Net Population Change" fieldName="populationChange" />
-			</SimpleGrid>
-		</>
+<SimpleGrid data={censusData} maxRows={10}>
+	<SimpleGrid.GroupColumn displayName="Name" fieldName="value" />
+	<GridColumn hide fieldName="areaDesc" groupByColumn width={200} />
+	<GridColumn displayName="Population" fieldName="population" />
+	<GridColumn displayName="Net Population Change" fieldName="populationChange" />
+</SimpleGrid>
 	</Story>
 </Preview>
 
@@ -77,18 +71,18 @@ The `hasInteractableElement` allows you to use interactable in rows without trig
 
 <Preview>
 	<Story name="Simple Text Filtering">
-		<SampleState initialState={{ filterText: 'WA' }}>
-			{(state, setState) => (<>
-				<Input placeholder="Search" value={state.filterText} onChange={(e => setState({ filterText: e.target.value }))} />
-				<SimpleGrid data={censusData} maxRows={10} filterText={state.filterText}>
-					<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
-					<GridColumn displayName="Population" fieldName="population" isRightAligned />
-					<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
-					<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
-					<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
-				</SimpleGrid>
-			</>)}
-		</SampleState>
+<SampleState initialState={{ filterText: 'WA' }}>
+	{(state, setState) => (<>
+		<Input placeholder="Search" value={state.filterText} onChange={(e => setState({ filterText: e.target.value }))} />
+		<SimpleGrid data={censusData} maxRows={10} filterText={state.filterText}>
+			<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+			<GridColumn displayName="Population" fieldName="population" isRightAligned />
+			<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
+			<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
+			<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
+		</SimpleGrid>
+	</>)}
+</SampleState>
 	</Story>
 </Preview>
 
@@ -100,21 +94,21 @@ See https://www.ag-grid.com/javascript-grid-filter-provided-simple/#filterOption
 
 <Preview>
 	<Story name="Advanced Filtering">
-		<SampleState initialState={{ filter: null }}>
-			{(state, setState) => (<>
-				<Button primary medium onClick={() => setState({ filter: { population: { type: 'greaterThan', filter: '200000' } } })}>Pop > 200,000</Button>
-				<Button primary medium onClick={() => setState({ filter: { population: { type: 'lessThan', filter: '200000' } } })}>{'Pop < 200,000'}</Button>
-				<Button primary medium onClick={() => setState({ filter: null })}>None</Button>
-				{JSON.stringify(state.filter)}
-				<SimpleGrid filters={state.filter} data={censusData} maxRows={10}>
-					<GridColumn displayName="Name" fieldName="value" />
-					<GridColumn displayName="Population" fieldName="population" isRightAligned filter={GridColumn.filterByOptions.number} />
-					<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
-					<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
-					<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
-				</SimpleGrid>
-			</>)}
-		</SampleState>
+<SampleState initialState={{ filter: null }}>
+	{(state, setState) => (<>
+		<Button primary medium onClick={() => setState({ filter: { population: { type: 'greaterThan', filter: '200000' } } })}>Pop > 200,000</Button>
+		<Button primary medium onClick={() => setState({ filter: { population: { type: 'lessThan', filter: '200000' } } })}>{'Pop < 200,000'}</Button>
+		<Button primary medium onClick={() => setState({ filter: null })}>None</Button>
+		{JSON.stringify(state.filter)}
+		<SimpleGrid filters={state.filter} data={censusData} maxRows={10}>
+			<GridColumn displayName="Name" fieldName="value" />
+			<GridColumn displayName="Population" fieldName="population" isRightAligned filter={GridColumn.filterByOptions.number} />
+			<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
+			<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
+			<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
+		</SimpleGrid>
+	</>)}
+</SampleState>
 	</Story>
 </Preview>
 
@@ -124,15 +118,13 @@ Cell components can be any valid react component. The `value` prop will be what 
 
 <Preview>
 	<Story name="Custom Cell Component">
-		<>
-			<SimpleGrid data={censusData} maxRows={10}>
-				<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
-				<GridColumn displayName="Population" fieldName="population" isRightAligned />
-				<GridColumn displayName="Net Population Change" fieldName="populationChange" cellComponent={PopulationChange} isRightAligned />
-				<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
-				<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
-			</SimpleGrid>
-		</>
+<SimpleGrid data={censusData} maxRows={10}>
+	<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+	<GridColumn displayName="Population" fieldName="population" isRightAligned />
+	<GridColumn displayName="Net Population Change" fieldName="populationChange" cellComponent={PopulationChange} isRightAligned />
+	<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
+	<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
+</SimpleGrid>
 	</Story>
 </Preview>
 
@@ -142,21 +134,21 @@ Just specify the `enableDragDrop` prop to enable.
 
 <Preview>
 	<Story name="Drag and Drop">
-		<SampleState initialState={{ data: censusData }}>
-			{(state, setState) => (<>
-				<SimpleGrid
-					data={state.data}
-					maxRows={10}
-					autoGroupExpansion={SimpleGrid.expandedRowsOptions.topLevel}
-					onDataChange={data => setState({ data })}
-					enableDragDrop
-				>
-					<SimpleGrid.GroupColumn displayName="Name" width={500} />
-					<GridColumn displayName="Population" fieldName="population" />
-					<GridColumn displayName="Net Population Change" fieldName="populationChange" />
-				</SimpleGrid>
-			</>)}
-		</SampleState>
+<SampleState initialState={{ data: censusData }}>
+	{(state, setState) => (<>
+		<SimpleGrid
+			data={state.data}
+			maxRows={10}
+			autoGroupExpansion={SimpleGrid.expandedRowsOptions.topLevel}
+			onDataChange={data => setState({ data })}
+			enableDragDrop
+		>
+			<SimpleGrid.GroupColumn displayName="Name" width={500} />
+			<GridColumn displayName="Population" fieldName="population" />
+			<GridColumn displayName="Net Population Change" fieldName="populationChange" />
+		</SimpleGrid>
+	</>)}
+</SampleState>
 	</Story>
 </Preview>
 
@@ -168,36 +160,36 @@ Ref handles available when using checkboxes are `selectAllRows`, `selectFiltered
 
 <Preview>
 	<Story name="Checkbox Selection">
-		<SampleState initialState={{ selected: false }}>
-			{(state, setState) => (<>
-				<Button
-					primary
-					medium
-					onClick={() => {
-						!state.selected ?
-							gridRef.current.selectAllRows() :
-							gridRef.current.deselectAllRows();
-						setState({ selected: !state.selected });
-						}}
-				>
-					Select/ Deselect
-				</Button>
-				<SimpleGrid
-					ref={gridRef}
-					data={censusData}
-					maxRows={10}
-					onRowClick={action('row-click')}
-					onRowSelect={action('row-select')}
-					rowSelectionType={SimpleGrid.rowSelectionOptions.multi}
-				>
-					<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} showCheckbox />
-					<GridColumn displayName="Population" fieldName="population" isRightAligned />
-					<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
-					<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
-					<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
-				</SimpleGrid>
-			</>)}
-		</SampleState>
+<SampleState initialState={{ selected: false }}>
+	{(state, setState) => (<>
+		<Button
+			primary
+			medium
+			onClick={() => {
+				!state.selected ?
+					gridRef.current.selectAllRows() :
+					gridRef.current.deselectAllRows();
+				setState({ selected: !state.selected });
+				}}
+		>
+			Select/ Deselect
+		</Button>
+		<SimpleGrid
+			ref={gridRef}
+			data={censusData}
+			maxRows={10}
+			onRowClick={action('row-click')}
+			onRowSelect={action('row-select')}
+			rowSelectionType={SimpleGrid.rowSelectionOptions.multi}
+		>
+			<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} showCheckbox />
+			<GridColumn displayName="Population" fieldName="population" isRightAligned />
+			<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
+			<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
+			<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly/>
+		</SimpleGrid>
+	</>)}
+</SampleState>
 	</Story>
 </Preview>
 
@@ -207,37 +199,31 @@ Also supported by PaginatedGrid.
 
 <Preview>
 	<Story name="Editable Fields">
-		<>
-			<SimpleGrid
-				data={censusData}
-				maxRows={10}
-				onRowDataChange={action('row-update')}
-			>
-				<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
-				<GridColumn displayName="Population" fieldName="population" isEditable />
-				<GridColumn displayName="Net Population Change" fieldName="populationChange" isEditable editorComponent={IncrementButton} />
-				<GridColumn displayName="Births" fieldName="births" width={100} isLargeViewportOnly />
-				<GridColumn displayName="Deaths" fieldName="deaths" width={100} isSortable={false} isLargeViewportOnly/>
-			</SimpleGrid>
-		</>
+<SimpleGrid data={censusData} maxRows={10} onRowDataChange={action('row-update')}>
+	<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+	<GridColumn displayName="Population" fieldName="population" isEditable />
+	<GridColumn displayName="Net Population Change" fieldName="populationChange" isEditable editorComponent={IncrementButton} />
+	<GridColumn displayName="Births" fieldName="births" width={100} isLargeViewportOnly />
+	<GridColumn displayName="Deaths" fieldName="deaths" width={100} isSortable={false} isLargeViewportOnly/>
+</SimpleGrid>
 	</Story>
 </Preview>
 
 #### Editable component example
 
 ```jsx
-	import { useCellEditor } from '@faithlife/equipment-grid';
+import { useCellEditor } from '@faithlife/equipment-grid';
 
-	const IncrementButton = React.forwardRef(({ value }, ref) => {
-		const [count, setCount] = useState(value);
-		useCellEditor(ref, count, true);
+const IncrementButton = React.forwardRef(({ value }, ref) => {
+	const [count, setCount] = useState(value);
+	useCellEditor(ref, count, true);
 
-		return (
-			<Button
-				variant="primaryOutline"
-				size="medium"
-				onClick={() => setCount(c => c + 1)}
-			>{`${count} +`}</Button>
-		);
-	});
+	return (
+		<Button
+			variant="primaryOutline"
+			size="medium"
+			onClick={() => setCount(c => c + 1)}
+		>{`${count} +`}</Button>
+	);
+});
 ```
