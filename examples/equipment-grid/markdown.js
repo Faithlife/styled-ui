@@ -316,3 +316,47 @@ Also supported by Paginated and TreeGrid.`,
 \`\`\``,
 	},
 };
+
+export const serverSideExamples = {
+	example: {
+		title: `
+### Server Side Datasource Example
+Server-side data fetching is enabled by passing in the value from the \`useGridServerDatasource\` hook.`,
+		source: `
+\`\`\`jsx
+	{const datasource = useGridServerDatasource(requestFunction)}
+	<div>
+		<PaginatedGrid data={datasource} maxRows={10}>
+			<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+			<GridColumn displayName="Population" fieldName="population" />
+			<GridColumn displayName="Net Population Change" fieldName="populationChange" />
+			<GridColumn displayName="Births" fieldName="births" />
+			<GridColumn displayName="Deaths" fieldName="deaths" />
+		</PaginatedGrid>
+	</div>
+\`\`\`
+		`,
+	},
+	useGridServerDatasource: {
+		title: `
+### useGridServerDatasource
+The useGridServerDatasource hook accepts a requestFunction that will be passed a request object and an abort signal and will return a tuple with an array of new rows as the first item and a boolean for if there is more data to fetch as the second item.
+
+The second parameter is an optional options object. It supports \`fetchLimit\` which is the amount of rows to fetch per request and \`maxPagesToCache\` to control the amount of pages that the grid keeps in memory at a time`,
+		source: `
+\`\`\`javascript
+	import { useGridServerDatasource } from '@faithlife/equipment-grid';
+	const datasource = useGridServerDatasource(requestFunction, { fetchLimit: 100, maxPagesToCache: 10 });
+\`\`\`
+
+#### Example Request Function
+\`\`\`javascript
+	async function fetchRows(request, abortSignal) {
+		const response = await fetch('/my-api/census-data', { signal: abortSignal, body: JSON.stringify(request) });
+
+		return [mapToRows(response.censusData), response.next !== null];
+	}
+\`\`\`
+		`,
+	},
+};

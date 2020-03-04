@@ -1,14 +1,35 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useMemo, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { AgGridReact, AgGridColumn } from 'ag-grid-react';
+import { LicenseManager } from 'ag-grid-enterprise';
 import 'ag-grid-enterprise';
-import { Box } from '@faithlife/styled-ui';
+import { Box, LoadingSpinner, Text } from '@faithlife/styled-ui';
 import { handleShowCheckbox, handleIsEditable, editorComponentTag } from './grid-helpers';
+
+LicenseManager.setLicenseKey(
+	'Faithlife_Corporation_MultiApp_4Devs_3Deployment_26_September_2020__MTYwMTA3NDgwMDAwMA==39f1a3354b35f48186eec1739954e621'
+);
 
 const gridHeight = 8;
 const defaultRowHeight = gridHeight * 5;
 const headerHeight = gridHeight * 5;
 const noRowsDefaultTableHeight = 200;
+const defaultFetchLimit = 100;
+const loadingCellComponent = 'loadingCellComponent';
+const serverSideRowModel = 'serverSide';
+const clientSideRowModel = 'clientSide';
+
+const defaultLocalization = {
+	noRowsMessage: 'No Rows to Show',
+	loadingRows: 'Loading...',
+	pageControls: {
+		to: 'to',
+		of: 'of',
+		page: 'Page',
+	},
+};
+
+export const filterTextField = 'baseGridFilterText';
 
 /** A wrapper of ag-grid with some boilerplate code to handle initialization and sorting/ filtering */
 export function BaseGrid({
@@ -41,9 +62,80 @@ export function BaseGrid({
 	onRowDataChange,
 	context,
 	filters,
+	localization,
 }) {
 	const tableHeightPadding = hasPagingBar ? 42 : 2;
 	const prevViewportSize = useRef(isSmallViewport);
+
+	const [rowModelType] = useState(determineRowModelType(data));
+	const [hasWarned, setHasWarned] = useState(false);
+	const [datasourceProps, setDatasourceProps] = useState();
+	useEffect(() => {
+		if (process.env.environment !== 'production' && !hasWarned) {
+			if (!rowModelType) {
+				console.error(
+					'The supplied datasource is invalid.',
+					'It must be of type Array or IServerSideDatasource.'
+				);
+				setHasWarned(true);
+			}
+
+			if (rowModelType !== determineRowModelType(data)) {
+				console.error('You cannot currently switch datasource types after one is set.');
+				setHasWarned(true);
+			}
+		}
+
+		if (!datasourceProps && determineRowModelType(data) === serverSideRowModel) {
+			setDatasourceProps({
+				rowModelType,
+				cacheBlockSize: data.fetchLimit || maxRows || defaultFetchLimit,
+				maxBlocksInCache: data.maxPagesToCache,
+			});
+		}
+
+		if (!datasourceProps && determineRowModelType(data) === clientSideRowModel) {
+			setDatasourceProps({ rowData: data });
+		}
+	}, [gridApi, data, hasWarned, rowModelType, datasourceProps, maxRows]);
+
+	const prevIsLoading = useRef(false);
+	useEffect(() => {
+		if (gridApi && rowModelType === serverSideRowModel) {
+			if (data.rowCount === 0 && !data.isMoreRows) {
+				gridApi.showNoRowsOverlay();
+				prevIsLoading.current = false;
+			} else {
+				gridApi.hideOverlay();
+				prevIsLoading.current = false;
+			}
+		}
+	}, [gridApi, rowModelType, data]);
+
+	useEffect(() => {
+		if (gridApi && rowModelType === serverSideRowModel) {
+			const filterModel = gridApi.getFilterModel();
+			gridApi.setFilterModel({
+				...filterModel,
+				[filterTextField]: { type: '', filter: filterText },
+			});
+		}
+	}, [gridApi, rowModelType, filterText]);
+
+	// Additional options are here: https://www.ag-grid.com/javascript-grid-internationalisation/
+	const localeText = useMemo(
+		() => ({
+			noRowsToShow:
+				(localization && localization.noRowsMessage) || defaultLocalization.noRowsMessage,
+			to: (localization && localization.pageControls.to) || defaultLocalization.pageControls.to,
+			from:
+				(localization && localization.pageControls.from) || defaultLocalization.pageControls.from,
+			page:
+				(localization && localization.pageControls.page) || defaultLocalization.pageControls.page,
+			loadingRows: (localization && localization.loadingRows) || defaultLocalization.loadingRows,
+		}),
+		[localization]
+	);
 
 	useEffect(() => {
 		if (gridApi && isSmallViewport !== prevViewportSize.current) {
@@ -62,10 +154,10 @@ export function BaseGrid({
 	}, [gridApi, rowHeight, getRowHeight]);
 
 	useEffect(() => {
-		if (gridApi) {
+		if (gridApi && rowModelType === clientSideRowModel) {
 			gridApi.setQuickFilter(filterText);
 		}
-	}, [gridApi, filterText]);
+	}, [gridApi, filterText, rowModelType]);
 
 	useEffect(() => {
 		if (gridApi && sortModel) {
@@ -81,8 +173,9 @@ export function BaseGrid({
 
 	useEffect(() => {
 		if (gridApi) {
-			gridApi.setFilterModel(filters);
-			gridApi.onFilterChanged();
+			const filterModel = gridApi.getFilterModel();
+			const { [filterTextField]: filterText } = filterModel;
+			gridApi.setFilterModel({ ...filters, [filterTextField]: filterText });
 		}
 	}, [gridApi, filters]);
 
@@ -116,7 +209,7 @@ export function BaseGrid({
 	const handleCellClicked = useCallback(
 		event => {
 			if (!event.column.colDef.hasInteractableElement && !event.column.colDef.checkboxSelection) {
-				onRowClick && onRowClick(event.data);
+				onRowClick && event.data && onRowClick(event.data);
 			}
 		},
 		[onRowClick]
@@ -124,7 +217,7 @@ export function BaseGrid({
 
 	const handleRowClicked = useCallback(
 		event => {
-			onRowClick && onRowClick(event.data);
+			onRowClick && event.data && onRowClick(event.data);
 		},
 		[onRowClick]
 	);
@@ -144,18 +237,39 @@ export function BaseGrid({
 			if (sortModel) {
 				api.setSortModel(sortModel);
 			}
+
 			if (filterText) {
-				api.setQuickFilter(filterText);
+				if (rowModelType === clientSideRowModel) {
+					api.setQuickFilter(filterText);
+				} else if (rowModelType === serverSideRowModel) {
+					const filterModel = api.getFilterModel();
+					api.setFilterModel({
+						...filterModel,
+						[filterTextField]: { type: '', filter: filterText },
+					});
+					api.onFilterChanged();
+				}
+			}
+
+			if (rowModelType === serverSideRowModel) {
+				api.setServerSideDatasource(data);
 			}
 		},
-		[setGridApi, setColumnApi, sortModel, filterText]
+		[setGridApi, setColumnApi, sortModel, filterText, rowModelType, data]
 	);
 
-	const rowCount = data ? data.length : 0;
+	let rowCount = null;
+	if (maxRows) {
+		if (rowModelType === clientSideRowModel) {
+			rowCount = data ? data.length : 0;
+		} else if (rowModelType === serverSideRowModel) {
+			rowCount = data.rowCount;
+		}
+	}
 	const currentHeaderHeight = hideHeaders ? 1 : headerHeight;
 
 	let calculatedTableHeight;
-	if (maxRows) {
+	if (rowCount !== null && rowCount !== undefined && maxRows) {
 		calculatedTableHeight =
 			rowCount !== 0
 				? (maxRows && maxRows < rowCount ? maxRows : rowCount) * (rowHeight || defaultRowHeight) +
@@ -166,6 +280,9 @@ export function BaseGrid({
 		calculatedTableHeight = '100%';
 	}
 
+	if (!datasourceProps) {
+		return null;
+	}
 	return (
 		<Box
 			className="ag-theme-faithlife"
@@ -174,7 +291,7 @@ export function BaseGrid({
 			maxHeight={maxHeight}
 		>
 			<AgGridReact
-				rowData={data}
+				{...datasourceProps}
 				context={context}
 				onGridReady={handleGridReady}
 				onGridSizeChanged={handleGridResize}
@@ -201,6 +318,9 @@ export function BaseGrid({
 				animateRows
 				reactNext
 				colResizeDefault="shift"
+				localeText={localeText}
+				loadingCellRendererParams={{ loadingMessage: localeText.loadingRows }}
+				loadingCellRenderer={loadingCellComponent}
 				{...gridOptions}
 			>
 				{headingChildren.map((child, index) => {
@@ -222,6 +342,7 @@ export function BaseGrid({
 						isEditable,
 						shouldBeEditable,
 						editorComponent,
+						filterParams,
 						...columnProps
 					} = child.props;
 					return (
@@ -251,9 +372,14 @@ export function BaseGrid({
 							}
 							editable={shouldBeEditable ? handleIsEditable(shouldBeEditable) : isEditable}
 							singleClickEdit={shouldBeEditable || isEditable}
+							filterParams={{
+								...filterParams,
+								values: (filterParams && filterParams.values) || ['wat'],
+							}}
 						/>
 					);
 				})}
+				<AgGridColumn field={filterTextField} hide filter="agTextColumnFilter" />
 			</AgGridReact>
 		</Box>
 	);
@@ -275,11 +401,18 @@ BaseGrid.propTypes = {
 	isSmallViewport: PropTypes.bool,
 	/** The Max amount of rows to show in the table. Leave blank to enable auto height/ infinite scroll */
 	maxRows: PropTypes.number,
-	/** An array of the data for the rows */
-	data: PropTypes.arrayOf(
+	/** The datasource for the rows */
+	data: PropTypes.oneOfType(
+		[
+			PropTypes.arrayOf(
+				PropTypes.shape({
+					id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+				})
+			),
+		],
 		PropTypes.shape({
-			id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-		}).isRequired
+			getRows: PropTypes.func,
+		})
 	),
 	/** The current sort model for the table */
 	sortModel: PropTypes.object,
@@ -310,7 +443,28 @@ BaseGrid.propTypes = {
 	context: PropTypes.object,
 	/** An object of filters see examples and https://www.ag-grid.com/javascript-grid-filter-provided-simple/#filterOptions */
 	filters: PropTypes.object,
+	/** Localization options */
+	localization: PropTypes.shape({
+		noRowsMessage: PropTypes.string,
+		loadingRows: PropTypes.string,
+		pageControls: PropTypes.shape({
+			to: PropTypes.string,
+			of: PropTypes.string,
+			page: PropTypes.string,
+		}),
+	}),
 };
+
+function LoadingCell({ loadingMessage }) {
+	return (
+		<Box display="flex" alignItems="center" paddingY={3}>
+			<LoadingSpinner small />
+			<Text textStyle="ui.16" paddingLeft={3}>
+				{loadingMessage}
+			</Text>
+		</Box>
+	);
+}
 
 function parseChildrenSettings(children, additionalCellComponents = {}) {
 	const headingChildren = React.Children.toArray(children).filter(
@@ -338,7 +492,23 @@ function parseChildrenSettings(children, additionalCellComponents = {}) {
 
 	return {
 		headingChildren,
-		cellComponents: { ...cellComponents, ...additionalCellComponents },
+		cellComponents: {
+			[loadingCellComponent]: LoadingCell,
+			...cellComponents,
+			...additionalCellComponents,
+		},
 		suppressRowClick,
 	};
+}
+
+function determineRowModelType(data) {
+	if (!data || Array.isArray(data)) {
+		return clientSideRowModel;
+	}
+
+	if (data && !!data.getRows) {
+		return serverSideRowModel;
+	}
+
+	return null;
 }

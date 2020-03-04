@@ -13,3 +13,4 @@ export {
 	editorComponentTag,
 } from './grid-helpers';
 export { AggregationGroupColumn } from './aggregation-group-column';
+export { useGridServerDatasource } from './use-grid-server-datasource';

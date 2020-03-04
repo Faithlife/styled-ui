@@ -10,10 +10,11 @@ import {
 	TreeGrid,
 	GridColumn,
 	useCellEditor,
+	useGridServerDatasource,
 } from '@faithlife/equipment-grid';
 import { coy } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import rawCensusData from './2010census.json';
-import { variations, examples } from './markdown';
+import { variations, examples, serverSideExamples } from './markdown';
 
 import '@faithlife/equipment-grid/dist/index.css'; // eslint-disable-line
 
@@ -69,6 +70,8 @@ function App() {
 			<Variations />
 			<Heading level={48}>Examples</Heading>
 			<Examples />
+			<Heading level={48}>Server Side Examples</Heading>
+			<ServerSideExamples />
 		</>
 	);
 }
@@ -286,19 +289,29 @@ function Examples() {
 						<SegmentedButtonGroup>
 							<Button
 								onClick={() =>
-									setState({ filter: { population: { type: 'greaterThan', filter: '200000' } } })
+									setState(state => ({
+										...state,
+										filter: {
+											population: { filterType: 'number', type: 'greaterThan', filter: '200000' },
+										},
+									}))
 								}
 							>
 								{'Pop > 200,000'}
 							</Button>
 							<Button
 								onClick={() =>
-									setState({ filter: { population: { type: 'lessThan', filter: '200000' } } })
+									setState(state => ({
+										...state,
+										filter: {
+											population: { filterType: 'number', type: 'lessThan', filter: '200000' },
+										},
+									}))
 								}
 							>
 								{'Pop < 200,000'}
 							</Button>
-							<Button onClick={() => setState({ filter: null })}>None</Button>
+							<Button onClick={() => setState(state => ({ ...state, filter: null }))}>None</Button>
 						</SegmentedButtonGroup>
 						{JSON.stringify(state.filter)}
 						<SimpleGrid
@@ -481,6 +494,102 @@ function Examples() {
 	);
 }
 
+let gridRequest = {};
+function ServerSideExamples() {
+	const datasource = useGridServerDatasource(fakeServer);
+	return (
+		<>
+			<Sample text={serverSideExamples.example} initialState={{ filterText: '', filter: null }}>
+				{(state, setState) => (
+					<>
+						<ReactMarkdown
+							source={`Last request:
+\`\`\`json
+${JSON.stringify(gridRequest, null, '\t')}
+\`\`\``}
+							renderers={{ code: CodeBlock }}
+						/>
+						<Input
+							placeholder="Search"
+							value={state.filterText}
+							onChange={e => setState({ filterText: e.target.value })}
+						/>
+						<SegmentedButtonGroup>
+							<Button
+								onClick={() =>
+									setState(state => ({
+										...state,
+										filter: {
+											population: { type: 'greaterThan', filter: '200000' },
+										},
+									}))
+								}
+							>
+								{'Pop > 200,000'}
+							</Button>
+							<Button
+								onClick={() =>
+									setState(state => ({
+										...state,
+										filter: {
+											population: { type: 'lessThan', filter: '200000' },
+										},
+									}))
+								}
+							>
+								{'Pop < 200,000'}
+							</Button>
+							<Button onClick={() => setState(state => ({ ...state, filter: null }))}>None</Button>
+						</SegmentedButtonGroup>
+						<PaginatedGrid
+							data={datasource}
+							filters={state.filter}
+							maxRows={10}
+							onRowClick={row => {
+								alert(row.value);
+							}}
+							filterText={state.filterText}
+						>
+							<GridColumn
+								displayName="Name"
+								fieldName="value"
+								defaultSort={GridColumn.sortOptions.ascending}
+							/>
+							<GridColumn
+								displayName="Population"
+								fieldName="population"
+								filter={GridColumn.filterByOptions.number}
+								isRightAligned
+							/>
+							<GridColumn
+								displayName="Net Population Change"
+								fieldName="populationChange"
+								isRightAligned
+							/>
+							<GridColumn
+								displayName="Births"
+								fieldName="births"
+								isRightAligned
+								width={100}
+								isLargeViewportOnly
+							/>
+							<GridColumn
+								displayName="Deaths"
+								fieldName="deaths"
+								isRightAligned
+								width={100}
+								isSortable={false}
+								isLargeViewportOnly
+							/>
+						</PaginatedGrid>
+					</>
+				)}
+			</Sample>
+			<Sample text={serverSideExamples.useGridServerDatasource} />
+		</>
+	);
+}
+
 function Sample({ text: { title, source }, initialState, children }) {
 	const [state, setState] = useState(initialState || {});
 	return (
@@ -498,4 +607,26 @@ function PopulationChange({ value }) {
 			value
 		)}`}</div>
 	);
+}
+
+async function fakeServer(request) {
+	gridRequest = request;
+	const nameFiltered = request.filterModel.filterText
+		? censusData.filter(data =>
+				data.value.toLowerCase().includes(request.filterModel.filterText.toLowerCase())
+		  )
+		: censusData;
+	const filteredData = request.filterModel.filters
+		? nameFiltered.filter(x =>
+				request.filterModel.filters.population.filterKind === 'greaterThan'
+					? x.population > request.filterModel.filters.population.filter
+					: x.population < request.filterModel.filters.population.filter
+		  )
+		: nameFiltered;
+	await new Promise(resolve => setTimeout(resolve, 500));
+	const response = [
+		filteredData.slice(request.startRow, request.endRow),
+		filteredData.length >= request.endRow,
+	];
+	return response;
 }
