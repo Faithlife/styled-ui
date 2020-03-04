@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@1.2.0...@faithlife/payment-methods@1.2.1) (2020-03-04)
+
+**Note:** Version bump only for package @faithlife/payment-methods
+
+
+
+
+
 # [1.2.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@1.1.0...@faithlife/payment-methods@1.2.0) (2020-02-24)
 
 
