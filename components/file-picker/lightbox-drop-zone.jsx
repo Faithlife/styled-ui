@@ -31,7 +31,7 @@ export function LightboxDropZone({ addFile, allowMultiSelect, showDetails, local
 			<Styled.DragDropContainer height={showDetails ? '415px' : '156px'}>
 				{showDetails && (
 					<div>
-						<img alt="drag and drop" src={CameraSvg} />
+						<CameraSvg />
 					</div>
 				)}
 				<Styled.DragDropText>{localizedResources.dragDropText}</Styled.DragDropText>

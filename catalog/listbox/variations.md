@@ -15,7 +15,7 @@ state: { isOpen: false, selected: 0 }
 		onToggleMenu={() => setState({ isOpen: !state.isOpen })}
 		labelledBy="listboxLabel"
 	>
-		<ListboxToggle primary medium icon={<DownArrow />} styleOverrides={{width: '100px'}}>{browserList[state.selected]}</ListboxToggle>
+		<ListboxToggle primary medium icon={<ChevronDown color="white" />} styleOverrides={{width: '100px'}}>{browserList[state.selected]}</ListboxToggle>
 		<ListboxMenu>
 			{browserList.map((name, index) => <ListItem id={index}>{name}</ListItem>)}
 			<ListItem id="ie" disabled>Internet Explorer</ListItem>

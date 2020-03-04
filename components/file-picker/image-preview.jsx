@@ -24,8 +24,8 @@ export function ImagePreview({ imageSource, onRemoveFile }) {
 	return loadError ? null : (
 		<Styled.BorderBox>
 			<Styled.Image src={imageSource} onLoad={handleLoad} onError={handleError} />
-			<Styled.CloseButton onClick={onRemoveFile}>
-				<img alt={'close'} src={CloseButtonSvg} />
+			<Styled.CloseButton onClick={onRemoveFile} aria-label="Close">
+				<CloseButtonSvg />
 			</Styled.CloseButton>
 
 			{!isLoaded && <LoadingSpinner large />}

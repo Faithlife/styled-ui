@@ -75,13 +75,13 @@ import censusData from './grid/2010census.json';
 import { ProductDrawerWithResources } from './product-drawer';
 import { DocgenTable } from './docgen-table';
 import { textInputPages } from './input/pages';
-import DownArrow from './svgs/arrow-down.svg';
 import { PopulationChange } from './grid/population-change';
 import { IncrementButton } from './grid/cell-editors';
 import { BaseGrid } from '../components/grid/base-grid';
 import { SimpleGrid, GridColumn, PaginatedGrid, TreeGrid } from '../components/grid';
 import { IconGroup } from './icon-table';
 import { FavoriteFilled } from '../components/icons/18px';
+import { ChevronDown } from '../components/icons/12px';
 
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
@@ -559,7 +559,7 @@ const pages = [
 					Label: styled.span`
 						margin-right: 8px;
 					`,
-					DownArrow: styled.img.attrs({ src: DownArrow })``,
+					ChevronDown,
 				},
 			},
 			{
