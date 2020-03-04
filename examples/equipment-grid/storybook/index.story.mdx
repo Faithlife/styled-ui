@@ -1,10 +1,10 @@
-import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 import ReactMarkdown from 'react-markdown';
 import { Input } from '@faithlife/styled-ui'
 import { Button, SegmentedButtonGroup } from '@faithlife/styled-ui/v6'
 import { action } from '@storybook/addon-actions'; // eslint-disable-line import/no-extraneous-dependencies
 import { BaseGrid } from '../../../packages/equipment-grid/base-grid';
-import { SimpleGrid, PaginatedGrid, GridColumn } from '@faithlife/equipment-grid';
+import { SimpleGrid, PaginatedGrid, GridColumn } from '../../../packages/equipment-grid';
 import { censusData, ServerSideWrapper, gridRequest } from './helpers';
 
 import '@faithlife/equipment-grid/dist/index.css';
@@ -89,6 +89,7 @@ ${JSON.stringify(gridRequest, null, '\t')}
 				<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
 				<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly />
 			</PaginatedGrid>
+			{console.log(SimpleGrid)}
 		</>
 	)}
 </ServerSideWrapper>
@@ -115,3 +116,19 @@ async function fetchRows(request, abortSignal) {
 	return [mapToRows(response.censusData), response.next !== null];
 }
 ```
+
+## Shared props between all Grids
+
+<Props of={BaseGrid} />
+
+## SimpleGrid props ⚠ Under Construction ⚠
+
+<Props of={SimpleGrid} />
+
+## PaginatedGrid props ⚠ Under Construction ⚠
+
+<Props of={PaginatedGrid} />
+
+## GridColumn props ⚠ Under Construction ⚠
+
+<Props of={GridColumn} />
