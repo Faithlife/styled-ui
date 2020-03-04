@@ -3,7 +3,7 @@ import { css } from 'styled-components';
 import { Box } from '../Box';
 import { Input } from './Input';
 import { Button } from '../button';
-import { ChevronExpand, ChevronCollapse } from '../icons';
+import { ChevronUp, ChevronDown } from '../icons/12px';
 import { theme } from '../../theme';
 import { useCopyRefs } from '../shared-hooks/use-copy-refs';
 
@@ -55,14 +55,14 @@ const NumberInput = React.memo(
 					onClick={handleStepUp}
 					top={0}
 					paddingTop={buttonPadding}
-					icon={<ChevronCollapse />}
+					icon={<ChevronUp />}
 					disabled={props.disabled}
 				/>
 				<StepButton
 					onClick={handleStepDown}
 					bottom={0}
 					paddingBottom={buttonPadding}
-					icon={<ChevronExpand />}
+					icon={<ChevronDown />}
 					disabled={props.disabled}
 				/>
 			</InputContainer>

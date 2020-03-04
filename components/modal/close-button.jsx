@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '../Box';
 import { UtilityButton } from '../button';
-import { Close } from '../icons';
+import { X as Close } from '../icons/18px';
 
 /**
  * Simple absolutely-positioned button to close a modal.

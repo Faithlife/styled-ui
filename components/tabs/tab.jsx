@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { SmallCheck } from '../icons';
+import { Checkmark } from '../icons/12px';
 import * as Styled from './styled.jsx';
 
 export function Tab({ children, disabled, index, selected, onSelectTab, panelId, ...props }) {
@@ -78,7 +78,7 @@ export function SequencedTab({
 			onClick={handleSelectTab}
 		>
 			<Styled.Circle selected={selected} completed={completed} disabled={disabled}>
-				{completed ? <SmallCheck /> : index + 1}
+				{completed ? <Checkmark color="white" /> : index + 1}
 			</Styled.Circle>
 			<Styled.SequencedTabContent
 				ref={tabRef}

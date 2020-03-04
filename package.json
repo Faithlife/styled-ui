@@ -31,7 +31,8 @@
 	"files": [
 		"dist/**",
 		"grid.js",
-		"v6.js"
+		"v6.js",
+		"icons.js"
 	],
 	"browserslist": [
 		"> 1%",
@@ -81,6 +82,7 @@
 		"@babel/preset-react": "^7.0.0",
 		"@babel/register": "^7.4.4",
 		"@storybook/storybook-deployer": "^2.3.0",
+		"@svgr/webpack": "^4.3.3",
 		"ag-grid-community": "^21.2.2",
 		"ag-grid-enterprise": "^21.2.2",
 		"ag-grid-react": "^21.2.2",

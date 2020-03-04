@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FaithlifeConnectAnimatedImage, FaithlifeEquipAnimatedImage } from './animated-image';
 import { ProductLinkList, ProductLink } from './product-link';
 import { LegacyButton as Button } from '../../button';
-import { Close } from '../../icons';
+import { X as Close } from '../../icons/18px';
 import {
 	FaithlifeFlameSvg,
 	FaithlifeTvSvg,
@@ -40,7 +40,7 @@ export const ProductDrawerDropdown = ({
 		<Styled.DropdownColumns>
 			<Styled.DropdownColumn>
 				<Styled.DropdownHeader>
-					<img alt="" src={IndividualsSvg} />
+					<IndividualsSvg />
 					<h1>{resources.individualsSectionTitle}</h1>
 				</Styled.DropdownHeader>
 				<Styled.DropdownBody>
@@ -51,42 +51,42 @@ export const ProductDrawerDropdown = ({
 							href="https://faithlife.com"
 							autoFocus
 						>
-							<Styled.ProductLinkIcon src={FaithlifeFlameSvg} role="presentation" />
+							<FaithlifeFlameSvg />
 						</ProductLink>
 						<ProductLink
 							title={resources.logosLinkTitle}
 							description={resources.logosLinkDescription}
 							href="https://www.logos.com"
 						>
-							<Styled.ProductLinkIcon src={LogosSvg} role="presentation" />
+							<LogosSvg />
 						</ProductLink>
 						<ProductLink
 							title={resources.mobileEdLinkTitle}
 							description={resources.mobileEdLinkDescription}
 							href="https://www.logos.com/mobile-ed"
 						>
-							<Styled.ProductLinkIcon src={MobileEdSvg} role="presentation" />
+							<MobileEdSvg />
 						</ProductLink>
 						<ProductLink
 							title={resources.faithlifeTvLinkTitle}
 							description={resources.faithlifeTvLinkDescription}
 							href="https://faithlifetv.com/"
 						>
-							<Styled.ProductLinkIcon src={FaithlifeTvSvg} role="presentation" />
+							<FaithlifeTvSvg />
 						</ProductLink>
 						<ProductLink
 							title={resources.ebooksLinkTitle}
 							description={resources.ebooksLinkDescription}
 							href="https://ebooks.faithlife.com/"
 						>
-							<Styled.ProductLinkIcon src={EbooksSvg} role="presentation" />
+							<EbooksSvg />
 						</ProductLink>
 						<ProductLink
 							title={resources.faithlifeStudyBibleLinkTitle}
 							description={resources.faithlifeStudyBibleLinkDescription}
 							href="https://faithlife.com/products/faithlife-study-bible"
 						>
-							<Styled.ProductLinkIcon src={FaithlifeStudyBibleSvg} role="presentation" />
+							<FaithlifeStudyBibleSvg />
 						</ProductLink>
 						<ProductLink
 							title={resources.bsmLinkTitle}
@@ -110,7 +110,7 @@ export const ProductDrawerDropdown = ({
 			</Styled.DropdownColumn>
 			<Styled.DropdownColumn>
 				<Styled.DropdownHeader>
-					<img alt="" src={ChurchesSvg} />
+					<ChurchesSvg />
 					<h1>{resources.churchesSectionTitle}</h1>
 				</Styled.DropdownHeader>
 				<Styled.DropdownBody>
@@ -120,42 +120,42 @@ export const ProductDrawerDropdown = ({
 							description={resources.faithlifeChurchLinkDescription}
 							href="https://faithlife.com"
 						>
-							<Styled.ProductLinkIcon src={FaithlifeFlameSvg} role="presentation" />
+							<FaithlifeFlameSvg />
 						</ProductLink>
 						<ProductLink
 							title={resources.sitesLinkTitle}
 							description={resources.sitesLinkDescription}
 							href="https://sites.faithlife.com/"
 						>
-							<Styled.ProductLinkIcon src={SitesSvg} role="presentation" />
+							<SitesSvg />
 						</ProductLink>
 						<ProductLink
 							title={resources.proclaimLinkTitle}
 							description={resources.proclaimLinkDescription}
 							href="https://proclaimonline.com/"
 						>
-							<Styled.ProductLinkIcon src={ProclaimSvg} role="presentation" />
+							<ProclaimSvg />
 						</ProductLink>
 						<ProductLink
 							title={resources.sermonsLinkTitle}
 							description={resources.sermonsLinkDescription}
 							href="https://sermons.faithlife.com/"
 						>
-							<Styled.ProductLinkIcon src={SermonsSvg} role="presentation" />
+							<SermonsSvg />
 						</ProductLink>
 						<ProductLink
 							title={resources.givingLinkTitle}
 							description={resources.givingLinkDescription}
 							href="https://giving.faithlife.com"
 						>
-							<Styled.ProductLinkIcon src={GivingSvg} role="presentation" />
+							<GivingSvg />
 						</ProductLink>
 						<ProductLink
 							title={resources.faithlifeBibleScreenLinkTitle}
 							description={resources.faithlifeBibleScreenLinkDescription}
 							href="https://faithlife.com/products/biblescreen"
 						>
-							<Styled.ProductLinkIcon src={BibleScreenSvg} role="presentation" />
+							<BibleScreenSvg />
 						</ProductLink>
 						<ProductLink
 							title={resources.ministryTeamMagazineLinkTitle}

@@ -5,7 +5,7 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { Paragraph } from '../Paragraph';
 import { UtilityButton } from '../button';
-import { Close } from '../icons';
+import { X as Close } from '../icons/18px';
 import { useModalContext } from './use-modal-context';
 
 /** A flexible component built on styled-system primitives. */
