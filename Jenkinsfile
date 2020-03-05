@@ -48,10 +48,10 @@ flowdock.withNotification('a611b96b1517142a58a87c1b58aacdd8', '#build') {
 			setGitHubStatus('Build', buildResult)
 
 			if (!isPr) {
-				stage('Publish') {
-					withCredentials([
-						string(credentialsId: '6e22d829-5047-4509-b8d8-9f3ed6ff6bfa', variable: 'GH_TOKEN'),
-					]) {
+				withCredentials([
+					string(credentialsId: '6e22d829-5047-4509-b8d8-9f3ed6ff6bfa', variable: 'GH_TOKEN'),
+				]) {
+					stage('Publish') {
 						withEnv([
 							"NODE_TLS_REJECT_UNAUTHORIZED=0",
 							"GHE_API_URL=https://git/api/v3",
@@ -61,6 +61,9 @@ flowdock.withNotification('a611b96b1517142a58a87c1b58aacdd8', '#build') {
 						]) {
 							sh script: 'yarn run publish'
 						}
+					}
+					stage('Deploy Storybook'){
+						sh script: 'yarn run deploy-storybook --ci'
 					}
 				}
 				stage('CrowdIn Upload'){
