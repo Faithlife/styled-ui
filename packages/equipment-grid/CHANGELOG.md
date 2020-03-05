@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/equipment-grid@1.2.0...@faithlife/equipment-grid@1.2.1) (2020-03-05)
+
+
+### Bug Fixes
+
+* Bump storybook version to work with workspaces. ([646ac7e](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/646ac7e0d322a1e5a2e70e78cf992916d7841578))
+
+
+
+
+
 # [1.2.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/equipment-grid@1.1.0...@faithlife/equipment-grid@1.2.0) (2020-03-04)
 
 

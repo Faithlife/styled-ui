@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@2.0.0...@faithlife/file-picker@2.0.1) (2020-03-05)
+
+
+### Bug Fixes
+
+* Add dev deps. ([1516287](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/1516287c1001b2531785e920bad08cf96eef5199))
+* Use dev dependency. ([9540254](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/95402546afe23cc3d898aca125e0877e97cf9af0))
+
+
+
+
+
 # [2.0.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@1.0.6...@faithlife/file-picker@2.0.0) (2020-02-27)
 
 
