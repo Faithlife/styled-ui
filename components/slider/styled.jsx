@@ -19,8 +19,8 @@ export const ThumbContainer = styled.div`
 	align-items: center;
 	position: absolute;
 	top: 0;
-	left: 8px;
-	right: 8px;
+	left: 1px;
+	right: 1px;
 	bottom: 0;
 `;
 

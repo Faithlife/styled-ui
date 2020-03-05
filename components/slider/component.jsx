@@ -342,6 +342,8 @@ export class Slider extends PureComponent {
 					<Thumb
 						isSliding={isSliding}
 						isHovered={isHovered}
+						isAtTrackStart={activeStopIndex === 0}
+						isAtTrackEnd={activeStopIndex === stopCount - 1}
 						position={getPercentage(activeStopIndex, stopCount - 1)}
 						label={labels[activeStopIndex]}
 						disabled={disabled}
@@ -371,24 +373,30 @@ function getPercentage(index, max) {
 	return (index / max) * 100;
 }
 
-const Thumb = React.memo(({ isSliding, isHovered, position, label, disabled }) => {
-	const thumb = <Styled.Thumb active={isSliding} hovered={isHovered} disabled={disabled} />;
+const Thumb = React.memo(
+	({ isSliding, isHovered, isAtTrackStart, isAtTrackEnd, position, label, disabled }) => {
+		const thumb = <Styled.Thumb active={isSliding} hovered={isHovered} disabled={disabled} />;
 
-	const isPopupOpen = !!(isHovered && (label || label === 0));
-	return (
-		<Styled.ThumbAnchor style={{ left: `${position}%` }}>
-			<PopoverManager>
-				<PopoverReference>{thumb}</PopoverReference>
-				<Popover
-					key={position}
-					isOpen={isPopupOpen}
-					placement="top"
-					container="body"
-					modifiers={{ offset: { offset: '0, 33' } }}
-				>
-					{`${label}`}
-				</Popover>
-			</PopoverManager>
-		</Styled.ThumbAnchor>
-	);
-});
+		const isPopupOpen = !!(isHovered && (label || label === 0));
+		return (
+			<Styled.ThumbAnchor
+				style={{
+					left: isAtTrackStart ? '7px' : isAtTrackEnd ? 'calc(100% - 6.5px)' : `${position}%`,
+				}}
+			>
+				<PopoverManager>
+					<PopoverReference>{thumb}</PopoverReference>
+					<Popover
+						key={position}
+						isOpen={isPopupOpen}
+						placement="top"
+						container="body"
+						modifiers={{ offset: { offset: '0, 33' } }}
+					>
+						{`${label}`}
+					</Popover>
+				</PopoverManager>
+			</Styled.ThumbAnchor>
+		);
+	},
+);
