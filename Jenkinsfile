@@ -63,7 +63,7 @@ flowdock.withNotification('a611b96b1517142a58a87c1b58aacdd8', '#build') {
 						}
 					}
 					stage('Deploy Storybook'){
-						sh script: 'echo $GH_TOKEN && yarn run deploy-storybook --ci --host-token-env-variable=GH_TOKEN'
+						sh script: 'yarn run deploy-storybook --ci --host-token-env-variable=GH_TOKEN'
 					}
 				}
 				stage('CrowdIn Upload'){
