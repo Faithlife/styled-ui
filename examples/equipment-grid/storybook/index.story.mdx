@@ -1,0 +1,134 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import ReactMarkdown from 'react-markdown';
+import { Input } from '@faithlife/styled-ui'
+import { Button, SegmentedButtonGroup } from '@faithlife/styled-ui/v6'
+import { action } from '@storybook/addon-actions'; // eslint-disable-line import/no-extraneous-dependencies
+import { BaseGrid } from '../../../packages/equipment-grid/base-grid';
+import { SimpleGrid, PaginatedGrid, GridColumn } from '../../../packages/equipment-grid';
+import { censusData, ServerSideWrapper, gridRequest } from './helpers';
+
+import '@faithlife/equipment-grid/dist/index.css';
+
+<Meta title="Equipment Grid" component={BaseGrid} />
+
+# Equipment Grid
+
+### Simple Table
+
+The simplest use of the table. Each column is sortable and resizable. Leave `maxRows` blank for an infinite scroll table.
+
+<Preview>
+	<Story name="Simple Grid">
+<SimpleGrid data={censusData} maxRows={10} onRowClick={action('row click')}>
+	<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+	<GridColumn displayName="Population" fieldName="population" isRightAligned />
+	<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
+	<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
+	<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly />
+</SimpleGrid>
+	</Story>
+</Preview>
+
+### Paginated Table
+
+Simple table with pagination.
+
+<Preview>
+	<Story name="Paginated Grid">
+<PaginatedGrid data={censusData} maxRows={10} onRowClick={action('row click')}>
+	<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+	<GridColumn displayName="Population" fieldName="population" />
+	<GridColumn displayName="Net Population Change" fieldName="populationChange" />
+	<GridColumn displayName="Births" fieldName="births" />
+	<GridColumn displayName="Deaths" fieldName="deaths" />
+</PaginatedGrid>
+	</Story>
+</Preview>
+
+### Example data for Simple and Paginated Table
+
+```json
+	[
+		{
+			"id": 0,
+			"value": "Abilene, TX",
+			"areaDesc": "Metropolitan Statistical Area",
+			"population": 165252,
+			"populationChange": 337,
+			"births": 540,
+			"deaths": 406
+		}
+	]
+```
+
+### Server Side Datasource Example
+
+Server-side data fetching is enabled by passing in the value from the `useGridServerDatasource` hook and is supported in Simple and PaginatedGrid.
+
+<Preview>
+	<Story name="Serverside sourced Grid">
+<ServerSideWrapper initialState={{ filterText: '', filter: null }}>
+	{(state, setState, datasource) => ( // const datasource = useGridServerDatasource(requestFunction, { options });
+		<>
+			<ReactMarkdown
+					source={`Last request:
+\`\`\`json
+${JSON.stringify(gridRequest, null, '\t')}
+\`\`\``}
+			/>
+			<Input placeholder="Search" value={state.filterText} onChange={e => setState({ filterText: e.target.value })} />
+			<SegmentedButtonGroup>
+				<Button onClick={() => setState(state => ({ ...state, filter: { population: { type: 'greaterThan', filter: '200000' }, }, }))}>{'Pop > 200,000'}</Button>
+				<Button onClick={() => setState(state => ({ ...state, filter: { population: { type: 'lessThan', filter: '200000' }, }, }))}>{'Pop < 200,000'}</Button>
+				<Button onClick={() => setState(state => ({ ...state, filter: null }))}>None</Button>
+			</SegmentedButtonGroup>
+			<PaginatedGrid data={datasource} filters={state.filter} maxRows={10} filterText={state.filterText} onRowClick={action('row-click')}>
+				<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
+				<GridColumn displayName="Population" fieldName="population" filter={GridColumn.filterByOptions.number} isRightAligned />
+				<GridColumn displayName="Net Population Change" fieldName="populationChange" isRightAligned />
+				<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
+				<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly />
+			</PaginatedGrid>
+			{console.log(SimpleGrid)}
+		</>
+	)}
+</ServerSideWrapper>
+	</Story>
+</Preview>
+
+#### useGridServerDatasource
+
+The useGridServerDatasource hook accepts a requestFunction that will be passed a request object and an abort signal and will return a tuple with an array of new rows as the first item and a boolean for if there is more data to fetch as the second item.
+
+The second parameter is an optional options object. It supports `fetchLimit` which is the amount of rows to fetch per request and `maxPagesToCache` to control the amount of pages that the grid keeps in memory at a time
+
+```javascript
+import { useGridServerDatasource } from '@faithlife/equipment-grid';
+const datasource = useGridServerDatasource(requestFunction, { fetchLimit: 100, maxPagesToCache: 10 });
+```
+
+#### Example Request Function
+
+```javascript
+async function fetchRows(request, abortSignal) {
+	const response = await fetch('/my-api/census-data', { signal: abortSignal, body: JSON.stringify(request) });
+
+	return [mapToRows(response.censusData), response.next !== null];
+}
+```
+
+## Shared props between all Grids
+
+<Props of={BaseGrid} />
+
+## SimpleGrid props ⚠ Under Construction ⚠
+
+<Props of={SimpleGrid} />
+
+## PaginatedGrid props ⚠ Under Construction ⚠
+
+<Props of={PaginatedGrid} />
+
+## GridColumn props ⚠ Under Construction ⚠
+
+<Props of={GridColumn} />
