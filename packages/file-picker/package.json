@@ -10,6 +10,7 @@
     "test": "echo 'no tests yet'"
   },
   "devDependencies": {
+    "@faithlife/smart-media-editor": "^7.0.0",
     "@faithlife/styled-ui": "^5.36.0",
     "react": "^16.8.4"
   },
@@ -20,7 +21,6 @@
   },
   "dependencies": {
     "@faithlife/amber-api": "^0.8.1",
-    "@faithlife/smart-media-editor": "^7.0.0",
     "@faithlife/format-uri": "^1.0.0",
     "@faithlife/react-ui": "^7.7.0",
     "prop-types": "^15.7.2"

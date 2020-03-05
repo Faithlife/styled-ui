@@ -3080,10 +3080,10 @@
   resolved "http://npm.faithlife.io/@faithlife%2frt-vdom/-/rt-vdom-1.2.4.tgz#0bcaa90db81cb209328e6e466f94f4ec90ad981e"
   integrity sha512-6Smedaova/24dm+uEXbZKTl+AopMGxa6mgRS+w3/nh72mqdzwXNGwpYeVg/R511UUb4D3Ro8gU0/tXzh2nT6Kg==
 
-"@faithlife/smart-media-core@^2.2.1":
-  version "2.2.1"
-  resolved "http://npm.faithlife.io/@faithlife%2fsmart-media-core/-/smart-media-core-2.2.1.tgz#4445c9d50463d34c3c71a2d535ae07bc0709154c"
-  integrity sha512-a2PnVSNkxpB8cZrbQIUWQ1YVlCm4ZmJ6fllZUbCh+Xzh3+hesOIxICTp+AAC7xa2CIsdds6WqebVuqRfE7fUBw==
+"@faithlife/smart-media-core@^2.3.1":
+  version "2.3.1"
+  resolved "http://npm.faithlife.io/@faithlife%2fsmart-media-core/-/smart-media-core-2.3.1.tgz#5f5a1608d37cdb87136399e43c96051ddfc98e47"
+  integrity sha512-jAvjrrEzg3loIaJBmU0o8G0B+dMzk0yIsKU+qCO38oQhdNe77lEbPciCEam+W3udcRaVC+eikAPSMFb7DH/kdQ==
   dependencies:
     "@faithlife/rt-vdom" "^1.2.3"
     btoa-lite "^1.0.0"
@@ -3091,14 +3091,14 @@
     opentype.js "^1.1.0"
     qrcode "^1.4.4"
 
-"@faithlife/smart-media-editor@^7.4.3":
-  version "7.4.3"
-  resolved "http://npm.faithlife.io/@faithlife%2fsmart-media-editor/-/smart-media-editor-7.4.3.tgz#ff92ee22d443882f052786a09fa0ff1f302bba13"
-  integrity sha512-Bg8Ou6NYDQhGAOmlfydUgVG97VfmJG9ikYWXFRs5+GyuU1gUfpIQZ/+xl11celxM8E4hYjaOU1HkwIVCN3qjww==
+"@faithlife/smart-media-editor@^7.0.0":
+  version "7.5.2"
+  resolved "http://npm.faithlife.io/@faithlife%2fsmart-media-editor/-/smart-media-editor-7.5.2.tgz#d8d877b03f6af652e391247cea38792f45c3f558"
+  integrity sha512-BYzDlajK6/6SttfsQlkjWP86i2KM3mNj+SY7yN6PswjTlVJnQPBbN/C+tOzAVBEmzNrN4R72GVHisQXHAEfnSw==
   dependencies:
     "@faithlife/react-ui" "^7.7.0"
     "@faithlife/rt-vdom" "^1.2.3"
-    "@faithlife/smart-media-core" "^2.2.1"
+    "@faithlife/smart-media-core" "^2.3.1"
     "@types/opentype.js" "^0.7.2"
     downshift "^5.0.0-alpha.0"
     fabric "^3.0.0"
