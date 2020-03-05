@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.50.2
+
+- Restore `Slider` thumb alignment to how it was before unintended changes in v5.46.1.
+
 ### 5.50.1
 
 - Fix icons export.
