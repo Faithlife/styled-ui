@@ -32,7 +32,7 @@
 		"dist/**",
 		"grid.js",
 		"v6.js",
-		"icons.js"
+		"icons/*.js"
 	],
 	"browserslist": [
 		"> 1%",
