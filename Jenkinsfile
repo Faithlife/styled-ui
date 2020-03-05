@@ -63,7 +63,7 @@ flowdock.withNotification('a611b96b1517142a58a87c1b58aacdd8', '#build') {
 						}
 					}
 					stage('Deploy Storybook'){
-						sh script: 'yarn run deploy-storybook -- --ci'
+						sh script: 'yarn run deploy-storybook --ci'
 					}
 				}
 				stage('CrowdIn Upload'){
