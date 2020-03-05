@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.50.1
+
+- Fix icons export.
+
 ### 5.50.0
 
 - Export an icon set.

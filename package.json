@@ -1,6 +1,6 @@
 {
 	"name": "@faithlife/styled-ui",
-	"version": "5.50.0",
+	"version": "5.50.1",
 	"main": "dist/main.js",
 	"repository": "git@github.com:Faithlife/styled-ui.git",
 	"author": "Dustin Masters <dustin.masters@faithlife.com>",
@@ -21,8 +21,8 @@
 		"stylelint": "stylelint ./components/**/*.jsx",
 		"unit-test": "cross-env NODE_ENV=test mocha -t 60000 -r @babel/register ./tests/**/*.js",
 		"ship-to": "flcom-addin-scripts ship-to @faithlife/styled-ui",
-		"tag-for-beta": "flcom-addin-scripts ship-to @faithlife/styled-ui beta --no-ship-faithlife",
-		"tag-for-production": "flcom-addin-scripts ship-to @faithlife/styled-ui production --no-ship-faithlife",
+		"tag-for-beta": "flcom-addin-scripts ship-to @faithlife/styled-ui beta",
+		"tag-for-production": "flcom-addin-scripts ship-to @faithlife/styled-ui production",
 		"get-versions": "flcom-addin-scripts get-versions",
 		"catalog-start": "catalog start",
 		"catalog-build": "catalog build --public-url /styled-ui",
