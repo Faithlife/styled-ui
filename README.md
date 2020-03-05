@@ -2,7 +2,7 @@
 
 Shared components for Faithlife Equip projects
 
-### [View Demos Here (coming soon)](https://git.faithlife.dev/Logos/FaithlifeEquipment)
+### [View Demos Here](https://pages.git.faithlife.dev/Logos/FaithlifeEquipment)
 
 ### Why?
 

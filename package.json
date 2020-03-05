@@ -30,7 +30,8 @@
     "crowdin-upload": "java -jar ./tools/crowdin/crowdin-cli.jar upload",
     "crowdin-download": "java -jar ./tools/crowdin/crowdin-cli.jar download",
     "storybook": "start-storybook -p 3000",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "browserslist": [
     "extends @faithlife/browserslist-config-flcom-addin"
@@ -62,6 +63,7 @@
     "@storybook/addon-links": "6.0.0-alpha.20",
     "@storybook/preset-typescript": "^1.2.0",
     "@storybook/react": "6.0.0-alpha.20",
+    "@storybook/storybook-deployer": "^2.8.3",
     "babel-loader": "^8.0.6",
     "commitlint-config-faithlife": "^1.0.0",
     "fork-ts-checker-webpack-plugin": "^4.0.5",
