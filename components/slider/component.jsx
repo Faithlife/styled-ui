@@ -381,7 +381,8 @@ const Thumb = React.memo(
 		return (
 			<Styled.ThumbAnchor
 				style={{
-					left: isAtTrackStart ? '7px' : isAtTrackEnd ? 'calc(100% - 6.5px)' : `${position}%`,
+					left: isAtTrackStart ? '7px' : isAtTrackEnd ? 'auto' : `${position}%`,
+					right: isAtTrackEnd ? '7px' : 'auto',
 				}}
 			>
 				<PopoverManager>

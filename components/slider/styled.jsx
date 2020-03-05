@@ -32,7 +32,7 @@ export const Stop = styled.div`
 `;
 
 export const ThumbAnchor = styled.div`
-	position: relative;
+	position: absolute;
 	height: 8px;
 	width: 0px;
 `;
