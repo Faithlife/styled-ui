@@ -63,6 +63,7 @@ flowdock.withNotification('a611b96b1517142a58a87c1b58aacdd8', '#build') {
 						}
 					}
 					stage('Deploy Storybook'){
+						sh script: 'git push origin :gh-pages'
 						sh script: 'yarn run deploy-storybook --ci'
 					}
 				}
