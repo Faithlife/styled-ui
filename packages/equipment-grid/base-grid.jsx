@@ -93,11 +93,13 @@ export function BaseGrid({
 				maxBlocksInCache: data.maxPagesToCache,
 			});
 		}
+	}, [gridApi, data, hasWarned, rowModelType, datasourceProps, maxRows]);
 
-		if (determineRowModelType(data) === clientSideRowModel) {
+	useEffect(() => {
+		if (rowModelType === clientSideRowModel) {
 			setDatasourceProps({ rowData: data });
 		}
-	}, [gridApi, data, hasWarned, rowModelType, datasourceProps, maxRows]);
+	}, [data, rowModelType]);
 
 	const prevIsLoading = useRef(false);
 	useEffect(() => {
