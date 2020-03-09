@@ -83,6 +83,8 @@ import { IconGroup } from './icon-table';
 import { FavoriteFilled } from '../components/icons/18px';
 import { ChevronDown } from '../components/icons/12px';
 
+import { Tab as NewTab } from '../components/tabs/new-tabs';
+
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
 import '../dist/main.css';
@@ -880,6 +882,7 @@ const pages = [
 					Paragraph,
 					TabManager,
 					Tab,
+					NewTab,
 					TabList,
 					TabPanel,
 					TabPanels,
