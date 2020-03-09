@@ -4,42 +4,34 @@ const tabs = {
 	modal: {
 		...textStyles.ui['16'],
 		color: 'tab.modalForeground',
-		border: 1,
+		borderRadius: '3px 3px 0 0',
 		paddingX: 5,
 		paddingY: [4, 3],
+		backgroundColor: 'tab.modalBackground',
 		'&:hover': {
 			backgroundColor: 'tab.modalHover',
 			borderColor: 'tab.modalHover',
-		},
-		'&:active': {
-			backgroundColor: 'tab.modalActive',
-			borderColor: 'tab.modalActive',
 		},
 		'&:disabled': {
 			color: 'tab.modalForegroundDisabled',
 			backgroundColor: 'tab.modalDisabled',
 			borderColor: 'tab.modalDisabled',
 		},
+		'&:active': {
+			backgroundColor: 'tab.modalActive',
+			borderColor: 'tab.modalActive',
+		},
 		'&::before': {
-			content: '',
+			content: '""',
 			position: 'absolute',
 			top: 0,
 			left: 0,
 			width: '100%',
 			height: '3px',
-			backgroundColor: 'tab.modalColorStripeActive',
+			backgroundColor: 'tab.modalColorStripe',
 			border: 1,
-			borderColor: 'tab.modalColorStripeActive',
+			borderColor: 'tab.modalColorStripe',
 			borderRadius: 1,
-		},
-		'$::after': {
-			content: '',
-			position: 'absolute',
-			top: '100%',
-			left: '1px',
-			width: 'calc(100% - 2px)',
-			height: '1px',
-			backgroundColor: 'tab.modalBackgroundActive',
 		},
 	},
 	page: {
@@ -51,6 +43,12 @@ const tabs = {
 		paddingTop: 18,
 		width: '100%',
 		maxWidth: ['73px', '194px'],
+		'&:disabled': {
+			color: 'tab.pageForegroundDisabled',
+		},
+		'&:hover': {
+			backgroundColor: 'tab.pageHover',
+		},
 		'&::after': {
 			content: '""',
 			width: '100%',
@@ -66,9 +64,11 @@ const tabs = {
 
 const tabLists = {
 	modal: {
-		border: 1,
-		borderBottomColor: 'tab.modalBorderColor',
-		gridAutoColumns: 'auto',
+		borderBottom: 1,
+		borderColor: 'tab.modalBorder',
+		'&>*:not(:last-child)': {
+			marginRight: 2,
+		},
 	},
 	page: {
 		'&>*:not(:last-child)': {
@@ -80,8 +80,28 @@ const tabLists = {
 const selected = {
 	'modal-false': {},
 	'modal-true': {
+		'&::before': {
+			content: '""',
+			position: 'absolute',
+			top: 0,
+			left: 0,
+			width: 'calc(100% - 2px)',
+			height: '4px',
+			backgroundColor: 'tab.modalColorStripeActive',
+			borderLeft: 1,
+			borderRight: 1,
+			borderColor: 'tab.modalColorStripeActive',
+			borderRadius: '3px 3px 0 0',
+		},
 		backgroundColor: 'tab.modalBackgroundActive',
-		borderColor: 'tab.borderColor',
+		borderLeft: 1,
+		borderRight: 1,
+		borderLeftColor: 'tab.modalBorder',
+		borderRightColor: 'tab.modalBorder',
+		borderBottom: 1,
+		borderBottomColor: 'tab.modalBackgroundActive',
+		marginBottom: '-1px',
+		fontWeight: 1,
 	},
 	'page-false': {},
 	'page-true': {
@@ -91,27 +111,6 @@ const selected = {
 		'&::after': {
 			backgroundColor: 'tab.pageColorStripeActive',
 		},
-	},
-};
-
-const buttonSizes = {
-	small: {
-		...textStyles.ui['16'],
-		height: '32px',
-		paddingX: '6px', // we want a square button with an 18x18 icon
-		borderRadius: 1,
-	},
-	medium: {
-		...textStyles.ui['16'],
-		height: '40px',
-		paddingX: '10px', // we want a square button with an 18x18 icon
-		borderRadius: 1,
-	},
-	large: {
-		...textStyles.ui['24'],
-		height: '48px',
-		paddingX: '11px', // we want a square button with a 24x24 icon
-		borderRadius: 2,
 	},
 };
 

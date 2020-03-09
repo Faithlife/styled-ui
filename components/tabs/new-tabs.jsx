@@ -212,6 +212,10 @@ function TabManager({ variant, selectedTab, onSelectedTabChange, label, labeledB
 	return <TabContextProvider value={context}>{children}</TabContextProvider>;
 }
 
+TabManager.defaultProps = {
+	variant: 'modal',
+};
+
 const Tab = React.forwardRef(({ ...props }, ref) => {
 	const id = useId();
 	return <TabCore id={`tab:${id}`} ref={ref} {...props} />;
