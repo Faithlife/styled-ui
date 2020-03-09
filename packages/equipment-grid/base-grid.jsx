@@ -94,7 +94,7 @@ export function BaseGrid({
 			});
 		}
 
-		if (!datasourceProps && determineRowModelType(data) === clientSideRowModel) {
+		if (determineRowModelType(data) === clientSideRowModel) {
 			setDatasourceProps({ rowData: data });
 		}
 	}, [gridApi, data, hasWarned, rowModelType, datasourceProps, maxRows]);
