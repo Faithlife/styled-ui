@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/equipment-grid@1.2.2...@faithlife/equipment-grid@1.2.3) (2020-03-09)
+
+
+### Bug Fixes
+
+* Fix infinite reload when updating data. ([73a98fb](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/73a98fb5fe19b2f6a4ddd6ef1c2c2cb9babde59c))
+
+
+
+
+
 ## [1.2.2](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/equipment-grid@1.2.1...@faithlife/equipment-grid@1.2.2) (2020-03-09)
 
 
