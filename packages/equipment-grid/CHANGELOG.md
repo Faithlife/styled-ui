@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/equipment-grid@1.2.1...@faithlife/equipment-grid@1.2.2) (2020-03-09)
+
+
+### Bug Fixes
+
+* RowData not being set on change. ([1c3397a](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/1c3397aa220369c3bcc7f5c292176438ec30e07c))
+
+
+
+
+
 ## [1.2.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/equipment-grid@1.2.0...@faithlife/equipment-grid@1.2.1) (2020-03-05)
 
 
