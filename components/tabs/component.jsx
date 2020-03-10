@@ -1,46 +1,158 @@
-// ARIA for Tabs are documented in https://www.w3.org/TR/wai-aria-practices-1.1/#tabpanel
-// Tabs from Reach-Ui were used as a base https://ui.reach.tech/tabs
+import React, { useRef, useState, useMemo, useEffect, useCallback } from 'react';
+import { useId } from '../shared-hooks';
+import { TabContextProvider, useTabContext, useKeyboardNav } from './tab-utils';
+import { TabCore, TabListCore, TabPanelsCore, TabPanelCore } from './Tab';
 
-import React, { useState, useCallback, useMemo, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { TabContextProvider, usePanelIdsHandler } from './tab-utils';
+function TabManager({ variant, selectedTab, onSelectedTabChange, label, labeledBy, children }) {
+	const tabList = useRef([]);
+	const panelList = useRef([]);
+	const [selectedTabIndex, setCurrentTab] = useState(selectedTab || 0);
 
-export function TabManager({ children, selectedTab, onSelectedTabChange }) {
-	const [selectedTabIndex, setSelectedTabIndex] = useState(selectedTab || 0);
-	const { panelIdsMap, registerPanelId, unRegisterPanelId } = usePanelIdsHandler();
+	useEffect(() => {
+		if (process.env.NODE_ENV !== 'production' && !label && !labeledBy) {
+			console.warn('Either a prop for label or labeledBy must be supplied for aria purposes.');
+		}
+
+		if (process.env.NODE_ENV !== 'production' && label && labeledBy) {
+			console.warn(
+				'Should only specify one of label or labeledBy. When both are present, prefer labeledBy',
+			);
+		}
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	useEffect(() => {
 		if (selectedTab !== null && selectedTab !== undefined) {
-			setSelectedTabIndex(selectedTab);
+			setCurrentTab(selectedTab);
 		}
 	}, [selectedTab]);
 
-	const handleSelectTab = useCallback(
-		tabIndex => {
+	const onSelectTab = useCallback(
+		newTabIndex => () => {
 			if (onSelectedTabChange) {
-				onSelectedTabChange(tabIndex);
+				onSelectedTabChange(newTabIndex);
 			}
-			setSelectedTabIndex(tabIndex);
+
+			setCurrentTab(newTabIndex);
 		},
 		[onSelectedTabChange],
 	);
 
+	const registerTab = useCallback(({ index }) => {
+		return ref => {
+			let newList = [...tabList.current];
+			if (tabList.current.length < index) {
+				newList = newList.slice(0, index);
+			}
+			newList[index] = ref;
+
+			tabList.current = newList;
+		};
+	}, []);
+
+	const registerPanel = useCallback(({ index }) => {
+		return ref => {
+			let newList = [...panelList.current];
+			if (panelList.current.length < index) {
+				newList = newList.slice(0, index);
+			}
+			newList[index] = ref;
+
+			panelList.current = newList;
+		};
+	}, []);
+
 	const context = useMemo(
 		() => ({
+			variant,
 			selectedTabIndex,
-			onSelectTab: handleSelectTab,
-			panelIdsMap,
-			registerPanelId,
-			unRegisterPanelId,
+			onSelectTab,
+			registerTab,
+			panelList,
+			registerPanel,
+			label,
+			labeledBy,
+			tabList,
 		}),
-		[selectedTabIndex, handleSelectTab, panelIdsMap, registerPanelId, unRegisterPanelId],
+		[variant, selectedTabIndex, onSelectTab, registerTab, registerPanel, labeledBy, label],
 	);
 
 	return <TabContextProvider value={context}>{children}</TabContextProvider>;
 }
 
-TabManager.propTypes = {
-	children: PropTypes.node.isRequired,
-	selectedTab: PropTypes.number,
-	onSelectedTabChange: PropTypes.func,
+TabManager.defaultProps = {
+	variant: 'modal',
 };
+
+const Tab = React.forwardRef(({ ...props }, ref) => {
+	const id = useId();
+	return <TabCore id={`tab:${id}`} ref={ref} {...props} />;
+});
+
+Tab.displayName = 'Tab';
+
+function TabList({ children, ...props }) {
+	const {
+		variant,
+		selectedTabIndex,
+		tabList,
+		onSelectTab,
+		registerTab,
+		panelList,
+		label,
+		labeledBy,
+	} = useTabContext();
+	const handleKeyboardNav = useKeyboardNav(tabList, selectedTabIndex, onSelectTab);
+
+	return (
+		<TabListCore
+			variant={variant}
+			label={label}
+			labeledBy={labeledBy}
+			onKeyDown={handleKeyboardNav}
+			{...props}
+		>
+			{React.Children.map(children, (child, index) =>
+				React.isValidElement(child)
+					? React.cloneElement(child, {
+							variant,
+							selected: selectedTabIndex === index,
+							onClick: onSelectTab(index),
+							panelId: panelList.current[index]?.id,
+							ref: registerTab({ index }),
+					  })
+					: null,
+			)}
+		</TabListCore>
+	);
+}
+
+const TabPanel = React.forwardRef(({ ...props }, ref) => {
+	return <TabPanelCore ref={ref} {...props} />;
+});
+
+TabPanel.displayName = 'TabPanel';
+
+function TabPanels({ children, ...props }) {
+	const { registerPanel, selectedTabIndex, tabList } = useTabContext();
+
+	return (
+		<TabPanelsCore {...props}>
+			{React.Children.map(children, (child, index) =>
+				React.isValidElement(child)
+					? React.cloneElement(child, {
+							selected: selectedTabIndex === index,
+							ref: registerPanel({ index }),
+							tabId: tabList.current[index]?.id,
+					  })
+					: null,
+			)}
+		</TabPanelsCore>
+	);
+}
+
+Tab.Manager = TabManager;
+Tab.List = TabList;
+Tab.Panels = TabPanels;
+Tab.Panel = TabPanel;
+
+export { Tab };

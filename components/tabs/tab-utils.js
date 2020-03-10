@@ -1,5 +1,4 @@
-import React, { useCallback, useContext, useRef, useEffect } from 'react';
-import { useBasicMap } from '../shared-hooks';
+import React, { useCallback, useContext } from 'react';
 
 const handledKeys = {
 	arrowRight: 'ArrowRight',
@@ -19,116 +18,47 @@ export function useTabContext() {
 	return context;
 }
 
-export function useKeyboardNav(selectedIndex, onSelectTab, children) {
-	const currentChildren = useRef();
-
-	useEffect(() => {
-		currentChildren.current = children;
-	}, [children]);
-
+export function useKeyboardNav(tabList, selectedIndex, onSelectTab) {
 	const handleKeyboardNav = useCallback(
 		event => {
-			const enabledTabIndexes = React.Children.map(currentChildren.current, (child, index) =>
-				!child || child.props.disabled ? null : index,
-			).filter(index => index !== null);
+			const enabledTabIndexes = tabList.current
+				.map((tab, index) => !tab.disabled && index)
+				.filter(index => index !== false);
 			const currentEnabledIndex = enabledTabIndexes.indexOf(selectedIndex);
 
+			let selectedTabIndex;
 			switch (event.key) {
 				case handledKeys.arrowRight: {
 					const nextEnabledIndex =
-						currentEnabledIndex === enabledTabIndexes.length - 1
-							? currentEnabledIndex
-							: currentEnabledIndex + 1;
-					onSelectTab(enabledTabIndexes[nextEnabledIndex]);
+						currentEnabledIndex === enabledTabIndexes.length - 1 ? 0 : currentEnabledIndex + 1;
+					selectedTabIndex = enabledTabIndexes[nextEnabledIndex];
 					break;
 				}
 				case handledKeys.arrowLeft: {
 					const nextEnabledIndex =
-						currentEnabledIndex === 0 ? currentEnabledIndex : currentEnabledIndex - 1;
-					onSelectTab(enabledTabIndexes[nextEnabledIndex]);
+						currentEnabledIndex === 0 ? enabledTabIndexes.length - 1 : currentEnabledIndex - 1;
+					selectedTabIndex = enabledTabIndexes[nextEnabledIndex];
 					break;
 				}
 				case handledKeys.home: {
-					onSelectTab(enabledTabIndexes[0]);
+					event.preventDefault();
+					selectedTabIndex = enabledTabIndexes[0];
 					break;
 				}
 				case handledKeys.end: {
-					onSelectTab(enabledTabIndexes[enabledTabIndexes.length - 1]);
+					event.preventDefault();
+					selectedTabIndex = enabledTabIndexes[enabledTabIndexes.length - 1];
 					break;
 				}
 				default:
 					return;
 			}
+
+			tabList.current[selectedTabIndex].focus();
+			onSelectTab(selectedTabIndex)();
 		},
-		[selectedIndex, onSelectTab],
+		[selectedIndex, onSelectTab, tabList],
 	);
 
 	return handleKeyboardNav;
-}
-
-export function useSequencedKeyboardNav(selectedIndex, onSelectTab, children) {
-	const currentChildren = useRef();
-
-	useEffect(() => {
-		currentChildren.current = children;
-	}, [children]);
-
-	const handleKeyboardNav = useCallback(
-		event => {
-			const enabledTabIndexes = React.Children.map(currentChildren.current, (child, index) =>
-				!child || child.props.disabled ? null : index,
-			).filter(index => index !== null);
-			const currentEnabledIndex = enabledTabIndexes.indexOf(selectedIndex);
-
-			switch (event.key) {
-				case handledKeys.arrowRight: {
-					const nextEnabledIndex =
-						currentEnabledIndex === enabledTabIndexes.length - 1
-							? currentEnabledIndex
-							: currentEnabledIndex + 1;
-					onSelectTab(enabledTabIndexes[nextEnabledIndex]);
-					break;
-				}
-				case handledKeys.arrowLeft: {
-					const nextEnabledIndex =
-						currentEnabledIndex === 0 ? currentEnabledIndex : currentEnabledIndex - 1;
-					onSelectTab(enabledTabIndexes[nextEnabledIndex]);
-					break;
-				}
-				case handledKeys.home: {
-					onSelectTab(enabledTabIndexes[0]);
-					break;
-				}
-				case handledKeys.end: {
-					onSelectTab(enabledTabIndexes[enabledTabIndexes.length - 1]);
-					break;
-				}
-				default:
-					return;
-			}
-		},
-		[selectedIndex, onSelectTab],
-	);
-
-	return handleKeyboardNav;
-}
-
-export function usePanelIdsHandler() {
-	const { map, add, remove } = useBasicMap();
-
-	const registerPanelId = useCallback(
-		(index, id) => {
-			add(index, id);
-		},
-		[add],
-	);
-
-	const unRegisterPanelId = useCallback(
-		index => {
-			remove(index);
-		},
-		[remove],
-	);
-
-	return { panelIdsMap: map, registerPanelId, unRegisterPanelId };
 }

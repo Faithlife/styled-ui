@@ -1,3 +1,2 @@
-export { TabManager } from './component';
-export { Tab, SequencedTab } from './tab';
-export { TabPanel, TabPanels, TabList, SequencedTabList } from './tab-helpers';
+export { TabManager, Tab as LegacyTab, TabList, TabPanels, TabPanel } from './legacy-tabs';
+export { Tab } from './component';
