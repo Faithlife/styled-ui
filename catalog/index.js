@@ -66,7 +66,12 @@ import {
 	Switch,
 	theme,
 } from '../index';
-import { Modal as V6Modal, Button as V6Button, SegmentedButtonGroup } from '../index-v6';
+import {
+	Modal as V6Modal,
+	Button as V6Button,
+	SegmentedButtonGroup,
+	Tab as V6Tab,
+} from '../index-v6';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
@@ -82,8 +87,6 @@ import { SimpleGrid, GridColumn, PaginatedGrid, TreeGrid } from '../components/g
 import { IconGroup } from './icon-table';
 import { FavoriteFilled } from '../components/icons/18px';
 import { ChevronDown } from '../components/icons/12px';
-
-import { Tab as NewTab } from '../components/tabs/new-tabs';
 
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
@@ -882,7 +885,6 @@ const pages = [
 					Paragraph,
 					TabManager,
 					Tab,
-					NewTab,
 					TabList,
 					TabPanel,
 					TabPanels,
@@ -892,6 +894,20 @@ const pages = [
 					`,
 					Button,
 					createPortal: component => ReactDOM.createPortal(component, document.body),
+				},
+			},
+			{
+				path: '/tabs/variations-v6',
+				title: 'v6 Tabs Variations',
+				content: pageLoader(() => import('./tabs/variations-v6.md')),
+				imports: {
+					Paragraph,
+					Tab: V6Tab,
+					TabDemo: styled(Stack)`
+						padding: 16px;
+						background-color: white;
+					`,
+					Button,
 				},
 			},
 			{

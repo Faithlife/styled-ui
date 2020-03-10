@@ -6,20 +6,20 @@ A tab controller with screen reader and keyboard navigation support
 showSource: true
 ---
 <TabDemo>
-	<NewTab.Manager variant="page">
-		<NewTab.List>
-			<NewTab>First Tab</NewTab>
-			<NewTab>Second Tab</NewTab>
-			<NewTab>Third Tab</NewTab>
-			<NewTab disabled>Disabled Tab</NewTab>
-		</NewTab.List>
-		<NewTab.Panels>
-			<NewTab.Panel>First Tab!</NewTab.Panel>
-			<NewTab.Panel>Second Tab!</NewTab.Panel>
-			<NewTab.Panel>Third Tab!</NewTab.Panel>
-			<NewTab.Panel>Disabled Tab!</NewTab.Panel>
-		</NewTab.Panels>
-	</NewTab.Manager>
+	<TabManager>
+		<TabList>
+			<Tab>First Tab</Tab>
+			<Tab>Second Tab</Tab>
+			<Tab>Third Tab</Tab>
+			<Tab disabled>Disabled Tab</Tab>
+		</TabList>
+		<TabPanels>
+			<TabPanel>First Tab!</TabPanel>
+			<TabPanel>Second Tab!</TabPanel>
+			<TabPanel>Third Tab!</TabPanel>
+			<TabPanel>Disabled Tab!</TabPanel>
+		</TabPanels>
+	</TabManager>
 </TabDemo>
 ```
 
