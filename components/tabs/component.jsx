@@ -26,7 +26,7 @@ function TabManager({ variant, selectedTab, onSelectedTabChange, label, labeledB
 		}
 	}, [selectedTab]);
 
-	const onSelectTab = useCallback(
+	const handleSelectTab = useCallback(
 		newTabIndex => () => {
 			if (onSelectedTabChange) {
 				onSelectedTabChange(newTabIndex);
@@ -65,7 +65,7 @@ function TabManager({ variant, selectedTab, onSelectedTabChange, label, labeledB
 		() => ({
 			variant,
 			selectedTabIndex,
-			onSelectTab,
+			handleSelectTab,
 			registerTab,
 			panelList,
 			registerPanel,
@@ -73,7 +73,7 @@ function TabManager({ variant, selectedTab, onSelectedTabChange, label, labeledB
 			labeledBy,
 			tabList,
 		}),
-		[variant, selectedTabIndex, onSelectTab, registerTab, registerPanel, labeledBy, label],
+		[variant, selectedTabIndex, handleSelectTab, registerTab, registerPanel, labeledBy, label],
 	);
 
 	return <TabContextProvider value={context}>{children}</TabContextProvider>;
@@ -83,25 +83,23 @@ TabManager.defaultProps = {
 	variant: 'modal',
 };
 
-const Tab = React.forwardRef(({ ...props }, ref) => {
+const Tab = React.forwardRef(function Tab(props, ref) {
 	const id = useId();
 	return <TabCore id={`tab:${id}`} ref={ref} {...props} />;
 });
-
-Tab.displayName = 'Tab';
 
 function TabList({ children, ...props }) {
 	const {
 		variant,
 		selectedTabIndex,
 		tabList,
-		onSelectTab,
+		handleSelectTab,
 		registerTab,
 		panelList,
 		label,
 		labeledBy,
 	} = useTabContext();
-	const handleKeyboardNav = useKeyboardNav(tabList, selectedTabIndex, onSelectTab);
+	const handleKeyboardNav = useKeyboardNav(tabList, selectedTabIndex, handleSelectTab);
 
 	return (
 		<TabListCore
@@ -116,7 +114,7 @@ function TabList({ children, ...props }) {
 					? React.cloneElement(child, {
 							variant,
 							selected: selectedTabIndex === index,
-							onClick: onSelectTab(index),
+							onClick: handleSelectTab(index),
 							panelId: panelList.current[index]?.id,
 							ref: registerTab({ index }),
 					  })
@@ -126,11 +124,9 @@ function TabList({ children, ...props }) {
 	);
 }
 
-const TabPanel = React.forwardRef(({ ...props }, ref) => {
+const TabPanel = React.forwardRef(function TabPanel(props, ref) {
 	return <TabPanelCore ref={ref} {...props} />;
 });
-
-TabPanel.displayName = 'TabPanel';
 
 function TabPanels({ children, ...props }) {
 	const { registerPanel, selectedTabIndex, tabList } = useTabContext();

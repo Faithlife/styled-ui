@@ -82,10 +82,11 @@ const selected = {
 	'modal-true': {
 		'&::before': {
 			content: '""',
+			boxSizing: 'border-box',
 			position: 'absolute',
 			top: 0,
 			left: 0,
-			width: 'calc(100% - 2px)',
+			width: '100%',
 			height: '4px',
 			backgroundColor: 'tab.modalColorStripeActive',
 			borderLeft: 1,
