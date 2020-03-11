@@ -151,4 +151,4 @@ Tab.List = TabList;
 Tab.Panels = TabPanels;
 Tab.Panel = TabPanel;
 
-export { Tab };
+export { TabManager, TabList, Tab, TabPanels, TabPanel };

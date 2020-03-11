@@ -36,7 +36,7 @@ export { Slider } from './components/slider';
 export { SimpleToast } from './components/simple-toast';
 export {
 	TabManager,
-	LegacyTab as Tab,
+	Tab,
 	SequencedTab,
 	TabList,
 	SequencedTabList,

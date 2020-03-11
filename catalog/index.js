@@ -66,12 +66,7 @@ import {
 	Switch,
 	theme,
 } from '../index';
-import {
-	Modal as V6Modal,
-	Button as V6Button,
-	SegmentedButtonGroup,
-	Tab as V6Tab,
-} from '../index-v6';
+import { Modal as V6Modal, Button as V6Button, SegmentedButtonGroup } from '../index-v6';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
@@ -894,20 +889,6 @@ const pages = [
 					`,
 					Button,
 					createPortal: component => ReactDOM.createPortal(component, document.body),
-				},
-			},
-			{
-				path: '/tabs/variations-v6',
-				title: 'v6 Tabs Variations',
-				content: pageLoader(() => import('./tabs/variations-v6.md')),
-				imports: {
-					Paragraph,
-					Tab: V6Tab,
-					TabDemo: styled(Stack)`
-						padding: 16px;
-						background-color: white;
-					`,
-					Button,
 				},
 			},
 			{
