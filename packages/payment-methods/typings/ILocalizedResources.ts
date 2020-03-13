@@ -15,6 +15,8 @@ declare interface ILocalizedResources {
 	expiration: string;
 	securityCode: string;
 	findThis: string;
+	name: string;
+	organization: string;
 	creditCardInfo: string;
 	billingAddress: string;
 	billingUpdateError: string;
@@ -67,6 +69,11 @@ declare interface ILocalizedResources {
 	movePreordersToAlternate: string;
 	movePrepubsToAlternate: string;
 	edit: string;
+	next: string;
+	sameAsBilling: string;
+	rememberThisCard: string;
+	expired: string;
+	expires: string;
 }
 
 export default ILocalizedResources;

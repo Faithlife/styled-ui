@@ -66,13 +66,13 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 
 	if (billingProfile.type.toLowerCase() === 'paypal') {
 		return (
-			<Styled.CreditCardRow data-test-id="credit-card-row" data-test-index={index}>
+			<Styled.CreditCardRow data-testid="credit-card-row" data-test-index={index}>
 				<Radio onClick={onSelected} isChecked={isSelected} disabled type="button" />
 				<Styled.CardLogoContainer>
 					<PayPal />
 				</Styled.CardLogoContainer>
 				<Styled.Name>{billingProfile.nameOnCard}</Styled.Name>
-				<Styled.PayPalDelete data-test-id="delete-button-container">
+				<Styled.PayPalDelete data-testid="delete-button-container">
 					<Button
 						minorTransparent
 						condensed
@@ -87,9 +87,9 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 	}
 
 	return (
-		<Styled.CreditCardRow data-test-id="credit-card-row" data-test-index={index}>
+		<Styled.CreditCardRow data-testid="credit-card-row" data-test-index={index}>
 			{isExpired ? (
-				<div data-test-id="update-billing-profile-button">
+				<div data-testid="update-billing-profile-button">
 					<Button
 						primaryTransparent
 						condensed
@@ -108,10 +108,10 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 			</Styled.CardLogoContainer>
 			<Styled.Dots>{'••••'}</Styled.Dots>
 			<Styled.CardNumber>{billingProfile.cardInfo.creditCardNumber}</Styled.CardNumber>
-			<Styled.ExpiredCardWarning data-test-id="expired-label">
+			<Styled.ExpiredCardWarning data-testid="expired-label">
 				{isExpired ? 'Expired' : null}
 			</Styled.ExpiredCardWarning>
-			<Styled.Edit data-test-id="edit-button-container">
+			<Styled.Edit data-testid="edit-button-container">
 				<Button
 					primaryTransparent
 					condensed
@@ -125,7 +125,7 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 					<Styled.EditText>{strings.edit}</Styled.EditText>
 				</Button>
 			</Styled.Edit>
-			<Styled.Delete data-test-id="delete-button-container">
+			<Styled.Delete data-testid="delete-button-container">
 				<Button
 					minorTransparent
 					condensed
@@ -170,7 +170,7 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 	);
 };
 
-const cardToSVG = {
+export const cardToSVG = {
 	mastercard: <Mastercard className={''} />,
 	visa: <Visa className={''} />,
 	amex: <Amex className={''} />,

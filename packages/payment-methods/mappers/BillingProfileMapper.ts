@@ -7,7 +7,8 @@ import IEditBillingProfile from '../typings/IEditBillingProfile';
 
 export default class BillingProfileMapper {
 	public static mapForCreatingInOrdersApi(
-		profile: IEditBillingProfile
+		profile: IEditBillingProfile,
+		saveForLater: boolean = true
 	): ICreateOrdersBillingProfileDto {
 		const {
 			nameOnCard,
@@ -38,16 +39,18 @@ export default class BillingProfileMapper {
 			stateId: stateId || '',
 			suburb: suburb || '',
 			countryId: countryId || '',
-			cardInfo: {
-				expirationMonth: parseInt(expirationMonth),
-				expirationYear: parseInt(
-					new Date()
-						.getFullYear()
-						.toString()
-						.substr(0, 2) + expirationYear
-				),
-				creditCardNumber: (cardNumber || '').toString(),
-			},
+			cardInfo: saveForLater
+				? {
+						expirationMonth: parseInt(expirationMonth),
+						expirationYear: parseInt(
+							new Date()
+								.getFullYear()
+								.toString()
+								.substr(0, 2) + expirationYear
+						),
+						creditCardNumber: (cardNumber || '').toString(),
+				  }
+				: undefined,
 			nameOnCard: nameOnCard || '',
 			postalCode: postalCode || '',
 			makeDefault: makeDefault || false,
@@ -60,22 +63,23 @@ export default class BillingProfileMapper {
 	}
 
 	public static mapForEditing(profile: IBillingProfileDto): IEditBillingProfile {
-		const expirationMonth = profile.cardInfo.expirationMonth
+		const expirationMonth = profile.cardInfo?.expirationMonth
 			.toString()
 			.slice(-2)
 			.padStart(2, '0');
-		const expirationYear = profile.cardInfo.expirationYear.toString().slice(-2);
+		const expirationYear = profile.cardInfo?.expirationYear.toString().slice(-2);
 
 		return {
+			profileId: profile.profileId,
 			addressLine1: profile.address1,
 			addressLine2: profile.address2,
 			cardInfo: {
-				cardNumber: parseInt(profile.cardInfo.creditCardNumber),
-				expiration: `${expirationMonth}${expirationYear}`,
+				cardNumber: profile.cardInfo ? parseInt(profile.cardInfo.creditCardNumber) : undefined,
+				expiration: profile.cardInfo ? `${expirationMonth}${expirationYear}` : undefined,
 				nameOnCard: profile.nameOnCard,
 				postalCode: profile.postalCode,
 				securityCode: null,
-				provider: profile.cardInfo.creditCardProvider,
+				provider: profile.cardInfo?.creditCardProvider,
 			},
 			city: profile.city,
 			suburb: profile.suburb,

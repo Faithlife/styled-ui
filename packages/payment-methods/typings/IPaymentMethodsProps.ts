@@ -12,4 +12,7 @@ export default interface IPaymentMethodsProps {
 	selectedBillingProfileId?: string;
 	isCalledPreorder?: boolean;
 	localizedResources: ILocalizedResources;
+	getCardInfoFromSessionStorage?: Function;
+	setCardInfoToSessionStorage?: Function;
+	handleSelectedProfileInvalid?: Function;
 }

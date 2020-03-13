@@ -98,7 +98,8 @@ export const Title = styled.div`
 	font-weight: ${({ theme }) => theme.semibold};
 	line-height: 1.33;
 	color: ${({ theme }) => theme.shade70};
-	padding: 0 ${({ theme }) => theme.thickness5} ${({ theme }) => theme.thickness3} 0;
+	padding: ${props => props.theme.thickness3} ${props => props.theme.thickness5}
+		${props => props.theme.thickness1} 0;
 	text-align: center;
 	text-transform: uppercase;
 `;
@@ -140,6 +141,7 @@ export const Input = styled(UnstyledInput)`
 		box-sizing: border-box;
 		height: 32px;
 		width: 100%;
+		margin: 0;
 		padding: 0 ${({ theme }) => theme.thickness2};
 		font-family: 'Source Sans Pro';
 
@@ -173,6 +175,7 @@ export const Cleave = styled(CleaveUnstyled)`
 		box-sizing: border-box;
 		height: 32px;
 		width: 100%;
+		margin: 0;
 		padding: 0 ${({ theme }) => theme.thickness2};
 		font-family: 'Source Sans Pro';
 
@@ -205,6 +208,7 @@ export const SecurityCodeContainer = styled.div`
 export const NewProfileButtons = styled.div`
 	padding-top: 12px;
 	display: flex;
+	flex-direction: row-reverse;
 	justify-content: space-between;
 `;
 

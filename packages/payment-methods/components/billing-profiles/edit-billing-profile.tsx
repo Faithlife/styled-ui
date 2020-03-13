@@ -1,8 +1,6 @@
-import React, { useCallback, useEffect, useState, useMemo, useRef } from 'react';
-import { components } from 'react-select';
+import React, { useCallback, useState, useRef } from 'react';
 
 import { Button } from '@faithlife/styled-ui';
-import { Select } from '@faithlife/styled-ui/dist/text-input-v2';
 import { useLocalization } from '../../Localization';
 import IError from '../../clients/typings/orders/IError';
 import ICountryDto from '../../clients/typings/locations/ICountryDto';
@@ -18,15 +16,15 @@ import {
 } from '../../utilities/credit-card-utils';
 import IEditBillingProfile from '../../typings/IEditBillingProfile';
 import IEditCardInfo from '../../typings/IEditCardInfo';
-import ISelectOption from '../../typings/ISelectOption';
 import * as Styled from './styled';
 import IUsageInfoDto from '../../clients/typings/orders/UsageInfoDto';
 import IAddressFormatItem from '../../clients/typings/locations/IAddressFormatItem';
+import AddressForm from './address-form';
 
 interface IEditBillingProfileProps {
 	billingProfile?: IEditBillingProfile;
 	onCommitBillingProfile: Function;
-	onCancelEditingBillingProfile: Function;
+	onCancelEditingBillingProfile?: Function;
 	serverValidationErrors: IError[];
 	countries: ICountryDto[];
 	statesByCountryId: Record<string, IStateDto[]>;
@@ -34,7 +32,11 @@ interface IEditBillingProfileProps {
 	usageInfo?: IUsageInfoDto;
 	addressFormatItems: IAddressFormatItem[];
 	isCalledPreorder: boolean;
+	handleSaveForLaterChange?: Function;
+	saveForLater?: boolean;
+	createButtonText?: string;
 }
+
 const usaCountryId = '840';
 const defaultCountryOption = { label: 'United States', value: usaCountryId };
 
@@ -49,9 +51,11 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 	usageInfo,
 	addressFormatItems,
 	isCalledPreorder,
+	handleSaveForLaterChange,
+	saveForLater = true,
+	createButtonText,
 }) => {
 	const commitButtonRef = useRef<Button>(null);
-	const [shouldCloseStateSelect, setShouldCloseStateSelect] = useState<boolean>(false);
 	const [uncommittedBillingProfile, setUncommittedBillingProfile] = useState<IEditBillingProfile>(
 		billingProfile
 			? { ...billingProfile }
@@ -72,74 +76,6 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 			  }
 	);
 	const [isProcessing, setIsProcessing] = useState<boolean>(false);
-	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-
-	const initialCountryOption =
-		billingProfile &&
-		countries &&
-		countries
-			.map(country => ({ label: country.name, value: country.countryId }))
-			.find(country => country.value === billingProfile.countryId);
-
-	const initialStateOption =
-		billingProfile &&
-		statesByCountryId &&
-		Object.prototype.hasOwnProperty.call(
-			statesByCountryId,
-			uncommittedBillingProfile.countryId as string
-		)
-			? statesByCountryId[uncommittedBillingProfile.countryId as string]
-					.map(mapStateToOption)
-					.find(stateDto => stateDto.value === uncommittedBillingProfile.stateId)
-			: { label: '', value: '' };
-
-	const [stateOption, setStateOption] = useState<{ label: string; value: string }>(
-		initialStateOption || { label: '', value: '' }
-	);
-
-	useEffect(() => {
-		if (shouldCloseStateSelect) {
-			setShouldCloseStateSelect(false);
-			commitButtonRef.current.focus();
-		}
-	}, [shouldCloseStateSelect]);
-
-	const countryOptions = useMemo<ISelectOption[]>(
-		() =>
-			countries
-				.map(c => ({ label: c.name, value: c.countryId }))
-				.sort((a, b) => a.label.localeCompare(b.label)),
-		[countries]
-	);
-
-	const stateOptions = useMemo(
-		() =>
-			Object.prototype.hasOwnProperty.call(
-				statesByCountryId,
-				uncommittedBillingProfile.countryId as string
-			)
-				? statesByCountryId[uncommittedBillingProfile.countryId as string]
-						.map(mapStateToOption)
-						.sort((a, b) => a.label.localeCompare(b.label))
-				: [],
-		[statesByCountryId, uncommittedBillingProfile.countryId]
-	);
-
-	const optionByState = useMemo(
-		() =>
-			Object.prototype.hasOwnProperty.call(
-				statesByCountryId,
-				uncommittedBillingProfile.countryId as string
-			)
-				? statesByCountryId[uncommittedBillingProfile.countryId as string].reduce((acc, cur) => {
-						const option = mapStateToOption(cur);
-						acc[cur.abbreviation.toLowerCase()] = option;
-						acc[cur.name.toLowerCase()] = option;
-						return acc;
-				  }, {})
-				: {},
-		[statesByCountryId, uncommittedBillingProfile.countryId]
-	);
 
 	const [clientValidationErrors, setClientValidationErrors] = useState<IError[]>([]);
 
@@ -229,10 +165,6 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 		uncommittedBillingProfile,
 	]);
 
-	const getUncommittedBillingProfileValueOrDefault = (propertyName: keyof IEditBillingProfile) => {
-		return (uncommittedBillingProfile && uncommittedBillingProfile[propertyName]) || '';
-	};
-
 	const getUncommittedBillingProfileBoolOrDefault = (propertyName: keyof IEditBillingProfile) => {
 		return (uncommittedBillingProfile && uncommittedBillingProfile[propertyName]) || false;
 	};
@@ -246,25 +178,21 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 		);
 	};
 
-	const useStateSelector =
-		Object.prototype.hasOwnProperty.call(
-			statesByCountryId,
-			uncommittedBillingProfile.countryId as string
-		) && statesByCountryId[uncommittedBillingProfile.countryId as string].length > 0;
-
-	const stateAddressFormat = addressFormatItems.find(
-		item => item.kind === 'State' || item.kind === 'Suburb'
-	) as IAddressFormatItem;
-
-	const postalCodeAddressFormat = addressFormatItems.find(
-		item => item.kind === 'PostalCode'
-	) as IAddressFormatItem;
-
 	const strings = useLocalization();
 
 	return (
 		<Styled.EditBillingProfileSection>
 			<div>
+				{handleSaveForLaterChange && (
+					<div data-testid="remember-this-card-checkbox">
+						<Styled.Checkbox
+							onClick={handleSaveForLaterChange}
+							isChecked={saveForLater}
+							title={strings.rememberThisCard}
+							type="button"
+						></Styled.Checkbox>
+					</div>
+				)}
 				<Styled.CreditCardInfoRow>
 					<Styled.Label>
 						<Styled.LabelText>{strings.cardNumber}</Styled.LabelText>
@@ -274,6 +202,7 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 							pattern={isEditingExistingProfile ? 'x*[0-9]*' : '[0-9]*'}
 							isValid={isValidField('cardNumber')}
 							placeholder="0000 0000 0000 0000"
+							data-testid="card-number"
 							onChange={e =>
 								updateCardInfo({
 									...e,
@@ -305,6 +234,7 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 							name={nameof<IEditCardInfo>('nameOnCard')}
 							autoComplete="cc-name"
 							isValid={isValidField('nameOnCard')}
+							data-testid="name-on-card"
 							onChange={updateCardInfo}
 							value={getUncommittedCardInfoValueOrDefault('nameOnCard')}
 							border={'1px solid #a8a8a8'}
@@ -321,6 +251,7 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 								autoFocus={isCardExpired}
 								pattern="[0-9]*"
 								isValid={isCardExpired ? false : isValidField('expiration')}
+								data-testid="expiration"
 								title={isCardExpired ? strings.expirationDateError : ''}
 								placeholder={strings.placeholders.expiration}
 								onBlur={() =>
@@ -344,6 +275,7 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 								autoComplete="cc-csc"
 								pattern={isEditingExistingProfile ? 'xxxx' : '[0-9]*'}
 								isValid={isValidField('securityCode')}
+								data-testid="security-code"
 								placeholder={strings.placeholders.securityCode}
 								onChange={updateCardInfo}
 								options={isEditingExistingProfile ? {} : { numericOnly: true, blocks: [4] }}
@@ -416,192 +348,23 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 					type="button"
 				></Styled.Checkbox>
 			)}
-			<Styled.BillingAddressInfoSection>
-				<Styled.Title>{strings.billingAddress}</Styled.Title>
-				<Styled.CreditCardInfoRow data-test-id="country-selector-container">
-					<Styled.Label>
-						<Styled.LabelText>{strings.country}</Styled.LabelText>
-						<Select
-							name={nameof<IEditBillingProfile>('countryId')}
-							autoComplete="country-name"
-							placeholder={strings.country}
-							onChange={(option, { action, name }) => {
-								if (action === 'select-option') {
-									onSelectedCountryChanged(option.value);
-									updateBillingProfile({
-										target: {
-											name,
-											value: option.value,
-										},
-									});
-
-									updateBillingProfile({
-										target: {
-											name: nameof<IEditBillingProfile>('stateId'),
-											value: '',
-										},
-									});
-								}
-							}}
-							options={countryOptions}
-							defaultValue={initialCountryOption || defaultCountryOption}
-							styles={countrySelectStyles}
-						/>
-					</Styled.Label>
-				</Styled.CreditCardInfoRow>
-				<Styled.CreditCardInfoRow>
-					<Styled.Label>
-						<Styled.LabelText>{strings.streetAddress}</Styled.LabelText>
-						<Styled.Input
-							name={nameof<IEditBillingProfile>('addressLine1')}
-							autoComplete="address-line1"
-							isValid={isValidField('addressLine1')}
-							onChange={updateBillingProfile}
-							value={getUncommittedBillingProfileValueOrDefault('addressLine1')}
-							border={'1px solid #a8a8a8'}
-						/>
-					</Styled.Label>
-				</Styled.CreditCardInfoRow>
-				<Styled.CreditCardInfoRow data-test-id="address-line-2">
-					<Styled.Input
-						name={nameof<IEditBillingProfile>('addressLine2')}
-						autoComplete="address-line2"
-						isValid={isValidField('addressLine2')}
-						onChange={updateBillingProfile}
-						value={getUncommittedBillingProfileValueOrDefault('addressLine2')}
-						border={'1px solid #a8a8a8'}
-					/>
-				</Styled.CreditCardInfoRow>
-
-				<Styled.CityStateInfoRow>
-					<Styled.CityContainer>
-						<Styled.Label>
-							<Styled.LabelText>{strings.city}</Styled.LabelText>
-							<Styled.Input
-								name={nameof<IEditBillingProfile>('city')}
-								autoComplete="address-level2"
-								placeholder={strings.city}
-								isValid={isValidField('city')}
-								onChange={updateBillingProfile}
-								value={getUncommittedBillingProfileValueOrDefault('city')}
-								border={'1px solid #a8a8a8'}
-							/>
-						</Styled.Label>
-					</Styled.CityContainer>
-					{useStateSelector ? (
-						<Styled.StateContainer data-test-id="state-selector-container">
-							<Styled.Label>
-								<Styled.LabelText>{strings[toCamelCase(stateAddressFormat.name)]}</Styled.LabelText>
-								<Select
-									name={nameof<IEditBillingProfile>('stateId')}
-									components={{
-										Input: StateInput,
-									}}
-									placeholder="—"
-									menuIsOpen={isMenuOpen}
-									onInputChange={(value, { action }) => {
-										// HACK: close the menu after the browser auto-fills the address
-										// see https://github.com/JedWatson/react-select/issues/765
-										if (action === 'input-change') {
-											if (optionByState[value.toLowerCase()]) {
-												setStateOption(optionByState[value.toLowerCase()]);
-												setIsMenuOpen(false);
-											} else {
-												if (!isMenuOpen) {
-													setIsMenuOpen(true);
-												}
-											}
-										}
-									}}
-									onMenuOpen={() => {
-										/* HACK: don't let auto-fill open the menu */
-									}}
-									onMenuClose={() => {
-										setIsMenuOpen(false);
-									}}
-									onChange={(option, { action, name }) => {
-										if (action === 'select-option') {
-											setStateOption(option);
-											updateBillingProfile({
-												target: {
-													name,
-													value: option.value,
-												},
-											});
-										}
-									}}
-									onBlur={e => {
-										setIsMenuOpen(false);
-										const selectedOption = optionByState[e.target.value.toLowerCase()];
-
-										if (selectedOption) {
-											setStateOption(selectedOption);
-											updateBillingProfile({
-												target: {
-													name: nameof<IEditBillingProfile>('stateId'),
-													value: selectedOption.value,
-												},
-											});
-										}
-									}}
-									onFocus={() => setIsMenuOpen(true)}
-									options={stateOptions}
-									value={stateOption}
-									styles={stateSelectStyles(
-										!Object.prototype.hasOwnProperty.call(
-											errorByFieldName,
-											nameof<IEditBillingProfile>('stateId')
-										)
-									)}
-								/>
-							</Styled.Label>
-						</Styled.StateContainer>
-					) : (
-						stateAddressFormat &&
-						!stateAddressFormat.isOptional && (
-							<Styled.StateContainer>
-								<Styled.Label>
-									<Styled.LabelText>
-										{strings[toCamelCase(stateAddressFormat.name)]}
-									</Styled.LabelText>
-									<Styled.Input
-										name={nameof<IEditBillingProfile>('suburb')}
-										autoComplete="suburb"
-										placeholder={stateAddressFormat.name}
-										isValid={isValidField('suburb')}
-										onChange={updateBillingProfile}
-										value={getUncommittedBillingProfileValueOrDefault('suburb')}
-										border={'1px solid #a8a8a8'}
-									></Styled.Input>
-								</Styled.Label>
-							</Styled.StateContainer>
-						)
-					)}
-					{postalCodeAddressFormat && !postalCodeAddressFormat.isOptional && (
-						<Styled.PostalCodeContainer>
-							<Styled.Label>
-								<Styled.LabelText>
-									{strings[toCamelCase(postalCodeAddressFormat.name)]}
-								</Styled.LabelText>
-								<Styled.Cleave
-									name={nameof<IEditCardInfo>('postalCode')}
-									autoComplete="postal-code"
-									isValid={isValidField('postalCode')}
-									placeholder={strings.placeholders.postalCode}
-									onChange={updateCardInfo}
-									options={{ blocks: [10] }}
-									value={getUncommittedCardInfoValueOrDefault('postalCode')}
-								/>
-							</Styled.Label>
-						</Styled.PostalCodeContainer>
-					)}
-				</Styled.CityStateInfoRow>
-			</Styled.BillingAddressInfoSection>
+			<Styled.Title>{strings.billingAddress}</Styled.Title>
+			<AddressForm
+				billingProfile={billingProfile}
+				uncommittedBillingProfile={uncommittedBillingProfile}
+				serverValidationErrors={serverValidationErrors}
+				countries={countries}
+				statesByCountryId={statesByCountryId}
+				onSelectedCountryChanged={onSelectedCountryChanged}
+				updateBillingProfile={updateBillingProfile}
+				updatePostalCode={updateCardInfo}
+				addressFormatItems={addressFormatItems}
+				defaultCountryOption={defaultCountryOption}
+				isValidField={isValidField}
+				errorByFieldName={errorByFieldName}
+			/>
 			<Styled.NewProfileButtons>
-				<Button minor medium onClick={onCancelEditingBillingProfile}>
-					{strings.cancel}
-				</Button>
-				<div data-test-id="create-billing-profile-button">
+				<div data-testid="create-billing-profile-button">
 					<Button
 						primary
 						medium
@@ -609,58 +372,17 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 						ref={commitButtonRef}
 						disabled={isProcessing}
 					>
-						{isEditingExistingProfile ? strings.save : strings.create}
+						{createButtonText || strings.save}
 					</Button>
 				</div>
+				{onCancelEditingBillingProfile && (
+					<Button minor medium onClick={onCancelEditingBillingProfile}>
+						{strings.cancel}
+					</Button>
+				)}
 			</Styled.NewProfileButtons>
 		</Styled.EditBillingProfileSection>
 	);
 };
-
-const StateInput = ({ ...props }) => <components.Input {...props} autoComplete="address-level1" />;
-
-const countrySelectStyles = {
-	dropdownIndicator: base => {
-		return {
-			...base,
-			paddingLeft: '6px',
-			paddingRight: '6px',
-		};
-	},
-};
-
-const stateSelectStyles = isValid => {
-	return {
-		control: (base, state) => {
-			return isValid
-				? { ...base }
-				: {
-						...base,
-						border: '1px solid #db4818',
-						boxShadow: '0 0 0 2px #f6d0d3',
-						'&:hover': {
-							boxShadow: '0 0 0 2px #f6d0d3',
-						},
-						outline: state.isFocused ? '1px auto #d94848' : 'none',
-				  };
-		},
-		dropdownIndicator: base => ({
-			...base,
-			paddingLeft: '5px',
-			paddingRight: '5px',
-		}),
-		option: base => ({
-			...base,
-			paddingLeft: '6px',
-		}),
-	};
-};
-
-const mapStateToOption = (state: IStateDto) => ({
-	label: state.abbreviation.toUpperCase(),
-	value: state.stateId,
-});
-
-const toCamelCase = (source: string) => source.charAt(0).toLowerCase() + source.slice(1);
 
 export default EditBillingProfile;

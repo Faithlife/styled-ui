@@ -19,6 +19,19 @@ const cardNumberPrefixByType = {
 	visa: '4',
 };
 
+export const getCardProvider = cardNumber => {
+	if (/^4[0-9]{12}(?:[0-9]{3})?$/.test(cardNumber)) {
+		return 'visa';
+	} else if (/^5[1-5][0-9]{14}$/.test(cardNumber)) {
+		return 'mastercard';
+	} else if (/^6(?:011|5[0-9]{2})[0-9]{12}$/.test(cardNumber)) {
+		return 'discover';
+	} else if (/^3[47][0-9]{13}$/.test(cardNumber)) {
+		return 'amex';
+	}
+	return 'unknown';
+};
+
 export const formatMaskedCardNumber = (maskedCardNumber: string, provider: string) => {
 	const maskCharacter = '•';
 	const lowercaseProvider = provider.toLowerCase();

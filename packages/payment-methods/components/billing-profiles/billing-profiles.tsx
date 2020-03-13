@@ -18,7 +18,7 @@ import { ISystemMessage } from '../../typings/ISystemMessage';
 import IUsageInfoDto from '../../clients/typings/orders/UsageInfoDto';
 import IAddressFormatItem from '../../clients/typings/locations/IAddressFormatItem';
 
-type billingProfileChangeKind = 'selected' | 'deleted';
+type billingProfileChangeKind = 'selected' | 'deleted' | 'invalidated';
 const unitedStatesCountryId = '840';
 
 interface IBillingProfilesProps {
@@ -33,6 +33,10 @@ interface IBillingProfilesProps {
 	setSystemMessage: (systemMessage: ISystemMessage) => void;
 	selectedProfileId?: string;
 	isCalledPreorder: boolean;
+	getCardInfoFromSessionStorage?: Function;
+	setCardInfoToSessionStorage?: Function;
+	allowAddressOnly: boolean;
+	handleSelectedProfileInvalid;
 }
 
 const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
@@ -41,6 +45,10 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 	setSystemMessage,
 	selectedProfileId,
 	isCalledPreorder,
+	getCardInfoFromSessionStorage,
+	setCardInfoToSessionStorage,
+	allowAddressOnly = false,
+	handleSelectedProfileInvalid,
 }) => {
 	const [billingProfiles, setBillingProfiles] = useState<IBillingProfileDto[]>([]);
 	const [usageInfo, setUsageInfo] = useState<IUsageInfoDto>();
@@ -58,18 +66,61 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 	const [countries, setCountries] = useState<ICountryDto[]>([]);
 	const [statesByCountryId, setStatesByCountryId] = useState<Record<string, IStateDto[]>>({});
 	const [addressFormatItems, setAddressFormatItems] = useState<IAddressFormatItem[]>([]);
+	const [saveForLater, setSaveForLater] = useState<boolean>(true);
+
+	const handleSaveForLaterChange = useCallback(() => setSaveForLater(prev => !prev), [
+		setSaveForLater,
+	]);
 
 	const strings = useLocalization();
 
 	useEffect(() => {
 		const loadBillingProfiles = async () => {
 			const billingProfiles = await OrdersClient.getBillingProfiles();
-			setBillingProfiles(billingProfiles.billingProfiles);
-			setUsageInfo(billingProfiles.usageInfo);
+
+			if (
+				selectedProfileId &&
+				getCardInfoFromSessionStorage &&
+				handleSelectedProfileInvalid &&
+				!billingProfiles.billingProfiles.find(profile => profile.profileId === selectedProfileId)
+			) {
+				// Get the address only profile and search for card info in session storage
+				const response = await OrdersClient.getBillingProfile(selectedProfileId);
+				const cardInfo = getCardInfoFromSessionStorage(selectedProfileId);
+
+				if (!cardInfo && !allowAddressOnly) {
+					handleSelectedProfileInvalid();
+					setIsAddingNewBillingProfile(true);
+					return;
+				}
+
+				const profilesWithAddressOnlySelectedProfile = [
+					...billingProfiles.billingProfiles,
+					{
+						...response,
+						cardInfo: cardInfo,
+					},
+				];
+				setSelectedBillingProfileId(response.profileId);
+				setBillingProfiles(profilesWithAddressOnlySelectedProfile);
+				setUsageInfo(billingProfiles.usageInfo);
+			} else {
+				setBillingProfiles(billingProfiles.billingProfiles);
+				setUsageInfo(billingProfiles.usageInfo);
+			}
 		};
 
 		actAndHandleException(loadBillingProfiles, strings.fetchBillingProfiles);
-	}, [setBillingProfiles, actAndHandleException, strings.fetchBillingProfiles]);
+	}, [
+		setBillingProfiles,
+		actAndHandleException,
+		strings.fetchBillingProfiles,
+		selectedProfileId,
+		getCardInfoFromSessionStorage,
+		onSelectedBillingProfileChange,
+		allowAddressOnly,
+		handleSelectedProfileInvalid,
+	]);
 
 	// load list of countries for editing billing profiles
 	useEffect(() => {
@@ -186,7 +237,8 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 		async (newBillingProfile: IEditBillingProfile) => {
 			const createProfile = async () => {
 				const newOrdersBillingProfile = BillingProfileMapper.mapForCreatingInOrdersApi(
-					newBillingProfile
+					newBillingProfile,
+					saveForLater
 				);
 				const response = await OrdersClient.createOrdersBillingProfile(newOrdersBillingProfile);
 
@@ -202,6 +254,23 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 						});
 					}
 				} else {
+					if (!saveForLater && setCardInfoToSessionStorage) {
+						const sanitizedExpiration = (newBillingProfile.cardInfo.expiration || '').replace(
+							/ \//g,
+							''
+						);
+						const cardInfo = {
+							cardNumber: newBillingProfile.cardInfo.cardNumber,
+							expirationMonth: parseInt(sanitizedExpiration.slice(0, 2)),
+							expirationYear: parseInt(
+								new Date()
+									.getFullYear()
+									.toString()
+									.substr(0, 2) + sanitizedExpiration.slice(-2)
+							),
+						};
+						setCardInfoToSessionStorage(response.profileId, cardInfo);
+					}
 					setShouldRefreshBillingProfiles(true);
 					setIsAddingNewBillingProfile(false);
 					onSelectBillingProfile(response);
@@ -211,7 +280,14 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 
 			await actAndHandleException(createProfile, strings.createProfile);
 		},
-		[onSelectBillingProfile, actAndHandleException, setSystemMessage, strings]
+		[
+			onSelectBillingProfile,
+			actAndHandleException,
+			setSystemMessage,
+			strings,
+			setCardInfoToSessionStorage,
+			saveForLater,
+		]
 	);
 
 	const updateBillingProfile = useCallback(
@@ -291,14 +367,14 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 	return (
 		<Styled.BillingProfilesContainer>
 			<Styled.BillingProfilesSection>
-				<Styled.BillingProfiles data-test-id="billing-profiles">
+				<Styled.BillingProfiles data-testid="billing-profiles">
 					<Styled.CreditCardRow>
 						<Radio
 							onClick={() => setIsAddingNewBillingProfile(true)}
 							isChecked={isAddingNewBillingProfile}
 							type="button"
 						>
-							<Styled.NewCardLabel data-test-id="add-payment-method-button">
+							<Styled.NewCardLabel data-testid="add-payment-method-button">
 								{strings.newCreditCard}
 							</Styled.NewCardLabel>
 						</Radio>
@@ -317,6 +393,11 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 							usageInfo={usageInfo}
 							addressFormatItems={addressFormatItems}
 							isCalledPreorder={isCalledPreorder}
+							handleSaveForLaterChange={
+								getCardInfoFromSessionStorage ? handleSaveForLaterChange : undefined
+							}
+							saveForLater={saveForLater}
+							createButtonText={strings.create}
 						/>
 					)}
 					{displayProfiles
@@ -351,6 +432,7 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 											usageInfo={usageInfo}
 											addressFormatItems={addressFormatItems}
 											isCalledPreorder={isCalledPreorder}
+											saveForLater={saveForLater}
 										/>
 									)}
 								</Fragment>

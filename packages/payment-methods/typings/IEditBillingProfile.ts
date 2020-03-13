@@ -1,6 +1,7 @@
 import IEditCardInfo from './IEditCardInfo';
 
 export default interface IEditBillingProfile {
+	profileId?: string;
 	addressLine1: string | null;
 	addressLine2: string | null;
 	cardInfo: IEditCardInfo;

@@ -16,6 +16,8 @@
 	"securityCode": "Security Code",
 	"findThis": "How do I find this?",
 	"creditCardInfo": "Credit Card Info",
+	"name": "Name",
+	"organization": "Organization",
 	"billingAddress": "Billing Address",
 	"billingUpdateError": "Unable to update billing profiles at this time. Please try again later.",
 	"deletedProfile": "Deleted billing profile.",
@@ -66,5 +68,10 @@
 	"movePaymentPlansToAlternate": "Move outstanding payment plans to an alternate credit card.",
 	"movePreordersToAlternate": "Cancel or move pre-orders to an alternate credit card.",
 	"movePrepubsToAlternate": "Cancel or move pre-pub orders to an alternate credit card.",
-	"edit": "Edit"
+	"edit": "Edit",
+	"next": "Next",
+	"sameAsBilling": "Same as billing.",
+	"rememberThisCard": "Remember this credit card.",
+	"expired": "Expired",
+	"expires": "Expires"
 }

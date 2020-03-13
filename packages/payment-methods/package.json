@@ -1,26 +1,26 @@
 {
-  "name": "@faithlife/payment-methods",
-  "version": "1.2.1",
-  "license": "UNLICENSED",
-  "main": "dist/index.js",
-  "files": [
-    "dist/**"
-  ],
-  "devDependencies": {
-    "@types/react": "^16.9.11"
-  },
-  "peerDependencies": {
-    "@faithlife/styled-ui": "^5.28.0",
-    "react": "^16.8.4",
-    "styled-components": "^4.0.2"
-  },
-  "dependencies": {
-    "@faithlife/giving-payment-gateway-util": "^1.0.0",
-    "@faithlife/react-ui": "^7.7.0",
-    "cleave.js": "^1.5.3",
-    "jquery": "^3.4.1",
-    "react": "^16.8.4",
-    "react-select": "^2.1.2",
-    "styled-components": "4.3.1"
-  }
+	"name": "@faithlife/payment-methods",
+	"version": "2.1.0",
+	"license": "UNLICENSED",
+	"main": "dist/index.js",
+	"files": [
+		"dist/**"
+	],
+	"devDependencies": {
+		"@types/react": "^16.9.11"
+	},
+	"peerDependencies": {
+		"@faithlife/styled-ui": "^5.28.0",
+		"react": "^16.8.4",
+		"styled-components": "^4.0.2"
+	},
+	"dependencies": {
+		"@faithlife/giving-payment-gateway-util": "^1.0.0",
+		"@faithlife/react-ui": "^7.7.0",
+		"cleave.js": "^1.5.3",
+		"jquery": "^3.4.1",
+		"react": "^16.8.4",
+		"react-select": "^2.1.2",
+		"styled-components": "4.3.1"
+	}
 }

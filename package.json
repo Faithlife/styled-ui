@@ -1,93 +1,95 @@
 {
-  "private": true,
-  "dependencies": {
-    "@faithlife/flcom-addin-scripts": "4.12.1",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0"
-  },
-  "workspaces": {
-    "packages": [
-      "packages/*",
-      "examples/*"
-    ],
-    "nohoist": [
-      "**/babel-preset-react-app/@babel/runtime"
-    ]
-  },
-  "license": "UNLICENSED",
-  "scripts": {
-    "start": "flcom-addin-scripts start",
-    "build": "flcom-addin-scripts build",
-    "create-package": "flcom-addin-scripts create-package",
-    "create-example": "flcom-addin-scripts create-example",
-    "clean": "rm -rf packages/*/dist",
-    "lint": "flcom-addin-scripts lint",
-    "ship": "flcom-addin-scripts ship",
-    "ship-to": "flcom-addin-scripts ship-to",
-    "get-versions": "flcom-addin-scripts get-versions",
-    "test": "lerna run test",
-    "publish": "lerna publish --conventional-commits --github-release --registry http://npm.faithlife.io --yes",
-    "crowdin-upload": "java -jar ./tools/crowdin/crowdin-cli.jar upload",
-    "crowdin-download": "java -jar ./tools/crowdin/crowdin-cli.jar download",
-    "storybook": "start-storybook -p 3000",
-    "build-storybook": "build-storybook",
-    "deploy-storybook": "storybook-to-ghpages"
-  },
-  "browserslist": [
-    "extends @faithlife/browserslist-config-flcom-addin"
-  ],
-  "eslintConfig": {
-    "root": true,
-    "extends": "@faithlife/eslint-config-flcom-addin",
-    "overrides": [
-      {
-        "files": [
-          "examples/**"
-        ],
-        "rules": {
-          "react/jsx-no-literals": "off"
-        }
-      }
-    ]
-  },
-  "eslintIgnore": [
-    "**/dist",
-    "**/node_modules"
-  ],
-  "devDependencies": {
-    "@babel/core": "^7.8.6",
-    "@commitlint/cli": "^8.2.0",
-    "@storybook/addon-actions": "6.0.0-alpha.20",
-    "@storybook/addon-docs": "6.0.0-alpha.20",
-    "@storybook/addon-knobs": "6.0.0-alpha.20",
-    "@storybook/addon-links": "6.0.0-alpha.20",
-    "@storybook/preset-typescript": "^1.2.0",
-    "@storybook/react": "6.0.0-alpha.20",
-    "@storybook/storybook-deployer": "^2.8.3",
-    "babel-loader": "^8.0.6",
-    "commitlint-config-faithlife": "^1.0.0",
-    "fork-ts-checker-webpack-plugin": "^4.0.5",
-    "husky": "^3.1.0",
-    "lerna": "^3.19.0",
-    "react-docgen-typescript-loader": "^3.6.0",
-    "react-is": "^16.13.0",
-    "ts-loader": "^6.2.1",
-    "typescript": "^3.7.2"
-  },
-  "resolutions": {
-    "@babel/runtime": "^7.5.0",
-    "@types/react": "^16.9.11",
-    "@emotion/memoize": "0.7.2",
-    "@emotion/unitless": "0.7.4",
-    "@emotion/is-prop-valid": "0.8.5",
-    "@faithlife/styled-ui": "^5.47.0",
-    "regenerator-runtime": "0.13.3",
-    "styled-components": "4.4.1",
-    "typescript": "^3.7.2",
-    "lint-staged": "^8.1.5",
-    "prop-types": "15.7.2",
-    "react-is": "16.10.1",
-    "sockjs-client": "1.4.0"
-  },
-  "name": "FaithlifeEquipment"
+	"private": true,
+	"dependencies": {
+		"@faithlife/flcom-addin-scripts": "4.12.1",
+		"react": "^16.13.0",
+		"react-dom": "^16.13.0"
+	},
+	"workspaces": {
+		"packages": [
+			"packages/*",
+			"examples/*"
+		],
+		"nohoist": [
+			"**/babel-preset-react-app/@babel/runtime"
+		]
+	},
+	"license": "UNLICENSED",
+	"scripts": {
+		"start": "flcom-addin-scripts start",
+		"build": "flcom-addin-scripts build",
+		"create-package": "flcom-addin-scripts create-package",
+		"create-example": "flcom-addin-scripts create-example",
+		"clean": "rm -rf packages/*/dist",
+		"lint": "flcom-addin-scripts lint",
+		"ship": "flcom-addin-scripts ship",
+		"ship-to": "flcom-addin-scripts ship-to",
+		"get-versions": "flcom-addin-scripts get-versions",
+		"test": "lerna run test",
+		"publish": "lerna publish --conventional-commits --github-release --registry http://npm.faithlife.io --yes",
+		"crowdin-upload": "java -jar ./tools/crowdin/crowdin-cli.jar upload",
+		"crowdin-download": "java -jar ./tools/crowdin/crowdin-cli.jar download",
+		"storybook": "start-storybook -p 3000",
+		"build-storybook": "build-storybook",
+		"deploy-storybook": "storybook-to-ghpages"
+	},
+	"browserslist": [
+		"extends @faithlife/browserslist-config-flcom-addin"
+	],
+	"eslintConfig": {
+		"root": true,
+		"extends": "@faithlife/eslint-config-flcom-addin",
+		"overrides": [
+			{
+				"files": [
+					"examples/**"
+				],
+				"rules": {
+					"react/jsx-no-literals": "off"
+				}
+			}
+		]
+	},
+	"eslintIgnore": [
+		"**/dist",
+		"**/node_modules"
+	],
+	"devDependencies": {
+		"@babel/core": "^7.8.6",
+		"@commitlint/cli": "^8.2.0",
+		"@storybook/addon-actions": "6.0.0-alpha.20",
+		"@storybook/addon-docs": "6.0.0-alpha.20",
+		"@storybook/addon-knobs": "6.0.0-alpha.20",
+		"@storybook/addon-links": "6.0.0-alpha.20",
+		"@storybook/preset-typescript": "^1.2.0",
+		"@storybook/react": "6.0.0-alpha.20",
+		"@storybook/storybook-deployer": "^2.8.3",
+		"babel-loader": "^8.0.6",
+		"commitlint-config-faithlife": "^1.0.0",
+		"fork-ts-checker-webpack-plugin": "^4.0.5",
+		"husky": "^3.1.0",
+		"lerna": "^3.19.0",
+		"react-docgen-typescript-loader": "^3.6.0",
+		"react-is": "^16.13.0",
+		"ts-loader": "^6.2.1",
+		"typescript": "^3.7.2"
+	},
+	"resolutions": {
+		"@babel/runtime": "^7.5.0",
+		"@types/react": "^16.9.11",
+		"@emotion/memoize": "0.7.2",
+		"@emotion/unitless": "0.7.4",
+		"@emotion/is-prop-valid": "0.8.5",
+		"@faithlife/styled-ui": "^5.47.0",
+		"regenerator-runtime": "0.13.3",
+		"styled-components": "4.4.1",
+		"typescript": "^3.7.2",
+		"lint-staged": "^8.1.5",
+		"prop-types": "15.7.2",
+		"react-is": "16.10.1",
+		"sockjs-client": "1.4.0",
+		"react": "^16.13.0",
+		"react-dom": "^16.13.0"
+	},
+	"name": "FaithlifeEquipment"
 }

@@ -18,6 +18,14 @@ export default class OrdersClient {
 		return response;
 	}
 
+	static async getBillingProfile(id: string): Promise<IBillingProfileDto> {
+		const response = await fetchJson(`/proxy/orders/v3/billingprofiles/${id}`, {
+			method: 'GET',
+		});
+
+		return response;
+	}
+
 	static async createOrdersBillingProfile(
 		createBillingProfileDto: ICreateOrdersBillingProfileDto
 	): Promise<IBillingProfileDto | IErrors> {

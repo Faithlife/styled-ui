@@ -21,3 +21,7 @@ npm-*
 
 packages/*/dist
 dist/
+
+#Ignore yalc used for local package dev
+.yalc
+yalc.loc

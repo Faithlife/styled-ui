@@ -5,6 +5,7 @@ import { LocalizationProvider } from '../../Localization';
 import BillingProfiles from '../billing-profiles/billing-profiles';
 import theme from '../theme';
 import IPaymentMethodsProps from '../../typings/IPaymentMethodsProps';
+import defaultResources from '../../locales/en-US/resources.json';
 
 const PaymentMethods: React.FunctionComponent<IPaymentMethodsProps> = ({
 	onSelectedBillingProfileChange,
@@ -13,9 +14,14 @@ const PaymentMethods: React.FunctionComponent<IPaymentMethodsProps> = ({
 	selectedBillingProfileId,
 	isCalledPreorder = false,
 	localizedResources,
+	getCardInfoFromSessionStorage,
+	setCardInfoToSessionStorage,
+	handleSelectedProfileInvalid,
 }) => {
+	const resources = { ...defaultResources, ...localizedResources };
+
 	return (
-		<LocalizationProvider localizedResources={localizedResources}>
+		<LocalizationProvider localizedResources={resources}>
 			<ThemeProvider theme={() => ({ ...theme, ...styledUITheme })}>
 				<BillingProfiles
 					setSystemMessage={setSystemMessage}
@@ -23,6 +29,10 @@ const PaymentMethods: React.FunctionComponent<IPaymentMethodsProps> = ({
 					onSelectedBillingProfileChange={onSelectedBillingProfileChange}
 					selectedProfileId={selectedBillingProfileId}
 					isCalledPreorder={isCalledPreorder}
+					getCardInfoFromSessionStorage={getCardInfoFromSessionStorage}
+					setCardInfoToSessionStorage={setCardInfoToSessionStorage}
+					handleSelectedProfileInvalid={handleSelectedProfileInvalid}
+					allowAddressOnly={false}
 				></BillingProfiles>
 			</ThemeProvider>
 		</LocalizationProvider>
