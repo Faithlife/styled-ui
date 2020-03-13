@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/payment-methods@2.0.0...payment-methods@2.1.0) (2020-03-13)
+
+
+### Features
+
+* **payment-methods:** Add support for Skeletor checkout. ([#71](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/71)) ([332aa6a](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/332aa6a4b526e66821878a6d17bcfc22c9238d17))
+
+
+
+
+
 # [2.0.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/payment-methods@1.1.0...payment-methods@2.0.0) (2020-02-21)
 
 
