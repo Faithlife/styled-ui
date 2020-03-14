@@ -16,6 +16,8 @@
 	"securityCode": "Sicherheitscode",
 	"findThis": "Wo finde ich diesen?",
 	"creditCardInfo": "Kreditkarteninformationen",
+	"name": "Name",
+	"organization": "Organisation",
 	"billingAddress": "Rechnungsadresse",
 	"billingUpdateError": "Wir konnten Ihre Rechnungsprofil nicht aufrufen. Bitte versuchen Sie es später erneut.",
 	"deletedProfile": "Rechnungsprofil löschen.",
@@ -66,5 +68,10 @@
 	"movePaymentPlansToAlternate": "Verschieben Sie alle laufenden Ratenzahlungspläne auf eine Ersatzkarte.",
 	"movePreordersToAlternate": "Stornieren Sie alle Ihre aktuellen Vorbestellungen oder verschieben Sie diese auf eine Ersatzkarte.",
 	"movePrepubsToAlternate": "Stornieren Sie alle Ihre aktuellen Vorbestellungen oder verschieben Sie diese auf eine Ersatzkarte.",
-	"edit": "Bearbeiten"
+	"edit": "Bearbeiten",
+	"next": "Weiter",
+	"sameAsBilling": "Wie Rechnungsadresse.",
+	"rememberThisCard": "Kreditkarte speichern.",
+	"expired": "Abgelaufen",
+	"expires": "Ablaufdatum"
 }

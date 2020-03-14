@@ -16,6 +16,8 @@
 	"securityCode": "安全碼",
 	"findThis": "我可以如何找到這個資訊？",
 	"creditCardInfo": "信用卡資料",
+	"name": "姓名",
+	"organization": "機構",
 	"billingAddress": "帳單地址",
 	"billingUpdateError": "目前無法更新您的帳單資料。請稍後再試。",
 	"deletedProfile": "刪除賬單資料。",
@@ -66,5 +68,10 @@
 	"movePaymentPlansToAlternate": "將未結付款計劃移至備用信用卡。",
 	"movePreordersToAlternate": "取消預訂或將預訂移至備用信用卡。",
 	"movePrepubsToAlternate": "取消或將發布前的訂單移至備用信用卡。",
-	"edit": "編輯"
+	"edit": "編輯",
+	"next": "下一步",
+	"sameAsBilling": "跟賬單地址一樣。",
+	"rememberThisCard": "儲存這張信用卡。",
+	"expired": "已過期",
+	"expires": "過期"
 }

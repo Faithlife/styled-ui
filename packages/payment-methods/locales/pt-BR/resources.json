@@ -16,6 +16,8 @@
 	"securityCode": "Código de Segurança",
 	"findThis": "Como encontrar essa informação?",
 	"creditCardInfo": "Informações do Cartão de Crédito",
+	"name": "Name",
+	"organization": "Organization",
 	"billingAddress": "Endereço de Cobrança",
 	"billingUpdateError": "Não foi possível atualizar os dados de cobrança no momento. Por favor, tente novamente mais tarde.",
 	"deletedProfile": "Dados de cobrança excluído.",
@@ -66,5 +68,10 @@
 	"movePaymentPlansToAlternate": "Mova os planos de pagamento pendentes para um cartão de crédito alternativo.",
 	"movePreordersToAlternate": "Cancele ou mova as encomendas para um cartão de crédito alternativo.",
 	"movePrepubsToAlternate": "Cancele ou mova as pré-publicações para um cartão de crédito alternativo.",
-	"edit": "Editar"
+	"edit": "Editar",
+	"next": "Next",
+	"sameAsBilling": "Same as billing.",
+	"rememberThisCard": "Remember this credit card.",
+	"expired": "Expired",
+	"expires": "Expires"
 }

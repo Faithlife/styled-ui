@@ -16,6 +16,8 @@
 	"securityCode": "Código de seguridad",
 	"findThis": "¿Cómo encuentro esto?",
 	"creditCardInfo": "Información de tarjeta de crédito",
+	"name": "Nombre",
+	"organization": "Organización",
 	"billingAddress": "Dirección de facturación",
 	"billingUpdateError": "No se puede actualizar el perfil de facturación en este momento. Por favor intente más tarde.",
 	"deletedProfile": "Perfil de facturación eliminado.",
@@ -66,5 +68,10 @@
 	"movePaymentPlansToAlternate": "Mover planes de pago activos a una tarjeta de crédito alternativa.",
 	"movePreordersToAlternate": "Cancelar o mover pre-órdenes activas a una tarjeta de crédito alternativa.",
 	"movePrepubsToAlternate": "Cancelar o mover las órdenes de pre-publicación activas a una tarjeta de crédito alternativa.",
-	"edit": "Editar"
+	"edit": "Editar",
+	"next": "Siguiente",
+	"sameAsBilling": "Mismo que facturación.",
+	"rememberThisCard": "Recordar esta tarjeta de crédito.",
+	"expired": "Vencida",
+	"expires": "Vence"
 }
