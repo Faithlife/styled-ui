@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@2.5.0...@faithlife/payment-methods@2.5.1) (2020-03-18)
+
+
+### Bug Fixes
+
+* **payment-methods:** Fix profile delete and add loading spinner. ([#75](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/75)) ([172eff8](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/172eff8b39f66e0fe289567fb4d1b38529fe8c59))
+
+
+
+
+
 # [2.5.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@2.4.0...@faithlife/payment-methods@2.5.0) (2020-03-18)
 
 
