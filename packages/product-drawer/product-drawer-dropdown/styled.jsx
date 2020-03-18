@@ -39,11 +39,12 @@ export const ProductDrawerDropdown = styled.div`
 		animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
 		animation-fill-mode: forwards;
 		animation-name: ${dropdownSlideDownFadeIn};
+		margin-top: ${({ styleOverrides }) => styleOverrides.tabletTopOffset || '12px'};
 	}
 
 	@media (min-width: ${mediaSizes.desktop}) {
 		right: 0;
-		margin-top: ${({ styleOverrides }) => styleOverrides.fullscreenTopOffset || '0'};
+		margin-top: ${({ styleOverrides }) => styleOverrides.fullscreenTopOffset || '12px'};
 	}
 
 	white-space: nowrap;

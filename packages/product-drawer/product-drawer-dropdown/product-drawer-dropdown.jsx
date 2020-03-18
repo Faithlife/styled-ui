@@ -16,7 +16,6 @@ import {
 	SitesSvg,
 	FaithlifeStudyBibleSvg,
 	GivingSvg,
-	FaithlifeTvChurchSvg,
 	CloseIcon,
 } from './svgs';
 import * as Styled from './styled';
@@ -155,7 +154,7 @@ export const ProductDrawerDropdown = ({
 							description={resources.faithlifeFaithlifeTvChurchLinkDescription}
 							href="https://faithlifetv.com/church"
 						>
-							<FaithlifeTvChurchSvg />
+							<FaithlifeTvSvg />
 						</ProductLink>
 						<ProductLink
 							title={resources.ministryTeamMagazineLinkTitle}
