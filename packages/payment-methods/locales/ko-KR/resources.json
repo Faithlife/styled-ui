@@ -16,8 +16,8 @@
 	"securityCode": "카드인증코드 (CVV)",
 	"findThis": "어떻게 찾을 수 있나요?",
 	"creditCardInfo": "신용카드 정보",
-	"name": "Name",
-	"organization": "Organization",
+	"name": "이름",
+	"organization": "단체",
 	"billingAddress": "청구 주소",
 	"billingUpdateError": "청구 프로필을 업데이트할 수 없습니다. 나중에 다시 시도해 주십시오.",
 	"deletedProfile": "청구 프로필 삭제함",
@@ -69,9 +69,9 @@
 	"movePreordersToAlternate": "사전 주문한 제품들을 다른 카드로 옮깁니다.",
 	"movePrepubsToAlternate": "사전 주문한 Pre-Pub 제품들을 다른 카드로 옮깁니다.",
 	"edit": "편집",
-	"next": "Next",
-	"sameAsBilling": "Same as billing.",
-	"rememberThisCard": "Remember this credit card.",
-	"expired": "Expired",
-	"expires": "Expires"
+	"next": "다음",
+	"sameAsBilling": "청구 주소와 동일.",
+	"rememberThisCard": "이 신용카드 기억하기.",
+	"expired": "만료됨",
+	"expires": "만료"
 }
