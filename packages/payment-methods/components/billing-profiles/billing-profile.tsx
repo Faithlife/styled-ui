@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Button, Radio } from '@faithlife/styled-ui';
+import { Button, Radio, LoadingSpinner } from '@faithlife/styled-ui';
 import { Modal } from '@faithlife/styled-ui/v6';
 import { useLocalization } from '../../Localization';
 import IBillingProfileDto from '../../clients/typings/orders/IBillingProfileDto';
@@ -39,8 +39,8 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 	const now = new Date();
 	const strings = useLocalization();
 
-	// TODO: this will disable trash can/delete button if there are usages on the card. We need a screen to warn the user and help them move usage to another card.
 	const [isEditDisabled, setIsEditDisabled] = useState(false);
+	const [isDeleting, setIsDeleting] = useState(false);
 	const [trashDisabled, setTrashDisabled] = useState(
 		billingProfile.usageInfo.activeSubscriptionCount > 0 ||
 			billingProfile.usageInfo.outstandingPaymentPlansCount > 0 ||
@@ -58,6 +58,7 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 	const deleteBillingProfile = useCallback(() => {
 		setTrashDisabled(true);
 		setIsEditDisabled(true);
+		setIsDeleting(true);
 		onDelete(billingProfile.profileId);
 		setIsEditDisabled(false);
 	}, [billingProfile.profileId, onDelete]);
@@ -77,7 +78,7 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 						minorTransparent
 						condensed
 						size="small"
-						icon={<Trash />}
+						icon={isDeleting ? <LoadingSpinner height={18} /> : <Trash />}
 						onClick={deleteBillingProfile}
 						disabled={trashDisabled}
 					/>
@@ -125,12 +126,13 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 					<Styled.EditText>{strings.edit}</Styled.EditText>
 				</Button>
 			</Styled.Edit>
-			<Styled.Delete data-testid="delete-button-container">
+			<Styled.Delete data-testid="delete-button-container" isDeleting={isDeleting}>
 				<Button
 					minorTransparent
 					condensed
 					size="small"
-					icon={<Trash />}
+					icon={isDeleting ? <LoadingSpinner height={18} /> : <Trash />}
+					disabled={isDeleting}
 					onClick={trashDisabled ? () => setShowErrorModal(true) : deleteBillingProfile}
 				/>
 				{trashDisabled && (

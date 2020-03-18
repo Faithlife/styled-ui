@@ -402,7 +402,7 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 					)}
 					{displayProfiles
 						? displayProfiles.map((p, i) => (
-								<Fragment key={i}>
+								<Fragment key={p.profileId}>
 									<BillingProfile
 										billingProfile={p}
 										onDelete={onDeleteBillingProfile}

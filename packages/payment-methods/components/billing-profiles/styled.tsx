@@ -74,7 +74,7 @@ export const ExpiredCardWarning = styled.div`
 `;
 
 export const Delete = styled.div`
-	padding-left: 16px;
+	padding-left: ${props => (props.isDeleting ? '11px' : '16px')};
 `;
 
 export const PayPalDelete = styled(Delete)`
