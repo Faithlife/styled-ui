@@ -8,14 +8,15 @@ const tabs = {
 		paddingX: 5,
 		paddingY: [4, 3],
 		backgroundColor: 'tab.modalBackground',
+		marginBottom: '-1px',
+		borderBottom: 1,
+		borderBottomColor: 'tab.modalBorder',
 		'&:hover': {
 			backgroundColor: 'tab.modalHover',
-			borderColor: 'tab.modalHover',
 		},
 		'&:disabled': {
 			color: 'tab.modalForegroundDisabled',
 			backgroundColor: 'tab.modalDisabled',
-			borderColor: 'tab.modalDisabled',
 		},
 		'&:active': {
 			backgroundColor: 'tab.modalActive',
@@ -101,7 +102,6 @@ const selected = {
 		borderRightColor: 'tab.modalBorder',
 		borderBottom: 1,
 		borderBottomColor: 'tab.modalBackgroundActive',
-		marginBottom: '-1px',
 		fontWeight: 1,
 	},
 	'page-false': {},
