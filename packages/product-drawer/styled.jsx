@@ -39,5 +39,6 @@ export const ProductDrawerToggleText = styled.span`
 	@media (min-width: ${mediaSizes.tablet}) {
 		display: inline;
 		margin-left: ${({ styleOverrides }) => styleOverrides.toggleTextLeftMargin || '4px'};
+		font-size: ${({ styleOverrides }) => styleOverrides.toggleTextFontSize || '16px'};
 	}
 `;
