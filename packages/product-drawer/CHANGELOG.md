@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.6](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.4.5...@faithlife/product-drawer@0.4.6) (2020-03-20)
+
+
+### Bug Fixes
+
+* Create style override for toggleTextFontSize. ([6c58b2b](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/6c58b2b41269d9c578ee081fa76838ed499f89c3))
+
+
+
+
+
 ## [0.4.5](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.4.4...@faithlife/product-drawer@0.4.5) (2020-03-18)
 
 
