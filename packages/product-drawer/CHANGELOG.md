@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.7](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.4.6...@faithlife/product-drawer@0.4.7) (2020-03-20)
+
+
+### Bug Fixes
+
+* Add font-family: inherit. ([2a64e68](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/2a64e68e6ba0bb8e0a0fb81b2d98f0d6bb8d6325))
+
+
+
+
+
 ## [0.4.6](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.4.5...@faithlife/product-drawer@0.4.6) (2020-03-20)
 
 
