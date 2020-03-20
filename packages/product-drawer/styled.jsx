@@ -13,6 +13,7 @@ export const ProductDrawerToggle = styled.button`
 	cursor: pointer;
 	background: transparent;
 	border: none;
+	font-family: inherit;
 
 	color: ${({ styleOverrides }) => styleOverrides.toggleButtonColor || 'initial'};
 
