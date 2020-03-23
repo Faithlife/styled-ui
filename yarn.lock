@@ -3091,10 +3091,10 @@
   resolved "http://npm.faithlife.io/@faithlife%2frt-vdom/-/rt-vdom-1.2.4.tgz#0bcaa90db81cb209328e6e466f94f4ec90ad981e"
   integrity sha512-6Smedaova/24dm+uEXbZKTl+AopMGxa6mgRS+w3/nh72mqdzwXNGwpYeVg/R511UUb4D3Ro8gU0/tXzh2nT6Kg==
 
-"@faithlife/smart-media-core@^2.3.1":
-  version "2.3.1"
-  resolved "http://npm.faithlife.io/@faithlife%2fsmart-media-core/-/smart-media-core-2.3.1.tgz#5f5a1608d37cdb87136399e43c96051ddfc98e47"
-  integrity sha512-jAvjrrEzg3loIaJBmU0o8G0B+dMzk0yIsKU+qCO38oQhdNe77lEbPciCEam+W3udcRaVC+eikAPSMFb7DH/kdQ==
+"@faithlife/smart-media-core@^2.13.0":
+  version "2.13.0"
+  resolved "http://npm.faithlife.io/@faithlife%2fsmart-media-core/-/smart-media-core-2.13.0.tgz#367bcce11f70a79f10d0e6e1995804b863fd99ff"
+  integrity sha512-aDfJdEMWDXhmdeHPUhRku+g8WRLwa4muasy+ITtZlEeqlB3A9EOlrZSOFWFtXeTy3hTwP8r8sDfRH31/cxIVJg==
   dependencies:
     "@faithlife/rt-vdom" "^1.2.3"
     btoa-lite "^1.0.0"
@@ -3102,16 +3102,17 @@
     opentype.js "^1.1.0"
     qrcode "^1.4.4"
 
-"@faithlife/smart-media-editor@^7.0.0", "@faithlife/smart-media-editor@^7.4.3":
-  version "7.5.2"
-  resolved "http://npm.faithlife.io/@faithlife%2fsmart-media-editor/-/smart-media-editor-7.5.2.tgz#d8d877b03f6af652e391247cea38792f45c3f558"
-  integrity sha512-BYzDlajK6/6SttfsQlkjWP86i2KM3mNj+SY7yN6PswjTlVJnQPBbN/C+tOzAVBEmzNrN4R72GVHisQXHAEfnSw==
+"@faithlife/smart-media-editor@^8.10.0":
+  version "8.10.0"
+  resolved "http://npm.faithlife.io/@faithlife%2fsmart-media-editor/-/smart-media-editor-8.10.0.tgz#bbf534b74bcc68070a72ab59189fb8e8b206f483"
+  integrity sha512-wPNqFZ9UXsa3YaqqgKRJLxqsvazUUUCdvNJQm4FLPL2rUhPvmnwcIhLH9pSIdFahLcE2fUkqVFA26FZwAEaKHw==
   dependencies:
+    "@faithlife/file-picker" "^2.0.0"
     "@faithlife/react-ui" "^7.7.0"
     "@faithlife/rt-vdom" "^1.2.3"
-    "@faithlife/smart-media-core" "^2.3.1"
+    "@faithlife/smart-media-core" "^2.13.0"
     "@types/opentype.js" "^0.7.2"
-    downshift "^5.0.0-alpha.0"
+    downshift "^5.0.3"
     fabric "^3.0.0"
     hotkeys-js "^3.6.11"
     lodash.debounce "^4.0.8"
@@ -9224,10 +9225,10 @@ dotenv@^8.0.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
 
-downshift@^5.0.0-alpha.0:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/downshift/-/downshift-5.0.3.tgz#4912e1deeda89c6f78b2af765f6700722f00918d"
-  integrity sha512-J6cfEcv0qbCUuI4yUhdoj08aJ025MxjLe+GkQ53eY5iC1NrjMj+FgjGkA0dGsyHm5JzVuKTJFd5wQNWOvsLP0g==
+downshift@^5.0.3:
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/downshift/-/downshift-5.0.5.tgz#1cc90dc09ae62998ce28a4ce457e0f1cdd0bfcfa"
+  integrity sha512-V1idov3Rkvz1YWA1K67aIx51EgokIDvep4x6KmU7HhsayI8DvTEZBeH4O92zeFVGximKujRO7ChBzBAf4PKWFA==
   dependencies:
     "@babel/runtime" "^7.4.5"
     compute-scroll-into-view "^1.0.9"
@@ -18584,9 +18585,9 @@ simple-get@^3.0.3:
     simple-concat "^1.0.0"
 
 simple-git@^1.85.0:
-  version "1.131.0"
-  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-1.131.0.tgz#68d85bf6a706e418b8a92cae765d2ad358781e21"
-  integrity sha512-z/art7YYtmPnnLItT/j+nKwJt6ap6nHZ4D8sYo9PdCKK/ug56SN6m/evfxJk7uDV3e9JuCa8qIyDU2P3cxmiNQ==
+  version "1.132.0"
+  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-1.132.0.tgz#53ac4c5ec9e74e37c2fd461e23309f22fcdf09b1"
+  integrity sha512-xauHm1YqCTom1sC9eOjfq3/9RKiUA9iPnxBbrY2DdL8l4ADMu0jjM5l5lphQP5YWNqAL2aXC/OeuQ76vHtW5fg==
   dependencies:
     debug "^4.0.1"
 

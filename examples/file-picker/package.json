@@ -4,7 +4,8 @@
   "version": "3.0.1",
   "dependencies": {
     "@faithlife/file-picker": "^2.0.1",
-    "@faithlife/smart-media-editor": "^7.4.3",
+    "@faithlife/format-uri": "^1.0.0",
+    "@faithlife/smart-media-editor": "^8.10.0",
     "@faithlife/styled-ui": "^5.47.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"

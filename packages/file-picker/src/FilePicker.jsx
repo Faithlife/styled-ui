@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import { loadSmartMediaModelForAmberSmartMediaFamily } from '@faithlife/smart-media-editor';
-import { SmartMediaEditorModal } from './SmartMediaEditorModal';
+import { ExternalEditorModal } from './ExternalEditorModal';
 import { FilePickerModal } from './FilePickerModal';
 import { FilePickerProvider } from './FilePickerContext';
 import { useAmberClient } from './useAmberClient';
@@ -13,9 +12,10 @@ export const FilePicker = ({
 	isOpen,
 	onFilesSelected,
 	onCancel,
+	onLoadAssetForEditing,
+	onLoadModelForSaving,
 	allowMultiSelect,
-	disableEditor,
-	localizedResources,
+	ExternalEditorComponent,
 }) => {
 	const [asset, setAsset] = useState(null);
 	const [model, setModel] = useState();
@@ -25,37 +25,37 @@ export const FilePicker = ({
 			const firstAsset = data.assets[0];
 			setAsset(firstAsset);
 			if (data.openInExternalEditor) {
-				setModel(loadSmartMediaModel(firstAsset));
+				setModel(onLoadAssetForEditing(firstAsset));
 			} else {
 				onFilesSelected({ assets: [firstAsset] });
 			}
 		},
-		[onFilesSelected]
+		[onFilesSelected, onLoadAssetForEditing]
 	);
 
 	const handleCancel = useCallback(() => {
 		setAsset(null);
-		setModel(null);
+		setModel(undefined);
 		onCancel();
 	}, [onCancel, setModel]);
 
 	const { createSmartMediaAsset } = useAmberClient(accountId);
-	const handleSmartMediaSave = useCallback(
+	const handleExternalEditorSave = useCallback(
 		async (blob, metadata) => {
 			const newAsset = await createSmartMediaAsset(asset, blob, metadata);
 			onFilesSelected({ assets: [newAsset] });
-			setModel(null);
+			setModel(undefined);
 		},
 		[asset, createSmartMediaAsset, onFilesSelected, setModel]
 	);
 
-	const handleSmartMediaDone = useCallback(() => {
-		setModel(null);
+	const handleExternalEditorDone = useCallback(() => {
+		setModel(undefined);
 		onFilesSelected({ assets: [asset] });
 	}, [asset, onFilesSelected, setModel]);
 
-	const handleSmartMediaCancel = useCallback(() => {
-		setModel(null);
+	const handleExternalEditorCancel = useCallback(() => {
+		setModel(undefined);
 	}, [setModel]);
 
 	const context = useMemo(
@@ -64,17 +64,9 @@ export const FilePicker = ({
 			onFilesSelected: handleFilesSelected,
 			onCancel: handleCancel,
 			allowMultiSelect,
-			disableEditor,
-			localizedResources,
+			ExternalEditorComponent,
 		}),
-		[
-			accountId,
-			handleFilesSelected,
-			handleCancel,
-			allowMultiSelect,
-			disableEditor,
-			localizedResources,
-		]
+		[accountId, handleFilesSelected, handleCancel, allowMultiSelect, ExternalEditorComponent]
 	);
 
 	return (
@@ -82,13 +74,15 @@ export const FilePicker = ({
 			<FilePickerModal isOpen={isOpen} onClose={handleCancel} title={title}>
 				{children}
 			</FilePickerModal>
-			{!disableEditor && (
-				<SmartMediaEditorModal
+			{ExternalEditorComponent && (
+				<ExternalEditorModal
+					ExternalEditorComponent={ExternalEditorComponent}
 					isOpen={isOpen && !!model}
 					model={model}
-					onCancel={handleSmartMediaCancel}
-					onDone={handleSmartMediaDone}
-					onSave={handleSmartMediaSave}
+					onCancel={handleExternalEditorCancel}
+					onDone={handleExternalEditorDone}
+					onLoadModelForSaving={onLoadModelForSaving}
+					onSave={handleExternalEditorSave}
 					title={title}
 				/>
 			)}
@@ -114,36 +108,12 @@ FilePicker.propTypes = {
 	onFilesSelected: PropTypes.func.isRequired,
 	/** Should close the File Picker. */
 	onCancel: PropTypes.func.isRequired,
+	/** Called when an asset is chosen for editing in the ExternalEditorComponent. The result of this callback will be passed to the ExternalEditorComponent in the model prop. */
+	onLoadAssetForEditing: PropTypes.func,
+	/** Called with a ref to the ExternalEditorComponent. Should return an object with {blob, metadata} with binary image data and SmartMedia metadata to be saved on a new Amber asset. */
+	onLoadModelForSaving: PropTypes.func,
+	/** For external editors such as the Smart Media Editor. */
+	ExternalEditorComponent: PropTypes.elementType,
 	/** Controls whether the File Picker can select multiple files. */
 	allowMultiSelect: PropTypes.bool,
-	/** Disables the Smart Media Editor. Defaults to false. */
-	disableEditor: PropTypes.bool,
-	/** Localized text for the Smart Media Editor. */
-	localizedResources: PropTypes.object,
 };
-
-const loadSmartMediaModel = asset => {
-	const selectedFileBackground = asset && asset.file && asset.file.linkUri;
-	const smartMediaMetadata = getOrInitSmartMediaMetadata(asset);
-
-	if (!asset || !selectedFileBackground || !smartMediaMetadata) {
-		return;
-	}
-
-	const model = loadSmartMediaModelForAmberSmartMediaFamily(
-		smartMediaMetadata.data,
-		asset.file,
-		selectedFileBackground,
-		'anonymous'
-	);
-
-	return model;
-};
-
-function getOrInitSmartMediaMetadata(asset) {
-	return (
-		(asset && asset.families && asset.families.find(x => x.name === 'smartMedia')) || {
-			data: { styles: [{ version: 1, data: { textFields: [] } }] },
-		}
-	);
-}
