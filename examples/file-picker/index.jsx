@@ -63,7 +63,6 @@ const App = () => {
 				onLoadModelForSaving={handleLoadModelForSaving}
 				ExternalEditorComponent={SmartMediaEditorComponent}
 				onCancel={handleCancel}
-				localizedResources={localizedResources}
 			>
 				<FilePicker.GroupVaultTab />
 				<FilePicker.FaithlifeStockTab />
