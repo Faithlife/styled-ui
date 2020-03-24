@@ -92,7 +92,6 @@ export const FilePicker = ({
 
 FilePicker.defaultProps = {
 	title: 'File Picker',
-	disableEditor: false,
 };
 
 FilePicker.propTypes = {
