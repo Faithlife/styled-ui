@@ -4,6 +4,7 @@ import { Box } from '@faithlife/styled-ui';
 import { FilePicker } from '@faithlife/file-picker';
 import formatUri from '@faithlife/format-uri';
 import {
+	getSmartMediaBackgroundQuery,
 	loadSmartMediaModelForAmberSmartMediaFamily,
 	SmartMediaEditor,
 	smartMediaToolbarFeatures,
@@ -11,8 +12,39 @@ import {
 	SmartMediaEditorProvider,
 	toAmberSmartMediaFamily,
 	useFabric,
+	SmartMediaModel,
 } from '@faithlife/smart-media-editor';
 import localizedResources from '@faithlife/smart-media-editor/dist/locales/en-US/resources.json';
+
+const SmartMediaEditorComponent = React.forwardRef(function SmartMediaEditorComponent(
+	{ model, onChange, isCreatingNewAsset },
+	ref
+) {
+	const fabric = useFabric();
+	const undesiredFeatures = [!isCreatingNewAsset ? 'assetPicker' : null, 'bold', 'italic'];
+	const toolbarFeatures = smartMediaToolbarFeatures.filter(
+		feature => !undesiredFeatures.includes(feature)
+	);
+
+	return (
+		<SmartMediaEditorProvider
+			fetchFontFamilies={fetchFontFamilies}
+			localizedResources={localizedResources}
+		>
+			<SmartMediaEditor
+				ref={ref}
+				fabric={fabric}
+				model={model}
+				onChange={onChange}
+				toolbarFeatures={toolbarFeatures}
+				getBackgroundItems={getBackgroundImages}
+				getForegroundItems={getForegroundImages}
+				getElements={getElements}
+				preferArtboard
+			/>
+		</SmartMediaEditorProvider>
+	);
+});
 
 const App = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -115,11 +147,15 @@ function ImagePreview({ onClick, previewImage }) {
 }
 
 function handleLoadSmartMediaModel(asset) {
-	const selectedFileBackground = asset && asset.file && asset.file.linkUri;
+	if (!asset) {
+		return SmartMediaModel.createWithData();
+	}
+
+	const selectedFileBackground = asset.file?.linkUri;
 	const smartMediaMetadata = getOrInitSmartMediaMetadata(asset);
 
-	if (!asset || !selectedFileBackground || !smartMediaMetadata) {
-		return undefined;
+	if (!selectedFileBackground || !smartMediaMetadata) {
+		return SmartMediaModel.createWithData();
 	}
 
 	const model = loadSmartMediaModelForAmberSmartMediaFamily(
@@ -134,40 +170,11 @@ function handleLoadSmartMediaModel(asset) {
 
 function getOrInitSmartMediaMetadata(asset) {
 	return (
-		(asset && asset.families && asset.families.find(x => x.name === 'smartMedia')) || {
+		asset.families?.find(x => x.name === 'smartMedia') || {
 			data: { styles: [{ version: 1, data: { textFields: [] } }] },
 		}
 	);
 }
-
-const SmartMediaEditorComponent = React.forwardRef(function SmartMediaEditorComponent(
-	{ model, onChange },
-	ref
-) {
-	const fabric = useFabric();
-	const undesiredFeatures = ['assetPicker', 'background', 'bold', 'italic'];
-	const toolbarFeatures = smartMediaToolbarFeatures.filter(
-		feature => !undesiredFeatures.includes(feature)
-	);
-
-	return (
-		<SmartMediaEditorProvider
-			fetchFontFamilies={fetchFontFamilies}
-			localizedResources={localizedResources}
-		>
-			<SmartMediaEditor
-				ref={ref}
-				fabric={fabric}
-				model={model}
-				onChange={onChange}
-				toolbarFeatures={toolbarFeatures}
-				getForegroundItems={getForegroundImages}
-				getElements={getElements}
-				preferArtboard
-			/>
-		</SmartMediaEditorProvider>
-	);
-});
 
 async function getElements(searchText, options) {
 	const query = searchText
@@ -274,4 +281,24 @@ async function handleLoadModelForSaving(editorRef, model) {
 		styles: [toAmberSmartMediaFamily(model)],
 	};
 	return { blob, metadata };
+}
+
+async function getBackgroundImages(searchText, options) {
+	const query = getSmartMediaBackgroundQuery(searchText);
+
+	const getHitExtraData = hit => {
+		return { model: fetchAndBuildAmberTemplate(hit.asset) };
+	};
+
+	const results = await getAmberResults(query, options, getHitExtraData);
+	return results;
+}
+
+function fetchAndBuildAmberTemplate(amberSmartMedia) {
+	return loadSmartMediaModelForAmberSmartMediaFamily(
+		amberSmartMedia.metadata.smartMedia,
+		amberSmartMedia.file,
+		proxyUrl(amberSmartMedia.file?.link?.uri),
+		'anonymous'
+	);
 }

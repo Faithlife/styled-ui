@@ -41,6 +41,11 @@ export function AmberContent({
 							filterData: parsedEvent.filterData,
 							kind: 'filter',
 						});
+					} else if (parsedEvent.type === 'create') {
+						onFilesSelected({
+							assets: [],
+							openInExternalEditor: parsedEvent.openInExternalEditor,
+						});
 					}
 				}
 			}

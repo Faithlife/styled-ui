@@ -17,21 +17,23 @@ export const useAmberClient = accountId => {
 
 	const createSmartMediaAsset = useCallback(
 		async (asset, blob, metadata) => {
-			const sourceId = asset.source ? asset.source.id : asset.file ? asset.file.id : null;
+			const sourceId = asset?.source ? asset.source.id : asset?.file ? asset.file.id : null;
 
 			const isUnsplashAsset = /^us_/.test(sourceId);
 
-			const copiedSourceFile = isUnsplashAsset
-				? { id: sourceId }
-				: await fetchJson(
-						formatUri('/proxy/files/v1/assets/{assetId}/files/{fileId}/copy', {
-							assetId: asset.id,
-							fileId: sourceId,
-						}),
-						{
-							method: 'POST',
-						}
-				  );
+			const copiedSourceFile = sourceId
+				? isUnsplashAsset
+					? { id: sourceId }
+					: await fetchJson(
+							formatUri('/proxy/files/v1/assets/{assetId}/files/{fileId}/copy', {
+								assetId: asset.id,
+								fileId: sourceId,
+							}),
+							{
+								method: 'POST',
+							}
+					  )
+				: null;
 
 			const startUploadResponse = await amberClient.current.createDirectUpload();
 			if (startUploadResponse.error) {
@@ -59,19 +61,21 @@ export const useAmberClient = accountId => {
 				throw finishUploadResponse.error;
 			}
 
+			const ops = [
+				{ op: 'setFile', fileId: finishUploadResponse.value.ok.id, update: true },
+				{ op: 'adoptFileMetadata' },
+				{ op: 'addToMetadataArray', path: 'families', value: 'smartMedia' },
+				{ op: 'setMetadata', path: 'smartMedia', value: metadata },
+				copiedSourceFile ? { op: 'setSource', fileId: copiedSourceFile.id } : null,
+				{ op: 'createStandardFormats' },
+			].filter(x => !!x);
+
 			const createAssetResponse = await amberClient.current.createAssetWithOperations({
 				assetEditRequest: {
 					bucket: bucketId,
 					forceJob: true,
 					waitForIndexing: true,
-					ops: [
-						{ op: 'setFile', fileId: finishUploadResponse.value.ok.id, update: true },
-						{ op: 'adoptFileMetadata' },
-						{ op: 'addToMetadataArray', path: 'families', value: 'smartMedia' },
-						{ op: 'setMetadata', path: 'smartMedia', value: metadata },
-						{ op: 'setSource', fileId: copiedSourceFile.id },
-						{ op: 'createStandardFormats' },
-					],
+					ops,
 				},
 			});
 			if (createAssetResponse.error) {

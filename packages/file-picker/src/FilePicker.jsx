@@ -19,12 +19,16 @@ export const FilePicker = ({
 }) => {
 	const [asset, setAsset] = useState(null);
 	const [model, setModel] = useState();
+	const [isCreatingNewAsset, setIsCreatingNewAsset] = useState(false);
 
 	const handleFilesSelected = useCallback(
 		data => {
 			const firstAsset = data.assets[0];
 			setAsset(firstAsset);
 			if (data.openInExternalEditor) {
+				if (!firstAsset) {
+					setIsCreatingNewAsset(true);
+				}
 				setModel(onLoadAssetForEditing(firstAsset));
 			} else {
 				onFilesSelected({ assets: [firstAsset] });
@@ -36,6 +40,7 @@ export const FilePicker = ({
 	const handleCancel = useCallback(() => {
 		setAsset(null);
 		setModel(undefined);
+		setIsCreatingNewAsset(false);
 		onCancel();
 	}, [onCancel, setModel]);
 
@@ -45,17 +50,20 @@ export const FilePicker = ({
 			const newAsset = await createSmartMediaAsset(asset, blob, metadata);
 			onFilesSelected({ assets: [newAsset] });
 			setModel(undefined);
+			setIsCreatingNewAsset(false);
 		},
 		[asset, createSmartMediaAsset, onFilesSelected, setModel]
 	);
 
 	const handleExternalEditorDone = useCallback(() => {
 		setModel(undefined);
+		setIsCreatingNewAsset(false);
 		onFilesSelected({ assets: [asset] });
 	}, [asset, onFilesSelected, setModel]);
 
 	const handleExternalEditorCancel = useCallback(() => {
 		setModel(undefined);
+		setIsCreatingNewAsset(false);
 	}, [setModel]);
 
 	const context = useMemo(
@@ -77,7 +85,8 @@ export const FilePicker = ({
 			{ExternalEditorComponent && (
 				<ExternalEditorModal
 					ExternalEditorComponent={ExternalEditorComponent}
-					isOpen={isOpen && !!model}
+					isOpen={isOpen && (model || isCreatingNewAsset)}
+					isCreatingNewAsset={isCreatingNewAsset}
 					model={model}
 					onCancel={handleExternalEditorCancel}
 					onDone={handleExternalEditorDone}

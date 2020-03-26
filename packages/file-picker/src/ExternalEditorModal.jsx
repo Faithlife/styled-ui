@@ -4,6 +4,7 @@ import { Button, Modal } from '@faithlife/styled-ui/v6';
 
 export const ExternalEditorModal = ({
 	ExternalEditorComponent,
+	isCreatingNewAsset,
 	isOpen,
 	title,
 	model: modelProp,
@@ -86,7 +87,12 @@ export const ExternalEditorModal = ({
 				}
 			/>
 			<Modal.Content padding={0} borderTop={`1px solid`} borderColor="gray8">
-				<ExternalEditorComponent model={model} onChange={handleChange} ref={editorRef} />
+				<ExternalEditorComponent
+					model={model}
+					onChange={handleChange}
+					ref={editorRef}
+					isCreatingNewAsset={isCreatingNewAsset}
+				/>
 			</Modal.Content>
 		</Modal>
 	);
