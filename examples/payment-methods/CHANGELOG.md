@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.5](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/payment-methods@2.1.4...payment-methods@2.1.5) (2020-03-27)
+
+
+### Bug Fixes
+
+* **payment-methods:** Address code. & design review for skeletor cart payment methods SITES-6056. ([#81](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/81)) ([5619950](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/5619950174d9b13f0cb72495efb5bb592061ffed))
+
+
+
+
+
 ## [2.1.4](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/payment-methods@2.1.3...payment-methods@2.1.4) (2020-03-18)
 
 **Note:** Version bump only for package payment-methods
