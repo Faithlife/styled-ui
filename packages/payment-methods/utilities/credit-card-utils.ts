@@ -6,6 +6,7 @@ import ICreditCardDto from '../clients/typings/orders/ICreditCardDto';
 import nameof from './nameof';
 import IEditBillingProfile from '../typings/IEditBillingProfile';
 import IEditCardInfo from '../typings/IEditCardInfo';
+import IEditShippingProfile from '../typings/IEditShippingProfile';
 
 // more-or-less from https://github.com/nosir/cleave.js/blob/f3e5d715109b9a51a36219d2751bb7b94734f066/src/shortcuts/CreditCardDetector.js#L21
 const cardNumberPrefixByType = {
@@ -185,6 +186,31 @@ export const validateBillingProfile = (
 	return errors;
 };
 
+export const validateShippingProfile = (
+	uncommittedShippingProfile: IEditShippingProfile,
+	statesByCountryId: Record<string, IStateDto[]>
+): IError[] => {
+	const errors: IError[] = validateSimpleMissingShippingAddressValues(uncommittedShippingProfile, [
+		'name',
+		'addressLine1',
+		'city',
+		'countryId',
+	]);
+
+	if (
+		!isNullOrWhitespace(uncommittedShippingProfile.countryId as string) &&
+		isNullOrWhitespace(uncommittedShippingProfile.stateId as string) &&
+		Object.prototype.hasOwnProperty.call(
+			statesByCountryId,
+			uncommittedShippingProfile.countryId as string
+		) &&
+		statesByCountryId[uncommittedShippingProfile.countryId as string].length > 0
+	) {
+		errors.push(missingValue('stateId'));
+	}
+	return errors;
+};
+
 // from https://git.faithlife.dev/Logos/Hermes/blob/d9ef2bde608f4514209753e7ace4377af4bbecdf/src/Hermes.Utility/CreditCardUtility.cs#L30
 const potentialCardNumberPattern = /(?:18|60|[34]\d|5[1-5]|2[0-1]|86)(?:\d[\W_]?){8,11}\d{3}/gi;
 
@@ -209,12 +235,35 @@ const validateSimpleMissingValues = (
 	return errors;
 };
 
-const missingValue = (property: keyof IEditBillingProfile | keyof IEditCardInfo) => ({
+const validateSimpleMissingShippingAddressValues = (
+	profile: IEditShippingProfile,
+	properties: (keyof IEditShippingProfile)[]
+): IError[] => {
+	const errors = [] as any;
+	for (const property of properties) {
+		let value = '';
+		if (Object.prototype.hasOwnProperty.call(profile, property)) {
+			value = profile[property] as string;
+		}
+
+		if (isNullOrWhitespace(value)) {
+			errors.push(missingValue(property));
+		}
+	}
+	return errors;
+};
+
+const missingValue = (
+	property: keyof IEditBillingProfile | keyof IEditCardInfo | keyof IEditShippingProfile
+) => ({
 	code: 'MissingValue',
 	property,
 });
 
-const badValue = (property: keyof IEditBillingProfile | keyof IEditCardInfo, message: string) => ({
+const badValue = (
+	property: keyof IEditBillingProfile | keyof IEditCardInfo | keyof IEditShippingProfile,
+	message: string
+) => ({
 	code: 'BadValue',
 	property,
 	message,

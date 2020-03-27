@@ -5,7 +5,7 @@ import PaymentMethods, {
 	ShippingAddressForm,
 	BillingForm,
 } from '@faithlife/payment-methods';
-import { SimpleToast, Accordion } from '@faithlife/styled-ui';
+import { SimpleToast, Accordion, theme } from '@faithlife/styled-ui';
 import localizedResources from '../../packages/payment-methods/locales/en-US/resources.json';
 
 const App = () => {
@@ -65,6 +65,15 @@ const App = () => {
 		return cardInfo;
 	};
 
+	// Example of how to override theme
+	const myTheme = {
+		...theme,
+		colors: {
+			...theme.colors,
+			button: { ...theme.colors.button, primaryBackground: '#036ced', primaryHover: '#5f9fed' },
+		},
+	};
+
 	return (
 		<Accordion
 			expandedSections={expandedSections}
@@ -81,6 +90,7 @@ const App = () => {
 						actAndHandleException={actAndHandleException}
 						setSystemMessage={setSystemMessage}
 						localizedResources={localizedResources}
+						theme={myTheme}
 					/>
 				</Accordion.Panel>
 			</Accordion.Item>
@@ -96,6 +106,7 @@ const App = () => {
 						}}
 						localizedResources={localizedResources}
 						setCardInfoToSessionStorage={setCardInfoToSessionStorage}
+						theme={myTheme}
 					></BillingForm>
 				</Accordion.Panel>
 			</Accordion.Item>
@@ -108,6 +119,7 @@ const App = () => {
 						localizedResources={localizedResources}
 						onCommitClicked={form => alert(form)}
 						billingProfile={testInitialBillingProfile}
+						theme={myTheme}
 					></ShippingAddressForm>
 				</Accordion.Panel>
 			</Accordion.Item>
@@ -130,6 +142,7 @@ const App = () => {
 						handleSelectedProfileInvalid={() =>
 							alert("Unable to find selected profile Id or it's not valid")
 						}
+						theme={myTheme}
 					/>
 				</Accordion.Panel>
 			</Accordion.Item>

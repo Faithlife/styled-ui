@@ -204,7 +204,6 @@ const AddressForm: React.FunctionComponent<IAddressFormProps> = ({
 						<Styled.Input
 							name={nameof<IEditBillingProfile>('city')}
 							autoComplete="city"
-							placeholder={strings.city}
 							isValid={isValidField('city')}
 							data-testid="city"
 							onChange={updateBillingProfile}
@@ -213,7 +212,7 @@ const AddressForm: React.FunctionComponent<IAddressFormProps> = ({
 						/>
 					</Styled.Label>
 				</Styled.CityContainer>
-				{useStateSelector ? (
+				{useStateSelector && stateAddressFormat ? (
 					<Styled.StateContainer data-testid="state-selector-container">
 						<Styled.Label>
 							<Styled.LabelText>{strings[toCamelCase(stateAddressFormat.name)]}</Styled.LabelText>

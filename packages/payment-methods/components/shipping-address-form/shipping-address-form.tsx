@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { Button } from '@faithlife/styled-ui';
+import { Button } from '@faithlife/styled-ui/v6';
 import { useLocalization } from '../../Localization';
 import IShippingAddressFormProps from '../../typings/IShippingAddressFormProps';
 import ICountryDto from '../../clients/typings/locations/ICountryDto';
@@ -12,6 +12,7 @@ import { mapOrdersPropertyToEditProperty } from '../../utilities/credit-card-uti
 import IError from '../../clients/typings/orders/IError';
 import * as Styled from './styled';
 import IEditBillingProfile from '../../typings/IEditBillingProfile';
+import { validateShippingProfile } from '../../utilities/credit-card-utils';
 
 const unitedStatesCountryId = '840';
 const defaultCountryOption = { label: 'United States', value: unitedStatesCountryId };
@@ -26,7 +27,7 @@ const ShippingAddressForm: React.FunctionComponent<IShippingAddressFormProps> = 
 	const [statesByCountryId, setStatesByCountryId] = useState<Record<string, IStateDto[]>>({});
 	const [useBilling, setUseBilling] = useState<boolean>(true);
 	const [addressFormatItems, setAddressFormatItems] = useState<IAddressFormatItem[]>([]);
-	const [clientValidationErrors] = useState<IError[]>([]);
+	const [clientValidationErrors, setClientValidationErrors] = useState<IError[]>([]);
 	const [isProcessing, setIsProcessing] = useState<boolean>(false);
 	const [uncommittedShippingProfile, setUncommittedShippingProfile] = useState<
 		IEditShippingProfile
@@ -156,18 +157,23 @@ const ShippingAddressForm: React.FunctionComponent<IShippingAddressFormProps> = 
 
 	const handleCommitClicked = useCallback(() => {
 		setIsProcessing(true);
+		const errors = validateShippingProfile(uncommittedShippingProfile, statesByCountryId);
+		setClientValidationErrors(errors);
 
-		const shippingAddress = {
-			...uncommittedShippingProfile,
-			countryAlpha2: countries.find(
-				country => country.countryId === uncommittedShippingProfile.countryId
-			)?.alpha2,
-			state: statesByCountryId[uncommittedShippingProfile.countryId as string].find(
-				state => state.stateId === uncommittedShippingProfile.stateId
-			)?.abbreviation,
-		};
+		if (errors.length === 0) {
+			const shippingAddress = {
+				...uncommittedShippingProfile,
+				countryAlpha2: countries.find(
+					country => country.countryId === uncommittedShippingProfile.countryId
+				)?.alpha2,
+				state: statesByCountryId[uncommittedShippingProfile.countryId as string].find(
+					state => state.stateId === uncommittedShippingProfile.stateId
+				)?.abbreviation,
+			};
 
-		onCommitClicked(shippingAddress);
+			onCommitClicked(shippingAddress);
+		}
+		setIsProcessing(false);
 	}, [setIsProcessing, uncommittedShippingProfile, onCommitClicked, countries, statesByCountryId]);
 
 	const getUncommittedShippingProfileValueOrDefault = (propertyName: any) => {
@@ -189,6 +195,12 @@ const ShippingAddressForm: React.FunctionComponent<IShippingAddressFormProps> = 
 			stateId,
 			countryId,
 			cardInfo: { postalCode },
+			usageInfo: {
+				outstandingPaymentPlansCount: 0,
+				pendingPrepubCount: 0,
+				activeSubscriptionCount: 0,
+			},
+			isDefault: false,
 		};
 	};
 
@@ -283,7 +295,12 @@ const ShippingAddressForm: React.FunctionComponent<IShippingAddressFormProps> = 
 				/>
 				<Styled.ButtonContainer>
 					<div data-testid="submit-address-form-button">
-						<Button primary medium onClick={handleCommitClicked} disabled={isProcessing}>
+						<Button
+							variant="primary"
+							size="small"
+							onClick={handleCommitClicked}
+							disabled={isProcessing}
+						>
 							{strings.next}
 						</Button>
 					</div>

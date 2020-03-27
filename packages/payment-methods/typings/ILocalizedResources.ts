@@ -74,6 +74,7 @@ declare interface ILocalizedResources {
 	rememberThisCard: string;
 	expired: string;
 	expires: string;
+	delete: string;
 }
 
 export default ILocalizedResources;

@@ -73,5 +73,6 @@
 	"sameAsBilling": "Same as billing.",
 	"rememberThisCard": "Remember this credit card.",
 	"expired": "Expired",
-	"expires": "Expires"
+	"expires": "Expires",
+	"delete": "Delete"
 }

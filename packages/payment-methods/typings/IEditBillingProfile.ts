@@ -1,4 +1,5 @@
 import IEditCardInfo from './IEditCardInfo';
+import IUsageInfo from './IUsageInfo';
 
 export default interface IEditBillingProfile {
 	profileId?: string;
@@ -9,8 +10,10 @@ export default interface IEditBillingProfile {
 	stateId: string | null;
 	suburb?: string;
 	countryId: string | null;
+	isDefault: boolean;
 	makeDefault?: boolean;
 	useOnPendingPrepubs?: boolean;
 	useOnActiveSubscriptions?: boolean;
 	useOnOutstandingPaymentPlans?: boolean;
+	usageInfo: IUsageInfo;
 }

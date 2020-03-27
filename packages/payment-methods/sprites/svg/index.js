@@ -5,6 +5,5 @@ import Visa from './visa.svg';
 import ArrowCycle from './arrow-cycle.svg';
 import Trash from './trash.svg';
 import PayPal from './paypal.svg';
-import Chevron from './chevron-up.svg';
 
-export { Amex, Discover, Mastercard, Visa, PayPal, ArrowCycle, Trash, Chevron };
+export { Amex, Discover, Mastercard, Visa, PayPal, ArrowCycle, Trash };

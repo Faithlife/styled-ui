@@ -1,18 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { Button, Radio, LoadingSpinner } from '@faithlife/styled-ui';
-import { Modal } from '@faithlife/styled-ui/v6';
 import { useLocalization } from '../../Localization';
 import IBillingProfileDto from '../../clients/typings/orders/IBillingProfileDto';
-import {
-	Amex,
-	Discover,
-	Mastercard,
-	Visa,
-	PayPal,
-	ArrowCycle,
-	Trash,
-	Chevron,
-} from '../../sprites/svg';
+import { Amex, Discover, Mastercard, Visa, PayPal, ArrowCycle, Trash } from '../../sprites/svg';
 import * as Styled from './styled';
 
 interface IBillingProfileProps {
@@ -46,7 +36,6 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 			billingProfile.usageInfo.outstandingPaymentPlansCount > 0 ||
 			billingProfile.usageInfo.pendingPrepubCount > 0
 	);
-	const [showErrorModal, setShowErrorModal] = useState(false);
 
 	// Date.getMonth() is zero-indexed
 	const isExpired =
@@ -62,8 +51,6 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 		onDelete(billingProfile.profileId);
 		setIsEditDisabled(false);
 	}, [billingProfile.profileId, onDelete]);
-
-	const handleModalClose = useCallback(() => setShowErrorModal(false), [setShowErrorModal]);
 
 	if (billingProfile.type.toLowerCase() === 'paypal') {
 		return (
@@ -112,62 +99,19 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 			<Styled.ExpiredCardWarning data-testid="expired-label">
 				{isExpired ? 'Expired' : null}
 			</Styled.ExpiredCardWarning>
-			<Styled.Edit data-testid="edit-button-container">
-				<Button
-					primaryTransparent
-					condensed
-					size="small"
-					onClick={() => onUpdate(billingProfile)}
-					disabled={isEditDisabled}
-				>
-					<Styled.ChevronContainer isEditing={isEditing}>
-						<Chevron />
-					</Styled.ChevronContainer>
-					<Styled.EditText>{strings.edit}</Styled.EditText>
-				</Button>
-			</Styled.Edit>
-			<Styled.Delete data-testid="delete-button-container" isDeleting={isDeleting}>
-				<Button
-					minorTransparent
-					condensed
-					size="small"
-					icon={isDeleting ? <LoadingSpinner height={18} /> : <Trash />}
-					disabled={isDeleting}
-					onClick={trashDisabled ? () => setShowErrorModal(true) : deleteBillingProfile}
-				/>
-				{trashDisabled && (
-					<Modal isOpen={showErrorModal} onClose={handleModalClose}>
-						<Modal.Header title={strings.beforeRemoving}></Modal.Header>
-						<Modal.Content width={['100vw', 400]}>
-							{billingProfile.usageInfo.activeSubscriptionCount > 0 && (
-								<p>
-									{'- '}
-									{strings.moveSubscriptionsToAlternate}
-								</p>
-							)}
-							{billingProfile.usageInfo.outstandingPaymentPlansCount > 0 && (
-								<p>
-									{'- '}
-									{strings.movePaymentPlansToAlternate}
-								</p>
-							)}
-							{billingProfile.usageInfo.pendingPrepubCount > 0 && (
-								<p>
-									{'- '}
-									{isCalledPreorder
-										? strings.movePreordersToAlternate
-										: strings.movePrepubsToAlternate}
-								</p>
-							)}
-						</Modal.Content>
-						<Modal.Footer>
-							<Modal.FooterButtons
-								cancelButton={{ text: 'Cancel', onClick: () => setShowErrorModal(false) }}
-							/>
-						</Modal.Footer>
-					</Modal>
-				)}
-			</Styled.Delete>
+			{!isEditing && (
+				<Styled.Edit data-testid="edit-button-container">
+					<Button
+						primaryTransparent
+						condensed
+						size="small"
+						onClick={() => onUpdate(billingProfile)}
+						disabled={isEditDisabled}
+					>
+						<Styled.EditText>{strings.edit}</Styled.EditText>
+					</Button>
+				</Styled.Edit>
+			)}
 		</Styled.CreditCardRow>
 	);
 };

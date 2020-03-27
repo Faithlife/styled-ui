@@ -85,6 +85,12 @@ export default class BillingProfileMapper {
 			suburb: profile.suburb,
 			countryId: profile.countryId.toString(),
 			stateId: profile.stateId ? profile.stateId.toString() : '',
+			usageInfo: {
+				pendingPrepubCount: profile.usageInfo?.pendingPrepubCount || 0,
+				activeSubscriptionCount: profile.usageInfo?.activeSubscriptionCount || 0,
+				outstandingPaymentPlansCount: profile.usageInfo?.outstandingPaymentPlansCount || 0,
+			},
+			isDefault: profile.isDefault,
 		};
 	}
 

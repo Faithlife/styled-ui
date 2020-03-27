@@ -11,4 +11,5 @@ export default interface IShippingProps {
 	) => Promise<T | undefined>;
 	onCommitClicked: Function;
 	billingProfile?: IEditBillingProfile;
+	theme?: any;
 }

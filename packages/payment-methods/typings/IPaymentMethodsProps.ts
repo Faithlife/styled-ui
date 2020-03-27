@@ -15,4 +15,5 @@ export default interface IPaymentMethodsProps {
 	getCardInfoFromSessionStorage?: Function;
 	setCardInfoToSessionStorage?: Function;
 	handleSelectedProfileInvalid?: Function;
+	theme?: any;
 }

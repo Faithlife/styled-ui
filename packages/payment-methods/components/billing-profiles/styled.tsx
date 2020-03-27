@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Input as UnstyledInput, Checkbox as UnstyledCheckbox } from '@faithlife/styled-ui';
+import { Button } from '@faithlife/styled-ui/v6';
 import CleaveUnstyled from 'cleave.js/react';
 
 export const BillingProfilesContainer = styled.div`
@@ -30,21 +31,13 @@ export const CreditCardRow = styled.div`
 	letter-spacing: 0.16px;
 	color: ${props => props.theme.shade80};
 
-	padding-left: 5px;
+	padding: 0 16px;
 `;
 
 export const CardLogoContainer = styled.div`
 	width: 38px;
 	height: 26px;
 	margin-left: 16px;
-`;
-
-export const ChevronContainer = styled.div`
-	width: 12px;
-	height: 12px;
-	transition: transform 100ms;
-	transform-style: preserve-3d;
-	transform: ${props => (props.isEditing ? 'rotate(180deg)' : '')};
 `;
 
 export const EditText = styled.div`
@@ -57,7 +50,7 @@ export const NewCardLabel = styled.div`
 `;
 
 export const Dots = styled.div`
-	padding-left: 22px;
+	padding-left: 8px;
 `;
 
 export const CardNumber = styled.div`
@@ -205,13 +198,6 @@ export const SecurityCodeContainer = styled.div`
 	padding-left: 8px;
 `;
 
-export const NewProfileButtons = styled.div`
-	padding-top: 12px;
-	display: flex;
-	flex-direction: row-reverse;
-	justify-content: space-between;
-`;
-
 export const BillingAddressInfoSection = styled.div`
 	padding-top: 8px;
 `;
@@ -236,4 +222,25 @@ export const Checkbox = styled(UnstyledCheckbox)`
 
 export const Edit = styled.div`
 	margin-left: auto;
+`;
+
+export const NewProfileButtons = styled.div`
+	padding-top: 12px;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row-reverse;
+`;
+
+export const DeleteButton = styled.div`
+	order: 3;
+`;
+
+export const CancelButton = styled(Button)`
+	order: 2;
+	margin-left: auto;
+	margin-right: 16px;
+`;
+
+export const CreateButton = styled.div`
+	order: 1;
 `;

@@ -201,6 +201,17 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 					const defaultProfile = freshProfiles.billingProfiles.filter(p => p.isDefault)[0];
 					if (defaultProfile && !selectedBillingProfileId) {
 						setSelectedBillingProfileId(defaultProfile.profileId);
+						setShowAllPaymentMethods(
+							freshProfiles.billingProfiles.findIndex(
+								p => p.profileId === defaultProfile.profileId
+							) > 2
+						);
+					} else {
+						setShowAllPaymentMethods(
+							freshProfiles.billingProfiles.findIndex(
+								p => p.profileId === selectedBillingProfileId
+							) > 2
+						);
 					}
 				}
 			};
@@ -407,7 +418,9 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 										billingProfile={p}
 										onDelete={onDeleteBillingProfile}
 										onUpdate={handleOnUpdateBillingProfile}
-										isSelected={selectedBillingProfileId === p.profileId}
+										isSelected={
+											selectedBillingProfileId === p.profileId && !isAddingNewBillingProfile
+										}
 										onSelected={() => onSelectBillingProfile(p)}
 										index={i}
 										isEditing={editingBillingProfileId === p.profileId}
@@ -433,6 +446,7 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 											addressFormatItems={addressFormatItems}
 											isCalledPreorder={isCalledPreorder}
 											saveForLater={saveForLater}
+											onDelete={onDeleteBillingProfile}
 										/>
 									)}
 								</Fragment>

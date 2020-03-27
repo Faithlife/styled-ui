@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useRef } from 'react';
 
-import { Button } from '@faithlife/styled-ui';
+import { LoadingSpinner } from '@faithlife/styled-ui';
+import { Modal, Button } from '@faithlife/styled-ui/v6';
 import { useLocalization } from '../../Localization';
 import IError from '../../clients/typings/orders/IError';
 import ICountryDto from '../../clients/typings/locations/ICountryDto';
@@ -32,6 +33,7 @@ interface IEditBillingProfileProps {
 	usageInfo?: IUsageInfoDto;
 	addressFormatItems: IAddressFormatItem[];
 	isCalledPreorder: boolean;
+	onDelete?: Function;
 	handleSaveForLaterChange?: Function;
 	saveForLater?: boolean;
 	createButtonText?: string;
@@ -48,12 +50,17 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 	countries,
 	statesByCountryId,
 	onSelectedCountryChanged,
-	usageInfo,
 	addressFormatItems,
 	isCalledPreorder,
 	handleSaveForLaterChange,
 	saveForLater = true,
 	createButtonText,
+	onDelete,
+	usageInfo = {
+		pendingPrepubCount: 0,
+		activeSubscriptionCount: 0,
+		outstandingPaymentPlansCount: 0,
+	},
 }) => {
 	const commitButtonRef = useRef<Button>(null);
 	const [uncommittedBillingProfile, setUncommittedBillingProfile] = useState<IEditBillingProfile>(
@@ -73,9 +80,23 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 					city: null,
 					stateId: null,
 					countryId: defaultCountryOption.value,
+					usageInfo: {
+						outstandingPaymentPlansCount: 0,
+						activeSubscriptionCount: 0,
+						pendingPrepubCount: 0,
+					},
+					isDefault: false,
 			  }
 	);
 	const [isProcessing, setIsProcessing] = useState<boolean>(false);
+	const [isDeleting, setIsDeleting] = useState(false);
+	const [trashDisabled, setTrashDisabled] = useState(
+		billingProfile &&
+			(billingProfile.usageInfo?.activeSubscriptionCount > 0 ||
+				billingProfile.usageInfo?.outstandingPaymentPlansCount > 0 ||
+				billingProfile.usageInfo?.pendingPrepubCount > 0)
+	);
+	const [showErrorModal, setShowErrorModal] = useState(false);
 
 	const [clientValidationErrors, setClientValidationErrors] = useState<IError[]>([]);
 
@@ -86,6 +107,8 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 			!isExpirationValid((billingProfile && billingProfile.cardInfo.expiration) || '')
 	);
 
+	const handleModalClose = useCallback(() => setShowErrorModal(false), [setShowErrorModal]);
+
 	const updateBillingProfile = useCallback(event => {
 		setIsProcessing(false);
 		const name = event.target.name;
@@ -95,6 +118,16 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 			[name]: value,
 		}));
 	}, []);
+
+	const deleteBillingProfile = useCallback(() => {
+		setTrashDisabled(true);
+		setIsDeleting(true);
+
+		if (billingProfile?.profileId && onDelete) {
+			onDelete(billingProfile.profileId);
+		}
+		setIsDeleting(false);
+	}, [billingProfile, onDelete]);
 
 	const updateCardInfo = useCallback((event: any) => {
 		// need to make local copies in case the event gets nullified before the useState function is called
@@ -158,6 +191,7 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 		if (errors.length === 0) {
 			onCommitBillingProfile(uncommittedBillingProfile);
 		}
+		setIsProcessing(false);
 	}, [
 		isEditingExistingProfile,
 		onCommitBillingProfile,
@@ -178,21 +212,29 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 		);
 	};
 
+	const showMakeDefault =
+		!billingProfile || (billingProfile && !billingProfile.isDefault && saveForLater);
+
+	const showMoveSubscriptions =
+		(!billingProfile && usageInfo.activeSubscriptionCount > 0) ||
+		(billingProfile &&
+			billingProfile.usageInfo.activeSubscriptionCount < usageInfo.activeSubscriptionCount);
+
+	const showMovePrepubs =
+		(!billingProfile && usageInfo.pendingPrepubCount > 0) ||
+		(billingProfile && billingProfile.usageInfo.pendingPrepubCount < usageInfo.pendingPrepubCount);
+
+	const showMovePaymentPlans =
+		(!billingProfile && usageInfo.outstandingPaymentPlansCount > 0) ||
+		(billingProfile &&
+			billingProfile.usageInfo.outstandingPaymentPlansCount <
+				usageInfo.outstandingPaymentPlansCount);
+
 	const strings = useLocalization();
 
 	return (
 		<Styled.EditBillingProfileSection>
 			<div>
-				{handleSaveForLaterChange && (
-					<div data-testid="remember-this-card-checkbox">
-						<Styled.Checkbox
-							onClick={handleSaveForLaterChange}
-							isChecked={saveForLater}
-							title={strings.rememberThisCard}
-							type="button"
-						></Styled.Checkbox>
-					</div>
-				)}
 				<Styled.CreditCardInfoRow>
 					<Styled.Label>
 						<Styled.LabelText>{strings.cardNumber}</Styled.LabelText>
@@ -290,20 +332,32 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 					</Styled.SecurityCodeContainer>
 				</Styled.CreditCardInfoRow>
 			</div>
-			<Styled.Checkbox
-				onClick={() =>
-					updateBillingProfile({
-						target: {
-							name: nameof<IEditBillingProfile>('makeDefault'),
-							value: !getUncommittedBillingProfileBoolOrDefault('makeDefault'),
-						},
-					})
-				}
-				isChecked={getUncommittedBillingProfileBoolOrDefault('makeDefault')}
-				title={strings.makeDefault}
-				type="button"
-			></Styled.Checkbox>
-			{usageInfo && usageInfo.activeSubscriptionCount > 0 && (
+			{handleSaveForLaterChange && (
+				<div data-testid="remember-this-card-checkbox">
+					<Styled.Checkbox
+						onClick={handleSaveForLaterChange}
+						isChecked={saveForLater}
+						title={strings.rememberThisCard}
+						type="button"
+					></Styled.Checkbox>
+				</div>
+			)}
+			{showMakeDefault && (
+				<Styled.Checkbox
+					onClick={() =>
+						updateBillingProfile({
+							target: {
+								name: nameof<IEditBillingProfile>('makeDefault'),
+								value: !getUncommittedBillingProfileBoolOrDefault('makeDefault'),
+							},
+						})
+					}
+					isChecked={getUncommittedBillingProfileBoolOrDefault('makeDefault')}
+					title={strings.makeDefault}
+					type="button"
+				></Styled.Checkbox>
+			)}
+			{showMoveSubscriptions && (
 				<Styled.Checkbox
 					onClick={() =>
 						updateBillingProfile({
@@ -318,7 +372,7 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 					type="button"
 				></Styled.Checkbox>
 			)}
-			{usageInfo && usageInfo.outstandingPaymentPlansCount > 0 && (
+			{showMovePaymentPlans && (
 				<Styled.Checkbox
 					onClick={() =>
 						updateBillingProfile({
@@ -333,7 +387,7 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 					type="button"
 				></Styled.Checkbox>
 			)}
-			{usageInfo && usageInfo.pendingPrepubCount > 0 && (
+			{showMovePrepubs && (
 				<Styled.Checkbox
 					onClick={() =>
 						updateBillingProfile({
@@ -364,22 +418,71 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 				errorByFieldName={errorByFieldName}
 			/>
 			<Styled.NewProfileButtons>
-				<div data-testid="create-billing-profile-button">
+				{onDelete && billingProfile && (
+					<Styled.DeleteButton data-testid="delete-button-container">
+						<Button
+							variant="danger"
+							size="small"
+							icon={isDeleting && <LoadingSpinner height={18} />}
+							disabled={isDeleting}
+							onClick={trashDisabled ? () => setShowErrorModal(true) : deleteBillingProfile}
+						>
+							{strings.delete}
+						</Button>
+						{trashDisabled && (
+							<Modal isOpen={showErrorModal} onClose={handleModalClose}>
+								<Modal.Header title={strings.beforeRemoving}></Modal.Header>
+								<Modal.Content width={['100vw', 400]}>
+									{billingProfile.usageInfo.activeSubscriptionCount > 0 && (
+										<p>
+											{'- '}
+											{strings.moveSubscriptionsToAlternate}
+										</p>
+									)}
+									{billingProfile.usageInfo.outstandingPaymentPlansCount > 0 && (
+										<p>
+											{'- '}
+											{strings.movePaymentPlansToAlternate}
+										</p>
+									)}
+									{billingProfile.usageInfo.pendingPrepubCount > 0 && (
+										<p>
+											{'- '}
+											{isCalledPreorder
+												? strings.movePreordersToAlternate
+												: strings.movePrepubsToAlternate}
+										</p>
+									)}
+								</Modal.Content>
+								<Modal.Footer>
+									<Modal.FooterButtons
+										cancelButton={{ text: 'Cancel', onClick: () => setShowErrorModal(false) }}
+									/>
+								</Modal.Footer>
+							</Modal>
+						)}
+					</Styled.DeleteButton>
+				)}
+				{onCancelEditingBillingProfile && (
+					<Styled.CancelButton
+						variant="secondary"
+						size="small"
+						onClick={onCancelEditingBillingProfile}
+					>
+						{strings.cancel}
+					</Styled.CancelButton>
+				)}
+				<Styled.CreateButton data-testid="create-billing-profile-button">
 					<Button
-						primary
-						medium
+						variant="primary"
+						size="small"
 						onClick={onCommitClicked}
 						ref={commitButtonRef}
 						disabled={isProcessing}
 					>
 						{createButtonText || strings.save}
 					</Button>
-				</div>
-				{onCancelEditingBillingProfile && (
-					<Button minor medium onClick={onCancelEditingBillingProfile}>
-						{strings.cancel}
-					</Button>
-				)}
+				</Styled.CreateButton>
 			</Styled.NewProfileButtons>
 		</Styled.EditBillingProfileSection>
 	);
