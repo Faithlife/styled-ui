@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Box } from '../Box';
 import { useId } from '../shared-hooks';
 import { useTabContext, useKeyboardNav, useSequencedKeyboardNav } from './tab-utils';
 import * as Styled from './styled';
 
 export function TabList({ children }) {
-	const { onSelectTab, selectedTabIndex, panelIdsMap } = useTabContext();
+	const { onSelectTab, selectedTabIndex, panelIdsMap, variant } = useTabContext();
 
 	const handleKeyboardNav = useKeyboardNav(selectedTabIndex, onSelectTab, children);
 	return (
-		<Styled.TabList onKeyDown={handleKeyboardNav}>
+		<Styled.TabListCore onKeyDown={handleKeyboardNav}>
 			{React.Children.map(children, (child, index) =>
 				React.isValidElement(child)
 					? React.cloneElement(child, {
@@ -18,10 +17,11 @@ export function TabList({ children }) {
 							onSelectTab,
 							index,
 							panelId: panelIdsMap[index],
+							variant,
 					  })
 					: null,
 			)}
-		</Styled.TabList>
+		</Styled.TabListCore>
 	);
 }
 
@@ -75,7 +75,7 @@ SequencedTabList.propTypes = {
 export function TabPanels({ children, ...props }) {
 	const { selectedTabIndex, registerPanelId, unRegisterPanelId } = useTabContext();
 	return (
-		<Box {...props}>
+		<Styled.TabPanelsCore {...props}>
 			{React.Children.map(children, (child, index) =>
 				React.isValidElement(child)
 					? React.cloneElement(child, {
@@ -86,7 +86,7 @@ export function TabPanels({ children, ...props }) {
 					  })
 					: null,
 			)}
-		</Box>
+		</Styled.TabPanelsCore>
 	);
 }
 
@@ -114,9 +114,15 @@ export function TabPanel({
 	}, [index, id, registerPanelId, unRegisterPanelId]);
 
 	return (
-		<Styled.TabPanel panelId={id} selected={selected} position="relative" padding={3} {...props}>
+		<Styled.TabPanelCore
+			panelId={id}
+			selected={selected}
+			position="relative"
+			padding={3}
+			{...props}
+		>
 			{children}
-		</Styled.TabPanel>
+		</Styled.TabPanelCore>
 	);
 }
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Checkmark } from '../icons/12px';
 import * as Styled from './styled.jsx';
 
-export function Tab({ children, disabled, index, selected, onSelectTab, panelId, ...props }) {
+export function Tab({ children, index, selected, onSelectTab, disabled, panelId, ...props }) {
 	const tabRef = useRef();
 
 	useEffect(() => {
@@ -17,24 +17,16 @@ export function Tab({ children, disabled, index, selected, onSelectTab, panelId,
 	}, [onSelectTab, index]);
 
 	return (
-		<Styled.Tab
+		<Styled.TabCore
+			ref={tabRef}
 			disabled={disabled}
-			panelId={panelId || ''}
-			selected={selected}
 			onClick={handleSelectTab}
+			selected={selected}
+			panelId={panelId || ''}
+			{...props}
 		>
-			<Styled.TabContent
-				ref={tabRef}
-				disabled={disabled}
-				fontSize={3}
-				paddingX={5}
-				paddingY={3}
-				selected={selected}
-				{...props}
-			>
-				{typeof children === 'function' ? children({ selected, disabled }) : children}
-			</Styled.TabContent>
-		</Styled.Tab>
+			{typeof children === 'function' ? children({ selected, disabled }) : children}
+		</Styled.TabCore>
 	);
 }
 
