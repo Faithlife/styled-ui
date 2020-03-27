@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.51.0
+
+- Add `page` variant to tabs as alternative to standard `modal` variant.
+
 ### 5.50.2
 
 - Restore `Slider` thumb alignment to how it was before unintended changes in v5.46.1.
