@@ -5,7 +5,7 @@ import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { TabContextProvider, usePanelIdsHandler } from './tab-utils';
 
-export function TabManager({ children, selectedTab, onSelectedTabChange }) {
+export function TabManager({ children, selectedTab, onSelectedTabChange, variant }) {
 	const [selectedTabIndex, setSelectedTabIndex] = useState(selectedTab || 0);
 	const { panelIdsMap, registerPanelId, unRegisterPanelId } = usePanelIdsHandler();
 
@@ -32,8 +32,9 @@ export function TabManager({ children, selectedTab, onSelectedTabChange }) {
 			panelIdsMap,
 			registerPanelId,
 			unRegisterPanelId,
+			variant,
 		}),
-		[selectedTabIndex, handleSelectTab, panelIdsMap, registerPanelId, unRegisterPanelId],
+		[selectedTabIndex, handleSelectTab, panelIdsMap, registerPanelId, unRegisterPanelId, variant],
 	);
 
 	return <TabContextProvider value={context}>{children}</TabContextProvider>;
@@ -43,4 +44,8 @@ TabManager.propTypes = {
 	children: PropTypes.node.isRequired,
 	selectedTab: PropTypes.number,
 	onSelectedTabChange: PropTypes.func,
+};
+
+TabManager.defaultProps = {
+	variant: 'modal',
 };

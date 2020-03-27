@@ -1,48 +1,20 @@
 // ARIA for Tabs are documented in https://www.w3.org/TR/wai-aria-practices-1.1/#tabpanel
 // Tabs from Reach-Ui were used as a base https://ui.reach.tech/tabs
 
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import { variant, layout, position, textStyle, border, background } from 'styled-system';
 import 'focus-visible';
 import { Box } from '../Box';
 import { UtilityButton } from '../button';
 import { Text } from '../Text';
 import { resetStyles } from '../utils';
-import { thickness } from '../shared-styles';
 import { mediaSizes } from '../shared-styles';
 
+import 'focus-visible';
+import { common, typography } from '../../theme/system';
+import { tabs, tabLists, selected } from '../../theme/tabs';
+
 const borderRadius = '3px 3px 0 0';
-
-const selectedTab = css`
-	font-weight: 600;
-
-	&::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 3px;
-		background-color: ${({ theme }) => theme.colors.blue4};
-
-		border-right: 1px solid ${({ theme }) => theme.colors.blue4};
-		border-left: 1px solid ${({ theme }) => theme.colors.blue4};
-		border-radius: ${borderRadius};
-	}
-
-	&::after {
-		content: '';
-		position: absolute;
-		top: 100%;
-		left: 1px;
-		width: calc(100% - 2px);
-		height: 1px;
-		background-color: ${({ theme }) => theme.colors.white};
-	}
-
-	background-color: ${({ theme }) => theme.colors.white};
-	border-right: 1px solid ${({ theme }) => theme.colors.gray14};
-	border-left: 1px solid ${({ theme }) => theme.colors.gray14};
-`;
 
 export const Tab = styled(UtilityButton).attrs(({ selected, panelId, disabled }) => ({
 	role: 'tab',
@@ -79,44 +51,6 @@ export const Tab = styled(UtilityButton).attrs(({ selected, panelId, disabled })
 	&::-moz-focus-inner {
 		border: 0;
 	}
-`;
-
-export const TabContent = styled(Text).attrs(() => ({ tabIndex: -1 }))`
-	border-radius: ${borderRadius};
-	cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
-	white-space: nowrap;
-	min-height: fit-content;
-	display: inline-block;
-	background-color: ${({ theme }) => theme.colors.gray4};
-
-	&:focus {
-		outline: none;
-	}
-
-	${({ disabled, theme }) => (disabled ? `color: ${theme.colors.gray52}` : '')};
-	${({ selected }) => selected && selectedTab};
-`;
-
-export const TabList = styled(Box).attrs(() => ({ role: 'tablist' }))`
-	border-bottom: 1px solid ${({ theme }) => theme.colors.gray14};
-	display: flex;
-	flex-direction: row;
-
-	& > *:not(:last-child) {
-		margin-right: ${thickness.eight};
-	}
-`;
-
-export const TabPanel = styled(Box).attrs(() => ({
-	role: 'tabpanel',
-	id: ({ panelId }) => `panel:${panelId}`,
-	'aria-expanded': ({ selected }) => selected,
-}))`
-	&:focus {
-		outline: none;
-	}
-
-	${({ selected }) => !selected && 'display: none'};
 `;
 
 export const SequencedTabList = styled.div.attrs(() => ({ role: 'tablist' }))`
@@ -188,4 +122,76 @@ export const Circle = styled(Box)`
 	@media (min-width: ${mediaSizes.phone}) {
 		margin: 0px 8px 0px 14px;
 	}
+`;
+
+// New variant tabs
+
+const tabVariant = variant({
+	prop: 'variant',
+	scale: 'tab',
+	variants: tabs,
+});
+
+const selectedTabVariant = variant({
+	prop: 'selectedVariant',
+	scale: 'tab',
+	variants: selected,
+});
+
+const tabListVariant = variant({
+	prop: 'variant',
+	scale: 'tab',
+	variants: tabLists,
+});
+
+export const TabCore = styled(UtilityButton).attrs(({ variant, selected, panelId }) => ({
+	selectedVariant: `${variant}-${selected}`,
+
+	role: 'tab',
+	'aria-controls': `panel:${panelId}`,
+	'aria-selected': selected,
+	tabIndex: selected ? 1 : -1,
+}))`
+	position: relative;
+
+	display: block;
+	white-space: nowrap;
+	overflow-x: hidden;
+	text-overflow: ellipsis;
+
+	${tabVariant}
+	${selectedTabVariant}
+	${textStyle};
+
+	${common};
+	${typography};
+	${layout};
+	${position};
+	${border};
+	${background};
+`;
+
+export const TabListCore = styled(Box).attrs({
+	role: 'tablist',
+})`
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+
+	${tabListVariant}
+	${textStyle};
+
+	${common};
+	${layout};
+	${position};
+	${border};
+	${background};
+`;
+
+export const TabPanelsCore = styled(Box)``;
+
+export const TabPanelCore = styled(Box).attrs({
+	role: 'tabpanel',
+})`
+	display: ${({ selected }) => (selected ? 'block' : 'none')};
 `;

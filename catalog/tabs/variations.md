@@ -23,6 +23,29 @@ showSource: true
 </TabDemo>
 ```
 
+Supports modal (default) and page variants
+
+```react
+showSource: true
+---
+<TabDemo>
+	<TabManager variant="page">
+		<TabList>
+			<Tab>First Tab</Tab>
+			<Tab>Second Tab</Tab>
+			<Tab>Third Tab</Tab>
+			<Tab disabled>Disabled Tab</Tab>
+		</TabList>
+		<TabPanels>
+			<TabPanel>First Tab!</TabPanel>
+			<TabPanel>Second Tab!</TabPanel>
+			<TabPanel>Third Tab!</TabPanel>
+			<TabPanel>Disabled Tab!</TabPanel>
+		</TabPanels>
+	</TabManager>
+</TabDemo>
+```
+
 ### Style Variations
 
 Both the Tab and TabPanel components extend the Box component and accept styled-system props.

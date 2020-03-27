@@ -125,6 +125,31 @@ colors.button = {
 	focusShadow: colors.blue3,
 };
 
+colors.tab = {
+	modalForeground: colors.gray66,
+	modalForegroundActive: colors.blue5,
+	modalForegroundDisabled: colors.gray34,
+	modalBorder: colors.gray14,
+	modalBackground: colors.gray8,
+	modalBackgroundActive: colors.white,
+	modalHover: colors.blue1,
+	modalActive: colors.blue2,
+	modalDisabled: colors.gray4,
+	modalColorStripe: 'transparent',
+	modalColorStripeActive: colors.blue4,
+
+	pageForeground: colors.gray66,
+	pageForegroundActive: colors.blue5,
+	pageForegroundDisabled: colors.gray34,
+	pageBackground: 'transparent',
+	pageBackgroundActive: colors.blue1,
+	pageHover: colors.blue1,
+	pageActive: colors.blue1,
+	pageDisabled: colors.white,
+	pageColorStripe: colors.gray14,
+	pageColorStripeActive: colors.blue4,
+};
+
 const fonts = {
 	normal: '"Source Sans Pro", sans-serif',
 };
