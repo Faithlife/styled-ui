@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/file-picker-example@4.0.0...file-picker-example@4.1.0) (2020-03-27)
+
+
+### Bug Fixes
+
+* Remove unused localizedResources. ([f0e74bd](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/f0e74bde5ea9ecd7ae3ad3aa4613ab1be293c39a))
+* Update SME in FilePicker example. ([e8db37c](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/e8db37c3acdd6594ab21b6e5690c7834ffe06df0))
+
+
+### Features
+
+* Allow creating new SmartMedia in amber ([#80](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/80)) ([571ded8](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/571ded8eb346a9126ef07251188cd4fa95c5bc28))
+
+
+
+
+
 # [4.0.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/file-picker-example@3.0.1...file-picker-example@4.0.0) (2020-03-23)
 
 

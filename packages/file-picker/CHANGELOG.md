@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@3.0.0...@faithlife/file-picker@3.1.0) (2020-03-27)
+
+
+### Bug Fixes
+
+* Remove obsolete default prop. ([cc0d05a](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/cc0d05a3870e681d529f36907a2429a8c8bc99f0))
+
+
+### Features
+
+* Allow creating new SmartMedia in amber ([#80](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/80)) ([571ded8](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/571ded8eb346a9126ef07251188cd4fa95c5bc28))
+
+
+
+
+
 # [3.0.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@2.0.1...@faithlife/file-picker@3.0.0) (2020-03-23)
 
 
