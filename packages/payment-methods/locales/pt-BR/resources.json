@@ -73,5 +73,6 @@
 	"sameAsBilling": "O mesmo de cobrança.",
 	"rememberThisCard": "Salvas dados deste cartão de crédito.",
 	"expired": "Expirado",
-	"expires": "Expira"
+	"expires": "Expira",
+	"delete": "Delete"
 }

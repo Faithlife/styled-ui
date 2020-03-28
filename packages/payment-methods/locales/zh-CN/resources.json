@@ -73,5 +73,6 @@
 	"sameAsBilling": "与账单地址相同。",
 	"rememberThisCard": "记住这张信用卡。",
 	"expired": "已过期",
-	"expires": "过期"
+	"expires": "过期",
+	"delete": "Delete"
 }

@@ -73,5 +73,6 @@
 	"sameAsBilling": "청구 주소와 동일.",
 	"rememberThisCard": "이 신용카드 기억하기.",
 	"expired": "만료됨",
-	"expires": "만료"
+	"expires": "만료",
+	"delete": "Delete"
 }

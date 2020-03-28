@@ -73,5 +73,6 @@
 	"sameAsBilling": "Wie Rechnungsadresse.",
 	"rememberThisCard": "Kreditkarte speichern.",
 	"expired": "Abgelaufen",
-	"expires": "Ablaufdatum"
+	"expires": "Ablaufdatum",
+	"delete": "Delete"
 }

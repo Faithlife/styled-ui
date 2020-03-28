@@ -73,5 +73,6 @@
 	"sameAsBilling": "Mismo que facturación.",
 	"rememberThisCard": "Recordar esta tarjeta de crédito.",
 	"expired": "Vencida",
-	"expires": "Vence"
+	"expires": "Vence",
+	"delete": "Delete"
 }
