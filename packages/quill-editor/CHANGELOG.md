@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.10](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.4.9...@faithlife/quill-editor@4.4.10) (2020-03-30)
+
+
+### Bug Fixes
+
+* **quill-editor:** Don't display 'undefined' when placeholder is undefined. ([8ea9f25](https://git/Logos/FaithlifeEquipment/commits/8ea9f2574efeb6976bf921f70751f10bfc170253))
+
+
+
+
+
 ## [4.4.9](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.4.8...@faithlife/quill-editor@4.4.9) (2020-03-05)
 
 

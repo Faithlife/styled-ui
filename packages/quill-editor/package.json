@@ -1,6 +1,6 @@
 {
   "name": "@faithlife/quill-editor",
-  "version": "4.4.9",
+  "version": "4.4.10",
   "description": "The quill-editor React component",
   "main": "dist/index.js",
   "files": [
