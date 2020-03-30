@@ -192,7 +192,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		formats,
 		toolbarHandlers,
 		modules,
-		placeholder,
+		placeholder: initialPlaceholder,
 		onContentChange,
 		onChangeSelection,
 		onClick,
@@ -217,6 +217,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const [filePickerKind, setFilePickerKind] = useState(FilePickerKind.Image);
 	const [storedValue, setStoredValue] = useState(value);
 	const [allowImageLink, setAllowImageLink] = useState(false);
+	const placeholder = initialPlaceholder ?? '';
 
 	// hasMounted is an anti-pattern, used here only to workaround a bug in ReactQuill.
 	// ReactQuill has a bug that will autofocus unless set to readOnly on initial render.
