@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
 
-const UnstyledDiv = ({ children, ...props }) => <div {...props}>{children}</div>;
+const PlaceholderDiv = ({ children, ...props }) => (
+	<div {...props} className={'quill ' + props.className}>
+		{children}
+	</div>
+);
+
 export const SafeQuill = ReactQuill && (ReactQuill as any).Quill;
-export const SafeReactQuill = SafeQuill ? ReactQuill : UnstyledDiv;
+export const SafeReactQuill = SafeQuill ? ReactQuill : PlaceholderDiv;

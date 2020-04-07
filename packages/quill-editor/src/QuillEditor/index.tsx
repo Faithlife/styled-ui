@@ -773,27 +773,23 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 						editorId: onlyChild.props.editorId || quillEditorId,
 						ref: setToolbarRef,
 					})}
-				{SafeQuill ? (
-					<ReactQuillStyled
-						ref={quillRef}
-						defaultValue={plainTextOverride || defaultValue || value}
-						placeholder={placeholder}
-						modules={moduleConfiguration}
-						formats={allowedFormats}
-						bounds={quillEditorQuery}
-						onChange={handleTextChange}
-						onChangeSelection={handleSelectionChange}
-						// ReactQuill has a bug that will autofocus unless set to readOnly on initial render.
-						// See https://github.com/zenoamaro/react-quill/issues/317
-						// We still want to allow normal autofocus behavior if the autofocus prop is set.
-						readOnly={readOnly || (!hasMounted && !autofocus)}
-						{...otherProps}
-					>
-						{placeholderDiv}
-					</ReactQuillStyled>
-				) : (
-					<ReactQuillStyled className="quill">{placeholderDiv}</ReactQuillStyled>
-				)}
+				<ReactQuillStyled
+					ref={quillRef}
+					defaultValue={plainTextOverride || defaultValue || value}
+					placeholder={placeholder}
+					modules={moduleConfiguration}
+					formats={allowedFormats}
+					bounds={quillEditorQuery}
+					onChange={handleTextChange}
+					onChangeSelection={handleSelectionChange}
+					// ReactQuill has a bug that will autofocus unless set to readOnly on initial render.
+					// See https://github.com/zenoamaro/react-quill/issues/317
+					// We still want to allow normal autofocus behavior if the autofocus prop is set.
+					readOnly={readOnly || (!hasMounted && !autofocus)}
+					{...otherProps}
+				>
+					{placeholderDiv}
+				</ReactQuillStyled>
 				<OverlayContainer hasToolbar={!!moduleConfiguration.toolbar}>
 					{overlayCoordinates && (
 						<ResizableOverlay
