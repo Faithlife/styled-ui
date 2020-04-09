@@ -22,6 +22,9 @@ const selectStyles = props => {
 		valueContainer: styles => ({
 			...styles,
 			padding: '0 6px',
+			input: {
+				fontFamily: 'inherit',
+			},
 		}),
 		input: styles => ({
 			...styles,
