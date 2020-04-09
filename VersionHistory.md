@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.51.1
+
+- Fix `Select` clipping text when certain CSS resets were used.
+
 ### 5.51.0
 
 - Add `page` variant to tabs as alternative to standard `modal` variant.
