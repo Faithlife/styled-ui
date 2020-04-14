@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { colors } from '../../shared-styles';
 
-const calendarWeekDayCss = `
+export const CalendarWeekDayButton = styled.button`
 	flex: 1;
 	position: relative;
 	box-sizing: border-box;
@@ -20,6 +20,11 @@ const calendarWeekDayCss = `
 		height: 44px;
 		width: 44px;
 	}
+`;
+
+const calendarWeekDayCss = `
+	width: 100%;
+	height: 100%;
 
 	&:hover {
 		background: ${colors.gray4};
@@ -40,7 +45,7 @@ export const CalendarWeekDay = styled.div`
 	${calendarWeekDayCss};
 `;
 
-export const CalendarWeekDaySelected = styled.button`
+export const CalendarWeekDaySelected = styled.div`
 	${calendarWeekDayCss}
 	background: ${colors.blueBase};
 	color: ${colors.white};
@@ -52,7 +57,7 @@ export const CalendarWeekDaySelected = styled.button`
 	}
 `;
 
-export const CalendarWeekDayInRange = styled.button`
+export const CalendarWeekDayInRange = styled.div`
 	${calendarWeekDayCss}
 	background: ${colors.blueTint};
 	border-radius: 0;
