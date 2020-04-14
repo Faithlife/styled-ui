@@ -25,16 +25,18 @@ export class CalendarDate extends Component {
 		this.props.dateFunctions.getMonth(date1) === this.props.dateFunctions.getMonth(date2) &&
 		this.props.dateFunctions.getYear(date1) === this.props.dateFunctions.getYear(date2);
 
-	renderCalendarWeekDay = (selectedDate, selectedDateRange, date, isCurrentMonth) => {
-		let CalendarWeekday = Styled.CalendarWeekDay;
-		const { isValid, isBefore } = this.props.dateFunctions;
+	getDayComponent = () => {
+		const isCurrentMonth = this.isCurrentMonth();
+		const { date, dateFunctions, selectedDate, selectedDateRange, validate } = this.props;
+		const { isValid, isBefore } = dateFunctions;
 
+		let CalendarWeekday = Styled.CalendarWeekDay;
 		if (selectedDate) {
 			if (selectedDate && isValid(selectedDate) && this.areDatesEqual(selectedDate, date)) {
 				CalendarWeekday = Styled.CalendarWeekDaySelected;
 			}
 
-			if (!isCurrentMonth || (this.props.validate && !this.props.validate(date))) {
+			if (!isCurrentMonth || (validate && !validate(date))) {
 				CalendarWeekday = Styled.CalendarWeekDayGrayedOut;
 			}
 			return CalendarWeekday;
@@ -53,43 +55,43 @@ export class CalendarDate extends Component {
 			CalendarWeekday = Styled.CalendarWeekDayInRange;
 		}
 
-		if (!isCurrentMonth || (this.props.validate && !this.props.validate(date))) {
+		if (!isCurrentMonth || (validate && !validate(date))) {
 			CalendarWeekday = Styled.CalendarWeekDayGrayedOut;
 		}
 
 		return CalendarWeekday;
 	};
 
+	isCurrentMonth = () => {
+		const { date, dateFunctions, currentMonth } = this.props;
+		return currentMonth === dateFunctions.getMonth(date);
+	};
+
 	render() {
 		const currentDate = new Date();
-		const { selectedDate, selectedDateRange, date, asDateRangePicker } = this.props;
+		const { date, asDateRangePicker } = this.props;
 		let currentDayDot = null;
-		const { format, getMonth } = this.props.dateFunctions;
+		const { format } = this.props.dateFunctions;
+		const isCurrentMonth = this.isCurrentMonth();
 
-		const isCurrentMonth = this.props.currentMonth === getMonth(date);
-
-		const CalendarWeekDay = this.renderCalendarWeekDay(
-			selectedDate,
-			selectedDateRange,
-			date,
-			isCurrentMonth,
-		);
+		const CalendarDay = this.getDayComponent();
 
 		if (this.areDatesEqual(currentDate, date)) {
 			currentDayDot = <Styled.CalendarWeekDayCurrentDay />;
 		}
 
 		return (
-			<CalendarWeekDay
+			<Styled.CalendarWeekDayButton
 				onClick={this.setSelectedDate}
-				tabIndex="-1"
 				disabled={this.props.validate && !this.props.validate(date)}
 			>
-				<Styled.CalendarDateLabel>
-					{asDateRangePicker && !isCurrentMonth ? null : format(date, 'd')}
-				</Styled.CalendarDateLabel>
-				{((asDateRangePicker && isCurrentMonth) || !asDateRangePicker) && currentDayDot}
-			</CalendarWeekDay>
+				<CalendarDay>
+					<Styled.CalendarDateLabel>
+						{asDateRangePicker && !isCurrentMonth ? null : format(date, 'd')}
+					</Styled.CalendarDateLabel>
+					{((asDateRangePicker && isCurrentMonth) || !asDateRangePicker) && currentDayDot}
+				</CalendarDay>
+			</Styled.CalendarWeekDayButton>
 		);
 	}
 }
