@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ThemeProvider } from 'styled-components';
 import { CheckboxContent } from '../../check-box';
 import { useDropdownContext } from '../dropdown-utils';
 import * as Styled from '../styled';
@@ -25,9 +24,11 @@ export function MenuCheckbox(props) {
 			role="menuitemcheckbox"
 			aria-checked={isChecked}
 		>
-			<ThemeProvider theme={{ primary: theme.checkboxPrimary, border: theme.checkboxBorder }}>
-				<CheckboxContent isChecked={isChecked} {...checkboxProps} />
-			</ThemeProvider>
+			<CheckboxContent
+				theme={{ primary: theme.checkboxPrimary, border: theme.checkboxBorder }}
+				isChecked={isChecked}
+				{...checkboxProps}
+			/>
 		</MenuItem>
 	);
 }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ThemeProvider } from 'styled-components';
 import { colors as sharedColors } from '../shared-styles';
 import { CheckboxContent } from './checkbox-content';
 import * as Styled from './styled';
@@ -44,22 +43,21 @@ export class Checkbox extends Component {
 	render() {
 		const { onClick, title, isChecked, theme, type, children, className, disabled } = this.props;
 		return (
-			<ThemeProvider theme={theme}>
-				<Styled.CheckboxContainer
-					ref={this.componentRef}
-					onClick={onClick}
-					onMouseUp={this.onMouseUp}
-					type={type}
-					className={className}
-					role={'checkbox'}
-					aria-checked={isChecked}
-					disabled={disabled}
-				>
-					<CheckboxContent isChecked={isChecked} title={title} disabled={disabled}>
-						{children}
-					</CheckboxContent>
-				</Styled.CheckboxContainer>
-			</ThemeProvider>
+			<Styled.CheckboxContainer
+				ref={this.componentRef}
+				onClick={onClick}
+				onMouseUp={this.onMouseUp}
+				type={type}
+				className={className}
+				role={'checkbox'}
+				aria-checked={isChecked}
+				disabled={disabled}
+				theme={theme}
+			>
+				<CheckboxContent isChecked={isChecked} title={title} disabled={disabled} theme={theme}>
+					{children}
+				</CheckboxContent>
+			</Styled.CheckboxContainer>
 		);
 	}
 }
