@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.51.3
+
+- Remove uses of `ThemeProvider` in `Radio`, `Checkbox`, and `MenuCheckbox` components, allowing use of the styled-system theme in children of those components.
+
 ### 5.51.2
 
 - Fix `DatePicker` and `DatePeriodPicker` popover bug. [#324](https://github.com/Faithlife/styled-ui/pull/324)
