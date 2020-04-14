@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ThemeProvider } from 'styled-components';
 import { colors as sharedColors } from '../shared-styles';
 import * as Styled from './styled';
 
@@ -52,24 +51,23 @@ export class Radio extends Component {
 	render() {
 		const { onClick, title, isChecked, theme, type, children, className, disabled } = this.props;
 		return (
-			<ThemeProvider theme={theme}>
-				<Styled.RadioContainer
-					ref={this.componentRef}
-					onMouseUp={this.onMouseUp}
-					onClick={onClick}
-					type={type}
-					className={className}
-					role={'radio'}
-					aria-checked={isChecked}
-					disabled={disabled}
-				>
-					<Styled.RadioDiv disabled={disabled}>
-						<Styled.CheckedIndicator isChecked={isChecked} disabled={disabled} />
-					</Styled.RadioDiv>
-					{title && <Styled.Label>{title}</Styled.Label>}
-					{children && <Styled.Label>{children}</Styled.Label>}
-				</Styled.RadioContainer>
-			</ThemeProvider>
+			<Styled.RadioContainer
+				ref={this.componentRef}
+				onMouseUp={this.onMouseUp}
+				onClick={onClick}
+				type={type}
+				className={className}
+				role={'radio'}
+				aria-checked={isChecked}
+				disabled={disabled}
+				theme={theme}
+			>
+				<Styled.RadioDiv disabled={disabled} theme={theme}>
+					<Styled.CheckedIndicator isChecked={isChecked} disabled={disabled} theme={theme} />
+				</Styled.RadioDiv>
+				{title && <Styled.Label>{title}</Styled.Label>}
+				{children && <Styled.Label>{children}</Styled.Label>}
+			</Styled.RadioContainer>
 		);
 	}
 }
