@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.51.2
+
+- Fix `DatePicker` and `DatePeriodPicker` popover bug. [#324](https://github.com/Faithlife/styled-ui/pull/324)
+
 ### 5.51.1
 
 - Fix `Select` clipping text when certain CSS resets were used.
