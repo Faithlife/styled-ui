@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@2.8.0...@faithlife/payment-methods@2.8.1) (2020-04-15)
+
+
+### Bug Fixes
+
+* Add maxLength to address line input. ([#87](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/87)) ([a6b877b](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/a6b877b03991a27c5d695278fb9acb2887385158))
+
+
+
+
+
 # [2.8.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@2.7.0...@faithlife/payment-methods@2.8.0) (2020-04-15)
 
 
