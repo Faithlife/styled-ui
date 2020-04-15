@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.51.4
+
+- Fix icons export.
+
 ### 5.51.3
 
 - Remove uses of `ThemeProvider` in `Radio`, `Checkbox`, and `MenuCheckbox` components, allowing use of the styled-system theme in children of those components.
