@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@2.7.0...@faithlife/payment-methods@2.8.0) (2020-04-15)
+
+
+### Features
+
+* Handle conflict response from orders api and add activeBidCount logic  ([#86](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/86)) ([edf2341](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/edf234119433a5990162867d42c92b48d89a7baa))
+
+
+
+
+
 # [2.7.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@2.6.0...@faithlife/payment-methods@2.7.0) (2020-03-31)
 
 
