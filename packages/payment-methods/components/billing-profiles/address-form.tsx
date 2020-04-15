@@ -182,6 +182,7 @@ const AddressForm: React.FunctionComponent<IAddressFormProps> = ({
 						onChange={updateBillingProfile}
 						value={getUncommittedBillingProfileValueOrDefault('addressLine1')}
 						border={'1px solid #a8a8a8'}
+						maxLength="80"
 					/>
 				</Styled.Label>
 			</Styled.CreditCardInfoRow>
@@ -194,6 +195,7 @@ const AddressForm: React.FunctionComponent<IAddressFormProps> = ({
 					onChange={updateBillingProfile}
 					value={getUncommittedBillingProfileValueOrDefault('addressLine2')}
 					border={'1px solid #a8a8a8'}
+					maxLength="80"
 				/>
 			</Styled.CreditCardInfoRow>
 
