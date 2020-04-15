@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.51.5
+
+- Remove hack checking for styled system theme in legacy `Button`.
+
 ### 5.51.4
 
 - Fix icons export.
