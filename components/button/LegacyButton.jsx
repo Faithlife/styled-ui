@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import systemPropTypes from '@styled-system/prop-types';
-import { theme } from '../../theme';
+import { theme, isSystemTheme } from '../../theme';
 import { common, typography } from '../../theme/system';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 import { getVariation } from '../utils';
@@ -28,7 +28,7 @@ export const Button = React.forwardRef(function Button(props, ref) {
 		...buttonProps
 	} = props;
 
-	const isCoreTheme = propTheme === theme;
+	const isCoreTheme = isSystemTheme(propTheme);
 
 	const themedProps = { ...buttonProps, ...(isCoreTheme ? {} : propTheme) };
 
