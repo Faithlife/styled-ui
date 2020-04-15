@@ -199,6 +199,7 @@ const ShippingAddressForm: React.FunctionComponent<IShippingAddressFormProps> = 
 				outstandingPaymentPlansCount: 0,
 				pendingPrepubCount: 0,
 				activeSubscriptionCount: 0,
+				activeBidCount: 0,
 			},
 			isDefault: false,
 		};

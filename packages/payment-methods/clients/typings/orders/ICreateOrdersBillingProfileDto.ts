@@ -14,4 +14,5 @@ export default interface ICreateOrdersBillingProfileDto {
 	useOnPendingPrepubs: boolean;
 	useOnActiveSubscriptions: boolean;
 	useOnOutstandingPaymentPlans: boolean;
+	useOnActiveBids: boolean;
 }

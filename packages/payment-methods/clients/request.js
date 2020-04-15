@@ -21,7 +21,9 @@ export async function fetchJson(
 		try {
 			errorJson = await response.json();
 		} catch (_) {
-			throw new Error(`Request failed with code: ${response.status}`);
+			const error = new Error(`Request failed with code: ${response.status}`);
+			error.response = response;
+			throw error;
 		}
 		throw errorJson;
 	}

@@ -25,6 +25,7 @@ export default class BillingProfileMapper {
 			useOnPendingPrepubs,
 			useOnActiveSubscriptions,
 			useOnOutstandingPaymentPlans,
+			useOnActiveBids,
 		} = {
 			...profile,
 			...profile.cardInfo,
@@ -57,6 +58,7 @@ export default class BillingProfileMapper {
 			useOnPendingPrepubs: useOnPendingPrepubs || false,
 			useOnActiveSubscriptions: useOnActiveSubscriptions || false,
 			useOnOutstandingPaymentPlans: useOnOutstandingPaymentPlans || false,
+			useOnActiveBids: useOnActiveBids || false,
 		};
 
 		return ordersBillingProfile;
@@ -89,6 +91,7 @@ export default class BillingProfileMapper {
 				pendingPrepubCount: profile.usageInfo?.pendingPrepubCount || 0,
 				activeSubscriptionCount: profile.usageInfo?.activeSubscriptionCount || 0,
 				outstandingPaymentPlansCount: profile.usageInfo?.outstandingPaymentPlansCount || 0,
+				activeBidCount: profile.usageInfo?.activeBidCount || 0,
 			},
 			isDefault: profile.isDefault,
 		};
@@ -119,6 +122,7 @@ export default class BillingProfileMapper {
 			useOnPendingPrepubs: profile.useOnPendingPrepubs,
 			useOnActiveSubscriptions: profile.useOnActiveSubscriptions,
 			useOnOutstandingPaymentPlans: profile.useOnOutstandingPaymentPlans,
+			useOnActiveBids: profile.useOnActiveBids,
 		};
 	}
 }

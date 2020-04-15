@@ -68,6 +68,7 @@ declare interface ILocalizedResources {
 	movePaymentPlansToAlternate: string;
 	movePreordersToAlternate: string;
 	movePrepubsToAlternate: string;
+	moveCommunityPricingBidsToAlternate: string;
 	edit: string;
 	next: string;
 	sameAsBilling: string;
@@ -75,6 +76,7 @@ declare interface ILocalizedResources {
 	expired: string;
 	expires: string;
 	delete: string;
+	conflict: string;
 }
 
 export default ILocalizedResources;

@@ -16,4 +16,5 @@ export default interface IOrdersBillingProfileChangeSetDto {
 	useOnPendingPrepubs?: boolean;
 	useOnActiveSubscriptions?: boolean;
 	useOnOutstandingPaymentPlans?: boolean;
+	useOnActiveBids?: boolean;
 }

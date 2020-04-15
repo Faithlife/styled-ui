@@ -39,6 +39,8 @@ export default class OrdersClient {
 		} catch (e) {
 			if (isErrorsDto(e)) {
 				return ErrorMapper.mapErrors(e);
+			} else if (e.response.status === 409) {
+				return { errors: [{ code: '409' }] };
 			}
 			throw e;
 		}
@@ -60,14 +62,23 @@ export default class OrdersClient {
 		} catch (e) {
 			if (isErrorsDto(e)) {
 				return ErrorMapper.mapErrors(e);
+			} else if (e.response.status === 409) {
+				return { errors: [{ code: '409' }] };
 			}
 			throw e;
 		}
 	}
 
-	static async deleteOrdersBillingProfile(billingProfileId: string): Promise<void> {
-		await fetchJson(`/proxy/orders/v3/billingprofiles/${billingProfileId}`, {
-			method: 'DELETE',
-		});
+	static async deleteOrdersBillingProfile(billingProfileId: string): Promise<void | IErrors> {
+		try {
+			await fetchJson(`/proxy/orders/v3/billingprofiles/${billingProfileId}`, {
+				method: 'DELETE',
+			});
+		} catch (e) {
+			if (e.response.status === 409) {
+				return { errors: [{ code: '409' }] };
+			}
+			throw e;
+		}
 	}
 }

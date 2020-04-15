@@ -29,8 +29,8 @@
 		"postalCode": "XXXXX"
 	},
 	"makeDefault": "Make this my default billing profile.",
-	"movePrepubOrders": "Move all pending Pre-Pub orders to this card.",
-	"movePreorders": "Move all pending Preorders to this card.",
+	"movePrepubOrders": "Move all pending Pre-Pub orders and Community Pricing bids to this card.",
+	"movePreorders": "Move all pending Preorders and Community Pricing bids to this card.",
 	"movePaymentPlans": "Move all outstanding payment plans to this card.",
 	"moveSubscriptions": "Move all current subscriptions to this card.",
 	"fetchCountries": "fetch list of countries",
@@ -66,13 +66,15 @@
 	"beforeRemoving": "Before removing your card, be sure to:",
 	"moveSubscriptionsToAlternate": "Cancel or move current subscriptions to an alternate credit card.",
 	"movePaymentPlansToAlternate": "Move outstanding payment plans to an alternate credit card.",
-	"movePreordersToAlternate": "Cancel or move pre-orders to an alternate credit card.",
-	"movePrepubsToAlternate": "Cancel or move pre-pub orders to an alternate credit card.",
+	"movePreordersToAlternate": "Cancel or move Preorders to an alternate credit card.",
+	"movePrepubsToAlternate": "Cancel or move Pre-Pub orders to an alternate credit card.",
+	"moveCommunityPricingBidsToAlternate": "Cancel or move Community Pricing bids to an alternate credit card.",
 	"edit": "Edit",
 	"next": "Next",
 	"sameAsBilling": "Same as billing.",
 	"rememberThisCard": "Remember this credit card.",
 	"expired": "Expired",
 	"expires": "Expires",
-	"delete": "Delete"
+	"delete": "Delete",
+	"conflict": "Credit card authorization declined. We are unable to use the selected credit card. Please contact your bank or try a different card."
 }

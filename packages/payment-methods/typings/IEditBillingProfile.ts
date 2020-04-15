@@ -15,5 +15,6 @@ export default interface IEditBillingProfile {
 	useOnPendingPrepubs?: boolean;
 	useOnActiveSubscriptions?: boolean;
 	useOnOutstandingPaymentPlans?: boolean;
+	useOnActiveBids?: boolean;
 	usageInfo: IUsageInfo;
 }

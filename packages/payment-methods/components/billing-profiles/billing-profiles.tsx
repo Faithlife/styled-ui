@@ -255,12 +255,13 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 
 				if (isErrors(response)) {
 					const fieldErrors = response.errors.filter(e => e.property !== null);
+					const isConflict = response.errors.some(e => e.code === '409');
 					const hasGeneralErrors = response.errors.some(e => e.message !== null);
 
 					setBillingProfileValidationErrors(fieldErrors);
-					if (hasGeneralErrors) {
+					if (hasGeneralErrors || isConflict) {
 						setSystemMessage({
-							message: strings.billingUpdateError,
+							message: isConflict ? strings.conflict : strings.billingUpdateError,
 							status: 'error',
 						});
 					}
@@ -311,9 +312,12 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 
 				if (isErrors(response)) {
 					setBillingProfileValidationErrors(response.errors.filter(e => e.property !== null));
-					if (response.errors.some(e => e.message !== null)) {
+
+					const isConflict = response.errors.some(e => e.code === '409');
+					const hasGeneralErrors = response.errors.some(e => e.message !== null);
+					if (isConflict || hasGeneralErrors) {
 						setSystemMessage({
-							message: strings.billingUpdateError,
+							message: isConflict ? strings.conflict : strings.billingUpdateError,
 							status: 'error',
 						});
 					}
@@ -331,7 +335,16 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 	const onDeleteBillingProfile = useCallback(
 		async (billingProfileId: string): Promise<boolean> => {
 			const deleteProfile = async () => {
-				await OrdersClient.deleteOrdersBillingProfile(billingProfileId);
+				const response = await OrdersClient.deleteOrdersBillingProfile(billingProfileId);
+
+				const isConflict = isErrors(response) && response.errors.some(e => e.code === '409');
+
+				if (isConflict) {
+					setSystemMessage({
+						message: strings.conflict,
+						status: 'error',
+					});
+				}
 
 				setShouldRefreshBillingProfiles(true);
 				return true;
@@ -339,7 +352,7 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 
 			return (await actAndHandleException(deleteProfile, strings.deleteProfile)) || false;
 		},
-		[strings, actAndHandleException]
+		[strings, actAndHandleException, setSystemMessage]
 	);
 
 	const toggleEditBillingProfile = useCallback(

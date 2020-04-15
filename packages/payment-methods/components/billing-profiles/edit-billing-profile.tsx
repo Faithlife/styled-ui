@@ -60,6 +60,7 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 		pendingPrepubCount: 0,
 		activeSubscriptionCount: 0,
 		outstandingPaymentPlansCount: 0,
+		activeBidCount: 0,
 	},
 }) => {
 	const commitButtonRef = useRef<Button>(null);
@@ -84,6 +85,7 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 						outstandingPaymentPlansCount: 0,
 						activeSubscriptionCount: 0,
 						pendingPrepubCount: 0,
+						activeBidCount: 0,
 					},
 					isDefault: false,
 			  }
@@ -94,7 +96,8 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 		billingProfile &&
 			(billingProfile.usageInfo?.activeSubscriptionCount > 0 ||
 				billingProfile.usageInfo?.outstandingPaymentPlansCount > 0 ||
-				billingProfile.usageInfo?.pendingPrepubCount > 0)
+				billingProfile.usageInfo?.pendingPrepubCount > 0 ||
+				billingProfile.usageInfo?.activeBidCount > 0)
 	);
 	const [showErrorModal, setShowErrorModal] = useState(false);
 
@@ -220,9 +223,12 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 		(billingProfile &&
 			billingProfile.usageInfo.activeSubscriptionCount < usageInfo.activeSubscriptionCount);
 
-	const showMovePrepubs =
+	const showMovePrepubsAndBids =
 		(!billingProfile && usageInfo.pendingPrepubCount > 0) ||
-		(billingProfile && billingProfile.usageInfo.pendingPrepubCount < usageInfo.pendingPrepubCount);
+		(billingProfile &&
+			billingProfile.usageInfo.pendingPrepubCount < usageInfo.pendingPrepubCount) ||
+		(!billingProfile && usageInfo.activeBidCount > 0) ||
+		(billingProfile && billingProfile.usageInfo.activeBidCount < usageInfo.activeBidCount);
 
 	const showMovePaymentPlans =
 		(!billingProfile && usageInfo.outstandingPaymentPlansCount > 0) ||
@@ -387,17 +393,26 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 					type="button"
 				></Styled.Checkbox>
 			)}
-			{showMovePrepubs && (
+			{showMovePrepubsAndBids && (
 				<Styled.Checkbox
-					onClick={() =>
+					onClick={() => {
 						updateBillingProfile({
 							target: {
 								name: nameof<IEditBillingProfile>('useOnPendingPrepubs'),
 								value: !getUncommittedBillingProfileBoolOrDefault('useOnPendingPrepubs'),
 							},
-						})
+						});
+						updateBillingProfile({
+							target: {
+								name: nameof<IEditBillingProfile>('useOnActiveBids'),
+								value: !getUncommittedBillingProfileBoolOrDefault('useOnActiveBids'),
+							},
+						});
+					}}
+					isChecked={
+						getUncommittedBillingProfileBoolOrDefault('useOnPendingPrepubs') ||
+						getUncommittedBillingProfileBoolOrDefault('useOnActiveBids')
 					}
-					isChecked={getUncommittedBillingProfileBoolOrDefault('useOnPendingPrepubs')}
 					title={isCalledPreorder ? strings.movePreorders : strings.movePrepubOrders}
 					type="button"
 				></Styled.Checkbox>
@@ -451,6 +466,12 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 											{isCalledPreorder
 												? strings.movePreordersToAlternate
 												: strings.movePrepubsToAlternate}
+										</p>
+									)}
+									{billingProfile.usageInfo.activeBidCount > 0 && (
+										<p>
+											{'- '}
+											{strings.moveCommunityPricingBidsToAlternate}
 										</p>
 									)}
 								</Modal.Content>
