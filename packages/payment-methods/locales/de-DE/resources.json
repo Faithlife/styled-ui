@@ -29,8 +29,8 @@
 		"postalCode": "XXXXX"
 	},
 	"makeDefault": "Zum Standardprofil machen.",
-	"movePrepubOrders": "Alle ausstehenden Vorbestellungen auf diese Karte verschieben.",
-	"movePreorders": "Alle ausstehenden Vorbestellungen auf diese Karte verschieben.",
+	"movePrepubOrders": "Alle ausstehenden Pre-Pub- und Community-Pricing-Vorbestellungen auf diese Karte schieben.",
+	"movePreorders": "Alle ausstehenden Vorbestellungen auf diese Karte schieben.",
 	"movePaymentPlans": "Alle ausstehenden Ratenzahlungspläne auf diese Karte verschieben.",
 	"moveSubscriptions": "Alle laufenden Abonnements auf diese Karte verschieben.",
 	"fetchCountries": "Länderliste abrufen",
@@ -66,13 +66,15 @@
 	"beforeRemoving": "Bevor Sie Ihre Kreditkarte löschen, überprüfen Sie bitte:",
 	"moveSubscriptionsToAlternate": "Stornieren Sie alle Ihre aktuellen Abonnements oder verschieben Sie diese auf eine Ersatzkarte.",
 	"movePaymentPlansToAlternate": "Verschieben Sie alle laufenden Ratenzahlungspläne auf eine Ersatzkarte.",
-	"movePreordersToAlternate": "Stornieren Sie alle Ihre aktuellen Vorbestellungen oder verschieben Sie diese auf eine Ersatzkarte.",
-	"movePrepubsToAlternate": "Stornieren Sie alle Ihre aktuellen Vorbestellungen oder verschieben Sie diese auf eine Ersatzkarte.",
+	"movePreordersToAlternate": "Alle ausstehenden Vorbestellungen stornieren oder auf eine andere Kreditkarte verschieben.",
+	"movePrepubsToAlternate": "Alle ausstehenden Pre-Pub-Vorbestellungen stornieren oder auf eine andere Kreditkarte verschieben.",
+	"moveCommunityPricingBidsToAlternate": "Alle ausstehenden Community-Pricing-Vorbestellungen stornieren oder auf eine andere Kreditkarte verschieben.",
 	"edit": "Bearbeiten",
 	"next": "Weiter",
 	"sameAsBilling": "Wie Rechnungsadresse.",
 	"rememberThisCard": "Kreditkarte speichern.",
 	"expired": "Abgelaufen",
 	"expires": "Ablaufdatum",
-	"delete": "Löschen"
+	"delete": "Löschen",
+	"conflict": "Kreditkarte konnte nicht belastet werden. Die gewählte Karte lässt sich nicht verwenden. Bitte kontaktieren Sie den Anbieter oder benutzen Sie eine andere Karte."
 }

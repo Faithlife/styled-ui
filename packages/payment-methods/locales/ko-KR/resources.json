@@ -29,8 +29,8 @@
 		"postalCode": "XXXXX"
 	},
 	"makeDefault": "기본 청구 프로필로 설정.",
-	"movePrepubOrders": "사전주문한 모든 Pre-Pub 제품들을 이 카드로 옮깁니다.",
-	"movePreorders": "사전주문한 모든 제품들을 이 카드로 옮깁니다.",
+	"movePrepubOrders": "Move all pending Pre-Pub orders and Community Pricing bids to this card.",
+	"movePreorders": "Move all pending Preorders and Community Pricing bids to this card.",
 	"movePaymentPlans": "미결제된 할부 제도 금액을 이 카드로 옮깁니다.",
 	"moveSubscriptions": "구독 중인 모든 서비스를 이 카드로 옮깁니다.",
 	"fetchCountries": "나라 목록 불러오기",
@@ -66,13 +66,15 @@
 	"beforeRemoving": "카드를 삭제하기 전에 다음 사항을 확인하세요:",
 	"moveSubscriptionsToAlternate": "구독 중인 제품들을 취소하거나 다른 카드로 옮깁니다.",
 	"movePaymentPlansToAlternate": "미결제된 할부 제도 금액을 다른 카드로 옮깁니다.",
-	"movePreordersToAlternate": "사전 주문한 제품들을 다른 카드로 옮깁니다.",
-	"movePrepubsToAlternate": "사전 주문한 Pre-Pub 제품들을 다른 카드로 옮깁니다.",
+	"movePreordersToAlternate": "Cancel or move Preorders to an alternate credit card.",
+	"movePrepubsToAlternate": "Cancel or move Pre-Pub orders to an alternate credit card.",
+	"moveCommunityPricingBidsToAlternate": "Cancel or move Community Pricing bids to an alternate credit card.",
 	"edit": "편집",
 	"next": "다음",
 	"sameAsBilling": "청구 주소와 동일.",
 	"rememberThisCard": "이 신용카드 기억하기.",
 	"expired": "만료됨",
 	"expires": "만료",
-	"delete": "삭제"
+	"delete": "삭제",
+	"conflict": "Credit card authorization declined. We are unable to use the selected credit card. Please contact your bank or try a different card."
 }

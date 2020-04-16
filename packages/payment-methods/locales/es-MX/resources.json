@@ -29,8 +29,8 @@
 		"postalCode": "XXXXX"
 	},
 	"makeDefault": "Hacer este mi perfil de facturación predeterminado.",
-	"movePrepubOrders": "Mover todas las pre-publicaciones pendientes a esta tarjeta.",
-	"movePreorders": "Mover todas las pre-órdenes pendientes a esta tarjeta.",
+	"movePrepubOrders": "Cambiar todas las órdenes de pre-publicación a esta tarjeta.",
+	"movePreorders": "Cambiar todas las pre-órdenes a esta tarjeta.",
 	"movePaymentPlans": "Mover todos los planes de pago activos a esta tarjeta.",
 	"moveSubscriptions": "Mover todas las suscripciones activas a esta tarjeta.",
 	"fetchCountries": "buscar lista de países",
@@ -68,11 +68,13 @@
 	"movePaymentPlansToAlternate": "Mover planes de pago activos a una tarjeta de crédito alternativa.",
 	"movePreordersToAlternate": "Cancelar o mover pre-órdenes activas a una tarjeta de crédito alternativa.",
 	"movePrepubsToAlternate": "Cancelar o mover las órdenes de pre-publicación activas a una tarjeta de crédito alternativa.",
+	"moveCommunityPricingBidsToAlternate": "Cancelar o mover las pujas de Precio comunitario a una tarjeta de crédito alternativa.",
 	"edit": "Editar",
 	"next": "Siguiente",
 	"sameAsBilling": "Mismo que facturación.",
 	"rememberThisCard": "Recordar esta tarjeta de crédito.",
 	"expired": "Vencida",
 	"expires": "Vence",
-	"delete": "Borrar"
+	"delete": "Borrar",
+	"conflict": "Autorización de la tarjeta de crédito denegada. No podemos utilizar la tarjeta de crédito seleccionada. Por favor contacte con su banco o pruebe con una tarjeta diferente."
 }

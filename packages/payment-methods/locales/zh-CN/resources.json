@@ -29,8 +29,8 @@
 		"postalCode": "XXXXX"
 	},
 	"makeDefault": "将其设为我的默认帐单资料",
-	"movePrepubOrders": "将所有待处理的预购产品的订单移至该卡。",
-	"movePreorders": "将所有待处理的预购订单移至该卡。",
+	"movePrepubOrders": "Move all pending Pre-Pub orders and Community Pricing bids to this card.",
+	"movePreorders": "Move all pending Preorders and Community Pricing bids to this card.",
 	"movePaymentPlans": "将所有未完成的付款计划移至该卡。",
 	"moveSubscriptions": "将所有当前的订阅移动到该卡。",
 	"fetchCountries": "获取国家列表",
@@ -66,13 +66,15 @@
 	"beforeRemoving": "在取消您的卡之前，请确保：",
 	"moveSubscriptionsToAlternate": "取消当前订阅或将其移动到备用信用卡。",
 	"movePaymentPlansToAlternate": "将未结付款计划移至备用信用卡。",
-	"movePreordersToAlternate": "取消预订或将预订移至备用信用卡。",
-	"movePrepubsToAlternate": "取消或将发布前的订单移至备用信用卡。",
+	"movePreordersToAlternate": "Cancel or move Preorders to an alternate credit card.",
+	"movePrepubsToAlternate": "Cancel or move Pre-Pub orders to an alternate credit card.",
+	"moveCommunityPricingBidsToAlternate": "Cancel or move Community Pricing bids to an alternate credit card.",
 	"edit": "编辑",
 	"next": "下一步",
 	"sameAsBilling": "与账单地址相同。",
 	"rememberThisCard": "记住这张信用卡。",
 	"expired": "已过期",
 	"expires": "过期",
-	"delete": "删除"
+	"delete": "删除",
+	"conflict": "Credit card authorization declined. We are unable to use the selected credit card. Please contact your bank or try a different card."
 }

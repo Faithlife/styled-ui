@@ -29,8 +29,8 @@
 		"postalCode": "XXXXX"
 	},
 	"makeDefault": "Torne estes os meus dados de cobrança padrão.",
-	"movePrepubOrders": "Mova todos os pedidos pendentes de Pré-Publicação para este cartão.",
-	"movePreorders": "Mova todas as Encomendas pendentes para este cartão.",
+	"movePrepubOrders": "Move all pending Pre-Pub orders and Community Pricing bids to this card.",
+	"movePreorders": "Move all pending Preorders and Community Pricing bids to this card.",
 	"movePaymentPlans": "Mova todos os planos de pagamento pendentes para este cartão.",
 	"moveSubscriptions": "Mova todas as assinaturas atuais para este cartão.",
 	"fetchCountries": "buscar lista de países",
@@ -66,13 +66,15 @@
 	"beforeRemoving": "Antes de remover o seu cartão, certifique-se de:",
 	"moveSubscriptionsToAlternate": "Cancele ou mova as assinaturas atuais para um cartão de crédito alternativo.",
 	"movePaymentPlansToAlternate": "Mova os planos de pagamento pendentes para um cartão de crédito alternativo.",
-	"movePreordersToAlternate": "Cancele ou mova as encomendas para um cartão de crédito alternativo.",
-	"movePrepubsToAlternate": "Cancele ou mova as pré-publicações para um cartão de crédito alternativo.",
+	"movePreordersToAlternate": "Cancel or move Preorders to an alternate credit card.",
+	"movePrepubsToAlternate": "Cancel or move Pre-Pub orders to an alternate credit card.",
+	"moveCommunityPricingBidsToAlternate": "Cancel or move Community Pricing bids to an alternate credit card.",
 	"edit": "Editar",
 	"next": "Próximo",
 	"sameAsBilling": "O mesmo de cobrança.",
 	"rememberThisCard": "Salvas dados deste cartão de crédito.",
 	"expired": "Expirado",
 	"expires": "Expira",
-	"delete": "Apagar"
+	"delete": "Apagar",
+	"conflict": "Credit card authorization declined. We are unable to use the selected credit card. Please contact your bank or try a different card."
 }
