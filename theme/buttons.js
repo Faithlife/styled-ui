@@ -99,6 +99,22 @@ const buttons = {
 			backgroundColor: 'transparent',
 		},
 	},
+	minorTransparent: {
+		border: 1,
+		color: 'button.minorForeground',
+		backgroundColor: 'transparent',
+		borderColor: 'transparent',
+		'&:hover': {
+			color: 'button.primaryBackground',
+		},
+		'&:active,&.active': {
+			color: 'button.primaryActive',
+		},
+		'&:disabled': {
+			color: 'button.primaryDisabled',
+			backgroundColor: 'transparent',
+		},
+	},
 	link: {
 		border: 1,
 		color: 'button.primaryBackground',

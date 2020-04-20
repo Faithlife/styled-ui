@@ -23,6 +23,9 @@ showSource: true
 		<Button variant="transparent" size="medium">
 			Transparent
 		</Button>
+		<Button variant="minorTransparent" size="medium">
+			Minor Transparent
+		</Button>
 		<Button variant="link" size="medium">
 			Link
 		</Button>
