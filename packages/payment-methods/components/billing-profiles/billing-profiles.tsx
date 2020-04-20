@@ -337,7 +337,8 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 			const deleteProfile = async () => {
 				const response = await OrdersClient.deleteOrdersBillingProfile(billingProfileId);
 
-				const isConflict = isErrors(response) && response.errors.some(e => e.code === '409');
+				const isConflict =
+					response && isErrors(response) && response.errors.some(e => e.code === '409');
 
 				if (isConflict) {
 					setSystemMessage({
