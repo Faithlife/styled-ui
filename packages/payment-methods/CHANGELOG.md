@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@2.10.0...@faithlife/payment-methods@2.10.1) (2020-04-20)
+
+
+### Bug Fixes
+
+* Account for responses without body from billing delete route. ([#91](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/91)) ([990137a](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/990137a5c9bb6c0946e859d585d1e9713e76aff8))
+
+
+
+
+
 # [2.10.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@2.9.0...@faithlife/payment-methods@2.10.0) (2020-04-20)
 
 
