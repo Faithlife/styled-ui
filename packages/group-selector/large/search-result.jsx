@@ -55,10 +55,8 @@ export class SearchResult extends React.PureComponent {
 	};
 
 	joinGroup = () => {
-		this.props.setModalState('main');
-		this.props.toggle();
+		this.props.setModalState('join');
 		this.props.setSelectedGroupId(this.props.groupId);
-		this.props.onJoinGroupClick(this.props.groupId);
 	};
 
 	changeFirstLetterCase(string) {

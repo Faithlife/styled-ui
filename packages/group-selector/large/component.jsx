@@ -348,7 +348,8 @@ export class LargeGroupSelector extends React.Component {
 			</Styled.LargeScrollView>
 		);
 
-		const secondaryModalOpen = modalContent === 'admin' || modalContent === 'change';
+		const secondaryModalOpen =
+			modalContent === 'admin' || modalContent === 'join' || modalContent === 'change';
 
 		return (
 			<Styled.LargeGroupSelector ref={this.nodeRef}>
@@ -363,7 +364,7 @@ export class LargeGroupSelector extends React.Component {
 				>
 					{modalContent === 'main' && <CloseButton onClose={this.toggle} />}
 					{modalContent === 'main' && !showInPlace && mainView}
-					{modalContent === 'admin' && (
+					{(modalContent === 'admin' || modalContent === 'join') && (
 						<>
 							<Modal.Header title="Group Membership Required" />
 							<Modal.Content width={['100vw', 375]}>
