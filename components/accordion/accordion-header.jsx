@@ -60,7 +60,7 @@ export function AccordionHeader({
 			display="flex"
 			gridArea="header"
 			borderTop={1}
-			borderTopColor="gray14"
+			borderTopColor="accordion.sectionBorder"
 			alignItems="center"
 			{...props}
 		>
@@ -89,7 +89,7 @@ export function AccordionHeader({
 							<Text
 								textStyle={variant === 'minimal' ? 'ui.14' : 'ui.16'}
 								display="grid"
-								color="gray66"
+								color="accordion.sectionHeaderTitle"
 								fontWeight="semibold"
 								lineHeight="16px"
 							>
@@ -100,7 +100,7 @@ export function AccordionHeader({
 							<Text
 								textStyle="ui.14"
 								display="block"
-								color="gray52"
+								color="accordion.sectionHeaderSubtitle"
 								overflow="hidden"
 								textOverflow="ellipsis"
 								lineHeight="16px"

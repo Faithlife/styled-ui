@@ -91,11 +91,12 @@ const colors = {
 	yellow5: '#b58300',
 
 	borderColor: '#C7C7C7',
-	inputBorderColor: '#C7C7C7',
-	inputFocusedBorderColor: '#278ed4',
-	inputFocusedShadowColor: '#d0e6f6',
-	inputPlaceholderColor: '#C7C7C7',
 };
+
+Object.assign(colors, {
+	foregroundPrimary: colors.gray66,
+	backgroundPrimary: 'white',
+});
 
 colors.button = {
 	primaryForeground: colors.white,
@@ -148,6 +149,24 @@ colors.tab = {
 	pageDisabled: colors.white,
 	pageColorStripe: colors.gray14,
 	pageColorStripeActive: colors.blue4,
+};
+
+colors.input = {
+	foreground: colors.gray66,
+	border: colors.gray22,
+	borderFocused: '#278ed4',
+	shadowFocused: '#d0e6f6',
+	placeholderForeground: colors.gray22,
+	background: 'white',
+	backgroundReadOnly: colors.gray8,
+	icon: colors.gray22,
+	iconFocused: colors.gray34,
+};
+
+colors.accordion = {
+	sectionHeaderTitle: colors.foregroundPrimary,
+	sectionHeaderSubtitle: colors.gray52,
+	sectionBorder: colors.gray14,
 };
 
 const fonts = {

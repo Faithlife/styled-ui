@@ -85,10 +85,6 @@ const Input = React.memo(
 	}),
 );
 
-Input.defaultProps = {
-	theme,
-};
-
 Input.propTypes = {
 	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	placeholder: PropTypes.string,
@@ -132,9 +128,11 @@ const StyledInput = styled.input(
 	height: 32px;
 	padding: ${theme.space[2]} ${theme.space[3]};
 
+	background-color: ${theme.colors.input.background};
 	border: 1px solid;
 	border-radius: ${theme.radii[1]};
-	border-color: ${theme.colors.inputBorderColor};
+	border-color: ${theme.colors.input.border};
+	color: ${theme.colors.input.foreground};
 
 	${'height' in styleOverrides &&
 		css`
@@ -149,8 +147,8 @@ const StyledInput = styled.input(
 	box-shadow: none;
 
 	&:focus {
-		border-color: ${theme.colors.inputFocusedBorderColor};
-		box-shadow: 0 0 0 2px ${theme.colors.inputFocusedShadowColor};
+		border-color: ${theme.colors.input.borderFocused};
+		box-shadow: 0 0 0 2px ${theme.colors.input.shadowFocused};
 		outline: 0;
 		${({ variant }) =>
 			variant === 'inline' &&
@@ -162,11 +160,11 @@ const StyledInput = styled.input(
 	}
 
 	&:read-only {
-		background: ${theme.colors.gray8};
+		background: ${theme.colors.input.backgroundReadOnly};
 	}
 
 	&::placeholder {
-		color: ${theme.colors.inputPlaceholderColor};
+		color: ${theme.colors.input.placeholderForeground};
 	}
 
 	${createVariant({
@@ -213,3 +211,7 @@ const StyledInput = styled.input(
 	${border};
 `,
 );
+
+StyledInput.defaultProps = {
+	theme,
+};

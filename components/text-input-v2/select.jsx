@@ -15,9 +15,9 @@ const selectStyles = props => {
 			minHeight: '32px',
 			fontSize: '16px',
 			border: state.isFocused
-				? `1px solid ${theme.colors.inputFocusedBorderColor}`
-				: `1px solid ${theme.colors.inputBorderColor}`,
-			boxShadow: state.isFocused ? `0 0 0 2px ${theme.colors.inputFocusedShadowColor}` : 'none',
+				? `1px solid ${theme.colors.input.borderFocused}`
+				: `1px solid ${theme.colors.input.border}`,
+			boxShadow: state.isFocused ? `0 0 0 2px ${theme.colors.shadowFocused}` : 'none',
 		}),
 		valueContainer: styles => ({
 			...styles,
@@ -50,7 +50,7 @@ const selectStyles = props => {
 			...styles,
 			lineHeight: 1,
 			whiteSpace: 'nowrap',
-			color: `${theme.colors.inputPlaceholderColor}`,
+			color: `${theme.colors.input.placeholderForeground}`,
 		}),
 		singleValue: styles => ({
 			...styles,

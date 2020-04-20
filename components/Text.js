@@ -9,7 +9,7 @@ import { theme } from '../theme';
 export const Text = styled.span`
 	display: inline-flex;
 	align-items: baseline;
-	color: ${themeGet('colors.gray66')};
+	color: ${themeGet('colors.foregroundPrimary')};
 	${themeGet('textStyles.c.16')};
 
 	${textStyle};

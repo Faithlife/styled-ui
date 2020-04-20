@@ -103,9 +103,17 @@ const StepButton = props => (
 
 			${!props.disabled &&
 				css`
+					path {
+						fill: ${theme.colors.input.icon};
+					}
+
 					.input-container:hover &,
 					.input-container:focus-within & {
 						visibility: visible;
+					}
+
+					.input-container:focus-within & path {
+						fill: ${theme.colors.input.iconFocused};
 					}
 				`}
 		`}

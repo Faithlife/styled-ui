@@ -61,7 +61,12 @@ export function Accordion({
 	);
 
 	return (
-		<Box onKeyDown={handleKeyboardNav} borderBottom={1} borderColor="gray14" {...props}>
+		<Box
+			onKeyDown={handleKeyboardNav}
+			borderBottom={1}
+			borderColor="accordion.sectionBorder"
+			{...props}
+		>
 			<AccordionContextProvider value={context}>
 				{React.Children.map(children, (child, index) =>
 					React.isValidElement(child) ? React.cloneElement(child, { index }) : null,
