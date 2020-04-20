@@ -1,5 +1,10 @@
 # Changelog
 
+### 5.52.0
+
+- Migrate several components toward contextual theme-based colors to support dark mode. (`Paragraph`, `Text`, `Accordion`, `Input`)
+- Add `minorTransparent` variation to `Button` v6.
+
 ### 5.51.5
 
 - Remove hack checking for styled system theme in legacy `Button`.
