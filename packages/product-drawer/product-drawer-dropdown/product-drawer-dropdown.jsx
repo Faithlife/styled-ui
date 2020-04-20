@@ -99,7 +99,7 @@ export const ProductDrawerDropdown = ({
 					<FaithlifeConnectAnimatedImage isVisible={isOpen} />
 					<p>{resources.connectDescription}</p>
 					<Styled.LearnMoreLink
-						href="https://connect.faithlife.com/"
+						href="https://www.logos.com/connect"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
@@ -157,9 +157,9 @@ export const ProductDrawerDropdown = ({
 							<FaithlifeTvSvg />
 						</ProductLink>
 						<ProductLink
-							title={resources.ministryTeamMagazineLinkTitle}
-							description={resources.ministryTeamMagazineLinkDescription}
-							href="https://faithlife.com/products/ministry-team-magazine"
+							title={resources.faithlifeLiveStreamLinkTitle}
+							description={resources.faithlifeLiveStreamLinkDescription}
+							href="https://livestream.faithlife.com/"
 						/>
 					</ProductLinkList>
 				</Styled.DropdownBody>

@@ -46,8 +46,8 @@ export class ProductDrawer extends React.PureComponent {
 			givingLinkDescription: PropTypes.string,
 			faithlifeFaithlifeTvChurchLinkTitle: PropTypes.string,
 			faithlifeFaithlifeTvChurchLinkDescription: PropTypes.string,
-			ministryTeamMagazineLinkTitle: PropTypes.string,
-			ministryTeamMagazineLinkDescription: PropTypes.string,
+			faithlifeLiveStreamLinkTitle: PropTypes.string,
+			faithlifeLiveStreamLinkDescription: PropTypes.string,
 		}),
 		styleOverrides: PropTypes.shape({
 			mobileTopOffset: PropTypes.string,

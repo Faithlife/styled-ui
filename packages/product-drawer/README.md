@@ -59,5 +59,5 @@ const MyComponent = () => (
 	- `givingLinkDescription: string`
 	- `faithlifeFaithlifeTvChurchLinkTitle: string`
 	- `faithlifeFaithlifeTvChurchLinkDescription: string`
-	- `ministryTeamMagazineLinkTitle: string`
-	- `ministryTeamMagazineLinkDescription: string`
+	- `faithlifeLiveStreamLinkTitle: string`
+	- `faithlifeLiveStreamLinkDescription: string`
