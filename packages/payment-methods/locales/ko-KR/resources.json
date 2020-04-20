@@ -29,8 +29,8 @@
 		"postalCode": "XXXXX"
 	},
 	"makeDefault": "기본 청구 프로필로 설정.",
-	"movePrepubOrders": "Move all pending Pre-Pub orders and Community Pricing bids to this card.",
-	"movePreorders": "Move all pending Preorders and Community Pricing bids to this card.",
+	"movePrepubOrders": "모든 Pre-Pub 제품들과 입찰한 커뮤니티 프라이스 제품들을 이 카드로 옮기기.",
+	"movePreorders": "모든 사전주문 제품들과 입찰한 커뮤니티 프라이스 제품들을 이 카드로 옮기기.",
 	"movePaymentPlans": "미결제된 할부 제도 금액을 이 카드로 옮깁니다.",
 	"moveSubscriptions": "구독 중인 모든 서비스를 이 카드로 옮깁니다.",
 	"fetchCountries": "나라 목록 불러오기",
@@ -66,9 +66,9 @@
 	"beforeRemoving": "카드를 삭제하기 전에 다음 사항을 확인하세요:",
 	"moveSubscriptionsToAlternate": "구독 중인 제품들을 취소하거나 다른 카드로 옮깁니다.",
 	"movePaymentPlansToAlternate": "미결제된 할부 제도 금액을 다른 카드로 옮깁니다.",
-	"movePreordersToAlternate": "Cancel or move Preorders to an alternate credit card.",
-	"movePrepubsToAlternate": "Cancel or move Pre-Pub orders to an alternate credit card.",
-	"moveCommunityPricingBidsToAlternate": "Cancel or move Community Pricing bids to an alternate credit card.",
+	"movePreordersToAlternate": "사전 주문한 제품들을 취소하거나 다른 카드로 옮기기.",
+	"movePrepubsToAlternate": "사전 주문한 Pre-Pub 제품들을 취소하거나 다른 카드로 옮기기.",
+	"moveCommunityPricingBidsToAlternate": "입찰한 커뮤니티 프라이스 제품들을 취소하거나 다른 카드로 옮기기.",
 	"edit": "편집",
 	"next": "다음",
 	"sameAsBilling": "청구 주소와 동일.",
@@ -76,5 +76,5 @@
 	"expired": "만료됨",
 	"expires": "만료",
 	"delete": "삭제",
-	"conflict": "Credit card authorization declined. We are unable to use the selected credit card. Please contact your bank or try a different card."
+	"conflict": "신용카드 승인이 거부되었습니다. 선택한 신용카드를 사용할 수 없습니다. 은행에 문의하거나 다른 카드를 사용해 주시기 바랍니다."
 }
