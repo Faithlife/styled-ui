@@ -7,6 +7,7 @@ export const RadioDiv = styled.div`
 	border-radius: 14px;
 	width: 14px;
 	height: 14px;
+	padding: 2px;
 	background: transparent;
 
 	${props =>
@@ -60,24 +61,17 @@ opacity: 1;
 }`;
 
 export const CheckedIndicator = styled.div`
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 14px;
-	height: 14px;
+	display: flex;
+	height: 100%;
 	cursor: pointer;
 
 	${props => (props.disabled ? 'cursor: default;' : '')};
 
 	&:after {
+		flex: 1;
 		background: ${props => props.theme.primary};
 		content: '';
-		position: absolute;
-		top: 2px;
-		left: 2px;
-		border-radius: 8px;
-		height: 8px;
-		width: 8px;
+		border-radius: 50%;
 		opacity: 0;
 	}
 
