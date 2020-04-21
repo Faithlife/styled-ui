@@ -9,7 +9,7 @@ export function TabList({ children }) {
 
 	const handleKeyboardNav = useKeyboardNav(selectedTabIndex, onSelectTab, children);
 	return (
-		<Styled.TabListCore onKeyDown={handleKeyboardNav}>
+		<Styled.TabListCore onKeyDown={handleKeyboardNav} variant={variant}>
 			{React.Children.map(children, (child, index) =>
 				React.isValidElement(child)
 					? React.cloneElement(child, {
