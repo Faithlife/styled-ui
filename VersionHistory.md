@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.52.2
+
+- Fix tablist variant styles, restoring space between tabs.
+
 ### 5.52.1
 
 - Fix radio button scaling with an SVG.
