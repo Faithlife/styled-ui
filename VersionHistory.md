@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.52.1
+
+- Fix radio button scaling with an SVG.
+
 ### 5.52.0
 
 - Migrate several components toward contextual theme-based colors to support dark mode. (`Paragraph`, `Text`, `Accordion`, `Input`)
