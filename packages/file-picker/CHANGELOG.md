@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@3.1.0...@faithlife/file-picker@3.1.1) (2020-04-21)
+
+
+### Bug Fixes
+
+* Pass accountId to ExternalEditorComponent. ([6fb2a8f](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/6fb2a8fd16d49739ce1fbc546411c046b2068699))
+
+
+
+
+
 # [3.1.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@3.0.0...@faithlife/file-picker@3.1.0) (2020-03-27)
 
 
