@@ -169,6 +169,11 @@ colors.accordion = {
 	sectionBorder: colors.gray14,
 };
 
+colors.popover = {
+	foreground: colors.foregroundPrimary,
+	background: colors.backgroundPrimary,
+};
+
 const fonts = {
 	normal: '"Source Sans Pro", sans-serif',
 };
