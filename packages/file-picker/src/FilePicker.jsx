@@ -85,6 +85,7 @@ export const FilePicker = ({
 			{ExternalEditorComponent && (
 				<ExternalEditorModal
 					ExternalEditorComponent={ExternalEditorComponent}
+					accountId={accountId}
 					isOpen={isOpen && (model || isCreatingNewAsset)}
 					isCreatingNewAsset={isCreatingNewAsset}
 					model={model}
