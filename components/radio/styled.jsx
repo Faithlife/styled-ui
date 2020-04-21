@@ -1,21 +1,20 @@
 import styled from 'styled-components';
 import { resetStyles } from '../utils';
 
-export const RadioDiv = styled.div`
+export const RadioSvg = styled.svg`
 	position: absolute;
-	border: solid 1px ${props => props.theme.border};
-	border-radius: 14px;
 	width: 14px;
 	height: 14px;
-	background: transparent;
+`;
 
-	${props =>
-		props.disabled
-			? `
-		border: solid 1px ${props.theme.disabledBorder};
-		background-color: ${props.theme.disabledBackground};
-	`
-			: ''}
+export const RadioBorder = styled.circle`
+	fill: none;
+	stroke: ${props => props.theme.border};
+	stroke-width: 2;
+`;
+
+export const CheckedIndicator = styled.circle`
+	fill: ${props => props.theme.primary};
 `;
 
 export const RadioContainer = styled.button`
@@ -36,15 +35,20 @@ export const RadioContainer = styled.button`
 		}
 
 		@media (hover: hover) {
-			&:hover ${RadioDiv} {
-				border: solid 1px ${props => props.theme.primary};
+			&:hover ${RadioBorder} {
+				stroke: ${props => props.theme.primary};
 			}
 		}
 		@media (hover: none) {
-			&:active ${RadioDiv} {
-				border: solid 1px ${props => props.theme.primary};
+			&:active ${RadioBorder} {
+				stroke: ${props => props.theme.primary};
 			}
 		}
+	}
+
+	&:disabled ${RadioBorder} {
+		fill: ${props => props.theme.disabledBackground};
+		stroke: ${props => props.theme.disabledBorder};
 	}
 
 	&:focus {
@@ -53,35 +57,6 @@ export const RadioContainer = styled.button`
 		}
 		outline: none;
 	}
-`;
-
-export const isCheckedStyles = `&:after {
-opacity: 1;
-}`;
-
-export const CheckedIndicator = styled.div`
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 14px;
-	height: 14px;
-	cursor: pointer;
-
-	${props => (props.disabled ? 'cursor: default;' : '')};
-
-	&:after {
-		background: ${props => props.theme.primary};
-		content: '';
-		position: absolute;
-		top: 2px;
-		left: 2px;
-		border-radius: 8px;
-		height: 8px;
-		width: 8px;
-		opacity: 0;
-	}
-
-	${props => (props.isChecked ? isCheckedStyles : '')};
 `;
 
 export const Label = styled.div`
