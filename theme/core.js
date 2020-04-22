@@ -169,6 +169,14 @@ colors.accordion = {
 	sectionBorder: colors.gray14,
 };
 
+colors.dropdown = {
+	background: colors.white,
+	backgroundHover: colors.gray4,
+	foreground: colors.black,
+	separatorColor: colors.gray14,
+	foregroundDisabled: colors.gray14
+}
+
 const fonts = {
 	normal: '"Source Sans Pro", sans-serif',
 };

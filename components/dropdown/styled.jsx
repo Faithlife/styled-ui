@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import { colors, thickness } from '../shared-styles';
 import { resetStyles } from '../utils';
+import { theme } from '../../theme';
 
 export const DropdownMenuContent = styled.div`
 	width: 100%;
 	padding: ${thickness.four} 0;
 
+	background-color: ${theme.colors.dropdown ? theme.colors.dropdown.background : colors.white};
 	display: flex;
 	flex-direction: column;
 `;
@@ -26,7 +28,7 @@ export const MenuItem = styled.button.attrs(({ role, isDisabled }) => ({
 	${({ isDisabled }) => !isDisabled && 'cursor: pointer'};
 
 	&:focus {
-		background-color: ${colors.gray4};
+		background-color: ${theme.colors.dropdown? theme.colors.dropdown.backgroundHover : colors.gray4};
 		outline: none;
 		border: 0;
 	}
@@ -37,7 +39,9 @@ export const MenuItem = styled.button.attrs(({ role, isDisabled }) => ({
 `;
 
 export const MenuItemContent = styled.span.attrs(() => ({ tabIndex: '-1' }))`
-	${({ isDisabled }) => isDisabled && `color: ${colors.gray22}`};
+	${({ isDisabled }) => isDisabled ?
+	`color: ${theme.colors.dropdown ? theme.colors.dropdown.foregroundDisabled : colors.gray22}`:
+	`color: ${theme.colors.dropdown ? theme.colors.dropdown.foreground : colors.black}`};
 
 	padding: ${({ styleOverrides }) => styleOverrides.padding || thickness.eight};
 	text-align: left;
@@ -55,7 +59,7 @@ export const MenuItemContent = styled.span.attrs(() => ({ tabIndex: '-1' }))`
 	}
 
 	&:hover {
-		${({ isDisabled }) => !isDisabled && `background-color: ${colors.gray4}`};
+		${({ isDisabled }) => !isDisabled && `background-color: ${theme.colors.dropdown ? theme.colors.dropdown.backgroundHover : colors.gray4};`};
 	}
 `;
 
@@ -64,7 +68,7 @@ export const MenuSeparator = styled.hr.attrs(() => ({
 	'aria-orientation': 'horizontal',
 }))`
 	border: 0;
-	border-top: 1px solid ${colors.gray14};
+	border-top: 1px solid ${theme.colors.dropdown ? theme.colors.dropdown.separatorColor : colors.gray14};
 	width: 100%;
 	margin: 0;
 `;
