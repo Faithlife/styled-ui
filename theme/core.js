@@ -179,7 +179,7 @@ colors.dropdown = {
 	backgroundHover: colors.gray4,
 	foreground: colors.black,
 	separatorColor: colors.gray14,
-	foregroundDisabled: colors.gray14
+	foregroundDisabled: colors.gray22
 }
 
 const fonts = {

@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DropdownCore } from './dropdown-core';
+import { DefaultThemeProvider } from '../DefaultThemeProvider';
 
 export function Dropdown({ isOpen, onToggleMenu, theme, styleOverrides, children }) {
 	return (
-		<DropdownCore
-			isOpen={isOpen}
-			onToggleMenu={onToggleMenu}
-			theme={theme}
-			styleOverrides={styleOverrides}
-		>
-			{children}
-		</DropdownCore>
+		<DefaultThemeProvider>
+			<DropdownCore
+				isOpen={isOpen}
+				onToggleMenu={onToggleMenu}
+				theme={theme}
+				styleOverrides={styleOverrides}
+			>
+				{children}
+			</DropdownCore>
+		</DefaultThemeProvider>
 	);
 }
 

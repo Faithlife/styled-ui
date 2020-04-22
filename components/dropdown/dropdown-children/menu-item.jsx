@@ -57,7 +57,7 @@ export function MenuItem(props) {
 			// `Disabled menu items are focusable but cannot be activated.` https://www.w3.org/TR/wai-aria-practices-1.1/#menubutton
 			{...(!disabled ? {} : { as: 'div' })}
 		>
-			<Styled.MenuItemContent isDisabled={disabled} theme={theme} styleOverrides={styleOverrides}>
+			<Styled.MenuItemContent isDisabled={disabled} styleOverrides={styleOverrides}>
 				{typeof children === 'function' ? children({ selected: isSelected, disabled }) : children}
 			</Styled.MenuItemContent>
 		</Styled.MenuItem>

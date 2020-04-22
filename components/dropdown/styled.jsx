@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { colors, thickness } from '../shared-styles';
 import { resetStyles } from '../utils';
-import { theme } from '../../theme';
+import { Box } from '../Box';
 
 export const DropdownMenuContent = styled.div`
 	width: 100%;
 	padding: ${thickness.four} 0;
 
-	background-color: ${theme.colors.dropdown ? theme.colors.dropdown.background : colors.white};
+	background-color: ${({ theme }) => theme.colors.dropdown ? theme.colors.dropdown.background : colors.white};
 	display: flex;
 	flex-direction: column;
 `;
@@ -28,7 +28,7 @@ export const MenuItem = styled.button.attrs(({ role, isDisabled }) => ({
 	${({ isDisabled }) => !isDisabled && 'cursor: pointer'};
 
 	&:focus {
-		background-color: ${theme.colors.dropdown
+		background-color: ${({ theme }) => theme.colors.dropdown
 			? theme.colors.dropdown.backgroundHover
 			: colors.gray4};
 		outline: none;
@@ -40,11 +40,11 @@ export const MenuItem = styled.button.attrs(({ role, isDisabled }) => ({
 	}
 `;
 
-export const MenuItemContent = styled.span.attrs(() => ({ tabIndex: '-1' }))`
-	${({ isDisabled }) =>
-		isDisabled
-			? `color: ${theme.colors.dropdown ? theme.colors.dropdown.foregroundDisabled : colors.gray22}`
-			: `color: ${theme.colors.dropdown ? theme.colors.dropdown.foreground : colors.black}`};
+export const MenuItemContent = styled(Box).attrs(() => ({ tabIndex: '-1' }))`
+	${({ disabled }) =>
+		disabled
+			? `color: ${({ theme }) => theme.colors.dropdown ? theme.colors.dropdown.foregroundDisabled : colors.gray22}`
+			: `color: ${({ theme }) => theme.colors.dropdown ? theme.colors.dropdown.foreground : colors.black}`};
 
 	padding: ${({ styleOverrides }) => styleOverrides.padding || thickness.eight};
 	text-align: left;
@@ -62,10 +62,10 @@ export const MenuItemContent = styled.span.attrs(() => ({ tabIndex: '-1' }))`
 	}
 
 	&:hover {
-		${({ isDisabled }) =>
+		${({ isDisabled, theme }) =>
 			!isDisabled &&
-			`background-color: ${
-				theme.colors.dropdown ? theme.colors.dropdown.backgroundHover : colors.gray4
+			`background-color:
+			${theme.colors.dropdown.backgroundHover || colors.gray4
 			};`};
 	}
 `;
@@ -76,7 +76,7 @@ export const MenuSeparator = styled.hr.attrs(() => ({
 }))`
 	border: 0;
 	border-top: 1px solid
-		${theme.colors.dropdown ? theme.colors.dropdown.separatorColor : colors.gray14};
+		${({ theme }) => theme.colors.dropdown ? theme.colors.dropdown.separatorColor : colors.gray14};
 	width: 100%;
 	margin: 0;
 `;
