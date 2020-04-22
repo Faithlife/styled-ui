@@ -31,7 +31,7 @@ export const FilePicker = ({
 				}
 				setModel(onLoadAssetForEditing(firstAsset));
 			} else {
-				onFilesSelected({ assets: [firstAsset] });
+				onFilesSelected({ assets: data.assets });
 			}
 		},
 		[onFilesSelected, onLoadAssetForEditing]
