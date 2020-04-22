@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.2](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/file-picker-example@4.1.1...file-picker-example@4.1.2) (2020-04-22)
+
+**Note:** Version bump only for package file-picker-example
+
+
+
+
+
 ## [4.1.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/file-picker-example@4.1.0...file-picker-example@4.1.1) (2020-04-21)
 
 **Note:** Version bump only for package file-picker-example
