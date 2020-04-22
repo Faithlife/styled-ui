@@ -7,7 +7,7 @@ export const DropdownMenuContent = styled.div`
 	width: 100%;
 	padding: ${thickness.four} 0;
 
-	background-color: ${({ theme }) => theme.colors.dropdown ? theme.colors.dropdown.background : colors.white};
+	background-color: ${({ theme }) => theme.colors.dropdown.background || colors.white};
 	display: flex;
 	flex-direction: column;
 `;
@@ -28,9 +28,7 @@ export const MenuItem = styled.button.attrs(({ role, isDisabled }) => ({
 	${({ isDisabled }) => !isDisabled && 'cursor: pointer'};
 
 	&:focus {
-		background-color: ${({ theme }) => theme.colors.dropdown
-			? theme.colors.dropdown.backgroundHover
-			: colors.gray4};
+		background-color: ${({ theme }) => theme.colors.dropdown.backgroundHover || colors.gray4};
 		outline: none;
 		border: 0;
 	}
@@ -43,8 +41,8 @@ export const MenuItem = styled.button.attrs(({ role, isDisabled }) => ({
 export const MenuItemContent = styled(Box).attrs(() => ({ tabIndex: '-1' }))`
 	${({ disabled }) =>
 		disabled
-			? `color: ${({ theme }) => theme.colors.dropdown ? theme.colors.dropdown.foregroundDisabled : colors.gray22}`
-			: `color: ${({ theme }) => theme.colors.dropdown ? theme.colors.dropdown.foreground : colors.black}`};
+			? `color: ${({ theme }) => theme.colors.dropdown.foregroundDisabled || colors.gray22}`
+			: `color: ${({ theme }) => theme.colors.dropdown.foreground || colors.black}`};
 
 	padding: ${({ styleOverrides }) => styleOverrides.padding || thickness.eight};
 	text-align: left;
@@ -65,8 +63,7 @@ export const MenuItemContent = styled(Box).attrs(() => ({ tabIndex: '-1' }))`
 		${({ isDisabled, theme }) =>
 			!isDisabled &&
 			`background-color:
-			${theme.colors.dropdown.backgroundHover || colors.gray4
-			};`};
+			${theme.colors.dropdown.backgroundHover || colors.gray4};`};
 	}
 `;
 
@@ -75,8 +72,7 @@ export const MenuSeparator = styled.hr.attrs(() => ({
 	'aria-orientation': 'horizontal',
 }))`
 	border: 0;
-	border-top: 1px solid
-		${({ theme }) => theme.colors.dropdown ? theme.colors.dropdown.separatorColor : colors.gray14};
+	border-top: 1px solid ${({ theme }) => theme.colors.dropdown.separator || colors.gray14};
 	width: 100%;
 	margin: 0;
 `;
