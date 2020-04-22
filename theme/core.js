@@ -169,6 +169,11 @@ colors.accordion = {
 	sectionBorder: colors.gray14,
 };
 
+colors.popover = {
+	foreground: colors.foregroundPrimary,
+	background: colors.backgroundPrimary,
+};
+
 colors.dropdown = {
 	background: colors.white,
 	backgroundHover: colors.gray4,

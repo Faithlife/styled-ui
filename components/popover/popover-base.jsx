@@ -171,35 +171,28 @@ export class PopoverBase extends Component {
 						delay={delay}
 						onAnimationEnd={this.handleTransition}
 						hideArrow={hideArrow}
-						background={
-							styleOverrides.background
-								? styleOverrides.background
-								: theme && theme.backgroundColor
-								? theme.backgroundColor
-								: 'white'
-						}
-						backgroundColor={theme && theme.backgroundColor ? theme.backgroundColor : 'white'}
-						border={styleOverrides.border ? styleOverrides.border : 'none'}
-						borderRadius={styleOverrides.borderRadius ? styleOverrides.borderRadius : 0}
+						backgroundColor={theme?.backgroundColor ?? 'popover.background'}
+						border={styleOverrides.border ?? 'none'}
+						borderRadius={styleOverrides.borderRadius ?? 0}
 						boxShadow={styleOverrides.hideShadow ? 0 : 1}
-						color={theme && theme.textColor ? theme.textColor : ''}
-						fontSize={styleOverrides.fontSize ? styleOverrides.fontSize : 'medium'}
-						fontWeight={styleOverrides.fontWeight ? styleOverrides.fontWeight : 'normal'}
-						height={styleOverrides.height ? styleOverrides.height : 'auto'}
-						lineHeight={styleOverrides.lineHeight ? styleOverrides.lineHeight : 'normal'}
-						margin={styleOverrides.margin ? styleOverrides.margin : 0}
-						maxHeight={styleOverrides.maxHeight ? styleOverrides.maxHeight : maxHeight}
-						maxWidth={styleOverrides.maxWidth ? styleOverrides.maxWidth : maxWidth}
-						minHeight={styleOverrides.minHeight ? styleOverrides.minHeight : ''}
-						minWidth={styleOverrides.minWidth ? styleOverrides.minWidth : ''}
-						outline={styleOverrides.outline ? styleOverrides.outline : ''}
-						padding={styleOverrides.padding ? styleOverrides.padding : 0}
+						color={theme?.textColor ?? ''}
+						fontSize={styleOverrides.fontSize ?? 'medium'}
+						fontWeight={styleOverrides.fontWeight ?? 'normal'}
+						height={styleOverrides.height ?? 'auto'}
+						lineHeight={styleOverrides.lineHeight ?? 'normal'}
+						margin={styleOverrides.margin ?? 0}
+						maxHeight={styleOverrides.maxHeight ?? maxHeight}
+						maxWidth={styleOverrides.maxWidth ?? maxWidth}
+						minHeight={styleOverrides.minHeight ?? ''}
+						minWidth={styleOverrides.minWidth ?? ''}
+						outline={styleOverrides.outline ?? ''}
+						padding={styleOverrides.padding ?? 0}
 						position="absolute"
 						whiteSpace="normal"
-						width={styleOverrides.width ? styleOverrides.width : 'auto'}
-						zIndex={styleOverrides.zIndex ? styleOverrides.zIndex : 'menu'}
+						width={styleOverrides.width ?? 'auto'}
+						zIndex={styleOverrides.zIndex ?? 'menu'}
 						css={`
-							text-align: ${styleOverrides.textAlign ? styleOverrides.textAlign : 'left'};
+							text-align: ${styleOverrides.textAlign ?? 'left'};
 							${styleOverrides.overflow ? `overflow: ${styleOverrides.overflow}` : ''};
 						`}
 						{...props}
@@ -216,18 +209,18 @@ export class PopoverBase extends Component {
 									overflow: hidden;
 									pointer-events: none;
 									text-align: center;
+									--bg: ${({ theme }) => theme.colors.popover.background};
+									--shadow: ${({ theme }) => theme.shadows[1]};
 
 									&::after {
 										content: '';
-										border: ${styleOverrides.border ? styleOverrides.border : 'none'};
+										border: ${styleOverrides?.border ?? 'none'};
 										position: absolute;
 										width: ${arrowWidth};
 										height: ${arrowWidth};
-										background: ${theme && theme.backgroundColor ? theme.backgroundColor : 'white'};
+										background: ${theme?.backgroundColor ?? 'var(--bg)'};
 										transform: translateX(-50%) translateY(-50%) rotate(45deg);
-										box-shadow: ${styleOverrides.hideShadow
-											? 'none'
-											: '0 4px 4px 0 rgba(0, 0, 0, 0.12), 0 0 4px 0 rgba(0, 0, 0, 0.12)'};
+										box-shadow: ${styleOverrides?.hideShadow ? 'none' : 'var(--shadow)'};
 									}
 									${placement ? arrowStyles[getPlacement(placement)] : arrowStyles.top};
 								`}

@@ -62,9 +62,10 @@ export class Radio extends Component {
 				disabled={disabled}
 				theme={theme}
 			>
-				<Styled.RadioDiv disabled={disabled} theme={theme}>
-					<Styled.CheckedIndicator isChecked={isChecked} disabled={disabled} theme={theme} />
-				</Styled.RadioDiv>
+				<Styled.RadioSvg viewBox="0 0 28 28" theme={theme}>
+					<Styled.RadioBorder cx="14" cy="14" r="13" theme={theme} />
+					{isChecked && <Styled.CheckedIndicator cx="14" cy="14" r="8" theme={theme} />}
+				</Styled.RadioSvg>
 				{title && <Styled.Label>{title}</Styled.Label>}
 				{children && <Styled.Label>{children}</Styled.Label>}
 			</Styled.RadioContainer>
