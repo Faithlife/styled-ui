@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Box } from '@faithlife/styled-ui';
 import { useFilePickerContext } from './FilePickerContext';
 
+const amberEmbedUrl = 'https://amber.faithlife.com/scripts/api/embeddedBucket.js';
+
 export function AmberContent({
 	accountId,
 	filter,
@@ -73,7 +75,7 @@ export function AmberContent({
 				sort,
 				url: '/embed/',
 				viewStyle,
-				externalEditorKinds: ExternalEditorComponent ? ['image'] : [],
+				externalEditorKinds: ExternalEditorComponent ? ['image'] : ['none'],
 			});
 		}
 	}, [
@@ -117,13 +119,11 @@ function useAmber() {
 		if (window.amberfile) {
 			setAmber(window.amberfile);
 		} else {
-			let amberScript = document.querySelector(
-				'script[src="https://amber.faithlife.com/scripts/api/embeddedBucket.js"]'
-			);
+			let amberScript = document.querySelector(`script[src="${amberEmbedUrl}"]`);
 
 			if (!amberScript) {
 				amberScript = document.createElement('script');
-				amberScript.src = 'https://amber.faithlife.com/scripts/api/embeddedBucket.js';
+				amberScript.src = amberEmbedUrl;
 				amberScript.async = true;
 				document.body.appendChild(amberScript);
 			}
