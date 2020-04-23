@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.53.0
+
+- Improve theming support in popovers, segmented button groups, selects, and dropdowns.
+
 ### 5.52.2
 
 - Fix tablist variant styles, restoring space between tabs.
