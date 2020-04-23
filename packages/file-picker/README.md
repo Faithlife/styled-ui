@@ -70,9 +70,11 @@ The recommended pattern is to use the various `Tab` components as children of th
 
 `accountId` - `number`: Either a Group ID or a User ID. This Account ID will be used to look up an Amber vault, and any assets edited by the Smart Media Editor will be saved to that User's or Group's vault.
 
+`shouldFillViewport` = `boolean`: If true, content fills entire viewport instead of being wrapped by Modal component. Defaults to false and should generally be false. If true, `title` and `isOpen` props are ignored, and `ExternalEditorComponent` is not supported.
+
 `title` - `string`: Title for the Modal component.
 
-`isOpen` - `boolean`: Controls whether the Modal is open.
+`isOpen` - `boolean`: Controls whether the Modal is open. Required except in rare circumstances where `shouldFillViewport` is set to true.
 
 `onFilesSelected` - `function`: Called when the user clicks the Insert button within the Amber Iframe.
 
@@ -80,7 +82,7 @@ The recommended pattern is to use the various `Tab` components as children of th
 
 `allowMultiSelect` - `boolean`: Controls whether the File Picker can select multiple files.
 
-`disableEditor` - `boolean`: Disables the Smart Media Editor. Defaults to false.
+`ExternalEditorComponent` - `element`: For external editors such as the Smart Media Editor.
 
 `localizedResources` - `object`: Localized text for the Smart Media Editor. Required when the editor is enabled.
 

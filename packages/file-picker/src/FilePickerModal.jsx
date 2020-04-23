@@ -1,6 +1,6 @@
 import React from 'react';
-import { TabManager, Tab, TabList, TabPanels, TabPanel } from '@faithlife/styled-ui';
 import { Modal } from '@faithlife/styled-ui/v6';
+import { Tabs } from './Tabs';
 
 export const FilePickerModal = ({ isOpen, onClose, title, children }) => (
 	<Modal isOpen={isOpen} onClose={onClose} container="body" fullscreen>
@@ -14,22 +14,7 @@ export const FilePickerModal = ({ isOpen, onClose, title, children }) => (
 			justifyContent="stretch"
 			alignItems="stretch"
 		>
-			<TabManager>
-				<TabList>
-					{React.Children.map(children, tab =>
-						tab ? <Tab paddingX={4}>{tab.props.title}</Tab> : null
-					)}
-				</TabList>
-				<TabPanels display="grid">
-					{React.Children.map(children, tab =>
-						tab ? (
-							<TabPanel display="grid" padding={tab.props.padding || 0}>
-								{React.cloneElement(tab)}
-							</TabPanel>
-						) : null
-					)}
-				</TabPanels>
-			</TabManager>
+			<Tabs>{children}</Tabs>
 		</Modal.Content>
 	</Modal>
 );

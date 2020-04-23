@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ExternalEditorModal } from './ExternalEditorModal';
 import { FilePickerModal } from './FilePickerModal';
+import { Tabs } from './Tabs';
 import { FilePickerProvider } from './FilePickerContext';
 import { useAmberClient } from './useAmberClient';
 
@@ -16,6 +17,7 @@ export const FilePicker = ({
 	onLoadModelForSaving,
 	allowMultiSelect,
 	ExternalEditorComponent,
+	shouldFillViewport,
 }) => {
 	const [asset, setAsset] = useState(null);
 	const [model, setModel] = useState();
@@ -79,9 +81,13 @@ export const FilePicker = ({
 
 	return (
 		<FilePickerProvider value={context}>
-			<FilePickerModal isOpen={isOpen} onClose={handleCancel} title={title}>
-				{children}
-			</FilePickerModal>
+			{shouldFillViewport ? (
+				<Tabs>{children}</Tabs>
+			) : (
+				<FilePickerModal isOpen={isOpen} onClose={handleCancel} title={title}>
+					{children}
+				</FilePickerModal>
+			)}
 			{ExternalEditorComponent && (
 				<ExternalEditorModal
 					ExternalEditorComponent={ExternalEditorComponent}
@@ -111,8 +117,8 @@ FilePicker.propTypes = {
 	accountId: PropTypes.number.isRequired,
 	/** Title for the modal. Defaults to 'File Picker'. */
 	title: PropTypes.string,
-	/** Controls whether the File Picker is open. */
-	isOpen: PropTypes.bool.isRequired,
+	/** Controls whether the File Picker is open.  Required except in rare circumstances where `shouldFillViewport` is set to true. */
+	isOpen: PropTypes.bool,
 	/** Called when a file or files are selected, should close the File Picker. */
 	onFilesSelected: PropTypes.func.isRequired,
 	/** Should close the File Picker. */
@@ -125,4 +131,6 @@ FilePicker.propTypes = {
 	ExternalEditorComponent: PropTypes.elementType,
 	/** Controls whether the File Picker can select multiple files. */
 	allowMultiSelect: PropTypes.bool,
+	/** If true, content fills entire viewport instead of being wrapped by Modal component. Defaults to false and should generally be false. When true, `title` and `isOpen` props are ignored. */
+	shouldFillViewport: PropTypes.bool,
 };
