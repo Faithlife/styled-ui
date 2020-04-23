@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@3.2.0...@faithlife/file-picker@3.2.1) (2020-04-23)
+
+
+### Bug Fixes
+
+* Pass new arguments to embedded amber to hide "Create" button. ([a497484](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/a497484ecd4de7fe3c4bef570fa903bf9c732fe6))
+
+
+
+
+
 # [3.2.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@3.1.2...@faithlife/file-picker@3.2.0) (2020-04-23)
 
 
