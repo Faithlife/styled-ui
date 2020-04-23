@@ -177,6 +177,12 @@ colors.popover = {
 	background: colors.backgroundPrimary,
 };
 
+colors.select = {
+	menuBackground: colors.backgroundPrimary,
+	menuForeground: colors.foregroundPrimary,
+	menuItemFocusedBackground: colors.gray4,
+};
+
 const fonts = {
 	normal: '"Source Sans Pro", sans-serif',
 };
