@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.2.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@3.1.2...@faithlife/file-picker@3.2.0) (2020-04-23)
+
+
+### Features
+
+* **file-picker:** Add full viewport (i.e. non-modal) option ([#93](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/93)) ([b444d3e](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/b444d3eea8fd0f28c0cea6994af767b7d4835af8))
+
+
+
+
+
 ## [3.1.2](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@3.1.1...@faithlife/file-picker@3.1.2) (2020-04-22)
 
 
