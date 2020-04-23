@@ -55,6 +55,10 @@ export class SearchResult extends React.PureComponent {
 	};
 
 	joinGroup = () => {
+		this.props.setModalState('main');
+		this.props.toggle();
+		this.props.setSelectedGroupId(this.props.groupId);
+		this.props.onJoinGroupClick(this.props.groupId);
 		const { authorizedMembershipLevels } = this.props;
 		const membershipKind = 'member';
 		if (!authorizedMembershipLevels.includes(membershipKind)) {
