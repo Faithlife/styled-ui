@@ -124,6 +124,9 @@ colors.button = {
 
 	focusBorder: colors.blue1,
 	focusShadow: colors.blue3,
+
+	segmentedButtonGroupBorder: colors.gray14,
+	segmentedButtonGroupBackground: 'transparent',
 };
 
 colors.tab = {

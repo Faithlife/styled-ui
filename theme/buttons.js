@@ -1,6 +1,6 @@
 import { textStyles } from './textStyles';
 
-const buttonSizes = {
+export const buttonSizes = {
 	small: {
 		...textStyles.ui['16'],
 		height: '32px',
@@ -21,7 +21,7 @@ const buttonSizes = {
 	},
 };
 
-const buttons = {
+export const buttons = {
 	primary: {
 		color: 'button.primaryForeground',
 		backgroundColor: 'button.primaryBackground',
@@ -170,5 +170,3 @@ const buttons = {
 		},
 	},
 };
-
-export { buttonSizes, buttons };
