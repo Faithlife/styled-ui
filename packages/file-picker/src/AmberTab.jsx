@@ -2,7 +2,16 @@ import React from 'react';
 import { AmberContent } from './AmberContent';
 import { Tab } from './Tab';
 
-export const AmberTab = ({ title, accountId, filter, footerText, pickerMode, sort, viewStyle }) => {
+export const AmberTab = ({
+	title,
+	accountId,
+	filter,
+	footerText,
+	pickerMode,
+	fields,
+	sort,
+	viewStyle,
+}) => {
 	return (
 		<Tab title={title} padding={0}>
 			<AmberContent
@@ -10,6 +19,7 @@ export const AmberTab = ({ title, accountId, filter, footerText, pickerMode, sor
 				filter={filter}
 				footerText={footerText}
 				pickerMode={pickerMode}
+				fields={fields}
 				sort={sort}
 				viewStyle={viewStyle}
 			/>

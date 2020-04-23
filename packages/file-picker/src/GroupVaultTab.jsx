@@ -2,7 +2,15 @@ import React from 'react';
 import { AmberTab } from './AmberTab';
 import { useFilePickerContext } from './FilePickerContext';
 
-export const GroupVaultTab = ({ title, filter, footerText, pickerMode, sort, viewStyle }) => {
+export const GroupVaultTab = ({
+	title,
+	filter,
+	footerText,
+	pickerMode,
+	fields,
+	sort,
+	viewStyle,
+}) => {
 	const { accountId } = useFilePickerContext();
 	return (
 		<AmberTab
@@ -11,6 +19,7 @@ export const GroupVaultTab = ({ title, filter, footerText, pickerMode, sort, vie
 			filter={filter}
 			footerText={footerText}
 			pickerMode={pickerMode}
+			fields={fields}
 			sort={sort}
 			viewStyle={viewStyle}
 		/>

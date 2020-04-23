@@ -8,6 +8,7 @@ const amberEmbedUrl = 'https://amber.faithlife.com/scripts/api/embeddedBucket.js
 export function AmberContent({
 	accountId,
 	filter,
+	fields,
 	footerText,
 	pickerMode,
 	sort,
@@ -72,6 +73,7 @@ export function AmberContent({
 				footerText,
 				multiSelect: allowMultiSelect,
 				pickerMode,
+				fields,
 				sort,
 				url: '/embed/',
 				viewStyle,
@@ -88,6 +90,7 @@ export function AmberContent({
 		sort,
 		viewStyle,
 		ExternalEditorComponent,
+		fields,
 	]);
 
 	return <Box ref={amberRef} height="100%" {...props} />;
@@ -102,6 +105,8 @@ AmberContent.propTypes = {
 	footerText: PropTypes.string,
 	/** Optional to control the type of data passed back. Values are "file", "asset" and "filter". */
 	pickerMode: PropTypes.string,
+	/** Optional; This field will only apply if `pickerMode` is set to "asset".  A comma-separated list of fields to be returned for each asset */
+	fields: PropTypes.string,
 	/** Optional to set the sorting of the assets. Values are "relevance" or an asset field. */
 	sort: PropTypes.string,
 	/** Optional to set the layout of the assets */

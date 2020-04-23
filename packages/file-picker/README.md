@@ -94,18 +94,20 @@ The recommended pattern is to use the various `Tab` components as children of th
 
 `children` - `node`: Will be rendered as the contents of the TabPanel when the Tab is active.
 
-#### FilePicker.AmberTab
+#### FilePicker.AmberTab [^1]
 
 Accepts the props necessary for rendering an Amber IFrame, as well as a `title` prop for the Tab List.
 
-#### FilePicker.FaithlifeStockTab
+#### FilePicker.FaithlifeStockTab [^1]
 
 Has default props for rendering the correct Amber Vault for Faithlife Stock.
 
-#### FilePicker.GroupVaultTab
+#### FilePicker.GroupVaultTab [^1]
 
 Has default props for rendering the correct Amber Vault for the Group ID passed in to the FilePicker component.
 
-#### FilePicker.UnsplashTab
+#### FilePicker.UnsplashTab [^1]
 
 Has default props for rendering the correct Amber Vault for Unsplash.
+
+[^1]: These components accept many of the options documented at [Embedding An Amber Picker: Options](https://git.faithlife.dev/Logos/AssetDesk/blob/master/docs/EmbeddingAnAmberPicker.md#options), including `filter`, `footerText`, `pickerMode`, `fields`, `sort`, and `viewStyle`.

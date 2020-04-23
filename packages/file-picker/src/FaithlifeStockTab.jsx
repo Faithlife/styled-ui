@@ -3,7 +3,15 @@ import { AmberTab } from './AmberTab';
 import { useIsInternal } from './useIsInternal';
 import { faithlifeStockAmberId, faithlifeStockInternalAmberId } from './constants';
 
-export const FaithlifeStockTab = ({ title, filter, footerText, pickerMode, sort, viewStyle }) => {
+export const FaithlifeStockTab = ({
+	title,
+	filter,
+	footerText,
+	pickerMode,
+	fields,
+	sort,
+	viewStyle,
+}) => {
 	const isInternal = useIsInternal();
 	const accountId = isInternal ? faithlifeStockInternalAmberId : faithlifeStockAmberId;
 	return (
@@ -13,6 +21,7 @@ export const FaithlifeStockTab = ({ title, filter, footerText, pickerMode, sort,
 			filter={filter}
 			footerText={footerText}
 			pickerMode={pickerMode}
+			fields={fields}
 			sort={sort}
 			viewStyle={viewStyle}
 		/>
