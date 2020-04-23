@@ -55,8 +55,11 @@ export class SearchResult extends React.PureComponent {
 	};
 
 	joinGroup = () => {
-		this.props.setModalState('join');
-		this.props.setSelectedGroupId(this.props.groupId);
+		const { authorizedMembershipLevels } = this.props;
+		const membershipKind = 'member';
+		if (!authorizedMembershipLevels.includes(membershipKind)) {
+			this.requestAccess();
+		}
 	};
 
 	changeFirstLetterCase(string) {
