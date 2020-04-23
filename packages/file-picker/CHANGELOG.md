@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.3.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@3.2.1...@faithlife/file-picker@3.3.0) (2020-04-23)
+
+
+### Features
+
+* **file-picker:** Add pass-through support for Amber's 'fields' option. ([4560553](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/45605532f7ce0867a79ba5aab6ce0d494dd861d2))
+
+
+
+
+
 ## [3.2.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@3.2.0...@faithlife/file-picker@3.2.1) (2020-04-23)
 
 
