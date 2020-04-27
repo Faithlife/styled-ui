@@ -59,6 +59,11 @@ export class SearchResult extends React.PureComponent {
 		this.props.toggle();
 		this.props.setSelectedGroupId(this.props.groupId);
 		this.props.onJoinGroupClick(this.props.groupId);
+		const { authorizedMembershipLevels } = this.props;
+		const membershipKind = 'follower';
+		if (!authorizedMembershipLevels.includes(membershipKind)) {
+			this.requestAccess();
+		}
 	};
 
 	changeFirstLetterCase(string) {
@@ -134,7 +139,9 @@ export class SearchResult extends React.PureComponent {
 			);
 			button = (
 				<Button size="small" variant="primary" onClick={this.joinGroup}>
-					{localizedResources.joinButtonText}
+					{authorizedMembershipLevels.includes('follower')
+						? localizedResources.selectButtonText
+						: localizedResources.joinButtonText}
 				</Button>
 			);
 		} else if ((membershipKind === 'none' || !membershipKind) && !joinable) {
