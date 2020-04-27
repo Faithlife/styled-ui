@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.11.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@2.10.1...@faithlife/payment-methods@2.11.0) (2020-04-27)
+
+
+### Features
+
+* Support converting half giving profiles to full ecommerce billing profiles SITES-6309. ([#98](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/98)) ([74e3a19](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/74e3a19dc04b864cd2b8d530384273bb4d94dd1f))
+
+
+
+
+
 ## [2.10.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@2.10.0...@faithlife/payment-methods@2.10.1) (2020-04-20)
 
 
