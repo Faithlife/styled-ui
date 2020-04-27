@@ -332,6 +332,20 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 		[setSystemMessage, strings, actAndHandleException]
 	);
 
+	const resetEditingBillingProfile = useCallback(() => {
+		setIsAddingNewBillingProfile(false);
+		setEditingBillingProfileId(null);
+		setAddressFormatItems([]);
+
+		// Reset the editor back to US defaults
+		handleCountryChanged(unitedStatesCountryId);
+	}, [
+		setIsAddingNewBillingProfile,
+		setEditingBillingProfileId,
+		setAddressFormatItems,
+		handleCountryChanged,
+	]);
+
 	const onDeleteBillingProfile = useCallback(
 		async (billingProfileId: string): Promise<boolean> => {
 			const deleteProfile = async () => {
@@ -347,13 +361,14 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 					});
 				}
 
+				resetEditingBillingProfile();
 				setShouldRefreshBillingProfiles(true);
 				return true;
 			};
 
 			return (await actAndHandleException(deleteProfile, strings.deleteProfile)) || false;
 		},
-		[strings, actAndHandleException, setSystemMessage]
+		[strings, actAndHandleException, setSystemMessage, resetEditingBillingProfile]
 	);
 
 	const toggleEditBillingProfile = useCallback(
@@ -367,26 +382,16 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 
 	const handleOnUpdateBillingProfile = useCallback(
 		(billingProfile: IBillingProfileDto): void => {
-			handleCountryChanged(billingProfile.countryId.toString());
-			fetchStatesForCountry(billingProfile.countryId.toString());
+			const countryId =
+				billingProfile.countryId === -1
+					? unitedStatesCountryId
+					: billingProfile.countryId.toString();
+			handleCountryChanged(countryId);
+			fetchStatesForCountry(countryId);
 			toggleEditBillingProfile(billingProfile.profileId);
 		},
 		[handleCountryChanged, toggleEditBillingProfile, fetchStatesForCountry]
 	);
-
-	const resetEditingBillingProfile = useCallback(() => {
-		setIsAddingNewBillingProfile(false);
-		setEditingBillingProfileId(null);
-		setAddressFormatItems([]);
-
-		// Reset the editor back to US defaults
-		handleCountryChanged(unitedStatesCountryId);
-	}, [
-		setIsAddingNewBillingProfile,
-		setEditingBillingProfileId,
-		setAddressFormatItems,
-		handleCountryChanged,
-	]);
 
 	const displayProfiles = showAllPaymentMethods ? billingProfiles : billingProfiles.slice(0, 3);
 	return (

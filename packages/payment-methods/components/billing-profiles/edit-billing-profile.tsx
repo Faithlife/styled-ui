@@ -66,7 +66,10 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 	const commitButtonRef = useRef<Button>(null);
 	const [uncommittedBillingProfile, setUncommittedBillingProfile] = useState<IEditBillingProfile>(
 		billingProfile
-			? { ...billingProfile }
+			? {
+					...billingProfile,
+					countryId: billingProfile.countryId === '-1' ? usaCountryId : billingProfile.countryId,
+			  }
 			: {
 					addressLine1: null,
 					addressLine2: null,

@@ -11,8 +11,9 @@ import { isErrorsDto } from './typings/orders/IErrorsDto';
 
 export default class OrdersClient {
 	static async getBillingProfiles(): Promise<IBillingProfilesDto> {
-		const response = await fetchJson('/proxy/orders/v3/billingprofiles', {
+		const response = await fetchJson('/proxy/orders/v3/billingprofiles/payfac', {
 			method: 'GET',
+			query: { fields: '*' },
 		});
 
 		return response;

@@ -32,9 +32,10 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 	const [isEditDisabled, setIsEditDisabled] = useState(false);
 	const [isDeleting, setIsDeleting] = useState(false);
 	const [trashDisabled, setTrashDisabled] = useState(
-		billingProfile.usageInfo.activeSubscriptionCount > 0 ||
-			billingProfile.usageInfo.outstandingPaymentPlansCount > 0 ||
-			billingProfile.usageInfo.pendingPrepubCount > 0
+		billingProfile.usageInfo &&
+			(billingProfile.usageInfo.activeSubscriptionCount > 0 ||
+				billingProfile.usageInfo.outstandingPaymentPlansCount > 0 ||
+				billingProfile.usageInfo.pendingPrepubCount > 0)
 	);
 
 	// Date.getMonth() is zero-indexed
@@ -43,6 +44,8 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 		(billingProfile.cardInfo.expirationYear < now.getFullYear() ||
 			(billingProfile.cardInfo.expirationYear === now.getFullYear() &&
 				billingProfile.cardInfo.expirationMonth <= now.getMonth() + 1));
+
+	const isHalfProfile = billingProfile.type === 'PayFacCreditCard';
 
 	const deleteBillingProfile = useCallback(() => {
 		setTrashDisabled(true);
@@ -76,7 +79,7 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 
 	return (
 		<Styled.CreditCardRow data-testid="credit-card-row" data-test-index={index}>
-			{isExpired ? (
+			{isExpired || isHalfProfile ? (
 				<div data-testid="update-billing-profile-button">
 					<Button
 						primaryTransparent
