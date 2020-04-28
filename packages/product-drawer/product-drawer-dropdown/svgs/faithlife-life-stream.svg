@@ -1,0 +1,25 @@
+<svg width="24px" height="22px" viewBox="0 0 28 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>Product Icon_Live Stream_Open</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M26,0 C27.1045695,0 28,0.8954305 28,2 L28,20 C28,21.1045695 27.1045695,22 26,22 L13,22 L13,20 L26,20 L26,2 L2,2 L2,9 L0,9 L0,2 C0,0.8954305 0.8954305,0 2,0 L26,0 Z M0,15 C3.87,15 7,18.13 7,22 L7,22 L5,22 C5,19.24 2.76,17 0,17 L0,17 Z M0,11 C6.07,11 11,15.92 11,22 L11,22 L9,22 C9,17.03 4.97,13 0,13 L0,13 Z M15,6 L15,8 L17,8 L17,10 L15,10 L15,15 L13,15 L13,10 L11,10 L11,8 L13,8 L13,6 L15,6 Z" id="path-1"></path>
+    </defs>
+    <g id="Product-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-1605.000000, -341.000000)" id="Product-Icon_Live-Stream_Open">
+            <g transform="translate(1605.000000, 341.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#504A4A" xlink:href="#path-1"></use>
+                <g id="Gradient" mask="url(#mask-2)">
+                    <g transform="translate(-1.000000, -1.000000)" id="Rectangle-3">
+                        <rect fill="#62B946" x="0" y="9" width="30" height="7"></rect>
+                        <rect fill="#42991D" x="0" y="16" width="30" height="8"></rect>
+                        <polygon fill="#8CD86C" points="0 0 30 0 30 9 5.27661133 9 4.5 10 0 10 0 9"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

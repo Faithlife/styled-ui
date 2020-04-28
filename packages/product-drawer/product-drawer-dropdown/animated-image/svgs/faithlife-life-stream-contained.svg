@@ -1,0 +1,38 @@
+<svg width="18px" height="18px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>Product Icon_Live Stream_Contained</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M34.5607575,40 L5.4392425,40 C2.44783447,40 0,37.5521655 0,34.5607575 L0,5.4392425 C0,2.44783447 2.44783447,0 5.4392425,0 L34.5607575,0 C37.5521655,0 40,2.44783447 40,5.4392425 L40,34.5607575 C40,37.5521655 37.5521655,40 34.5607575,40 Z" id="path-1"></path>
+    </defs>
+    <g id="Product-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-1599.000000, -212.000000)" id="Product-Icon_Live-Stream_Contained">
+            <g transform="translate(1599.000000, 212.000000)">
+                <g id="Product-Icons-/-Faithlife-/-OnShape-Copy-46">
+                    <g id="Groups-/-On-Shape">
+                        <g id="Group-2">
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <use id="Fill-14" fill="#F5F5F5" xlink:href="#path-1"></use>
+                            <g id="Group" mask="url(#mask-2)">
+                                <polygon id="Rectangle-3" fill="#8CD86C" points="0 0 40 0 40 13 0 13"></polygon>
+                                <polygon id="Rectangle-3" fill="#62B946" points="0 13 40 13 40 27 0 27"></polygon>
+                                <polygon id="Rectangle-3" fill="#42991D" points="0 27 40 27 40 40 0 40"></polygon>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g id="Group-11-Copy-26" transform="translate(17.000000, 15.000000)" fill="#FFFFFF">
+                    <polygon id="Path-11-Copy" points="2 0 2 9 4 9 4 0"></polygon>
+                    <polygon id="Path-12-Copy" points="0 4 6 4 6 2 0 2"></polygon>
+                </g>
+                <path d="M32,9 C33.1045695,9 34,9.8954305 34,11 L34,29 C34,30.1045695 33.1045695,31 32,31 L8,31 C6.8954305,31 6,30.1045695 6,29 L6,11 C6,9.8954305 6.8954305,9 8,9 L32,9 Z M32,11 L8,11 L8,29 L32,29 L32,11 Z" id="Shape-Copy-8" fill="#FFFFFF"></path>
+                <rect id="Rectangle-Copy-17" fill="#62B946" x="2" y="18" width="13" height="9"></rect>
+                <rect id="Rectangle-Copy-18" fill="#42991D" x="2" y="27" width="17" height="7"></rect>
+                <path d="M6,24 L6,26 C8.76,26 11,28.24 11,31 L13,31 C13,27.13 9.87,24 6,24 Z" id="Path-Copy-64" fill="#FFFFFF" fill-rule="nonzero"></path>
+                <path d="M6,20 L6,22 C10.97,22 15,26.03 15,31 L17,31 C17,24.92 12.07,20 6,20 Z" id="Path-Copy-65" fill="#FFFFFF" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

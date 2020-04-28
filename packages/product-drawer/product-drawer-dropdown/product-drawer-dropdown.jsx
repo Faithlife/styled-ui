@@ -17,6 +17,7 @@ import {
 	FaithlifeStudyBibleSvg,
 	GivingSvg,
 	CloseIcon,
+	FaithlifeLiveStreamIcon,
 } from './svgs';
 import * as Styled from './styled';
 
@@ -160,7 +161,9 @@ export const ProductDrawerDropdown = ({
 							title={resources.faithlifeLiveStreamLinkTitle}
 							description={resources.faithlifeLiveStreamLinkDescription}
 							href="https://livestream.faithlife.com/"
-						/>
+						>
+							<FaithlifeLiveStreamIcon />
+						</ProductLink>
 					</ProductLinkList>
 				</Styled.DropdownBody>
 				<Styled.DropdownFooter>
