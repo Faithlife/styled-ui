@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.5.0...@faithlife/product-drawer@0.5.1) (2020-04-28)
+
+
+### Bug Fixes
+
+* Add logo to Faithlife Live Stream. ([1b3623f](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/1b3623f7c2c87cec8a1cd5006368a9c1233a4c13))
+
+
+
+
+
 # [0.5.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.4.7...@faithlife/product-drawer@0.5.0) (2020-04-20)
 
 
