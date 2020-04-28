@@ -6,18 +6,24 @@ import ReactSelect, {
 import { colors } from '../shared-styles';
 import { ChevronDown } from '../icons/12px';
 import { DebouncedSelectAsync, DebouncedSelectAsyncCreatable } from './debounced-async';
-import { theme } from '../../theme';
+import { useTheme } from '../../theme';
 
-const selectStyles = props => {
+const selectStyles = (props, theme) => {
 	const ourStyles = {
 		control: (styles, state) => ({
 			...styles,
 			minHeight: '32px',
 			fontSize: '16px',
+			backgroundColor: theme.colors.input.background,
+			color: theme.colors.input.foreground,
 			border: state.isFocused
 				? `1px solid ${theme.colors.input.borderFocused}`
 				: `1px solid ${theme.colors.input.border}`,
-			boxShadow: state.isFocused ? `0 0 0 2px ${theme.colors.shadowFocused}` : 'none',
+			borderRadius: theme.radii[1],
+			boxShadow: state.isFocused ? `0 0 0 2px ${theme.colors.input.shadowFocused}` : 'none',
+			'&:hover': {
+				borderColor: state.isFocused ? theme.colors.input.borderFocused : theme.colors.input.border,
+			},
 		}),
 		valueContainer: styles => ({
 			...styles,
@@ -43,18 +49,18 @@ const selectStyles = props => {
 		}),
 		dropdownIndicator: styles => ({
 			...styles,
-			fill: colors.gray52,
+			color: theme.colors.input.icon,
 			padding: '5px 8px',
 		}),
 		placeholder: styles => ({
 			...styles,
 			lineHeight: 1,
 			whiteSpace: 'nowrap',
-			color: `${theme.colors.input.placeholderForeground}`,
+			color: theme.colors.input.placeholderForeground,
 		}),
 		singleValue: styles => ({
 			...styles,
-			color: props.inferred ? '#006099' : colors.gray66,
+			color: props.inferred ? '#006099' : theme.colors.input.foreground,
 		}),
 		multiValue: styles => ({
 			...styles,
@@ -62,7 +68,7 @@ const selectStyles = props => {
 		}),
 		multiValueLabel: styles => ({
 			...styles,
-			color: colors.gray66,
+			color: theme.colors.input.foreground,
 		}),
 		multiValueRemove: styles => ({
 			...styles,
@@ -79,7 +85,16 @@ const selectStyles = props => {
 		menu: styles => ({
 			...styles,
 			marginTop: 0,
-			boxShadow: 'rgba(0, 0, 0, 0.24) 0px 4px 4px 0px, rgba(0, 0, 0, 0.24) 0px 0px 4px 0px;',
+			boxShadow: theme.shadows[1],
+			backgroundColor: theme.colors.select.menuBackground,
+			color: theme.colors.select.menuForeground,
+		}),
+		option: (styles, state) => ({
+			...styles,
+			backgroundColor: state.isFocused
+				? theme.colors.select.menuItemFocusedBackground
+				: theme.colors.select.menuBackground,
+			color: theme.colors.select.menuForeground,
 		}),
 	};
 
@@ -130,7 +145,7 @@ const defaultComponents = {
 const DropdownIndicator = props => {
 	return (
 		<reactSelectComponents.DropdownIndicator {...props}>
-			<ChevronDown />
+			<ChevronDown color="currentColor" />
 		</reactSelectComponents.DropdownIndicator>
 	);
 };
@@ -169,6 +184,7 @@ export const Select = React.forwardRef(({ components = {}, ...props }, ref) => {
 	const onConsumerKeyDown = props.onKeyDown;
 
 	const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
+	const theme = useTheme();
 
 	return (
 		<ReactSelect
@@ -180,7 +196,7 @@ export const Select = React.forwardRef(({ components = {}, ...props }, ref) => {
 			menuPortalTarget={body}
 			{...props}
 			onChange={onChange}
-			styles={selectStyles(props)}
+			styles={selectStyles(props, theme)}
 			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 		/>
 	);
@@ -192,6 +208,7 @@ export const CreatableSelect = React.forwardRef(({ components = {}, ...props }, 
 	const onConsumerKeyDown = props.onKeyDown;
 
 	const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
+	const theme = useTheme();
 
 	return (
 		<ReactSelectCreatable
@@ -204,7 +221,7 @@ export const CreatableSelect = React.forwardRef(({ components = {}, ...props }, 
 			menuPortalTarget={body}
 			{...props}
 			onChange={onChange}
-			styles={selectStyles(props)}
+			styles={selectStyles(props, theme)}
 			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 		/>
 	);
@@ -216,6 +233,7 @@ export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...prop
 	const onConsumerKeyDown = props.onKeyDown;
 
 	const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
+	const theme = useTheme();
 
 	return (
 		<DebouncedSelectAsyncCreatable
@@ -229,7 +247,7 @@ export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...prop
 			menuPortalTarget={body}
 			{...props}
 			onChange={onChange}
-			styles={selectStyles(props)}
+			styles={selectStyles(props, theme)}
 			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 		/>
 	);
@@ -241,6 +259,7 @@ export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref)
 	const onConsumerKeyDown = props.onKeyDown;
 
 	const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
+	const theme = useTheme();
 
 	return (
 		<DebouncedSelectAsync
@@ -252,7 +271,7 @@ export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref)
 			menuPortalTarget={body}
 			{...props}
 			onChange={onChange}
-			styles={selectStyles(props)}
+			styles={selectStyles(props, theme)}
 			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 		/>
 	);
