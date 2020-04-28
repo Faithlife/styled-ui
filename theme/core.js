@@ -178,7 +178,7 @@ colors.dropdown = {
 	background: colors.white,
 	backgroundHover: colors.gray4,
 	foreground: colors.black,
-	separatorColor: colors.gray14,
+	separator: colors.gray14,
 	foregroundDisabled: colors.gray22
 }
 
