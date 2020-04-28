@@ -188,8 +188,17 @@ colors.dropdown = {
 	backgroundHover: colors.gray4,
 	foreground: colors.black,
 	separator: colors.gray14,
-	foregroundDisabled: colors.gray22
-}
+	foregroundDisabled: colors.gray22,
+};
+
+
+colors.checkbox = {
+	background: colors.transparent,
+	primary: colors.blueBase,
+	border: '#95908f',
+	disabledBackground: colors.gray8,
+	disabledBorder: colors.gray22,
+};
 
 const fonts = {
 	normal: '"Source Sans Pro", sans-serif',

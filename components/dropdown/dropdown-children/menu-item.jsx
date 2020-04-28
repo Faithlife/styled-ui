@@ -16,7 +16,7 @@ export function MenuItem(props) {
 		...ariaProps
 	} = props;
 
-	const { handleCloseMenu, theme, styleOverrides } = useDropdownContext();
+	const { handleCloseMenu, themeOverrides, styleOverrides } = useDropdownContext();
 	const ref = useRef();
 
 	useEffect(() => {
@@ -57,7 +57,11 @@ export function MenuItem(props) {
 			// `Disabled menu items are focusable but cannot be activated.` https://www.w3.org/TR/wai-aria-practices-1.1/#menubutton
 			{...(!disabled ? {} : { as: 'div' })}
 		>
-			<Styled.MenuItemContent isDisabled={disabled} styleOverrides={styleOverrides}>
+			<Styled.MenuItemContent
+				isDisabled={disabled}
+				styleOverrides={styleOverrides}
+				themeOverrides={themeOverrides}
+			>
 				{typeof children === 'function' ? children({ selected: isSelected, disabled }) : children}
 			</Styled.MenuItemContent>
 		</Styled.MenuItem>

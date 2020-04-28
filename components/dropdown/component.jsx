@@ -2,21 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { DropdownCore } from './dropdown-core';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
+import { isSystemTheme } from '../../theme';
 
-export function Dropdown({ isOpen, onToggleMenu, theme, styleOverrides, children }) {
+const Dropdown = React.forwardRef(function Dropdown(props, ref) {
+	const { isOpen, onToggleMenu, theme, styleOverrides, children, ...dropdownProps } = props;
+
+	const isCoreTheme = isSystemTheme(theme);
+	const themedProps = { ...dropdownProps, ...(isCoreTheme ? {} : theme) };
+
 	return (
 		<DefaultThemeProvider>
 			<DropdownCore
 				isOpen={isOpen}
 				onToggleMenu={onToggleMenu}
-				theme={theme}
+				themeOverrides={themedProps}
 				styleOverrides={styleOverrides}
 			>
 				{children}
 			</DropdownCore>
 		</DefaultThemeProvider>
 	);
-}
+});
 
 Dropdown.propTypes = {
 	isOpen: PropTypes.bool.isRequired,
@@ -41,3 +47,5 @@ Dropdown.defaultProps = {
 	},
 	styleOverrides: {},
 };
+
+export { Dropdown };

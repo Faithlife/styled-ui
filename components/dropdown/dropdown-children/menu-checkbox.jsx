@@ -13,7 +13,7 @@ export function MenuCheckbox(props) {
 	// eslint-disable-next-line react/prop-types
 	const { onClick, disabled, index, isChecked, ...checkboxProps } = props;
 
-	const { theme } = useDropdownContext();
+	const { themeOverrides } = useDropdownContext();
 
 	return (
 		<MenuItem
@@ -25,7 +25,10 @@ export function MenuCheckbox(props) {
 			aria-checked={isChecked}
 		>
 			<CheckboxContent
-				theme={{ primary: theme.checkboxPrimary, border: theme.checkboxBorder }}
+				themeOverrides={{
+					primary: themeOverrides.checkboxPrimary,
+					border: themeOverrides.checkboxBorder,
+				}}
 				isChecked={isChecked}
 				{...checkboxProps}
 			/>
