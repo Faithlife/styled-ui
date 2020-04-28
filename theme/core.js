@@ -124,6 +124,9 @@ colors.button = {
 
 	focusBorder: colors.blue1,
 	focusShadow: colors.blue3,
+
+	segmentedButtonGroupBorder: colors.gray14,
+	segmentedButtonGroupBackground: 'transparent',
 };
 
 colors.tab = {
@@ -172,6 +175,12 @@ colors.accordion = {
 colors.popover = {
 	foreground: colors.foregroundPrimary,
 	background: colors.backgroundPrimary,
+};
+
+colors.select = {
+	menuBackground: colors.backgroundPrimary,
+	menuForeground: colors.foregroundPrimary,
+	menuItemFocusedBackground: colors.gray4,
 };
 
 colors.dropdown = {
