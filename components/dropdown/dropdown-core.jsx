@@ -7,7 +7,7 @@ import { DropdownContextProvider } from './dropdown-utils';
 export function DropdownCore({
 	isOpen,
 	onToggleMenu,
-	theme,
+	themeOverrides,
 	styleOverrides,
 	children,
 	additionalContext,
@@ -30,7 +30,7 @@ export function DropdownCore({
 			focusedMenuItem,
 			setFocusedMenuItem,
 			dropdownToggleRef,
-			theme,
+			themeOverrides,
 			styleOverrides,
 			onToggleMenu,
 			...additionalContext,
@@ -42,7 +42,7 @@ export function DropdownCore({
 			focusedMenuItem,
 			setFocusedMenuItem,
 			dropdownToggleRef,
-			theme,
+			themeOverrides,
 			styleOverrides,
 			onToggleMenu,
 			additionalContext,
@@ -60,7 +60,7 @@ DropdownCore.propTypes = {
 	isOpen: PropTypes.bool.isRequired,
 	onToggleMenu: PropTypes.func.isRequired,
 	children: PropTypes.node.isRequired,
-	theme: PropTypes.shape({
+	themeOverrides: PropTypes.shape({
 		hoverBackgroundColor: PropTypes.string,
 		checkboxPrimary: PropTypes.string,
 		checkboxBorder: PropTypes.string,
