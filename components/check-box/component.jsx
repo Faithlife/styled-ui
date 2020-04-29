@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { CheckboxContent } from './checkbox-content';
 import * as Styled from './styled';
@@ -31,14 +31,16 @@ const Checkbox = React.forwardRef(function Checkbox(props) {
 		}
 
 		if (!props.disableAutoBlur) {
-			blur();
+			componentRef.current.blur();
 		}
 	};
+
+	const componentRef = useRef()
 
 	return (
 		<DefaultThemeProvider>
 			<Styled.CheckboxContainer
-				ref={this}
+				ref={componentRef}
 				onClick={onClick}
 				onMouseUp={handleMouseUp}
 				type={type}
