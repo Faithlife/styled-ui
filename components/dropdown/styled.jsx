@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { colors, thickness } from '../shared-styles';
+import { thickness } from '../shared-styles';
 import { resetStyles } from '../utils';
-import { Box } from '../Box';
 
 export const DropdownMenuContent = styled.div`
 	width: 100%;

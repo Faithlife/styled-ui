@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { colors as sharedColors } from '../shared-styles';
 import { CheckboxContent } from './checkbox-content';
 import * as Styled from './styled';
 import { isSystemTheme } from '../../theme';
