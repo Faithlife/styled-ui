@@ -6,7 +6,7 @@ import { isSystemTheme } from '../../theme';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 
 /** Styled checkbox control with consistent styling across platforms */
-const Checkbox = React.forwardRef(function Checkbox(props, ref) {
+const Checkbox = React.forwardRef(function Checkbox(props) {
 	const {
 		onClick,
 		onMouseUp,
@@ -22,7 +22,7 @@ const Checkbox = React.forwardRef(function Checkbox(props, ref) {
 	} = props;
 
 	const isCoreTheme = isSystemTheme(theme);
-	const themedProps = { ...checkboxProps, ...(isCoreTheme ? {} : theme) };
+	const themedProps = { ...(isCoreTheme ? {} : theme) };
 
 	/* eslint-disable react/prop-types */
 	const handleMouseUp = e => {

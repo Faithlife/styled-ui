@@ -4,7 +4,7 @@ import { resetStyles } from '../utils';
 export const CheckboxDiv = styled.div`
 	position: absolute;
 	border: solid 1px
-		${({ theme, themeOverrides }) => themeOverrides?.border || theme.colors.checkbox.border};
+		${({ theme, themeOverrides }) => themeOverrides?.border ?? theme.colors.checkbox.border};
 	border-radius: 3px;
 	width: 16px;
 	height: 16px;
@@ -14,9 +14,9 @@ export const CheckboxDiv = styled.div`
 		props.disabled
 			? `
 		border: solid 1px ${({ theme, themeOverrides }) =>
-			themeOverrides?.disabledBorder || theme.colors.checkbox.disabledBorder};
+			themeOverrides?.disabledBorder ?? theme.colors.checkbox.disabledBorder};
 		background-color: ${({ theme, themeOverrides }) =>
-			themeOverrides?.disabledBackground || theme.colors.checkbox.disabledBackground};
+			themeOverrides?.disabledBackground ?? theme.colors.checkbox.disabledBackground};
 	`
 			: ''}
 `;
@@ -42,13 +42,13 @@ export const CheckboxContainer = styled.button`
 		@media (hover: hover) {
 			&:hover ${CheckboxDiv} {
 				border: solid 1px
-					${({ theme, themeOverrides }) => themeOverrides?.primary || theme.colors.checkbox.primary};
+					${({ theme, themeOverrides }) => themeOverrides?.primary ?? theme.colors.checkbox.primary};
 			}
 		}
 		@media (hover: none) {
 			&:active ${CheckboxDiv} {
 				border: solid 1px
-					${({ theme, themeOverrides }) => themeOverrides?.primary || theme.colors.checkbox.primary};
+					${({ theme, themeOverrides }) => themeOverrides?.primary ?? theme.colors.checkbox.primary};
 			}
 		}
 	}
@@ -80,7 +80,7 @@ export const isMixedStyles = css`
 		width: 10px;
 		height: 2px;
 		background: ${({ theme, themeOverrides }) =>
-			themeOverrides?.primary || theme.colors.checkbox.primary};
+			themeOverrides?.primary ?? theme.colors.checkbox.primary};
 		content: '';
 		opacity: 1;
 	}
@@ -99,9 +99,9 @@ export const CheckedIndicator = styled.div`
 	&:after {
 		background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%208%208'%3E%3Cpath%20fill='${props =>
 			encodeURIComponent(
-				props.themeOverrides?.primary || props.theme.colors.checkbox.primary,
+				props.themeOverrides?.primary ?? props.theme.colors.checkbox.primary,
 			)}'%20d='M6.564.75l-3.59%203.612-1.538-1.55L0%204.26%202.974%207.25%208%202.193z'/%3E%3C/svg%3E");
-		color: ${({ theme, themeOverrides }) => themeOverrides?.primary || theme.colors.checkbox.primary};
+		color: ${({ theme, themeOverrides }) => themeOverrides?.primary ?? theme.colors.checkbox.primary};
 		opacity: 0;
 	}
 

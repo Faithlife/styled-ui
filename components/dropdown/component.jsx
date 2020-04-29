@@ -4,7 +4,7 @@ import { DropdownCore } from './dropdown-core';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 import { isSystemTheme } from '../../theme';
 
-const Dropdown = React.forwardRef(function Dropdown(props, ref) {
+const Dropdown = React.forwardRef(function Dropdown(props) {
 	const { isOpen, onToggleMenu, theme, styleOverrides, children, ...dropdownProps } = props;
 
 	const isCoreTheme = isSystemTheme(theme);

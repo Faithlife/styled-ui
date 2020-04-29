@@ -7,7 +7,7 @@ export const DropdownMenuContent = styled.div`
 	padding: ${thickness.four} 0;
 
 	background-color: ${({ theme, themeOverrides }) =>
-		themeOverrides?.background || theme.colors.dropdown.background};
+		themeOverrides?.background ?? theme.colors.dropdown.background};
 	display: flex;
 	flex-direction: column;
 `;
@@ -15,7 +15,7 @@ export const DropdownMenuContent = styled.div`
 export const MenuItem = styled.div.attrs(({ role, isDisabled }) => ({
 	// Menu items should not be in the tab order. They are only reachable by the arrow keys
 	tabIndex: '-1',
-	role: role || 'menuitem',
+	role: role ?? 'menuitem',
 	'aria-disabled': isDisabled,
 }))`
 	${resetStyles};
@@ -30,7 +30,7 @@ export const MenuItem = styled.div.attrs(({ role, isDisabled }) => ({
 
 	&:focus {
 		background-color: ${({ theme, themeOverrides }) =>
-			themeOverrides?.hoverBackgroundColor || theme.colors.dropdown.backgroundHover};
+			themeOverrides?.hoverBackgroundColor ?? theme.colors.dropdown.backgroundHover};
 		outline: none;
 		border: 0;
 	}
@@ -45,11 +45,11 @@ export const MenuItemContent = styled.div.attrs(() => ({ tabIndex: '-1' }))`
 		isDisabled
 			? themeOverrides?.foregroundDisabled ?? theme.colors.dropdown.foregroundDisabled
 			: themeOverrides?.foreground ?? theme.colors.dropdown.foreground};
-	padding: ${({ styleOverrides }) => styleOverrides.padding || thickness.eight};
+	padding: ${({ styleOverrides }) => styleOverrides.padding ?? thickness.eight};
 	text-align: left;
 	white-space: nowrap;
 	background-color: transparent;
-	font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
+	font-size: ${({ styleOverrides }) => styleOverrides.fontSize ?? '16px'};
 
 	display: flex;
 	flex-direction: row;
@@ -74,7 +74,7 @@ export const MenuSeparator = styled.hr.attrs(() => ({
 }))`
 	border: 0;
 	border-top: 1px solid
-		${({ theme, themeOverrides }) => themeOverrides?.separator || theme.colors.dropdown.separator};
+		${({ theme, themeOverrides }) => themeOverrides?.separator ?? theme.colors.dropdown.separator};
 	width: 100%;
 	margin: 0;
 `;
