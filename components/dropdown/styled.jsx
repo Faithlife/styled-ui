@@ -12,7 +12,7 @@ export const DropdownMenuContent = styled.div`
 	flex-direction: column;
 `;
 
-export const MenuItem = styled.div.attrs(({ role, isDisabled }) => ({
+export const MenuItem = styled.button.attrs(({ role, isDisabled }) => ({
 	// Menu items should not be in the tab order. They are only reachable by the arrow keys
 	tabIndex: '-1',
 	role: role ?? 'menuitem',
