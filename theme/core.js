@@ -192,8 +192,8 @@ colors.dropdown = {
 };
 
 colors.checkbox = {
-	background: colors.transparent,
-	primary: colors.blueBase,
+	background: 'transparent',
+	primary: colors.blue4,
 	border: '#95908f',
 	disabledBackground: colors.gray8,
 	disabledBorder: colors.gray22,
