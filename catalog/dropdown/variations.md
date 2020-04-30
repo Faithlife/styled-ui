@@ -89,7 +89,7 @@ state: { isOpen: false }
 	<Dropdown isOpen={state.isOpen} onToggleMenu={() => setState({ isOpen: !state.isOpen })}>
 		<DropdownToggle variant="primary" size="medium">Show a Dropdown!</DropdownToggle>
 		<DropdownMenu>
-			<MenuItem onClick={() => alert("Menu Item 1")} disabled="true">Menu Item 1</MenuItem>
+			<MenuItem onClick={() => alert("Menu Item 1")} disabled>Menu Item 1</MenuItem>
 			<MenuItem onClick={() => alert("Menu Item 2")}>Menu Item 2</MenuItem>
 			<MenuItem onClick={() => alert("Menu Item 3")}>Menu Item 3</MenuItem>
 		</DropdownMenu>

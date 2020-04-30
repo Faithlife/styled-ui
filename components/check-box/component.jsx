@@ -6,7 +6,7 @@ import { isSystemTheme } from '../../theme';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 
 /** Styled checkbox control with consistent styling across platforms */
-const Checkbox = React.forwardRef(function Checkbox(props) {
+const Checkbox = function Checkbox(props) {
 	const { onClick, title, isChecked, theme, type, children, className, disabled } = props;
 
 	const isCoreTheme = isSystemTheme(theme);
@@ -49,7 +49,7 @@ const Checkbox = React.forwardRef(function Checkbox(props) {
 			</Styled.CheckboxContainer>
 		</DefaultThemeProvider>
 	);
-});
+};
 
 Checkbox.propTypes = {
 	/** Handler passed to native `button` */

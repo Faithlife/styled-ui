@@ -28,7 +28,8 @@ export const MenuItem = styled.button.attrs(({ role, isDisabled }) => ({
 
 	${({ isDisabled }) => !isDisabled && 'cursor: pointer'};
 
-	&:focus {
+	&:focus,
+	&:hover {
 		background-color: ${({ theme, themeOverrides }) =>
 			themeOverrides?.hoverBackgroundColor ?? theme.colors.dropdown.backgroundHover};
 		outline: none;

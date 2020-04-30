@@ -4,7 +4,7 @@ import { DropdownCore } from './dropdown-core';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 import { isSystemTheme } from '../../theme';
 
-const Dropdown = React.forwardRef(function Dropdown(props) {
+const Dropdown = function Dropdown(props) {
 	const { isOpen, onToggleMenu, theme, styleOverrides, children, ...dropdownProps } = props;
 
 	const isCoreTheme = isSystemTheme(theme);
@@ -22,7 +22,7 @@ const Dropdown = React.forwardRef(function Dropdown(props) {
 			</DropdownCore>
 		</DefaultThemeProvider>
 	);
-});
+};
 
 Dropdown.propTypes = {
 	isOpen: PropTypes.bool.isRequired,

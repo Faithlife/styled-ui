@@ -191,7 +191,6 @@ colors.dropdown = {
 	foregroundDisabled: colors.gray22,
 };
 
-
 colors.checkbox = {
 	background: colors.transparent,
 	primary: colors.blueBase,
