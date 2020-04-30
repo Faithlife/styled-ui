@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.54.0
+
+- Improve theming support in dropdowns and checkboxes.
+
 ### 5.53.0
 
 - Improve theming support in popovers, segmented button groups, selects, and dropdowns.
