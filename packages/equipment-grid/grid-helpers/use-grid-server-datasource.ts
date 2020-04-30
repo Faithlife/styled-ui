@@ -126,6 +126,8 @@ function mapAgGridRequest(request: ServerSideGetRowsRequest): GetRowsRequest {
 				filterKind: filter.type,
 				filter: filter.filter,
 				filterTo: filter.filterTo,
+				dateFrom: filter.dateFrom,
+				dateTo: filter.dateTo,
 			};
 		}
 	}
@@ -159,8 +161,10 @@ interface FilterModel {
 		[key: string]: {
 			filterType: string;
 			filterKind: string;
-			filter: string | number;
-			filterTo: string | number;
+			filter?: string | number;
+			filterTo?: string | number;
+			dateFrom?: string;
+			dateTo?: string;
 		};
 	} | null;
 }
@@ -218,6 +222,8 @@ interface ServerSideGetRowsParams {
 interface AGFilter {
 	filterType: string;
 	type: string;
-	filter: string | number;
-	filterTo: string | number;
+	filter?: string | number;
+	filterTo?: string | number;
+	dateFrom?: string;
+	dateTo?: string;
 }
