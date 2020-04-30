@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/equipment-grid@1.2.3...@faithlife/equipment-grid@1.2.4) (2020-04-30)
+
+
+### Bug Fixes
+
+* Add missing date field mapping. ([#102](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/102)) ([b725091](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/b72509124aaf3ce6bd24ae363af77384fe017cf7))
+* Fix row count bugs. ([#99](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/99)) ([82c2ab6](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/82c2ab66412c1d743e00746af7cd2b1b01f29e30))
+
+
+
+
+
 ## [1.2.3](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/equipment-grid@1.2.2...@faithlife/equipment-grid@1.2.3) (2020-03-09)
 
 

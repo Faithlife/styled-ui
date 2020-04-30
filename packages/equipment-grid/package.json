@@ -1,6 +1,6 @@
 {
   "name": "@faithlife/equipment-grid",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "license": "UNLICENSED",
   "main": "dist/index.js",
   "files": [
