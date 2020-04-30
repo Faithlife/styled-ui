@@ -1,29 +1,4 @@
 {
-	"workbench.colorCustomizations": {
-		"titleBar.activeBackground": "#FFC83D",
-		"titleBar.inactiveBackground": "#FFC83D99",
-		"titleBar.activeForeground": "#3d3d3d",
-		"titleBar.inactiveForeground": "#3d3d3d99"
-	},
 	"prettier.requireConfig": true,
-	"[typescript]": {
-		"editor.formatOnSave": true
-	},
-	"[typescriptreact]": {
-		"editor.formatOnSave": true
-	},
-	"[javascriptreact]": {
-		"editor.formatOnSave": true
-	},
-	"[javascript]": {
-		"editor.formatOnSave": true
-	},
-	"[less]": {
-		"editor.formatOnSave": true
-	},
-	"[css]": {
-		"editor.formatOnSave": true
-	},
-	"files.insertFinalNewline": true,
 	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"]
 }
