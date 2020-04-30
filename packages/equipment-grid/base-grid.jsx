@@ -104,7 +104,7 @@ export function BaseGrid({
 	const prevIsLoading = useRef(false);
 	useEffect(() => {
 		if (gridApi && rowModelType === serverSideRowModel) {
-			if (data.rowCount === 0 && !data.isMoreRows) {
+			if (data.totalRowCount === 0 && !data.isMoreRows) {
 				gridApi.showNoRowsOverlay();
 				prevIsLoading.current = false;
 			} else {
@@ -260,26 +260,21 @@ export function BaseGrid({
 		[setGridApi, setColumnApi, sortModel, filterText, rowModelType, data]
 	);
 
-	let rowCount = null;
-	if (maxRows) {
-		if (rowModelType === clientSideRowModel) {
-			rowCount = data ? data.length : 0;
-		} else if (rowModelType === serverSideRowModel) {
-			rowCount = data.rowCount;
-		}
+	let totalRowCount = null;
+	if (rowModelType === clientSideRowModel) {
+		totalRowCount = data ? data.length : 0;
+	} else if (rowModelType === serverSideRowModel) {
+		totalRowCount = data.totalRowCount;
 	}
-	const currentHeaderHeight = hideHeaders ? 1 : headerHeight;
 
-	let calculatedTableHeight;
-	if (rowCount !== null && rowCount !== undefined && maxRows) {
+	let calculatedTableHeight = '100%';
+	if (totalRowCount === 0) {
+		calculatedTableHeight = noRowsDefaultTableHeight;
+	} else if (maxRows) {
+		const currentHeaderHeight = hideHeaders ? 1 : headerHeight;
+		const visibleRowCount = Math.min(maxRows, totalRowCount || Infinity);
 		calculatedTableHeight =
-			rowCount !== 0
-				? (maxRows && maxRows < rowCount ? maxRows : rowCount) * (rowHeight || defaultRowHeight) +
-				  tableHeightPadding +
-				  currentHeaderHeight
-				: noRowsDefaultTableHeight;
-	} else {
-		calculatedTableHeight = '100%';
+			visibleRowCount * (rowHeight || defaultRowHeight) + tableHeightPadding + currentHeaderHeight;
 	}
 
 	if (!datasourceProps) {

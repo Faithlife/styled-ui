@@ -2,12 +2,12 @@ import { useRef, useMemo, useEffect, useCallback, useState } from 'react';
 import { filterTextField } from '../base-grid';
 
 const initialState: {
-	rowCount: number;
+	totalRowCount: number | null;
 	moreRows: boolean;
 	isLoading: boolean;
 	filterText: string | number;
 } = {
-	rowCount: 0,
+	totalRowCount: null,
 	moreRows: true,
 	isLoading: false,
 	filterText: '',
@@ -39,12 +39,12 @@ export function useGridServerDatasource(
 				abortController.current = new AbortController();
 				const currentAbortController = abortController.current;
 
-				const { [filterTextField]: filterTextObject } = request.filterModel;
+				const { filterModel, startRow } = request;
+				const { [filterTextField]: filterTextObject } = filterModel;
 				const filterText = (filterTextObject && filterTextObject.filter) || '';
 				setRowState(state => ({
 					...state,
 					isLoading: true,
-					rowCount: filterText === state.filterText ? state.rowCount : 0,
 					filterText,
 				}));
 
@@ -62,15 +62,13 @@ export function useGridServerDatasource(
 						if (!rows || !Array.isArray(rows)) {
 							failCallback();
 						}
-						setRowState(state => {
-							successCallback(rows, moreRows ? -1 : state.rowCount + rows.length);
-							return {
-								...state,
-								rowCount: state.rowCount + rows.length,
-								moreRows,
-								isLoading: false,
-							};
-						});
+						successCallback(rows, moreRows ? -1 : startRow + rows.length);
+						setRowState(state => ({
+							...state,
+							totalRowCount: moreRows ? null : startRow + rows.length,
+							moreRows,
+							isLoading: false,
+						}));
 					}
 				} catch (error) {
 					failCallback();
@@ -82,21 +80,21 @@ export function useGridServerDatasource(
 	);
 
 	const setFilterText = useCallback(filterText => {
-		setRowState(state => ({ ...state, filterText, moreRows: true, rowCount: 0 }));
+		setRowState(state => ({ ...state, filterText, moreRows: true, totalRowCount: null }));
 	}, []);
 
-	const { rowCount, moreRows, isLoading } = rowState;
+	const { totalRowCount, moreRows, isLoading } = rowState;
 	const { fetchLimit, maxPagesToCache } = options || {};
 	const serverDatasource = useMemo(
 		() => ({
 			getRows: request => handleRequest.current(request),
-			rowCount: rowCount,
+			totalRowCount,
 			isMoreRows: moreRows,
 			isLoading: isLoading,
 			fetchLimit,
 			maxPagesToCache,
 		}),
-		[rowCount, moreRows, isLoading, setFilterText, fetchLimit, maxPagesToCache] //eslint-disable-line react-hooks/exhaustive-deps
+		[totalRowCount, moreRows, isLoading, setFilterText, fetchLimit, maxPagesToCache] //eslint-disable-line react-hooks/exhaustive-deps
 	);
 
 	return serverDatasource;
@@ -195,7 +193,7 @@ interface AGColumn {
 
 interface ServerSideDatasource {
 	getRows: Function;
-	rowCount: number;
+	totalRowCount: number | null;
 	isMoreRows: boolean;
 	isLoading: boolean;
 }
