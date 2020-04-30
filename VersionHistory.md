@@ -1,5 +1,9 @@
 # Changelog
 
+### 5.54.1
+
+- Fix some color definitions for `Checkbox`.
+
 ### 5.54.0
 
 - Improve theming support in dropdowns and checkboxes.
