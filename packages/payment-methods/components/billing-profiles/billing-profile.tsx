@@ -47,6 +47,8 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 
 	const isHalfProfile = billingProfile.type === 'PayFacCreditCard';
 
+	const supportedProfileTypes = ['PayFacCreditCard', 'CreditCard', 'Paypal'];
+
 	const deleteBillingProfile = useCallback(() => {
 		setTrashDisabled(true);
 		setIsEditDisabled(true);
@@ -54,6 +56,10 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 		onDelete(billingProfile.profileId);
 		setIsEditDisabled(false);
 	}, [billingProfile.profileId, onDelete]);
+
+	if (!supportedProfileTypes.includes(billingProfile.type)) {
+		return null;
+	}
 
 	if (billingProfile.type.toLowerCase() === 'paypal') {
 		return (
