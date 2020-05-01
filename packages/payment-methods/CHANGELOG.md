@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@2.11.0...@faithlife/payment-methods@2.11.1) (2020-05-01)
+
+
+### Bug Fixes
+
+* Filter out unsupported profile types. ([#104](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/104)) ([8534516](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/8534516f785eb3164e7256b2214b2e274a4aa9ec))
+
+
+
+
+
 # [2.11.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@2.10.1...@faithlife/payment-methods@2.11.0) (2020-04-27)
 
 
