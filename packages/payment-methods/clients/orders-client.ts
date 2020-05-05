@@ -13,7 +13,7 @@ export default class OrdersClient {
 	static async getBillingProfiles(): Promise<IBillingProfilesDto> {
 		const response = await fetchJson('/proxy/orders/v3/billingprofiles/payfac', {
 			method: 'GET',
-			query: { fields: '*' },
+			query: { fields: '*', shouldIncludePayPal: true },
 		});
 
 		return response;
