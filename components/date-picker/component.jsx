@@ -53,6 +53,8 @@ export class DatePicker extends Component {
 		/** Takes a date as a parameter and returns false if that date is invalid */
 		validate: PropTypes.func,
 		dateFunctions: dateFunctionProps,
+		minDate: PropTypes.instanceOf(Date),
+		maxDate: PropTypes.instanceOf(Date),
 	};
 
 	UNSAFE_componentWillMount() {
@@ -93,6 +95,16 @@ export class DatePicker extends Component {
 	incrementMonth = () =>
 		this.setMonth(this.props.dateFunctions.addMonths(this.state.currentMonth, 1));
 
+	canDecrementMonth = weeks => {
+		var firstWeek = weeks[0];
+		return !this.props.minDate || this.props.minDate < firstWeek[0];
+	};
+
+	canIncrementMonth = weeks => {
+		var lastWeek = weeks[weeks.length - 1];
+		return !this.props.maxDate || this.props.maxDate > lastWeek[lastWeek.length - 1];
+	};
+
 	render() {
 		const {
 			selectedDate,
@@ -100,19 +112,25 @@ export class DatePicker extends Component {
 			selectedDateRange,
 			asDateRangePicker,
 			validate,
+			minDate,
+			maxDate,
 		} = this.props;
 		const { currentMonth, weeks } = this.state;
 
 		return (
 			<Fragment>
 				<Styled.Header>
-					<Styled.ChangeMonth onClick={this.decrementMonth} tabIndex="-1">
-						<Caret style={{ transform: 'scaleX(-1)', color: colors.gray66 }} />
-					</Styled.ChangeMonth>
+					{this.canDecrementMonth(weeks) && (
+						<Styled.ChangeMonth onClick={this.decrementMonth} tabIndex="-1">
+							<Caret style={{ transform: 'scaleX(-1)', color: colors.gray66 }} />
+						</Styled.ChangeMonth>
+					)}
 					<Styled.MonthLabel>{dateFunctions.format(currentMonth, 'MMMM yyyy')}</Styled.MonthLabel>
-					<Styled.ChangeMonth onClick={this.incrementMonth} tabIndex="-1">
-						<Caret style={{ color: colors.gray66 }} />
-					</Styled.ChangeMonth>
+					{this.canIncrementMonth(weeks) && (
+						<Styled.ChangeMonth onClick={this.incrementMonth} tabIndex="-1">
+							<Caret style={{ color: colors.gray66 }} />
+						</Styled.ChangeMonth>
+					)}
 				</Styled.Header>
 				<Styled.Week>
 					<Styled.WeekDay>S</Styled.WeekDay>
@@ -135,6 +153,8 @@ export class DatePicker extends Component {
 							setSelectedDate={this.setSelectedDate}
 							validate={validate}
 							dateFunctions={dateFunctions}
+							minDate={minDate}
+							maxDate={maxDate}
 						/>
 					))}
 				</Styled.Month>
