@@ -96,13 +96,13 @@ export class DatePicker extends Component {
 		this.setMonth(this.props.dateFunctions.addMonths(this.state.currentMonth, 1));
 
 	canDecrementMonth = weeks => {
-		const firstWeek = weeks[0];
-		return !this.props.minDate || this.props.minDate < firstWeek[0];
+		const firstDay = weeks[0][0];
+		return !this.props.minDate || this.props.minDate < firstDay;
 	};
 
 	canIncrementMonth = weeks => {
-		const lastWeek = weeks[weeks.length - 1];
-		return !this.props.maxDate || this.props.maxDate > lastWeek[lastWeek.length - 1];
+		const lastDay = weeks[weeks.length - 1][weeks[weeks.length - 1].length - 1];
+		return !this.props.maxDate || this.props.maxDate > lastDay;
 	};
 
 	render() {
@@ -122,19 +122,30 @@ export class DatePicker extends Component {
 				<Styled.Header>
 					<Styled.ChangeMonth
 						onClick={this.decrementMonth}
-						disabled={this.canDecrementMonth(weeks)}
+						disabled={!this.canDecrementMonth(weeks)}
 						tabIndex="-1"
 					>
-						<Caret style={{ transform: 'scaleX(-1)', color: colors.gray66 }} />
+						<Caret
+							style={{
+								transform: 'scaleX(-1)',
+								color: colors.gray66,
+								visibility: this.canDecrementMonth(weeks) ? 'visible' : 'hidden',
+							}}
+						/>
 					</Styled.ChangeMonth>
 
 					<Styled.MonthLabel>{dateFunctions.format(currentMonth, 'MMMM yyyy')}</Styled.MonthLabel>
 					<Styled.ChangeMonth
 						onClick={this.incrementMonth}
-						disabled={this.canIncrementMonth(weeks)}
+						disabled={!this.canIncrementMonth(weeks)}
 						tabIndex="-1"
 					>
-						<Caret style={{ color: colors.gray66 }} />
+						<Caret
+							style={{
+								color: colors.gray66,
+								visibility: this.canIncrementMonth(weeks) ? 'visible' : 'hidden',
+							}}
+						/>
 					</Styled.ChangeMonth>
 				</Styled.Header>
 				<Styled.Week>
