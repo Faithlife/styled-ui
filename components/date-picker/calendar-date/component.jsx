@@ -16,6 +16,8 @@ export class CalendarDate extends Component {
 		selectedDate: PropTypes.instanceOf(Date),
 		dateFunctions: dateFunctionProps,
 		asDateRangePicker: PropTypes.bool,
+		minDate: PropTypes.instanceOf(Date),
+		maxDate: PropTypes.instanceOf(Date),
 	};
 
 	setSelectedDate = () => this.props.setSelectedDate(this.props.date);
@@ -67,6 +69,13 @@ export class CalendarDate extends Component {
 		return currentMonth === dateFunctions.getMonth(date);
 	};
 
+	dateIsInRange = date => {
+		return (
+			(!this.props.minDate || date >= this.props.minDate) &&
+			(!this.props.maxDate || date <= this.props.maxDate)
+		);
+	};
+
 	render() {
 		const currentDate = new Date();
 		const { date, asDateRangePicker } = this.props;
@@ -83,7 +92,7 @@ export class CalendarDate extends Component {
 		return (
 			<Styled.CalendarWeekDayButton
 				onClick={this.setSelectedDate}
-				disabled={this.props.validate && !this.props.validate(date)}
+				disabled={!this.dateIsInRange(date) || (this.props.validate && !this.props.validate(date))}
 			>
 				<CalendarDay>
 					<Styled.CalendarDateLabel>

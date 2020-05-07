@@ -35,6 +35,8 @@ export class DatePickerInput extends PureComponent {
 		disabled: PropTypes.bool,
 		/** Where on the target the date picker renders */
 		placement: PlacementOptionsProps,
+		minDate: PropTypes.instanceOf(Date),
+		maxDate: PropTypes.instanceOf(Date),
 		/** Style overrides, inputWidth is applied to the input */
 		styleOverrides: PropTypes.shape({
 			inputWidth: PropTypes.string,
@@ -149,6 +151,8 @@ export class DatePickerInput extends PureComponent {
 				setSelectedDate={this.handleChangeSelectedDate}
 				validate={this.props.validate}
 				dateFunctions={this.props.dateFunctions}
+				minDate={this.props.minDate}
+				maxDate={this.props.maxDate}
 			/>
 		</Styled.DateTime>
 	);

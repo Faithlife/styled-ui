@@ -53,6 +53,8 @@ export class DatePicker extends Component {
 		/** Takes a date as a parameter and returns false if that date is invalid */
 		validate: PropTypes.func,
 		dateFunctions: dateFunctionProps,
+		minDate: PropTypes.instanceOf(Date),
+		maxDate: PropTypes.instanceOf(Date),
 	};
 
 	UNSAFE_componentWillMount() {
@@ -93,6 +95,16 @@ export class DatePicker extends Component {
 	incrementMonth = () =>
 		this.setMonth(this.props.dateFunctions.addMonths(this.state.currentMonth, 1));
 
+	canDecrementMonth = weeks => {
+		const firstDay = weeks[0][0];
+		return !this.props.minDate || this.props.minDate < firstDay;
+	};
+
+	canIncrementMonth = weeks => {
+		const lastDay = weeks[weeks.length - 1][weeks[weeks.length - 1].length - 1];
+		return !this.props.maxDate || this.props.maxDate > lastDay;
+	};
+
 	render() {
 		const {
 			selectedDate,
@@ -100,18 +112,40 @@ export class DatePicker extends Component {
 			selectedDateRange,
 			asDateRangePicker,
 			validate,
+			minDate,
+			maxDate,
 		} = this.props;
 		const { currentMonth, weeks } = this.state;
 
 		return (
 			<Fragment>
 				<Styled.Header>
-					<Styled.ChangeMonth onClick={this.decrementMonth} tabIndex="-1">
-						<Caret style={{ transform: 'scaleX(-1)', color: colors.gray66 }} />
+					<Styled.ChangeMonth
+						onClick={this.decrementMonth}
+						disabled={!this.canDecrementMonth(weeks)}
+						tabIndex="-1"
+					>
+						<Caret
+							style={{
+								transform: 'scaleX(-1)',
+								color: colors.gray66,
+								visibility: this.canDecrementMonth(weeks) ? 'visible' : 'hidden',
+							}}
+						/>
 					</Styled.ChangeMonth>
+
 					<Styled.MonthLabel>{dateFunctions.format(currentMonth, 'MMMM yyyy')}</Styled.MonthLabel>
-					<Styled.ChangeMonth onClick={this.incrementMonth} tabIndex="-1">
-						<Caret style={{ color: colors.gray66 }} />
+					<Styled.ChangeMonth
+						onClick={this.incrementMonth}
+						disabled={!this.canIncrementMonth(weeks)}
+						tabIndex="-1"
+					>
+						<Caret
+							style={{
+								color: colors.gray66,
+								visibility: this.canIncrementMonth(weeks) ? 'visible' : 'hidden',
+							}}
+						/>
 					</Styled.ChangeMonth>
 				</Styled.Header>
 				<Styled.Week>
@@ -135,6 +169,8 @@ export class DatePicker extends Component {
 							setSelectedDate={this.setSelectedDate}
 							validate={validate}
 							dateFunctions={dateFunctions}
+							minDate={minDate}
+							maxDate={maxDate}
 						/>
 					))}
 				</Styled.Month>

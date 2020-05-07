@@ -26,6 +26,8 @@ export function CalendarWeek(props) {
 		validate,
 		dateFunctions,
 		asDateRangePicker,
+		minDate,
+		maxDate,
 	} = props;
 
 	return (
@@ -41,6 +43,8 @@ export function CalendarWeek(props) {
 					validate={validate}
 					dateFunctions={dateFunctions}
 					asDateRangePicker={asDateRangePicker}
+					minDate={minDate}
+					maxDate={maxDate}
 				/>
 			))}
 		</StyledCalendarWeek>
@@ -59,4 +63,6 @@ CalendarWeek.propTypes = {
 	validate: PropTypes.func,
 	dateFunctions: dateFunctionProps,
 	asDateRangePicker: PropTypes.bool,
+	minDate: PropTypes.instanceOf(Date),
+	maxDate: PropTypes.instanceOf(Date),
 };
