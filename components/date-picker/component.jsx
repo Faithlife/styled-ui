@@ -96,12 +96,12 @@ export class DatePicker extends Component {
 		this.setMonth(this.props.dateFunctions.addMonths(this.state.currentMonth, 1));
 
 	canDecrementMonth = weeks => {
-		var firstWeek = weeks[0];
+		const firstWeek = weeks[0];
 		return !this.props.minDate || this.props.minDate < firstWeek[0];
 	};
 
 	canIncrementMonth = weeks => {
-		var lastWeek = weeks[weeks.length - 1];
+		const lastWeek = weeks[weeks.length - 1];
 		return !this.props.maxDate || this.props.maxDate > lastWeek[lastWeek.length - 1];
 	};
 
@@ -120,17 +120,22 @@ export class DatePicker extends Component {
 		return (
 			<Fragment>
 				<Styled.Header>
-					{this.canDecrementMonth(weeks) && (
-						<Styled.ChangeMonth onClick={this.decrementMonth} tabIndex="-1">
-							<Caret style={{ transform: 'scaleX(-1)', color: colors.gray66 }} />
-						</Styled.ChangeMonth>
-					)}
+					<Styled.ChangeMonth
+						onClick={this.decrementMonth}
+						disabled={this.canDecrementMonth(weeks)}
+						tabIndex="-1"
+					>
+						<Caret style={{ transform: 'scaleX(-1)', color: colors.gray66 }} />
+					</Styled.ChangeMonth>
+
 					<Styled.MonthLabel>{dateFunctions.format(currentMonth, 'MMMM yyyy')}</Styled.MonthLabel>
-					{this.canIncrementMonth(weeks) && (
-						<Styled.ChangeMonth onClick={this.incrementMonth} tabIndex="-1">
-							<Caret style={{ color: colors.gray66 }} />
-						</Styled.ChangeMonth>
-					)}
+					<Styled.ChangeMonth
+						onClick={this.incrementMonth}
+						disabled={this.canIncrementMonth(weeks)}
+						tabIndex="-1"
+					>
+						<Caret style={{ color: colors.gray66 }} />
+					</Styled.ChangeMonth>
 				</Styled.Header>
 				<Styled.Week>
 					<Styled.WeekDay>S</Styled.WeekDay>
