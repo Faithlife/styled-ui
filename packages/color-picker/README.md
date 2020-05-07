@@ -50,7 +50,7 @@ color code. The input accepts input with optional `#`, in short or long mode
 `(Red|Green|Etc.)Slider`: These sliders allow controlling an individual color channel.
 The background of the slider contains a gradient that displays how the color will change when the slider value changes.
 
-`SvPicker`: This is a box slider which controls VSaturation on the x-axis and Value on the y-axis.
+`SvPicker`: This is a box slider which controls Saturation on the x-axis and Value on the y-axis.
 This is probably the most user-friendly picker (combined with a HueSlider and optionally an
 AlphaSlider), as it makes it very easy to see what color you want and pick it.
 
@@ -111,3 +111,31 @@ returned by `useColor`)
 - `hexColors`: an array of hex color codes to display
 - `set`: the function for setting the color (from `useColor`)
 - `isInitiallyOpen`: should this section default to open
+
+
+## FAQ
+
+### Why `HslSaturationSlider`?
+The `s` in `hsl` and `hsv` are actually different values ([see here](https://en.wikipedia.org/wiki/HSL_and_HSV)).
+As such, I felt it was prudent to make clear that this is an `hsl` saturation slider, and not an `hsv` one.
+
+However, the `h` value *is* the same, so the `HueSlider` is used for both.
+
+### Why use `hsl` internally? Why not use `hex` or (other format here)?
+Deriving everything from a single internal format is really nice, as it avoids any potential issues where the
+different used formats get out of sync with each other. However, the choice of internal format is important.
+`hsl` is chosen for two main reasons:
+
+First, higher precision. Hex for instance, can only store `256` unique
+values per channel, but `hsl` uses floats. RGB can technically store floats though, so...
+
+Second, round-trip conversions. Many hsl values do not round trip from rgb; primarily speaking, monochromatic
+colors. Any color with a saturation of 0 (or a lightness of 1 or 0) will actually lose the hue value in a
+round-trip to and from rgb, because the actual hue of the value doesn't matter if the color is grayscale.
+
+This makes for a poor experience when using an hsv box picker, as round-tripping to rgb and back would cause
+the hue to reset to 0 any time the saturation or value bottoms-out.
+
+### Why not use `hsv` then, since it's the format of the box picker?
+It mostly doesn't matter, so the main reason is that `hsl` is supported in css while `hsv` is not. This
+makes it an outlier, in that it is the only one of the four formats that cannot be directly used in css.
