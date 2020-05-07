@@ -1,0 +1,16 @@
+{
+  "name": "@faithlife/color-picker",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "peerDependencies": {
+    "@faithlife/styled-ui": "^5.54.0",
+    "react": "^16.13.1",
+    "styled-components": "^4.4.1"
+  },
+  "devDependencies": {
+    "@faithlife/styled-ui": "^5.54.0",
+    "react": "^16.13.1",
+    "styled-components": "^4.4.1"
+  }
+}

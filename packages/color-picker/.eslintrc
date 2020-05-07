@@ -1,0 +1,7 @@
+{
+	"extends": ["faithlife"],
+	"rules": {
+		"no-use-before-define": ["error", "nofunc"],
+		"eqeqeq": ["error", "always", {"null": "never"}]
+	}
+}

@@ -3122,10 +3122,10 @@
     react-virtualized-auto-sizer "^1.0.2"
     react-window "^1.8.5"
 
-"@faithlife/styled-ui@5.31.1", "@faithlife/styled-ui@^5.31.0", "@faithlife/styled-ui@^5.31.1", "@faithlife/styled-ui@^5.34.3", "@faithlife/styled-ui@^5.36.0", "@faithlife/styled-ui@^5.39.1", "@faithlife/styled-ui@^5.47.0":
-  version "5.47.0"
-  resolved "http://npm.faithlife.io/@faithlife%2fstyled-ui/-/styled-ui-5.47.0.tgz#942505c9ca84e1d498ed6eb834521d4a5c5d8e3f"
-  integrity sha512-LH/s/TM5i/h87hAsVnso7g3orAHtkaNm/CLkywmV3aArd5xjzXTJL4W/Ypgc8bA12OmMo0Ie38s8XybNGvvJ2g==
+"@faithlife/styled-ui@5.31.1", "@faithlife/styled-ui@^5.31.0", "@faithlife/styled-ui@^5.31.1", "@faithlife/styled-ui@^5.34.3", "@faithlife/styled-ui@^5.36.0", "@faithlife/styled-ui@^5.39.1", "@faithlife/styled-ui@^5.47.0", "@faithlife/styled-ui@^5.54.0":
+  version "5.54.1"
+  resolved "http://npm.faithlife.io/@faithlife%2fstyled-ui/-/styled-ui-5.54.1.tgz#44d6c63838645369571327587c5a5e8d5c72fe08"
+  integrity sha512-lmHsNqj4j1I+b+BDKPCeX5yCUUHTFBG+i7tzkaiUNnlhRTkm3EYu63sxFu72uKGiHJh508zkZodWykOaXktWpA==
   dependencies:
     "@styled-system/prop-types" "^5.1.1"
     "@styled-system/theme-get" "^5.1.1"
@@ -17132,7 +17132,7 @@ react-dom-factories@^1.0.0:
   resolved "https://registry.yarnpkg.com/react-dom-factories/-/react-dom-factories-1.0.2.tgz#eb7705c4db36fb501b3aa38ff759616aa0ff96e0"
   integrity sha1-63cFxNs2+1AbOqOP91lhaqD/luA=
 
-react-dom@^16.11.0, react-dom@^16.12.0, react-dom@^16.13.0, react-dom@^16.8.3, react-dom@^16.8.4:
+react-dom@^16.11.0, react-dom@^16.12.0, react-dom@^16.13.0, react-dom@^16.13.1, react-dom@^16.8.3, react-dom@^16.8.4:
   version "16.13.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.13.0.tgz#cdde54b48eb9e8a0ca1b3dc9943d9bb409b81866"
   integrity sha512-y09d2c4cG220DzdlFkPTnVvGTszVvNpC73v+AaLGLHbkpy3SSgvYq8x0rNwPJ/Rk/CicTNgk0hbHNw1gMEZAXg==
@@ -17449,7 +17449,7 @@ react-window@^1.8.5:
     "@babel/runtime" "^7.0.0"
     memoize-one ">=3.1.1 <6"
 
-react@^16.11.0, react@^16.12.0, react@^16.13.0, react@^16.8.3, react@^16.8.4:
+react@^16.11.0, react@^16.12.0, react@^16.13.0, react@^16.13.1, react@^16.8.3, react@^16.8.4:
   version "16.13.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.13.0.tgz#d046eabcdf64e457bbeed1e792e235e1b9934cf7"
   integrity sha512-TSavZz2iSLkq5/oiE7gnFzmURKZMltmi193rm5HEoUDAXpzT9Kzw6oNZnGoai/4+fUnm7FqS5dwgUL34TujcWQ==
@@ -18185,7 +18185,14 @@ rxjs@^6.1.0, rxjs@^6.4.0:
   dependencies:
     tslib "^1.9.0"
 
-rxjs@^6.3.3, rxjs@^6.5.3:
+rxjs@^6.3.3:
+  version "6.5.5"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.5.tgz#c5c884e3094c8cfee31bf27eb87e54ccfc87f9ec"
+  integrity sha512-WfQI+1gohdf0Dai/Bbmk5L5ItH5tYqm3ki2c5GdWhKjalzjg93N3avFjVStyZZz+A2Em+ZxKH5bNghw9UeylGQ==
+  dependencies:
+    tslib "^1.9.0"
+
+rxjs@^6.5.3:
   version "6.5.4"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.4.tgz#e0777fe0d184cec7872df147f303572d414e211c"
   integrity sha512-naMQXcgEo3csAEGvw/NydRA0fuS2nDZJiw1YUWFKU7aPPAPGZEsD4Iimit96qwCieH6y614MCLYwdkrWx7z/7Q==
