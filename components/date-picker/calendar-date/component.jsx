@@ -69,7 +69,7 @@ export class CalendarDate extends Component {
 		return currentMonth === dateFunctions.getMonth(date);
 	};
 
-	inRange = date => {
+	dateIsInRange = date => {
 		return (
 			(!this.props.minDate || date >= this.props.minDate) &&
 			(!this.props.maxDate || date <= this.props.maxDate)
@@ -92,8 +92,7 @@ export class CalendarDate extends Component {
 		return (
 			<Styled.CalendarWeekDayButton
 				onClick={this.setSelectedDate}
-				disabled={!this.inRange(date) || (this.props.validate && !this.props.validate(date))}
-				tabIndex="-1"
+				disabled={!this.dateIsInRange(date) || (this.props.validate && !this.props.validate(date))}
 			>
 				<CalendarDay>
 					<Styled.CalendarDateLabel>
