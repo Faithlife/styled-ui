@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.55.0
+
+- Add min and max dates to `DatePicker`.
+
 ### 5.54.1
 
 - Fix some color definitions for `Checkbox`.
