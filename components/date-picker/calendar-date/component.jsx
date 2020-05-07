@@ -67,9 +67,9 @@ export class CalendarDate extends Component {
 	isCurrentMonth = () => {
 		const { date, dateFunctions, currentMonth } = this.props;
 		return currentMonth === dateFunctions.getMonth(date);
-	}
+	};
 
-	inRange = (date) => {
+	inRange = date => {
 		return (
 			(!this.props.minDate || date >= this.props.minDate) &&
 			(!this.props.maxDate || date <= this.props.maxDate)
