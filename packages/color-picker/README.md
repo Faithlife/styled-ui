@@ -139,3 +139,12 @@ the hue to reset to 0 any time the saturation or value bottoms-out.
 ### Why not use `hsv` then, since it's the format of the box picker?
 It mostly doesn't matter, so the main reason is that `hsl` is supported in css while `hsv` is not. This
 makes it an outlier, in that it is the only one of the four formats that cannot be directly used in css.
+
+### Why are all these colors set using inline styles and not styled-system props?
+When styled-systems receives a new set of styles that it has never seen before, it generates a new classname
+and style ruleset, and appends it to a stylesheet in the document. When editing a color, for instance by sliding
+a slider, the color value subtly changes. Styled-systems will be forced to generate and append new styles for
+every element on the page that uses the color (all the other sliders, color swatches, etc.).
+
+In practice, this stylesheet appending caused enough lag to make the UI feel quite unresponsive. Simply using
+inline styles instead avoids all the stylesheet modifications, and results in much smoother UI.
