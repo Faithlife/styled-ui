@@ -1,9 +1,9 @@
 {
   "private": true,
   "name": "color-picker-example",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "dependencies": {
-    "@faithlife/color-picker": "^1.1.0",
+    "@faithlife/color-picker": "^1.2.0",
     "@faithlife/styled-ui": "^5.54.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
