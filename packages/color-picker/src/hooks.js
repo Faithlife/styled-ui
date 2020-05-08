@@ -1,16 +1,21 @@
+import { unstable_batchedUpdates } from 'react-dom';
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { hslToRgb, rgbToHsl, hslToHsv, hsvToHsl, rgbToHex, hexToRgb, isHex } from './color-convert';
 
+function useStableCallback(callback) {
+	const callbackRef = useRef();
+	callbackRef.current = callback;
+	return useCallback((...args) => callbackRef.current(...args), []);
+}
+
 export function useMappingUpdate(v, setV, mapIn = x => x, mapOut = (_, x) => x) {
-	const mappedSet = useRef();
-	mappedSet.current = update => {
+	return useStableCallback(update => {
 		if (update instanceof Function) {
 			setV(mapOut(v, update(mapIn(v))));
 		} else {
 			setV(mapOut(v, update));
 		}
-	};
-	return useCallback(callback => mappedSet.current(callback), []);
+	});
 }
 
 export const clamp = (v, min, max) => Math.max(min, Math.min(v, max));
@@ -119,25 +124,35 @@ function toHsl(color) {
 
 	return { h: 0, s: 0, l: 0, a: 1 };
 }
-export function useColor(initialColor) {
-	const [hsl, setHsl] = useState(() => toHsl(initialColor));
-
-	const color = useMemo(() => {
-		const hsv = hslToHsv(hsl);
-		const rgb = hslToRgb(hsl);
-		const hex = rgbToHex(rgb);
-		return { hsl, hsv, rgb, hex };
-	}, [hsl]);
+function hslToColor(hsl) {
+	const hsv = hslToHsv(hsl);
+	const rgb = hslToRgb(hsl);
+	const hex = rgbToHex(rgb);
+	return { hsl, hsv, rgb, hex };
+}
+export function useColor(initialColor, onChange = () => {}) {
+	const [color, setColor] = useState(() => hslToColor(toHsl(initialColor)));
+	const onChangeColor = useStableCallback(color =>
+		// https://overreacted.io/react-as-a-ui-runtime/#batching
+		// batching *usually* works by default, but react can't control document event listeners
+		// (which the sliders use for mouse tracking). We use this to prevent multiple rerenders
+		// https://twitter.com/dan_abramov/status/1091977127514292224
+		unstable_batchedUpdates(() => {
+			onChange(color);
+			setColor(color);
+		})
+	);
 
 	const set = useMemo(() => {
-		const set = color => setHsl(toHsl(color));
-		set.hsl = setHsl;
-		set.hsv = c => setHsl(hsvToHsl(c));
-		set.rgb = c => setHsl(rgbToHsl(c));
-		set.hex = c => setHsl(rgbToHsl(hexToRgb(c)));
+		const set = c => set.hsl(toHsl(c));
+
+		set.hsl = c => onChangeColor(hslToColor(c));
+		set.hsv = c => set.hsl(hsvToHsl(c));
+		set.rgb = c => set.hsl(rgbToHsl(c));
+		set.hex = c => set.rgb(hexToRgb(c));
 
 		return set;
-	}, []);
+	}, [onChangeColor]);
 
 	return [color, set];
 }

@@ -6,11 +6,13 @@
   "peerDependencies": {
     "@faithlife/styled-ui": "^5.54.0",
     "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "styled-components": "^4.4.1"
   },
   "devDependencies": {
     "@faithlife/styled-ui": "^5.54.0",
     "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "styled-components": "^4.4.1"
   }
 }

@@ -69,6 +69,8 @@ initial color (which can be a hex string, rgb value, hsl value, or hsv value), a
 a `color` object (which contains hex, rgb, hsl, and hsv values) and a `setColor` function (which
 can accept any color format, and also has methods for setting a color format directly). Each
 tracked color format is derived from a single internal hsl value.
+It also accepts an onChange handler, in case the color needs to be stored higher up. The hook
+will still track hsl internally (check FAQ to see why).
 
 `getShadesAndTints|getComplementaryColors|getAnalagousColors`: These functions each take an
 `hsl` color format and return a list of hex format colors which are in some way related to the
