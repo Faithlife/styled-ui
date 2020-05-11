@@ -130,29 +130,29 @@ function hslToColor(hsl) {
 	const hex = rgbToHex(rgb);
 	return { hsl, hsv, rgb, hex };
 }
-export function useColor(initialColor, onChange = () => {}) {
-	const [color, setColor] = useState(() => hslToColor(toHsl(initialColor)));
-	const onChangeColor = useStableCallback(color =>
+function useColorSetters(setColor) {
+	return useMemo(() => {
 		// https://overreacted.io/react-as-a-ui-runtime/#batching
 		// batching *usually* works by default, but react can't control document event listeners
 		// (which the sliders use for mouse tracking). We use this to prevent multiple rerenders
 		// https://twitter.com/dan_abramov/status/1091977127514292224
-		unstable_batchedUpdates(() => {
-			onChange(color);
-			setColor(color);
-		})
-	);
+		const batchedSetColor = color => unstable_batchedUpdates(() => setColor(color));
+		const useWrapper = onChange => useColorSetters(c => (setColor(c), onChange(c)));
 
-	const set = useMemo(() => {
 		const set = c => set.hsl(toHsl(c));
 
-		set.hsl = c => onChangeColor(hslToColor(c));
+		set.useWrapper = useWrapper;
+		set.hsl = c => batchedSetColor(hslToColor(c));
 		set.hsv = c => set.hsl(hsvToHsl(c));
 		set.rgb = c => set.hsl(rgbToHsl(c));
 		set.hex = c => set.rgb(hexToRgb(c));
 
 		return set;
-	}, [onChangeColor]);
+	}, [setColor]);
+}
+export function useColor(initialColor) {
+	const [color, setColor] = useState(() => hslToColor(toHsl(initialColor)));
+	const set = useColorSetters(setColor);
 
 	return [color, set];
 }

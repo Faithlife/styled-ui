@@ -22,6 +22,7 @@ import {
 
 function App() {
 	const [color, set] = useColor('#25f');
+	const setSwatch = set.useWrapper(() => alert('picked a swatch!'));
 
 	const shadesAndTints = getShadesAndTints(color.hsl);
 	const complementary = getComplementaryColors(color.hsl);
@@ -71,12 +72,12 @@ function App() {
 					'#fff',
 					'#0000',
 				]}
-				set={set}
+				set={setSwatch}
 				width="280px"
 			/>
-			<Palette name="Shades and Tints" hexColors={shadesAndTints} set={set} width="280px" />
-			<Palette name="Complementary Colors" hexColors={complementary} set={set} width="280px" />
-			<Palette name="Analagous" hexColors={analagous} set={set} width="280px" />
+			<Palette name="Shades and Tints" hexColors={shadesAndTints} set={setSwatch} width="280px" />
+			<Palette name="Complementary" hexColors={complementary} set={setSwatch} width="280px" />
+			<Palette name="Analagous" hexColors={analagous} set={setSwatch} width="280px" />
 		</div>
 	);
 }

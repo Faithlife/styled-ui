@@ -66,11 +66,10 @@ css props just like a styled-ui `Box` or `Input` component would**
 
 `useColor`: This is the main hook to use to control all of the sliders/pickers. It accepts an
 initial color (which can be a hex string, rgb value, hsl value, or hsv value), and returns
-a `color` object (which contains hex, rgb, hsl, and hsv values) and a `setColor` function (which
-can accept any color format, and also has methods for setting a color format directly). Each
+a `color` object (which contains hex, rgb, hsl, and hsv values) and a `setColor` function. Each
 tracked color format is derived from a single internal hsl value.
-It also accepts an onChange handler, in case the color needs to be stored higher up. The hook
-will still track hsl internally (check FAQ to see why).
+- `setColor` also has a `useWrapper(onChange)` method, which will create a clone of `setColor` that
+calls the `onChange` handler passed in.
 
 `getShadesAndTints|getComplementaryColors|getAnalagousColors`: These functions each take an
 `hsl` color format and return a list of hex format colors which are in some way related to the
