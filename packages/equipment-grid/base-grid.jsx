@@ -53,6 +53,7 @@ export function BaseGrid({
 	rowSelectionType,
 	hideHeaders,
 	rowHeight,
+	rowClassRules,
 	hasPagingBar,
 	handleGetRowId,
 	additionalCellComponents,
@@ -304,6 +305,7 @@ export function BaseGrid({
 				rowHeight={rowHeight || defaultRowHeight}
 				suppressHorizontalScroll
 				rowClass={onRowClick ? 'ag-grid-clickable-row' : ''}
+				rowClassRules={rowClassRules}
 				deltaRowDataMode
 				getRowNodeId={handleGetRowId || getRowNodeId}
 				suppressRowClickSelection={suppressRowClick}
