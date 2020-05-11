@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/equipment-grid@1.2.4...@faithlife/equipment-grid@1.3.0) (2020-05-11)
+
+
+### Features
+
+* Support rowClassRules prop. ([10ccef8](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/10ccef8aaec8c4050c673b6b226e3fe297394025))
+
+
+
+
+
 ## [1.2.4](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/equipment-grid@1.2.3...@faithlife/equipment-grid@1.2.4) (2020-04-30)
 
 
