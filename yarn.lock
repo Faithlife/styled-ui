@@ -3122,10 +3122,10 @@
     react-virtualized-auto-sizer "^1.0.2"
     react-window "^1.8.5"
 
-"@faithlife/styled-ui@5.31.1", "@faithlife/styled-ui@^5.31.0", "@faithlife/styled-ui@^5.31.1", "@faithlife/styled-ui@^5.34.3", "@faithlife/styled-ui@^5.36.0", "@faithlife/styled-ui@^5.39.1", "@faithlife/styled-ui@^5.47.0", "@faithlife/styled-ui@^5.54.0":
-  version "5.54.1"
-  resolved "http://npm.faithlife.io/@faithlife%2fstyled-ui/-/styled-ui-5.54.1.tgz#44d6c63838645369571327587c5a5e8d5c72fe08"
-  integrity sha512-lmHsNqj4j1I+b+BDKPCeX5yCUUHTFBG+i7tzkaiUNnlhRTkm3EYu63sxFu72uKGiHJh508zkZodWykOaXktWpA==
+"@faithlife/styled-ui@5.31.1", "@faithlife/styled-ui@^5.31.0", "@faithlife/styled-ui@^5.31.1", "@faithlife/styled-ui@^5.34.3", "@faithlife/styled-ui@^5.39.1", "@faithlife/styled-ui@^5.47.0", "@faithlife/styled-ui@^5.54.0", "@faithlife/styled-ui@^5.56.0":
+  version "5.56.0"
+  resolved "http://npm.faithlife.io/@faithlife%2fstyled-ui/-/styled-ui-5.56.0.tgz#39f931b2d0b8dcd045d684708bbad98e8da88e9d"
+  integrity sha512-H2pV9pFjWk9pxzfxUmsN29jOaseDggKBl038mSkaiTRz/0LkV9jUJQmTl4zZnXjcnhPnF1TWYTcGxG1wFtm/tA==
   dependencies:
     "@styled-system/prop-types" "^5.1.1"
     "@styled-system/theme-get" "^5.1.1"
@@ -3139,7 +3139,7 @@
     react-popper "^1.3.3"
     react-scrollbar "^0.5.4"
     react-select "^2"
-    react-transition-group "^4.2.1"
+    react-transition-group "^4.4.1"
     reactstrap "^6.1.0"
     styled-system "^5.1.1"
 
@@ -17426,10 +17426,10 @@ react-transition-group@^2.2.0, react-transition-group@^2.2.1, react-transition-g
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react-transition-group@^4.2.1:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.3.0.tgz#fea832e386cf8796c58b61874a3319704f5ce683"
-  integrity sha512-1qRV1ZuVSdxPlPf4O8t7inxUGpdyO5zG9IoNfJxSO0ImU2A1YWkEQvFPuIPZmMLkg5hYs7vv5mMOyfgSkvAwvw==
+react-transition-group@^4.4.1:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.1.tgz#63868f9325a38ea5ee9535d828327f85773345c9"
+  integrity sha512-Djqr7OQ2aPUiYurhPalTrVy9ddmFCCzwhqQmtN+J3+3DzLO209Fdr70QrN8Z3DsglWql6iY1lDWAfpFiBtuKGw==
   dependencies:
     "@babel/runtime" "^7.5.5"
     dom-helpers "^5.0.1"

@@ -80,7 +80,7 @@
 		"@emotion/memoize": "0.7.2",
 		"@emotion/unitless": "0.7.4",
 		"@emotion/is-prop-valid": "0.8.5",
-		"@faithlife/styled-ui": "^5.54.0",
+		"@faithlife/styled-ui": "^5.56.0",
 		"regenerator-runtime": "0.13.3",
 		"styled-components": "4.4.1",
 		"typescript": "^3.7.2",

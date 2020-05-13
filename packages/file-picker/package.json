@@ -10,11 +10,11 @@
     "test": "echo 'no tests yet'"
   },
   "devDependencies": {
-    "@faithlife/styled-ui": "^5.36.0",
+    "@faithlife/styled-ui": "^5.56.0",
     "react": "^16.8.4"
   },
   "peerDependencies": {
-    "@faithlife/styled-ui": "^5.47.0",
+    "@faithlife/styled-ui": "^5.56.0",
     "react": "^16.8.4"
   },
   "dependencies": {
