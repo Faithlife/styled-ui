@@ -1,77 +1,40 @@
-import { useCallback, useRef, useEffect } from 'react';
-import { useId } from './use-id';
-import { useBasicMap } from './use-basic-map';
+/* eslint eqeqeq: ["error", "always", {"null": "never"}] */
+import { useRef, useEffect } from 'react';
 
-export function useFocusAwayHandler(onFocusAwayCallback) {
+export function useFocusAwayHandler(onFocusAway) {
 	const targetRef = useRef();
-	const { map, add, remove } = useBasicMap();
+	const focusAwayRef = useRef();
+	focusAwayRef.current = onFocusAway;
 
-	const onBlur = useCallback(
-		event => {
-			const inboundsElementsList = Object.values(map).filter(ref => !!ref.current);
-			if (targetRef.current || inboundsElementsList.length > 0) {
-				const relatedTarget =
-					event.relatedTarget || event.explicitOriginalTarget || document.activeElement;
-				if (
-					onFocusAwayCallback &&
-					(!relatedTarget ||
-						(!targetRef.current.contains(relatedTarget) &&
-							!inboundsElementsList.some(
-								ref => ref.current && ref.current.contains(relatedTarget),
-							)))
-				) {
-					onFocusAwayCallback();
-				}
+	useEffect(() => {
+		const handleFocusIn = event => {
+			if (targetRef.current == null || focusAwayRef.current == null) {
+				return;
 			}
-		},
-		[onFocusAwayCallback, map],
-	);
 
-	useEffect(
-		// There is no reason to return a cleanup function if an event listener is not created
-		// eslint-disable-next-line consistent-return
-		() => {
-			const targetList = [targetRef.current, ...Object.values(map).map(x => x.current)].filter(
-				x => x !== null && x !== undefined,
-			);
-			if (targetList.length > 0) {
-				for (const target of targetList) {
-					target.addEventListener('focusout', onBlur);
-				}
-				return () => {
-					for (const target of targetList) {
-						target.removeEventListener('focusout', onBlur);
-					}
-				};
+			const target = event.target ?? document.activeElement;
+			if (target !== targetRef.current && !targetRef.current.contains(target)) {
+				focusAwayRef.current();
 			}
-		},
-		[onBlur, map],
-	);
-
-	const addInboundsElement = useCallback((id, ref) => add(id, ref), [add]);
-	const removeInboundsElement = useCallback(id => remove(id), [remove]);
-
-	return { targetRef, addInboundsElement, removeInboundsElement };
-}
-
-export function useAddInboundsElement(addInboundsElement, removeInboundsElement) {
-	const targetRef = useRef();
-	const id = useId();
-
-	useEffect(
-		// There is no reason to return a cleanup function if an event listener is not created
-		// eslint-disable-next-line consistent-return
-		() => {
-			if (id) {
-				addInboundsElement(id, targetRef);
-
-				return () => {
-					removeInboundsElement(id);
-				};
+		};
+		const handleFocusOut = event => {
+			if (targetRef.current == null || focusAwayRef.current == null) {
+				return;
 			}
-		},
-		[addInboundsElement, removeInboundsElement, id],
-	);
+
+			const target = event.relatedTarget ?? document.activeElement;
+			if (target !== targetRef.current && !targetRef.current.contains(target)) {
+				focusAwayRef.current();
+			}
+		};
+
+		document.addEventListener('focusin', handleFocusIn);
+		document.addEventListener('focusout', handleFocusOut);
+		return () => {
+			document.removeEventListener('focusin', handleFocusIn);
+			document.removeEventListener('focusout', handleFocusOut);
+		};
+	}, []);
 
 	return targetRef;
 }

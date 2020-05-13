@@ -1,8 +1,10 @@
 /* eslint eqeqeq: ["error", "always", {"null": "never"}] */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { usePopper } from 'react-popper';
+import { useFocusAwayHandler } from '../shared-hooks/use-focus-away-handler';
+import { mergeRefs } from '../utils/merge-refs';
 import { PopoverContainer, PopoverArrow } from './styled';
 
 export function usePopover(reference, options) {
@@ -17,7 +19,6 @@ export function usePopover(reference, options) {
 	});
 
 	return {
-		popperElement,
 		popperProps: { ...attributes.popper, style: styles.popper, ref: setPopper },
 		arrowProps: { ...attributes.arrow, style: styles.arrow, ref: setArrow },
 		...rest,
@@ -36,27 +37,16 @@ export function Popover({
 	children,
 	...restProps
 }) {
-	const { popperElement, popperProps, arrowProps } = usePopover(reference, {
+	const focusRef = useFocusAwayHandler(onFocusAway);
+	const { popperProps, arrowProps } = usePopover(reference, {
 		placement,
 		modifiers: hideArrow ? modifiers : [arrowOffset].concat(modifiers ?? []),
 		strategy,
 	});
 
-	useEffect(() => {
-		if (popperElement != null && onFocusAway instanceof Function) {
-			const onClick = event => {
-				if (!popperElement.contains(event.target)) {
-					onFocusAway();
-				}
-			};
-
-			document.addEventListener('click', onClick);
-			return () => document.removeEventListener('click', onClick);
-		}
-	}, [onFocusAway, popperElement]);
-
+	const { ref, ...popperRest } = popperProps;
 	const popover = (
-		<PopoverContainer {...restProps} {...popperProps}>
+		<PopoverContainer tabIndex="-1" ref={mergeRefs(ref, focusRef)} {...restProps} {...popperRest}>
 			{children}
 			{!hideArrow && <PopoverArrow {...arrowProps} />}
 		</PopoverContainer>

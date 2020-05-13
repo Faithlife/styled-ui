@@ -27,6 +27,7 @@ export const PopoverContainer = styled(Box)`
 	background-color: ${({ backgroundColor, theme }) =>
 		backgroundColor ?? theme.colors.popover.background};
 	z-index: ${({ zIndex, theme }) => zIndex || theme.zIndices.menu};
+	outline: none !important;
 
 	& > ${PopoverArrow}::after {
 		border: ${({ border }) => border ?? 'none'};

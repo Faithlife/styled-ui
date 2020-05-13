@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Popper } from 'react-popper';
 import { deprecate } from '../utils/deprecate';
+import { mergeRefs } from '../utils/merge-refs';
 import { Box } from '../Box';
 import {
+	PopoverContext,
 	PlacementOptionsProps,
-	FocusHandlerInboundsElement,
 	arrowWidth,
 	maxWidth,
 	maxHeight,
@@ -71,6 +72,8 @@ export class PopoverBase extends Component {
 		modifiers: [],
 		styleOverrides: {},
 	};
+
+	static contextType = PopoverContext;
 
 	state = {
 		showPopper: this.props.isOpen || false,
@@ -158,7 +161,7 @@ export class PopoverBase extends Component {
 			>
 				{({ ref, style, placement, arrowProps }) => (
 					<Box
-						ref={ref}
+						ref={mergeRefs(ref, this.context.targetRef)}
 						placement={placement}
 						style={{
 							...style,
@@ -189,8 +192,10 @@ export class PopoverBase extends Component {
 						zIndex={styleOverrides.zIndex ?? 'menu'}
 						css={`
 							text-align: ${styleOverrides.textAlign ?? 'left'};
+							outline: none !important;
 							${styleOverrides.overflow ? `overflow: ${styleOverrides.overflow}` : ''};
 						`}
+						tabIndex="-1"
 						{...props}
 					>
 						{children}
@@ -228,10 +233,7 @@ export class PopoverBase extends Component {
 		);
 
 		if (!!this.targetContainer && showPopper) {
-			return ReactDOM.createPortal(
-				<FocusHandlerInboundsElement>{popover}</FocusHandlerInboundsElement>,
-				this.targetContainer,
-			);
+			return ReactDOM.createPortal(popover, this.targetContainer);
 		}
 
 		if (showPopper) {
