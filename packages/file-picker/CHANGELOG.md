@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.4.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@3.3.0...@faithlife/file-picker@3.4.0) (2020-05-13)
+
+
+### Features
+
+* **file-picker:** Work around Amber auto sign in problem BWA-41714. ([#112](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/112)) ([d7762ed](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/d7762edc22f27f14bf626b0c66cb7dd0e586f19d))
+
+
+
+
+
 # [3.3.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@3.2.1...@faithlife/file-picker@3.3.0) (2020-04-23)
 
 
