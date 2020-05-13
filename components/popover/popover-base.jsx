@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Popper } from 'react-popper';
+import { deprecate } from '../utils/deprecate';
 import { Box } from '../Box';
 import {
 	PlacementOptionsProps,
@@ -23,23 +24,17 @@ export class PopoverBase extends Component {
 		isOpen: PropTypes.bool,
 		/** Where on the target the popover renders */
 		placement: PlacementOptionsProps,
-		/** Not all modifiers are shown. Refer to https://popper.js.org/popper-documentation.html#modifiers for a full list*/
-		modifiers: PropTypes.shape({
-			offset: PropTypes.shape({
+		/** Refer to https://popper.js.org/docs/v2/modifiers/ for further documentation */
+		modifiers: PropTypes.arrayOf(
+			PropTypes.shape({
+				name: PropTypes.string.isRequired,
 				enabled: PropTypes.bool,
-				offset: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+				phase: PropTypes.string,
+				fn: PropTypes.func,
+				options: PropTypes.object,
+				data: PropTypes.object,
 			}),
-			preventOverflow: PropTypes.shape({
-				padding: PropTypes.number,
-				boundariesElement: PropTypes.any,
-			}),
-			flip: PropTypes.shape({
-				enabled: PropTypes.bool,
-				behavior: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-				padding: PropTypes.number,
-				boundariesElement: PropTypes.any,
-			}),
-		}),
+		),
 		/** Contents of the Popover */
 		children: PropTypes.node,
 		/** Where to inject the popover. Defaults to inline */
@@ -48,7 +43,6 @@ export class PopoverBase extends Component {
 		hideArrow: PropTypes.bool,
 		/** Delay on popover showing in milliseconds*/
 		delay: PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
-		eventsEnabled: PropTypes.bool,
 		positionFixed: PropTypes.bool,
 		styleOverrides: PropTypes.shape({
 			background: PropTypes.string,
@@ -74,7 +68,7 @@ export class PopoverBase extends Component {
 
 	static defaultProps = {
 		placement: 'top',
-		modifiers: {},
+		modifiers: [],
 		styleOverrides: {},
 	};
 
@@ -85,6 +79,7 @@ export class PopoverBase extends Component {
 	_timeout = null;
 
 	componentDidMount() {
+		deprecate('Popover v1 is deprecated, please migrate to popover v2');
 		const { container } = this.props;
 		if (container) {
 			if (typeof container === 'string') {
@@ -145,20 +140,21 @@ export class PopoverBase extends Component {
 		} = this.props;
 		const { showPopper } = this.state;
 
-		const popperModifiers = {
-			...modifiers,
-			computeStyle: {
-				...modifiers.computeStyle,
-				gpuAcceleration: false,
-			},
-		};
+		const popperModifiers = [];
+		if (modifiers instanceof Array) {
+			popperModifiers.push(...modifiers);
+		} else {
+			deprecate(
+				'v1 style modifiers detected, please update to v2: https://popper.js.org/docs/v2/modifiers/',
+			);
+		}
+		popperModifiers.push({ name: 'computeStyle', options: { gpuAcceleration: false } });
 
 		const popover = (
 			<Popper
 				placement={popoverPlacement}
 				modifiers={popperModifiers}
-				eventsEnabled={eventsEnabled}
-				positionFixed={positionFixed}
+				strategy={positionFixed ? 'fixed' : 'absolute'}
 			>
 				{({ ref, style, placement, arrowProps }) => (
 					<Box
