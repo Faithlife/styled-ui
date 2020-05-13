@@ -121,11 +121,11 @@ export function TabPanel({
 			padding={3}
 			{...props}
 		>
-			{children}
+			{typeof children === 'function' ? children({ selected }) : children}
 		</Styled.TabPanelCore>
 	);
 }
 
 TabPanel.propTypes = {
-	children: PropTypes.node.isRequired,
+	children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
 };
