@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.56.0
+
+- Tab panels now accept render functions as children, allowing panels to be lazy loaded.
+
 ## 5.55.0
 
 - Add min and max dates to `DatePicker`.
