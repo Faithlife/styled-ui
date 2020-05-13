@@ -1,4 +1,3 @@
-/* eslint eqeqeq: ["error", "always", {"null": "never"}] */
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
@@ -52,7 +51,7 @@ export function Popover({
 		</PopoverContainer>
 	);
 
-	if (container != null) {
+	if (container !== null && container !== undefined) {
 		return ReactDOM.createPortal(popover, container === 'body' ? document.body : container.current);
 	}
 

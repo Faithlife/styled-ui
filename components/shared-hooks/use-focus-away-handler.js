@@ -1,6 +1,6 @@
-/* eslint eqeqeq: ["error", "always", {"null": "never"}] */
 import { useRef, useEffect } from 'react';
 
+const isNullOrUndefined = v => v === null || v === undefined;
 export function useFocusAwayHandler(onFocusAway) {
 	const targetRef = useRef();
 	const focusAwayRef = useRef();
@@ -8,7 +8,7 @@ export function useFocusAwayHandler(onFocusAway) {
 
 	useEffect(() => {
 		const handleFocusIn = event => {
-			if (targetRef.current == null || focusAwayRef.current == null) {
+			if (isNullOrUndefined(targetRef.current) || isNullOrUndefined(focusAwayRef.current)) {
 				return;
 			}
 
@@ -18,7 +18,7 @@ export function useFocusAwayHandler(onFocusAway) {
 			}
 		};
 		const handleFocusOut = event => {
-			if (targetRef.current == null || focusAwayRef.current == null) {
+			if (isNullOrUndefined(targetRef.current) || isNullOrUndefined(focusAwayRef.current)) {
 				return;
 			}
 
