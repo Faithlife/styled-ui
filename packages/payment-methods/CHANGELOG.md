@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.12.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@2.11.2...@faithlife/payment-methods@2.12.0) (2020-05-15)
+
+
+### Features
+
+* Support consumer passing in max width. ([#113](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/113)) ([a2e6677](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/a2e66772f314aefed55dfcd3874456e70aeb87fd))
+
+
+
+
+
 ## [2.11.2](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@2.11.1...@faithlife/payment-methods@2.11.2) (2020-05-05)
 
 
