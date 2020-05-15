@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Input as UnstyledInput, Checkbox as UnstyledCheckbox } from '@faithlife/styled-ui';
+import { Box, Input as UnstyledInput, Checkbox as UnstyledCheckbox } from '@faithlife/styled-ui';
 import { Button } from '@faithlife/styled-ui/v6';
 import CleaveUnstyled from 'cleave.js/react';
 
@@ -10,8 +10,7 @@ export const BillingProfilesSection = styled.div`
 	padding-top: 14px;
 `;
 
-export const BillingProfiles = styled.div`
-	max-width: 327px;
+export const BillingProfiles = styled(Box)`
 	overflow-y: auto;
 	overflow-x: hidden;
 	border: 1px solid ${({ theme }) => theme.shade10};

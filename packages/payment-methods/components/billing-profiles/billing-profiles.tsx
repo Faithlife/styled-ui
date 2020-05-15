@@ -49,6 +49,7 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 	setCardInfoToSessionStorage,
 	allowAddressOnly = false,
 	handleSelectedProfileInvalid,
+	...props
 }) => {
 	const [billingProfiles, setBillingProfiles] = useState<IBillingProfileDto[]>([]);
 	const [usageInfo, setUsageInfo] = useState<IUsageInfoDto>();
@@ -397,7 +398,7 @@ const BillingProfiles: React.FunctionComponent<IBillingProfilesProps> = ({
 	return (
 		<Styled.BillingProfilesContainer>
 			<Styled.BillingProfilesSection>
-				<Styled.BillingProfiles data-testid="billing-profiles">
+				<Styled.BillingProfiles maxWidth="327px" {...props} data-testid="billing-profiles">
 					<Styled.CreditCardRow>
 						<Radio
 							onClick={() => setIsAddingNewBillingProfile(true)}

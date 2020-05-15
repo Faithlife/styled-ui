@@ -18,6 +18,7 @@ const PaymentMethods: React.FunctionComponent<IPaymentMethodsProps> = ({
 	setCardInfoToSessionStorage,
 	handleSelectedProfileInvalid,
 	theme = {},
+	...props
 }) => {
 	const resources = { ...defaultResources, ...localizedResources };
 
@@ -34,6 +35,7 @@ const PaymentMethods: React.FunctionComponent<IPaymentMethodsProps> = ({
 					setCardInfoToSessionStorage={setCardInfoToSessionStorage}
 					handleSelectedProfileInvalid={handleSelectedProfileInvalid}
 					allowAddressOnly={false}
+					{...props}
 				></BillingProfiles>
 			</ThemeProvider>
 		</LocalizationProvider>

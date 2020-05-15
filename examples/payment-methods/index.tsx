@@ -91,6 +91,7 @@ const App = () => {
 						setSystemMessage={setSystemMessage}
 						localizedResources={localizedResources}
 						theme={myTheme}
+						maxWidth={'597px'}
 					/>
 				</Accordion.Panel>
 			</Accordion.Item>
