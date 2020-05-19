@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.2](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.5.1...@faithlife/product-drawer@0.5.2) (2020-05-19)
+
+
+### Bug Fixes
+
+* Don't rely on browsers to set document.activeElement. ([#115](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/115)) ([8287a3b](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/8287a3beba907745f1662bf8f41bdd20a0ec6358))
+
+
+
+
+
 ## [0.5.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.5.0...@faithlife/product-drawer@0.5.1) (2020-04-28)
 
 
