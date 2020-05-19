@@ -10,7 +10,7 @@ import { X as Close } from '../icons/18px';
 import { useCopyRefs } from '../shared-hooks/use-copy-refs';
 
 const FilterInput = React.forwardRef(function FilterInput(
-	{ value, onChange, onClear, variant, border, borderColor, borderWidth, ...props },
+	{ value, onChange, onClear, variant, border, borderColor, borderWidth, placeholder, ...props },
 	ref,
 ) {
 	if (!onClear) {
@@ -35,6 +35,7 @@ const FilterInput = React.forwardRef(function FilterInput(
 				<Input
 					ref={flattenedRef}
 					variant={variant}
+					placeholder={placeholder}
 					value={value}
 					border={border}
 					borderColor={borderColor}
