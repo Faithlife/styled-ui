@@ -66,7 +66,7 @@ Use in UI that needs to inline-filter a list.
 showSource: true
 state: { value: 'Washington' }
 ---
-<FilterInput variant="medium" value={state.value} onChange={event => setState({ value: event.target.value })} onClear={() => setState({ value: '' })} />
+<FilterInput variant="medium" placeholder="Find" value={state.value} onChange={event => setState({ value: event.target.value })} onClear={() => setState({ value: '' })} />
 ```
 
 ## NumberInput
