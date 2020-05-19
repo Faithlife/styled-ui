@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Popper } from 'react-popper';
 import { deprecate } from '../utils/deprecate';
 import { mergeRefs } from '../utils/merge-refs';
 import { Box } from '../Box';
+import { useFocusAwayHandler } from '../shared-hooks';
 import {
 	PopoverContext,
 	PlacementOptionsProps,
@@ -73,8 +74,6 @@ export class PopoverBase extends Component {
 		styleOverrides: {},
 	};
 
-	static contextType = PopoverContext;
-
 	state = {
 		showPopper: this.props.isOpen || false,
 	};
@@ -129,117 +128,121 @@ export class PopoverBase extends Component {
 	};
 
 	render() {
-		const {
-			children,
-			placement: popoverPlacement,
-			hideArrow,
-			delay,
-			theme,
-			modifiers,
-			styleOverrides,
-			eventsEnabled,
-			positionFixed,
-			...props
-		} = this.props;
 		const { showPopper } = this.state;
 
-		const popperModifiers = [];
-		if (modifiers instanceof Array) {
-			popperModifiers.push(...modifiers);
-		} else {
-			deprecate(
-				'v1 style modifiers detected, please update to v2: https://popper.js.org/docs/v2/modifiers/',
-			);
-		}
-		popperModifiers.push({ name: 'computeStyle', options: { gpuAcceleration: false } });
-
-		const popover = (
-			<Popper
-				placement={popoverPlacement}
-				modifiers={popperModifiers}
-				strategy={positionFixed ? 'fixed' : 'absolute'}
-			>
-				{({ ref, style, placement, arrowProps }) => (
-					<Box
-						ref={mergeRefs(ref, this.context.targetRef)}
-						placement={placement}
-						style={{
-							...style,
-							...(!hideArrow ? margins[getPlacement(placement)] : {}),
-						}}
-						delay={delay}
-						onAnimationEnd={this.handleTransition}
-						hideArrow={hideArrow}
-						backgroundColor={theme?.backgroundColor ?? 'popover.background'}
-						border={styleOverrides.border ?? 'none'}
-						borderRadius={styleOverrides.borderRadius ?? 0}
-						boxShadow={styleOverrides.hideShadow ? 0 : 1}
-						color={theme?.textColor ?? ''}
-						fontSize={styleOverrides.fontSize ?? 'medium'}
-						fontWeight={styleOverrides.fontWeight ?? 'normal'}
-						height={styleOverrides.height ?? 'auto'}
-						lineHeight={styleOverrides.lineHeight ?? 'normal'}
-						margin={styleOverrides.margin ?? 0}
-						maxHeight={styleOverrides.maxHeight ?? maxHeight}
-						maxWidth={styleOverrides.maxWidth ?? maxWidth}
-						minHeight={styleOverrides.minHeight ?? ''}
-						minWidth={styleOverrides.minWidth ?? ''}
-						outline={styleOverrides.outline ?? ''}
-						padding={styleOverrides.padding ?? 0}
-						position="absolute"
-						whiteSpace="normal"
-						width={styleOverrides.width ?? 'auto'}
-						zIndex={styleOverrides.zIndex ?? 'menu'}
-						css={`
-							text-align: ${styleOverrides.textAlign ?? 'left'};
-							outline: none !important;
-							${styleOverrides.overflow ? `overflow: ${styleOverrides.overflow}` : ''};
-						`}
-						tabIndex="-1"
-						{...props}
-					>
-						{children}
-						{!hideArrow && (
-							<Box
-								ref={arrowProps.ref}
-								style={arrowProps.style}
-								css={`
-									width: 25px;
-									height: 25px;
-									position: absolute;
-									overflow: hidden;
-									pointer-events: none;
-									text-align: center;
-									--bg: ${({ theme }) => theme.colors.popover.background};
-									--shadow: ${({ theme }) => theme.shadows[1]};
-
-									&::after {
-										content: '';
-										border: ${styleOverrides?.border ?? 'none'};
-										position: absolute;
-										width: ${arrowWidth};
-										height: ${arrowWidth};
-										background: ${theme?.backgroundColor ?? 'var(--bg)'};
-										transform: translateX(-50%) translateY(-50%) rotate(45deg);
-										box-shadow: ${styleOverrides?.hideShadow ? 'none' : 'var(--shadow)'};
-									}
-									${placement ? arrowStyles[getPlacement(placement)] : arrowStyles.top};
-								`}
-							/>
-						)}
-					</Box>
-				)}
-			</Popper>
-		);
-
 		if (!!this.targetContainer && showPopper) {
-			return ReactDOM.createPortal(popover, this.targetContainer);
+			return ReactDOM.createPortal(<PopoverCore {...this.props} />, this.targetContainer);
 		}
 
 		if (showPopper) {
-			return popover;
+			return <PopoverCore {...this.props} />;
 		}
 
 		return null;
 	}
+}
+
+function PopoverCore({
+	children,
+	placement: popoverPlacement,
+	hideArrow,
+	delay,
+	theme,
+	modifiers,
+	styleOverrides,
+	eventsEnabled,
+	positionFixed,
+	...rest
+}) {
+	const { onFocusAway } = useContext(PopoverContext);
+	const focusRef = useFocusAwayHandler(onFocusAway);
+
+	const popperModifiers = [];
+	if (modifiers instanceof Array) {
+		popperModifiers.push(...modifiers);
+	} else {
+		deprecate(
+			'v1 style modifiers detected, please update to v2: https://popper.js.org/docs/v2/modifiers/',
+		);
+	}
+
+	popperModifiers.push({ name: 'computeStyle', options: { gpuAcceleration: false } });
+
+	return (
+		<Popper
+			placement={popoverPlacement}
+			modifiers={popperModifiers}
+			strategy={positionFixed ? 'fixed' : 'absolute'}
+		>
+			{({ ref, style, placement, arrowProps }) => (
+				<Box
+					ref={mergeRefs(ref, focusRef)}
+					placement={placement}
+					style={{
+						...style,
+						...(!hideArrow ? margins[getPlacement(placement)] : {}),
+					}}
+					delay={delay}
+					hideArrow={hideArrow}
+					backgroundColor={theme?.backgroundColor ?? 'popover.background'}
+					border={styleOverrides.border ?? 'none'}
+					borderRadius={styleOverrides.borderRadius ?? 0}
+					boxShadow={styleOverrides.hideShadow ? 0 : 1}
+					color={theme?.textColor ?? ''}
+					fontSize={styleOverrides.fontSize ?? 'medium'}
+					fontWeight={styleOverrides.fontWeight ?? 'normal'}
+					height={styleOverrides.height ?? 'auto'}
+					lineHeight={styleOverrides.lineHeight ?? 'normal'}
+					margin={styleOverrides.margin ?? 0}
+					maxHeight={styleOverrides.maxHeight ?? maxHeight}
+					maxWidth={styleOverrides.maxWidth ?? maxWidth}
+					minHeight={styleOverrides.minHeight ?? ''}
+					minWidth={styleOverrides.minWidth ?? ''}
+					outline={styleOverrides.outline ?? ''}
+					padding={styleOverrides.padding ?? 0}
+					position="absolute"
+					whiteSpace="normal"
+					width={styleOverrides.width ?? 'auto'}
+					zIndex={styleOverrides.zIndex ?? 'menu'}
+					css={`
+						text-align: ${styleOverrides.textAlign ?? 'left'};
+						outline: none !important;
+						${styleOverrides.overflow ? `overflow: ${styleOverrides.overflow}` : ''};
+					`}
+					tabIndex="-1"
+					{...rest}
+				>
+					{children}
+					{!hideArrow && (
+						<Box
+							ref={arrowProps.ref}
+							style={arrowProps.style}
+							css={`
+								width: 25px;
+								height: 25px;
+								position: absolute;
+								overflow: hidden;
+								pointer-events: none;
+								text-align: center;
+								--bg: ${({ theme }) => theme.colors.popover.background};
+								--shadow: ${({ theme }) => theme.shadows[1]};
+
+								&::after {
+									content: '';
+									border: ${styleOverrides?.border ?? 'none'};
+									position: absolute;
+									width: ${arrowWidth};
+									height: ${arrowWidth};
+									background: ${theme?.backgroundColor ?? 'var(--bg)'};
+									transform: translateX(-50%) translateY(-50%) rotate(45deg);
+									box-shadow: ${styleOverrides?.hideShadow ? 'none' : 'var(--shadow)'};
+								}
+								${placement ? arrowStyles[getPlacement(placement)] : arrowStyles.top};
+							`}
+						/>
+					)}
+				</Box>
+			)}
+		</Popper>
+	);
 }

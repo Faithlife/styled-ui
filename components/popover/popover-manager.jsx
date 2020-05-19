@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Manager } from 'react-popper';
-import { useFocusAwayHandler } from '../shared-hooks';
 import { PopoverContext } from './popper-helpers';
 
-export function PopoverManager({ children, onFocusAway, ...props }) {
-	const targetRef = useFocusAwayHandler(onFocusAway);
+export function PopoverManager({ children, onFocusAway }) {
 	return (
 		<Manager>
-			<PopoverContext.Provider value={{ targetRef }}>{children}</PopoverContext.Provider>
+			<PopoverContext.Provider value={{ onFocusAway }}>{children}</PopoverContext.Provider>
 		</Manager>
 	);
 }

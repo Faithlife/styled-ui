@@ -7,6 +7,9 @@ export function useFocusAwayHandler(onFocusAway) {
 	focusAwayRef.current = onFocusAway;
 
 	useEffect(() => {
+		const previousFocus = document.activeElement;
+		targetRef.current.focus({ preventScroll: true });
+
 		const handleFocusIn = event => {
 			if (isNullOrUndefined(targetRef.current) || isNullOrUndefined(focusAwayRef.current)) {
 				return;
@@ -14,6 +17,7 @@ export function useFocusAwayHandler(onFocusAway) {
 
 			const target = event.target ?? document.activeElement;
 			if (target !== targetRef.current && !targetRef.current.contains(target)) {
+				previousFocus?.focus();
 				focusAwayRef.current();
 			}
 		};
@@ -24,6 +28,7 @@ export function useFocusAwayHandler(onFocusAway) {
 
 			const target = event.relatedTarget ?? document.activeElement;
 			if (target !== targetRef.current && !targetRef.current.contains(target)) {
+				previousFocus?.focus({ preventScroll: true });
 				focusAwayRef.current();
 			}
 		};
