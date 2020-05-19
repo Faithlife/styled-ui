@@ -72,12 +72,10 @@ export class ProductDrawer extends React.PureComponent {
 
 	handleBlur = e => {
 		const currentTarget = e.currentTarget;
+		const activeElement = e.target;
 
 		setTimeout(() => {
-			if (
-				!currentTarget.contains(document.activeElement) &&
-				this.toggle !== document.activeElement
-			) {
+			if (!currentTarget.contains(activeElement) && this.toggle !== activeElement) {
 				this.setState({ isOpen: false });
 			}
 		}, 0);
