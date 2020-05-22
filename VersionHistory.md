@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.57.0
+
+- Add `placeholder` prop to `FilterInput` components.
+- Add v6 `Popover` component based on Popper v2.
+
 ## 5.56.0
 
 - Tab panels now accept render functions as children, allowing panels to be lazy loaded.
