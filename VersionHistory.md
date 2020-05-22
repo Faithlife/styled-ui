@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.57.1
+
+- Restore wrapping div in `PopoverManager` to avoid undesired breaking change.
+
 ## 5.57.0
 
 - Add `placeholder` prop to `FilterInput` components.
