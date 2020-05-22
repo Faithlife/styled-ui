@@ -2,21 +2,16 @@ import React, { useState, useCallback } from 'react';
 import { Box, Text, UtilityButton, theme } from '@faithlife/styled-ui';
 import { Button } from '@faithlife/styled-ui/v6';
 import { ChevronRight, ChevronDown } from '@faithlife/styled-ui/icons/12px';
-import { CheckeredBox, Swatch, PaletteGrid } from './styled';
+import { SwatchBg, Swatch, PaletteGrid } from './styled';
 import { hexToRgb, rgbToHex, hslToRgb } from './color-convert';
 
 function partitionBorderProps(props) {
-	const parentProps = { borderRadius: '2px' };
-	const childProps = { borderRadius: '2px' };
+	const parentProps = {};
+	const childProps = {};
 
 	for (const [key, value] of Object.entries(props)) {
-		if (key.startsWith('border')) {
-			if (key.endsWith('Radius')) {
-				parentProps[key] = value;
-				childProps[key] = value;
-			} else {
-				childProps[key] = value;
-			}
+		if (key.startsWith('border') && !key.endsWith('Radius')) {
+			childProps[key] = value;
 		} else {
 			parentProps[key] = value;
 		}
@@ -25,20 +20,13 @@ function partitionBorderProps(props) {
 	return { parentProps, childProps };
 }
 
-export function ColorSwatch({ swatchHex, size, ...props }) {
-	const { display, width, height, ...rest } = props;
-	const { parentProps, childProps } = partitionBorderProps(rest);
+export function ColorSwatch({ swatchHex, ...props }) {
+	const { parentProps, childProps } = partitionBorderProps(props);
 
 	return (
-		<CheckeredBox
-			display={display ?? 'inline-block'}
-			width={width ?? size}
-			height={width ?? size}
-			line-height="0"
-			{...parentProps}
-		>
+		<SwatchBg {...parentProps}>
 			<Swatch style={{ background: swatchHex }} {...childProps} />
-		</CheckeredBox>
+		</SwatchBg>
 	);
 }
 

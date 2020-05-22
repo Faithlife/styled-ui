@@ -35,7 +35,6 @@ export function useSlider(onChange) {
 	const onMouseDown = useCallback(
 		event => {
 			if (event.button === 0) {
-				event.preventDefault();
 				isClicking.current = true;
 				onChange(() => calcPosition(ref.current, event));
 			}
@@ -45,7 +44,6 @@ export function useSlider(onChange) {
 
 	const onTouchStart = useCallback(
 		event => {
-			event.preventDefault();
 			isClicking.current = true;
 			onChange(() => calcPosition(ref.current, event.touches[0]));
 		},
@@ -57,12 +55,16 @@ export function useSlider(onChange) {
 	const onKeyDown = useCallback(
 		event => {
 			if (event.key === 'ArrowUp') {
+				event.preventDefault();
 				onChange(v => ({ x: v.x, y: Math.max(v.y - 0.01, 0) }));
 			} else if (event.key === 'ArrowDown') {
+				event.preventDefault();
 				onChange(v => ({ x: v.x, y: Math.min(v.y + 0.01, 1) }));
 			} else if (event.key === 'ArrowLeft') {
+				event.preventDefault();
 				onChange(v => ({ x: Math.max(v.x - 0.01, 0), y: v.y }));
 			} else if (event.key === 'ArrowRight') {
+				event.preventDefault();
 				onChange(v => ({ x: Math.min(v.x + 0.01, 1), y: v.y }));
 			}
 		},

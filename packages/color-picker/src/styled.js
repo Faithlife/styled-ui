@@ -15,7 +15,7 @@ export const SliderContainer = styled(CheckeredBox)`
 	border-radius: 4px;
 `;
 
-export const SliderTrack = styled(Box)`
+export const SliderTrack = styled(Box).attrs({ tabIndex: 0 })`
 	position: relative;
 	border-radius: 4px;
 	width: 100%;
@@ -38,7 +38,7 @@ export const SliderThumb = styled(Box)`
 	z-index: 1;
 `;
 
-export const SvBoxSlider = styled(Box)`
+export const SvBoxSlider = styled(Box).attrs({ tabIndex: 0 })`
 	position: relative;
 	min-height: 100px;
 	cursor: pointer;
@@ -73,7 +73,16 @@ export const SvThumb = styled(Box)`
 	z-index: 1;
 `;
 
+export const SwatchBg = styled(CheckeredBox)`
+	display: ${({ display }) => display ?? 'inline-block'};
+	border-radius: ${({ borderRadius }) => borderRadius ?? '2px'};
+	width: ${({ width, size }) => width ?? size};
+	height: ${({ height, size }) => height ?? size};
+	line-height: 0;
+`;
+
 export const Swatch = styled(Box)`
+	border-radius: inherit;
 	width: 100%;
 	height: 100%;
 `;
