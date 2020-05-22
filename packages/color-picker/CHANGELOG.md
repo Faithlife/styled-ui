@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/color-picker@1.3.0...@faithlife/color-picker@1.3.1) (2020-05-22)
+
+
+### Bug Fixes
+
+* Improve a11y and perf in color picker. ([#116](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/116)) ([5b5556f](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/5b5556f8e2e653cedf7b3df5ec3f4a88bcdaa4dc))
+
+
+
+
+
 # [1.3.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/color-picker@1.2.0...@faithlife/color-picker@1.3.0) (2020-05-11)
 
 
