@@ -154,8 +154,8 @@ function PopoverCore({
 	positionFixed,
 	...rest
 }) {
-	const { onFocusAway } = useContext(PopoverContext);
-	const focusRef = useFocusAwayHandler(onFocusAway);
+	const { reference, onFocusAway } = useContext(PopoverContext);
+	const focusRef = useFocusAwayHandler(reference.current, onFocusAway);
 
 	const popperModifiers = [];
 	if (modifiers instanceof Array) {

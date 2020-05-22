@@ -36,7 +36,7 @@ export function Popover({
 	children,
 	...restProps
 }) {
-	const focusRef = useFocusAwayHandler(onFocusAway);
+	const focusRef = useFocusAwayHandler(reference, onFocusAway);
 	const { popperProps, arrowProps } = usePopover(reference, {
 		placement,
 		modifiers: hideArrow ? modifiers : [arrowOffset].concat(modifiers ?? []),

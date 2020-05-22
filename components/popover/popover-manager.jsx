@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Manager } from 'react-popper';
+import { Box } from '../Box';
 import { PopoverContext } from './popper-helpers';
 
-export function PopoverManager({ children, onFocusAway }) {
+export function PopoverManager({ children, onFocusAway, ...props }) {
+	const reference = useRef();
 	return (
 		<Manager>
-			<PopoverContext.Provider value={{ onFocusAway }}>{children}</PopoverContext.Provider>
+			<PopoverContext.Provider value={{ reference, onFocusAway }}>
+				<Box display="inline-block" {...props} ref={reference}>
+					{children}
+				</Box>
+			</PopoverContext.Provider>
 		</Manager>
 	);
 }
