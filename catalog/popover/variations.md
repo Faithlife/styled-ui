@@ -44,46 +44,46 @@ state: { isOpen: false }
 
 ```react
 showSource: true
-state: { isOpen: false }
+state: { isOpen1: false, isOpen2: false, isOpen3: false, isOpen4: false }
 ---
 <PopoverDemo>
-	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
+	<PopoverManager onFocusAway={() => setState({ isOpen1: false })}>
 		<PopoverReference>
-			<Button variant="primary" size="medium" onClick={() => setState({ isOpen: !state.isOpen })}>
+			<Button variant="primary" size="medium" onClick={() => setState({ isOpen1: !state.isOpen1 })}>
 				Show a Popover!
 			</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="top">
+		<Popover isOpen={state.isOpen1} placement="top">
 			Hello!
 		</Popover>
 	</PopoverManager>
-	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
+	<PopoverManager onFocusAway={() => setState({ isOpen2: false })}>
 		<PopoverReference>
-			<Button variant="primary" size="medium" onClick={() => setState({ isOpen: !state.isOpen })}>
+			<Button variant="primary" size="medium" onClick={() => setState({ isOpen2: !state.isOpen2 })}>
 				Show a Popover!
 			</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="bottom">
+		<Popover isOpen={state.isOpen2} placement="bottom">
 			Hello!
 		</Popover>
 	</PopoverManager>
-	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
+	<PopoverManager onFocusAway={() => setState({ isOpen3: false })}>
 		<PopoverReference>
-			<Button variant="primary" size="medium" onClick={() => setState({ isOpen: !state.isOpen })}>
+			<Button variant="primary" size="medium" onClick={() => setState({ isOpen3: !state.isOpen3 })}>
 				Show a Popover!
 			</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="left">
+		<Popover isOpen={state.isOpen3} placement="left">
 			Hello!
 		</Popover>
 	</PopoverManager>
-	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
+	<PopoverManager onFocusAway={() => setState({ isOpen4: false })}>
 		<PopoverReference>
-			<Button variant="primary" size="medium" onClick={() => setState({ isOpen: !state.isOpen })}>
+			<Button variant="primary" size="medium" onClick={() => setState({ isOpen4: !state.isOpen4 })}>
 				Show a Popover!
 			</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="right">
+		<Popover isOpen={state.isOpen4} placement="right">
 			Hello!
 		</Popover>
 	</PopoverManager>
@@ -94,27 +94,27 @@ state: { isOpen: false }
 
 ```react
 showSource: true
-state: { isOpen: false }
+state: { isOpen1: false, isOpen2: false, isOpen3: false, isOpen4: false }
 ---
 <PopoverDemo>
-	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
+	<PopoverManager onFocusAway={() => setState({ isOpen1: false })}>
 		<PopoverReference>
-			<Button variant="primary" size="medium" onClick={() => setState({ isOpen: !state.isOpen })}>
+			<Button variant="primary" size="medium" onClick={() => setState({ isOpen1: !state.isOpen1 })}>
 				Show a Popover!
 			</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="top" theme={{ backgroundColor: '#ebf7ff' }}>
+		<Popover isOpen={state.isOpen1} placement="top" theme={{ backgroundColor: '#ebf7ff' }}>
 			Hello!
 		</Popover>
 	</PopoverManager>
-	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
+	<PopoverManager onFocusAway={() => setState({ isOpen2: false })}>
 		<PopoverReference>
-			<Button variant="primary" size="medium" onClick={() => setState({ isOpen: !state.isOpen })}>
+			<Button variant="primary" size="medium" onClick={() => setState({ isOpen2: !state.isOpen2 })}>
 				Show a Popover with zIndex!
 			</Button>
 		</PopoverReference>
 		<Popover
-			isOpen={state.isOpen}
+			isOpen={state.isOpen2}
 			placement="top"
 			styleOverrides={{
 				padding: '18px',
@@ -127,23 +127,23 @@ state: { isOpen: false }
 			Hello!
 		</Popover>
 	</PopoverManager>
-	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
+	<PopoverManager onFocusAway={() => setState({ isOpen3: false })}>
 		<PopoverReference>
-			<Button variant="primary" size="medium" onClick={() => setState({ isOpen: !state.isOpen })}>
+			<Button variant="primary" size="medium" onClick={() => setState({ isOpen3: !state.isOpen3 })}>
 				Show a Popover!
 			</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="top" hideArrow>
+		<Popover isOpen={state.isOpen3} placement="top" hideArrow>
 			Hello!
 		</Popover>
 	</PopoverManager>
-	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
+	<PopoverManager onFocusAway={() => setState({ isOpen4: false })}>
 		<PopoverReference>
-			<Button variant="primary" size="medium" onClick={() => setState({ isOpen: !state.isOpen })}>
+			<Button variant="primary" size="medium" onClick={() => setState({ isOpen4: !state.isOpen4 })}>
 				Show a Popover w/ a delay!
 			</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="top" delay={{ show: 1000, hide: 1000 }}>
+		<Popover isOpen={state.isOpen4} placement="top" delay={{ show: 1000, hide: 1000 }}>
 			Hello!
 		</Popover>
 	</PopoverManager>
@@ -154,27 +154,27 @@ state: { isOpen: false }
 
 ```react
 showSource: true
-state: { isOpen: false }
+state: { isOpen1: false, isOpen2: false }
 ---
 // overflow: hidden
 <PopoverOverflowDemo>
-	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
+	<PopoverManager onFocusAway={() => setState({ isOpen1: false })}>
 		<PopoverReference>
-			<Button variant="primary" size="medium" onClick={() => setState({ isOpen: !state.isOpen })}>
+			<Button variant="primary" size="medium" onClick={() => setState({ isOpen1: !state.isOpen1 })}>
 				Show a Popover!
 			</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="top">
+		<Popover isOpen={state.isOpen1} placement="top">
 			I'm inline
 		</Popover>
 	</PopoverManager>
-	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
+	<PopoverManager onFocusAway={() => setState({ isOpen2: false })}>
 		<PopoverReference>
-			<Button variant="primary" size="medium" onClick={() => setState({ isOpen: !state.isOpen })}>
+			<Button variant="primary" size="medium" onClick={() => setState({ isOpen2: !state.isOpen2 })}>
 				Show a Popover!
 			</Button>
 		</PopoverReference>
-		<Popover isOpen={state.isOpen} placement="top" container="body">
+		<Popover isOpen={state.isOpen2} placement="top" container="body">
 			I'm thinking with portals!
 		</Popover>
 	</PopoverManager>

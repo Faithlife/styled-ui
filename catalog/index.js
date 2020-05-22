@@ -79,6 +79,7 @@ import { PopulationChange } from './grid/population-change';
 import { IncrementButton } from './grid/cell-editors';
 import { BaseGrid } from '../components/grid/base-grid';
 import { SimpleGrid, GridColumn, PaginatedGrid, TreeGrid } from '../components/grid';
+import { Popover as PopoverV6 } from '../components/popover-v6';
 import { IconGroup } from './icon-table';
 import { FavoriteFilled } from '../components/icons/18px';
 import { ChevronDown } from '../components/icons/12px';
@@ -746,10 +747,39 @@ const pages = [
 				},
 			},
 			{
+				path: '/popover/vatiations-v6',
+				title: 'Popover Variations v6',
+				content: pageLoader(() => import('./popover/variations-v6.md')),
+				imports: {
+					Button,
+					Popover: PopoverV6,
+					PopoverDemo: styled.div`
+						display: flex;
+						align-items: flex-start;
+						justify-content: space-between;
+					`,
+					PopoverOverflowDemo: styled.div`
+						display: flex;
+						align-items: flex-start;
+						justify-content: space-around;
+						position: relative;
+						overflow: hidden;
+						padding-top: 20px;
+					`,
+					refs: new Array(10).fill(0).map(React.createRef),
+				},
+			},
+			{
 				path: '/popover/documentation',
 				title: 'Popover Documentation',
 				content: pageLoader(() => import('./popover/documentation.md')),
 				imports: { Popover, PopoverBase, DocgenTable, Tooltip, PopoverManager },
+			},
+			{
+				path: '/popover/documentation-v6',
+				title: 'Popover Documentation v6',
+				content: pageLoader(() => import('./popover/documentation-v6.md')),
+				imports: { Popover: PopoverV6, DocgenTable },
 			},
 		],
 	},

@@ -1,16 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Reference } from 'react-popper';
-import { useAddInboundsElement } from '../shared-hooks';
 import { Box } from '../Box';
 
 export const PopoverContext = React.createContext();
-
-export function usePopoverContext() {
-	const popoverContext = useContext(PopoverContext);
-
-	return popoverContext;
-}
 
 /** Popover reference container from react-popper */
 export const PopoverReference = ({ children, ...referenceProps }) => (
@@ -29,21 +22,6 @@ export const PopoverReference = ({ children, ...referenceProps }) => (
 
 PopoverReference.propTypes = {
 	children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-};
-
-export function FocusHandlerInboundsElement({ children }) {
-	const { addInboundsElement, removeInboundsElement } = usePopoverContext();
-	const targetRef = useAddInboundsElement(addInboundsElement, removeInboundsElement);
-
-	return (
-		<div ref={targetRef} tabIndex="-1">
-			{children}
-		</div>
-	);
-}
-
-FocusHandlerInboundsElement.propTypes = {
-	children: PropTypes.node.isRequired,
 };
 
 export const PlainPopoverReference = Reference;
