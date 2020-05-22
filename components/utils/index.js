@@ -1,7 +1,6 @@
 export { BootstrapContainer, wrapBootstrap } from './bootstrap-container';
 export { forwardClassRef } from './forwardref-wrapper';
 export { TransitionStatuses, TransitionTimeouts } from './transition-group-utils';
-export { FocusAwayHandler } from './focus-away-handler';
 export { filterChildProps } from './filter-props';
 export { deprecate, deprecateComponent, deprecateProp } from './deprecate';
 

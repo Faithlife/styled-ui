@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 
 const isNullOrUndefined = v => v === null || v === undefined;
-export function useFocusAwayHandler(onFocusAway) {
+export function useFocusAwayHandler(reference, onFocusAway) {
 	const targetRef = useRef();
 	const focusAwayRef = useRef();
 	focusAwayRef.current = onFocusAway;
@@ -16,7 +16,12 @@ export function useFocusAwayHandler(onFocusAway) {
 			}
 
 			const target = event.target ?? document.activeElement;
-			if (target !== targetRef.current && !targetRef.current.contains(target)) {
+			if (
+				target !== targetRef.current &&
+				!targetRef.current.contains(target) &&
+				target !== reference &&
+				!reference.contains(target)
+			) {
 				previousFocus?.focus();
 				focusAwayRef.current();
 			}
@@ -27,7 +32,12 @@ export function useFocusAwayHandler(onFocusAway) {
 			}
 
 			const target = event.relatedTarget ?? document.activeElement;
-			if (target !== targetRef.current && !targetRef.current.contains(target)) {
+			if (
+				target !== targetRef.current &&
+				!targetRef.current.contains(target) &&
+				target !== reference &&
+				!reference.contains(target)
+			) {
 				previousFocus?.focus({ preventScroll: true });
 				focusAwayRef.current();
 			}
@@ -39,7 +49,7 @@ export function useFocusAwayHandler(onFocusAway) {
 			document.removeEventListener('focusin', handleFocusIn);
 			document.removeEventListener('focusout', handleFocusOut);
 		};
-	}, []);
+	}, [reference]);
 
 	return targetRef;
 }
