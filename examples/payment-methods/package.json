@@ -1,9 +1,9 @@
 {
 	"private": true,
 	"name": "payment-methods",
-	"version": "2.2.0",
+	"version": "2.2.1",
 	"dependencies": {
-		"@faithlife/payment-methods": "^2.12.0",
+		"@faithlife/payment-methods": "^2.12.1",
 		"@faithlife/styled-ui": "^5.34.3",
 		"react": "^16.11.0",
 		"react-dom": "^16.11.0"
