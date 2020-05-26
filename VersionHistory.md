@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.57.2
+
+- Prevent auto-focusing fully-controlled popovers that don't supply `onFocusAway` handlers.
+
 ## 5.57.1
 
 - Restore wrapping div in `PopoverManager` to avoid undesired breaking change.
