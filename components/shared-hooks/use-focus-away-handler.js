@@ -7,7 +7,7 @@ export function useFocusAwayHandler(reference, onFocusAway) {
 	focusAwayRef.current = onFocusAway;
 
 	useEffect(() => {
-		if (!isNullOrUndefined(focusAwayRef.current)) {
+		if (isNullOrUndefined(focusAwayRef.current)) {
 			return;
 		}
 
