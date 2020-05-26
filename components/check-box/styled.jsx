@@ -10,13 +10,11 @@ export const CheckboxDiv = styled.div`
 	height: 16px;
 	background: ${({ theme }) => theme.colors.checkbox.background};
 
-	${props =>
-		props.disabled
+	${({ disabled, theme, themeOverrides }) =>
+		disabled
 			? `
-		border: solid 1px ${({ theme, themeOverrides }) =>
-			themeOverrides?.disabledBorder ?? theme.colors.checkbox.disabledBorder};
-		background-color: ${({ theme, themeOverrides }) =>
-			themeOverrides?.disabledBackground ?? theme.colors.checkbox.disabledBackground};
+		border: solid 1px ${themeOverrides?.disabledBorder ?? theme.colors.checkbox.disabledBorder};
+		background-color: ${themeOverrides?.disabledBackground ?? theme.colors.checkbox.disabledBackground};
 	`
 			: ''}
 `;
