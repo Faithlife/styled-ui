@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.57.3
+
+- Fix boolean logic for the previous fix.
+
 ## 5.57.2
 
 - Prevent auto-focusing fully-controlled popovers that don't supply `onFocusAway` handlers.
