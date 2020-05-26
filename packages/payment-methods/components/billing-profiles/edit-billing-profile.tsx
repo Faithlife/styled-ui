@@ -250,7 +250,7 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 						<Styled.Cleave
 							name={nameof<IEditCardInfo>('cardNumber')}
 							autoComplete="cc-number"
-							pattern={isEditingExistingProfile ? 'x*[0-9]*' : '[0-9]*'}
+							pattern={isEditingExistingProfile ? 'x*[0-9 ]*' : '[0-9 ]*'}
 							isValid={isValidField('cardNumber')}
 							placeholder="0000 0000 0000 0000"
 							data-testid="card-number"
@@ -300,7 +300,7 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 								name={nameof<IEditCardInfo>('expiration')}
 								autoComplete="cc-exp"
 								autoFocus={isCardExpired}
-								pattern="[0-9]*"
+								pattern="[0-9 /]*"
 								isValid={isCardExpired ? false : isValidField('expiration')}
 								data-testid="expiration"
 								title={isCardExpired ? strings.expirationDateError : ''}
@@ -351,7 +351,7 @@ const EditBillingProfile: React.FunctionComponent<IEditBillingProfileProps> = ({
 					></Styled.Checkbox>
 				</div>
 			)}
-			{showMakeDefault && (
+			{showMakeDefault && saveForLater && (
 				<Styled.Checkbox
 					onClick={() =>
 						updateBillingProfile({

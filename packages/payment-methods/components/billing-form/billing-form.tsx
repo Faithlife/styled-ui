@@ -18,7 +18,6 @@ const BillingForm: React.FunctionComponent<any> = ({
 	onCommitBillingProfile,
 	actAndHandleException,
 	setSystemMessage,
-	getCardInfoFromSessionStorage,
 	setCardInfoToSessionStorage,
 }) => {
 	const [countries, setCountries] = useState<ICountryDto[]>([]);
@@ -163,7 +162,9 @@ const BillingForm: React.FunctionComponent<any> = ({
 				onSelectedCountryChanged={handleCountryChanged}
 				addressFormatItems={addressFormatItems}
 				isCalledPreorder={false}
-				handleSaveForLaterChange={handleSaveForLaterChange}
+				handleSaveForLaterChange={
+					setCardInfoToSessionStorage ? handleSaveForLaterChange : undefined
+				}
 				saveForLater={saveForLater}
 				createButtonText={strings.next}
 			></EditBillingProfile>
