@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.58.0
+
+- Add better support for swapping out the main theme.
+
 ## 5.57.4
 
 - Fix disabled checkbox styling.
