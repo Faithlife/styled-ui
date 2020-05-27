@@ -1,10 +1,10 @@
-import React, { createRef, PureComponent } from 'react';
+import React, { createRef, PureComponent, useRef } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import throttle from 'lodash.throttle';
 import memoize from 'memoize-one';
 import { Box } from '../Box';
-import { PopoverManager, PopoverReference, Popover } from '../popover';
+import { Popover } from '../popover-v6';
 import * as Styled from './styled';
 
 function range(from, to) {
@@ -375,8 +375,7 @@ function getPercentage(index, max) {
 
 const Thumb = React.memo(
 	({ isSliding, isHovered, isAtTrackStart, isAtTrackEnd, position, label, disabled }) => {
-		const thumb = <Styled.Thumb active={isSliding} hovered={isHovered} disabled={disabled} />;
-
+		const ref = useRef();
 		const isPopupOpen = !!(isHovered && (label || label === 0));
 		return (
 			<Styled.ThumbAnchor
@@ -385,18 +384,18 @@ const Thumb = React.memo(
 					right: isAtTrackEnd ? '7px' : 'auto',
 				}}
 			>
-				<PopoverManager>
-					<PopoverReference>{thumb}</PopoverReference>
+				<Styled.Thumb ref={ref} active={isSliding} hovered={isHovered} disabled={disabled} />
+				{isPopupOpen && (
 					<Popover
 						key={position}
-						isOpen={isPopupOpen}
+						reference={ref.current}
 						placement="top"
 						container="body"
-						modifiers={{ offset: { offset: '0, 33' } }}
+						modifiers={[{ name: 'offset', options: { offset: [0, 33] } }]}
 					>
 						{`${label}`}
 					</Popover>
-				</PopoverManager>
+				)}
 			</Styled.ThumbAnchor>
 		);
 	},
