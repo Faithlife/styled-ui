@@ -60,6 +60,7 @@ export {
 export { FilePicker, AmberContent, FileUpload } from './components/file-picker';
 
 export { Box } from './components/Box';
+export { ThemedBox } from './components/ThemedBox';
 export { Stack } from './components/Stack';
 export { Text } from './components/Text';
 export { Paragraph } from './components/Paragraph';
@@ -67,6 +68,7 @@ export { Heading } from './components/Heading';
 export { theme, useTheme } from './theme';
 export { DefaultThemeProvider } from './components/DefaultThemeProvider';
 export { ThemeProvider } from './components/ThemeProvider';
+export { theme as proclaimTheme } from './theme/brandOverrides/proclaim';
 export {
 	AutoSizedRowMasonry,
 	MasonryRow,

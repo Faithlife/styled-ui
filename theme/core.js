@@ -248,6 +248,11 @@ const theme = {
 	zIndices,
 	breakpoints,
 	mediaQueries,
+	scrollbars: {
+		width: null,
+		background: null,
+		thumbBackground: null,
+	},
 };
 
 export { theme };
