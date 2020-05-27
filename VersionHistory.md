@@ -3,6 +3,7 @@
 ## 5.58.0
 
 - Add better support for swapping out the main theme.
+- Fix `Popover` usage in `Slider`
 
 ## 5.57.4
 
