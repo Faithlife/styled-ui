@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.57.4
+
+- Fix disabled checkbox styling.
+
 ## 5.57.3
 
 - Fix boolean logic for the previous fix.
