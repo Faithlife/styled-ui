@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.58.1
+
+- Fix ThemedBox scrollbar styling.
+
 ## 5.58.0
 
 - Add better support for swapping out the main theme.
