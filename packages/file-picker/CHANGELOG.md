@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.5.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@3.4.0...@faithlife/file-picker@3.5.0) (2020-05-29)
+
+
+### Features
+
+* Add amber theme option. BWA-41760. ([c877dd6](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/c877dd67796237e7927ddfdc993ce109879c21bd))
+
+
+
+
+
 # [3.4.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@3.3.0...@faithlife/file-picker@3.4.0) (2020-05-13)
 
 
