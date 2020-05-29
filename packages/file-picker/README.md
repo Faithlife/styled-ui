@@ -110,4 +110,4 @@ Has default props for rendering the correct Amber Vault for the Group ID passed 
 
 Has default props for rendering the correct Amber Vault for Unsplash.
 
-[^1]: These components accept many of the options documented at [Embedding An Amber Picker: Options](https://git.faithlife.dev/Logos/AssetDesk/blob/master/docs/EmbeddingAnAmberPicker.md#options), including `filter`, `footerText`, `pickerMode`, `fields`, `sort`, and `viewStyle`.
+[^1]: These components accept many of the options documented at [Embedding An Amber Picker: Options](https://git.faithlife.dev/Logos/AssetDesk/blob/master/docs/EmbeddingAnAmberPicker.md#options), including `filter`, `footerText`, `pickerMode`, `fields`, `sort`, `theme` and `viewStyle`.

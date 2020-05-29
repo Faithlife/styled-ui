@@ -9,6 +9,7 @@ export const GroupVaultTab = ({
 	pickerMode,
 	fields,
 	sort,
+	theme,
 	viewStyle,
 }) => {
 	const { accountId } = useFilePickerContext();
@@ -21,6 +22,7 @@ export const GroupVaultTab = ({
 			pickerMode={pickerMode}
 			fields={fields}
 			sort={sort}
+			theme={theme}
 			viewStyle={viewStyle}
 		/>
 	);

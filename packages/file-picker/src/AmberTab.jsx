@@ -10,6 +10,7 @@ export const AmberTab = ({
 	pickerMode,
 	fields,
 	sort,
+	theme,
 	viewStyle,
 }) => {
 	return (
@@ -21,6 +22,7 @@ export const AmberTab = ({
 				pickerMode={pickerMode}
 				fields={fields}
 				sort={sort}
+				theme={theme}
 				viewStyle={viewStyle}
 			/>
 		</Tab>

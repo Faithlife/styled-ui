@@ -10,6 +10,7 @@ export const FaithlifeStockTab = ({
 	pickerMode,
 	fields,
 	sort,
+	theme,
 	viewStyle,
 }) => {
 	const isInternal = useIsInternal();
@@ -23,6 +24,7 @@ export const FaithlifeStockTab = ({
 			pickerMode={pickerMode}
 			fields={fields}
 			sort={sort}
+			theme={theme}
 			viewStyle={viewStyle}
 		/>
 	);

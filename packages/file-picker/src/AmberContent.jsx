@@ -12,6 +12,7 @@ export function AmberContent({
 	footerText,
 	pickerMode,
 	sort,
+	theme,
 	viewStyle,
 	...props
 }) {
@@ -75,6 +76,7 @@ export function AmberContent({
 				pickerMode,
 				fields,
 				sort,
+				theme,
 				url: '/embed/',
 				viewStyle,
 				externalEditorKinds: ExternalEditorComponent ? ['image'] : ['none'],
@@ -91,6 +93,7 @@ export function AmberContent({
 		viewStyle,
 		ExternalEditorComponent,
 		fields,
+		theme,
 	]);
 
 	return <Box ref={amberRef} height="100%" {...props} />;
@@ -109,6 +112,8 @@ AmberContent.propTypes = {
 	fields: PropTypes.string,
 	/** Optional to set the sorting of the assets. Values are "relevance" or an asset field. */
 	sort: PropTypes.string,
+	/** Optional to set the theme of the Amber site. Valid values are bible-study-light and bible-study-dark of the assets. NOTE: This doesn't theme the container around the Amber iframe. */
+	theme: PropTypes.string,
 	/** Optional to set the layout of the assets */
 	viewStyle: PropTypes.string,
 };
