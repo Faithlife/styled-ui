@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.58.2
+
+- Improve `Slider` label placement.
+
 ## 5.58.1
 
 - Fix ThemedBox scrollbar styling.
