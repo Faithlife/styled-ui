@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { PopoverManager, PopoverReference, Popover } from '../popover';
+import { Popover } from '../popover-v6';
 import { PlacementOptionsProps } from '../popover/popper-helpers';
 import { Calendar as CalendarIcon } from '../icons';
 import { Input } from '../input';
@@ -61,6 +61,7 @@ export class DatePickerInput extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.icon = React.createRef();
+		this._popoverRef = React.createRef();
 
 		this.state = {
 			showCalendar: false,
@@ -175,27 +176,25 @@ export class DatePickerInput extends PureComponent {
 
 		return (
 			<Styled.Container>
-				<PopoverManager>
-					<Input
-						type="text"
-						onBlur={this.handleBlur}
-						onChange={this.handleChange}
-						onFocus={this.handleFocus}
-						value={value}
-						disabled={disabled}
-						borderColor={styleOverrides.inputBorderColor}
-						styleOverrides={inputStyleOverrides}
-					/>
-					<Styled.CalendarButton ref={this.icon} onClick={!disabled ? this.openCalendar : null}>
-						<Styled.CalendarIconContainer>
-							<PopoverReference>
-								<CalendarIcon style={{ color: colors.gray52 }} />
-							</PopoverReference>
-						</Styled.CalendarIconContainer>
-					</Styled.CalendarButton>
+				<Input
+					type="text"
+					onBlur={this.handleBlur}
+					onChange={this.handleChange}
+					onFocus={this.handleFocus}
+					value={value}
+					disabled={disabled}
+					borderColor={styleOverrides.inputBorderColor}
+					styleOverrides={inputStyleOverrides}
+				/>
+				<Styled.CalendarButton ref={this.icon} onClick={!disabled ? this.openCalendar : null}>
+					<Styled.CalendarIconContainer ref={this._popoverRef}>
+						<CalendarIcon style={{ color: colors.gray52 }} />
+					</Styled.CalendarIconContainer>
+				</Styled.CalendarButton>
+				{showCalendar && (
 					<Popover
+						reference={this._popoverRef.current}
 						placement={placement}
-						isOpen={showCalendar}
 						styleOverrides={popoverStyleOverrides}
 					>
 						{/*eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
@@ -203,7 +202,7 @@ export class DatePickerInput extends PureComponent {
 							{this.renderCalendar(selectedDate || new Date())}
 						</div>
 					</Popover>
-				</PopoverManager>
+				)}
 			</Styled.Container>
 		);
 	}
