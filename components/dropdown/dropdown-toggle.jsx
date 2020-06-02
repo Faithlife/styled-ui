@@ -40,5 +40,5 @@ export function DropdownToggle(props) {
 
 DropdownToggle.propTypes = {
 	/** The content of the toggle button, usually a span */
-	children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]).isRequired,
+	children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
 };
