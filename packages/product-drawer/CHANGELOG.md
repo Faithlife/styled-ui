@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.5](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.5.4...@faithlife/product-drawer@0.5.5) (2020-06-04)
+
+
+### Bug Fixes
+
+* Remove unused localization.json file from product-drawer. ([2e5079e](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/2e5079e912a59440d134e0f7369bc955e74600ab))
+
+
+
+
+
 ## [0.5.4](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.5.3...@faithlife/product-drawer@0.5.4) (2020-06-04)
 
 
