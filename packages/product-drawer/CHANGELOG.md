@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.3](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.5.2...@faithlife/product-drawer@0.5.3) (2020-06-04)
+
+
+### Bug Fixes
+
+* Update Mobile Ed link title SITES-6415. ([96d7606](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/96d7606cda21890263e6b780c61c1f26bd4662da))
+
+
+
+
+
 ## [0.5.2](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.5.1...@faithlife/product-drawer@0.5.2) (2020-05-19)
 
 
