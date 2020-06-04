@@ -13,7 +13,7 @@ export const FaithlifeConnectAnimatedImage = ({ isVisible }) => (
 				<ConnectSvg />
 			</Styled.AnimatedImageTextSecond>
 		</div>
-		<Styled.AnimatedImageIcon role="presentation">
+		<Styled.AnimatedImageIcon role="presentation" fadeRight>
 			<LogosSvg />
 		</Styled.AnimatedImageIcon>
 		<Styled.AnimatedImageIcon role="presentation">
@@ -22,7 +22,7 @@ export const FaithlifeConnectAnimatedImage = ({ isVisible }) => (
 		<Styled.AnimatedImageIcon role="presentation">
 			<MobileEdSvg />
 		</Styled.AnimatedImageIcon>
-		<Styled.AnimatedImageIcon role="presentation">
+		<Styled.AnimatedImageIcon role="presentation" fadeLeft>
 			<EbooksSvg />
 		</Styled.AnimatedImageIcon>
 	</Styled.AnimatedImage>

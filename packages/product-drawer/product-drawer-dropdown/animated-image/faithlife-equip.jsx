@@ -14,7 +14,7 @@ import {
 import * as Styled from './styled';
 
 export const FaithlifeEquipAnimatedImage = ({ isVisible }) => (
-	<Styled.AnimatedImageEquip animatedImageVisible={isVisible}>
+	<Styled.AnimatedImage animatedImageVisible={isVisible}>
 		<div>
 			<Styled.AnimatedImageTextFirst role="presentation">
 				<FaithlifeSvg />
@@ -23,10 +23,10 @@ export const FaithlifeEquipAnimatedImage = ({ isVisible }) => (
 				<EquipSvg />
 			</Styled.AnimatedImageTextSecond>
 		</div>
-		<Styled.AnimatedImageIcon role="presentation">
+		<Styled.AnimatedImageIcon role="presentation" fadeRight>
 			<ProclaimSvg />
 		</Styled.AnimatedImageIcon>
-		<Styled.AnimatedImageIcon role="presentation">
+		<Styled.AnimatedImageIcon role="presentation" fadeRight>
 			<SermonsSvg />
 		</Styled.AnimatedImageIcon>
 		<Styled.AnimatedImageIcon role="presentation">
@@ -38,13 +38,13 @@ export const FaithlifeEquipAnimatedImage = ({ isVisible }) => (
 		<Styled.AnimatedImageIcon role="presentation">
 			<MobileEdSvg />
 		</Styled.AnimatedImageIcon>
-		<Styled.AnimatedImageIcon role="presentation">
+		<Styled.AnimatedImageIcon role="presentation" fadeLeft>
 			<BibleScreenSvg />
 		</Styled.AnimatedImageIcon>
-		<Styled.AnimatedImageIcon role="presentation">
+		<Styled.AnimatedImageIcon role="presentation" fadeLeft>
 			<FaithlifeLiveStreamSvg />
 		</Styled.AnimatedImageIcon>
-	</Styled.AnimatedImageEquip>
+	</Styled.AnimatedImage>
 );
 
 FaithlifeEquipAnimatedImage.propTypes = {

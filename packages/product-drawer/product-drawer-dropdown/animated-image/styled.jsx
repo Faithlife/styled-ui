@@ -19,11 +19,6 @@ const textSlideUpAndFadeIn = keyframes`
 
 const iconsSlideUpPauseAndSlideOut = keyframes`
 	0% {
-		transform: translate(0, -23px);
-		opacity: 1;
-	}
-
-	80% {
 		transform: translate(0, -23px) scale(1);
 		opacity: 1;
 	}
@@ -32,7 +27,7 @@ const iconsSlideUpPauseAndSlideOut = keyframes`
 		transform: translate(0, -25px) scale(0.5);
 		opacity: 0;
 	}
-    `;
+`;
 
 const textShrinkUpAndFadeOut = keyframes`
 	0% {
@@ -43,7 +38,7 @@ const textShrinkUpAndFadeOut = keyframes`
 		opacity: 0;
 		transform: scale(0.4) translate(0, -7px);
 	}
-    `;
+`;
 
 const iconSlideUpAndFadeIn = keyframes`
 	0% {
@@ -55,46 +50,42 @@ const iconSlideUpAndFadeIn = keyframes`
 		opacity: 1;
 		transform: translate(0, -23px);
 	}
-    `;
+`;
 
 export const AnimatedImageIcon = styled.div`
 	display: inline-block;
 	margin: 0 7px;
-	transform-origin: 100% 50%;
-	animation-duration: 1.5s;
+	transform-origin: ${props =>
+		props.fadeRight ? '100% 50%' : props.fadeLeft ? '0% 50%' : '50% 50%'};
+	animation-duration: 530ms;
 	animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
 	animation-fill-mode: both;
 
-	&:nth-of-type(2) {
-		animation-delay: 40ms;
-		transform-origin: 50% 50%;
-	}
-
-	&:nth-of-type(3) {
-		animation-delay: 80ms;
-		transform-origin: 50% 50%;
-	}
-
 	&:nth-of-type(4) {
-		animation-delay: 120ms;
-		transform-origin: 0% 50%;
+		animation-delay: 40ms;
 	}
 
 	&:nth-of-type(5) {
-		animation-delay: 160ms;
-		transform-origin: 0% 50%;
+		animation-delay: 80ms;
 	}
 
 	&:nth-of-type(6) {
+		animation-delay: 120ms;
+	}
+
+	&:nth-of-type(7) {
 		animation-delay: 160ms;
-		transform-origin: 0% 50%;
+	}
+
+	&:nth-of-type(8) {
+		animation-delay: 200ms;
 	}
 `;
 
 const AnimatedImageText = styled.div`
 	display: inline-block;
 	vertical-align: bottom;
-	animation-duration: 1.5s;
+	animation-duration: 530ms;
 	animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
 	animation-fill-mode: both;
 `;
@@ -145,29 +136,6 @@ export const AnimatedImage = styled.div`
 			animation-duration: 300ms;
 			animation-timing-function: cubic-bezier(0.33, 0, 0, 1);
 			animation-fill-mode: both;
-		}
-	}
-`;
-
-export const AnimatedImageEquip = styled(AnimatedImage)`
-	${/* sc-custom 'div' */ AnimatedImageIcon} {
-		&:nth-of-type(2) {
-			transform-origin: 100% 50%;
-		}
-
-		&:nth-of-type(4) {
-			animation-delay: 120ms;
-			transform-origin: 50% 50%;
-		}
-
-		&:nth-of-type(5) {
-			animation-delay: 160ms;
-			transform-origin: 0% 50%;
-		}
-
-		&:nth-of-type(6) {
-			animation-delay: 200ms;
-			transform-origin: 0% 50%;
 		}
 	}
 `;
