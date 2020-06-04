@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.4](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.5.3...@faithlife/product-drawer@0.5.4) (2020-06-04)
+
+
+### Bug Fixes
+
+* Fix product drawer animation delays and transform origins SITES-6377. ([#120](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/120)) ([9ea017b](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/9ea017b55ec9eaa1dbdf0d8d18243b872eccff92))
+
+
+
+
+
 ## [0.5.3](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/product-drawer@0.5.2...@faithlife/product-drawer@0.5.3) (2020-06-04)
 
 
