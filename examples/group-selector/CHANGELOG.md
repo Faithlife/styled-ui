@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.7](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/group-selector-example@1.0.6...group-selector-example@1.0.7) (2020-06-08)
+
+**Note:** Version bump only for package group-selector-example
+
+
+
+
+
 ## [1.0.6](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/group-selector-example@1.0.5...group-selector-example@1.0.6) (2020-04-27)
 
 **Note:** Version bump only for package group-selector-example

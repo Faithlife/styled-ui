@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.2](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/group-selector@0.3.1...@faithlife/group-selector@0.3.2) (2020-06-08)
+
+
+### Bug Fixes
+
+* Limit group selector to 100 characters. ([6b0be4d](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/6b0be4d558e088c458cbf8dd236f264f398fbf4c))
+
+
+
+
+
 ## [0.3.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/group-selector@0.3.0...@faithlife/group-selector@0.3.1) (2020-04-27)
 
 

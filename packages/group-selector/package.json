@@ -1,6 +1,6 @@
 {
   "name": "@faithlife/group-selector",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "license": "UNLICENSED",
   "main": "dist/index.js",
   "files": [
