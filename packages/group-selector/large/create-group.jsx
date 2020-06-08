@@ -45,6 +45,7 @@ export class CreateGroup extends React.Component {
 						onChange={onChurchNameInputChange}
 						placeholder={localizedResources.churchNameText}
 						small
+						maxLength={100}
 					/>
 				</Styled.InputWrapper>
 				<Styled.CreateGroupLabel>
