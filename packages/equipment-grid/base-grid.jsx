@@ -43,7 +43,7 @@ export function BaseGrid({
 	maxHeight,
 	minHeight,
 	children,
-	data,
+	data: datasource,
 	getRowHeight,
 	/** IGridOptions interface from ag-grid */
 	gridOptions,
@@ -68,9 +68,20 @@ export function BaseGrid({
 	const tableHeightPadding = hasPagingBar ? 42 : 2;
 	const prevViewportSize = useRef(isSmallViewport);
 
-	const [rowModelType] = useState(determineRowModelType(data));
+	const [rowModelType] = useState(determineRowModelType(datasource));
 	const [hasWarned, setHasWarned] = useState(false);
 	const [datasourceProps, setDatasourceProps] = useState();
+
+	const data = useMemo(() => {
+		if (rowModelType) {
+			if (rowModelType === serverSideRowModel && datasource.refreshGridCache) {
+				return datasource.data;
+			}
+
+			return datasource;
+		}
+	}, [datasource, rowModelType]);
+
 	useEffect(() => {
 		if (process.env.environment !== 'production' && !hasWarned) {
 			if (!rowModelType) {
@@ -505,7 +516,7 @@ function determineRowModelType(data) {
 		return clientSideRowModel;
 	}
 
-	if (data && !!data.getRows) {
+	if (data && (!!data.getRows || !!data.data?.getRows)) {
 		return serverSideRowModel;
 	}
 

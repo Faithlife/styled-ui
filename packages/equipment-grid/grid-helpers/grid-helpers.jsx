@@ -22,7 +22,16 @@ export function useGridState() {
 	return { gridApi, setGridApi, columnApi, setColumnApi };
 }
 
-export function useGridHandles(gridApi, ref) {
+export function useGridHandles(data, gridApi, ref) {
+	const isServerSideDatasource = !Array.isArray(data);
+	if (isServerSideDatasource) {
+		if (data.refreshGridCache) {
+			data.data.setGridRef(ref);
+		} else {
+			data.setGridRef(ref);
+		}
+	}
+
 	useImperativeHandle(
 		ref,
 		() => ({
@@ -46,8 +55,15 @@ export function useGridHandles(gridApi, ref) {
 					gridApi.deselectAllFiltered();
 				}
 			},
+			refreshServersideGridCache: isServerSideDatasource
+				? () => {
+						if (gridApi) {
+							gridApi.purgeServerSideCache();
+						}
+				  }
+				: () => {},
 		}),
-		[gridApi]
+		[gridApi, isServerSideDatasource]
 	);
 }
 

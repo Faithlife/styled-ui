@@ -9,7 +9,7 @@ export const PaginatedGrid = React.forwardRef((props, ref) => {
 
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useGridState();
 
-	useGridHandles(gridApi, ref);
+	useGridHandles(props.data, gridApi, ref);
 
 	useEffect(() => {
 		if (gridApi && currentPageNumber !== null && currentPageNumber !== undefined) {

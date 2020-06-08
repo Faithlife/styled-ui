@@ -18,9 +18,10 @@ export function useGridServerDatasource(
 	options?: Options
 ): ServerSideDatasource {
 	const [rowState, setRowState] = useState(initialState);
+	const [gridRef, setGridRef] = useState<React.MutableRefObject<any>>();
 	const datasource = useCurrentFunction(requestFunction);
 
-	const abortController: React.MutableRefObject<AbortController | null> = useRef(null);
+	const abortController = useRef<AbortController | null>(null);
 
 	useEffect(() => {
 		return () => {
@@ -83,16 +84,26 @@ export function useGridServerDatasource(
 		setRowState(state => ({ ...state, filterText, moreRows: true, totalRowCount: null }));
 	}, []);
 
+	const refreshGridCache = useCallback(() => {
+		if (gridRef && gridRef.current) {
+			gridRef.current.refreshServersideGridCache();
+		}
+	}, [gridRef]);
+
 	const { totalRowCount, moreRows, isLoading } = rowState;
 	const { fetchLimit, maxPagesToCache } = options || {};
 	const serverDatasource = useMemo(
 		() => ({
-			getRows: request => handleRequest.current(request),
-			totalRowCount,
-			isMoreRows: moreRows,
-			isLoading: isLoading,
-			fetchLimit,
-			maxPagesToCache,
+			data: {
+				getRows: request => handleRequest.current(request),
+				totalRowCount,
+				isMoreRows: moreRows,
+				isLoading: isLoading,
+				fetchLimit,
+				maxPagesToCache,
+				setGridRef,
+			},
+			refreshGridCache,
 		}),
 		[totalRowCount, moreRows, isLoading, setFilterText, fetchLimit, maxPagesToCache] //eslint-disable-line react-hooks/exhaustive-deps
 	);
@@ -192,10 +203,14 @@ interface AGColumn {
 }
 
 interface ServerSideDatasource {
-	getRows: Function;
-	totalRowCount: number | null;
-	isMoreRows: boolean;
-	isLoading: boolean;
+	data: {
+		getRows: Function;
+		totalRowCount: number | null;
+		isMoreRows: boolean;
+		isLoading: boolean;
+		setGridRef: Function;
+	};
+	refreshGridCache: () => void;
 }
 
 interface ServerSideGetRowsRequest {

@@ -105,6 +105,10 @@ The second parameter is an optional options object. It supports `fetchLimit` whi
 ```javascript
 import { useGridServerDatasource } from '@faithlife/equipment-grid';
 const datasource = useGridServerDatasource(requestFunction, { fetchLimit: 100, maxPagesToCache: 10 });
+
+or
+
+const { datasource, refreshGridCache } = useGridServerDatasource(requestFunction, { fetchLimit: 100, maxPagesToCache: 10 });
 ```
 
 #### Example Request Function
@@ -116,6 +120,10 @@ async function fetchRows(request, abortSignal) {
 	return [mapToRows(response.censusData), response.next !== null];
 }
 ```
+
+#### refreshGridCache
+
+`refreshGridCache()` allows you to imperatively force the grid to refetch rows, for example after a CRUD operation.
 
 ## Shared props between all Grids
 
