@@ -12,6 +12,7 @@ export const FaithlifeStockTab = ({
 	sort,
 	theme,
 	viewStyle,
+	query,
 }) => {
 	const isInternal = useIsInternal();
 	const accountId = isInternal ? faithlifeStockInternalAmberId : faithlifeStockAmberId;
@@ -26,6 +27,7 @@ export const FaithlifeStockTab = ({
 			sort={sort}
 			theme={theme}
 			viewStyle={viewStyle}
+			query={query}
 		/>
 	);
 };

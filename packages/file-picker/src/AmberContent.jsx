@@ -14,6 +14,7 @@ export function AmberContent({
 	sort,
 	theme,
 	viewStyle,
+	query,
 	...props
 }) {
 	const {
@@ -71,6 +72,7 @@ export function AmberContent({
 				accountId,
 				container: amberRef.current,
 				filter,
+				query,
 				footerText,
 				multiSelect: allowMultiSelect,
 				pickerMode,
@@ -87,6 +89,7 @@ export function AmberContent({
 		allowMultiSelect,
 		amber,
 		filter,
+		query,
 		footerText,
 		pickerMode,
 		sort,
@@ -104,6 +107,8 @@ AmberContent.propTypes = {
 	accountId: PropTypes.number.isRequired,
 	/** Option to filter assets */
 	filter: PropTypes.string,
+	/** Option to add query parameter */
+	query: PropTypes.string,
 	/** Option to set footer text */
 	footerText: PropTypes.string,
 	/** Optional to control the type of data passed back. Values are "file", "asset" and "filter". */

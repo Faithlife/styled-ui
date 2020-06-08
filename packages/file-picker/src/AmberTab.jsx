@@ -12,6 +12,7 @@ export const AmberTab = ({
 	sort,
 	theme,
 	viewStyle,
+	query,
 }) => {
 	return (
 		<Tab title={title} padding={0}>
@@ -24,6 +25,7 @@ export const AmberTab = ({
 				sort={sort}
 				theme={theme}
 				viewStyle={viewStyle}
+				query={query}
 			/>
 		</Tab>
 	);
