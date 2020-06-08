@@ -85,7 +85,7 @@ export function useGridServerDatasource(
 	}, []);
 
 	const refreshGridCache = useCallback(() => {
-		if (gridRef && gridRef.current) {
+		if (gridRef?.current) {
 			gridRef.current.refreshServersideGridCache();
 		}
 	}, [gridRef]);
@@ -94,7 +94,7 @@ export function useGridServerDatasource(
 	const { fetchLimit, maxPagesToCache } = options || {};
 	const serverDatasource = useMemo(
 		() => ({
-			data: {
+			datasource: {
 				getRows: request => handleRequest.current(request),
 				totalRowCount,
 				isMoreRows: moreRows,
@@ -203,7 +203,7 @@ interface AGColumn {
 }
 
 interface ServerSideDatasource {
-	data: {
+	datasource: {
 		getRows: Function;
 		totalRowCount: number | null;
 		isMoreRows: boolean;

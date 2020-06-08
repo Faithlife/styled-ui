@@ -75,7 +75,7 @@ export function BaseGrid({
 	const data = useMemo(() => {
 		if (rowModelType) {
 			if (rowModelType === serverSideRowModel && datasource.refreshGridCache) {
-				return datasource.data;
+				return datasource.datasource;
 			}
 
 			return datasource;

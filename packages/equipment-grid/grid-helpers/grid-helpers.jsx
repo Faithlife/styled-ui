@@ -26,7 +26,7 @@ export function useGridHandles(data, gridApi, ref) {
 	const isServerSideDatasource = !!data && !Array.isArray(data);
 	if (isServerSideDatasource) {
 		if (data.refreshGridCache) {
-			data.data.setGridRef(ref);
+			data.datasource.setGridRef(ref);
 		} else {
 			data.setGridRef(ref);
 		}
