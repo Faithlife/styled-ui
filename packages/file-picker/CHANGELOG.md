@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.6.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@3.5.0...@faithlife/file-picker@3.6.0) (2020-06-08)
+
+
+### Features
+
+* **filepicker:** Add query prop to FaithlifeStockTab. ([#127](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/127)) ([e641a73](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/e641a734520c265b70beadce34cd449ff0bde747))
+
+
+
+
+
 # [3.5.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@3.4.0...@faithlife/file-picker@3.5.0) (2020-05-29)
 
 
