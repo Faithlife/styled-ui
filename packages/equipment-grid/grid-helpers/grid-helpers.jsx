@@ -23,7 +23,7 @@ export function useGridState() {
 }
 
 export function useGridHandles(data, gridApi, ref) {
-	const isServerSideDatasource = !Array.isArray(data);
+	const isServerSideDatasource = !!data && !Array.isArray(data);
 	if (isServerSideDatasource) {
 		if (data.refreshGridCache) {
 			data.data.setGridRef(ref);
