@@ -76,6 +76,36 @@ export class SearchResult extends React.PureComponent {
 		return string;
 	};
 
+	boldKeyword = (targetString, keyword) => {
+		if (!targetString.includes(keyword)) {
+			return targetString;
+		} else {
+			const stringPieces = targetString.split(keyword);
+			return (
+				<>
+					{stringPieces[0]}
+					<Styled.SearchResultBoldText>{keyword}</Styled.SearchResultBoldText>
+					{stringPieces[1]}
+				</>
+			);
+		}
+	};
+
+	highlightKeyword = (targetString, keyword) => {
+		if (!targetString.includes(keyword)) {
+			return targetString;
+		} else {
+			const stringPieces = targetString.split(keyword);
+			return (
+				<>
+					{stringPieces[0]}
+					<Styled.SearchResultHightlightText>{keyword}</Styled.SearchResultHightlightText>
+					{stringPieces[1]}
+				</>
+			);
+		}
+	};
+
 	render() {
 		const {
 			claimable,
@@ -126,15 +156,18 @@ export class SearchResult extends React.PureComponent {
 		} else if ((membershipKind === 'none' || !membershipKind) && joinable) {
 			message = (
 				<Styled.SearchResultMessage>
-					<Styled.SearchResultHightlightText>
-						{formattedMembershiplevels}
-					</Styled.SearchResultHightlightText>{' '}
-					membership required.
+					{this.highlightKeyword(
+						localizedResources.membershipRequiredTemplate.replace(
+							'%membershipKinds%',
+							formattedMembershiplevels
+						),
+						formattedMembershiplevels
+					)}
 				</Styled.SearchResultMessage>
 			);
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
-					You are <Styled.SearchResultBoldText>not</Styled.SearchResultBoldText> a member.
+					{this.highlightKeyword(localizedResources.notAMember, localizedResources.notText)}
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
@@ -147,15 +180,18 @@ export class SearchResult extends React.PureComponent {
 		} else if ((membershipKind === 'none' || !membershipKind) && !joinable) {
 			message = (
 				<Styled.SearchResultMessage>
-					<Styled.SearchResultHightlightText>
-						{formattedMembershiplevels}
-					</Styled.SearchResultHightlightText>{' '}
-					membership required.
+					{this.highlightKeyword(
+						localizedResources.membershipRequiredTemplate.replace(
+							'%membershipKinds%',
+							formattedMembershiplevels
+						),
+						formattedMembershiplevels
+					)}
 				</Styled.SearchResultMessage>
 			);
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
-					You are <Styled.SearchResultBoldText>not</Styled.SearchResultBoldText> a member.
+					{this.highlightKeyword(localizedResources.notAMember, localizedResources.notText)}
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
@@ -169,28 +205,61 @@ export class SearchResult extends React.PureComponent {
 		) {
 			message = (
 				<Styled.SearchResultMessage>
-					<Styled.SearchResultHightlightText>
-						{formattedMembershiplevels}
-					</Styled.SearchResultHightlightText>{' '}
-					membership required.
+					{this.highlightKeyword(
+						localizedResources.membershipRequiredTemplate.replace(
+							'%membershipKinds%',
+							formattedMembershiplevels
+						),
+						formattedMembershiplevels
+					)}
 				</Styled.SearchResultMessage>
 			);
 
 			// observer is an obsolete membership kind
-			membershipLine =
-				membershipKind === 'admin' || membershipKind === 'observer' ? (
-					<Styled.SearchResultMembershipLine>
-						You are an <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>.
-					</Styled.SearchResultMembershipLine>
-				) : membershipKind === 'invited' ? (
-					<Styled.SearchResultMembershipLine>
-						You are <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>.
-					</Styled.SearchResultMembershipLine>
-				) : (
-					<Styled.SearchResultMembershipLine>
-						You are a <Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>.
-					</Styled.SearchResultMembershipLine>
+			membershipLine = (membershipKind => {
+				let membershipMessage;
+				switch (membershipKind) {
+					case 'admin':
+						membershipMessage = this.boldKeyword(
+							localizedResources.isAnAdmin,
+							localizedResources.adminText
+						);
+						break;
+					case 'observer':
+						membershipMessage = this.boldKeyword(
+							localizedResources.isAnObserver,
+							localizedResources.observerText
+						);
+						break;
+					case 'moderator':
+						membershipMessage = this.boldKeyword(
+							localizedResources.isAModerator,
+							localizedResources.moderatorText
+						);
+						break;
+					case 'member':
+						membershipMessage = this.boldKeyword(
+							localizedResources.isAMember,
+							localizedResources.memberText
+						);
+						break;
+					case 'follower':
+						membershipMessage = this.boldKeyword(
+							localizedResources.isAFollower,
+							localizedResources.followerText
+						);
+						break;
+					case 'invited':
+						membershipMessage = this.boldKeyword(
+							localizedResources.isInvited,
+							localizedResources.invitedText
+						);
+						break;
+				}
+				return (
+					<Styled.SearchResultMembershipLine>{membershipMessage}</Styled.SearchResultMembershipLine>
 				);
+			})(membershipKind);
 			button = (
 				<Button size="small" variant="primary" onClick={this.requestAccess}>
 					{localizedResources.requestButtonText}
@@ -207,7 +276,7 @@ export class SearchResult extends React.PureComponent {
 			);
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
-					You are an <Styled.SearchResultBoldText>Admin</Styled.SearchResultBoldText>.
+					{this.boldKeyword(localizedResources.isAnAdmin, localizedResources.adminText)}
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
@@ -218,8 +287,7 @@ export class SearchResult extends React.PureComponent {
 		} else if (relationshipKind === 'none' && joinable) {
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
-					You are not a{' '}
-					<Styled.SearchResultHightlightText>Member</Styled.SearchResultHightlightText>.
+					{this.highlightKeyword(localizedResources.notAMember, localizedResources.notText)}
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
@@ -230,8 +298,7 @@ export class SearchResult extends React.PureComponent {
 		} else if (relationshipKind === 'none' && !joinable) {
 			membershipLine = (
 				<Styled.SearchResultMembershipLine>
-					You are not a{' '}
-					<Styled.SearchResultHightlightText>Member</Styled.SearchResultHightlightText>.
+					{this.highlightKeyword(localizedResources.notAMember, localizedResources.notText)}
 				</Styled.SearchResultMembershipLine>
 			);
 			button = (
@@ -240,18 +307,50 @@ export class SearchResult extends React.PureComponent {
 				</Button>
 			);
 		} else {
-			membershipLine = (
-				<Styled.SearchResultMembershipLine>
-					You are
-					{/* observer is an obsolete membership kind */}
-					{membershipKind === 'admin' || membershipKind === 'observer'
-						? ' an '
-						: membershipKind === 'invited'
-						? ' '
-						: ' a '}
-					<Styled.SearchResultBoldText>{membershipKind}</Styled.SearchResultBoldText>.
-				</Styled.SearchResultMembershipLine>
-			);
+			membershipLine = (membershipKind => {
+				let membershipMessage;
+				switch (membershipKind) {
+					case 'admin':
+						membershipMessage = this.boldKeyword(
+							localizedResources.isAnAdmin,
+							localizedResources.adminText
+						);
+						break;
+					case 'observer':
+						membershipMessage = this.boldKeyword(
+							localizedResources.isAnObserver,
+							localizedResources.observerText
+						);
+						break;
+					case 'moderator':
+						membershipMessage = this.boldKeyword(
+							localizedResources.isAModerator,
+							localizedResources.moderatorText
+						);
+						break;
+					case 'member':
+						membershipMessage = this.boldKeyword(
+							localizedResources.isAMember,
+							localizedResources.memberText
+						);
+						break;
+					case 'follower':
+						membershipMessage = this.boldKeyword(
+							localizedResources.isAFollower,
+							localizedResources.followerText
+						);
+						break;
+					case 'invited':
+						membershipMessage = this.boldKeyword(
+							localizedResources.isInvited,
+							localizedResources.invitedText
+						);
+						break;
+				}
+				return (
+					<Styled.SearchResultMembershipLine>{membershipMessage}</Styled.SearchResultMembershipLine>
+				);
+			})(membershipKind);
 			button = (
 				<Button size="small" variant="secondary" onClick={this.getStarted}>
 					{localizedResources.selectButtonText}
