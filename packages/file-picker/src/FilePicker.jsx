@@ -18,6 +18,7 @@ export const FilePicker = ({
 	allowMultiSelect,
 	ExternalEditorComponent,
 	shouldFillViewport,
+	selectedTab,
 }) => {
 	const [asset, setAsset] = useState(null);
 	const [model, setModel] = useState();
@@ -82,9 +83,14 @@ export const FilePicker = ({
 	return (
 		<FilePickerProvider value={context}>
 			{shouldFillViewport ? (
-				<Tabs>{children}</Tabs>
+				<Tabs selectedTab={selectedTab}>{children}</Tabs>
 			) : (
-				<FilePickerModal isOpen={isOpen} onClose={handleCancel} title={title}>
+				<FilePickerModal
+					isOpen={isOpen}
+					onClose={handleCancel}
+					title={title}
+					selectedTab={selectedTab}
+				>
 					{children}
 				</FilePickerModal>
 			)}
@@ -133,4 +139,6 @@ FilePicker.propTypes = {
 	allowMultiSelect: PropTypes.bool,
 	/** If true, content fills entire viewport instead of being wrapped by Modal component. Defaults to false and should generally be false. When true, `title` and `isOpen` props are ignored. */
 	shouldFillViewport: PropTypes.bool,
+	/** For allowing a different default tab to be opened on the first render*/
+	selectedTab: PropTypes.number,
 };

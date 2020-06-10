@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal } from '@faithlife/styled-ui/v6';
 import { Tabs } from './Tabs';
 
-export const FilePickerModal = ({ isOpen, onClose, title, children }) => (
+export const FilePickerModal = ({ isOpen, onClose, title, selectedTab, children }) => (
 	<Modal isOpen={isOpen} onClose={onClose} container="body" fullscreen>
 		<Modal.Header title={title} textStyle="h.24" />
 		<Modal.Content
@@ -14,7 +14,7 @@ export const FilePickerModal = ({ isOpen, onClose, title, children }) => (
 			justifyContent="stretch"
 			alignItems="stretch"
 		>
-			<Tabs>{children}</Tabs>
+			<Tabs selectedTab={selectedTab}>{children}</Tabs>
 		</Modal.Content>
 	</Modal>
 );

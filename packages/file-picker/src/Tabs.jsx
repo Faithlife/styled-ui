@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { TabManager, Tab, TabList, TabPanels, TabPanel } from '@faithlife/styled-ui';
 
-export const Tabs = ({ children }) => (
-	<TabManager>
+export const Tabs = ({ children, selectedTab }) => (
+	<TabManager selectedTab={selectedTab}>
 		<TabList>
 			{React.Children.map(children, tab =>
 				tab ? <Tab paddingX={4}>{tab.props.title}</Tab> : null
