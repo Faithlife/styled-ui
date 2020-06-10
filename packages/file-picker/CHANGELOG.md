@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.7.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@3.6.0...@faithlife/file-picker@3.7.0) (2020-06-10)
+
+
+### Features
+
+* **file-picker:** Add selectedTab prop to FilePicker. ([#131](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/131)) ([c485bc8](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/c485bc8fb0fa86819630efb5abc3391aa8a9c9f3))
+
+
+
+
+
 # [3.6.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/file-picker@3.5.0...@faithlife/file-picker@3.6.0) (2020-06-08)
 
 
