@@ -46,6 +46,7 @@ export interface IQuillRichTextEditorProps {
 	disableImageControls?: boolean;
 	htmlOptions?: { [key: string]: any };
 	plainTextMode?: boolean;
+	paragraphSpacing?: boolean;
 	readOnly?: boolean;
 	children?: React.ReactElement;
 }
@@ -111,7 +112,7 @@ const ReactQuillStyled = styled(SafeReactQuill)`
 	}
 `;
 
-const QuillContainer = styled.div<{ isEmpty: boolean }>`
+const QuillContainer = styled.div<{ isEmpty: boolean; paragraphSpacing: boolean }>`
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -119,6 +120,23 @@ const QuillContainer = styled.div<{ isEmpty: boolean }>`
 	border: 1px solid #a8a8a8;
 	border-radius: 3px;
 	box-sizing: border-box;
+
+	${({ paragraphSpacing }) =>
+		paragraphSpacing &&
+		css`
+			p {
+				margin-bottom: 0;
+				margin-top: 12px;
+			}
+
+			p:first-child {
+				margin-top: 0;
+			}
+
+			p.ql-nomargin-active {
+				margin-top: 0;
+			}
+		`}
 
 	.ql-snow .ql-tooltip {
 		z-index: 1;
@@ -182,6 +200,10 @@ if (SafeQuill) {
 	});
 	SafeQuill.register(ImageAlignClass);
 	SafeQuill.register({ 'formats/faithlifeImage': ImageBlot });
+	const NoMarginClass = new Parchment.Attributor.Class('nomargin', 'ql-nomargin', {
+		scope: Parchment.Scope.BLOCK,
+	});
+	SafeQuill.register(NoMarginClass);
 }
 
 const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
@@ -205,6 +227,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 		disableImageControls,
 		htmlOptions,
 		plainTextMode,
+		paragraphSpacing,
 		readOnly,
 		children,
 		...otherProps
@@ -336,6 +359,15 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 
 		// Disable Firefox native image resizing
 		document.execCommand('enableObjectResizing', false, 'false');
+
+		if (htmlOptions?.format === 'inline' && paragraphSpacing) {
+			console.warn(
+				"QuillEditor: 'inline' html format is not compatible with the paragraphSpacing flag"
+			);
+		}
+		if (plainTextMode && paragraphSpacing) {
+			console.warn('QuillEditor: plainTextMode is not compatible with the paragraphSpacing flag');
+		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
@@ -580,6 +612,11 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 	const getHTML = useCallback(
 		(options?: { [key: string]: any }) => {
 			if (quillRef.current) {
+				if (options?.format === 'inline' && paragraphSpacing) {
+					console.warn(
+						"QuillEditor: 'inline' html format is not compatible with the paragraphSpacing flag"
+					);
+				}
 				const deltas = quillRef.current.getEditor().getContents();
 				const finalOptions: any = { ...htmlOptions, ...options };
 				if (finalOptions.format === 'raw') {
@@ -589,7 +626,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				}
 			}
 		},
-		[htmlOptions]
+		[htmlOptions, paragraphSpacing]
 	);
 
 	useImperativeHandle(
@@ -704,6 +741,44 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			keyboard: {
 				...((modules && modules.keyboard) || {}),
 				bindings: {
+					...(paragraphSpacing
+						? {
+								linebreak: {
+									key: 13,
+									shiftKey: true,
+									handler: function(range) {
+										const quillApi = quillRef.current && quillRef.current.getEditor();
+										if (quillApi) {
+											quillApi.insertText(range.index, '\n', 'user');
+											const newBlock = quillApi.getLeaf(range.index + 1)[0].parent;
+											const index = newBlock.offset(quillApi.scroll);
+											const length = newBlock.length();
+											quillApi.formatText(index, length, 'nomargin', 'active');
+
+											// Now that we've inserted a line break, move the cursor forward
+											quillApi.setSelection(range.index + 1, 'silent');
+										}
+									},
+								},
+								realbreak: {
+									key: 13,
+									handler: function(range) {
+										const quillApi = quillRef.current && quillRef.current.getEditor();
+										if (quillApi) {
+											quillApi.insertText(range.index, '\n', 'user');
+											const newBlock = quillApi.getLeaf(range.index + 1)[0].parent;
+											const index = newBlock.offset(quillApi.scroll);
+											const length = newBlock.length();
+											if (newBlock.attributes.attributes.nomargin) {
+												quillApi.formatText(index, length, 'nomargin', false);
+											}
+											// Now that we've inserted a line break, move the cursor forward
+											quillApi.setSelection(range.index + 1, 'silent');
+										}
+									},
+								},
+						  }
+						: {}),
 					...(tabMode === 'insert' ? {} : { tab: false }),
 					...getShortcuts(quillRef),
 					...((modules && modules.keyboard && modules.keyboard.bindings) || {}),
@@ -712,16 +787,17 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 			clipboard: { matchVisual: false, ...((modules && modules.clipboard) || {}) },
 		}),
 		[
+			quillEditorId,
+			hasOnlyChild,
 			insertTemplate,
 			imageHandler,
 			textHandler,
 			handleLinkInsert,
-			modules,
-			quillEditorId,
-			toolbarHandlers,
-			tabMode,
 			handleClean,
-			hasOnlyChild,
+			toolbarHandlers,
+			modules,
+			paragraphSpacing,
+			tabMode,
 		]
 	);
 
@@ -742,6 +818,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				'width',
 				'align',
 				'imageAlign',
+				'nomargin',
 		  ];
 
 	const [placeholderDiv] = useState(() => <div data-placeholder={placeholder} />);
@@ -766,6 +843,7 @@ const QuillEditorCore: React.FunctionComponent<IQuillRichTextEditorProps> = (
 				linkSaveText={localizedResources.toolbar.save}
 				imageIsSelected={!!overlayCoordinates}
 				isEmpty={isEmpty}
+				paragraphSpacing={paragraphSpacing}
 			>
 				{hasOnlyChild &&
 					React.cloneElement(onlyChild, {
