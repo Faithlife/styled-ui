@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.5.0](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.4.12...@faithlife/quill-editor@4.5.0) (2020-06-12)
+
+
+### Features
+
+* Add shortcut to create newlines within the same paragraph. ([#125](https://git/Logos/FaithlifeEquipment/issues/125)) ([ad0c9cf](https://git/Logos/FaithlifeEquipment/commits/ad0c9cfea067a1a17f24ec0caaf24f7dbc5bf375))
+
+
+
+
+
 ## [4.4.12](https://git/Logos/FaithlifeEquipment/compare/@faithlife/quill-editor@4.4.10...@faithlife/quill-editor@4.4.12) (2020-04-08)
 
 **Note:** Version bump only for package @faithlife/quill-editor
