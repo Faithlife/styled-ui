@@ -3086,6 +3086,13 @@
   dependencies:
     prop-types "^15.7.2"
 
+"@faithlife/react-ui@^7.8.0":
+  version "7.8.0"
+  resolved "http://npm.faithlife.io/@faithlife%2freact-ui/-/react-ui-7.8.0.tgz#b4271d0b6cef7ad4e147e6580467a871cb0f4c4e"
+  integrity sha512-Ux0lr4se7QFOKeJRZ8k5YOMzgeckRHybzo1Qui6O0iV5WCh/ttU8KorqW7uNCp8Uam5hEZLQeoIVgoESDYCa1g==
+  dependencies:
+    prop-types "^15.7.2"
+
 "@faithlife/rt-vdom@^1.2.3":
   version "1.2.4"
   resolved "http://npm.faithlife.io/@faithlife%2frt-vdom/-/rt-vdom-1.2.4.tgz#0bcaa90db81cb209328e6e466f94f4ec90ad981e"

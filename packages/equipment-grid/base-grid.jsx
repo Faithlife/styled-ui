@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { AgGridReact, AgGridColumn } from 'ag-grid-react';
 import { LicenseManager } from 'ag-grid-enterprise';
 import 'ag-grid-enterprise';
+import { useDebouncedCallback } from '@faithlife/react-ui';
 import { Box, LoadingSpinner, Text } from '@faithlife/styled-ui';
 import { handleShowCheckbox, handleIsEditable, editorComponentTag } from './grid-helpers';
 
@@ -49,6 +50,8 @@ export function BaseGrid({
 	gridOptions,
 	sortModel,
 	updateSortModel,
+	columnState,
+	updateColumnState,
 	filterText,
 	rowSelectionType,
 	hideHeaders,
@@ -207,6 +210,23 @@ export function BaseGrid({
 		}
 	}, [updateSortModel, gridApi]);
 
+	const handleColumnStateChanged = useDebouncedCallback(event => {
+		if (updateColumnState && columnApi) {
+			const newColumnState = columnApi.getColumnState();
+			updateColumnState(event, newColumnState);
+		}
+	}, 200);
+
+	const handleDisplayedColumnsChanged = event => {
+		if (gridApi) {
+			gridApi.sizeColumnsToFit();
+		}
+		if (updateColumnState && columnApi) {
+			const newColumnState = columnApi.getColumnState();
+			updateColumnState(event, newColumnState);
+		}
+	};
+
 	const getRowNodeId = useCallback(data => data.id, []);
 
 	const handleCellClicked = useCallback(
@@ -241,6 +261,10 @@ export function BaseGrid({
 				api.setSortModel(sortModel);
 			}
 
+			if (columnState) {
+				columnApi.setColumnState(columnState);
+			}
+
 			if (filterText) {
 				if (rowModelType === clientSideRowModel) {
 					api.setQuickFilter(filterText);
@@ -258,7 +282,7 @@ export function BaseGrid({
 				api.setServerSideDatasource(data);
 			}
 		},
-		[setGridApi, setColumnApi, sortModel, filterText, rowModelType, data]
+		[setGridApi, setColumnApi, sortModel, columnState, filterText, rowModelType, data]
 	);
 
 	let totalRowCount = null;
@@ -294,6 +318,8 @@ export function BaseGrid({
 				onGridReady={handleGridReady}
 				onGridSizeChanged={handleGridResize}
 				onSortChanged={handleSortChanged}
+				onColumnResized={handleColumnStateChanged}
+				onDisplayedColumnsChanged={handleDisplayedColumnsChanged}
 				onSelectionChanged={handleSelectionChanged}
 				rowSelection={
 					!onRowClick && !onRowSelect
@@ -417,6 +443,10 @@ BaseGrid.propTypes = {
 	sortModel: PropTypes.object,
 	/** Called when `sortModel` is updated by the table */
 	updateSortModel: PropTypes.func,
+	/** The current column state for the table */
+	columnState: PropTypes.object,
+	/** Called when `columnState` is updated by the table */
+	updateColumnState: PropTypes.func,
 	/** Text to filter the rows on */
 	filterText: PropTypes.string,
 	/** Whether to allow single or multi row select, Use 'GridComponent'.rowSelectionOptions */
