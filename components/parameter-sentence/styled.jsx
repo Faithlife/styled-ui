@@ -7,7 +7,7 @@ const selectStyling = css`
 	min-height: fit-content;
 	font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
 	width: ${({ styleOverrides }) => styleOverrides.width};
-	border-bottom: dashed ${thickness.two} ${({ theme }) => theme.underlineColor || colors.blueBase};
+	border-bottom: dashed ${thickness.two} ${colors.blueBase};
 	font-weight: bold;
 	color: ${colors.gray66};
 	${props => `color: ${props.isOpen ? colors.blueActive : colors.gray66}`};
@@ -18,12 +18,12 @@ const selectStyling = css`
 
 	&:hover {
 		&:not(:focus) {
-			color: ${({ theme }) => theme.hoverColor || colors.blueBase};
+			color: ${colors.blueBase};
 		}
 	}
 
 	&:active {
-		color: ${({ theme }) => theme.activeColor || colors.blueActive};
+		color: ${colors.blueActive};
 	}
 
 	&:focus {
@@ -103,7 +103,7 @@ export const InputContainer = styled.div`
 	${selectStyling};
 
 	border-bottom: ${({ isFocused }) => (isFocused ? 'solid' : 'dashed')} ${thickness.two}
-		${({ theme }) => theme.underlineColor || colors.blueBase};
+		${colors.blueBase};
 
 	height: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
 

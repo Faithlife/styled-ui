@@ -11,7 +11,6 @@ export const ParameterInputBox = React.forwardRef((props, ref) => {
 		width,
 		accessibilityLabel,
 		styleOverrides,
-		theme,
 		onFocus,
 		onBlur,
 		...inputProps
@@ -42,7 +41,6 @@ export const ParameterInputBox = React.forwardRef((props, ref) => {
 		<Styled.InputContainer
 			width={width}
 			isFocused={isFocused}
-			theme={theme}
 			styleOverrides={{ width, ...styleOverrides }}
 		>
 			<Styled.Input
@@ -52,7 +50,6 @@ export const ParameterInputBox = React.forwardRef((props, ref) => {
 				onFocus={handleFocus}
 				onBlur={handleBlur}
 				value={!isFocused ? displayValue : value}
-				theme={theme}
 				aria-label={accessibilityLabel}
 				styleOverrides={{ width, ...styleOverrides }}
 				{...inputProps}
@@ -68,17 +65,11 @@ ParameterInputBox.propTypes = {
 	formatValue: PropTypes.func,
 	width: PropTypes.string,
 	accessibilityLabel: PropTypes.string.isRequired,
-	theme: PropTypes.shape({
-		hoverColor: PropTypes.string,
-		activeColor: PropTypes.string,
-		underlineColor: PropTypes.string,
-	}),
 	styleOverrides: PropTypes.shape({
 		fontSize: PropTypes.string,
 	}),
 };
 
 ParameterInputBox.defaultProps = {
-	theme: {},
 	styleOverrides: {},
 };
