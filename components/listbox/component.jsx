@@ -6,7 +6,6 @@ export function Listbox({
 	isOpen,
 	onToggleMenu,
 	onItemSelect,
-	theme,
 	styleOverrides,
 	children,
 	labelledBy,
@@ -22,7 +21,6 @@ export function Listbox({
 		<DropdownCore
 			isOpen={isOpen}
 			onToggleMenu={onToggleMenu}
-			theme={theme}
 			styleOverrides={styleOverrides}
 			additionalContext={context}
 		>
@@ -36,11 +34,6 @@ Listbox.propTypes = {
 	onToggleMenu: PropTypes.func.isRequired,
 	onItemSelect: PropTypes.func.isRequired,
 	children: PropTypes.node.isRequired,
-	theme: PropTypes.shape({
-		hoverBackgroundColor: PropTypes.string,
-		checkboxPrimary: PropTypes.string,
-		checkboxBorder: PropTypes.string,
-	}),
 	styleOverrides: PropTypes.shape({
 		fontSize: PropTypes.string,
 		padding: PropTypes.string,
@@ -53,6 +46,5 @@ Listbox.propTypes = {
 };
 
 Listbox.defaultProps = {
-	theme: {},
 	styleOverrides: {},
 };
