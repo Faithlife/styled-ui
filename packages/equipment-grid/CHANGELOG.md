@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/equipment-grid@1.4.0...@faithlife/equipment-grid@1.5.0) (2020-06-18)
+
+
+### Bug Fixes
+
+* Ensure data exists when assuming serverside datasource. ([4658d0e](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/4658d0ec98d1c291325b24f1864438294877a93c))
+* Fix datasource naming. ([b2a0fc5](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/b2a0fc528d0e3db1753875ff73f7a23831ca2e2f))
+* Missed a couple things when renaming. ([9100e21](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/9100e21f16fbe16fad2b3b83e7a978ae6357fe9c))
+
+
+### Features
+
+* Add imperative way to refresh serverside data cache. ([dc2d5e2](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/dc2d5e2fcab7a622e9b85f0576c45e228aa252f6))
+
+
+
+
+
 # [1.4.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/equipment-grid@1.3.0...@faithlife/equipment-grid@1.4.0) (2020-06-18)
 
 
