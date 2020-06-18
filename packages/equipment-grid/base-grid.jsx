@@ -50,7 +50,6 @@ export function BaseGrid({
 	gridOptions,
 	sortModel,
 	updateSortModel,
-	columnState,
 	updateColumnState,
 	filterText,
 	rowSelectionType,
@@ -261,10 +260,6 @@ export function BaseGrid({
 				api.setSortModel(sortModel);
 			}
 
-			if (columnState) {
-				columnApi.setColumnState(columnState);
-			}
-
 			if (filterText) {
 				if (rowModelType === clientSideRowModel) {
 					api.setQuickFilter(filterText);
@@ -282,7 +277,7 @@ export function BaseGrid({
 				api.setServerSideDatasource(data);
 			}
 		},
-		[setGridApi, setColumnApi, sortModel, columnState, filterText, rowModelType, data]
+		[setGridApi, setColumnApi, sortModel, filterText, rowModelType, data]
 	);
 
 	let totalRowCount = null;
@@ -443,8 +438,6 @@ BaseGrid.propTypes = {
 	sortModel: PropTypes.object,
 	/** Called when `sortModel` is updated by the table */
 	updateSortModel: PropTypes.func,
-	/** The current column state for the table */
-	columnState: PropTypes.object,
 	/** Called when `columnState` is updated by the table */
 	updateColumnState: PropTypes.func,
 	/** Text to filter the rows on */
