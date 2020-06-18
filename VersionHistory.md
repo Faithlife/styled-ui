@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.58.3
+
+- Removed unused `theme` prop from `Listbox` and `ParameterSentence` components.
+- Fixed errors when `Dropdown` components were missing a `theme` prop.
+- Update `DatePickerInput` to use new `Popovers`.
+
 ## 5.58.2
 
 - Improve `Slider` label placement.
