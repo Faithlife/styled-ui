@@ -6,6 +6,7 @@ import rawCensusData from './2010census.json';
 export let gridRequest;
 async function fakeServer(request) {
 	gridRequest = request;
+	gridRequest.filterModel.filters = undefined;
 	const nameFiltered = request.filterModel.filterText
 		? censusData.filter(data =>
 				data.value.toLowerCase().includes(request.filterModel.filterText.toLowerCase())

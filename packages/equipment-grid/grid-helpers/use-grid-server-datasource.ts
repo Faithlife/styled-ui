@@ -131,6 +131,7 @@ function mapAgGridRequest(request: ServerSideGetRowsRequest): GetRowsRequest {
 	const filterModel: FilterModel = {
 		filterText: filterTextObject && filterTextObject.filter,
 		filters: null,
+		filterList: [],
 	};
 	if (restFilters) {
 		for (const [key, filter] of Object.entries(restFilters)) {
@@ -143,6 +144,16 @@ function mapAgGridRequest(request: ServerSideGetRowsRequest): GetRowsRequest {
 				dateFrom: filter.dateFrom,
 				dateTo: filter.dateTo,
 			};
+
+			filterModel.filterList.push({
+				fieldName: key,
+				filterType: filter.filterType,
+				filterKind: filter.type,
+				filter: filter.filter,
+				filterTo: filter.filterTo,
+				dateFrom: filter.dateFrom,
+				dateTo: filter.dateTo,
+			});
 		}
 	}
 
@@ -171,6 +182,7 @@ interface Column {
 
 interface FilterModel {
 	filterText: string | number | undefined;
+	// depricated
 	filters: {
 		[key: string]: {
 			filterType: string;
@@ -181,6 +193,15 @@ interface FilterModel {
 			dateTo?: string;
 		};
 	} | null;
+	filterList: {
+		fieldName: string;
+		filterType: string;
+		filterKind: string;
+		filter?: string | number;
+		filterTo?: string | number;
+		dateFrom?: string;
+		dateTo?: string;
+	}[];
 }
 
 interface SortModel {
