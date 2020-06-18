@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/equipment-grid@1.3.0...@faithlife/equipment-grid@1.4.0) (2020-06-18)
+
+
+### Features
+
+* **equipment-grid:** Allow host to set column state. ([e0c282f](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/e0c282fd20b172f427cf66de811a776946427186))
+* **equipment-grid:** Allow host to set column state. ([8c096c5](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/8c096c5725012f39ee81ce74dcce9f20c1b52ec6))
+
+
+
+
+
 # [1.3.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/equipment-grid@1.2.4...@faithlife/equipment-grid@1.3.0) (2020-05-11)
 
 
