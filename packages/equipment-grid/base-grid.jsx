@@ -516,7 +516,7 @@ function determineRowModelType(data) {
 		return clientSideRowModel;
 	}
 
-	if (data && (!!data.getRows || !!data.data?.getRows)) {
+	if (data && (!!data.getRows || !!data.datasource?.getRows)) {
 		return serverSideRowModel;
 	}
 

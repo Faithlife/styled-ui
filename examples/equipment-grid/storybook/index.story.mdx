@@ -68,7 +68,7 @@ Server-side data fetching is enabled by passing in the value from the `useGridSe
 <Preview>
 	<Story name="Serverside sourced Grid">
 <ServerSideWrapper initialState={{ filterText: '', filter: null }}>
-	{(state, setState, datasource) => ( // const datasource = useGridServerDatasource(requestFunction, { options });
+	{(state, setState, { refreshGridCache, datasource }) => ( // const datasource = useGridServerDatasource(requestFunction, { options });
 		<>
 			<ReactMarkdown
 					source={`Last request:
@@ -81,6 +81,7 @@ ${JSON.stringify(gridRequest, null, '\t')}
 				<Button onClick={() => setState(state => ({ ...state, filter: { population: { type: 'greaterThan', filter: '200000' }, }, }))}>{'Pop > 200,000'}</Button>
 				<Button onClick={() => setState(state => ({ ...state, filter: { population: { type: 'lessThan', filter: '200000' }, }, }))}>{'Pop < 200,000'}</Button>
 				<Button onClick={() => setState(state => ({ ...state, filter: null }))}>None</Button>
+				<Button onClick={refreshGridCache}>{'Refresh Cache'}</Button>
 			</SegmentedButtonGroup>
 			<PaginatedGrid data={datasource} filters={state.filter} maxRows={10} filterText={state.filterText} onRowClick={action('row-click')}>
 				<GridColumn displayName="Name" fieldName="value" defaultSort={GridColumn.sortOptions.ascending} />
@@ -89,7 +90,6 @@ ${JSON.stringify(gridRequest, null, '\t')}
 				<GridColumn displayName="Births" fieldName="births" isRightAligned width={100} isLargeViewportOnly />
 				<GridColumn displayName="Deaths" fieldName="deaths" isRightAligned width={100} isSortable={false} isLargeViewportOnly />
 			</PaginatedGrid>
-			{console.log(SimpleGrid)}
 		</>
 	)}
 </ServerSideWrapper>

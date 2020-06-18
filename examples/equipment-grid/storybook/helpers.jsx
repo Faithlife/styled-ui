@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button } from '@faithlife/styled-ui';
 import { useCellEditor, useGridServerDatasource } from '@faithlife/equipment-grid';
 import rawCensusData from './2010census.json';

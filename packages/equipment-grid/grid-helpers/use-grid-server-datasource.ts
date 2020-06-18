@@ -18,8 +18,9 @@ export function useGridServerDatasource(
 	options?: Options
 ): ServerSideDatasource {
 	const [rowState, setRowState] = useState(initialState);
-	const [gridRef, setGridRef] = useState<React.MutableRefObject<any>>();
 	const datasource = useCurrentFunction(requestFunction);
+
+	const gridRef = useRef<any>();
 
 	const abortController = useRef<AbortController | null>(null);
 
@@ -29,6 +30,10 @@ export function useGridServerDatasource(
 				abortController.current.abort();
 			}
 		};
+	}, []);
+
+	const setGridRef = useCallback(ref => {
+		gridRef.current = ref.current;
 	}, []);
 
 	const handleRequest = useCurrentFunction(
