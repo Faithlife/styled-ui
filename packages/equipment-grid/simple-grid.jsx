@@ -131,7 +131,7 @@ export const SimpleGrid = React.forwardRef((props, ref) => {
 			// HACK ag-grid will currently not respect the new order of dragged rows with deltaRowMode
 			deltaRowDataMode: !(enableDragDrop || isDraggableRow),
 			rememberGroupStateWhenNewData: true,
-			...(!rowClickSelects && { suppressRowClickSelection: true }),
+			...(rowClickSelects === false && { suppressRowClickSelection: true }),
 		}),
 		[
 			groupColumnSettings,
