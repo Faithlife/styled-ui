@@ -22,6 +22,8 @@ npm-*
 packages/*/dist
 dist/
 
+storybook-static
+
 #Ignore yalc used for local package dev
 .yalc
 yalc.loc

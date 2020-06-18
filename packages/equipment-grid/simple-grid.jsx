@@ -28,7 +28,7 @@ export const SimpleGrid = React.forwardRef((props, ref) => {
 
 	const { gridApi, setGridApi, columnApi, setColumnApi } = useGridState();
 
-	useGridHandles(gridApi, ref);
+	useGridHandles(data, gridApi, ref);
 
 	useEffect(() => {
 		if (gridApi) {

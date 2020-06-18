@@ -22,9 +22,19 @@ export function useGridState() {
 	return { gridApi, setGridApi, columnApi, setColumnApi };
 }
 
-export function useGridHandles(gridApi, ref) {
+export function useGridHandles(data, gridApi, ref) {
+	const altRef = useRef();
+	const isServerSideDatasource = !!data && !Array.isArray(data);
+	if (isServerSideDatasource) {
+		if (data.refreshGridCache) {
+			data.datasource.setGridRef(ref || altRef);
+		} else {
+			data.setGridRef(ref || altRef);
+		}
+	}
+
 	useImperativeHandle(
-		ref,
+		ref || altRef,
 		() => ({
 			selectAllRows() {
 				if (gridApi) {
@@ -46,8 +56,16 @@ export function useGridHandles(gridApi, ref) {
 					gridApi.deselectAllFiltered();
 				}
 			},
+			refreshServersideGridCache: isServerSideDatasource
+				? (route = null) => {
+						if (gridApi) {
+							console.log('doinit');
+							gridApi.purgeServerSideCache(route);
+						}
+				  }
+				: () => {},
 		}),
-		[gridApi]
+		[gridApi, isServerSideDatasource]
 	);
 }
 
