@@ -1,9 +1,9 @@
 {
   "private": true,
   "name": "equipment-grid",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "dependencies": {
-    "@faithlife/equipment-grid": "^1.5.0",
+    "@faithlife/equipment-grid": "^1.6.0",
     "@faithlife/styled-ui": "^5.47.0",
     "ag-grid-community": "21.2.2",
     "ag-grid-enterprise": "21.2.2",

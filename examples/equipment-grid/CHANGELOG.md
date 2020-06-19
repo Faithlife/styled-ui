@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/equipment-grid@1.5.0...equipment-grid@1.6.0) (2020-06-19)
+
+
+### Features
+
+* **equipment-grid:** Add filterList and depricate fitlers. ([b748a78](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/b748a78b45086000984acd7c69b6084ef806d2ce))
+
+
+
+
+
 # [1.5.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/equipment-grid@1.4.0...equipment-grid@1.5.0) (2020-06-18)
 
 
