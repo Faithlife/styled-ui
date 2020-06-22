@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/equipment-grid@1.6.0...equipment-grid@1.6.1) (2020-06-22)
+
+**Note:** Version bump only for package equipment-grid
+
+
+
+
+
 # [1.6.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/equipment-grid@1.5.0...equipment-grid@1.6.0) (2020-06-19)
 
 

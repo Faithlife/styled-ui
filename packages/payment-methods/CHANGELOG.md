@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.12.2](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@2.12.1...@faithlife/payment-methods@2.12.2) (2020-06-22)
+
+
+### Bug Fixes
+
+* Make card icon and card number labels clickable. ([#136](https://git.faithlife.dev/Logos/FaithlifeEquipment/issues/136)) ([3951475](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/395147575052c1e91f94e69b6822c3cb4f20eec0))
+
+
+
+
+
 ## [2.12.1](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/payment-methods@2.12.0...@faithlife/payment-methods@2.12.1) (2020-05-26)
 
 **Note:** Version bump only for package @faithlife/payment-methods

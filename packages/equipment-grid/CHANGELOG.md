@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/equipment-grid@1.6.0...@faithlife/equipment-grid@1.7.0) (2020-06-22)
+
+
+### Features
+
+* **equipment-grid:** Allow host to specify header height. ([2db0547](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/2db0547306a0da17c3b41e9555f6c9e8dd997c9c))
+
+
+
+
+
 # [1.6.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/equipment-grid@1.5.0...@faithlife/equipment-grid@1.6.0) (2020-06-19)
 
 
