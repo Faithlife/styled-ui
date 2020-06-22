@@ -13,7 +13,7 @@ LicenseManager.setLicenseKey(
 
 const gridHeight = 8;
 const defaultRowHeight = gridHeight * 5;
-const headerHeight = gridHeight * 5;
+const defaultHeaderHeight = gridHeight * 5;
 const noRowsDefaultTableHeight = 200;
 const defaultFetchLimit = 100;
 const loadingCellComponent = 'loadingCellComponent';
@@ -54,6 +54,7 @@ export function BaseGrid({
 	filterText,
 	rowSelectionType,
 	hideHeaders,
+	headerHeight,
 	rowHeight,
 	rowClassRules,
 	hasPagingBar,
@@ -302,7 +303,7 @@ export function BaseGrid({
 	if (totalRowCount === 0) {
 		calculatedTableHeight = noRowsDefaultTableHeight;
 	} else if (maxRows) {
-		const currentHeaderHeight = hideHeaders ? 1 : headerHeight;
+		const currentHeaderHeight = hideHeaders ? 1 : headerHeight ?? defaultHeaderHeight;
 		const visibleRowCount = Math.min(maxRows, totalRowCount || Infinity);
 		calculatedTableHeight =
 			visibleRowCount * (rowHeight || defaultRowHeight) + tableHeightPadding + currentHeaderHeight;
@@ -333,7 +334,7 @@ export function BaseGrid({
 						: rowSelectionType || BaseGrid.rowSelectionOptions.single
 				}
 				frameworkComponents={cellComponents}
-				headerHeight={!hideHeaders ? headerHeight : 0}
+				headerHeight={!hideHeaders ? headerHeight ?? defaultHeaderHeight : 0}
 				rowHeight={rowHeight || defaultRowHeight}
 				suppressHorizontalScroll
 				rowClass={onRowClick ? 'ag-grid-clickable-row' : ''}
@@ -459,7 +460,9 @@ BaseGrid.propTypes = {
 	onRowClick: PropTypes.func,
 	/** Hide headers */
 	hideHeaders: PropTypes.bool,
-	/** The height, in pixels, of non-header rows in the table.  If not provided, default is 45px */
+	/** The height, in pixels, of header row in the table.  If not provided, default is 40px */
+	headerHeight: PropTypes.number,
+	/** The height, in pixels, of non-header rows in the table.  If not provided, default is 40px */
 	rowHeight: PropTypes.number,
 	/** Whether component is simple table or paginated table */
 	hasPagingBar: PropTypes.bool,
