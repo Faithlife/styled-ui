@@ -64,11 +64,14 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 	if (billingProfile.type.toLowerCase() === 'paypal') {
 		return (
 			<Styled.CreditCardRow data-testid="credit-card-row" data-test-index={index}>
-				<Radio onClick={onSelected} isChecked={isSelected} disabled type="button" />
-				<Styled.CardLogoContainer>
-					<PayPal />
-				</Styled.CardLogoContainer>
-				<Styled.Name>{billingProfile.nameOnCard}</Styled.Name>
+				<Radio onClick={onSelected} isChecked={isSelected} disabled type="button">
+					<Styled.RadioLabel>
+						<Styled.CardLogoContainer>
+							<PayPal />
+						</Styled.CardLogoContainer>
+						<Styled.Name>{billingProfile.nameOnCard}</Styled.Name>
+					</Styled.RadioLabel>
+				</Radio>
 				<Styled.PayPalDelete data-testid="delete-button-container">
 					<Button
 						minorTransparent
@@ -98,13 +101,16 @@ const BillingProfile: React.FunctionComponent<IBillingProfileProps> = ({
 					/>
 				</div>
 			) : (
-				<Radio onClick={onSelected} isChecked={isSelected} type="button" />
+				<Radio onClick={onSelected} isChecked={isSelected} type="button">
+					<Styled.RadioLabel>
+						<Styled.CardLogoContainer>
+							{cardToSVG[billingProfile.cardInfo.creditCardProvider.toLowerCase()]}
+						</Styled.CardLogoContainer>
+						<Styled.Dots>{'••••'}</Styled.Dots>
+						<Styled.CardNumber>{billingProfile.cardInfo.creditCardNumber}</Styled.CardNumber>
+					</Styled.RadioLabel>
+				</Radio>
 			)}
-			<Styled.CardLogoContainer>
-				{cardToSVG[billingProfile.cardInfo.creditCardProvider.toLowerCase()]}
-			</Styled.CardLogoContainer>
-			<Styled.Dots>{'••••'}</Styled.Dots>
-			<Styled.CardNumber>{billingProfile.cardInfo.creditCardNumber}</Styled.CardNumber>
 			<Styled.ExpiredCardWarning data-testid="expired-label">
 				{isExpired ? 'Expired' : null}
 			</Styled.ExpiredCardWarning>

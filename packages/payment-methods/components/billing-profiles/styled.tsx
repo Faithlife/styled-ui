@@ -33,6 +33,11 @@ export const CreditCardRow = styled.div`
 	padding: 0 16px;
 `;
 
+export const RadioLabel = styled.div`
+	display: flex;
+	align-items: center;
+`;
+
 export const CardLogoContainer = styled.div`
 	width: 38px;
 	height: 26px;
