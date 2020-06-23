@@ -142,14 +142,11 @@ export function BaseGrid({
 	// Additional options are here: https://www.ag-grid.com/javascript-grid-internationalisation/
 	const localeText = useMemo(
 		() => ({
-			noRowsToShow:
-				(localization && localization.noRowsMessage) || defaultLocalization.noRowsMessage,
-			to: (localization && localization.pageControls.to) || defaultLocalization.pageControls.to,
-			from:
-				(localization && localization.pageControls.from) || defaultLocalization.pageControls.from,
-			page:
-				(localization && localization.pageControls.page) || defaultLocalization.pageControls.page,
-			loadingRows: (localization && localization.loadingRows) || defaultLocalization.loadingRows,
+			noRowsToShow: localization?.noRowsMessage || defaultLocalization.noRowsMessage,
+			to: localization?.pageControls?.to || defaultLocalization.pageControls.to,
+			from: localization?.pageControls?.from || defaultLocalization.pageControls.from,
+			page: localization?.pageControls?.page || defaultLocalization.pageControls.page,
+			loadingRows: localization?.loadingRows || defaultLocalization.loadingRows,
 		}),
 		[localization]
 	);
@@ -373,6 +370,7 @@ export function BaseGrid({
 						shouldShowCheckbox,
 						isEditable,
 						shouldBeEditable,
+						doubleClickEdit,
 						editorComponent,
 						filterParams,
 						...columnProps
@@ -403,7 +401,7 @@ export function BaseGrid({
 								shouldShowCheckbox ? handleShowCheckbox(shouldShowCheckbox) : showCheckbox
 							}
 							editable={shouldBeEditable ? handleIsEditable(shouldBeEditable) : isEditable}
-							singleClickEdit={shouldBeEditable || isEditable}
+							singleClickEdit={!doubleClickEdit && (shouldBeEditable || isEditable)}
 							filterParams={{
 								...filterParams,
 								values: (filterParams && filterParams.values) || ['wat'],
