@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/equipment-grid@1.7.0...@faithlife/equipment-grid@1.8.0) (2020-06-24)
+
+
+### Features
+
+* **equipment-grid:** Allow host to double-click for cell editing. ([099c0ef](https://git.faithlife.dev/Logos/FaithlifeEquipment/commits/099c0ef4ac3e5de061d914a0065e2f7b57e0b051))
+
+
+
+
+
 # [1.7.0](https://git.faithlife.dev/Logos/FaithlifeEquipment/compare/@faithlife/equipment-grid@1.6.0...@faithlife/equipment-grid@1.7.0) (2020-06-22)
 
 
