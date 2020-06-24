@@ -20,6 +20,7 @@ export function GridColumn({
 	showCheckbox,
 	shouldShowCheckbox,
 	isEditable,
+	doubleClickEdit,
 	shouldBeEditable,
 	editorComponent,
 	filter,
@@ -75,6 +76,8 @@ GridColumn.propTypes = {
 	shouldShowCheckbox: PropTypes.func,
 	/** Makes the rows in this column editable */
 	isEditable: PropTypes.bool,
+	/** When cell is editable, disables default single-click entry into cell in favor of doubleclick */
+	doubleClickEdit: PropTypes.bool,
 	/** Expects boolean return. Called with (isGroup: bool, rowData: object) */
 	shouldBeEditable: PropTypes.func,
 	/** What to filter by in this column */
