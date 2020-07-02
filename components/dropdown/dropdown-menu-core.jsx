@@ -56,6 +56,7 @@ export function DropdownMenuCore({ children, popoverProps = {}, ariaProps }) {
 					padding: '0',
 					width: styleOverrides.width || '160px',
 					overflow: styleOverrides.overflow,
+					maxHeight: styleOverrides.maxHeight,
 				}}
 				{...popoverProps}
 			>

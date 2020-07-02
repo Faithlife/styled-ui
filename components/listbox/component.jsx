@@ -39,6 +39,7 @@ Listbox.propTypes = {
 		padding: PropTypes.string,
 		width: PropTypes.string,
 		overflow: PropTypes.string,
+		maxHeight: PropTypes.string,
 	}),
 	/** The id of an element containing the label for this component. Maybe omitted if the content is self-explanatory. */
 	labelledBy: PropTypes.string,

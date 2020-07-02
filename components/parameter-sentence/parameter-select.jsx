@@ -56,7 +56,15 @@ export function ParameterSelect({
 							</Styled.Button>
 						)}
 					</ListboxToggle>
-					<ListboxMenu styleOverrides={{ zIndex: 10, padding: '4px 0', width }}>
+					<ListboxMenu
+						styleOverrides={{
+							zIndex: 10,
+							padding: '4px 0',
+							width,
+							overflow: styleOverrides.overflow ?? 'auto',
+							maxHeight: styleOverrides.maxHeight ?? '300px',
+						}}
+					>
 						{options &&
 							Object.entries(options).map(([value, name]) => (
 								<ListItem key={value} id={value}>
@@ -95,6 +103,8 @@ ParameterSelect.propTypes = {
 	useNativeSelect: PropTypes.bool,
 	styleOverrides: PropTypes.shape({
 		fontSize: PropTypes.string,
+		overflow: PropTypes.string,
+		maxHeight: PropTypes.string,
 	}),
 };
 
