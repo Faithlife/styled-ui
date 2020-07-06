@@ -1,6 +1,6 @@
 {
 	"name": "@faithlife/styled-ui",
-	"version": "5.58.3",
+	"version": "5.58.4",
 	"main": "dist/main.js",
 	"repository": "git@github.com:Faithlife/styled-ui.git",
 	"license": "UNLICENSED",
