@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.58.4
+
+- Fix overflow in ParameterSelect
+
 ## 5.58.3
 
 - Removed unused `theme` prop from `Listbox` and `ParameterSentence` components.
