@@ -75,7 +75,6 @@ const NumberInput = React.memo(
 
 NumberInput.defaultProps = {
 	theme,
-	alwaysShowButtons: false,
 };
 
 NumberInput.propTypes = {
