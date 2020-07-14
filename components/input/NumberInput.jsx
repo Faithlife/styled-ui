@@ -1,4 +1,5 @@
 import React, { useCallback, useRef, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { css } from 'styled-components';
 import { Box } from '../Box';
 import { Input } from './Input';
@@ -57,6 +58,7 @@ const NumberInput = React.memo(
 					paddingTop={buttonPadding}
 					icon={<ChevronUp />}
 					disabled={props.disabled}
+					alwaysShowButtons={props.alwaysShowButtons}
 				/>
 				<StepButton
 					onClick={handleStepDown}
@@ -64,6 +66,7 @@ const NumberInput = React.memo(
 					paddingBottom={buttonPadding}
 					icon={<ChevronDown />}
 					disabled={props.disabled}
+					alwaysShowButtons={props.alwaysShowButtons}
 				/>
 			</InputContainer>
 		);
@@ -76,6 +79,7 @@ NumberInput.defaultProps = {
 
 NumberInput.propTypes = {
 	...Input.PropTypes,
+	alwaysShowButtons: PropTypes.bool,
 };
 
 const InputContainer = ({ children, ...props }) => (
@@ -99,7 +103,11 @@ const StepButton = props => (
 		size="small"
 		css={`
 			height: 50%;
-			visibility: hidden;
+
+			${!props.alwaysShowButtons &&
+				css`
+					visibility: hidden;
+				`}
 
 			${!props.disabled &&
 				css`
