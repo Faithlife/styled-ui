@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.59.0
+
+- Add optional prop to always show buttons on `NumberInput` components.
+
 ## 5.58.4
 
 - Fix overflow in ParameterSelect
