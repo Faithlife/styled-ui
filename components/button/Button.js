@@ -89,13 +89,20 @@ const SegmentedButtonGroup = styled(Box).attrs(() => ({
 }))`
 	${ButtonCore} {
 		margin: 0;
+		border-radius: 2px; // 1 less than borderRadius: 1 so the inner radius fits the outer
+	}
 
-		&:nth-child(n + 2) {
+	> *:nth-child(n + 2) {
+		&,
+		${ButtonCore} {
 			border-top-left-radius: 0;
 			border-bottom-left-radius: 0;
 		}
+	}
 
-		&:nth-child(-n + 2) {
+	> *:not(:last-child) {
+		&,
+		${ButtonCore} {
 			border-top-right-radius: 0;
 			border-bottom-right-radius: 0;
 		}
