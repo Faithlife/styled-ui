@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.59.1
+
+- Fix `SegmentedButtonGroup` corner radius on children when a wrapping element is used around child `Button`s.
+
 ## 5.59.0
 
 - Add optional prop to always show buttons on `NumberInput` components.
