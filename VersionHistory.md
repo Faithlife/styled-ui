@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.59.2
+
+- Fix `Helpbox` overriding the path color of every svg in every button.
+
 ## 5.59.1
 
 - Fix `SegmentedButtonGroup` corner radius on children when a wrapping element is used around child `Button`s.
