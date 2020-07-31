@@ -133,7 +133,7 @@ function variantCreator(backgroundColor, foregroundColor, closeIconColor) {
 			}
 		}
 
-		button {
+		${CloseButton} {
 			path {
 				fill: ${props => props.theme.closeIconColor || closeIconColor};
 			}
