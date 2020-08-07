@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18" viewBox="0 0 18 18">
+  <defs>
+    <path id="18px-trash-a" d="M5.5,16 C4.67157288,16 4,15.3284271 4,14.5 L4,5 L14,5 L14,14.5 C14,15.3284271 13.3284271,16 12.5,16 L5.5,16 Z M15,3 L15,5 L3,5 L3,3 L6.5,3 L7.5,2 L10.5,2 L11.5,3 L15,3 Z M10,6 L10,13 L11.5,13 L11.5,6 L10,6 Z M6.5,6 L6.5,13 L8,13 L8,6 L6.5,6 Z"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <use fill="#7A7A7A" xlink:href="#18px-trash-a"/>
+  </g>
+</svg>
