@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.60.0
+
+- Add more common icons
+
 ## 5.59.2
 
 - Fix `Helpbox` overriding the path color of every svg in every button.
