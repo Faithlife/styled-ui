@@ -1,6 +1,10 @@
 export { default as AddNewCircleFilled } from './AddNewCircleFilled.svg';
 export { default as AddNewCircleOutline } from './AddNewCircleOutline.svg';
 export { default as Calendar } from './Calendar.svg';
+export { default as CaretDown } from './CaretDown.svg';
+export { default as CaretLeft } from './CaretLeft.svg';
+export { default as CaretRight } from './CaretRight.svg';
+export { default as CaretUp } from './CaretUp.svg';
 export { default as Change } from './Change.svg';
 export { default as Checkmark } from './Checkmark.svg';
 export { default as Clear } from './Clear.svg';
