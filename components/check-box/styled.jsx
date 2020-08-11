@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 import { resetStyles } from '../utils';
+import { Box } from '../Box';
 
-export const CheckboxDiv = styled.div`
+export const CheckboxDiv = styled(Box)`
 	position: absolute;
 	border: solid 1px
 		${({ theme, themeOverrides }) => themeOverrides?.border ?? theme.colors.checkbox.border};
@@ -105,12 +106,4 @@ export const CheckedIndicator = styled.div`
 	}
 
 	${props => (props.isChecked === 'mixed' ? isMixedStyles : props.isChecked ? isCheckedStyles : '')};
-`;
-
-export const Label = styled.div`
-	margin-left: 22px;
-
-	& + & {
-		margin-left: 6px;
-	}
 `;

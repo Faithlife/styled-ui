@@ -1,20 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './styled';
+import { Text } from '../Text';
 
-export function CheckboxContent({ isChecked, title, children, disabled, themeOverrides }) {
+export function CheckboxContent({
+	isChecked,
+	title,
+	children,
+	disabled,
+	themeOverrides,
+	...props
+}) {
 	return (
-		<React.Fragment>
-			<Styled.CheckboxDiv disabled={disabled} themeOverrides={themeOverrides}>
+		<>
+			<Styled.CheckboxDiv disabled={disabled} themeOverrides={themeOverrides} {...props}>
 				<Styled.CheckedIndicator
 					isChecked={isChecked}
 					disabled={disabled}
 					themeOverrides={themeOverrides}
 				/>
 			</Styled.CheckboxDiv>
-			{title && <Styled.Label>{title}</Styled.Label>}
-			{children && <Styled.Label>{children}</Styled.Label>}
-		</React.Fragment>
+			{title && <Label>{title}</Label>}
+			{children && <Label>{children}</Label>}
+		</>
 	);
 }
 
@@ -24,3 +32,17 @@ CheckboxContent.propTypes = {
 	isChecked: PropTypes.oneOf([true, false, 'mixed']),
 	disabled: PropTypes.bool,
 };
+
+const Label = ({ children }) => (
+	<Text
+		css={`
+			margin-left: 22px;
+
+			& + & {
+				margin-left: 6px;
+			}
+		`}
+	>
+		{children}
+	</Text>
+);
