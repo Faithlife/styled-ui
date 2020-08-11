@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.60.0
+
+- Add more icons.
+- Improve `Checkbox` default styles and accept style props.
+
 ## 5.59.2
 
 - Fix `Helpbox` overriding the path color of every svg in every button.
