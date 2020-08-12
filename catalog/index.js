@@ -747,7 +747,7 @@ const pages = [
 				},
 			},
 			{
-				path: '/popover/vatiations-v6',
+				path: '/popover/variations-v6',
 				title: 'Popover Variations v6',
 				content: pageLoader(() => import('./popover/variations-v6.md')),
 				imports: {
