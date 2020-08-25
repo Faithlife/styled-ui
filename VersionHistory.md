@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.60.1
+
+- Use faithlife-react-popper fork to avoid a crash experienced by FaithlifeMedia when using a popover with SSR.
+
 ## 5.60.0
 
 - Add more icons.
