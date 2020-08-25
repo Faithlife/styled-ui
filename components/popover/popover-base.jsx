@@ -1,7 +1,7 @@
 import React, { Component, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { Popper } from 'react-popper';
+import { Popper } from 'faithlife-react-popper';
 import { deprecate } from '../utils/deprecate';
 import { mergeRefs } from '../utils/merge-refs';
 import { Box } from '../Box';

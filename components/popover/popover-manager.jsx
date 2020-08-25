@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Manager } from 'react-popper';
+import { Manager } from 'faithlife-react-popper';
 import { Box } from '../Box';
 import { PopoverContext } from './popper-helpers';
 
