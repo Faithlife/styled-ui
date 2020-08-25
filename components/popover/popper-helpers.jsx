@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Reference } from 'react-popper';
+import { Reference } from 'faithlife-react-popper';
 import { Box } from '../Box';
 
 export const PopoverContext = React.createContext();

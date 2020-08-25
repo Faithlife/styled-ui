@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { usePopper } from 'react-popper';
+import { usePopper } from 'faithlife-react-popper';
 import { useFocusAwayHandler } from '../shared-hooks/use-focus-away-handler';
 import { mergeRefs } from '../utils/merge-refs';
 import { PopoverContainer, PopoverArrow } from './styled';
