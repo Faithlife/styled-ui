@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.60.2
+
+- Reduce spacing between elements in Accordion.Header to match spec.
+- Use baseline text alignment in Accordion.Header to match spec.
+
 ## 5.60.1
 
 - Use faithlife-react-popper fork to avoid a crash experienced by FaithlifeMedia when using a popover with SSR.
