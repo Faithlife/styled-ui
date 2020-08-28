@@ -80,7 +80,7 @@ export function AccordionHeader({
 					hideArrows={shouldHideArrows}
 				>
 					{!shouldHideArrows && (
-						<Box marginRight={variant === 'minimal' ? 3 : 4} lineHeight={0} alignSelf="center">
+						<Box lineHeight={0} alignSelf="center">
 							{isExpanded ? <ChevronDown /> : <ChevronRight />}
 						</Box>
 					)}
@@ -154,7 +154,7 @@ const Button = styled(UtilityButton).attrs(({ isExpanded, panelId, headerId }) =
 	line-height: 1;
 `;
 
-const ButtonContent = styled(Box).attrs(() => ({ gridGap: 6 }))`
+const ButtonContent = styled(Box).attrs(() => ({ gridGap: 4 }))`
 	display: inline-grid;
 	grid-template-columns: min-content auto;
 	align-items: center;
