@@ -4,7 +4,7 @@ import { InferredTypeahead, Typeahead } from '../../components/text-input';
 import { Select, CreatableSelect } from '../../components/text-input-v2';
 import { DocgenTable } from '../docgen-table';
 import { Bootstrap, Button, Input, NumberInput, Modal, FilterInput } from '../../index';
-import { InferredTextFocusDemo, InferredSelectFocusDemo, AsyncSelectDemo } from './demos';
+import { InferredTextFocusDemo, InferredSelectFocusDemo, AsyncSelectDemo, CustomOptionsSelectDemo } from './demos';
 
 export const textInputPages = {
 	title: 'Input',
@@ -36,6 +36,7 @@ export const textInputPages = {
 				Select,
 				CreatableSelect,
 				AsyncSelectDemo,
+				CustomOptionsSelectDemo,
 				Modal,
 				Button,
 				DemoDiv: styled.div`

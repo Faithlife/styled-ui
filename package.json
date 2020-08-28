@@ -71,6 +71,7 @@
 		"react-scrollbar": "^0.5.4",
 		"react-select": "^2",
 		"react-transition-group": "^4.4.1",
+		"react-window": "^1.8.5",
 		"reactstrap": "^6.1.0",
 		"styled-system": "^5.1.1"
 	},
