@@ -157,6 +157,6 @@ const Button = styled(UtilityButton).attrs(({ isExpanded, panelId, headerId }) =
 const ButtonContent = styled(Box).attrs(() => ({ gridGap: 4 }))`
 	display: inline-grid;
 	grid-template-columns: min-content auto;
-	align-items: center;
+	align-items: baseline;
 	white-space: nowrap;
 `;
