@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { fonts, colors, thickness, mediaSizes } from '../../../components/shared-styles';
+import styled from 'styled-components';
+import { colors, thickness } from '../../../components/shared-styles';
 
 export const MenuItem = styled.div`
 	display: flex;

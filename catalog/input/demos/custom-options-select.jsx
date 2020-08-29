@@ -9,7 +9,7 @@ export function CustomOptionsSelectDemo() {
 		group => {
 			setSelection(group.value);
 		},
-		[setSelection]
+		[setSelection],
 	);
 
 	return (
@@ -19,12 +19,31 @@ export function CustomOptionsSelectDemo() {
 				onChange={handleGroupChanged}
 				isSearchable={false}
 				options={[
-					{ value: "washington", group: "Washington", subtitle: "yo", avatar:"https://files.logoscdn.com/v1/files/42382171/content.svg?signature=6V_cO8zkG4kob-qZTjNlJkCuNTA" },
-					{ value: "california", group: "California", subtitle: "yo", avatar:"https://files.logoscdn.com/v1/files/42382171/content.svg?signature=6V_cO8zkG4kob-qZTjNlJkCuNTA" },
-					{ value: "Texas", group: "Texas", subtitle: "yo", avatar:"https://files.logoscdn.com/v1/files/42382171/content.svg?signature=6V_cO8zkG4kob-qZTjNlJkCuNTA" }
+					{
+						value: 'employees',
+						group: 'Faithlife Employees',
+						subtitle: 'Organization',
+						avatar:
+							'https://files.logoscdn.com/v1/files/42382171/content.svg?signature=6V_cO8zkG4kob-qZTjNlJkCuNTA',
+					},
+					{
+						value: 'coders',
+						group: 'Faithlife Coders',
+						subtitle: 'General',
+						avatar:
+							'https://files.logoscdn.com/v1/files/42382171/content.svg?signature=6V_cO8zkG4kob-qZTjNlJkCuNTA',
+					},
+					{
+						value: 'ecc',
+						group: 'Example Community Church',
+						subtitle: 'Church',
+						avatar:
+							'https://files.logoscdn.com/v1/files/42382171/content.svg?signature=6V_cO8zkG4kob-qZTjNlJkCuNTA',
+					},
 				]}
 				placeholder="Choose a state..."
 				formatOptionLabel={MenuItem}
+				components={{ SingleValue: SelectedItem }}
 			/>
 		</div>
 	);
@@ -40,4 +59,8 @@ function MenuItem({ value, group, subtitle, avatar }) {
 			</Styled.GroupInfo>
 		</Styled.MenuItem>
 	);
+}
+
+function SelectedItem({ data }) {
+	return <div>{data.group}</div>;
 }
