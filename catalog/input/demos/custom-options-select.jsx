@@ -49,7 +49,7 @@ export function CustomOptionsSelectDemo() {
 							'https://files.logoscdn.com/v1/files/42382171/content.svg?signature=6V_cO8zkG4kob-qZTjNlJkCuNTA',
 					},
 				]}
-				placeholder="Choose a state..."
+				placeholder="Choose a group..."
 				formatOptionLabel={MenuItem}
 				components={{ SingleValue: SelectedItem }}
 			/>
