@@ -12,12 +12,20 @@ export function CustomOptionsSelectDemo() {
 		[setSelection],
 	);
 
+	const customStyles = {
+		option: (provided, state) => ({
+			...provided,
+			padding: 0,
+		}),
+	};
+
 	return (
 		<div>
 			<div>Current selection: {selection}</div>
 			<Select
 				onChange={handleGroupChanged}
 				isSearchable={false}
+				styles={customStyles}
 				options={[
 					{
 						value: 'employees',
@@ -49,7 +57,7 @@ export function CustomOptionsSelectDemo() {
 	);
 }
 
-function MenuItem({ value, group, subtitle, avatar }) {
+function MenuItem({ group, subtitle, avatar }) {
 	return (
 		<Styled.MenuItem>
 			<Styled.Avatar src={avatar} />
@@ -62,5 +70,5 @@ function MenuItem({ value, group, subtitle, avatar }) {
 }
 
 function SelectedItem({ data }) {
-	return <div>{data.group}</div>;
+	return <div>To: {data.group}</div>;
 }
