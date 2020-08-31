@@ -147,3 +147,11 @@ state: { tags: [] }
 ---
 <AsyncSelectDemo />
 ```
+
+### Custom Options select
+
+```react
+showSource: true
+---
+<CustomOptionsSelectDemo />
+```
