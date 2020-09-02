@@ -177,6 +177,7 @@ export class DatePickerInput extends PureComponent {
 		return (
 			<Styled.Container>
 				<Input
+					{...this.props}
 					type="text"
 					onBlur={this.handleBlur}
 					onChange={this.handleChange}
