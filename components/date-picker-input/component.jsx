@@ -159,7 +159,7 @@ export class DatePickerInput extends PureComponent {
 	);
 
 	render() {
-		const { disabled, defaultSelectedDate, placement, styleOverrides } = this.props;
+		const { disabled, defaultSelectedDate, placement, styleOverrides, ...rest } = this.props;
 		const { text, selectedDate, showCalendar } = this.state;
 
 		const defaultValue = defaultSelectedDate ? this.formatDate(defaultSelectedDate) : '';
@@ -177,6 +177,7 @@ export class DatePickerInput extends PureComponent {
 		return (
 			<Styled.Container>
 				<Input
+					{...rest}
 					type="text"
 					onBlur={this.handleBlur}
 					onChange={this.handleChange}
