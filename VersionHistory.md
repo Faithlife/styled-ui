@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.60.3
+
+- Pass through props in `DatePickerInput` (id, aria, etc.)
+
 ## 5.60.2
 
 - Reduce spacing between elements in Accordion.Header to match spec.
