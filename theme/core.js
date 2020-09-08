@@ -162,7 +162,7 @@ colors.input = {
 	placeholderForeground: colors.gray22,
 	background: 'white',
 	backgroundReadOnly: colors.gray8,
-	icon: colors.gray22,
+	icon: colors.gray52,
 	iconFocused: colors.gray34,
 };
 
