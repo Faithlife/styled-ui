@@ -156,13 +156,13 @@ colors.tab = {
 
 colors.input = {
 	foreground: colors.gray66,
-	border: colors.gray22,
+	border: colors.gray34,
 	borderFocused: '#278ed4',
 	shadowFocused: '#d0e6f6',
 	placeholderForeground: colors.gray22,
 	background: 'white',
 	backgroundReadOnly: colors.gray8,
-	icon: colors.gray22,
+	icon: colors.gray52,
 	iconFocused: colors.gray34,
 };
 
