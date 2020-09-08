@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.60.4
+
+- Update `Input` border and icon color to spec
+
 ## 5.60.3
 
 - Pass through props in `DatePickerInput` (id, aria, etc.)
