@@ -106,7 +106,6 @@ export const InputContainer = styled.div`
 	border-bottom: ${({ isFocused }) => (isFocused ? 'solid' : 'dashed')} ${thickness.two}
 		${colors.blueBase};
 
-
 	&& > input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button {
 		appearance: none;
