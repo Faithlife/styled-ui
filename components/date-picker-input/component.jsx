@@ -24,6 +24,7 @@ export function DatePickerInput({
 	styleOverrides,
 	minDate,
 	maxDate,
+	children,
 	...rest
 }) {
 	const popoverRef = useRef();
@@ -94,9 +95,21 @@ export function DatePickerInput({
 		[validate, onChange],
 	);
 
+	const configChildren = React.Children.toArray(children).filter(
+		child => child.type.childConfigComponent,
+	);
+	const popoverProps = configChildren.find(
+		child => child.type.childConfigComponent === DatePickerInputPopover.childConfigComponent,
+	)?.props;
+	const buttonProps = configChildren.find(
+		child => child.type.childConfigComponent === DatePickerInputButton.childConfigComponent,
+	)?.props;
+
+	console.log(React.Children.toArray(children), configChildren, buttonProps);
+
 	const defaultValue = defaultSelectedDate ? formatDate(defaultSelectedDate) : '';
 	const formattedDate = currentDate ? formatDate(currentDate) : defaultValue;
-	const value = text !== null && text !== undefined ? text : formattedDate;
+	const value = text ?? formattedDate;
 	const inputStyleOverrides = { width: styleOverrides.inputWidth };
 	const popoverStyleOverrides = {
 		hideShadow: styleOverrides.hideShadow,
@@ -124,9 +137,10 @@ export function DatePickerInput({
 				onClick={() => {
 					setIsPopoverOpen(isOpen => !isOpen);
 				}}
+				{...(buttonProps ? buttonProps : {})}
 			>
 				<Styled.CalendarIconContainer>
-					<CalendarIcon style={{ color: colors.gray52 }} />
+					<CalendarIcon />
 				</Styled.CalendarIconContainer>
 			</Styled.CalendarButton>
 			{isPopoverOpen && (
@@ -137,6 +151,7 @@ export function DatePickerInput({
 					onFocusAway={() => {
 						setIsPopoverOpen(false);
 					}}
+					{...(popoverProps ? popoverProps : {})}
 				>
 					<Styled.DateTime>
 						<DatePicker
@@ -200,3 +215,16 @@ DatePickerInput.propTypes = {
 		zIndex: PropTypes.number,
 	}),
 };
+
+function DatePickerInputPopover(props) {
+	return <div />;
+}
+DatePickerInputPopover.childConfigComponent = 'DatePickerInputPopover';
+
+function DatePickerInputButton(props) {
+	return <div />;
+}
+DatePickerInputButton.childConfigComponent = 'DatePickerInputButton';
+
+DatePickerInput.Popover = DatePickerInputPopover;
+DatePickerInput.Button = DatePickerInputButton;

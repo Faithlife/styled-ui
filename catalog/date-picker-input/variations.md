@@ -37,13 +37,14 @@ state: { selectedDate: null }
 
 ## Custom props on Date Picker
 
-Useful for adding IDs to assign labels.
+Extra props on the DatePicker Input will be passed to the Input. Useful for adding IDs to assign labels.
+Additional config components can be used to pass props to the button and popover.
 
 ```react
 showSource: true
 state: { selectedDate: null }
 ---
-<div>
+<div style={{ overflowY: 'hidden' }}>
 	<label htmlFor="date-picker-input">The selected date is {dateFunctions.format(state.selectedDate, 'MM-dd-yyyy')}</label>
 	<DatePickerInput
 		id="date-picker-input"
@@ -52,7 +53,9 @@ state: { selectedDate: null }
 		dateFunctions={dateFunctions}
 		parseUserDateString={parseUserDateString}
 		validate={() => true}
-		placement={"left-start"}
-	/>
+	>
+		<DatePickerInput.Button color="green4" />
+		<DatePickerInput.Popover container="body" placement="left-start" />
+	</DatePickerInput>
 </div>
 ```

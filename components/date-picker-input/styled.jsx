@@ -13,7 +13,9 @@ export const Container = styled.div`
 	color: ${colors.flGray};
 `;
 
-export const CalendarButton = styled(UtilityButton)`
+export const CalendarButton = styled(UtilityButton).attrs(({ color }) => ({
+	color: color ?? 'gray52',
+}))`
 	position: absolute;
 	top: 0;
 	right: 7px;
