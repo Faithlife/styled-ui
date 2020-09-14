@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { UtilityButton } from '../button';
 import { colors } from '../shared-styles';
 
 export const Container = styled.div`
@@ -12,7 +13,7 @@ export const Container = styled.div`
 	color: ${colors.flGray};
 `;
 
-export const CalendarButton = styled.div`
+export const CalendarButton = styled(UtilityButton)`
 	position: absolute;
 	top: 0;
 	right: 7px;
@@ -20,7 +21,7 @@ export const CalendarButton = styled.div`
 `;
 
 export const CalendarIconContainer = styled.div`
-	padding: 7px 0;
+	padding: 7px 0 0 0;
 `;
 
 export const DateTime = styled.div`
