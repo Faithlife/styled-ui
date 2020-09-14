@@ -4,7 +4,6 @@ import { Popover } from '../popover-v6';
 import { PlacementOptionsProps } from '../popover/popper-helpers';
 import { Calendar as CalendarIcon } from '../icons';
 import { Input } from '../input';
-import { colors } from '../shared-styles';
 import { dateFunctionProps } from '../date-picker/date-function-props';
 import { DatePicker } from '../date-picker/component';
 import * as Styled from './styled';
