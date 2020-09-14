@@ -37,6 +37,7 @@ export class DatePickerInput extends PureComponent {
 		placement: PlacementOptionsProps,
 		minDate: PropTypes.instanceOf(Date),
 		maxDate: PropTypes.instanceOf(Date),
+		popoverContainer: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 		/** Style overrides, inputWidth is applied to the input */
 		styleOverrides: PropTypes.shape({
 			inputWidth: PropTypes.string,
@@ -159,7 +160,14 @@ export class DatePickerInput extends PureComponent {
 	);
 
 	render() {
-		const { disabled, defaultSelectedDate, placement, styleOverrides, ...rest } = this.props;
+		const {
+			disabled,
+			defaultSelectedDate,
+			placement,
+			styleOverrides,
+			popoverContainer,
+			...rest
+		} = this.props;
 		const { text, selectedDate, showCalendar } = this.state;
 
 		const defaultValue = defaultSelectedDate ? this.formatDate(defaultSelectedDate) : '';
@@ -197,6 +205,7 @@ export class DatePickerInput extends PureComponent {
 						reference={this._popoverRef.current}
 						placement={placement}
 						styleOverrides={popoverStyleOverrides}
+						container={popoverContainer}
 					>
 						{/*eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
 						<div onClick={this.handlePopoutClicked}>
