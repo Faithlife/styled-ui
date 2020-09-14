@@ -9,6 +9,7 @@ export const ParameterInputBox = React.forwardRef((props, ref) => {
 		onChange,
 		formatValue,
 		width,
+		height,
 		accessibilityLabel,
 		styleOverrides,
 		onFocus,
@@ -40,6 +41,7 @@ export const ParameterInputBox = React.forwardRef((props, ref) => {
 	return (
 		<Styled.InputContainer
 			width={width}
+			height={height}
 			isFocused={isFocused}
 			styleOverrides={{ width, ...styleOverrides }}
 		>
@@ -64,6 +66,7 @@ ParameterInputBox.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	formatValue: PropTypes.func,
 	width: PropTypes.string,
+	height: PropTypes.string,
 	accessibilityLabel: PropTypes.string.isRequired,
 	styleOverrides: PropTypes.shape({
 		fontSize: PropTypes.string,

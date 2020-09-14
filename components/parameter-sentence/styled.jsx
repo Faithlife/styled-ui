@@ -99,13 +99,13 @@ export const InputContainer = styled.div`
 	display: inline-block;
 	position: relative;
 	width: ${props => props.width};
+	height: ${props => props.height || props.styleOverrides.fontSize || '16px'};
 
 	${selectStyling};
 
 	border-bottom: ${({ isFocused }) => (isFocused ? 'solid' : 'dashed')} ${thickness.two}
 		${colors.blueBase};
 
-	height: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
 
 	&& > input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button {
