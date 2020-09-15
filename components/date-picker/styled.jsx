@@ -4,6 +4,7 @@ import { colors } from '../shared-styles';
 export const ChangeMonth = styled.button`
 	display: flex;
 	justify-content: space-around;
+	align-items: center;
 	border: none;
 	margin: 0;
 	padding: 0;
