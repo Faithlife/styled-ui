@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.61.0
+
+- Add height prop to `ParameterInput`
+- Match `Input` placeholder to spec
+
 ## 5.60.4
 
 - Update `Input` border and icon color to spec
