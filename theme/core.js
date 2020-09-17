@@ -199,6 +199,10 @@ colors.checkbox = {
 	disabledBorder: colors.gray22,
 };
 
+colors.datePickerInput = {
+	iconColor: colors.gray52,
+};
+
 const fonts = {
 	normal: '"Source Sans Pro", sans-serif',
 };

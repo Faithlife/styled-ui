@@ -13,8 +13,8 @@ export const Container = styled.div`
 	color: ${colors.flGray};
 `;
 
-export const CalendarButton = styled(UtilityButton).attrs(({ color }) => ({
-	color: color ?? 'gray52',
+export const CalendarButton = styled(UtilityButton).attrs(({ theme, color }) => ({
+	color: color ?? theme.colors.datePickerInput.iconColor,
 }))`
 	position: absolute;
 	top: 0;

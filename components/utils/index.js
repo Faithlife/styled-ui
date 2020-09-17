@@ -3,6 +3,7 @@ export { forwardClassRef } from './forwardref-wrapper';
 export { TransitionStatuses, TransitionTimeouts } from './transition-group-utils';
 export { filterChildProps } from './filter-props';
 export { deprecate, deprecateComponent, deprecateProp } from './deprecate';
+export { getConfigProps } from './get-config-props';
 
 export function getVariation(variant, obj) {
 	if (variant) {
