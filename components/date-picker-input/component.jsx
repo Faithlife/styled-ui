@@ -77,7 +77,7 @@ export function DatePickerInput({
 				return;
 			}
 
-			this.setState({ selectedDate });
+			setCurrentDate(selectedDate);
 			onChange(selectedDate);
 		},
 		[parseUserDateString, validate, onChange],
