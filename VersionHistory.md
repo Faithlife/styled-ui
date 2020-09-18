@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.62.0
+
+- Center paging buttons in `DatePicker`
+- Add configuration components to `DatePickerInput`
+
 ## 5.61.0
 
 - Add height prop to `ParameterInput`
