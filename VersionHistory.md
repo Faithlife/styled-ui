@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.62.1
+
+- Render `Select` menu contents in a `ThemedBox` to ensure theme defaults propagate to menu contents.
+
 ## 5.62.0
 
 - Center paging buttons in `DatePicker`
