@@ -6,6 +6,7 @@ import ReactSelect, {
 import { colors } from '../shared-styles';
 import { ChevronDown } from '../icons/12px';
 import { DebouncedSelectAsync, DebouncedSelectAsyncCreatable } from './debounced-async';
+import { ThemedBox } from '../ThemedBox';
 import { useTheme } from '../../theme';
 
 const selectStyles = (props, theme) => {
@@ -140,14 +141,18 @@ const defaultComponents = {
 	Option: ({ children, ...props }) => (
 		<reactSelectComponents.Option {...props}>{children || '\u200B'}</reactSelectComponents.Option>
 	),
-};
 
-const DropdownIndicator = props => {
-	return (
+	DropdownIndicator: props => (
 		<reactSelectComponents.DropdownIndicator {...props}>
 			<ChevronDown color="currentColor" />
 		</reactSelectComponents.DropdownIndicator>
-	);
+	),
+
+	Menu: props => (
+		<ThemedBox>
+			<reactSelectComponents.Menu {...props} />
+		</ThemedBox>
+	),
 };
 
 function noOptionsMessage({ inputValue }) {
@@ -191,7 +196,7 @@ export const Select = React.forwardRef(({ components = {}, ...props }, ref) => {
 			ref={ref}
 			classNamePrefix="fl-select"
 			theme={selectTheme}
-			components={{ DropdownIndicator, ...defaultComponents, ...components }}
+			components={{ ...defaultComponents, ...components }}
 			noOptionsMessage={noOptionsMessage}
 			menuPortalTarget={body}
 			{...props}
@@ -216,7 +221,7 @@ export const CreatableSelect = React.forwardRef(({ components = {}, ...props }, 
 			classNamePrefix="fl-select"
 			theme={selectTheme}
 			formatCreateLabel={node => <span>New entry: {node}</span>}
-			components={{ DropdownIndicator, ...defaultComponents, ...components }}
+			components={{ ...defaultComponents, ...components }}
 			noOptionsMessage={noOptionsMessage}
 			menuPortalTarget={body}
 			{...props}
@@ -241,7 +246,7 @@ export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...prop
 			allowCreateWhileLoading={false}
 			classNamePrefix="fl-select"
 			theme={selectTheme}
-			components={{ DropdownIndicator, ...defaultComponents, ...components }}
+			components={{ ...defaultComponents, ...components }}
 			formatCreateLabel={node => <span>New entry: {node}</span>}
 			noOptionsMessage={noOptionsMessage}
 			menuPortalTarget={body}
@@ -266,7 +271,7 @@ export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref)
 			ref={ref}
 			classNamePrefix="fl-select"
 			theme={selectTheme}
-			components={{ DropdownIndicator, ...defaultComponents, ...components }}
+			components={{ ...defaultComponents, ...components }}
 			noOptionsMessage={noOptionsMessage}
 			menuPortalTarget={body}
 			{...props}
