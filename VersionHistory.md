@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.62.2
+
+- Render `Popover` menu contents in a `ThemedBox` to ensure theme defaults propagate to popover contents.
+
 ## 5.62.1
 
 - Render `Select` menu contents in a `ThemedBox` to ensure theme defaults propagate to menu contents.
