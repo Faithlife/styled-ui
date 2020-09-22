@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { Box } from '../Box';
+import { ThemedBox } from '../ThemedBox';
 
-export const PopoverArrow = styled(Box)`
+export const PopoverArrow = styled(ThemedBox)`
 	position: absolute;
 	width: 25px;
 	height: 25px;
@@ -19,7 +19,7 @@ export const PopoverArrow = styled(Box)`
 	}
 `;
 
-export const PopoverContainer = styled(Box)`
+export const PopoverContainer = styled(ThemedBox)`
 	position: absolute;
 	box-shadow: ${({ boxShadow, theme }) => boxShadow ?? theme.shadows[1]};
 	border-radius: ${({ borderRadius, theme }) => borderRadius ?? theme.radii[1]};

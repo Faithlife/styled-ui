@@ -5,6 +5,7 @@ import { Popper } from 'faithlife-react-popper';
 import { deprecate } from '../utils/deprecate';
 import { mergeRefs } from '../utils/merge-refs';
 import { Box } from '../Box';
+import { ThemedBox } from '../ThemedBox';
 import { useFocusAwayHandler } from '../shared-hooks';
 import {
 	PopoverContext,
@@ -175,7 +176,7 @@ function PopoverCore({
 			strategy={positionFixed ? 'fixed' : 'absolute'}
 		>
 			{({ ref, style, placement, arrowProps }) => (
-				<Box
+				<ThemedBox
 					ref={mergeRefs(ref, focusRef)}
 					placement={placement}
 					style={{
@@ -188,7 +189,7 @@ function PopoverCore({
 					border={styleOverrides.border ?? 'none'}
 					borderRadius={styleOverrides.borderRadius ?? 0}
 					boxShadow={styleOverrides.hideShadow ? 0 : 1}
-					color={theme?.textColor ?? ''}
+					color={theme?.textColor ?? undefined}
 					fontSize={styleOverrides.fontSize ?? 'medium'}
 					fontWeight={styleOverrides.fontWeight ?? 'normal'}
 					height={styleOverrides.height ?? 'auto'}
@@ -196,9 +197,9 @@ function PopoverCore({
 					margin={styleOverrides.margin ?? 0}
 					maxHeight={styleOverrides.maxHeight ?? maxHeight}
 					maxWidth={styleOverrides.maxWidth ?? maxWidth}
-					minHeight={styleOverrides.minHeight ?? ''}
-					minWidth={styleOverrides.minWidth ?? ''}
-					outline={styleOverrides.outline ?? ''}
+					minHeight={styleOverrides.minHeight ?? undefined}
+					minWidth={styleOverrides.minWidth ?? undefined}
+					outline={styleOverrides.outline ?? undefined}
 					padding={styleOverrides.padding ?? 0}
 					position="absolute"
 					whiteSpace="normal"
@@ -241,7 +242,7 @@ function PopoverCore({
 							`}
 						/>
 					)}
-				</Box>
+				</ThemedBox>
 			)}
 		</Popper>
 	);
