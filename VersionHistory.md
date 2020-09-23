@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.63.0
+
+- Expose `resize` prop on the `Input` component, applicable for textareas.
+
 ## 5.62.2
 
 - Render `Popover` menu contents in a `ThemedBox` to ensure theme defaults propagate to popover contents.
