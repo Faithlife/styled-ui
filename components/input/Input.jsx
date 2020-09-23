@@ -26,6 +26,7 @@ const Input = React.memo(
 			onFocus,
 			selectOnFocus,
 			textarea,
+			resize,
 			forwardedRef, // eslint-disable-line react/prop-types
 			...inputProps
 		} = props;
@@ -79,6 +80,7 @@ const Input = React.memo(
 				ref={ref || forwardedRef}
 				textStyle={variation === 'large' ? 'c.18' : 'c.16'}
 				underlineColor="blue4"
+				resize={resize}
 				{...inputProps}
 			/>
 		);
@@ -111,6 +113,9 @@ Input.propTypes = {
 	inline: PropTypes.bool,
 	/** Textarea input variation */
 	textarea: PropTypes.bool,
+	/** Configure resizing for textarea */
+	/** Enum with values: 'both' (default), 'vertical', 'horizontal', 'none' */
+	resize: PropTypes.oneOfType(['both', 'vertical', 'horizontal', 'none']),
 	...common.propTypes,
 	...typography.propTypes,
 	...systemPropTypes.layout,
@@ -121,7 +126,7 @@ Input.propTypes = {
 export { Input };
 
 const StyledInput = styled.input(
-	({ theme, variant, styleOverrides = {} }) => css`
+	({ theme, variant, resize, styleOverrides = {} }) => css`
 	${resetStyles};
 	${textStyle};
 
@@ -133,6 +138,8 @@ const StyledInput = styled.input(
 	border-radius: ${theme.radii[1]};
 	border-color: ${theme.colors.input.border};
 	color: ${theme.colors.input.foreground};
+
+	resize: ${resize};
 
 	${'height' in styleOverrides &&
 		css`
