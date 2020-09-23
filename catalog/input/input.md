@@ -53,7 +53,7 @@ showSource: true
 state: { value: '' }
 ---
 <InputSpacer>
-	<Input textarea placeholder='My favorite state is...' value={state.value} onChange={event => setState({ value: event.target.value })} height="120px" width="280px" />
+	<Input textarea placeholder='My favorite state is...' value={state.value} onChange={event => setState({ value: event.target.value })} resize="horizontal" height="120px" width="280px" />
 	<Button variant="primary" size="small">Search</Button>
 </InputSpacer>
 ```
