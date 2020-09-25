@@ -58,7 +58,6 @@ export function DatePickerInput({
 
 	const handleFocus = useCallback(
 		event => {
-			event.target.select();
 			setText(null);
 			if (onFocus) {
 				onFocus(event);
@@ -122,6 +121,7 @@ export function DatePickerInput({
 				disabled={disabled}
 				borderColor={styleOverrides.inputBorderColor}
 				styleOverrides={inputStyleOverrides}
+				selectOnFocus
 			/>
 			<Styled.CalendarButton
 				ref={popoverRef}
