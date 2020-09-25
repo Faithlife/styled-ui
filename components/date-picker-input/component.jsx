@@ -58,6 +58,7 @@ export function DatePickerInput({
 
 	const handleFocus = useCallback(
 		event => {
+			event.target.select();
 			setText(null);
 			if (onFocus) {
 				onFocus(event);
