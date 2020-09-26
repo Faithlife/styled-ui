@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.63.1
+
+- Use Styled-System for handling the `resize` prop.
+
 ## 5.63.0
 
 - Expose `resize` prop on the `Input` component, applicable for textareas.
