@@ -71,6 +71,7 @@ showSource: true
 	</Button>
 	<Button variant="primary" size="small" icon={<GearIcon />} />
 	<Button variant="transparent" size="small" icon={<GearIcon />} />
+	<Button variant="minorTransparent" size="small" icon={<GearIcon />} />
 </ButtonDemo>
 ```
 
