@@ -121,6 +121,7 @@ export function DatePickerInput({
 				disabled={disabled}
 				borderColor={styleOverrides.inputBorderColor}
 				styleOverrides={inputStyleOverrides}
+				selectOnFocus
 			/>
 			<Styled.CalendarButton
 				ref={popoverRef}
