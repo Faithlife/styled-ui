@@ -326,7 +326,7 @@ export class Slider extends PureComponent {
 							<Styled.Stop
 								available={
 									!hideAvailableStops &&
-									(index > 0 && !(index >= maxValue) && !(index === stopCount - 1))
+									(index > (minValue ?? 0) && !(index >= maxValue) && !(index === stopCount - 1))
 								}
 								minimumAvailable={index === minValue && minValue > 0}
 								key={index}
