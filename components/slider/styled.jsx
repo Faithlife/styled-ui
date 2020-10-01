@@ -25,8 +25,13 @@ export const ThumbContainer = styled.div`
 `;
 
 export const Stop = styled.div`
-	height: 8px;
-	width: 3px;
+	height: ${props => (props.minimumAvailable ? '4px' : '8px')};
+	border-radius: ${props => (props.minimumAvailable ? '50%' : 0)};
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-left-width: ${props => (props.minimumAvailable ? '0' : '1px')};
+	border-right-width: ${props => (props.minimumAvailable ? '0' : '1px')};
+	width: ${props => (props.minimumAvailable ? '4px' : '2px')};
 	background-color: ${props =>
 		props.available || props.minimumAvailable ? '#fff' : 'transparent'};
 `;
