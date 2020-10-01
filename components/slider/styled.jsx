@@ -25,15 +25,23 @@ export const ThumbContainer = styled.div`
 `;
 
 export const Stop = styled.div`
+	position: relative;
 	height: ${props => (props.minimumAvailable ? '4px' : '8px')};
 	border-radius: ${props => (props.minimumAvailable ? '50%' : 0)};
-	border-left: 1px solid transparent;
-	border-right: 1px solid transparent;
-	border-left-width: ${props => (props.minimumAvailable ? '0' : '1px')};
-	border-right-width: ${props => (props.minimumAvailable ? '0' : '1px')};
-	width: ${props => (props.minimumAvailable ? '4px' : '2px')};
+	width: 4px;
 	background-color: ${props =>
-		props.available || props.minimumAvailable ? '#fff' : 'transparent'};
+		props.minimumAvailable && !props.available ? '#fff' : 'transparent'};
+
+	&:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 1px;
+		right: 1px;
+		background-color: ${props =>
+			props.available && !props.minimumAvailable ? '#fff' : 'transparent'};
+	}
 `;
 
 export const ThumbAnchor = styled.div`
