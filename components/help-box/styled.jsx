@@ -29,7 +29,7 @@ export const HelpBox = variantCreator(
 	word-break: break-word;
 
 	${IconDiv} {
-		margin: 15px -4px 0px 16px;
+		margin: ${({ hasIcon }) => (hasIcon ? '15px -4px 0px 16px' : '15px 4px 0px 0px')};
 
 		svg {
 			height: 18px;
@@ -124,7 +124,6 @@ function variantCreator(backgroundColor, foregroundColor, closeIconColor) {
 		${resetStyles};
 
 		background-color: ${props => props.theme.backgroundColor || backgroundColor};
-		border: solid 1px ${props => props.theme.foregroundColor || foregroundColor};
 		border-left: solid ${thickness.four} ${props => props.theme.foregroundColor || foregroundColor};
 
 		${IconDiv} {
