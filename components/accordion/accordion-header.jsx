@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { colors } from '../shared-styles';
 import { Text } from '../Text';
 import { Box } from '../Box';
 import { UtilityButton } from '../button';
