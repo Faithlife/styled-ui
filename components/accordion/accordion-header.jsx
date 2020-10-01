@@ -158,11 +158,11 @@ const Button = styled(UtilityButton).attrs(({ isExpanded, panelId, headerId, wid
 			color: ${theme.colors.button.primaryHover};
 
 			span {
-				color: ${theme.colors.button.primaryHover};
+				color: inherit;
 			}
 
 			& svg path {
-				fill: ${theme.colors.button.primaryHover};
+				fill: currentColor;
 			}
 		}
 	`}
