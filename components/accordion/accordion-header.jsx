@@ -146,7 +146,6 @@ const Button = styled(UtilityButton).attrs(({ isExpanded, panelId, headerId, wid
 	'aria-expanded': isExpanded,
 	'aria-controls': `accordion-panel-${panelId}`,
 	id: `accordion-header-${headerId}`,
-	width,
 }))`
 	${({ theme }) => css`
 		height: 100%;
