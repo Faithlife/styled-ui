@@ -91,7 +91,7 @@ export function AccordionHeader({
 							<Text
 								textStyle={variant === 'minimal' ? 'ui.14' : 'ui.16'}
 								display="grid"
-								color="inherit"
+								color="accordion.sectionHeaderTitle"
 								fontWeight="semibold"
 								lineHeight="16px"
 							>
@@ -102,7 +102,7 @@ export function AccordionHeader({
 							<Text
 								textStyle="ui.14"
 								display="block"
-								color="inherit"
+								color="accordion.sectionHeaderSubtitle"
 								overflow="hidden"
 								textOverflow="ellipsis"
 								lineHeight="16px"
@@ -154,8 +154,14 @@ const Button = styled(UtilityButton).attrs(({ isExpanded, panelId, headerId, wid
 	display: flex;
 	align-items: baseline;
 	line-height: 1;
+
 	&:hover {
 		color: ${colors.blueDark};
+
+		span {
+			color: ${colors.blueDark};
+		}
+
 		& svg path {
 			fill: ${colors.blueDark};
 		}
