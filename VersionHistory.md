@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.64.0
+
+- Update `Slider` visuals to use round indicators for minimum values and slightly thinner stop marks.
+- Update `DatePickerInput` to select text on focus.
+
 ## 5.63.1
 
 - Use Styled-System for handling the `resize` prop.
