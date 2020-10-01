@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { colors } from '../shared-styles';
 import { Text } from '../Text';
 import { Box } from '../Box';
@@ -149,23 +149,25 @@ const Button = styled(UtilityButton).attrs(({ isExpanded, panelId, headerId, wid
 	id: `accordion-header-${headerId}`,
 	width,
 }))`
-	height: 100%;
-	text-align: left;
-	display: flex;
-	align-items: baseline;
-	line-height: 1;
+	${({ theme }) => css`
+		height: 100%;
+		text-align: left;
+		display: flex;
+		align-items: baseline;
+		line-height: 1;
 
-	&:hover {
-		color: ${colors.blueDark};
+		&:hover {
+			color: ${theme.colors.button.primaryHover};
 
-		span {
-			color: ${colors.blueDark};
+			span {
+				color: ${theme.colors.button.primaryHover};
+			}
+
+			& svg path {
+				fill: ${theme.colors.button.primaryHover};
+			}
 		}
-
-		& svg path {
-			fill: ${colors.blueDark};
-		}
-	}
+	`}
 `;
 
 const ButtonContent = styled(Box).attrs(() => ({ gridGap: 4 }))`
