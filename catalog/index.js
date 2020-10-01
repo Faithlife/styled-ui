@@ -528,6 +528,7 @@ const pages = [
 				imports: {
 					HelpBox,
 					Button,
+					Stack,
 				},
 			},
 			{

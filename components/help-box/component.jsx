@@ -36,6 +36,7 @@ export function HelpBox({
 			warning={helpBoxProps.warning}
 			minor={helpBoxProps.minor}
 			stacked={stacked}
+			hasIcon={(!hideIcon && !helpBoxProps.minor) || showLightBulb}
 			{...filteredProps}
 		>
 			{(showLightBulb && <Styled.BulbIcon />) ||
