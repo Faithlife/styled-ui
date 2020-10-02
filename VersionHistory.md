@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.65.0
+
+- Update `Accordion` with smaller hit targets on desktop, add hover state.
+
 ## 5.64.0
 
 - Update `Slider` visuals to use round indicators for minimum values and slightly thinner stop marks.
