@@ -147,13 +147,13 @@ const Button = styled(UtilityButton).attrs(({ isExpanded, panelId, headerId }) =
 	'aria-controls': `accordion-panel-${panelId}`,
 	id: `accordion-header-${headerId}`,
 }))`
-	${({ theme }) => css`
-		height: 100%;
-		text-align: left;
-		display: flex;
-		align-items: baseline;
-		line-height: 1;
+	height: 100%;
+	text-align: left;
+	display: flex;
+	align-items: baseline;
+	line-height: 1;
 
+	${({ theme }) => css`
 		&:hover {
 			color: ${theme.colors.button.primaryHover};
 
