@@ -87,7 +87,7 @@ export function AccordionHeader({
 					)}
 					<ButtonContent>
 						{children ? (
-							<Text
+							<HoverableText
 								textStyle={variant === 'minimal' ? 'ui.14' : 'ui.16'}
 								display="grid"
 								color="accordion.sectionHeaderTitle"
@@ -95,10 +95,10 @@ export function AccordionHeader({
 								lineHeight="16px"
 							>
 								{children}
-							</Text>
+							</HoverableText>
 						) : null}
 						{subtitle ? (
-							<Text
+							<HoverableText
 								textStyle="ui.14"
 								display="block"
 								color="accordion.sectionHeaderSubtitle"
@@ -107,7 +107,7 @@ export function AccordionHeader({
 								lineHeight="16px"
 							>
 								{subtitle}
-							</Text>
+							</HoverableText>
 						) : null}
 					</ButtonContent>
 				</Button>
@@ -157,15 +157,17 @@ const Button = styled(UtilityButton).attrs(({ isExpanded, panelId, headerId }) =
 		&:hover {
 			color: ${theme.colors.button.primaryHover};
 
-			span {
-				color: inherit;
-			}
-
-			& svg path {
+			path {
 				fill: currentColor;
 			}
 		}
 	`}
+`;
+
+const HoverableText = styled(Text)`
+	${Button}:hover & {
+		color: inherit;
+	}
 `;
 
 const ButtonContent = styled(Box).attrs(() => ({ gridGap: 4 }))`
