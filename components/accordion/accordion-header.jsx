@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Text } from '../Text';
 import { Box } from '../Box';
 import { UtilityButton } from '../button';
@@ -78,6 +78,7 @@ export function AccordionHeader({
 					paddingX={variant === 'minimal' ? 4 : [5, 6]}
 					gridColumnGap={4}
 					hideArrows={shouldHideArrows}
+					width={['100%', 'max-content']}
 				>
 					{!shouldHideArrows && (
 						<Box lineHeight={0} alignSelf="center">
@@ -86,7 +87,7 @@ export function AccordionHeader({
 					)}
 					<ButtonContent>
 						{children ? (
-							<Text
+							<HoverableText
 								textStyle={variant === 'minimal' ? 'ui.14' : 'ui.16'}
 								display="grid"
 								color="accordion.sectionHeaderTitle"
@@ -94,10 +95,10 @@ export function AccordionHeader({
 								lineHeight="16px"
 							>
 								{children}
-							</Text>
+							</HoverableText>
 						) : null}
 						{subtitle ? (
-							<Text
+							<HoverableText
 								textStyle="ui.14"
 								display="block"
 								color="accordion.sectionHeaderSubtitle"
@@ -106,7 +107,7 @@ export function AccordionHeader({
 								lineHeight="16px"
 							>
 								{subtitle}
-							</Text>
+							</HoverableText>
 						) : null}
 					</ButtonContent>
 				</Button>
@@ -146,12 +147,27 @@ const Button = styled(UtilityButton).attrs(({ isExpanded, panelId, headerId }) =
 	'aria-controls': `accordion-panel-${panelId}`,
 	id: `accordion-header-${headerId}`,
 }))`
-	width: 100%;
 	height: 100%;
 	text-align: left;
 	display: flex;
 	align-items: baseline;
 	line-height: 1;
+
+	${({ theme }) => css`
+		&:hover {
+			color: ${theme.colors.button.primaryHover};
+
+			path {
+				fill: currentColor;
+			}
+		}
+	`}
+`;
+
+const HoverableText = styled(Text)`
+	${Button}:hover & {
+		color: inherit;
+	}
 `;
 
 const ButtonContent = styled(Box).attrs(() => ({ gridGap: 4 }))`
