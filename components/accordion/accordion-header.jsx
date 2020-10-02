@@ -141,7 +141,7 @@ const Heading = styled.header.attrs(({ ariaLevel }) => ({
 	width: 100%;
 `;
 
-const Button = styled(UtilityButton).attrs(({ isExpanded, panelId, headerId, width }) => ({
+const Button = styled(UtilityButton).attrs(({ isExpanded, panelId, headerId }) => ({
 	role: 'button',
 	'aria-expanded': isExpanded,
 	'aria-controls': `accordion-panel-${panelId}`,
