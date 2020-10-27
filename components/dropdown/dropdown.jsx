@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState, useMemo, useCallback } from 'react';
 import { useId } from '../shared-hooks';
-import { Button } from '../button';
+import { Button, UtilityButton } from '../button';
 import { Popover } from '../popover-v6';
 import { Box } from '../Box';
 import { ChevronDown } from '../icons/12px';
@@ -15,7 +15,7 @@ function useDropdownContext() {
 	return context;
 }
 
-export function Dropdown({ isOpen, onToggleMenu, children }) {
+export function Dropdown({ isOpen, onToggleMenu, children, width }) {
 	const itemList = useRef([]);
 	const [focusedItem, setFocusedItem] = useState(null);
 
@@ -43,6 +43,7 @@ export function Dropdown({ isOpen, onToggleMenu, children }) {
 				registerItem,
 				menuId: `dropdownMenu-${menuId}`,
 				toggleRef,
+				width,
 			}}
 		>
 			{children}
@@ -70,28 +71,35 @@ function DropdownToggle({ hideCarrot, children, ...buttonProps }) {
 	return typeof children === 'function' ? (
 		children(childProps)
 	) : (
-		<Button size="small" variant="minorTransparent" {...childProps} {...buttonProps}>
+		<Button size="small" variant="primary" {...childProps} {...buttonProps}>
 			{children}
-			{!hideCarrot && <DropdownCarrot />}
+			{!hideCarrot && <Styled.DropdownCarrot />}
 		</Button>
 	);
 }
 
 function DropdownMenu({ children, ...popoverProps }) {
-	const { onToggleMenu, menuId, isOpen, toggleRef } = useDropdownContext();
+	const { onToggleMenu, menuId, isOpen, toggleRef, registerItem, width } = useDropdownContext();
 
 	return (
 		isOpen && (
 			<Popover
 				id={menuId}
 				as="ul"
+				margin={0}
 				role="menu"
-				reference={toggleRef}
+				reference={toggleRef.current}
 				onFocusAway={onToggleMenu}
-				placement="bottom"
+				placement="bottom-start"
+				hideArrow
+				width={width || Styled.defaultMenuWidth}
 				{...popoverProps}
 			>
-				{children}
+				{React.Children.map(children, (child, index) =>
+					React.isValidElement(child) && child.type.isFocusableChild
+						? React.cloneElement(child, { ref: registerItem({ index }) })
+						: child,
+				)}
 			</Popover>
 		)
 	);
@@ -111,9 +119,15 @@ Dropdown.Toggle = DropdownToggle;
 Dropdown.Menu = DropdownMenu;
 Dropdown.Item = MenuItem;
 
-const DropdownCarrot = styled(ChevronDown).attrs({ color: 'inherit' })`
-	margin-left: ${({ theme }) => theme.space[3]};
-`;
+const DropdownCarrot = styled(ChevronDown).attrs({ color: 'currentColor' })``;
+
+const CarrotContainer = styled(Box).attrs({ marginLeft: 3, color: 'inherit' })``;
 
 const Styled = {};
-Styled.MenuItem = styled(Box)``;
+Styled.MenuItem = styled(UtilityButton)``;
+Styled.DropdownCarrot = () => (
+	<CarrotContainer>
+		<DropdownCarrot />
+	</CarrotContainer>
+);
+Styled.defaultMenuWidth = '160px';

@@ -84,6 +84,8 @@ import { IconGroup } from './icon-table';
 import { FavoriteFilled } from '../components/icons/18px';
 import { ChevronDown } from '../components/icons/12px';
 
+import { Dropdown as NewDropdown } from '../components/dropdown/dropdown';
+
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
 import '../dist/main.css';
@@ -475,6 +477,20 @@ const pages = [
 					MenuItem,
 					MenuSeparator,
 					MenuCheckbox,
+					DropdownDemo: styled.div`
+						display: flex;
+						align-items: flex-start;
+						justify-content: space-between;
+					`,
+					Button,
+				},
+			},
+			{
+				path: '/dropdown/variations/v6',
+				title: 'Dropdown v6',
+				content: pageLoader(() => import('./dropdown/variations-v6.md')),
+				imports: {
+					Dropdown: NewDropdown,
 					DropdownDemo: styled.div`
 						display: flex;
 						align-items: flex-start;
