@@ -4,8 +4,9 @@ import { Button, UtilityButton } from '../button';
 import { Popover } from '../popover-v6';
 import { Box } from '../Box';
 import { ChevronDown } from '../icons/12px';
+import { DefaultThemeProvider } from '../DefaultThemeProvider';
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const DropdownContext = React.createContext();
 
@@ -35,19 +36,21 @@ export function Dropdown({ isOpen, onToggleMenu, children, width }) {
 	}, []);
 
 	return (
-		<DropdownContext.Provider
-			value={{
-				isOpen,
-				focusedItem,
-				onToggleMenu,
-				registerItem,
-				menuId: `dropdownMenu-${menuId}`,
-				toggleRef,
-				width,
-			}}
-		>
-			{children}
-		</DropdownContext.Provider>
+		<DefaultThemeProvider>
+			<DropdownContext.Provider
+				value={{
+					isOpen,
+					focusedItem,
+					onToggleMenu,
+					registerItem,
+					menuId: `dropdownMenu-${menuId}`,
+					toggleRef,
+					width,
+				}}
+			>
+				{children}
+			</DropdownContext.Provider>
+		</DefaultThemeProvider>
 	);
 }
 
@@ -93,6 +96,7 @@ function DropdownMenu({ children, ...popoverProps }) {
 				placement="bottom-start"
 				hideArrow
 				width={width || Styled.defaultMenuWidth}
+				padding={0}
 				{...popoverProps}
 			>
 				{React.Children.map(children, (child, index) =>
@@ -107,7 +111,16 @@ function DropdownMenu({ children, ...popoverProps }) {
 
 function MenuItem({ children, ...boxProps }) {
 	return (
-		<Styled.MenuItem as="li" role="menuitem" {...boxProps}>
+		<Styled.MenuItem
+			as="li"
+			role="menuitem"
+			height="40px"
+			paddingX={4}
+			paddingY="10px"
+			color="dropdown.foreground"
+			backgroundColor="dropdown.background"
+			{...boxProps}
+		>
 			{children}
 		</Styled.MenuItem>
 	);
@@ -124,10 +137,24 @@ const DropdownCarrot = styled(ChevronDown).attrs({ color: 'currentColor' })``;
 const CarrotContainer = styled(Box).attrs({ marginLeft: 3, color: 'inherit' })``;
 
 const Styled = {};
-Styled.MenuItem = styled(UtilityButton)``;
 Styled.DropdownCarrot = () => (
 	<CarrotContainer>
 		<DropdownCarrot />
 	</CarrotContainer>
 );
 Styled.defaultMenuWidth = '160px';
+Styled.MenuItem = styled(UtilityButton)`
+	box-sizing: border-box;
+
+	${({ theme }) => css`
+		&:hover {
+			background-color: ${theme.colors.dropdown.backgroundHover};
+		}
+
+		&:disabled {
+			cursor: default;
+
+			color: ${theme.colors.dropdown.foregroundDisabled};
+		}
+	`}
+`;
