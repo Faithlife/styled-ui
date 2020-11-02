@@ -1,6 +1,7 @@
 import React, { useContext, useRef, useState, useMemo, useEffect, useCallback } from 'react';
 import { useId } from '../shared-hooks';
-import { Button, UtilityButton } from '../button';
+import { getConfigChild } from '../utils';
+import { Button, UtilityButton, SegmentedButtonGroup } from '../button';
 import { Popover } from '../popover-v6';
 import { Box } from '../Box';
 import { ChevronDown } from '../icons/12px';
@@ -29,6 +30,7 @@ export function Dropdown({ isOpen, onToggleMenu, children, width }) {
 
 	const menuId = useId();
 	const toggleRef = useRef();
+	const splitRef = useRef();
 
 	useEffect(() => {
 		if (!isOpen) {
@@ -45,7 +47,7 @@ export function Dropdown({ isOpen, onToggleMenu, children, width }) {
 	const onCloseMenu = useCallback(() => {
 		if (isOpen) {
 			onToggleMenu();
-			toggleRef.current?.focus();
+			splitRef.current ? splitRef.current.focus() : toggleRef.current?.focus();
 		}
 	}, [isOpen, onToggleMenu]);
 
@@ -67,7 +69,6 @@ export function Dropdown({ isOpen, onToggleMenu, children, width }) {
 				const itemIndexes = itemList.current
 					.map((item, index) => (item !== null ? index : null))
 					.filter(x => x !== null);
-				console.log(itemList.current, itemIndexes);
 				const currentIndex = focusedItemIndex && itemIndexes.findIndex(x => x === focusedItemIndex);
 
 				switch (nav) {
@@ -104,6 +105,7 @@ export function Dropdown({ isOpen, onToggleMenu, children, width }) {
 					registerItem,
 					menuId: `dropdownMenu-${menuId}`,
 					toggleRef,
+					splitRef,
 					width,
 					onKeyboardNav,
 					focusedItemIndex,
@@ -116,14 +118,28 @@ export function Dropdown({ isOpen, onToggleMenu, children, width }) {
 	);
 }
 
-function DropdownToggle({ hideCarrot, children, ...buttonProps }) {
-	const { onToggleMenu, menuId, isOpen, toggleRef, onKeyboardNav } = useDropdownContext();
+function DropdownActionButton({
+	defaultSize,
+	defaultVariant,
+	defaultDisabled,
+	children,
+	...buttonProps
+}) {
+	return (
+		<Button size={defaultSize} variant={defaultVariant} disabled={defaultDisabled} {...buttonProps}>
+			{children}
+		</Button>
+	);
+}
+DropdownActionButton.childConfigComponent = 'DropdownActionButton';
+
+function DropdownToggle({ hideCarrot, size, variant, disabled, children, ...buttonProps }) {
+	const { onToggleMenu, menuId, isOpen, toggleRef, splitRef, onKeyboardNav } = useDropdownContext();
 
 	const onKeyPress = useKeyboardActivate(onToggleMenu, onKeyboardNav);
 
 	const childProps = useMemo(
 		() => ({
-			ref: toggleRef,
 			onKeyDown: onKeyPress,
 			onClick: onToggleMenu,
 			ariaProps: {
@@ -132,18 +148,56 @@ function DropdownToggle({ hideCarrot, children, ...buttonProps }) {
 				'aria-expanded': isOpen,
 			},
 		}),
-		[toggleRef, onToggleMenu, menuId, isOpen, onKeyPress],
+		[onToggleMenu, menuId, isOpen, onKeyPress],
 	);
 
-	return typeof children === 'function' ? (
-		children(childProps)
+	if (typeof children === 'function') {
+		return children(toggleRef, childProps);
+	}
+
+	const actionChild = getConfigChild(children, DropdownActionButton.childConfigComponent);
+	return actionChild ? (
+		<SegmentedButtonGroup ref={toggleRef}>
+			{React.cloneElement(actionChild, {
+				defaultSize: size,
+				defaultVariant: variant,
+				defaultDisabled: disabled,
+			})}
+			<Button
+				ref={splitRef}
+				size={size}
+				variant={variant}
+				disabled={disabled}
+				border={0}
+				borderLeft={1}
+				borderColor="blue5"
+				{...childProps}
+				{...childProps.ariaProps}
+				{...buttonProps}
+			>
+				<Styled.DropdownCarrot hideMargin />
+			</Button>
+		</SegmentedButtonGroup>
 	) : (
-		<Button size="small" variant="primary" {...childProps} {...buttonProps}>
+		<Button
+			ref={toggleRef}
+			size={size}
+			variant={variant}
+			disabled={disabled}
+			{...childProps}
+			{...childProps.ariaProps}
+			{...buttonProps}
+		>
 			{children}
 			{!hideCarrot && <Styled.DropdownCarrot />}
 		</Button>
 	);
 }
+
+DropdownToggle.defaultProps = {
+	size: 'small',
+	variant: 'primary',
+};
 
 const handledKeys = {
 	enter: 'Enter',
@@ -324,14 +378,18 @@ MenuItem.isFocusableChild = true;
 Dropdown.Toggle = DropdownToggle;
 Dropdown.Menu = DropdownMenu;
 Dropdown.Item = MenuItem;
+Dropdown.ActionButton = DropdownActionButton;
 
 const DropdownCarrot = styled(ChevronDown).attrs({ color: 'currentColor' })``;
 
-const CarrotContainer = styled(Box).attrs({ marginLeft: 3, color: 'inherit' })``;
+const CarrotContainer = styled(Box).attrs(({ hideMargin }) => ({
+	marginLeft: !hideMargin ? 3 : 0,
+	color: 'inherit',
+}))``;
 
 const Styled = {};
-Styled.DropdownCarrot = () => (
-	<CarrotContainer>
+Styled.DropdownCarrot = ({ hideMargin }) => (
+	<CarrotContainer hideMargin={hideMargin}>
 		<DropdownCarrot />
 	</CarrotContainer>
 );
@@ -345,26 +403,26 @@ Styled.MenuItem = styled(UtilityButton)`
 			background-color: ${theme.colors.dropdown.backgroundHover};
 		}
 
-		&:focus {
-			outline: none;
-			box-shadow: none;
-			border: 0;
-		}
-
-		&.focus-visible {
-			outline: none;
-			box-shadow: none;
-			border: 0;
-
-			&:not(:active) {
-				box-shadow: none;
-			}
-		}
-
 		&:disabled {
 			cursor: default;
 
 			color: ${theme.colors.dropdown.foregroundDisabled};
 		}
 	`}
+
+	&:focus {
+		outline: none;
+		box-shadow: none;
+		border: 0;
+	}
+
+	&.focus-visible {
+		outline: none;
+		box-shadow: none;
+		border: 0;
+
+		&:not(:active) {
+			box-shadow: none;
+		}
+	}
 `;
