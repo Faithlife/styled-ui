@@ -29,12 +29,6 @@ export const MenuItem = styled(UtilityButton)`
 		&:hover {
 			background-color: ${theme.colors.dropdown.backgroundHover};
 		}
-
-		&:disabled {
-			cursor: default;
-
-			color: ${theme.colors.dropdown.foregroundDisabled};
-		}
 	`}
 
 	&:focus {

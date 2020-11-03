@@ -52,28 +52,30 @@ export function MenuItemSecondaryText({ children, ...textProps }) {
 MenuItemSecondaryText.childConfigComponent = 'MenuItemSecondaryText';
 
 export const MenuItem = React.forwardRef(function MenuItem(
-	{ keyboardHovered, onClick, children, preventDefaultOnClick, ...boxProps },
+	{ keyboardHovered, onClick, onKeyDown, disabled, preventDefaultOnClick, children, ...boxProps },
 	ref,
 ) {
 	const { onCloseMenu } = useDropdownContext();
 
 	const handleClick = useCallback(
 		event => {
-			onClick(event);
-			onCloseMenu();
+			if (!disabled) {
+				onClick(event);
+				onCloseMenu();
+			}
 		},
-		[onClick, onCloseMenu],
+		[onClick, onCloseMenu, disabled],
 	);
 
 	const handleKeyPress = useCallback(
 		event => {
-			if (event.key === handledKeys.enter) {
+			if (!disabled && event.key === handledKeys.enter) {
 				event.preventDefault();
 				onClick();
 				onCloseMenu();
 			}
 		},
-		[onClick, onCloseMenu],
+		[onClick, onCloseMenu, disabled],
 	);
 
 	const [icon, iconFilteredChildren] = getConfigChild(children, MenuItemIcon.childConfigComponent);
@@ -97,14 +99,15 @@ export const MenuItem = React.forwardRef(function MenuItem(
 			minHeight="40px"
 			paddingX={4}
 			paddingY={icon ? 2 : '10px'}
-			color="dropdown.foreground"
+			color={!disabled ? 'dropdown.foreground' : 'dropdown.foregroundDisabled'}
 			backgroundColor={keyboardHovered ? 'dropdown.backgroundHover' : 'dropdown.background'}
 			tabIndex={-1}
-			onClick={!preventDefaultOnClick ? handleClick : onClick}
-			onKeyDown={handleKeyPress}
+			onClick={!preventDefaultOnClick || disabled ? handleClick : onClick}
+			onKeyDown={!disabled && onKeyDown ? onKeyDown : handleKeyPress}
 			display="flex"
 			flexDirection="row"
 			alignItems="center"
+			disabled={disabled}
 			{...boxProps}
 		>
 			{checkbox}
@@ -123,7 +126,7 @@ export const MenuItem = React.forwardRef(function MenuItem(
 MenuItem.isFocusableChild = true;
 
 export const MenuItemCheckbox = React.forwardRef(function MenuItemCheckbox(
-	{ isChecked, onToggle, children, ...menuItemProps },
+	{ isChecked, onToggle, disabled, children, ...menuItemProps },
 	ref,
 ) {
 	const handleKeyPress = useCallback(
@@ -142,10 +145,11 @@ export const MenuItemCheckbox = React.forwardRef(function MenuItemCheckbox(
 			aria-checked={isChecked}
 			onClick={onToggle}
 			onKeyDown={handleKeyPress}
+			disabled={disabled}
 			preventDefaultOnClick
 			{...menuItemProps}
 		>
-			<MenuItemCheckboxComponent isChecked={isChecked} />
+			<MenuItemCheckboxComponent isChecked={isChecked} disabled={disabled} />
 			{children}
 		</MenuItem>
 	);
@@ -154,7 +158,7 @@ export const MenuItemCheckbox = React.forwardRef(function MenuItemCheckbox(
 MenuItemCheckbox.isFocusableChild = true;
 
 export const MenuItemLink = React.forwardRef(function MenuItemLink(
-	{ children, ...menuItemProps },
+	{ disabled, href, children, ...menuItemProps },
 	ref,
 ) {
 	return (
@@ -166,6 +170,8 @@ export const MenuItemLink = React.forwardRef(function MenuItemLink(
 				onKeyDown={null}
 				rel="noopener noreferrer"
 				preventDefaultOnClick
+				href={!disabled ? href : null}
+				disabled={disabled}
 				{...menuItemProps}
 			>
 				{children}
