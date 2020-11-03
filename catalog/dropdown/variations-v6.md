@@ -1,3 +1,6 @@
+- [✔] Styled Systems support
+- [✔] WAI-ARIA compliant
+
 ## Dropdown v6
 
 ```react
