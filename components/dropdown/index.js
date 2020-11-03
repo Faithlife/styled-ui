@@ -22,6 +22,7 @@ import {
 	MenuItemIcon,
 	MenuItemPrimaryText,
 	MenuItemSecondaryText,
+	MenuItemTitle,
 } from './dropdown-children';
 
 Dropdown.Toggle = DropdownToggle;
@@ -34,5 +35,6 @@ Dropdown.ActionButton = DropdownActionButton;
 Dropdown.ItemIcon = MenuItemIcon;
 Dropdown.ItemPrimaryText = MenuItemPrimaryText;
 Dropdown.ItemSecondaryText = MenuItemSecondaryText;
+Dropdown.Title = MenuItemTitle;
 
 export { Dropdown };

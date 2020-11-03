@@ -46,7 +46,7 @@ state: { isOpen: false, isChecked: false }
 	<Dropdown isOpen={state.isOpen} onToggleMenu={() => setState({ isOpen: !state.isOpen })}>
 		<Dropdown.Toggle>Show a Dropdown!</Dropdown.Toggle>
 		<Dropdown.Menu>
-			<h3>Dropdown</h3>
+			<Dropdown.Title>Dropdown</Dropdown.Title>
 			<Dropdown.Separator />
 			<Dropdown.Item onClick={() => alert("Menu Item")}>Menu Item</Dropdown.Item>
 			<Dropdown.CheckboxItem isChecked={state.isChecked} onToggle={() => setState({ isChecked: !state.isChecked })}>Menu Checkbox</Dropdown.CheckboxItem>
@@ -110,7 +110,7 @@ state: { isOpen: false }
 
 ## Styling
 
-Toggle, Menu, Item, Item variants, and Item config children all accept them.
+Toggle, Menu, Title, Item, Item variants, and Item config children all accept styled-system props.
 
 ```react
 showSource: true

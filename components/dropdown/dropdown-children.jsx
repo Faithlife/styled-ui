@@ -197,3 +197,11 @@ export function MenuItemSeparator(hrProps) {
 		/>
 	);
 }
+
+export function MenuItemTitle({ children, ...textProps }) {
+	return (
+		<Text textStyle="ui.16" fontWeight={1} paddingX={4} paddingY={5} {...textProps}>
+			{children}
+		</Text>
+	);
+}
