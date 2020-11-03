@@ -4,10 +4,13 @@ import { getConfigChild } from '../utils';
 import { Button, UtilityButton, SegmentedButtonGroup } from '../button';
 import { Popover } from '../popover-v6';
 import { Box } from '../Box';
+import { Text } from '../Text';
 import { ChevronDown } from '../icons/12px';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
+import { CheckboxContent } from '../check-box';
 
 import styled, { css } from 'styled-components';
+import { variant as createVariant } from 'styled-system';
 
 const DropdownContext = React.createContext();
 
@@ -39,7 +42,7 @@ export function Dropdown({ isOpen, onToggleMenu, children, width }) {
 	}, [isOpen]);
 
 	useEffect(() => {
-		if (focusedItemIndex) {
+		if (focusedItemIndex !== null) {
 			itemList.current[focusedItemIndex]?.focus();
 		}
 	}, [focusedItemIndex]);
@@ -155,7 +158,7 @@ function DropdownToggle({ hideCarrot, size, variant, disabled, children, ...butt
 		return children(toggleRef, childProps);
 	}
 
-	const actionChild = getConfigChild(children, DropdownActionButton.childConfigComponent);
+	const [actionChild] = getConfigChild(children, DropdownActionButton.childConfigComponent);
 	return actionChild ? (
 		<SegmentedButtonGroup ref={toggleRef}>
 			{React.cloneElement(actionChild, {
@@ -328,8 +331,53 @@ function useKeyboardNavigate(onCloseMenu, onKeyboardNav) {
 	return handleKeyboardNavigate;
 }
 
+function MenuItemIcon({ src, variant, children, ...iconProps }) {
+	return (
+		<Styled.MenuItemIcon variant={variant}>
+			{src ? (
+				<Box as="img" src={src} borderRadius={1} width="60px" height="40px" {...iconProps} />
+			) : (
+				children
+			)}
+		</Styled.MenuItemIcon>
+	);
+}
+MenuItemIcon.defaultProps = {
+	variant: 'icon',
+};
+MenuItemIcon.childConfigComponent = 'MenuItemIcon';
+
+function MenuItemPrimaryText({ hasSecondaryText, children, ...textProps }) {
+	return (
+		<Text
+			textStyle="ui.16"
+			color="inherit"
+			fontWeight={hasSecondaryText ? 1 : 0}
+			marginBottom={hasSecondaryText ? 2 : 0}
+			{...textProps}
+		>
+			{children}
+		</Text>
+	);
+}
+MenuItemPrimaryText.childConfigComponent = 'MenuItemPrimaryText';
+
+function MenuItemSecondaryText({ children, ...textProps }) {
+	return (
+		<Text textStyle="ui.14" color="gray52" {...textProps}>
+			{children}
+		</Text>
+	);
+}
+MenuItemSecondaryText.childConfigComponent = 'MenuItemSecondaryText';
+
+function MenuItemCheckboxComponent(checkboxProps) {
+	return <CheckboxContent position="relative" marginRight={3} {...checkboxProps} />;
+}
+MenuItemCheckboxComponent.childConfigComponent = 'MenuItemCheckboxComponent';
+
 const MenuItem = React.forwardRef(function MenuItem(
-	{ children, keyboardHovered, onClick, ...boxProps },
+	{ keyboardHovered, onClick, children, preventDefaultOnClick, ...boxProps },
 	ref,
 ) {
 	const { onCloseMenu } = useDropdownContext();
@@ -353,32 +401,129 @@ const MenuItem = React.forwardRef(function MenuItem(
 		[onClick, onCloseMenu],
 	);
 
+	const [icon, iconFilteredChildren] = getConfigChild(children, MenuItemIcon.childConfigComponent);
+	const [primaryText, primaryFilteredChildren] = getConfigChild(
+		iconFilteredChildren,
+		MenuItemPrimaryText.childConfigComponent,
+	);
+	const [secondaryText, secondaryFilteredChildren] = getConfigChild(
+		primaryFilteredChildren,
+		MenuItemSecondaryText.childConfigComponent,
+	);
+	const [checkbox, filteredChildren] = getConfigChild(
+		secondaryFilteredChildren,
+		MenuItemCheckboxComponent.childConfigComponent,
+	);
 	return (
 		<Styled.MenuItem
 			ref={ref}
 			as="li"
 			role="menuitem"
-			height="40px"
+			minHeight="40px"
 			paddingX={4}
-			paddingY="10px"
+			paddingY={icon ? 2 : '10px'}
 			color="dropdown.foreground"
 			backgroundColor={keyboardHovered ? 'dropdown.backgroundHover' : 'dropdown.background'}
 			tabIndex={-1}
-			onClick={handleClick}
+			onClick={!preventDefaultOnClick ? handleClick : onClick}
 			onKeyDown={handleKeyPress}
+			display="flex"
+			flexDirection="row"
+			alignItems="center"
 			{...boxProps}
 		>
-			{children}
+			{checkbox}
+			{icon}
+			<Styled.MenuItemTextContainer>
+				{primaryText
+					? React.cloneElement(primaryText, { hasSecondaryText: !!secondaryText })
+					: null}
+				{secondaryText}
+				{filteredChildren}
+			</Styled.MenuItemTextContainer>
 		</Styled.MenuItem>
 	);
 });
 
 MenuItem.isFocusableChild = true;
 
+const MenuItemCheckbox = React.forwardRef(function MenuItemCheckbox(
+	{ isChecked, onToggle, children, ...menuItemProps },
+	ref,
+) {
+	const handleKeyPress = useCallback(
+		event => {
+			if (event.key === handledKeys.enter) {
+				event.preventDefault();
+				onToggle();
+			}
+		},
+		[onToggle],
+	);
+	return (
+		<MenuItem
+			ref={ref}
+			role="menuitemcheckbox"
+			aria-checked={isChecked}
+			onClick={onToggle}
+			onKeyDown={handleKeyPress}
+			preventDefaultOnClick
+			{...menuItemProps}
+		>
+			<MenuItemCheckboxComponent isChecked={isChecked} />
+			{children}
+		</MenuItem>
+	);
+});
+
+MenuItemCheckbox.isFocusableChild = true;
+
+const MenuItemLink = React.forwardRef(function MenuItemLink({ children, ...menuItemProps }, ref) {
+	return (
+		<Box as="li" role="none">
+			<MenuItem
+				as="a"
+				ref={ref}
+				onClick={null}
+				onKeyDown={null}
+				rel="noopener noreferrer"
+				preventDefaultOnClick
+				{...menuItemProps}
+			>
+				{children}
+			</MenuItem>
+		</Box>
+	);
+});
+
+MenuItemLink.isFocusableChild = true;
+
+function MenuItemSeparator(hrProps) {
+	return (
+		<Box
+			as="hr"
+			role="separator"
+			aria-orientation="horizontal"
+			width="100%"
+			border={0}
+			borderTop={1}
+			borderColor="dropdown.separator"
+			margin={0}
+			{...hrProps}
+		/>
+	);
+}
+
 Dropdown.Toggle = DropdownToggle;
 Dropdown.Menu = DropdownMenu;
 Dropdown.Item = MenuItem;
+Dropdown.CheckboxItem = MenuItemCheckbox;
+Dropdown.LinkItem = MenuItemLink;
+Dropdown.Separator = MenuItemSeparator;
 Dropdown.ActionButton = DropdownActionButton;
+Dropdown.ItemIcon = MenuItemIcon;
+Dropdown.ItemPrimaryText = MenuItemPrimaryText;
+Dropdown.ItemSecondaryText = MenuItemSecondaryText;
 
 const DropdownCarrot = styled(ChevronDown).attrs({ color: 'currentColor' })``;
 
@@ -397,6 +542,7 @@ Styled.defaultMenuWidth = '160px';
 Styled.MenuItem = styled(UtilityButton)`
 	box-sizing: border-box;
 	box-shadow: none;
+	text-decoration: none;
 
 	${({ theme }) => css`
 		&:hover {
@@ -425,4 +571,46 @@ Styled.MenuItem = styled(UtilityButton)`
 			box-shadow: none;
 		}
 	}
+`;
+Styled.MenuItemIcon = styled(Box)`
+	${createVariant({
+		variants: {
+			thumbnail: {
+				width: '76px',
+				height: '56px',
+				marginRight: 2,
+			},
+			icon: {
+				width: '40px',
+				height: '40px',
+				marginRight: 3,
+			},
+			avatar: {
+				width: '48px',
+				height: '48px',
+				marginRight: 3,
+			},
+		},
+	})}
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+Styled.MenuItemTextContainer = styled(Box)`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+`;
+Styled.MenuItemSeparator = styled.hr.attrs(() => ({
+	role: 'separator',
+	'aria-orientation': 'horizontal',
+}))`
+	border: 0;
+	border-top: 1px solid
+		${({ theme, themeOverrides }) =>
+			themeOverrides?.separator ?? theme?.colors?.dropdown?.separator};
+	width: 100%;
+	margin: 0;
 `;

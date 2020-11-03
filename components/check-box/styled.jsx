@@ -3,7 +3,7 @@ import { resetStyles } from '../utils';
 import { Box } from '../Box';
 
 export const CheckboxDiv = styled(Box)`
-	position: absolute;
+	position: ${({ position }) => position || 'absolute'};
 	border: solid 1px
 		${({ theme, themeOverrides }) => themeOverrides?.border ?? theme.colors.checkbox.border};
 	border-radius: 3px;
