@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { variant as createVariant } from 'styled-system';
 import { ChevronDown } from '../icons/12px';
 import { UtilityButton } from '../button';
@@ -25,11 +25,9 @@ export const MenuItem = styled(UtilityButton)`
 	box-shadow: none;
 	text-decoration: none;
 
-	${({ theme }) => css`
-		&:hover {
-			background-color: ${theme.colors.dropdown.backgroundHover};
-		}
-	`}
+	&:hover {
+		background-color: ${({ theme }) => theme.colors.dropdown.backgroundHover};
+	}
 
 	&:focus {
 		outline: none;
@@ -79,16 +77,4 @@ export const MenuItemTextContainer = styled(Box)`
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
-`;
-
-export const MenuItemSeparator = styled.hr.attrs(() => ({
-	role: 'separator',
-	'aria-orientation': 'horizontal',
-}))`
-	border: 0;
-	border-top: 1px solid
-		${({ theme, themeOverrides }) =>
-			themeOverrides?.separator ?? theme?.colors?.dropdown?.separator};
-	width: 100%;
-	margin: 0;
 `;
