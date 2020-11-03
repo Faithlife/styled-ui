@@ -66,7 +66,12 @@ import {
 	Switch,
 	theme,
 } from '../index';
-import { Modal as V6Modal, Button as V6Button, SegmentedButtonGroup } from '../index-v6';
+import {
+	Modal as V6Modal,
+	Button as V6Button,
+	SegmentedButtonGroup,
+	Dropdown as V6Dropdown,
+} from '../index-v6';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
@@ -83,8 +88,6 @@ import { Popover as PopoverV6 } from '../components/popover-v6';
 import { IconGroup } from './icon-table';
 import { FavoriteFilled } from '../components/icons/18px';
 import { ChevronDown } from '../components/icons/12px';
-
-import { Dropdown as NewDropdown } from '../components/dropdown/dropdown';
 
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
@@ -490,13 +493,13 @@ const pages = [
 				title: 'Dropdown v6',
 				content: pageLoader(() => import('./dropdown/variations-v6.md')),
 				imports: {
-					Dropdown: NewDropdown,
+					Dropdown: V6Dropdown,
 					DropdownDemo: styled.div`
 						display: flex;
 						align-items: flex-start;
 						justify-content: space-between;
 					`,
-					Button,
+					Button: V6Button,
 					FavoriteFilled,
 					avatarSrc:
 						'https://files.logoscdn.com/v1/files/45929047/content.svg?signature=LanlyvDyHzxkch6f8DNUV1J15Lw',

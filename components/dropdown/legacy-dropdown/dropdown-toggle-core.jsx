@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../button';
-import { PopoverReference } from '../popover';
+import { Button } from '../../button';
+import { PopoverReference } from '../../popover';
 import { useDropdownContext } from './dropdown-utils';
 
 /** If not using render props will pass all unrecognized props to children. */
