@@ -63,6 +63,7 @@ export const MenuItemIcon = styled(Box)`
 				width: '48px',
 				height: '48px',
 				marginRight: 3,
+				marginLeft: 2,
 			},
 		},
 	})}
