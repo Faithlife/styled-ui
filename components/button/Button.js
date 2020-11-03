@@ -81,8 +81,8 @@ const Button = React.forwardRef(({ children, icon, ...props }, ref) => (
 	</ButtonCore>
 ));
 
-const SegmentedButtonGroup = styled(Box).attrs(() => ({
-	border: 1,
+const SegmentedButtonGroup = styled(Box).attrs(({ border }) => ({
+	border: border ?? 1,
 	borderColor: 'button.segmentedButtonGroupBorder',
 	borderRadius: 1,
 	backgroundColor: 'button.segmentedButtonGroupBackground',

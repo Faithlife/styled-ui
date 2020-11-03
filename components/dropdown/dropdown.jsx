@@ -160,7 +160,7 @@ function DropdownToggle({ hideCarrot, size, variant, disabled, children, ...butt
 
 	const [actionChild] = getConfigChild(children, DropdownActionButton.childConfigComponent);
 	return actionChild ? (
-		<SegmentedButtonGroup ref={toggleRef}>
+		<SegmentedButtonGroup ref={toggleRef} border={0}>
 			{React.cloneElement(actionChild, {
 				defaultSize: size,
 				defaultVariant: variant,
