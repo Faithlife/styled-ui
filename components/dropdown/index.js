@@ -1,8 +1,40 @@
-export { Dropdown } from './component';
-export { MenuItem, MenuSeparator, MenuCheckbox } from './dropdown-children';
-export { DropdownMenu } from './dropdown-menu';
-export { DropdownToggle } from './dropdown-toggle';
-export { useDropdownContext } from './dropdown-utils';
-export { DropdownCore } from './dropdown-core';
-export { DropdownToggleCore } from './dropdown-toggle-core';
-export { DropdownMenuCore } from './dropdown-menu-core';
+export {
+	Dropdown as LegacyDropdown,
+	MenuItem,
+	MenuSeparator,
+	MenuCheckbox,
+	DropdownMenu,
+	DropdownToggle,
+	useDropdownContext,
+	DropdownCore,
+	DropdownToggleCore,
+	DropdownMenuCore,
+} from './legacy-dropdown';
+
+import { Dropdown } from './dropdown';
+import { DropdownToggle, DropdownActionButton } from './dropdown-toggle';
+import { DropdownMenu } from './dropdown-menu';
+import {
+	MenuItem,
+	MenuItemCheckbox,
+	MenuItemLink,
+	MenuItemSeparator,
+	MenuItemIcon,
+	MenuItemPrimaryText,
+	MenuItemSecondaryText,
+	MenuItemTitle,
+} from './dropdown-children';
+
+Dropdown.Toggle = DropdownToggle;
+Dropdown.Menu = DropdownMenu;
+Dropdown.Item = MenuItem;
+Dropdown.CheckboxItem = MenuItemCheckbox;
+Dropdown.LinkItem = MenuItemLink;
+Dropdown.Separator = MenuItemSeparator;
+Dropdown.ActionButton = DropdownActionButton;
+Dropdown.ItemIcon = MenuItemIcon;
+Dropdown.ItemPrimaryText = MenuItemPrimaryText;
+Dropdown.ItemSecondaryText = MenuItemSecondaryText;
+Dropdown.Title = MenuItemTitle;
+
+export { Dropdown };

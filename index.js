@@ -44,7 +44,7 @@ export {
 	TabPanels,
 } from './components/tabs';
 export {
-	Dropdown,
+	LegacyDropdown as Dropdown,
 	DropdownToggle,
 	DropdownMenu,
 	MenuItem,

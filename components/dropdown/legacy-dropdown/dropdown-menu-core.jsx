@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { Popover } from '../popover';
+import { Popover } from '../../popover';
 import { useDropdownContext, getFocusableChildrenList, useKeyboardNav } from './dropdown-utils';
 import * as Styled from './styled';
 

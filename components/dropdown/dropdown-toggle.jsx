@@ -1,44 +1,86 @@
-import React, { useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { useDropdownContext, useKeyboardActivate } from './dropdown-utils';
-import { DropdownToggleCore } from './dropdown-toggle-core';
+import React, { useMemo } from 'react';
+import { getConfigChild } from '../utils';
+import { Button, SegmentedButtonGroup } from '../button';
+import { useDropdownContext, useKeyboardActivate } from './utils';
+import * as Styled from './styled';
 
-/** Accepts all props a Button component would as well. */
-export function DropdownToggle(props) {
-	// DropdownToggle will pass all props that a Button component will want if it is not using render props
-	const { children, ...buttonProps } = props;
-	const { isOpen, menuId, setFocusedMenuItem, onToggleMenu } = useDropdownContext();
-	const handleKeyPress = useKeyboardActivate(onToggleMenu, setFocusedMenuItem);
+export function DropdownToggle({ hideCarrot, size, variant, disabled, children, ...buttonProps }) {
+	const { onToggleMenu, menuId, isOpen, toggleRef, splitRef, onKeyboardNav } = useDropdownContext();
 
-	const toggleAriaProps = {
-		role: 'button',
-		'aria-haspopup': true,
-		'aria-controls': `dropdown:${menuId}`,
-		'aria-label': `dropdown:${menuId}`,
-		'aria-expanded': isOpen,
-	};
+	const onKeyPress = useKeyboardActivate(onToggleMenu, onKeyboardNav);
 
-	const handleToggleMenu = useCallback(
-		event => {
-			setFocusedMenuItem(null);
-			onToggleMenu(event);
-		},
-		[setFocusedMenuItem, onToggleMenu],
+	const childProps = useMemo(
+		() => ({
+			onKeyDown: onKeyPress,
+			onClick: onToggleMenu,
+			ariaProps: {
+				'aria-haspopup': true,
+				'aria-controls': menuId,
+				'aria-expanded': isOpen,
+			},
+		}),
+		[onToggleMenu, menuId, isOpen, onKeyPress],
 	);
 
-	return (
-		<DropdownToggleCore
-			buttonProps={buttonProps}
-			onKeyPress={handleKeyPress}
-			onToggleMenu={handleToggleMenu}
-			ariaProps={toggleAriaProps}
+	if (typeof children === 'function') {
+		return children(toggleRef, childProps);
+	}
+
+	const [actionChild] = getConfigChild(children, DropdownActionButton.childConfigComponent);
+	return actionChild ? (
+		<SegmentedButtonGroup ref={toggleRef} border={0}>
+			{React.cloneElement(actionChild, {
+				defaultSize: size,
+				defaultVariant: variant,
+				defaultDisabled: disabled,
+			})}
+			<Button
+				ref={splitRef}
+				size={size}
+				variant={variant}
+				disabled={disabled}
+				border={0}
+				borderLeft={1}
+				borderColor="blue5"
+				{...childProps}
+				{...childProps.ariaProps}
+				{...buttonProps}
+			>
+				<Styled.DropdownCarrot hideMargin />
+			</Button>
+		</SegmentedButtonGroup>
+	) : (
+		<Button
+			ref={toggleRef}
+			size={size}
+			variant={variant}
+			disabled={disabled}
+			{...childProps}
+			{...childProps.ariaProps}
+			{...buttonProps}
 		>
 			{children}
-		</DropdownToggleCore>
+			{!hideCarrot && <Styled.DropdownCarrot />}
+		</Button>
 	);
 }
 
-DropdownToggle.propTypes = {
-	/** The content of the toggle button, usually a span */
-	children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+DropdownToggle.defaultProps = {
+	size: 'small',
+	variant: 'primary',
 };
+
+export function DropdownActionButton({
+	defaultSize,
+	defaultVariant,
+	defaultDisabled,
+	children,
+	...buttonProps
+}) {
+	return (
+		<Button size={defaultSize} variant={defaultVariant} disabled={defaultDisabled} {...buttonProps}>
+			{children}
+		</Button>
+	);
+}
+DropdownActionButton.childConfigComponent = 'DropdownActionButton';

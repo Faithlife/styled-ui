@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DropdownCore } from './dropdown-core';
-import { DefaultThemeProvider } from '../DefaultThemeProvider';
-import { isSystemTheme } from '../../theme';
+import { DefaultThemeProvider } from '../../DefaultThemeProvider';
+import { isSystemTheme } from '../../../theme';
 
 const Dropdown = function Dropdown(props) {
 	const { isOpen, onToggleMenu, theme, styleOverrides, children, ...dropdownProps } = props;

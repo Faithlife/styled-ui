@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { useId } from '../shared-hooks';
-import { PopoverManager } from '../popover';
+import { useId } from '../../shared-hooks';
+import { PopoverManager } from '../../popover';
 import { DropdownContextProvider } from './dropdown-utils';
 
 export function DropdownCore({

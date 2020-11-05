@@ -66,7 +66,12 @@ import {
 	Switch,
 	theme,
 } from '../index';
-import { Modal as V6Modal, Button as V6Button, SegmentedButtonGroup } from '../index-v6';
+import {
+	Modal as V6Modal,
+	Button as V6Button,
+	SegmentedButtonGroup,
+	Dropdown as V6Dropdown,
+} from '../index-v6';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
@@ -481,6 +486,25 @@ const pages = [
 						justify-content: space-between;
 					`,
 					Button,
+				},
+			},
+			{
+				path: '/dropdown/variations/v6',
+				title: 'Dropdown v6',
+				content: pageLoader(() => import('./dropdown/variations-v6.md')),
+				imports: {
+					Dropdown: V6Dropdown,
+					DropdownDemo: styled.div`
+						display: flex;
+						align-items: flex-start;
+						justify-content: space-between;
+					`,
+					Button: V6Button,
+					FavoriteFilled,
+					avatarSrc:
+						'https://files.logoscdn.com/v1/files/45929047/content.svg?signature=LanlyvDyHzxkch6f8DNUV1J15Lw',
+					thumbnailSrc:
+						'https://files.logoscdn.com/v1/files/46191785/assets/11156922/content.png?signature=ogDB6y5KmpyPWtBWitethsnveRw',
 				},
 			},
 			{

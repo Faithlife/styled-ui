@@ -29,6 +29,8 @@ export const PopoverContainer = styled(ThemedBox)`
 	z-index: ${({ zIndex, theme }) => zIndex || theme.zIndices.menu};
 	outline: none !important;
 
+	list-style-type: none;
+
 	& > ${PopoverArrow}::after {
 		border: ${({ border }) => border ?? 'none'};
 		box-shadow: ${({ boxShadow, theme }) => boxShadow ?? theme.shadows[1]};
