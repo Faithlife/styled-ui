@@ -45,7 +45,7 @@ export function DropdownMenu({ children, ...popoverProps }) {
 					React.isValidElement(child) && child.type.isFocusableChild
 						? React.cloneElement(child, {
 								ref: registerItem(index),
-								keyboardHovered: focusedItemIndex === index,
+								keyboardFocused: focusedItemIndex === index,
 						  })
 						: unregisterItem(index, child),
 				)}

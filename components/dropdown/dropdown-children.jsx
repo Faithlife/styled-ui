@@ -52,7 +52,7 @@ export function MenuItemSecondaryText({ children, ...textProps }) {
 MenuItemSecondaryText.childConfigComponent = 'MenuItemSecondaryText';
 
 export const MenuItem = React.forwardRef(function MenuItem(
-	{ keyboardHovered, onClick, onKeyDown, disabled, preventDefaultOnClick, children, ...boxProps },
+	{ keyboardFocused, onClick, onKeyDown, disabled, preventDefaultOnClick, children, ...boxProps },
 	ref,
 ) {
 	const { onCloseMenu } = useDropdownContext();
@@ -100,7 +100,7 @@ export const MenuItem = React.forwardRef(function MenuItem(
 			paddingX={4}
 			paddingY={icon ? 2 : '10px'}
 			color={!disabled ? 'dropdown.foreground' : 'dropdown.foregroundDisabled'}
-			backgroundColor={keyboardHovered ? 'dropdown.backgroundHover' : 'dropdown.background'}
+			backgroundColor={keyboardFocused ? 'dropdown.backgroundHover' : 'dropdown.background'}
 			tabIndex={-1}
 			onClick={!preventDefaultOnClick || disabled ? handleClick : onClick}
 			onKeyDown={!disabled && onKeyDown ? onKeyDown : handleKeyPress}
@@ -161,13 +161,22 @@ export const MenuItemLink = React.forwardRef(function MenuItemLink(
 	{ disabled, href, children, ...menuItemProps },
 	ref,
 ) {
+	const activateOnEnter = useCallback(
+		event => {
+			if (ref.current && event.key === handledKeys.enter) {
+				ref.current.click();
+			}
+		},
+		[ref],
+	);
+
 	return (
 		<Box as="li" role="none">
 			<MenuItem
 				as="a"
 				ref={ref}
 				onClick={null}
-				onKeyDown={null}
+				onKeyDown={activateOnEnter}
 				rel="noopener noreferrer"
 				preventDefaultOnClick
 				href={!disabled ? href : null}
