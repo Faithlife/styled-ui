@@ -6,6 +6,7 @@ import ReactSelect, {
 import { colors } from '../shared-styles';
 import { ChevronDown } from '../icons/12px';
 import { DebouncedSelectAsync, DebouncedSelectAsyncCreatable } from './debounced-async';
+import * as Styled from './styled';
 import { ThemedBox } from '../ThemedBox';
 import { useTheme } from '../../theme';
 
@@ -155,6 +156,53 @@ const defaultComponents = {
 	),
 };
 
+const AvatarOption = ({ data: { avatar, label, secondaryLabel }, ...props }) => {
+	const theme = useTheme();
+
+	return (
+		<Styled.AvatarOption {...props}>
+			{avatar ? (
+				<>
+					<Styled.AvatarOptionImage src={avatar} alt={label} />
+					<Styled.AvatarOptionText theme={theme}>
+						<Styled.AvatarOptionName theme={theme}>{label}</Styled.AvatarOptionName>
+						{secondaryLabel && (
+							<Styled.AvatarOptionSecondaryLabel theme={theme}>
+								{secondaryLabel}
+							</Styled.AvatarOptionSecondaryLabel>
+						)}
+					</Styled.AvatarOptionText>
+				</>
+			) : (
+				label
+			)}
+		</Styled.AvatarOption>
+	);
+};
+
+const AvatarMultiValue = ({ data: { avatar, label }, ...props }) => {
+	const theme = useTheme();
+
+	return (
+		<Styled.AvatarMultiValue {...props}>
+			{avatar ? (
+				<>
+					<Styled.AvatarMultiValueImage src={avatar} alt={label} />
+					<Styled.AvatarMultiValueName theme={theme}>{label}</Styled.AvatarMultiValueName>
+				</>
+			) : (
+				label
+			)}
+		</Styled.AvatarMultiValue>
+	);
+};
+
+export const avatarComponents = {
+	...defaultComponents,
+	Option: AvatarOption,
+	MultiValue: AvatarMultiValue,
+};
+
 function noOptionsMessage({ inputValue }) {
 	return inputValue ? 'No options' : null;
 }
@@ -280,6 +328,22 @@ export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref)
 			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 		/>
 	);
+});
+
+export const AvatarSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
+	return <Select ref={ref} {...props} components={{ ...avatarComponents }} />;
+});
+
+export const AvatarCreatableSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
+	return <CreatableSelect ref={ref} {...props} components={{ ...avatarComponents }} />;
+});
+
+export const AvatarAsyncCreatableSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
+	return <AsyncCreatableSelect ref={ref} {...props} components={{ ...avatarComponents }} />;
+});
+
+export const AvatarAsyncSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
+	return <AsyncSelect ref={ref} {...props} components={{ ...avatarComponents }} />;
 });
 
 function useBody() {

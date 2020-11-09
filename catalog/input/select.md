@@ -148,6 +148,21 @@ state: { tags: [] }
 <AsyncSelectDemo />
 ```
 
+### Avatar Select
+
+```react
+showSource: true
+---
+<AvatarSelect
+	isMulti
+	options={[
+		{ value: "california", label: "California" },
+		{ value: "washington", label: "Washington", avatar: "https://files.logoscdn.com/v1/files/42382171/content.svg?signature=6V_cO8zkG4kob-qZTjNlJkCuNTA" },
+		{ value: "texas", label: "Texas", avatar: "https://files.logoscdn.com/v1/files/42382171/content.svg?signature=6V_cO8zkG4kob-qZTjNlJkCuNTA", "secondaryLabel": "The Lonestar State" }
+	]}
+/>
+```
+
 ### Custom Options select
 
 ```react
