@@ -19,7 +19,7 @@ export const ModalHeader = ({ title, subtitle, message, actions, textStyle, ...p
 			alignItems="center"
 			width="100%"
 			padding={contentPadding}
-			paddingBottom={0}
+			paddingBottom={2}
 			{...props}
 		>
 			<Stack spacing={3} width="100%">
