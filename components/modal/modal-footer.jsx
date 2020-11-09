@@ -12,7 +12,7 @@ export const ModalFooter = ({ children, ...props }) => {
 			justifyContent="flex-end"
 			width="100%"
 			padding={contentPadding}
-			paddingTop={0}
+			paddingTop={2}
 			{...props}
 		>
 			{children}

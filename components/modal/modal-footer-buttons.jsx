@@ -20,7 +20,7 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 			{commitButton && (
 				<Button
 					variant="primary"
-					size="medium"
+					size={['medium', 'small']}
 					onClick={commitButton.onClick}
 					width={useFullWidthButtons ? '100%' : null}
 					disabled={commitButton.disabled}
@@ -36,7 +36,7 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 				>
 					<Button
 						variant="secondary"
-						size="medium"
+						size={['medium', 'small']}
 						onClick={cancelButton.onClick}
 						width={useFullWidthButtons ? '100%' : null}
 						disabled={cancelButton.disabled}
@@ -53,7 +53,7 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 				>
 					<Button
 						variant="danger"
-						size="medium"
+						size={['medium', 'small']}
 						onClick={deleteButton.onClick}
 						width={useFullWidthButtons ? '100%' : null}
 						disabled={deleteButton.disabled}
