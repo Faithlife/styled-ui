@@ -43,6 +43,36 @@ state: { modal: false, value: '' }
 </div>
 ```
 
+## Scrolling Modal
+
+The modal will automatically scroll when content is longer than the page height
+
+```react
+showSource: true
+state: { modal: false, value: '' }
+---
+<div>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Modal
+		isOpen={state.modal}
+		container="body"
+		onClose={() => setState({ modal: false })}
+	>
+		<Modal.Header title="Location" subtitle="Help us locate you" />
+		<Modal.Content width={['100vw', 400]}>
+			{JSON.stringify(new Array(3000), null, '\t')}
+		</Modal.Content>
+		<Modal.Footer>
+			<Modal.FooterButtons
+				commitButton={{ text: 'Save', onClick: () => alert('Saved') }}
+				cancelButton={{ text: 'Cancel', onClick: () => setState({ modal: !state.modal }) }}
+				deleteButton={{ text: 'Delete Forever', onClick: () => alert('Deleted') }}
+			/>
+		</Modal.Footer>
+	</Modal>
+</div>
+```
+
 ## Modal with 24px spacing and 24px title
 
 ```react
