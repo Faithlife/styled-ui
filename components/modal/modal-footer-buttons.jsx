@@ -24,6 +24,7 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 					onClick={commitButton.onClick}
 					width={useFullWidthButtons ? '100%' : null}
 					disabled={commitButton.disabled}
+					paddingX={['10px', 4]}
 				>
 					{commitButton.text}
 				</Button>
@@ -40,6 +41,7 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 						onClick={cancelButton.onClick}
 						width={useFullWidthButtons ? '100%' : null}
 						disabled={cancelButton.disabled}
+						paddingX={['10px', 4]}
 					>
 						{cancelButton.text}
 					</Button>
@@ -57,6 +59,7 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 						onClick={deleteButton.onClick}
 						width={useFullWidthButtons ? '100%' : null}
 						disabled={deleteButton.disabled}
+						paddingX={['10px', 4]}
 					>
 						{deleteButton.text}
 					</Button>
