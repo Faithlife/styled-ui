@@ -59,7 +59,7 @@ state: { modal: false, value: '' }
 		onClose={() => setState({ modal: false })}
 	>
 		<Modal.Header title="Location" subtitle="Help us locate you" />
-		<Modal.Content width={['100vw', 400]}>
+		<Modal.Content width={['100vw', 475]}>
 			{JSON.stringify(new Array(3000), null, '\t')}
 		</Modal.Content>
 		<Modal.Footer>
