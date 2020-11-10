@@ -3,7 +3,7 @@ export {
 	CreatableSelect,
 	AsyncCreatableSelect,
 	Select,
-	AvatarSelect,
+	avatarComponents,
 	reactSelectComponents,
 } from './select';
 export { InferredText } from './inferred-text';

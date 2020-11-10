@@ -330,22 +330,6 @@ export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref)
 	);
 });
 
-export const AvatarSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
-	return <Select ref={ref} {...props} components={{ ...avatarComponents }} />;
-});
-
-export const AvatarCreatableSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
-	return <CreatableSelect ref={ref} {...props} components={{ ...avatarComponents }} />;
-});
-
-export const AvatarAsyncCreatableSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
-	return <AsyncCreatableSelect ref={ref} {...props} components={{ ...avatarComponents }} />;
-});
-
-export const AvatarAsyncSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
-	return <AsyncSelect ref={ref} {...props} components={{ ...avatarComponents }} />;
-});
-
 function useBody() {
 	const [body, setBody] = useState(null);
 	useEffect(() => {
