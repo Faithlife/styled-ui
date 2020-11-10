@@ -153,7 +153,8 @@ state: { tags: [] }
 ```react
 showSource: true
 ---
-<AvatarSelect
+<Select
+	components={avatarComponents}
 	isMulti
 	options={[
 		{ value: "california", label: "California" },
