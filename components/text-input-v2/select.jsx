@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import ReactSelect, {
-	Creatable as ReactSelectCreatable,
-	components as reactSelectComponents,
-} from 'react-select';
+import ReactSelect, { components as reactSelectComponents } from 'react-select';
+import ReactSelectCreatable from 'react-select/creatable';
 import { colors } from '../shared-styles';
 import { ChevronDown } from '../icons/12px';
 import { DebouncedSelectAsync, DebouncedSelectAsyncCreatable } from './debounced-async';
