@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.68.0
+
+- Update padding on `Modal.Content` to keep vertical padding fixed while content scrolls.
+- Use `medium` buttons in `Modal.FooterButtons` on mobile, `small` on desktop.
+
 ## 5.67.0
 
 - Add `avatarComponents` helper export for `Select` components.
