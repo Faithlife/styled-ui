@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.67.0
+
+- Add `avatarComponents` helper export for `Select` components.
+
+## 5.66.0
+
+- Add `Dropdown` v6 component.
+
 ## 5.65.0
 
 - Update `Accordion` with smaller hit targets on desktop, add hover state.
