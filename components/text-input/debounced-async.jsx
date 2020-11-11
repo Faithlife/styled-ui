@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
-import { Async, AsyncCreatable } from 'react-select';
+import Async from 'react-select/async';
+import AsyncCreatable from 'react-select/async-creatable';
 import debounce from 'lodash.debounce';
 import { useCopyRefs } from '../shared-hooks';
 
