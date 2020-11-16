@@ -52,6 +52,6 @@ export const Month = styled.div`
 	font-size: 14px;
 
 	@media (hover: none) {
-		width: 308px;
+		max-width: 308px;
 	}
 `;
