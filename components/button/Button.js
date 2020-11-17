@@ -7,18 +7,6 @@ import { common, typography } from '../../theme/system';
 import { buttonSizes, buttons } from '../../theme/buttons';
 import { theme } from '../../theme';
 
-const sizeVariant = variant({
-	prop: 'size',
-	scale: 'buttonSizes',
-	variants: buttonSizes,
-});
-
-const buttonVariant = variant({
-	prop: 'variant',
-	scale: 'buttons',
-	variants: buttons,
-});
-
 const ButtonCore = styled.button.attrs(({ active }) => ({ className: active ? 'active' : null }))`
 	box-sizing: border-box;
 	font-family: inherit;
@@ -55,10 +43,21 @@ const ButtonCore = styled.button.attrs(({ active }) => ({ className: active ? 'a
 		margin-right: ${props => (props.hasChildren ? props.theme.space[2] : '')};
 	}
 
-	${sizeVariant}
-	${buttonVariant}
-	${textStyle};
+	${variant({
+		prop: 'size',
+		scale: 'buttonSizes',
+		variants: buttonSizes,
+	})};
 
+	${({ disabled }) => css`
+		${variant({
+			prop: 'variant',
+			scale: 'buttons',
+			variants: buttons(disabled),
+		})};
+	`}
+
+	${textStyle};
 	${common};
 	${typography};
 	${layout};
