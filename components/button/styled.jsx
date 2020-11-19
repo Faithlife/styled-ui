@@ -75,51 +75,51 @@ export const Button = styled.button`
 
 	${({ as: baseTag }) => baseTag && baseTag === 'a' && Anchor};
 
-		${({ disabled }) =>
-			variant({
-				variants: {
-					primary: {
-						border: '1px solid',
-						color: 'white',
-						'@media (hover: hover)': {
-							'&:hover': {
-								color: 'white',
-							},
+	${({ disabled }) =>
+		variant({
+			variants: {
+				primary: {
+					border: '1px solid',
+					color: 'white',
+					'@media (hover: hover)': {
+						'&:hover': {
+							color: 'white',
 						},
-					},
-					primaryOutline: {
-						border: '1px solid',
-						background: 'none',
-						'@media (hover: hover)': {
-							'&:hover': {
-								color: disabled ? 'blue2' : 'white',
-							},
-						},
-						'&:active': {
-							color: disabled || 'white',
-						},
-					},
-					primaryTransparent: {
-						border: '1px solid transparent',
-						background: 'none',
-						padding: '0px',
-					},
-					minor: {
-						border: '1px solid',
-						color: disabled ? 'gray22' : 'gray66',
-						'@media (hover: hover)': {
-							'&:hover': {
-								color: disabled ? 'gray22' : 'gray66',
-							},
-						},
-					},
-					minorTransparent: {
-						border: '1px solid transparent',
-						background: 'none',
-						padding: '0px',
 					},
 				},
-			})}
+				primaryOutline: {
+					border: '1px solid',
+					background: 'none',
+					'@media (hover: hover)': {
+						'&:hover': {
+							color: disabled ? 'blue2' : 'white',
+						},
+					},
+					'&:active': {
+						color: disabled || 'white',
+					},
+				},
+				primaryTransparent: {
+					border: '1px solid transparent',
+					background: 'none',
+					padding: '0px',
+				},
+				minor: {
+					border: '1px solid',
+					color: disabled ? 'gray22' : 'gray66',
+					'@media (hover: hover)': {
+						'&:hover': {
+							color: disabled ? 'gray22' : 'gray66',
+						},
+					},
+				},
+				minorTransparent: {
+					border: '1px solid transparent',
+					background: 'none',
+					padding: '0px',
+				},
+			},
+		})}
 
 	${({ variant }) => {
 		switch (variant) {
