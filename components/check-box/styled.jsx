@@ -55,6 +55,11 @@ export const CheckboxContainer = styled.button`
 
 	&:focus {
 		outline: none;
+
+		& ${CheckboxDiv} {
+			border-color: ${({ theme }) => theme.colors.input.borderFocused};
+			box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.input.shadowFocused};
+		}
 	}
 `;
 
