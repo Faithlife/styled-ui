@@ -73,7 +73,9 @@ export const Button = styled.button`
 		margin-right: ${props => (props.hasChildren ? '6px' : '')};
 	}
 
-	${({ as: baseTag }) => baseTag && baseTag === 'a' && Anchor};
+	a& {
+		${Anchor}
+	}
 
 	${({ disabled }) =>
 		variant({
