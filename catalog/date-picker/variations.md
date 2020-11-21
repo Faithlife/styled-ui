@@ -55,19 +55,21 @@ state: { selectedDateRange: null }
 
 ```react
 showSource: true
-state: { selectedDateRange: null }
+state: { selectedDateRange: null, selectedDatePeriodName: null }
 ---
 <DatePickerDemo>
-<div>
-	<span style={{ marginRight: '8px' }}>The selected date range is {(state.selectedDateRange ? dateFunctions.format(state.selectedDateRange.start, 'MM-dd-yyyy') : null)} to {(state.selectedDateRange ? dateFunctions.format(state.selectedDateRange.end, 'MM-dd-yyyy') : null)}</span>
+	<div>The selected date range is {(state.selectedDateRange ? dateFunctions.format(state.selectedDateRange.start, 'MM-dd-yyyy') : null)} to {(state.selectedDateRange ? dateFunctions.format(state.selectedDateRange.end, 'MM-dd-yyyy') : null)}</div>
+	<div>The selected date period name is {state.selectedDatePeriodName === undefined ? (<code>undefined</code>) : state.selectedDatePeriodName === null ? (<code>null</code>) : `"${state.selectedDatePeriodName}"`}</div>
 	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
-			<Button variant="primary" size="medium" onClick={() => setState({ isOpen: !state.isOpen })}>Select Dates</Button>
+			<Button variant="primary" size="medium" onClick={() => setState({ isOpen: !state.isOpen })} style={{ margin: "0.5rem 4rem" }}>Select Dates</Button>
 		</PopoverReference>
 		<Popover isOpen={state.isOpen} placement="bottom" styleOverrides={{ padding: '0px', maxWidth: '1000px' }}>
 			<DatePeriodPicker
 				selectedDateRange={state.selectedDateRange}
-				setSelectedDate={(dateRange) => setState({ selectedDateRange: dateRange })}
+				setSelectedDate={(dateRange, displayName) => {
+					setState({ selectedDateRange: dateRange, selectedDatePeriodName: displayName })
+				}}
 				dateFunctions={dateFunctions}
 				validate={date => date >= new Date(1970, 0, 1)}
 				parseDate={dateFunctions.parse}
@@ -84,6 +86,5 @@ state: { selectedDateRange: null }
 			/>
 		</Popover>
 	</PopoverManager>
-</div>
 </DatePickerDemo>
 ```
