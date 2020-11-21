@@ -104,7 +104,7 @@ export class DatePeriodPicker extends PureComponent {
 				this.setState({ inputValues: { [input]: value } });
 			}
 
-			this.props.setSelectedDate(selectedDate);
+			this.props.setSelectedDate(selectedDate, null);
 		}
 	}, this.props.debounce);
 
@@ -156,7 +156,7 @@ export class DatePeriodPicker extends PureComponent {
 					<DatePicker
 						asDateRangePicker
 						selectedDateRange={selectedDateRange}
-						setSelectedDate={setSelectedDate}
+						setSelectedDate={dateRange => setSelectedDate(dateRange, null)}
 						validate={validate}
 						dateFunctions={dateFunctions}
 					/>

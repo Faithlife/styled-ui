@@ -59,7 +59,7 @@ state: { selectedDateRange: null, selectedDatePeriodName: null }
 ---
 <DatePickerDemo>
 	<div>The selected date range is {(state.selectedDateRange ? dateFunctions.format(state.selectedDateRange.start, 'MM-dd-yyyy') : null)} to {(state.selectedDateRange ? dateFunctions.format(state.selectedDateRange.end, 'MM-dd-yyyy') : null)}</div>
-	<div>The selected date period name is {state.selectedDatePeriodName === undefined ? (<code>undefined</code>) : state.selectedDatePeriodName === null ? (<code>null</code>) : `"${state.selectedDatePeriodName}"`}</div>
+	<div>The selected date period name is {state.selectedDatePeriodName === null ? (<code>null</code>) : `"${state.selectedDatePeriodName}"`}</div>
 	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
 		<PopoverReference>
 			<Button variant="primary" size="medium" onClick={() => setState({ isOpen: !state.isOpen })} style={{ margin: "0.5rem 4rem" }}>Select Dates</Button>
