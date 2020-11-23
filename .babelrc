@@ -17,7 +17,9 @@
 		],
 		"react-docgen",
 		"@babel/plugin-proposal-class-properties",
-		"@babel/plugin-syntax-dynamic-import"
+		"@babel/plugin-syntax-dynamic-import",
+		"@babel/plugin-proposal-private-methods",
+		"@babel/plugin-proposal-private-property-in-object"
 	],
 	"env": {
 		"test": {
