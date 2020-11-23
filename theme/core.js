@@ -197,6 +197,8 @@ colors.checkbox = {
 	border: '#95908f',
 	disabledBackground: colors.gray8,
 	disabledBorder: colors.gray22,
+	borderFocused: colors.input.borderFocused,
+	shadowFocused: colors.input.shadowFocused,
 };
 
 colors.datePickerInput = {
