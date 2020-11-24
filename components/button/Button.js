@@ -6,6 +6,7 @@ import { Box } from '../Box';
 import { common, typography } from '../../theme/system';
 import { buttonSizes, buttons } from '../../theme/buttons';
 import { theme } from '../../theme';
+import { LoadingSpinner } from '../loading-spinner';
 
 const sizeVariant = variant({
 	prop: 'size',
@@ -20,6 +21,7 @@ const buttonVariant = variant({
 });
 
 const ButtonCore = styled.button.attrs(({ active }) => ({ className: active ? 'active' : null }))`
+	position: relative;
 	box-sizing: border-box;
 	font-family: inherit;
 	background: transparent;
@@ -55,6 +57,15 @@ const ButtonCore = styled.button.attrs(({ active }) => ({ className: active ? 'a
 		margin-right: ${props => (props.hasChildren ? props.theme.space[2] : '')};
 	}
 
+	${({ loading }) =>
+		loading
+			? css`
+					& > :not(:first-child) {
+						visibility: hidden;
+					}
+			  `
+			: ''}
+
 	${sizeVariant}
 	${buttonVariant}
 	${textStyle};
@@ -74,10 +85,17 @@ ButtonCore.defaultProps = {
 	variant: 'primary',
 };
 
-const Button = React.forwardRef(({ children, icon, ...props }, ref) => (
-	<ButtonCore ref={ref} {...props} hasChildren={!!children}>
+const Button = React.forwardRef(({ children, icon, disabled, loading, ...props }, ref) => (
+	<ButtonCore
+		ref={ref}
+		{...props}
+		hasChildren={!!children}
+		loading={loading}
+		disabled={loading || disabled}
+	>
+		{loading && <LoadingSpinner position="absolute" />}
 		{icon}
-		{children}
+		<div>{children}</div>
 	</ButtonCore>
 ));
 
