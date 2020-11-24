@@ -1,0 +1,216 @@
+import { useState } from 'react';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { GearIcon } from '../../components/icons';
+import { resetArgTypes, getStyledSystemArgTypes, styledSystemProps } from '../shared-util';
+import { ButtonDemo, commonArgTypes } from './util';
+
+import { Button, SegmentedButtonGroup } from '../../index-v6';
+
+<Meta title="Components/Button" component={Button} argTypes={commonArgTypes} />
+
+# Button
+
+`import { Button } from '@faithlife/styled-ui/v6';`
+
+Buttons allow users to command the computer to take some action. Buttons, like all standard form components, usually have 16 px space between them.
+
+## Component Variations
+
+### Variants
+
+<ButtonDemo>
+	<Button variant="primary" size="medium">
+		Primary
+	</Button>
+	<Button variant="secondary" size="medium">
+		Secondary
+	</Button>
+	<Button variant="minor" size="medium">
+		Minor
+	</Button>
+	<Button variant="transparent" size="medium">
+		Transparent
+	</Button>
+	<Button variant="minorTransparent" size="medium">
+		Minor Transparent
+	</Button>
+	<Button variant="link" size="medium">
+		Link
+	</Button>
+	<Button variant="danger" size="medium">
+		Danger
+	</Button>
+	<Button variant="dangerSpecial" size="medium">
+		Danger (Special)
+	</Button>
+</ButtonDemo>
+
+### Size
+
+<ButtonDemo>
+	<Button variant="primary" size="small">
+		Small
+	</Button>
+	<Button variant="primary" size="medium">
+		Medium
+	</Button>
+	<Button variant="primary" size="large">
+		Large
+	</Button>
+</ButtonDemo>
+
+<Canvas>
+	<Story
+		name="Variants and Size"
+		args={{ variant: 'primary', size: 'medium' }}
+		argTypes={{ ...resetArgTypes, ...commonArgTypes }}
+	>
+		{args => <Button {...args}>Primary</Button>}
+	</Story>
+</Canvas>
+
+### With Icon
+
+<ButtonDemo>
+	<Button variant="primary" size="large" icon={<GearIcon />}>
+		Settings
+	</Button>
+	<Button variant="primary" size="small" icon={<GearIcon />}>
+		Settings
+	</Button>
+	<Button variant="primary" size="small" icon={<GearIcon />} />
+	<Button variant="transparent" size="small" icon={<GearIcon />} />
+	<Button variant="minorTransparent" size="small" icon={<GearIcon />} />
+</ButtonDemo>
+
+<Canvas>
+	<Story
+		name="With Icon"
+		args={{ variant: 'primary', size: 'medium' }}
+		argTypes={{ ...resetArgTypes, ...commonArgTypes }}
+	>
+		{args => (
+			<Button icon={<GearIcon />} {...args}>
+				Primary
+			</Button>
+		)}
+	</Story>
+</Canvas>
+
+### Responsive Sizes
+
+Pass an array of sizes corresponding to breakpoints.
+
+<Canvas>
+	<Story
+		name="Responsive Sizes"
+		args={{ size: ['large', 'medium'] }}
+		argTypes={{
+			...resetArgTypes,
+			size: {
+				control: {
+					type: 'array',
+					separator: ',',
+				},
+			},
+		}}
+	>
+		{args => (
+			<Button variant="primary" {...args}>
+				Go
+			</Button>
+		)}
+	</Story>
+</Canvas>
+
+### Disabled states
+
+<ButtonDemo>
+	<Button variant="primary" size="medium" disabled>
+		Primary
+	</Button>
+	<Button variant="secondary" size="medium" disabled>
+		Secondary
+	</Button>
+	<Button variant="minor" size="medium" disabled>
+		Minor
+	</Button>
+	<Button variant="transparent" size="medium" disabled>
+		Transparent
+	</Button>
+	<Button variant="link" size="medium" disabled>
+		Link
+	</Button>
+	<Button variant="danger" size="medium" disabled>
+		danger
+	</Button>
+	<Button variant="dangerSpecial" size="medium" disabled>
+		Danger (Special)
+	</Button>
+</ButtonDemo>
+
+## Button Groups
+
+<Canvas>
+	<Story name="Button Groups">
+		{args => {
+			const [active, setActive] = useState(1);
+			return (
+				<ButtonDemo>
+					<SegmentedButtonGroup {...args}>
+						<Button
+							variant="transparent"
+							active={active === 1}
+							onClick={() => setActive(1)}
+							size="medium"
+						>
+							First Action
+						</Button>
+						<Button
+							variant="transparent"
+							active={active === 2}
+							onClick={() => setActive(2)}
+							size="medium"
+						>
+							Second Action
+						</Button>
+						<Button
+							variant="transparent"
+							active={active === 3}
+							onClick={() => setActive(3)}
+							size="medium"
+						>
+							Thrid Action
+						</Button>
+					</SegmentedButtonGroup>
+				</ButtonDemo>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## Button Demo
+
+<Canvas>
+	<Story
+		name="ButtonDemo"
+		args={{ variant: 'primary', size: 'medium', children: 'Button' }}
+		argTypes={{
+			...commonArgTypes,
+			...getStyledSystemArgTypes([
+				styledSystemProps.border,
+				styledSystemProps.color,
+				styledSystemProps.flexbox,
+				styledSystemProps.layout,
+				styledSystemProps.position,
+				styledSystemProps.shadow,
+				styledSystemProps.space,
+				styledSystemProps.textStyle,
+			]),
+		}}
+	>
+		{({ children, ...args }) => <Button {...args}>{children}</Button>}
+	</Story>
+</Canvas>
+
+<ArgsTable story={'ButtonDemo'} />
