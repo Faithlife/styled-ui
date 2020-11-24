@@ -9,34 +9,32 @@ Buttons allow users to command the computer to take some action. Buttons, like a
 ```react
 showSource: true
 ---
-<div>
-	<ButtonDemo>
-		<Button variant="primary" size="medium">
-			Primary
-		</Button>
-		<Button variant="secondary" size="medium">
-			Secondary
-		</Button>
-		<Button variant="minor" size="medium">
-			Minor
-		</Button>
-		<Button variant="transparent" size="medium">
-			Transparent
-		</Button>
-		<Button variant="minorTransparent" size="medium">
-			Minor Transparent
-		</Button>
-		<Button variant="link" size="medium">
-			Link
-		</Button>
-		<Button variant="danger" size="medium">
-			Danger
-		</Button>
-		<Button variant="dangerSpecial" size="medium">
-			Danger (Special)
-		</Button>
-	</ButtonDemo>
-</div>
+<ButtonDemo>
+	<Button variant="primary" size="medium">
+		Primary
+	</Button>
+	<Button variant="secondary" size="medium">
+		Secondary
+	</Button>
+	<Button variant="minor" size="medium">
+		Minor
+	</Button>
+	<Button variant="transparent" size="medium">
+		Transparent
+	</Button>
+	<Button variant="minorTransparent" size="medium">
+		Minor Transparent
+	</Button>
+	<Button variant="link" size="medium">
+		Link
+	</Button>
+	<Button variant="danger" size="medium">
+		Danger
+	</Button>
+	<Button variant="dangerSpecial" size="medium">
+		Danger (Special)
+	</Button>
+</ButtonDemo>
 ```
 
 ### Size
@@ -112,31 +110,61 @@ showSource: true
 ```react
 showSource: true
 ---
-<div>
-	<ButtonDemo>
-		<Button variant="primary" size="medium" disabled>
-			Primary
-		</Button>
-		<Button variant="secondary" size="medium" disabled>
-			Secondary
-		</Button>
-		<Button variant="minor" size="medium" disabled>
-			Minor
-		</Button>
-		<Button variant="transparent" size="medium" disabled>
-			Transparent
-		</Button>
-		<Button variant="link" size="medium" disabled>
-			Link
-		</Button>
-		<Button variant="danger" size="medium" disabled>
-			danger
-		</Button>
-		<Button variant="dangerSpecial" size="medium" disabled>
-			Danger (Special)
-		</Button>
-	</ButtonDemo>
-</div>
+<ButtonDemo>
+	<Button variant="primary" size="medium" disabled>
+		Primary
+	</Button>
+	<Button variant="secondary" size="medium" disabled>
+		Secondary
+	</Button>
+	<Button variant="minor" size="medium" disabled>
+		Minor
+	</Button>
+	<Button variant="transparent" size="medium" disabled>
+		Transparent
+	</Button>
+	<Button variant="link" size="medium" disabled>
+		Link
+	</Button>
+	<Button variant="danger" size="medium" disabled>
+		danger
+	</Button>
+	<Button variant="dangerSpecial" size="medium" disabled>
+		Danger (Special)
+	</Button>
+</ButtonDemo>
+```
+
+## Loading prop
+
+```react
+showSource: true
+state: { loading: false }
+---
+<ButtonDemo>
+	<Button variant="primary" loading={state.loading} onClick={() => {
+		setState({ loading: true });
+		setTimeout(() => setState({ loading: false }), 1000);
+	}}>
+		Primary
+	</Button>
+	<Button variant="secondary" loading={state.loading} onClick={() => {
+		setState({ loading: true });
+		setTimeout(() => setState({ loading: false }), 1000);
+	}}>
+		Secondary
+	</Button>
+	<Button variant="primary" icon={<GearIcon />} loading={state.loading} onClick={() => {
+		setState({ loading: true });
+		setTimeout(() => setState({ loading: false }), 1000);
+	}}>
+		With Icon
+	</Button>
+	<Button variant="transparent" icon={<GearIcon />} loading={state.loading} onClick={() => {
+		setState({ loading: true });
+		setTimeout(() => setState({ loading: false }), 1000);
+	}} />
+</ButtonDemo>
 ```
 
 ## Button Groups
@@ -144,19 +172,17 @@ showSource: true
 ```react
 showSource: true
 ---
-<div>
-	<ButtonDemo>
-		<SegmentedButtonGroup>
-			<Button variant="transparent" active size="medium">
-				Primary
-			</Button>
-			<Button variant="transparent" size="medium">
-				Secondary
-			</Button>
-			<Button variant="transparent" size="medium">
-				Minor
-			</Button>
-		</SegmentedButtonGroup>
-	</ButtonDemo>
-</div>
+<ButtonDemo>
+	<SegmentedButtonGroup>
+		<Button variant="transparent" active size="medium">
+			Primary
+		</Button>
+		<Button variant="transparent" size="medium">
+			Secondary
+		</Button>
+		<Button variant="transparent" size="medium">
+			Minor
+		</Button>
+	</SegmentedButtonGroup>
+</ButtonDemo>
 ```
