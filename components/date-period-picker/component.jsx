@@ -104,13 +104,33 @@ export class DatePeriodPicker extends PureComponent {
 				this.setState({ inputValues: { [input]: value } });
 			}
 
-			this.props.setSelectedDate(selectedDate, null);
+			this.props.setSelectedDate(selectedDate, this.getDatePeriodIndex(selectedDate));
 		}
 	}, this.props.debounce);
 
 	handleInputValueChange = (value, input) => {
 		this.setState(state => ({ inputValues: { ...state.inputValues, [input]: value } }));
 		this.parseAndUpdateDate(value, input);
+	};
+
+	getDatePeriodIndex = ({ start, end }) => {
+		if (start === undefined || end === undefined || start === null || end === null) {
+			return null;
+		}
+
+		for (let i = 0; i < this.props.datePeriods.length; i++) {
+			if (
+				isSameDay(start, this.props.datePeriods[i].dateRange.start) &&
+				isSameDay(end, this.props.datePeriods[i].dateRange.end)
+			) {
+				return i;
+			}
+		}
+		return null;
+
+		function isSameDay(date1, date2) {
+			return new Date(date1).setHours(0, 0, 0, 0) === new Date(date2).setHours(0, 0, 0, 0);
+		}
 	};
 
 	render() {
@@ -156,7 +176,9 @@ export class DatePeriodPicker extends PureComponent {
 					<DatePicker
 						asDateRangePicker
 						selectedDateRange={selectedDateRange}
-						setSelectedDate={dateRange => setSelectedDate(dateRange, null)}
+						setSelectedDate={dateRange =>
+							setSelectedDate(dateRange, this.getDatePeriodIndex(dateRange))
+						}
 						validate={validate}
 						dateFunctions={dateFunctions}
 					/>
