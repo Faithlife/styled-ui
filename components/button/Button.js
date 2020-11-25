@@ -60,6 +60,7 @@ const ButtonCore = styled.button.attrs(({ active }) => ({ className: active ? 'a
 	${({ loading }) =>
 		loading
 			? css`
+					color: transparent !important;
 					& > :not(:first-child) {
 						visibility: hidden;
 					}
@@ -95,7 +96,7 @@ const Button = React.forwardRef(({ children, icon, disabled, loading, ...props }
 	>
 		{loading && <LoadingSpinner position="absolute" />}
 		{icon}
-		<div>{children}</div>
+		{children}
 	</ButtonCore>
 ));
 
