@@ -26,6 +26,9 @@ export const commonArgTypes = {
 			options: [null, <GearIcon />],
 		},
 	},
+	onClick: {
+		action: 'click',
+	},
 };
 
 export const ButtonDemo = styled.div`

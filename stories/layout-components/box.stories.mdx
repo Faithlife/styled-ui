@@ -1,0 +1,103 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { resetArgTypes, getStyledSystemArgTypes, styledSystemProps } from '../shared-util';
+import { theme } from '../../index';
+
+import { Box } from '../../index';
+
+<Meta
+	title="Layout Components/Box"
+	component={Box}
+	argTypes={getStyledSystemArgTypes([
+		styledSystemProps.layout,
+		styledSystemProps.flexbox,
+		styledSystemProps.position,
+		styledSystemProps.grid,
+		styledSystemProps.shadow,
+		styledSystemProps.border,
+		styledSystemProps.background,
+		styledSystemProps.textStyle,
+		styledSystemProps.space,
+		styledSystemProps.color,
+	])}
+/>
+
+# Box
+
+✔ Styled-Systems Compliant  
+✔ WAI ARIA Compliant
+
+`import { Box } from '@faithlife/styled-ui';`
+
+`Box` is a primitive layout component similar to a `div`. Layout styling can be applied directly via props, which also allows easy access to theme data.
+
+### Example
+
+<Canvas>
+	<Story name="Layout Example" args={{ width: '200px', backgroundColor: 'green1' }}>
+		{args => (
+			<Box display="flex" height="100px" boxShadow={1}>
+				<Box flex={1} bg="blue1" borderRight={1} />
+				<Box {...args} />
+			</Box>
+		)}
+	</Story>
+</Canvas>
+
+## Theming
+
+Style prop values are theme-aware. For named theme values like color, strings values will be looked up in the theme object under that name. Numeric values can be used to reference indexed theme scales like spacing.
+
+<Canvas>
+	<Story name="Theming Example" args={{ border: 1, padding: 3, color: 'teal5' }}>
+		{args => (
+			<Box {...args}>
+				{`I have a padding of ${
+					args.padding >= theme.space.length
+						? `${args.padding}px, an arbitrary value not on the spacing scale`
+						: `${theme.space[args.padding]} corresponding to the spacing value at index ${
+								args.padding
+						  }`
+				}, with a background
+				color of ${theme.colors[args.color]}, corresponding to the theme color named "${args.color}".`}
+			</Box>
+		)}
+	</Story>
+</Canvas>
+
+## Responsive styling
+
+Pass arrays of values corresponding to the styles to apply at various breakpoints.
+
+<Canvas>
+	<Story
+		name="Responsive Styling Example"
+		args={{ padding: [2, 3], backgroundColor: ['teal5', 'blue1', 'purple1'] }}
+		argTypes={{
+			...resetArgTypes,
+			padding: { control: { type: 'array' } },
+			backgroundColor: { control: { type: 'array' } },
+		}}
+	>
+		{args => (
+			<Box border={1} {...args}>
+				I have a padding of 4px at the smallest breakpoint, and 8px at larger viewport widths.
+				Background color is unset at the smallest breakpoint, blue1 at the medium breakpoint, and
+				purple1 on larger viewports.
+			</Box>
+		)}
+	</Story>
+</Canvas>
+
+## Box Demo
+
+<Canvas>
+	<Story
+		name="Box Demo"
+		args={{ padding: 3, backgroundColor: 'purple1', width: '100%', height: '50px', border: 1 }}
+		argTypes={{ children: { control: { type: 'text' } } }}
+	>
+		{({ children, ...args }) => <Box {...args}>{children}</Box>}
+	</Story>
+</Canvas>
+
+<ArgsTable story={'Box Demo'} />

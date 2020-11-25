@@ -3,7 +3,7 @@ export const parameters = {
 	viewMode: 'docs',
 	options: {
 		storySort: {
-			order: ['Welcome', 'Components', ['Theme']],
+			order: ['Welcome', 'Layout Components', 'Components', ['Theme']],
 		},
 	},
 };

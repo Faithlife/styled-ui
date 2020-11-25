@@ -149,15 +149,21 @@ const shadowProps = {
 	props: [['textShadow', theme.shadows], ['boxShadow', theme.shadows]],
 };
 
+const customProps = {
+	name: 'Extra',
+	props: ['pointerEvents', 'transform', 'transition'],
+};
+
 export const styledSystemProps = {
 	space: spaceProps,
 	color: colorProps,
 	textStyle: typographyProps,
 	layout: layoutProps,
 	flexbox: flexboxProps,
-	gridLayout: gridLayoutProps,
+	grid: gridLayoutProps,
 	background: backgroundProps,
 	border: borderProps,
 	position: positionProps,
 	shadow: shadowProps,
+	custom: customProps,
 };

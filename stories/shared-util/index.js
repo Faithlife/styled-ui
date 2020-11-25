@@ -23,9 +23,6 @@ function getStyledSystemArgTypes(systemsList) {
 								table: {
 									category,
 									subcategory: propList.name,
-									isExpanded: false,
-									collapse: true,
-									isCollapsed: true,
 								},
 						  }
 						: {
@@ -57,9 +54,6 @@ const resetArgTypes = {
 		table: {
 			disable: true,
 		},
-	},
-	onClick: {
-		action: 'click',
 	},
 };
 
