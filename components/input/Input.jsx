@@ -121,7 +121,7 @@ Input.propTypes = {
 export { Input };
 
 const StyledInput = styled.input(
-	({ theme, variant, styleOverrides = {} }) => css`
+	({ theme, variant = {} }) => css`
 	${resetStyles};
 	${textStyle};
 
@@ -135,16 +135,6 @@ const StyledInput = styled.input(
 	color: ${theme.colors.input.foreground};
 
 	${system({ resize: true })};
-
-	${'height' in styleOverrides &&
-		css`
-			height: ${styleOverrides.height};
-		`}
-
-	${'width' in styleOverrides &&
-		css`
-			width: ${styleOverrides.width};
-		`}
 
 	box-shadow: none;
 
