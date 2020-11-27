@@ -122,86 +122,86 @@ export { Input };
 
 const StyledInput = styled.input(
 	({ theme, variant = {} }) => css`
-	${resetStyles};
-	${textStyle};
+		${resetStyles}
+		${textStyle}
 
-	height: 32px;
-	padding: ${theme.space[2]} ${theme.space[3]};
+		height: 32px;
+		padding: ${theme.space[2]} ${theme.space[3]};
 
-	background-color: ${theme.colors.input.background};
-	border: 1px solid;
-	border-radius: ${theme.radii[1]};
-	border-color: ${theme.colors.input.border};
-	color: ${theme.colors.input.foreground};
+		background-color: ${theme.colors.input.background};
+		border: 1px solid;
+		border-radius: ${theme.radii[1]};
+		border-color: ${theme.colors.input.border};
+		color: ${theme.colors.input.foreground};
 
-	${system({ resize: true })};
+		${system({ resize: true })}
 
-	box-shadow: none;
+		box-shadow: none;
 
-	&:focus {
-		border-color: ${theme.colors.input.borderFocused};
-		box-shadow: 0 0 0 2px ${theme.colors.input.shadowFocused};
-		outline: 0;
-		${({ variant }) =>
-			variant === 'inline' &&
-			system({ underlineColor: { property: 'border-color', scale: 'colors' } })}
-	}
+		&:focus {
+			border-color: ${theme.colors.input.borderFocused};
+			box-shadow: 0 0 0 2px ${theme.colors.input.shadowFocused};
+			outline: 0;
+			${({ variant }) =>
+				variant === 'inline' &&
+				system({ underlineColor: { property: 'border-color', scale: 'colors' } })}
+		}
 
-	&:disabled {
-		opacity: 0.5;
-	}
+		&:disabled {
+			opacity: 0.5;
+		}
 
-	&:read-only {
-		background: ${theme.colors.input.backgroundReadOnly};
-	}
+		&:read-only {
+			background: ${theme.colors.input.backgroundReadOnly};
+		}
 
-	&::placeholder {
-		color: ${theme.colors.input.placeholderForeground};
-	}
+		&::placeholder {
+			color: ${theme.colors.input.placeholderForeground};
+		}
 
-	${createVariant({
-		variants: {
-			small: {
-				paddingX: 3,
-				paddingY: 2,
-				height: '32px',
-			},
-			medium: {
-				paddingX: 4,
-				paddingY: 3,
-				height: '40px',
-			},
-			large: {
-				paddingX: 5,
-				paddingY: 4,
-				height: '56px',
-			},
-			inline: {
-				backgroundColor: 'transparent',
-				border: 'none',
-				boxShadow: 'none',
-				borderRadius: 0,
-				padding: 0,
-				borderBottom: '2px solid',
-				borderColor: 'blue',
-				height: '20px',
-				paddingBottom: '4px',
-				lineHeight: 1,
-				'&:focus': {
+		${createVariant({
+			variants: {
+				small: {
+					paddingX: 3,
+					paddingY: 2,
+					height: '32px',
+				},
+				medium: {
+					paddingX: 4,
+					paddingY: 3,
+					height: '40px',
+				},
+				large: {
+					paddingX: 5,
+					paddingY: 4,
+					height: '56px',
+				},
+				inline: {
+					backgroundColor: 'transparent',
+					border: 'none',
 					boxShadow: 'none',
-					outline: '0',
+					borderRadius: 0,
+					padding: 0,
+					borderBottom: '2px solid',
+					borderColor: 'blue',
+					height: '20px',
+					paddingBottom: '4px',
+					lineHeight: 1,
+					'&:focus': {
+						boxShadow: 'none',
+						outline: '0',
+					},
 				},
 			},
-		},
-	})}
+		})}
 
-	${variant === 'inline' && system({ underlineColor: { property: 'border-color', scale: 'colors' } })}
+		${variant === 'inline' && system({ underlineColor: { property: 'border-color', scale: 'colors' } })}
 
-	${common};
-	${typography};
-	${layout};
-	${border};
-`,
+		${common}
+		${typography}
+		${layout}
+		${border}
+	`,
 );
 
 StyledInput.defaultProps = {
