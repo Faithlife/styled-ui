@@ -1,12 +1,13 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { variant, layout, flexbox, position, textStyle, border, background } from 'styled-system';
+import { variant, flexbox, position, textStyle, border, background } from 'styled-system';
 import 'focus-visible';
 import { Box } from '../Box';
 import { common, typography } from '../../theme/system';
 import { buttonSizes, buttons } from '../../theme/buttons';
 import { theme } from '../../theme';
 import { LoadingSpinner } from '../loading-spinner';
+import layoutExceptSize from '../utils/layout-except-size';
 
 const sizeVariant = variant({
 	prop: 'size',
@@ -73,7 +74,7 @@ const ButtonCore = styled.button.attrs(({ active }) => ({ className: active ? 'a
 
 	${common}
 	${typography}
-	${layout}
+	${layoutExceptSize}
 	${flexbox}
 	${position}
 	${border}
