@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { LegacyButton as Button } from '../button';
+import { Button } from '../button';
 import { addSeparator } from '../utils';
 import {
 	convertBytesToFriendlyString,
@@ -8,11 +8,6 @@ import {
 	mapMediaTypeToIcon,
 } from '../utils/file-utils';
 import * as Styled from './styled';
-
-const fileLabelButtonWidthOverride = {
-	width: '100%',
-	justifyContent: 'left',
-};
 
 export class FileItem extends PureComponent {
 	static propTypes = {
@@ -71,7 +66,7 @@ export class FileItem extends PureComponent {
 		return (
 			<Styled.FileItem>
 				{onFileClicked ? (
-					<Button onClick={this.handleFileClick} variant="primaryTransparent">
+					<Button onClick={this.handleFileClick} variant="link" height="unset" padding={0}>
 						{fileIcon}
 					</Button>
 				) : (
@@ -80,9 +75,12 @@ export class FileItem extends PureComponent {
 				<Styled.FileInformation>
 					{onFileClicked ? (
 						<Button
-							styleOverrides={fileLabelButtonWidthOverride}
+							width="100%"
+							justifyContent="left"
+							variant="link"
+							height="unset"
+							padding={0}
 							onClick={this.handleFileClick}
-							primaryTransparent
 						>
 							{fileInformation}
 						</Button>
