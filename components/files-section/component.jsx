@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { LegacyButton as Button } from '../button';
+import { Button } from '../button';
 import { DropZone } from '../drop-zone';
 import { FileItem } from './file-item';
 import * as Styled from './styled';
@@ -128,7 +128,7 @@ export class FilesSection extends PureComponent {
 					<DropZone onDrop={onUploadFiles}>
 						<Styled.DropZoneText>{dropZoneText}</Styled.DropZoneText>
 
-						<Button variant="primaryTransparent" onClick={this.handleBrowseFilesClick}>
+						<Button variant="link" onClick={this.handleBrowseFilesClick}>
 							{browseFilesButtonText}
 						</Button>
 						<Styled.FileInputLabel>
