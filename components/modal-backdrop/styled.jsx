@@ -11,5 +11,5 @@ export const Backdrop = styled.div`
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
-	z-index: ${props => props.styleOverrides.zIndex};
+	z-index: ${props => props.zIndex};
 `;
