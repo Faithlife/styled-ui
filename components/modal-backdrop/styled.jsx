@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Backdrop = styled.div`
 	position: fixed;
@@ -11,5 +11,10 @@ export const Backdrop = styled.div`
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
-	z-index: ${props => props.zIndex};
+	${({ zIndex }) =>
+		zIndex !== undefined && zIndex !== null
+			? css`
+					z-index: ${zIndex};
+			  `
+			: ''}
 `;
