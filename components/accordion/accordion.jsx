@@ -37,7 +37,7 @@ export function Accordion({
 
 	const context = useMemo(
 		() => ({
-			expandedSections,
+			expandedSections: expandedSections.map(x => Number.parseInt(x)),
 			focusedMenuItem,
 			focusableChildList,
 			hideArrows,

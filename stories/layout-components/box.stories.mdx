@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
-import { resetArgTypes, getStyledSystemArgTypes, styledSystemProps } from '../shared-util';
+import { resetArgTypes, getStyledSystemArgTypes, boxStyleProps } from '../shared-util';
 import { theme } from '../../index';
 
 import { Box } from '../../index';
@@ -7,18 +7,7 @@ import { Box } from '../../index';
 <Meta
 	title="Layout Components/Box"
 	component={Box}
-	argTypes={getStyledSystemArgTypes([
-		styledSystemProps.layout,
-		styledSystemProps.flexbox,
-		styledSystemProps.position,
-		styledSystemProps.grid,
-		styledSystemProps.shadow,
-		styledSystemProps.border,
-		styledSystemProps.background,
-		styledSystemProps.textStyle,
-		styledSystemProps.space,
-		styledSystemProps.color,
-	])}
+	argTypes={getStyledSystemArgTypes(boxStyleProps)}
 />
 
 # Box

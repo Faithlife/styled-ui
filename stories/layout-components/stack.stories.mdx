@@ -9,18 +9,7 @@ import { Stack, Box, Paragraph } from '../../index';
 	component={Stack}
 	argTypes={{
 		spacing: { control: { type: 'number' } },
-		...getStyledSystemArgTypes([
-			styledSystemProps.layout,
-			styledSystemProps.flexbox,
-			styledSystemProps.position,
-			styledSystemProps.grid,
-			styledSystemProps.shadow,
-			styledSystemProps.border,
-			styledSystemProps.background,
-			styledSystemProps.textStyle,
-			styledSystemProps.space,
-			styledSystemProps.color,
-		]),
+		...getStyledSystemArgTypes(boxStyleProps),
 	}}
 />
 

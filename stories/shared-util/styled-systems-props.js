@@ -167,3 +167,16 @@ export const styledSystemProps = {
 	shadow: shadowProps,
 	custom: customProps,
 };
+
+export const boxStyleProps = [
+	styledSystemProps.layout,
+	styledSystemProps.flexbox,
+	styledSystemProps.position,
+	styledSystemProps.grid,
+	styledSystemProps.shadow,
+	styledSystemProps.border,
+	styledSystemProps.background,
+	styledSystemProps.textStyle,
+	styledSystemProps.space,
+	styledSystemProps.color,
+];

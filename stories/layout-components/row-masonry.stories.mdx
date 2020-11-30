@@ -19,18 +19,7 @@ import { AutoSizedRowMasonry, Box } from '../../index';
 		maxRowItems: { control: { type: 'number' } },
 		getItemAspectRatio: { action: 'getItemAspectRatio' },
 		renderItem: { action: 'renderItem' },
-		...getStyledSystemArgTypes([
-			styledSystemProps.layout,
-			styledSystemProps.flexbox,
-			styledSystemProps.position,
-			styledSystemProps.grid,
-			styledSystemProps.shadow,
-			styledSystemProps.border,
-			styledSystemProps.background,
-			styledSystemProps.textStyle,
-			styledSystemProps.space,
-			styledSystemProps.color,
-		]),
+		...getStyledSystemArgTypes(boxStyleProps),
 	}}
 />
 
