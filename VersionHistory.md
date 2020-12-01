@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.69.0
+
+- Add focus style to `Checkbox`
+- Add `loading` prop to v6 `Button`
+
 ## 5.68.0
 
 - Update padding on `Modal.Content` to keep vertical padding fixed while content scrolls.
