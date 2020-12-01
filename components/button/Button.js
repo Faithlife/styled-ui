@@ -88,7 +88,7 @@ ButtonCore.defaultProps = {
 
 const Button = React.forwardRef(
 	({ children, icon, disabled, loading, size, width, height, ...props }, ref) => {
-		// Work around size prop bug (#393)
+		// Temporary workaround for #393
 		let sizeVariant = ButtonCore.defaultProps.size;
 		let widthStyle = width;
 		let heightStyle = height;
