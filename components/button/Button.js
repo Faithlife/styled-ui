@@ -87,39 +87,30 @@ ButtonCore.defaultProps = {
 };
 
 const Button = React.forwardRef(
-	({ children, icon, disabled, loading, size, width, height, ...props }, ref) => {
-		// Temporary workaround for #393
-		let sizeVariant = ButtonCore.defaultProps.size;
-		let widthStyle = width;
-		let heightStyle = height;
-		if (Object.keys(buttonSizes).includes(size)) {
-			sizeVariant = size;
-		} else if (size !== undefined) {
-			if (width === undefined) {
-				widthStyle = size;
-			}
-			if (height === undefined) {
-				heightStyle = size;
-			}
-		}
-
-		return (
-			<ButtonCore
-				ref={ref}
-				size={sizeVariant}
-				width={widthStyle}
-				height={heightStyle}
-				{...props}
-				hasChildren={!!children}
-				loading={loading}
-				disabled={loading || disabled}
-			>
-				{loading && <LoadingSpinner position="absolute" />}
-				{icon}
-				{children}
-			</ButtonCore>
-		);
-	},
+	(
+		{
+			children,
+			icon,
+			disabled,
+			loading,
+			size = ButtonCore.defaultProps.size, // temporary workaround for #393
+			...props
+		},
+		ref,
+	) => (
+		<ButtonCore
+			ref={ref}
+			size={size}
+			{...props}
+			hasChildren={!!children}
+			loading={loading}
+			disabled={loading || disabled}
+		>
+			{loading && <LoadingSpinner position="absolute" />}
+			{icon}
+			{children}
+		</ButtonCore>
+	),
 );
 
 const SegmentedButtonGroup = styled(Box).attrs(({ border }) => ({
