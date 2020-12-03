@@ -67,10 +67,11 @@ import {
 	theme,
 } from '../index';
 import {
-	Modal as V6Modal,
 	Button as V6Button,
-	SegmentedButtonGroup,
+	DatePickerInput as V6DatePickerInput,
 	Dropdown as V6Dropdown,
+	Modal as V6Modal,
+	SegmentedButtonGroup,
 } from '../index-v6';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
@@ -429,6 +430,27 @@ const pages = [
 				title: 'Date Picker Input Documentation',
 				content: pageLoader(() => import('./date-picker-input/documentation.md')),
 				imports: { DatePickerInput, DocgenTable },
+			},
+			{
+				path: '/date-picker-input/variations-v6',
+				title: 'v6 Date Picker Input Variations',
+				content: pageLoader(() => import('./date-picker-input/variations-v6.md')),
+				imports: {
+					DatePickerInput: V6DatePickerInput,
+					dateFunctions: {
+						...dateFunctions,
+					},
+					parseUserDateString: str => {
+						const parsed = chrono.parseDate(str);
+						return parsed;
+					},
+				},
+			},
+			{
+				path: 'date-picker-input/documentation-v6',
+				title: 'v6 Date Picker Input Documentation',
+				content: pageLoader(() => import('./date-picker-input/documentation-v6.md')),
+				imports: { DatePickerInput: V6DatePickerInput, DocgenTable },
 			},
 		],
 	},
