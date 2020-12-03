@@ -24,6 +24,7 @@ export function DatePickerInput({
 	disabled,
 	minDate,
 	maxDate,
+	width,
 	calendarPlacement,
 	hideCalendarShadow,
 	calendarWidth,
@@ -108,9 +109,10 @@ export function DatePickerInput({
 	const formattedDate = currentDate ? formatDate(currentDate) : defaultValue;
 	const value = text ?? formattedDate;
 	return (
-		<Styled.Container>
+		<Styled.Container width={width}>
 			<Input
 				{...rest}
+				width="100%"
 				type="text"
 				onBlur={handleBlur}
 				onChange={handleChange}
