@@ -162,11 +162,9 @@ export function DatePickerInput({
 
 DatePickerInput.defaultProps = {
 	placement: 'bottom-start',
-	styleOverrides: {
-		inputWidth: '100%',
-		padding: '16px 20px',
-		zIndex: 3,
-	},
+	inputWidth: '100%',
+	padding: '16px 20px',
+	zIndex: 3,
 };
 
 DatePickerInput.propTypes = {
