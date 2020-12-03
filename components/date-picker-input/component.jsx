@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import systemPropTypes from '@styled-system/prop-types';
+import { common, typography } from '../../theme/system';
 import { getConfigProps } from '../utils';
 import { Popover } from '../popover-v6';
 import { PlacementOptionsProps } from '../popover/popper-helpers';
@@ -20,16 +22,14 @@ export function DatePickerInput({
 	validate,
 	onChange,
 	disabled,
-	placement,
-	inputWidth,
-	inputBorderColor,
-	hideShadow,
-	width,
-	padding,
-	border,
-	zIndex,
 	minDate,
 	maxDate,
+	calendarPlacement,
+	hideCalendarShadow,
+	calendarWidth,
+	calendarPadding,
+	calendarBorder,
+	calendarZIndex,
 	children,
 	...rest
 }) {
@@ -117,8 +117,6 @@ export function DatePickerInput({
 				onFocus={handleFocus}
 				value={value}
 				disabled={disabled}
-				borderColor={inputBorderColor}
-				width={inputWidth}
 				selectOnFocus
 			/>
 			<Styled.CalendarButton
@@ -135,12 +133,15 @@ export function DatePickerInput({
 			{isPopoverOpen && (
 				<Popover
 					reference={popoverRef.current}
-					placement={placement}
 					onFocusAway={() => {
 						setIsPopoverOpen(false);
 					}}
-					boxShadow={hideShadow ? 0 : undefined}
-					{...{ width, padding, border, zIndex }}
+					placement={calendarPlacement}
+					boxShadow={hideCalendarShadow ? 0 : undefined}
+					width={calendarWidth}
+					padding={calendarPadding}
+					border={calendarBorder}
+					zIndex={calendarZIndex}
 					{...popoverProps}
 				>
 					<Styled.DateTime>
@@ -160,10 +161,10 @@ export function DatePickerInput({
 }
 
 DatePickerInput.defaultProps = {
-	placement: 'bottom-start',
-	inputWidth: '100%',
-	padding: '16px 20px',
-	zIndex: 3,
+	width: '100%',
+	calendarPlacement: 'bottom-start',
+	calendarPadding: '16px 20px',
+	calendarZIndex: 3,
 };
 
 DatePickerInput.propTypes = {
@@ -188,24 +189,26 @@ DatePickerInput.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	onFocus: PropTypes.func,
 	disabled: PropTypes.bool,
-	/** Where on the target the date picker renders */
-	placement: PlacementOptionsProps,
 	minDate: PropTypes.instanceOf(Date),
 	maxDate: PropTypes.instanceOf(Date),
-	/** The width to pass to the input element. */
-	inputWidth: PropTypes.string,
-	/** The border color to pass to the input element. */
-	inputBorderColor: PropTypes.string,
-	/** Whether to hide the box shadow on the popover element. */
-	hideShadow: PropTypes.bool,
+	/** Where on the target the date picker renders. */
+	calendarPlacement: PlacementOptionsProps,
+	/** Whether to hide the box shadow on the calendar element. */
+	hideCalendarShadow: PropTypes.bool,
 	/** The `width` of the calendar popover. */
-	width: PropTypes.string,
+	calendarWidth: PropTypes.string,
 	/** The `padding` of the calendar popover. */
-	padding: PropTypes.string,
+	calendarPadding: PropTypes.string,
 	/** The `border` of the calendar popover. */
-	border: PropTypes.string,
+	calendarBorder: PropTypes.string,
 	/** The `z-index` of the calendar popover. */
-	zIndex: PropTypes.number,
+	calendarZIndex: PropTypes.number,
+	// Input style props
+	...common.propTypes,
+	...typography.propTypes,
+	...systemPropTypes.layout,
+	...systemPropTypes.border,
+	textStyle: PropTypes.string,
 };
 
 function DatePickerInputPopover(props) {
