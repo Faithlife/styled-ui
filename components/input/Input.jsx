@@ -41,10 +41,18 @@ const Input = React.memo(
 
 		const variation = getVariation(variant, { small, medium, large, inline, none: true });
 
-		if (process.env.NODE_ENV !== 'production' && variation === 'inline') {
-			console.warn(
-				'Warning: The `inline` variation has been deprecated, and will be removed in a future release.',
-			);
+		if (process.env.NODE_ENV !== 'production') {
+			if (variation === 'inline') {
+				console.warn(
+					'Warning: The `inline` variation has been deprecated, and will be removed in a future release.',
+				);
+			}
+			/** @todo Remove warning upon v6 release. */
+			if (inputProps.styleOverrides) {
+				console.warn(
+					'Warning: The `styleOverrides` prop has been deprecated and will be removed in the next major release.',
+				);
+			}
 		}
 
 		const handleFocus = useMemo(() => {
@@ -121,7 +129,8 @@ Input.propTypes = {
 export { Input };
 
 const StyledInput = styled.input(
-	({ theme, variant }) => css`
+	/** @todo Remove styleOverrides for v6 release. */
+	({ theme, variant, styleOverrides = {} }) => css`
 		${resetStyles}
 		${textStyle}
 
@@ -135,6 +144,16 @@ const StyledInput = styled.input(
 		color: ${theme.colors.input.foreground};
 
 		${system({ resize: true })}
+
+		${'height' in styleOverrides &&
+			css`
+				height: ${styleOverrides.height};
+			`}
+
+		${'width' in styleOverrides &&
+			css`
+				width: ${styleOverrides.width};
+			`}
 
 		box-shadow: none;
 
