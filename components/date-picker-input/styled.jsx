@@ -18,12 +18,13 @@ export const CalendarButton = styled(UtilityButton).attrs(({ theme, color }) => 
 }))`
 	position: absolute;
 	top: 0;
-	right: 7px;
+	right: 0;
+	padding: 7px 7px 7px 0;
 	cursor: pointer;
 `;
 
 export const CalendarIconContainer = styled.div`
-	padding: 7px 0 0 0;
+	height: 18px; // matches CalendarIcon
 `;
 
 export const DateTime = styled.div`

@@ -122,14 +122,13 @@ export function DatePickerInput({
 				selectOnFocus
 			/>
 			<Styled.CalendarButton
-				ref={popoverRef}
 				disabled={disabled}
 				onClick={() => {
 					setIsPopoverOpen(isOpen => !isOpen);
 				}}
 				{...buttonProps}
 			>
-				<Styled.CalendarIconContainer>
+				<Styled.CalendarIconContainer ref={popoverRef}>
 					<CalendarIcon />
 				</Styled.CalendarIconContainer>
 			</Styled.CalendarButton>
