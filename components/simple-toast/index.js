@@ -1,1 +1,1 @@
-export { SimpleToast } from './component';
+export { SimpleToast as LegacySimpleToast } from './legacy-component';

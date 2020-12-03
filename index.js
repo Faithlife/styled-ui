@@ -32,8 +32,8 @@ export {
 	Tooltip,
 } from './components/popover';
 export { Radio } from './components/radio';
+export { LegacySimpleToast as SimpleToast } from './components/simple-toast';
 export { Slider } from './components/slider';
-export { SimpleToast } from './components/simple-toast';
 export {
 	TabManager,
 	Tab,

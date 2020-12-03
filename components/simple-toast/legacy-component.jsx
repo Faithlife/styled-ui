@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Transition from 'react-transition-group/Transition';
 import { LegacyButton as Button } from '../button';
 import { X as Close } from '../icons/18px';
-import * as Styled from './styled.jsx';
+import * as Styled from './legacy-styled.jsx';
 
 const transitionTime = Styled.transitionTime; // milliseconds
 
