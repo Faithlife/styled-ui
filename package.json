@@ -3,7 +3,7 @@
 	"version": "5.69.0",
 	"main": "dist/main.js",
 	"repository": "git@github.com:Faithlife/styled-ui.git",
-	"license": "UNLICENSED",
+	"license": "MIT",
 	"description": "UI components for use in Faithlife applications.",
 	"sideEffects": [
 		"dist/main.css",
