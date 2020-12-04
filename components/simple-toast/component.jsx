@@ -25,7 +25,6 @@ export class SimpleToast extends PureComponent {
 	static defaultProps = {
 		showTime: 1000,
 		theme: theme,
-		styleOverrides: {},
 	};
 
 	state = {
