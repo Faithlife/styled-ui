@@ -5,7 +5,7 @@ import throttle from 'lodash.throttle';
 import memoize from 'memoize-one';
 import { Box } from '../Box';
 import { Popover } from '../popover-v6';
-import * as Styled from './styled';
+import * as Styled from './legacy-styled';
 
 function range(from, to) {
 	return [...Array(to - from).keys()].map(num => num + from);

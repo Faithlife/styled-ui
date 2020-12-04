@@ -1,1 +1,1 @@
-export { Slider } from './component';
+export { Slider as LegacySlider } from './legacy-component';
