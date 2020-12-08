@@ -303,7 +303,7 @@ export class Slider extends PureComponent {
 					<TrackPart
 						left={`${getPercentage(activeStopIndex, stopCount - 1)}%`}
 						right={0}
-						bg={props?.backgroundColor || props?.bg || '#fff'}
+						bg={props?.backgroundColor ?? props?.bg ?? '#fff'}
 					/>
 					<TrackPart
 						bg="#ebebeb"
@@ -351,8 +351,8 @@ export class Slider extends PureComponent {
 const TrackPart = ({ children, left, right, ...props }) => (
 	<Box
 		position="absolute"
-		left={left || 0}
-		right={right || 0}
+		left={left ?? 0}
+		right={right ?? 0}
 		height="100%"
 		overflow="hidden"
 		borderRadius={100}
