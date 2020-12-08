@@ -84,7 +84,7 @@ export const ToastContainer = styled.div`
 	/** Desktop */
 	@media (min-width: ${themeGet('breakpoints.tablet')}) {
 		padding: 16px;
-		${({ width }) => (!width || !width?.[1] ? `min-width: ${toastMinWidth};` : '')}
+		${({ width }) => (!width ? `min-width: ${toastMinWidth};` : '')}
 		height: ${toastHeight.desktop};
 
 		right: ${toastOffset.desktop};
