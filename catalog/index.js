@@ -653,6 +653,7 @@ const pages = [
 					Box,
 					Input,
 					Button: V6Button,
+					Dropdown: V6Dropdown,
 				},
 			},
 			{
