@@ -9,13 +9,37 @@ const toastOffset = { desktop: '24px', mobile: `${fixedHeaderHeight + fixedHeigh
 const toastMinWidth = '285px';
 const toastHeight = { desktop: '20px', mobile: '18px' };
 
+const getResponsiveProp = propName => css`
+	${({ theme, ...props }) => {
+		const propValue = props[propName];
+		if (Array.isArray(propValue)) {
+			return css`
+				${propName}: ${propValue[0]};
+
+				@media screen and (min-width: ${theme.breakpoints.tablet}) {
+					${propName}: ${propValue[1]};
+				}
+
+				${propValue.length === 3 &&
+					css`
+						@media screen and (min-width: ${theme.breakpoints.desktop}) {
+							${propName}: ${propValue[2]};
+						}
+					`}
+			`;
+		}
+
+		return `${propName}: ${propValue};`;
+	}}
+`;
+
 const slideIn = ({ bottom }) => keyframes`
 	from {
 		bottom: 0;
 	}
 
 	to {
-		bottom: ${(Array.isArray(bottom) ? bottom?.[1] || bottom?.[2] : bottom) || toastOffset.desktop};
+		${bottom ? getResponsiveProp('bottom') : `bottom: ${toastOffset.desktop};`}
 	}
 `;
 
