@@ -108,5 +108,5 @@ export const CheckedIndicator = styled.div`
 		opacity: 0;
 	}
 
-	${props => (props.isChecked === 'mixed' ? isMixedStyles : props.isChecked ? isCheckedStyles : '')};
+	${props => (props.isChecked === 'mixed' ? isMixedStyles : props.isChecked ? isCheckedStyles : '')}
 `;
