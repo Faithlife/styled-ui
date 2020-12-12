@@ -85,7 +85,7 @@ export function DatePickerInput({
 
 	const handleChangeSelectedDate = useCallback(
 		selectedDate => {
-			if (validate && validate(selectedDate)) {
+			if (!validate || validate(selectedDate)) {
 				setCurrentDate(selectedDate);
 				setText(null);
 				setIsPopoverOpen(false);
