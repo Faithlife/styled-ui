@@ -12,12 +12,11 @@ export const CheckboxDiv = styled(Box)`
 	background: ${({ theme }) => theme.colors.checkbox.background};
 
 	${({ disabled, theme, themeOverrides }) =>
-		disabled
-			? `
-		border: solid 1px ${themeOverrides?.disabledBorder ?? theme.colors.checkbox.disabledBorder};
-		background-color: ${themeOverrides?.disabledBackground ?? theme.colors.checkbox.disabledBackground};
-	`
-			: ''}
+		disabled &&
+		`
+			border: solid 1px ${themeOverrides?.disabledBorder ?? theme.colors.checkbox.disabledBorder};
+			background-color: ${themeOverrides?.disabledBackground ?? theme.colors.checkbox.disabledBackground};
+		`}
 `;
 
 export const CheckboxContainer = styled.button`
