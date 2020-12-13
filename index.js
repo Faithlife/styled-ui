@@ -55,7 +55,7 @@ export { Listbox, ListboxToggle, ListboxMenu, ListItem } from './components/list
 export {
 	LegacyParameterSelect as ParameterSelect,
 	LegacyParameterInputBox as ParameterInputBox,
-	LegacyParameterSentence as ParameterSentence,
+	ParameterSentence,
 } from './components/parameter-sentence';
 export { FilePicker, AmberContent, FileUpload } from './components/file-picker';
 
