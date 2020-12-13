@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { VisuallyHiddenLabel } from '../hidden-label';
 import { useId } from '../shared-hooks';
-import * as Styled from './styled';
+import * as Styled from './legacy-styled';
 
 /**
  * If an author uses a script to submit a form based on a user action that would otherwise not trigger an onsubmit event

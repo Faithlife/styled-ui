@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useId } from '../shared-hooks';
 import { VisuallyHiddenLabel } from '../hidden-label';
 import { Listbox, ListboxToggle, ListboxMenu, ListItem } from '../listbox';
-import * as Styled from './styled.jsx';
+import * as Styled from './legacy-styled.jsx';
 
 export function ParameterSelect({
 	options,

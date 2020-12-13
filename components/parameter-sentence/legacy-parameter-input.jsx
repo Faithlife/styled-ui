@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import * as Styled from './styled';
+import * as Styled from './legacy-styled';
 
 export const ParameterInputBox = React.forwardRef((props, ref) => {
 	const {
