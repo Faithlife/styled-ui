@@ -205,6 +205,10 @@ colors.datePickerInput = {
 	iconColor: colors.gray52,
 };
 
+colors.parameterSentence = {
+	active: '#1D6CA1',
+};
+
 const fonts = {
 	normal: '"Source Sans Pro", sans-serif',
 };

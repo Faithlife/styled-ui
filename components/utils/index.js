@@ -1,7 +1,7 @@
 export { BootstrapContainer, wrapBootstrap } from './bootstrap-container';
 export { forwardClassRef } from './forwardref-wrapper';
 export { TransitionStatuses, TransitionTimeouts } from './transition-group-utils';
-export { filterChildProps } from './filter-props';
+export { filterProps } from './filter-props';
 export { deprecate, deprecateComponent, deprecateProp } from './deprecate';
 export { getConfigProps, getConfigChild } from './get-config-props';
 
