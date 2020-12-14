@@ -32,7 +32,7 @@ export {
 	Tooltip,
 } from './components/popover';
 export { Radio } from './components/radio';
-export { SimpleToast } from './components/simple-toast';
+export { LegacySimpleToast as SimpleToast } from './components/simple-toast';
 export { LegacySlider as Slider } from './components/slider';
 export {
 	TabManager,

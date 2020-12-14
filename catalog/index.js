@@ -71,6 +71,7 @@ import {
 	SegmentedButtonGroup,
 	Dropdown as V6Dropdown,
 	Modal as V6Modal,
+	SimpleToast as V6SimpleToast,
 	Slider as V6Slider,
 } from '../index-v6';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
@@ -895,6 +896,28 @@ const pages = [
 				title: 'Simple Toast Documentation',
 				content: pageLoader(() => import('./simple-toast/documentation.md')),
 				imports: { SimpleToast, DocgenTable },
+			},
+			{
+				path: '/simple-toast/variations-v6',
+				title: 'v6 Simple Toast Variations',
+				content: pageLoader(() => import('./simple-toast/variations-v6.md')),
+				imports: {
+					Button: V6Button,
+					ToastDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
+					SimpleToast: V6SimpleToast,
+					LoadingSpinner,
+					toastRef: React.createRef(),
+				},
+			},
+			{
+				path: '/simple-toast/documentation-v6',
+				title: 'v6 Simple Toast Documentation',
+				content: pageLoader(() => import('./simple-toast/documentation-v6.md')),
+				imports: { SimpleToast: V6SimpleToast, DocgenTable },
 			},
 		],
 	},
