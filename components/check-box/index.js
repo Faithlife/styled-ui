@@ -1,2 +1,2 @@
-export { Checkbox } from './component';
-export { CheckboxContent } from './checkbox-content';
+export { Checkbox as LegacyCheckbox } from './legacy-component';
+export { CheckboxContent as LegacyCheckboxContent } from './legacy-checkbox-content';
