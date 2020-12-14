@@ -33,7 +33,7 @@ export {
 } from './components/popover';
 export { Radio } from './components/radio';
 export { LegacySimpleToast as SimpleToast } from './components/simple-toast';
-export { Slider } from './components/slider';
+export { LegacySlider as Slider } from './components/slider';
 export {
 	TabManager,
 	Tab,
