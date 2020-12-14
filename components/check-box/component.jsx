@@ -2,15 +2,11 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { CheckboxContent } from './checkbox-content';
 import * as Styled from './styled';
-import { isSystemTheme } from '../../theme';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 
 /** Styled checkbox control with consistent styling across platforms */
 const Checkbox = function Checkbox(props) {
-	const { onClick, title, isChecked, theme, type, children, className, disabled } = props;
-
-	const isCoreTheme = isSystemTheme(theme);
-	const themedProps = { ...(isCoreTheme ? {} : theme) };
+	const { onClick, title, isChecked, type, children, className, disabled } = props;
 
 	/* eslint-disable react/prop-types */
 	const handleMouseUp = e => {
@@ -36,14 +32,8 @@ const Checkbox = function Checkbox(props) {
 				role={'checkbox'}
 				aria-checked={isChecked}
 				disabled={disabled}
-				themeOverrides={themedProps}
 			>
-				<CheckboxContent
-					isChecked={isChecked}
-					title={title}
-					disabled={disabled}
-					themeOverrides={themedProps}
-				>
+				<CheckboxContent isChecked={isChecked} title={title} disabled={disabled}>
 					{children}
 				</CheckboxContent>
 			</Styled.CheckboxContainer>
@@ -57,12 +47,6 @@ Checkbox.propTypes = {
 	onMouseUp: PropTypes.func,
 	title: PropTypes.string,
 	isChecked: PropTypes.oneOf([true, false, 'mixed']),
-	theme: PropTypes.shape({
-		primary: PropTypes.string,
-		border: PropTypes.string,
-		disabledBackground: PropTypes.string,
-		disabledBorder: PropTypes.string,
-	}),
 	type: PropTypes.string,
 	children: PropTypes.node,
 	/** See the docs for how to override styles properly  */
@@ -73,7 +57,6 @@ Checkbox.propTypes = {
 };
 
 Checkbox.defaultProps = {
-	theme: {},
 	type: 'button',
 };
 
