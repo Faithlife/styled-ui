@@ -67,10 +67,12 @@ import {
 	theme,
 } from '../index';
 import {
-	Modal as V6Modal,
 	Button as V6Button,
 	SegmentedButtonGroup,
 	Dropdown as V6Dropdown,
+	Modal as V6Modal,
+	SimpleToast as V6SimpleToast,
+	Slider as V6Slider,
 } from '../index-v6';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
@@ -653,6 +655,7 @@ const pages = [
 					Box,
 					Input,
 					Button: V6Button,
+					Dropdown: V6Dropdown,
 				},
 			},
 			{
@@ -894,6 +897,28 @@ const pages = [
 				content: pageLoader(() => import('./simple-toast/documentation.md')),
 				imports: { SimpleToast, DocgenTable },
 			},
+			{
+				path: '/simple-toast/variations-v6',
+				title: 'v6 Simple Toast Variations',
+				content: pageLoader(() => import('./simple-toast/variations-v6.md')),
+				imports: {
+					Button: V6Button,
+					ToastDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
+					SimpleToast: V6SimpleToast,
+					LoadingSpinner,
+					toastRef: React.createRef(),
+				},
+			},
+			{
+				path: '/simple-toast/documentation-v6',
+				title: 'v6 Simple Toast Documentation',
+				content: pageLoader(() => import('./simple-toast/documentation-v6.md')),
+				imports: { SimpleToast: V6SimpleToast, DocgenTable },
+			},
 		],
 	},
 	{
@@ -903,16 +928,25 @@ const pages = [
 				path: '/slider/variations',
 				title: 'Slider Variations',
 				content: pageLoader(() => import('./slider/variations.md')),
-				imports: {
-					Slider,
-					DocgenTable,
-				},
+				imports: { Slider, DocgenTable },
 			},
 			{
 				path: 'slider/documentation',
 				title: 'Slider Documentation',
 				content: pageLoader(() => import('./slider/documentation.md')),
 				imports: { Slider, DocgenTable },
+			},
+			{
+				path: '/slider/variations-v6',
+				title: 'v6 Slider Variations',
+				content: pageLoader(() => import('./slider/variations-v6.md')),
+				imports: { Slider: V6Slider, DocgenTable },
+			},
+			{
+				path: 'slider/documentation-v6',
+				title: 'v6 Slider Documentation',
+				content: pageLoader(() => import('./slider/documentation-v6.md')),
+				imports: { Slider: V6Slider, DocgenTable },
 			},
 		],
 	},

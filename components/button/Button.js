@@ -57,8 +57,8 @@ const ButtonCore = styled.button.attrs(({ active }) => ({ className: active ? 'a
 		margin-right: ${props => (props.hasChildren ? props.theme.space[2] : '')};
 	}
 
-	${({ loading }) =>
-		loading
+	${({ isLoading }) =>
+		isLoading
 			? css`
 					color: transparent !important;
 					& > :not(:first-child) {
@@ -103,7 +103,7 @@ const Button = React.forwardRef(
 			size={size}
 			{...props}
 			hasChildren={!!children}
-			loading={loading}
+		  isLoading={loading}
 			disabled={loading || disabled}
 		>
 			{loading && <LoadingSpinner position="absolute" />}

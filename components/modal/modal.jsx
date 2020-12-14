@@ -26,8 +26,9 @@ export const Modal = ({
 			contentPadding,
 			onClose,
 			modalWidth: size ? size.width : null,
+			fullscreen,
 		}),
-		[contentPadding, onClose, size],
+		[contentPadding, fullscreen, onClose, size],
 	);
 
 	if (!isOpen) {

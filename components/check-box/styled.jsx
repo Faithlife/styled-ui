@@ -12,16 +12,15 @@ export const CheckboxDiv = styled(Box)`
 	background: ${({ theme }) => theme.colors.checkbox.background};
 
 	${({ disabled, theme, themeOverrides }) =>
-		disabled
-			? `
-		border: solid 1px ${themeOverrides?.disabledBorder ?? theme.colors.checkbox.disabledBorder};
-		background-color: ${themeOverrides?.disabledBackground ?? theme.colors.checkbox.disabledBackground};
-	`
-			: ''}
+		disabled &&
+		`
+			border: solid 1px ${themeOverrides?.disabledBorder ?? theme.colors.checkbox.disabledBorder};
+			background-color: ${themeOverrides?.disabledBackground ?? theme.colors.checkbox.disabledBackground};
+		`}
 `;
 
 export const CheckboxContainer = styled.button`
-	${resetStyles};
+	${resetStyles}
 
 	display: flex;
 	align-items: center;
@@ -33,6 +32,7 @@ export const CheckboxContainer = styled.button`
 	background: transparent;
 	text-align: unset;
 	color: ${({ theme }) => theme.colors.foregroundPrimary};
+	cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 
 	&:not(:disabled) {
 		&:active {
@@ -97,9 +97,6 @@ export const CheckedIndicator = styled.div`
 	left: 0;
 	width: 100%;
 	height: 100%;
-	cursor: pointer;
-
-	${props => (props.disabled ? 'cursor: default' : '')};
 
 	&:after {
 		background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%208%208'%3E%3Cpath%20fill='${props =>
@@ -110,5 +107,5 @@ export const CheckedIndicator = styled.div`
 		opacity: 0;
 	}
 
-	${props => (props.isChecked === 'mixed' ? isMixedStyles : props.isChecked ? isCheckedStyles : '')};
+	${props => (props.isChecked === 'mixed' ? isMixedStyles : props.isChecked ? isCheckedStyles : '')}
 `;
