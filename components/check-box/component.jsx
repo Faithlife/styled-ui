@@ -5,16 +5,23 @@ import * as Styled from './styled';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 
 /** Styled checkbox control with consistent styling across platforms */
-const Checkbox = function Checkbox(props) {
-	const { onClick, title, isChecked, type, children, className, disabled } = props;
-
-	/* eslint-disable react/prop-types */
+const Checkbox = function Checkbox({
+	onClick,
+	onMouseUp,
+	title,
+	isChecked,
+	type,
+	children,
+	disableAutoBlur,
+	disabled,
+	...otherProps
+}) {
 	const handleMouseUp = e => {
-		if (props.onMouseUp) {
-			props.onMouseUp(e);
+		if (onMouseUp) {
+			onMouseUp(e);
 		}
 
-		if (!props.disableAutoBlur) {
+		if (!disableAutoBlur) {
 			componentRef.current.blur();
 		}
 	};
@@ -28,10 +35,10 @@ const Checkbox = function Checkbox(props) {
 				onClick={onClick}
 				onMouseUp={handleMouseUp}
 				type={type}
-				className={className}
 				role={'checkbox'}
 				aria-checked={isChecked}
 				disabled={disabled}
+				{...otherProps}
 			>
 				<CheckboxContent isChecked={isChecked} title={title} disabled={disabled}>
 					{children}
@@ -49,8 +56,6 @@ Checkbox.propTypes = {
 	isChecked: PropTypes.oneOf([true, false, 'mixed']),
 	type: PropTypes.string,
 	children: PropTypes.node,
-	/** See the docs for how to override styles properly  */
-	className: PropTypes.string,
 	/** Disables automatic blur */
 	disableAutoBlur: PropTypes.bool,
 	disabled: PropTypes.bool,
