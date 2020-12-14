@@ -26,16 +26,9 @@ CheckboxContent.propTypes = {
 	...spacePropTypes,
 };
 
-const Label = ({ children }) => (
-	<Text
-		css={`
-			margin-left: 22px;
-
-			& + & {
-				margin-left: 6px;
-			}
-		`}
-	>
-		{children}
-	</Text>
-);
+const Label = styled(Text)`
+	margin-left: 22px;
+	& + & {
+		margin-left: 6px;
+	}
+`;
