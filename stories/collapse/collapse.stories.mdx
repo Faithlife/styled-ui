@@ -1,0 +1,44 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { useArgs } from '@storybook/client-api';
+import { getStyledSystemArgTypes, boxStyleProps } from '../shared-util';
+import { Button } from '../../index-v6';
+import { theme } from '../../index';
+
+import { Collapse } from '../../index';
+
+<Meta
+	title="Components/Collapse"
+	component={Collapse}
+	argTypes={getStyledSystemArgTypes(boxStyleProps)}
+/>
+
+# Collapse
+
+✔ Styled-Systems Compliant  
+✔ WAI ARIA Compliant
+
+This is a straight port of the component from [Reactstrap](https://reactstrap.github.io/components/collapse/), using only `styled-components` and [`react-transaction-group`](https://reactcommunity.org/react-transition-group/transition)
+
+<Canvas>
+	<Story name="Collapse Demo" args={{ isOpen: false }}>
+		{args => {
+			const [_, updateArgs] = useArgs();
+			return (
+				<>
+					<Button onClick={() => updateArgs({ isOpen: !args.isOpen })} marginBottom={4}>
+						Toggle
+					</Button>
+					<Collapse {...args}>
+						<img
+							src="https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201"
+							alt="Faithlife campus"
+							style={{ maxWidth: '100%' }}
+						/>
+					</Collapse>
+				</>
+			);
+		}}
+	</Story>
+</Canvas>
+
+<ArgsTable story={'Collapse Demo'} />
