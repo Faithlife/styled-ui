@@ -14,7 +14,7 @@ export { DatePickerInput } from './components/date-picker-input';
 export { DatePeriodPicker } from './components/date-period-picker';
 export { DropZone } from './components/drop-zone';
 export { FilesSection } from './components/files-section';
-export { HelpBox } from './components/help-box';
+export { LegacyHelpBox as HelpBox } from './components/help-box';
 export { Input, FilterInput, NumberInput } from './components/input';
 export { LoadingSpinner } from './components/loading-spinner';
 export {
