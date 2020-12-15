@@ -5,10 +5,6 @@
 	"repository": "git@github.com:Faithlife/styled-ui.git",
 	"license": "MIT",
 	"description": "UI components for use in Faithlife applications.",
-	"sideEffects": [
-		"dist/main.css",
-		"dist/ag-grid.css"
-	],
 	"scripts": {
 		"deploy-site": "npm run catalog-build && storybook-to-ghpages --ci --existing-output-dir=catalog/build",
 		"eslint": "eslint ./components ./catalog --ext .js --ext .jsx",
