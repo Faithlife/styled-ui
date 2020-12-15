@@ -80,62 +80,15 @@ import { GroupSelector, LargeGroupSelector } from '../components/group-selector'
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
 import { colors } from '../components/shared-styles';
-import censusData from './grid/2010census.json';
 import { ProductDrawerWithResources } from './product-drawer';
 import { DocgenTable } from './docgen-table';
 import { textInputPages } from './input/pages';
-import { PopulationChange } from './grid/population-change';
-import { IncrementButton } from './grid/cell-editors';
-import { BaseGrid } from '../components/grid/base-grid';
-import { SimpleGrid, GridColumn, PaginatedGrid, TreeGrid } from '../components/grid';
 import { Popover as PopoverV6 } from '../components/popover-v6';
 import { IconGroup } from './icon-table';
 import { FavoriteFilled } from '../components/icons/18px';
 import { ChevronDown } from '../components/icons/12px';
 
-// SVG icons embedded in SASS stylesheets do not work properly with catalog,
-// so the stylesheets must be built by a separate webpack build.
-import '../dist/main.css';
-import '../dist/ag-grid.css';
-
 window.ResizeObserver = ResizeObserver;
-
-const censusDataWithId = censusData.map((data, index) => ({
-	...data,
-	id: index,
-}));
-
-const censusDataFolders = censusData.reduce((list, row, index) => {
-	const subFolderName = row.population > 100000 ? 'Pop more than 100k' : 'Pop less than 100k';
-	const folder = list.find(x => x.value === row.areaDesc);
-
-	if (folder) {
-		const subFolder = folder.children.find(x => x.value === subFolderName);
-		if (subFolder) {
-			subFolder.children.push({ id: `${index}`, ...row });
-		} else {
-			folder.children.push({
-				id: `${row.areaDesc}:${subFolderName}`,
-				value: subFolderName,
-				children: [{ id: `${index}`, ...row }],
-			});
-		}
-	} else {
-		list.push({
-			id: `${row.areaDesc}`,
-			value: row.areaDesc,
-			children: [
-				{
-					id: `${row.areaDesc}:${subFolderName}`,
-					value: subFolderName,
-					children: [{ id: `${index}`, ...row }],
-				},
-			],
-		});
-	}
-
-	return list;
-}, []);
 
 const ButtonDemo = styled.div`
 	display: inline-grid;
@@ -1225,43 +1178,6 @@ const pages = [
 				title: 'Product Drawer',
 				content: pageLoader(() => import('./product-drawer/variations.md')),
 				imports: { ProductDrawerWithResources },
-			},
-			{
-				title: 'Grid Variations',
-				path: '/grid/variations',
-				content: pageLoader(() => import('./grid/variations.md')),
-				imports: {
-					GridColumn,
-					PaginatedGrid,
-					SimpleGrid,
-					TreeGrid,
-					Button,
-					censusData: censusDataWithId,
-					censusDataFolders,
-				},
-			},
-			{
-				title: 'Grid Examples',
-				path: '/grid/simple-examples',
-				content: pageLoader(() => import('./grid/examples.md')),
-				imports: {
-					GridColumn,
-					SimpleGrid,
-					Input,
-					PopulationChange,
-					Button,
-					censusData: censusDataWithId,
-					censusDataFolders,
-					TreeGrid,
-					gridRef: React.createRef(),
-					IncrementButton,
-				},
-			},
-			{
-				title: 'Grid Documentation',
-				path: '/grid/documentation',
-				content: pageLoader(() => import('./grid/documentation.md')),
-				imports: { DocgenTable, GridColumn, SimpleGrid, BaseGrid, PaginatedGrid, TreeGrid },
 			},
 		],
 	},
