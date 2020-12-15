@@ -28,6 +28,7 @@ CheckboxContent.propTypes = {
 
 const Label = styled(Text)`
 	margin-left: 22px;
+
 	& + & {
 		margin-left: 6px;
 	}
