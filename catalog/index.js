@@ -9,7 +9,6 @@ import chrono from 'chrono-node';
 import {
 	Accordion,
 	AnchorButton,
-	Bootstrap,
 	Button,
 	UtilityButton,
 	Checkbox,
@@ -97,7 +96,6 @@ import { ChevronDown } from '../components/icons/12px';
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
 import '../dist/main.css';
-import '../dist/text-input.css';
 import '../dist/ag-grid.css';
 
 window.ResizeObserver = ResizeObserver;
@@ -1156,31 +1154,6 @@ const pages = [
 	{
 		title: 'Deprecated',
 		pages: [
-			{
-				path: '/bootstrap/components',
-				title: 'Bootstrap Components',
-				content: pageLoader(() => import('./bootstrap/components.md')),
-				imports: {
-					...Bootstrap,
-					RowWithMargin: styled(Bootstrap.Row)`
-						margin-bottom: 1rem;
-					`,
-					LayoutGridDemo: styled.div`
-						.container .row > [class^='col'] {
-							padding-top: 0.75rem;
-							padding-bottom: 0.75rem;
-							background-color: #e5edf5;
-							border: 1px solid #c9c1d5;
-							color: #5f5f5f;
-						}
-					`,
-				},
-			},
-			{
-				path: '/bootstrap/stylesheet',
-				title: 'Bootstrap Stylesheet',
-				content: pageLoader(() => import('./bootstrap/stylesheet.md')),
-			},
 			{
 				path: '/file-picker/variations',
 				title: 'File Picker',

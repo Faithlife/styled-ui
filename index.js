@@ -5,7 +5,6 @@
 
 export { LegacyAccordion as Accordion } from './components/accordion';
 export { AnchorButton } from './components/button/anchor-button';
-export { Bootstrap } from './components/bootstrap';
 export { LegacyButton as Button, UtilityButton } from './components/button';
 export { LegacyCheckbox as Checkbox } from './components/check-box';
 export { Collapse } from './components/collapse';
