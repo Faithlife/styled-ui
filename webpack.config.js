@@ -10,7 +10,6 @@ module.exports = {
 		main: './index.js',
 		v6: './index-v6.js',
 		'text-input-v2': './components/text-input-v2/index.js',
-		'group-selector': './components/group-selector/index.js',
 		'share-dialog': './components/share-dialog/index.js',
 		icons12: './components/icons/12px/index.js',
 		icons18: './components/icons/18px/index.js',
