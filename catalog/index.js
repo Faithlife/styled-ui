@@ -76,7 +76,6 @@ import {
 	Slider as V6Slider,
 	Listbox as V6Listbox,
 } from '../index-v6';
-import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
 import { colors } from '../components/shared-styles';
@@ -1129,48 +1128,6 @@ const pages = [
 				title: 'File Picker Documentation',
 				content: pageLoader(() => import('./file-picker/documentation.md')),
 				imports: { FilePicker, AmberContent, DocgenTable },
-			},
-			{
-				path: '/group-selector/variations',
-				title: 'Group Selector Variations',
-				content: pageLoader(() => import('./group-selector/variations.md')),
-				imports: {
-					GroupSelector,
-					Button,
-					GroupSelectorDemo: styled.div`
-						.wide-content {
-							width: 600px;
-						}
-
-						.button-container {
-							margin-right: 16px;
-						}
-
-						.stacked-content {
-							width: 240px;
-						}
-					`,
-					LargeGroupSelector,
-					LargeGroupSelectorDemo: styled.div`
-						.wide-content {
-							width: 600px;
-						}
-
-						.button-container {
-							margin-right: 16px;
-						}
-
-						.stacked-content {
-							width: 240px;
-						}
-					`,
-				},
-			},
-			{
-				path: '/group-selector/documentation',
-				title: 'Group Selector Documentation',
-				content: pageLoader(() => import('./group-selector/documentation.md')),
-				imports: { GroupSelector, LargeGroupSelector, DocgenTable },
 			},
 		],
 	},

@@ -61,7 +61,6 @@
 		"lodash.throttle": "^4.1.1",
 		"memoize-one": "^5.0.0",
 		"prop-types": "^15.6.1",
-		"react-scrollbar": "^0.5.4",
 		"react-select": "^2",
 		"react-transition-group": "^4.4.1",
 		"styled-system": "^5.1.1"
