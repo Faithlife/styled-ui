@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.0.0
+
+- Remove all deprecated components, including `Grid`, `ProductDrawer`, `GroupSelector`, and all Bootstrap components.
+
 ## 5.73.0
 
 - Added `showCheckboxes` option to `Select` components, used by the `AvatarOption` component to support `RecordLookup` components from FaithlifeEquipment.
@@ -28,7 +32,6 @@
 - Added warning for duplicate date period display names in `DatePeriodPicker`.
 - Fixed focus-away handler in `DatePicker` interfering with min- and max- dates.
 - Fixed `Modal` components not correctly scrolling overflow content on Safari.
-
 ## 5.71.0
 
 - Added v6 `Checkbox` component with Styled-System props.
