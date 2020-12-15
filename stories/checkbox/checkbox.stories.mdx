@@ -1,0 +1,78 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { useArgs } from '@storybook/client-api';
+import { resetArgTypes, getStyledSystemArgTypes, boxStyleProps } from '../shared-util';
+
+import { Checkbox } from '../../index';
+
+<Meta title="Components/Checkbox" component={Checkbox} />
+
+# Checkbox
+
+## Variations
+
+<Canvas>
+	<Story
+		name="Default Theme"
+		args={{ isChecked: false, title: 'Click me', type: 'button' }}
+		args={resetArgTypes}
+	>
+		{args => {
+			const [_, updateArgs] = useArgs();
+			return (
+				<Checkbox
+					{...args}
+					isChecked={args.isChecked === 'mixed' ? args.isChecked : JSON.parse(args.isChecked)}
+					onClick={() => updateArgs({ isChecked: !args.isChecked })}
+				/>
+			);
+		}}
+	</Story>
+</Canvas>
+
+### Custom Label Component
+
+<Canvas>
+	<Story
+		name="Custom Label"
+		args={{ isChecked: false, title: 'Click me', type: 'button' }}
+		args={resetArgTypes}
+	>
+		{args => {
+			const [_, updateArgs] = useArgs();
+			return (
+				<Checkbox
+					{...args}
+					isChecked={args.isChecked === 'mixed' ? args.isChecked : JSON.parse(args.isChecked)}
+					onClick={() => updateArgs({ isChecked: !args.isChecked })}
+				>
+					<span>
+						No, click <b>me</b>!
+					</span>
+				</Checkbox>
+			);
+		}}
+	</Story>
+</Canvas>
+
+### Disabled
+
+<Checkbox isChecked={false} title={'Click me'} type="button" disabled />
+
+## Checkbox Demo
+
+<Canvas>
+	<Story name="Checkbox Demo" args={{ isChecked: false, title: 'Click me', type: 'button' }}>
+		{args => {
+			const [_, updateArgs] = useArgs();
+			return (
+				<Checkbox
+					{...args}
+					isChecked={args.isChecked === 'mixed' ? args.isChecked : JSON.parse(args.isChecked)}
+					onClick={() => updateArgs({ isChecked: !args.isChecked })}
+				/>
+			);
+		}}
+	</Story>
+</Canvas>
+
+<ArgsTable story={'Checkbox Demo'} />

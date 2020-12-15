@@ -1,0 +1,39 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { resetArgTypes, getStyledSystemArgTypes, styledSystemProps } from '../shared-util';
+import { Box } from '../../index';
+import { IconGroup } from './util';
+
+import { FavoriteFilled } from '../../components/icons/18px';
+
+<Meta
+	title="Components/Icons"
+	argTypes={{
+		color: getStyledSystemArgTypes([styledSystemProps.color]).color,
+	}}
+/>
+
+# Icons
+
+`import { FavoriteFilled } from '@faithlife/styled-ui/icons/18px'`
+
+## 12px Icons
+
+<IconGroup size={'12'} />
+
+## 18px Icons
+
+<IconGroup size={'18'} />
+
+## Customizing Colors
+
+<Canvas>
+	<Story name="Box Demo" args={{ color: 'purple5' }}>
+		{args => (
+			<Box {...args}>
+				<FavoriteFilled color="currentColor" />
+			</Box>
+		)}
+	</Story>
+</Canvas>
+
+<ArgsTable story={'Box Demo'} />
