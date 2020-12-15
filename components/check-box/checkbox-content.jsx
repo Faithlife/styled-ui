@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { position as positionPropTypes, space as spacePropTypes } from '@styled-system/prop-types';
+import systemPropTypes from '@styled-system/prop-types';
 import styled from 'styled-components';
 import * as Styled from './styled';
 import { Text } from '../Text';
@@ -22,8 +22,8 @@ CheckboxContent.propTypes = {
 	title: PropTypes.string,
 	isChecked: PropTypes.oneOf([true, false, 'mixed']),
 	disabled: PropTypes.bool,
-	...positionPropTypes,
-	...spacePropTypes,
+	...systemPropTypes.position,
+	...systemPropTypes.space,
 };
 
 const Label = styled(Text)`
