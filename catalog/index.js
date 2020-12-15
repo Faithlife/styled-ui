@@ -80,7 +80,6 @@ import { GroupSelector, LargeGroupSelector } from '../components/group-selector'
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
 import { colors } from '../components/shared-styles';
-import { ProductDrawerWithResources } from './product-drawer';
 import { DocgenTable } from './docgen-table';
 import { textInputPages } from './input/pages';
 import { Popover as PopoverV6 } from '../components/popover-v6';
@@ -1172,12 +1171,6 @@ const pages = [
 				title: 'Group Selector Documentation',
 				content: pageLoader(() => import('./group-selector/documentation.md')),
 				imports: { GroupSelector, LargeGroupSelector, DocgenTable },
-			},
-			{
-				path: '/product-drawer/variations',
-				title: 'Product Drawer',
-				content: pageLoader(() => import('./product-drawer/variations.md')),
-				imports: { ProductDrawerWithResources },
 			},
 		],
 	},
