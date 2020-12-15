@@ -136,7 +136,7 @@ function validateVariantSelection(variant, primary, success, danger, warning, mi
 	) {
 		if (process.env.NODE_ENV !== 'production') {
 			console.warn(
-				`Multiple HelpBox variants have been selected. Defaulting to \`variant\` prop value, '${variant}'...`,
+				`Multiple HelpBox variants have been selected. Defaulting to the \`variant\` prop value, '${variant}'...`,
 			);
 		}
 		return variant;
