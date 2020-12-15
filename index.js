@@ -61,7 +61,6 @@ export {
 	LegacyParameterSelect as ParameterSelect,
 	LegacyParameterInputBox as ParameterInputBox,
 } from './components/parameter-sentence';
-export { FilePicker, AmberContent, FileUpload } from './components/file-picker';
 
 export { Box } from './components/Box';
 export { ThemedBox } from './components/ThemedBox';
