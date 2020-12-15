@@ -1,4 +1,3 @@
-export { BootstrapContainer, wrapBootstrap } from './bootstrap-container';
 export { forwardClassRef } from './forwardref-wrapper';
 export { TransitionStatuses, TransitionTimeouts } from './transition-group-utils';
 export { filterProps } from './filter-props';
