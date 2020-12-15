@@ -125,6 +125,10 @@ export const HelpBox = styled.div`
 		})}
 `;
 
+HelpBox.defaultProps = {
+	variant: 'primary',
+};
+
 /**
  * Generates the styles for a given color variant.
  *

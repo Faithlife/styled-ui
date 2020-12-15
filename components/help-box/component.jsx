@@ -7,6 +7,7 @@ import {
 	WarningCircle as Info,
 } from '../icons/12px';
 import * as Styled from './styled';
+import { getVariation } from '../utils';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 
 /** Rectangular box containing tips on how to use our products */
@@ -25,14 +26,8 @@ export function HelpBox({
 	minor,
 	...helpBoxProps
 }) {
-	const selectedVariant = validateVariantSelection(
-		variant,
-		primary,
-		success,
-		danger,
-		warning,
-		minor,
-	);
+	const selectedVariant =
+		getVariation(variant, { primary, success, danger, warning, minor }) ?? undefined;
 
 	return (
 		<DefaultThemeProvider>
@@ -107,48 +102,3 @@ HelpBox.propTypes = {
 HelpBox.Body = Styled.HelpBoxBody;
 
 HelpBox.Footer = Styled.HelpBoxFooter;
-
-/**
- * Disambiguates variant selection and sends a warning to the console if variant props conflict.
- *
- * @param {'primary'|'success'|'danger'|'warning'|'minor'|undefined} variant - The value sent to `HelpBox`'s `variant` prop.
- * @param {boolean|undefined} primary - The value sent to `HelpBox`'s `primary` prop.
- * @param {boolean|undefined} success - The value sent to `HelpBox`'s `success` prop.
- * @param {boolean|undefined} danger - The value sent to `HelpBox`'s `danger` prop.
- * @param {boolean|undefined} warning - The value sent to `HelpBox`'s `warning` prop.
- * @param {boolean|undefined} minor - The value sent to `HelpBox`'s `minor` prop.
- * @returns {'primary'|'success'|'danger'|'warning'|'minor'} The disambiguated variant selection.
- */
-function validateVariantSelection(variant, primary, success, danger, warning, minor) {
-	const shortcutsChosen = !!primary + !!success + !!danger + !!warning + !!minor;
-
-	if (!variant && shortcutsChosen > 1) {
-		if (process.env.NODE_ENV !== 'production') {
-			console.warn("Multiple HelpBox variants have been selected. Defaulting to 'primary'...");
-		}
-		return 'primary';
-	} else if (
-		(variant === 'primary' && (success || danger || warning || minor)) ||
-		(variant === 'success' && (primary || danger || warning || minor)) ||
-		(variant === 'danger' && (primary || success || warning || minor)) ||
-		(variant === 'warning' && (primary || success || danger || minor)) ||
-		(variant === 'minor' && (primary || success || danger || warning))
-	) {
-		if (process.env.NODE_ENV !== 'production') {
-			console.warn(
-				`Multiple HelpBox variants have been selected. Defaulting to the \`variant\` prop value, '${variant}'...`,
-			);
-		}
-		return variant;
-	} else {
-		return (
-			variant ||
-			(primary && 'primary') ||
-			(success && 'success') ||
-			(danger && 'danger') ||
-			(warning && 'warning') ||
-			(minor && 'minor') ||
-			'primary'
-		);
-	}
-}
