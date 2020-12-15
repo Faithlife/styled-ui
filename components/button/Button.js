@@ -103,7 +103,7 @@ const Button = React.forwardRef(
 			size={size}
 			{...props}
 			hasChildren={!!children}
-		  isLoading={loading}
+			isLoading={loading}
 			disabled={loading || disabled}
 		>
 			{loading && <LoadingSpinner position="absolute" />}
