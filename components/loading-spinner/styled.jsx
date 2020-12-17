@@ -44,7 +44,7 @@ export const Spinner = styled(Box)`
 
 	${layout}
 
-	/* Square up dimensions if necessary */
+	/* Square up dimensions in case it's necessary */
 	${({ size, height, width }) =>
 		// Uses object notation instead of CSS so integers will be converted to pixels
 		(size || height || width) && {
