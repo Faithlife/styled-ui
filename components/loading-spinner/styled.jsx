@@ -43,6 +43,7 @@ export const Spinner = styled(Box)`
 	})}
 
 	${layout}
+
 	/* Square up dimensions if necessary */
 	${({ size, height, width }) =>
 		// Object notation is used instead of CSS so integers will be converted to pixels
