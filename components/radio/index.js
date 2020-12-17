@@ -1,1 +1,1 @@
-export { Radio } from './component';
+export { Radio as LegacyRadio } from './legacy-component';

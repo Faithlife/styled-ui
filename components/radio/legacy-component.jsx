@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { colors as sharedColors } from '../shared-styles';
-import * as Styled from './styled';
+import * as Styled from './legacy-styled';
 
 /** Styled radio control (uses a button instead of an input) */
 export class Radio extends Component {
