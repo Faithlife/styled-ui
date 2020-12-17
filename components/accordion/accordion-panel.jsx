@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { variant, space } from 'styled-system';
-import systemPropTypes from '@styled-system/prop-types';
+import styledSystemPropTypes from '@styled-system/prop-types';
 import { Collapse } from '../collapse';
 import { Box } from '../Box';
 import { useAccordionItemContext } from './accordion-util';
@@ -32,7 +32,7 @@ AccordionPanel.propTypes = {
 	mountOnEnter: PropTypes.bool,
 	/** true if panel contents should be unmounted when the section is closed **/
 	unmountOnExit: PropTypes.bool,
-	...systemPropTypes.space,
+	...styledSystemPropTypes.space,
 };
 
 export const Panel = styled(Box).attrs(({ headerId, panelId }) => ({
