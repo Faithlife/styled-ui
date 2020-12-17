@@ -205,6 +205,11 @@ colors.datePickerInput = {
 	iconColor: colors.gray52,
 };
 
+colors.loadingSpinner = {
+	innerColor: colors.blue5,
+	outerColor: colors.gray22,
+};
+
 const fonts = {
 	normal: '"Source Sans Pro", sans-serif',
 };
