@@ -65,12 +65,14 @@ import {
 	AutoSizedRowMasonry,
 	Switch,
 	theme,
+	ThemeProvider,
 } from '../index';
 import {
 	Button as V6Button,
 	SegmentedButtonGroup,
 	Dropdown as V6Dropdown,
 	Modal as V6Modal,
+	Radio as V6Radio,
 	SimpleToast as V6SimpleToast,
 	Slider as V6Slider,
 } from '../index-v6';
@@ -832,6 +834,26 @@ const pages = [
 				title: 'Radio Documentation',
 				content: pageLoader(() => import('./radio/documentation.md')),
 				imports: { Radio, DocgenTable },
+			},
+			{
+				path: '/radio/variations-v6',
+				title: 'v6 Radio Variations',
+				content: pageLoader(() => import('./radio/variations-v6.md')),
+				imports: {
+					Radio: V6Radio,
+					RadioDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
+					ThemeProvider,
+				},
+			},
+			{
+				path: '/radio/documentation-v6',
+				title: 'v6 Radio Documentation',
+				content: pageLoader(() => import('./radio/documentation-v6.md')),
+				imports: { Radio: V6Radio, DocgenTable },
 			},
 		],
 	},
