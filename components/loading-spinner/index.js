@@ -1,1 +1,1 @@
-export { LoadingSpinner } from './component';
+export { LoadingSpinner as LegacyLoadingSpinner } from './legacy-component';

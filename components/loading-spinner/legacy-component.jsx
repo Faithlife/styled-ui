@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getVariation } from '../utils';
 import { colors } from '../shared-styles';
-import { Spinner as StyledSpinner } from './styled';
+import { Spinner as StyledSpinner } from './legacy-styled';
 
 /** Loading spinner, frequently displayed as a placeholder when loading data */
 export function LoadingSpinner({
