@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { TabContextProvider, usePanelIdsHandler } from './tab-utils';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 
+/** A wrapper that handles the tabs and their content. */
 export function TabManager({ children, selectedTab, onSelectedTabChange, variant }) {
 	const [selectedTabIndex, setSelectedTabIndex] = useState(selectedTab || 0);
 	const { panelIdsMap, registerPanelId, unRegisterPanelId } = usePanelIdsHandler();
@@ -46,9 +47,15 @@ export function TabManager({ children, selectedTab, onSelectedTabChange, variant
 }
 
 TabManager.propTypes = {
+	/** Direct children should be `Tab.List`/`SequencedTab.List` and `Tab.Panels`. */
 	children: PropTypes.node.isRequired,
 	selectedTab: PropTypes.number,
+	/**
+	 * A function taking the selected tab's index that will be called whenever a new tab is selected.
+	 * @type {(tabIndex: number) => void}
+	 */
 	onSelectedTabChange: PropTypes.func,
+	variant: PropTypes.oneOf(['modal', 'page']),
 };
 
 TabManager.defaultProps = {
