@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import systemPropTypes from '@styled-system/prop-types';
+import styledSystemPropTypes from '@styled-system/prop-types';
 import { common, typography } from '../../theme/system';
 import { getConfigProps } from '../utils';
 import { Popover } from '../popover-v6';
@@ -208,8 +208,8 @@ DatePickerInput.propTypes = {
 	// Input style props
 	...common.propTypes,
 	...typography.propTypes,
-	...systemPropTypes.layout,
-	...systemPropTypes.border,
+	...styledSystemPropTypes.layout,
+	...styledSystemPropTypes.border,
 	textStyle: PropTypes.string,
 };
 
