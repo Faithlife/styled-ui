@@ -12,7 +12,7 @@ state: { isChecked: false }
 	<Checkbox
 		onClick={() => setState({ isChecked: !state.isChecked })}
 		isChecked={state.isChecked}
-		title={'Click me'}
+		title="Click me"
 		type="button"
 	/>
 </CheckboxDemo>
@@ -28,7 +28,7 @@ state: { isChecked: 'mixed' }
 	<Checkbox
 		onClick={() => setState({ isChecked: ({ [true]: false, [false]: 'mixed', mixed: true })[state.isChecked] })}
 		isChecked={state.isChecked}
-		title={'Click me'}
+		title="Click me"
 		type="button"
 	/>
 </CheckboxDemo>
@@ -49,7 +49,7 @@ state: { isChecked: false }
 		<Checkbox
 			onClick={() => setState({ isChecked: !state.isChecked })}
 			isChecked={state.isChecked}
-			title={"Click me"}
+			title="Click me"
 		/>
 	</ThemeProvider>
 </CheckboxDemo>
@@ -82,7 +82,7 @@ state: { isChecked: false }
 	<Checkbox
 		onClick={() => setState({ isChecked: !state.isChecked })}
 		isChecked={state.isChecked}
-		title={'Click me'}
+		title="Click me"
 		type="button"
 		disabled
 	/>

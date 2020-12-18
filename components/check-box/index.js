@@ -1,3 +1,4 @@
+/** @todo Remove legacy exports upon v6 release. */
 export { Checkbox as LegacyCheckbox } from './legacy-component';
 export { CheckboxContent as LegacyCheckboxContent } from './legacy-checkbox-content';
 

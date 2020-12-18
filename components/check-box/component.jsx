@@ -5,7 +5,7 @@ import * as Styled from './styled';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 
 /** Styled checkbox control with consistent styling across platforms */
-const Checkbox = function Checkbox({
+export const Checkbox = function Checkbox({
 	onClick,
 	onMouseUp,
 	title,
@@ -49,14 +49,22 @@ const Checkbox = function Checkbox({
 };
 
 Checkbox.propTypes = {
-	/** Handler passed to native `button` */
+	/**
+	 * Click handler passed to the native `<button>`.
+	 * @type {(event: React.MouseEvent<HTMLElement>) => void}
+	 */
 	onClick: PropTypes.func.isRequired,
+	/**
+	 * Mouse-up handler passed to the native `<button>`.
+	 * @type {(event: React.MouseEvent<HTMLElement>) => void}
+	 */
 	onMouseUp: PropTypes.func,
 	title: PropTypes.string,
 	isChecked: PropTypes.oneOf([true, false, 'mixed']),
+	/** `type` attribute passed to the native `<button>`. */
 	type: PropTypes.string,
 	children: PropTypes.node,
-	/** Disables automatic blur */
+	/** Disables automatic blur. */
 	disableAutoBlur: PropTypes.bool,
 	disabled: PropTypes.bool,
 };
@@ -64,5 +72,3 @@ Checkbox.propTypes = {
 Checkbox.defaultProps = {
 	type: 'button',
 };
-
-export { Checkbox };
