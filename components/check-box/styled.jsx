@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components';
-import { position, space } from 'styled-system';
+import { position, space, layout } from 'styled-system';
 import { resetStyles } from '../utils';
 import { Box } from '../Box';
 
 export const CheckboxDiv = styled(Box)`
-	position: absolute;
+	display: inline;
+	position: relative;
 	border: solid 1px ${({ theme }) => theme.colors.checkbox.border};
 	border-radius: 3px;
 	width: 16px;
@@ -20,6 +21,7 @@ export const CheckboxDiv = styled(Box)`
 
 	${position}
 	${space}
+	${layout}
 `;
 
 export const CheckboxContainer = styled.button`
@@ -92,9 +94,6 @@ export const isMixedStyles = css`
 `;
 
 export const CheckedIndicator = styled.div`
-	position: absolute;
-	top: 0;
-	left: 0;
 	width: 100%;
 	height: 100%;
 
