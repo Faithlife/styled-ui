@@ -1,6 +1,6 @@
 import { pageLoader } from 'catalog';
 import styled from 'styled-components';
-import { Select, CreatableSelect, avatarComponents } from '../../components/text-input-v2';
+import { Select, CreatableSelect, avatarComponents } from '../../components/text-input';
 import { DocgenTable } from '../docgen-table';
 import { Button, Input, NumberInput, Modal, FilterInput } from '../../index';
 import {
