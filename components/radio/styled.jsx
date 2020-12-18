@@ -1,11 +1,18 @@
 import styled from 'styled-components';
+import { position, space, layout } from 'styled-system';
 import { themeGet } from '@styled-system/theme-get';
+import { Text } from '../Text';
 import { resetStyles } from '../utils';
 
 export const RadioSvg = styled.svg`
-	position: absolute;
+	display: inline;
+	position: relative;
 	width: 14px;
 	height: 14px;
+
+	${position}
+	${space}
+	${layout}
 `;
 
 export const RadioBorder = styled.circle`
@@ -60,10 +67,11 @@ export const RadioContainer = styled.button`
 	}
 `;
 
-export const Label = styled.div`
-	margin-left: 22px;
-
-	& + & {
-		margin-left: 6px;
-	}
+/**
+ * An optional configuration component that allows styling just the label via Styled System props.
+ */
+export const RadioLabel = styled(Text)`
+	margin-left: 6px;
 `;
+RadioLabel.propTypes = Text.propTypes;
+RadioLabel.childConfigComponent = 'RadioLabel';
