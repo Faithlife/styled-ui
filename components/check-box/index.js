@@ -7,4 +7,4 @@ import { CheckboxContent, CheckboxLabel, CheckboxBox } from './checkbox-content'
 Checkbox.Content = CheckboxContent;
 Checkbox.Box = CheckboxBox;
 Checkbox.Label = CheckboxLabel;
-export { Checkbox } from './component';
+export { Checkbox };
