@@ -43,13 +43,13 @@ state: { modal: false, value: '' }
 </div>
 ```
 
-## Scrolling Modal
+## Scrolling Modal with overflowing Dropdown
 
 The modal will automatically scroll when content is longer than the page height
 
 ```react
 showSource: true
-state: { modal: false, value: '' }
+state: { modal: false, dropdown: false, value: '' }
 ---
 <div>
 	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
@@ -61,6 +61,18 @@ state: { modal: false, value: '' }
 		<Modal.Header title="Location" subtitle="Help us locate you" />
 		<Modal.Content width={['100vw', 475]}>
 			{JSON.stringify(new Array(3000), null, '\t')}
+			<Dropdown isOpen={state.dropdown} onToggleMenu={() => setState({dropdown: !state.dropdown})}>
+				<Dropdown.Toggle>Show a Dropdown!</Dropdown.Toggle>
+				<Dropdown.Menu>
+					<Dropdown.Item onClick={() => {}}>Banana</Dropdown.Item>
+					<Dropdown.Item onClick={() => {}}>Banana</Dropdown.Item>
+					<Dropdown.Item onClick={() => {}}>Banana</Dropdown.Item>
+					<Dropdown.Item onClick={() => {}}>Banana</Dropdown.Item>
+					<Dropdown.Item onClick={() => {}}>Banana</Dropdown.Item>
+					<Dropdown.Item onClick={() => {}}>Banana</Dropdown.Item>
+					<Dropdown.Item onClick={() => {}}>Orange you glad I didn't say "banana"?</Dropdown.Item>
+				</Dropdown.Menu>
+			</Dropdown>
 		</Modal.Content>
 		<Modal.Footer>
 			<Modal.FooterButtons
