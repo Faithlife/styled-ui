@@ -9,3 +9,5 @@
   - Check your sizes, standalone props have been replaced by the `size` prop, such as `size=medium` instead of `medium`.
 - `Modal`
   - Subcomponents have been renamed, `ModalContent` has been replaced by `Modal.Content`, etc.
+- `Tab`
+  - Subcomponents have been renamed: `TabList` to `Tab.List`, `SequencedTabList` to `SequencedTab.List`, etc.
