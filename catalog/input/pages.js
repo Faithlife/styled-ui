@@ -1,7 +1,7 @@
 import { pageLoader } from 'catalog';
 import styled from 'styled-components';
 import { InferredTypeahead, Typeahead } from '../../components/legacy-text-input';
-import { Select, CreatableSelect, avatarComponents } from '../../components/text-input-v2';
+import { Select, CreatableSelect, avatarComponents } from '../../components/text-input';
 import { DocgenTable } from '../docgen-table';
 import { Bootstrap, Button, Input, NumberInput, Modal, FilterInput } from '../../index';
 import {

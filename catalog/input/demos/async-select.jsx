@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Client from 'micro-graphql-react/lib-es5/client';
 import compress from 'micro-graphql-react/lib-es5/compress';
-import { AsyncCreatableSelect } from '../../../components/text-input-v2';
+import { AsyncCreatableSelect } from '../../../components/text-input';
 
 const client = new Client({
 	endpoint: 'https://www.graphqlhub.com/graphql',

@@ -11,7 +11,7 @@ module.exports = {
 		v6: './index-v6.js',
 		'ag-grid': './components/grid/index.js',
 		'legacy-text-input': './components/legacy-text-input/index.js',
-		'text-input-v2': './components/text-input-v2/index.js',
+		'text-input': './components/text-input/index.js',
 		'group-selector': './components/group-selector/index.js',
 		'share-dialog': './components/share-dialog/index.js',
 		'product-drawer': './components/product-drawer/index.js',

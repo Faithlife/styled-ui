@@ -7,7 +7,7 @@ describe('components', () => {
 		assert.doesNotThrow(() => require('../dist/main'));
 		assert.doesNotThrow(() => require('../dist/ag-grid'));
 		assert.doesNotThrow(() => require('../dist/legacy-text-input'));
-		assert.doesNotThrow(() => require('../dist/text-input-v2'));
+		assert.doesNotThrow(() => require('../dist/text-input'));
 		assert.doesNotThrow(() => require('../dist/group-selector'));
 		assert.doesNotThrow(() => require('../dist/share-dialog'));
 	});
