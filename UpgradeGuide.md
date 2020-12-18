@@ -33,3 +33,18 @@
   - The `styleOverrides` prop has been removed in favor of Styled System props.
 - `Tab`
   - Subcomponents have been renamed: `TabList` to `Tab.List`, `SequencedTabList` to `SequencedTab.List`, etc.
+- `text-input` components
+  - Components previously imported from `'@faithlife/styled-ui/dist/text-input-v2'` should now be imported from `'@faithlife/styled-ui/text-input'`:
+    ```js
+    import {
+    	AsyncSelect,
+    	CreatableSelect,
+    	AsyncCreatableSelect,
+    	Select,
+    	avatarComponents,
+    	reactSelectComponents,
+    	InferredText,
+    	InferredSelect,
+    } from '@faithlife/styled-ui/text-input';
+    ```
+  - Deprecated components previously imported from `'@faithlife/styled-ui/dist/text-input'` (`Typeahead`, `AsyncTypeahead`, `Token`, `Menu`, `MenuItem`, `InferredTypeahead`) have been removed.
