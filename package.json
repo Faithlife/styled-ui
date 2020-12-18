@@ -7,7 +7,7 @@
 	"description": "UI components for use in Faithlife applications.",
 	"sideEffects": [
 		"dist/main.css",
-		"dist/text-input.css",
+		"dist/legacy-text-input.css",
 		"dist/ag-grid.css"
 	],
 	"scripts": {

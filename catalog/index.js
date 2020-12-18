@@ -94,7 +94,7 @@ import { ChevronDown } from '../components/icons/12px';
 // SVG icons embedded in SASS stylesheets do not work properly with catalog,
 // so the stylesheets must be built by a separate webpack build.
 import '../dist/main.css';
-import '../dist/text-input.css';
+import '../dist/legacy-text-input.css';
 import '../dist/ag-grid.css';
 
 window.ResizeObserver = ResizeObserver;

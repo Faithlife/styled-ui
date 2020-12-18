@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { BootstrapContainer, forwardClassRef } from '../utils';
-import { InferredBase } from '../text-input-v2/inferred-base';
+import { InferredBase } from '../text-input/inferred-base';
 import { Typeahead } from './typeahead';
 
 const StyledTypeahead = styled(
