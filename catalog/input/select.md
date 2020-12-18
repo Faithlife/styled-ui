@@ -2,15 +2,12 @@ A typeahead control with keyboard navigation based on react-select.
 
 [Component documentation](https://github.com/JedWatson/react-select)
 
-### Migration guide from V1 to v2:
+### Migration guide from v5 to v6:
 
-- Change the import to `text-input-v2` (see below)
-- The dedicated CSS import is not required for v2. Delete the typeahead and bootstrap CSS imports when upgrading.
-- `options` now requires an array of objects instead of strings
-- `multiple` should be changed to `isMulti` enable the tags input
+- Change the import to `text-input` (see below)
 
 ```
-import { Select } from '@faithlife/styled-ui/dist/text-input-v2';
+import { Select } from '@faithlife/styled-ui/dist/text-input';
 ```
 
 ### Single select
