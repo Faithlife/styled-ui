@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { UtilityButton } from '../button';
-import { colors } from '../shared-styles';
 
 export const Container = styled.div`
 	display: inherit;
@@ -11,7 +10,7 @@ export const Container = styled.div`
 	min-width: 0;
 	height: 32px;
 	font-size: 14px;
-	color: ${colors.flGray};
+	color: ${({ theme }) => theme.colors.flGray};
 `;
 
 export const CalendarButton = styled(UtilityButton).attrs(({ theme, color }) => ({

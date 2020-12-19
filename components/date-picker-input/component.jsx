@@ -8,6 +8,7 @@ import { dateFunctionProps } from '../date-picker/date-function-props';
 import { DatePicker } from '../date-picker/component';
 import { UtilityButton } from '../button';
 import * as Styled from './styled';
+import { DefaultThemeProvider } from '../DefaultThemeProvider';
 
 /** Flexible date picker input (with support for many date parsing libraries) */
 export function DatePickerInput({
@@ -101,55 +102,57 @@ export function DatePickerInput({
 	const formattedDate = currentDate ? formatDate(currentDate) : defaultValue;
 	const value = text ?? formattedDate;
 	return (
-		// Redirecting `width` to the container so the calendar button will remain inside the input if
-		// width is less than 100%
-		<Styled.Container width={width}>
-			<Input
-				{...rest}
-				width="100%"
-				type="text"
-				onBlur={handleBlur}
-				onChange={handleChange}
-				onFocus={handleFocus}
-				value={value}
-				disabled={disabled}
-				selectOnFocus
-			/>
-			<Styled.CalendarButton
-				disabled={disabled}
-				onClick={() => {
-					setIsPopoverOpen(isOpen => !isOpen);
-				}}
-				{...buttonProps}
-			>
-				<Styled.CalendarIconContainer ref={popoverRef}>
-					<CalendarIcon />
-				</Styled.CalendarIconContainer>
-			</Styled.CalendarButton>
-			{isPopoverOpen && (
-				<Popover
-					reference={popoverRef.current}
-					onFocusAway={() => {
-						setIsPopoverOpen(false);
+		<DefaultThemeProvider>
+			{/* Redirecting `width` to the container so the calendar button will remain inside the input
+			 /* if width is less than 100% */}
+			<Styled.Container width={width}>
+				<Input
+					{...rest}
+					width="100%"
+					type="text"
+					onBlur={handleBlur}
+					onChange={handleChange}
+					onFocus={handleFocus}
+					value={value}
+					disabled={disabled}
+					selectOnFocus
+				/>
+				<Styled.CalendarButton
+					disabled={disabled}
+					onClick={() => {
+						setIsPopoverOpen(isOpen => !isOpen);
 					}}
-					placement="bottom-start"
-					padding="16px 20px"
-					zIndex={3}
-					{...popoverProps}
+					{...buttonProps}
 				>
-					<Styled.DateTime>
-						<DatePicker
-							selectedDate={currentDate ?? new Date()}
-							setSelectedDate={handleChangeSelectedDate}
-							validate={validate}
-							dateFunctions={dateFunctions}
-							minDate={minDate}
-							maxDate={maxDate}
-						/>
-					</Styled.DateTime>
-				</Popover>
-			)}
-		</Styled.Container>
+					<Styled.CalendarIconContainer ref={popoverRef}>
+						<CalendarIcon />
+					</Styled.CalendarIconContainer>
+				</Styled.CalendarButton>
+				{isPopoverOpen && (
+					<Popover
+						reference={popoverRef.current}
+						onFocusAway={() => {
+							setIsPopoverOpen(false);
+						}}
+						placement="bottom-start"
+						padding="16px 20px"
+						zIndex={3}
+						{...popoverProps}
+					>
+						<Styled.DateTime>
+							<DatePicker
+								selectedDate={currentDate ?? new Date()}
+								setSelectedDate={handleChangeSelectedDate}
+								validate={validate}
+								dateFunctions={dateFunctions}
+								minDate={minDate}
+								maxDate={maxDate}
+							/>
+						</Styled.DateTime>
+					</Popover>
+				)}
+			</Styled.Container>
+		</DefaultThemeProvider>
 	);
 }
 
