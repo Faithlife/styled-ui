@@ -5,7 +5,7 @@ export const Container = styled.div`
 	display: inherit;
 	flex-grow: 1;
 	position: relative;
-	${({ width }) => (width ? `width: ${width};` : '')}
+	${({ width }) => width && `width: ${width};`}
 	max-width: 100%;
 	min-width: 0;
 	height: 32px;
