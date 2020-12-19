@@ -1,13 +1,12 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import styledSystemPropTypes from '@styled-system/prop-types';
-import { common, typography } from '../../theme/system';
 import { getConfigProps } from '../utils';
 import { Popover } from '../popover-v6';
 import { Calendar as CalendarIcon } from '../icons';
 import { Input } from '../input';
 import { dateFunctionProps } from '../date-picker/date-function-props';
 import { DatePicker } from '../date-picker/component';
+import { UtilityButton } from '../button';
 import * as Styled from './styled';
 
 /** Flexible date picker input (with support for many date parsing libraries) */
@@ -181,22 +180,19 @@ DatePickerInput.propTypes = {
 	disabled: PropTypes.bool,
 	minDate: PropTypes.instanceOf(Date),
 	maxDate: PropTypes.instanceOf(Date),
-	// Input style props
-	...common.propTypes,
-	...typography.propTypes,
-	...styledSystemPropTypes.layout,
-	...styledSystemPropTypes.border,
-	textStyle: PropTypes.string,
+	...Input.propTypes,
 };
 
 function DatePickerInputPopover(props) {
 	return null;
 }
+DatePickerInputPopover.propTypes = Popover.propTypes;
 DatePickerInputPopover.childConfigComponent = 'DatePickerInputPopover';
 
 function DatePickerInputButton(props) {
 	return null;
 }
+DatePickerInputButton.propTypes = UtilityButton.propTypes;
 DatePickerInputButton.childConfigComponent = 'DatePickerInputButton';
 
 DatePickerInput.Popover = DatePickerInputPopover;
