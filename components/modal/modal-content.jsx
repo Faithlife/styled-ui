@@ -5,10 +5,13 @@ import { ThemedBox } from '../ThemedBox';
 import { useModalContext } from './use-modal-context';
 
 /** A flexible component built on styled-system primitives. */
-export const ModalContent = ({ paddingY, children, ...props }) => {
-	const { contentPadding } = useModalContext();
+export const ModalContent = ({ paddingY, maxHeight, children, ...props }) => {
+	const { contentPadding, fullscreen } = useModalContext();
 	return (
-		<ThemedBox paddingY={paddingY ?? contentPadding} overflow="hidden">
+		<ThemedBox
+			paddingY={paddingY ?? contentPadding}
+			maxHeight={maxHeight ? maxHeight : fullscreen ? '100vh' : 'calc(100vh - 150px)'}
+		>
 			<Box
 				maxWidth="100%"
 				width={['100vw', 'auto']}

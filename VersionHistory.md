@@ -1,5 +1,16 @@
 # Changelog
 
+## 5.70.0
+
+- Prevent overflow in `DatePickerInput` on mobile viewports.
+- Remove overflow:hidden from `ModalContent`, use maxHeight to constrain modals with scrolling content.
+- Prevent React warning about `loading` prop on `Button` components.
+
+## 5.69.0
+
+- Add focus style to `Checkbox`
+- Add `loading` prop to v6 `Button`
+
 ## 5.68.0
 
 - Update padding on `Modal.Content` to keep vertical padding fixed while content scrolls.

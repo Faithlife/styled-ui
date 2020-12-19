@@ -36,10 +36,6 @@ Tab.propTypes = {
 	disabled: PropTypes.bool,
 };
 
-Tab.defaultProps = {
-	styleOverrides: {},
-};
-
 export function SequencedTab({
 	children,
 	disabled,
