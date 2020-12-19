@@ -4,7 +4,6 @@ import styledSystemPropTypes from '@styled-system/prop-types';
 import { common, typography } from '../../theme/system';
 import { getConfigProps } from '../utils';
 import { Popover } from '../popover-v6';
-import { PlacementOptionsProps } from '../popover/popper-helpers';
 import { Calendar as CalendarIcon } from '../icons';
 import { Input } from '../input';
 import { dateFunctionProps } from '../date-picker/date-function-props';
@@ -24,14 +23,8 @@ export function DatePickerInput({
 	disabled,
 	minDate,
 	maxDate,
-	width,
-	calendarPlacement,
-	hideCalendarShadow,
-	calendarWidth,
-	calendarPadding,
-	calendarBorder,
-	calendarZIndex,
 	children,
+	width,
 	...rest
 }) {
 	const popoverRef = useRef();
@@ -109,6 +102,8 @@ export function DatePickerInput({
 	const formattedDate = currentDate ? formatDate(currentDate) : defaultValue;
 	const value = text ?? formattedDate;
 	return (
+		// Redirecting `width` to the container so the calendar button will remain inside the input if
+		// width is less than 100%
 		<Styled.Container width={width}>
 			<Input
 				{...rest}
@@ -138,12 +133,9 @@ export function DatePickerInput({
 					onFocusAway={() => {
 						setIsPopoverOpen(false);
 					}}
-					placement={calendarPlacement}
-					boxShadow={hideCalendarShadow ? 0 : undefined}
-					width={calendarWidth}
-					padding={calendarPadding}
-					border={calendarBorder}
-					zIndex={calendarZIndex}
+					placement="bottom-start"
+					padding="16px 20px"
+					zIndex={3}
 					{...popoverProps}
 				>
 					<Styled.DateTime>
@@ -164,9 +156,6 @@ export function DatePickerInput({
 
 DatePickerInput.defaultProps = {
 	width: '100%',
-	calendarPlacement: 'bottom-start',
-	calendarPadding: '16px 20px',
-	calendarZIndex: 3,
 };
 
 DatePickerInput.propTypes = {
@@ -179,7 +168,6 @@ DatePickerInput.propTypes = {
 	 * startOfWeek, startOfMonth, endOfWeek, endOfMonth, getYear, getMonth, getDate, addWeeks, addMonths, subMonths, isBefore, format, isValid
 	 *
 	 * For details on how these functions should behave see the date-fns (v2) documentation https://date-fns.org
-	 *
 	 */
 	dateFunctions: dateFunctionProps,
 	/**
@@ -193,18 +181,6 @@ DatePickerInput.propTypes = {
 	disabled: PropTypes.bool,
 	minDate: PropTypes.instanceOf(Date),
 	maxDate: PropTypes.instanceOf(Date),
-	/** Where on the target the date picker renders. */
-	calendarPlacement: PlacementOptionsProps,
-	/** Whether to hide the box shadow on the calendar element. */
-	hideCalendarShadow: PropTypes.bool,
-	/** The `width` of the calendar popover. */
-	calendarWidth: PropTypes.string,
-	/** The `padding` of the calendar popover. */
-	calendarPadding: PropTypes.string,
-	/** The `border` of the calendar popover. */
-	calendarBorder: PropTypes.string,
-	/** The `z-index` of the calendar popover. */
-	calendarZIndex: PropTypes.number,
 	// Input style props
 	...common.propTypes,
 	...typography.propTypes,
