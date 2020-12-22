@@ -1,7 +1,8 @@
 // see https://react-svgr.com/docs/jest/
 
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 
-export default 'SvgrURL';
-export const ReactComponent = 'div';
+export default 'svgrurl';
+
+const SvgrMock = React.forwardRef((props, ref) => <span ref={ref} {...props} />);
+export const ReactComponent = SvgrMock;
