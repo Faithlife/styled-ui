@@ -30,7 +30,7 @@ export class DatePeriodPicker extends PureComponent {
 		}),
 		/** Function to parse a date of format M/d/yyyy into a date object. See https://date-fns.org/v2.0.0-alpha.25/docs/parse for details */
 		parseDate: PropTypes.func.isRequired,
-		/** Returns a date when selected. If asDateRangePicker is true, it will return a date range object matching the selectedDateRange prop shape */
+		/** A callback that retrieves the currently selected date range and (optionally) the index of the selected date period whenever the the selected dates change. */
 		setSelectedDate: PropTypes.func.isRequired,
 		/** Takes a date as a parameter and returns false if that date is invalid */
 		validate: PropTypes.func,
@@ -104,13 +104,33 @@ export class DatePeriodPicker extends PureComponent {
 				this.setState({ inputValues: { [input]: value } });
 			}
 
-			this.props.setSelectedDate(selectedDate);
+			this.props.setSelectedDate(selectedDate, this.getDatePeriodIndex(selectedDate));
 		}
 	}, this.props.debounce);
 
 	handleInputValueChange = (value, input) => {
 		this.setState(state => ({ inputValues: { ...state.inputValues, [input]: value } }));
 		this.parseAndUpdateDate(value, input);
+	};
+
+	getDatePeriodIndex = ({ start, end }) => {
+		if (start === undefined || end === undefined || start === null || end === null) {
+			return null;
+		}
+
+		for (let i = 0; i < this.props.datePeriods.length; i++) {
+			if (
+				isSameDay(start, this.props.datePeriods[i].dateRange.start) &&
+				isSameDay(end, this.props.datePeriods[i].dateRange.end)
+			) {
+				return i;
+			}
+		}
+		return null;
+
+		function isSameDay(date1, date2) {
+			return new Date(date1).setHours(0, 0, 0, 0) === new Date(date2).setHours(0, 0, 0, 0);
+		}
 	};
 
 	render() {
@@ -122,11 +142,11 @@ export class DatePeriodPicker extends PureComponent {
 
 		return (
 			<Styled.Container>
-				{datePeriods.map(datePeriod => (
+				{datePeriods.map((datePeriod, index) => (
 					<Styled.DatePeriod
 						key={datePeriod.displayName}
 						onClick={() => {
-							setSelectedDate(datePeriod.dateRange);
+							setSelectedDate(datePeriod.dateRange, index);
 						}}
 					>
 						{datePeriod.displayName}
@@ -156,7 +176,9 @@ export class DatePeriodPicker extends PureComponent {
 					<DatePicker
 						asDateRangePicker
 						selectedDateRange={selectedDateRange}
-						setSelectedDate={setSelectedDate}
+						setSelectedDate={dateRange =>
+							setSelectedDate(dateRange, this.getDatePeriodIndex(dateRange))
+						}
 						validate={validate}
 						dateFunctions={dateFunctions}
 					/>
