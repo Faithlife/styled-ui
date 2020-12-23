@@ -31,7 +31,7 @@ export {
 	PopoverReference,
 	Tooltip,
 } from './components/popover';
-export { Radio } from './components/radio';
+export { LegacyRadio as Radio } from './components/radio';
 export { LegacySimpleToast as SimpleToast } from './components/simple-toast';
 export { LegacySlider as Slider } from './components/slider';
 export {
