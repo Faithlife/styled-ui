@@ -34,12 +34,16 @@ export class Slider extends PureComponent {
 		stopCount: PropTypes.number.isRequired,
 		/** Useful for sliders with many stops */
 		hideAvailableStops: PropTypes.bool,
-		...Box.propTypes,
+		/** Style overrides */
+		styleOverrides: PropTypes.shape({
+			backgroundColor: PropTypes.string,
+		}),
 	};
 
 	static defaultProps = {
 		hideAvailableStops: false,
 		labels: [],
+		styleOverrides: {},
 	};
 
 	state = {
@@ -263,6 +267,7 @@ export class Slider extends PureComponent {
 			onStop,
 			stopCount,
 			hideAvailableStops,
+			styleOverrides,
 			disabled,
 			...props
 		} = this.props;
@@ -303,7 +308,7 @@ export class Slider extends PureComponent {
 					<TrackPart
 						left={`${getPercentage(activeStopIndex, stopCount - 1)}%`}
 						right={0}
-						bg={props?.backgroundColor ?? props?.bg ?? '#fff'}
+						bg={(styleOverrides && styleOverrides.backgroundColor) || '#fff'}
 					/>
 					<TrackPart
 						bg="#ebebeb"
@@ -325,6 +330,7 @@ export class Slider extends PureComponent {
 								}
 								minimumAvailable={index === minValue && minValue > 0}
 								key={index}
+								styleOverrides={styleOverrides}
 							/>
 						))}
 					</Styled.StopContainer>
@@ -351,11 +357,12 @@ export class Slider extends PureComponent {
 const TrackPart = ({ children, left, right, ...props }) => (
 	<Box
 		position="absolute"
-		left={left ?? 0}
-		right={right ?? 0}
+		left={0}
+		right={0}
 		height="100%"
 		overflow="hidden"
 		borderRadius={100}
+		style={{ left, right }}
 		{...props}
 	>
 		{children}

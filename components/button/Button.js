@@ -85,19 +85,32 @@ ButtonCore.defaultProps = {
 	variant: 'primary',
 };
 
-const Button = React.forwardRef(({ children, icon, disabled, loading, ...props }, ref) => (
-	<ButtonCore
-		ref={ref}
-		{...props}
-		hasChildren={!!children}
-		loading={loading}
-		disabled={loading || disabled}
-	>
-		{loading && <LoadingSpinner position="absolute" />}
-		{icon}
-		{children}
-	</ButtonCore>
-));
+const Button = React.forwardRef(
+	(
+		{
+			children,
+			icon,
+			disabled,
+			loading,
+			size = ButtonCore.defaultProps.size, // temporary workaround for #393
+			...props
+		},
+		ref,
+	) => (
+		<ButtonCore
+			ref={ref}
+			size={size}
+			{...props}
+			hasChildren={!!children}
+			isLoading={loading}
+			disabled={loading || disabled}
+		>
+			{loading && <LoadingSpinner position="absolute" />}
+			{icon}
+			{children}
+		</ButtonCore>
+	),
+);
 
 const SegmentedButtonGroup = styled(Box).attrs(({ border }) => ({
 	border: border ?? 1,
@@ -105,6 +118,8 @@ const SegmentedButtonGroup = styled(Box).attrs(({ border }) => ({
 	borderRadius: 1,
 	backgroundColor: 'button.segmentedButtonGroupBackground',
 }))`
+	display: flex;
+
 	${ButtonCore} {
 		margin: 0;
 		border-radius: 2px; // 1 less than borderRadius: 1 so the inner radius fits the outer

@@ -1,5 +1,27 @@
 # Changelog
 
+## 5.71.0
+
+- Added v6 `Checkbox` component with Styled-System props.
+- Added v6 `Radio` component with Styled-System props.
+- Added v6 `SimpleToast` component with Styled-System props.
+- Added v6 `Slider` component with Styled-System props.
+- Added `UpgradeGuide.md` with documentation about upgrading to v6.
+- Updated `Tooltip` to use v6 `Popover` under the hood.
+- Fixed an issue where the default `size` prop would override `height` or `width` props on v6 `Button` components.
+- Fixed `SegmentedButtonGroup` wrapping on smaller viewports.
+
+## 5.70.0
+
+- Prevent overflow in `DatePickerInput` on mobile viewports.
+- Remove overflow:hidden from `ModalContent`, use maxHeight to constrain modals with scrolling content.
+- Prevent React warning about `loading` prop on `Button` components.
+
+## 5.69.0
+
+- Add focus style to `Checkbox`
+- Add `loading` prop to v6 `Button`
+
 ## 5.68.0
 
 - Update padding on `Modal.Content` to keep vertical padding fixed while content scrolls.

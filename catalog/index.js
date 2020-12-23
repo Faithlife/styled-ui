@@ -65,12 +65,17 @@ import {
 	AutoSizedRowMasonry,
 	Switch,
 	theme,
+	ThemeProvider,
 } from '../index';
 import {
-	Modal as V6Modal,
 	Button as V6Button,
 	SegmentedButtonGroup,
+	Checkbox as V6Checkbox,
 	Dropdown as V6Dropdown,
+	Modal as V6Modal,
+	Radio as V6Radio,
+	SimpleToast as V6SimpleToast,
+	Slider as V6Slider,
 } from '../index-v6';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
@@ -351,6 +356,26 @@ const pages = [
 				title: 'Checkbox Documentation',
 				content: pageLoader(() => import('./checkbox/documentation.md')),
 				imports: { Checkbox, DocgenTable },
+			},
+			{
+				path: '/checkbox/variations-v6',
+				title: 'v6 Checkbox Variations',
+				content: pageLoader(() => import('./checkbox/variations-v6.md')),
+				imports: {
+					Checkbox: V6Checkbox,
+					ThemeProvider,
+					CheckboxDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
+				},
+			},
+			{
+				path: '/checkbox/documentation-v6',
+				title: 'v6 Checkbox Documentation',
+				content: pageLoader(() => import('./checkbox/documentation-v6.md')),
+				imports: { Checkbox: V6Checkbox, DocgenTable },
 			},
 		],
 	},
@@ -653,6 +678,7 @@ const pages = [
 					Box,
 					Input,
 					Button: V6Button,
+					Dropdown: V6Dropdown,
 				},
 			},
 			{
@@ -830,6 +856,26 @@ const pages = [
 				content: pageLoader(() => import('./radio/documentation.md')),
 				imports: { Radio, DocgenTable },
 			},
+			{
+				path: '/radio/variations-v6',
+				title: 'v6 Radio Variations',
+				content: pageLoader(() => import('./radio/variations-v6.md')),
+				imports: {
+					Radio: V6Radio,
+					RadioDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
+					ThemeProvider,
+				},
+			},
+			{
+				path: '/radio/documentation-v6',
+				title: 'v6 Radio Documentation',
+				content: pageLoader(() => import('./radio/documentation-v6.md')),
+				imports: { Radio: V6Radio, DocgenTable },
+			},
 		],
 	},
 	{
@@ -894,6 +940,28 @@ const pages = [
 				content: pageLoader(() => import('./simple-toast/documentation.md')),
 				imports: { SimpleToast, DocgenTable },
 			},
+			{
+				path: '/simple-toast/variations-v6',
+				title: 'v6 Simple Toast Variations',
+				content: pageLoader(() => import('./simple-toast/variations-v6.md')),
+				imports: {
+					Button: V6Button,
+					ToastDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
+					SimpleToast: V6SimpleToast,
+					LoadingSpinner,
+					toastRef: React.createRef(),
+				},
+			},
+			{
+				path: '/simple-toast/documentation-v6',
+				title: 'v6 Simple Toast Documentation',
+				content: pageLoader(() => import('./simple-toast/documentation-v6.md')),
+				imports: { SimpleToast: V6SimpleToast, DocgenTable },
+			},
 		],
 	},
 	{
@@ -903,16 +971,25 @@ const pages = [
 				path: '/slider/variations',
 				title: 'Slider Variations',
 				content: pageLoader(() => import('./slider/variations.md')),
-				imports: {
-					Slider,
-					DocgenTable,
-				},
+				imports: { Slider, DocgenTable },
 			},
 			{
 				path: 'slider/documentation',
 				title: 'Slider Documentation',
 				content: pageLoader(() => import('./slider/documentation.md')),
 				imports: { Slider, DocgenTable },
+			},
+			{
+				path: '/slider/variations-v6',
+				title: 'v6 Slider Variations',
+				content: pageLoader(() => import('./slider/variations-v6.md')),
+				imports: { Slider: V6Slider, DocgenTable },
+			},
+			{
+				path: 'slider/documentation-v6',
+				title: 'v6 Slider Documentation',
+				content: pageLoader(() => import('./slider/documentation-v6.md')),
+				imports: { Slider: V6Slider, DocgenTable },
 			},
 		],
 	},
