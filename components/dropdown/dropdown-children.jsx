@@ -2,12 +2,12 @@ import React, { useCallback } from 'react';
 import { getConfigChild } from '../utils';
 import { Box } from '../Box';
 import { Text } from '../Text';
-import { CheckboxContent } from '../check-box';
+import { Checkbox } from '../check-box';
 import { handledKeys, useDropdownContext } from './utils';
 import * as Styled from './styled';
 
 function MenuItemCheckboxComponent(checkboxProps) {
-	return <CheckboxContent position="relative" marginRight={3} {...checkboxProps} />;
+	return <Checkbox.Content marginRight={3} {...checkboxProps} />;
 }
 MenuItemCheckboxComponent.childConfigComponent = 'MenuItemCheckboxComponent';
 

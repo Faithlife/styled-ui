@@ -1,13 +1,23 @@
 import React from 'react';
 
+/**
+ * Retrieves the props from a child component specified by name.
+ *
+ * @param {React.ReactNode} children - The parent component's `children` prop.
+ * @param {string} name - The name of the child component to search for.
+ * @returns {object} The props object of the specified child component (or an empty object if it wasn't found).
+ */
 export function getConfigProps(children, name) {
 	const childrenList = React.Children.toArray(children);
 	return childrenList.find(child => child.type.childConfigComponent === name)?.props ?? {};
 }
 
 /**
- * Returns a tuple of the item or null if it doesn't exist and an array of all children with the found child filtered out.
- * [configItem, filteredChildrenList]
+ * Finds a child component by name and separates it from the parent component's other children.
+ *
+ * @param {React.ReactNode} children - The parent component's `children` prop.
+ * @param {string} name - The name of the child component to search for.
+ * @returns {[(React.ReactElement|null), React.ReactNode]} A tuple of the found child component (or `null` if it wasn't found) and an object of the remaining children.
  */
 export function getConfigChild(children, name) {
 	const childrenList = Array.isArray(children) ? children : React.Children.toArray(children);
