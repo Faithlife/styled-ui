@@ -1,4 +1,5 @@
 export { Button, SegmentedButtonGroup } from './components/button';
+export { Checkbox } from './components/check-box';
 export { Dropdown } from './components/dropdown';
 export { Modal } from './components/modal';
 export { usePopover, Popover } from './components/popover-v6';

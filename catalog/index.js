@@ -70,6 +70,7 @@ import {
 import {
 	Button as V6Button,
 	SegmentedButtonGroup,
+	Checkbox as V6Checkbox,
 	Dropdown as V6Dropdown,
 	Modal as V6Modal,
 	Radio as V6Radio,
@@ -355,6 +356,26 @@ const pages = [
 				title: 'Checkbox Documentation',
 				content: pageLoader(() => import('./checkbox/documentation.md')),
 				imports: { Checkbox, DocgenTable },
+			},
+			{
+				path: '/checkbox/variations-v6',
+				title: 'v6 Checkbox Variations',
+				content: pageLoader(() => import('./checkbox/variations-v6.md')),
+				imports: {
+					Checkbox: V6Checkbox,
+					ThemeProvider,
+					CheckboxDemo: styled.div`
+						&& > * {
+							margin: 8px;
+						}
+					`,
+				},
+			},
+			{
+				path: '/checkbox/documentation-v6',
+				title: 'v6 Checkbox Documentation',
+				content: pageLoader(() => import('./checkbox/documentation-v6.md')),
+				imports: { Checkbox: V6Checkbox, DocgenTable },
 			},
 		],
 	},

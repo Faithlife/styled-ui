@@ -119,6 +119,8 @@ const SegmentedButtonGroup = styled(Box).attrs(({ border }) => ({
 	borderRadius: 1,
 	backgroundColor: 'button.segmentedButtonGroupBackground',
 }))`
+	display: flex;
+
 	${ButtonCore} {
 		margin: 0;
 		border-radius: 2px; // 1 less than borderRadius: 1 so the inner radius fits the outer
