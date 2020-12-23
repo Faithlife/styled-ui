@@ -78,8 +78,6 @@ export class FileItem extends PureComponent {
 							width="100%"
 							justifyContent="left"
 							variant="link"
-							height="unset"
-							padding={0}
 							onClick={this.handleFileClick}
 						>
 							{fileInformation}
