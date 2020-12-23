@@ -144,7 +144,7 @@ export class DatePeriodPicker extends PureComponent {
 			<Styled.Container>
 				{datePeriods.map((datePeriod, index) => (
 					<Styled.DatePeriod
-						key={index}
+						key={datePeriod.displayName}
 						onClick={() => {
 							setSelectedDate(datePeriod.dateRange, index);
 						}}
