@@ -54,18 +54,17 @@ const ButtonCore = styled.button.attrs(({ active }) => ({ className: active ? 'a
 	}
 
 	> svg {
-		margin-right: ${props => (props.hasChildren ? props.theme.space[2] : '')};
+		margin-right: ${props => props.hasChildren && props.theme.space[2]};
 	}
 
 	${({ isLoading }) =>
-		isLoading
-			? css`
-					color: transparent !important;
-					& > :not(:first-child) {
-						visibility: hidden;
-					}
-			  `
-			: ''}
+		isLoading &&
+		css`
+			color: transparent !important;
+			& > :not(:first-child) {
+				visibility: hidden;
+			}
+		`}
 
 	${sizeVariant}
 	${buttonVariant}
