@@ -69,15 +69,15 @@ const ButtonCore = styled.button.attrs(({ active }) => ({ className: active ? 'a
 
 	${sizeVariant}
 	${buttonVariant}
-	${textStyle};
+	${textStyle}
 
-	${common};
-	${typography};
-	${layout};
-	${flexbox};
-	${position};
-	${border};
-	${background};
+	${common}
+	${typography}
+	${layout}
+	${flexbox}
+	${position}
+	${border}
+	${background}
 `;
 
 ButtonCore.defaultProps = {
