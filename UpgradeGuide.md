@@ -5,8 +5,8 @@
 - Installation
   - Styled-UI v6 should be installed as a **direct** dependency, not a peerDependency anymore.
 - `Button`
-  - Check your variants, `primaryOutline` has been replaced by `secondary`.
-  - Check your sizes, standalone props have been replaced by the `size` prop, such as `size=medium` instead of `medium`.
+  - Check your variants: `primaryOutline` has been replaced by `secondary`, and the inline version of `primaryTransparent` has been replaced by the new `link` variant.
+  - Check your sizes: standalone props have been replaced by the `size` prop, such as `size="medium"` instead of `medium`.
 - `Checkbox`
   - The old `theme` prop functionality has been replaced by the [global theme object](https://faithlife.github.io/styled-ui/#/theme) and Styled System props.
 - `Modal`
