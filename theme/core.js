@@ -205,6 +205,13 @@ colors.datePickerInput = {
 	iconColor: colors.gray52,
 };
 
+colors.radio = {
+	primary: colors.blue4,
+	border: colors.checkbox.border,
+	disabledBackground: colors.gray8,
+	disabledBorder: colors.gray22,
+};
+
 const fonts = {
 	normal: '"Source Sans Pro", sans-serif',
 };

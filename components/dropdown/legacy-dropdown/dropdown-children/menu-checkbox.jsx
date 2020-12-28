@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CheckboxContent } from '../../../check-box';
+import { LegacyCheckboxContent as CheckboxContent } from '../../../check-box';
 import { useDropdownContext } from '../dropdown-utils';
 import * as Styled from '../styled';
 import { MenuItem } from './menu-item';
