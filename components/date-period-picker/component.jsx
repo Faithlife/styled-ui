@@ -30,7 +30,10 @@ export class DatePeriodPicker extends PureComponent {
 		}),
 		/** Function to parse a date of format M/d/yyyy into a date object. See https://date-fns.org/v2.0.0-alpha.25/docs/parse for details */
 		parseDate: PropTypes.func.isRequired,
-		/** A callback that retrieves the currently selected date range and (optionally) the index of the selected date period whenever the the selected dates change. */
+		/**
+		 * A callback that retrieves the currently selected date range and (optionally) the index of the selected date period whenever the the selected dates change.
+		 * @type {(dateRange: { start: Date, end: Date }, index?: number) => void}
+		 */
 		setSelectedDate: PropTypes.func.isRequired,
 		/** Takes a date as a parameter and returns false if that date is invalid */
 		validate: PropTypes.func,
