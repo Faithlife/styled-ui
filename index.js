@@ -7,7 +7,7 @@ export { Accordion } from './components/accordion';
 export { AnchorButton } from './components/button/anchor-button';
 export { Bootstrap } from './components/bootstrap';
 export { LegacyButton as Button, UtilityButton } from './components/button';
-export { Checkbox } from './components/check-box';
+export { LegacyCheckbox as Checkbox } from './components/check-box';
 export { Collapse } from './components/collapse';
 export { DatePicker } from './components/date-picker';
 export { DatePickerInput } from './components/date-picker-input';
@@ -31,7 +31,7 @@ export {
 	PopoverReference,
 	Tooltip,
 } from './components/popover';
-export { Radio } from './components/radio';
+export { LegacyRadio as Radio } from './components/radio';
 export { LegacySimpleToast as SimpleToast } from './components/simple-toast';
 export { LegacySlider as Slider } from './components/slider';
 export {
