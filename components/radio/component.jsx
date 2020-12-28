@@ -1,74 +1,94 @@
-import React, { Component } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { colors as sharedColors } from '../shared-styles';
+import styledSystemPropTypes from '@styled-system/prop-types';
+import { getConfigChild } from '../utils';
+import { DefaultThemeProvider } from '../DefaultThemeProvider';
 import * as Styled from './styled';
 
-/** Styled radio control (uses a button instead of an input) */
-export class Radio extends Component {
-	static propTypes = {
-		/** Handler passed to native `button` */
-		onClick: PropTypes.func.isRequired,
-		title: PropTypes.string,
-		isChecked: PropTypes.bool,
-		theme: PropTypes.shape({
-			primary: PropTypes.string,
-			border: PropTypes.string,
-			disabledBackground: PropTypes.string,
-			disabledBorder: PropTypes.string,
-		}),
-		type: PropTypes.string,
-		children: PropTypes.node,
-		/** See the docs for how to override styles properly  */
-		className: PropTypes.string,
-		/** Disables automatic blur */
-		disableAutoBlur: PropTypes.bool,
-		disabled: PropTypes.bool,
-	};
+/** A styled radio control that uses a `<button>` instead of an `<input>`. */
+export function Radio({
+	onClick,
+	title,
+	isChecked,
+	type,
+	children,
+	disableAutoBlur,
+	disabled,
+	onMouseUp: propsOnMouseUp,
+	...buttonProps
+}) {
+	const buttonRef = useRef();
 
-	static defaultProps = {
-		theme: {
-			primary: sharedColors.blueBase,
-			border: '#95908f',
-			disabledBackground: sharedColors.gray8,
-			disabledBorder: sharedColors.gray22,
-		},
-		type: 'button',
-	};
-
-	/* eslint-disable react/prop-types */
-	onMouseUp = e => {
-		if (this.props.onMouseUp) {
-			this.props.onMouseUp(e);
+	const onMouseUp = e => {
+		if (propsOnMouseUp) {
+			propsOnMouseUp(e);
 		}
 
-		if (!this.props.disableAutoBlur && this.componentRef.current) {
-			this.componentRef.current.blur();
+		if (!disableAutoBlur && buttonRef.current) {
+			buttonRef.current.blur();
 		}
 	};
 
-	componentRef = React.createRef();
+	const [icon, iconFilteredChildren] = getConfigChild(children, RadioIcon.childConfigComponent);
+	const [label, otherChildren] = getConfigChild(
+		iconFilteredChildren,
+		Styled.RadioLabel.childConfigComponent,
+	);
 
-	render() {
-		const { onClick, title, isChecked, theme, type, children, className, disabled } = this.props;
-		return (
+	return (
+		<DefaultThemeProvider>
 			<Styled.RadioContainer
-				ref={this.componentRef}
-				onMouseUp={this.onMouseUp}
+				ref={buttonRef}
+				onMouseUp={onMouseUp}
 				onClick={onClick}
 				type={type}
-				className={className}
-				role={'radio'}
+				role="radio"
 				aria-checked={isChecked}
 				disabled={disabled}
-				theme={theme}
+				{...buttonProps}
 			>
-				<Styled.RadioSvg viewBox="0 0 28 28" theme={theme}>
-					<Styled.RadioBorder cx="14" cy="14" r="13" theme={theme} />
-					{isChecked && <Styled.CheckedIndicator cx="14" cy="14" r="8" theme={theme} />}
+				<Styled.RadioSvg viewBox="0 0 28 28" {...icon?.props ?? {}}>
+					<Styled.RadioBorder cx="14" cy="14" r="13" />
+					{isChecked && <Styled.CheckedIndicator cx="14" cy="14" r="8" />}
 				</Styled.RadioSvg>
-				{title && <Styled.Label>{title}</Styled.Label>}
-				{children && <Styled.Label>{children}</Styled.Label>}
+				{label}
+				{title && <Styled.RadioLabel>{title}</Styled.RadioLabel>}
+				{otherChildren && <Styled.RadioLabel>{otherChildren}</Styled.RadioLabel>}
 			</Styled.RadioContainer>
-		);
-	}
+		</DefaultThemeProvider>
+	);
 }
+
+Radio.propTypes = {
+	/** A handler passed to the `<button>` element. */
+	onClick: PropTypes.func.isRequired,
+	/** The text of the radio button. */
+	title: PropTypes.string,
+	/** Whether the button is currently checked. */
+	isChecked: PropTypes.bool,
+	/** The `type` attribute passed to the `<button>` element. */
+	type: PropTypes.string,
+	/** The text of the radio button (may be used instead of `title`). */
+	children: PropTypes.node,
+	/** Disables automatic blur. */
+	disableAutoBlur: PropTypes.bool,
+	/** Disables the radio button. */
+	disabled: PropTypes.bool,
+	/** A handler passed to the `<button>` element. */
+	onMouseUp: PropTypes.func,
+};
+
+Radio.defaultProps = {
+	type: 'button',
+};
+
+/**
+ * An optional configuration component that passes Styled System props directly to the radio icon.
+ */
+export const RadioIcon = props => null;
+RadioIcon.propTypes = {
+	...styledSystemPropTypes.position,
+	...styledSystemPropTypes.space,
+	...styledSystemPropTypes.layout,
+};
+RadioIcon.childConfigComponent = 'RadioIcon';
