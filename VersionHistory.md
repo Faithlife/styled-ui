@@ -1,5 +1,16 @@
 # Changelog
 
+## 5.71.0
+
+- Added v6 `Checkbox` component with Styled-System props.
+- Added v6 `Radio` component with Styled-System props.
+- Added v6 `SimpleToast` component with Styled-System props.
+- Added v6 `Slider` component with Styled-System props.
+- Added `UpgradeGuide.md` with documentation about upgrading to v6.
+- Updated `Tooltip` to use v6 `Popover` under the hood.
+- Fixed an issue where the default `size` prop would override `height` or `width` props on v6 `Button` components.
+- Fixed `SegmentedButtonGroup` wrapping on smaller viewports.
+
 ## 5.70.0
 
 - Prevent overflow in `DatePickerInput` on mobile viewports.
