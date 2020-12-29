@@ -66,7 +66,7 @@ export class FileItem extends PureComponent {
 		return (
 			<Styled.FileItem>
 				{onFileClicked ? (
-					<Button onClick={this.handleFileClick} variant="link" height="unset" padding={0}>
+					<Button onClick={this.handleFileClick} variant="link">
 						{fileIcon}
 					</Button>
 				) : (
