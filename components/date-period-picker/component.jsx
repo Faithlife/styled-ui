@@ -18,8 +18,8 @@ export class DatePeriodPicker extends PureComponent {
 			PropTypes.shape({
 				displayName: PropTypes.string.isRequired,
 				dateRange: PropTypes.shape({
-					start: PropTypes.instanceOf(Date).isRequired,
-					end: PropTypes.instanceOf(Date).isRequired,
+					start: PropTypes.instanceOf(Date),
+					end: PropTypes.instanceOf(Date),
 				}).isRequired,
 			}),
 		).isRequired,
