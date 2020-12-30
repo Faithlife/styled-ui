@@ -96,11 +96,6 @@ Accordion.propTypes = {
 	panelPadding: styledPropType,
 };
 
-Accordion.defaultProps = {
-	variant: 'default',
-	expandedSections: [],
-};
-
 const AccordionBox = styled(Box)`
 	${Panel} {
 		${system({
