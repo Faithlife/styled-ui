@@ -107,7 +107,6 @@ export function DatePickerInput({
 			 /* if width is less than 100% */}
 			<Styled.Container width={width}>
 				<Input
-					{...rest}
 					width="100%"
 					type="text"
 					onBlur={handleBlur}
@@ -116,6 +115,7 @@ export function DatePickerInput({
 					value={value}
 					disabled={disabled}
 					selectOnFocus
+					{...rest}
 				/>
 				<Styled.CalendarButton
 					disabled={disabled}
