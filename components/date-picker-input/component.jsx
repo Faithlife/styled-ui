@@ -24,7 +24,7 @@ export function DatePickerInput({
 	minDate,
 	maxDate,
 	children,
-	width,
+	width = '100%',
 	...rest
 }) {
 	const popoverRef = useRef();
@@ -155,10 +155,6 @@ export function DatePickerInput({
 		</DefaultThemeProvider>
 	);
 }
-
-DatePickerInput.defaultProps = {
-	width: '100%',
-};
 
 DatePickerInput.propTypes = {
 	defaultSelectedDate: PropTypes.instanceOf(Date),
