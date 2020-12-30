@@ -94,6 +94,7 @@ Accordion.propTypes = {
 	variant: PropTypes.oneOf('default', 'minimal'),
 	/** Overrides the `padding` style on all nested `Accordion.Panel`s */
 	panelPadding: styledPropType,
+	...Box.propTypes,
 };
 
 const AccordionBox = styled(Box)`
