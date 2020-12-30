@@ -161,14 +161,14 @@ export const TabCore = styled(UtilityButton).attrs(({ variant, selected, panelId
 
 	${tabVariant}
 	${selectedTabVariant}
-	${textStyle};
+	${textStyle}
 
-	${common};
-	${typography};
-	${layout};
-	${position};
-	${border};
-	${background};
+	${common}
+	${typography}
+	${layout}
+	${position}
+	${border}
+	${background}
 `;
 
 export const TabListCore = styled(Box).attrs({
@@ -179,13 +179,13 @@ export const TabListCore = styled(Box).attrs({
 	flex-wrap: nowrap;
 
 	${tabListVariant}
-	${textStyle};
+	${textStyle}
 
-	${common};
-	${layout};
-	${position};
-	${border};
-	${background};
+	${common}
+	${layout}
+	${position}
+	${border}
+	${background}
 `;
 
 export const TabPanelsCore = styled(Box)``;

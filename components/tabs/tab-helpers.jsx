@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useId } from '../shared-hooks';
 import { useTabContext, useKeyboardNav, useSequencedKeyboardNav } from './tab-utils';
+import { Box } from '../Box';
 import * as Styled from './styled';
 
+/** A wrapper that handles the tab labels. */
 export function TabList({ children }) {
 	const { onSelectTab, selectedTabIndex, panelIdsMap, variant } = useTabContext();
 
@@ -26,9 +28,11 @@ export function TabList({ children }) {
 }
 
 TabList.propTypes = {
+	/** One or more `Tab` components. */
 	children: PropTypes.node.isRequired,
 };
 
+/** A wrapper that handles `SequencedTab` components. */
 export function SequencedTabList({ children }) {
 	const { onSelectTab, selectedTabIndex, panelIdsMap } = useTabContext();
 
@@ -69,9 +73,11 @@ export function SequencedTabList({ children }) {
 }
 
 SequencedTabList.propTypes = {
+	/** One or more `SequencedTab` components. */
 	children: PropTypes.node.isRequired,
 };
 
+/** A wrapper that handles `Tab.Panel` components. */
 export function TabPanels({ children, ...props }) {
 	const { selectedTabIndex, registerPanelId, unRegisterPanelId } = useTabContext();
 	return (
@@ -91,9 +97,14 @@ export function TabPanels({ children, ...props }) {
 }
 
 TabPanels.propTypes = {
+	/** One or more `Tab.Panel` components. */
 	children: PropTypes.node.isRequired,
+	...Box.propTypes,
 };
 
+/**
+ * Wraps the content associated with a particular tab. Optional if `SequencedTab`s are being used.
+ */
 export function TabPanel({
 	children,
 	selected,
@@ -128,4 +139,5 @@ export function TabPanel({
 
 TabPanel.propTypes = {
 	children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+	...Box.propTypes,
 };

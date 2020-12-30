@@ -34,13 +34,8 @@ import {
 	DatePickerInput,
 	DatePeriodPicker,
 	SimpleToast,
-	TabManager,
 	Tab,
 	SequencedTab,
-	TabList,
-	SequencedTabList,
-	TabPanel,
-	TabPanels,
 	Dropdown,
 	DropdownToggle,
 	DropdownMenu,
@@ -1033,11 +1028,7 @@ const pages = [
 				content: pageLoader(() => import('./tabs/variations.md')),
 				imports: {
 					Paragraph,
-					TabManager,
 					Tab,
-					TabList,
-					TabPanel,
-					TabPanels,
 					TabDemo: styled(Stack)`
 						padding: 16px;
 						background-color: white;
@@ -1051,11 +1042,8 @@ const pages = [
 				title: 'Sequenced Tabs',
 				content: pageLoader(() => import('./tabs/sequenced-tabs.md')),
 				imports: {
-					TabManager,
+					Tab,
 					SequencedTab,
-					SequencedTabList,
-					TabPanels,
-					TabPanel,
 					TabDemo: styled.div`
 						padding: 8px;
 						background-color: white;
@@ -1075,7 +1063,6 @@ const pages = [
 				imports: {
 					Tab,
 					SequencedTab,
-					TabManager,
 					DocgenTable,
 				},
 			},
@@ -1118,11 +1105,11 @@ const pages = [
 					Button,
 					Modal: V6Modal,
 					FilePicker,
-					TabManager,
-					TabList,
+					TabManager: Tab.Manager,
+					TabList: Tab.List,
 					Tab,
-					TabPanel,
-					TabPanels,
+					TabPanel: Tab.Panel,
+					TabPanels: Tab.Panels,
 					FileUpload,
 					AmberContent,
 				},

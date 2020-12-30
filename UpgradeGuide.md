@@ -19,3 +19,5 @@
   - The `styleOverrides` prop and old `theme` prop have been replaced by the [global theme object](https://faithlife.github.io/styled-ui/#/theme) and Styled System props.
 - `Slider`
   - The `styleOverrides` prop has been removed in favor of Styled System props.
+- `Tab`
+  - Subcomponents have been renamed: `TabList` to `Tab.List`, `SequencedTabList` to `SequencedTab.List`, etc.
