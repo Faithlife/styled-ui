@@ -7,7 +7,7 @@ A typeahead control with keyboard navigation based on react-select.
 - Change the import to `text-input` (see below)
 
 ```
-import { Select } from '@faithlife/styled-ui/dist/text-input';
+import { Select } from '@faithlife/styled-ui/text-input';
 ```
 
 ### Single select
