@@ -68,6 +68,7 @@ import {
 	ThemeProvider,
 } from '../index';
 import {
+	Accordion as V6Accordion,
 	Button as V6Button,
 	SegmentedButtonGroup,
 	Checkbox as V6Checkbox,
@@ -267,6 +268,28 @@ const pages = [
 				title: 'Accordion Documentation',
 				content: pageLoader(() => import('./accordion/documentation.md')),
 				imports: { Accordion, DocgenTable },
+			},
+			{
+				path: '/accordion/variations-v6',
+				title: 'v6 Accordion Variations',
+				content: pageLoader(() => import('./accordion/variations-v6.md')),
+				imports: {
+					Accordion: V6Accordion,
+					AccordionDemo: styled.div`
+						background: #fff;
+						border: 16px solid #f2f2f2;
+					`,
+					Checkbox,
+					Form: FormDemo,
+					Input,
+					Switch,
+				},
+			},
+			{
+				path: '/accordion/documentation-v6',
+				title: 'v6 Accordion Documentation',
+				content: pageLoader(() => import('./accordion/documentation-v6.md')),
+				imports: { Accordion: V6Accordion, DocgenTable },
 			},
 		],
 	},

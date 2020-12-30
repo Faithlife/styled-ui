@@ -1,3 +1,4 @@
+export { Accordion } from './components/accordion';
 export { Button, SegmentedButtonGroup } from './components/button';
 export { Checkbox } from './components/check-box';
 export { Dropdown } from './components/dropdown';
