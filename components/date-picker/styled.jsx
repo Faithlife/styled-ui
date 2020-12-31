@@ -12,6 +12,10 @@ export const ChangeMonth = styled.button`
 	width: 22px;
 	background: none;
 	cursor: pointer;
+
+	&:focus {
+		outline: ${({ visuallyDisabled }) => visuallyDisabled && `${colors.gray22} auto 1px`};
+	}
 `;
 
 export const Header = styled.div`
