@@ -1,6 +1,6 @@
 Styled-UI includes a [Styled Components](https://www.styled-components.com/docs/advanced#theming) theme object. The theme is designed to work with [Styled System](https://styled-system.com/theme-specification). Most components accept theme-aware style props that can be used to easily access theme data. When possible, prefer to reference the theme rather than hard code specific color codes, pixel values, font families, etc.
 
-### Spacing scale
+## Spacing scale
 
 Use:
 `<Box paddingX={3}>`
@@ -27,7 +27,7 @@ Use:
 </Box>
 ```
 
-### Color scale
+## Color scale
 
 Use:
 `<Box backgroundColor="blue2">`
@@ -58,7 +58,7 @@ Use:
 </Box>
 ```
 
-### Full theme object
+## Full default Styled UI theme object
 
 ```react
 <Stack spacing={4}>

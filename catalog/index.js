@@ -172,17 +172,31 @@ const pages = [
 		content: pageLoader(() => import('./WELCOME.md')),
 	},
 	{
-		path: '/theme',
 		title: 'Theme',
-		content: pageLoader(() => import('./theme/documentation.md')),
-		imports: {
-			Box,
-			Stack,
-			Text,
-			Paragraph,
-			Heading,
-			ThemeList,
-		},
+		pages: [
+			{
+				path: '/theme/usage',
+				title: 'Usage',
+				content: pageLoader(() => import('./theme/usage.md')),
+				imports: {
+					Box,
+					Stack,
+					Text,
+					Paragraph,
+					Heading,
+					ThemeList,
+				},
+			},
+			{
+				path: '/theme/customization',
+				title: 'Customization',
+				content: pageLoader(() => import('./theme/customization.md')),
+				imports: {
+					ThemeProvider,
+					DocgenTable,
+				},
+			},
+		],
 	},
 	{
 		title: 'Layout Primitives',
