@@ -89,11 +89,19 @@ export class DatePicker extends Component {
 		}
 	};
 
-	decrementMonth = () =>
+	decrementMonth = () => {
+		if (!this.canDecrementMonth(this.state.weeks)) {
+			return;
+		}
 		this.setMonth(this.props.dateFunctions.subMonths(this.state.currentMonth, 1));
+	};
 
-	incrementMonth = () =>
+	incrementMonth = () => {
+		if (!this.canIncrementMonth(this.state.weeks)) {
+			return;
+		}
 		this.setMonth(this.props.dateFunctions.addMonths(this.state.currentMonth, 1));
+	};
 
 	canDecrementMonth = weeks => {
 		const firstDay = weeks[0][0];
@@ -122,8 +130,8 @@ export class DatePicker extends Component {
 				<Styled.Header>
 					<Styled.ChangeMonth
 						onClick={this.decrementMonth}
-						disabled={!this.canDecrementMonth(weeks)}
-						tabIndex="-1"
+						visuallyDisabled={!this.canDecrementMonth(weeks)}
+						tabIndex="0"
 					>
 						<Caret
 							style={{
@@ -137,8 +145,8 @@ export class DatePicker extends Component {
 					<Styled.MonthLabel>{dateFunctions.format(currentMonth, 'MMMM yyyy')}</Styled.MonthLabel>
 					<Styled.ChangeMonth
 						onClick={this.incrementMonth}
-						disabled={!this.canIncrementMonth(weeks)}
-						tabIndex="-1"
+						visuallyDisabled={!this.canIncrementMonth(weeks)}
+						tabIndex="0"
 					>
 						<Caret
 							style={{
