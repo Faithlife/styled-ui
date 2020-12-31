@@ -130,6 +130,7 @@ AccordionHeader.propTypes = {
 	ariaLevel: PropTypes.number,
 	/** Receives an isExpanded boolean value. */
 	renderCustomIndicator: PropTypes.func,
+	...Box.propTypes,
 };
 
 const Heading = styled.header.attrs(({ ariaLevel }) => ({

@@ -6,20 +6,20 @@ A tab controller with screen reader and keyboard navigation support
 showSource: true
 ---
 <TabDemo>
-	<TabManager>
-		<TabList>
+	<Tab.Manager>
+		<Tab.List>
 			<Tab>First Tab</Tab>
 			<Tab>Second Tab</Tab>
 			<Tab>Third Tab</Tab>
 			<Tab disabled>Disabled Tab</Tab>
-		</TabList>
-		<TabPanels>
-			<TabPanel>First Tab!</TabPanel>
-			<TabPanel>Second Tab!</TabPanel>
-			<TabPanel>Third Tab!</TabPanel>
-			<TabPanel>Disabled Tab!</TabPanel>
-		</TabPanels>
-	</TabManager>
+		</Tab.List>
+		<Tab.Panels>
+			<Tab.Panel>First Tab!</Tab.Panel>
+			<Tab.Panel>Second Tab!</Tab.Panel>
+			<Tab.Panel>Third Tab!</Tab.Panel>
+			<Tab.Panel>Disabled Tab!</Tab.Panel>
+		</Tab.Panels>
+	</Tab.Manager>
 </TabDemo>
 ```
 
@@ -29,43 +29,43 @@ Supports modal (default) and page variants
 showSource: true
 ---
 <TabDemo>
-	<TabManager variant="page">
-		<TabList>
+	<Tab.Manager variant="page">
+		<Tab.List>
 			<Tab>First Tab</Tab>
 			<Tab>Second Tab</Tab>
 			<Tab>Third Tab</Tab>
 			<Tab disabled>Disabled Tab</Tab>
-		</TabList>
-		<TabPanels>
-			<TabPanel>First Tab!</TabPanel>
-			<TabPanel>Second Tab!</TabPanel>
-			<TabPanel>Third Tab!</TabPanel>
-			<TabPanel>Disabled Tab!</TabPanel>
-		</TabPanels>
-	</TabManager>
+		</Tab.List>
+		<Tab.Panels>
+			<Tab.Panel>First Tab!</Tab.Panel>
+			<Tab.Panel>Second Tab!</Tab.Panel>
+			<Tab.Panel>Third Tab!</Tab.Panel>
+			<Tab.Panel>Disabled Tab!</Tab.Panel>
+		</Tab.Panels>
+	</Tab.Manager>
 </TabDemo>
 ```
 
 ### Style Variations
 
-Both the Tab and TabPanel components extend the Box component and accept styled-system props.
+Both the Tab and Tab.Panel components extend the Box component and accept styled-system props.
 
 ```react
 showSource: true
 ---
 <TabDemo>
-	<TabManager>
-		<TabList>
+	<Tab.Manager>
+		<Tab.List>
 			<Tab width="200px">First Tab</Tab>
 			<Tab disabled>Disabled Tab</Tab>
 			<Tab>Third Tab</Tab>
-		</TabList>
-		<TabPanels>
-			<TabPanel backgroundColor="gray4" padding={5}>First Tab!</TabPanel>
-			<TabPanel>Second Tab!</TabPanel>
-			<TabPanel>Third Tab!</TabPanel>
-		</TabPanels>
-	</TabManager>
+		</Tab.List>
+		<Tab.Panels>
+			<Tab.Panel backgroundColor="gray4" padding={5}>First Tab!</Tab.Panel>
+			<Tab.Panel>Second Tab!</Tab.Panel>
+			<Tab.Panel>Third Tab!</Tab.Panel>
+		</Tab.Panels>
+	</Tab.Manager>
 </TabDemo>
 ```
 
@@ -79,18 +79,18 @@ state: { currentTab: 0 }
 	<Button variant="primary" size="medium" onClick={() => setState({ currentTab: 0 })}>First tab</Button>
 	<Paragraph>The current tab index is {state.currentTab}</Paragraph>
 	<div>
-		<TabManager selectedTab={state.currentTab} onSelectedTabChange={tabIndex => setState({ currentTab: tabIndex })}>
-			<TabList>
+		<Tab.Manager selectedTab={state.currentTab} onSelectedTabChange={tabIndex => setState({ currentTab: tabIndex })}>
+			<Tab.List>
 				<Tab>First Tab</Tab>
 				<Tab>Second Tab</Tab>
 				<Tab>Third Tab</Tab>
-			</TabList>
-			<TabPanels>
-				<TabPanel>First Tab!</TabPanel>
-				<TabPanel>Second Tab!</TabPanel>
-				<TabPanel>Third Tab!</TabPanel>
-			</TabPanels>
-		</TabManager>
+			</Tab.List>
+			<Tab.Panels>
+				<Tab.Panel>First Tab!</Tab.Panel>
+				<Tab.Panel>Second Tab!</Tab.Panel>
+				<Tab.Panel>Third Tab!</Tab.Panel>
+			</Tab.Panels>
+		</Tab.Manager>
 	</div>
 </TabDemo>
 ```

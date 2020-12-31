@@ -28,6 +28,7 @@ common.propTypes = {
 	...systemPropTypes.space,
 	...systemPropTypes.color,
 	...systemPropTypes.display,
+	pointerEvents: responsivePropType,
 	transform: responsivePropType,
 	transition: responsivePropType,
 };
@@ -44,6 +45,8 @@ export const typography = compose(
 typography.propTypes = {
 	...systemPropTypes.typography,
 	textTransform: responsivePropType,
+	whiteSpace: responsivePropType,
+	textOverflow: responsivePropType,
 };
 
 export const box = compose(

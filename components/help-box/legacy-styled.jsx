@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { variant } from 'styled-system';
-import { themeGet } from '@styled-system/theme-get';
+import { fonts, colors, thickness } from '../../components/shared-styles';
 import { LightBulbH } from '../icons';
 import { resetStyles } from '../utils';
+import { mediaSizes } from '../shared-styles';
 
 export const HelpBoxContent = styled.div``;
 
@@ -18,7 +18,11 @@ export const IconDiv = styled.div``;
 
 export const RightIconDiv = styled.div``;
 
-export const HelpBox = styled.div`
+export const HelpBox = variantCreator(
+	colors.blueTint,
+	colors.blueLight,
+	colors.blueDark,
+)(styled.div`
 	position: relative;
 	display: flex;
 	border-radius: 3px;
@@ -42,41 +46,37 @@ export const HelpBox = styled.div`
 	}
 
 	${HelpBoxContent} {
-		font-weight: ${themeGet('fontWeights.regular')};
+		${fonts.c16};
 		display: flex;
 		flex: 1;
 		text-align: left;
 		line-height: 1.25;
 		font-size: 16px;
-		color: ${themeGet('colors.flGray')};
+		color: ${colors.flGray};
 
 		height: ${props => (props.large ? '230px' : '')};
 		padding: 14px 16px 14px 12px;
 
 		flex-direction: ${props => (props.stacked ? 'column' : 'row')};
-		@media (max-width: ${themeGet('breakpoints.phone')}) {
+		@media (max-width: ${mediaSizes.phone}) {
 			flex-direction: column;
 		}
 
 		${HelpBoxBody} {
-			font-size: ${themeGet('fontSizes.3')};
-			font-weight: ${themeGet('fontWeights.regular')};
-			line-height: ${themeGet('lineHeights.3')};
+			${fonts.c16};
 			display: flex;
 			flex: 1;
 			order: 2;
 		}
 
 		${HelpBoxFooter} {
-			font-size: ${themeGet('fontSizes.3')};
-			font-weight: ${themeGet('fontWeights.regular')};
-			line-height: ${themeGet('lineHeights.3')};
+			${fonts.c16};
 			display: flex;
 			order: 2;
 			align-items: center;
 
 			margin: ${props => (props.stacked ? '12px 16px 0px 0px' : '-7px 0px -7px 16px')};
-			@media (max-width: ${themeGet('breakpoints.phone')}) {
+			@media (max-width: ${mediaSizes.phone}) {
 				margin: 12px 0px 0px 0px;
 			}
 		}
@@ -85,7 +85,7 @@ export const HelpBox = styled.div`
 	${CloseButton} {
 		cursor: pointer;
 		margin: ${props => (props.large ? '15px 16px 0px 16px' : '15px 16px 0px 12px')};
-		margin-left: ${props => !props.stacked && '-4px'};
+		margin-left: ${props => (!props.stacked ? '-4px' : '')};
 		height: 18px;
 		background: transparent;
 		padding: 0;
@@ -99,7 +99,7 @@ export const HelpBox = styled.div`
 
 	${RightIconDiv} {
 		margin: ${props => (props.large ? '15px 16px 0px 16px' : '15px 16px 0px 12px')};
-		margin-left: ${props => !props.stacked && '-4px'};
+		margin-left: ${props => (!props.stacked ? '-4px' : '')};
 		height: 18px;
 		background: transparent;
 		padding: 0;
@@ -110,47 +110,32 @@ export const HelpBox = styled.div`
 			padding: 0;
 		}
 	}
+`);
 
-	${resetStyles}
-
-	${props =>
-		variant({
-			variants: {
-				primary: createColorVariant('primary', props),
-				success: createColorVariant('success', props),
-				danger: createColorVariant('danger', props),
-				warning: createColorVariant('warning', props),
-				minor: createColorVariant('minor', props),
-			},
-		})}
-`;
-
-HelpBox.defaultProps = {
-	variant: 'primary',
+export const variationMap = {
+	success: variantCreator(colors.greenTint, colors.greenLight, colors.greenDark),
+	danger: variantCreator(colors.redTint, colors.redLight, colors.redDark),
+	warning: variantCreator(colors.yellowTint, colors.yellowLight, colors.yellowDark),
+	minor: variantCreator(colors.gray4, colors.gray14, colors.gray34),
 };
 
-/**
- * Generates the styles for a given color variant.
- *
- * @param {'primary'|'success'|'danger'|'warning'|'minor'} name - The name of the color variant.
- * @param {object} props - `HelpBox`'s `props` object.
- * @returns {object} That variant's style object.
- */
-function createColorVariant(name, props) {
-	return {
-		backgroundColor: `helpBox.${name}Background`,
-		borderLeft: `solid ${themeGet('space.2')(props)} ${themeGet(`colors.helpBox.${name}Foreground`)(
-			props,
-		)}`,
-		[IconDiv]: {
-			path: {
-				fill: themeGet(`colors.helpBox.${name}Foreground`)(props),
-			},
-		},
-		[CloseButton]: {
-			path: {
-				fill: themeGet(`colors.helpBox.${name}Icon`)(props),
-			},
-		},
-	};
+function variantCreator(backgroundColor, foregroundColor, closeIconColor) {
+	return component => styled(component)`
+		${resetStyles};
+
+		background-color: ${props => props.theme.backgroundColor || backgroundColor};
+		border-left: solid ${thickness.four} ${props => props.theme.foregroundColor || foregroundColor};
+
+		${IconDiv} {
+			path {
+				fill: ${props => props.theme.foregroundColor || foregroundColor};
+			}
+		}
+
+		${CloseButton} {
+			path {
+				fill: ${props => props.theme.closeIconColor || closeIconColor};
+			}
+		}
+	`;
 }
