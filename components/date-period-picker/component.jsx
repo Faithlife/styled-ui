@@ -20,8 +20,8 @@ export class DatePeriodPicker extends PureComponent {
 				dateRange: PropTypes.shape({
 					start: PropTypes.instanceOf(Date),
 					end: PropTypes.instanceOf(Date),
-				}),
-			}),
+				}).isRequired,
+			}).isRequired,
 		).isRequired,
 		/** Sets the selected date range */
 		selectedDateRange: PropTypes.shape({
@@ -30,7 +30,10 @@ export class DatePeriodPicker extends PureComponent {
 		}),
 		/** Function to parse a date of format M/d/yyyy into a date object. See https://date-fns.org/v2.0.0-alpha.25/docs/parse for details */
 		parseDate: PropTypes.func.isRequired,
-		/** A callback that retrieves the currently selected date range and (optionally) the index of the selected date period whenever the the selected dates change. */
+		/**
+		 * A callback that retrieves the currently selected date range and (optionally) the index of the selected date period whenever the the selected dates change.
+		 * @type {(dateRange: { start: Date, end: Date }, index?: number) => void}
+		 */
 		setSelectedDate: PropTypes.func.isRequired,
 		/** Takes a date as a parameter and returns false if that date is invalid */
 		validate: PropTypes.func,
@@ -113,28 +116,71 @@ export class DatePeriodPicker extends PureComponent {
 		this.parseAndUpdateDate(value, input);
 	};
 
+	/**
+	 * Gets the index of a passed date period that happens to match a manually selected date range, if
+	 * one matches.
+	 * @param {{ start: Date, end: Date }} dateRange - The manually selected start and end dates.
+	 * @return {number | null} The original array index of a matching date period or `null` if no period matches.
+	 */
 	getDatePeriodIndex = ({ start, end }) => {
 		if (start === undefined || end === undefined || start === null || end === null) {
 			return null;
 		}
 
-		for (let i = 0; i < this.props.datePeriods.length; i++) {
+		for (const datePeriod of this.getUniqueDatePeriods()) {
 			if (
-				isSameDay(start, this.props.datePeriods[i].dateRange.start) &&
-				isSameDay(end, this.props.datePeriods[i].dateRange.end)
+				isSameDay(start, datePeriod.dateRange.start) &&
+				isSameDay(end, datePeriod.dateRange.end)
 			) {
-				return i;
+				return datePeriod.originalIndex;
 			}
 		}
+
 		return null;
 
+		/**
+		 * @param {Date} date1
+		 * @param {Date} date2
+		 * @returns {boolean}
+		 */
 		function isSameDay(date1, date2) {
 			return new Date(date1).setHours(0, 0, 0, 0) === new Date(date2).setHours(0, 0, 0, 0);
 		}
 	};
 
+	/**
+	 * Returns only the first date period of each display name, retaining the original array index in
+	 * a new `originalIndex` property. Also sends a console warning in development environments when
+	 * duplicates are passed.
+	 * @returns {Array<{ displayName: string; dateRange: { start: Date; end: Date }; originalIndex: number}}
+	 */
+	getUniqueDatePeriods = () => {
+		const uniqueDatePeriods = [];
+
+		for (let i = 0; i < this.props.datePeriods.length; i++) {
+			const currentPeriod = this.props.datePeriods[i];
+			const uniqueDisplayNames = uniqueDatePeriods.map(({ displayName }) => displayName);
+
+			if (uniqueDisplayNames.includes(currentPeriod.displayName)) {
+				// Display name is a duplicate: filter out and warn the dev
+				if (process.env.NODE_ENV !== 'production') {
+					console.warn(
+						`A \`DatePeriodPicker\` has been passed multiple date periods named "${
+							currentPeriod.displayName
+						}". Only the first "${currentPeriod.displayName}" period has been passed.`,
+					);
+				}
+			} else {
+				// Display name is unique: add period to return array (and save original index)
+				uniqueDatePeriods.push({ ...currentPeriod, originalIndex: i });
+			}
+		}
+
+		return uniqueDatePeriods;
+	};
+
 	render() {
-		const { setSelectedDate, validate, dateFunctions, datePeriods } = this.props;
+		const { setSelectedDate, validate, dateFunctions } = this.props;
 		const {
 			inputValues: { start, end },
 			selectedDateRange,
@@ -142,14 +188,14 @@ export class DatePeriodPicker extends PureComponent {
 
 		return (
 			<Styled.Container>
-				{datePeriods.map((datePeriod, index) => (
+				{this.getUniqueDatePeriods().map(({ displayName, dateRange, originalIndex }) => (
 					<Styled.DatePeriod
-						key={datePeriod.displayName}
+						key={displayName}
 						onClick={() => {
-							setSelectedDate(datePeriod.dateRange, index);
+							setSelectedDate(dateRange, originalIndex);
 						}}
 					>
-						{datePeriod.displayName}
+						{displayName}
 					</Styled.DatePeriod>
 				))}
 				<Styled.DateInputContainer>
