@@ -50,7 +50,7 @@ export const InputContainer = styled.div`
 	position: relative;
 	height: ${({ fontSize }) => fontSize || '16px'};
 
-	${selectStyling};
+	${selectStyling}
 
 	border-bottom: ${({ isFocused }) => (isFocused ? 'solid' : 'dashed')} ${themeGet('space.1')}
 		${themeGet('colors.parameterSentence.border')};
