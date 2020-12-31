@@ -1,11 +1,11 @@
 import styled from 'styled-components';
+import { Box } from '../Box';
 import { UtilityButton } from '../button';
 
-export const Container = styled.div`
+export const Container = styled(Box)`
 	display: inherit;
 	flex-grow: 1;
 	position: relative;
-	${({ width }) => width && `width: ${width};`}
 	max-width: 100%;
 	min-width: 0;
 	height: 32px;
