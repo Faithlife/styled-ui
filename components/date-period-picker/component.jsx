@@ -159,9 +159,16 @@ export class DatePeriodPicker extends PureComponent {
 
 		for (let i = 0; i < this.props.datePeriods.length; i++) {
 			const currentPeriod = this.props.datePeriods[i];
-			const uniqueDisplayNames = uniqueDatePeriods.map(({ displayName }) => displayName);
 
-			if (uniqueDisplayNames.includes(currentPeriod.displayName)) {
+			if (
+				uniqueDatePeriods.find(
+					datePeriod => datePeriod.displayName === currentPeriod.displayName,
+				) === undefined
+			) {
+				// Display name is unique: add period to return array (and save original index)
+				uniqueDatePeriods.push({ ...currentPeriod, index: i });
+			} else {
+				// Display name is a duplicate: filter out and warn the dev
 				if (process.env.NODE_ENV !== 'production') {
 					console.warn(
 						`A \`DatePeriodPicker\` has been passed multiple date periods named "${
@@ -169,8 +176,6 @@ export class DatePeriodPicker extends PureComponent {
 						}". Only the first "${currentPeriod.displayName}" period has been passed.`,
 					);
 				}
-			} else {
-				uniqueDatePeriods.push(Object.assign({ index: i }, currentPeriod));
 			}
 		}
 
