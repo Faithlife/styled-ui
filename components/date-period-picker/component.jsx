@@ -120,7 +120,7 @@ export class DatePeriodPicker extends PureComponent {
 	 * Gets the index of a passed date period that happens to match a manually selected date range, if
 	 * one matches.
 	 * @param {{ start: Date, end: Date }} dateRange - The manually selected start and end dates.
-	 * @return {number | null} The index of a matching date period or `null` if no period matches.
+	 * @return {number | null} The original array index of a matching date period or `null` if no period matches.
 	 */
 	getDatePeriodIndex = ({ start, end }) => {
 		if (start === undefined || end === undefined || start === null || end === null) {
@@ -132,7 +132,7 @@ export class DatePeriodPicker extends PureComponent {
 				isSameDay(start, datePeriod.dateRange.start) &&
 				isSameDay(end, datePeriod.dateRange.end)
 			) {
-				return datePeriod.index;
+				return datePeriod.originalIndex;
 			}
 		}
 
@@ -150,9 +150,9 @@ export class DatePeriodPicker extends PureComponent {
 
 	/**
 	 * Returns only the first date period of each display name, retaining the original array index in
-	 * a new `index` property. Also sends a console warning in development environments when
+	 * a new `originalIndex` property. Also sends a console warning in development environments when
 	 * duplicates are passed.
-	 * @returns {Array<{ index: number; displayName: string; dateRange: { start: Date; end: Date } }}
+	 * @returns {Array<{ displayName: string; dateRange: { start: Date; end: Date }; originalIndex: number}}
 	 */
 	getUniqueDatePeriods = () => {
 		const uniqueDatePeriods = [];
@@ -172,7 +172,7 @@ export class DatePeriodPicker extends PureComponent {
 				}
 			} else {
 				// Display name is unique: add period to return array (and save original index)
-				uniqueDatePeriods.push({ ...currentPeriod, index: i });
+				uniqueDatePeriods.push({ ...currentPeriod, originalIndex: i });
 			}
 		}
 
@@ -188,11 +188,11 @@ export class DatePeriodPicker extends PureComponent {
 
 		return (
 			<Styled.Container>
-				{this.getUniqueDatePeriods().map(({ index, displayName, dateRange }) => (
+				{this.getUniqueDatePeriods().map(({ displayName, dateRange, originalIndex }) => (
 					<Styled.DatePeriod
 						key={displayName}
 						onClick={() => {
-							setSelectedDate(dateRange, index);
+							setSelectedDate(dateRange, originalIndex);
 						}}
 					>
 						{displayName}
