@@ -24,6 +24,34 @@ state: { selectedDate: null }
 </DatePickerDemo>
 ```
 
+## With Min and Max Dates
+
+```react
+showSource: true
+state: { selectedDate: null }
+---
+<DatePickerDemo>
+<div>
+<span>The selected date is {dateFunctions.format(state.selectedDate, 'MM-dd-yyyy')}</span>
+	<PopoverManager onFocusAway={() => setState({ isOpen: false })}>
+		<PopoverReference>
+			<Button variant="primary" size="medium" onClick={() => setState({ isOpen: !state.isOpen })}>Select Date</Button>
+		</PopoverReference>
+		<Popover isOpen={state.isOpen} placement="bottom" styleOverrides={{ maxWidth: '1000px' }}>
+			<DatePicker
+				selectedDate={state.selectedDate}
+				minDate={new Date(today.getTime()).setMonth(today.getMonth() - 2)}
+				maxDate={new Date(today.getTime()).setMonth(today.getMonth() + 2)}
+				setSelectedDate={(date) => setState({ selectedDate: date })}
+				dateFunctions={dateFunctions}
+				validate={() => true}
+			/>
+		</Popover>
+	</PopoverManager>
+</div>
+</DatePickerDemo>
+```
+
 ## Default Date Range Picker
 
 ```react
