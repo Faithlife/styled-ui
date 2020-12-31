@@ -8,10 +8,12 @@ const selectStyling = css`
 	min-height: fit-content;
 	/* font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'}; */
 	/* width: ${({ styleOverrides }) => styleOverrides.width}; */
-	border-bottom: dashed ${themeGet('space.1')} ${themeGet('colors.blue4')};
+	border-bottom: dashed ${themeGet('space.1')} ${themeGet('colors.parameterSentence.border')};
 	font-weight: bold;
 	color: ${({ isOpen }) =>
-		isOpen ? themeGet('colors.parameterSentence.active') : themeGet('colors.gray66')};
+		isOpen
+			? themeGet('colors.parameterSentence.active')
+			: themeGet('colors.parameterSentence.closed')};
 	font-family: inherit;
 	border-radius: 0;
 	line-height: 1;
@@ -19,7 +21,7 @@ const selectStyling = css`
 
 	&:hover {
 		&:not(:focus) {
-			color: ${themeGet('colors.blue4')};
+			color: ${themeGet('colors.parameterSentence.border')};
 		}
 	}
 
@@ -53,7 +55,7 @@ export const InputContainer = styled.div`
 	${selectStyling};
 
 	border-bottom: ${({ isFocused }) => (isFocused ? 'solid' : 'dashed')} ${themeGet('space.1')}
-		${themeGet('colors.blue4')};
+		${themeGet('colors.parameterSentence.border')};
 
 	&& > input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button {
@@ -93,7 +95,7 @@ export const Input = styled.input`
 		}
 
 		&:read-only {
-			background: ${themeGet('colors.gray8')};
+			background: ${themeGet('colors.parameterSentence.readonly')};
 		}
 
 		&:focus,
