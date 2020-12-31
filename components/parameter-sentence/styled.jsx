@@ -6,8 +6,6 @@ import { resetStyles } from '../utils';
 const selectStyling = css`
 	white-space: nowrap;
 	min-height: fit-content;
-	/* font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'}; */
-	/* width: ${({ styleOverrides }) => styleOverrides.width}; */
 	border-bottom: dashed ${themeGet('space.1')} ${themeGet('colors.parameterSentence.border')};
 	font-weight: bold;
 	color: ${({ isOpen }) =>
