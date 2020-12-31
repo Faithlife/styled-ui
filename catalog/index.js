@@ -453,6 +453,7 @@ const pages = [
 					`,
 					DatePicker,
 					DatePeriodPicker,
+					today: new Date(),
 					dateFunctions: {
 						...dateFunctions,
 					},
