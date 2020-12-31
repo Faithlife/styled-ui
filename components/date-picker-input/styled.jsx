@@ -19,7 +19,7 @@ export const CalendarButton = styled(UtilityButton).attrs(({ theme, color }) => 
 	position: absolute;
 	top: 0;
 	right: 0;
-	padding: 7px 7px 7px 0;
+	padding: 7px;
 	cursor: pointer;
 `;
 
