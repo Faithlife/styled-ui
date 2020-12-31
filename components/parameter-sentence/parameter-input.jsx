@@ -16,11 +16,10 @@ export const ParameterInputBox = React.forwardRef((props, ref) => {
 		onBlur,
 		...otherProps
 	} = props;
-	const [styleProps, inputProps] = filterProps(otherProps, {
+	const [styledSystemProps, inputProps] = filterProps(otherProps, {
 		...styledSystemPropTypes.layout,
 		...styledSystemPropTypes.typography,
 	});
-	const { width, fontSize } = styleProps;
 
 	const [isFocused, setIsFocused] = useState(false);
 
@@ -46,7 +45,7 @@ export const ParameterInputBox = React.forwardRef((props, ref) => {
 
 	return (
 		<DefaultThemeProvider>
-			<Styled.InputContainer isFocused={isFocused} {...styleProps}>
+			<Styled.InputContainer isFocused={isFocused} {...styledSystemProps}>
 				<Styled.Input
 					ref={ref}
 					onChange={onChange}
@@ -55,7 +54,9 @@ export const ParameterInputBox = React.forwardRef((props, ref) => {
 					onBlur={handleBlur}
 					value={!isFocused ? displayValue : value}
 					aria-label={accessibilityLabel}
-					{...{ width, fontSize, ...inputProps }}
+					width={styledSystemProps.width}
+					fontSize={styledSystemProps.fontSize}
+					{...inputProps}
 				/>
 			</Styled.InputContainer>
 		</DefaultThemeProvider>

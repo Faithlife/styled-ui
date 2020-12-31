@@ -12,16 +12,16 @@ export function filterProps(props, filterPropNames) {
 		? filterPropNames
 		: Object.keys(filterPropNames);
 
-	const filteredProps = {};
+	const matchingProps = {};
 	const remainingProps = {};
 
 	for (const [propName, propValue] of Object.entries(props)) {
 		if (filterList.includes(propName)) {
-			filteredProps[propName] = propValue;
+			matchingProps[propName] = propValue;
 		} else {
 			remainingProps[propName] = propValue;
 		}
 	}
 
-	return [filteredProps, remainingProps];
+	return [matchingProps, remainingProps];
 }
