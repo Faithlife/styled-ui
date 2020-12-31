@@ -6,8 +6,9 @@ import {
 	CorrectCircle as CircleCheck,
 	WarningCircle as Info,
 } from '../icons/12px';
-import { applyVariations } from '../utils';
 import * as Styled from './styled';
+import { getVariation } from '../utils';
+import { DefaultThemeProvider } from '../DefaultThemeProvider';
 
 /** Rectangular box containing tips on how to use our products */
 export function HelpBox({
@@ -16,65 +17,61 @@ export function HelpBox({
 	hideIcon,
 	showRightIcon,
 	stacked,
-	className,
-	theme,
 	handleClose,
+	variant,
+	primary,
+	success,
+	danger,
+	warning,
+	minor,
 	...helpBoxProps
 }) {
-	const { component: HelpBoxVariation, filteredProps } = applyVariations(
-		Styled.HelpBox,
-		Styled.variationMap,
-		helpBoxProps,
-	);
+	const selectedVariant =
+		getVariation(variant, { primary, success, danger, warning, minor }) ?? undefined;
 
 	return (
-		<HelpBoxVariation
-			className={className}
-			theme={theme}
-			success={helpBoxProps.success}
-			danger={helpBoxProps.danger}
-			warning={helpBoxProps.warning}
-			minor={helpBoxProps.minor}
-			stacked={stacked}
-			hasIcon={(!hideIcon && !helpBoxProps.minor) || showLightBulb}
-			{...filteredProps}
-		>
-			{(showLightBulb && <Styled.BulbIcon />) ||
-				(!hideIcon && (
-					<Styled.IconDiv>
-						{helpBoxProps.danger ? (
-							<Exclamation />
-						) : helpBoxProps.success ? (
-							<CircleCheck />
-						) : helpBoxProps.minor ? null : (
-							<Info />
-						)}
-					</Styled.IconDiv>
-				))}
-			<Styled.HelpBoxContent>{children}</Styled.HelpBoxContent>
-			{(handleClose && (
-				<Styled.CloseButton onClick={handleClose}>
-					<Close />
-				</Styled.CloseButton>
-			)) ||
-				(showRightIcon && (
-					<Styled.RightIconDiv>
-						{helpBoxProps.danger ? (
-							<Exclamation />
-						) : helpBoxProps.success ? (
-							<CircleCheck />
-						) : helpBoxProps.minor ? null : (
-							<Info />
-						)}
-					</Styled.RightIconDiv>
-				))}
-		</HelpBoxVariation>
+		<DefaultThemeProvider>
+			<Styled.HelpBox
+				variant={selectedVariant}
+				stacked={stacked}
+				hasIcon={(!hideIcon && !(selectedVariant === 'minor')) || showLightBulb}
+				{...helpBoxProps}
+			>
+				{(showLightBulb && <Styled.BulbIcon />) ||
+					(!hideIcon && (
+						<Styled.IconDiv>
+							{selectedVariant === 'danger' ? (
+								<Exclamation />
+							) : selectedVariant === 'success' ? (
+								<CircleCheck />
+							) : selectedVariant === 'minor' ? null : (
+								<Info />
+							)}
+						</Styled.IconDiv>
+					))}
+				<Styled.HelpBoxContent>{children}</Styled.HelpBoxContent>
+				{(handleClose && (
+					<Styled.CloseButton onClick={handleClose}>
+						<Close />
+					</Styled.CloseButton>
+				)) ||
+					(showRightIcon && (
+						<Styled.RightIconDiv>
+							{selectedVariant === 'danger' ? (
+								<Exclamation />
+							) : selectedVariant === 'success' ? (
+								<CircleCheck />
+							) : selectedVariant === 'minor' ? null : (
+								<Info />
+							)}
+						</Styled.RightIconDiv>
+					))}
+			</Styled.HelpBox>
+		</DefaultThemeProvider>
 	);
 }
 
 HelpBox.propTypes = {
-	/** See the docs for how to override styles properly.  */
-	className: PropTypes.string,
 	children: PropTypes.node.isRequired,
 	/** The light bulb will override the other icon. */
 	showLightBulb: PropTypes.bool,
@@ -84,22 +81,19 @@ HelpBox.propTypes = {
 	showRightIcon: PropTypes.bool,
 	/** Stacking will happen automatically on small viewports. */
 	stacked: PropTypes.bool,
-	/** Blue theme is the default.
-	 * The icons are colored by foregroundColor. */
-	theme: PropTypes.shape({
-		foregroundColor: PropTypes.string,
-		backgroundColor: PropTypes.string,
-		closeIconColor: PropTypes.string,
-	}),
-	/** Green theme */
+	/** Specifies the color variant (defaults to `primary`). */
+	variant: PropTypes.oneOf(['primary', 'success', 'danger', 'warning', 'minor']),
+	/** Shortcut for setting `variant` to `primary` (the blue theme). */
+	primary: PropTypes.bool,
+	/** Shortcut for setting `variant` to `success` (the green theme). */
 	success: PropTypes.bool,
-	/** Red theme */
+	/** Shortcut for setting `variant` to `danger` (the red theme). */
 	danger: PropTypes.bool,
-	/** Yellow theme */
+	/** Shortcut for setting `variant` to `warning` (the yellow theme). */
 	warning: PropTypes.bool,
-	/** Gray theme */
+	/** Shortcut for setting `variant` to `minor` (the gray theme). */
 	minor: PropTypes.bool,
-	/** Height will be 230px */
+	/** Sets height to `230px`. */
 	large: PropTypes.bool,
 	/** If not handled, there will be no close icon. */
 	handleClose: PropTypes.func,

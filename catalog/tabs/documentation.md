@@ -3,7 +3,7 @@ This documentation is automatically generated from jsdoc comments.
 ```react
 noSource: true
 ---
-<DocgenTable component={TabManager} />
+<DocgenTable component={Tab.Manager} displayName="Tab.Manager" />
 ```
 
 ```react

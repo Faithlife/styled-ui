@@ -34,13 +34,8 @@ import {
 	DatePickerInput,
 	DatePeriodPicker,
 	SimpleToast,
-	TabManager,
 	Tab,
 	SequencedTab,
-	TabList,
-	SequencedTabList,
-	TabPanel,
-	TabPanels,
 	Dropdown,
 	DropdownToggle,
 	DropdownMenu,
@@ -68,11 +63,13 @@ import {
 	ThemeProvider,
 } from '../index';
 import {
+	Accordion as V6Accordion,
 	Button as V6Button,
 	SegmentedButtonGroup,
 	Checkbox as V6Checkbox,
 	DatePickerInput as V6DatePickerInput,
 	Dropdown as V6Dropdown,
+	HelpBox as V6HelpBox,
 	Modal as V6Modal,
 	Radio as V6Radio,
 	SimpleToast as V6SimpleToast,
@@ -268,6 +265,28 @@ const pages = [
 				title: 'Accordion Documentation',
 				content: pageLoader(() => import('./accordion/documentation.md')),
 				imports: { Accordion, DocgenTable },
+			},
+			{
+				path: '/accordion/variations-v6',
+				title: 'v6 Accordion Variations',
+				content: pageLoader(() => import('./accordion/variations-v6.md')),
+				imports: {
+					Accordion: V6Accordion,
+					AccordionDemo: styled.div`
+						background: #fff;
+						border: 16px solid #f2f2f2;
+					`,
+					Checkbox,
+					Form: FormDemo,
+					Input,
+					Switch,
+				},
+			},
+			{
+				path: '/accordion/documentation-v6',
+				title: 'v6 Accordion Documentation',
+				content: pageLoader(() => import('./accordion/documentation-v6.md')),
+				imports: { Accordion: V6Accordion, DocgenTable },
 			},
 		],
 	},
@@ -607,6 +626,22 @@ const pages = [
 				title: 'Help Box Documentation',
 				content: pageLoader(() => import('./help-box/documentation.md')),
 				imports: { HelpBox, DocgenTable },
+			},
+			{
+				path: '/help-box/variations-v6',
+				title: 'v6 Help Box Variations',
+				content: pageLoader(() => import('./help-box/variations-v6.md')),
+				imports: {
+					HelpBox: V6HelpBox,
+					Button: V6Button,
+					Stack,
+				},
+			},
+			{
+				path: '/help-box/documentation-v6',
+				title: 'v6 Help Box Documentation',
+				content: pageLoader(() => import('./help-box/documentation-v6.md')),
+				imports: { HelpBox: V6HelpBox, DocgenTable },
 			},
 		],
 	},
@@ -1032,11 +1067,7 @@ const pages = [
 				content: pageLoader(() => import('./tabs/variations.md')),
 				imports: {
 					Paragraph,
-					TabManager,
 					Tab,
-					TabList,
-					TabPanel,
-					TabPanels,
 					TabDemo: styled(Stack)`
 						padding: 16px;
 						background-color: white;
@@ -1050,11 +1081,8 @@ const pages = [
 				title: 'Sequenced Tabs',
 				content: pageLoader(() => import('./tabs/sequenced-tabs.md')),
 				imports: {
-					TabManager,
+					Tab,
 					SequencedTab,
-					SequencedTabList,
-					TabPanels,
-					TabPanel,
 					TabDemo: styled.div`
 						padding: 8px;
 						background-color: white;
@@ -1074,7 +1102,6 @@ const pages = [
 				imports: {
 					Tab,
 					SequencedTab,
-					TabManager,
 					DocgenTable,
 				},
 			},
@@ -1117,11 +1144,11 @@ const pages = [
 					Button,
 					Modal: V6Modal,
 					FilePicker,
-					TabManager,
-					TabList,
+					TabManager: Tab.Manager,
+					TabList: Tab.List,
 					Tab,
-					TabPanel,
-					TabPanels,
+					TabPanel: Tab.Panel,
+					TabPanels: Tab.Panels,
 					FileUpload,
 					AmberContent,
 				},

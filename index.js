@@ -3,7 +3,7 @@
 // We could use tree-shaking in the future to prune out unused exports,
 // but not all projects are able to use that right now.
 
-export { Accordion } from './components/accordion';
+export { LegacyAccordion as Accordion } from './components/accordion';
 export { AnchorButton } from './components/button/anchor-button';
 export { Bootstrap } from './components/bootstrap';
 export { LegacyButton as Button, UtilityButton } from './components/button';
@@ -14,7 +14,7 @@ export { LegacyDatePickerInput as DatePickerInput } from './components/date-pick
 export { DatePeriodPicker } from './components/date-period-picker';
 export { DropZone } from './components/drop-zone';
 export { FilesSection } from './components/files-section';
-export { HelpBox } from './components/help-box';
+export { LegacyHelpBox as HelpBox } from './components/help-box';
 export { Input, FilterInput, NumberInput } from './components/input';
 export { LoadingSpinner } from './components/loading-spinner';
 export {
