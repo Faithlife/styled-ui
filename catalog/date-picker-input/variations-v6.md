@@ -48,7 +48,7 @@ Additional config components can be used to pass props to the button and popover
 showSource: true
 state: { selectedDate: null }
 ---
-<div style={{ overflowY: 'hidden' }}>
+<div>
 	<label htmlFor="date-picker-input">The selected date is {dateFunctions.format(state.selectedDate, 'MM-dd-yyyy')}</label>
 	<DatePickerInput
 		id="date-picker-input"
