@@ -1,9 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-	layout as layoutPropTypes,
-	typography as typographyPropTypes,
-} from '@styled-system/prop-types';
+import styledSystemPropTypes from '@styled-system/prop-types';
 import { filterProps } from '../utils';
 import { theme } from '../../theme';
 import * as Styled from './styled';
@@ -20,8 +17,8 @@ export const ParameterInputBox = React.forwardRef((props, ref) => {
 		...otherProps
 	} = props;
 	const [styleProps, inputProps] = filterProps(otherProps, {
-		...layoutPropTypes,
-		...typographyPropTypes,
+		...styledSystemPropTypes.layout,
+		...styledSystemPropTypes.typography,
 	});
 	const { width, fontSize, theme } = styleProps;
 
@@ -69,8 +66,8 @@ ParameterInputBox.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	formatValue: PropTypes.func,
 	accessibilityLabel: PropTypes.string.isRequired,
-	...layoutPropTypes,
-	...typographyPropTypes,
+	...styledSystemPropTypes.layout,
+	...styledSystemPropTypes.typography,
 };
 
 ParameterInputBox.defaultProps = {
