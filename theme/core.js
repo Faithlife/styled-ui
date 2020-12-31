@@ -223,6 +223,11 @@ colors.helpBox = {
 	minorIcon: colors.gray34,
 };
 
+colors.loadingSpinner = {
+	innerColor: colors.blue5,
+	outerColor: colors.gray22,
+};
+
 colors.radio = {
 	primary: colors.blue4,
 	border: colors.checkbox.border,

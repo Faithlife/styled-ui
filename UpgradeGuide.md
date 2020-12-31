@@ -18,6 +18,8 @@
   - The old `theme` prop functionality has been replaced by the [global theme object](https://faithlife.github.io/styled-ui/#/theme) and Styled System props.
 - `Input`
   - The `styleOverrides` prop has been removed in favor of Styled System props.
+- `LoadingSpinner`
+  - The old `theme` prop functionality has been replaced by the [global theme object](https://faithlife.github.io/styled-ui/#/theme) and Styled System props.
 - `Modal`
   - Subcomponents have been renamed, `ModalContent` has been replaced by `Modal.Content`, etc.
 - `Radio`

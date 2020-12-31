@@ -16,7 +16,7 @@ export { DropZone } from './components/drop-zone';
 export { FilesSection } from './components/files-section';
 export { LegacyHelpBox as HelpBox } from './components/help-box';
 export { Input, FilterInput, NumberInput } from './components/input';
-export { LoadingSpinner } from './components/loading-spinner';
+export { LegacyLoadingSpinner as LoadingSpinner } from './components/loading-spinner';
 export {
 	LegacyModal as Modal,
 	LegacyModalContent as ModalContent,
