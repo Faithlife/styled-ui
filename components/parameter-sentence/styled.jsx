@@ -30,6 +30,39 @@ const selectStyling = css`
 	&:focus {
 		outline: none;
 	}
+
+	${layout}
+	${typography}
+`;
+
+export const Button = styled.button`
+	${resetStyles}
+
+	box-shadow: none;
+	cursor: pointer;
+	display: inline-block;
+	background-color: transparent;
+	padding: 0;
+	border: none;
+	outline: none;
+
+	transition: box-shadow 0.25s ease 0s;
+
+	&:focus {
+		&:not(:active) {
+			box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
+		}
+		outline: none;
+	}
+`;
+
+export const ButtonContent = styled.div.attrs(() => ({ tabIndex: '-1' }))`
+	${selectStyling}
+`;
+
+export const Container = styled.div`
+	display: inline-block;
+	position: relative;
 `;
 
 export const ParameterSentence = styled.form.attrs(({ isSearchForm, labelledBy }) => ({
@@ -43,6 +76,26 @@ export const Fieldset = styled.fieldset`
 	border: none;
 	padding: 0;
 	margin: 0;
+`;
+
+export const Select = styled.select`
+	appearance: none;
+	user-select: none;
+	cursor: pointer;
+	border: none;
+	background-color: transparent;
+	text-align-last: center;
+
+	${selectStyling}
+
+	transition: box-shadow 0.25s ease 0s;
+
+	&:focus {
+		&:not(:active) {
+			box-shadow: 0 0 0 0.2rem rgba(30, 145, 214, 0.5);
+		}
+		outline: none;
+	}
 `;
 
 export const InputContainer = styled.div`
@@ -64,9 +117,6 @@ export const InputContainer = styled.div`
 	&& > input[type='number'] {
 		appearance: textfield; /* Firefox */
 	}
-
-	${layout}
-	${typography}
 `;
 
 export const Input = styled.input`
