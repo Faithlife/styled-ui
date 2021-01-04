@@ -16,7 +16,7 @@ export const ParameterInputBox = React.forwardRef((props, ref) => {
 		onBlur,
 		...otherProps
 	} = props;
-	const [styledSystemProps, inputProps] = filterProps(otherProps, {
+	const { matchingProps: styledSystemProps, remainingProps: inputProps } = filterProps(otherProps, {
 		...styledSystemPropTypes.layout,
 		...styledSystemPropTypes.typography,
 	});
