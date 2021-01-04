@@ -1,4 +1,4 @@
-These `<Accordion>` components follow the [WAI-AIRA spec for accordions](https://www.w3.org/TR/wai-aria-practices-1.1/#accordion).
+These `<Accordion>` components follow the [WAI-ARIA spec for accordions](https://www.w3.org/TR/wai-aria-practices-1.1/#accordion).
 
 This component does not directly support any options for requiring that one section always be open, or else limiting that no more than one section can be open. However, this component uses a fully-controlled pattern and this functionality could be implemented with a wrapping component in consuming code.
 

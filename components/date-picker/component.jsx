@@ -46,7 +46,7 @@ export class DatePicker extends Component {
 			start: PropTypes.instanceOf(Date),
 			end: PropTypes.instanceOf(Date),
 		}),
-		/** Returns a date when selected. If asDateRangePicker is true, it will return a date range object matching the selectedDateRange prop shape */
+		/** A callback that retrieves the currently selected date or date range whenever the the selected dates change. */
 		setSelectedDate: PropTypes.func.isRequired,
 		/** Specifies that the component should function as a date range picker */
 		asDateRangePicker: PropTypes.bool,

@@ -1,15 +1,18 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { system } from 'styled-system';
+import { propType as styledPropType } from '@styled-system/prop-types';
 import { Box } from '../Box';
 import { useKeyboardNav, AccordionContextProvider } from './accordion-util';
+import { Panel } from './accordion-panel';
 
 export function Accordion({
 	children,
 	expandedSections,
 	hideArrows,
 	onExpansion,
-	styleOverrides,
-	variant,
+	variant = 'default',
 	mountOnEnter,
 	unmountOnExit,
 	...props
@@ -43,7 +46,6 @@ export function Accordion({
 			hideArrows,
 			onExpansion: handleExpansion,
 			setFocusedMenuItem,
-			styleOverrides,
 			variant,
 			mountOnEnter,
 			unmountOnExit,
@@ -53,7 +55,6 @@ export function Accordion({
 			focusedMenuItem,
 			hideArrows,
 			handleExpansion,
-			styleOverrides,
 			variant,
 			mountOnEnter,
 			unmountOnExit,
@@ -61,7 +62,7 @@ export function Accordion({
 	);
 
 	return (
-		<Box
+		<AccordionBox
 			onKeyDown={handleKeyboardNav}
 			borderBottom={1}
 			borderColor="accordion.sectionBorder"
@@ -72,7 +73,7 @@ export function Accordion({
 					React.isValidElement(child) ? React.cloneElement(child, { index }) : null,
 				)}
 			</AccordionContextProvider>
-		</Box>
+		</AccordionBox>
 	);
 }
 
@@ -89,12 +90,20 @@ Accordion.propTypes = {
 	mountOnEnter: PropTypes.bool,
 	/** true if panel contents should be unmounted when the section is closed **/
 	unmountOnExit: PropTypes.bool,
-	styleOverrides: PropTypes.shape({
-		panelPadding: PropTypes.string,
-	}),
+	/** Determines the size and spacing of several UI elements. */
+	variant: PropTypes.oneOf('default', 'minimal'),
+	/** Overrides the `padding` style on all nested `Accordion.Panel`s */
+	panelPadding: styledPropType,
+	...Box.propTypes,
 };
 
-Accordion.defaultProps = {
-	expandedSections: [],
-	styleOverrides: {},
-};
+const AccordionBox = styled(Box)`
+	${Panel} {
+		${system({
+			panelPadding: {
+				property: 'padding',
+				scale: 'space',
+			},
+		})}
+	}
+`;

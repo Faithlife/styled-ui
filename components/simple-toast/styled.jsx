@@ -1,6 +1,7 @@
 import styled, { keyframes, css } from 'styled-components';
+import { color, layout, position } from 'styled-system';
+import { themeGet } from '@styled-system/theme-get';
 import { TransitionStatuses } from '../utils';
-import { fonts, colors, thickness, mediaSizes } from '../shared-styles';
 
 const fixedHeaderHeight = 47; // px
 const fixedHeightOffset = 8; // px
@@ -8,13 +9,37 @@ const toastOffset = { desktop: '24px', mobile: `${fixedHeaderHeight + fixedHeigh
 const toastMinWidth = '285px';
 const toastHeight = { desktop: '20px', mobile: '18px' };
 
-const slideIn = ({ styleOverrides }) => keyframes`
+const getResponsiveProp = propName => css`
+	${({ theme, ...props }) => {
+		const propValue = props[propName];
+		if (Array.isArray(propValue)) {
+			return css`
+				${propName}: ${propValue[0]};
+
+				@media screen and (min-width: ${theme.breakpoints.tablet}) {
+					${propName}: ${propValue[1]};
+				}
+
+				${propValue.length === 3 &&
+					css`
+						@media screen and (min-width: ${theme.breakpoints.desktop}) {
+							${propName}: ${propValue[2]};
+						}
+					`}
+			`;
+		}
+
+		return `${propName}: ${propValue};`;
+	}}
+`;
+
+const slideIn = ({ bottom }) => keyframes`
 	from {
 		bottom: 0;
 	}
 
 	to {
-		bottom: ${styleOverrides.bottomOffset || toastOffset.desktop};
+		${bottom ? getResponsiveProp('bottom') : `bottom: ${toastOffset.desktop};`}
 	}
 `;
 
@@ -24,17 +49,18 @@ export const ToastContainer = styled.div`
 	/** Shared Styles */
 	display: grid;
 	grid-auto-flow: column;
-	grid-column-gap: ${thickness.eight};
+	grid-column-gap: ${themeGet('space.3')};
 
 	grid-template-columns: min-content;
 
 	position: fixed;
-	z-index: ${({ styleOverrides }) => styleOverrides.zIndex || 1000};
-	${({ styleOverrides }) => (styleOverrides.width ? `width: ${styleOverrides.width}` : '')};
+	z-index: 1000;
 
-	${fonts.ui18};
+	font-size: ${themeGet('fontSizes.4')};
+	font-weight: ${themeGet('fontWeights.regular')};
+	line-height: ${themeGet('lineHeights.ui')};
 
-	background-color: ${({ theme }) => theme.backgroundColor || colors.white};
+	background-color: ${themeGet('colors.white')};
 	border-radius: 3px;
 	box-shadow: 0 19px 38px 0 rgba(0, 0, 0, 0.12), 0 15px 12px 0 rgba(0, 0, 0, 0.12);
 	opacity: 0;
@@ -48,8 +74,8 @@ export const ToastContainer = styled.div`
 
 	/** Mobile Styles */
 	padding: 10px 16px;
-	height: ${({ styleOverrides }) => styleOverrides.height || toastHeight.mobile};
-	top: ${({ styleOverrides }) => styleOverrides.topOffset || toastOffset.mobile};
+	height: ${toastHeight.mobile};
+	top: ${toastOffset.mobile};
 	left: 50%;
 	transform: translateX(-50%);
 
@@ -80,19 +106,19 @@ export const ToastContainer = styled.div`
 	}};
 
 	/** Desktop */
-	@media (min-width: ${mediaSizes.tablet}) {
+	@media (min-width: ${themeGet('breakpoints.tablet')}) {
 		padding: 16px;
-		${({ styleOverrides }) => (!styleOverrides.width ? `min-width: ${toastMinWidth}` : '')};
-		height: ${({ styleOverrides }) => styleOverrides.height || toastHeight.desktop};
+		${({ width }) => !width && `min-width: ${toastMinWidth};`}
+		height: ${toastHeight.desktop};
 
-		right: ${({ styleOverrides }) => styleOverrides.rightOffset || toastOffset.desktop};
+		right: ${toastOffset.desktop};
 
 		top: auto;
 		left: auto;
 		transform: none;
 		justify-items: left;
 
-		bottom: ${({ styleOverrides }) => styleOverrides.bottomOffset || toastOffset.desktop};
+		bottom: ${toastOffset.desktop};
 
 		${props => {
 			switch (props.state) {
@@ -116,6 +142,12 @@ export const ToastContainer = styled.div`
 					return '';
 			}
 		}};
+	}
+
+	&& {
+		${color}
+		${layout}
+		${position}
 	}
 `;
 

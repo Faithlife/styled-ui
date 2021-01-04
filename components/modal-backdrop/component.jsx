@@ -9,6 +9,8 @@ export class ModalBackdrop extends React.Component {
 	static propTypes = {
 		/** Callback function to tell modal to close due to clicking the backdrop  */
 		onClose: PropTypes.func.isRequired,
+		/** The z-index of the backdrop */
+		zIndex: PropTypes.number,
 		/** Contents of the modal */
 		children: PropTypes.node.isRequired,
 	};
@@ -38,7 +40,7 @@ export class ModalBackdrop extends React.Component {
 	};
 
 	render() {
-		const { children, styleOverrides, ...props } = this.props;
+		const { children, ...props } = this.props;
 
 		return (
 			<Box
@@ -59,7 +61,6 @@ export class ModalBackdrop extends React.Component {
 				left="0"
 				overflow="hidden"
 				background="rgba(0, 0, 0, 0.7)"
-				zIndex={styleOverrides ? styleOverrides.zIndex : undefined}
 				{...props}
 			>
 				{children}

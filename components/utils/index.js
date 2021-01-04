@@ -5,11 +5,18 @@ export { filterProps } from './filter-props';
 export { deprecate, deprecateComponent, deprecateProp } from './deprecate';
 export { getConfigProps, getConfigChild } from './get-config-props';
 
-export function getVariation(variant, obj) {
+/**
+ * Chooses the correct variant from a main variant prop and a set of boolean shortcut props.
+ *
+ * @param {string|undefined} variant - The value of the component's `variant` prop.
+ * @param {{ [propName: string]: boolean }} shortcutProps - An object of shortcut prop names and boolean values, the names corresponding to variant name options.
+ * @returns {string|null} The name of the selected variant (or `null` if no variant has been selected).
+ */
+export function getVariation(variant, shortcutProps) {
 	if (variant) {
 		return variant;
 	}
-	const match = [...Object.entries(obj)].find(entry => entry[1]);
+	const match = [...Object.entries(shortcutProps)].find(entry => entry[1]);
 
 	return match ? match[0] : null;
 }

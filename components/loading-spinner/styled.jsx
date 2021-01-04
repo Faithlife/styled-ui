@@ -1,21 +1,22 @@
-import styled, { css, keyframes } from 'styled-components';
-import { variant } from 'styled-system';
+import styled, { keyframes } from 'styled-components';
+import { variant, layout, position } from 'styled-system';
+import { themeGet } from '@styled-system/theme-get';
 import { theme } from '../../theme';
 import { Box } from '../Box';
 
 const spinTransform = keyframes`
-0% {
-	transform: rotate(0deg);
-}
+	0% {
+		transform: rotate(0deg);
+	}
 
-100% {
-	transform: rotate(360deg);
-}
+	100% {
+		transform: rotate(360deg);
+	}
 `;
 
 export const Spinner = styled(Box)`
-	border: 0 solid ${props => props.overrides.outerColor};
-	border-left-color: ${props => props.overrides.innerColor};
+	border: 0 solid ${themeGet('colors.loadingSpinner.outerColor')};
+	border-left-color: ${themeGet('colors.loadingSpinner.innerColor')};
 	border-radius: 50%;
 	display: inline-block;
 	animation: ${spinTransform} 1.1s infinite linear;
@@ -41,12 +42,17 @@ export const Spinner = styled(Box)`
 		},
 	})}
 
-	${props =>
-		props.height &&
-		css`
-			width: ${props.height}px;
-			height: ${props.height}px;
-		`}
+	${layout}
+
+	/* Square up dimensions in case it's necessary */
+	${({ size, height, width }) =>
+		// Uses object notation instead of CSS so integers will be converted to pixels
+		(size || height || width) && {
+			height: size || height || width,
+			width: size || height || width,
+		}}
+
+	${position}
 `;
 
 Spinner.defaultProps = {

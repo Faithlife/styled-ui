@@ -28,7 +28,7 @@ export function ImagePreview({ imageSource, onRemoveFile }) {
 				<CloseButtonSvg />
 			</Styled.CloseButton>
 
-			{!isLoaded && <LoadingSpinner large />}
+			{!isLoaded && <LoadingSpinner variant="large" />}
 		</Styled.BorderBox>
 	);
 }

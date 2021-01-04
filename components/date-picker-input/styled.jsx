@@ -1,8 +1,8 @@
 import styled from 'styled-components';
+import { Box } from '../Box';
 import { UtilityButton } from '../button';
-import { colors } from '../shared-styles';
 
-export const Container = styled.div`
+export const Container = styled(Box)`
 	display: inherit;
 	flex-grow: 1;
 	position: relative;
@@ -10,7 +10,7 @@ export const Container = styled.div`
 	min-width: 0;
 	height: 32px;
 	font-size: 14px;
-	color: ${colors.flGray};
+	color: ${({ theme }) => theme.colors.flGray};
 `;
 
 export const CalendarButton = styled(UtilityButton).attrs(({ theme, color }) => ({
@@ -18,12 +18,13 @@ export const CalendarButton = styled(UtilityButton).attrs(({ theme, color }) => 
 }))`
 	position: absolute;
 	top: 0;
-	right: 7px;
+	right: 0;
+	padding: 7px;
 	cursor: pointer;
 `;
 
 export const CalendarIconContainer = styled.div`
-	padding: 7px 0 0 0;
+	height: 18px; /* matches CalendarIcon */
 `;
 
 export const DateTime = styled.div`

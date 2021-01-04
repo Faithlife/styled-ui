@@ -3,20 +3,20 @@
 // We could use tree-shaking in the future to prune out unused exports,
 // but not all projects are able to use that right now.
 
-export { Accordion } from './components/accordion';
+export { LegacyAccordion as Accordion } from './components/accordion';
 export { AnchorButton } from './components/button/anchor-button';
 export { Bootstrap } from './components/bootstrap';
 export { LegacyButton as Button, UtilityButton } from './components/button';
-export { Checkbox } from './components/check-box';
+export { LegacyCheckbox as Checkbox } from './components/check-box';
 export { Collapse } from './components/collapse';
 export { DatePicker } from './components/date-picker';
-export { DatePickerInput } from './components/date-picker-input';
+export { LegacyDatePickerInput as DatePickerInput } from './components/date-picker-input';
 export { DatePeriodPicker } from './components/date-period-picker';
 export { DropZone } from './components/drop-zone';
 export { FilesSection } from './components/files-section';
-export { HelpBox } from './components/help-box';
+export { LegacyHelpBox as HelpBox } from './components/help-box';
 export { Input, FilterInput, NumberInput } from './components/input';
-export { LoadingSpinner } from './components/loading-spinner';
+export { LegacyLoadingSpinner as LoadingSpinner } from './components/loading-spinner';
 export {
 	LegacyModal as Modal,
 	LegacyModalContent as ModalContent,
@@ -31,9 +31,9 @@ export {
 	PopoverReference,
 	Tooltip,
 } from './components/popover';
-export { Radio } from './components/radio';
-export { Slider } from './components/slider';
-export { SimpleToast } from './components/simple-toast';
+export { LegacyRadio as Radio } from './components/radio';
+export { LegacySimpleToast as SimpleToast } from './components/simple-toast';
+export { LegacySlider as Slider } from './components/slider';
 export {
 	TabManager,
 	Tab,
