@@ -14,8 +14,12 @@ export const AvatarOptionImage = styled.img`
 	width: 40px;
 `;
 
+export const AvatarOptionCheckbox = styled.div`
+	padding-right: ${props => props.theme.space[3]};
+`;
+
 export const AvatarOptionText = styled.div`
-	padding: ${props => props.theme.space[2]};
+	padding: ${props => props.theme.space[3]};
 `;
 
 export const AvatarOptionName = styled.div`

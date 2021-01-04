@@ -5,6 +5,7 @@ import ReactSelect, {
 } from 'react-select';
 import { colors } from '../shared-styles';
 import { ChevronDown } from '../icons/12px';
+import { Checkbox } from '../../components/check-box';
 import { DebouncedSelectAsync, DebouncedSelectAsyncCreatable } from './debounced-async';
 import * as Styled from './styled';
 import { ThemedBox } from '../ThemedBox';
@@ -156,13 +157,19 @@ const defaultComponents = {
 	),
 };
 
-const AvatarOption = ({ data: { avatar, label, secondaryLabel }, ...props }) => {
+const AvatarOption = ({ data, selectProps: { allowSelect, isOptionChecked }, ...props }) => {
 	const theme = useTheme();
+	const { avatar, label, secondaryLabel } = data;
 
 	return (
 		<Styled.AvatarOption {...props}>
 			{avatar ? (
 				<>
+					{!allowSelect ? null : (
+						<Styled.AvatarOptionCheckbox theme={theme}>
+							<Checkbox onClick={() => {}} isChecked={isOptionChecked(data)} disableAutoBlur />
+						</Styled.AvatarOptionCheckbox>
+					)}
 					<Styled.AvatarOptionImage src={avatar} alt={label} />
 					<Styled.AvatarOptionText theme={theme}>
 						<Styled.AvatarOptionName theme={theme}>{label}</Styled.AvatarOptionName>
