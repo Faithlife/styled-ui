@@ -34,13 +34,8 @@ import {
 	DatePickerInput,
 	DatePeriodPicker,
 	SimpleToast,
-	TabManager,
 	Tab,
 	SequencedTab,
-	TabList,
-	SequencedTabList,
-	TabPanel,
-	TabPanels,
 	Dropdown,
 	DropdownToggle,
 	DropdownMenu,
@@ -68,10 +63,14 @@ import {
 	ThemeProvider,
 } from '../index';
 import {
+	Accordion as V6Accordion,
 	Button as V6Button,
 	SegmentedButtonGroup,
 	Checkbox as V6Checkbox,
+	DatePickerInput as V6DatePickerInput,
 	Dropdown as V6Dropdown,
+	HelpBox as V6HelpBox,
+	LoadingSpinner as V6LoadingSpinner,
 	Modal as V6Modal,
 	Radio as V6Radio,
 	SimpleToast as V6SimpleToast,
@@ -174,17 +173,31 @@ const pages = [
 		content: pageLoader(() => import('./WELCOME.md')),
 	},
 	{
-		path: '/theme',
 		title: 'Theme',
-		content: pageLoader(() => import('./theme/documentation.md')),
-		imports: {
-			Box,
-			Stack,
-			Text,
-			Paragraph,
-			Heading,
-			ThemeList,
-		},
+		pages: [
+			{
+				path: '/theme/usage',
+				title: 'Usage',
+				content: pageLoader(() => import('./theme/usage.md')),
+				imports: {
+					Box,
+					Stack,
+					Text,
+					Paragraph,
+					Heading,
+					ThemeList,
+				},
+			},
+			{
+				path: '/theme/customization',
+				title: 'Customization',
+				content: pageLoader(() => import('./theme/customization.md')),
+				imports: {
+					ThemeProvider,
+					DocgenTable,
+				},
+			},
+		],
 	},
 	{
 		title: 'Layout Primitives',
@@ -267,6 +280,28 @@ const pages = [
 				title: 'Accordion Documentation',
 				content: pageLoader(() => import('./accordion/documentation.md')),
 				imports: { Accordion, DocgenTable },
+			},
+			{
+				path: '/accordion/variations-v6',
+				title: 'v6 Accordion Variations',
+				content: pageLoader(() => import('./accordion/variations-v6.md')),
+				imports: {
+					Accordion: V6Accordion,
+					AccordionDemo: styled.div`
+						background: #fff;
+						border: 16px solid #f2f2f2;
+					`,
+					Checkbox,
+					Form: FormDemo,
+					Input,
+					Switch,
+				},
+			},
+			{
+				path: '/accordion/documentation-v6',
+				title: 'v6 Accordion Documentation',
+				content: pageLoader(() => import('./accordion/documentation-v6.md')),
+				imports: { Accordion: V6Accordion, DocgenTable },
 			},
 		],
 	},
@@ -455,6 +490,27 @@ const pages = [
 				content: pageLoader(() => import('./date-picker-input/documentation.md')),
 				imports: { DatePickerInput, DocgenTable },
 			},
+			{
+				path: '/date-picker-input/variations-v6',
+				title: 'v6 Date Picker Input Variations',
+				content: pageLoader(() => import('./date-picker-input/variations-v6.md')),
+				imports: {
+					DatePickerInput: V6DatePickerInput,
+					dateFunctions: {
+						...dateFunctions,
+					},
+					parseUserDateString: str => {
+						const parsed = chrono.parseDate(str);
+						return parsed;
+					},
+				},
+			},
+			{
+				path: 'date-picker-input/documentation-v6',
+				title: 'v6 Date Picker Input Documentation',
+				content: pageLoader(() => import('./date-picker-input/documentation-v6.md')),
+				imports: { DatePickerInput: V6DatePickerInput, DocgenTable },
+			},
 		],
 	},
 	{
@@ -586,6 +642,22 @@ const pages = [
 				content: pageLoader(() => import('./help-box/documentation.md')),
 				imports: { HelpBox, DocgenTable },
 			},
+			{
+				path: '/help-box/variations-v6',
+				title: 'v6 Help Box Variations',
+				content: pageLoader(() => import('./help-box/variations-v6.md')),
+				imports: {
+					HelpBox: V6HelpBox,
+					Button: V6Button,
+					Stack,
+				},
+			},
+			{
+				path: '/help-box/documentation-v6',
+				title: 'v6 Help Box Documentation',
+				content: pageLoader(() => import('./help-box/documentation-v6.md')),
+				imports: { HelpBox: V6HelpBox, DocgenTable },
+			},
 		],
 	},
 	textInputPages,
@@ -635,6 +707,18 @@ const pages = [
 				title: 'Loading Spinner Documentation',
 				content: pageLoader(() => import('./loading-spinner/documentation.md')),
 				imports: { LoadingSpinner, DocgenTable },
+			},
+			{
+				path: '/loading-spinner/variations-v6',
+				title: 'v6 Loading Spinner Variations',
+				content: pageLoader(() => import('./loading-spinner/variations-v6.md')),
+				imports: { LoadingSpinner: V6LoadingSpinner },
+			},
+			{
+				path: '/loading-spinner/documentation-v6',
+				title: 'v6 Loading Spinner Documentation',
+				content: pageLoader(() => import('./loading-spinner/documentation-v6.md')),
+				imports: { LoadingSpinner: V6LoadingSpinner, DocgenTable },
 			},
 		],
 	},
@@ -1010,11 +1094,7 @@ const pages = [
 				content: pageLoader(() => import('./tabs/variations.md')),
 				imports: {
 					Paragraph,
-					TabManager,
 					Tab,
-					TabList,
-					TabPanel,
-					TabPanels,
 					TabDemo: styled(Stack)`
 						padding: 16px;
 						background-color: white;
@@ -1028,11 +1108,8 @@ const pages = [
 				title: 'Sequenced Tabs',
 				content: pageLoader(() => import('./tabs/sequenced-tabs.md')),
 				imports: {
-					TabManager,
+					Tab,
 					SequencedTab,
-					SequencedTabList,
-					TabPanels,
-					TabPanel,
 					TabDemo: styled.div`
 						padding: 8px;
 						background-color: white;
@@ -1052,7 +1129,6 @@ const pages = [
 				imports: {
 					Tab,
 					SequencedTab,
-					TabManager,
 					DocgenTable,
 				},
 			},
@@ -1095,11 +1171,11 @@ const pages = [
 					Button,
 					Modal: V6Modal,
 					FilePicker,
-					TabManager,
-					TabList,
+					TabManager: Tab.Manager,
+					TabList: Tab.List,
 					Tab,
-					TabPanel,
-					TabPanels,
+					TabPanel: Tab.Panel,
+					TabPanels: Tab.Panels,
 					FileUpload,
 					AmberContent,
 				},

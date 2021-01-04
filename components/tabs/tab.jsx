@@ -1,8 +1,12 @@
 import React, { useCallback, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import styledSystemPropTypes, { propType as styledSystemPropType } from '@styled-system/prop-types';
+import { common, typography } from '../../theme/system';
+import { Text } from '../Text';
 import { Checkmark } from '../icons/12px';
 import * as Styled from './styled.jsx';
 
+/** A styled label/button that switches the view to a particular panel of content. */
 export function Tab({ children, index, selected, onSelectTab, disabled, panelId, ...props }) {
 	const tabRef = useRef();
 
@@ -31,11 +35,22 @@ export function Tab({ children, index, selected, onSelectTab, disabled, panelId,
 }
 
 Tab.propTypes = {
-	/** The tab's label */
+	/** The tab's label. */
 	children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
 	disabled: PropTypes.bool,
+	textStyle: styledSystemPropType,
+	...common.propTypes,
+	...typography.propTypes,
+	...styledSystemPropTypes.layout,
+	...styledSystemPropTypes.position,
+	...styledSystemPropTypes.border,
+	...styledSystemPropTypes.background,
 };
 
+/**
+ * A specialized tab interface that keeps track of tasks to be completed in a sequence. May be
+ * paired with `TabPanel` content or used alone.
+ */
 export function SequencedTab({
 	children,
 	disabled,
@@ -84,9 +99,13 @@ export function SequencedTab({
 }
 
 SequencedTab.propTypes = {
-	/** The tab's label */
+	/** The tab's label. */
 	children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
 	disabled: PropTypes.bool,
-	/** The user should always be shown this tab even though it's been externally completed. */
+	/**
+	 * Whether this tab's task has already been completed externally. Note: when a user progresses in
+	 * sequence to an externally completed tab, the tab should still be shown, not skipped over.
+	 */
 	completed: PropTypes.bool,
+	...Text.propTypes,
 };

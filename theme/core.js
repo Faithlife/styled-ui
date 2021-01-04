@@ -205,6 +205,29 @@ colors.datePickerInput = {
 	iconColor: colors.gray52,
 };
 
+colors.helpBox = {
+	primaryBackground: colors.blue1,
+	primaryForeground: colors.blue3,
+	primaryIcon: colors.blue5,
+	successBackground: colors.green1,
+	successForeground: colors.green2,
+	successIcon: colors.green5,
+	dangerBackground: colors.red1,
+	dangerForeground: colors.red3,
+	dangerIcon: colors.red5,
+	warningBackground: colors.yellow1,
+	warningForeground: colors.yellow3,
+	warningIcon: colors.yellow5,
+	minorBackground: colors.gray4,
+	minorForeground: colors.gray14,
+	minorIcon: colors.gray34,
+};
+
+colors.loadingSpinner = {
+	innerColor: colors.blue5,
+	outerColor: colors.gray22,
+};
+
 colors.radio = {
 	primary: colors.blue4,
 	border: colors.checkbox.border,

@@ -1,6 +1,10 @@
+export { Accordion } from './components/accordion';
 export { Button, SegmentedButtonGroup } from './components/button';
 export { Checkbox } from './components/check-box';
+export { DatePickerInput } from './components/date-picker-input';
 export { Dropdown } from './components/dropdown';
+export { HelpBox } from './components/help-box';
+export { LoadingSpinner } from './components/loading-spinner';
 export { Modal } from './components/modal';
 export { usePopover, Popover } from './components/popover-v6';
 export { Radio } from './components/radio';
