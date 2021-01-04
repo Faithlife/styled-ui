@@ -4,8 +4,9 @@
  * @param {object} props - A props object.
  * @param {(string[] | object)} filterPropNames - An array of prop names to filter by (or a prop
  * types object with keys to filter by).
- * @returns {{ matchingProps: object, remainingProps: object }} An array of two props objects: the
- * first containing the props that match the filter and the second containing the rest.
+ * @returns {{ matchingProps: object, remainingProps: object }} An object containing two props
+ * objects: one containing the props that match the filter and the other containing the props that
+ * don't match.
  */
 export function filterProps(props, filterPropNames) {
 	const filterList = Array.isArray(filterPropNames)
