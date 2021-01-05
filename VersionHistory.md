@@ -1,5 +1,18 @@
 # Changelog
 
+## 5.72.0
+
+- Added v6 `Accordion` component with Styled-System props.
+- Added v6 `DatePickerInput` component with Styled-System props.
+- Added v6 `HelpBox` component with Styled-System props.
+- Added v6 `Input` component with Styled-System props.
+- Added v6 `LoadingSpinner` component with Styled-System props.
+- Added new sub-component syntax for `Tab` and `SequencedTab` components: e.g: `Tab.List`, `Tab.Panel`, etc.
+- Updated `DatePeriodPicker` callback to return information about the selected date period.
+- Added warning for duplicate date period display names in `DatePeriodPicker`.
+- Fixed focus-away handler in `DatePicker` interfering with min- and max- dates.
+- Fixed `Modal` components not correctly scrolling overflow content on Safari.
+
 ## 5.71.0
 
 - Added v6 `Checkbox` component with Styled-System props.
