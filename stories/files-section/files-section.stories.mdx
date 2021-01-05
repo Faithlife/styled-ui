@@ -1,0 +1,138 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { useArgs } from '@storybook/client-api';
+import { files, localizedFiles, handleUpload, renderCustomFileActions } from './util';
+
+import { FilesSection, LoadingSpinner } from '../../index';
+
+<Meta title="Components/Files Section" component={FilesSection} />
+
+# Files Section
+
+<Canvas>
+	<Story
+		name="File Section Example"
+		args={{ files, mediaTypeLabels: FilesSection.defaultProps.mediaTypeLabels }}
+	>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<FilesSection
+					{...args}
+					onFileClicked={file => console.log(file)}
+					onUploadFiles={handleUpload(updateArgs)}
+				/>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## With file actions
+
+<Canvas>
+	<Story
+		name="Custom Actions"
+		args={{ files, mediaTypeLabels: FilesSection.defaultProps.mediaTypeLabels }}
+	>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<FilesSection
+					{...args}
+					onFileClicked={file => console.log(file)}
+					onUploadFiles={handleUpload(updateArgs)}
+					renderFileActions={renderCustomFileActions}
+				/>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## With processing files
+
+<Canvas>
+	<Story
+		name="Custom Loading Spinner"
+		args={{ files, mediaTypeLabels: FilesSection.defaultProps.mediaTypeLabels }}
+	>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<FilesSection
+					{...args}
+					onFileClicked={file => console.log(file)}
+					onUploadFiles={handleUpload(updateArgs)}
+					renderLoadingSpinner={() => <LoadingSpinner small />}
+				/>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## With localized strings
+
+<Canvas>
+	<Story
+		name="Localization"
+		args={{
+			files: localizedFiles,
+			mediaTypeLabels: {
+				video: 'Vídeo',
+				audio: 'Audio',
+				image: 'Imagen',
+				default: 'Otro',
+			},
+			title: 'Archivos',
+			dropZoneText: 'Arrastra y suelta para subir archivos',
+			browseFilesButtonText: 'o navegar archivos',
+		}}
+	>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<FilesSection
+					{...args}
+					onFileClicked={file => console.log(file)}
+					onUploadFiles={handleUpload(updateArgs)}
+					renderLoadingSpinner={() => <LoadingSpinner small />}
+				/>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## Without clickable files
+
+<Canvas>
+	<Story
+		name="Without Clickable Files"
+		args={{ files, mediaTypeLabels: FilesSection.defaultProps.mediaTypeLabels }}
+	>
+		{args => <FilesSection {...args} />}
+	</Story>
+</Canvas>
+
+# Demo
+
+<Canvas>
+	<Story
+		name="File Section Demo"
+		args={{
+			files,
+			mediaTypeLabels: FilesSection.defaultProps.mediaTypeLabels,
+			titleFontSize: '32px',
+		}}
+	>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<FilesSection
+					{...args}
+					onFileClicked={file => console.log(file)}
+					onUploadFiles={handleUpload(updateArgs)}
+				/>
+			);
+		}}
+	</Story>
+</Canvas>
+
+<ArgsTable story={'File Section Demo'} />

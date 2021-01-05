@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { UtilityButton } from '../button';
 import { getConfigProps } from '../utils';
 import { Popover } from '../popover-v6';
 import { PlacementOptionsProps } from '../popover/popper-helpers';
@@ -209,14 +210,16 @@ DatePickerInput.propTypes = {
 };
 
 function DatePickerInputPopover(props) {
-	return null;
+	return <div />;
 }
 DatePickerInputPopover.childConfigComponent = 'DatePickerInputPopover';
+DatePickerInputPopover.propTypes = Popover.propTypes;
 
 function DatePickerInputButton(props) {
-	return null;
+	return <div />;
 }
 DatePickerInputButton.childConfigComponent = 'DatePickerInputButton';
+DatePickerInputPopover.propTypes = UtilityButton.propTypes;
 
 DatePickerInput.Popover = DatePickerInputPopover;
 DatePickerInput.Button = DatePickerInputButton;

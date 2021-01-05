@@ -1,0 +1,228 @@
+import { useState } from 'react';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { useArgs } from '@storybook/client-api';
+import {
+	resetArgTypes,
+	getStyledSystemArgTypes,
+	styledSystemProps,
+	buttonStyleProps,
+} from '../shared-util';
+import { Button } from '../../index-v6';
+import { FavoriteFilled } from '../../components/icons/18px';
+import { avatarSrc, thumbnailSrc } from './util';
+
+import { Dropdown } from '../../index-v6';
+
+<Meta
+	title="Components/Dropdown"
+	component={Dropdown}
+	supcomponents={{
+		DropdownActionButton: Dropdown.ActionButton,
+		DropdownToggle: Dropdown.Toggle,
+		DropdownMenu: Dropdown.Menu,
+		DropdownTitle: Dropdown.Title,
+		DropdownSeparator: Dropdown.Separator,
+		DropdownItem: Dropdown.Item,
+		DropdownCheckboxItem: Dropdown.CheckboxItem,
+		DropdownLinkItem: Dropdown.LinkItem,
+	}}
+	argTypes={getStyledSystemArgTypes([
+		styledSystemProps.border,
+		styledSystemProps.color,
+		styledSystemProps.flexbox,
+		styledSystemProps.layout,
+		styledSystemProps.position,
+		styledSystemProps.shadow,
+		styledSystemProps.space,
+		styledSystemProps.textStyle,
+		styledSystemProps.custom,
+	])}
+/>
+
+# Dropdown
+
+✔ Styled-Systems Compliant  
+✔ WAI ARIA Compliant
+
+<Canvas>
+	<Story name="Dropdown Example" args={{ isOpen: false }} argTypes={resetArgTypes}>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<Dropdown {...args} onToggleMenu={() => updateArgs({ isOpen: !args.isOpen })}>
+					<Dropdown.Toggle>Show a Dropdown!</Dropdown.Toggle>
+					<Dropdown.Menu container="body">
+						<Dropdown.Item onClick={() => alert('Menu Item 1')}>Menu Item 1</Dropdown.Item>
+						<Dropdown.Item onClick={() => alert('Menu Item 2')}>Menu Item 2</Dropdown.Item>
+						<Dropdown.Item disabled onClick={() => alert('Menu Item 3')}>
+							Menu Item 3
+						</Dropdown.Item>
+					</Dropdown.Menu>
+				</Dropdown>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## Split Dropdown Toggle
+
+<Canvas>
+	<Story
+		name="Dropdown Split Button"
+		args={{ isOpen: false }}
+		argTypes={{
+			...resetArgTypes,
+			...getStyledSystemArgTypes(buttonStyleProps),
+		}}
+	>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<Dropdown isOpen={args.isOpen} onToggleMenu={() => updateArgs({ isOpen: !args.isOpen })}>
+					<Dropdown.Toggle>
+						<Dropdown.ActionButton {...args} onClick={() => alert('Different Action')}>
+							Show a Dropdown!
+						</Dropdown.ActionButton>
+					</Dropdown.Toggle>
+					<Dropdown.Menu container="body">
+						<Dropdown.Item onClick={() => alert('Menu Item 1')}>Menu Item 1</Dropdown.Item>
+						<Dropdown.Item onClick={() => alert('Menu Item 2')}>Menu Item 2</Dropdown.Item>
+						<Dropdown.Item disabled onClick={() => alert('Menu Item 3')}>
+							Menu Item 3
+						</Dropdown.Item>
+					</Dropdown.Menu>
+				</Dropdown>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## Dropdown Menu Items
+
+<Canvas>
+	<Story
+		name="Dropdown Menu Items"
+		args={{ isOpen: false }}
+		argTypes={{
+			...resetArgTypes,
+			...getStyledSystemArgTypes(buttonStyleProps),
+		}}
+	>
+		{args => {
+			const [isChecked, setIsChecked] = useState(false);
+			const [, updateArgs] = useArgs();
+			return (
+				<Dropdown isOpen={args.isOpen} onToggleMenu={() => updateArgs({ isOpen: !args.isOpen })}>
+					<Dropdown.Toggle>Show a Dropdown!</Dropdown.Toggle>
+					<Dropdown.Menu container="body">
+						<Dropdown.Title>Dropdown</Dropdown.Title>
+						<Dropdown.Separator />
+						<Dropdown.Item {...args} onClick={() => alert('Menu Item')}>
+							Menu Item
+						</Dropdown.Item>
+						<Dropdown.CheckboxItem isChecked={isChecked} onToggle={() => setIsChecked(!isChecked)}>
+							Menu Checkbox
+						</Dropdown.CheckboxItem>
+						<Dropdown.LinkItem href="https://faithlife.github.io/styled-ui/#/icons" target="_blank">
+							Menu Link
+						</Dropdown.LinkItem>
+					</Dropdown.Menu>
+				</Dropdown>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## Using custom toggle component
+
+<Canvas>
+	<Story name="Custom Toggle" args={{ isOpen: false }} argTypes={resetArgTypes}>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<Dropdown {...args} onToggleMenu={() => updateArgs({ isOpen: !args.isOpen })}>
+					<Dropdown.Toggle>
+						{(ref, { onKeyDown, onClick, ariaProps }) => (
+							<Button
+								variant="primary"
+								size="medium"
+								ref={ref}
+								onKeyDown={onKeyDown}
+								onClick={onClick}
+								{...ariaProps}
+							>
+								Show a Dropdown!
+							</Button>
+						)}
+					</Dropdown.Toggle>
+					<Dropdown.Menu container="body">
+						<Dropdown.Item onClick={() => alert('Menu Item 1')}>Menu Item 1</Dropdown.Item>
+						<Dropdown.Item onClick={() => alert('Menu Item 2')}>Menu Item 2</Dropdown.Item>
+						<Dropdown.Item disabled onClick={() => alert('Menu Item 3')}>
+							Menu Item 3
+						</Dropdown.Item>
+					</Dropdown.Menu>
+				</Dropdown>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## With Icon
+
+<Canvas>
+	<Story name="Icon Example" args={{ isOpen: false, width: '280px' }} argTypes={resetArgTypes}>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<Dropdown {...args} onToggleMenu={() => updateArgs({ isOpen: !args.isOpen })}>
+					<Dropdown.Toggle>Show a Dropdown!</Dropdown.Toggle>
+					<Dropdown.Menu container="body">
+						<Dropdown.Item onClick={() => alert('Menu Item 1')}>
+							<Dropdown.ItemIcon>
+								<FavoriteFilled />
+							</Dropdown.ItemIcon>
+							<Dropdown.ItemPrimaryText>Menu Item 1</Dropdown.ItemPrimaryText>
+							<Dropdown.ItemSecondaryText>Variant = Icon</Dropdown.ItemSecondaryText>
+						</Dropdown.Item>
+						<Dropdown.Item onClick={() => alert('Menu Item 2')}>
+							<Dropdown.ItemIcon src={thumbnailSrc} variant="thumbnail" />
+							<Dropdown.ItemPrimaryText>Menu Item 2</Dropdown.ItemPrimaryText>
+							<Dropdown.ItemSecondaryText>Variant = Thumbnail</Dropdown.ItemSecondaryText>
+						</Dropdown.Item>
+						<Dropdown.Item onClick={() => alert('Menu Item 3')}>
+							<Dropdown.ItemIcon src={avatarSrc} variant="avatar" />
+							<Dropdown.ItemPrimaryText fontWeight={1}>
+								Menu Item 3 (Avatar)
+							</Dropdown.ItemPrimaryText>
+						</Dropdown.Item>
+					</Dropdown.Menu>
+				</Dropdown>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## Demo
+
+<Canvas>
+	<Story name="Dropdown Demo" args={{ isOpen: false, variant: 'minor' }}>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<Dropdown isOpen={args.isOpen} onToggleMenu={() => updateArgs({ isOpen: !args.isOpen })}>
+					<Dropdown.Toggle {...args}>Show a Dropdown!</Dropdown.Toggle>
+					<Dropdown.Menu container="body">
+						<Dropdown.Item onClick={() => alert('Menu Item 1')}>Menu Item 1</Dropdown.Item>
+						<Dropdown.Item onClick={() => alert('Menu Item 2')}>Menu Item 2</Dropdown.Item>
+						<Dropdown.Item disabled onClick={() => alert('Menu Item 3')}>
+							Menu Item 3
+						</Dropdown.Item>
+					</Dropdown.Menu>
+				</Dropdown>
+			);
+		}}
+	</Story>
+</Canvas>
+
+<ArgsTable story={'Dropdown Demo'} />

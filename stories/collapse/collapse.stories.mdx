@@ -2,7 +2,6 @@ import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 import { useArgs } from '@storybook/client-api';
 import { getStyledSystemArgTypes, boxStyleProps } from '../shared-util';
 import { Button } from '../../index-v6';
-import { theme } from '../../index';
 
 import { Collapse } from '../../index';
 
@@ -22,7 +21,7 @@ This is a straight port of the component from [Reactstrap](https://reactstrap.gi
 <Canvas>
 	<Story name="Collapse Demo" args={{ isOpen: false }}>
 		{args => {
-			const [_, updateArgs] = useArgs();
+			const [, updateArgs] = useArgs();
 			return (
 				<>
 					<Button onClick={() => updateArgs({ isOpen: !args.isOpen })} marginBottom={4}>

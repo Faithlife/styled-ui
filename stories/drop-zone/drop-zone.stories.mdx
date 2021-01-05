@@ -1,0 +1,83 @@
+import { useState, useCallback } from 'react';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { DroppedFiles, CustomDropZoneMessage, CustomDropZoneIcons, handleDrop } from './utils';
+
+import { DropZone } from '../../index';
+
+<Meta title="Components/Drop Zone" component={DropZone} />
+
+# Drop Zone
+
+In general, it is recommended to provide some other alternate UI on mobile .
+
+## Basic
+
+<Canvas>
+	<Story name="Drop Zone">
+		{args => {
+			const [fileNames, setFilenames] = useState([]);
+			const onDrop = useCallback(handleDrop(setFilenames), []);
+			return (
+				<>
+					<DropZone onDrop={onDrop}>Drop files</DropZone>
+					<DroppedFiles>
+						{fileNames.map((name, i) => (
+							<div key={`${name}_{i}`}>Dropped file: {name}</div>
+						))}
+					</DroppedFiles>
+				</>
+			);
+		}}
+	</Story>
+</Canvas>
+
+### With more complex children
+
+Drop Zone accepts custom children. This example uses custom styled-components.
+
+<Canvas>
+	<Story name="Drop Zone With Children">
+		{args => {
+			const [fileNames, setFilenames] = useState([]);
+			const onDrop = useCallback(handleDrop(setFilenames), []);
+			return (
+				<>
+					<DropZone onDrop={onDrop}>
+						<CustomDropZoneIcons />
+						<CustomDropZoneMessage>
+							Drag & drop to upload chord charts, tracks, etc.
+						</CustomDropZoneMessage>
+					</DropZone>
+					<DroppedFiles>
+						{fileNames.map((name, i) => (
+							<div key={`${name}_{i}`}>Dropped file: {name}</div>
+						))}
+					</DroppedFiles>
+				</>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## Basic
+
+<Canvas>
+	<Story name="Drop Zone Demo" args={{ children: 'Drop files' }}>
+		{args => {
+			const [fileNames, setFilenames] = useState([]);
+			const onDrop = useCallback(handleDrop(setFilenames), []);
+			return (
+				<>
+					<DropZone {...args} onDrop={onDrop} />
+					<DroppedFiles>
+						{fileNames.map((name, i) => (
+							<div key={`${name}_{i}`}>Dropped file: {name}</div>
+						))}
+					</DroppedFiles>
+				</>
+			);
+		}}
+	</Story>
+</Canvas>
+
+<ArgsTable story={'Drop Zone Demo'} />

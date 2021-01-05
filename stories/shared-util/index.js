@@ -1,4 +1,4 @@
-import { styledSystemProps, boxStyleProps } from './styled-systems-props';
+import { styledSystemProps, boxStyleProps, buttonStyleProps } from './styled-systems-props';
 
 const category = 'Styled-Systems';
 function getStyledSystemArgTypes(systemsList) {
@@ -57,5 +57,11 @@ const resetArgTypes = {
 	},
 };
 
-export { styledSystemProps, boxStyleProps, resetArgTypes, getStyledSystemArgTypes };
+export {
+	styledSystemProps,
+	boxStyleProps,
+	resetArgTypes,
+	getStyledSystemArgTypes,
+	buttonStyleProps,
+};
 export * from './components';

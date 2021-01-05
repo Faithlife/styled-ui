@@ -1,0 +1,136 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Stack } from '../../index';
+import { Button } from '../../index-v6';
+
+import { HelpBox } from '../../index';
+
+<Meta title="Components/Help Box" component={HelpBox} />
+
+# Help Box
+
+## Colors and Meaning
+
+<Stack spacing={3}>
+	<HelpBox handleClose={() => true}>
+		<HelpBox.Body>This is a helpful alert.</HelpBox.Body>
+		<HelpBox.Footer>
+			<Button variant="primary" size="small">
+				CTA
+			</Button>
+		</HelpBox.Footer>
+	</HelpBox>
+	<HelpBox danger handleClose={() => true}>
+		<HelpBox.Body>This is an error alert.</HelpBox.Body>
+		<HelpBox.Footer>
+			<Button variant="primary" size="small">
+				CTA
+			</Button>
+		</HelpBox.Footer>
+	</HelpBox>
+	<HelpBox success handleClose={() => true}>
+		<HelpBox.Body>This is a successful alert.</HelpBox.Body>
+		<HelpBox.Footer>
+			<Button variant="primary" size="small">
+				CTA
+			</Button>
+		</HelpBox.Footer>
+	</HelpBox>
+	<HelpBox warning handleClose={() => true}>
+		<HelpBox.Body>This is a cautious alert.</HelpBox.Body>
+		<HelpBox.Footer>
+			<Button variant="primary" size="small">
+				CTA
+			</Button>
+		</HelpBox.Footer>
+	</HelpBox>
+	<HelpBox minor handleClose={() => true}>
+		<HelpBox.Body>This is a minor alert.</HelpBox.Body>
+		<HelpBox.Footer>
+			<Button variant="primary" size="small">
+				CTA
+			</Button>
+		</HelpBox.Footer>
+	</HelpBox>
+</Stack>
+
+<Canvas>
+	<Story name="Helpbox Types">
+		{args => {
+			return (
+				<HelpBox {...args} handleClose={() => true}>
+					<HelpBox.Body>This is a helpful alert.</HelpBox.Body>
+					<HelpBox.Footer>
+						<Button variant="primary" size="small">
+							CTA
+						</Button>
+					</HelpBox.Footer>
+				</HelpBox>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## Variations
+
+<Canvas>
+	<Story name="Helpbox Variations" args={{ showLightBulb: true }}>
+		{args => {
+			return (
+				<Stack spacing={3}>
+					<HelpBox {...args} handleClose={() => true}>
+						This is an alert with a light bulb.
+					</HelpBox>
+					<HelpBox hideIcon handleClose={() => true}>
+						This alert has its icon hidden.
+					</HelpBox>
+					<HelpBox showRightIcon>This alert is showing its icon on both sides.</HelpBox>
+					<HelpBox stacked handleClose={() => true}>
+						<HelpBox.Body>This alert's contents are stacked.</HelpBox.Body>
+						<HelpBox.Footer>
+							<Button primary small>
+								CTA
+							</Button>
+						</HelpBox.Footer>
+					</HelpBox>
+					<HelpBox>
+						<HelpBox.Body>This alert doesn't handle closing.</HelpBox.Body>
+						<HelpBox.Footer>
+							<Button primary small>
+								CTA
+							</Button>
+						</HelpBox.Footer>
+					</HelpBox>
+				</Stack>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## Large alerts
+
+<Canvas>
+	<Story name="Large Alerts" args={{ large: true }}>
+		{args => {
+			return (
+				<Stack spacing={3}>
+					<HelpBox {...args} handleClose={() => true}>
+						This is a large alert.
+					</HelpBox>
+					<HelpBox showLightBulb large handleClose={() => true}>
+						This is a large alert with a light bulb.
+					</HelpBox>
+				</Stack>
+			);
+		}}
+	</Story>
+</Canvas>
+
+# Demo
+
+<Canvas>
+	<Story name="Helpbox Demo" args={{ children: 'ALERT!' }}>
+		{args => <HelpBox {...args} handleClose={() => true} />}
+	</Story>
+</Canvas>
+
+<ArgsTable story={'Helpbox Demo'} />

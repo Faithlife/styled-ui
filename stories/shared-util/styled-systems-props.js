@@ -180,3 +180,15 @@ export const boxStyleProps = [
 	styledSystemProps.space,
 	styledSystemProps.color,
 ];
+
+export const buttonStyleProps = [
+	styledSystemProps.border,
+	styledSystemProps.color,
+	styledSystemProps.flexbox,
+	styledSystemProps.layout,
+	styledSystemProps.position,
+	styledSystemProps.shadow,
+	styledSystemProps.space,
+	styledSystemProps.textStyle,
+	styledSystemProps.custom,
+];

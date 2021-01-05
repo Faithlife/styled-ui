@@ -1,0 +1,109 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { useArgs } from '@storybook/client-api';
+import * as dateFunctions from 'date-fns';
+import chrono from 'chrono-node';
+import { Text } from '../../index';
+import { DatePickerInputDemo } from './utils';
+
+import { DatePickerInput } from '../../index';
+
+<Meta
+	title="Components/Date Picker Input"
+	component={DatePickerInput}
+	subcomponents={{
+		DatePickerInputPopover: DatePickerInput.Popover,
+		DatePickerInputButton: DatePickerInput.Button,
+	}}
+/>
+
+# Date Picker Input
+
+This implementation uses functions from v2 of [date-fns](https://date-fns.org/) for the `dateFunctions` prop.
+
+<Canvas>
+	<Story name="Date Picker Input" args={{ defaultSelectedDate: new Date() }}>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<DatePickerInputDemo>
+					<Text>
+						{args.selectedDate
+							? `The selected date is ${dateFunctions.format(args.selectedDate, 'MM-dd-yyyy')}`
+							: 'No selected date'}
+					</Text>
+					<DatePickerInput
+						{...args}
+						onChange={selectedDate => updateArgs({ selectedDate })}
+						dateFunctions={dateFunctions}
+						parseUserDateString={str => chrono.parseDate(str)}
+						validate={() => true}
+					/>
+				</DatePickerInputDemo>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## Custom props on Date Picker
+
+Extra props on the DatePicker Input will be passed to the Input. Useful for adding IDs to assign labels.  
+Additional config components can be used to pass props to the button and popover.
+
+<Canvas>
+	<Story
+		name="Date Picker Input Children"
+		args={{ defaultSelectedDate: new Date(), color: 'green4' }}
+	>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<DatePickerInputDemo>
+					<Text as="label" htmlFor="date-picker-input">
+						{args.selectedDate
+							? `The selected date is ${dateFunctions.format(args.selectedDate, 'MM-dd-yyyy')}`
+							: 'No selected date'}
+					</Text>
+					<DatePickerInput
+						id="date-picker-input"
+						selectedDate={args.selectedDate}
+						onChange={selectedDate => updateArgs({ selectedDate })}
+						dateFunctions={dateFunctions}
+						parseUserDateString={str => chrono.parseDate(str)}
+						validate={() => true}
+					>
+						<DatePickerInput.Button {...args} />
+						<DatePickerInput.Popover container="body" placement="left-start" />
+					</DatePickerInput>
+				</DatePickerInputDemo>
+			);
+		}}
+	</Story>
+</Canvas>
+
+# Date Picker Input Demo
+
+<Canvas>
+	<Story name="Date Picker Input Demo" args={{ defaultSelectedDate: new Date() }}>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<DatePickerInputDemo>
+					<Text>
+						{args.selectedDate
+							? `The selected date is ${dateFunctions.format(args.selectedDate, 'MM-dd-yyyy')}`
+							: 'No selected date'}
+					</Text>
+					<DatePickerInput
+						{...args}
+						onChange={selectedDate => updateArgs({ selectedDate })}
+						dateFunctions={dateFunctions}
+						parseUserDateString={str => chrono.parseDate(str)}
+						validate={() => true}
+					/>
+				</DatePickerInputDemo>
+			);
+		}}
+	</Story>
+</Canvas>
+
+<ArgsTable story={'Date Picker Input Demo'} />

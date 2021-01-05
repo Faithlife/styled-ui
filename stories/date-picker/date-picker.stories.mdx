@@ -1,0 +1,191 @@
+import { useRef, useState } from 'react';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { useArgs } from '@storybook/client-api';
+import * as dateFunctions from 'date-fns';
+import { Button, Popover } from '../../index-v6';
+import { Text } from '../../index';
+import { DatePickerDemo } from './utils';
+
+import { DatePicker, DatePeriodPicker } from '../../index';
+
+<Meta title="Components/Date Picker" component={DatePicker} subcomponents={{ DatePeriodPicker }} />
+
+# Date Picker
+
+This implementation uses functions from v2 of [date-fns](https://date-fns.org/) for the `dateFunctions` prop.
+
+<Canvas>
+	<Story name="Date Picker">
+		{args => {
+			const [, updateArgs] = useArgs();
+			const [isOpen, setIsOpen] = useState(false);
+			const ref = useRef();
+			return (
+				<DatePickerDemo>
+					<Text>
+						{args.selectedDate
+							? `The selected date is ${dateFunctions.format(args.selectedDate, 'MM-dd-yyyy')}`
+							: 'No selected date'}
+					</Text>
+					<Button ref={ref} onClick={() => setIsOpen(state => !state)}>
+						Select Date
+					</Button>
+					{isOpen && (
+						<Popover reference={ref} placement="bottom" onFocusAway={() => setIsOpen(false)}>
+							<DatePicker
+								{...args}
+								setSelectedDate={date => updateArgs({ selectedDate: date })}
+								dateFunctions={dateFunctions}
+								validate={() => true}
+							/>
+						</Popover>
+					)}
+				</DatePickerDemo>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## Date Range Picker
+
+<Canvas>
+	<Story name="Date Range Picker" args={{ asDateRangePicker: true }}>
+		{args => {
+			const [, updateArgs] = useArgs();
+			const [isOpen, setIsOpen] = useState(false);
+			const ref = useRef();
+			return (
+				<DatePickerDemo>
+					<Text>
+						{args.selectedDateRange
+							? `The selected date range is ${dateFunctions.format(
+									args.selectedDateRange.start,
+									'MM-dd-yyyy',
+							  )} to ${dateFunctions.format(args.selectedDateRange.end, 'MM-dd-yyyy')}`
+							: 'No selected date range'}
+					</Text>
+					<Button ref={ref} onClick={() => setIsOpen(state => !state)}>
+						Select Date
+					</Button>
+					{isOpen && (
+						<Popover reference={ref} placement="bottom" onFocusAway={() => setIsOpen(false)}>
+							<DatePicker
+								{...args}
+								setSelectedDate={dateRange => updateArgs({ selectedDateRange: dateRange })}
+								dateFunctions={dateFunctions}
+								validate={() => true}
+							/>
+						</Popover>
+					)}
+				</DatePickerDemo>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## Date Period Picker
+
+<Canvas>
+	<Story name="Date Period Picker">
+		{args => {
+			const [, updateArgs] = useArgs();
+			const [isOpen, setIsOpen] = useState(false);
+			const ref = useRef();
+			return (
+				<DatePickerDemo>
+					<Text>
+						{args.selectedDateRange
+							? `The selected date range is ${dateFunctions.format(
+									args.selectedDateRange.start,
+									'MM-dd-yyyy',
+							  )} to ${dateFunctions.format(args.selectedDateRange.end, 'MM-dd-yyyy')}`
+							: 'No selected date range'}
+					</Text>
+					<Button ref={ref} onClick={() => setIsOpen(state => !state)}>
+						Select Date
+					</Button>
+					{isOpen && (
+						<Popover reference={ref} placement="bottom" onFocusAway={() => setIsOpen(false)}>
+							<DatePeriodPicker
+								{...args}
+								setSelectedDate={dateRange => updateArgs({ selectedDateRange: dateRange })}
+								dateFunctions={dateFunctions}
+								validate={date => date >= new Date(1970, 0, 1)}
+								parseDate={dateFunctions.parse}
+								datePeriods={[
+									{
+										displayName: 'Last 7 Days',
+										dateRange: { start: dateFunctions.addDays(new Date(), -7), end: new Date() },
+									},
+									{
+										displayName: 'Last 30 Days',
+										dateRange: { start: dateFunctions.addDays(new Date(), -30), end: new Date() },
+									},
+									{
+										displayName: 'Last 90 Days',
+										dateRange: { start: dateFunctions.addDays(new Date(), -90), end: new Date() },
+									},
+								]}
+							/>
+						</Popover>
+					)}
+				</DatePickerDemo>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## Date Picker Demo
+
+<Canvas>
+	<Story name="Date Picker Demo">
+		{args => {
+			const [, updateArgs] = useArgs();
+			const [isOpen, setIsOpen] = useState(false);
+			const ref = useRef();
+			return (
+				<DatePickerDemo>
+					<Text>
+						{args.asDateRangePicker
+							? `${
+									args.selectedDateRange
+										? `The selected date range is ${dateFunctions.format(
+												args.selectedDateRange.start,
+												'MM-dd-yyyy',
+										  )} to ${dateFunctions.format(args.selectedDateRange.end, 'MM-dd-yyyy')}`
+										: 'No selected date range'
+							  }`
+							: `${
+									args.selectedDate
+										? `The selected date is ${dateFunctions.format(
+												args.selectedDate,
+												'MM-dd-yyyy',
+										  )}`
+										: 'No selected date'
+							  }`}
+					</Text>
+					<Button ref={ref} onClick={() => setIsOpen(state => !state)}>
+						Select Date
+					</Button>
+					{isOpen && (
+						<Popover reference={ref} placement="bottom" onFocusAway={() => setIsOpen(false)}>
+							<DatePicker
+								{...args}
+								setSelectedDate={date =>
+									updateArgs(
+										args.asDateRangePicker ? { selectedDateRange: date } : { selectedDate: date },
+									)
+								}
+								dateFunctions={dateFunctions}
+								validate={date => date >= new Date(1970, 0, 1)}
+								parseDate={dateFunctions.parse}
+							/>
+						</Popover>
+					)}
+				</DatePickerDemo>
+			);
+		}}
+	</Story>
+</Canvas>
+
+<ArgsTable story={'Date Picker Demo'} />

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 import { GearIcon } from '../../components/icons';
-import { resetArgTypes, getStyledSystemArgTypes, styledSystemProps } from '../shared-util';
+import { resetArgTypes, getStyledSystemArgTypes, buttonStyleProps } from '../shared-util';
 import { ButtonDemo, commonArgTypes } from './util';
 
 import { Button, SegmentedButtonGroup } from '../../index-v6';
@@ -197,17 +197,7 @@ Pass an array of sizes corresponding to breakpoints.
 		args={{ variant: 'primary', size: 'medium', children: 'Button' }}
 		argTypes={{
 			...commonArgTypes,
-			...getStyledSystemArgTypes([
-				styledSystemProps.border,
-				styledSystemProps.color,
-				styledSystemProps.flexbox,
-				styledSystemProps.layout,
-				styledSystemProps.position,
-				styledSystemProps.shadow,
-				styledSystemProps.space,
-				styledSystemProps.textStyle,
-				styledSystemProps.custom,
-			]),
+			...getStyledSystemArgTypes(buttonStyleProps),
 		}}
 	>
 		{({ children, ...args }) => <Button {...args}>{children}</Button>}
