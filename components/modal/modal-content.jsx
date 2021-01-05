@@ -10,6 +10,7 @@ export const ModalContent = ({ paddingY, maxHeight, children, ...props }) => {
 	return (
 		<ThemedBox
 			paddingY={paddingY ?? contentPadding}
+			height="100%"
 			maxHeight={maxHeight ? maxHeight : fullscreen ? '100vh' : 'calc(100vh - 150px)'}
 		>
 			<Box
