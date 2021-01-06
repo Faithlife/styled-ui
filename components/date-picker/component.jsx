@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Caret } from '../icons';
-import { colors } from '../shared-styles';
+import { theme } from '../../theme';
+import { DefaultThemeProvider } from '../DefaultThemeProvider';
 import { dateFunctionProps } from './date-function-props';
 import { common, typography } from '../../theme/system';
 import * as Styled from './styled';
@@ -129,63 +130,65 @@ export class DatePicker extends Component {
 		const { currentMonth, weeks } = this.state;
 
 		return (
-			<Styled.Container>
-				<Styled.Header>
-					<Styled.ChangeMonth
-						onClick={this.decrementMonth}
-						visuallyDisabled={!this.canDecrementMonth(weeks)}
-						tabIndex="0"
-					>
-						<Caret
-							style={{
-								transform: 'scaleX(-1)',
-								color: colors.gray66,
-								visibility: this.canDecrementMonth(weeks) ? 'visible' : 'hidden',
-							}}
-						/>
-					</Styled.ChangeMonth>
+			<DefaultThemeProvider>
+				<Styled.Container>
+					<Styled.Header>
+						<Styled.ChangeMonth
+							onClick={this.decrementMonth}
+							visuallyDisabled={!this.canDecrementMonth(weeks)}
+							tabIndex="0"
+						>
+							<Caret
+								style={{
+									transform: 'scaleX(-1)',
+									color: theme.colors.gray66,
+									visibility: this.canDecrementMonth(weeks) ? 'visible' : 'hidden',
+								}}
+							/>
+						</Styled.ChangeMonth>
 
-					<Styled.MonthLabel>{dateFunctions.format(currentMonth, 'MMMM yyyy')}</Styled.MonthLabel>
-					<Styled.ChangeMonth
-						onClick={this.incrementMonth}
-						visuallyDisabled={!this.canIncrementMonth(weeks)}
-						tabIndex="0"
-					>
-						<Caret
-							style={{
-								color: colors.gray66,
-								visibility: this.canIncrementMonth(weeks) ? 'visible' : 'hidden',
-							}}
-						/>
-					</Styled.ChangeMonth>
-				</Styled.Header>
-				<Styled.Week>
-					<Styled.WeekDay>S</Styled.WeekDay>
-					<Styled.WeekDay>M</Styled.WeekDay>
-					<Styled.WeekDay>T</Styled.WeekDay>
-					<Styled.WeekDay>W</Styled.WeekDay>
-					<Styled.WeekDay>T</Styled.WeekDay>
-					<Styled.WeekDay>F</Styled.WeekDay>
-					<Styled.WeekDay>S</Styled.WeekDay>
-				</Styled.Week>
-				<Styled.Month>
-					{weeks.map(week => (
-						<CalendarWeek
-							currentMonth={dateFunctions.getMonth(currentMonth)}
-							days={week}
-							key={`week-${week[0]}`}
-							selectedDate={asDateRangePicker ? null : selectedDate}
-							selectedDateRange={asDateRangePicker ? selectedDateRange : null}
-							asDateRangePicker={asDateRangePicker}
-							setSelectedDate={this.setSelectedDate}
-							validate={validate}
-							dateFunctions={dateFunctions}
-							minDate={minDate}
-							maxDate={maxDate}
-						/>
-					))}
-				</Styled.Month>
-			</Styled.Container>
+						<Styled.MonthLabel>{dateFunctions.format(currentMonth, 'MMMM yyyy')}</Styled.MonthLabel>
+						<Styled.ChangeMonth
+							onClick={this.incrementMonth}
+							visuallyDisabled={!this.canIncrementMonth(weeks)}
+							tabIndex="0"
+						>
+							<Caret
+								style={{
+									color: theme.colors.gray66,
+									visibility: this.canIncrementMonth(weeks) ? 'visible' : 'hidden',
+								}}
+							/>
+						</Styled.ChangeMonth>
+					</Styled.Header>
+					<Styled.Week>
+						<Styled.WeekDay>S</Styled.WeekDay>
+						<Styled.WeekDay>M</Styled.WeekDay>
+						<Styled.WeekDay>T</Styled.WeekDay>
+						<Styled.WeekDay>W</Styled.WeekDay>
+						<Styled.WeekDay>T</Styled.WeekDay>
+						<Styled.WeekDay>F</Styled.WeekDay>
+						<Styled.WeekDay>S</Styled.WeekDay>
+					</Styled.Week>
+					<Styled.Month>
+						{weeks.map(week => (
+							<CalendarWeek
+								currentMonth={dateFunctions.getMonth(currentMonth)}
+								days={week}
+								key={`week-${week[0]}`}
+								selectedDate={asDateRangePicker ? null : selectedDate}
+								selectedDateRange={asDateRangePicker ? selectedDateRange : null}
+								asDateRangePicker={asDateRangePicker}
+								setSelectedDate={this.setSelectedDate}
+								validate={validate}
+								dateFunctions={dateFunctions}
+								minDate={minDate}
+								maxDate={maxDate}
+							/>
+						))}
+					</Styled.Month>
+				</Styled.Container>
+			</DefaultThemeProvider>
 		);
 	}
 }
