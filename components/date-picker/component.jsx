@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Caret } from '../icons';
 import { colors } from '../shared-styles';
 import { dateFunctionProps } from './date-function-props';
+import { common, typography } from '../../theme/system';
 import * as Styled from './styled';
 import { CalendarWeek } from './calendar-week';
 
@@ -55,6 +56,8 @@ export class DatePicker extends Component {
 		dateFunctions: dateFunctionProps,
 		minDate: PropTypes.instanceOf(Date),
 		maxDate: PropTypes.instanceOf(Date),
+		...common.propTypes,
+		...typography.propTypes,
 	};
 
 	UNSAFE_componentWillMount() {
@@ -126,7 +129,7 @@ export class DatePicker extends Component {
 		const { currentMonth, weeks } = this.state;
 
 		return (
-			<Fragment>
+			<Styled.Container>
 				<Styled.Header>
 					<Styled.ChangeMonth
 						onClick={this.decrementMonth}
@@ -182,7 +185,7 @@ export class DatePicker extends Component {
 						/>
 					))}
 				</Styled.Month>
-			</Fragment>
+			</Styled.Container>
 		);
 	}
 }
