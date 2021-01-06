@@ -4,6 +4,7 @@ import styledSystemPropTypes from '@styled-system/prop-types';
 import styled from 'styled-components';
 import { getConfigChild } from '../utils';
 import { Text } from '../Text';
+import { common } from '../../theme/system';
 import * as Styled from './styled';
 
 export function CheckboxContent({ isChecked, title, disabled, children, ...otherProps }) {
@@ -30,8 +31,8 @@ CheckboxContent.propTypes = {
 	title: PropTypes.string,
 	isChecked: PropTypes.oneOf([true, false, 'mixed']),
 	disabled: PropTypes.bool,
+	...common.propTypes,
 	...styledSystemPropTypes.position,
-	...styledSystemPropTypes.space,
 	...styledSystemPropTypes.layout,
 };
 
@@ -41,8 +42,8 @@ CheckboxContent.propTypes = {
  */
 export const CheckboxBox = props => null;
 CheckboxBox.propTypes = {
+	...common.propTypes,
 	...styledSystemPropTypes.position,
-	...styledSystemPropTypes.space,
 	...styledSystemPropTypes.layout,
 };
 CheckboxBox.childConfigComponent = 'CheckboxBox';
