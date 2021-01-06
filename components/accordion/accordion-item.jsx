@@ -46,4 +46,6 @@ AccordionItem.propTypes = {
 	children: PropTypes.node.isRequired,
 	/** This is supplied by the Accordion component. */
 	index: PropTypes.number,
+	/** If `true`, the item will remain permanenty expanded. */
+	pinned: PropTypes.bool,
 };
