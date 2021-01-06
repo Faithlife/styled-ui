@@ -141,6 +141,8 @@ const SegmentedButtonGroup = styled(Box).attrs(({ border }) => ({
 			border-bottom-right-radius: 0;
 		}
 	}
+
+	${typography}
 `;
 
 export { Button, SegmentedButtonGroup };
