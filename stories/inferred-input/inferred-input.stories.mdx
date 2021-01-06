@@ -1,0 +1,75 @@
+import { useState } from 'react';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { useArgs } from '@storybook/client-api';
+import { Select } from '../../components/text-input-v2';
+
+import { InferredSelect, InferredText } from '../../components/text-input-v2';
+
+<Meta
+	title="Components/Inferred Input"
+	component={InferredSelect}
+	subcomponents={{ InferredText }}
+/>
+
+# Inferred Input
+
+A text input control with a clickable inline confidence indicator.
+
+<Canvas>
+	<Story name="Select Demo" args={{ confidence: 0.9, selected: '' }}>
+		{args => {
+			const [confirmed, setConfirmed] = useState(false);
+			const [, updateArgs] = useArgs();
+			return (
+				<>
+					<InferredSelect
+						{...args}
+						confidence={confirmed ? null : args.confirmed}
+						onConfirm={() => setConfirmed(true)}
+						renderSelect={({ inferred, DropdownIndicator }) => (
+							<Select
+								inferred={inferred}
+								components={DropdownIndicator && { DropdownIndicator }}
+								onChange={selected => {
+									updateArgs({ selected });
+									setConfirmed(true);
+								}}
+								options={[
+									{ value: 'washington', label: 'Washington' },
+									{ value: 'california', label: 'California' },
+									{ value: 'Texas', label: 'Texas' },
+								]}
+								placeholder="Choose a state..."
+								defaultValue={args.selected}
+							/>
+						)}
+					/>
+				</>
+			);
+		}}
+	</Story>
+</Canvas>
+
+<Canvas>
+	<Story name="Text Demo" args={{ confidence: 0.9, value: 'This value was guessed' }}>
+		{args => {
+			const [confirmed, setConfirmed] = useState(false);
+			const [, updateArgs] = useArgs();
+			return (
+				<>
+					<InferredText
+						{...args}
+						confidence={confirmed ? null : args.confidence}
+						onChange={e => {
+							updateArgs({ value: e.target.value });
+							setConfirmed(true);
+						}}
+						onConfirm={() => setConfirmed(true)}
+					/>
+				</>
+			);
+		}}
+	</Story>
+</Canvas>
+
+<ArgsTable story={'Text Demo'} />

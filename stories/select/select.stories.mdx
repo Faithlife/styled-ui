@@ -1,0 +1,250 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { useArgs } from '@storybook/client-api';
+import { fetchCommits } from './util';
+
+import {
+	Select,
+	CreatableSelect,
+	AsyncSelect,
+	AsyncCreatableSelect,
+	avatarComponents,
+} from '../../components/text-input-v2';
+
+<Meta
+	title="Components/Select"
+	component={Select}
+	subcomponents={{ CreatableSelect, AsyncSelect, AsyncCreatableSelect }}
+/>
+
+# Select
+
+✔ WAI ARIA Compliant
+
+`import { Select } from '@faithlife/styled-ui/dist/text-input-v2';`
+
+A typeahead control with keyboard navigation based on react-select.
+
+[Component documentation](https://github.com/JedWatson/react-select)
+
+<Canvas>
+	<Story
+		name="Example"
+		args={{
+			selection: '',
+			options: [
+				{ value: 'washington', label: 'Washington' },
+				{ value: 'california', label: 'California' },
+				{ value: 'Texas', label: 'Texas' },
+			],
+			placeholder: 'Choose a state...',
+		}}
+	>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<>
+					<div>Current selection: {args.selection}</div>
+					<Select
+						{...args}
+						value={args.selection}
+						onChange={({ value }) => {
+							updateArgs({ selection: value });
+						}}
+					/>
+				</>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## Without Search
+
+<Canvas>
+	<Story
+		name="Without Search"
+		args={{
+			selection: '',
+			options: [
+				{ value: 'washington', label: 'Washington' },
+				{ value: 'california', label: 'California' },
+				{ value: 'Texas', label: 'Texas' },
+			],
+			placeholder: 'Choose a state...',
+			isSearchable: false,
+		}}
+	>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<>
+					<div>Current selection: {args.selection}</div>
+					<Select
+						{...args}
+						value={args.selection}
+						onChange={({ value }) => {
+							updateArgs({ selection: value });
+						}}
+					/>
+				</>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## Multi select
+
+<Canvas>
+	<Story
+		name="Multi Select"
+		args={{
+			selection: '',
+			options: [
+				{ value: 'washington', label: 'Washington' },
+				{ value: 'california', label: 'California' },
+				{ value: 'Texas', label: 'Texas' },
+			],
+			placeholder: 'Choose a state...',
+			isMulti: true,
+		}}
+	>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<>
+					<div>Current selection: {args.selection}</div>
+					<Select
+						{...args}
+						components={avatarComponents}
+						value={args.selection}
+						onChange={({ value }) => {
+							updateArgs({ selection: value });
+						}}
+					/>
+				</>
+			);
+		}}
+	</Story>
+</Canvas>
+
+## Avatar Select
+
+`import { Select, avatarComponents } from '../../components/text-input-v2';`
+
+<Canvas>
+	<Story
+		name="Avatar Select"
+		args={{
+			selection: '',
+			options: [
+				{ value: 'washington', label: 'Washington' },
+				{ value: 'california', label: 'California' },
+				{ value: 'Texas', label: 'Texas' },
+			],
+			placeholder: 'Search for commits',
+		}}
+	>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<Select
+					{...args}
+					components={avatarComponents}
+					value={args.selection}
+					onChange={({ value }) => {
+						updateArgs({ selection: value });
+					}}
+				/>
+			);
+		}}
+	</Story>
+</Canvas>
+
+# Custom Entries with CreatableSelect
+
+<Canvas>
+	<Story
+		name="Custom Entries"
+		args={{
+			selection: '',
+			options: [
+				{ value: 'washington', label: 'Washington' },
+				{ value: 'california', label: 'California' },
+				{ value: 'Texas', label: 'Texas' },
+			],
+			placeholder: 'Choose a state...',
+			isMulti: true,
+		}}
+	>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<>
+					<div>Current selection: {args.selection}</div>
+					<CreatableSelect
+						{...args}
+						onChange={({ value }) => {
+							updateArgs({ selection: value });
+						}}
+					/>
+				</>
+			);
+		}}
+	</Story>
+</Canvas>
+
+# Async Select
+
+<Canvas>
+	<Story
+		name="Async Select"
+		args={{
+			selection: '',
+			options: [
+				{ value: 'washington', label: 'Washington' },
+				{ value: 'california', label: 'California' },
+				{ value: 'Texas', label: 'Texas' },
+			],
+			placeholder: 'Search for commits',
+			isMulti: true,
+			defaultOptions: true,
+			debounceInterval: 200,
+		}}
+	>
+		{args => <AsyncCreatableSelect {...args} loadOptions={fetchCommits} />}
+	</Story>
+</Canvas>
+
+# Demo
+
+<Canvas>
+	<Story
+		name="Select Demo"
+		args={{
+			selection: '',
+			options: [
+				{ value: 'washington', label: 'Washington' },
+				{ value: 'california', label: 'California' },
+				{ value: 'Texas', label: 'Texas' },
+			],
+			placeholder: 'Choose a state...',
+		}}
+	>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<>
+					<div>Current selection: {args.selection}</div>
+					<Select
+						{...args}
+						value={args.selection}
+						onChange={({ value }) => {
+							updateArgs({ selection: value });
+						}}
+					/>
+				</>
+			);
+		}}
+	</Story>
+</Canvas>
+
+<ArgsTable story={'Select Demo'} />

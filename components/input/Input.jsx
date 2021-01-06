@@ -7,6 +7,40 @@ import { theme } from '../../theme';
 import { common, typography } from '../../theme/system';
 import { resetStyles, getVariation } from '../utils';
 
+export const inputVariants = {
+	small: {
+		paddingX: 3,
+		paddingY: 2,
+		height: '32px',
+	},
+	medium: {
+		paddingX: 4,
+		paddingY: 3,
+		height: '40px',
+	},
+	large: {
+		paddingX: 5,
+		paddingY: 4,
+		height: '56px',
+	},
+	inline: {
+		backgroundColor: 'transparent',
+		border: 'none',
+		boxShadow: 'none',
+		borderRadius: 0,
+		padding: 0,
+		borderBottom: '2px solid',
+		borderColor: 'blue',
+		height: '20px',
+		paddingBottom: '4px',
+		lineHeight: 1,
+		'&:focus': {
+			boxShadow: 'none',
+			outline: '0',
+		},
+	},
+};
+
 const Input = React.memo(
 	React.forwardRef(function Input(props, ref) {
 		const {
@@ -170,39 +204,7 @@ const StyledInput = styled.input(
 	}
 
 	${createVariant({
-		variants: {
-			small: {
-				paddingX: 3,
-				paddingY: 2,
-				height: '32px',
-			},
-			medium: {
-				paddingX: 4,
-				paddingY: 3,
-				height: '40px',
-			},
-			large: {
-				paddingX: 5,
-				paddingY: 4,
-				height: '56px',
-			},
-			inline: {
-				backgroundColor: 'transparent',
-				border: 'none',
-				boxShadow: 'none',
-				borderRadius: 0,
-				padding: 0,
-				borderBottom: '2px solid',
-				borderColor: 'blue',
-				height: '20px',
-				paddingBottom: '4px',
-				lineHeight: 1,
-				'&:focus': {
-					boxShadow: 'none',
-					outline: '0',
-				},
-			},
-		},
+		variants: inputVariants,
 	})}
 
 	${variant === 'inline' && system({ underlineColor: { property: 'border-color', scale: 'colors' } })}

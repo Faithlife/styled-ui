@@ -1,0 +1,135 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { useArgs } from '@storybook/client-api';
+import { getStyledSystemArgTypes, resetArgTypes } from '../shared-util';
+import { Stack } from '../../index';
+import { commonStyles } from './util';
+
+import { Input, FilterInput, NumberInput } from '../../index';
+
+<Meta
+	title="Components/Input"
+	component={Input}
+	subcomponents={{ FilterInput, NumberInput }}
+	argTypes={getStyledSystemArgTypes(commonStyles)}
+/>
+
+# Input
+
+✔ Styled-Systems Compliant  
+✔ WAI ARIA Compliant
+
+## Size Variants
+
+<Stack spacing={3}>
+	<Input variant="small" value="Small" />
+	<Input variant="medium" value="Medium" />
+	<Input variant="large" value="Large" />
+</Stack>
+
+<Canvas>
+	<Story
+		name="Input Sizes"
+		argTypes={resetArgTypes}
+		args={{ value: 'Washington', variant: 'small' }}
+	>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return <Input {...args} onChange={event => updateArgs({ value: event.target.value })} />;
+		}}
+	</Story>
+</Canvas>
+
+## Responsive Sizes
+
+<Canvas>
+	<Story
+		name="Input"
+		argTypes={{
+			...resetArgTypes,
+			variant: {
+				control: {
+					type: 'array',
+					separator: ',',
+				},
+			},
+		}}
+		args={{ value: 'Washington', variant: ['medium', 'small'] }}
+	>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return <Input {...args} onChange={event => updateArgs({ value: event.target.value })} />;
+		}}
+	</Story>
+</Canvas>
+
+## Select on Focus
+
+<Canvas>
+	<Story
+		name="Select on Focus"
+		argTypes={resetArgTypes}
+		args={{ value: 'Washington', variant: 'small', selectOnFocus: true }}
+	>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return <Input {...args} onChange={event => updateArgs({ value: event.target.value })} />;
+		}}
+	</Story>
+</Canvas>
+
+## Textarea
+
+<Canvas>
+	<Story name="Textarea" argTypes={resetArgTypes} args={{ value: 'Washington', textarea: true }}>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return <Input {...args} onChange={event => updateArgs({ value: event.target.value })} />;
+		}}
+	</Story>
+</Canvas>
+
+# FilterInput
+
+<Canvas>
+	<Story name="Filter Input" args={{ value: 'Washington', variant: 'medium', placeholder: 'Find' }}>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<FilterInput
+					{...args}
+					onChange={event => updateArgs({ value: event.target.value })}
+					onClear={() => updateArgs({ value: '' })}
+				/>
+			);
+		}}
+	</Story>
+</Canvas>
+
+# NumberInput
+
+<Canvas>
+	<Story
+		name="Number Input"
+		args={{ value: 'Washington', variant: 'medium', min: 0, max: 100, value: 42 }}
+	>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<NumberInput {...args} onChange={event => updateArgs({ value: event.target.value })} />
+			);
+		}}
+	</Story>
+</Canvas>
+
+# Demo
+
+<Canvas>
+	<Story name="Input Demo" args={{ value: 'Washington', variant: 'small' }}>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return <Input {...args} onChange={event => updateArgs({ value: event.target.value })} />;
+		}}
+	</Story>
+</Canvas>
+
+<ArgsTable story={'Input Demo'} />
