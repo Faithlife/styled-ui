@@ -5,6 +5,7 @@ import { Text } from '../Text';
 import { Box } from '../Box';
 import { UtilityButton } from '../button';
 import { ChevronRight, ChevronDown } from '../icons/12px';
+import { typography } from '../../theme/system';
 import { useAccordionContext, useAccordionItemContext } from './accordion-util';
 
 export function AccordionHeader({
@@ -56,7 +57,7 @@ export function AccordionHeader({
 	}, [headerId, focusableChildList]);
 
 	return (
-		<Box
+		<HeaderBox
 			display="flex"
 			gridArea="header"
 			borderTop={1}
@@ -117,7 +118,7 @@ export function AccordionHeader({
 					{renderCustomIndicator({ isExpanded, onExpansion: handleExpansion })}
 				</Box>
 			) : null}
-		</Box>
+		</HeaderBox>
 	);
 }
 
@@ -131,7 +132,10 @@ AccordionHeader.propTypes = {
 	/** Receives an isExpanded boolean value. */
 	renderCustomIndicator: PropTypes.func,
 	...Box.propTypes,
+	...typography.propTypes,
 };
+
+const HeaderBox = styled(Box)(typography);
 
 const Heading = styled.header.attrs(({ ariaLevel }) => ({
 	role: 'heading',

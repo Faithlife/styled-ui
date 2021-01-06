@@ -1,10 +1,12 @@
 import React, { useCallback, useMemo } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useId } from '../shared-hooks';
 import { Box } from '../Box';
+import { typography } from '../../theme/system';
 import { useAccordionContext, AccordionItemContextProvider } from './accordion-util';
 
-export function AccordionItem({ children, index, pinned: isPinned }) {
+export function AccordionItem({ children, index, pinned: isPinned, ...otherProps }) {
 	const { expandedSections, onExpansion } = useAccordionContext();
 
 	const isExpanded = expandedSections.includes(index);
@@ -29,15 +31,16 @@ export function AccordionItem({ children, index, pinned: isPinned }) {
 	);
 
 	return (
-		<Box
+		<ItemBox
 			display="grid"
 			gridTemplateAreas={`
 				'header'
 				'panel'
 			`}
+			{...otherProps}
 		>
 			<AccordionItemContextProvider value={context}>{children}</AccordionItemContextProvider>
-		</Box>
+		</ItemBox>
 	);
 }
 
@@ -48,4 +51,8 @@ AccordionItem.propTypes = {
 	index: PropTypes.number,
 	/** If `true`, the item will remain permanenty expanded. */
 	pinned: PropTypes.bool,
+	...Box.propTypes,
+	...typography.propTypes,
 };
+
+const ItemBox = styled(Box)(typography);

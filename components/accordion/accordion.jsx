@@ -5,6 +5,7 @@ import { system } from 'styled-system';
 import { propType as styledPropType } from '@styled-system/prop-types';
 import { Box } from '../Box';
 import { useKeyboardNav, AccordionContextProvider } from './accordion-util';
+import { typography } from '../../theme/system';
 import { Panel } from './accordion-panel';
 
 export function Accordion({
@@ -95,6 +96,7 @@ Accordion.propTypes = {
 	/** Overrides the `padding` style on all nested `Accordion.Panel`s */
 	panelPadding: styledPropType,
 	...Box.propTypes,
+	...typography.propTypes,
 };
 
 const AccordionBox = styled(Box)`
@@ -106,4 +108,6 @@ const AccordionBox = styled(Box)`
 			},
 		})}
 	}
+
+	${typography}
 `;
