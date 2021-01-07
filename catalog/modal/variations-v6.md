@@ -211,7 +211,7 @@ state: { modal: false, value: '' }
 		fullscreen
 	>
 		<Modal.Header title="Fullscreen modal" textStyle="h.24" />
-		<Modal.Content overflowY="auto">
+		<Modal.Content paddingBottom={0}>
 			{JSON.stringify(new Array(3000))}
 		</Modal.Content>
 	</Modal>
