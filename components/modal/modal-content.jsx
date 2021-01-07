@@ -6,14 +6,11 @@ import { useModalContext } from './use-modal-context';
 
 /** A flexible component built on styled-system primitives. */
 export const ModalContent = ({ paddingY, maxHeight, children, ...props }) => {
-	const { contentPadding, fullscreen } = useModalContext();
+	const { contentPadding } = useModalContext();
 	return (
-		<ThemedBox
-			paddingY={paddingY ?? contentPadding}
-			height="100%"
-			maxHeight={maxHeight ? maxHeight : fullscreen ? '100vh' : 'calc(100vh - 150px)'}
-		>
+		<ThemedBox paddingY={paddingY ?? contentPadding} display="grid" minHeight={0}>
 			<Box
+				minHeight={0}
 				maxWidth="100%"
 				width={['100vw', 'auto']}
 				css={`
@@ -21,7 +18,6 @@ export const ModalContent = ({ paddingY, maxHeight, children, ...props }) => {
 				`}
 				paddingX={contentPadding}
 				overflowY="auto"
-				height="100%"
 				{...props}
 			>
 				{children}

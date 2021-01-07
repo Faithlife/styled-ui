@@ -47,6 +47,7 @@ export const Modal = ({
 					width={fullscreen ? ['100vw', '90vw'] : ['100vw', 'fit-content']}
 					height={fullscreen ? ['100vh', '90vh'] : 'fit-content'}
 					maxWidth={['100%', 'calc(100% - 32px)']}
+					minHeight={0}
 					maxHeight={fullscreen ? '100%' : ['100%', 'calc(100% - 32px)']}
 					margin="auto"
 					borderRadius={1}
