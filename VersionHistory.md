@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.72.2
+
+- Fix `Accordion` proptype that was causing a warning.
+
 ## 5.72.1
 
 - Improved `Modal` overflow handling even further by relying on `display:grid` and `minHeight:0` instead of `height:100%`.
