@@ -5,10 +5,27 @@ import { ThemedBox } from '../ThemedBox';
 import { useModalContext } from './use-modal-context';
 
 /** A flexible component built on styled-system primitives. */
-export const ModalContent = ({ paddingY, maxHeight, children, ...props }) => {
+export const ModalContent = ({
+	padding,
+	paddingY,
+	paddingTop,
+	paddingBottom,
+	paddingX,
+	maxHeight,
+	children,
+	...props
+}) => {
 	const { contentPadding } = useModalContext();
+	const paddingForTop = paddingTop ?? paddingY ?? padding ?? contentPadding;
+	const paddingForBottom = paddingBottom ?? paddingY ?? padding ?? contentPadding;
+	const paddingForX = paddingX ?? padding ?? contentPadding;
 	return (
-		<ThemedBox paddingY={paddingY ?? contentPadding} display="grid" minHeight={0}>
+		<ThemedBox
+			paddingTop={paddingForTop}
+			paddingBottom={paddingForBottom}
+			display="grid"
+			minHeight={0}
+		>
 			<Box
 				minHeight={0}
 				maxWidth="100%"
@@ -16,7 +33,7 @@ export const ModalContent = ({ paddingY, maxHeight, children, ...props }) => {
 				css={`
 					overflow-wrap: break-word;
 				`}
-				paddingX={contentPadding}
+				paddingX={paddingForX}
 				overflowY="auto"
 				{...props}
 			>
