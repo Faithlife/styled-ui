@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.72.1
+
+- Improved `Modal` overflow handling even further by relying on `display:grid` and `minHeight:0` instead of `height:100%`.
+- Improved support for various padding props on `Modal.Content` components.
+
 ## 5.72.0
 
 - Added v6 `Accordion` component with Styled-System props.
