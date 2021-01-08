@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, thickness, fonts } from '../shared-styles';
+import { themeGet } from '@styled-system/theme-get';
 
 export const Container = styled.div`
 	display: flex;
@@ -12,25 +12,26 @@ export const Container = styled.div`
 		max-width: 324px;
 	}
 
-	padding: ${thickness.four} 0 ${thickness.twelve} 0;
+	padding: ${themeGet('space.2')} 0 ${themeGet('space.4')} 0;
 	overflow: hidden;
 `;
 
 export const DatePickerContainer = styled.div`
-	padding: ${thickness.eight};
+	padding: ${themeGet('space.3')};
 `;
 
 export const DatePeriod = styled.div`
-	font: ${fonts.ui14};
-	padding: ${thickness.eight};
-	background: ${colors.white};
+	${themeGet('textStyles.ui.14')}
+
+	padding: ${themeGet('space.3')};
+	background: ${themeGet('colors.datePeriodPicker.background')};
 	cursor: pointer;
 	width: 100%;
 	text-align: initial;
 
 	&:hover {
-		background: ${colors.blueBase};
-		color: ${colors.white};
+		background: ${themeGet('colors.datePeriodPicker.hoverBackground')};
+		color: ${themeGet('colors.datePeriodPicker.hoverText')};
 		transition: background 0.2s ease-out, color 0.2s ease-out;
 	}
 `;
@@ -38,8 +39,8 @@ export const DatePeriod = styled.div`
 export const DateInputContainer = styled.div`
 	display: flex;
 	flex-direction: row;
-	border-top: 1px solid ${colors.gray14};
-	padding: ${thickness.twelve} ${thickness.eight};
+	border-top: 1px solid ${themeGet('colors.datePeriodPicker.inputBorder')};
+	padding: ${themeGet('space.4')} ${themeGet('space.3')};
 `;
 
 export const Label = styled.label`
@@ -47,13 +48,14 @@ export const Label = styled.label`
 	text-align: initial;
 	display: flex;
 	flex-direction: column;
-	font: ${fonts.ui14};
+
+	${themeGet('textStyles.ui.14')}
 
 	&:first-of-type {
-		padding-right: ${thickness.eight};
+		padding-right: ${themeGet('space.3')};
 	}
 `;
 
 export const LabelText = styled.span`
-	padding-bottom: ${thickness.four};
+	padding-bottom: ${themeGet('space.2')};
 `;

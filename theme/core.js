@@ -209,6 +209,13 @@ colors.datePicker = {
 	weekBorder: colors.gray14,
 };
 
+colors.datePeriodPicker = {
+	background: colors.datePicker.background,
+	hoverBackground: colors.blue4,
+	hoverText: colors.white,
+	inputBorder: colors.datePicker.weekBorder,
+};
+
 colors.datePickerInput = {
 	iconColor: colors.gray52,
 };

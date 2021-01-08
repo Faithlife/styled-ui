@@ -4,6 +4,7 @@ import debounce from 'lodash.debounce';
 import { DatePicker } from '../date-picker';
 import { Input } from '../input';
 import { dateFunctionProps } from '../date-picker/date-function-props';
+import { DefaultThemeProvider } from '../DefaultThemeProvider';
 import * as Styled from './styled';
 
 const DATE_FORMAT_STRING = 'M/d/yyyy';
@@ -187,49 +188,51 @@ export class DatePeriodPicker extends PureComponent {
 		} = this.state;
 
 		return (
-			<Styled.Container>
-				{this.getUniqueDatePeriods().map(({ displayName, dateRange, originalIndex }) => (
-					<Styled.DatePeriod
-						key={displayName}
-						onClick={() => {
-							setSelectedDate(dateRange, originalIndex);
-						}}
-					>
-						{displayName}
-					</Styled.DatePeriod>
-				))}
-				<Styled.DateInputContainer>
-					<Styled.Label>
-						<Styled.LabelText>From</Styled.LabelText>
-						<Input
-							placeholder="mm/dd/yyyy"
-							value={start}
-							onChange={event => this.handleInputValueChange(event.target.value, 'start')}
-							small
+			<DefaultThemeProvider>
+				<Styled.Container>
+					{this.getUniqueDatePeriods().map(({ displayName, dateRange, originalIndex }) => (
+						<Styled.DatePeriod
+							key={displayName}
+							onClick={() => {
+								setSelectedDate(dateRange, originalIndex);
+							}}
+						>
+							{displayName}
+						</Styled.DatePeriod>
+					))}
+					<Styled.DateInputContainer>
+						<Styled.Label>
+							<Styled.LabelText>From</Styled.LabelText>
+							<Input
+								placeholder="mm/dd/yyyy"
+								value={start}
+								onChange={event => this.handleInputValueChange(event.target.value, 'start')}
+								small
+							/>
+						</Styled.Label>
+						<Styled.Label>
+							<Styled.LabelText>To</Styled.LabelText>
+							<Input
+								placeholder="mm/dd/yyyy"
+								value={end}
+								onChange={event => this.handleInputValueChange(event.target.value, 'end')}
+								small
+							/>
+						</Styled.Label>
+					</Styled.DateInputContainer>
+					<Styled.DatePickerContainer>
+						<DatePicker
+							asDateRangePicker
+							selectedDateRange={selectedDateRange}
+							setSelectedDate={dateRange =>
+								setSelectedDate(dateRange, this.getDatePeriodIndex(dateRange))
+							}
+							validate={validate}
+							dateFunctions={dateFunctions}
 						/>
-					</Styled.Label>
-					<Styled.Label>
-						<Styled.LabelText>To</Styled.LabelText>
-						<Input
-							placeholder="mm/dd/yyyy"
-							value={end}
-							onChange={event => this.handleInputValueChange(event.target.value, 'end')}
-							small
-						/>
-					</Styled.Label>
-				</Styled.DateInputContainer>
-				<Styled.DatePickerContainer>
-					<DatePicker
-						asDateRangePicker
-						selectedDateRange={selectedDateRange}
-						setSelectedDate={dateRange =>
-							setSelectedDate(dateRange, this.getDatePeriodIndex(dateRange))
-						}
-						validate={validate}
-						dateFunctions={dateFunctions}
-					/>
-				</Styled.DatePickerContainer>
-			</Styled.Container>
+					</Styled.DatePickerContainer>
+				</Styled.Container>
+			</DefaultThemeProvider>
 		);
 	}
 }
