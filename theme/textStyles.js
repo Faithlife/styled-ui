@@ -52,59 +52,59 @@ export const textStyles = {
 		'12': {
 			fontSize: '12px',
 			lineHeight: '16px',
-			fontWeight: fontWeights.normal,
+			fontWeight: fontWeights.regular,
 		},
 		'13': {
 			fontSize: '13px',
 			lineHeight: '18px',
-			fontWeight: fontWeights.normal,
+			fontWeight: fontWeights.regular,
 		},
 		'14': {
 			fontSize: '14px',
 			lineHeight: '20px',
-			fontWeight: fontWeights.normal,
+			fontWeight: fontWeights.regular,
 		},
 		'16': {
 			fontSize: '16px',
 			lineHeight: '22px',
-			fontWeight: fontWeights.normal,
+			fontWeight: fontWeights.regular,
 		},
 		'18': {
 			fontSize: '18px',
 			lineHeight: '24px',
-			fontWeight: fontWeights.normal,
+			fontWeight: fontWeights.regular,
 		},
 	},
 	ui: {
 		'12': {
 			fontSize: '12px',
 			lineHeight: '12px',
-			fontWeight: fontWeights.normal,
+			fontWeight: fontWeights.regular,
 		},
 		'13': {
 			fontSize: '13px',
 			lineHeight: '13px',
-			fontWeight: fontWeights.normal,
+			fontWeight: fontWeights.regular,
 		},
 		'14': {
 			fontSize: '14px',
 			lineHeight: '14px',
-			fontWeight: fontWeights.normal,
+			fontWeight: fontWeights.regular,
 		},
 		'16': {
 			fontSize: '16px',
 			lineHeight: '16px',
-			fontWeight: fontWeights.normal,
+			fontWeight: fontWeights.regular,
 		},
 		'18': {
 			fontSize: '18px',
 			lineHeight: '18px',
-			fontWeight: fontWeights.normal,
+			fontWeight: fontWeights.regular,
 		},
 		'24': {
 			fontSize: '24px',
 			lineHeight: '24px',
-			fontWeight: fontWeights.normal,
+			fontWeight: fontWeights.regular,
 		},
 	},
 };
