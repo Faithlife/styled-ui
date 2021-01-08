@@ -6,7 +6,7 @@ import { PlacementOptionsProps } from '../popover/popper-helpers';
 import { Calendar as CalendarIcon } from '../icons';
 import { Input } from '../input';
 import { dateFunctionProps } from '../date-picker/date-function-props';
-import { DatePicker } from '../date-picker/component';
+import { DatePicker } from '../date-picker';
 import * as Styled from './styled';
 
 /** Flexible date picker input (with support for many date parsing libraries) */
@@ -145,16 +145,15 @@ export function DatePickerInput({
 					}}
 					{...popoverProps}
 				>
-					<Styled.DateTime>
-						<DatePicker
-							selectedDate={currentDate ?? new Date()}
-							setSelectedDate={handleChangeSelectedDate}
-							validate={validate}
-							dateFunctions={dateFunctions}
-							minDate={minDate}
-							maxDate={maxDate}
-						/>
-					</Styled.DateTime>
+					<DatePicker
+						selectedDate={currentDate ?? new Date()}
+						setSelectedDate={handleChangeSelectedDate}
+						validate={validate}
+						dateFunctions={dateFunctions}
+						minDate={minDate}
+						maxDate={maxDate}
+						width="204px"
+					/>
 				</Popover>
 			)}
 		</Styled.Container>

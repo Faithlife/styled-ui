@@ -1,9 +1,5 @@
 import styled from 'styled-components';
-import { layout } from 'styled-system';
-import { themeGet } from '@styled-system/theme-get';
-import { common } from '../../theme/system';
-
-export const Container = styled.div(common, layout);
+import { colors } from '../shared-styles';
 
 export const ChangeMonth = styled.button`
 	display: flex;
@@ -18,8 +14,7 @@ export const ChangeMonth = styled.button`
 	cursor: pointer;
 
 	&:focus {
-		outline: ${({ visuallyDisabled }) =>
-			visuallyDisabled && `${themeGet('colors.datePicker.disabledOutline')} auto 1px`};
+		outline: ${({ visuallyDisabled }) => visuallyDisabled && `${colors.gray22} auto 1px`};
 	}
 `;
 
@@ -29,8 +24,8 @@ export const Header = styled.div`
 	align-items: center;
 	white-space: nowrap;
 	border-bottom: none;
-	background: ${themeGet('colors.datePicker.background')};
-	color: ${themeGet('colors.datePicker.header')};
+	background: ${colors.white};
+	color: ${colors.gray66};
 	line-height: 32px;
 	font-weight: bold;
 `;
@@ -41,12 +36,12 @@ export const MonthLabel = styled.div`
 
 export const Week = styled.ul`
 	display: flex;
-	border-bottom: 1px solid ${themeGet('colors.datePicker.weekBorder')};
+	border-bottom: 1px solid ${colors.gray14};
 	padding: 8px 0;
-	background: ${themeGet('colors.datePicker.background')};
+	background: ${colors.white};
 	list-style: none;
 	margin: 0;
-	color: ${themeGet('colors.datePicker.week')};
+	color: ${colors.gray22};
 	font-size: 12px;
 `;
 
@@ -57,7 +52,7 @@ export const WeekDay = styled.li`
 `;
 
 export const Month = styled.div`
-	background: ${themeGet('colors.datePicker.background')};
+	background: ${colors.white};
 	font-size: 14px;
 
 	@media (hover: none) {

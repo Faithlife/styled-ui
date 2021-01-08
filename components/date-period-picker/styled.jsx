@@ -16,10 +16,6 @@ export const Container = styled.div`
 	overflow: hidden;
 `;
 
-export const DatePickerContainer = styled.div`
-	padding: ${themeGet('space.3')};
-`;
-
 export const DatePeriod = styled.div`
 	${themeGet('textStyles.ui.14')}
 

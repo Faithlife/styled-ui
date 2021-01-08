@@ -220,17 +220,16 @@ export class DatePeriodPicker extends PureComponent {
 							/>
 						</Styled.Label>
 					</Styled.DateInputContainer>
-					<Styled.DatePickerContainer>
-						<DatePicker
-							asDateRangePicker
-							selectedDateRange={selectedDateRange}
-							setSelectedDate={dateRange =>
-								setSelectedDate(dateRange, this.getDatePeriodIndex(dateRange))
-							}
-							validate={validate}
-							dateFunctions={dateFunctions}
-						/>
-					</Styled.DatePickerContainer>
+					<DatePicker
+						asDateRangePicker
+						selectedDateRange={selectedDateRange}
+						setSelectedDate={dateRange =>
+							setSelectedDate(dateRange, this.getDatePeriodIndex(dateRange))
+						}
+						validate={validate}
+						dateFunctions={dateFunctions}
+						padding={3}
+					/>
 				</Styled.Container>
 			</DefaultThemeProvider>
 		);

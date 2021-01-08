@@ -9,7 +9,7 @@ export { Bootstrap } from './components/bootstrap';
 export { LegacyButton as Button, UtilityButton } from './components/button';
 export { LegacyCheckbox as Checkbox } from './components/check-box';
 export { Collapse } from './components/collapse';
-export { DatePicker } from './components/date-picker';
+export { LegacyDatePicker as DatePicker } from './components/date-picker';
 export { LegacyDatePickerInput as DatePickerInput } from './components/date-picker-input';
 export { DatePeriodPicker } from './components/date-period-picker';
 export { DropZone } from './components/drop-zone';

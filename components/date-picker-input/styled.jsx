@@ -26,7 +26,3 @@ export const CalendarButton = styled(UtilityButton).attrs(({ theme, color }) => 
 export const CalendarIconContainer = styled.div`
 	height: 18px; /* matches CalendarIcon */
 `;
-
-export const DateTime = styled.div`
-	width: 204px;
-`;
