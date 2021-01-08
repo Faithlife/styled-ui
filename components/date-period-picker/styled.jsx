@@ -23,6 +23,7 @@ export const DatePeriod = styled.div`
 	background: ${themeGet('colors.datePeriodPicker.background')};
 	cursor: pointer;
 	width: 100%;
+	box-sizing: border-box;
 	text-align: initial;
 
 	&:hover {
