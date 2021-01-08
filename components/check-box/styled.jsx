@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 import { position, layout } from 'styled-system';
+import { common } from '../../theme/system';
 import { resetStyles } from '../utils';
 import { Box } from '../Box';
-import { common, typography } from '../../theme/system';
 
 export const CheckboxDiv = styled(Box)`
 	display: inline;
@@ -67,7 +67,6 @@ export const CheckboxContainer = styled.button`
 	}
 
 	${common}
-	${typography}
 `;
 
 export const isCheckedStyles = css`

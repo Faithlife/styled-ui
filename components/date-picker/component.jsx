@@ -4,7 +4,7 @@ import { Caret } from '../icons';
 import { theme } from '../../theme';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 import { dateFunctionProps } from './date-function-props';
-import { common, typography } from '../../theme/system';
+import { common } from '../../theme/system';
 import * as Styled from './styled';
 import { CalendarWeek } from './calendar-week';
 
@@ -58,7 +58,6 @@ export class DatePicker extends Component {
 		minDate: PropTypes.instanceOf(Date),
 		maxDate: PropTypes.instanceOf(Date),
 		...common.propTypes,
-		...typography.propTypes,
 	};
 
 	UNSAFE_componentWillMount() {

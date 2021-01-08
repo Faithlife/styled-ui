@@ -1,9 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useId } from '../shared-hooks';
 import { Box } from '../Box';
-import { typography } from '../../theme/system';
 import { useAccordionContext, AccordionItemContextProvider } from './accordion-util';
 
 export function AccordionItem({ children, index, pinned: isPinned, ...otherProps }) {
@@ -31,7 +29,7 @@ export function AccordionItem({ children, index, pinned: isPinned, ...otherProps
 	);
 
 	return (
-		<ItemBox
+		<Box
 			display="grid"
 			gridTemplateAreas={`
 				'header'
@@ -40,7 +38,7 @@ export function AccordionItem({ children, index, pinned: isPinned, ...otherProps
 			{...otherProps}
 		>
 			<AccordionItemContextProvider value={context}>{children}</AccordionItemContextProvider>
-		</ItemBox>
+		</Box>
 	);
 }
 
@@ -52,7 +50,4 @@ AccordionItem.propTypes = {
 	/** If `true`, the item will remain permanenty expanded. */
 	pinned: PropTypes.bool,
 	...Box.propTypes,
-	...typography.propTypes,
 };
-
-const ItemBox = styled(Box)(typography);

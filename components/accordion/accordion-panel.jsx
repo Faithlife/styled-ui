@@ -6,7 +6,6 @@ import { Collapse } from '../collapse';
 import { Box } from '../Box';
 import { useAccordionItemContext } from './accordion-util';
 import { useAccordionContext } from './accordion-util';
-import { typography } from '../../theme/system';
 
 export function AccordionPanel({ children, mountOnEnter, unmountOnExit, ...props }) {
 	const ctx = useAccordionContext();
@@ -33,7 +32,6 @@ AccordionPanel.propTypes = {
 	/** true if panel contents should be unmounted when the section is closed **/
 	unmountOnExit: PropTypes.bool,
 	...Box.propTypes,
-	...typography.propTypes,
 };
 
 export const Panel = styled(Box).attrs(({ headerId, panelId }) => ({
@@ -53,5 +51,4 @@ export const Panel = styled(Box).attrs(({ headerId, panelId }) => ({
 			},
 		},
 	}),
-	typography,
 );

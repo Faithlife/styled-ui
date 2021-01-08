@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { themeGet } from '@styled-system/theme-get';
-import { common, typography } from '../../theme/system';
+import { common } from '../../theme/system';
 
-export const Container = styled.div(common, typography);
+export const Container = styled.div(common);
 
 export const ChangeMonth = styled.button`
 	display: flex;
