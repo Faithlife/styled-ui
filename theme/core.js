@@ -201,6 +201,14 @@ colors.checkbox = {
 	shadowFocused: colors.input.shadowFocused,
 };
 
+colors.datePicker = {
+	disabledOutline: colors.gray22,
+	background: colors.white,
+	header: colors.gray66,
+	week: colors.gray22,
+	weekBorder: colors.gray14,
+};
+
 colors.datePickerInput = {
 	iconColor: colors.gray52,
 };

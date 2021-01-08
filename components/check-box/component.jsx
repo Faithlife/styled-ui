@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { CheckboxContent } from './checkbox-content';
 import * as Styled from './styled';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
+import { common } from '../../theme/system';
 
 /** Styled checkbox control with consistent styling across platforms */
 export const Checkbox = function Checkbox({
@@ -67,6 +68,7 @@ Checkbox.propTypes = {
 	/** Disables automatic blur. */
 	disableAutoBlur: PropTypes.bool,
 	disabled: PropTypes.bool,
+	...common.propTypes,
 };
 
 Checkbox.defaultProps = {

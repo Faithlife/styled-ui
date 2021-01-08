@@ -8,6 +8,7 @@ const propTypes = {
 	...Transition.propTypes,
 	isOpen: PropTypes.bool,
 	children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+	...Box.propTypes,
 };
 
 const defaultProps = {

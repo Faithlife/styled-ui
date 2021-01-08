@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
-import { position, space, layout } from 'styled-system';
+import { position, layout } from 'styled-system';
+import { common } from '../../theme/system';
 import { resetStyles } from '../utils';
 import { Box } from '../Box';
 
@@ -19,8 +20,8 @@ export const CheckboxDiv = styled(Box)`
 			background-color: ${theme.colors.checkbox.disabledBackground};
 		`}
 
+	${common}
 	${position}
-	${space}
 	${layout}
 `;
 
@@ -64,6 +65,8 @@ export const CheckboxContainer = styled.button`
 			box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.checkbox.shadowFocused};
 		}
 	}
+
+	${common}
 `;
 
 export const isCheckedStyles = css`

@@ -4,7 +4,7 @@ import { useId } from '../shared-hooks';
 import { Box } from '../Box';
 import { useAccordionContext, AccordionItemContextProvider } from './accordion-util';
 
-export function AccordionItem({ children, index, pinned: isPinned }) {
+export function AccordionItem({ children, index, pinned: isPinned, ...otherProps }) {
 	const { expandedSections, onExpansion } = useAccordionContext();
 
 	const isExpanded = expandedSections.includes(index);
@@ -35,6 +35,7 @@ export function AccordionItem({ children, index, pinned: isPinned }) {
 				'header'
 				'panel'
 			`}
+			{...otherProps}
 		>
 			<AccordionItemContextProvider value={context}>{children}</AccordionItemContextProvider>
 		</Box>
@@ -46,4 +47,7 @@ AccordionItem.propTypes = {
 	children: PropTypes.node.isRequired,
 	/** This is supplied by the Accordion component. */
 	index: PropTypes.number,
+	/** If `true`, the item will remain permanenty expanded. */
+	pinned: PropTypes.bool,
+	...Box.propTypes,
 };
