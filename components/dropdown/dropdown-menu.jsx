@@ -1,6 +1,18 @@
 import React, { useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { Popover } from '../popover-v6';
 import { useDropdownContext, useKeyboardNavigate } from './utils';
+import { elementOfType } from '../utils';
+import {
+	MenuItem,
+	MenuItemCheckbox,
+	MenuItemLink,
+	MenuItemSeparator,
+	MenuItemIcon,
+	MenuItemPrimaryText,
+	MenuItemSecondaryText,
+	MenuItemTitle,
+} from './dropdown-children';
 import * as Styled from './styled';
 
 export function DropdownMenu({ children, ...popoverProps }) {
@@ -53,3 +65,19 @@ export function DropdownMenu({ children, ...popoverProps }) {
 		)
 	);
 }
+
+DropdownMenu.propTypes = {
+	children: PropTypes.arrayOf(
+		PropTypes.oneOfType([
+			elementOfType(MenuItem),
+			elementOfType(MenuItemCheckbox),
+			elementOfType(MenuItemLink),
+			elementOfType(MenuItemSeparator),
+			elementOfType(MenuItemIcon),
+			elementOfType(MenuItemPrimaryText),
+			elementOfType(MenuItemSecondaryText),
+			elementOfType(MenuItemTitle),
+		]),
+	),
+	...Popover.propTypes,
+};

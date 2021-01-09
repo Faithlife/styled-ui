@@ -4,6 +4,7 @@ export { TransitionStatuses, TransitionTimeouts } from './transition-group-utils
 export { filterProps } from './filter-props';
 export { deprecate, deprecateComponent, deprecateProp } from './deprecate';
 export { getConfigProps, getConfigChild } from './get-config-props';
+export { elementOfType } from './prop-types';
 
 /**
  * Chooses the correct variant from a main variant prop and a set of boolean shortcut props.

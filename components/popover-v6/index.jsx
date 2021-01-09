@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { usePopper } from 'faithlife-react-popper';
 import { useFocusAwayHandler } from '../shared-hooks/use-focus-away-handler';
 import { mergeRefs } from '../utils/merge-refs';
+import { box } from '../../theme/system';
 import { PopoverContainer, PopoverArrow } from './styled';
 
 export function usePopover(reference, options) {
@@ -99,4 +100,6 @@ Popover.propTypes = {
 	hideArrow: PropTypes.bool,
 	/** handler useful for closing popover when clicking away */
 	onFocusAway: PropTypes.func,
+	children: PropTypes.node.required,
+	...box.propTypes,
 };

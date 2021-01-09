@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { getConfigChild } from '../utils';
 import { Button, SegmentedButtonGroup } from '../button';
 import { useDropdownContext, useKeyboardActivate } from './utils';
@@ -69,6 +70,23 @@ DropdownToggle.defaultProps = {
 	size: 'small',
 	variant: 'primary',
 };
+DropdownToggle.propTypes = {
+	hideCarrot: PropTypes.bool,
+	size: PropTypes.oneOf(['small', 'medium', 'large']),
+	variant: PropTypes.oneOf([
+		'primary',
+		'secondary',
+		'minor',
+		'transparent',
+		'minorTransparent',
+		'link',
+		'danger',
+		'dangerSpecial',
+	]),
+	disabled: PropTypes.bool,
+	children: PropTypes.node.isRequired,
+	...Button.propTypes,
+};
 
 export function DropdownActionButton({
 	defaultSize,
@@ -84,3 +102,19 @@ export function DropdownActionButton({
 	);
 }
 DropdownActionButton.childConfigComponent = 'DropdownActionButton';
+DropdownActionButton.propTypes = {
+	defaultSize: PropTypes.oneOf(['small', 'medium', 'large']),
+	defaultVariant: PropTypes.oneOf([
+		'primary',
+		'secondary',
+		'minor',
+		'transparent',
+		'minorTransparent',
+		'link',
+		'danger',
+		'dangerSpecial',
+	]),
+	defaultDisabled: PropTypes.bool,
+	children: PropTypes.element.isRequired,
+	...Button.propTypes,
+};

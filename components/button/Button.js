@@ -1,12 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { variant, layout, flexbox, position, textStyle, border, background } from 'styled-system';
+import styledSystemPropTypes from '@styled-system/prop-types';
 import 'focus-visible';
 import { Box } from '../Box';
 import { common, typography } from '../../theme/system';
 import { buttonSizes, buttons } from '../../theme/buttons';
 import { theme } from '../../theme';
 import { LoadingSpinner } from '../loading-spinner';
+import { elementOfType } from '../utils';
 
 const sizeVariant = variant({
 	prop: 'size',
@@ -113,6 +116,33 @@ const Button = React.forwardRef(
 	),
 );
 
+Button.propTypes = {
+	children: PropTypes.node,
+	icon: PropTypes.element,
+	disabled: PropTypes.bool,
+	loading: PropTypes.bool,
+	active: PropTypes.bool,
+	size: PropTypes.oneOf(['small', 'medium', 'large']),
+	variant: PropTypes.oneOf([
+		'primary',
+		'secondary',
+		'minor',
+		'transparent',
+		'minorTransparent',
+		'link',
+		'danger',
+		'dangerSpecial',
+	]),
+	...common.propTypes,
+	...typography.propTypes,
+	...styledSystemPropTypes.textStyle,
+	...styledSystemPropTypes.layout,
+	...styledSystemPropTypes.flexbox,
+	...styledSystemPropTypes.position,
+	...styledSystemPropTypes.border,
+	...styledSystemPropTypes.background,
+};
+
 const SegmentedButtonGroup = styled(Box).attrs(({ border }) => ({
 	border: border ?? 1,
 	borderColor: 'button.segmentedButtonGroupBorder',
@@ -142,5 +172,10 @@ const SegmentedButtonGroup = styled(Box).attrs(({ border }) => ({
 		}
 	}
 `;
+
+SegmentedButtonGroup.propTypes = {
+	children: PropTypes.arrayOf(elementOfType(Button)),
+	...Box.propTypes,
+};
 
 export { Button, SegmentedButtonGroup };

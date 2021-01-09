@@ -1,8 +1,10 @@
 import React, { useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { getConfigChild } from '../utils';
 import { Box } from '../Box';
 import { Text } from '../Text';
 import { Checkbox } from '../check-box';
+import { UtilityButton } from '../button';
 import { handledKeys, useDropdownContext } from './utils';
 import * as Styled from './styled';
 
@@ -25,6 +27,12 @@ export function MenuItemIcon({ src, variant, children, ...iconProps }) {
 MenuItemIcon.defaultProps = {
 	variant: 'icon',
 };
+MenuItemIcon.propTypes = {
+	src: PropTypes.string,
+	variant: PropTypes.oneOf(['thumbnail', 'icon', 'avatar']),
+	children: PropTypes.node,
+	...Box.propTypes,
+};
 MenuItemIcon.childConfigComponent = 'MenuItemIcon';
 
 export function MenuItemPrimaryText({ hasSecondaryText, children, ...textProps }) {
@@ -40,6 +48,11 @@ export function MenuItemPrimaryText({ hasSecondaryText, children, ...textProps }
 		</Text>
 	);
 }
+MenuItemPrimaryText.propTypes = {
+	hasSecondaryText: PropTypes.bool,
+	children: PropTypes.node.isRequired,
+	...Text.propTypes,
+};
 MenuItemPrimaryText.childConfigComponent = 'MenuItemPrimaryText';
 
 export function MenuItemSecondaryText({ children, ...textProps }) {
@@ -49,6 +62,10 @@ export function MenuItemSecondaryText({ children, ...textProps }) {
 		</Text>
 	);
 }
+MenuItemSecondaryText.propTypes = {
+	children: PropTypes.node.isRequired,
+	...Text.propTypes,
+};
 MenuItemSecondaryText.childConfigComponent = 'MenuItemSecondaryText';
 
 export const MenuItem = React.forwardRef(function MenuItem(
@@ -123,6 +140,17 @@ export const MenuItem = React.forwardRef(function MenuItem(
 	);
 });
 
+MenuItem.propTypes = {
+	keyboardFocused: PropTypes.bool,
+	/** @type {(event: React.MouseEvent) => void} */
+	onClick: PropTypes.func,
+	preventDefaultOnClick: PropTypes.bool,
+	/** @type {(event: React.KeyboardEvent) => void} */
+	onKeyDown: PropTypes.func,
+	disabled: PropTypes.bool,
+	children: PropTypes.node.isRequired,
+	...UtilityButton.propTypes,
+};
 MenuItem.isFocusableChild = true;
 
 export const MenuItemCheckbox = React.forwardRef(function MenuItemCheckbox(
@@ -155,6 +183,14 @@ export const MenuItemCheckbox = React.forwardRef(function MenuItemCheckbox(
 	);
 });
 
+MenuItemCheckbox.propTypes = {
+	isChecked: PropTypes.bool,
+	/** @type {() => void} */
+	onToggle: PropTypes.func,
+	disabled: PropTypes.bool,
+	children: PropTypes.node.isRequired,
+	...MenuItem.propTypes,
+};
 MenuItemCheckbox.isFocusableChild = true;
 
 export const MenuItemLink = React.forwardRef(function MenuItemLink(
@@ -189,6 +225,12 @@ export const MenuItemLink = React.forwardRef(function MenuItemLink(
 	);
 });
 
+MenuItemLink.propTypes = {
+	disabled: PropTypes.bool,
+	href: PropTypes.string,
+	children: PropTypes.node.isRequired,
+	...MenuItem.propTypes,
+};
 MenuItemLink.isFocusableChild = true;
 
 export function MenuItemSeparator(hrProps) {
@@ -206,6 +248,7 @@ export function MenuItemSeparator(hrProps) {
 		/>
 	);
 }
+MenuItemSeparator.propTypes = Box.propTypes;
 
 export function MenuItemTitle({ children, ...textProps }) {
 	return (
@@ -214,3 +257,7 @@ export function MenuItemTitle({ children, ...textProps }) {
 		</Text>
 	);
 }
+MenuItemTitle.propTypes = {
+	children: PropTypes.node.isRequired,
+	...Text.propTypes,
+};
