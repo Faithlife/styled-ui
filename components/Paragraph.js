@@ -9,11 +9,11 @@ export const Paragraph = styled.p`
 	display: block;
 	margin: 0;
 	color: ${themeGet('colors.foregroundPrimary')};
-	${themeGet('textStyles.c.16')};
+	${themeGet('textStyles.c.16')}
 
-	${textStyle};
-	${box};
-	${typography};
+	${textStyle}
+	${box}
+	${typography}
 `;
 
 Paragraph.defaultProps = { theme };

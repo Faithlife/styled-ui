@@ -13,6 +13,7 @@ export class DropZone extends PureComponent {
 		onDrop: PropTypes.func.isRequired,
 		/** The contents of the drop zone. Children will be rendered into a flex container with align-items set to center. */
 		children: PropTypes.node,
+		...Paragraph.propTypes,
 	};
 
 	state = {
@@ -48,7 +49,7 @@ export class DropZone extends PureComponent {
 	};
 
 	render() {
-		const { children } = this.props;
+		const { children, onDrop, ...otherProps } = this.props;
 		const { showHighlight } = this.state;
 
 		return (
@@ -71,6 +72,7 @@ export class DropZone extends PureComponent {
 				alignItems="center"
 				backgroundColor={showHighlight ? 'blue2' : null}
 				color={showHighlight ? 'blue4' : null}
+				{...otherProps}
 			>
 				{children}
 			</Paragraph>
