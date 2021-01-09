@@ -10,6 +10,6 @@ import PropTypes from 'prop-types';
 export function elementOfType(Component) {
 	// Not very intuitive, but this is the best way to check with PropTypes (see https://github.com/facebook/react/issues/2979)
 	return PropTypes.shape({
-		type: PropTypes.oneOf([Component]),
+		type: PropTypes.oneOf([Component]).isRequired,
 	});
 }
