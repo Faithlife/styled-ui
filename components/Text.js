@@ -9,13 +9,13 @@ export const Text = styled.span`
 	display: inline-flex;
 	align-items: baseline;
 	color: ${themeGet('colors.foregroundPrimary')};
-	${themeGet('textStyles.c.16')};
+	${themeGet('textStyles.c.16')}
 
-	${textStyle};
-	${common};
-	${layout};
-	${typography};
-	${border};
+	${textStyle}
+	${common}
+	${layout}
+	${typography}
+	${border}
 `;
 
 Text.defaultProps = { theme };
