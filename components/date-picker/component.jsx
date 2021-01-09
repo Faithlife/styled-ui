@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styledSystemPropTypes from '@styled-system/prop-types';
 import { Caret } from '../icons';
 import { theme } from '../../theme';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 import { dateFunctionProps } from './date-function-props';
 import { common } from '../../theme/system';
+import { filterProps } from '../utils';
 import * as Styled from './styled';
 import { CalendarWeek } from './calendar-week';
 
@@ -58,6 +60,7 @@ export class DatePicker extends Component {
 		minDate: PropTypes.instanceOf(Date),
 		maxDate: PropTypes.instanceOf(Date),
 		...common.propTypes,
+		...styledSystemPropTypes.layout,
 	};
 
 	UNSAFE_componentWillMount() {
@@ -126,11 +129,15 @@ export class DatePicker extends Component {
 			minDate,
 			maxDate,
 		} = this.props;
+		const { matchingProps: styleProps } = filterProps(this.props, {
+			...common.propTypes,
+			...styledSystemPropTypes.layout,
+		});
 		const { currentMonth, weeks } = this.state;
 
 		return (
 			<DefaultThemeProvider>
-				<Styled.Container>
+				<Styled.Container {...styleProps}>
 					<Styled.Header>
 						<Styled.ChangeMonth
 							onClick={this.decrementMonth}
