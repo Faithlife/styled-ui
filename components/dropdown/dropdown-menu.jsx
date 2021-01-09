@@ -78,6 +78,6 @@ DropdownMenu.propTypes = {
 			elementOfType(MenuItemSecondaryText),
 			elementOfType(MenuItemTitle),
 		]),
-	),
+	).isRequired,
 	...Popover.propTypes,
 };

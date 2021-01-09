@@ -174,7 +174,7 @@ const SegmentedButtonGroup = styled(Box).attrs(({ border }) => ({
 `;
 
 SegmentedButtonGroup.propTypes = {
-	children: PropTypes.arrayOf(elementOfType(Button)),
+	children: PropTypes.arrayOf(elementOfType(Button)).isRequired,
 	...Box.propTypes,
 };
 
