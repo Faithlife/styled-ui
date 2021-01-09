@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { themeGet } from '@styled-system/theme-get';
+import { common } from '../../theme/system';
 
 export const Container = styled.div`
 	display: flex;
@@ -14,6 +15,8 @@ export const Container = styled.div`
 
 	padding: ${themeGet('space.2')} 0 ${themeGet('space.4')} 0;
 	overflow: hidden;
+
+	${common}
 `;
 
 export const DatePeriod = styled.div`

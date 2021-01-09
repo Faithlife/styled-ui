@@ -4,6 +4,8 @@ import debounce from 'lodash.debounce';
 import { DatePicker } from '../date-picker';
 import { Input } from '../input';
 import { dateFunctionProps } from '../date-picker/date-function-props';
+import { filterProps } from '../utils';
+import { common } from '../../theme/system';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 import * as Styled from './styled';
 
@@ -41,6 +43,7 @@ export class DatePeriodPicker extends PureComponent {
 		dateFunctions: dateFunctionProps,
 		/** Debounce value for date inputs. Defaults to 500ms */
 		debounce: PropTypes.number,
+		...common.propTypes,
 	};
 
 	static defaultProps = {
@@ -182,6 +185,7 @@ export class DatePeriodPicker extends PureComponent {
 
 	render() {
 		const { setSelectedDate, validate, dateFunctions } = this.props;
+		const { matchingProps: styleProps } = filterProps(this.props, common.propTypes);
 		const {
 			inputValues: { start, end },
 			selectedDateRange,
@@ -189,7 +193,7 @@ export class DatePeriodPicker extends PureComponent {
 
 		return (
 			<DefaultThemeProvider>
-				<Styled.Container>
+				<Styled.Container {...styleProps}>
 					{this.getUniqueDatePeriods().map(({ displayName, dateRange, originalIndex }) => (
 						<Styled.DatePeriod
 							key={displayName}
