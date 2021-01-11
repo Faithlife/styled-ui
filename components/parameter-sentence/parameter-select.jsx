@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styledSystemPropTypes from '@styled-system/prop-types';
 import { useId } from '../shared-hooks';
 import { VisuallyHiddenLabel } from '../hidden-label';
-import { Listbox } from '../../index-v6';
+import { Listbox } from '../listbox';
 import * as Styled from './styled.jsx';
 
 export function ParameterSelect({
