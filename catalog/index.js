@@ -75,6 +75,7 @@ import {
 	Radio as V6Radio,
 	SimpleToast as V6SimpleToast,
 	Slider as V6Slider,
+	Listbox as V6Listbox,
 } from '../index-v6';
 import { GroupSelector, LargeGroupSelector } from '../components/group-selector';
 import { ShareDialog } from '../components/share-dialog';
@@ -684,6 +685,23 @@ const pages = [
 						margin-right: 8px;
 					`,
 					ChevronDown,
+				},
+			},
+			{
+				path: '/Listbox/variations-v6',
+				title: 'Listbox V6',
+				content: pageLoader(() => import('./listbox/variations-v6.md')),
+				imports: {
+					Listbox: V6Listbox,
+					ListboxDemo: styled.div`
+						display: flex;
+						align-items: baseline;
+					`,
+					Button,
+					browserList: ['Firefox', 'Chrome', 'Opera', 'Edge'],
+					Label: styled.span`
+						margin-right: 8px;
+					`,
 				},
 			},
 			{

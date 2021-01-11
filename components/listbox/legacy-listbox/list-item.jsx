@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { useDropdownContext, MenuItem } from '../menu';
+import { useDropdownContext, MenuItem } from '../../menu';
 
 export function ListItem(props) {
 	// Proptypes is linting so index does not show up in consumer proptypes

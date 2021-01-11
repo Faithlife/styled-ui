@@ -1,53 +1,24 @@
-import React, { useCallback } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { Menu } from '../../index-v6';
 import { useId } from '../shared-hooks';
-import { useDropdownContext, DropdownToggleCore } from '../menu';
-import { useKeyboardActivate } from './listbox-utils';
+import { useListboxContext } from './utils';
 
-/** Accepts all props a Button component would as well. */
-export function ListboxToggle(props) {
-	// DropdownToggle will pass all props that a Button component will want if it is not using render props
-	const { children, ...buttonProps } = props;
-	const {
-		isOpen,
-		focusedMenuItem,
-		setFocusedMenuItem,
-		onToggleMenu,
-		labelledBy,
-	} = useDropdownContext();
-	const handleKeyPress = useKeyboardActivate(onToggleMenu, focusedMenuItem, setFocusedMenuItem);
+// https://www.w3.org/TR/wai-aria-practices-1.1/#Listbox
 
-	const id = useId();
-
-	const toggleAriaProps = {
-		id: `listbox:${id}`,
-		role: 'button',
-		'aria-haspopup': 'listbox',
-		'aria-labelledby': `${labelledBy || ''} listbox:${id}`,
-		'aria-expanded': isOpen,
-	};
-
-	const handleToggleMenu = useCallback(
-		event => {
-			setFocusedMenuItem(null);
-			onToggleMenu(event);
-		},
-		[setFocusedMenuItem, onToggleMenu],
-	);
+export function ListboxToggle({ children, ...props }) {
+	const uniqueId = useId();
+	const id = `listbox-toggle-${uniqueId}`;
+	const { labelledBy } = useListboxContext();
 
 	return (
-		<DropdownToggleCore
-			buttonProps={buttonProps}
-			onKeyPress={handleKeyPress}
-			onToggleMenu={handleToggleMenu}
-			ariaProps={toggleAriaProps}
+		<Menu.Toggle
+			id={id}
+			aria-labelledby={`${labelledBy} ${id}`}
+			aria-haspopup="listbox"
+			aria-controls={null}
+			{...props}
 		>
 			{children}
-		</DropdownToggleCore>
+		</Menu.Toggle>
 	);
 }
-
-ListboxToggle.propTypes = {
-	/** The content of the toggle button, usually a span */
-	children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]).isRequired,
-};

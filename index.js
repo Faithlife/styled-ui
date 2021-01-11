@@ -51,7 +51,12 @@ export {
 	MenuSeparator,
 	MenuCheckbox,
 } from './components/menu';
-export { Listbox, ListboxToggle, ListboxMenu, ListItem } from './components/listbox';
+export {
+	LegacyListbox as Listbox,
+	ListboxToggle,
+	ListboxMenu,
+	ListItem,
+} from './components/listbox';
 export {
 	LegacyParameterSentence as ParameterSentence,
 	LegacyParameterSelect as ParameterSelect,

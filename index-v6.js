@@ -11,3 +11,4 @@ export { usePopover, Popover } from './components/popover-v6';
 export { Radio } from './components/radio';
 export { SimpleToast } from './components/simple-toast';
 export { Slider } from './components/slider';
+export { Listbox } from './components/listbox';
