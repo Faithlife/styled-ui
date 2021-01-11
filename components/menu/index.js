@@ -1,5 +1,5 @@
 export {
-	Dropdown,
+	Dropdown as LegacyDropdown,
 	MenuItem,
 	MenuSeparator,
 	MenuCheckbox,
@@ -37,4 +37,4 @@ Menu.ItemPrimaryText = MenuItemPrimaryText;
 Menu.ItemSecondaryText = MenuItemSecondaryText;
 Menu.Title = MenuItemTitle;
 
-export { Menu };
+export { Menu, Menu as Dropdown };
