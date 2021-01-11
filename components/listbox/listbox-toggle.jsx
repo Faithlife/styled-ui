@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu } from '../../index-v6';
+import { Menu } from '../menu';
 import { useId } from '../shared-hooks';
 import { useListboxContext } from './utils';
 

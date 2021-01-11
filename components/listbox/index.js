@@ -1,4 +1,4 @@
-import { Menu } from '../../index-v6';
+import { Menu } from '../menu';
 
 export { Listbox as LegacyListbox, ListboxToggle, ListboxMenu, ListItem } from './legacy-listbox';
 

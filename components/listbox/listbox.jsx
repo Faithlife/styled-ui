@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Menu } from '../../index-v6';
+import { Menu } from '../menu';
 import { ListboxContextProvider } from './utils';
 
 // https://www.w3.org/TR/wai-aria-practices-1.1/#Listbox

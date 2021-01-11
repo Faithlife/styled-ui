@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu } from '../../index-v6';
+import { Menu } from '../menu';
 import { useListboxContext } from './utils';
 
 // https://www.w3.org/TR/wai-aria-practices-1.1/#Listbox

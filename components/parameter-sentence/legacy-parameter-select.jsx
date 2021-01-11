@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { Listbox, ListboxToggle, ListboxMenu, ListItem } from '../../index';
+import { LegacyListbox as Listbox, ListboxToggle, ListboxMenu, ListItem } from '../listbox';
 import { useId } from '../shared-hooks';
 import { VisuallyHiddenLabel } from '../hidden-label';
 import * as Styled from './legacy-styled.jsx';
