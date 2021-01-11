@@ -61,6 +61,7 @@ import {
 	Switch,
 	theme,
 	ThemeProvider,
+	ImageWell,
 } from '../index';
 import {
 	Accordion as V6Accordion,
@@ -658,6 +659,19 @@ const pages = [
 				title: 'v6 Help Box Documentation',
 				content: pageLoader(() => import('./help-box/documentation-v6.md')),
 				imports: { HelpBox: V6HelpBox, DocgenTable },
+			},
+		],
+	},
+	{
+		title: 'ImageWell',
+		pages: [
+			{
+				path: '/image-well',
+				title: 'ImageWell',
+				content: pageLoader(() => import('./image-well/documentation.md')),
+				imports: {
+					ImageWell,
+				},
 			},
 		],
 	},

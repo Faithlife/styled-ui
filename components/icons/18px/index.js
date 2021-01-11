@@ -1,6 +1,7 @@
 export { default as AddNewCircleFilled } from './AddNewCircleFilled.svg';
 export { default as AddNewCircleOutline } from './AddNewCircleOutline.svg';
 export { default as Calendar } from './Calendar.svg';
+export { default as Camera } from './Camera.svg';
 export { default as CaretDown } from './CaretDown.svg';
 export { default as CaretLeft } from './CaretLeft.svg';
 export { default as CaretRight } from './CaretRight.svg';

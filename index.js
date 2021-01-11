@@ -76,3 +76,5 @@ export {
 	getRowLayout,
 } from './components/row-masonry';
 export { Switch } from './components/Switch';
+
+export { ImageWell } from './components/image-well';
