@@ -139,6 +139,34 @@ state: { tags: [] }
 </div>
 ```
 
+### Multi select with checkbox add
+
+```react
+showSource: true
+state: { selection: [], pendingSelectedValues: [{value: 'Texas', label: 'Texas'}] }
+---
+<div>
+	<div>Current selection: {state.selection}</div>
+	<CreatableSelect
+		onChange={({ value }) => {
+			setState({ selection: value });
+		}}
+		isMulti
+		options={[
+			{ value: "washington", label: "Washington" },
+			{ value: "california", label: "California" },
+			{ value: "Texas", label: "Texas" }
+		]}
+		allowSelect={true}
+		getIsOptionChecked={(data) => {
+			return data.value && !!state.pendingSelectedValues.find((x) => x.value === data.value);
+		}}
+		onKeyDown={handleKeyDown}
+		placeholder="Choose a state..."
+	/>
+</div>
+```
+
 ### Async select
 
 ```react
