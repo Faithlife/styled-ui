@@ -44,13 +44,13 @@ export {
 	TabPanels,
 } from './components/tabs';
 export {
-	LegacyDropdown as Dropdown,
+	Dropdown,
 	DropdownToggle,
 	DropdownMenu,
 	MenuItem,
 	MenuSeparator,
 	MenuCheckbox,
-} from './components/dropdown';
+} from './components/menu';
 export { Listbox, ListboxToggle, ListboxMenu, ListItem } from './components/listbox';
 export {
 	LegacyParameterSentence as ParameterSentence,

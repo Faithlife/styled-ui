@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { DropdownCore } from '../dropdown';
+import { DropdownCore } from '../menu';
 
 export function Listbox({
 	isOpen,

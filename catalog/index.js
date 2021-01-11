@@ -68,7 +68,7 @@ import {
 	SegmentedButtonGroup,
 	Checkbox as V6Checkbox,
 	DatePickerInput as V6DatePickerInput,
-	Dropdown as V6Dropdown,
+	Menu,
 	HelpBox as V6HelpBox,
 	LoadingSpinner as V6LoadingSpinner,
 	Modal as V6Modal,
@@ -575,8 +575,8 @@ const pages = [
 				title: 'Dropdown v6',
 				content: pageLoader(() => import('./dropdown/variations-v6.md')),
 				imports: {
-					Dropdown: V6Dropdown,
-					DropdownDemo: styled.div`
+					Menu,
+					MenuDemo: styled.div`
 						display: flex;
 						align-items: flex-start;
 						justify-content: space-between;
@@ -763,7 +763,7 @@ const pages = [
 					Box,
 					Input,
 					Button: V6Button,
-					Dropdown: V6Dropdown,
+					Menu,
 				},
 			},
 			{

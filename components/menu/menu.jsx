@@ -3,7 +3,7 @@ import { useId } from '../shared-hooks';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 import { itemNavigation, DropdownContextProvider } from './utils';
 
-export function Dropdown({ isOpen, onToggleMenu, children, width }) {
+export function Menu({ isOpen, onToggleMenu, children, width }) {
 	const itemList = useRef([]);
 	const [focusedItemIndex, setFocusedItemIndex] = useState(null);
 
