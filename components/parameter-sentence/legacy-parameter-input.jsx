@@ -1,9 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import styledSystemPropTypes from '@styled-system/prop-types';
-import { DefaultThemeProvider } from '../DefaultThemeProvider';
-import { filterProps } from '../utils';
-import * as Styled from './styled';
+import * as Styled from './legacy-styled';
 
 export const ParameterInputBox = React.forwardRef((props, ref) => {
 	const {
@@ -11,16 +8,14 @@ export const ParameterInputBox = React.forwardRef((props, ref) => {
 		value,
 		onChange,
 		formatValue,
+		width,
+		height,
 		accessibilityLabel,
+		styleOverrides,
 		onFocus,
 		onBlur,
-		...otherProps
+		...inputProps
 	} = props;
-	const { matchingProps: styledSystemProps, remainingProps: inputProps } = filterProps(otherProps, {
-		...styledSystemPropTypes.layout,
-		...styledSystemPropTypes.typography,
-	});
-
 	const [isFocused, setIsFocused] = useState(false);
 
 	const toggleFocus = useCallback(() => {
@@ -44,22 +39,24 @@ export const ParameterInputBox = React.forwardRef((props, ref) => {
 	const displayValue = formatValue ? formatValue(value || defaultValue) : value || defaultValue;
 
 	return (
-		<DefaultThemeProvider>
-			<Styled.InputContainer isFocused={isFocused} {...styledSystemProps}>
-				<Styled.Input
-					ref={ref}
-					onChange={onChange}
-					placeholder={defaultValue}
-					onFocus={handleFocus}
-					onBlur={handleBlur}
-					value={!isFocused ? displayValue : value}
-					aria-label={accessibilityLabel}
-					width={styledSystemProps.width}
-					fontSize={styledSystemProps.fontSize}
-					{...inputProps}
-				/>
-			</Styled.InputContainer>
-		</DefaultThemeProvider>
+		<Styled.InputContainer
+			width={width}
+			height={height}
+			isFocused={isFocused}
+			styleOverrides={{ width, ...styleOverrides }}
+		>
+			<Styled.Input
+				ref={ref}
+				onChange={onChange}
+				placeholder={defaultValue}
+				onFocus={handleFocus}
+				onBlur={handleBlur}
+				value={!isFocused ? displayValue : value}
+				aria-label={accessibilityLabel}
+				styleOverrides={{ width, ...styleOverrides }}
+				{...inputProps}
+			/>
+		</Styled.InputContainer>
 	);
 });
 
@@ -68,7 +65,14 @@ ParameterInputBox.propTypes = {
 	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 	onChange: PropTypes.func.isRequired,
 	formatValue: PropTypes.func,
+	width: PropTypes.string,
+	height: PropTypes.string,
 	accessibilityLabel: PropTypes.string.isRequired,
-	...styledSystemPropTypes.layout,
-	...styledSystemPropTypes.typography,
+	styleOverrides: PropTypes.shape({
+		fontSize: PropTypes.string,
+	}),
+};
+
+ParameterInputBox.defaultProps = {
+	styleOverrides: {},
 };

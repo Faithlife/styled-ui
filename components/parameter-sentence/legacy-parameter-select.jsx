@@ -1,19 +1,18 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import styledSystemPropTypes from '@styled-system/prop-types';
 import { useId } from '../shared-hooks';
 import { VisuallyHiddenLabel } from '../hidden-label';
-import { Listbox } from '../listbox';
-import * as Styled from './styled.jsx';
+import { Listbox, ListboxToggle, ListboxMenu, ListItem } from '../listbox';
+import * as Styled from './legacy-styled.jsx';
 
 export function ParameterSelect({
 	options,
 	selectedId,
 	onItemSelect,
+	width,
 	accessibilityLabel,
 	useNativeSelect,
-	width,
-	...otherStyleProps
+	styleOverrides,
 }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const id = useId();
@@ -39,10 +38,10 @@ export function ParameterSelect({
 					onToggleMenu={handleToggleMenu}
 					onItemSelect={onItemSelect}
 					selectedId={selectedId}
-					width={width}
+					styleOverrides={{ width }}
 					labelledBy={labelId}
 				>
-					<Listbox.Toggle>
+					<ListboxToggle>
 						{({ ref, onKeyDown, onClick, ariaProps }) => (
 							<Styled.Button
 								ref={ref}
@@ -51,33 +50,34 @@ export function ParameterSelect({
 								type="button"
 								{...ariaProps}
 							>
-								<Styled.ButtonContent isOpen={isOpen} {...otherStyleProps}>
+								<Styled.ButtonContent isOpen={isOpen} styleOverrides={styleOverrides}>
 									{options[selectedId]}
 								</Styled.ButtonContent>
 							</Styled.Button>
 						)}
-					</Listbox.Toggle>
-					<Listbox.Menu
-						zIndex={10}
-						padding="4px 0"
-						width={width}
-						overflow={otherStyleProps?.overflow ?? 'auto'}
-						maxHeight={otherStyleProps?.maxHeight ?? '300px'}
+					</ListboxToggle>
+					<ListboxMenu
+						styleOverrides={{
+							zIndex: 10,
+							padding: '4px 0',
+							width,
+							overflow: styleOverrides.overflow ?? 'auto',
+							maxHeight: styleOverrides.maxHeight ?? '300px',
+						}}
 					>
 						{options &&
 							Object.entries(options).map(([value, name]) => (
-								<Listbox.Item key={value} id={value}>
+								<ListItem key={value} id={value}>
 									{name}
-								</Listbox.Item>
+								</ListItem>
 							))}
-					</Listbox.Menu>
+					</ListboxMenu>
 				</Listbox>
 			) : (
 				<Styled.Select
 					value={selectedId}
 					onChange={handleNativeSelect}
-					width={width}
-					{...otherStyleProps}
+					styleOverrides={styleOverrides}
 					aria-labelledby={labelId}
 				>
 					{options &&
@@ -96,13 +96,19 @@ ParameterSelect.propTypes = {
 	options: PropTypes.object.isRequired,
 	selectedId: PropTypes.string.isRequired,
 	onItemSelect: PropTypes.func.isRequired,
+	/** Width (in pixels) of the select dropdown */
+	width: PropTypes.string,
 	accessibilityLabel: PropTypes.string,
 	/** Use the native select controls (mobile only) */
 	useNativeSelect: PropTypes.bool,
-	...styledSystemPropTypes.layout,
-	...styledSystemPropTypes.typography,
+	styleOverrides: PropTypes.shape({
+		fontSize: PropTypes.string,
+		overflow: PropTypes.string,
+		maxHeight: PropTypes.string,
+	}),
 };
 
 ParameterSelect.defaultProps = {
 	width: '180px',
+	styleOverrides: {},
 };

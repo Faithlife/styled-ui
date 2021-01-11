@@ -22,6 +22,9 @@
   - The old `theme` prop functionality has been replaced by the [global theme object](https://faithlife.github.io/styled-ui/#/theme/usage) and Styled System props. Use the [`ThemeProvider` component](https://faithlife.github.io/styled-ui/#/theme/customization) to customize the theme.
 - `Modal`
   - Subcomponents have been renamed, `ModalContent` has been replaced by `Modal.Content`, etc.
+- `ParameterSentence`
+  - Subcomponents have been renamed: `ParameterSelect` to `ParameterSentence.Select`, `ParameterInputBox` to `ParameterSentence.Input`.
+  - The `styleOverrides` prop has been removed in favor of Styled System props.
 - `Radio`
   - The old `theme` prop functionality has been replaced by the [global theme object](https://faithlife.github.io/styled-ui/#/theme/usage) and Styled System props. Use the [`ThemeProvider` component](https://faithlife.github.io/styled-ui/#/theme/customization) to customize the theme.
 - `SimpleToast`

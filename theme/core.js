@@ -235,6 +235,13 @@ colors.radio = {
 	disabledBorder: colors.gray22,
 };
 
+colors.parameterSentence = {
+	active: '#1D6CA1',
+	border: colors.blue4,
+	closed: colors.gray66,
+	readonly: colors.gray8,
+};
+
 const fonts = {
 	normal: '"Source Sans Pro", sans-serif',
 };
