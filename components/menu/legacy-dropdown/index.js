@@ -37,6 +37,9 @@ const MenuCheckbox = deprecateComponent(
 	depWarning('MenuCheckbox', 'Menu.CheckboxItem'),
 );
 
+MenuItem.isFocusableMenuChild = true;
+MenuCheckbox.isFocusableMenuChild = true;
+
 export { Dropdown, DropdownMenu, DropdownToggle, MenuItem, MenuSeparator, MenuCheckbox };
 export { useDropdownContext } from './dropdown-utils';
 export { DropdownCore } from './dropdown-core';
