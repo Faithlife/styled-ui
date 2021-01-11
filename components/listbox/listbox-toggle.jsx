@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useId } from '../shared-hooks';
-import { useDropdownContext, DropdownToggleCore } from '../dropdown';
+import { useDropdownContext, DropdownToggleCore } from '../menu';
 import { useKeyboardActivate } from './listbox-utils';
 
 /** Accepts all props a Button component would as well. */

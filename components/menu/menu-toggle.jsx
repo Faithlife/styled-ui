@@ -4,7 +4,7 @@ import { Button, SegmentedButtonGroup } from '../button';
 import { useDropdownContext, useKeyboardActivate } from './utils';
 import * as Styled from './styled';
 
-export function DropdownToggle({ hideCarrot, size, variant, disabled, children, ...buttonProps }) {
+export function MenuToggle({ hideCarrot, size, variant, disabled, children, ...buttonProps }) {
 	const { onToggleMenu, menuId, isOpen, toggleRef, splitRef, onKeyboardNav } = useDropdownContext();
 
 	const onKeyPress = useKeyboardActivate(onToggleMenu, onKeyboardNav);
@@ -26,7 +26,7 @@ export function DropdownToggle({ hideCarrot, size, variant, disabled, children, 
 		return children(toggleRef, childProps);
 	}
 
-	const [actionChild] = getConfigChild(children, DropdownActionButton.childConfigComponent);
+	const [actionChild] = getConfigChild(children, MenuActionButton.childConfigComponent);
 	return actionChild ? (
 		<SegmentedButtonGroup ref={toggleRef} border={0}>
 			{React.cloneElement(actionChild, {
@@ -65,12 +65,12 @@ export function DropdownToggle({ hideCarrot, size, variant, disabled, children, 
 	);
 }
 
-DropdownToggle.defaultProps = {
+MenuToggle.defaultProps = {
 	size: 'small',
 	variant: 'primary',
 };
 
-export function DropdownActionButton({
+export function MenuActionButton({
 	defaultSize,
 	defaultVariant,
 	defaultDisabled,
@@ -83,4 +83,4 @@ export function DropdownActionButton({
 		</Button>
 	);
 }
-DropdownActionButton.childConfigComponent = 'DropdownActionButton';
+MenuActionButton.childConfigComponent = 'DropdownActionButton';

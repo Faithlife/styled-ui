@@ -9,7 +9,7 @@ import {
 	MenuCheckbox as MenuCheckboxComponent,
 } from './dropdown-children';
 
-const v6ImportHelpText = `You can opt into this new API by importing { Dropdown } from @faithlife/styled-ui/v6
+const v6ImportHelpText = `You can opt into this new API by importing { Menu } from @faithlife/styled-ui/v6
 Learn more at https://faithlife.github.io/styled-ui/#/dropdown/variations/v6`;
 
 const depWarning = (name, newName) =>
@@ -17,24 +17,24 @@ const depWarning = (name, newName) =>
 
 const Dropdown = deprecateComponent(
 	DropdownComponent,
-	`Prefer the Styled-UI version 6 Dropdown.\n${v6ImportHelpText}`,
+	`Prefer the Styled-UI version 6 Menu.\n${v6ImportHelpText}`,
 );
 const DropdownMenu = deprecateComponent(
 	DropdownMenuComponent,
-	depWarning('DropdownMenu', 'Dropdown.Menu'),
+	depWarning('DropdownMenu', 'Menu.Dropdown'),
 );
 const DropdownToggle = deprecateComponent(
 	DropdownToggleComponent,
-	depWarning('DropdownToggle', 'Dropdown.Toggle'),
+	depWarning('DropdownToggle', 'Menu.Toggle'),
 );
-const MenuItem = deprecateComponent(MenuItemComponent, depWarning('MenuItem', 'Dropdown.Item'));
+const MenuItem = deprecateComponent(MenuItemComponent, depWarning('MenuItem', 'Menu.Item'));
 const MenuSeparator = deprecateComponent(
 	MenuSeparatorComponent,
 	depWarning('MenuSeparator', 'Menu.Separator'),
 );
 const MenuCheckbox = deprecateComponent(
 	MenuCheckboxComponent,
-	depWarning('MenuCheckbox', 'Dropdown.CheckboxItem'),
+	depWarning('MenuCheckbox', 'Menu.CheckboxItem'),
 );
 
 export { Dropdown, DropdownMenu, DropdownToggle, MenuItem, MenuSeparator, MenuCheckbox };

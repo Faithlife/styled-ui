@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DropdownMenuCore, useDropdownContext } from '../dropdown';
+import { DropdownMenuCore, useDropdownContext } from '../menu';
 
 export function ListboxMenu(props) {
 	const { children, ...popoverProps } = props;

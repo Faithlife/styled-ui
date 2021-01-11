@@ -3,7 +3,7 @@ import { Popover } from '../popover-v6';
 import { useDropdownContext, useKeyboardNavigate } from './utils';
 import * as Styled from './styled';
 
-export function DropdownMenu({ children, ...popoverProps }) {
+export function MenuDropdown({ children, ...popoverProps }) {
 	const {
 		menuId,
 		isOpen,
