@@ -13,7 +13,7 @@ export function ListboxToggle({ children, ...props }) {
 	return (
 		<Menu.Toggle
 			id={id}
-			aria-labelledby={`${labelledBy} ${id}`}
+			aria-labelledby={`${labelledBy ?? ''} ${id}`}
 			aria-haspopup="listbox"
 			aria-controls={null}
 			{...props}

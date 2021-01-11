@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styledSystemPropTypes from '@styled-system/prop-types';
 import { useId } from '../shared-hooks';
 import { VisuallyHiddenLabel } from '../hidden-label';
-import { Listbox } from '../listbox';
+import { Listbox } from '../../index-v6';
 import * as Styled from './styled.jsx';
 
 export function ParameterSelect({
@@ -57,12 +57,12 @@ export function ParameterSelect({
 							</Styled.Button>
 						)}
 					</Listbox.Toggle>
-					<Listbox.Menu
+					<Listbox.Dropdown
 						zIndex={10}
 						padding="4px 0"
-						width={width}
 						overflow={otherStyleProps?.overflow ?? 'auto'}
 						maxHeight={otherStyleProps?.maxHeight ?? '300px'}
+						width={width}
 					>
 						{options &&
 							Object.entries(options).map(([value, name]) => (
@@ -70,7 +70,7 @@ export function ParameterSelect({
 									{name}
 								</Listbox.Item>
 							))}
-					</Listbox.Menu>
+					</Listbox.Dropdown>
 				</Listbox>
 			) : (
 				<Styled.Select
