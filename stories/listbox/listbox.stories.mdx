@@ -1,0 +1,55 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { useArgs } from '@storybook/client-api';
+import { Text } from '../../index';
+import { browserList } from './util';
+
+import { Listbox, ListboxToggle, ListboxMenu, ListItem } from '../../index';
+
+<Meta
+	title="Components/Listbox"
+	component={Listbox}
+	supcomponents={{ ListboxToggle, ListboxMenu, ListItem }}
+/>
+
+# Listbox
+
+✔ WAI ARIA Compliant
+
+A list box should be used in situations simmilar to a html select. Refer to the dropdown docs for more info on varriations.
+
+<Canvas>
+	<Story name="Listbox Demo" args={{ isOpen: false, selectedId: 0 }}>
+		{args => {
+			const [, updateArgs] = useArgs();
+			return (
+				<>
+					<Text as="label" id="listboxLabel">
+						Pick your favorite browser:
+					</Text>
+					<Listbox
+						{...args}
+						onItemSelect={id => updateArgs({ selectedId: id })}
+						onToggleMenu={() => updateArgs({ isOpen: !args.isOpen })}
+						labelledBy="listboxLabel"
+					>
+						<ListboxToggle primary medium styleOverrides={{ width: '100px' }}>
+							{browserList[args.selectedId]}
+						</ListboxToggle>
+						<ListboxMenu container="body">
+							{browserList.map((name, index) => (
+								<ListItem key={index} id={index}>
+									{name}
+								</ListItem>
+							))}
+							<ListItem id="ie" disabled>
+								Internet Explorer
+							</ListItem>
+						</ListboxMenu>
+					</Listbox>
+				</>
+			);
+		}}
+	</Story>
+</Canvas>
+
+<ArgsTable story={'Listbox Demo'} />

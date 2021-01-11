@@ -1,0 +1,30 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Stack } from '../../index';
+
+import { LoadingSpinner } from '../../index';
+
+<Meta title="Components/Loading Spinner" component={LoadingSpinner} />
+
+# Help Box
+
+## Colors and Meaning
+
+<Stack spacing={3}>
+	Small
+	<LoadingSpinner variant="small" />
+	Medium
+	<LoadingSpinner variant="medium" />
+	Large
+	<LoadingSpinner variant="large" />
+</Stack>
+
+<Canvas>
+	<Story
+		name="Loading Spinner Demo"
+		args={{ variant: 'medium', theme: LoadingSpinner.defaultProps.theme }}
+	>
+		{args => <LoadingSpinner {...args} />}
+	</Story>
+</Canvas>
+
+<ArgsTable story={'Loading Spinner Demo'} />
