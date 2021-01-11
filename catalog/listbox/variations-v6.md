@@ -4,7 +4,7 @@ A `Listbox` is a dropdown should be used in situations similar to a html select.
 
 ```react
 showSource: true
-state: { isOpen: false, selected: "0" }
+state: { isOpen: false, selected: 0 }
 ---
 <ListboxDemo>
 	<Label id="listboxLabel">Pick your favorite browser:</Label>
