@@ -1,35 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { X } from '../icons/12px';
 import { Camera } from '../icons/18px';
 import * as Styled from './styled';
 
-const ImageWell = ({ children, previewUrl, fitPreviewToSquare, onClick, localizedResources }) => {
+const ImageWell = ({
+	children,
+	previewUrl,
+	fitPreviewToSquare,
+	onSelectImage,
+	onRemoveImage,
+	localizedResources,
+}) => {
 	if (previewUrl) {
 		return (
-			<ImageWellBase onClick={onClick}>
+			<ImageWellBase previewUrl={previewUrl}>
 				<Styled.WellPreview
 					style={{
 						backgroundImage: `url(${previewUrl})`,
-						backgroundSize: fitPreviewToSquare ? 'contain' : 'cover',
+						backgroundSize: fitPreviewToSquare ? 'cover' : 'contain',
 						backgroundPosition: 'center',
 						backgroundRepeat: 'no-repeat',
 					}}
 				>
-					<Styled.EditIconContainer>
-						<Camera className="image-well_edit-icon" />
-					</Styled.EditIconContainer>
+					<Styled.RemoveIconContainer onClick={() => onRemoveImage?.()}>
+						<X className="image-well_remove-icon" />
+					</Styled.RemoveIconContainer>
 				</Styled.WellPreview>
 			</ImageWellBase>
 		);
 	}
 
 	return (
-		<ImageWellBase onClick={onClick}>
+		<ImageWellBase onClick={onSelectImage} previewUrl={previewUrl}>
 			{children ? (
 				children
 			) : (
 				<>
-					<Camera className="image-well_selector-icon" />
+					<Camera className="image-well_select-icon" />
 					{localizedResources.addText}
 				</>
 			)}
@@ -46,7 +54,8 @@ const ImageWellBase = props => (
 ImageWell.propTypes = {
 	previewUrl: PropTypes.string,
 	fitPreviewToSquare: PropTypes.bool,
-	onClick: PropTypes.function,
+	onSelectImage: PropTypes.function,
+	onRemoveImage: PropTypes.function,
 	localizedResources: PropTypes.shape({
 		addText: PropTypes.string,
 	}),

@@ -22,8 +22,8 @@ export const WellButton = styled.button`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	cursor: pointer;
 	outline: none;
+	cursor: ${props => (props.previewUrl ? 'default' : 'pointer')};
 
 	${fonts.ui16}
 
@@ -31,16 +31,12 @@ export const WellButton = styled.button`
 		background-color: ${colors.blueTint};
 		border-color: ${colors.blueBase};
 
-		& .image-well_selector-icon path {
+		& .image-well_select-icon path {
 			fill: ${colors.blueBase};
-		}
-
-		.image-well_edit-icon path {
-			fill: ${colors.borderColor};
 		}
 	}
 
-	& .image-well_selector-icon {
+	& .image-well_select-icon {
 		margin-bottom: 8px;
 	}
 `;
@@ -58,17 +54,18 @@ export const WellPreview = styled.div`
 	border: none;
 `;
 
-export const EditIconContainer = styled.div`
+export const RemoveIconContainer = styled.div`
 	background-color: rgba(0, 0, 0, 0.3);
 	position: absolute;
 	top: 6px;
 	right: 6px;
-	width: 20px;
-	height: 20px;
-	padding: 8px;
-	border-radius: 5px;
+	width: 16px;
+	height: 16px;
+	padding: 3px;
+	border-radius: 50%;
+	cursor: pointer;
 
-	& .image-well_edit-icon path {
-		fill: #fff;
+	& .image-well_remove-icon path {
+		fill: ${colors.gray4};
 	}
 `;
