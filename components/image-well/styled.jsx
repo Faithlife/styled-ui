@@ -9,14 +9,13 @@ const fixedContainerHeight = '116px';
 export const WellContainer = styled.div`
 	width: ${fixedContainerWidth};
 	height: ${fixedContainerHeight};
-	box-sizing: content-box;
 `;
 
 export const WellButton = styled.button`
 	margin: 0;
 	padding: 0;
-	width: ${fixedContainerWidth};
-	height: ${fixedContainerHeight};
+	width: 100%;
+	height: 100%;
 	color: ${colors.blueBase};
 	border: ${thickness.two} dashed ${colors.borderColor};
 	border-radius: 6px;
