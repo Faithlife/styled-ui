@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.73.0
+
+- Added `showCheckboxes` option to `Select` components, used by the `AvatarOption` component to support `RecordLookup` components from FaithlifeEquipment.
+- Added v6 `Listbox` component with Styled-System props.
+- Added v6 `Menu` component with Styled-System props. This replaces the v5 `Dropdown` component.
+- Added v6 `ParameterSentence` components with Styled-System props.
+
 ## 5.72.2
 
 - Fix `Accordion` proptype that was causing a warning.
