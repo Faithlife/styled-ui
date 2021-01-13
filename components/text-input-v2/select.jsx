@@ -157,7 +157,7 @@ const defaultComponents = {
 	),
 };
 
-const AvatarOption = ({ data, selectProps: { allowSelect, getIsOptionChecked }, ...props }) => {
+const AvatarOption = ({ data, selectProps: { showCheckboxes, getIsOptionChecked }, ...props }) => {
 	const theme = useTheme();
 	const { avatar, label, secondaryLabel } = data;
 
@@ -165,7 +165,7 @@ const AvatarOption = ({ data, selectProps: { allowSelect, getIsOptionChecked }, 
 		<Styled.AvatarOption {...props}>
 			{avatar ? (
 				<>
-					{!allowSelect ? null : (
+					{!showCheckboxes ? null : (
 						<Styled.AvatarOptionCheckbox theme={theme}>
 							<Checkbox onClick={() => {}} isChecked={getIsOptionChecked(data)} disableAutoBlur />
 						</Styled.AvatarOptionCheckbox>

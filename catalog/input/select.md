@@ -157,11 +157,10 @@ state: { selection: [], pendingSelectedValues: [{value: 'Texas', label: 'Texas'}
 			{ value: "california", label: "California" },
 			{ value: "Texas", label: "Texas" }
 		]}
-		allowSelect={true}
+		showCheckboxes={true}
 		getIsOptionChecked={(data) => {
 			return data.value && !!state.pendingSelectedValues.find((x) => x.value === data.value);
 		}}
-		onKeyDown={handleKeyDown}
 		placeholder="Choose a state..."
 	/>
 </div>
