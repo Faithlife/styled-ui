@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { X } from '../icons/12px';
-import { Camera } from '../icons/18px';
 import * as Styled from './styled';
 
 const ImageWell = ({
@@ -24,7 +22,7 @@ const ImageWell = ({
 					}}
 				>
 					<Styled.RemoveIconContainer onClick={() => onRemoveImage?.()}>
-						<X className="image-well_remove-icon" />
+						<Styled.X />
 					</Styled.RemoveIconContainer>
 				</Styled.WellPreview>
 			</ImageWellBase>
@@ -37,7 +35,7 @@ const ImageWell = ({
 				children
 			) : (
 				<>
-					<Camera className="image-well_select-icon" />
+					<Styled.Camera />
 					{localizedResources.addText}
 				</>
 			)}

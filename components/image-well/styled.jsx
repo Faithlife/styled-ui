@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { colors, thickness, fonts } from '../shared-styles';
+import { Camera as UnstyledCamera } from '../icons/18px';
+import { X as UnstyledX } from '../icons/12px';
 
 const fixedContainerWidth = '116px';
 const fixedContainerHeight = '116px';
@@ -31,13 +33,9 @@ export const WellButton = styled.button`
 		background-color: ${colors.blueTint};
 		border-color: ${colors.blueBase};
 
-		& .image-well_select-icon path {
-			fill: ${colors.blueBase};
+		& svg path {
+			fill: ${props => (props.previewUrl ? '' : colors.blueBase)};
 		}
-	}
-
-	& .image-well_select-icon {
-		margin-bottom: 8px;
 	}
 `;
 
@@ -64,8 +62,14 @@ export const RemoveIconContainer = styled.div`
 	padding: 3px;
 	border-radius: 50%;
 	cursor: pointer;
+`;
 
-	& .image-well_remove-icon path {
-		fill: ${colors.gray4};
+export const Camera = styled(UnstyledCamera)`
+	margin-bottom: 8px;
+`;
+
+export const X = styled(UnstyledX)`
+	& path {
+		fill: #${colors.gray4};
 	}
 `;
