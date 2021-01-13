@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { colors, thickness, fonts } from '../shared-styles';
 import { Camera as UnstyledCamera } from '../icons/18px';
 import { X as UnstyledX } from '../icons/12px';
 
@@ -16,9 +15,9 @@ export const WellButton = styled.button`
 	padding: 0;
 	width: 100%;
 	height: 100%;
-	color: ${colors.blueBase};
-	border: ${thickness.two} dashed ${colors.borderColor};
-	border-radius: 6px;
+	color: ${({ theme }) => theme.colors.blue4};
+	border: 2px dashed ${({ theme }) => theme.colors.gray34};
+	border-radius: ${({ theme }) => theme.radii[2]};
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -26,14 +25,17 @@ export const WellButton = styled.button`
 	outline: none;
 	cursor: ${props => (props.previewUrl ? 'default' : 'pointer')};
 
-	${fonts.ui16}
+	/* use themeGet here? not sure these are actually working */
+	font-size: ${({ theme }) => theme.fontSizes[3]};
+	font-weight: ${({ theme }) => theme.fontWeights.regular};
+	line-height: ${({ theme }) => theme.lineHeights[1]};
 
 	&:hover {
-		background-color: ${colors.blueTint};
-		border-color: ${colors.blueBase};
+		background-color: ${({ theme }) => theme.colors.blue1};
+		border-color: ${({ theme }) => theme.colors.blue4};
 
 		& svg path {
-			fill: ${props => (props.previewUrl ? '' : colors.blueBase)};
+			fill: ${({ previewUrl, theme }) => (previewUrl ? '' : theme.colors.blue4)};
 		}
 	}
 `;
@@ -47,7 +49,7 @@ export const WellPreview = styled.div`
 	justify-content: center;
 	align-items: center;
 	position: absolute;
-	border-radius: 6px;
+	border-radius: ${({ theme }) => theme.radii[2]};
 	border: none;
 `;
 
@@ -69,6 +71,6 @@ export const Camera = styled(UnstyledCamera)`
 
 export const X = styled(UnstyledX)`
 	& path {
-		fill: #${colors.gray4};
+		fill: ${({ theme }) => theme.colors.gray4};
 	}
 `;

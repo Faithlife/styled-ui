@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './styled';
+import { DefaultThemeProvider } from '../DefaultThemeProvider';
 
 const ImageWell = ({
 	children,
@@ -46,9 +47,11 @@ const ImageWell = ({
 };
 
 const ImageWellBase = props => (
-	<Styled.WellContainer>
-		<Styled.WellButton {...props} />
-	</Styled.WellContainer>
+	<DefaultThemeProvider>
+		<Styled.WellContainer>
+			<Styled.WellButton {...props} />
+		</Styled.WellContainer>
+	</DefaultThemeProvider>
 );
 
 ImageWell.propTypes = {
