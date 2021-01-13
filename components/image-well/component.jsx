@@ -21,9 +21,11 @@ const ImageWell = ({
 						backgroundRepeat: 'no-repeat',
 					}}
 				>
-					<Styled.RemoveIconContainer onClick={() => onRemoveImage?.()}>
-						<Styled.X />
-					</Styled.RemoveIconContainer>
+					{onRemoveImage && (
+						<Styled.RemoveIconContainer onClick={onRemoveImage}>
+							<Styled.X />
+						</Styled.RemoveIconContainer>
+					)}
 				</Styled.WellPreview>
 			</ImageWellBase>
 		);
