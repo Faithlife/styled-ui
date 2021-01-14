@@ -368,23 +368,9 @@ const pages = [
 		title: 'Dropdown',
 		pages: [
 			{
-				path: '/menu/variations',
-				title: 'Menu',
-				content: pageLoader(() => import('./menu/variations.md')),
-				imports: {
-					Menu,
-					MenuDemo: styled.div`
-						display: flex;
-						align-items: flex-start;
-						justify-content: space-between;
-					`,
-					Button,
-					FavoriteFilled,
-					avatarSrc:
-						'https://files.logoscdn.com/v1/files/45929047/content.svg?signature=LanlyvDyHzxkch6f8DNUV1J15Lw',
-					thumbnailSrc:
-						'https://files.logoscdn.com/v1/files/46191785/assets/11156922/content.png?signature=ogDB6y5KmpyPWtBWitethsnveRw',
-				},
+				path: '/dropdown',
+				title: 'Dropdown Menu',
+				content: pageLoader(() => import('./menu/dropdown.md')),
 			},
 		],
 	},
@@ -468,6 +454,30 @@ const pages = [
 				title: 'Loading Spinner Documentation',
 				content: pageLoader(() => import('./loading-spinner/documentation.md')),
 				imports: { LoadingSpinner },
+			},
+		],
+	},
+	{
+		title: 'Menu',
+		pages: [
+			{
+				path: '/menu/variations',
+				title: 'Menu Variations',
+				content: pageLoader(() => import('./menu/variations.md')),
+				imports: {
+					Menu,
+					MenuDemo: styled.div`
+						display: flex;
+						align-items: flex-start;
+						justify-content: space-between;
+					`,
+					Button,
+					FavoriteFilled,
+					avatarSrc:
+						'https://files.logoscdn.com/v1/files/45929047/content.svg?signature=LanlyvDyHzxkch6f8DNUV1J15Lw',
+					thumbnailSrc:
+						'https://files.logoscdn.com/v1/files/46191785/assets/11156922/content.png?signature=ogDB6y5KmpyPWtBWitethsnveRw',
+				},
 			},
 		],
 	},
