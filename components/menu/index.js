@@ -37,4 +37,5 @@ Menu.ItemPrimaryText = MenuItemPrimaryText;
 Menu.ItemSecondaryText = MenuItemSecondaryText;
 Menu.Title = MenuItemTitle;
 
+Menu.Menu = MenuDropdown;
 export { Menu, Menu as Dropdown };
