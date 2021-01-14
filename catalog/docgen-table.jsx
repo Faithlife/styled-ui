@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button, Popover, PopoverManager, PopoverReference } from '../index';
+import { Button, Popover } from '../index';
 
 const Table = styled.table`
 	border-collapse: collapse;
@@ -56,18 +56,29 @@ class CollapsableText extends Component {
 		this.setState({ isPopoverOpen: true });
 	};
 
+	buttonRef = React.createRef();
+
 	render() {
 		return (
-			<PopoverManager>
-				<PopoverReference>
-					<Button variant="primaryOutline" size="small" onClick={this.handleOpenTooltip}>
-						Reveal
-					</Button>
-				</PopoverReference>
-				<Popover isOpen={this.state.isPopoverOpen} placement="top">
-					{this.props.children}
-				</Popover>
-			</PopoverManager>
+			<>
+				<Button
+					variant="secondary"
+					size="small"
+					onClick={this.handleOpenTooltip}
+					ref={this.buttonRef}
+				>
+					Reveal
+				</Button>
+				{this.state.isPopoverOpen && (
+					<Popover
+						isOpen={this.state.isPopoverOpen}
+						placement="top"
+						reference={this.buttonRef.current}
+					>
+						{this.props.children}
+					</Popover>
+				)}
+			</>
 		);
 	}
 }

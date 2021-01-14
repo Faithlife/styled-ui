@@ -1,3 +1,15 @@
+```react
+noSource: true
+---
+<React.Fragment>
+	<V6Banner>
+		<AcceptsStyledSystemProps />
+		<AriaCompliant />
+	</V6Banner>
+	<HelpBox variant="warning">This documentation page was broken by the update to v6. It will be fixed shortly.</HelpBox>
+</React.Fragment>
+```
+
 ## Desktop Parameter Sentence
 
 Note to designers: under the hood a parameter sentence is seen as a form by screen readers. Including a small description of each parameter as if it was a form label will go a long way towards keeping it accessible.
@@ -15,7 +27,7 @@ state: {
 <ParameterSentenceDemo>
 	<ParameterSentence accessibilityFormLabel="Tithe Calculator">
 		{'I want to give '}
-		<ParameterInputBox
+		<ParameterSentence.Input
 			defaultValue="10"
 			value={state.percentage}
 			onChange={event => setState({ percentage: event.target.value })}
@@ -24,7 +36,7 @@ state: {
 			accessibilityLabel={'Percent of income to tithe'}
 		/>
 		{' of my '}
-		<ParameterSelect
+		<ParameterSentence.Select
 			selectedId={state.schedule}
 			onItemSelect={item => setState({ schedule: item })}
 			options={scheduleOptions}
@@ -51,7 +63,7 @@ state: {
 ---
 <ParameterSentenceDemo>
 	<ParameterSentence accessibilityFormLabel="Tithe Calculator">
-		<ParameterSelect
+		<ParameterSentence.Select
 			useNativeSelect
 			selectedId={state.schedule}
 			onItemSelect={item => setState({ schedule: item })}
@@ -75,14 +87,14 @@ state: {
 }
 ---
 <ParameterSentenceDemo addMargin>
-	<ParameterSelect
+	<ParameterSentence.Select
 		selectedId={state.schedule}
 		onItemSelect={item => setState({ schedule: item })}
 		options={scheduleOptions}
 		accessibilityLabel={'Pay schedule of income'}
 		styleOverrides={{ fontSize: '18px' }}
 	/>
-	<ParameterInputBox
+	<ParameterSentence.Input
 		defaultValue="10"
 		value={state.percentage}
 		onChange={event => setState({ percentage: event.target.value })}

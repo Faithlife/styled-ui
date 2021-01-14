@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import systemPropTypes from '@styled-system/prop-types';
 import Transition from 'react-transition-group/Transition';
-import { LegacyButton as Button } from '../button';
+import { Button } from '../button';
 import { X as Close } from '../icons/18px';
 import * as Styled from './styled.jsx';
 import { theme } from '../../theme';
@@ -95,7 +95,13 @@ export class SimpleToast extends PureComponent {
 							<Styled.ToastContent>{messages[0].message}</Styled.ToastContent>
 						)}
 						<Styled.ToastClose>
-							<Button variant="minorTransparent" icon={<Close />} onClick={this.triggerExit} />
+							<Button
+								variant="minorTransparent"
+								icon={<Close />}
+								onClick={this.triggerExit}
+								height="unset"
+								padding={0}
+							/>
 						</Styled.ToastClose>
 					</Styled.ToastContainer>
 				)}

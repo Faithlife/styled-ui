@@ -186,6 +186,7 @@ colors.select = {
 colors.dropdown = {
 	background: colors.white,
 	backgroundHover: colors.gray8,
+	backgroundSelected: colors.blue2,
 	foreground: colors.gray66,
 	separator: colors.gray14,
 	foregroundDisabled: colors.gray22,
@@ -233,6 +234,13 @@ colors.radio = {
 	border: colors.checkbox.border,
 	disabledBackground: colors.gray8,
 	disabledBorder: colors.gray22,
+};
+
+colors.parameterSentence = {
+	active: '#1D6CA1',
+	border: colors.blue4,
+	closed: colors.gray66,
+	readonly: colors.gray8,
 };
 
 const fonts = {

@@ -1,5 +1,18 @@
 # Changelog
 
+## 6.0.0
+
+- Removed all deprecated components, including `Grid`, `ProductDrawer`, `GroupSelector`, and all Bootstrap components.
+- Removed the /v6 entrypoint. All components that had been available at the /v6 entrypoint are now exported from the main entrypoint.
+- Removed the `inline` variant for `Input` components.
+
+## 5.73.0
+
+- Added `showCheckboxes` option to `Select` components, used by the `AvatarOption` component to support `RecordLookup` components from FaithlifeEquipment.
+- Added v6 `Listbox` component with Styled-System props.
+- Added v6 `Menu` component with Styled-System props. This replaces the v5 `Dropdown` component.
+- Added v6 `ParameterSentence` components with Styled-System props.
+
 ## 5.72.2
 
 - Fix `Accordion` proptype that was causing a warning.

@@ -1,9 +1,8 @@
 import { pageLoader } from 'catalog';
 import styled from 'styled-components';
-import { InferredTypeahead, Typeahead } from '../../components/text-input';
-import { Select, CreatableSelect, avatarComponents } from '../../components/text-input-v2';
+import { Select, CreatableSelect, avatarComponents } from '../../components/text-input';
 import { DocgenTable } from '../docgen-table';
-import { Bootstrap, Button, Input, NumberInput, Modal, FilterInput } from '../../index';
+import { Button, Input, NumberInput, Modal, FilterInput } from '../../index';
 import {
 	InferredTextFocusDemo,
 	InferredSelectFocusDemo,
@@ -34,7 +33,7 @@ export const textInputPages = {
 		},
 		{
 			path: '/text-input/select',
-			title: 'Autocomplete Select Variations',
+			title: 'Select Variations',
 			content: pageLoader(() => import('./select.md')),
 			imports: {
 				Input,
@@ -49,12 +48,6 @@ export const textInputPages = {
 				`,
 				avatarComponents,
 			},
-		},
-		{
-			path: '/text-input/typeahead',
-			title: 'Typeahead (deprecated)',
-			content: pageLoader(() => import('./typeahead.md')),
-			imports: { InferredTypeahead, Typeahead, ...Bootstrap },
 		},
 		{
 			path: '/text-input/inferred',

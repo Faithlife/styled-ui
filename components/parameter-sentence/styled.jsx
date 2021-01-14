@@ -1,16 +1,17 @@
 import styled, { css } from 'styled-components';
-import { colors, thickness } from '../shared-styles';
+import { layout, typography } from 'styled-system';
+import { themeGet } from '@styled-system/theme-get';
 import { resetStyles } from '../utils';
 
 const selectStyling = css`
 	white-space: nowrap;
 	min-height: fit-content;
-	font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
-	width: ${({ styleOverrides }) => styleOverrides.width};
-	border-bottom: dashed ${thickness.two} ${colors.blueBase};
+	border-bottom: dashed ${themeGet('space.1')} ${themeGet('colors.parameterSentence.border')};
 	font-weight: bold;
-	color: ${colors.gray66};
-	${props => `color: ${props.isOpen ? colors.blueActive : colors.gray66}`};
+	color: ${({ isOpen }) =>
+		isOpen
+			? themeGet('colors.parameterSentence.active')
+			: themeGet('colors.parameterSentence.closed')};
 	font-family: inherit;
 	border-radius: 0;
 	line-height: 1;
@@ -18,21 +19,24 @@ const selectStyling = css`
 
 	&:hover {
 		&:not(:focus) {
-			color: ${colors.blueBase};
+			color: ${themeGet('colors.parameterSentence.border')};
 		}
 	}
 
 	&:active {
-		color: ${colors.blueActive};
+		color: ${themeGet('colors.parameterSentence.active')};
 	}
 
 	&:focus {
 		outline: none;
 	}
+
+	${layout}
+	${typography}
 `;
 
 export const Button = styled.button`
-	${resetStyles};
+	${resetStyles}
 
 	box-shadow: none;
 	cursor: pointer;
@@ -53,13 +57,12 @@ export const Button = styled.button`
 `;
 
 export const ButtonContent = styled.div.attrs(() => ({ tabIndex: '-1' }))`
-	${selectStyling};
+	${selectStyling}
 `;
 
 export const Container = styled.div`
 	display: inline-block;
 	position: relative;
-	width: ${props => props.width};
 `;
 
 export const ParameterSentence = styled.form.attrs(({ isSearchForm, labelledBy }) => ({
@@ -83,7 +86,7 @@ export const Select = styled.select`
 	background-color: transparent;
 	text-align-last: center;
 
-	${selectStyling};
+	${selectStyling}
 
 	transition: box-shadow 0.25s ease 0s;
 
@@ -98,13 +101,12 @@ export const Select = styled.select`
 export const InputContainer = styled.div`
 	display: inline-block;
 	position: relative;
-	width: ${props => props.width};
-	height: ${props => props.height || props.styleOverrides.fontSize || '16px'};
+	height: ${({ fontSize }) => fontSize || '16px'};
 
-	${selectStyling};
+	${selectStyling}
 
-	border-bottom: ${({ isFocused }) => (isFocused ? 'solid' : 'dashed')} ${thickness.two}
-		${colors.blueBase};
+	border-bottom: ${({ isFocused }) => (isFocused ? 'solid' : 'dashed')} ${themeGet('space.1')}
+		${themeGet('colors.parameterSentence.border')};
 
 	&& > input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button {
@@ -119,16 +121,15 @@ export const InputContainer = styled.div`
 
 export const Input = styled.input`
 	&& {
-		${resetStyles};
+		${resetStyles}
 
 		padding: 0;
 		padding-bottom: 0;
 
-		width: ${props => props.styleOverrides.width};
-		height: ${({ styleOverrides }) =>
-			styleOverrides.fontSize ? `calc(2px + ${styleOverrides.fontSize})` : '18px'};
+		${({ width }) => width && `width: ${width};`}
+		height: ${({ fontSize }) => (fontSize ? `calc(2px + ${fontSize})` : '18px')};
 		line-height: 1;
-		font-size: ${({ styleOverrides }) => styleOverrides.fontSize || '16px'};
+		font-size: ${({ fontSize }) => fontSize || '16px'};
 		font-weight: 600;
 		border-radius: 0;
 
@@ -142,7 +143,7 @@ export const Input = styled.input`
 		}
 
 		&:read-only {
-			background: ${colors.gray8};
+			background: ${themeGet('colors.parameterSentence.readonly')};
 		}
 
 		&:focus,

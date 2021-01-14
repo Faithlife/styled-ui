@@ -1,6 +1,20 @@
-The Modal component has been reworked for v6, but you can opt-in to use the new API now: [/v6 Modal Examples](/modal/v6)
+```react
+noSource: true
+---
+<React.Fragment>
+	<V6Banner>
+		<AcceptsStyledSystemProps />
+	</V6Banner>
+</React.Fragment>
+```
 
-## Modal with default header and footer
+## Possible polyfill requirements
+
+This component assumes the availability of the following APIs, which may require polyfills in your application:
+
+- `ResizeObserver`
+
+## Modal with v6 API
 
 ```react
 showSource: true
@@ -12,29 +26,70 @@ state: { modal: false, value: '' }
 		isOpen={state.modal}
 		container="body"
 		onClose={() => setState({ modal: false })}
-		title="Location"
-		subtitle="Help us locate you"
-		footerProps={{
-			commitButton: { text: 'Save', onClick: () => alert('Saved') },
-			cancelButton: { text: 'Cancel', onClick: () => setState({ modal: !state.modal }) },
-			deleteButton: { text: 'Delete Forever', onClick: () => alert('Deleted') }
-		}}
 	>
-		<ModalDemoWideContent>
+		<Modal.Header title="Location" subtitle="Help us locate you" />
+		<Modal.Content width={['100vw', 400]}>
 			<Input
 				value={state.value}
 				onChange={value => setState({ value: value.value, isValid: value !== '' })}
 				placeholder="Bellingham"
 				title="Location"
 			/>
-		</ModalDemoWideContent>
+		</Modal.Content>
+		<Modal.Footer>
+			<Modal.FooterButtons
+				commitButton={{ text: 'Save', onClick: () => alert('Saved') }}
+				cancelButton={{ text: 'Cancel', onClick: () => setState({ modal: !state.modal }) }}
+				deleteButton={{ text: 'Delete Forever', onClick: () => alert('Deleted') }}
+			/>
+		</Modal.Footer>
 	</Modal>
 </div>
 ```
 
-## Modal attached as child
+## Scrolling Modal with overflowing Dropdown Menu
 
-This `<Modal>` component doesn't specify a `container` prop, so it is added as a child of its parent in the DOM.
+The modal will automatically scroll when content is longer than the page height
+
+```react
+showSource: true
+state: { modal: false, dropdown: false, value: '' }
+---
+<div>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Modal
+		isOpen={state.modal}
+		container="body"
+		onClose={() => setState({ modal: false })}
+	>
+		<Modal.Header title="Location" subtitle="Help us locate you" />
+		<Modal.Content width={['100vw', 475]}>
+			{JSON.stringify(new Array(3000), null, '\t')}
+			<Menu isOpen={state.dropdown} onToggleMenu={() => setState({dropdown: !state.dropdown})}>
+				<Menu.Toggle>Show a Dropdown Menu!</Menu.Toggle>
+				<Menu.Dropdown>
+					<Menu.Item onClick={() => {}}>Banana</Menu.Item>
+					<Menu.Item onClick={() => {}}>Banana</Menu.Item>
+					<Menu.Item onClick={() => {}}>Banana</Menu.Item>
+					<Menu.Item onClick={() => {}}>Banana</Menu.Item>
+					<Menu.Item onClick={() => {}}>Banana</Menu.Item>
+					<Menu.Item onClick={() => {}}>Banana</Menu.Item>
+					<Menu.Item onClick={() => {}}>Orange you glad I didn't say "banana"?</Menu.Item>
+				</Menu.Dropdown>
+			</Menu>
+		</Modal.Content>
+		<Modal.Footer>
+			<Modal.FooterButtons
+				commitButton={{ text: 'Save', onClick: () => alert('Saved') }}
+				cancelButton={{ text: 'Cancel', onClick: () => setState({ modal: !state.modal }) }}
+				deleteButton={{ text: 'Delete Forever', onClick: () => alert('Deleted') }}
+			/>
+		</Modal.Footer>
+	</Modal>
+</div>
+```
+
+## Modal with 24px spacing and 24px title
 
 ```react
 showSource: true
@@ -44,28 +99,31 @@ state: { modal: false, value: '' }
 	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
+		container="body"
 		onClose={() => setState({ modal: false })}
-		title="Location"
-		subtitle="Help us locate you"
-		footerProps={{
-			commitButton: { text: 'Save', onClick: () => alert('Saved') },
-			cancelButton: { text: 'Cancel', onClick: () => setState({ modal: !state.modal })},
-			deleteButton: { text: 'Delete Forever', onClick: () => alert('Deleted') }
-		}}
+		contentPadding={6}
 	>
-		<ModalDemoWideContent>
+		<Modal.Header title="Location" subtitle="Help us locate you" textStyle={'h.24'} />
+		<Modal.Content width={['100vw', 400]}>
 			<Input
 				value={state.value}
 				onChange={value => setState({ value: value.value, isValid: value !== '' })}
 				placeholder="Bellingham"
 				title="Location"
 			/>
-		</ModalDemoWideContent>
+		</Modal.Content>
+		<Modal.Footer>
+			<Modal.FooterButtons
+				commitButton={{ text: 'Save', onClick: () => alert('Saved') }}
+				cancelButton={{ text: 'Cancel', onClick: () => setState({ modal: !state.modal }) }}
+				deleteButton={{ text: 'Delete Forever', onClick: () => alert('Deleted') }}
+			/>
+		</Modal.Footer>
 	</Modal>
 </div>
 ```
 
-## Modal with no delete option
+## Modal with 16px title
 
 ```react
 showSource: true
@@ -77,60 +135,28 @@ state: { modal: false, value: '' }
 		isOpen={state.modal}
 		container="body"
 		onClose={() => setState({ modal: false })}
-		title="Location"
-		subtitle="Help us locate you"
-		footerProps={{
-			commitButton: { text: 'Save', onClick: () => alert('Saved') },
-			cancelButton: { text: 'Cancel', onClick: () => setState({ modal: !state.modal })}
-		}}
 	>
-		<ModalDemoWideContent>
+		<Modal.Header title="Location" subtitle="Help us locate you" textStyle={'h.16'} />
+		<Modal.Content width={['100vw', 400]}>
 			<Input
 				value={state.value}
-				onChange={value => setState({ value: value, isValid: value !== '' })}
+				onChange={value => setState({ value: value.value, isValid: value !== '' })}
 				placeholder="Bellingham"
 				title="Location"
-				debounce={200}
 			/>
-		</ModalDemoWideContent>
-	</Modal>
-</div>
-```
-
-## Modal with only a delete option
-
-```react
-showSource: true
-state: { modal: false, value: '' }
----
-<div>
-	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
-	<Modal
-		isOpen={state.modal}
-		container="body"
-		onClose={() => setState({ modal: false })}
-		title="Location"
-		subtitle="Help us locate you"
-		footerProps={{
-			deleteButton: { text: 'Delete Forever', onClick: () => alert('Deleted') }
-		}}
-	>
-		<ModalDemoWideContent>
-			<Input
-				value={state.value}
-				onChange={value => setState({ value: value, isValid: value !== '' })}
-				placeholder="Bellingham"
-				title="Location"
-				debounce={200}
+		</Modal.Content>
+		<Modal.Footer>
+			<Modal.FooterButtons
+				commitButton={{ text: 'Save', onClick: () => alert('Saved') }}
+				cancelButton={{ text: 'Cancel', onClick: () => setState({ modal: !state.modal }) }}
+				deleteButton={{ text: 'Delete Forever', onClick: () => alert('Deleted') }}
 			/>
-		</ModalDemoWideContent>
+		</Modal.Footer>
 	</Modal>
 </div>
 ```
 
-## Modal with stacked buttons
-
-Modal buttons stack at 320px for 3 buttons configurations and 220px for 1 or 2 button configurations.
+## Fullscreen modal with custom header actions
 
 ```react
 showSource: true
@@ -142,28 +168,39 @@ state: { modal: false, value: '' }
 		isOpen={state.modal}
 		container="body"
 		onClose={() => setState({ modal: false })}
-		title="Location"
-		subtitle="Help us locate you"
-		footerProps={{
-			commitButton: { text: 'Save', onClick: () => alert('Saved') },
-			cancelButton: { text: 'Cancel', onClick: () => setState({ modal: !state.modal })},
-			deleteButton: { text: 'Delete Forever', onClick: () => alert('Deleted') }
-		}}
+		contentPadding={6}
+		fullscreen
 	>
-		<ModalDemoStackedContent>
-			<Input
-				value={state.value}
-				onChange={value => setState({ value: value, isValid: value !== '' })}
-				placeholder="Bellingham"
-				title="Location"
-				debounce={200}
-			/>
-		</ModalDemoStackedContent>
+		<Modal.Header
+			title="Fullscreen modal"
+			textStyle="h.24"
+			message={`Autosaved at ${new Date().toString()}`}
+			actions={<Box display="grid" gridAutoFlow="column" gridAutoColumns="min-content" gridGap={[3,5]}>
+				<Button size={['medium', 'small']} minWidth={78} variant="secondary" onClick={() => setState({ modal: !state.modal })}>
+					Cancel
+				</Button>
+				<Button size={['medium', 'small']} minWidth={78} variant="primary" onClick={() => setState({ modal: !state.modal })}>
+					Save
+				</Button>
+			</Box>}
+		/>
+		<Modal.Content
+			paddingX={0}
+			paddingBottom={0}
+		>
+			<Box
+				backgroundImage="url(https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201)"
+				backgroundSize="cover"
+				height="100%"
+			>
+				&nbsp;
+			</Box>
+		</Modal.Content>
 	</Modal>
 </div>
 ```
 
-## Modal with custom footer
+## Fullscreen modal with really long content
 
 ```react
 showSource: true
@@ -175,103 +212,12 @@ state: { modal: false, value: '' }
 		isOpen={state.modal}
 		container="body"
 		onClose={() => setState({ modal: false })}
-		title="Location"
-		subtitle="Help us locate you"
-		renderFooter={() => <ModalFooter>
-				<ModalDemoButtonContainer>
-					<Button variant="primaryOutline" size="medium" onClick={() => setState({ modal: false })}>Option 1</Button>
-				</ModalDemoButtonContainer>
-				<ModalDemoButtonContainer>
-					<Button variant="primaryOutline" size="medium" onClick={() => setState({ modal: false })}>Option 2</Button>
-				</ModalDemoButtonContainer>
-				<ModalDemoButtonContainer>
-					<Button variant="primaryOutline" size="medium" onClick={() => setState({ modal: false })}>Option 3</Button>
-				</ModalDemoButtonContainer>
-				<Button variant="primary" size="medium" onClick={() => {}}>Yes!</Button>
-			</ModalFooter>}
+		fullscreen
 	>
-		<ModalDemoWideContent>
-			<Input
-				value={state.value}
-				onChange={value => setState({ value: value, isValid: value !== '' })}
-				placeholder="Bellingham"
-				title="Location"
-				debounce={200}
-			/>
-		</ModalDemoWideContent>
-	</Modal>
-</div>
-```
-
-## Modal with no footer
-
-```react
-showSource: true
-state: { modal: false, value: '' }
----
-<div>
-	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
-	<Modal
-		isOpen={state.modal}
-		container="body"
-		onClose={() => setState({ modal: false })}
-		title="Location"
-		subtitle="Help us locate you"
-		withoutFooter
-	>
-		<ModalContent paddingBottom={5}>
-			<Input
-				value={state.value}
-				onChange={value => setState({ value: value, isValid: value !== '' })}
-				placeholder="Bellingham"
-				title="Location"
-				debounce={200}
-			/>
-		</ModalContent>
-	</Modal>
-</div>
-```
-
-## Modal with really long content
-
-```react
-showSource: true
-state: { modal: false, value: '' }
----
-<div>
-	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
-	<Modal
-		isOpen={state.modal}
-		container="body"
-		onClose={() => setState({ modal: false })}
-		title="Lots of content"
-		withoutFooter
-	>
-		<ModalContent overflowY="auto">
-			{JSON.stringify(new Array(1000))}
-		</ModalContent>
-	</Modal>
-</div>
-```
-
-## Modal with custom content padding
-
-```react
-showSource: true
-state: { modal: false, value: '' }
----
-<div>
-	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
-	<Modal
-		isOpen={state.modal}
-		container="body"
-		onClose={() => setState({ modal: false })}
-		title="Modal with full width content"
-		withoutFooter
-	>
-		<ModalContent paddingX={0} paddingBottom={0} overflowY="auto">
-			<img src="https://www.bellinghamherald.com/news/local/l6de4z/picture53186905/alternates/LANDSCAPE_1140/Faithlife%201" alt="Faithlife campus" style={{ display: 'block' }} />
-		</ModalContent>
+		<Modal.Header title="Fullscreen modal" textStyle="h.24" />
+		<Modal.Content paddingBottom={0}>
+			{JSON.stringify(new Array(3000))}
+		</Modal.Content>
 	</Modal>
 </div>
 ```

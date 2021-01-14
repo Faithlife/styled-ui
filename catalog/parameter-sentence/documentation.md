@@ -9,11 +9,11 @@ noSource: true
 ```react
 noSource: true
 ---
-<DocgenTable component={ParameterSelect} />
+<DocgenTable component={ParameterSentence.Select} displayName="ParameterSentence.Select" />
 ```
 
 ```react
 noSource: true
 ---
-<DocgenTable component={ParameterInputBox} />
+<DocgenTable component={ParameterSentence.Input} displayName="ParameterSentence.Input" />
 ```

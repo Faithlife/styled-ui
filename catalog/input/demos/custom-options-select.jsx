@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Select } from '../../../components/text-input-v2';
+import { Select } from '../../../components/text-input';
 import * as Styled from './styled.jsx';
 
 export function CustomOptionsSelectDemo() {

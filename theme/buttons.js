@@ -129,6 +129,8 @@ export const buttons = {
 		'&:disabled': {
 			color: 'button.primaryDisabled',
 		},
+		height: 'unset',
+		padding: 0,
 	},
 	danger: {
 		border: 1,

@@ -1,3 +1,8 @@
-export { ParameterSelect } from './parameter-select';
-export { ParameterInputBox } from './parameter-input';
-export { ParameterSentence } from './parameter-sentence';
+import { ParameterSentence } from './parameter-sentence';
+import { ParameterSelect } from './parameter-select';
+import { ParameterInputBox } from './parameter-input';
+
+ParameterSentence.Select = ParameterSelect;
+ParameterSentence.Input = ParameterInputBox;
+
+export { ParameterSentence };

@@ -1,3 +1,13 @@
+```react
+noSource: true
+---
+<React.Fragment>
+	<V6Banner>
+		<AcceptsStyledSystemProps />
+	</V6Banner>
+</React.Fragment>
+```
+
 ## Default Date Picker
 
 ```react

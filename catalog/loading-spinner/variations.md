@@ -1,3 +1,13 @@
+```react
+noSource: true
+---
+<React.Fragment>
+	<V6Banner>
+		<AcceptsStyledSystemProps />
+	</V6Banner>
+</React.Fragment>
+```
+
 ### Default size
 
 ```react
@@ -22,12 +32,12 @@ showSource: true
 <LoadingSpinner variant="medium" />
 ```
 
-### Medium with Custom Height
+### Medium with Custom Dimensions
 
 ```react
 showSource: true
 ---
-<LoadingSpinner variant="medium" height={80} />
+<LoadingSpinner variant="medium" size={80} />
 ```
 
 ### Large

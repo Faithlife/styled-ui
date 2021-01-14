@@ -20,7 +20,6 @@ const Input = React.memo(
 			small,
 			medium,
 			large,
-			inline,
 			disabled,
 			onEnter,
 			onFocus,
@@ -39,21 +38,7 @@ const Input = React.memo(
 			[onEnter],
 		);
 
-		const variation = getVariation(variant, { small, medium, large, inline, none: true });
-
-		if (process.env.NODE_ENV !== 'production') {
-			if (variation === 'inline') {
-				console.warn(
-					'Warning: The `inline` variation has been deprecated, and will be removed in a future release.',
-				);
-			}
-			/** @todo Remove warning upon v6 release. */
-			if (inputProps.styleOverrides) {
-				console.warn(
-					'Warning: The `styleOverrides` prop has been deprecated and will be removed in the next major release.',
-				);
-			}
-		}
+		const variation = getVariation(variant, { small, medium, large, none: true });
 
 		const handleFocus = useMemo(() => {
 			if (!selectOnFocus) {
@@ -115,8 +100,6 @@ Input.propTypes = {
 	/** Large variation (deprecated in favor of the variant prop) */
 	large: PropTypes.bool,
 	size: PropTypes.number,
-	/** Inline input variation */
-	inline: PropTypes.bool,
 	/** Textarea input variation */
 	textarea: PropTypes.bool,
 	...common.propTypes,
@@ -161,9 +144,6 @@ const StyledInput = styled.input(
 			border-color: ${theme.colors.input.borderFocused};
 			box-shadow: 0 0 0 2px ${theme.colors.input.shadowFocused};
 			outline: 0;
-			${({ variant }) =>
-				variant === 'inline' &&
-				system({ underlineColor: { property: 'border-color', scale: 'colors' } })}
 		}
 
 		&:disabled {
@@ -195,26 +175,8 @@ const StyledInput = styled.input(
 					paddingY: 4,
 					height: '56px',
 				},
-				inline: {
-					backgroundColor: 'transparent',
-					border: 'none',
-					boxShadow: 'none',
-					borderRadius: 0,
-					padding: 0,
-					borderBottom: '2px solid',
-					borderColor: 'blue',
-					height: '20px',
-					paddingBottom: '4px',
-					lineHeight: 1,
-					'&:focus': {
-						boxShadow: 'none',
-						outline: '0',
-					},
-				},
 			},
 		})}
-
-		${variant === 'inline' && system({ underlineColor: { property: 'border-color', scale: 'colors' } })}
 
 		${common}
 		${typography}

@@ -13,7 +13,7 @@ lang: jsx
 			template={'I want to give %PERCENTAGE% (%PREPOST% 19% taxes) of my %SCHEDULE% income of %INCOME%.'}
 		>
 			<CommandSentence.Field name="PERCENTAGE">
-				<ParameterInputBox
+				<ParameterSentence.Input
 					defaultValue="10"
 					value={state.percentage}
 					onChange={event => setState({ percentage: event.target.value })}
@@ -23,7 +23,7 @@ lang: jsx
 				/>
 			</CommandSentence.Field>
 			<CommandSentence.Field name="PREPOST">
-				<ParameterSelect
+				<ParameterSentence.Select
 					selectedId={state.prepost}
 					onItemSelect={item => setState({ prepost: item })}
 					options={prePostOptions}
@@ -31,7 +31,7 @@ lang: jsx
 				/>
 			</CommandSentence.Field>
 			<CommandSentence.Field name="SCHEDULE">
-				<ParameterSelect
+				<ParameterSentence.Select
 					selectedId={state.schedule}
 					onItemSelect={item => setState({ schedule: item })}
 					options={scheduleOptions}
@@ -39,7 +39,7 @@ lang: jsx
 				/>
 			</CommandSentence.Field>
 			<CommandSentence.Field name="INCOME">
-				<ParameterInputBox
+				<ParameterSentence.Input
 					defaultValue="55700"
 					value={state.income}
 					onChange={event => setState({ income: event.target.value })}
