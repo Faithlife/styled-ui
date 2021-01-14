@@ -1,6 +1,5 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
 	optimization: {
@@ -21,21 +20,13 @@ module.exports = {
 		jsonpFunction: 'styledUIJsonp',
 	},
 	externals: [nodeExternals()],
-	plugins: [
-		new MiniCssExtractPlugin({
-			filename: '[name].css',
-		}),
-	],
+	plugins: [],
 	module: {
 		rules: [
 			{
 				test: /\.jsx?$/,
 				use: 'babel-loader',
 				exclude: [/node_modules/],
-			},
-			{
-				test: /\.scss?$/,
-				use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
 			},
 			{
 				test: /\.(svg)$/,
