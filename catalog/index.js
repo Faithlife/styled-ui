@@ -755,7 +755,7 @@ function V6Banner({ children, oldHash }) {
 			<Stack spacing={3}>
 				<Paragraph>
 					This component has been updated for Styled-UI v6.
-					<Button as="a" variant="link" href="/#/upgrade-guide" marginLeft={2}>
+					<Button as="a" variant="link" href="/styled-ui/#/upgrade-guide" marginLeft={2}>
 						View the full v6 upgrade guide
 					</Button>
 				</Paragraph>

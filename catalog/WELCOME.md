@@ -4,7 +4,7 @@ noSource: true
 <HelpBox variant="success">
 	<Paragraph>
 		Styled-UI v6.0.0 has been released!
-		<Button as="a" variant="link" href="/#/upgrade-guide" marginLeft={2}>Please check out the upgrade guide</Button>
+		<Button as="a" variant="link" href="/styled-ui/#/upgrade-guide" marginLeft={2}>Please check out the upgrade guide</Button>
 	</Paragraph>
 </HelpBox>
 ```
