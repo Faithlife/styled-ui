@@ -3,6 +3,8 @@
 ## 6.0.0
 
 - Remove all deprecated components, including `Grid`, `ProductDrawer`, `GroupSelector`, and all Bootstrap components.
+- The /v6 entrypoint has been removed. All components that had been available at the /v6 entrypoint are now exported from the main entrypoint.
+- The `inline` variant for `Input` components has been removed.
 
 ## 5.73.0
 
@@ -32,6 +34,7 @@
 - Added warning for duplicate date period display names in `DatePeriodPicker`.
 - Fixed focus-away handler in `DatePicker` interfering with min- and max- dates.
 - Fixed `Modal` components not correctly scrolling overflow content on Safari.
+
 ## 5.71.0
 
 - Added v6 `Checkbox` component with Styled-System props.
