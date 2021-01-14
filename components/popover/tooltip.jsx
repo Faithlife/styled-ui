@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useDebouncedCallback } from '../shared-hooks'; // Copied from react-ui. Import from there when made available.
-import { Popover } from '../popover-v6';
+import { Popover } from './popover';
 import { Box } from '../Box';
 
 /** Simple tooltip that uses popovers internally. */

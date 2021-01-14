@@ -1,7 +1,5 @@
 import { Menu } from '../menu';
 
-export { Listbox as LegacyListbox, ListboxToggle, ListboxMenu, ListItem } from './legacy-listbox';
-
 import { Listbox } from './listbox';
 import { ListboxToggle } from './listbox-toggle';
 import { ListboxDropdown } from './listbox-dropdown';

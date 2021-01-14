@@ -1,3 +1,7 @@
+For the next major version of Styled UI, the Slider component has been rebuilt to use Styled System primitives.
+
+You can opt-in to the new API now by importing `{ Slider } from '@faithlife/styled-ui/v6'`. When v6 is released, the `/v6` entrypoint will continue to be supported with a deprecation warning until v7 is released.
+
 ## Slider
 
 ```react
@@ -90,8 +94,7 @@ state: { value: 50, labels: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 
 
 ### Note on background colors
 
-The slider component expects a white background to create the sections of inactive track that cover the blue gradient.
-If your slider is not on a white background, use the `styleOverrides` prop to indicate the background color.
+The slider component expects a white background to create the sections of inactive track that cover the blue gradient. If your slider is not on a white background, use the `backgroundColor` (or `bg`) prop to indicate the correct background color.
 
 ```react
 showSource: true
@@ -99,6 +102,7 @@ state: {}
 ---
 <div style={{background: "#8fdb6b", padding: 20}}>
 	<Slider value={1} maxValue={3} stopCount={5} />
-	<Slider styleOverrides={{ backgroundColor: '#8fdb6b' }} value={1} maxValue={3} stopCount={5} />
+	<Slider backgroundColor="#8fdb6b" value={1} maxValue={3} stopCount={5} />
+	<Slider bg="#8fdb6b" value={1} maxValue={3} stopCount={5} />
 </div>
 ```

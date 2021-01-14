@@ -1,8 +1,7 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { getConfigProps } from '../utils';
-import { Popover } from '../popover-v6';
-import { PlacementOptionsProps } from '../popover/popper-helpers';
+import { Popover } from '../popover';
 import { Calendar as CalendarIcon } from '../icons';
 import { Input } from '../input';
 import { dateFunctionProps } from '../date-picker/date-function-props';
@@ -193,7 +192,6 @@ DatePickerInput.propTypes = {
 	onFocus: PropTypes.func,
 	disabled: PropTypes.bool,
 	/** Where on the target the date picker renders */
-	placement: PlacementOptionsProps,
 	minDate: PropTypes.instanceOf(Date),
 	maxDate: PropTypes.instanceOf(Date),
 	/** Style overrides, inputWidth is applied to the input */

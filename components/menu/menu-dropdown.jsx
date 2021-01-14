@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Popover } from '../popover-v6';
+import { Popover } from '../popover';
 import { useDropdownContext, useKeyboardNavigate } from './utils';
 import * as Styled from './styled';
 
@@ -42,7 +42,7 @@ export function MenuDropdown({ children, ...popoverProps }) {
 				{...popoverProps}
 			>
 				{React.Children.map(children, (child, index) =>
-					React.isValidElement(child) && child.type.isFocusableChild
+					React.isValidElement(child) && child.type && child.type.isFocusableChild
 						? React.cloneElement(child, {
 								ref: registerItem(index),
 								keyboardFocused: focusedItemIndex === index,

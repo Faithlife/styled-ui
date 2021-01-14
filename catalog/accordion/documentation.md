@@ -1,4 +1,10 @@
-This documentation is automatically generated from jsdoc comments.
+```react
+noSource: true
+---
+<AcceptsStyledSystemProps />
+```
+
+This documentation is automatically generated from JSDoc comments.
 
 ```react
 noSource: true

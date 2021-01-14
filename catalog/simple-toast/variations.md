@@ -1,4 +1,8 @@
-## Simple Toast
+For the next major version of Styled UI, the SimpleToast component has been rebuilt to use Styled System primitives.
+
+You can opt in to the new API now by importing `{ SimpleToast } from '@faithlife/styled-ui/v6'`. When v6 is released, the `/v6` entrypoint will continue to be supported with a deprecation warning until v7 is released.
+
+## v6 Simple Toast
 
 The toast will appear differently for mobile and desktop. Try resizing the screen and refreshing.
 
@@ -9,8 +13,8 @@ showSource: true
 state: { number: 0 }
 ---
 <ToastDemo>
-	<Button variant="primary" size="medium" onClick={() => toastRef.current.showMessage({ message: 'Hello!' })}>Hello!</Button>
-	<Button variant="primary" size="medium" onClick={() => toastRef.current.showMessage({ message: 'Hello w/ Icon!', icon: <LoadingSpinner small /> })}>Hello w/ Icon!</Button>
+	<Button onClick={() => toastRef.current.showMessage({ message: 'Hello!' })}>Hello!</Button>
+	<Button onClick={() => toastRef.current.showMessage({ message: 'Hello w/ Icon!', icon: <LoadingSpinner small /> })}>Hello w/ Icon!</Button>
 	<SimpleToast ref={toastRef} showTime={1000} />
 </ToastDemo>
 ```

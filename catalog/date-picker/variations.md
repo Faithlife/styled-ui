@@ -1,3 +1,9 @@
+```react
+noSource: true
+---
+<HelpBox variant="warning">This documentation page was broken by the update to v6. It will be fixed shortly.</HelpBox>
+```
+
 ## Default Date Picker
 
 ```react

@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { getConfigProps } from '../utils';
-import { Popover } from '../popover-v6';
+import { Popover } from '../popover';
 import { Calendar as CalendarIcon } from '../icons';
 import { Input } from '../input';
 import { dateFunctionProps } from '../date-picker/date-function-props';

@@ -43,7 +43,7 @@ export function ParameterSelect({
 					labelledBy={labelId}
 				>
 					<Listbox.Toggle>
-						{({ ref, onKeyDown, onClick, ariaProps }) => (
+						{(ref, { onKeyDown, onClick, ariaProps }) => (
 							<Styled.Button
 								ref={ref}
 								onKeyDown={onKeyDown}

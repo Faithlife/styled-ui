@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import systemPropTypes from '@styled-system/prop-types';
 import Transition from 'react-transition-group/Transition';
-import { LegacyButton as Button } from '../button';
+import { Button } from '../button';
 import { X as Close } from '../icons/18px';
 import * as Styled from './styled.jsx';
 import { theme } from '../../theme';
