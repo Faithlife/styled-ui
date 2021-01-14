@@ -8,6 +8,7 @@ export { DatePeriodPicker } from './components/date-period-picker';
 export { DropZone } from './components/drop-zone';
 export { FilesSection } from './components/files-section';
 export { HelpBox } from './components/help-box';
+export { ImageWell } from './components/image-well';
 export { Input, FilterInput, NumberInput } from './components/input';
 export { LoadingSpinner } from './components/loading-spinner';
 export { Listbox } from './components/listbox';
@@ -33,9 +34,6 @@ export {
 	MasonryCell,
 	getRowLayout,
 } from './components/row-masonry';
-export { Switch } from './components/Switch';
-
-export { ImageWell } from './components/image-well';
 
 export { theme, useTheme } from './theme';
 export { DefaultThemeProvider } from './components/DefaultThemeProvider';
