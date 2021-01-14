@@ -47,7 +47,7 @@ state: { modal: false, value: '' }
 </div>
 ```
 
-## Scrolling Modal with overflowing Dropdown
+## Scrolling Modal with overflowing Dropdown Menu
 
 The modal will automatically scroll when content is longer than the page height
 
@@ -65,18 +65,18 @@ state: { modal: false, dropdown: false, value: '' }
 		<Modal.Header title="Location" subtitle="Help us locate you" />
 		<Modal.Content width={['100vw', 475]}>
 			{JSON.stringify(new Array(3000), null, '\t')}
-			<Dropdown isOpen={state.dropdown} onToggleMenu={() => setState({dropdown: !state.dropdown})}>
-				<Dropdown.Toggle>Show a Dropdown!</Dropdown.Toggle>
-				<Dropdown.Menu>
-					<Dropdown.Item onClick={() => {}}>Banana</Dropdown.Item>
-					<Dropdown.Item onClick={() => {}}>Banana</Dropdown.Item>
-					<Dropdown.Item onClick={() => {}}>Banana</Dropdown.Item>
-					<Dropdown.Item onClick={() => {}}>Banana</Dropdown.Item>
-					<Dropdown.Item onClick={() => {}}>Banana</Dropdown.Item>
-					<Dropdown.Item onClick={() => {}}>Banana</Dropdown.Item>
-					<Dropdown.Item onClick={() => {}}>Orange you glad I didn't say "banana"?</Dropdown.Item>
-				</Dropdown.Menu>
-			</Dropdown>
+			<Menu isOpen={state.dropdown} onToggleMenu={() => setState({dropdown: !state.dropdown})}>
+				<Menu.Toggle>Show a Dropdown Menu!</Menu.Toggle>
+				<Menu.Dropdown>
+					<Menu.Item onClick={() => {}}>Banana</Menu.Item>
+					<Menu.Item onClick={() => {}}>Banana</Menu.Item>
+					<Menu.Item onClick={() => {}}>Banana</Menu.Item>
+					<Menu.Item onClick={() => {}}>Banana</Menu.Item>
+					<Menu.Item onClick={() => {}}>Banana</Menu.Item>
+					<Menu.Item onClick={() => {}}>Banana</Menu.Item>
+					<Menu.Item onClick={() => {}}>Orange you glad I didn't say "banana"?</Menu.Item>
+				</Menu.Dropdown>
+			</Menu>
 		</Modal.Content>
 		<Modal.Footer>
 			<Modal.FooterButtons
