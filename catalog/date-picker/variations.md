@@ -1,7 +1,10 @@
 ```react
 noSource: true
 ---
-<HelpBox variant="warning">This documentation page was broken by the update to v6. It will be fixed shortly.</HelpBox>
+<React.Fragment>
+	<V6Banner />
+	<HelpBox variant="warning">This documentation page was broken by the update to v6. It will be fixed shortly.</HelpBox>
+</React.Fragment>
 ```
 
 ## Default Date Picker

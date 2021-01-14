@@ -2,7 +2,7 @@
 showSource: true
 ---
 <ButtonDemo>
-	<Button variant="primaryOutline" size="medium" width="80px">
+	<Button variant="secondary" size="medium" width="80px">
 		Cancel
 	</Button>
 	<Button variant="primary" size="medium" width="80px">

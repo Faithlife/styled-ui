@@ -33,7 +33,7 @@ export const textInputPages = {
 		},
 		{
 			path: '/text-input/select',
-			title: 'Autocomplete Select Variations',
+			title: 'Select Variations',
 			content: pageLoader(() => import('./select.md')),
 			imports: {
 				Input,

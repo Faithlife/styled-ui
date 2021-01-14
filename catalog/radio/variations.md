@@ -1,3 +1,13 @@
+```react
+noSource: true
+---
+<React.Fragment>
+	<V6Banner>
+		<AcceptsStyledSystemProps />
+	</V6Banner>
+</React.Fragment>
+```
+
 ### Default theme
 
 ```react
@@ -21,15 +31,18 @@ showSource: true
 state: { isChecked: false }
 ---
 <RadioDemo>
-	<Radio
-		onClick={() => setState({ isChecked: !state.isChecked })}
-		isChecked={state.isChecked}
-		title={'Click me'}
-		theme={{
-			primary: 'darkslateblue',
-			border: 'plum',
-		}}
-	/>
+	<ThemeProvider theme={{
+		colors: {
+			radio: { primary: 'darkslateblue', border: 'plum' }
+		}
+	}}>
+		<Radio
+			onClick={() => setState({ isChecked: !state.isChecked })}
+			isChecked={state.isChecked}
+			title={'Click me'}
+			type="button"
+		/>
+	</ThemeProvider>
 </RadioDemo>
 ```
 
@@ -64,6 +77,26 @@ state: { isChecked: false }
 		type="button"
 		disabled
 	>
+	</Radio>
+</RadioDemo>
+```
+
+### Custom icon/label props
+
+Extra props on the `Radio` component are passed to the container. To pass Styled System props to just the icon or just the label, use `Radio.Icon` and/or `Radio.Label` config components.
+
+```react
+showSource: true
+state: { isChecked: false }
+---
+<RadioDemo>
+	<Radio
+		onClick={() => setState({ isChecked: !state.isChecked })}
+		isChecked={state.isChecked}
+		type="button"
+	>
+		<Radio.Icon size="25px" />
+		<Radio.Label color="red">A bigger icon and a red label</Radio.Label>
 	</Radio>
 </RadioDemo>
 ```

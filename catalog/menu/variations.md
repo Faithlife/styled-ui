@@ -2,14 +2,12 @@
 noSource: true
 ---
 <React.Fragment>
-	<AcceptsStyledSystemProps />
-	<AriaCompliant />
+	<V6Banner oldHash="#/dropdown/variations">
+		<AcceptsStyledSystemProps />
+		<AriaCompliant />
+	</V6Banner>
 </React.Fragment>
 ```
-
-## Dropdown v6
-
-Dropdown is an umbrella term for any component that shows a popover when clicked or hovered. The v5 Dropdown component implements the `menu` pattern and as such has been renamed to `Menu` for role clarity.
 
 ```react
 showSource: true

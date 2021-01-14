@@ -1,6 +1,15 @@
-## Listbox V6
+```react
+noSource: true
+---
+<React.Fragment>
+	<V6Banner>
+		<AcceptsStyledSystemProps />
+		<AriaCompliant />
+	</V6Banner>
+</React.Fragment>
+```
 
-A `Listbox` is a dropdown should be used in situations similar to a html select. Refer to the `Menu` docs for more info on variations.
+A `Listbox` is a dropdown should be used in situations similar to an HTML select. Refer to the `Menu` docs for more info on variations.
 
 ```react
 showSource: true

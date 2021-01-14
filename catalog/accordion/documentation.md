@@ -1,7 +1,12 @@
 ```react
 noSource: true
 ---
-<AcceptsStyledSystemProps />
+<React.Fragment>
+	<V6Banner>
+		<AcceptsStyledSystemProps />
+		<AriaCompliant />
+	</V6Banner>
+</React.Fragment>
 ```
 
 This documentation is automatically generated from JSDoc comments.
