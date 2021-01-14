@@ -1,16 +1,3 @@
-export {
-	Dropdown as LegacyDropdown,
-	MenuItem,
-	MenuSeparator,
-	MenuCheckbox,
-	DropdownMenu,
-	DropdownToggle,
-	useDropdownContext,
-	DropdownCore,
-	DropdownToggleCore,
-	DropdownMenuCore,
-} from './legacy-dropdown';
-
 import { Menu } from './menu';
 import { MenuToggle, MenuActionButton } from './menu-toggle';
 import { MenuDropdown } from './menu-dropdown';
@@ -37,4 +24,4 @@ Menu.ItemPrimaryText = MenuItemPrimaryText;
 Menu.ItemSecondaryText = MenuItemSecondaryText;
 Menu.Title = MenuItemTitle;
 
-export { Menu, Menu as Dropdown };
+export { Menu };

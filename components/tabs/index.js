@@ -9,6 +9,3 @@ Tab.Panel = TabPanel;
 SequencedTab.List = SequencedTabList;
 
 export { Tab, SequencedTab };
-
-/** @todo Remove helper exports after v6 release */
-export { TabManager, TabList, TabPanels, TabPanel, SequencedTabList };

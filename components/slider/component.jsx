@@ -4,7 +4,7 @@ import debounce from 'lodash.debounce';
 import throttle from 'lodash.throttle';
 import memoize from 'memoize-one';
 import { Box } from '../Box';
-import { Popover } from '../popover-v6';
+import { Popover } from '../popover';
 import * as Styled from './styled';
 
 function range(from, to) {

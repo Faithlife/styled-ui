@@ -1,5 +1,11 @@
-- [✔] Styled Systems support
-- [✔] WAI-ARIA compliant
+```react
+noSource: true
+---
+<React.Fragment>
+	<AcceptsStyledSystemProps />
+	<AriaCompliant />
+</React.Fragment>
+```
 
 ## Dropdown v6
 

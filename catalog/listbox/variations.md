@@ -1,6 +1,6 @@
-## Listbox
+## Listbox V6
 
-A list box should be used in situations simmilar to a html select. Refer to the dropdown docs for more info on varriations.
+A `Listbox` is a dropdown should be used in situations similar to a html select. Refer to the `Menu` docs for more info on variations.
 
 ```react
 showSource: true
@@ -10,16 +10,17 @@ state: { isOpen: false, selected: 0 }
 	<Label id="listboxLabel">Pick your favorite browser:</Label>
 	<Listbox
 		isOpen={state.isOpen}
-		onItemSelect={id => setState({ selected: id })}
+		onItemSelect={id => {console.log(id); setState({ selected: id })}}
 		selectedId={state.selected}
 		onToggleMenu={() => setState({ isOpen: !state.isOpen })}
 		labelledBy="listboxLabel"
+		width="100px"
 	>
-		<ListboxToggle primary medium icon={<ChevronDown color="white" />} styleOverrides={{width: '100px'}}>{browserList[state.selected]}</ListboxToggle>
-		<ListboxMenu>
-			{browserList.map((name, index) => <ListItem id={index}>{name}</ListItem>)}
-			<ListItem id="ie" disabled>Internet Explorer</ListItem>
-		</ListboxMenu>
+		<Listbox.Toggle>{browserList[state.selected]}</Listbox.Toggle>
+		<Listbox.Dropdown>
+			{browserList.map((name, index) => <Listbox.Option id={index}>{name}</Listbox.Option>)}
+			<Listbox.Option id="ie" disabled>Internet Explorer</Listbox.Option>
+		</Listbox.Dropdown>
 	</Listbox>
 </ListboxDemo>
 ```
