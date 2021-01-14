@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { border, color, typography } from 'styled-system';
 
 export const fixedContainerWidth = '116px';
 export const fixedContainerHeight = '116px';
@@ -35,4 +36,8 @@ export const WellButton = styled.button`
 			fill: ${({ previewUrl, theme }) => (previewUrl ? '' : theme.colors.blue4)};
 		}
 	}
+
+	${border}
+	${color}
+	${typography}
 `;

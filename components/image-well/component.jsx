@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import systemPropTypes from '@styled-system/prop-types';
 import { WellContainer, WellButton } from './image-well-base';
 import { WellPreview } from './image-well-preview';
 import {
@@ -18,6 +19,7 @@ const ImageWell = ({
 	onSelectImage,
 	onRemoveImage,
 	localizedResources,
+	...props
 }) => {
 	const handleIconClick = (e, cb) => {
 		e.stopPropagation();
@@ -26,7 +28,7 @@ const ImageWell = ({
 
 	if (previewUrl) {
 		return (
-			<ImageWellBase onClick={onSelectImage} previewUrl={previewUrl}>
+			<ImageWellBase onClick={onSelectImage} previewUrl={previewUrl} {...props}>
 				<WellPreview
 					style={{
 						backgroundImage: `url(${previewUrl})`,
@@ -50,7 +52,7 @@ const ImageWell = ({
 	}
 
 	return (
-		<ImageWellBase onClick={onSelectImage} previewUrl={previewUrl}>
+		<ImageWellBase onClick={onSelectImage} previewUrl={previewUrl} {...props}>
 			{children ? (
 				children
 			) : (
@@ -79,6 +81,9 @@ ImageWell.propTypes = {
 	localizedResources: PropTypes.shape({
 		addText: PropTypes.string,
 	}),
+	...systemPropTypes.border,
+	...systemPropTypes.color,
+	...systemPropTypes.typography,
 };
 
 ImageWell.defaultProps = {
