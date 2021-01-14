@@ -270,7 +270,7 @@ const pages = [
 		],
 	},
 	{
-		// TODO: add v6 documentation
+		// TODO: fix use of v6 Popovers
 		title: 'Date Picker',
 		pages: [
 			{
@@ -505,7 +505,7 @@ const pages = [
 		],
 	},
 	{
-		// TODO: write v6 documentation
+		// TODO: fix use of v6 Popovers
 		title: 'Parameter Sentence',
 		pages: [
 			{
