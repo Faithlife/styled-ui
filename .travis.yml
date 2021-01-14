@@ -7,3 +7,6 @@ script:
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" = "master" ]; then yarn deploy-site; fi'
 node_js:
   - '12'
+branches:
+  only:
+    - master
