@@ -53,7 +53,7 @@ const ImageWell = ({
 			) : (
 				<>
 					<SelectCamera />
-					{localizedResources.addText}
+					{localizedResources.selectText}
 				</>
 			)}
 		</ImageWellBase>
@@ -77,7 +77,7 @@ ImageWell.propTypes = {
 	onSelectImage: PropTypes.function,
 	onRemoveImage: PropTypes.function,
 	localizedResources: PropTypes.shape({
-		addText: PropTypes.string,
+		selectText: PropTypes.string,
 	}),
 	...systemPropTypes.border,
 	...systemPropTypes.color,
@@ -86,7 +86,7 @@ ImageWell.propTypes = {
 
 ImageWell.defaultProps = {
 	localizedResources: {
-		addText: '+ Add Image',
+		selectText: '+ Add Image',
 	},
 };
 
