@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { variant, layout, flexbox, position, textStyle, border, background } from 'styled-system';
 import 'focus-visible';
@@ -142,9 +141,5 @@ const SegmentedButtonGroup = styled(Box).attrs(({ border }) => ({
 		}
 	}
 `;
-
-Button.propTypes = {
-	children: PropTypes.node.isRequired,
-};
 
 export { Button, SegmentedButtonGroup };
