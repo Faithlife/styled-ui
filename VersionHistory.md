@@ -2,9 +2,9 @@
 
 ## 6.0.0
 
-- Remove all deprecated components, including `Grid`, `ProductDrawer`, `GroupSelector`, and all Bootstrap components.
-- The /v6 entrypoint has been removed. All components that had been available at the /v6 entrypoint are now exported from the main entrypoint.
-- The `inline` variant for `Input` components has been removed.
+- Removed all deprecated components, including `Grid`, `ProductDrawer`, `GroupSelector`, and all Bootstrap components.
+- Removed the /v6 entrypoint. All components that had been available at the /v6 entrypoint are now exported from the main entrypoint.
+- Removed the `inline` variant for `Input` components.
 
 ## 5.73.0
 
