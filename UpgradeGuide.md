@@ -14,6 +14,9 @@
 - `DatePickerInput`
   - The `styleOverrides` prop has been removed in favor of Styled System props. Use style props for the input directly on the `DatePickerInput` component, and use style props for the calendar popover on a `DatePickerInput.Popover` child config component.
   - The `placement` prop has been removed—use `placement` on `DatePickerInput.Popover` instead.
+- `Dropdown`
+  - The `Dropdown` component has been renamed to `Menu`.
+  - "Dropdown" is a general term that refers to content inside of a popover. For more details, see the docs on the `Menu` and `Listbox` components.
 - `HelpBox`
   - The old `theme` prop functionality has been replaced by the [global theme object](https://faithlife.github.io/styled-ui/#/theme/usage) and Styled System props. Use the [`ThemeProvider` component](https://faithlife.github.io/styled-ui/#/theme/customization) to customize the theme.
 - `Input`
