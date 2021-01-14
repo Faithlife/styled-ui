@@ -1,8 +1,14 @@
-For the next major version of Styled UI, the SimpleToast component has been rebuilt to use Styled System primitives.
+```react
+noSource: true
+---
+<React.Fragment>
+	<V6Banner>
+		<AcceptsStyledSystemProps />
+	</V6Banner>
+</React.Fragment>
+```
 
-You can opt in to the new API now by importing `{ SimpleToast } from '@faithlife/styled-ui/v6'`. When v6 is released, the `/v6` entrypoint will continue to be supported with a deprecation warning until v7 is released.
-
-## v6 Simple Toast
+## Simple Toast
 
 The toast will appear differently for mobile and desktop. Try resizing the screen and refreshing.
 

@@ -1,4 +1,14 @@
-## Popover v6
+```react
+noSource: true
+---
+<React.Fragment>
+	<V6Banner>
+		<AcceptsStyledSystemProps />
+	</V6Banner>
+</React.Fragment>
+```
+
+## Popover
 
 onFocusAway should always be used according to the spec.
 

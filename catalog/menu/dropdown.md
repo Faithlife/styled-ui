@@ -1,3 +1,14 @@
+```react
+noSource: true
+---
+<React.Fragment>
+	<V6Banner>
+		<AcceptsStyledSystemProps />
+		<AriaCompliant />
+	</V6Banner>
+</React.Fragment>
+```
+
 ## Dropdown -> Menu
 
 "Dropdown" is an umbrella term for any component that shows a popover when clicked or hovered. The v5 Dropdown component implemented the WAI-ARIA `menu` pattern and as such has been renamed to `<Menu>` in Styled-UI v6 for role clarity.

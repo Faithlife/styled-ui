@@ -368,7 +368,7 @@ const pages = [
 		title: 'Dropdown',
 		pages: [
 			{
-				path: '/dropdown',
+				path: '/dropdown/variations',
 				title: 'Dropdown Menu',
 				content: pageLoader(() => import('./menu/dropdown.md')),
 			},
@@ -748,7 +748,7 @@ function AriaCompliant() {
 	);
 }
 
-function V6Banner({ children }) {
+function V6Banner({ children, oldHash }) {
 	const v5BaseUrl = 'https://v5--faithlife-styled-ui.netlify.app/';
 	return (
 		<HelpBox variant="success" marginBottom={3}>
@@ -764,7 +764,7 @@ function V6Banner({ children }) {
 				<Button
 					as="a"
 					variant="secondary"
-					href={`${v5BaseUrl}${document.location.hash}`}
+					href={`${v5BaseUrl}${oldHash ?? document.location.hash}`}
 					target="_blank"
 					icon={<FloatUndock color="currentColor" />}
 				>
