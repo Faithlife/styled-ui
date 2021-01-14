@@ -81,6 +81,7 @@ const pages = [
 		path: '/',
 		title: 'Welcome',
 		content: pageLoader(() => import('./WELCOME.md')),
+		imports: { Paragraph, Button },
 	},
 	{
 		title: 'Upgrading',
