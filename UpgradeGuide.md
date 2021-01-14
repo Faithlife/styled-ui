@@ -35,7 +35,9 @@
   - Subcomponents have been renamed: `TabList` to `Tab.List`, `SequencedTabList` to `SequencedTab.List`, etc.
 - `text-input` components
   - Components previously imported from `'@faithlife/styled-ui/dist/text-input-v2'` should now be imported from `'@faithlife/styled-ui/text-input'`:
-    ```js
+    ```code
+    lang: js
+    ---
     import {
     	AsyncSelect,
     	CreatableSelect,

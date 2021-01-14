@@ -83,6 +83,11 @@ const pages = [
 		content: pageLoader(() => import('./WELCOME.md')),
 	},
 	{
+		title: 'Upgrading',
+		path: '/upgrade-guide',
+		content: pageLoader(() => import('../UpgradeGuide.md')),
+	},
+	{
 		title: 'Theme',
 		pages: [
 			{
