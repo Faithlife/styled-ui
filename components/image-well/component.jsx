@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as Styled from './styled';
+import { WellContainer, WellButton } from './image-well-base';
+import { WellPreview } from './image-well-preview';
+import {
+	RemoveIconContainer,
+	CameraIconContainer,
+	Camera,
+	EditCamera,
+	X,
+} from './image-well-icons';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 
 const ImageWell = ({
@@ -19,7 +27,7 @@ const ImageWell = ({
 	if (previewUrl) {
 		return (
 			<ImageWellBase onClick={onSelectImage} previewUrl={previewUrl}>
-				<Styled.WellPreview
+				<WellPreview
 					style={{
 						backgroundImage: `url(${previewUrl})`,
 						backgroundSize: fitPreviewToSquare ? 'cover' : 'contain',
@@ -28,15 +36,15 @@ const ImageWell = ({
 					}}
 				>
 					{onRemoveImage ? (
-						<Styled.RemoveIconContainer onClick={e => handleIconClick(e, onRemoveImage)}>
-							<Styled.X />
-						</Styled.RemoveIconContainer>
+						<RemoveIconContainer onClick={e => handleIconClick(e, onRemoveImage)}>
+							<X />
+						</RemoveIconContainer>
 					) : (
-						<Styled.CameraIconContainer onClick={e => handleIconClick(e, onSelectImage)}>
-							<Styled.EditCamera />
-						</Styled.CameraIconContainer>
+						<CameraIconContainer onClick={e => handleIconClick(e, onSelectImage)}>
+							<EditCamera />
+						</CameraIconContainer>
 					)}
-				</Styled.WellPreview>
+				</WellPreview>
 			</ImageWellBase>
 		);
 	}
@@ -47,7 +55,7 @@ const ImageWell = ({
 				children
 			) : (
 				<>
-					<Styled.Camera />
+					<Camera />
 					{localizedResources.addText}
 				</>
 			)}
@@ -57,9 +65,9 @@ const ImageWell = ({
 
 const ImageWellBase = props => (
 	<DefaultThemeProvider>
-		<Styled.WellContainer>
-			<Styled.WellButton {...props} />
-		</Styled.WellContainer>
+		<WellContainer>
+			<WellButton {...props} />
+		</WellContainer>
 	</DefaultThemeProvider>
 );
 
