@@ -740,7 +740,39 @@ function AriaCompliant() {
 	);
 }
 
-const commonImports = { DocgenTable, AcceptsStyledSystemProps, AriaCompliant, HelpBox };
+function LinkToV5Docs() {
+	const v5BaseUrl = 'https://v5--faithlife-styled-ui.netlify.app/';
+	return (
+		<HelpBox variant="success">
+			<HelpBox.Body>
+				<Paragraph>
+					This component was reworked for Styled-UI v6.
+					<Button as="a" variant="link" href="/#/upgrade-guide" marginLeft={2}>
+						View the full v6 upgrade guide
+					</Button>
+				</Paragraph>
+			</HelpBox.Body>
+			<HelpBox.Footer>
+				<Button
+					as="a"
+					variant="secondary"
+					href={`${v5BaseUrl}${document.location.hash}`}
+					target="_blank"
+				>
+					View the v5 docs
+				</Button>
+			</HelpBox.Footer>
+		</HelpBox>
+	);
+}
+
+const commonImports = {
+	DocgenTable,
+	AcceptsStyledSystemProps,
+	AriaCompliant,
+	HelpBox,
+	LinkToV5Docs,
+};
 
 ReactDOM.render(
 	<Catalog
