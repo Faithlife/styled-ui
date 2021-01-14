@@ -6,6 +6,9 @@ noSource: true
 		<AcceptsStyledSystemProps />
 		<AriaCompliant />
 	</V6Banner>
+	<HelpBox variant="warning">
+		Catalog has a setState bug and the example below appears broken, but the component is functional.
+	</HelpBox>
 </React.Fragment>
 ```
 
