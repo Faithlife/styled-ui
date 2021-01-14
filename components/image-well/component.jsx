@@ -3,13 +3,7 @@ import PropTypes from 'prop-types';
 import systemPropTypes from '@styled-system/prop-types';
 import { WellContainer, WellButton } from './image-well-base';
 import { WellPreview } from './image-well-preview';
-import {
-	RemoveIconContainer,
-	CameraIconContainer,
-	Camera,
-	EditCamera,
-	X,
-} from './image-well-icons';
+import { RemoveIcon, CameraIcon, SelectCamera } from './image-well-icons';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 
 const ImageWell = ({
@@ -21,12 +15,11 @@ const ImageWell = ({
 	localizedResources,
 	...props
 }) => {
-	const handleIconClick = (e, cb) => {
-		e.stopPropagation();
-		cb();
-	};
-
 	if (previewUrl) {
+		const customPreviewContent = React.Children.toArray(children).filter(
+			child => child.type === ImageWell.PreviewContent,
+		);
+
 		return (
 			<ImageWellBase onClick={onSelectImage} previewUrl={previewUrl} {...props}>
 				<WellPreview
@@ -37,27 +30,29 @@ const ImageWell = ({
 						backgroundRepeat: 'no-repeat',
 					}}
 				>
-					{onRemoveImage ? (
-						<RemoveIconContainer onClick={e => handleIconClick(e, onRemoveImage)}>
-							<X />
-						</RemoveIconContainer>
+					{customPreviewContent.length ? (
+						customPreviewContent
+					) : onRemoveImage ? (
+						<RemoveIcon onClick={onRemoveImage} />
 					) : (
-						<CameraIconContainer onClick={e => handleIconClick(e, onSelectImage)}>
-							<EditCamera />
-						</CameraIconContainer>
+						<CameraIcon onClick={onSelectImage} />
 					)}
 				</WellPreview>
 			</ImageWellBase>
 		);
 	}
 
+	const customSelectContent = React.Children.toArray(children).filter(
+		child => child.type === ImageWell.SelectContent,
+	);
+
 	return (
 		<ImageWellBase onClick={onSelectImage} previewUrl={previewUrl} {...props}>
-			{children ? (
-				children
+			{customSelectContent.length ? (
+				customSelectContent
 			) : (
 				<>
-					<Camera />
+					<SelectCamera />
 					{localizedResources.addText}
 				</>
 			)}
@@ -72,6 +67,9 @@ const ImageWellBase = props => (
 		</WellContainer>
 	</DefaultThemeProvider>
 );
+
+ImageWell.SelectContent = ({ children }) => children;
+ImageWell.PreviewContent = ({ children }) => children;
 
 ImageWell.propTypes = {
 	previewUrl: PropTypes.string,

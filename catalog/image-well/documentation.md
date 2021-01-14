@@ -73,12 +73,68 @@ state: { previewUrl: 'https://files.logoscdn.com/v1/files/47422190/assets/113898
 />
 ```
 
-### Custom add text
+### Custom content
 
-Provide `children` to change what the `ImageWell` displays when there is no `previewUrl`.
+Provide `ImageWell.SelectContent` to change what the `ImageWell` displays when there is no `previewUrl`.
 
 ```react
-<ImageWell onSelectImage={() => alert("Choose a room layout")}>
-    + Add Room Layout
+state: { previewUrl: '' }
+
+---
+
+<ImageWell
+    previewUrl={state.previewUrl}
+    fitPreviewToSquare
+    onSelectImage={() => {
+        if (state.previewUrl) {
+            alert("Change image");
+        }  else {
+            setState({ previewUrl: 'https://files.logoscdn.com/v1/files/47422190/assets/11389823/content.jpg?signature=kCZKvBBttRqoZJrv_S2qjo0pcrs' });
+        }
+    }}
+>
+    <ImageWell.SelectContent>
+        + Add Room Layout
+    </ImageWell.SelectContent>
+</ImageWell>
+```
+
+Provide `ImageWell.PreviewContent` to change what gets displayed over the preview image.
+
+```react
+state: { previewUrl: '', favorite: false }
+
+---
+
+<ImageWell
+    previewUrl={state.previewUrl}
+    fitPreviewToSquare
+    onSelectImage={() => {
+        if (state.previewUrl) {
+            alert("Displaying image");
+        }  else {
+            setState({ previewUrl: 'https://files.logoscdn.com/v1/files/47422190/assets/11389823/content.jpg?signature=kCZKvBBttRqoZJrv_S2qjo0pcrs' });
+        }
+    }}
+>
+    <ImageWell.PreviewContent>
+        <ImageWell.RemoveIcon onClick={() => setState({ previewUrl: '' })} />
+        <FavoriteFilled
+            color="yellow"
+            style={{
+                position: 'absolute',
+                top: '6px',
+                left: '6px',
+            }}
+            onClick={(e) => {
+                e.stopPropagation();
+                alert("Star clicked");
+            }}
+        />
+
+    </ImageWell.PreviewContent>
+    <ImageWell.SelectContent>
+        + Add Room Layout
+    </ImageWell.SelectContent>
 </ImageWell>
 ```

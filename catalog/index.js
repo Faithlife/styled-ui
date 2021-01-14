@@ -426,6 +426,7 @@ const pages = [
 				content: pageLoader(() => import('./image-well/documentation.md')),
 				imports: {
 					ImageWell,
+					FavoriteFilled,
 				},
 			},
 		],
