@@ -43,6 +43,7 @@ import {
 } from '../index';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
+import { FloatUndock } from '../components/icons/18px';
 import { colors } from '../components/shared-styles';
 import { DocgenTable } from './docgen-table';
 import { textInputPages } from './input/pages';
@@ -108,7 +109,6 @@ const pages = [
 				path: '/theme/customization',
 				title: 'Customization',
 				content: pageLoader(() => import('./theme/customization.md')),
-				imports: { ThemeProvider },
 			},
 		],
 	},
@@ -172,7 +172,6 @@ const pages = [
 				title: 'Accordion Variations',
 				content: pageLoader(() => import('./accordion/variations.md')),
 				imports: {
-					AcceptsStyledSystemProps,
 					Accordion,
 					AccordionDemo: styled.div`
 						background: #fff;
@@ -238,7 +237,6 @@ const pages = [
 				content: pageLoader(() => import('./checkbox/variations.md')),
 				imports: {
 					Checkbox,
-					ThemeProvider,
 					CheckboxDemo: styled.div`
 						&& > * {
 							margin: 8px;
@@ -438,7 +436,7 @@ const pages = [
 		pages: [
 			{
 				path: '/Listbox/variations',
-				title: 'Listbox',
+				title: 'Listbox Variations',
 				content: pageLoader(() => import('./listbox/variations.md')),
 				imports: {
 					Listbox,
@@ -525,7 +523,6 @@ const pages = [
 				path: '/parameter-sentence/command-sentence',
 				title: 'Command Sentence',
 				content: pageLoader(() => import('./parameter-sentence/command-sentence.md')),
-				imports: {},
 			},
 			{
 				path: '/parameter-sentence/documentation',
@@ -741,28 +738,29 @@ function AriaCompliant() {
 	);
 }
 
-function LinkToV5Docs() {
+function V6Banner({ children }) {
 	const v5BaseUrl = 'https://v5--faithlife-styled-ui.netlify.app/';
 	return (
-		<HelpBox variant="success">
-			<HelpBox.Body>
+		<HelpBox variant="success" marginBottom={3}>
+			<Stack spacing={3}>
 				<Paragraph>
-					This component was reworked for Styled-UI v6.
+					This component has been updated for Styled-UI v6.
 					<Button as="a" variant="link" href="/#/upgrade-guide" marginLeft={2}>
 						View the full v6 upgrade guide
 					</Button>
 				</Paragraph>
-			</HelpBox.Body>
-			<HelpBox.Footer>
+				{children}
+
 				<Button
 					as="a"
 					variant="secondary"
 					href={`${v5BaseUrl}${document.location.hash}`}
 					target="_blank"
+					icon={<FloatUndock color="currentColor" />}
 				>
 					View the v5 docs
 				</Button>
-			</HelpBox.Footer>
+			</Stack>
 		</HelpBox>
 	);
 }
@@ -772,7 +770,8 @@ const commonImports = {
 	AcceptsStyledSystemProps,
 	AriaCompliant,
 	HelpBox,
-	LinkToV5Docs,
+	V6Banner,
+	ThemeProvider,
 };
 
 ReactDOM.render(
