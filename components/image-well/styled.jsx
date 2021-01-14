@@ -23,7 +23,7 @@ export const WellButton = styled.button`
 	justify-content: center;
 	align-items: center;
 	outline: none;
-	cursor: ${props => (props.previewUrl ? 'default' : 'pointer')};
+	cursor: pointer;
 
 	/* use themeGet here? not sure these are actually working */
 	font-size: ${({ theme }) => theme.fontSizes[3]};
@@ -53,20 +53,36 @@ export const WellPreview = styled.div`
 	border: none;
 `;
 
-export const RemoveIconContainer = styled.div`
+const IconContainerBase = styled.div`
 	background-color: rgba(0, 0, 0, 0.3);
 	position: absolute;
 	top: 6px;
 	right: 6px;
+	cursor: pointer;
+`;
+
+export const RemoveIconContainer = styled(IconContainerBase)`
 	width: 16px;
 	height: 16px;
 	padding: 3px;
 	border-radius: 50%;
-	cursor: pointer;
+`;
+
+export const CameraIconContainer = styled(IconContainerBase)`
+	width: 20px;
+	height: 20px;
+	padding: 8px;
+	border-radius: 6px;
 `;
 
 export const Camera = styled(UnstyledCamera)`
 	margin-bottom: 8px;
+`;
+
+export const EditCamera = styled(Camera)`
+	& path {
+		fill: ${({ theme }) => theme.colors.gray4};
+	}
 `;
 
 export const X = styled(UnstyledX)`

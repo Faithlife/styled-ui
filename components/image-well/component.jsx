@@ -11,9 +11,14 @@ const ImageWell = ({
 	onRemoveImage,
 	localizedResources,
 }) => {
+	const handleIconClick = (e, cb) => {
+		e.stopPropagation();
+		cb();
+	};
+
 	if (previewUrl) {
 		return (
-			<ImageWellBase previewUrl={previewUrl}>
+			<ImageWellBase onClick={onSelectImage} previewUrl={previewUrl}>
 				<Styled.WellPreview
 					style={{
 						backgroundImage: `url(${previewUrl})`,
@@ -22,10 +27,14 @@ const ImageWell = ({
 						backgroundRepeat: 'no-repeat',
 					}}
 				>
-					{onRemoveImage && (
-						<Styled.RemoveIconContainer onClick={onRemoveImage}>
+					{onRemoveImage ? (
+						<Styled.RemoveIconContainer onClick={e => handleIconClick(e, onRemoveImage)}>
 							<Styled.X />
 						</Styled.RemoveIconContainer>
+					) : (
+						<Styled.CameraIconContainer onClick={e => handleIconClick(e, onSelectImage)}>
+							<Styled.EditCamera />
+						</Styled.CameraIconContainer>
 					)}
 				</Styled.WellPreview>
 			</ImageWellBase>
