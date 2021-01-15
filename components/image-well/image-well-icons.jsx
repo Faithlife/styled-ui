@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Camera as UnstyledCamera } from '../icons/18px';
 import { X as UnstyledX } from '../icons/12px';
@@ -41,14 +42,22 @@ const X = styled(UnstyledX)`
 	}
 `;
 
-export const RemoveIcon = ({ onClick = () => {} }) => (
+export const RemoveIcon = ({ onClick }) => (
 	<RemoveIconContainer onClick={onClick}>
 		<X />
 	</RemoveIconContainer>
 );
 
-export const CameraIcon = ({ onClick = () => {} }) => (
+RemoveIcon.propTypes = {
+	onClick: PropTypes.func.isRequired,
+};
+
+export const CameraIcon = ({ onClick }) => (
 	<CameraIconContainer onClick={onClick}>
 		<EditCamera />
 	</CameraIconContainer>
 );
+
+CameraIcon.propTypes = {
+	onClick: PropTypes.func.isRequired,
+};

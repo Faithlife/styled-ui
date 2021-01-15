@@ -204,7 +204,7 @@ showSource: true
     onSelectImage={() => alert("Image selected")}
 >
     <ImageWell.PreviewContent>
-        <ImageWell.CameraIcon />
+        <ImageWell.CameraIcon onClick={() => {}} />
         <FavoriteFilled
             color="yellow"
             style={{
