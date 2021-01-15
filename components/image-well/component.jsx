@@ -15,9 +15,9 @@ const ImageWell = ({
 	localizedResources,
 	...props
 }) => {
-	const handleIconClick = (e, cb) => {
-		e.stopPropagation();
-		cb();
+	const handleIconClick = (event, callback) => {
+		event.stopPropagation();
+		callback();
 	};
 
 	if (previewUrl) {
@@ -38,9 +38,9 @@ const ImageWell = ({
 					{customPreviewContent.length ? (
 						customPreviewContent
 					) : onRemoveImage ? (
-						<RemoveIcon onClick={e => handleIconClick(e, onRemoveImage)} />
+						<RemoveIcon onClick={event => handleIconClick(event, onRemoveImage)} />
 					) : (
-						<CameraIcon onClick={e => handleIconClick(e, onSelectImage)} />
+						<CameraIcon onClick={event => handleIconClick(event, onSelectImage)} />
 					)}
 				</WellPreview>
 			</ImageWellBase>
