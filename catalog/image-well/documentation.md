@@ -84,6 +84,7 @@ showSource: true
 <ImageWell
     fitPreviewToSquare
     previewUrl={'https://files.logoscdn.com/v1/files/30472073/assets/6474223/content.jpg?signature=YJ26qbTG_tyIdVHvhowUOoqT7Bs'}
+    onSelectImage={() => {}}
 />
 
 ```
@@ -173,7 +174,7 @@ state: { previewUrl: ''}
 
 #### Icons
 
-The X and camera icons that are shown without custom `ImageWell.PreviewContent` can be used in custom preview content.
+The X and camera icons that are shown without custom `ImageWell.PreviewContent` can be used in custom preview content. Provide an `onClick` handler to customize the behavior of the icon, otherwise `onSelectImage` will be called.
 
 ```react
 showSource: true
@@ -182,9 +183,13 @@ showSource: true
 
 <ImageWell
     previewUrl={'https://files.logoscdn.com/v1/files/30472073/assets/6474223/content.jpg?signature=YJ26qbTG_tyIdVHvhowUOoqT7Bs'}
+    onSelectImage={() => alert("Image selected")}
 >
     <ImageWell.PreviewContent>
-        <ImageWell.RemoveIcon onClick={() => alert("Remove icon clicked")}/>
+        <ImageWell.RemoveIcon onClick={(e) => {
+            e.stopPropagation();
+            alert("Remove icon clicked");
+        }}/>
     </ImageWell.PreviewContent>
 </ImageWell>
 ```
@@ -196,9 +201,22 @@ showSource: true
 
 <ImageWell
     previewUrl={'https://files.logoscdn.com/v1/files/30472073/assets/6474223/content.jpg?signature=YJ26qbTG_tyIdVHvhowUOoqT7Bs'}
+    onSelectImage={() => alert("Image selected")}
 >
     <ImageWell.PreviewContent>
-        <ImageWell.CameraIcon onClick={() => alert("Camera icon clicked")}/>
+        <ImageWell.CameraIcon />
+        <FavoriteFilled
+            color="yellow"
+            style={{
+                position: 'absolute',
+                top: '6px',
+                left: '6px',
+            }}
+            onClick={(e) => {
+                e.stopPropagation();
+                alert("Star clicked");
+            }}
+        />
     </ImageWell.PreviewContent>
 </ImageWell>
 ```
