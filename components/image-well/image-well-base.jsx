@@ -1,12 +1,15 @@
 import styled from 'styled-components';
-import { border, color, typography } from 'styled-system';
+import { border, color, layout, typography } from 'styled-system';
+import { Box } from '../Box';
 
 export const fixedContainerWidth = '116px';
 export const fixedContainerHeight = '116px';
 
-export const WellContainer = styled.div`
+export const WellContainer = styled(Box)`
 	width: ${fixedContainerWidth};
 	height: ${fixedContainerHeight};
+
+	${layout}
 `;
 
 export const WellButton = styled.button`

@@ -28,6 +28,8 @@ const ImageWell = ({
 		return (
 			<ImageWellBase onClick={onSelectImage} previewUrl={previewUrl} {...props}>
 				<WellPreview
+					width={props.width}
+					height={props.height}
 					style={{
 						backgroundImage: `url(${previewUrl})`,
 						backgroundSize: fitPreviewToSquare ? 'cover' : 'contain',
@@ -67,7 +69,7 @@ const ImageWell = ({
 
 const ImageWellBase = props => (
 	<DefaultThemeProvider>
-		<WellContainer>
+		<WellContainer width={props.width} height={props.height}>
 			<WellButton {...props} />
 		</WellContainer>
 	</DefaultThemeProvider>
@@ -86,6 +88,7 @@ ImageWell.propTypes = {
 	}),
 	...systemPropTypes.border,
 	...systemPropTypes.color,
+	...systemPropTypes.layout,
 	...systemPropTypes.typography,
 };
 
