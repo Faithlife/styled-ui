@@ -79,8 +79,8 @@ ImageWell.PreviewContent = ({ children }) => children;
 ImageWell.propTypes = {
 	previewUrl: PropTypes.string,
 	fitPreviewToSquare: PropTypes.bool,
-	onSelectImage: PropTypes.function,
-	onRemoveImage: PropTypes.function,
+	onSelectImage: PropTypes.func.isRequired,
+	onRemoveImage: PropTypes.func,
 	localizedResources: PropTypes.shape({
 		selectText: PropTypes.string,
 	}),
