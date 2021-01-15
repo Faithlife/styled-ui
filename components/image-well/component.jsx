@@ -15,6 +15,11 @@ const ImageWell = ({
 	localizedResources,
 	...props
 }) => {
+	const handleIconClick = (e, cb) => {
+		e.stopPropagation();
+		cb();
+	};
+
 	if (previewUrl) {
 		const customPreviewContent = React.Children.toArray(children).filter(
 			child => child.type === ImageWell.PreviewContent,
@@ -33,9 +38,9 @@ const ImageWell = ({
 					{customPreviewContent.length ? (
 						customPreviewContent
 					) : onRemoveImage ? (
-						<RemoveIcon onClick={onRemoveImage} />
+						<RemoveIcon onClick={e => handleIconClick(e, onRemoveImage)} />
 					) : (
-						<CameraIcon onClick={onSelectImage} />
+						<CameraIcon onClick={e => handleIconClick(e, onSelectImage)} />
 					)}
 				</WellPreview>
 			</ImageWellBase>

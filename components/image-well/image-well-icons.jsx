@@ -41,28 +41,14 @@ const X = styled(UnstyledX)`
 	}
 `;
 
-export const RemoveIcon = ({ onClick = () => {} }) => {
-	const handleClick = e => {
-		e.stopPropagation();
-		onClick();
-	};
+export const RemoveIcon = ({ onClick = () => {} }) => (
+	<RemoveIconContainer onClick={onClick}>
+		<X />
+	</RemoveIconContainer>
+);
 
-	return (
-		<RemoveIconContainer onClick={handleClick}>
-			<X />
-		</RemoveIconContainer>
-	);
-};
-
-export const CameraIcon = ({ onClick = () => {} }) => {
-	const handleClick = e => {
-		e.stopPropagation();
-		onClick();
-	};
-
-	return (
-		<CameraIconContainer onClick={handleClick}>
-			<EditCamera />
-		</CameraIconContainer>
-	);
-};
+export const CameraIcon = ({ onClick = () => {} }) => (
+	<CameraIconContainer onClick={onClick}>
+		<EditCamera />
+	</CameraIconContainer>
+);
