@@ -429,14 +429,6 @@ const pages = [
 					FavoriteFilled,
 				},
 			},
-			{
-				path: '/image-well/variatons',
-				title: 'ImageWell Variations',
-				content: pageLoader(() => import('./image-well/variations.md')),
-				imports: {
-					ImageWell,
-				},
-			},
 		],
 	},
 	textInputPages,

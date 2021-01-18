@@ -1,11 +1,6 @@
 import styled from 'styled-components';
-import { border, color, layout, typography, variant } from 'styled-system';
-import { theme } from '../../theme';
+import { border, color, layout, typography } from 'styled-system';
 import { Box } from '../Box';
-
-const {
-	colors: { blue4 },
-} = theme;
 
 export const fixedContainerWidth = '116px';
 export const fixedContainerHeight = '116px';
@@ -42,33 +37,10 @@ export const WellButton = styled.button`
 
 		& svg path {
 			fill: ${({ previewUrl, theme }) => (previewUrl ? '' : theme.colors.blue4)};
-			transition: fill 0.2s ease;
 		}
-
-		transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 	}
 
 	${border}
 	${color}
 	${typography}
-
-	${variant({
-		variants: {
-			primary: {
-				color: blue4,
-				borderColor: blue4,
-				'& > svg path': {
-					fill: blue4,
-				},
-				'&:hover': {
-					color: '#fff',
-					backgroundColor: blue4,
-					borderColor: blue4,
-					'& > svg path': {
-						fill: '#fff',
-					},
-				},
-			},
-		},
-	})}
 `;
