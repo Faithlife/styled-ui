@@ -116,7 +116,7 @@ Input.propTypes = {
 export { Input };
 
 const StyledInput = styled.input(
-	({ theme, variant }) => css`
+	({ theme }) => css`
 		${resetStyles}
 		${textStyle}
 
