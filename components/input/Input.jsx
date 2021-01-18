@@ -100,6 +100,10 @@ Input.propTypes = {
 	/** Large variation (deprecated in favor of the variant prop) */
 	large: PropTypes.bool,
 	size: PropTypes.number,
+	/**
+	 * Whether focusing the input should select _all_ of its text, regardless of where it was clicked.
+	 */
+	selectOnFocus: PropTypes.bool,
 	/** Textarea input variation */
 	textarea: PropTypes.bool,
 	...common.propTypes,
