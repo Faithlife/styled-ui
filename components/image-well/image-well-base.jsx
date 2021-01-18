@@ -31,7 +31,6 @@ export const WellButton = styled.button`
 		getBorderImage({ borderColor: theme.colors.gray34, borderRadius: theme.radii[2] })};
 	border-radius: ${({ theme }) => theme.radii[2]};
 
-	
 	font-size: ${({ theme }) => theme.fontSizes[3]};
 	font-weight: ${({ theme }) => theme.fontWeights.regular};
 	line-height: ${({ theme }) => theme.lineHeights[1]};
