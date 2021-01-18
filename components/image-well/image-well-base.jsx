@@ -18,7 +18,7 @@ export const WellButton = styled.button`
 	width: 100%;
 	height: 100%;
 	color: ${({ theme }) => theme.colors.blue4};
-	border: 2px dashed ${({ theme }) => theme.colors.gray34};
+	border: 1px dashed ${({ theme }) => theme.colors.gray34};
 	border-radius: ${({ theme }) => theme.radii[2]};
 	display: flex;
 	flex-direction: column;
