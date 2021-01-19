@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { border, color, layout, typography } from 'styled-system';
+import 'focus-visible';
 import { Box } from '../Box';
 import { getBorderImage } from '../utils/get-border-image';
 
@@ -35,7 +36,7 @@ export const WellButton = styled.button`
 	font-weight: ${({ theme }) => theme.fontWeights.regular};
 	line-height: ${({ theme }) => theme.lineHeights[1]};
 
-	&:hover {
+	&:hover, &.focus-visible {
 		background-color: ${({ theme }) => theme.colors.blue1};
 		background-image: ${({ theme }) =>
 			getBorderImage({ borderColor: theme.colors.blue4, borderRadius: theme.radii[2] })};
