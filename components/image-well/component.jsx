@@ -86,7 +86,9 @@ ImageWell.propTypes = {
 	localizedResources: PropTypes.shape({
 		selectText: PropTypes.string,
 	}),
-	...systemPropTypes.border,
+	borderColor: PropTypes.string,
+	borderRadius: PropTypes.string,
+	borderWidth: PropTypes.string,
 	...systemPropTypes.color,
 	...systemPropTypes.layout,
 	...systemPropTypes.typography,
