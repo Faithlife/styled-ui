@@ -5,6 +5,7 @@ export const AvatarOption = styled(reactSelectComponents.Option)`
 	&& {
 		align-items: center;
 		display: flex;
+		padding: ${props => props.styled.space[3]};
 	}
 `;
 
@@ -43,6 +44,26 @@ export const AvatarMultiValueImage = styled.img`
 	border-radius: 10%;
 	height: 18px;
 	width: 18px;
+`;
+
+export const AvatarCreateWrapper = styled.div`
+	color: ${props => props.theme.colors.blue4};
+	padding: ${props => props.theme.space[1]};
+`;
+
+export const AvatarDoneWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: ${props => props.theme.space[3]};
+	border-top: 1px solid ${props => props.theme.colors.gray22};
+`;
+
+export const AvatarLoadingWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	padding: ${props => props.theme.space[3]};
+	justify-content: center;
 `;
 
 export const AvatarMultiValueName = styled.span`

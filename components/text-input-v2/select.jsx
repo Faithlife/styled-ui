@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, createContext, useContext } from 'react';
 import ReactSelect, {
 	Creatable as ReactSelectCreatable,
 	components as reactSelectComponents,
@@ -8,6 +8,8 @@ import { ChevronDown } from '../icons/12px';
 import { Checkbox } from '../../components/check-box';
 import { DebouncedSelectAsync, DebouncedSelectAsyncCreatable } from './debounced-async';
 import * as Styled from './styled';
+import { Button } from '../button';
+import { LoadingSpinner } from '../loading-spinner';
 import { ThemedBox } from '../ThemedBox';
 import { useTheme } from '../../theme';
 
@@ -138,31 +140,20 @@ const selectTheme = theme => ({
 	},
 });
 
-const defaultComponents = {
-	// eslint-disable-next-line react/prop-types
-	Option: ({ children, ...props }) => (
-		<reactSelectComponents.Option {...props}>{children || '\u200B'}</reactSelectComponents.Option>
-	),
+const avatarContext = createContext({});
 
-	DropdownIndicator: props => (
-		<reactSelectComponents.DropdownIndicator {...props}>
-			<ChevronDown color="currentColor" />
-		</reactSelectComponents.DropdownIndicator>
-	),
+export const AvatarContextProvider = avatarContext.Provider;
 
-	Menu: props => (
-		<ThemedBox>
-			<reactSelectComponents.Menu {...props} />
-		</ThemedBox>
-	),
-};
-
-const AvatarOption = ({ data, selectProps: { showCheckboxes, getIsOptionChecked }, ...props }) => {
+const AvatarOptionDisplay = ({
+	data,
+	selectProps: { showCheckboxes, getIsOptionChecked },
+	...props
+}) => {
 	const theme = useTheme();
 	const { avatar, label, secondaryLabel } = data;
 
 	return (
-		<Styled.AvatarOption {...props}>
+		<Styled.AvatarOption {...props} styled={theme}>
 			{avatar ? (
 				<>
 					{!showCheckboxes ? null : (
@@ -187,27 +178,155 @@ const AvatarOption = ({ data, selectProps: { showCheckboxes, getIsOptionChecked 
 	);
 };
 
-const AvatarMultiValue = ({ data: { avatar, label }, ...props }) => {
-	const theme = useTheme();
+export const avatarComponents = {
+	Menu: menuProps => {
+		const { showCheckboxes = false, onDone = () => {}, doneText = 'Done' } = useContext(
+			avatarContext,
+		);
+		const theme = useTheme();
 
-	return (
-		<Styled.AvatarMultiValue {...props}>
-			{avatar ? (
-				<>
-					<Styled.AvatarMultiValueImage src={avatar} alt={label} />
-					<Styled.AvatarMultiValueName theme={theme}>{label}</Styled.AvatarMultiValueName>
-				</>
-			) : (
-				label
-			)}
-		</Styled.AvatarMultiValue>
-	);
+		// Work around to prevent react-select swallowing the click event for touch devices
+		const handleOnTouchEnd = useCallback(
+			e => {
+				// Prevents the onClick event firing
+				e.preventDefault();
+				onDone(e);
+			},
+			[onDone],
+		);
+
+		return (
+			<reactSelectComponents.Menu {...menuProps}>
+				{menuProps.children}{' '}
+				{showCheckboxes ? (
+					<Styled.AvatarDoneWrapper theme={theme}>
+						<Button variant="primary" size="small" onClick={onDone} onTouchEnd={handleOnTouchEnd}>
+							{doneText}
+						</Button>
+					</Styled.AvatarDoneWrapper>
+				) : null}
+			</reactSelectComponents.Menu>
+		);
+	},
+
+	MenuList: menuListProps => {
+		const { isSearching, isSearchError } = useContext(avatarContext);
+		const theme = useTheme();
+
+		if (isSearching) {
+			return (
+				<Styled.AvatarLoadingWrapper theme={theme}>
+					<LoadingSpinner small />
+				</Styled.AvatarLoadingWrapper>
+			);
+		}
+		if (isSearchError) {
+			return (
+				<Styled.AvatarLoadingWrapper theme={theme}>{'Error Searching'}</Styled.AvatarLoadingWrapper>
+			);
+		}
+
+		return (
+			<reactSelectComponents.MenuList {...menuListProps}>
+				{menuListProps.children}
+			</reactSelectComponents.MenuList>
+		);
+	},
+
+	Option: optionProps => {
+		const {
+			creatingState,
+			CreateButtonContent,
+			pendingSelectedValues,
+			showCreateButton,
+			inputValue,
+		} = useContext(avatarContext);
+		const theme = useTheme();
+
+		if (!optionProps.data) {
+			return null;
+		}
+		if (optionProps.data.isNew === true) {
+			if (!showCreateButton) {
+				return null;
+			}
+
+			if (creatingState) {
+				if (creatingState.isCreating) {
+					return (
+						<div className={'create-new-loading'}>
+							<LoadingSpinner theme={theme} small />
+						</div>
+					);
+				} else if (creatingState.fromInput === inputValue) {
+					return null;
+				}
+			}
+			return (
+				<Styled.AvatarCreateWrapper
+					theme={theme}
+					{...optionProps.innerProps}
+					className={'create-new-option'}
+				>
+					<Button variant="primaryTransparent" size="small" condensed>
+						<CreateButtonContent
+							pendingSelectedValues={pendingSelectedValues}
+							inputValue={inputValue}
+						/>
+					</Button>
+				</Styled.AvatarCreateWrapper>
+			);
+		}
+
+		return (
+			<div
+				{...optionProps.innerProps}
+				className={`option${optionProps.isFocused ? ' option-focused' : ''}`}
+			>
+				<AvatarOptionDisplay {...optionProps} />
+			</div>
+		);
+	},
+
+	MultiValue: ({ data: { avatar, label }, ...props }) => {
+		const theme = useTheme();
+
+		return (
+			<Styled.AvatarMultiValue {...props}>
+				{avatar ? (
+					<>
+						<Styled.AvatarMultiValueImage src={avatar} alt={label} />
+						<Styled.AvatarMultiValueName theme={theme}>{label}</Styled.AvatarMultiValueName>
+					</>
+				) : (
+					label
+				)}
+			</Styled.AvatarMultiValue>
+		);
+	},
+
+	ClearIndicator: () => null,
+
+	DropdownIndicator: () => null,
 };
 
-export const avatarComponents = {
-	...defaultComponents,
-	Option: AvatarOption,
-	MultiValue: AvatarMultiValue,
+const defaultComponents = {
+	// eslint-disable-next-line react/prop-types
+	Option: ({ children, ...props }) => (
+		<reactSelectComponents.Option {...props}>{children || '\u200B'}</reactSelectComponents.Option>
+	),
+
+	DropdownIndicator: props => (
+		<reactSelectComponents.DropdownIndicator {...props}>
+			<ChevronDown color="currentColor" />
+		</reactSelectComponents.DropdownIndicator>
+	),
+
+	Menu: props => (
+		<ThemedBox>
+			<reactSelectComponents.Menu {...props} />
+		</ThemedBox>
+	),
 };
 
 function noOptionsMessage({ inputValue }) {

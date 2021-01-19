@@ -4,6 +4,7 @@ export {
 	AsyncCreatableSelect,
 	Select,
 	avatarComponents,
+	AvatarContextProvider,
 	reactSelectComponents,
 } from './select';
 export { InferredText } from './inferred-text';
