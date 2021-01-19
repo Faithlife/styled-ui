@@ -74,6 +74,7 @@ const NumberInput = React.memo(
 );
 
 NumberInput.defaultProps = {
+	selectOnFocus: true,
 	theme,
 };
 
