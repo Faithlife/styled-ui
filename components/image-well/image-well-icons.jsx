@@ -1,36 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import 'focus-visible';
+import { UtilityButton } from '../button';
 import { Camera as UnstyledCamera } from '../icons/18px';
 import { X as UnstyledX } from '../icons/12px';
 
-const IconContainerBase = styled.div`
-	background-color: rgba(0, 0, 0, 0.3);
+const IconContainerBase = styled(UtilityButton)`
+	background-color: ${({ theme }) => theme.colors.gray14};
 	position: absolute;
 	top: 6px;
 	right: 6px;
 	cursor: pointer;
+
+	&:hover,
+	&.focus-visible {
+		background-color: ${({ theme }) => theme.colors.gray22};
+	}
 `;
 
 const RemoveIconContainer = styled(IconContainerBase)`
-	width: 16px;
-	height: 16px;
+	width: 20px;
+	height: 20px;
 	padding: 3px;
 	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `;
 
 const CameraIconContainer = styled(IconContainerBase)`
-	width: 20px;
-	height: 20px;
-	padding: 8px;
+	width: 32px;
+	height: 32px;
+	padding: 4px;
 	border-radius: 6px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `;
 
 export const SelectCamera = styled(UnstyledCamera)`
 	margin-bottom: 8px;
 `;
 
-const EditCamera = styled(SelectCamera)`
+const EditCamera = styled(UnstyledCamera)`
 	& path {
 		fill: ${({ theme }) => theme.colors.gray4};
 	}
