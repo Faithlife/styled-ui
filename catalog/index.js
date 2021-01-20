@@ -40,6 +40,7 @@ import {
 	AutoSizedRowMasonry,
 	theme,
 	ThemeProvider,
+	ImageWell,
 } from '../index';
 import { ShareDialog } from '../components/share-dialog';
 import { GearIcon } from '../components/icons';
@@ -413,6 +414,20 @@ const pages = [
 				title: 'Help Box Documentation',
 				content: pageLoader(() => import('./help-box/documentation.md')),
 				imports: { HelpBox },
+			},
+		],
+	},
+	{
+		title: 'ImageWell',
+		pages: [
+			{
+				path: '/image-well',
+				title: 'ImageWell',
+				content: pageLoader(() => import('./image-well/documentation.md')),
+				imports: {
+					ImageWell,
+					FavoriteFilled,
+				},
 			},
 		],
 	},
