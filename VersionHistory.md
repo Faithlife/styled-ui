@@ -1,5 +1,10 @@
 # Changelog
 
+## 6.1.0
+
+- Added `ImageWell` component.
+- Default to `selectOnFocus` in `NumberInput` components.
+
 ## 6.0.0
 
 - Removed all deprecated components, including `Grid`, `ProductDrawer`, `GroupSelector`, and all Bootstrap components.
