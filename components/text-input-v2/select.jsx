@@ -162,7 +162,7 @@ const AvatarOption = ({ data, selectProps: { showCheckboxes, getIsOptionChecked 
 	const { avatar, label, secondaryLabel } = data;
 
 	return (
-		<Styled.AvatarOption {...props} theme={theme}>
+		<Styled.AvatarOption {...props} styled={theme}>
 			{avatar ? (
 				<>
 					{!showCheckboxes ? null : (
