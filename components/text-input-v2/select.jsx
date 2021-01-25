@@ -161,6 +161,7 @@ const AvatarOption = ({ data, selectProps: { showCheckboxes, getIsOptionChecked 
 	const theme = useTheme();
 	const { avatar, label, secondaryLabel } = data;
 
+	// Using styled instead of theme for theme prop since react-select already uses a prop named theme and there is a collision.
 	return (
 		<Styled.AvatarOption {...props} styled={theme}>
 			{avatar ? (
