@@ -5,6 +5,7 @@ export const AvatarOption = styled(reactSelectComponents.Option)`
 	&& {
 		align-items: center;
 		display: flex;
+		padding: ${props => props.styled.space[3]};
 	}
 `;
 
