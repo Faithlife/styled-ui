@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.1.1
+
+- Fixed padding for AvatarOption components (merged in from v5 branch)
+
 ## 6.1.0
 
 - Added `ImageWell` component.
