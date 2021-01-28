@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.73.2
+
+- Fixed padding for AvatarOption components.
+
 ## 5.73.1
 
 - Added a missing alias for `Dropdown.Menu`, which has been replaced in v6 by `Menu.Dropdown`.
