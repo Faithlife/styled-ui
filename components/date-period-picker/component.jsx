@@ -43,6 +43,7 @@ export class DatePeriodPicker extends PureComponent {
 		disableEnumeratedRanges: PropTypes.bool,
 		disableCustomRange: PropTypes.bool,
 		disableCalendar: PropTypes.bool,
+		disableInferredDatePeriodIndex: PropTypes.bool,
 	};
 
 	static defaultProps = {
@@ -110,7 +111,10 @@ export class DatePeriodPicker extends PureComponent {
 				this.setState({ inputValues: { [input]: value } });
 			}
 
-			this.props.setSelectedDate(selectedDate, this.getDatePeriodIndex(selectedDate));
+			this.props.setSelectedDate(
+				selectedDate,
+				this.props.disableInferredDatePeriodIndex ? null : this.getDatePeriodIndex(selectedDate),
+			);
 		}
 	}, this.props.debounce);
 
@@ -190,6 +194,7 @@ export class DatePeriodPicker extends PureComponent {
 			disableEnumeratedRanges,
 			disableCustomRange,
 			disableCalendar,
+			disableInferredDatePeriodIndex,
 		} = this.props;
 		const {
 			inputValues: { start, end },
@@ -238,7 +243,10 @@ export class DatePeriodPicker extends PureComponent {
 							asDateRangePicker
 							selectedDateRange={selectedDateRange}
 							setSelectedDate={dateRange =>
-								setSelectedDate(dateRange, this.getDatePeriodIndex(dateRange))
+								setSelectedDate(
+									dateRange,
+									disableInferredDatePeriodIndex ? null : this.getDatePeriodIndex(dateRange),
+								)
 							}
 							validate={validate}
 							dateFunctions={dateFunctions}
