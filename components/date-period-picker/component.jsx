@@ -40,6 +40,7 @@ export class DatePeriodPicker extends PureComponent {
 		dateFunctions: dateFunctionProps,
 		/** Debounce value for date inputs. Defaults to 500ms */
 		debounce: PropTypes.number,
+		disableCustomRange: PropTypes.bool,
 		disableCalendar: PropTypes.bool,
 	};
 
@@ -181,7 +182,13 @@ export class DatePeriodPicker extends PureComponent {
 	};
 
 	render() {
-		const { setSelectedDate, validate, dateFunctions, disableCalendar } = this.props;
+		const {
+			setSelectedDate,
+			validate,
+			dateFunctions,
+			disableCustomRange,
+			disableCalendar,
+		} = this.props;
 		const {
 			inputValues: { start, end },
 			selectedDateRange,
@@ -199,26 +206,28 @@ export class DatePeriodPicker extends PureComponent {
 						{displayName}
 					</Styled.DatePeriod>
 				))}
-				<Styled.DateInputContainer>
-					<Styled.Label>
-						<Styled.LabelText>From</Styled.LabelText>
-						<Input
-							placeholder="mm/dd/yyyy"
-							value={start}
-							onChange={event => this.handleInputValueChange(event.target.value, 'start')}
-							small
-						/>
-					</Styled.Label>
-					<Styled.Label>
-						<Styled.LabelText>To</Styled.LabelText>
-						<Input
-							placeholder="mm/dd/yyyy"
-							value={end}
-							onChange={event => this.handleInputValueChange(event.target.value, 'end')}
-							small
-						/>
-					</Styled.Label>
-				</Styled.DateInputContainer>
+				{disableCustomRange ? null : (
+					<Styled.DateInputContainer>
+						<Styled.Label>
+							<Styled.LabelText>From</Styled.LabelText>
+							<Input
+								placeholder="mm/dd/yyyy"
+								value={start}
+								onChange={event => this.handleInputValueChange(event.target.value, 'start')}
+								small
+							/>
+						</Styled.Label>
+						<Styled.Label>
+							<Styled.LabelText>To</Styled.LabelText>
+							<Input
+								placeholder="mm/dd/yyyy"
+								value={end}
+								onChange={event => this.handleInputValueChange(event.target.value, 'end')}
+								small
+							/>
+						</Styled.Label>
+					</Styled.DateInputContainer>
+				)}
 				{disableCalendar ? null : (
 					<Styled.DatePickerContainer>
 						<DatePicker
