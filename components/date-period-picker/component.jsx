@@ -40,6 +40,7 @@ export class DatePeriodPicker extends PureComponent {
 		dateFunctions: dateFunctionProps,
 		/** Debounce value for date inputs. Defaults to 500ms */
 		debounce: PropTypes.number,
+		disableEnumeratedRanges: PropTypes.bool,
 		disableCustomRange: PropTypes.bool,
 		disableCalendar: PropTypes.bool,
 	};
@@ -186,6 +187,7 @@ export class DatePeriodPicker extends PureComponent {
 			setSelectedDate,
 			validate,
 			dateFunctions,
+			disableEnumeratedRanges,
 			disableCustomRange,
 			disableCalendar,
 		} = this.props;
@@ -196,16 +198,18 @@ export class DatePeriodPicker extends PureComponent {
 
 		return (
 			<Styled.Container>
-				{this.getUniqueDatePeriods().map(({ displayName, dateRange, originalIndex }) => (
-					<Styled.DatePeriod
-						key={displayName}
-						onClick={() => {
-							setSelectedDate(dateRange, originalIndex);
-						}}
-					>
-						{displayName}
-					</Styled.DatePeriod>
-				))}
+				{disableEnumeratedRanges
+					? null
+					: this.getUniqueDatePeriods().map(({ displayName, dateRange, originalIndex }) => (
+							<Styled.DatePeriod
+								key={displayName}
+								onClick={() => {
+									setSelectedDate(dateRange, originalIndex);
+								}}
+							>
+								{displayName}
+							</Styled.DatePeriod>
+					  ))}
 				{disableCustomRange ? null : (
 					<Styled.DateInputContainer>
 						<Styled.Label>
