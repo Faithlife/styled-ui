@@ -77,6 +77,8 @@ export class InferredBase extends Component {
 		children: PropTypes.func.isRequired,
 		/** See the docs for how to override styles properly */
 		className: PropTypes.string,
+		/** The popover container for the tooltip */
+		container: PropTypes.oneOf([PropTypes.string, PropTypes.node]),
 	};
 
 	static defaultProps = {
@@ -85,7 +87,13 @@ export class InferredBase extends Component {
 	};
 
 	render() {
-		const { confidence, shouldShowPercentageText, confidenceSource, onConfirm } = this.props;
+		const {
+			confidence,
+			shouldShowPercentageText,
+			confidenceSource,
+			onConfirm,
+			container,
+		} = this.props;
 
 		const ConfidenceIcon =
 			confidence >= 0.9 ? (
@@ -112,7 +120,12 @@ export class InferredBase extends Component {
 			<RelativeContainer className={this.props.className}>
 				{this.props.children({ inferred: !!ConfidenceIcon })}
 				<IndicatorContainer className={ConfidenceIcon ? 'hasConfidence' : ''}>
-					<Tooltip text={tooltipContents} minWidth="300px" placement="top-end">
+					<Tooltip
+						text={tooltipContents}
+						container={container}
+						minWidth="300px"
+						placement="top-end"
+					>
 						<ConfidenceIconContainer
 							onClick={() => {
 								onConfirm();
