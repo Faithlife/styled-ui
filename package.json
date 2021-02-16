@@ -26,8 +26,7 @@
 	},
 	"files": [
 		"dist/**",
-		"grid.js",
-		"v6.js",
+		"text-input.js",
 		"icons/*.js"
 	],
 	"browserslist": [
