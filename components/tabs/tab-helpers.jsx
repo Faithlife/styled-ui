@@ -45,10 +45,10 @@ export function SequencedTabList({ children }) {
 							selected: selectedTabIndex === index,
 							disabled:
 								child.props.disabled ||
-									(selectedTabIndex < index - 1 &&
-										!children
-											.slice(selectedTabIndex + 1, index)
-											.every(value => value.props.disabled)),
+								(selectedTabIndex < index - 1 &&
+									!children
+										.slice(selectedTabIndex + 1, index)
+										.every(value => value.props.disabled)),
 							completed:
 								selectedTabIndex !== index &&
 								(child.props.disabled ? false : child.props.completed || selectedTabIndex > index),
