@@ -40,6 +40,10 @@ export class DatePeriodPicker extends PureComponent {
 		dateFunctions: dateFunctionProps,
 		/** Debounce value for date inputs. Defaults to 500ms */
 		debounce: PropTypes.number,
+		disableEnumeratedRanges: PropTypes.bool,
+		disableCustomRange: PropTypes.bool,
+		disableCalendar: PropTypes.bool,
+		disableInferredDatePeriodIndex: PropTypes.bool,
 	};
 
 	static defaultProps = {
@@ -107,7 +111,10 @@ export class DatePeriodPicker extends PureComponent {
 				this.setState({ inputValues: { [input]: value } });
 			}
 
-			this.props.setSelectedDate(selectedDate, this.getDatePeriodIndex(selectedDate));
+			this.props.setSelectedDate(
+				selectedDate,
+				this.props.disableInferredDatePeriodIndex ? null : this.getDatePeriodIndex(selectedDate),
+			);
 		}
 	}, this.props.debounce);
 
@@ -180,7 +187,15 @@ export class DatePeriodPicker extends PureComponent {
 	};
 
 	render() {
-		const { setSelectedDate, validate, dateFunctions } = this.props;
+		const {
+			setSelectedDate,
+			validate,
+			dateFunctions,
+			disableEnumeratedRanges,
+			disableCustomRange,
+			disableCalendar,
+			disableInferredDatePeriodIndex,
+		} = this.props;
 		const {
 			inputValues: { start, end },
 			selectedDateRange,
@@ -188,47 +203,56 @@ export class DatePeriodPicker extends PureComponent {
 
 		return (
 			<Styled.Container>
-				{this.getUniqueDatePeriods().map(({ displayName, dateRange, originalIndex }) => (
-					<Styled.DatePeriod
-						key={displayName}
-						onClick={() => {
-							setSelectedDate(dateRange, originalIndex);
-						}}
-					>
-						{displayName}
-					</Styled.DatePeriod>
-				))}
-				<Styled.DateInputContainer>
-					<Styled.Label>
-						<Styled.LabelText>From</Styled.LabelText>
-						<Input
-							placeholder="mm/dd/yyyy"
-							value={start}
-							onChange={event => this.handleInputValueChange(event.target.value, 'start')}
-							small
+				{disableEnumeratedRanges
+					? null
+					: this.getUniqueDatePeriods().map(({ displayName, dateRange, originalIndex }) => (
+							<Styled.DatePeriod
+								key={displayName}
+								onClick={() => {
+									setSelectedDate(dateRange, originalIndex);
+								}}
+							>
+								{displayName}
+							</Styled.DatePeriod>
+					  ))}
+				{disableCustomRange ? null : (
+					<Styled.DateInputContainer>
+						<Styled.Label>
+							<Styled.LabelText>From</Styled.LabelText>
+							<Input
+								placeholder="mm/dd/yyyy"
+								value={start}
+								onChange={event => this.handleInputValueChange(event.target.value, 'start')}
+								small
+							/>
+						</Styled.Label>
+						<Styled.Label>
+							<Styled.LabelText>To</Styled.LabelText>
+							<Input
+								placeholder="mm/dd/yyyy"
+								value={end}
+								onChange={event => this.handleInputValueChange(event.target.value, 'end')}
+								small
+							/>
+						</Styled.Label>
+					</Styled.DateInputContainer>
+				)}
+				{disableCalendar ? null : (
+					<Styled.DatePickerContainer>
+						<DatePicker
+							asDateRangePicker
+							selectedDateRange={selectedDateRange}
+							setSelectedDate={dateRange =>
+								setSelectedDate(
+									dateRange,
+									disableInferredDatePeriodIndex ? null : this.getDatePeriodIndex(dateRange),
+								)
+							}
+							validate={validate}
+							dateFunctions={dateFunctions}
 						/>
-					</Styled.Label>
-					<Styled.Label>
-						<Styled.LabelText>To</Styled.LabelText>
-						<Input
-							placeholder="mm/dd/yyyy"
-							value={end}
-							onChange={event => this.handleInputValueChange(event.target.value, 'end')}
-							small
-						/>
-					</Styled.Label>
-				</Styled.DateInputContainer>
-				<Styled.DatePickerContainer>
-					<DatePicker
-						asDateRangePicker
-						selectedDateRange={selectedDateRange}
-						setSelectedDate={dateRange =>
-							setSelectedDate(dateRange, this.getDatePeriodIndex(dateRange))
-						}
-						validate={validate}
-						dateFunctions={dateFunctions}
-					/>
-				</Styled.DatePickerContainer>
+					</Styled.DatePickerContainer>
+				)}
 			</Styled.Container>
 		);
 	}
