@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.2.0
+
+- Added extra options to `DatePicker`
+- Add v6 upgrade notes for `Button` and `Select`
+- Allow passing a container to `InferredInput`
+
 ## 6.1.2
 
 - Fix /text-input import entrypoint.
