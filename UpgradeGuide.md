@@ -46,6 +46,8 @@
 - `ParameterSentence`
   - Subcomponents have been renamed: `ParameterSelect` to `ParameterSentence.Select`, `ParameterInputBox` to `ParameterSentence.Input`.
   - The `styleOverrides` prop has been removed in favor of Styled System props.
+- `Popover`
+  - The `styleOverrides` prop has been removed in favor of Styled System props.
 - `Radio`
   - The old `theme` prop functionality has been replaced by the [global theme object](https://faithlife.github.io/styled-ui/#/theme/usage) and Styled System props. Use the [`ThemeProvider` component](https://faithlife.github.io/styled-ui/#/theme/customization) to customize the theme.
 - `SimpleToast`
@@ -72,3 +74,5 @@
     ```
   - Deprecated components previously imported from `'@faithlife/styled-ui/dist/text-input'` (`Typeahead`, `AsyncTypeahead`, `Token`, `Menu`, `MenuItem`, `InferredTypeahead`) have been removed.
   - `Select` components behave slightly differently now in one situation. When `isMulti` is `true`, if one or more options are selected and then later all selected options are removed, upon the removal of the last option the value passed to `onChange` will be `null`. In v5, the value passed to `onChange` in this situation would have been `[]`. See the [React Select v3 upgrade guide](https://github.com/JedWatson/react-select/issues/3585) for more details.
+- `Tooltip`
+  - The `styleOverrides` prop has been removed in favor of Styled System props.
