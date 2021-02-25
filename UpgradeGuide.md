@@ -4,6 +4,8 @@
 
 - Installation
   - Styled-UI v6 should be installed as a **direct** dependency, not a peerDependency anymore.
+- Importing
+  - Importing from `'@faithlife/styled-iu/v6'` has been deprecated—you can import v6 components from `'@faithlife/styled-ui'` now.
 - `Accordion`
   - The `styleOverrides` prop has been removed in favor of Styled System props. Use style props for `Accordion.Panel` directly on that component.
 - `Button`
