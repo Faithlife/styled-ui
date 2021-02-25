@@ -25,6 +25,7 @@ export function DatePickerInput({
 	maxDate,
 	children,
 	width = '100%',
+	datePickerContainer,
 	...rest
 }) {
 	const popoverRef = useRef();
@@ -137,6 +138,7 @@ export function DatePickerInput({
 						placement="bottom-start"
 						padding="16px 20px"
 						zIndex={3}
+						container={datePickerContainer}
 						{...popoverProps}
 					>
 						<Styled.DateTime>
