@@ -1,6 +1,6 @@
 For the next major version of Styled UI, the Accordion component has been rebuilt to use Styled System primitives.
 
-You can opt in to the new API by importing `{ Accordion } from '@faithlife/styled-ui/v6'`. When v6 is released, the `/v6` entrypoint will continue to be supported with a deprecation warning until v7 is released.
+You can opt in to the new API by importing `{ Accordion } from '@faithlife/styled-ui/v6'`.
 
 These `<Accordion>` components follow the [WAI-ARIA spec for accordions](https://www.w3.org/TR/wai-aria-practices-1.1/#accordion).
 
