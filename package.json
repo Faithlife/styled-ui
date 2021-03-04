@@ -5,6 +5,9 @@
 	"repository": "git@github.com:Faithlife/styled-ui.git",
 	"license": "MIT",
 	"description": "UI components for use in Faithlife applications.",
+	"bin": {
+		"v6-codemod": "./tools/update-to-v6-codemod/index.js"
+	},
 	"scripts": {
 		"deploy-site": "npm run catalog-build && storybook-to-ghpages --ci --existing-output-dir=catalog/build",
 		"eslint": "eslint ./components ./catalog --ext .js --ext .jsx",
@@ -22,12 +25,14 @@
 		"get-versions": "yarn helmsman get-versions @faithlife/styled-ui",
 		"catalog-start": "catalog start",
 		"catalog-build": "catalog build --public-url /styled-ui",
-		"catalog-build-netlify": "npm run prepublishOnly && catalog build"
+		"catalog-build-netlify": "npm run prepublishOnly && catalog build",
+		"cm": "node ./tools/update-to-v6-codemod/index.js"
 	},
 	"files": [
 		"dist/**",
 		"text-input.js",
-		"icons/*.js"
+		"icons/*.js",
+		"tools/update-to-v6-codemod/**"
 	],
 	"browserslist": [
 		"> 1%",
@@ -83,11 +88,14 @@
 		"babel-runtime": "^6.26.0",
 		"catalog": "^3.5.4",
 		"chrono-node": "^1.3.5",
+		"commander": "^7.1.0",
 		"cross-env": "^5.2.0",
 		"date-fns": "^2.0.0-alpha.25",
 		"eslint": "^5.16.0",
 		"eslint-config-faithlife": "^6.0.0",
 		"esm": "^3.0.24",
+		"execa": "^5.0.0",
+		"jscodeshift": "^0.11.0",
 		"micro-graphql-react": "^0.3.0-beta2",
 		"mocha": "^5.1.1",
 		"prettier": "^1.17.1",
