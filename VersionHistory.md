@@ -25,6 +25,10 @@
 - Removed the /v6 entrypoint. All components that had been available at the /v6 entrypoint are now exported from the main entrypoint.
 - Removed the `inline` variant for `Input` components.
 
+## 5.73.3
+
+- Fixed shift+home key handling in Select components.
+
 ## 5.73.2
 
 - Fixed padding for AvatarOption components.
