@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.2.1
+
+- Fixed shift+home key handling in Select components.
+
 ## 6.2.0
 
 - Added extra options to `DatePicker`
