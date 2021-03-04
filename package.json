@@ -12,7 +12,7 @@
 		"precommit": "prettier --write \"./components/**/*.{js,jsx}\" && npm run stylelint",
 		"build": "rimraf dist && webpack --mode=none",
 		"prepublishOnly": "npm test",
-		"postpublish": "yarn helmsman ship-to @faithlife/styled-ui@5.73.2 latest --no-ship-faithlife",
+		"postpublish": "yarn helmsman ship-to @faithlife/styled-ui@5.73.3 latest --no-ship-faithlife",
 		"stylelint": "stylelint ./components/**/*.jsx",
 		"unit-test": "cross-env NODE_ENV=test mocha -t 60000 -r @babel/register ./tests/**/*.js",
 		"helmsman": "npx --userconfig ./.npmrc @faithlife/helmsman",
