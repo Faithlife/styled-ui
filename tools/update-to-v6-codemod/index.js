@@ -14,12 +14,13 @@ program
 		'--parser <option>',
 		'babel|babylon|flow|ts|tsx the parser to use for parsing the source files',
 	)
+	.option('--babel', 'use babel to parse the code', false)
 	.allowUnknownOption();
 
 program.parse(process.argv);
 const options = program.opts();
 
-const args = [];
+const args = [options.babel ? '--babel' : '--no-babel'];
 
 if (!program.args.includes('--verbose')) {
 	args.push('--verbose=2');
@@ -48,6 +49,7 @@ args.unshift(...program.args);
 
 const transforms = [
 	'v6-imports',
+	'anchor-button',
 	'style-overrides',
 	'theme',
 	'text-input',
@@ -61,7 +63,6 @@ const transforms = [
 	'popover',
 ];
 
-console.log(options.transform);
 let runList;
 if (options.transform) {
 	if (!options.transform.length || options.transform.some(x => !transforms.includes(x))) {

@@ -23,7 +23,6 @@ module.exports = function(file, api, options) {
 
 		pannels.forEach(panel => {
 			const openingElement = j(panel.value.openingElement);
-			const attributes = openingElement.find(j.JSXAttribute);
 			const paddingAttr = openingElement.find(j.JSXAttribute, {
 				name: { name: 'padding' },
 			});
@@ -42,6 +41,10 @@ module.exports = function(file, api, options) {
 			.find(j.JSXAttribute, { name: { name: 'styleOverrides' } })
 			.remove();
 	});
+
+	// buttons
+	const buttons = getElementsWithOverrides(j, root, 'Button', 'styleOverrides');
+	addTodoComments(j, buttons, 'styleOverrides');
 
 	// datePickerInput
 	const datePickerInputs = getElementsWithOverrides(j, root, 'DatePickerInput', 'styleOverrides');
@@ -81,7 +84,8 @@ module.exports = function(file, api, options) {
 	addTodoComments(j, paramInput, 'styleOverrides');
 
 	// popover
-	// TODO make sure this is handled in the popover specific func
+	const popovers = getElementsWithOverrides(j, root, 'Popover', 'styleOverrides');
+	addTodoComments(j, popovers, 'styleOverrides');
 
 	// simpleToast
 	const toast = getElementsWithOverrides(j, root, 'SimpleToast', 'styleOverrides');
