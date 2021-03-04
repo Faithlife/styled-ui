@@ -229,7 +229,11 @@ function handleKeyDown(e, onConsumerKeyDown) {
 
 		if (selectionIndex !== null) {
 			if (e.shiftKey) {
-				e.target.selectionEnd = selectionIndex;
+				if (e.key === 'Home') {
+					e.target.selectionStart = selectionIndex;
+				} else {
+					e.target.selectionEnd = selectionIndex;
+				}
 			} else {
 				e.target.setSelectionRange(selectionIndex, selectionIndex);
 			}
