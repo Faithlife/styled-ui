@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.73.3
+
+- Fixed shift+home key handling in Select components.
+
 ## 5.73.2
 
 - Fixed padding for AvatarOption components.
