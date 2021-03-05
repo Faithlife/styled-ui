@@ -1,6 +1,6 @@
 // Update tabs to v6
 
-module.exports = function(file, api, options) {
+module.exports = function(file, api, { printOptions }) {
 	const j = api.jscodeshift;
 	const root = j(file.source);
 
@@ -92,5 +92,5 @@ module.exports = function(file, api, options) {
 		);
 	});
 
-	return root.toSource();
+	return root.toSource(printOptions);
 };

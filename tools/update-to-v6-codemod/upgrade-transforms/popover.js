@@ -10,7 +10,7 @@ module.exports = function(j, api, options) {
 	}
 };
 
-function popover(file, api, options) {
+function popover(file, api, { printOptions }) {
 	const j = api.jscodeshift;
 	const root = j(file.source);
 
@@ -22,10 +22,10 @@ function popover(file, api, options) {
 		]);
 	});
 
-	return root.toSource();
+	return root.toSource(printOptions);
 }
 
-function popoverExperimental(file, api, options) {
+function popoverExperimental(file, api, { printOptions }) {
 	const j = api.jscodeshift;
 	const root = j(file.source);
 
@@ -123,7 +123,7 @@ function popoverExperimental(file, api, options) {
 		includeUseRef(j, root);
 	}
 
-	return root.toSource();
+	return root.toSource(printOptions);
 }
 
 function includeUseRef(j, root) {

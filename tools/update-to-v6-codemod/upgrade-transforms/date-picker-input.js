@@ -2,7 +2,7 @@
 
 const { getElementsWithOverrides } = require('./utils');
 
-module.exports = function(file, api, options) {
+module.exports = function(file, api, { printOptions }) {
 	const j = api.jscodeshift;
 	const root = j(file.source);
 
@@ -62,5 +62,5 @@ module.exports = function(file, api, options) {
 			.remove();
 	});
 
-	return root.toSource();
+	return root.toSource(printOptions);
 };
