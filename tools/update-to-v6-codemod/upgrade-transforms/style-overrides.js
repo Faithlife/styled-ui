@@ -4,7 +4,7 @@ const { getElementsWithOverrides, getPropAsObj, addTodoComments } = require('./u
 
 const scale = [0, '2px', '4px', '8px', '12px', '16px', '24px', '32px', '64px', '96px'];
 
-module.exports = function(file, api, options) {
+module.exports = function(file, api, { printOptions }) {
 	const j = api.jscodeshift;
 	const root = j(file.source);
 
@@ -72,9 +72,13 @@ module.exports = function(file, api, options) {
 			openingElement.attributes.push(j.jsxAttribute(j.jsxIdentifier('width'), newValue));
 		}
 
-		j(ele)
-			.find(j.JSXAttribute, { name: { name: 'styleOverrides' } })
-			.remove();
+		if (Object.keys(styleOverrides).filter(x => x !== 'height' && x !== 'width').length) {
+			addTodoComments(j, j(ele), 'styleOverrides');
+		} else {
+			j(ele)
+				.find(j.JSXAttribute, { name: { name: 'styleOverrides' } })
+				.remove();
+		}
 	});
 
 	// parameterSentence
@@ -115,5 +119,5 @@ module.exports = function(file, api, options) {
 	const tooltips = getElementsWithOverrides(j, root, 'Tooltip', 'styleOverrides');
 	addTodoComments(j, tooltips, 'styleOverrides');
 
-	return root.toSource();
+	return root.toSource(printOptions);
 };

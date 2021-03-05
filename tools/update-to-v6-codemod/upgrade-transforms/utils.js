@@ -12,8 +12,9 @@ module.exports = {
 		return root.find(
 			j.JSXElement,
 			ele =>
+				ele.openingElement.name !== undefined &&
 				ele.openingElement.name.name === eleName &&
-				ele.openingElement.attributes.some(x => x.name.name === overrideName),
+				ele.openingElement.attributes.some(x => x.name && x.name.name === overrideName),
 		);
 	},
 
@@ -38,11 +39,20 @@ module.exports = {
 function addBlockComment(j, ele, comments) {
 	const element = j(ele);
 	const lineBreak = j.jsxText('\n');
+
+	// HACK need a better way to see if this is a tag without JSX parents
+	console.log(ele);
+	const useJSXComment = ele.parent.value.type.startsWith('JSX');
+	console.log(useJSXComment);
 	for (const comment of comments) {
-		const commentContent = j.jsxEmptyExpression();
-		commentContent.comments = [j.commentBlock(comment, false, true)];
-		element.insertBefore(j.jsxExpressionContainer(commentContent));
-		element.insertBefore(lineBreak);
+		if (useJSXComment) {
+			const commentContent = j.jsxEmptyExpression();
+			commentContent.comments = [j.commentBlock(comment, false, true)];
+			element.insertBefore(j.jsxExpressionContainer(commentContent));
+			element.insertBefore(lineBreak);
+		} else {
+			ele.value.comments = [...(ele.value.comments || []), j.commentLine(comment, false, true)];
+		}
 	}
 }
 
@@ -57,7 +67,7 @@ function getPropAsObj(j, propName, element) {
 	const eleAsString = j(propElement).toSource();
 	const sanitizedString = eleAsString
 		.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2":')
-		.replaceAll(`'`, `"`);
+		.replace(/'/gi, `"`);
 
 	return JSON.parse(sanitizedString);
 }

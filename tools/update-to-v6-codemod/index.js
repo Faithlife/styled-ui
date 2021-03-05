@@ -15,6 +15,7 @@ program
 		'babel|babylon|flow|ts|tsx the parser to use for parsing the source files',
 	)
 	.option('--babel', 'use babel to parse the code', false)
+	.option('--line-endings <option>', '\\n|\\crlf', '\\n')
 	.allowUnknownOption();
 
 program.parse(process.argv);
@@ -44,6 +45,13 @@ if (options.parser) {
 if (options.experimental) {
 	args.push('--experimental=true');
 }
+
+args.push(
+	'--printOptions',
+	`{"lineTerminator":"${
+		options.lineEndings
+	}", "useTabs": true, "tabWidth": 4, "reuseWhitespace": true, "quote": "auto", "trailingComma": true}`,
+);
 
 args.unshift(...program.args);
 
