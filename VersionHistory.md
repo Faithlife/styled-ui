@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.73.4
+
+- Added extra options to DatePicker (added in 6.2.0)
+
 ## 5.73.3
 
 - Fixed shift+home key handling in Select components.
