@@ -64,6 +64,7 @@ const transforms = [
 	'button',
 	'date-picker-input',
 	'dropdown',
+	'listbox',
 	'loading-spinner',
 	'modal',
 	'parameter-sentence',
