@@ -22,10 +22,10 @@
 
 ### How to publish
 
-- Update VersionHistory.md
-- Run `yarn version`. Please follow semver when bumping the version.
-- Push your changes to master
-- Run this publish job to push to our internal package manager: https://jenkins.lrscorp.net/view/Community/job/styled-ui%20publish/
+- Update `VersionHistory.md`.
+- Run `yarn version`, following [semantic versioning](https://semver.org/) when choosing the new version number.
+- Push your changes to `master`.
+- Go to [this Jenkins build page](https://jenkins.lrscorp.net/view/Community/job/styled-ui%20publish/build?delay=0sec) and click "Build".
 
 ### Why?
 
