@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.73.5
+
+- Fixed bug with v6 `Accordion.Panel` padding props.
+
 ## 5.73.4
 
 - Added extra options to DatePicker (added in 6.2.0)
