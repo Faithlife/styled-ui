@@ -21,10 +21,11 @@
 - Open a pull request via the Github Web UI to request review
 
 ### How to publish
-- Update VersionHistory.md
-- Run `yarn version`. Please follow semver when bumping the version.
-- Push your changes to master
-- Run this publish job to push to our internal package manager: https://jenkins.lrscorp.net/view/Community/job/styled-ui%20publish/
+
+- Update `VersionHistory.md`.
+- Run `yarn version`, following [semantic versioning](https://semver.org/) when choosing the new version number.
+- Push your changes to the `v5` branch.
+- Go to [this Jenkins build page](https://jenkins.lrscorp.net/view/Community/job/styled-ui%20publish/build?delay=0sec), change the branch parameter to `v5`, and click "Build".
 
 ### Why?
 
