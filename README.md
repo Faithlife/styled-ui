@@ -24,6 +24,7 @@
 
 - Update `VersionHistory.md`.
 - Run `yarn version`, following [semantic versioning](https://semver.org/) when choosing the new version number.
+- Change the version number in the `postPublish` script in `package.json` to the new version.
 - Push your changes to the `v5` branch.
 - Go to [this Jenkins build page](https://jenkins.lrscorp.net/view/Community/job/styled-ui%20publish/build?delay=0sec), change the branch parameter to `v5`, and click "Build".
 
