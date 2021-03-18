@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { variant } from 'styled-system';
+import { variant, padding } from 'styled-system';
 import { Collapse } from '../collapse';
 import { Box } from '../Box';
 import { useAccordionItemContext } from './accordion-util';
@@ -51,4 +51,5 @@ export const Panel = styled(Box).attrs(({ headerId, panelId }) => ({
 			},
 		},
 	}),
+	padding,
 );
