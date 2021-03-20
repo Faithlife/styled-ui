@@ -129,7 +129,9 @@ state: { isOpen: false }
 	<Menu isOpen={state.isOpen} onToggleMenu={() => setState({ isOpen: !state.isOpen })}>
 		<Menu.Toggle variant="minor">Show a Dropdown!</Menu.Toggle>
 		<Menu.Dropdown>
-			<Menu.Item onClick={() => alert("Menu Item 1")}>Menu Item 1</Menu.Item>
+			<Menu.Item onClick={() => alert("Menu Item 1")}>
+				<Menu.ItemTextContainer display="flex">Menu Item 1</Menu.ItemTextContainer>
+			</Menu.Item>
 			<Menu.Item onClick={() => alert("Menu Item 2")}>Menu Item 2</Menu.Item>
 			<Menu.Item color="red" onClick={() => alert("Menu Item 3")}>Menu Item 3</Menu.Item>
 		</Menu.Dropdown>
