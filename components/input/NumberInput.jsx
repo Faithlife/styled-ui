@@ -16,6 +16,7 @@ const NumberInput = React.memo(
 
 		const dispatchChangeEvent = useCallback(() => {
 			inputRef.current.dispatchEvent(new Event('input', { bubbles: true }));
+			inputRef.current.focus();
 		}, []);
 
 		const handleStepUp = useCallback(() => {
