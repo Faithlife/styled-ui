@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.74.0
+
+- Changed `NumberInput` to focus the input box on step button click.
+
 ## 5.73.5
 
 - Fixed bug with v6 `Accordion.Panel` padding props.
