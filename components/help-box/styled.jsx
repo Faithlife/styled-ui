@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { variant } from 'styled-system';
 import { themeGet } from '@styled-system/theme-get';
+import { box } from '../../theme/system';
 import { LightBulbH } from '../icons';
 import { resetStyles } from '../utils';
 
@@ -112,6 +113,7 @@ export const HelpBox = styled.div`
 	}
 
 	${resetStyles}
+	${box}
 
 	${props =>
 		variant({
