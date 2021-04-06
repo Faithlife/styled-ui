@@ -11,6 +11,7 @@ export const CheckboxDiv = styled(Box)`
 	width: 16px;
 	height: 16px;
 	background: ${({ theme }) => theme.colors.checkbox.background};
+	flex-shrink: 0;
 
 	${({ disabled, theme }) =>
 		disabled &&
