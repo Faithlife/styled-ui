@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.2.3
+
+- Fixed checkboxes shrinking when long label text wraps.
+
+## 6.2.2
+
+- Added `Box` styled-system props to `HelpBox`.
+
 ## 6.2.1
 
 - Fixed shift+home key handling in Select components.
