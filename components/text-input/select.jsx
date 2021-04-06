@@ -55,6 +55,7 @@ const selectStyles = (props, theme) => {
 		}),
 		placeholder: styles => ({
 			...styles,
+			fontStyle: 'italic',
 			lineHeight: 1,
 			whiteSpace: 'nowrap',
 			color: theme.colors.input.placeholderForeground,
