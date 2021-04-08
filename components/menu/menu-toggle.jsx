@@ -1,11 +1,12 @@
 import React, { useMemo } from 'react';
 import { getConfigChild } from '../utils';
-import { Button, SegmentedButtonGroup } from '../button';
+import { Button, MultiButton } from '../button';
+import { Box } from '../Box';
 import { useDropdownContext, useKeyboardActivate } from './utils';
 import * as Styled from './styled';
 
 export function MenuToggle({ hideCarrot, size, variant, disabled, children, ...buttonProps }) {
-	const { onToggleMenu, menuId, isOpen, toggleRef, splitRef, onKeyboardNav } = useDropdownContext();
+	const { onToggleMenu, menuId, isOpen, toggleRef, onKeyboardNav } = useDropdownContext();
 
 	const onKeyPress = useKeyboardActivate(onToggleMenu, onKeyboardNav);
 
@@ -28,14 +29,15 @@ export function MenuToggle({ hideCarrot, size, variant, disabled, children, ...b
 
 	const [actionChild] = getConfigChild(children, MenuActionButton.childConfigComponent);
 	return actionChild ? (
-		<SegmentedButtonGroup ref={toggleRef} border={0}>
+		<Box>
 			{React.cloneElement(actionChild, {
 				defaultSize: size,
 				defaultVariant: variant,
 				defaultDisabled: disabled,
+				isMulti: true,
 			})}
-			<Button
-				ref={splitRef}
+			<MultiButton
+				ref={toggleRef}
 				size={size}
 				variant={variant}
 				disabled={disabled}
@@ -47,8 +49,8 @@ export function MenuToggle({ hideCarrot, size, variant, disabled, children, ...b
 				{...buttonProps}
 			>
 				<Styled.DropdownCarrot hideMargin />
-			</Button>
-		</SegmentedButtonGroup>
+			</MultiButton>
+		</Box>
 	) : (
 		<Button
 			ref={toggleRef}
@@ -74,13 +76,21 @@ export function MenuActionButton({
 	defaultSize,
 	defaultVariant,
 	defaultDisabled,
+	isMulti,
 	children,
 	...buttonProps
 }) {
+	const Component = isMulti ? MultiButton : Button;
 	return (
-		<Button size={defaultSize} variant={defaultVariant} disabled={defaultDisabled} {...buttonProps}>
+		<Component
+			border={0}
+			size={defaultSize}
+			variant={defaultVariant}
+			disabled={defaultDisabled}
+			{...buttonProps}
+		>
 			{children}
-		</Button>
+		</Component>
 	);
 }
 MenuActionButton.childConfigComponent = 'DropdownActionButton';
