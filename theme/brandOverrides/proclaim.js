@@ -36,6 +36,12 @@ export const theme = {
 
 			segmentedButtonGroupBorder: '#494949',
 			segmentedButtonGroupBackground: '#7a7a7a',
+
+			multi: {
+				border: '#494949',
+				selectedBackground: '#0097FF',
+				selectedForeground: 'foregroundPrimary',
+			},
 		},
 		select: {
 			menuBackground: '#494949',

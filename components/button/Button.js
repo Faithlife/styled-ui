@@ -7,6 +7,7 @@ import { common, typography } from '../../theme/system';
 import { buttonSizes, buttons } from '../../theme/buttons';
 import { theme } from '../../theme';
 import { LoadingSpinner } from '../loading-spinner';
+import { deprecateComponent } from '../utils';
 
 const sizeVariant = variant({
 	prop: 'size',
@@ -85,7 +86,7 @@ ButtonCore.defaultProps = {
 	variant: 'primary',
 };
 
-const Button = React.forwardRef(
+export const Button = React.forwardRef(
 	(
 		{
 			children,
@@ -112,34 +113,65 @@ const Button = React.forwardRef(
 	),
 );
 
-const SegmentedButtonGroup = styled(Box).attrs(({ border }) => ({
-	border: border ?? 1,
-	borderColor: 'button.segmentedButtonGroupBorder',
-	borderRadius: 1,
-	backgroundColor: 'button.segmentedButtonGroupBackground',
+export const MultiButton = styled(Button).attrs(({ variant }) => ({
+	variant: variant ?? 'minorTransparent',
 }))`
-	display: flex;
+	border: 1;
+	border-color: ${({ theme, borderColor }) => borderColor ?? theme.colors.button.multi.border};
 
-	${ButtonCore} {
-		margin: 0;
-		border-radius: 2px; // 1 less than borderRadius: 1 so the inner radius fits the outer
+	${({ selected, theme }) =>
+		selected &&
+		css`
+			border: none;
+			background-color: ${theme.colors.button.multi.selectedBackground};
+			color: ${theme.colors.button.multi.selectedForeground};
+			font-weight: bold;
+		`}
+
+	&:not(:first-child) {
+		border-left: ${({ borderLeft }) => borderLeft ?? 'none'};
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
 	}
 
-	> *:nth-child(n + 2) {
-		&,
-		${ButtonCore} {
-			border-top-left-radius: 0;
-			border-bottom-left-radius: 0;
-		}
-	}
-
-	> *:not(:last-child) {
-		&,
-		${ButtonCore} {
-			border-top-right-radius: 0;
-			border-bottom-right-radius: 0;
-		}
+	&:not(:last-child) {
+		border-right: ${({ borderRight }) => borderRight ?? 'none'};
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
 	}
 `;
 
-export { Button, SegmentedButtonGroup };
+MultiButton.defaultProps = { theme };
+
+export const SegmentedButtonGroup = deprecateComponent(
+	styled(Box).attrs(({ border }) => ({
+		border: border ?? 1,
+		borderColor: 'button.multi.border',
+		borderRadius: 1,
+		backgroundColor: 'button.multi.background',
+	}))`
+		display: flex;
+
+		${ButtonCore} {
+			margin: 0;
+			border-radius: 2px; // 1 less than borderRadius: 1 so the inner radius fits the outer
+		}
+
+		> *:nth-child(n + 2) {
+			&,
+			${ButtonCore} {
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
+			}
+		}
+
+		> *:not(:last-child) {
+			&,
+			${ButtonCore} {
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
+			}
+		}
+	`,
+	'SegmentedButtonGroup is deprecated in favor of MultiButton or ButtonSelect',
+);

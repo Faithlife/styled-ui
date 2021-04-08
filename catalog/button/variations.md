@@ -175,7 +175,49 @@ state: { loading: false }
 </ButtonDemo>
 ```
 
-## Button Groups
+## MultiButtons
+
+MultiButtons inside a container "join" together
+
+```react
+showSource: true
+---
+<ButtonDemo>
+	<Box>
+		<MultiButton variant="primary">Primary</MultiButton>
+		<MultiButton variant="secondary">Secondary</MultiButton>
+		<MultiButton variant="transparent">Transparent</MultiButton>
+	</Box>
+</ButtonDemo>
+```
+
+## Button Select
+
+A common use of MultiButtons is for a "select" like group of buttons serving as options
+
+```react
+showSource: true
+state: { value: 0 }
+---
+<ButtonDemo>
+	<ButtonSelect
+		size="small"
+		textStyle="ui.14"
+		minWidth="72px"
+		value={state.value}
+		options={[
+			{value: 0, display: "Zero"},
+			{value: 1, display: "One"},
+			{value: 2, display: "Two"},
+			{value: 3, display: "Three", color: "green"},
+		]}
+		onChange={(value) => setState({ value })}
+	/>
+</ButtonDemo>
+```
+
+## Button Groups (deprecated)
+Prefer using `MultiButton` or `ButtonSelect`
 
 ```react
 showSource: true

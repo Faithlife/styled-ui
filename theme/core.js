@@ -127,6 +127,12 @@ colors.button = {
 
 	segmentedButtonGroupBorder: colors.gray14,
 	segmentedButtonGroupBackground: 'transparent',
+
+	multi: {
+		border: colors.gray14,
+		selectedBackground: colors.blue2,
+		selectedForeground: colors.blue4,
+	},
 };
 
 colors.tab = {
