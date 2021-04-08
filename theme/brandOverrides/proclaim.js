@@ -39,7 +39,7 @@ export const theme = {
 
 			multi: {
 				border: '#494949',
-				selectedBackground: '#0097FF',
+				selectedBackground: '#7a7a7a',
 				selectedForeground: 'foregroundPrimary',
 			},
 		},
@@ -55,7 +55,6 @@ export const theme = {
 			separator: '#999999',
 			foregroundDisabled: '#999999',
 		},
-
 		checkbox: {
 			background: 'transparent',
 			primary: '#0097FF',

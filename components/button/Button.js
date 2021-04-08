@@ -116,7 +116,7 @@ export const Button = React.forwardRef(
 export const MultiButton = styled(Button).attrs(({ variant }) => ({
 	variant: variant ?? 'minorTransparent',
 }))`
-	border: 1;
+	border: ${({ theme }) => theme.borders[1]};
 	border-color: ${({ theme, borderColor }) => borderColor ?? theme.colors.button.multi.border};
 
 	${({ selected, theme }) =>
@@ -146,9 +146,9 @@ MultiButton.defaultProps = { theme };
 export const SegmentedButtonGroup = deprecateComponent(
 	styled(Box).attrs(({ border }) => ({
 		border: border ?? 1,
-		borderColor: 'button.multi.border',
+		borderColor: 'button.segmentedButtonGroupBorder',
 		borderRadius: 1,
-		backgroundColor: 'button.multi.background',
+		backgroundColor: 'button.segmentedButtonGroupBackground',
 	}))`
 		display: flex;
 
