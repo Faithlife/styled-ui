@@ -9,6 +9,7 @@ export const RadioSvg = styled.svg`
 	position: relative;
 	width: 14px;
 	height: 14px;
+	flex-shrink: 0;
 
 	${position}
 	${space}
