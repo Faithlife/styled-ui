@@ -113,19 +113,20 @@ export const Button = React.forwardRef(
 	),
 );
 
-export const MultiButton = styled(Button).attrs(({ variant }) => ({
-	variant: variant ?? 'minorTransparent',
+export const MultiButton = styled(Button).attrs(({ variant, border, borderColor }) => ({
+	variant: variant ?? 'transparent',
+	border: border ?? 1,
+	borderColor: borderColor ?? 'button.multi.border',
 }))`
-	border: ${({ theme }) => theme.borders[1]};
-	border-color: ${({ theme, borderColor }) => borderColor ?? theme.colors.button.multi.border};
-
 	${({ selected, theme }) =>
 		selected &&
 		css`
-			border: none;
-			background-color: ${theme.colors.button.multi.selectedBackground};
-			color: ${theme.colors.button.multi.selectedForeground};
-			font-weight: bold;
+			&& {
+				border: none;
+				background-color: ${theme.colors.button.multi.selectedBackground};
+				color: ${theme.colors.button.multi.selectedForeground};
+				font-weight: bold;
+			}
 		`}
 
 	&:not(:first-child) {
@@ -154,7 +155,7 @@ export const SegmentedButtonGroup = deprecateComponent(
 
 		${ButtonCore} {
 			margin: 0;
-			border-radius: 2px; // 1 less than borderRadius: 1 so the inner radius fits the outer
+			border-radius: 2px; /* 1 less than borderRadius: 1 so the inner radius fits the outer */
 		}
 
 		> *:nth-child(n + 2) {
