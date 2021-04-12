@@ -36,6 +36,12 @@ export const theme = {
 
 			segmentedButtonGroupBorder: '#494949',
 			segmentedButtonGroupBackground: '#7a7a7a',
+
+			multi: {
+				border: '#494949',
+				selectedBackground: '#323232',
+				selectedForeground: 'foregroundPrimary',
+			},
 		},
 		select: {
 			menuBackground: '#494949',
@@ -49,7 +55,6 @@ export const theme = {
 			separator: '#999999',
 			foregroundDisabled: '#999999',
 		},
-
 		checkbox: {
 			background: 'transparent',
 			primary: '#0097FF',

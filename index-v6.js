@@ -1,5 +1,11 @@
 export { Accordion } from './components/accordion';
-export { Button, SegmentedButtonGroup } from './components/button';
+export {
+	Button,
+	UtilityButton,
+	MultiButton,
+	ButtonSelect,
+	SegmentedButtonGroup,
+} from './components/button';
 export { Checkbox } from './components/check-box';
 export { DatePickerInput } from './components/date-picker-input';
 export { Menu, Dropdown } from './components/menu';

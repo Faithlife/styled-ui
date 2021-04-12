@@ -9,7 +9,6 @@ export function Menu({ isOpen, onToggleMenu, children, width }) {
 
 	const menuId = useId();
 	const toggleRef = useRef();
-	const splitRef = useRef();
 
 	useEffect(() => {
 		if (!isOpen) {
@@ -26,7 +25,7 @@ export function Menu({ isOpen, onToggleMenu, children, width }) {
 	const onCloseMenu = useCallback(() => {
 		if (isOpen) {
 			onToggleMenu();
-			splitRef.current ? splitRef.current.focus() : toggleRef.current?.focus();
+			toggleRef.current?.focus();
 		}
 	}, [isOpen, onToggleMenu]);
 
@@ -84,7 +83,6 @@ export function Menu({ isOpen, onToggleMenu, children, width }) {
 					registerItem,
 					menuId: `dropdownMenu-${menuId}`,
 					toggleRef,
-					splitRef,
 					width,
 					onKeyboardNav,
 					focusedItemIndex,

@@ -65,6 +65,8 @@ import {
 import {
 	Accordion as V6Accordion,
 	Button as V6Button,
+	ButtonSelect,
+	MultiButton,
 	SegmentedButtonGroup,
 	Checkbox as V6Checkbox,
 	DatePickerInput as V6DatePickerInput,
@@ -326,10 +328,13 @@ const pages = [
 				title: 'Button Variations v6',
 				content: pageLoader(() => import('./button/variations-v6.md')),
 				imports: {
+					Box,
 					Button: V6Button,
+					MultiButton,
 					SegmentedButtonGroup,
 					ButtonDemo,
 					ButtonGrid,
+					ButtonSelect,
 					GearIcon,
 					buttonRef: React.createRef(),
 				},
