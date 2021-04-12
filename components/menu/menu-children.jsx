@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { getConfigChild, getConfigProps } from '../utils';
+import { getConfigChild } from '../utils';
 import { Box } from '../Box';
 import { Text } from '../Text';
 import { Checkbox } from '../check-box';
