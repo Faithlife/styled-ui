@@ -216,14 +216,16 @@ Prefer using `MultiButton` or `ButtonSelect`
 showSource: true
 ---
 <ButtonDemo>
-	<Button variant="primary" size="medium">
-		Buy now
-	</Button>
-	<Button variant="primaryOutline" size="medium">
-		Rent
-	</Button>
-	<Button variant="minor" size="medium">
-		Learn more
-	</Button>
+	<SegmentedButtonGroup>
+		<Button variant="transparent" active size="medium">
+			Primary
+		</Button>
+		<Button variant="transparent" size="medium">
+			Secondary
+		</Button>
+		<Button variant="transparent" size="medium">
+			Minor
+		</Button>
+	</SegmentedButtonGroup>
 </ButtonDemo>
 ```
