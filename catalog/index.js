@@ -316,7 +316,6 @@ const pages = [
 				title: 'Button Variations',
 				content: pageLoader(() => import('./button/variations.md')),
 				imports: {
-					Box,
 					Button,
 					ButtonDemo,
 					ButtonGrid,
@@ -329,6 +328,7 @@ const pages = [
 				title: 'Button Variations v6',
 				content: pageLoader(() => import('./button/variations-v6.md')),
 				imports: {
+					Box,
 					Button: V6Button,
 					MultiButton,
 					SegmentedButtonGroup,
