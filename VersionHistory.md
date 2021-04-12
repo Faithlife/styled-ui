@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.4.0
+
+- Add `Menu.ItemTextContainer` to control the layout of text in the Menu (Aliased to `Listbox.OptionTextContainer`)
+
 ## 6.3.0
 
 - Add `MultiButton` implementation to replace `SegmentedButtonGroup`
