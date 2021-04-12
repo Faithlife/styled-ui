@@ -14,5 +14,6 @@ Listbox.ItemIcon = Menu.ItemIcon;
 Listbox.ItemPrimaryText = Menu.ItemPrimaryText;
 Listbox.ItemSecondaryText = Menu.ItemSecondaryText;
 Listbox.Title = Menu.Title;
+Listbox.OptionTextContainer = Menu.ItemTextContainer;
 
 export { Listbox };

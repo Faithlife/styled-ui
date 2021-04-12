@@ -51,6 +51,27 @@ export function MenuItemSecondaryText({ children, ...textProps }) {
 }
 MenuItemSecondaryText.childConfigComponent = 'MenuItemSecondaryText';
 
+export function MenuItemTextContainer({ children, ...props }) {
+	const [primaryText, primaryFilteredChildren] = getConfigChild(
+		children,
+		MenuItemPrimaryText.childConfigComponent,
+	);
+	const [secondaryText, filteredChildren] = getConfigChild(
+		primaryFilteredChildren,
+		MenuItemSecondaryText.childConfigComponent,
+	);
+
+	return (
+		<Styled.MenuItemTextContainer {...props}>
+			{primaryText ? React.cloneElement(primaryText, { hasSecondaryText: !!secondaryText }) : null}
+			{secondaryText}
+			{filteredChildren}
+		</Styled.MenuItemTextContainer>
+	);
+}
+
+MenuItemTextContainer.childConfigComponent = 'MenuItemTextContainer';
+
 export const MenuItem = React.forwardRef(function MenuItem(
 	{ keyboardFocused, onClick, onKeyDown, disabled, preventDefaultOnClick, children, ...boxProps },
 	ref,
@@ -78,7 +99,15 @@ export const MenuItem = React.forwardRef(function MenuItem(
 		[onClick, onCloseMenu, disabled],
 	);
 
-	const [icon, iconFilteredChildren] = getConfigChild(children, MenuItemIcon.childConfigComponent);
+	const [container, containerFilteredChildren] = getConfigChild(
+		children,
+		MenuItemTextContainer.childConfigComponent,
+	);
+
+	const [icon, iconFilteredChildren] = getConfigChild(
+		containerFilteredChildren,
+		MenuItemIcon.childConfigComponent,
+	);
 	const [primaryText, primaryFilteredChildren] = getConfigChild(
 		iconFilteredChildren,
 		MenuItemPrimaryText.childConfigComponent,
@@ -91,6 +120,7 @@ export const MenuItem = React.forwardRef(function MenuItem(
 		secondaryFilteredChildren,
 		MenuItemCheckboxComponent.childConfigComponent,
 	);
+
 	return (
 		<Styled.MenuItem
 			ref={ref}
@@ -112,13 +142,15 @@ export const MenuItem = React.forwardRef(function MenuItem(
 		>
 			{checkbox}
 			{icon}
-			<Styled.MenuItemTextContainer>
-				{primaryText
-					? React.cloneElement(primaryText, { hasSecondaryText: !!secondaryText })
-					: null}
-				{secondaryText}
-				{filteredChildren}
-			</Styled.MenuItemTextContainer>
+			{container ?? (
+				<Styled.MenuItemTextContainer>
+					{primaryText
+						? React.cloneElement(primaryText, { hasSecondaryText: !!secondaryText })
+						: null}
+					{secondaryText}
+					{filteredChildren}
+				</Styled.MenuItemTextContainer>
+			)}
 		</Styled.MenuItem>
 	);
 });

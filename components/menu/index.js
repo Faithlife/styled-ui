@@ -10,6 +10,7 @@ import {
 	MenuItemPrimaryText,
 	MenuItemSecondaryText,
 	MenuItemTitle,
+	MenuItemTextContainer,
 } from './menu-children';
 
 Menu.Toggle = MenuToggle;
@@ -23,5 +24,6 @@ Menu.ItemIcon = MenuItemIcon;
 Menu.ItemPrimaryText = MenuItemPrimaryText;
 Menu.ItemSecondaryText = MenuItemSecondaryText;
 Menu.Title = MenuItemTitle;
+Menu.ItemTextContainer = MenuItemTextContainer;
 
 export { Menu };
