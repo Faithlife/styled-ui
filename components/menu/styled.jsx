@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { variant as createVariant } from 'styled-system';
+import { variant as createVariant, flexbox, layout } from 'styled-system';
 import { ChevronDown } from '../icons/12px';
 import { UtilityButton } from '../button';
 import { Box } from '../Box';
@@ -78,4 +78,7 @@ export const MenuItemTextContainer = styled(Box)`
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
+
+	${flexbox}
+	${layout}
 `;
