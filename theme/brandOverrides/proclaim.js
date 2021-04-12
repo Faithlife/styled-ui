@@ -39,7 +39,7 @@ export const theme = {
 
 			multi: {
 				border: '#494949',
-				selectedBackground: '#7a7a7a',
+				selectedBackground: '#323232',
 				selectedForeground: 'foregroundPrimary',
 			},
 		},
