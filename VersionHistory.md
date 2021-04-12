@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.3.0
+
+- Add `MultiButton` implementation to replace `SegmentedButtonGroup`
+- Deprecate `SegmentedButtonGroup`
+- Fix radio button shrinking when radio label runs long and wraps.
+
 ## 6.2.3
 
 - Fixed checkboxes shrinking when long label text wraps.
