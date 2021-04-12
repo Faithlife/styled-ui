@@ -1,5 +1,19 @@
 # Changelog
 
+## 5.74.7
+
+- Added `MultiButton` and `ButtonSelect` components.
+
+## 5.74.6
+
+- Fixed radio button shrinking.
+
+## 5.74.5
+
+- Added `Box` styled-system props to `HelpBox`
+
+(there were no versions 5.74.1 to 5.74.4)
+
 ## 5.74.0
 
 - Changed `NumberInput` to focus the input box on step button click.
