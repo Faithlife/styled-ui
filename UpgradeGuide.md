@@ -8,6 +8,8 @@
   - Importing from `'@faithlife/styled-ui/v6'` has been removed—import v6 components from `'@faithlife/styled-ui'` now.
 - `Accordion`
   - The `styleOverrides` prop has been removed in favor of Styled System props. Use style props for `Accordion.Panel` directly on that component.
+- `AnchorButton`
+  - `AnchorButton` has been removed—use `<Button as="a" />` instead.
 - `Button`
   - Check your variants:
     - `primaryOutline` has been replaced by `secondary`.
@@ -34,6 +36,7 @@
   - The `placement` prop has been removed—use `placement` on `DatePickerInput.Popover` instead.
 - `Dropdown`
   - The `Dropdown` component has been renamed to `Menu`.
+    - `Dropdown.Menu` has been renamed `Menu.Dropdown`.
   - "Dropdown" is a general term that refers to content inside of a popover. For more details, see the docs on the `Menu` and `Listbox` components.
 - `HelpBox`
   - The old `theme` prop functionality has been replaced by the [global theme object](https://faithlife.github.io/styled-ui/#/theme/usage) and Styled System props. Use the [`ThemeProvider` component](https://faithlife.github.io/styled-ui/#/theme/customization) to customize the theme.
@@ -47,6 +50,7 @@
   - Subcomponents have been renamed: `ParameterSelect` to `ParameterSentence.Select`, `ParameterInputBox` to `ParameterSentence.Input`.
   - The `styleOverrides` prop has been removed in favor of Styled System props.
 - `Popover`
+  - `PopoverManager` and `PopoverReference` have been removed. See [`Popover`'s documentation](https://faithlife.github.io/styled-ui/#/popover/variations) for the new API.
   - The `styleOverrides` prop has been removed in favor of Styled System props.
 - `Radio`
   - The old `theme` prop functionality has been replaced by the [global theme object](https://faithlife.github.io/styled-ui/#/theme/usage) and Styled System props. Use the [`ThemeProvider` component](https://faithlife.github.io/styled-ui/#/theme/customization) to customize the theme.
