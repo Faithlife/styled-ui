@@ -10,7 +10,7 @@ import { useCopyRefs } from '../shared-hooks/use-copy-refs';
 
 const NumberInput = React.memo(
 	React.forwardRef(function NumberInput(props, ref) {
-		const { variant, width, ...rest } = props;
+		const { variant, width, onStep, ...rest } = props;
 		const inputRef = useRef();
 		const innerRef = useCopyRefs(useMemo(() => [ref, inputRef], [inputRef, ref]));
 
@@ -21,12 +21,14 @@ const NumberInput = React.memo(
 		const handleStepUp = useCallback(() => {
 			inputRef.current.stepUp();
 			dispatchChangeEvent();
-		}, [dispatchChangeEvent]);
+			onStep && onStep();
+		}, [dispatchChangeEvent, onStep]);
 
 		const handleStepDown = useCallback(() => {
 			inputRef.current.stepDown();
 			dispatchChangeEvent();
-		}, [dispatchChangeEvent]);
+			onStep && onStep();
+		}, [dispatchChangeEvent, onStep]);
 
 		const buttonPadding = variant === 'small' ? 2 : 3;
 
@@ -81,6 +83,11 @@ NumberInput.defaultProps = {
 NumberInput.propTypes = {
 	...Input.PropTypes,
 	alwaysShowButtons: PropTypes.bool,
+	/**
+	 * Runs when either step button is pressed.
+	 * @type {() => void}
+	 */
+	onStep: PropTypes.func,
 };
 
 const InputContainer = ({ children, ...props }) => (
