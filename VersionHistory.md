@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.75.0
+
+- Added an `onStep` callback prop to `NumberInput`.
+
 ## 5.74.7
 
 - Added `MultiButton` and `ButtonSelect` components.
