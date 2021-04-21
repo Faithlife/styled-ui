@@ -22,13 +22,13 @@ const NumberInput = React.memo(
 		const handleStepUp = useCallback(() => {
 			inputRef.current.stepUp();
 			dispatchChangeEvent();
-			onStep && onStep();
+			onStep && onStep(inputRef.current.value);
 		}, [dispatchChangeEvent, onStep]);
 
 		const handleStepDown = useCallback(() => {
 			inputRef.current.stepDown();
 			dispatchChangeEvent();
-			onStep && onStep();
+			onStep && onStep(inputRef.current.value);
 		}, [dispatchChangeEvent, onStep]);
 
 		const buttonPadding = variant === 'small' ? 2 : 3;
@@ -85,7 +85,7 @@ NumberInput.propTypes = {
 	alwaysShowButtons: PropTypes.bool,
 	/**
 	 * Runs when either step button is pressed.
-	 * @type {() => void}
+	 * @type {(inputValue: string) => void}
 	 */
 	onStep: PropTypes.func,
 };
