@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.75.1
+
+- Added input value parameter to `onStep` callback prop in `NumberInput`.
+
 ## 5.75.0
 
 - Added an `onStep` callback prop to `NumberInput`.
