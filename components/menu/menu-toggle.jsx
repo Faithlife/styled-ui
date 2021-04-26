@@ -1,11 +1,21 @@
 import React, { useMemo } from 'react';
-import { getConfigChild } from '../utils';
+import { deprecateProp, getConfigChild } from '../utils';
 import { Button, MultiButton } from '../button';
 import { Box } from '../Box';
 import { useDropdownContext, useKeyboardActivate } from './utils';
 import * as Styled from './styled';
 
-export function MenuToggle({ hideCarrot, size, variant, disabled, children, ...buttonProps }) {
+export function MenuToggle({
+	hideCaret,
+	hideCarrot,
+	size,
+	variant,
+	disabled,
+	children,
+	...buttonProps
+}) {
+	deprecateProp(hideCarrot, "The 'hideCarrot' prop has been deprecated in favor of 'hideCaret'.");
+
 	const { onToggleMenu, menuId, isOpen, toggleRef, onKeyboardNav } = useDropdownContext();
 
 	const onKeyPress = useKeyboardActivate(onToggleMenu, onKeyboardNav);
@@ -48,7 +58,7 @@ export function MenuToggle({ hideCarrot, size, variant, disabled, children, ...b
 				{...childProps.ariaProps}
 				{...buttonProps}
 			>
-				<Styled.DropdownCarrot hideMargin />
+				<Styled.DropdownCaret hideMargin />
 			</MultiButton>
 		</Box>
 	) : (
@@ -62,7 +72,7 @@ export function MenuToggle({ hideCarrot, size, variant, disabled, children, ...b
 			{...buttonProps}
 		>
 			{children}
-			{!hideCarrot && <Styled.DropdownCarrot />}
+			{!(hideCaret || hideCarrot) && <Styled.DropdownCaret />}
 		</Button>
 	);
 }
