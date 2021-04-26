@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styledSystemPropTypes from '@styled-system/prop-types';
-import { deprecateProp, getConfigChild } from '../utils';
+import { deprecateProp, filterProps, getConfigChild } from '../utils';
 import { Button, MultiButton } from '../button';
 import { Box } from '../Box';
 import { useDropdownContext, useKeyboardActivate } from './utils';
@@ -40,8 +40,19 @@ export function MenuToggle({
 	}
 
 	const [actionChild] = getConfigChild(children, MenuActionButton.childConfigComponent);
+	const { matchingProps: containerProps, remainingProps: caretButtonProps } = filterProps(
+		buttonProps,
+		{
+			...styledSystemPropTypes.space,
+			...styledSystemPropTypes.layout,
+			...styledSystemPropTypes.flexbox,
+			...styledSystemPropTypes.grid,
+			...styledSystemPropTypes.position,
+		},
+	);
+
 	return actionChild ? (
-		<Box>
+		<Box {...containerProps}>
 			{React.cloneElement(actionChild, {
 				defaultSize: size,
 				defaultVariant: variant,
@@ -58,7 +69,7 @@ export function MenuToggle({
 				borderColor="blue5"
 				{...childProps}
 				{...childProps.ariaProps}
-				{...buttonProps}
+				{...caretButtonProps}
 			>
 				<Styled.DropdownCaret hideMargin />
 			</MultiButton>
