@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { variant, layout, flexbox, position, textStyle, border, background } from 'styled-system';
+import styledSystemPropTypes from '@styled-system/prop-types';
 import 'focus-visible';
 import { Box } from '../Box';
 import { common, typography } from '../../theme/system';
@@ -79,7 +81,31 @@ const ButtonCore = styled.button.attrs(({ active }) => ({ className: active ? 'a
 	${border}
 	${background}
 `;
-
+ButtonCore.propTypes = {
+	...common.propTypes,
+	...typography.propTypes,
+	...styledSystemPropTypes.textStyle,
+	...styledSystemPropTypes.layout,
+	...styledSystemPropTypes.flexbox,
+	...styledSystemPropTypes.position,
+	...styledSystemPropTypes.border,
+	...styledSystemPropTypes.background,
+	size: PropTypes.oneOf(['small', 'medium', 'large']),
+	variant: PropTypes.oneOf([
+		'primary',
+		'secondary',
+		'minor',
+		'minorTransparent',
+		'link',
+		'danger',
+		'dangerSpecial',
+	]),
+	active: PropTypes.bool,
+	disabled: PropTypes.bool,
+	isLoading: PropTypes.bool,
+	theme: PropTypes.object,
+	children: PropTypes.node,
+};
 ButtonCore.defaultProps = {
 	theme,
 	size: 'medium',
@@ -112,6 +138,11 @@ export const Button = React.forwardRef(
 		</ButtonCore>
 	),
 );
+Button.propTypes = {
+	...ButtonCore.propTypes,
+	icon: PropTypes.node,
+	loading: PropTypes.bool,
+};
 
 export const MultiButton = styled(Button).attrs(({ variant, border, borderColor }) => ({
 	variant: variant ?? 'transparent',
@@ -141,7 +172,10 @@ export const MultiButton = styled(Button).attrs(({ variant, border, borderColor 
 		border-bottom-right-radius: 0;
 	}
 `;
-
+MultiButton.propTypes = {
+	...Button.propTypes,
+	selected: PropTypes.bool,
+};
 MultiButton.defaultProps = { theme };
 
 export const SegmentedButtonGroup = deprecateComponent(

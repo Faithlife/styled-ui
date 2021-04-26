@@ -1,4 +1,6 @@
 import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
+import styledSystemPropTypes from '@styled-system/prop-types';
 import { deprecateProp, getConfigChild } from '../utils';
 import { Button, MultiButton } from '../button';
 import { Box } from '../Box';
@@ -76,7 +78,12 @@ export function MenuToggle({
 		</Button>
 	);
 }
-
+MenuToggle.propTypes = {
+	...MultiButton.propTypes,
+	...styledSystemPropTypes.grid,
+	hideCaret: PropTypes.bool,
+	hideCarrot: PropTypes.bool,
+};
 MenuToggle.defaultProps = {
 	size: 'small',
 	variant: 'primary',
