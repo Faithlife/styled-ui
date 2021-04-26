@@ -52,7 +52,7 @@ export function MenuToggle({
 	);
 
 	return actionChild ? (
-		<Box {...containerProps}>
+		<Box display="inline-flex" {...containerProps}>
 			{React.cloneElement(actionChild, {
 				defaultSize: size,
 				defaultVariant: variant,
@@ -115,6 +115,7 @@ export function MenuActionButton({
 			size={defaultSize}
 			variant={defaultVariant}
 			disabled={defaultDisabled}
+			flexGrow={1}
 			{...buttonProps}
 		>
 			{children}
