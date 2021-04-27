@@ -242,103 +242,115 @@ function handleKeyDown(e, onConsumerKeyDown) {
 export { reactSelectComponents };
 
 /** Autocomplete control based on react-select */
-export const Select = React.forwardRef(({ components = {}, ...props }, ref) => {
-	const body = useBody();
-	const onConsumerKeyDown = props.onKeyDown;
+export const Select = React.forwardRef(
+	({ components = {}, disabled, isDisabled, ...props }, ref) => {
+		const body = useBody();
+		const onConsumerKeyDown = props.onKeyDown;
 
-	const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
-	const theme = useTheme();
+		const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
+		const theme = useTheme();
 
-	return (
-		<ReactSelect
-			ref={ref}
-			classNamePrefix="fl-select"
-			theme={selectTheme}
-			components={{ ...defaultComponents, ...components }}
-			noOptionsMessage={noOptionsMessage}
-			menuPortalTarget={body}
-			{...props}
-			onChange={onChange}
-			styles={selectStyles(props, theme)}
-			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
-		/>
-	);
-});
+		return (
+			<ReactSelect
+				ref={ref}
+				classNamePrefix="fl-select"
+				theme={selectTheme}
+				components={{ ...defaultComponents, ...components }}
+				noOptionsMessage={noOptionsMessage}
+				menuPortalTarget={body}
+				isDisabled={disabled || isDisabled}
+				{...props}
+				onChange={onChange}
+				styles={selectStyles(props, theme)}
+				onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
+			/>
+		);
+	},
+);
 
 /** The same as `Select`, but allows new entries. */
-export const CreatableSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
-	const body = useBody();
-	const onConsumerKeyDown = props.onKeyDown;
+export const CreatableSelect = React.forwardRef(
+	({ components = {}, disabled, isDisabled, ...props }, ref) => {
+		const body = useBody();
+		const onConsumerKeyDown = props.onKeyDown;
 
-	const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
-	const theme = useTheme();
+		const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
+		const theme = useTheme();
 
-	return (
-		<ReactSelectCreatable
-			ref={ref}
-			classNamePrefix="fl-select"
-			theme={selectTheme}
-			formatCreateLabel={node => <span>New entry: {node}</span>}
-			components={{ ...defaultComponents, ...components }}
-			noOptionsMessage={noOptionsMessage}
-			menuPortalTarget={body}
-			{...props}
-			onChange={onChange}
-			styles={selectStyles(props, theme)}
-			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
-		/>
-	);
-});
+		return (
+			<ReactSelectCreatable
+				ref={ref}
+				classNamePrefix="fl-select"
+				theme={selectTheme}
+				formatCreateLabel={node => <span>New entry: {node}</span>}
+				components={{ ...defaultComponents, ...components }}
+				noOptionsMessage={noOptionsMessage}
+				menuPortalTarget={body}
+				isDisabled={disabled || isDisabled}
+				{...props}
+				onChange={onChange}
+				styles={selectStyles(props, theme)}
+				onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
+			/>
+		);
+	},
+);
 
 /** The same as `Select`, but allows new entries and fetches data asynchronously. */
-export const AsyncCreatableSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
-	const body = useBody();
-	const onConsumerKeyDown = props.onKeyDown;
+export const AsyncCreatableSelect = React.forwardRef(
+	({ components = {}, disabled, isDisabled, ...props }, ref) => {
+		const body = useBody();
+		const onConsumerKeyDown = props.onKeyDown;
 
-	const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
-	const theme = useTheme();
+		const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
+		const theme = useTheme();
 
-	return (
-		<DebouncedSelectAsyncCreatable
-			ref={ref}
-			allowCreateWhileLoading={false}
-			classNamePrefix="fl-select"
-			theme={selectTheme}
-			components={{ ...defaultComponents, ...components }}
-			formatCreateLabel={node => <span>New entry: {node}</span>}
-			noOptionsMessage={noOptionsMessage}
-			menuPortalTarget={body}
-			{...props}
-			onChange={onChange}
-			styles={selectStyles(props, theme)}
-			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
-		/>
-	);
-});
+		return (
+			<DebouncedSelectAsyncCreatable
+				ref={ref}
+				allowCreateWhileLoading={false}
+				classNamePrefix="fl-select"
+				theme={selectTheme}
+				components={{ ...defaultComponents, ...components }}
+				formatCreateLabel={node => <span>New entry: {node}</span>}
+				noOptionsMessage={noOptionsMessage}
+				menuPortalTarget={body}
+				isDisabled={disabled || isDisabled}
+				{...props}
+				onChange={onChange}
+				styles={selectStyles(props, theme)}
+				onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
+			/>
+		);
+	},
+);
 
 /** The same as `Select`, but fetches options asynchronously. */
-export const AsyncSelect = React.forwardRef(({ components = {}, ...props }, ref) => {
-	const body = useBody();
-	const onConsumerKeyDown = props.onKeyDown;
+export const AsyncSelect = React.forwardRef(
+	({ components = {}, disabled, isDisabled, ...props }, ref) => {
+		const body = useBody();
+		const onConsumerKeyDown = props.onKeyDown;
 
-	const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
-	const theme = useTheme();
+		const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
+		const theme = useTheme();
 
-	return (
-		<DebouncedSelectAsync
-			ref={ref}
-			classNamePrefix="fl-select"
-			theme={selectTheme}
-			components={{ ...defaultComponents, ...components }}
-			noOptionsMessage={noOptionsMessage}
-			menuPortalTarget={body}
-			{...props}
-			onChange={onChange}
-			styles={selectStyles(props, theme)}
-			onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
-		/>
-	);
-});
+		return (
+			<DebouncedSelectAsync
+				ref={ref}
+				classNamePrefix="fl-select"
+				theme={selectTheme}
+				components={{ ...defaultComponents, ...components }}
+				noOptionsMessage={noOptionsMessage}
+				menuPortalTarget={body}
+				isDisabled={disabled || isDisabled}
+				{...props}
+				onChange={onChange}
+				styles={selectStyles(props, theme)}
+				onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
+			/>
+		);
+	},
+);
 
 function useBody() {
 	const [body, setBody] = useState(null);
