@@ -47,6 +47,36 @@
 - Removed the /v6 entrypoint. All components that had been available at the /v6 entrypoint are now exported from the main entrypoint.
 - Removed the `inline` variant for `Input` components.
 
+## 5.75.1
+
+- Added input value parameter to `onStep` callback prop in `NumberInput`.
+
+## 5.75.0
+
+- Added an `onStep` callback prop to `NumberInput`.
+
+## 5.74.7
+
+- Added `MultiButton` and `ButtonSelect` components.
+
+## 5.74.6
+
+- Fixed radio button shrinking.
+
+## 5.74.5
+
+- Added `Box` styled-system props to `HelpBox`
+
+(there were no versions 5.74.1 to 5.74.4)
+
+## 5.74.0
+
+- Changed `NumberInput` to focus the input box on step button click.
+
+## 5.73.5
+
+- Fixed bug with v6 `Accordion.Panel` padding props.
+
 ## 5.73.4
 
 - Added extra options to DatePicker (added in 6.2.0)
