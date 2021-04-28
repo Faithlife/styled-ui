@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react';
-import { deprecateProp, getConfigChild } from '../utils';
+import PropTypes from 'prop-types';
+import styledSystemPropTypes from '@styled-system/prop-types';
+import { deprecateProp, filterProps, getConfigChild } from '../utils';
 import { Button, MultiButton } from '../button';
 import { Box } from '../Box';
 import { useDropdownContext, useKeyboardActivate } from './utils';
@@ -38,8 +40,19 @@ export function MenuToggle({
 	}
 
 	const [actionChild] = getConfigChild(children, MenuActionButton.childConfigComponent);
+	const { matchingProps: containerProps, remainingProps: caretButtonProps } = filterProps(
+		buttonProps,
+		{
+			...styledSystemPropTypes.space,
+			...styledSystemPropTypes.layout,
+			...styledSystemPropTypes.flexbox,
+			...styledSystemPropTypes.grid,
+			...styledSystemPropTypes.position,
+		},
+	);
+
 	return actionChild ? (
-		<Box>
+		<Box display="inline-flex" {...containerProps}>
 			{React.cloneElement(actionChild, {
 				defaultSize: size,
 				defaultVariant: variant,
@@ -56,7 +69,7 @@ export function MenuToggle({
 				borderColor="blue5"
 				{...childProps}
 				{...childProps.ariaProps}
-				{...buttonProps}
+				{...caretButtonProps}
 			>
 				<Styled.DropdownCaret hideMargin />
 			</MultiButton>
@@ -76,7 +89,12 @@ export function MenuToggle({
 		</Button>
 	);
 }
-
+MenuToggle.propTypes = {
+	...MultiButton.propTypes,
+	...styledSystemPropTypes.grid,
+	hideCaret: PropTypes.bool,
+	hideCarrot: PropTypes.bool,
+};
 MenuToggle.defaultProps = {
 	size: 'small',
 	variant: 'primary',
@@ -97,6 +115,7 @@ export function MenuActionButton({
 			size={defaultSize}
 			variant={defaultVariant}
 			disabled={defaultDisabled}
+			flexGrow={1}
 			{...buttonProps}
 		>
 			{children}
