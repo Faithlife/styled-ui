@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.5.0
+
+- Added `disabled` prop to Select components.
+- Added `hideCaret` prop to `Menu.Toggle`, deprecating `hideCarrot`.
+- Adjusted `Menu.Toggle` to direct appropriate style props to its container.
+- Changed `NumberInput` to focus the input box on step button click (merged in from `v5` branch).
+- Added an `onStep` callback prop to `NumberInput` (merged in from `v5` branch).
+
 ## 6.4.0
 
 - Add `Menu.ItemTextContainer` to control the layout of text in the Menu (Aliased to `Listbox.OptionTextContainer`)
