@@ -7,17 +7,17 @@ import { Box } from '../Box';
 
 export const defaultMenuWidth = '160px';
 
-const DropdownCarrotComponent = styled(ChevronDown).attrs({ color: 'currentColor' })``;
+const DropdownCaretComponent = styled(ChevronDown).attrs({ color: 'currentColor' })``;
 
-const CarrotContainer = styled(Box).attrs(({ hideMargin }) => ({
+const CaretContainer = styled(Box).attrs(({ hideMargin }) => ({
 	marginLeft: !hideMargin ? 3 : 0,
 	color: 'inherit',
 }))``;
 
-export const DropdownCarrot = ({ hideMargin }) => (
-	<CarrotContainer hideMargin={hideMargin}>
-		<DropdownCarrotComponent />
-	</CarrotContainer>
+export const DropdownCaret = ({ hideMargin }) => (
+	<CaretContainer hideMargin={hideMargin}>
+		<DropdownCaretComponent />
+	</CaretContainer>
 );
 
 export const MenuItem = styled(UtilityButton)`
