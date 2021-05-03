@@ -243,7 +243,7 @@ export { reactSelectComponents };
 
 /** Autocomplete control based on react-select */
 export const Select = React.forwardRef(
-	({ components = {}, disabled, isDisabled, ...props }, ref) => {
+	({ components = {}, disabled, isDisabled, isClearable = true, ...props }, ref) => {
 		const body = useBody();
 		const onConsumerKeyDown = props.onKeyDown;
 
@@ -259,6 +259,7 @@ export const Select = React.forwardRef(
 				noOptionsMessage={noOptionsMessage}
 				menuPortalTarget={body}
 				isDisabled={disabled || isDisabled}
+				isClearable={isClearable}
 				{...props}
 				onChange={onChange}
 				styles={selectStyles(props, theme)}
@@ -270,7 +271,7 @@ export const Select = React.forwardRef(
 
 /** The same as `Select`, but allows new entries. */
 export const CreatableSelect = React.forwardRef(
-	({ components = {}, disabled, isDisabled, ...props }, ref) => {
+	({ components = {}, disabled, isDisabled, isClearable = true, ...props }, ref) => {
 		const body = useBody();
 		const onConsumerKeyDown = props.onKeyDown;
 
@@ -287,6 +288,7 @@ export const CreatableSelect = React.forwardRef(
 				noOptionsMessage={noOptionsMessage}
 				menuPortalTarget={body}
 				isDisabled={disabled || isDisabled}
+				isClearable={isClearable}
 				{...props}
 				onChange={onChange}
 				styles={selectStyles(props, theme)}
@@ -298,7 +300,7 @@ export const CreatableSelect = React.forwardRef(
 
 /** The same as `Select`, but allows new entries and fetches data asynchronously. */
 export const AsyncCreatableSelect = React.forwardRef(
-	({ components = {}, disabled, isDisabled, ...props }, ref) => {
+	({ components = {}, disabled, isDisabled, isClearable = true, ...props }, ref) => {
 		const body = useBody();
 		const onConsumerKeyDown = props.onKeyDown;
 
@@ -316,6 +318,7 @@ export const AsyncCreatableSelect = React.forwardRef(
 				noOptionsMessage={noOptionsMessage}
 				menuPortalTarget={body}
 				isDisabled={disabled || isDisabled}
+				isClearable={isClearable}
 				{...props}
 				onChange={onChange}
 				styles={selectStyles(props, theme)}
@@ -327,7 +330,7 @@ export const AsyncCreatableSelect = React.forwardRef(
 
 /** The same as `Select`, but fetches options asynchronously. */
 export const AsyncSelect = React.forwardRef(
-	({ components = {}, disabled, isDisabled, ...props }, ref) => {
+	({ components = {}, disabled, isDisabled, isClearable = true, ...props }, ref) => {
 		const body = useBody();
 		const onConsumerKeyDown = props.onKeyDown;
 
@@ -343,6 +346,7 @@ export const AsyncSelect = React.forwardRef(
 				noOptionsMessage={noOptionsMessage}
 				menuPortalTarget={body}
 				isDisabled={disabled || isDisabled}
+				isClearable={isClearable}
 				{...props}
 				onChange={onChange}
 				styles={selectStyles(props, theme)}
