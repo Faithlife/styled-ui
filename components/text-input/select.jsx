@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactSelect, { components as reactSelectComponents } from 'react-select';
 import ReactSelectCreatable from 'react-select/creatable';
 import { colors } from '../shared-styles';
@@ -247,7 +247,6 @@ export const Select = React.forwardRef(
 		const body = useBody();
 		const onConsumerKeyDown = props.onKeyDown;
 
-		const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
 		const theme = useTheme();
 
 		return (
@@ -261,7 +260,6 @@ export const Select = React.forwardRef(
 				isDisabled={disabled || isDisabled}
 				isClearable={isClearable}
 				{...props}
-				onChange={onChange}
 				styles={selectStyles(props, theme)}
 				onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 			/>
@@ -275,7 +273,6 @@ export const CreatableSelect = React.forwardRef(
 		const body = useBody();
 		const onConsumerKeyDown = props.onKeyDown;
 
-		const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
 		const theme = useTheme();
 
 		return (
@@ -290,7 +287,6 @@ export const CreatableSelect = React.forwardRef(
 				isDisabled={disabled || isDisabled}
 				isClearable={isClearable}
 				{...props}
-				onChange={onChange}
 				styles={selectStyles(props, theme)}
 				onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 			/>
@@ -304,7 +300,6 @@ export const AsyncCreatableSelect = React.forwardRef(
 		const body = useBody();
 		const onConsumerKeyDown = props.onKeyDown;
 
-		const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
 		const theme = useTheme();
 
 		return (
@@ -320,7 +315,6 @@ export const AsyncCreatableSelect = React.forwardRef(
 				isDisabled={disabled || isDisabled}
 				isClearable={isClearable}
 				{...props}
-				onChange={onChange}
 				styles={selectStyles(props, theme)}
 				onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 			/>
@@ -334,7 +328,6 @@ export const AsyncSelect = React.forwardRef(
 		const body = useBody();
 		const onConsumerKeyDown = props.onKeyDown;
 
-		const onChange = useLegacyChangeHandler(props.onChange, props.isMulti);
 		const theme = useTheme();
 
 		return (
@@ -348,7 +341,6 @@ export const AsyncSelect = React.forwardRef(
 				isDisabled={disabled || isDisabled}
 				isClearable={isClearable}
 				{...props}
-				onChange={onChange}
 				styles={selectStyles(props, theme)}
 				onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
 			/>
@@ -363,17 +355,4 @@ function useBody() {
 	}, []);
 
 	return body;
-}
-
-// TODO: Remove in version 6.0
-// This undoes the change type normalization introduced in react-select 3
-function useLegacyChangeHandler(onChange, isMulti) {
-	return useCallback(
-		(values, change) => {
-			if (onChange) {
-				return onChange(isMulti ? values || [] : values, change);
-			}
-		},
-		[isMulti, onChange],
-	);
 }
