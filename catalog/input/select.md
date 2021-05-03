@@ -19,9 +19,7 @@ state: { selection: '' }
 <div>
 	<div>Current selection: {state.selection}</div>
 	<Select
-		onChange={({ value }) => {
-			setState({ selection: value });
-		}}
+		onChange={selectedOption => setState({ selection: selectedOption ? selectedOption.value : '' })}
 		options={[
 			{ value: "washington", label: "Washington" },
 			{ value: "california", label: "California" },
@@ -41,9 +39,7 @@ state: { selection: '' }
 <div>
 	<div>Current selection: {state.selection}</div>
 	<Select
-		onChange={({ value }) => {
-			setState({ selection: value });
-		}}
+		onChange={selectedOption => setState({ selection: selectedOption ? selectedOption.value : '' })}
 		isSearchable={false}
 		options={[
 			{ value: "washington", label: "Washington" },
@@ -59,7 +55,7 @@ state: { selection: '' }
 
 ```react
 showSource: true
-state: { modal: false, value: '', selection: '' }
+state: { modal: false, selection: '' }
 ---
 <div>
 	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
@@ -75,9 +71,8 @@ state: { modal: false, value: '', selection: '' }
 		<DemoDiv>
 			<div>Current selection: {state.selection}</div>
 			<Select
-				onChange={({ value }) => {
-					setState({ selection: value });
-				}}
+				onChange={selectedOption =>
+					setState({ selection: selectedOption ? selectedOption.value : '' })}
 				options={[
 					{ value: "washington", label: "Washington" },
 					{ value: "california", label: "California" },
@@ -94,13 +89,13 @@ state: { modal: false, value: '', selection: '' }
 
 ```react
 showSource: true
-state: { tags: [] }
+state: { selection: [] }
 ---
 <div>
-	<div>Current selection: {state.selection}</div>
+	<div>Current selection: {state.selection.join(', ')}</div>
 	<Select
-		onChange={({ value }) => {
-			setState({ selection: value });
+		onChange={(selectedOptions) => {
+			setState({ selection: selectedOptions ? selectedOptions.map(option => option.value) : [] });
 		}}
 		isMulti
 		options={[
@@ -117,13 +112,13 @@ state: { tags: [] }
 
 ```react
 showSource: true
-state: { tags: [] }
+state: { selection: [] }
 ---
 <div>
-	<div>Current selection: {state.selection}</div>
+	<div>Current selection: {state.selection.join(', ')}</div>
 	<CreatableSelect
-		onChange={({ value }) => {
-			setState({ selection: value });
+		onChange={(selectedOptions) => {
+			setState({ selection: selectedOptions ? selectedOptions.map(option => option.value) : [] });
 		}}
 		isMulti
 		options={[
@@ -143,10 +138,10 @@ showSource: true
 state: { selection: [], pendingSelectedValues: [{value: 'Texas', label: 'Texas'}] }
 ---
 <div>
-	<div>Current selection: {state.selection}</div>
+	<div>Current selection: {state.selection.join(', ')}</div>
 	<CreatableSelect
-		onChange={({ value }) => {
-			setState({ selection: value });
+		onChange={(selectedOptions) => {
+			setState({ selection: selectedOptions ? selectedOptions.map(option => option.value) : [] });
 		}}
 		isMulti
 		options={[
