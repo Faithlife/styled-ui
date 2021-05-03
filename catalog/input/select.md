@@ -1,14 +1,9 @@
-A typeahead control with keyboard navigation based on react-select.
+A typeahead control with keyboard navigation based on [React Select](https://react-select.com).
 
-[Component documentation](https://github.com/JedWatson/react-select)
+### Upgrading from v5 to v6
 
-### Migration guide from v5 to v6:
-
-- Change the import to `text-input` (see below)
-
-```
-import { Select } from '@faithlife/styled-ui/text-input';
-```
+1. Import from `'@faithlife/styled-ui/text-input'` instead of `'@faithlife/styled-ui/dist/text-input-v2'`.
+2. `onChange` behaves a bit differently now when `isMulti` is `true`. If one or more options are selected and then later all selected options are removed, upon the removal of the last option the value passed to `onChange` will be `null`. In v5, the value passed to `onChange` in this situation would have been `[]`. See the [React Select v3 upgrade guide](https://github.com/JedWatson/react-select/issues/3585) for more details.
 
 ### Single select
 
