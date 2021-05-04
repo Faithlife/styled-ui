@@ -5,6 +5,7 @@ import { colors } from '../shared-styles';
 import { ChevronDown } from '../icons/12px';
 import { Checkbox } from '../../components/check-box';
 import { DebouncedSelectAsync, DebouncedSelectAsyncCreatable } from './debounced-async';
+import { useClearableSelectValue } from './use-clearable-select-value';
 import * as Styled from './styled';
 import { ThemedBox } from '../ThemedBox';
 import { useTheme } from '../../theme';
@@ -281,14 +282,36 @@ export function useCommonSelectProps(props, ref) {
 		components,
 		disabled,
 		isDisabled,
-		isClearable = true,
 		styles,
 		onKeyDown,
+		value,
+		defaultValue,
+		onChange,
+		inputValue,
+		defaultInputValue,
+		onInputChange,
+		isClearable = true,
+		isMulti,
 		...otherProps
 	} = props;
 
 	const body = useBody();
 	const theme = useTheme();
+	const {
+		innerValue,
+		innerOnChange,
+		innerInputValue,
+		innerOnInputChange,
+	} = useClearableSelectValue({
+		value,
+		defaultValue,
+		onChange,
+		inputValue,
+		defaultInputValue,
+		onInputChange,
+		isClearable,
+		isMulti,
+	});
 
 	return {
 		ref: ref,
@@ -298,9 +321,14 @@ export function useCommonSelectProps(props, ref) {
 		noOptionsMessage: noOptionsMessage,
 		menuPortalTarget: body,
 		isDisabled: disabled || isDisabled,
-		isClearable: isClearable,
 		styles: selectStyles(props, theme),
 		onKeyDown: e => handleKeyDown(e, onKeyDown),
+		value: innerValue,
+		onChange: innerOnChange,
+		inputValue: innerInputValue,
+		onInputChange: innerOnInputChange,
+		isClearable: isClearable,
+		isMulti: isMulti,
 		...otherProps,
 	};
 }
