@@ -242,111 +242,68 @@ function handleKeyDown(e, onConsumerKeyDown) {
 export { reactSelectComponents };
 
 /** Autocomplete control based on react-select */
-export const Select = React.forwardRef(
-	({ components = {}, disabled, isDisabled, isClearable = true, ...props }, ref) => {
-		const body = useBody();
-		const onConsumerKeyDown = props.onKeyDown;
-
-		const theme = useTheme();
-
-		return (
-			<ReactSelect
-				ref={ref}
-				classNamePrefix="fl-select"
-				theme={selectTheme}
-				components={{ ...defaultComponents, ...components }}
-				noOptionsMessage={noOptionsMessage}
-				menuPortalTarget={body}
-				isDisabled={disabled || isDisabled}
-				isClearable={isClearable}
-				{...props}
-				styles={selectStyles(props, theme)}
-				onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
-			/>
-		);
-	},
-);
+export const Select = React.forwardRef((props, ref) => {
+	const transformedProps = useCommonSelectProps(props, ref);
+	return <ReactSelect {...transformedProps} />;
+});
 
 /** The same as `Select`, but allows new entries. */
-export const CreatableSelect = React.forwardRef(
-	({ components = {}, disabled, isDisabled, isClearable = true, ...props }, ref) => {
-		const body = useBody();
-		const onConsumerKeyDown = props.onKeyDown;
-
-		const theme = useTheme();
-
-		return (
-			<ReactSelectCreatable
-				ref={ref}
-				classNamePrefix="fl-select"
-				theme={selectTheme}
-				formatCreateLabel={node => <span>New entry: {node}</span>}
-				components={{ ...defaultComponents, ...components }}
-				noOptionsMessage={noOptionsMessage}
-				menuPortalTarget={body}
-				isDisabled={disabled || isDisabled}
-				isClearable={isClearable}
-				{...props}
-				styles={selectStyles(props, theme)}
-				onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
-			/>
-		);
-	},
-);
+export const CreatableSelect = React.forwardRef((props, ref) => {
+	const transformedProps = useCommonSelectProps(props, ref);
+	return (
+		<ReactSelectCreatable
+			formatCreateLabel={node => <span>New entry: {node}</span>}
+			{...transformedProps}
+		/>
+	);
+});
 
 /** The same as `Select`, but allows new entries and fetches data asynchronously. */
-export const AsyncCreatableSelect = React.forwardRef(
-	({ components = {}, disabled, isDisabled, isClearable = true, ...props }, ref) => {
-		const body = useBody();
-		const onConsumerKeyDown = props.onKeyDown;
-
-		const theme = useTheme();
-
-		return (
-			<DebouncedSelectAsyncCreatable
-				ref={ref}
-				allowCreateWhileLoading={false}
-				classNamePrefix="fl-select"
-				theme={selectTheme}
-				components={{ ...defaultComponents, ...components }}
-				formatCreateLabel={node => <span>New entry: {node}</span>}
-				noOptionsMessage={noOptionsMessage}
-				menuPortalTarget={body}
-				isDisabled={disabled || isDisabled}
-				isClearable={isClearable}
-				{...props}
-				styles={selectStyles(props, theme)}
-				onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
-			/>
-		);
-	},
-);
+export const AsyncCreatableSelect = React.forwardRef((props, ref) => {
+	const transformedProps = useCommonSelectProps(props, ref);
+	return (
+		<DebouncedSelectAsyncCreatable
+			allowCreateWhileLoading={false}
+			formatCreateLabel={node => <span>New entry: {node}</span>}
+			{...transformedProps}
+		/>
+	);
+});
 
 /** The same as `Select`, but fetches options asynchronously. */
-export const AsyncSelect = React.forwardRef(
-	({ components = {}, disabled, isDisabled, isClearable = true, ...props }, ref) => {
-		const body = useBody();
-		const onConsumerKeyDown = props.onKeyDown;
+export const AsyncSelect = React.forwardRef((props, ref) => {
+	const transformedProps = useCommonSelectProps(props, ref);
+	return <DebouncedSelectAsync {...transformedProps} />;
+});
 
-		const theme = useTheme();
+export function useCommonSelectProps(props, ref) {
+	const {
+		components,
+		disabled,
+		isDisabled,
+		isClearable = true,
+		styles,
+		onKeyDown,
+		...otherProps
+	} = props;
 
-		return (
-			<DebouncedSelectAsync
-				ref={ref}
-				classNamePrefix="fl-select"
-				theme={selectTheme}
-				components={{ ...defaultComponents, ...components }}
-				noOptionsMessage={noOptionsMessage}
-				menuPortalTarget={body}
-				isDisabled={disabled || isDisabled}
-				isClearable={isClearable}
-				{...props}
-				styles={selectStyles(props, theme)}
-				onKeyDown={e => handleKeyDown(e, onConsumerKeyDown)}
-			/>
-		);
-	},
-);
+	const body = useBody();
+	const theme = useTheme();
+
+	return {
+		ref: ref,
+		classNamePrefix: 'fl-select',
+		theme: selectTheme,
+		components: { ...defaultComponents, ...components },
+		noOptionsMessage: noOptionsMessage,
+		menuPortalTarget: body,
+		isDisabled: disabled || isDisabled,
+		isClearable: isClearable,
+		styles: selectStyles(props, theme),
+		onKeyDown: e => handleKeyDown(e, onKeyDown),
+		...otherProps,
+	};
+}
 
 function useBody() {
 	const [body, setBody] = useState(null);
