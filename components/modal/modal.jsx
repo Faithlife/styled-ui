@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
+import FocusTrap from 'focus-trap-react';
 import { Box } from '../Box';
 import { useElementSize } from '../shared-hooks/useElementSize';
 import { usePortalContainer } from '../shared-hooks/usePortalContainer';
@@ -38,24 +39,26 @@ export const Modal = ({
 	const modal = (
 		<ModalBackdrop onClose={onClose} zIndex={zIndex}>
 			<ModalContextProvider value={modalContext}>
-				<Box
-					ref={containerRef}
-					display="grid"
-					gridTemplateRows="auto 1fr"
-					justifyContent="stretch"
-					alignItems="stretch"
-					width={fullscreen ? ['100vw', '90vw'] : ['100vw', 'fit-content']}
-					height={fullscreen ? ['100vh', '90vh'] : 'fit-content'}
-					maxWidth={['100%', 'calc(100% - 32px)']}
-					minHeight={0}
-					maxHeight={fullscreen ? ['100vh', '90vh'] : ['100%', 'calc(100% - 32px)']}
-					margin="auto"
-					borderRadius={1}
-					backgroundColor="white"
-					{...props}
-				>
-					{children}
-				</Box>
+				<FocusTrap>
+					<Box
+						ref={containerRef}
+						display="grid"
+						gridTemplateRows="auto 1fr"
+						justifyContent="stretch"
+						alignItems="stretch"
+						width={fullscreen ? ['100vw', '90vw'] : ['100vw', 'fit-content']}
+						height={fullscreen ? ['100vh', '90vh'] : 'fit-content'}
+						maxWidth={['100%', 'calc(100% - 32px)']}
+						minHeight={0}
+						maxHeight={fullscreen ? ['100vh', '90vh'] : ['100%', 'calc(100% - 32px)']}
+						margin="auto"
+						borderRadius={1}
+						backgroundColor="white"
+						{...props}
+					>
+						{children}
+					</Box>
+				</FocusTrap>
 			</ModalContextProvider>
 		</ModalBackdrop>
 	);
