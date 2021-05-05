@@ -10,7 +10,7 @@ import { useModalContext } from './use-modal-context';
 
 /** A flexible component built on styled-system primitives. */
 export const ModalHeader = ({ title, subtitle, message, actions, textStyle, ...props }) => {
-	const { contentPadding, onClose } = useModalContext();
+	const { contentPadding, onClose, labeledById, describedById } = useModalContext();
 	return (
 		<Box
 			display="flex"
@@ -31,6 +31,7 @@ export const ModalHeader = ({ title, subtitle, message, actions, textStyle, ...p
 						whiteSpace="nowrap"
 						overflow={['hidden', 'visible']}
 						textOverflow="ellipsis"
+						id={labeledById}
 					>
 						{title}
 					</Text>
@@ -59,7 +60,14 @@ export const ModalHeader = ({ title, subtitle, message, actions, textStyle, ...p
 				</Box>
 				{subtitle && (
 					<Box width="100%">
-						<Paragraph width="100%" padding={0} textStyle="ui.14" textAlign="left" color="gray66">
+						<Paragraph
+							id={describedById}
+							width="100%"
+							padding={0}
+							textStyle="ui.14"
+							textAlign="left"
+							color="gray66"
+						>
 							{subtitle}
 						</Paragraph>
 					</Box>
@@ -83,3 +91,5 @@ ModalHeader.propTypes = {
 ModalHeader.defaultProps = {
 	textStyle: 'h.18',
 };
+
+ModalHeader.isModalHeader = true;

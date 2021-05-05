@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, Children } from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import FocusTrap from 'focus-trap-react';
@@ -7,6 +7,8 @@ import { useElementSize } from '../shared-hooks/useElementSize';
 import { usePortalContainer } from '../shared-hooks/usePortalContainer';
 import { ModalBackdrop } from '../modal-backdrop';
 import { ModalContextProvider } from './use-modal-context';
+
+let nextLabelId = 0;
 
 /** A flexible component built on styled-system primitives. */
 export const Modal = ({
@@ -21,6 +23,24 @@ export const Modal = ({
 }) => {
 	const [size, containerRef] = useElementSize();
 	const container = usePortalContainer(containerProp);
+	const labelId = useMemo(() => nextLabelId++, []);
+
+	const titleChild = useMemo(
+		() => Children.toArray(children).find(x => x && x.type.isModalHeader),
+		[children],
+	);
+
+	const labeledById = useMemo(() => {
+		if (titleChild) {
+			return `styled-ui-modal-label-${labelId}`;
+		}
+	}, [titleChild, labelId]);
+
+	const describedById = useMemo(() => {
+		if (titleChild && titleChild.props.subtitle) {
+			return `styled-ui-modal-description-${labelId}`;
+		}
+	}, [titleChild, labelId]);
 
 	const modalContext = useMemo(
 		() => ({
@@ -28,8 +48,10 @@ export const Modal = ({
 			onClose,
 			modalWidth: size ? size.width : null,
 			fullscreen,
+			labeledById,
+			describedById,
 		}),
-		[contentPadding, fullscreen, onClose, size],
+		[contentPadding, fullscreen, onClose, size, labeledById, describedById],
 	);
 
 	if (!isOpen) {
@@ -54,6 +76,10 @@ export const Modal = ({
 						margin="auto"
 						borderRadius={1}
 						backgroundColor="white"
+						role="dialog"
+						aria-labelledby={labeledById}
+						aria-describedby={describedById}
+						aria-modal="true"
 						{...props}
 					>
 						{children}
