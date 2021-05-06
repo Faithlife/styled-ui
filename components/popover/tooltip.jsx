@@ -65,7 +65,12 @@ export function Tooltip(props) {
 				</Box>
 			)}
 			{isOpen && (
-				<Popover {...otherProps} reference={ref.current}>
+				<Popover
+					{...otherProps}
+					onMouseEnter={onMouseEnter}
+					onMouseLeave={onMouseLeave}
+					reference={ref.current}
+				>
 					{content || text}
 				</Popover>
 			)}
