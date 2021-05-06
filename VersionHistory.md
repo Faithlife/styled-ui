@@ -1,5 +1,10 @@
 # Changelog
 
+## 6.5.1
+
+- Made `Select` components clearable by default and fixed clearing functionality to be more intuitive.
+- Fixed a style conflict between FLCOM global styles and several `Button` variants when used as `<a>` elements.
+
 ## 6.5.0
 
 - Added `disabled` prop to Select components.
