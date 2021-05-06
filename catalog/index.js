@@ -26,6 +26,7 @@ import {
 	MultiButton,
 	ParameterSentence,
 	Popover,
+	Tooltip,
 	Radio,
 	SegmentedButtonGroup,
 	SequencedTab,
@@ -572,10 +573,11 @@ const pages = [
 				imports: {
 					Button,
 					Popover,
+					Tooltip,
 					PopoverDemo: styled.div`
 						display: flex;
 						align-items: flex-start;
-						justify-content: space-between;
+						justify-content: space-around;
 					`,
 					PopoverOverflowDemo: styled.div`
 						display: flex;

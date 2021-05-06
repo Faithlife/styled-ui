@@ -154,3 +154,18 @@ state: { isOpen1: false, isOpen2 }
 	)}
 </PopoverOverflowDemo>
 ```
+
+## Tooltip
+
+```react
+showSource: true
+---
+<PopoverDemo>
+	<Tooltip content="hovered!">
+		Hover me!
+	</Tooltip>
+	<Tooltip delay={1000} content="delayed!">
+		No, Hover me!
+	</Tooltip>
+</PopoverDemo>
+```
