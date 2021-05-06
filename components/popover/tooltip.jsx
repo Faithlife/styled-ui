@@ -31,7 +31,7 @@ function useDelayedHoverState(delay) {
 
 /** Simple tooltip that uses popovers internally. */
 export function Tooltip(props) {
-	const { children, text, content, toggleOnClick, delay, ...otherProps } = props;
+	const { children, text, content, toggleOnClick, delay = 0, ...otherProps } = props;
 	const [isOpen, setIsOpen, onMouseEnter, onMouseLeave, cancel] = useDelayedHoverState(delay);
 	const [isOnMobile, setIsOnMobile] = useState(false);
 	const ref = useRef();
