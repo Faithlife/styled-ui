@@ -28,6 +28,7 @@ export const buttons = {
 		border: 1,
 		borderColor: 'button.primaryBackground',
 		'&:hover': {
+			color: 'button.primaryForeground',
 			backgroundColor: 'button.primaryHover',
 			borderColor: 'button.primaryHover',
 		},
@@ -67,6 +68,7 @@ export const buttons = {
 		backgroundColor: 'button.minorBackground',
 		borderColor: 'button.minorBackground',
 		'&:hover': {
+			color: 'button.minorForeground',
 			backgroundColor: 'button.minorHover',
 			borderColor: 'button.minorHover',
 		},
@@ -86,6 +88,7 @@ export const buttons = {
 		backgroundColor: 'transparent',
 		borderColor: 'transparent',
 		'&:hover': {
+			color: 'button.minorForeground',
 			backgroundColor: 'button.transparentHover',
 			borderColor: 'button.transparentHover',
 		},
@@ -158,6 +161,7 @@ export const buttons = {
 		backgroundColor: 'button.dangerBackground',
 		borderColor: 'button.dangerBackground',
 		'&:hover': {
+			color: 'button.dangerForeground',
 			backgroundColor: 'button.dangerHover',
 			borderColor: 'button.dangerHover',
 		},
