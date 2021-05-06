@@ -1,40 +1,55 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { useDebouncedCallback } from '../shared-hooks'; // Copied from react-ui. Import from there when made available.
 import { Popover } from './popover';
 import { Box } from '../Box';
 
+function useDelayedHoverState(delay) {
+	const [isHovered, setIsHovered] = useState(false);
+	const timeouts = useRef({ isHovered: false });
+
+	const cancel = useCallback(() => {
+		clearTimeout(timeouts.current.enterTimeout);
+		clearTimeout(timeouts.current.leaveTimeout);
+	}, []);
+
+	const onMouseEnter = useCallback(() => {
+		cancel();
+		if (!isHovered) {
+			timeouts.current.enterTimeout = setTimeout(() => setIsHovered(true), delay);
+		}
+	}, [cancel, delay, isHovered]);
+
+	const onMouseLeave = useCallback(() => {
+		cancel();
+		if (isHovered) {
+			timeouts.current.leaveTimeout = setTimeout(() => setIsHovered(false), 200);
+		}
+	}, [cancel, isHovered]);
+
+	return [isHovered, setIsHovered, onMouseEnter, onMouseLeave, cancel];
+}
+
 /** Simple tooltip that uses popovers internally. */
 export function Tooltip(props) {
-	const ref = useRef();
-	const { children, text, content, isOpen, toggleOnClick, ...otherProps } = props;
-	const [tooltipIsOpen, setToolTipIsOpen] = useState(false);
+	const { children, text, content, toggleOnClick, delay, ...otherProps } = props;
+	const [isOpen, setIsOpen, onMouseEnter, onMouseLeave, cancel] = useDelayedHoverState(delay);
 	const [isOnMobile, setIsOnMobile] = useState(false);
+	const ref = useRef();
 
-	const handleMouseEnter = () => {
-		handleMouseLeave.cancel();
-		setToolTipIsOpen(true);
-	};
-
-	const handleMouseLeave = useDebouncedCallback(() => {
-		setToolTipIsOpen(false);
-	}, 200);
-
-	const toggle = () => {
-		handleMouseLeave.cancel();
-		setToolTipIsOpen(x => !x);
-	};
+	const toggle = useCallback(() => {
+		cancel();
+		setIsOpen(x => !x);
+	}, [cancel, setIsOpen]);
 
 	useEffect(() => {
 		setIsOnMobile(window.matchMedia('(hover: none)').matches);
-		return () => handleMouseLeave.cancel();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		return cancel;
+	}, [cancel]);
 
 	const referenceProps = {
-		onMouseEnter: handleMouseEnter,
-		onMouseLeave: handleMouseLeave,
-		onClick: () => (isOnMobile ? toggle() : setToolTipIsOpen(false)),
+		onMouseEnter,
+		onMouseLeave,
+		onClick: () => (isOnMobile ? toggle() : setIsOpen(false)),
 		ref,
 	};
 
@@ -49,7 +64,7 @@ export function Tooltip(props) {
 					{children}
 				</Box>
 			)}
-			{(tooltipIsOpen || isOpen) && (
+			{isOpen && (
 				<Popover {...otherProps} reference={ref.current}>
 					{content || text}
 				</Popover>
@@ -62,6 +77,8 @@ Tooltip.propTypes = {
 	...Popover.propTypes,
 
 	children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+	/** Hover delay in milliseconds */
+	delay: PropTypes.number,
 	/** Content for the tooltip */
 	content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 	/** Text for the tooltip (deprecated) */
