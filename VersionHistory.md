@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.6.0
+
+- Added a v5 -> v6 update codemod and target `next` dist-tag
+
 ## 6.5.1
 
 - Made `Select` components clearable by default and fixed clearing functionality to be more intuitive.
