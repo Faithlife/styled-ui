@@ -6,6 +6,7 @@
 - Added `role="dialog"` to modal
 - Modals now pull `aria-labeledby` and `aria-describedby` from the `title` and `subtitle` props of `ModalHeader` respectively
 - Modals now prevent background elements from being focused
+- Added `delay` prop to `Tooltip`
 
 ## 6.5.1
 
