@@ -3,6 +3,9 @@
 ## 6.6.0
 
 - Added a v5 -> v6 update codemod and target `next` dist-tag
+- Added `role="dialog"` to modal
+- Modals now pull `aria-labeledby` and `aria-describedby` from the `title` and `subtitle` props of `ModalHeader` respectively
+- Modals now prevent background elements from being focused
 
 ## 6.5.1
 
