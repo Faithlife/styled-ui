@@ -30,6 +30,8 @@ export const Modal = ({
 		[children],
 	);
 
+	const modalId = useMemo(() => `styled-ui-modal-${labelId}`, [labelId]);
+
 	const labeledById = useMemo(() => {
 		if (titleChild) {
 			return `styled-ui-modal-label-${labelId}`;
@@ -54,6 +56,13 @@ export const Modal = ({
 		[contentPadding, fullscreen, onClose, size, labeledById, describedById],
 	);
 
+	const focusTrapOptions = useMemo(
+		() => ({
+			fallbackFocus: `#${modalId}`,
+		}),
+		[modalId],
+	);
+
 	if (!isOpen) {
 		return null;
 	}
@@ -61,7 +70,7 @@ export const Modal = ({
 	const modal = (
 		<ModalBackdrop onClose={onClose} zIndex={zIndex}>
 			<ModalContextProvider value={modalContext}>
-				<FocusTrap>
+				<FocusTrap focusTrapOptions={focusTrapOptions}>
 					<Box
 						ref={containerRef}
 						display="grid"
@@ -77,9 +86,11 @@ export const Modal = ({
 						borderRadius={1}
 						backgroundColor="white"
 						role="dialog"
+						id={modalId}
 						aria-labelledby={labeledById}
 						aria-describedby={describedById}
 						aria-modal="true"
+						tabIndex={-1}
 						{...props}
 					>
 						{children}
