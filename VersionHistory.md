@@ -1,5 +1,17 @@
 # Changelog
 
+## 6.6.3
+
+- Reverted new default value of `Select`'s `isClearable` prop introduced in 6.5.1.
+
+## 6.6.2
+
+- Removed focus trap functionality from `Modal`.
+
+## 6.6.1
+
+- Fixed `Modal` crashing related to focus-trap.
+
 ## 6.6.0
 
 - Added a v5 -> v6 update codemod and target `next` dist-tag
