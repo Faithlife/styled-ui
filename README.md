@@ -22,7 +22,7 @@
 
 ### How to publish
 
-- Update `VersionHistory.md`.
+- Update [`VersionHistory.md`](/VersionHistory.md).
 - Run `yarn version`, following [semantic versioning](https://semver.org/) when choosing the new version number.
 - Push your changes to `master`.
 - Go to [this Jenkins build page](https://jenkins.lrscorp.net/view/Community/job/styled-ui%20publish/build?delay=0sec) and click "Build".
