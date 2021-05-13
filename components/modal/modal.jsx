@@ -1,7 +1,6 @@
 import React, { useMemo, Children } from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
-import FocusTrap from 'focus-trap-react';
 import { Box } from '../Box';
 import { useElementSize } from '../shared-hooks/useElementSize';
 import { usePortalContainer } from '../shared-hooks/usePortalContainer';
@@ -30,8 +29,6 @@ export const Modal = ({
 		[children],
 	);
 
-	const modalId = useMemo(() => `styled-ui-modal-${labelId}`, [labelId]);
-
 	const labeledById = useMemo(() => {
 		if (titleChild) {
 			return `styled-ui-modal-label-${labelId}`;
@@ -56,13 +53,6 @@ export const Modal = ({
 		[contentPadding, fullscreen, onClose, size, labeledById, describedById],
 	);
 
-	const focusTrapOptions = useMemo(
-		() => ({
-			fallbackFocus: `#${modalId}`,
-		}),
-		[modalId],
-	);
-
 	if (!isOpen) {
 		return null;
 	}
@@ -70,32 +60,28 @@ export const Modal = ({
 	const modal = (
 		<ModalBackdrop onClose={onClose} zIndex={zIndex}>
 			<ModalContextProvider value={modalContext}>
-				<FocusTrap focusTrapOptions={focusTrapOptions}>
-					<Box
-						ref={containerRef}
-						display="grid"
-						gridTemplateRows="auto 1fr"
-						justifyContent="stretch"
-						alignItems="stretch"
-						width={fullscreen ? ['100vw', '90vw'] : ['100vw', 'fit-content']}
-						height={fullscreen ? ['100vh', '90vh'] : 'fit-content'}
-						maxWidth={['100%', 'calc(100% - 32px)']}
-						minHeight={0}
-						maxHeight={fullscreen ? ['100vh', '90vh'] : ['100%', 'calc(100% - 32px)']}
-						margin="auto"
-						borderRadius={1}
-						backgroundColor="white"
-						role="dialog"
-						id={modalId}
-						aria-labelledby={labeledById}
-						aria-describedby={describedById}
-						aria-modal="true"
-						tabIndex={-1}
-						{...props}
-					>
-						{children}
-					</Box>
-				</FocusTrap>
+				<Box
+					ref={containerRef}
+					display="grid"
+					gridTemplateRows="auto 1fr"
+					justifyContent="stretch"
+					alignItems="stretch"
+					width={fullscreen ? ['100vw', '90vw'] : ['100vw', 'fit-content']}
+					height={fullscreen ? ['100vh', '90vh'] : 'fit-content'}
+					maxWidth={['100%', 'calc(100% - 32px)']}
+					minHeight={0}
+					maxHeight={fullscreen ? ['100vh', '90vh'] : ['100%', 'calc(100% - 32px)']}
+					margin="auto"
+					borderRadius={1}
+					backgroundColor="white"
+					role="dialog"
+					aria-labelledby={labeledById}
+					aria-describedby={describedById}
+					aria-modal="true"
+					{...props}
+				>
+					{children}
+				</Box>
 			</ModalContextProvider>
 		</ModalBackdrop>
 	);
