@@ -54,6 +54,13 @@ export const Modal = ({
 		[contentPadding, fullscreen, onClose, size, labeledById, describedById],
 	);
 
+	const focusTrapOptions = useMemo(
+		() => ({
+			fallbackFocus: containerRef && (() => containerRef),
+		}),
+		[containerRef],
+	);
+
 	if (!isOpen) {
 		return null;
 	}
@@ -61,7 +68,7 @@ export const Modal = ({
 	const modal = (
 		<ModalBackdrop onClose={onClose} zIndex={zIndex}>
 			<ModalContextProvider value={modalContext}>
-				<FocusTrap>
+				<FocusTrap focusTrapOptions={focusTrapOptions}>
 					<Box
 						ref={containerRef}
 						display="grid"
@@ -80,6 +87,7 @@ export const Modal = ({
 						aria-labelledby={labeledById}
 						aria-describedby={describedById}
 						aria-modal="true"
+						tabIndex={-1}
 						{...props}
 					>
 						{children}

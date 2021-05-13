@@ -221,3 +221,20 @@ state: { modal: false, value: '' }
 	</Modal>
 </div>
 ```
+
+## Modal with no content
+
+```react
+showSource: true
+state: { modal: false, value: '' }
+---
+<div>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Modal
+		isOpen={state.modal}
+		container="body"
+		onClose={() => setState({ modal: false })}
+		fullscreen
+	/>
+</div>
+```
