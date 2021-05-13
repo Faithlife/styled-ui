@@ -290,7 +290,7 @@ export function useCommonSelectProps(props, ref) {
 		inputValue,
 		defaultInputValue,
 		onInputChange,
-		isClearable = true,
+		isClearable,
 		isMulti,
 		...otherProps
 	} = props;
