@@ -1,6 +1,8 @@
 import React from 'react';
 import * as dateFunctions from 'date-fns';
-import { render, axe, screen, userEvent, act } from '../../../test-utils';
+import { render, screen } from '@testing-library/react';
+import { axe } from 'jest-axe';
+import userEvent from '@testing-library/user-event';
 
 import { DatePickerInput } from '../';
 

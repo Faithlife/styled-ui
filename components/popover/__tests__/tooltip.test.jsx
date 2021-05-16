@@ -1,5 +1,7 @@
 import React from 'react';
-import { render, axe, userEvent, screen, waitFor } from '../../../test-utils';
+import { render, screen, waitFor } from '@testing-library/react';
+import { axe } from 'jest-axe';
+import userEvent from '@testing-library/user-event';
 
 import { Tooltip } from '../';
 
