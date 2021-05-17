@@ -23,7 +23,7 @@ describe('ParameterSentence', () => {
 		expect(ParameterSentence.Select).toBeTruthy();
 	});
 
-	it('s Input is interact-able', () => {
+	it('Input is interact-able', () => {
 		expect.hasAssertions();
 
 		const callback = jest.fn();
@@ -33,19 +33,18 @@ describe('ParameterSentence', () => {
 					defaultValue="10"
 					value={''}
 					onChange={event => callback(event.target.value)}
-					// formatValue={val => `${val}%`}
 					width="30px"
 					accessibilityLabel={'Percent of income to tithe'}
 				/>
 			</ParameterSentence>,
 		);
 
-		const input = screen.getByRole('textbox');
+		const input = screen.getByRole('textbox', { name: 'Percent of income to tithe' });
 		userEvent.paste(input, '10');
 		expect(callback).toHaveBeenLastCalledWith('10');
 	});
 
-	it('s Input shows formatted text', () => {
+	it('Input shows formatted text', () => {
 		expect.hasAssertions();
 
 		const callback = jest.fn(val => `${val}%`);
@@ -66,7 +65,7 @@ describe('ParameterSentence', () => {
 		expect(screen.getByRole('textbox')).toHaveValue('10%');
 	});
 
-	it('s Select is interact-able', () => {
+	it('Select is interact-able', () => {
 		expect.hasAssertions();
 
 		const callback = jest.fn();

@@ -26,7 +26,6 @@ describe('DatePicker', () => {
 		expect(callback).toHaveBeenLastCalledWith(firstOfMonth);
 	});
 
-	// eslint-disable-next-line no-unsanitized/method
 	it.each`
 		first | last
 		${1}  | ${1}

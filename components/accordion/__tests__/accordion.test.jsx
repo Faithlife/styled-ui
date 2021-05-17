@@ -6,7 +6,6 @@ import userEvent from '@testing-library/user-event';
 import { Accordion } from '../';
 
 describe('accordion', () => {
-	// eslint-disable-next-line no-unsanitized/method
 	it.each`
 		expandedSections | clickedSection         | expectedExpandedSections
 		${[]}            | ${/Section One Title/} | ${[0]}
@@ -45,7 +44,7 @@ describe('accordion', () => {
 			}
 
 			userEvent.click(screen.getByText(clickedSection));
-			expect(onExpansion.mock.calls[0][0]).toEqual(expectedExpandedSections);
+			expect(onExpansion).toHaveBeenCalledWith(expectedExpandedSections);
 		},
 	);
 

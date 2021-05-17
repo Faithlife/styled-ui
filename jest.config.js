@@ -1,7 +1,6 @@
 module.exports = {
 	testEnvironment: 'jest-environment-jsdom',
 	moduleNameMapper: {
-		// '\\.(css|less)$': require.resolve('./__mocks__/styleMock.js'),
 		'\\.svg': require.resolve('./__mocks__/svgMock.js'),
 	},
 	testPathIgnorePatterns: ['/node_modules/'],
