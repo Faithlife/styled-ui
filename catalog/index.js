@@ -301,6 +301,7 @@ const pages = [
 					dateFunctions: {
 						...dateFunctions,
 					},
+					refs: new Array(4).fill(null).map(() => React.createRef()),
 				},
 			},
 			{

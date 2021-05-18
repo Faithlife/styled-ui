@@ -7,6 +7,8 @@ import { Input } from '../input';
 import { dateFunctionProps } from '../date-picker/date-function-props';
 import { DatePicker } from '../date-picker/component';
 import { UtilityButton } from '../button';
+import { useId } from '../shared-hooks';
+import { VisuallyHiddenLabel } from '../hidden-label';
 import * as Styled from './styled';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 
@@ -32,6 +34,8 @@ export function DatePickerInput({
 	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 	const [currentDate, setCurrentDate] = useState(defaultSelectedDate);
 	const [text, setText] = useState(null);
+	const calendarButtonLabelId = useId();
+	const calendarButtonLabel = `${calendarButtonLabelId}-calendar-input-button`;
 
 	useEffect(() => {
 		setCurrentDate(selectedDate);
@@ -118,6 +122,7 @@ export function DatePickerInput({
 					{...rest}
 				/>
 				<Styled.CalendarButton
+					id={calendarButtonLabel}
 					disabled={disabled}
 					onClick={() => {
 						setIsPopoverOpen(isOpen => !isOpen);
@@ -151,6 +156,9 @@ export function DatePickerInput({
 						</Styled.DateTime>
 					</Popover>
 				)}
+				<VisuallyHiddenLabel as="label" htmlFor={calendarButtonLabel}>
+					{'Show calendar picker'}
+				</VisuallyHiddenLabel>
 			</Styled.Container>
 		</DefaultThemeProvider>
 	);

@@ -14,13 +14,16 @@
 	"scripts": {
 		"deploy-site": "npm run catalog-build && storybook-to-ghpages --ci --existing-output-dir=catalog/build",
 		"eslint": "eslint ./components ./catalog --ext .js --ext .jsx",
-		"test": "npm run build && npm run unit-test && npm run eslint && npm run stylelint",
+		"test": "npm run test:ci && npm run eslint && npm run stylelint",
 		"precommit": "prettier --write \"./components/**/*.{js,jsx}\" && npm run stylelint",
 		"build": "rimraf dist && webpack --mode=none",
 		"prepublishOnly": "npm test",
 		"postpublish": "yarn helmsman ship-to @faithlife/styled-ui@5.75.1 latest --no-ship-faithlife",
 		"stylelint": "stylelint ./components/**/*.jsx",
-		"unit-test": "cross-env NODE_ENV=test mocha -t 60000 -r @babel/register ./tests/**/*.js",
+		"test:jest": "jest --maxWorkers=50%",
+		"test:watch": "jest --watch --maxWorkers=25%",
+		"test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand --watch",
+		"test:ci": "jest --ci --runInBand --coverage --verbose",
 		"helmsman": "npx --userconfig ./.npmrc @faithlife/helmsman",
 		"ship-to": "yarn helmsman ship-to @faithlife/styled-ui",
 		"tag-for-beta": "yarn helmsman ship-to @faithlife/styled-ui beta --no-ship-faithlife",
@@ -46,17 +49,6 @@
 		"react-dom": "^16.8.0",
 		"styled-components": "^4 || ^5"
 	},
-	"peerDependenciesMeta": {
-		"ag-grid-community": {
-			"optional": true
-		},
-		"ag-grid-enterprise": {
-			"optional": true
-		},
-		"ag-grid-react": {
-			"optional": true
-		}
-	},
 	"dependencies": {
 		"@popperjs/core": "^2.4.0",
 		"@styled-system/prop-types": "^5.1.1",
@@ -81,7 +73,9 @@
 		"@babel/register": "^7.4.4",
 		"@storybook/storybook-deployer": "^2.8.7",
 		"@svgr/webpack": "^4.3.3",
-		"assert": "^1.4.1",
+		"@testing-library/jest-dom": "^5.12.0",
+		"@testing-library/react": "^11.2.6",
+		"@testing-library/user-event": "^13.1.9",
 		"babel-core": "^7.0.0-bridge.0",
 		"babel-eslint": "^10.0.2",
 		"babel-loader": "^8.0.6",
@@ -98,12 +92,13 @@
 		"eslint-config-faithlife": "^6.0.0",
 		"esm": "^3.0.24",
 		"execa": "^5.0.0",
+		"jest": "^26.6.3",
+		"jest-axe": "^4.1.0",
 		"jscodeshift": "^0.11.0",
 		"micro-graphql-react": "^0.3.0-beta2",
-		"mocha": "^5.1.1",
 		"prettier": "^1.17.1",
-		"react": "^16.8.0",
-		"react-dom": "^16.8.0",
+		"react": "^16.14.0",
+		"react-dom": "^16.14.0",
 		"react-dom-factories": "^1.0.2",
 		"resize-observer-polyfill": "^1.5.1",
 		"rimraf": "^2.6.2",

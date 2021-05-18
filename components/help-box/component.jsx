@@ -51,7 +51,7 @@ export function HelpBox({
 					))}
 				<Styled.HelpBoxContent>{children}</Styled.HelpBoxContent>
 				{(handleClose && (
-					<Styled.CloseButton onClick={handleClose}>
+					<Styled.CloseButton aria-label="Close" onClick={handleClose}>
 						<Close />
 					</Styled.CloseButton>
 				)) ||

@@ -3,5 +3,17 @@
 	"rules": {
 		"react/jsx-no-literals": "off",
 		"react/display-name": "off"
-	}
+	},
+	"env": {
+		"jest": true
+	},
+	"overrides": [
+		{
+			"files": ["components/**"],
+			"excludedFiles": "*.test.js",
+			"rules": {
+				"no-unsanitized/method": false
+			}
+		}
+	]
 }

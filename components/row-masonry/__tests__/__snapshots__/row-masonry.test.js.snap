@@ -1,0 +1,190 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Row Masonry should return consistent row layouts 1`] = `
+Object {
+  "averageItemsPerRow": 2,
+  "averageRowHeight": 96.17699655587734,
+  "rows": Array [
+    Object {
+      "gapWidth": 12,
+      "items": Array [
+        Object {
+          "aspectRatio": 2.21955943409412,
+          "item": Object {
+            "aspectRatio": 2.21955943409412,
+          },
+        },
+        Object {
+          "aspectRatio": 0.9859003797276708,
+          "item": Object {
+            "aspectRatio": 0.9859003797276708,
+          },
+        },
+      ],
+      "rowHeight": 89.84670428815163,
+    },
+    Object {
+      "gapWidth": 12,
+      "items": Array [
+        Object {
+          "aspectRatio": 2.2994515698612124,
+          "item": Object {
+            "aspectRatio": 2.2994515698612124,
+          },
+        },
+        Object {
+          "aspectRatio": 1.3756087709650013,
+          "item": Object {
+            "aspectRatio": 1.3756087709650013,
+          },
+        },
+      ],
+      "rowHeight": 78.36606022508269,
+    },
+    Object {
+      "gapWidth": 12,
+      "items": Array [
+        Object {
+          "aspectRatio": 1.7468094204054432,
+          "item": Object {
+            "aspectRatio": 1.7468094204054432,
+          },
+        },
+        Object {
+          "aspectRatio": 1.287234360985344,
+          "item": Object {
+            "aspectRatio": 1.287234360985344,
+          },
+        },
+      ],
+      "rowHeight": 94.92282272472104,
+    },
+    Object {
+      "gapWidth": 12,
+      "items": Array [
+        Object {
+          "aspectRatio": 0.7694801207159913,
+          "item": Object {
+            "aspectRatio": 0.7694801207159913,
+          },
+        },
+        Object {
+          "aspectRatio": 0.6343636184394491,
+          "item": Object {
+            "aspectRatio": 0.6343636184394491,
+          },
+        },
+        Object {
+          "aspectRatio": 0.9485378396801197,
+          "item": Object {
+            "aspectRatio": 0.9485378396801197,
+          },
+        },
+      ],
+      "rowHeight": 117.32790397747515,
+    },
+    Object {
+      "gapWidth": 12,
+      "items": Array [
+        Object {
+          "aspectRatio": 2.082402503272989,
+          "item": Object {
+            "aspectRatio": 2.082402503272989,
+          },
+        },
+        Object {
+          "aspectRatio": 0.6632252433090523,
+          "item": Object {
+            "aspectRatio": 0.6632252433090523,
+          },
+        },
+      ],
+      "rowHeight": 104.89404485313915,
+    },
+    Object {
+      "gapWidth": 12,
+      "items": Array [
+        Object {
+          "aspectRatio": 1.2269313864337024,
+          "item": Object {
+            "aspectRatio": 1.2269313864337024,
+          },
+        },
+        Object {
+          "aspectRatio": 1.3638050079390163,
+          "item": Object {
+            "aspectRatio": 1.3638050079390163,
+          },
+        },
+      ],
+      "rowHeight": 111.1653044383668,
+    },
+    Object {
+      "gapWidth": 12,
+      "items": Array [
+        Object {
+          "aspectRatio": 2.2283917834546902,
+          "item": Object {
+            "aspectRatio": 2.2283917834546902,
+          },
+        },
+        Object {
+          "aspectRatio": 2.047257867779835,
+          "item": Object {
+            "aspectRatio": 2.047257867779835,
+          },
+        },
+      ],
+      "rowHeight": 67.35818495251233,
+    },
+    Object {
+      "gapWidth": 12,
+      "items": Array [
+        Object {
+          "aspectRatio": 1.0734050352965245,
+          "item": Object {
+            "aspectRatio": 1.0734050352965245,
+          },
+        },
+        Object {
+          "aspectRatio": 2.074352961337868,
+          "item": Object {
+            "aspectRatio": 2.074352961337868,
+          },
+        },
+      ],
+      "rowHeight": 91.49369179839486,
+    },
+    Object {
+      "gapWidth": 12,
+      "items": Array [
+        Object {
+          "aspectRatio": 1.7873129356076118,
+          "item": Object {
+            "aspectRatio": 1.7873129356076118,
+          },
+        },
+        Object {
+          "aspectRatio": 0.9430428677741222,
+          "item": Object {
+            "aspectRatio": 0.9430428677741222,
+          },
+        },
+      ],
+      "rowHeight": 105.4807580914151,
+    },
+    Object {
+      "gapWidth": 12,
+      "items": Array [
+        Object {
+          "aspectRatio": 1.853901351550863,
+          "item": Object {
+            "aspectRatio": 1.853901351550863,
+          },
+        },
+      ],
+      "rowHeight": 100.91449020951458,
+    },
+  ],
+}
+`;
