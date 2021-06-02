@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.6.4
+
+- Fix `ParameterSentence.Select` by using correct underlying component.
+
 ## 6.6.3
 
 - Reverted new default value of `Select`'s `isClearable` prop introduced in 6.5.1.
