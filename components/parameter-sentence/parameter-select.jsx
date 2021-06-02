@@ -66,9 +66,9 @@ export function ParameterSelect({
 					>
 						{options &&
 							Object.entries(options).map(([value, name]) => (
-								<Listbox.Item key={value} id={value}>
+								<Listbox.Option key={value} id={value}>
 									{name}
-								</Listbox.Item>
+								</Listbox.Option>
 							))}
 					</Listbox.Dropdown>
 				</Listbox>
