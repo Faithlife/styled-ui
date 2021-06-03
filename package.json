@@ -17,7 +17,7 @@
 		"test": "npm run test:ci && npm run eslint && npm run stylelint",
 		"precommit": "prettier --write \"./components/**/*.{js,jsx}\" && npm run stylelint",
 		"build": "rimraf dist && webpack --mode=none",
-		"prepublishOnly": "npm test",
+		"prepublishOnly": "npm run build && npm test",
 		"postpublish": "yarn helmsman ship-to @faithlife/styled-ui@5.75.1 latest --no-ship-faithlife",
 		"stylelint": "stylelint ./components/**/*.jsx",
 		"test:jest": "jest --maxWorkers=50%",
