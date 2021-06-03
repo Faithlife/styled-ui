@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.6.5
+
+- Republish
+
 ## 6.6.4
 
 - Fix `ParameterSentence.Select` by using correct underlying component.
