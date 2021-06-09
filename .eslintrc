@@ -2,7 +2,8 @@
 	"extends": ["faithlife"],
 	"rules": {
 		"react/jsx-no-literals": "off",
-		"react/display-name": "off"
+		"react/display-name": "off",
+		"no-console": ["error", {"allow": ["error", "warn"]}]
 	},
 	"env": {
 		"jest": true
