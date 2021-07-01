@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Caret } from '../icons';
-import { colors } from '../shared-styles';
+import { Caret } from '../../icons';
+import { colors } from '../../shared-styles';
 import { dateFunctionProps } from './date-function-props';
 import * as Styled from './styled';
 import { CalendarWeek } from './calendar-week';
