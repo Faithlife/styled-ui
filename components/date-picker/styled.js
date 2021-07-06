@@ -8,8 +8,13 @@ import { CaretRight, CaretLeft } from '../icons/18px';
 export const Container = styled(Box).attrs({
 	role: 'dialog',
 	'aria-modal': 'true',
+	tabIndex: -1,
 })`
 	width: 251px;
+
+	&:focus {
+		outline: none;
+	}
 `;
 
 export const HeaderContainer = styled(Box)`
@@ -81,11 +86,13 @@ export const Week = styled(Box).attrs({
 	width: 100%;
 `;
 
-export const Day = styled(UtilityButton).attrs(({ isToday, isSelected, noSelection }) => ({
-	...(isToday && { 'aria-current': 'date' }),
-	...(isSelected && { 'aria-selected': 'true' }),
-	tabIndex: isSelected || (isToday && noSelection) ? 0 : -1,
-}))`
+export const Day = styled(UtilityButton).attrs(
+	({ isToday, isSelected, noSelection, isCurrentDate }) => ({
+		...(isToday && { 'aria-current': 'date' }),
+		...(isSelected && { 'aria-selected': 'true' }),
+		tabIndex: isSelected || (isToday && noSelection) || isCurrentDate ? 0 : -1,
+	}),
+)`
 	cursor: pointer;
 	width: 30px;
 	height: 30px;
@@ -132,6 +139,10 @@ export const Day = styled(UtilityButton).attrs(({ isToday, isSelected, noSelecti
 
 					&:hover {
 						background-color: ${colors.datePicker.selectedDayHoverBackground};
+					}
+
+					&:disabled {
+						color: ${colors.datePicker.selectedDayForeground};
 					}
 			  `
 			: ''}
