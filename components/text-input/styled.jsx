@@ -13,6 +13,8 @@ export const AvatarOptionImage = styled.img`
 	border-radius: 10%;
 	height: 40px;
 	width: 40px;
+	max-width: 40px;
+	object-fit: cover;
 `;
 
 export const AvatarOptionCheckbox = styled.div`
@@ -44,6 +46,8 @@ export const AvatarMultiValueImage = styled.img`
 	border-radius: 10%;
 	height: 18px;
 	width: 18px;
+	max-width: 18px;
+	object-fit: cover;
 `;
 
 export const AvatarMultiValueName = styled.span`
