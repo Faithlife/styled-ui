@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.6.6
+
+- Fix crash in Safari with number inputs #494
+
 ## 6.6.5
 
 - Republish
