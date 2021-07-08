@@ -24,8 +24,8 @@ export function DayPicker({ dateFunctions, value, onChange, onClose }) {
 			<Styled.DatesContainer aria-labelledby={headerId}>
 				<Styled.DayHeaderRow>
 					<tr>
-						{Array.from(Array(7)).map((_, i) => (
-							<Styled.DayHeader key={i}>{dateFns.getDOWName(i)}</Styled.DayHeader>
+						{weekDayIndexArray.map(dIndex => (
+							<Styled.DayHeader key={dIndex}>{dateFns.getDOWName(dIndex)}</Styled.DayHeader>
 						))}
 					</tr>
 				</Styled.DayHeaderRow>

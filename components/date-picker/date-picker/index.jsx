@@ -29,6 +29,7 @@ export function DatePicker({
 		() => dateFns.getEachDayOfMonthByWeek(currentDate),
 		[currentMonth, currentYear, dateFns], // eslint-disable-line react-hooks/exhaustive-deps
 	);
+	const weekDayIndexArray = useMemo(() => dateFns.getWeekDayIndexArray(), [dateFns]);
 
 	const handleSelectDate = useCallback(
 		date => () => {
@@ -70,9 +71,9 @@ export function DatePicker({
 			<Styled.DatesContainer aria-labelledby={headerId}>
 				<Styled.DayHeaderRow>
 					<tr>
-						{Array.from(Array(7)).map((_, i) => (
-							<Styled.DayHeader key={i} abbr={dateFns.getDOWName(i)}>
-								{dateFns.getDOWName(i, dateFns.abbrv.narrow)}
+						{weekDayIndexArray.map(dIndex => (
+							<Styled.DayHeader key={dIndex} abbr={dateFns.getDOWName(dIndex)}>
+								{dateFns.getDOWName(dIndex, dateFns.abbrv.narrow)}
 							</Styled.DayHeader>
 						))}
 					</tr>
