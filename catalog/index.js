@@ -56,7 +56,11 @@ import { IconGroup } from './icon-table';
 import { FavoriteFilled } from '../components/icons/18px';
 import { ChevronDown } from '../components/icons/12px';
 
-import { DatePickerVNext, DateFunctionsContextProvider } from '../components/date-picker';
+import {
+	DatePicker as DatePickerVNext,
+	DateFunctionsContextProvider,
+	DayPicker,
+} from '../index-vnext';
 import newDateFunctions from '../components/date-picker/date-functions/date-fns';
 const russianLocaleDateFunctions = new newDateFunctions({ locale: ru });
 
@@ -292,6 +296,7 @@ const pages = [
 					Button,
 					Popover,
 					DatePicker: DatePickerVNext,
+					DayPicker,
 					DateFunctions: newDateFunctions,
 					DateFunctionsContextProvider,
 					formatDate: date =>

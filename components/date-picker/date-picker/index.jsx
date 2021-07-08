@@ -1,7 +1,7 @@
 import React, { useRef, useState, useMemo, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { useId } from '../shared-hooks';
-import { useKeyboardNav, useDateFunctions } from './date-picker-utils';
+import { useId } from '../../shared-hooks';
+import { useKeyboardNav, useDateFunctions } from '../date-picker-utils';
 import * as Styled from './styled';
 
 export function DatePicker({
@@ -72,7 +72,7 @@ export function DatePicker({
 					<tr>
 						{Array.from(Array(7)).map((_, i) => (
 							<Styled.DayHeader key={i} abbr={dateFns.getDOWName(i)}>
-								{dateFns.getDOWNameAbbrv(i)}
+								{dateFns.getDOWName(i, dateFns.abbrv.narrow)}
 							</Styled.DayHeader>
 						))}
 					</tr>

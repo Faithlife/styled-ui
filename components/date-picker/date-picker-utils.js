@@ -84,7 +84,6 @@ export function useKeyboardNav({ setCurrentDate, onCloseMenu, focusCatchRef, dat
 							}
 							break;
 						}
-
 						case handledKeys.arrowUp: {
 							event.preventDefault();
 							focusCatchRef.current.focus();
@@ -168,6 +167,76 @@ export function useKeyboardNav({ setCurrentDate, onCloseMenu, focusCatchRef, dat
 		},
 		[onCloseMenu, focusCatchRef, setCurrentDate, dateFns],
 	);
+
+	return {
+		register,
+	};
+}
+
+export function useDOWKeyboardNav({ onCloseMenu, focusCatchRef }) {
+	const dayRefs = useRef([]);
+
+	const register = useCallback(() => {
+		return {
+			ref: ref => {
+				if (!ref) {
+					return;
+				}
+
+				const newRef = React.createRef();
+				newRef.current = ref;
+
+				const [, dayIndex] = newRef.current.id.split('-').map(x => Number.parseInt(x));
+				dayRefs.current[dayIndex] = newRef;
+			},
+			onKeyDown: event => {
+				const [, dayIndex] = event.target.id.split('-').map(x => Number.parseInt(x));
+				switch (event.key) {
+					case handledKeys.escape: {
+						if (onCloseMenu) {
+							event.preventDefault();
+							onCloseMenu();
+						}
+						break;
+					}
+					case handledKeys.arrowLeft: {
+						event.preventDefault();
+						focusCatchRef.current.focus();
+						if (dayIndex > 0) {
+							dayRefs.current[dayIndex - 1].current.focus();
+						} else {
+							dayRefs.current[6].current.focus();
+						}
+						break;
+					}
+					case handledKeys.arrowRight: {
+						event.preventDefault();
+						focusCatchRef.current.focus();
+						if (dayIndex < 6) {
+							dayRefs.current[dayIndex + 1].current.focus();
+						} else {
+							dayRefs.current[0].current.focus();
+						}
+						break;
+					}
+					case handledKeys.home: {
+						event.preventDefault();
+						focusCatchRef.current.focus();
+						dayRefs.current[0].current.focus();
+						break;
+					}
+					case handledKeys.end: {
+						event.preventDefault();
+						focusCatchRef.current.focus();
+						dayRefs.current[6].current.focus();
+						break;
+					}
+					default:
+						return;
+				}
+			},
+		};
+	}, [onCloseMenu, focusCatchRef]);
 
 	return {
 		register,

@@ -14,6 +14,7 @@ import getYear from 'date-fns/getYear';
 import isValid from 'date-fns/isValid';
 import startOfMonth from 'date-fns/startOfMonth';
 import endOfMonth from 'date-fns/endOfMonth';
+import getDay from 'date-fns/getDay';
 
 import enUS from 'date-fns/locale/en-US';
 
@@ -21,6 +22,13 @@ export default class DateFunctions {
 	version = '1';
 	locale = enUS;
 	todaysDate = null;
+
+	abbrv = {
+		narrow: 'narrow',
+		abbreviated: 'abbreviated',
+		short: 'short',
+		wide: 'wide',
+	};
 
 	constructor({ locale } = {}) {
 		this.locale = locale ?? this.locale;
@@ -109,12 +117,8 @@ export default class DateFunctions {
 		return format(date, 'd', { locale: this.locale });
 	};
 
-	getDOWName = dayIndex => {
-		return this.locale.localize.day(dayIndex, { locale: this.locale });
-	};
-
-	getDOWNameAbbrv = dayIndex => {
-		return this.locale.localize.day(dayIndex, { locale: this.locale, width: 'narrow' });
+	getDOWName = (dayIndex, abbrev = this.abbrv.wide) => {
+		return this.locale.localize.day(dayIndex, { locale: this.locale, width: abbrev });
 	};
 
 	startOfWeek = date => {
@@ -123,5 +127,24 @@ export default class DateFunctions {
 
 	endOfWeek = date => {
 		return endOfWeek(date, { locale: this.locale });
+	};
+
+	getDayOfWeek = date => {
+		return getDay(date);
+	};
+
+	getWeekDayIndexArray = () => {
+		const now = new Date();
+		return eachDayOfInterval(
+			{
+				start: startOfWeek(now, {
+					locale: this.locale,
+				}),
+				end: endOfWeek(now, {
+					locale: this.locale,
+				}),
+			},
+			{ locale: this.locale },
+		).map(this.getDayOfWeek);
 	};
 }

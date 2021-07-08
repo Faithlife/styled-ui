@@ -1,4 +1,5 @@
 export {
 	DateFunctionsContextProvider,
-	DatePicker as DatePickerVNext,
+	DatePickerVNext as DatePicker,
+	DayPicker,
 } from './components/date-picker';

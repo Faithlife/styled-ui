@@ -1,9 +1,7 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
-import { Box } from '../Box';
-import { Button, UtilityButton } from '../button';
-import { Text } from '../Text';
-import { CaretRight, CaretLeft } from '../icons/18px';
+import { Box } from '../../Box';
+import { UtilityButton } from '../../button';
+import { Text } from '../../Text';
 
 export const Container = styled(Box).attrs({
 	role: 'dialog',
@@ -20,23 +18,11 @@ export const Container = styled(Box).attrs({
 export const HeaderContainer = styled(Box)`
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
 
 	height: 32px;
 `;
-
-export const PrevButton = styled(Button).attrs({
-	variant: 'minorTransparent',
-	size: 'small',
-	icon: <CaretLeft />,
-})``;
-
-export const NextButton = styled(Button).attrs({
-	variant: 'minorTransparent',
-	size: 'small',
-	icon: <CaretRight />,
-})``;
 
 export const Header = styled(Text).attrs({
 	as: 'h2',
@@ -49,6 +35,7 @@ export const Header = styled(Text).attrs({
 export const DatesContainer = styled(Box).attrs({
 	as: 'table',
 	role: 'grid',
+	width: '100%',
 })``;
 
 export const DayHeaderRow = styled(Box).attrs({
@@ -62,20 +49,14 @@ export const DayHeader = styled(Text).attrs({
 	textStyle: 'ui.12',
 	color: 'datePicker.secondaryForeground',
 })`
-	display: table-cell;
-	position: relative;
-	height: 30px;
-
-	&:after {
-		content: '';
-		width: 34px;
-		height: 1px;
-		left: -2px;
-		bottom: 0;
-		position: absolute;
-
-		background-color: ${({ theme }) => theme.colors.borderColor};
-	}
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	width: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
 `;
 
 export const Week = styled(Box).attrs({
@@ -86,13 +67,11 @@ export const Week = styled(Box).attrs({
 	width: 100%;
 `;
 
-export const Day = styled(UtilityButton).attrs(
-	({ isToday, isSelected, noSelection, isCurrentDate }) => ({
-		...(isToday && { 'aria-current': 'date' }),
-		...(isSelected && { 'aria-selected': 'true' }),
-		tabIndex: isSelected || (isToday && noSelection) || isCurrentDate ? 0 : -1,
-	}),
-)`
+export const Day = styled(UtilityButton).attrs(({ isToday, isSelected, noSelection }) => ({
+	...(isToday && { 'aria-current': 'date' }),
+	...(isSelected && { 'aria-selected': 'true' }),
+	tabIndex: isSelected || (isToday && noSelection) ? 0 : -1,
+}))`
 	cursor: pointer;
 	width: 30px;
 	height: 30px;

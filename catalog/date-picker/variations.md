@@ -34,6 +34,30 @@ state: { selectedDate: null }
 </Stack>
 ```
 
+## Day Picker
+
+When a day is selected the `onChange` will be called with the number of the day of the week selected (0 = Sunday)
+
+```react
+showSource: true
+state: { selectedDay: null }
+---
+<Stack spacing={3} width="200px">
+	<DateFunctionsContextProvider dateFunctions={DateFunctions}>
+		<span>The selected day is {`${state.selectedDay}`}</span>
+		<Button ref={refs[3]} onClick={() => setState({ isOpen: !state.isOpen })}>Select Date</Button>
+		{state.isOpen && (
+			<Popover reference={refs[3].current} placement="right" onFocusAway={() => setState({ isOpen: false })}>
+				<DayPicker
+					value={state.selectedDay}
+					onChange={(date) => setState({ selectedDay: date })}
+				/>
+			</Popover>
+		)}
+	</DateFunctionsContextProvider>
+</Stack>
+```
+
 ## Localization
 
 ```react
