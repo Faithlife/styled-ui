@@ -14,7 +14,7 @@ export const WellContainer = styled(Box)`
 	${layout}
 `;
 
-export const WellButton = styled.button`
+export const WellButton = styled.div`
 	margin: 0;
 	padding: 0;
 	width: 100%;
@@ -24,10 +24,12 @@ export const WellButton = styled.button`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	text-align: center;
 	outline: none;
 	cursor: pointer;
 
 	border: none;
+	background-color: ${({ theme }) => theme.colors.button.minorBackground};
 	background-image: ${props => getBorderImage(props)};
 	border-radius: ${({ theme }) => theme.radii[2]};
 
