@@ -46,6 +46,18 @@ state: { value: 'Washington' }
 </InputSpacer>
 ```
 
+### Placeholders
+
+```react
+showSource: true
+state: { value: '' }
+---
+<InputSpacer>
+	<Input variant={['medium', 'small']} value={state.value} onChange={event => setState({ value: event.target.value })} placeholder="Placeholder text" />
+	<Button variant="primary" size={['medium', 'small']}>Search</Button>
+</InputSpacer>
+```
+
 ### Textarea
 
 ```react

@@ -149,6 +149,7 @@ const StyledInput = styled.input(
 
 		&::placeholder {
 			color: ${theme.colors.input.placeholderForeground};
+			font-style: italic;
 		}
 
 		${createVariant({
