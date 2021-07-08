@@ -249,6 +249,19 @@ colors.parameterSentence = {
 	readonly: colors.gray8,
 };
 
+colors.datePicker = {
+	primaryForeground: colors.flGray,
+	secondaryForeground: colors.gray34,
+
+	dayDisabledForeground: colors.gray34,
+	dayForeground: colors.gray66,
+	dayHoverBackground: colors.gray8,
+
+	selectedDayForeground: colors.white,
+	selectedDayBackground: colors.blue4,
+	selectedDayHoverBackground: colors.blue5,
+};
+
 const fonts = {
 	normal: '"Source Sans Pro", sans-serif',
 };

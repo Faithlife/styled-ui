@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../shared-styles';
+import { colors } from '../../../shared-styles';
 
 export const CalendarWeekDayButton = styled.button`
 	flex: 1;

@@ -11,6 +11,8 @@ module.exports = {
 		'share-dialog': './components/share-dialog/index.js',
 		icons12: './components/icons/12px/index.js',
 		icons18: './components/icons/18px/index.js',
+		vnext: './index-vnext.js',
+		'date-functions/date-fns': './components/date-picker/date-functions/date-fns.js',
 	},
 	devtool: 'sourcemap',
 	output: {

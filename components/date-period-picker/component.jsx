@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import { DatePicker } from '../date-picker';
 import { Input } from '../input';
-import { dateFunctionProps } from '../date-picker/date-function-props';
+import { dateFunctionProps } from '../date-picker/legacy/date-function-props';
 import * as Styled from './styled';
 
 const DATE_FORMAT_STRING = 'M/d/yyyy';
