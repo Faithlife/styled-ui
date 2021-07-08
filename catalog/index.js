@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import ResizeObserver from 'resize-observer-polyfill';
 import { Catalog, pageLoader } from 'catalog';
 import * as dateFunctions from 'date-fns';
+import ru from 'date-fns/locale/ru';
 import chrono from 'chrono-node';
 import {
 	Accordion,
@@ -54,6 +55,10 @@ import { textInputPages } from './input/pages';
 import { IconGroup } from './icon-table';
 import { FavoriteFilled } from '../components/icons/18px';
 import { ChevronDown } from '../components/icons/12px';
+
+import { DatePickerVNext, DateFunctionsContextProvider } from '../components/date-picker';
+import newDateFunctions from '../components/date-picker/date-functions/date-fns';
+const russianLocaleDateFunctions = new newDateFunctions({ locale: ru });
 
 window.ResizeObserver = ResizeObserver;
 
@@ -277,13 +282,35 @@ const pages = [
 		],
 	},
 	{
-		// TODO: fix use of v6 Popovers
 		title: 'Date Picker',
 		pages: [
 			{
 				path: '/date-picker/variations',
 				title: 'Date Picker Variations',
 				content: pageLoader(() => import('./date-picker/variations.md')),
+				imports: {
+					Button,
+					Popover,
+					DatePicker: DatePickerVNext,
+					DateFunctions: newDateFunctions,
+					DateFunctionsContextProvider,
+					formatDate: date =>
+						dateFunctions.isValid(date) ? dateFunctions.format(date, 'MM-dd-yyyy') : 'null',
+					russianLocaleDateFunctions,
+					refs: new Array(5).fill(null).map(() => React.createRef()),
+					Stack,
+				},
+			},
+			{
+				path: 'date-picker/documentation',
+				title: 'Date Picker Documentation',
+				content: pageLoader(() => import('./date-picker/documentation.md')),
+				imports: { DatePicker: DatePickerVNext, DatePeriodPicker },
+			},
+			{
+				path: '/date-picker/v6',
+				title: 'Date Picker v6 Variations',
+				content: pageLoader(() => import('./date-picker/v6-variations.md')),
 				imports: {
 					Button,
 					Popover,
@@ -305,9 +332,9 @@ const pages = [
 				},
 			},
 			{
-				path: 'date-picker/documentation',
-				title: 'Date Picker Documentation',
-				content: pageLoader(() => import('./date-picker/documentation.md')),
+				path: 'date-picker/v6-documentation',
+				title: 'Date Picker V6 Documentation',
+				content: pageLoader(() => import('./date-picker/v6-documentation.md')),
 				imports: { DatePicker, DatePeriodPicker },
 			},
 		],
@@ -798,6 +825,33 @@ function V6Banner({ children, oldHash }) {
 	);
 }
 
+function VNextBanner({ children, v6Hash }) {
+	const baseUrl = 'https://faithlife.github.io/styled-ui/#/';
+	return (
+		<HelpBox variant="warning" marginBottom={3}>
+			<Stack spacing={3}>
+				<Paragraph>
+					This component has been updated for Styled-UI vNext. You can use it by with:
+				</Paragraph>
+				<Paragraph fontFamily="monospace">
+					{"import { ThisComponent } from '@faithlife/styled-ui/vnext'"}
+				</Paragraph>
+				{children}
+
+				<Button
+					as="a"
+					variant="secondary"
+					href={`${baseUrl}${v6Hash}`}
+					target="_blank"
+					icon={<FloatUndock color="currentColor" />}
+				>
+					View the v6 docs
+				</Button>
+			</Stack>
+		</HelpBox>
+	);
+}
+
 const commonImports = {
 	DocgenTable,
 	AcceptsStyledSystemProps,
@@ -805,6 +859,7 @@ const commonImports = {
 	HelpBox,
 	V6Banner,
 	ThemeProvider,
+	VNextBanner,
 };
 
 ReactDOM.render(

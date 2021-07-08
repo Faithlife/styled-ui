@@ -14,7 +14,11 @@ const handledKeys = {
 
 const DateFunctionsContext = React.createContext();
 
-export const DateFunctionsContextProvider = DateFunctionsContext.Provider;
+export function DateFunctionsContextProvider({ children, dateFunctions }) {
+	return (
+		<DateFunctionsContext.Provider value={dateFunctions}>{children}</DateFunctionsContext.Provider>
+	);
+}
 
 function useDateFunctionsContext() {
 	const context = useContext(DateFunctionsContext);

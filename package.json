@@ -38,7 +38,9 @@
 		"dist/**",
 		"text-input.js",
 		"icons/*.js",
-		"tools/update-to-v6-codemod/**"
+		"tools/update-to-v6-codemod/**",
+		"vnext.js",
+		"date-functions/*.js"
 	],
 	"browserslist": [
 		"> 1%",
