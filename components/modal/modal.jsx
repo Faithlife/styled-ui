@@ -18,6 +18,7 @@ export const Modal = ({
 	contentPadding,
 	fullscreen,
 	zIndex,
+	scrollbarEnabled,
 	...props
 }) => {
 	const [size, containerRef] = useElementSize();
@@ -58,7 +59,7 @@ export const Modal = ({
 	}
 
 	const modal = (
-		<ModalBackdrop onClose={onClose} zIndex={zIndex}>
+		<ModalBackdrop onClose={onClose} zIndex={zIndex} scrollbarEnabled={scrollbarEnabled}>
 			<ModalContextProvider value={modalContext}>
 				<Box
 					ref={containerRef}
@@ -96,7 +97,7 @@ export const Modal = ({
 Modal.propTypes = {
 	/** Controls state of modal. */
 	isOpen: PropTypes.bool.isRequired,
-	/** Callback function for when the modal is closed.  */
+	/** Callback function for when the modal is closed. */
 	onClose: PropTypes.func.isRequired,
 	/** Consider using the Modal.Header, Modal.Content, and Modal.Footer components as children. */
 	children: PropTypes.node.isRequired,
@@ -108,6 +109,8 @@ Modal.propTypes = {
 	zIndex: PropTypes.number,
 	/** Intended for modals with lots of functionality, such as media galleries or editors. */
 	fullscreen: PropTypes.bool,
+	/** Whether page's active scrollbar should be hidden when modal is active. */
+	scrollbarEnabled: PropTypes.bool,
 };
 
 Modal.defaultProps = {

@@ -45,6 +45,6 @@ export const CopyContainer = styled.div`
 export const Copied = styled.div`
 	position: absolute;
 	top: 100%;
-	right: 0;
+	right: -3px;
 	color: ${colors.gray34};
 `;

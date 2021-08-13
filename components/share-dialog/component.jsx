@@ -21,6 +21,7 @@ export class ShareDialog extends React.Component {
 		isOpen: PropTypes.bool,
 		modalTitle: PropTypes.string,
 		copyButtonText: PropTypes.string,
+		scrollbarEnabled: PropTypes.bool,
 	};
 
 	static defaultProps = {
@@ -28,15 +29,29 @@ export class ShareDialog extends React.Component {
 	};
 
 	render() {
-		const { shareUrl, message, onClose, isOpen, modalTitle, copyButtonText } = this.props;
+		const {
+			shareUrl,
+			message,
+			onClose,
+			isOpen,
+			modalTitle,
+			copyButtonText,
+			scrollbarEnabled,
+		} = this.props;
 
 		const encodedShareUrl = encodeURIComponent(shareUrl);
 		const encodedMessage = message ? encodeURIComponent(message) : '';
 
 		return (
-			<Modal isOpen={isOpen} onClose={onClose} container="body" contentPadding={6}>
+			<Modal
+				isOpen={isOpen}
+				onClose={onClose}
+				container="body"
+				contentPadding={6}
+				scrollbarEnabled={scrollbarEnabled}
+			>
 				<Modal.Header title={modalTitle} textStyle="h.24" />
-				<Modal.Content>
+				<Modal.Content overflowY="visible">
 					<Styled.ShareContainer>
 						<Styled.ButtonContainer>
 							<FaithlifeShareButton
