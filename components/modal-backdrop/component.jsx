@@ -13,20 +13,20 @@ export class ModalBackdrop extends React.Component {
 		zIndex: PropTypes.number,
 		/** Contents of the modal */
 		children: PropTypes.node.isRequired,
-		/** Whether page's active scrollbar should be hidden when modal is active */
-		scrollbarEnabled: PropTypes.bool,
+		/** Whether background page scrolling is allowed while modal is active. */
+		allowBackgroundScrolling: PropTypes.bool,
 	};
 
 	inPotentialCloseEvent = false;
 
 	componentDidMount() {
-		if (!this.props.scrollbarEnabled) {
+		if (!this.props.allowBackgroundScrolling) {
 			document.body.style.overflow = 'hidden';
 		}
 	}
 
 	componentWillUnmount() {
-		if (!this.props.scrollbarEnabled) {
+		if (!this.props.allowBackgroundScrolling) {
 			document.body.style.overflow = '';
 		}
 	}

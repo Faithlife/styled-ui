@@ -21,7 +21,7 @@ export class ShareDialog extends React.Component {
 		isOpen: PropTypes.bool,
 		modalTitle: PropTypes.string,
 		copyButtonText: PropTypes.string,
-		scrollbarEnabled: PropTypes.bool,
+		allowBackgroundScrolling: PropTypes.bool,
 	};
 
 	static defaultProps = {
@@ -36,7 +36,7 @@ export class ShareDialog extends React.Component {
 			isOpen,
 			modalTitle,
 			copyButtonText,
-			scrollbarEnabled,
+			allowBackgroundScrolling,
 		} = this.props;
 
 		const encodedShareUrl = encodeURIComponent(shareUrl);
@@ -48,7 +48,7 @@ export class ShareDialog extends React.Component {
 				onClose={onClose}
 				container="body"
 				contentPadding={6}
-				scrollbarEnabled={scrollbarEnabled}
+				allowBackgroundScrolling={allowBackgroundScrolling}
 			>
 				<Modal.Header title={modalTitle} textStyle="h.24" />
 				<Modal.Content overflowY="visible">
