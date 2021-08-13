@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.76.0
+
+- Added the `allowBackgroundScrolling` prop to the `Modal` component.
+
 ## 5.75.1
 
 - Added input value parameter to `onStep` callback prop in `NumberInput`.
