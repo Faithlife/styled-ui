@@ -113,7 +113,7 @@ Modal.propTypes = {
 	zIndex: PropTypes.number,
 	/** Intended for modals with lots of functionality, such as media galleries or editors. */
 	fullscreen: PropTypes.bool,
-	/** Whether background page scrolling is allowed while modal is active. */
+	/** Whether background page scrolling is allowed while modal is open. */
 	allowBackgroundScrolling: PropTypes.bool,
 };
 

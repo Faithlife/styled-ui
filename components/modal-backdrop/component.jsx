@@ -13,7 +13,7 @@ export class ModalBackdrop extends React.Component {
 		zIndex: PropTypes.number,
 		/** Contents of the modal */
 		children: PropTypes.node.isRequired,
-		/** Whether background page scrolling is allowed while modal is active. */
+		/** Whether background page scrolling is allowed while modal is open. */
 		allowBackgroundScrolling: PropTypes.bool,
 	};
 
