@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.7.0
+
+- Added `allowBackgroundScrolling` feature to `Modal` and `ShareDialog`.
+
 ## 6.6.6
 
 - Fix crash in Safari with number inputs #494
