@@ -89,7 +89,7 @@
 		"cross-env": "^5.2.0",
 		"date-fns": "^2.0.0-alpha.25",
 		"eslint": "^5.16.0",
-		"eslint-config-faithlife": "^6.0.0",
+		"eslint-config-faithlife": "^8.1.0",
 		"esm": "^3.0.24",
 		"execa": "^5.0.0",
 		"jest": "^26.6.3",
