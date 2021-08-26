@@ -2,7 +2,12 @@
 
 /* eslint-disable */
 
-export function debounce(func: Function, wait: number, immediate?: boolean) {
+/**
+ * @param {Function} func
+ * @param {number} wait
+ * @param {number | undefined} immediate
+ */
+export function debounce(func, wait, immediate) {
 	let timeout;
 	return function() {
 		const context = this,
