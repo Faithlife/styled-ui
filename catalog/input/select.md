@@ -173,7 +173,9 @@ showSource: true
 	options={[
 		{ value: "california", label: "California" },
 		{ value: "washington", label: "Washington", avatar: "https://files.logoscdn.com/v1/files/42382171/content.svg?signature=6V_cO8zkG4kob-qZTjNlJkCuNTA" },
-		{ value: "texas", label: "Texas", avatar: "https://files.logoscdn.com/v1/files/42382171/content.svg?signature=6V_cO8zkG4kob-qZTjNlJkCuNTA", "secondaryLabel": "The Lonestar State" }
+		{ value: "texas", label: "Texas", avatar: "https://files.logoscdn.com/v1/files/42382171/content.svg?signature=6V_cO8zkG4kob-qZTjNlJkCuNTA", "secondaryLabel": "The Lonestar State" },
+		{ value: "arizona", label: "Arizona", avatar: "https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arizona.svg" },
+		{ value: "florida", label: "Florida", avatar: "https://farm4.staticflickr.com/3495/3732163874_7677a346da_z.jpg" },
 	]}
 />
 ```
