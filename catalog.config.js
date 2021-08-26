@@ -19,6 +19,9 @@ module.exports = {
 	webpack: catalogWebpackConfig => {
 		const modifiedConfig = { ...catalogWebpackConfig };
 		modifiedConfig.module.rules[0].oneOf.unshift(...newRules);
-		return catalogWebpackConfig;
+		modifiedConfig.plugins = catalogWebpackConfig.plugins.filter(
+			x => x.constructor.name !== 'UglifyJsPlugin',
+		);
+		return modifiedConfig;
 	},
 };

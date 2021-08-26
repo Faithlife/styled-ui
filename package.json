@@ -42,6 +42,7 @@
 	],
 	"browserslist": [
 		"> 1%",
+		"IE 11",
 		"not op_mini all"
 	],
 	"peerDependencies": {
@@ -65,12 +66,12 @@
 		"styled-system": "^5.1.1"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.5.4",
-		"@babel/plugin-proposal-class-properties": "^7.5.0",
-		"@babel/plugin-syntax-dynamic-import": "^7.2.0",
-		"@babel/preset-env": "^7.5.4",
-		"@babel/preset-react": "^7.0.0",
-		"@babel/register": "^7.4.4",
+		"@babel/core": "^7.15.0",
+		"@babel/plugin-proposal-class-properties": "^7.14.5",
+		"@babel/plugin-syntax-dynamic-import": "^7.8.3",
+		"@babel/preset-env": "^7.15.0",
+		"@babel/preset-react": "^7.14.5",
+		"@babel/register": "^7.15.3",
 		"@storybook/storybook-deployer": "^2.8.7",
 		"@svgr/webpack": "^4.3.3",
 		"@testing-library/jest-dom": "^5.12.0",
