@@ -8505,11 +8505,6 @@ methods@~1.1.2:
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
   integrity sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4=
 
-micro-graphql-react@^0.3.0-beta2:
-  version "0.3.9"
-  resolved "https://registry.yarnpkg.com/micro-graphql-react/-/micro-graphql-react-0.3.9.tgz#d926a748ba03ffb37f74c56fa5ec32ff92082392"
-  integrity sha512-Mpz1pFxEBrjTPUL8A4tGOpTZZeYrsrQIlSfCoOaneouhlR6m3Lhyfv4Zce+qw7dI12wOIC1QDC8mwD/aCK3tEw==
-
 micromatch@^3.0.4, micromatch@^3.1.10, micromatch@^3.1.4:
   version "3.1.10"
   resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-3.1.10.tgz#70859bc95c9840952f359a068a3fc49f9ecfac23"
