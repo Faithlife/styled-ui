@@ -159,7 +159,21 @@ state: { selection: [], pendingSelectedValues: [{value: 'Texas', label: 'Texas'}
 showSource: true
 state: { tags: [] }
 ---
-<AsyncSelectDemo />
+const fetchMovies = async query => {
+	await new Promise(resolve => setTimeout(resolve, 250));
+	return movies
+		.map((label, value) => ({ value, label }))
+		.filter(({ label }) => label.toLowerCase().includes(query.toLowerCase()))
+		.slice(0, 5);
+};
+
+<AsyncCreatableSelect
+	placeholder="Search for movies"
+	isMulti
+	defaultOptions
+	debounceInterval={100}
+	loadOptions={fetchMovies}
+/>
 ```
 
 ### Avatar Select

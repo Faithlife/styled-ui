@@ -1,6 +1,14 @@
 {
 	"extends": ["faithlife"],
+	"parser": "@babel/eslint-parser",
+	"parserOptions": {
+		"sourceType": "module",
+		"babelOptions": { "configFile": "./.babelrc" }
+	},
+	"plugins": ["@babel"],
 	"rules": {
+		"babel/no-unused-expressions": "off",
+		"@babel/no-unused-expressions": "error",
 		"react/jsx-no-literals": "off",
 		"react/display-name": "off",
 		"no-console": ["error", {"allow": ["error", "warn"]}]

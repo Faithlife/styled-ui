@@ -1,14 +1,15 @@
 import { pageLoader } from 'catalog';
 import styled from 'styled-components';
-import { Select, CreatableSelect, avatarComponents } from '../../components/text-input';
+import {
+	Select,
+	CreatableSelect,
+	AsyncCreatableSelect,
+	avatarComponents,
+} from '../../components/text-input';
 import { DocgenTable } from '../docgen-table';
 import { Button, Input, NumberInput, Modal, FilterInput } from '../../index';
-import {
-	InferredTextFocusDemo,
-	InferredSelectFocusDemo,
-	AsyncSelectDemo,
-	CustomOptionsSelectDemo,
-} from './demos';
+import { InferredTextFocusDemo, InferredSelectFocusDemo, CustomOptionsSelectDemo } from './demos';
+import { movies } from './demos/movies';
 
 export const textInputPages = {
 	title: 'Input',
@@ -39,7 +40,7 @@ export const textInputPages = {
 				Input,
 				Select,
 				CreatableSelect,
-				AsyncSelectDemo,
+				AsyncCreatableSelect,
 				CustomOptionsSelectDemo,
 				Modal,
 				Button,
@@ -47,6 +48,7 @@ export const textInputPages = {
 					width: 256px;
 				`,
 				avatarComponents,
+				movies,
 			},
 		},
 		{
