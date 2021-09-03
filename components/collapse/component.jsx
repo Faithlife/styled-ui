@@ -23,7 +23,7 @@ function getHeight(node) {
 	return node.scrollHeight;
 }
 
-/** Collapsable accordion component. Useful for nodes that have 'height: auto'. Ported from reactstrap */
+/** Collapsible accordion component. Useful for nodes that have 'height: auto'. Ported from reactstrap */
 export const Collapse = forwardClassRef(
 	class Collapse extends Component {
 		static propTypes = propTypes;
