@@ -20,15 +20,25 @@ const NumberInput = React.memo(
 		}, []);
 
 		const handleStepUp = useCallback(() => {
+			if (!inputRef.current.value) {
+				inputRef.current.value = 0;
+			}
 			inputRef.current.stepUp();
 			dispatchChangeEvent();
-			onStep && onStep(inputRef.current.value);
+			if (onStep) {
+				onStep(inputRef.current.value);
+			}
 		}, [dispatchChangeEvent, onStep]);
 
 		const handleStepDown = useCallback(() => {
+			if (!inputRef.current.value) {
+				inputRef.current.value = 0;
+			}
 			inputRef.current.stepDown();
 			dispatchChangeEvent();
-			onStep && onStep(inputRef.current.value);
+			if (onStep) {
+				onStep(inputRef.current.value);
+			}
 		}, [dispatchChangeEvent, onStep]);
 
 		const buttonPadding = variant === 'small' ? 2 : 3;

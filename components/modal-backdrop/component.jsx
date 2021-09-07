@@ -7,12 +7,14 @@ import { Box } from '../Box';
  */
 export class ModalBackdrop extends React.Component {
 	static propTypes = {
-		/** Callback function to tell modal to close due to clicking the backdrop  */
+		/** Callback function to tell modal to close due to clicking the backdrop */
 		onClose: PropTypes.func.isRequired,
 		/** The z-index of the backdrop */
 		zIndex: PropTypes.number,
 		/** Contents of the modal */
 		children: PropTypes.node.isRequired,
+		/** Whether background page scrolling is allowed while modal is open. */
+		allowBackgroundScrolling: PropTypes.bool,
 		/** Flag to prevent closing modal on backdrop click */
 		ignoreClickOnBackdrop: PropTypes.boolean,
 	};
@@ -20,11 +22,15 @@ export class ModalBackdrop extends React.Component {
 	inPotentialCloseEvent = false;
 
 	componentDidMount() {
-		document.body.style.overflow = 'hidden';
+		if (!this.props.allowBackgroundScrolling) {
+			document.body.style.overflow = 'hidden';
+		}
 	}
 
 	componentWillUnmount() {
-		document.body.style.overflow = '';
+		if (!this.props.allowBackgroundScrolling) {
+			document.body.style.overflow = '';
+		}
 	}
 
 	handleBackdropCloseEventStart = event => {

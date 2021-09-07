@@ -159,7 +159,21 @@ state: { selection: [], pendingSelectedValues: [{value: 'Texas', label: 'Texas'}
 showSource: true
 state: { tags: [] }
 ---
-<AsyncSelectDemo />
+const fetchMovies = async query => {
+	await new Promise(resolve => setTimeout(resolve, 250));
+	return movies
+		.map((label, value) => ({ value, label }))
+		.filter(({ label }) => label.toLowerCase().includes(query.toLowerCase()))
+		.slice(0, 5);
+};
+
+<AsyncCreatableSelect
+	placeholder="Search for movies"
+	isMulti
+	defaultOptions
+	debounceInterval={100}
+	loadOptions={fetchMovies}
+/>
 ```
 
 ### Avatar Select
@@ -173,7 +187,9 @@ showSource: true
 	options={[
 		{ value: "california", label: "California" },
 		{ value: "washington", label: "Washington", avatar: "https://files.logoscdn.com/v1/files/42382171/content.svg?signature=6V_cO8zkG4kob-qZTjNlJkCuNTA" },
-		{ value: "texas", label: "Texas", avatar: "https://files.logoscdn.com/v1/files/42382171/content.svg?signature=6V_cO8zkG4kob-qZTjNlJkCuNTA", "secondaryLabel": "The Lonestar State" }
+		{ value: "texas", label: "Texas", avatar: "https://files.logoscdn.com/v1/files/42382171/content.svg?signature=6V_cO8zkG4kob-qZTjNlJkCuNTA", "secondaryLabel": "The Lonestar State" },
+		{ value: "arizona", label: "Arizona", avatar: "https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arizona.svg" },
+		{ value: "florida", label: "Florida", avatar: "https://farm4.staticflickr.com/3495/3732163874_7677a346da_z.jpg" },
 	]}
 />
 ```

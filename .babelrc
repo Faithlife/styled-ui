@@ -4,6 +4,7 @@
 		[
 			"@babel/preset-env",
 			{
+				"include": ["proposal-nullish-coalescing-operator", "proposal-object-rest-spread"],
 				"modules": false
 			}
 		]

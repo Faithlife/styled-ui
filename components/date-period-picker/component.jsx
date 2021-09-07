@@ -172,9 +172,7 @@ export class DatePeriodPicker extends PureComponent {
 				// Display name is a duplicate: filter out and warn the dev
 				if (process.env.NODE_ENV !== 'production') {
 					console.warn(
-						`A \`DatePeriodPicker\` has been passed multiple date periods named "${
-							currentPeriod.displayName
-						}". Only the first "${currentPeriod.displayName}" period has been passed.`,
+						`A \`DatePeriodPicker\` has been passed multiple date periods named "${currentPeriod.displayName}". Only the first "${currentPeriod.displayName}" period has been passed.`,
 					);
 				}
 			} else {

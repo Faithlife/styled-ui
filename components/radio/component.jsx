@@ -47,7 +47,7 @@ export function Radio({
 				disabled={disabled}
 				{...buttonProps}
 			>
-				<Styled.RadioSvg viewBox="0 0 28 28" {...icon?.props ?? {}}>
+				<Styled.RadioSvg viewBox="0 0 28 28" {...(icon?.props ?? {})}>
 					<Styled.RadioBorder cx="14" cy="14" r="13" />
 					{isChecked && <Styled.CheckedIndicator cx="14" cy="14" r="8" />}
 				</Styled.RadioSvg>

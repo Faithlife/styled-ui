@@ -95,6 +95,7 @@ ButtonCore.propTypes = {
 		'primary',
 		'secondary',
 		'minor',
+		'transparent',
 		'minorTransparent',
 		'link',
 		'danger',

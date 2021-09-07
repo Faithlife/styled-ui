@@ -15,7 +15,7 @@ export function CheckboxContent({ isChecked, title, disabled, children, ...other
 
 	return (
 		<>
-			<Styled.CheckboxDiv disabled={disabled} {...otherProps} {...box?.props ?? {}}>
+			<Styled.CheckboxDiv disabled={disabled} {...otherProps} {...(box?.props ?? {})}>
 				<Styled.CheckedIndicator isChecked={isChecked} disabled={disabled} />
 			</Styled.CheckboxDiv>
 			{label}
@@ -50,7 +50,7 @@ CheckboxBox.childConfigComponent = 'CheckboxBox';
 /**
  * An optional configuration component that allows styling just the label via Styled System props.
  */
-export const CheckboxLabel = styled(Text)`
+export const CheckboxLabel = styled(Text).attrs({ as: 'label' })`
 	margin-left: 6px;
 `;
 CheckboxLabel.propTypes = Text.propTypes;

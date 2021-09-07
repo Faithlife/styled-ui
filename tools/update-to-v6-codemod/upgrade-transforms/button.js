@@ -64,7 +64,7 @@ module.exports = function(file, api, { printOptions }) {
 	const condensed = getElementsWithOverrides(j, root, 'Button', 'condensed');
 	condensed.forEach(ele => {
 		addBlockComment(j, ele, [
-			' TODO the `condenced` prop has been removed and the padding will need to be manually adjusted. ',
+			' TODO the `condensed` prop has been removed and the padding will need to be manually adjusted. ',
 			' Refer to the upgrade docs at https://faithlife.github.io/styled-ui/#/upgrade-guide. ',
 		]);
 	});

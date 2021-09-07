@@ -78,7 +78,10 @@ export class Slider extends PureComponent {
 		return newValue > maxValue ? maxValue : newValue < minValue ? minValue : newValue;
 	};
 
-	getStops = createDerivedValue(() => [this.props.stopCount], stopCount => range(0, stopCount));
+	getStops = createDerivedValue(
+		() => [this.props.stopCount],
+		stopCount => range(0, stopCount),
+	);
 
 	handleTouchStart = event => {
 		if (this.props.disabled) {
@@ -321,7 +324,9 @@ export class Slider extends PureComponent {
 							<Styled.Stop
 								available={
 									!hideAvailableStops &&
-									(index > (minValue ?? 0) && !(index >= maxValue) && !(index === stopCount - 1))
+									index > (minValue ?? 0) &&
+									!(index >= maxValue) &&
+									!(index === stopCount - 1)
 								}
 								minimumAvailable={index === minValue && minValue > 0}
 								key={index}
