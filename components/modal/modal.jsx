@@ -18,6 +18,7 @@ export const Modal = ({
 	contentPadding,
 	fullscreen,
 	zIndex,
+	ignoreClickOnBackdrop,
 	...props
 }) => {
 	const [size, containerRef] = useElementSize();
@@ -58,7 +59,7 @@ export const Modal = ({
 	}
 
 	const modal = (
-		<ModalBackdrop onClose={onClose} zIndex={zIndex}>
+		<ModalBackdrop onClose={onClose} zIndex={zIndex} ignoreClickOnBackdrop={ignoreClickOnBackdrop}>
 			<ModalContextProvider value={modalContext}>
 				<Box
 					ref={containerRef}
@@ -108,6 +109,8 @@ Modal.propTypes = {
 	zIndex: PropTypes.number,
 	/** Intended for modals with lots of functionality, such as media galleries or editors. */
 	fullscreen: PropTypes.bool,
+	/** Prevents modal close on backdrop click. */
+	ignoreClickOnBackdrop: PropTypes.bool,
 };
 
 Modal.defaultProps = {
