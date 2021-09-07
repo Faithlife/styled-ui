@@ -15,6 +15,8 @@ export class ModalBackdrop extends React.Component {
 		children: PropTypes.node.isRequired,
 		/** Whether background page scrolling is allowed while modal is open. */
 		allowBackgroundScrolling: PropTypes.bool,
+		/** Flag to prevent closing modal on backdrop click */
+		ignoreClickOnBackdrop: PropTypes.boolean,
 	};
 
 	inPotentialCloseEvent = false;
@@ -38,7 +40,11 @@ export class ModalBackdrop extends React.Component {
 	};
 
 	handleBackdropCloseEventEnd = event => {
-		if (event.target === this._backdrop && this.inPotentialCloseEvent) {
+		if (
+			!this.props.ignoreClickOnBackdrop &&
+			event.target === this._backdrop &&
+			this.inPotentialCloseEvent
+		) {
 			this.props.onClose();
 		}
 

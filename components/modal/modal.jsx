@@ -19,6 +19,7 @@ export const Modal = ({
 	fullscreen,
 	zIndex,
 	allowBackgroundScrolling,
+	ignoreClickOnBackdrop,
 	...props
 }) => {
 	const [size, containerRef] = useElementSize();
@@ -63,6 +64,7 @@ export const Modal = ({
 			onClose={onClose}
 			zIndex={zIndex}
 			allowBackgroundScrolling={allowBackgroundScrolling}
+			ignoreClickOnBackdrop={ignoreClickOnBackdrop}
 		>
 			<ModalContextProvider value={modalContext}>
 				<Box
@@ -115,6 +117,8 @@ Modal.propTypes = {
 	fullscreen: PropTypes.bool,
 	/** Whether background page scrolling is allowed while modal is open. */
 	allowBackgroundScrolling: PropTypes.bool,
+	/** Prevents modal close on backdrop click. */
+	ignoreClickOnBackdrop: PropTypes.bool,
 };
 
 Modal.defaultProps = {
