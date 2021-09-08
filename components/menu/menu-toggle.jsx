@@ -94,6 +94,7 @@ MenuToggle.propTypes = {
 	...styledSystemPropTypes.grid,
 	hideCaret: PropTypes.bool,
 	hideCarrot: PropTypes.bool,
+	children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
 };
 MenuToggle.defaultProps = {
 	size: 'small',
