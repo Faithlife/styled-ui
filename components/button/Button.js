@@ -90,7 +90,10 @@ ButtonCore.propTypes = {
 	...styledSystemPropTypes.position,
 	...styledSystemPropTypes.border,
 	...styledSystemPropTypes.background,
-	size: PropTypes.oneOf(['small', 'medium', 'large']),
+	size: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.oneOf(['small', 'medium', 'large'])),
+		PropTypes.oneOf(['small', 'medium', 'large']),
+	]),
 	variant: PropTypes.oneOf([
 		'primary',
 		'secondary',
