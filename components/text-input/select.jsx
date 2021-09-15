@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactSelect, { components as reactSelectComponents } from 'react-select';
+import * as reactSelect from 'react-select';
 import ReactSelectCreatable from 'react-select/creatable';
 import { colors } from '../shared-styles';
 import { ChevronDown } from '../icons/12px';
@@ -240,7 +241,7 @@ function handleKeyDown(e, onConsumerKeyDown) {
 	}
 }
 
-export { reactSelectComponents };
+export { reactSelect, reactSelectComponents };
 
 /** Autocomplete control based on react-select */
 export const Select = React.forwardRef((props, ref) => {
