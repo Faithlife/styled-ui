@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import * as reactSelect from 'react-select';
-const { default: ReactSelect, components: reactSelectComponents, ...reactSelectFunctions } = reactSelect;
 import ReactSelectCreatable from 'react-select/creatable';
 import { colors } from '../shared-styles';
 import { ChevronDown } from '../icons/12px';
@@ -10,6 +9,12 @@ import { useClearableSelectValue } from './use-clearable-select-value';
 import * as Styled from './styled';
 import { ThemedBox } from '../ThemedBox';
 import { useTheme } from '../../theme';
+
+const {
+	default: ReactSelect,
+	components: reactSelectComponents,
+	...reactSelectFunctions
+} = reactSelect;
 
 const selectStyles = (props, theme) => {
 	const ourStyles = {
@@ -119,7 +124,7 @@ const selectStyles = (props, theme) => {
 				return ourStyle;
 			},
 		}),
-		{},
+		{}
 	);
 
 	return { ...customStyles, ...ourWrappedStyles };
