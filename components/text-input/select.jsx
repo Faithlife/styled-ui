@@ -124,7 +124,7 @@ const selectStyles = (props, theme) => {
 				return ourStyle;
 			},
 		}),
-		{}
+		{},
 	);
 
 	return { ...customStyles, ...ourWrappedStyles };
