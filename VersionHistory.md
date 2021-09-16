@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.8.0
+
+- Added `reactSelectFunctions` to `text-inputs` export.
+
 ## 6.7.0
 
 - Added `allowBackgroundScrolling` feature to `Modal` and `ShareDialog`.
