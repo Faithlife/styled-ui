@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.8.1
+
+- Fix PropTypes for `Modal`.
+
 ## 6.8.0
 
 - Added `reactSelectFunctions` to `text-inputs` export.
