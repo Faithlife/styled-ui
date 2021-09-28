@@ -14,10 +14,7 @@ state: { selectedDate: null }
 ---
 <DatePickerDemo>
 	<div>
-		{state.selectedDate == null ?
-			<span>No date selected.</span> :
-			<span>{`The selected date is ${dateFunctions.format(state.selectedDate, 'MM-dd-yyyy')}`}</span>
-		}
+		<span>{`The selected date is ${state.selectedDate && dateFunctions.format(state.selectedDate, 'MM-dd-yyyy')}`}</span>
 		<Button ref={refs[0]} onClick={() => setState({ isOpen: !state.isOpen })}>Select Date</Button>
 		{state.isOpen && (
 			<Popover reference={refs[0].current} placement="bottom" styleOverrides={{ maxWidth: '1000px' }} onFocusAway={() => setState({ isOpen: false })}>
@@ -51,10 +48,7 @@ state: { selectedDate: null }
 ---
 <DatePickerDemo>
 	<div>
-		{state.selectedDate == null ?
-			<span>No date selected.</span> :
-			<span>{`The selected date is ${dateFunctions.format(state.selectedDate, 'MM-dd-yyyy')}`}</span>
-		}
+		<span>{`The selected date is ${state.selectedDate && dateFunctions.format(state.selectedDate, 'MM-dd-yyyy')}`}</span>
 		<Button ref={refs[1]} onClick={() => setState({ isOpen: !state.isOpen })}>Select Date</Button>
 			{state.isOpen && (
 				<Popover reference={refs[1].current} placement="bottom" styleOverrides={{ maxWidth: '1000px' }} onFocusAway={() => setState({ isOpen: false })}>

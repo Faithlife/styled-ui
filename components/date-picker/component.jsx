@@ -39,11 +39,9 @@ function generateWeeks(month, dateFunctions) {
 
 Footer.PropTypes = {
 	children: PropTypes.node,
-}
+};
 function Footer({ children, ...props }) {
-	return <Box {...props}>
-		{children}
-	</Box>;
+	return <Box {...props}>{children}</Box>;
 }
 
 /** Standard date picker control (with support for many different date parsing libraries) */
@@ -138,9 +136,7 @@ class DatePicker extends Component {
 		} = this.props;
 		const { currentMonth, weeks } = this.state;
 
-		const footer = React.Children.toArray(children).filter(
-			child => child.type === Footer,
-		);
+		const footer = React.Children.toArray(children).filter(child => child.type === Footer);
 
 		return (
 			<Fragment>
