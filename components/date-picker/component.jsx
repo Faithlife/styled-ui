@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Box } from '../Box';
 import { Caret } from '../icons';
 import { colors } from '../shared-styles';
 import { dateFunctionProps } from './date-function-props';
@@ -36,8 +37,17 @@ function generateWeeks(month, dateFunctions) {
 	return weeks;
 }
 
+Footer.PropTypes = {
+	children: PropTypes.node,
+}
+function Footer({ children, ...props }) {
+	return <Box {...props}>
+		{children}
+	</Box>;
+}
+
 /** Standard date picker control (with support for many different date parsing libraries) */
-export class DatePicker extends Component {
+class DatePicker extends Component {
 	static propTypes = {
 		/** Sets the selected date */
 		selectedDate: PropTypes.instanceOf(Date),
@@ -55,6 +65,8 @@ export class DatePicker extends Component {
 		dateFunctions: dateFunctionProps,
 		minDate: PropTypes.instanceOf(Date),
 		maxDate: PropTypes.instanceOf(Date),
+		/** Use <DatePicker.Footer>...</DatePicker.Footer> to place components at the bottom of the DatePicker */
+		children: PropTypes.node,
 	};
 
 	UNSAFE_componentWillMount() {
@@ -122,8 +134,13 @@ export class DatePicker extends Component {
 			validate,
 			minDate,
 			maxDate,
+			children,
 		} = this.props;
 		const { currentMonth, weeks } = this.state;
+
+		const footer = React.Children.toArray(children).filter(
+			child => child.type === Footer,
+		);
 
 		return (
 			<Fragment>
@@ -182,7 +199,12 @@ export class DatePicker extends Component {
 						/>
 					))}
 				</Styled.Month>
+				{footer}
 			</Fragment>
 		);
 	}
 }
+
+DatePicker.Footer = Footer;
+
+export { DatePicker };
