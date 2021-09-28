@@ -14,7 +14,10 @@ state: { selectedDate: null }
 ---
 <DatePickerDemo>
 	<div>
-		<span>The selected date is {dateFunctions.format(state.selectedDate || new Date(), 'MM-dd-yyyy')}</span>
+		{state.selectedDate == null ?
+			<span>No date selected.</span> :
+			<span>{`The selected date is ${dateFunctions.format(state.selectedDate, 'MM-dd-yyyy')}`}</span>
+		}
 		<Button ref={refs[0]} onClick={() => setState({ isOpen: !state.isOpen })}>Select Date</Button>
 		{state.isOpen && (
 			<Popover reference={refs[0].current} placement="bottom" styleOverrides={{ maxWidth: '1000px' }} onFocusAway={() => setState({ isOpen: false })}>
@@ -24,8 +27,14 @@ state: { selectedDate: null }
 					dateFunctions={dateFunctions}
 					validate={() => true}
 				>
-					<DatePicker.Footer>
-						<Button onClick={() => { setState({ selectedDate: null }); }}>Reset date</Button>
+					<DatePicker.Footer display="flex" justifyContent="end">
+						<Button
+							variant="secondary"
+							height="22px"
+							onClick={() => { setState({ selectedDate: null }); }}
+						>
+							Reset date
+						</Button>
 					</DatePicker.Footer>
 				</DatePicker>
 			</Popover>
@@ -42,7 +51,10 @@ state: { selectedDate: null }
 ---
 <DatePickerDemo>
 	<div>
-		<span>The selected date is {dateFunctions.format(state.selectedDate || new Date(), 'MM-dd-yyyy')}</span>
+		{state.selectedDate == null ?
+			<span>No date selected.</span> :
+			<span>{`The selected date is ${dateFunctions.format(state.selectedDate, 'MM-dd-yyyy')}`}</span>
+		}
 		<Button ref={refs[1]} onClick={() => setState({ isOpen: !state.isOpen })}>Select Date</Button>
 			{state.isOpen && (
 				<Popover reference={refs[1].current} placement="bottom" styleOverrides={{ maxWidth: '1000px' }} onFocusAway={() => setState({ isOpen: false })}>
