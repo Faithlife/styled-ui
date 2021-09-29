@@ -320,6 +320,8 @@ const pages = [
 				title: 'Date Picker Input Variations',
 				content: pageLoader(() => import('./date-picker-input/variations.md')),
 				imports: {
+					Button,
+					DatePicker,
 					DatePickerInput,
 					dateFunctions: {
 						...dateFunctions,

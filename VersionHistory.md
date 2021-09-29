@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.9.0
+
+- Added `DatePicker.Footer` to the `DatePicker` module.
+
 ## 6.8.1
 
 - Fix PropTypes for `Modal`.

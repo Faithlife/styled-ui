@@ -152,7 +152,9 @@ export function DatePickerInput({
 								dateFunctions={dateFunctions}
 								minDate={minDate}
 								maxDate={maxDate}
-							/>
+							>
+								{children}
+							</DatePicker>
 						</Styled.DateTime>
 					</Popover>
 				)}
