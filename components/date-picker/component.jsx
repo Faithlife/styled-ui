@@ -4,6 +4,7 @@ import { Box } from '../Box';
 import { Caret } from '../icons';
 import { colors } from '../shared-styles';
 import { dateFunctionProps } from './date-function-props';
+import { getConfigChild } from '../utils';
 import * as Styled from './styled';
 import { CalendarWeek } from './calendar-week';
 
@@ -35,13 +36,6 @@ function generateWeeks(month, dateFunctions) {
 	}
 
 	return weeks;
-}
-
-Footer.PropTypes = {
-	children: PropTypes.node,
-};
-function Footer({ children, ...props }) {
-	return <Box {...props}>{children}</Box>;
 }
 
 /** Standard date picker control (with support for many different date parsing libraries) */
@@ -136,7 +130,7 @@ class DatePicker extends Component {
 		} = this.props;
 		const { currentMonth, weeks } = this.state;
 
-		const footer = React.Children.toArray(children).filter(child => child.type === Footer);
+		const [footer] = getConfigChild(children, Footer.childConfigComponent);
 
 		return (
 			<Fragment>
@@ -200,6 +194,12 @@ class DatePicker extends Component {
 		);
 	}
 }
+
+function Footer({ children, ...props }) {
+	return <Box {...props}>{children}</Box>;
+}
+Footer.PropTypes = Box.PropTypes;
+Footer.childConfigComponent = 'Footer';
 
 DatePicker.Footer = Footer;
 
