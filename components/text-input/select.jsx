@@ -68,9 +68,13 @@ const selectStyles = (props, theme) => {
 			whiteSpace: 'nowrap',
 			color: theme.colors.input.placeholderForeground,
 		}),
-		singleValue: styles => ({
+		singleValue: (styles, state) => ({
 			...styles,
-			color: props.inferred ? '#006099' : theme.colors.input.foreground,
+			color: state.isDisabled
+				? theme.colors.input.foregroundDisabled
+				: props.inferred
+				? '#006099'
+				: theme.colors.input.foreground,
 		}),
 		multiValue: styles => ({
 			...styles,
