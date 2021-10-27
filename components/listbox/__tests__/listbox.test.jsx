@@ -22,8 +22,7 @@ describe('Listbox', () => {
 		expect(Listbox.OptionTextContainer).toBeTruthy();
 	});
 
-	// TODO: fix act warnings with popovers
-	it('will toggle', () => {
+	it('will toggle', async () => {
 		expect.hasAssertions();
 
 		const callback = jest.fn();
@@ -36,7 +35,7 @@ describe('Listbox', () => {
 				labelledBy="listboxLabel"
 				width="100px"
 			>
-				<Listbox.Toggle>{'FireFox'}</Listbox.Toggle>
+				<Listbox.Toggle>{'Browser'}</Listbox.Toggle>
 				<Listbox.Dropdown>
 					<Listbox.Option id={'f'}>{'Firefox Choice'}</Listbox.Option>
 					<Listbox.Option id="ie" disabled>
@@ -47,7 +46,7 @@ describe('Listbox', () => {
 		);
 
 		expect(screen.queryByText('Firefox Choice')).toBeFalsy();
-		userEvent.click(screen.getByText('FireFox'));
+		await userEvent.click(screen.getByText('Browser'));
 		expect(callback).toHaveBeenCalledTimes(1);
 
 		rerender(
@@ -59,7 +58,7 @@ describe('Listbox', () => {
 				labelledBy="listboxLabel"
 				width="100px"
 			>
-				<Listbox.Toggle>{'FireFox'}</Listbox.Toggle>
+				<Listbox.Toggle>{'Browser'}</Listbox.Toggle>
 				<Listbox.Dropdown>
 					<Listbox.Option id={'f'}>{'Firefox Choice'}</Listbox.Option>
 					<Listbox.Option id="ie" disabled>
@@ -69,12 +68,12 @@ describe('Listbox', () => {
 			</Listbox>,
 		);
 
-		expect(screen.queryByText('Firefox Choice')).toBeVisible();
-		userEvent.click(screen.getByText('FireFox'));
+		expect(await screen.findByText('Firefox Choice')).toBeVisible();
+		await userEvent.click(screen.getByText('Browser'));
 		expect(callback).toHaveBeenCalledTimes(2);
 	});
 
-	it('handles selecting a value', () => {
+	it('handles selecting a value', async () => {
 		expect.hasAssertions();
 
 		const callback = jest.fn();
@@ -98,7 +97,7 @@ describe('Listbox', () => {
 		);
 
 		expect(screen.queryByText('Firefox Choice')).toBeVisible();
-		userEvent.click(screen.getByText('Firefox Choice'));
+		await userEvent.click(await screen.findByText('Firefox Choice'));
 		expect(callback).toHaveBeenCalledWith('f');
 	});
 
