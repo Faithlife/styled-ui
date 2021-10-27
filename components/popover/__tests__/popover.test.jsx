@@ -1,38 +1,51 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 
 import { Popover } from '../';
 
+const fakeRef = {
+	getBoundingClientRect() {
+		return {
+			width: 0,
+			height: 0,
+			top: 0,
+			right: 100,
+			bottom: 100,
+			left: 0,
+		};
+	},
+	contains() {
+		return false;
+	},
+};
+
 describe('Popover', () => {
-	it('shows children', () => {
+	it('shows children', async () => {
 		expect.hasAssertions();
 
-		const ref = React.createRef();
 		render(
 			<>
-				<button ref={ref}>Show a Popover!</button>
-				<Popover reference={ref.current} placement="top" onFocusAway={() => {}}>
+				<button>Show a Popover!</button>
+				<Popover reference={fakeRef} placement="top" onFocusAway={() => {}}>
 					{'Test me!'}
 				</Popover>
 			</>,
 		);
 
-		expect(screen.getByText('Test me!')).toBeVisible();
+		expect(await screen.findByText('Test me!')).toBeVisible();
 	});
 
-	it('closes when losing focus', () => {
+	it('closes when losing focus', async () => {
 		expect.hasAssertions();
 
-		// HACK could be a bit flaky, but due to the fact that refs are never set during testing we kinda have to fake it
-		const ref = { current: { contains: jest.fn(() => false) } }; // React.createRef();
 		const callback = jest.fn();
 		render(
 			<>
 				<button>Not referenced</button>
-				<button ref={ref}>Show a Popover!</button>
-				<Popover reference={ref.current} placement="top" onFocusAway={callback}>
+				<button>Show a Popover!</button>
+				<Popover reference={fakeRef} placement="top" onFocusAway={callback}>
 					{'Test me!'}
 				</Popover>
 			</>,
@@ -41,7 +54,7 @@ describe('Popover', () => {
 		expect(callback).not.toHaveBeenCalled();
 		expect(screen.getByText('Test me!')).toHaveFocus();
 
-		userEvent.click(screen.getByText('Not referenced'));
+		await userEvent.click(await screen.findByText('Not referenced'));
 		expect(screen.getByText('Not referenced')).toHaveFocus();
 		expect(callback).toHaveBeenCalled();
 	});
@@ -50,12 +63,14 @@ describe('Popover', () => {
 		expect.hasAssertions();
 
 		const { container } = render(
-			<Popover reference={{}} placement="top" onFocusAway={() => {}}>
+			<Popover reference={fakeRef} placement="top" onFocusAway={() => {}}>
 				{'Test me!'}
 			</Popover>,
 		);
 
-		const results = await axe(container);
-		expect(results).toHaveNoViolations();
+		await act(async () => {
+			const results = await axe(container);
+			expect(results).toHaveNoViolations();
+		});
 	});
 });
