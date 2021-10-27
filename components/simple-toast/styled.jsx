@@ -48,6 +48,7 @@ export const transitionTime = 250; // milliseconds
 export const ToastContainer = styled.div`
 	/** Shared Styles */
 	display: grid;
+	box-sizing: content-box;
 	grid-auto-flow: column;
 	grid-column-gap: ${themeGet('space.3')};
 
