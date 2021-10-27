@@ -22,7 +22,9 @@ const selectStyles = (props, theme) => {
 			...styles,
 			minHeight: '32px',
 			fontSize: '16px',
-			backgroundColor: theme.colors.input.background,
+			backgroundColor: state.isDisabled
+				? theme.colors.input.backgroundDisabled
+				: theme.colors.input.background,
 			color: theme.colors.input.foreground,
 			border: state.isFocused
 				? `1px solid ${theme.colors.input.borderFocused}`
@@ -66,9 +68,13 @@ const selectStyles = (props, theme) => {
 			whiteSpace: 'nowrap',
 			color: theme.colors.input.placeholderForeground,
 		}),
-		singleValue: styles => ({
+		singleValue: (styles, state) => ({
 			...styles,
-			color: props.inferred ? '#006099' : theme.colors.input.foreground,
+			color: state.isDisabled
+				? theme.colors.input.foregroundDisabled
+				: props.inferred
+				? '#006099'
+				: theme.colors.input.foreground,
 		}),
 		multiValue: styles => ({
 			...styles,
