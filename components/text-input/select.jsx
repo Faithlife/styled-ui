@@ -22,7 +22,9 @@ const selectStyles = (props, theme) => {
 			...styles,
 			minHeight: '32px',
 			fontSize: '16px',
-			backgroundColor: theme.colors.input.background,
+			backgroundColor: state.isDisabled
+				? theme.colors.input.backgroundDisabled
+				: theme.colors.input.background,
 			color: theme.colors.input.foreground,
 			border: state.isFocused
 				? `1px solid ${theme.colors.input.borderFocused}`

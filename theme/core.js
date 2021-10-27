@@ -167,6 +167,7 @@ colors.input = {
 	shadowFocused: '#d0e6f6',
 	placeholderForeground: colors.gray34,
 	background: 'white',
+	backgroundDisabled: colors.gray4,
 	backgroundReadOnly: colors.gray8,
 	icon: colors.gray52,
 	iconFocused: colors.gray34,

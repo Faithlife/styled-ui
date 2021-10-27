@@ -201,3 +201,23 @@ showSource: true
 ---
 <CustomOptionsSelectDemo />
 ```
+
+### Disabled state
+
+```react
+showSource: false
+state: { selection: '' }
+---
+<div>
+	<div>Current selection: {state.selection}</div>
+	<Select
+		disabled
+		options={[
+			{ value: "washington", label: "Washington" },
+			{ value: "california", label: "California" },
+			{ value: "Texas", label: "Texas" }
+		]}
+		value={{ value: "washington", label: "Washington" }}
+	/>
+</div>
+```
