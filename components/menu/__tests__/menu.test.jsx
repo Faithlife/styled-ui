@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 
@@ -23,8 +23,7 @@ describe('Menu', () => {
 		expect(Menu.ItemTextContainer).toBeTruthy();
 	});
 
-	// TODO: fix act warnings with popovers
-	it('will toggle', () => {
+	it('will toggle', async () => {
 		expect.hasAssertions();
 
 		const callback = jest.fn();
@@ -42,7 +41,7 @@ describe('Menu', () => {
 		);
 
 		expect(screen.queryByText('Menu Item 1')).toBeFalsy();
-		userEvent.click(screen.getByText('Show a Dropdown!'));
+		await userEvent.click(await screen.findByText('Show a Dropdown!'));
 		expect(callback).toHaveBeenCalledTimes(1);
 
 		rerender(
@@ -59,11 +58,11 @@ describe('Menu', () => {
 		);
 
 		expect(screen.queryByText('Menu Item 1')).toBeVisible();
-		userEvent.click(screen.getByText('Show a Dropdown!'));
+		await userEvent.click(await screen.findByText('Show a Dropdown!'));
 		expect(callback).toHaveBeenCalledTimes(2);
 	});
 
-	it('handles selecting an item', () => {
+	it('handles selecting an item', async () => {
 		expect.hasAssertions();
 
 		const callback = jest.fn();
@@ -81,7 +80,7 @@ describe('Menu', () => {
 		);
 
 		expect(screen.queryByText('Menu Item 1')).toBeVisible();
-		userEvent.click(screen.getByText('Menu Item 1'));
+		await userEvent.click(await screen.findByText('Menu Item 1'));
 		expect(callback).toHaveBeenCalled();
 	});
 
@@ -101,8 +100,9 @@ describe('Menu', () => {
 			</Menu>,
 		);
 
-		const results = await axe(container);
-
-		expect(results).toHaveNoViolations();
+		await act(async () => {
+			const results = await axe(container);
+			expect(results).toHaveNoViolations();
+		});
 	});
 });
