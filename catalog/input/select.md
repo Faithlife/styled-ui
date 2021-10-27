@@ -5,12 +5,12 @@ A typeahead control with keyboard navigation based on [React Select](https://rea
 1. Import from `'@faithlife/styled-ui/text-input'` instead of `'@faithlife/styled-ui/dist/text-input-v2'`.
 2. `onChange` behaves a bit differently now when `isMulti` is `true`. If one or more options are selected and then later all selected options are removed, upon the removal of the last option the value passed to `onChange` will be `null`. In v5, the value passed to `onChange` in this situation would have been `[]`. See the [React Select v3 upgrade guide](https://github.com/JedWatson/react-select/issues/3585) for more details.
 
-### Note on custom components
+### Note on customizing re-exported features from ReactSelect
 
-If you want to use the [components](https://react-select.com/components) prop of the `<Select>` component to replace or extend the components supplied by ReactSelect, it is strongly recommended that you use the components exported by the same version of ReactSelect. For your convenience, Styled-UI re-exports this object for you as `reactSelectComponents`:
+If you want to use the [components](https://react-select.com/components) prop of the `<Select>` component to replace or extend the components supplied by ReactSelect, it is strongly recommended that you use the components exported by the same version of ReactSelect. For your convenience, Styled-UI re-exports this object for you as `reactSelectComponents`, and all the other exports from ReactSelect in the `reactSelectFunctions` export.
 
 ```code
-import { Select, reactSelectComponents } from '@faithlife/styled-ui/text-input';
+import { Select, reactSelectComponents, reactSelectFunctions } from '@faithlife/styled-ui/text-input';
 ```
 
 ### Single select
