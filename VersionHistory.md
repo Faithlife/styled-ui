@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.9.1
+
+- Add gray background for disabled `Select` components.
+
 ## 6.9.0
 
 - Added `DatePicker.Footer` to the `DatePicker` module.
