@@ -141,7 +141,6 @@ export function DatePickerInput({
 						}}
 						placement="bottom-start"
 						padding="16px 20px"
-						zIndex={3}
 						{...popoverProps}
 					>
 						<Styled.DateTime>
