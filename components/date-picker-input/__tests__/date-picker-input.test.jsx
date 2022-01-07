@@ -25,7 +25,7 @@ describe('DatePeriodPicker', () => {
 			/>,
 		);
 
-		userEvent.type(screen.getByDisplayValue('August 26'), 'March 14');
+		userEvent.type(screen.getByDisplayValue(/August 26/), 'March 14');
 
 		expect(parseUserDateString).toHaveBeenLastCalledWith('March 14');
 		expect(callback).toHaveBeenLastCalledWith(new Date('03-14-2021'));
