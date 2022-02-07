@@ -16,9 +16,12 @@
 				"ssr": true
 			}
 		],
-		["@babel/plugin-transform-runtime", {
-			"version": "^7.17.0"
-		}],
+		[
+			"@babel/plugin-transform-runtime",
+			{
+				"version": "^7.17.0"
+			}
+		],
 		"react-docgen",
 		"@babel/plugin-proposal-class-properties",
 		"@babel/plugin-syntax-dynamic-import"
