@@ -51,7 +51,7 @@
 		"styled-components": "^4 || ^5"
 	},
 	"dependencies": {
-		"@popperjs/core": "^2.4.0",
+		"@popperjs/core": "^2.11.2",
 		"@styled-system/prop-types": "^5.1.1",
 		"@styled-system/theme-get": "^5.1.1",
 		"clipboard": "^2.0.1",
