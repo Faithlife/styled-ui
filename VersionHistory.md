@@ -1,5 +1,10 @@
 # Changelog
 
+## 6.10.0
+
+- Updated popperjs/core dependency version to 2.11.2.
+- Started using @babel/plugin-transform-runtime and webpack's usedExports in builds.
+
 ## 6.9.1
 
 - Add gray background for disabled `Select` components.
