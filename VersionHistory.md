@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.9.3
+
+- Update popperjs/core dependecy version to 2.11.2
+
 ## 6.9.1
 
 - Add gray background for disabled `Select` components.
