@@ -21,6 +21,18 @@ export const common = compose(
 		pointerEvents: true,
 		transform: true,
 		transition: true,
+		gap: {
+			property: 'gap',
+			scale: 'space',
+		},
+		rowGap: {
+			property: 'rowGap',
+			scale: 'space',
+		},
+		columnGap: {
+			property: 'columnGap',
+			scale: 'space',
+		},
 	}),
 );
 
