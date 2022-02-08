@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from '.';
-import { CloseButton } from './close-button';
+import { CloseButton } from './CloseButton';
 
 /**
  * Simple modal with just a close icon and no padding. For a standardized modal layout, please see: Modal

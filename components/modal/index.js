@@ -1,8 +1,8 @@
-import { Modal } from './modal';
-import { ModalHeader } from './modal-header';
-import { ModalContent } from './modal-content';
-import { ModalFooter } from './modal-footer';
-import { ModalFooterButtons } from './modal-footer-buttons';
+import { Modal } from './Modal';
+import { ModalHeader } from './ModalHeader';
+import { ModalContent } from './ModalContent';
+import { ModalFooter } from './ModalFooter';
+import { ModalFooterButtons } from './ModalFooterButtons';
 
 Modal.Header = ModalHeader;
 Modal.Content = ModalContent;
