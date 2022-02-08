@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '../Box';
-import { useModalContext } from './use-modal-context';
+import { useModalContext } from './useModalContext';
 
 /** A flexible component built on styled-system primitives. */
 export const ModalFooter = ({ children, ...props }) => {

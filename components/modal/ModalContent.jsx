@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '../Box';
 import { ThemedBox } from '../ThemedBox';
-import { useModalContext } from './use-modal-context';
+import { useModalContext } from './useModalContext';
 
 /** A flexible component built on styled-system primitives. */
 export const ModalContent = ({

@@ -5,7 +5,7 @@ import { Box } from '../Box';
 import { useElementSize } from '../shared-hooks/useElementSize';
 import { usePortalContainer } from '../shared-hooks/usePortalContainer';
 import { ModalBackdrop } from '../modal-backdrop';
-import { ModalContextProvider } from './use-modal-context';
+import { ModalContextProvider } from './useModalContext';
 
 let nextLabelId = 0;
 

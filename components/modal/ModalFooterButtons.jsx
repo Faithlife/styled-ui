@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '../Box';
 import { Button } from '../button';
-import { useModalContext } from './use-modal-context';
+import { useModalContext } from './useModalContext';
 
 /** A helper component intended for use inside a <Modal.Footer>. Matches the shape of the v5 Modal "footerProps". */
 export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton }) => {

@@ -6,7 +6,7 @@ import { Text } from '../Text';
 import { Paragraph } from '../Paragraph';
 import { UtilityButton } from '../button';
 import { X as Close } from '../icons/18px';
-import { useModalContext } from './use-modal-context';
+import { useModalContext } from './useModalContext';
 
 /** A flexible component built on styled-system primitives. */
 export const ModalHeader = ({ title, subtitle, message, actions, textStyle, ...props }) => {
