@@ -12,6 +12,7 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 	return (
 		<Box
 			display="flex"
+			gap={5}
 			flexDirection={useFullWidthButtons ? 'column-reverse' : 'row-reverse'}
 			justifyContent="flex-start"
 			alignItems="center"
@@ -37,8 +38,6 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 					width={useFullWidthButtons ? '100%' : null}
 					disabled={cancelButton.disabled}
 					paddingX={[4, '10px']}
-					marginBottom={useFullWidthButtons ? 5 : null}
-					marginRight={useFullWidthButtons ? null : 5}
 				>
 					{cancelButton.text}
 				</Button>
@@ -51,7 +50,6 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 					width={useFullWidthButtons ? '100%' : null}
 					disabled={deleteButton.disabled}
 					paddingX={[4, '10px']}
-					marginBottom={useFullWidthButtons ? 5 : null}
 					marginRight={useFullWidthButtons ? null : 'auto'}
 				>
 					{deleteButton.text}
