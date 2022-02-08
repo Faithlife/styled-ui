@@ -30,40 +30,32 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 				</Button>
 			)}
 			{cancelButton && (
-				<Box
+				<Button
+					variant="secondary"
+					size={['medium', 'small']}
+					onClick={cancelButton.onClick}
 					width={useFullWidthButtons ? '100%' : null}
+					disabled={cancelButton.disabled}
+					paddingX={[4, '10px']}
 					marginBottom={useFullWidthButtons ? 5 : null}
 					marginRight={useFullWidthButtons ? null : 5}
 				>
-					<Button
-						variant="secondary"
-						size={['medium', 'small']}
-						onClick={cancelButton.onClick}
-						width={useFullWidthButtons ? '100%' : null}
-						disabled={cancelButton.disabled}
-						paddingX={[4, '10px']}
-					>
-						{cancelButton.text}
-					</Button>
-				</Box>
+					{cancelButton.text}
+				</Button>
 			)}
 			{deleteButton && (
-				<Box
+				<Button
+					variant="danger"
+					size={['medium', 'small']}
+					onClick={deleteButton.onClick}
 					width={useFullWidthButtons ? '100%' : null}
+					disabled={deleteButton.disabled}
+					paddingX={[4, '10px']}
 					marginBottom={useFullWidthButtons ? 5 : null}
 					marginRight={useFullWidthButtons ? null : 'auto'}
 				>
-					<Button
-						variant="danger"
-						size={['medium', 'small']}
-						onClick={deleteButton.onClick}
-						width={useFullWidthButtons ? '100%' : null}
-						disabled={deleteButton.disabled}
-						paddingX={[4, '10px']}
-					>
-						{deleteButton.text}
-					</Button>
-				</Box>
+					{deleteButton.text}
+				</Button>
 			)}
 		</Box>
 	);
