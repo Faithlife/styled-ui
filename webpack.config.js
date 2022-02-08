@@ -4,6 +4,7 @@ const nodeExternals = require('webpack-node-externals');
 module.exports = {
 	optimization: {
 		nodeEnv: false,
+		usedExports: true,
 	},
 	entry: {
 		main: './index.js',
