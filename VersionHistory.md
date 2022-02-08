@@ -2,7 +2,7 @@
 
 ## 6.9.3
 
-- Update popperjs/core dependecy version to 2.11.2
+- Update popperjs/core dependency version to 2.11.2
 
 ## 6.9.1
 
