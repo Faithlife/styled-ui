@@ -33,6 +33,54 @@ export const common = compose(
 			property: 'columnGap',
 			scale: 'space',
 		},
+		marginBlock: {
+			property: 'marginBlock',
+			scale: 'space',
+		},
+		marginBlockStart: {
+			property: 'marginBlockStart',
+			scale: 'space',
+		},
+		marginBlockEnd: {
+			property: 'marginBlockEnd',
+			scale: 'space',
+		},
+		marginInline: {
+			property: 'marginInline',
+			scale: 'space',
+		},
+		marginInlineStart: {
+			property: 'marginInlineStart',
+			scale: 'space',
+		},
+		marginInlineEnd: {
+			property: 'marginInlineEnd',
+			scale: 'space',
+		},
+		paddingBlock: {
+			property: 'paddingBlock',
+			scale: 'space',
+		},
+		paddingBlockStart: {
+			property: 'paddingBlockStart',
+			scale: 'space',
+		},
+		paddingBlockEnd: {
+			property: 'paddingBlockEnd',
+			scale: 'space',
+		},
+		paddingInline: {
+			property: 'paddingInline',
+			scale: 'space',
+		},
+		paddingInlineStart: {
+			property: 'paddingInlineStart',
+			scale: 'space',
+		},
+		paddingInlineEnd: {
+			property: 'paddingInlineEnd',
+			scale: 'space',
+		},
 	}),
 );
 
