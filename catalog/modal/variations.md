@@ -8,7 +8,7 @@ noSource: true
 </React.Fragment>
 ```
 
-## Modal with v6 API
+## Basic modal
 
 ```react
 showSource: true
@@ -31,11 +31,17 @@ state: { modal: false, value: '' }
 			/>
 		</Modal.Content>
 		<Modal.Footer>
-			<Modal.FooterButtons
-				commitButton={{ text: 'Save', onClick: () => alert('Saved') }}
-				cancelButton={{ text: 'Cancel', onClick: () => setState({ modal: !state.modal }) }}
-				deleteButton={{ text: 'Delete Forever', onClick: () => alert('Deleted') }}
-			/>
+			<Modal.FooterButtons>
+				<Modal.FooterButton variant="primary" onClick={() => alert('Saved')}>
+					Save
+				</Modal.FooterButton>
+				<Modal.FooterButton variant="secondary" onClick={() => setState({ modal: !state.modal })}>
+					Cancel
+				</Modal.FooterButton>
+				<Modal.FooterButton floatAcross variant="danger" onClick={() => alert('Deleted')}>
+					Delete Forever
+				</Modal.FooterButton>
+			</Modal.FooterButtons>
 		</Modal.Footer>
 	</Modal>
 </div>
@@ -73,11 +79,17 @@ state: { modal: false, dropdown: false, value: '' }
 			</Menu>
 		</Modal.Content>
 		<Modal.Footer>
-			<Modal.FooterButtons
-				commitButton={{ text: 'Save', onClick: () => alert('Saved') }}
-				cancelButton={{ text: 'Cancel', onClick: () => setState({ modal: !state.modal }) }}
-				deleteButton={{ text: 'Delete Forever', onClick: () => alert('Deleted') }}
-			/>
+			<Modal.FooterButtons>
+				<Modal.FooterButton variant="primary" onClick={() => alert('Saved')}>
+					Save
+				</Modal.FooterButton>
+				<Modal.FooterButton variant="secondary" onClick={() => setState({ modal: !state.modal })}>
+					Cancel
+				</Modal.FooterButton>
+				<Modal.FooterButton floatAcross variant="danger" onClick={() => alert('Deleted')}>
+					Delete Forever
+				</Modal.FooterButton>
+			</Modal.FooterButtons>
 		</Modal.Footer>
 	</Modal>
 </div>
@@ -107,11 +119,17 @@ state: { modal: false, value: '' }
 			/>
 		</Modal.Content>
 		<Modal.Footer>
-			<Modal.FooterButtons
-				commitButton={{ text: 'Save', onClick: () => alert('Saved') }}
-				cancelButton={{ text: 'Cancel', onClick: () => setState({ modal: !state.modal }) }}
-				deleteButton={{ text: 'Delete Forever', onClick: () => alert('Deleted') }}
-			/>
+			<Modal.FooterButtons>
+				<Modal.FooterButton variant="primary" onClick={() => alert('Saved')}>
+					Save
+				</Modal.FooterButton>
+				<Modal.FooterButton variant="secondary" onClick={() => setState({ modal: !state.modal })}>
+					Cancel
+				</Modal.FooterButton>
+				<Modal.FooterButton floatAcross variant="danger" onClick={() => alert('Deleted')}>
+					Delete Forever
+				</Modal.FooterButton>
+			</Modal.FooterButtons>
 		</Modal.Footer>
 	</Modal>
 </div>
@@ -140,11 +158,17 @@ state: { modal: false, value: '' }
 			/>
 		</Modal.Content>
 		<Modal.Footer>
-			<Modal.FooterButtons
-				commitButton={{ text: 'Save', onClick: () => alert('Saved') }}
-				cancelButton={{ text: 'Cancel', onClick: () => setState({ modal: !state.modal }) }}
-				deleteButton={{ text: 'Delete Forever', onClick: () => alert('Deleted') }}
-			/>
+			<Modal.FooterButtons>
+				<Modal.FooterButton variant="primary" onClick={() => alert('Saved')}>
+					Save
+				</Modal.FooterButton>
+				<Modal.FooterButton variant="secondary" onClick={() => setState({ modal: !state.modal })}>
+					Cancel
+				</Modal.FooterButton>
+				<Modal.FooterButton floatAcross variant="danger" onClick={() => alert('Deleted')}>
+					Delete Forever
+				</Modal.FooterButton>
+			</Modal.FooterButtons>
 		</Modal.Footer>
 	</Modal>
 </div>
@@ -230,5 +254,34 @@ state: { modal: false, value: '' }
 		onClose={() => setState({ modal: false })}
 		fullscreen
 	/>
+</div>
+```
+
+## Legacy `Modal.FooterButtons` API (deprecated)
+
+**⚠️ Deprecated: This API will be removed in a future version of styled-ui and should not be used in new code. ⚠️** Use the `Modal.FooterButton` child components demonstrated on the rest of this page instead.
+
+```react
+showSource: true
+state: { modal: false, value: '' }
+---
+<div>
+	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Modal
+		isOpen={state.modal}
+		container="body"
+		onClose={() => setState({ modal: false })}
+		width="500px"
+	>
+		<Modal.Header title="I'm just here for the footer" />
+		<Modal.Content />
+		<Modal.Footer>
+			<Modal.FooterButtons
+				commitButton={{ text: 'Save', onClick: () => alert('Saved') }}
+				cancelButton={{ text: 'Cancel', onClick: () => setState(({ modal }) => ({ modal: !modal })) }}
+				deleteButton={{ text: 'Delete Forever', onClick: () => alert('Deleted') }}
+			/>
+		</Modal.Footer>
+	</Modal>
 </div>
 ```
