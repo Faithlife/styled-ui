@@ -8,12 +8,6 @@ noSource: true
 </React.Fragment>
 ```
 
-## Possible polyfill requirements
-
-This component assumes the availability of the following APIs, which may require polyfills in your application:
-
-- `ResizeObserver`
-
 ## Modal with v6 API
 
 ```react

@@ -2,7 +2,6 @@ import React, { useMemo, Children } from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import { Box } from '../Box';
-import { useElementSize } from '../shared-hooks/useElementSize';
 import { usePortalContainer } from '../shared-hooks/usePortalContainer';
 import { ModalBackdrop } from '../modal-backdrop';
 import { ModalContextProvider } from './useModalContext';
@@ -22,7 +21,6 @@ export const Modal = ({
 	ignoreClickOnBackdrop,
 	...props
 }) => {
-	const [size, containerRef] = useElementSize();
 	const container = usePortalContainer(containerProp);
 	const labelId = useMemo(() => nextLabelId++, []);
 
@@ -47,12 +45,11 @@ export const Modal = ({
 		() => ({
 			contentPadding,
 			onClose,
-			modalWidth: size ? size.width : null,
 			fullscreen,
 			labeledById,
 			describedById,
 		}),
-		[contentPadding, fullscreen, onClose, size, labeledById, describedById],
+		[contentPadding, fullscreen, onClose, labeledById, describedById],
 	);
 
 	if (!isOpen) {
@@ -68,7 +65,6 @@ export const Modal = ({
 		>
 			<ModalContextProvider value={modalContext}>
 				<Box
-					ref={containerRef}
 					display="grid"
 					gridTemplateRows="auto 1fr"
 					justifyContent="stretch"
