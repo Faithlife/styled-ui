@@ -5,6 +5,37 @@ import { ModalFooterButton } from './ModalFooterButton';
 
 /** A helper component intended for use inside a <Modal.Footer>. Matches the shape of the v5 Modal "footerProps". */
 export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton }) => {
+	const buttons = [];
+	if (commitButton) {
+		buttons.push(<LegacyFooterButton key="commit" buttonObject={commitButton} variant="primary" />);
+		if (cancelButton) {
+			buttons.push(
+				<LegacyFooterButton key="cancel" buttonObject={cancelButton} variant="secondary" />,
+			);
+		}
+		if (deleteButton) {
+			buttons.push(
+				<LegacyFooterButton
+					key="delete"
+					buttonObject={deleteButton}
+					variant="danger"
+					floatAcross
+				/>,
+			);
+		}
+	} else {
+		if (deleteButton) {
+			buttons.push(
+				<LegacyFooterButton key="delete" buttonObject={deleteButton} variant="dangerSpecial" />,
+			);
+		}
+		if (cancelButton) {
+			buttons.push(
+				<LegacyFooterButton key="cancel" buttonObject={cancelButton} variant="secondary" />,
+			);
+		}
+	}
+
 	return (
 		<Box
 			display="flex"
@@ -14,34 +45,7 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 			alignItems="center"
 			width="100%"
 		>
-			{commitButton && (
-				<ModalFooterButton
-					variant="primary"
-					onClick={commitButton.onClick}
-					disabled={commitButton.disabled}
-				>
-					{commitButton.text}
-				</ModalFooterButton>
-			)}
-			{cancelButton && (
-				<ModalFooterButton
-					variant="secondary"
-					onClick={cancelButton.onClick}
-					disabled={cancelButton.disabled}
-				>
-					{cancelButton.text}
-				</ModalFooterButton>
-			)}
-			{deleteButton && (
-				<ModalFooterButton
-					variant="danger"
-					onClick={deleteButton.onClick}
-					disabled={deleteButton.disabled}
-					floatAcross
-				>
-					{deleteButton.text}
-				</ModalFooterButton>
-			)}
+			{buttons}
 		</Box>
 	);
 };
@@ -62,4 +66,25 @@ ModalFooterButtons.propTypes = {
 		text: PropTypes.string.isRequired,
 		disabled: PropTypes.bool,
 	}),
+};
+
+const LegacyFooterButton = ({ buttonObject, variant, floatAcross = false }) => (
+	<ModalFooterButton
+		variant={variant}
+		onClick={buttonObject.onClick}
+		disabled={buttonObject.disabled}
+		floatAcross={floatAcross}
+	>
+		{buttonObject.text}
+	</ModalFooterButton>
+);
+
+LegacyFooterButton.propTypes = {
+	buttonObject: PropTypes.shape({
+		onClick: PropTypes.func.isRequired,
+		text: PropTypes.string.isRequired,
+		disabled: PropTypes.bool,
+	}).isRequired,
+	variant: ModalFooterButton.propTypes.variant,
+	floatAcross: PropTypes.bool,
 };
