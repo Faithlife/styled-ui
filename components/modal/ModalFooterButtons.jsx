@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '../Box';
-import { Button } from '../button';
+import { ModalFooterButton } from './ModalFooterButton';
 
 /** A helper component intended for use inside a <Modal.Footer>. Matches the shape of the v5 Modal "footerProps". */
 export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton }) => {
@@ -15,38 +15,32 @@ export const ModalFooterButtons = ({ commitButton, cancelButton, deleteButton })
 			width="100%"
 		>
 			{commitButton && (
-				<Button
+				<ModalFooterButton
 					variant="primary"
-					size={['medium', 'small']}
 					onClick={commitButton.onClick}
 					disabled={commitButton.disabled}
-					paddingInline={[4, '10px']}
 				>
 					{commitButton.text}
-				</Button>
+				</ModalFooterButton>
 			)}
 			{cancelButton && (
-				<Button
+				<ModalFooterButton
 					variant="secondary"
-					size={['medium', 'small']}
 					onClick={cancelButton.onClick}
 					disabled={cancelButton.disabled}
-					paddingInline={[4, '10px']}
 				>
 					{cancelButton.text}
-				</Button>
+				</ModalFooterButton>
 			)}
 			{deleteButton && (
-				<Button
+				<ModalFooterButton
 					variant="danger"
-					size={['medium', 'small']}
 					onClick={deleteButton.onClick}
 					disabled={deleteButton.disabled}
-					paddingInline={[4, '10px']}
-					marginInlineEnd="auto"
+					floatAcross
 				>
 					{deleteButton.text}
-				</Button>
+				</ModalFooterButton>
 			)}
 		</Box>
 	);
