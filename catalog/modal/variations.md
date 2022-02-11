@@ -15,7 +15,7 @@ showSource: true
 state: { modal: false, value: '' }
 ---
 <div>
-	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState(({ modal }) => ({ modal: !modal }))}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		container="body"
@@ -35,7 +35,7 @@ state: { modal: false, value: '' }
 				<Modal.FooterButton variant="primary" onClick={() => alert('Saved')}>
 					Save
 				</Modal.FooterButton>
-				<Modal.FooterButton variant="secondary" onClick={() => setState({ modal: !state.modal })}>
+				<Modal.FooterButton variant="secondary" onClick={() => setState(({ modal }) => ({ modal: !modal }))}>
 					Cancel
 				</Modal.FooterButton>
 				<Modal.FooterButton floatAcross variant="danger" onClick={() => alert('Deleted')}>
@@ -56,7 +56,7 @@ showSource: true
 state: { modal: false, dropdown: false, value: '' }
 ---
 <div>
-	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState(({ modal }) => ({ modal: !modal }))}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		container="body"
@@ -65,7 +65,7 @@ state: { modal: false, dropdown: false, value: '' }
 		<Modal.Header title="Location" subtitle="Help us locate you" />
 		<Modal.Content width={['100vw', 475]}>
 			{JSON.stringify(new Array(3000), null, '\t')}
-			<Menu isOpen={state.dropdown} onToggleMenu={() => setState({dropdown: !state.dropdown})}>
+			<Menu isOpen={state.dropdown} onToggleMenu={() => setState(({ dropdown }) => ({ dropdown: !dropdown }))}>
 				<Menu.Toggle>Show a Dropdown Menu!</Menu.Toggle>
 				<Menu.Dropdown>
 					<Menu.Item onClick={() => {}}>Banana</Menu.Item>
@@ -83,7 +83,7 @@ state: { modal: false, dropdown: false, value: '' }
 				<Modal.FooterButton variant="primary" onClick={() => alert('Saved')}>
 					Save
 				</Modal.FooterButton>
-				<Modal.FooterButton variant="secondary" onClick={() => setState({ modal: !state.modal })}>
+				<Modal.FooterButton variant="secondary" onClick={() => setState(({ modal }) => ({ modal: !modal }))}>
 					Cancel
 				</Modal.FooterButton>
 				<Modal.FooterButton floatAcross variant="danger" onClick={() => alert('Deleted')}>
@@ -102,7 +102,7 @@ showSource: true
 state: { modal: false, value: '' }
 ---
 <div>
-	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState(({ modal }) => ({ modal: !modal }))}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		container="body"
@@ -123,7 +123,7 @@ state: { modal: false, value: '' }
 				<Modal.FooterButton variant="primary" onClick={() => alert('Saved')}>
 					Save
 				</Modal.FooterButton>
-				<Modal.FooterButton variant="secondary" onClick={() => setState({ modal: !state.modal })}>
+				<Modal.FooterButton variant="secondary" onClick={() => setState(({ modal }) => ({ modal: !modal }))}>
 					Cancel
 				</Modal.FooterButton>
 				<Modal.FooterButton floatAcross variant="danger" onClick={() => alert('Deleted')}>
@@ -142,7 +142,7 @@ showSource: true
 state: { modal: false, value: '' }
 ---
 <div>
-	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState(({ modal }) => ({ modal: !modal }))}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		container="body"
@@ -162,7 +162,7 @@ state: { modal: false, value: '' }
 				<Modal.FooterButton variant="primary" onClick={() => alert('Saved')}>
 					Save
 				</Modal.FooterButton>
-				<Modal.FooterButton variant="secondary" onClick={() => setState({ modal: !state.modal })}>
+				<Modal.FooterButton variant="secondary" onClick={() => setState(({ modal }) => ({ modal: !modal }))}>
 					Cancel
 				</Modal.FooterButton>
 				<Modal.FooterButton floatAcross variant="danger" onClick={() => alert('Deleted')}>
@@ -181,7 +181,7 @@ showSource: true
 state: { modal: false, value: '' }
 ---
 <div>
-	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState(({ modal }) => ({ modal: !modal }))}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		container="body"
@@ -194,10 +194,10 @@ state: { modal: false, value: '' }
 			textStyle="h.24"
 			message={`Autosaved at ${new Date().toString()}`}
 			actions={<Box display="grid" gridAutoFlow="column" gridAutoColumns="min-content" gridGap={[3,5]}>
-				<Button size={['medium', 'small']} minWidth={78} variant="secondary" onClick={() => setState({ modal: !state.modal })}>
+				<Button size={['medium', 'small']} minWidth={78} variant="secondary" onClick={() => setState(({ modal }) => ({ modal: !modal }))}>
 					Cancel
 				</Button>
-				<Button size={['medium', 'small']} minWidth={78} variant="primary" onClick={() => setState({ modal: !state.modal })}>
+				<Button size={['medium', 'small']} minWidth={78} variant="primary" onClick={() => setState(({ modal }) => ({ modal: !modal }))}>
 					Save
 				</Button>
 			</Box>}
@@ -225,7 +225,7 @@ showSource: true
 state: { modal: false, value: '' }
 ---
 <div>
-	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState(({ modal }) => ({ modal: !modal }))}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		container="body"
@@ -247,7 +247,7 @@ showSource: true
 state: { modal: false, value: '' }
 ---
 <div>
-	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState(({ modal }) => ({ modal: !modal }))}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		container="body"
@@ -266,7 +266,7 @@ showSource: true
 state: { modal: false, value: '' }
 ---
 <div>
-	<Button variant="primary" size="medium" onClick={() => setState({ modal: !state.modal })}>Open a modal!</Button>
+	<Button variant="primary" size="medium" onClick={() => setState(({ modal }) => ({ modal: !modal }))}>Open a modal!</Button>
 	<Modal
 		isOpen={state.modal}
 		container="body"
