@@ -5,7 +5,7 @@ import { ModalFooterButton } from './ModalFooterButton';
 import { deprecateProp } from '../utils';
 
 /** A helper component intended for use inside a `Modal.Footer`. */
-export const ModalFooterButtons = ({ children, commitButton, cancelButton, deleteButton }) => {
+export function ModalFooterButtons({ children, commitButton, cancelButton, deleteButton }) {
 	deprecateProp(
 		commitButton,
 		'The `commitButton` prop has been deprecated in favor of using `Modal.FooterButton` children. See the docs page for our current pattern: https://faithlife.github.io/styled-ui/#/modal',
@@ -68,7 +68,7 @@ export const ModalFooterButtons = ({ children, commitButton, cancelButton, delet
 			{children || buttons}
 		</Box>
 	);
-};
+}
 
 ModalFooterButtons.propTypes = {
 	children: PropTypes.node,
@@ -92,16 +92,18 @@ ModalFooterButtons.propTypes = {
 	}),
 };
 
-const LegacyFooterButton = ({ buttonObject, variant, floatAcross = false }) => (
-	<ModalFooterButton
-		variant={variant}
-		onClick={buttonObject.onClick}
-		disabled={buttonObject.disabled}
-		floatAcross={floatAcross}
-	>
-		{buttonObject.text}
-	</ModalFooterButton>
-);
+function LegacyFooterButton({ buttonObject, variant, floatAcross = false }) {
+	return (
+		<ModalFooterButton
+			variant={variant}
+			onClick={buttonObject.onClick}
+			disabled={buttonObject.disabled}
+			floatAcross={floatAcross}
+		>
+			{buttonObject.text}
+		</ModalFooterButton>
+	);
+}
 
 LegacyFooterButton.propTypes = {
 	buttonObject: PropTypes.shape({

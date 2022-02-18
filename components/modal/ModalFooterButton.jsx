@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import { Button } from '../button';
 
 /** A `Button` with size and padding defaults that conform to our modal footer design specs. */
-export const ModalFooterButton = ({ floatAcross = false, ...props }) => (
-	<Button
-		size={['medium', 'small']}
-		paddingInline={[4, '10px']}
-		marginInlineEnd={floatAcross ? 'auto' : null}
-		{...props}
-	/>
-);
+export function ModalFooterButton({ floatAcross = false, ...props }) {
+	return (
+		<Button
+			size={['medium', 'small']}
+			paddingInline={[4, '10px']}
+			marginInlineEnd={floatAcross ? 'auto' : null}
+			{...props}
+		/>
+	);
+}
 
 ModalFooterButton.propTypes = {
 	...Button.propTypes,
