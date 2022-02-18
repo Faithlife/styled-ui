@@ -37,3 +37,9 @@ noSource: true
 ---
 <DocgenTable component={Modal.FooterButtons} displayName="Modal.FooterButtons" />
 ```
+
+```react
+noSource: true
+---
+<DocgenTable component={Modal.FooterButton} displayName="Modal.FooterButton" />
+```
