@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.11.0
+
+- Added `gap` Styled System props.
+- Added logical spacing props for Styled System.
+- Fixed modal footer buttons when Delete button is primary.
+- Added new `Modal.FooterButton` component for use as children of `Modal.FooterButtons`.
+  - Deprecated `Modal.FooterButtons`'s `commitButton`, `cancelButton`, and `deleteButton` props.
+
 ## 6.10.0
 
 - Updated popperjs/core dependency version to 2.11.2.
