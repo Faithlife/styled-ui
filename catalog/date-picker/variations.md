@@ -74,7 +74,7 @@ state: { selectedDateRange: null }
 ---
 <DatePickerDemo>
 	<div>
-		<span>The selected date range is {(state.selectedDateRange ? dateFunctions.format(state.selectedDateRange.start, 'MM-dd-yyyy') : null)} to {(state.selectedDateRange ? dateFunctions.format(state.selectedDateRange.end, 'MM-dd-yyyy') : null)}</span>
+		<span>The selected date range is {(state.selectedDateRange && state.selectedDateRange.start ? dateFunctions.format(state.selectedDateRange.start, 'MM-dd-yyyy') : null)} to {(state.selectedDateRange && state.selectedDateRange.end ? dateFunctions.format(state.selectedDateRange.end, 'MM-dd-yyyy') : null)}</span>
 			<Button ref={refs[2]} onClick={() => setState({ isOpen: !state.isOpen })}>Select Dates</Button>
 			{state.isOpen && (
 				<Popover reference={refs[2].current} placement="bottom" styleOverrides={{ maxWidth: '1000px' }} onFocusAway={() => setState({ isOpen: false })}>
@@ -98,7 +98,7 @@ showSource: true
 state: { selectedDateRange: null, selectedDatePeriodIndex: null }
 ---
 <DatePickerDemo>
-	<div>The selected date range is {(state.selectedDateRange ? dateFunctions.format(state.selectedDateRange.start, 'MM-dd-yyyy') : null)} to {(state.selectedDateRange ? dateFunctions.format(state.selectedDateRange.end, 'MM-dd-yyyy') : null)}</div>
+	<div>The selected date range is {(state.selectedDateRange && state.selectedDateRange.start ? dateFunctions.format(state.selectedDateRange.start, 'MM-dd-yyyy') : null)} to {(state.selectedDateRange && state.selectedDateRange.end ? dateFunctions.format(state.selectedDateRange.end, 'MM-dd-yyyy') : null)}</div>
 	<div>The selected date period index is <code>{state.selectedDatePeriodIndex === null ? "null" : state.selectedDatePeriodIndex}</code></div>
 	<Button ref={refs[3]} onClick={() => setState({ isOpen: !state.isOpen })} style={{ margin: "0.5rem 4rem" }}>Select Dates</Button>
 	{state.isOpen && (
