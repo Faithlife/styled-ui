@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import debounce from 'lodash.debounce';
 import { DatePicker } from '../date-picker';
 import { Input } from '../input';
 import { dateFunctionProps } from '../date-picker/date-function-props';
@@ -38,16 +37,10 @@ export class DatePeriodPicker extends PureComponent {
 		/** Takes a date as a parameter and returns false if that date is invalid */
 		validate: PropTypes.func,
 		dateFunctions: dateFunctionProps,
-		/** Debounce value for date inputs. Defaults to 500ms */
-		debounce: PropTypes.number,
 		disableEnumeratedRanges: PropTypes.bool,
 		disableCustomRange: PropTypes.bool,
 		disableCalendar: PropTypes.bool,
 		disableInferredDatePeriodIndex: PropTypes.bool,
-	};
-
-	static defaultProps = {
-		debounce: 500,
 	};
 
 	static getDerivedStateFromProps(props, state) {
@@ -93,7 +86,7 @@ export class DatePeriodPicker extends PureComponent {
 		selectedDateRange: this.props.selectedDateRange,
 	};
 
-	parseAndUpdateDate = debounce((value, input) => {
+	parseAndUpdateDate = (value, input) => {
 		const parsedDate = this.props.parseDate(value, DATE_FORMAT_STRING, new Date());
 		if (parsedDate && !isNaN(parsedDate) && this.props.validate(parsedDate)) {
 			let selectedDate;
@@ -116,7 +109,7 @@ export class DatePeriodPicker extends PureComponent {
 				this.props.disableInferredDatePeriodIndex ? null : this.getDatePeriodIndex(selectedDate),
 			);
 		}
-	}, this.props.debounce);
+	};
 
 	handleInputValueChange = (value, input) => {
 		this.setState(state => ({ inputValues: { ...state.inputValues, [input]: value } }));
