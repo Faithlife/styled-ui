@@ -113,7 +113,10 @@ export class DatePeriodPicker extends PureComponent {
 
 	handleInputValueChange = (value, input) => {
 		this.setState(state => ({ inputValues: { ...state.inputValues, [input]: value } }));
-		this.parseAndUpdateDate(value, input);
+	};
+
+	handleBlur = input => {
+		this.parseAndUpdateDate(this.state.inputValues[input], input);
 	};
 
 	/**
@@ -214,6 +217,7 @@ export class DatePeriodPicker extends PureComponent {
 								placeholder="mm/dd/yyyy"
 								value={start}
 								onChange={event => this.handleInputValueChange(event.target.value, 'start')}
+								onBlur={() => this.handleBlur('start')}
 								small
 							/>
 						</Styled.Label>
@@ -223,6 +227,7 @@ export class DatePeriodPicker extends PureComponent {
 								placeholder="mm/dd/yyyy"
 								value={end}
 								onChange={event => this.handleInputValueChange(event.target.value, 'end')}
+								onBlur={() => this.handleBlur('end')}
 								small
 							/>
 						</Styled.Label>
