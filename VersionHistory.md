@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.12.0
+
+- Change `DatePicker` to parse date on `blur` instead of `debounce`
+
 ## 6.11.0
 
 - Added `gap` Styled System props.
