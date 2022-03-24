@@ -70,12 +70,12 @@ For usability, it is suggested that custom indicators have `tabindex: -1` and no
 ```react
 plain: true
 showSource: true
-state: { expandedSections: [0, 2] }
+state: { expandedSections: [0, 3] }
 ---
 <AccordionDemo>
 	<Accordion hideArrows expandedSections={state.expandedSections} onExpansion={expandedSections => setState({expandedSections})}>
 		<Accordion.Item>
-			<Accordion.Header placeCustomIndicatorOnLeft renderCustomIndicator={({ isExpanded, onExpansion }) => (
+			<Accordion.Header renderLeftCustomIndicator={({ isExpanded, onExpansion }) => (
 					<Checkbox isChecked={isExpanded} onClick={onExpansion} tabIndex={-1} />
 				)
 			}>
@@ -103,8 +103,26 @@ state: { expandedSections: [0, 2] }
 			</Accordion.Panel>
 		</Accordion.Item>
 		<Accordion.Item>
-			<Accordion.Header>
+			<Accordion.Header
+				renderLeftCustomIndicator={({ isExpanded, onExpansion }) => (
+					<Checkbox isChecked={isExpanded} onClick={onExpansion} tabIndex={-1} />
+				)}
+				renderCustomIndicator={({ isExpanded, onExpansion }) => (
+					<Button variant="link" onClick={onExpansion}>{isExpanded ? 'Collapse' : 'Expand'}</Button>
+				)}
+			>
 				Section Three Title
+			</Accordion.Header>
+			<Accordion.Panel>
+				<Form>
+					<Input small placeholder="State/Province" />
+					<Input small placeholder="Country" />
+				</Form>
+			</Accordion.Panel>
+		</Accordion.Item>
+		<Accordion.Item>
+			<Accordion.Header>
+				Section Four Title
 			</Accordion.Header>
 			<Accordion.Panel>
 				<Form>

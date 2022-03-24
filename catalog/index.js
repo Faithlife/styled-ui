@@ -182,6 +182,7 @@ const pages = [
 						border: 16px solid #f2f2f2;
 					`,
 					Checkbox,
+					Button,
 					Form: FormDemo,
 					Input,
 					Switch,

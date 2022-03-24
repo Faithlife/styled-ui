@@ -11,7 +11,7 @@ export function AccordionHeader({
 	ariaLevel,
 	children,
 	renderCustomIndicator,
-	placeCustomIndicatorOnLeft = false,
+	renderLeftCustomIndicator,
 	subtitle,
 	...props
 }) {
@@ -86,9 +86,9 @@ export function AccordionHeader({
 							{isExpanded ? <ChevronDown /> : <ChevronRight />}
 						</Box>
 					)}
-					{renderCustomIndicator && placeCustomIndicatorOnLeft && (
+					{renderLeftCustomIndicator && (
 						<Box alignSelf="center">
-							{renderCustomIndicator({ isExpanded, onExpansion: handleExpansion })}
+							{renderLeftCustomIndicator({ isExpanded, onExpansion: handleExpansion })}
 						</Box>
 					)}
 					<ButtonContent>
@@ -118,7 +118,7 @@ export function AccordionHeader({
 					</ButtonContent>
 				</Button>
 			</Heading>
-			{renderCustomIndicator && !placeCustomIndicatorOnLeft && (
+			{renderCustomIndicator && (
 				<Box display="flex" gridRow={1} marginRight={variant === 'minimal' ? 4 : [5, 6]}>
 					{renderCustomIndicator({ isExpanded, onExpansion: handleExpansion })}
 				</Box>
@@ -136,8 +136,8 @@ AccordionHeader.propTypes = {
 	ariaLevel: PropTypes.number,
 	/** Receives an isExpanded boolean value. */
 	renderCustomIndicator: PropTypes.func,
-	/** Default behavior is rendering the custom indicator on the right side of the header, this flag renders it to the left of the title. */
-	placeCustomIndicatorOnLeft: PropTypes.bool,
+	/** Receives an isExpanded boolean value. Can be used with `renderCustomIndicator`. */
+	renderLeftCustomIndicator: PropTypes.func,
 	...Box.propTypes,
 };
 
