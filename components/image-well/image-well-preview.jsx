@@ -11,7 +11,7 @@ export const WellPreview = styled(Box)`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	position: absolute;
+	position: relative;
 	border-radius: ${({ theme }) => theme.radii[2]};
 	border: none;
 
