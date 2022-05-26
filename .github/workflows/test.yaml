@@ -27,9 +27,11 @@ jobs:
           - 14
           - 16
 
+		name: Test with Node.js v${{ matrix.node_version }} on ${{ matrix.os }}
+
     steps:
       - run: echo "This job was triggered by a ${{ github.event_name }} event."
-      - name: Clone the ${{ github.ref }} branch of ${{ github.repository_owner }}/${{ github.repository }} to the ${{ matrix.os }} runner
+      - name: Clone the ${{ github.ref }} branch of ${{ github.repository }} to the ${{ matrix.os }} runner
         uses: actions/checkout@v3
       - name: Set up Node.js v${{ matrix.node_version }}
         uses: actions/setup-node@v3
