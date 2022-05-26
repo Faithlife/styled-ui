@@ -27,7 +27,7 @@ jobs:
           - 14
           - 16
 
-		name: Test with Node.js v${{ matrix.node_version }} on ${{ matrix.os }}
+    name: Test with Node.js v${{ matrix.node_version }} on ${{ matrix.os }}
 
     steps:
       - run: echo "This job was triggered by a ${{ github.event_name }} event."
