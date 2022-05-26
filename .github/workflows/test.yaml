@@ -1,0 +1,43 @@
+name: Run tests
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '*.md'
+      - 'catalog/**'
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - '*.md'
+      - 'catalog/**'
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+        node_version:
+          - 12
+          - 14
+          - 16
+
+    name: with Node.js v${{ matrix.node_version }} on ${{ matrix.os }}
+
+    steps:
+      - run: echo "This job was triggered by a ${{ github.event_name }} event."
+      - name: Clone the ${{ github.ref }} branch of ${{ github.repository }} to the ${{ matrix.os }} runner
+        uses: actions/checkout@v3
+      - name: Set up Node.js v${{ matrix.node_version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node_version }}
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
