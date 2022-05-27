@@ -1,0 +1,38 @@
+name: Test
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - '*.md'
+      - 'catalog/**'
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '*.md'
+      - 'catalog/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node_version:
+          - 14
+          - 16
+          - 18
+
+    name: Node.js ${{ matrix.node_version }}
+
+    steps:
+      - name: Clone
+        uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node_version }}
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
