@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { variant as createVariant, flexbox, layout } from 'styled-system';
 import { ChevronDown } from '../icons/12px';
 import { UtilityButton } from '../button';
@@ -25,9 +25,13 @@ export const MenuItem = styled(UtilityButton)`
 	box-shadow: none;
 	text-decoration: none;
 
-	&:hover {
-		background-color: ${({ theme }) => theme.colors.dropdown.backgroundHover};
-	}
+	${({ disabled, theme }) =>
+		!disabled &&
+		css`
+			&:hover {
+				background-color: ${theme.colors.dropdown.backgroundHover};
+			}
+		`}
 
 	&:focus {
 		outline: none;

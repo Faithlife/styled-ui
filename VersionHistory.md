@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.12.2
+
+- `Menu.Item`: Stop showing hover background when disabled
+
 ## 6.12.0
 
 - Change `DatePicker` to parse date on `blur` instead of `debounce`
