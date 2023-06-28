@@ -12,12 +12,12 @@
 		"tag": "next"
 	},
 	"scripts": {
-		"deploy-site": "npm run catalog-build && storybook-to-ghpages --ci --existing-output-dir=catalog/build",
+		"deploy-site": "yarn run catalog-build && storybook-to-ghpages --ci --existing-output-dir=catalog/build",
 		"eslint": "eslint ./components ./catalog --ext .js --ext .jsx",
-		"test": "npm run test:ci && npm run eslint && npm run stylelint",
-		"precommit": "prettier --write \"./components/**/*.{js,jsx}\" && npm run stylelint",
+		"test": "yarn run test:ci && yarn run eslint && yarn run stylelint",
+		"precommit": "prettier --write \"./components/**/*.{js,jsx}\" && yarn run stylelint",
 		"build": "rimraf dist && webpack --mode=none",
-		"prepublishOnly": "npm test",
+		"prepublishOnly": "yarn test",
 		"stylelint": "stylelint ./components/**/*.jsx",
 		"test:jest": "jest --maxWorkers=50%",
 		"test:watch": "jest --watch --maxWorkers=25%",
@@ -25,7 +25,7 @@
 		"test:ci": "jest --ci --runInBand --coverage --verbose",
 		"catalog-start": "catalog start",
 		"catalog-build": "catalog build --public-url /styled-ui",
-		"catalog-build-netlify": "npm run prepublishOnly && catalog build",
+		"catalog-build-netlify": "yarn run prepublishOnly && catalog build",
 		"cm": "node ./tools/update-to-v6-codemod/index.js"
 	},
 	"files": [
