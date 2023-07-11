@@ -1,63 +1,63 @@
 export const theme = {
 	scrollbars: {
 		width: '8px',
-		background: '#494949',
+		background: '#46444F',
 		thumbBackground: 'rgba(120, 120, 120, 0.8)',
 	},
 	colors: {
 		foregroundPrimary: 'white',
-		backgroundPrimary: '#2e2e2e',
+		backgroundPrimary: '#2e2d39',
 		input: {
 			foreground: '#FFFFFF',
 			border: '#111111',
-			borderFocused: '#0097FF',
+			borderFocused: '#4F7EDF',
 			shadowFocused: 'transparent',
 			placeholderForeground: '#7a7a7a',
-			background: '#252525',
-			backgroundReadOnly: '#252525',
+			background: '#17151F',
+			backgroundReadOnly: '#17151F',
 			icon: '#a8a8a8',
 			iconFocused: '#a8a8a8',
 		},
 		accordion: {
 			sectionHeaderTitle: 'foregroundPrimary',
 			sectionHeaderSubtitle: 'gray66',
-			sectionBorder: '#2e2e2e',
+			sectionBorder: '#2e2d39',
 		},
 		popover: {
 			foreground: 'white',
-			background: '#2e2e2e',
+			background: '#2e2d39',
 		},
 		button: {
 			focusBorder: 'transparent',
 			focusShadow: '#7ccaff',
 
 			primaryForeground: 'foregroundPrimary',
-			primaryBackground: '#0097FF',
+			primaryBackground: '#4F7EDF',
 
-			segmentedButtonGroupBorder: '#494949',
+			segmentedButtonGroupBorder: '#46444F',
 			segmentedButtonGroupBackground: '#7a7a7a',
 
 			multi: {
-				border: '#494949',
+				border: '#46444F',
 				selectedBackground: '#323232',
 				selectedForeground: 'foregroundPrimary',
 			},
 		},
 		select: {
-			menuBackground: '#494949',
+			menuBackground: '#46444F',
 			menuForeground: 'foregroundPrimary',
-			menuItemFocusedBackground: '#2e2e2e',
+			menuItemFocusedBackground: '#2e2d39',
 		},
 		dropdown: {
-			background: '#494949',
-			backgroundHover: '#2e2e2e',
+			background: '#46444F',
+			backgroundHover: '#2e2d39',
 			foreground: 'foregroundPrimary',
 			separator: '#999999',
 			foregroundDisabled: '#999999',
 		},
 		checkbox: {
 			background: 'transparent',
-			primary: '#0097FF',
+			primary: '#4F7EDF',
 			border: 'foregroundPrimary',
 			disabledBackground: 'transparent',
 			disabledBorder: '#999999',
@@ -66,9 +66,9 @@ export const theme = {
 	buttons: {
 		primary: {
 			color: 'button.primaryForeground',
-			backgroundColor: '#0097FF',
+			backgroundColor: '#4F7EDF',
 			border: 1,
-			borderColor: '#0097FF',
+			borderColor: '#4F7EDF',
 			'&:hover': {
 				backgroundColor: '#008ae9',
 				borderColor: '#008ae9',
@@ -144,7 +144,7 @@ export const theme = {
 			backgroundColor: 'transparent',
 			borderColor: 'transparent',
 			'&:hover': {
-				color: '#0097ff',
+				color: '#4F7EDF',
 			},
 			'&:active,&.active': {
 				color: '#ffec1f',
@@ -155,7 +155,7 @@ export const theme = {
 		},
 		link: {
 			border: 1,
-			color: '#0097ff',
+			color: '#4F7EDF',
 			backgroundColor: 'transparent',
 			borderColor: 'transparent',
 			'&:hover': {
