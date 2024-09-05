@@ -1,5 +1,8 @@
 # Changelog
 
+## 6.12.5
+- Updates to Proclaim's theme
+
 ## 6.12.2
 
 - `Menu.Item`: Stop showing hover background when disabled
