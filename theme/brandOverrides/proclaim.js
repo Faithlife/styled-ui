@@ -99,15 +99,15 @@ export const theme = {
 			},
 			'&:disabled': {
 				color: '#999999',
-				borderColor: '#767676',
+				borderColor: '#5A5962',
 				backgroundColor: 'transparent',
 			},
 		},
 		minor: {
 			border: 1,
 			color: 'foregroundPrimary',
-			backgroundColor: '#767676',
-			borderColor: '#767676',
+			backgroundColor: '#5A5962',
+			borderColor: '#5A5962',
 			'&:hover': {
 				backgroundColor: '#666666',
 				borderColor: '#666666',
@@ -185,7 +185,7 @@ export const theme = {
 			},
 			'&:disabled': {
 				color: '#999999',
-				borderColor: '#767676',
+				borderColor: '#5A5962',
 				backgroundColor: 'transparent',
 			},
 		},
