@@ -23,7 +23,7 @@ function getHeight(node) {
 	return node.scrollHeight;
 }
 
-/** Collapsable accordion component. Useful for nodes that have 'height: auto'. Ported from reactstrap */
+/** Collapsible accordion component. Useful for nodes that have 'height: auto'. Ported from reactstrap */
 export const Collapse = forwardClassRef(
 	class Collapse extends Component {
 		static propTypes = propTypes;
@@ -102,35 +102,37 @@ export const Collapse = forwardClassRef(
 					{status => {
 						const style = height === null ? null : { height };
 						return (
-							<Box
-								{...otherProps}
-								transitionStatus={status}
-								style={{ ...otherProps.style, ...style }}
-								ref={forwardedRef}
-								display={status === TransitionStatuses.EXITED ? 'none' : undefined}
-								position={
-									status === TransitionStatuses.ENTERING || status === TransitionStatuses.EXITING
-										? 'relative'
-										: ''
-								}
-								height={
-									status === TransitionStatuses.ENTERING || status === TransitionStatuses.EXITING
-										? '0'
-										: ''
-								}
-								transition={
-									status === TransitionStatuses.ENTERING || status === TransitionStatuses.EXITING
-										? 'height 0.2s ease-in'
-										: ''
-								}
-								css={`
-									${status === TransitionStatuses.ENTERING || status === TransitionStatuses.EXITING
-										? 'overflow: hidden'
-										: ''}
-								`}
-							>
-								{children}
-							</Box>
+							status !== TransitionStatuses.EXITED && (
+								<Box
+									{...otherProps}
+									transitionStatus={status}
+									style={{ ...otherProps.style, ...style }}
+									ref={forwardedRef}
+									position={
+										status === TransitionStatuses.ENTERING || status === TransitionStatuses.EXITING
+											? 'relative'
+											: ''
+									}
+									height={
+										status === TransitionStatuses.ENTERING || status === TransitionStatuses.EXITING
+											? '0'
+											: ''
+									}
+									transition={
+										status === TransitionStatuses.ENTERING || status === TransitionStatuses.EXITING
+											? 'height 0.2s ease-in'
+											: ''
+									}
+									css={`
+										${status === TransitionStatuses.ENTERING ||
+										status === TransitionStatuses.EXITING
+											? 'overflow: hidden'
+											: ''}
+									`}
+								>
+									{children}
+								</Box>
+							)
 						);
 					}}
 				</Transition>
