@@ -39,7 +39,7 @@ export const theme = {
 
 			multi: {
 				border: '#46444F',
-				selectedBackground: '#323232',
+				selectedBackground: '#383643',
 				selectedForeground: 'foregroundPrimary',
 			},
 		},
@@ -79,8 +79,8 @@ export const theme = {
 			},
 			'&:disabled': {
 				color: '#999999',
-				backgroundColor: '#666666',
-				borderColor: '#666666',
+				backgroundColor: '#838290',
+				borderColor: '#838290',
 			},
 		},
 		secondary: {
@@ -94,8 +94,8 @@ export const theme = {
 			},
 			'&:active': {
 				color: 'foregroundPrimary',
-				backgroundColor: '#323232',
-				borderColor: '#323232',
+				backgroundColor: '#383643',
+				borderColor: '#383643',
 			},
 			'&:disabled': {
 				color: '#999999',
@@ -109,17 +109,17 @@ export const theme = {
 			backgroundColor: '#5A5962',
 			borderColor: '#5A5962',
 			'&:hover': {
-				backgroundColor: '#666666',
-				borderColor: '#666666',
+				backgroundColor: '#838290',
+				borderColor: '#838290',
 			},
 			'&:active': {
-				backgroundColor: '#323232',
-				borderColor: '#323232',
+				backgroundColor: '#383643',
+				borderColor: '#383643',
 			},
 			'&:disabled': {
 				color: '#999999',
-				backgroundColor: '#666666',
-				borderColor: '#666666',
+				backgroundColor: '#838290',
+				borderColor: '#838290',
 			},
 		},
 		transparent: {
@@ -128,12 +128,12 @@ export const theme = {
 			backgroundColor: 'transparent',
 			borderColor: 'transparent',
 			'&:hover': {
-				backgroundColor: '#666666',
-				borderColor: '#666666',
+				backgroundColor: '#838290',
+				borderColor: '#838290',
 			},
 			'&:active,&.active': {
-				backgroundColor: '#323232',
-				borderColor: '#323232',
+				backgroundColor: '#383643',
+				borderColor: '#383643',
 			},
 			'&:disabled': {
 				color: '#999999',
@@ -206,8 +206,8 @@ export const theme = {
 			},
 			'&:disabled': {
 				color: '#999999',
-				borderColor: '#666666',
-				backgroundColor: '#666666',
+				borderColor: '#838290',
+				backgroundColor: '#838290',
 			},
 		},
 	},
