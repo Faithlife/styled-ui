@@ -1,5 +1,11 @@
 # Changelog
 
+## 7.0.0
+
+- Added React 19 compatibility.
+- Replaced Popper with Floating UI for popover positioning; Popper modifiers and `usePopover`'s Popper-specific results are no longer supported.
+- Upgraded `react-select` to v5, including its exposed ref and custom-component API changes.
+
 ## 6.12.5
 - Updates to Proclaim's theme
 

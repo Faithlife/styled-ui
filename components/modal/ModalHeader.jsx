@@ -9,7 +9,14 @@ import { X as Close } from '../icons/18px';
 import { useModalContext } from './useModalContext';
 
 /** A flexible component built on styled-system primitives. */
-export const ModalHeader = ({ title, subtitle, message, actions, textStyle, ...props }) => {
+export const ModalHeader = ({
+	title,
+	subtitle,
+	message,
+	actions,
+	textStyle = 'h.18',
+	...props
+}) => {
 	const { contentPadding, onClose, labeledById, describedById } = useModalContext();
 	return (
 		<Box

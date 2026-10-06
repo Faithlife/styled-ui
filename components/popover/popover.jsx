@@ -1,46 +1,150 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { usePopper } from 'faithlife-react-popper';
+import {
+	autoPlacement,
+	autoUpdate,
+	arrow,
+	flip,
+	limitShift,
+	offset as floatingOffset,
+	shift,
+	useFloating,
+} from '@floating-ui/react-dom';
 import { useFocusAwayHandler } from '../shared-hooks/use-focus-away-handler';
 import { mergeRefs } from '../utils/merge-refs';
 import { PopoverContainer, PopoverArrow } from './styled';
 
-export function usePopover(reference, options) {
-	const [popperElement, setPopper] = useState();
-	const [arrowElement, setArrow] = useState();
-	const { styles, attributes, ...rest } = usePopper(reference, popperElement, {
-		...options,
-		modifiers: [
-			...(options?.modifiers ?? []),
-			{ name: 'arrow', options: { element: arrowElement } },
-		],
-	});
+const hasOwn = (object, property) => Object.prototype.hasOwnProperty.call(object, property);
 
+function getViewportBoundary({ elements }) {
+	const documentElement = elements.floating.ownerDocument.documentElement;
+	if (documentElement.clientWidth > 0 && documentElement.clientHeight > 0) {
+		return {};
+	}
+
+	const view = documentElement.ownerDocument.defaultView;
 	return {
-		popperProps: { ...attributes.popper, style: styles.popper, ref: setPopper },
-		arrowProps: { ...attributes.arrow, style: styles.arrow, ref: setArrow },
-		...rest,
+		rootBoundary: {
+			x: 0,
+			y: 0,
+			width: documentElement.clientWidth || view?.innerWidth || 0,
+			height: documentElement.clientHeight || view?.innerHeight || 0,
+		},
 	};
 }
 
-const arrowOffset = { name: 'offset', options: { offset: [0, 10] } };
-export function Popover({
-	reference,
-	placement,
-	modifiers,
-	strategy,
-	container,
-	hideArrow,
-	onFocusAway,
-	children,
-	...restProps
-}) {
+export function usePopover(reference, options) {
+	const [arrowElement, setArrow] = useState();
+	if (options) {
+		const legacyOption = ['modifiers', 'createPopper', 'onFirstUpdate'].find(option =>
+			hasOwn(options, option),
+		);
+		if (legacyOption) {
+			throw new Error(
+				`usePopover no longer supports the Popper "${legacyOption}" option; use Floating UI middleware instead.`,
+			);
+		}
+	}
+
+	const requestedPlacement = options?.placement ?? 'bottom';
+	const strategy = options?.strategy ?? 'absolute';
+	const offsetValue = options?.offset ?? 0;
+	const isAutoPlacement = requestedPlacement.startsWith('auto');
+	const alignment = requestedPlacement.endsWith('-start')
+		? 'start'
+		: requestedPlacement.endsWith('-end')
+		? 'end'
+		: undefined;
+	const placement = isAutoPlacement ? 'bottom' : requestedPlacement;
+	const middleware = options?.middleware;
+	const positioningMiddleware = useMemo(
+		() =>
+			middleware ??
+			(isAutoPlacement
+				? [
+						autoPlacement(state => ({
+							...(alignment && { alignment }),
+							...getViewportBoundary(state),
+						})),
+				  ]
+				: [
+						flip(getViewportBoundary),
+						shift(state => ({
+							limiter: limitShift(),
+							...getViewportBoundary(state),
+						})),
+				  ]),
+		[middleware, isAutoPlacement, alignment],
+	);
+	const floatingMiddleware = useMemo(
+		() => [floatingOffset(offsetValue), ...positioningMiddleware, arrow({ element: arrowElement })],
+		[offsetValue, positioningMiddleware, arrowElement],
+	);
+
+	const {
+		placement: resolvedPlacement,
+		strategy: resolvedStrategy,
+		middlewareData,
+		isPositioned,
+		update,
+		floatingStyles,
+		refs,
+	} = useFloating({
+		placement,
+		strategy,
+		middleware: floatingMiddleware,
+		elements: { reference },
+		whileElementsMounted: autoUpdate,
+	});
+
+	return {
+		popperProps: {
+			'data-popper-placement': resolvedPlacement,
+			style: { ...floatingStyles, position: resolvedStrategy },
+			ref: refs.setFloating,
+		},
+		arrowProps: {
+			style: {
+				...(middlewareData.arrow?.x !== undefined &&
+					middlewareData.arrow.x !== null && { left: middlewareData.arrow.x }),
+				...(middlewareData.arrow?.y !== undefined &&
+					middlewareData.arrow.y !== null && { top: middlewareData.arrow.y }),
+			},
+			ref: setArrow,
+		},
+		placement: resolvedPlacement,
+		middlewareData,
+		isPositioned,
+		update,
+	};
+}
+
+export function Popover(props) {
+	if (hasOwn(props, 'modifiers')) {
+		throw new Error(
+			'Popover no longer supports the Popper "modifiers" prop; use offset or Floating UI middleware instead.',
+		);
+	}
+
+	const {
+		reference,
+		placement,
+		strategy,
+		container,
+		hideArrow,
+		onFocusAway,
+		children,
+		offset,
+		middleware,
+		...restProps
+	} = props;
 	const focusRef = useFocusAwayHandler(reference, onFocusAway);
 	const { popperProps, arrowProps } = usePopover(reference, {
 		placement,
-		modifiers: hideArrow ? modifiers : [arrowOffset].concat(modifiers ?? []),
 		strategy,
+		offset: offset ?? (hideArrow ? 0 : 10),
+		middleware,
 	});
 
 	const { ref, ...popperRest } = popperProps;
@@ -85,10 +189,13 @@ Popover.propTypes = {
 		'left-start',
 		'left-end',
 	]),
-	/** modifiers allow custom behavior, see https://popper.js.org/docs/v2/modifiers */
-	modifiers: PropTypes.arrayOf(
+	/** distance in CSS pixels from the reference element */
+	offset: PropTypes.number,
+	/** Floating UI middleware that replaces the default collision handling */
+	middleware: PropTypes.arrayOf(
 		PropTypes.shape({
 			name: PropTypes.string.isRequired,
+			fn: PropTypes.func.isRequired,
 		}),
 	),
 	/** whether popover should use absolute or fixed positioning */

@@ -1,5 +1,28 @@
 # Upgrade Guide
 
+## Upgrading from v6 to v7
+
+- **React:** v7 adds React 19 compatibility. Keep React and React DOM on compatible versions.
+- **`Popover`:** Popper modifiers are replaced by Floating UI middleware. For example, replace a Popper offset modifier with `offset(8)` in `middleware`:
+  ```js
+  import { offset } from '@floating-ui/react-dom';
+
+  usePopover(reference, {
+    placement: 'bottom',
+    middleware: [offset(8)],
+  });
+  ```
+  Build custom positioning behavior from Floating UI middleware instead of Popper modifier objects. Popper-specific `modifiers` are no longer supported.
+- **`usePopover`:** The hook returns `placement`, `middlewareData`, `isPositioned`, `update`, `popperProps`, and `arrowProps`. The `popperProps` and `arrowProps` wrapper objects remain available: `popperProps` includes the floating element's ref, positioning styles, and `data-popper-placement`; `arrowProps` includes the arrow ref and styles. Positioning is powered by Floating UI, but the hook does not return `refs` or `floatingStyles` as top-level fields.
+- **Select components:** v7 upgrades `react-select` to v5. Recheck code that consumes a Select ref or supplies custom components against the v5 exposed instance and component props. Keep forwarding the provided `innerRef` and `innerProps` to the rendered custom component element:
+  ```jsx
+  function CustomOption({ innerRef, innerProps, children }) {
+    return <div ref={innerRef} {...innerProps}>{children}</div>;
+  }
+
+  <Select ref={selectRef} components={{ Option: CustomOption }} />;
+  ```
+
 ## Upgrading from v5 to v6
 
 - Installation

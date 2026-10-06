@@ -10,7 +10,7 @@ export const Checkbox = function Checkbox({
 	onMouseUp,
 	title,
 	isChecked,
-	type,
+	type = 'button',
 	children,
 	disableAutoBlur,
 	disabled,

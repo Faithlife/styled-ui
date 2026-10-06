@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { Box } from './Box';
 import { theme } from '../theme';
 
-export const ThemedBox = styled(Box)`
+export const ThemedBox = styled(Box).attrs(({ color = 'foregroundPrimary' }) => ({ color }))`
 	${({ theme }) => css`
 		div::-webkit-scrollbar-thumb {
 			border-radius: 10px;

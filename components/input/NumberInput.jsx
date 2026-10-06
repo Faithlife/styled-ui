@@ -10,7 +10,7 @@ import { useCopyRefs } from '../shared-hooks/use-copy-refs';
 
 const NumberInput = React.memo(
 	React.forwardRef(function NumberInput(props, ref) {
-		const { variant, width, onStep, ...rest } = props;
+		const { variant, width, onStep, selectOnFocus = true, ...rest } = props;
 		const inputRef = useRef();
 		const innerRef = useCopyRefs(useMemo(() => [ref, inputRef], [inputRef, ref]));
 
@@ -53,6 +53,7 @@ const NumberInput = React.memo(
 					ref={innerRef}
 					variant={variant}
 					type="number"
+					selectOnFocus={selectOnFocus}
 					css={`
 						-webkit-appearance: textfield;
 						-moz-appearance: textfield;

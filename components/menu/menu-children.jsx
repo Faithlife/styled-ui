@@ -11,7 +11,7 @@ function MenuItemCheckboxComponent(checkboxProps) {
 }
 MenuItemCheckboxComponent.childConfigComponent = 'MenuItemCheckboxComponent';
 
-export function MenuItemIcon({ src, variant, children, ...iconProps }) {
+export function MenuItemIcon({ src, variant = 'icon', children, ...iconProps }) {
 	return (
 		<Styled.MenuItemIcon variant={variant}>
 			{src ? (

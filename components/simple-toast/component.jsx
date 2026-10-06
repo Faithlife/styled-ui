@@ -33,6 +33,8 @@ export class SimpleToast extends PureComponent {
 		messages: [],
 	};
 
+	_nodeRef = React.createRef();
+
 	_showTimeout = null;
 
 	componentWillUnmount() {
@@ -77,6 +79,7 @@ export class SimpleToast extends PureComponent {
 		return (
 			<Transition
 				in={transitionIn}
+				nodeRef={this._nodeRef}
 				timeout={{
 					enter: transitionTime,
 					exit: hasMultipleMessages ? transitionTime / 2 : transitionTime,
@@ -88,6 +91,7 @@ export class SimpleToast extends PureComponent {
 					<Styled.ToastContainer
 						state={state}
 						{...this.props}
+						ref={this._nodeRef}
 						onAnimationEnd={this.handleAnimationEnd}
 					>
 						{messages.length > 0 && messages[0].icon}

@@ -23,6 +23,8 @@ const buttonVariant = variant({
 	variants: buttons,
 });
 
+const buttonLayout = props => layout({ ...props, size: undefined });
+
 const ButtonCore = styled.button.attrs(({ active }) => ({ className: active ? 'active' : null }))`
 	position: relative;
 	box-sizing: border-box;
@@ -75,7 +77,7 @@ const ButtonCore = styled.button.attrs(({ active }) => ({ className: active ? 'a
 
 	${common}
 	${typography}
-	${layout}
+	${buttonLayout}
 	${flexbox}
 	${position}
 	${border}
@@ -124,6 +126,7 @@ export const Button = React.forwardRef(
 			disabled,
 			loading,
 			size = ButtonCore.defaultProps.size, // temporary workaround for #393
+			variant = ButtonCore.defaultProps.variant,
 			...props
 		},
 		ref,
@@ -131,6 +134,7 @@ export const Button = React.forwardRef(
 		<ButtonCore
 			ref={ref}
 			size={size}
+			variant={variant}
 			{...props}
 			hasChildren={!!children}
 			isLoading={loading}

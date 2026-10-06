@@ -7,7 +7,7 @@ import { TabContextProvider, usePanelIdsHandler } from './tab-utils';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 
 /** A wrapper that handles the tabs and their content. */
-export function TabManager({ children, selectedTab, onSelectedTabChange, variant }) {
+export function TabManager({ children, selectedTab, onSelectedTabChange, variant = 'modal' }) {
 	const [selectedTabIndex, setSelectedTabIndex] = useState(selectedTab || 0);
 	const { panelIdsMap, registerPanelId, unRegisterPanelId } = usePanelIdsHandler();
 

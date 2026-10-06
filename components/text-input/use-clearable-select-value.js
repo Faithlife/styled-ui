@@ -26,12 +26,16 @@ export function useClearableSelectValue({
 
 	const innerOnSelectChange = useCallback(
 		(newSelectValue, meta) => {
-			trySetSelectValue(newSelectValue);
+			const nextSelectValue =
+				isMulti && Array.isArray(newSelectValue) && newSelectValue.length === 0
+					? null
+					: newSelectValue;
+			trySetSelectValue(nextSelectValue);
 			if (onSelectChange) {
-				onSelectChange(newSelectValue, meta);
+				onSelectChange(nextSelectValue, meta);
 			}
 		},
-		[onSelectChange, trySetSelectValue],
+		[isMulti, onSelectChange, trySetSelectValue],
 	);
 	const innerOnInputChange = useCallback(
 		(newInputValue, meta) => {
