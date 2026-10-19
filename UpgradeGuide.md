@@ -3,17 +3,15 @@
 ## Upgrading from v6 to v7
 
 - **React:** v7 adds React 19 compatibility. Keep React and React DOM on compatible versions.
-- **`Popover`:** Popper modifiers are replaced by Floating UI middleware. For example, replace a Popper offset modifier with `offset(8)` in `middleware`:
+- **`Popover`:** Positioning now uses Floating UI. A limited legacy `modifiers` subset remains supported: `offset` pairs/functions and `flip`/`preventOverflow` padding and boundary options, including their `enabled` flags. `modifiers={undefined}`, `null`, and `[]` are accepted. See the [Popover documentation](catalog/popover/documentation.md) for the exact subset. Custom Popper `fn`/`effect`/`phase` behavior and other options still require Floating UI middleware; unsupported configurations throw with migration guidance. For a simple distance, use `offset` to retain default collision handling:
   ```js
-  import { offset } from '@floating-ui/react-dom';
-
   usePopover(reference, {
     placement: 'bottom',
-    middleware: [offset(8)],
+    offset: 8,
   });
   ```
-  Build custom positioning behavior from Floating UI middleware instead of Popper modifier objects. Popper-specific `modifiers` are no longer supported.
-- **`usePopover`:** The hook returns `placement`, `middlewareData`, `isPositioned`, `update`, `popperProps`, and `arrowProps`. The `popperProps` and `arrowProps` wrapper objects remain available: `popperProps` includes the floating element's ref, positioning styles, and `data-popper-placement`; `arrowProps` includes the arrow ref and styles. Positioning is powered by Floating UI, but the hook does not return `refs` or `floatingStyles` as top-level fields.
+  Supplying `middleware` replaces default collision handling, so include the desired `flip`/`autoPlacement` and `shift` middleware explicitly. Do not combine it with legacy collision modifiers. A legacy offset overrides, rather than adds to, the numeric/default arrow distance.
+- **`usePopover`:** The hook returns `placement`, `middlewareData`, `isPositioned`, `update`, `popperProps`, and `arrowProps`. The `popperProps` and `arrowProps` wrapper objects remain available: `popperProps` includes the floating element's ref, positioning styles, `data-popper-placement`, and the measured `data-popper-reference-hidden` string (`"false"` or `"true"`); `arrowProps` includes the arrow ref and styles. Positioning is powered by Floating UI, but the hook does not return `refs` or `floatingStyles` as top-level fields.
 - **Select components:** v7 upgrades `react-select` to v5. Recheck code that consumes a Select ref or supplies custom components against the v5 exposed instance and component props. Keep forwarding the provided `innerRef` and `innerProps` to the rendered custom component element:
   ```jsx
   function CustomOption({ innerRef, innerProps, children }) {
@@ -22,6 +20,8 @@
 
   <Select ref={selectRef} components={{ Option: CustomOption }} />;
   ```
+  Use the re-exported `reactSelectComponents.Input` for custom inputs, rather than an Input from a separate react-select v3 dependency. Select inputs now have the accessible role `combobox`; update old `textbox` test queries rather than overriding the role.
+- **Async Select components:** Inline `loadOptions` callbacks are supported across parent rerenders. Queued requests use the latest callback; already-started requests retain their results. Callback- and promise-style loaders are supported. Failed current loads settle loading and call the optional synchronous `onLoadError(error, inputValue)` callback, or `console.error(error)` by default. Use `onLoadError` to display the application's error UI; failures are not silently converted to successful option arrays. Obsolete/unmounted failures are ignored.
 
 ## Upgrading from v5 to v6
 

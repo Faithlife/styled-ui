@@ -1,9 +1,15 @@
-import React, { createRef } from 'react';
+import React, { createRef, useState } from 'react';
 import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { DefaultThemeProvider } from '../../DefaultThemeProvider';
-import { AsyncCreatableSelect, AsyncSelect, CreatableSelect, Select } from '../';
+import {
+	AsyncCreatableSelect,
+	AsyncSelect,
+	CreatableSelect,
+	reactSelectComponents,
+	Select,
+} from '../';
 
 const options = [
 	{ value: 'apple', label: 'Apple' },
@@ -64,6 +70,23 @@ describe.each(selectVariants)('$name', ({ Component, props }) => {
 		act(() => ref.current.blur());
 		expect(input).not.toHaveFocus();
 	});
+});
+
+it('supports custom Inputs built from the matching public components', async () => {
+	const Input = props => <reactSelectComponents.Input {...props} autoComplete="country-name" />;
+	const onChange = jest.fn();
+	renderSelect(
+		<Select aria-label="Fruit" options={options} components={{ Input }} onChange={onChange} />,
+	);
+	const input = screen.getByRole('combobox', { name: 'Fruit' });
+
+	expect(input).toHaveAttribute('autocomplete', 'country-name');
+	await userEvent.type(input, 'ap{arrowdown}{enter}');
+
+	expect(onChange).toHaveBeenCalledWith(
+		options[0],
+		expect.objectContaining({ action: 'select-option' }),
+	);
 });
 
 describe('clearable values', () => {
@@ -182,6 +205,8 @@ describe('clearable values', () => {
 });
 
 describe('async options', () => {
+	afterEach(() => jest.restoreAllMocks());
+
 	it('supports callback-style option loaders', async () => {
 		expect.hasAssertions();
 
@@ -246,7 +271,35 @@ describe('async options', () => {
 		expect(await screen.findByText('Apple')).toBeVisible();
 	});
 
-	it('cancels pending debounced work when the loader changes', async () => {
+	it.each(asyncSelectVariants)(
+		'$name tolerates inline loaders with controlled input',
+		async ({ Component }) => {
+			const loadOptions = jest.fn((_inputValue, callback) => callback(options));
+
+			function Consumer() {
+				const [inputValue, setInputValue] = useState('');
+				return (
+					<Component
+						aria-label="Fruit"
+						inputValue={inputValue}
+						onInputChange={setInputValue}
+						debounceInterval={100}
+						loadOptions={(value, callback) => loadOptions(value, callback)}
+					/>
+				);
+			}
+
+			renderSelect(<Consumer />);
+			await userEvent.type(screen.getByRole('combobox', { name: 'Fruit' }), 'ap');
+
+			expect(loadOptions).not.toHaveBeenCalled();
+			expect(await screen.findByText('Apple')).toBeVisible();
+			expect(loadOptions).toHaveBeenCalledTimes(1);
+			expect(loadOptions).toHaveBeenCalledWith('ap', expect.any(Function));
+		},
+	);
+
+	it('uses the latest loader and its data for pending debounced work', async () => {
 		expect.hasAssertions();
 
 		const initialLoadOptions = jest.fn();
@@ -259,21 +312,134 @@ describe('async options', () => {
 		const { rerender } = render(selectWithLoader(initialLoadOptions));
 		const input = screen.getByRole('combobox', { name: 'Fruit' });
 
-		await userEvent.type(input, 'a');
+		await act(async () => userEvent.type(input, 'a'));
 		expect(initialLoadOptions).not.toHaveBeenCalled();
 		expect(await screen.findByText('Loading...')).toBeVisible();
 
 		rerender(selectWithLoader(updatedLoadOptions));
-		await new Promise(resolve => setTimeout(resolve, 125));
-		expect(initialLoadOptions).not.toHaveBeenCalled();
-		expect(updatedLoadOptions).not.toHaveBeenCalled();
+		expect(await screen.findByText('Apple')).toBeVisible();
+		expect(updatedLoadOptions).toHaveBeenCalledTimes(1);
+		expect(updatedLoadOptions).toHaveBeenCalledWith('a', expect.any(Function));
 		await waitFor(() => expect(screen.queryByText('Loading...')).not.toBeInTheDocument());
 
 		await userEvent.type(input, 'b');
-		await waitFor(() => expect(updatedLoadOptions).toHaveBeenCalledTimes(1));
-		expect(updatedLoadOptions.mock.calls[0][0]).toBe('ab');
+		await waitFor(() => expect(updatedLoadOptions).toHaveBeenCalledTimes(2));
+		expect(updatedLoadOptions.mock.calls[1][0]).toBe('ab');
 		expect(initialLoadOptions).not.toHaveBeenCalled();
+	});
+
+	it.each(asyncSelectVariants)(
+		'$name retains an in-flight default load across parent renders',
+		async ({ Component }) => {
+			let resolveOptions;
+			const loadOptions = jest.fn(() => new Promise(resolve => (resolveOptions = resolve)));
+			const select = () => (
+				<DefaultThemeProvider>
+					<Component
+						aria-label="Fruit"
+						defaultOptions
+						loadOptions={(value, callback) => loadOptions(value, callback)}
+					/>
+				</DefaultThemeProvider>
+			);
+			const { rerender } = render(select());
+			expect(loadOptions).toHaveBeenCalledTimes(1);
+
+			rerender(select());
+			await act(async () => resolveOptions(options));
+			await userEvent.click(screen.getByRole('combobox', { name: 'Fruit' }));
+
+			expect(await screen.findByText('Apple')).toBeVisible();
+			expect(loadOptions).toHaveBeenCalledTimes(1);
+		},
+	);
+
+	it('retains a query result when its loader triggers a parent render', async () => {
+		let resolveOptions;
+
+		function Consumer() {
+			const [isLoading, setIsLoading] = useState(false);
+			return (
+				<>
+					<span>{isLoading ? 'Fetching fruit' : 'Ready'}</span>
+					<AsyncSelect
+						aria-label="Fruit"
+						loadOptions={() => {
+							setIsLoading(true);
+							return new Promise(resolve => (resolveOptions = resolve));
+						}}
+					/>
+				</>
+			);
+		}
+
+		renderSelect(<Consumer />);
+		await userEvent.type(screen.getByRole('combobox', { name: 'Fruit' }), 'a');
+		expect(screen.getByText('Fetching fruit')).toBeInTheDocument();
+
+		await act(async () => resolveOptions(options));
 		expect(await screen.findByText('Apple')).toBeVisible();
+	});
+
+	it.each(['', 'a'])('retains late default options with initial input "%s"', async initialInput => {
+		const pending = new Map();
+		const loadOptions = input => new Promise(resolve => pending.set(input, resolve));
+		renderSelect(
+			<AsyncSelect
+				aria-label="Fruit"
+				defaultOptions
+				defaultInputValue={initialInput}
+				loadOptions={loadOptions}
+			/>,
+		);
+		const input = screen.getByRole('combobox', { name: 'Fruit' });
+		await userEvent.type(input, 'b');
+
+		await act(async () => pending.get(`${initialInput}b`)([options[1]]));
+		expect(await screen.findByText('Banana')).toBeVisible();
+		await act(async () => pending.get(initialInput)([options[0]]));
+		expect(screen.queryByText('Apple')).not.toBeInTheDocument();
+
+		await userEvent.clear(input);
+		expect(await screen.findByText('Apple')).toBeVisible();
+	});
+
+	it('settles pending work when the debounce interval changes', async () => {
+		const loadOptions = jest.fn((_inputValue, callback) => callback(options));
+		const select = debounceInterval => (
+			<DefaultThemeProvider>
+				<AsyncSelect
+					aria-label="Fruit"
+					loadOptions={loadOptions}
+					debounceInterval={debounceInterval}
+				/>
+			</DefaultThemeProvider>
+		);
+		const { rerender } = render(select(100));
+		const input = screen.getByRole('combobox', { name: 'Fruit' });
+		await userEvent.type(input, 'a');
+
+		rerender(select(0));
+		await waitFor(() => expect(screen.queryByText('Loading...')).not.toBeInTheDocument());
+		await new Promise(resolve => setTimeout(resolve, 125));
+		expect(loadOptions).not.toHaveBeenCalled();
+
+		await act(async () => userEvent.type(input, 'p'));
+		expect(loadOptions).toHaveBeenCalledWith('ap', expect.any(Function));
+		expect(await screen.findByText('Apple')).toBeVisible();
+	});
+
+	it('settles only once when a callback loader also returns a promise', async () => {
+		const loadOptions = (_input, callback) => {
+			callback(options);
+			return Promise.resolve();
+		};
+		renderSelect(<AsyncSelect aria-label="Fruit" loadOptions={loadOptions} />);
+
+		await userEvent.type(screen.getByRole('combobox', { name: 'Fruit' }), 'a');
+
+		expect(await screen.findByText('Apple')).toBeVisible();
+		expect(screen.queryByText('No options')).not.toBeInTheDocument();
 	});
 
 	it('ignores stale results when a newer query resolves first', async () => {
@@ -305,27 +471,163 @@ describe('async options', () => {
 		expect(screen.getByText('Latest result')).toBeInTheDocument();
 	});
 
-	it('does not treat a rejected load as a successful empty result', async () => {
-		expect.hasAssertions();
+	it('does not replace a cached query with an obsolete result', async () => {
+		const pending = new Map();
+		const loadOptions = input => new Promise(resolve => pending.set(input, resolve));
+		renderSelect(<AsyncSelect aria-label="Fruit" cacheOptions loadOptions={loadOptions} />);
+		const input = screen.getByRole('combobox', { name: 'Fruit' });
+		await userEvent.type(input, 'a');
+		await act(async () => pending.get('a')([options[0]]));
+		expect(await screen.findByText('Apple')).toBeVisible();
 
-		const failure = new Error('Option loading failed');
-		let observedFailure;
-		const rejectedPromise = Promise.reject(failure);
-		// Catch the adapter's rethrown failure so Jest can assert the select's loading state.
-		const originalThen = rejectedPromise.then.bind(rejectedPromise);
-		rejectedPromise.then = (onFulfilled, onRejected) =>
-			originalThen(onFulfilled, onRejected).catch(error => {
-				observedFailure = error;
-			});
-		const loadOptions = jest.fn(() => rejectedPromise);
-		renderSelect(<AsyncSelect aria-label="Fruit" loadOptions={loadOptions} />);
+		await userEvent.type(input, 'b{backspace}');
+		expect(screen.getByText('Apple')).toBeVisible();
+		await act(async () => pending.get('ab')([options[1]]));
 
-		await userEvent.type(screen.getByRole('combobox', { name: 'Fruit' }), 'x');
-		await waitFor(() => expect(observedFailure).toBe(failure));
-
-		expect(screen.getByText('Loading...')).toBeVisible();
-		expect(screen.queryByText('No options')).not.toBeInTheDocument();
+		expect(screen.getByText('Apple')).toBeVisible();
+		expect(screen.queryByText('Banana')).not.toBeInTheDocument();
 	});
+
+	it.each(asyncSelectVariants)(
+		'$name reports rejected loads, settles loading, and can retry',
+		async ({ Component }) => {
+			const failure = new Error('Option loading failed');
+			const reportError = jest.spyOn(console, 'error').mockImplementation(() => {});
+			const loadOptions = jest
+				.fn()
+				.mockImplementationOnce(() => Promise.reject(failure))
+				.mockImplementation(() => Promise.resolve(options));
+			renderSelect(<Component aria-label="Fruit" loadOptions={loadOptions} />);
+			const input = screen.getByRole('combobox', { name: 'Fruit' });
+
+			await act(async () => userEvent.type(input, 'a'));
+
+			await waitFor(() => expect(reportError).toHaveBeenCalledWith(failure));
+			expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+			expect(loadOptions).toHaveBeenCalledTimes(1);
+
+			await act(async () => userEvent.type(input, 'p'));
+			expect(await screen.findByText('Apple')).toBeVisible();
+			expect(reportError).toHaveBeenCalledTimes(1);
+		},
+	);
+
+	it('reports synchronous loader failures through onLoadError and settles loading', async () => {
+		const failure = new Error('Synchronous option failure');
+		const reportError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const onLoadError = jest.fn();
+		renderSelect(
+			<AsyncSelect
+				aria-label="Fruit"
+				onLoadError={onLoadError}
+				loadOptions={() => {
+					throw failure;
+				}}
+			/>,
+		);
+
+		await userEvent.type(screen.getByRole('combobox', { name: 'Fruit' }), 'a');
+
+		expect(onLoadError).toHaveBeenCalledWith(failure, 'a');
+		expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+		expect(reportError).not.toHaveBeenCalled();
+	});
+
+	it('reports rejected default loads without leaving loading unsettled', async () => {
+		const failure = new Error('Default options failed');
+		const reportError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		await act(async () =>
+			renderSelect(
+				<AsyncSelect
+					aria-label="Fruit"
+					defaultOptions
+					loadOptions={() => Promise.reject(failure)}
+				/>,
+			),
+		);
+		await userEvent.click(screen.getByRole('combobox', { name: 'Fruit' }));
+
+		expect(reportError).toHaveBeenCalledWith(failure);
+		expect(reportError).toHaveBeenCalledTimes(1);
+		expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+	});
+
+	it('uses the current error handler without discarding the request', async () => {
+		const failure = new Error('Option loading failed');
+		let rejectOptions;
+		const loadOptions = () => new Promise((_resolve, reject) => (rejectOptions = reject));
+		const initialHandler = jest.fn();
+		const currentHandler = jest.fn();
+		const select = onLoadError => (
+			<DefaultThemeProvider>
+				<AsyncSelect aria-label="Fruit" loadOptions={loadOptions} onLoadError={onLoadError} />
+			</DefaultThemeProvider>
+		);
+		const { rerender } = render(select(initialHandler));
+		await userEvent.type(screen.getByRole('combobox', { name: 'Fruit' }), 'a');
+
+		rerender(select(currentHandler));
+		await act(async () => rejectOptions(failure));
+
+		expect(currentHandler).toHaveBeenCalledWith(failure, 'a');
+		expect(initialHandler).not.toHaveBeenCalled();
+		expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+	});
+
+	it('settles loading even when an error reporter throws', async () => {
+		const failure = new Error('Option loading failed');
+		const reportingFailure = new Error('Error reporter failed');
+		const reportError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		renderSelect(
+			<AsyncSelect
+				aria-label="Fruit"
+				loadOptions={() => Promise.reject(failure)}
+				onLoadError={() => {
+					throw reportingFailure;
+				}}
+			/>,
+		);
+
+		await act(async () => userEvent.type(screen.getByRole('combobox', { name: 'Fruit' }), 'a'));
+
+		expect(reportError).toHaveBeenCalledWith(failure);
+		expect(reportError).toHaveBeenCalledWith(reportingFailure);
+		expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+	});
+
+	it.each(['new query', 'clear', 'unmount'])(
+		'ignores obsolete rejections after %s',
+		async action => {
+			const failure = new Error('Obsolete failure');
+			let rejectOptions;
+			const onLoadError = jest.fn();
+			const reportError = jest.spyOn(console, 'error').mockImplementation(() => {});
+			const loadOptions = jest
+				.fn()
+				.mockImplementationOnce(() => new Promise((_resolve, reject) => (rejectOptions = reject)))
+				.mockImplementation(() => Promise.resolve(options));
+			const { unmount } = renderSelect(
+				<AsyncSelect aria-label="Fruit" loadOptions={loadOptions} onLoadError={onLoadError} />,
+			);
+			const input = screen.getByRole('combobox', { name: 'Fruit' });
+			await userEvent.type(input, 'a');
+
+			if (action === 'new query') {
+				await act(async () => userEvent.type(input, 'p'));
+				expect(await screen.findByText('Apple')).toBeVisible();
+			} else if (action === 'clear') {
+				await userEvent.clear(input);
+			} else {
+				unmount();
+			}
+
+			await act(async () => rejectOptions(failure));
+
+			expect(onLoadError).not.toHaveBeenCalled();
+			expect(reportError).not.toHaveBeenCalled();
+			expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+		},
+	);
 
 	it('cancels a pending debounced load when unmounted', async () => {
 		expect.hasAssertions();

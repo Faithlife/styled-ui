@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { render, screen, act, waitFor } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
+import { hide } from '@floating-ui/react-dom';
 
 import { Popover, usePopover } from '../';
 
@@ -43,6 +44,12 @@ function getRenderedY(element) {
 	const top = Number.parseFloat(element.style.top) || 0;
 	const translateY = element.style.transform.match(/translate(?:3d)?\([^,]+,\s*(-?[\d.]+)px/);
 	return top + (translateY ? Number.parseFloat(translateY[1]) : 0);
+}
+
+function getRenderedX(element) {
+	const left = Number.parseFloat(element.style.left) || 0;
+	const translateX = element.style.transform.match(/translate(?:3d)?\((-?[\d.]+)px/);
+	return left + (translateX ? Number.parseFloat(translateX[1]) : 0);
 }
 
 function UsePopoverProbe({ reference, options, onResult }) {
@@ -287,6 +294,26 @@ describe('Popover', () => {
 		});
 	});
 
+	it('does not overwrite native hide middleware data when restoring the legacy marker', async () => {
+		const onResult = jest.fn();
+		render(
+			<UsePopoverProbe
+				reference={createReference()}
+				options={{ middleware: [hide({ padding: 1000 })] }}
+				onResult={onResult}
+			/>,
+		);
+
+		await waitFor(() => {
+			const result = onResult.mock.calls[onResult.mock.calls.length - 1][0];
+			expect(result.middlewareData.hide.referenceHidden).toBe(true);
+			expect(screen.getByTestId('hook-floating')).toHaveAttribute(
+				'data-popper-reference-hidden',
+				'false',
+			);
+		});
+	});
+
 	it('exposes the resolved placement and positioning refs from usePopover', async () => {
 		const reference = createReference({ y: 0 });
 		const onResult = jest.fn();
@@ -346,6 +373,26 @@ describe('Popover', () => {
 		},
 	);
 
+	it('updates native auto-placement alignment on rerender', async () => {
+		const reference = createReference();
+		const onResult = jest.fn();
+		const probe = placement => (
+			<UsePopoverProbe reference={reference} options={{ placement }} onResult={onResult} />
+		);
+		const { rerender } = render(probe('auto-start'));
+		await waitFor(() => {
+			const result = onResult.mock.calls[onResult.mock.calls.length - 1][0];
+			expect(result.placement).toMatch(/-start$/);
+		});
+
+		rerender(probe('auto-end'));
+
+		await waitFor(() => {
+			const result = onResult.mock.calls[onResult.mock.calls.length - 1][0];
+			expect(result.placement).toMatch(/-end$/);
+		});
+	});
+
 	it('portals into document.body when requested', () => {
 		const { container } = render(
 			<Popover reference={fakeRef} container="body" data-testid="body-popover">
@@ -373,22 +420,297 @@ describe('Popover', () => {
 		expect(container).not.toContainElement(popover);
 	});
 
-	it('rejects the legacy modifiers prop with migration guidance', () => {
-		expect(() =>
-			render(
-				<Popover reference={fakeRef} modifiers={[]} data-testid="legacy-popover">
-					{'Legacy modifiers'}
-				</Popover>,
+	it.each([undefined, null, []])('accepts empty legacy modifiers: %s', async modifiers => {
+		render(
+			<Popover reference={createReference()} modifiers={modifiers} data-testid="legacy-popover">
+				{'Legacy modifiers'}
+			</Popover>,
+		);
+
+		await waitFor(() =>
+			expect(screen.getByTestId('legacy-popover')).toHaveAttribute(
+				'data-popper-reference-hidden',
+				'false',
 			),
-		).toThrow(/modifiers.*middleware|middleware.*modifiers/i);
+		);
+		expect(screen.getByTestId('legacy-popover')).not.toHaveAttribute('modifiers');
 	});
 
-	it('rejects the legacy modifiers option on usePopover with migration guidance', () => {
+	it.each([undefined, null, []])('accepts empty usePopover modifiers: %s', async modifiers => {
+		const onResult = jest.fn();
+		render(
+			<UsePopoverProbe reference={createReference()} options={{ modifiers }} onResult={onResult} />,
+		);
+
+		await waitFor(() =>
+			expect(onResult.mock.calls[onResult.mock.calls.length - 1][0].isPositioned).toBe(true),
+		);
+	});
+
+	it('lets a legacy offset override the default arrow distance without adding it twice', async () => {
+		const reference = createReference();
+		render(
+			<Popover
+				reference={reference}
+				placement="bottom-end"
+				strategy="fixed"
+				middleware={[]}
+				modifiers={[{ name: 'offset', options: { offset: [8, 8] } }]}
+				data-testid="legacy-popover"
+			>
+				{'Account menu'}
+			</Popover>,
+		);
+
+		const popover = screen.getByTestId('legacy-popover');
+		await waitFor(() => {
+			expect(popover).toHaveAttribute('data-popper-placement', 'bottom-end');
+			expect(getRenderedY(popover)).toBeCloseTo(reference.getBoundingClientRect().bottom + 8, 0);
+			expect(getRenderedX(popover)).toBeCloseTo(reference.getBoundingClientRect().right + 8, 0);
+		});
+		expect(popover).toHaveStyle({ position: 'fixed' });
+	});
+
+	it.each([
+		['top', 5, -8],
+		['bottom', 5, 8],
+		['left', -8, 5],
+		['right', 8, 5],
+	])('preserves both physical offset axes for %s', async (placement, x, y) => {
+		const onResult = jest.fn();
+		render(
+			<UsePopoverProbe
+				reference={createReference()}
+				options={{ placement, modifiers: [{ name: 'offset', options: { offset: [5, 8] } }] }}
+				onResult={onResult}
+			/>,
+		);
+
+		await waitFor(() => {
+			const result = onResult.mock.calls[onResult.mock.calls.length - 1][0];
+			expect(result.isPositioned).toBe(true);
+			expect(result.placement).toBe(placement);
+			expect(result.middlewareData.offset).toEqual({ x, y, placement });
+		});
+	});
+
+	it('passes current placement and rects to legacy offset functions after a flip', async () => {
+		const onResult = jest.fn();
+		const offset = jest.fn(({ placement, reference }) => [
+			reference.width / 4,
+			placement === 'top' ? 6 : 8,
+		]);
+		render(
+			<UsePopoverProbe
+				reference={createReference({ y: 0 })}
+				options={{ placement: 'top', modifiers: [{ name: 'offset', options: { offset } }] }}
+				onResult={onResult}
+			/>,
+		);
+
+		await waitFor(() => {
+			const result = onResult.mock.calls[onResult.mock.calls.length - 1][0];
+			expect(result.placement).toBe('bottom');
+			expect(result.middlewareData.offset).toEqual({ x: 5, y: 8, placement: 'bottom' });
+		});
+		expect(offset).toHaveBeenCalledWith({
+			placement: 'bottom',
+			reference: expect.objectContaining({ width: 20, height: 20 }),
+			popper: expect.objectContaining({ width: 0, height: 0 }),
+		});
+	});
+
+	it('updates offset functions that capture new data on rerender', async () => {
+		const reference = createReference();
+		const onResult = jest.fn();
+		const probe = skidding => (
+			<UsePopoverProbe
+				reference={reference}
+				options={{
+					modifiers: [{ name: 'offset', options: { offset: () => [skidding, 8] } }],
+				}}
+				onResult={onResult}
+			/>
+		);
+		const { rerender } = render(probe(0));
+		await waitFor(() => {
+			const result = onResult.mock.calls[onResult.mock.calls.length - 1][0];
+			expect(result.middlewareData.offset).toEqual({ x: 0, y: 8, placement: 'bottom' });
+		});
+
+		rerender(probe(8));
+
+		await waitFor(() => {
+			const result = onResult.mock.calls[onResult.mock.calls.length - 1][0];
+			expect(result.middlewareData.offset).toEqual({ x: 8, y: 8, placement: 'bottom' });
+		});
+	});
+
+	it.each([8, 12, { left: 12 }])(
+		'preserves preventOverflow padding %s and default flip',
+		async padding => {
+			render(
+				<Popover
+					reference={createReference({ x: 0, y: 0 })}
+					placement="top"
+					modifiers={[{ name: 'preventOverflow', options: { padding } }]}
+					data-testid="padded-popover"
+				>
+					{'Padded tooltip'}
+				</Popover>,
+			);
+			const popover = screen.getByTestId('padded-popover');
+
+			await waitFor(() => {
+				expect(popover).toHaveAttribute('data-popper-placement', 'bottom');
+				expect(getRenderedX(popover)).toBeCloseTo(
+					typeof padding === 'number' ? Math.max(10, padding) : 12,
+					0,
+				);
+			});
+		},
+	);
+
+	it('preserves flip padding', async () => {
+		render(
+			<Popover
+				reference={createReference({ y: 2 })}
+				placement="top"
+				hideArrow
+				modifiers={[{ name: 'flip', options: { padding: 12 } }]}
+				data-testid="padded-popover"
+			>
+				{'Padded flip'}
+			</Popover>,
+		);
+
+		await waitFor(() =>
+			expect(screen.getByTestId('padded-popover')).toHaveAttribute(
+				'data-popper-placement',
+				'bottom',
+			),
+		);
+	});
+
+	it('honors disabled built-in modifiers', async () => {
+		render(
+			<Popover
+				reference={createReference({ x: -30, y: -30 })}
+				placement="top"
+				modifiers={[
+					{ name: 'offset', enabled: false },
+					{ name: 'flip', enabled: false },
+					{ name: 'preventOverflow', enabled: false },
+				]}
+				data-testid="unconstrained-popover"
+			>
+				{'Unconstrained'}
+			</Popover>,
+		);
+		const popover = screen.getByTestId('unconstrained-popover');
+
+		await waitFor(() => {
+			expect(popover).toHaveAttribute('data-popper-reference-hidden', 'true');
+			expect(getRenderedY(popover)).toBeCloseTo(-30, 0);
+			expect(getRenderedX(popover)).toBeCloseTo(-20, 0);
+		});
+		expect(popover).toHaveAttribute('data-popper-placement', 'top');
+	});
+
+	it.each([
+		{ name: 'sameWidth', fn: () => {} },
+		{ name: 'maxHeight', phase: 'beforeWrite', fn: () => {} },
+		{ name: 'offset', phase: 'main' },
+		{ name: 'preventOverflow', options: { tetherOffset: 4 } },
+		{ name: 'flip', options: { fallbackPlacements: ['left'] } },
+	])('rejects unsupported legacy modifier %s with actionable guidance', modifier => {
 		expect(() =>
 			render(
-				<UsePopoverProbe reference={fakeRef} options={{ modifiers: [] }} onResult={jest.fn()} />,
+				<UsePopoverProbe
+					reference={fakeRef}
+					options={{ modifiers: [modifier] }}
+					onResult={jest.fn()}
+				/>,
 			),
-		).toThrow(/modifiers.*middleware|middleware.*modifiers/i);
+		).toThrow(/Unsupported Popper.*middleware/i);
+	});
+
+	it('rejects ambiguous legacy collision modifiers combined with native middleware', () => {
+		expect(() =>
+			render(
+				<UsePopoverProbe
+					reference={fakeRef}
+					options={{ modifiers: [{ name: 'preventOverflow' }], middleware: [] }}
+					onResult={jest.fn()}
+				/>,
+			),
+		).toThrow(/combine.*middleware/i);
+	});
+
+	it.each([
+		[{ x: 100, y: 100 }, 'false'],
+		[{ x: -10, y: 100 }, 'false'],
+		[{ x: -21, y: 100 }, 'true'],
+		[{ x: 100, y: -21 }, 'true'],
+	])('serializes reference clipping for %s as "%s"', async (rect, hidden) => {
+		render(
+			<Popover reference={createReference(rect)} data-testid="visibility-popover">
+				{'Reference visibility'}
+			</Popover>,
+		);
+
+		await waitFor(() =>
+			expect(screen.getByTestId('visibility-popover')).toHaveAttribute(
+				'data-popper-reference-hidden',
+				hidden,
+			),
+		);
+	});
+
+	it('tracks reference clipping ancestors independently of a body portal and updates on scroll', async () => {
+		const clippingParent = document.createElement('div');
+		clippingParent.style.overflow = 'hidden';
+		clippingParent.getBoundingClientRect = () => ({
+			x: 0,
+			y: 0,
+			top: 0,
+			left: 0,
+			right: 100,
+			bottom: 100,
+			width: 100,
+			height: 100,
+		});
+		Object.defineProperties(clippingParent, {
+			clientWidth: { value: 100 },
+			clientHeight: { value: 100 },
+			offsetWidth: { value: 100 },
+			offsetHeight: { value: 100 },
+		});
+		const contextElement = document.createElement('button');
+		clippingParent.appendChild(contextElement);
+		document.body.appendChild(clippingParent);
+		let rect = createReference({ x: 150, y: 20 }).getBoundingClientRect();
+		const reference = {
+			contextElement,
+			getBoundingClientRect: () => rect,
+		};
+		const { unmount } = render(
+			<Popover reference={reference} container="body" data-testid="clipped-popover">
+				{'Clipped reference'}
+			</Popover>,
+		);
+		try {
+			const popover = screen.getByTestId('clipped-popover');
+			await waitFor(() => expect(popover).toHaveAttribute('data-popper-reference-hidden', 'true'));
+
+			rect = createReference({ x: 50, y: 20 }).getBoundingClientRect();
+			act(() => clippingParent.dispatchEvent(new Event('scroll')));
+
+			await waitFor(() => expect(popover).toHaveAttribute('data-popper-reference-hidden', 'false'));
+		} finally {
+			unmount();
+			clippingParent.remove();
+		}
 	});
 
 	it.each(['createPopper', 'onFirstUpdate'])(

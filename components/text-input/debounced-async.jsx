@@ -3,91 +3,139 @@ import Async from 'react-select/async';
 import AsyncCreatable from 'react-select/async-creatable';
 import debounce from 'lodash.debounce';
 
-function createDebouncedLoadOptions(loadOptions, debounceInterval) {
-	let isActive = true;
-	let pendingCallback;
+function createDebouncedLoadOptions(optionsRef, debounceInterval) {
+	let pendingRequest;
+	let generation = 0;
+	let hasInputChanged = false;
 
-	const invokeLoadOptions = (inputValue, callback) => {
-		if (!isActive) {
+	const invokeLoadOptions = request => {
+		if (pendingRequest !== request) {
 			return;
 		}
 
 		let hasCalledBack = false;
 		const handleOptions = options => {
-			if (!isActive || hasCalledBack) {
+			// Late default options are still needed when the user clears a newer query.
+			if (
+				request.generation !== generation ||
+				hasCalledBack ||
+				(pendingRequest !== request && !request.isDefault)
+			) {
 				return;
 			}
 
 			hasCalledBack = true;
-			if (pendingCallback === callback) {
-				pendingCallback = undefined;
+			if (pendingRequest === request) {
+				pendingRequest = undefined;
 			}
-			callback(options);
+			request.callback(options);
+		};
+		const handleError = error => {
+			if (request.generation !== generation || pendingRequest !== request || hasCalledBack) {
+				return;
+			}
+
+			try {
+				if (optionsRef.current.onLoadError) {
+					optionsRef.current.onLoadError(error, request.inputValue);
+				} else {
+					console.error(error);
+				}
+			} catch (reportingError) {
+				console.error(error);
+				console.error(reportingError);
+			} finally {
+				handleOptions();
+			}
 		};
 
-		const result = loadOptions(inputValue, handleOptions);
-		if (result && typeof result.then === 'function') {
-			result.then(handleOptions, error => {
-				if (isActive) {
-					throw error;
-				}
-			});
+		try {
+			const result = optionsRef.current.loadOptions(request.inputValue, handleOptions);
+			if (result && typeof result.then === 'function') {
+				result.then(handleOptions, handleError);
+			}
+		} catch (error) {
+			handleError(error);
 		}
 	};
 
 	const debouncedInvokeLoadOptions = debounce(invokeLoadOptions, debounceInterval);
 	const debouncedLoadOptions = (inputValue, callback) => {
-		if (!isActive) {
-			return;
-		}
-
-		pendingCallback = callback;
+		pendingRequest = {
+			inputValue,
+			callback,
+			generation,
+			isDefault: !hasInputChanged && optionsRef.current.defaultOptions === true,
+		};
 		if (debounceInterval) {
-			debouncedInvokeLoadOptions(inputValue, callback);
+			debouncedInvokeLoadOptions(pendingRequest);
 		} else {
-			invokeLoadOptions(inputValue, callback);
+			invokeLoadOptions(pendingRequest);
 		}
 	};
 
 	debouncedLoadOptions.cancel = settlePending => {
-		isActive = false;
+		generation++;
 		debouncedInvokeLoadOptions.cancel();
-		const callback = pendingCallback;
-		pendingCallback = undefined;
-		if (settlePending && callback) {
-			callback();
+		const request = pendingRequest;
+		pendingRequest = undefined;
+		if (settlePending && request) {
+			request.callback();
 		}
+	};
+	debouncedLoadOptions.invalidate = () => {
+		hasInputChanged = true;
+		debouncedInvokeLoadOptions.cancel();
+		pendingRequest = undefined;
 	};
 
 	return debouncedLoadOptions;
 }
 
 function makeDebouncedSelect(Component) {
-	return React.forwardRef(({ debounceInterval, loadOptions, ...props }, ref) => {
-		const debouncedLoadOptions = useMemo(
-			() => (loadOptions ? createDebouncedLoadOptions(loadOptions, debounceInterval) : undefined),
-			[debounceInterval, loadOptions],
-		);
-		const isMounted = useRef(false);
+	return React.forwardRef(
+		({ debounceInterval, loadOptions, onLoadError, onInputChange, ...props }, ref) => {
+			const optionsRef = useRef();
+			optionsRef.current = { loadOptions, onLoadError, defaultOptions: props.defaultOptions };
+			const hasLoadOptions = Boolean(loadOptions);
+			const debouncedLoadOptions = useMemo(
+				() =>
+					hasLoadOptions ? createDebouncedLoadOptions(optionsRef, debounceInterval) : undefined,
+				[debounceInterval, hasLoadOptions],
+			);
+			const isMounted = useRef(false);
 
-		useEffect(() => {
-			isMounted.current = true;
-			return () => {
-				isMounted.current = false;
-			};
-		}, []);
+			useEffect(() => {
+				isMounted.current = true;
+				return () => {
+					isMounted.current = false;
+				};
+			}, []);
 
-		useEffect(
-			() => () => {
-				if (debouncedLoadOptions) {
-					debouncedLoadOptions.cancel(isMounted.current);
-				}
-			},
-			[debouncedLoadOptions],
-		);
+			useEffect(
+				() => () => {
+					if (debouncedLoadOptions) {
+						debouncedLoadOptions.cancel(isMounted.current);
+					}
+				},
+				[debouncedLoadOptions],
+			);
 
-		return <Component {...props} loadOptions={debouncedLoadOptions} ref={ref} />;
-	});
+			return (
+				<Component
+					{...props}
+					onInputChange={(inputValue, meta) => {
+						if (debouncedLoadOptions) {
+							debouncedLoadOptions.invalidate();
+						}
+						return onInputChange && onInputChange(inputValue, meta);
+					}}
+					loadOptions={debouncedLoadOptions}
+					ref={ref}
+				/>
+			);
+		},
+	);
 }
 
 export const DebouncedSelectAsync = makeDebouncedSelect(Async);

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import {
@@ -6,6 +6,7 @@ import {
 	autoUpdate,
 	arrow,
 	flip,
+	hide,
 	limitShift,
 	offset as floatingOffset,
 	shift,
@@ -14,6 +15,7 @@ import {
 import { useFocusAwayHandler } from '../shared-hooks/use-focus-away-handler';
 import { mergeRefs } from '../utils/merge-refs';
 import { PopoverContainer, PopoverArrow } from './styled';
+import { getLegacyModifiers, getLegacyOverflowOptions, legacyOffset } from './legacy-modifiers';
 
 const hasOwn = (object, property) => Object.prototype.hasOwnProperty.call(object, property);
 
@@ -37,9 +39,7 @@ function getViewportBoundary({ elements }) {
 export function usePopover(reference, options) {
 	const [arrowElement, setArrow] = useState();
 	if (options) {
-		const legacyOption = ['modifiers', 'createPopper', 'onFirstUpdate'].find(option =>
-			hasOwn(options, option),
-		);
+		const legacyOption = ['createPopper', 'onFirstUpdate'].find(option => hasOwn(options, option));
 		if (legacyOption) {
 			throw new Error(
 				`usePopover no longer supports the Popper "${legacyOption}" option; use Floating UI middleware instead.`,
@@ -58,28 +58,83 @@ export function usePopover(reference, options) {
 		: undefined;
 	const placement = isAutoPlacement ? 'bottom' : requestedPlacement;
 	const middleware = options?.middleware;
-	const positioningMiddleware = useMemo(
-		() =>
-			middleware ??
-			(isAutoPlacement
-				? [
-						autoPlacement(state => ({
-							...(alignment && { alignment }),
-							...getViewportBoundary(state),
-						})),
-				  ]
-				: [
-						flip(getViewportBoundary),
-						shift(state => ({
-							limiter: limitShift(),
-							...getViewportBoundary(state),
-						})),
-				  ]),
-		[middleware, isAutoPlacement, alignment],
-	);
+	const modifiers = options?.modifiers;
+	const legacyModifiers = useMemo(() => getLegacyModifiers(modifiers), [modifiers]);
+	const legacyRef = useRef();
+	legacyRef.current = legacyModifiers;
+	const offsetRef = useRef();
+	offsetRef.current = legacyModifiers.offset?.options.offset;
+	if (
+		middleware !== undefined &&
+		middleware !== null &&
+		(legacyModifiers.flip || legacyModifiers.preventOverflow)
+	) {
+		throw new Error(
+			'Do not combine Popper flip/preventOverflow modifiers with Floating UI middleware; move collision handling into middleware.',
+		);
+	}
+	if (isAutoPlacement && legacyModifiers.flip?.enabled === false) {
+		throw new Error(
+			'Auto placement requires flip; use a concrete placement or Floating UI middleware.',
+		);
+	}
+	const positioningMiddleware = useMemo(() => {
+		if (middleware !== undefined && middleware !== null) {
+			return middleware;
+		}
+		const collision = [];
+		if (isAutoPlacement) {
+			collision.push(
+				autoPlacement(
+					state => ({
+						...(alignment && { alignment }),
+						...getViewportBoundary(state),
+						...getLegacyOverflowOptions(legacyRef.current.flip?.options),
+					}),
+					[alignment, legacyModifiers.flip],
+				),
+			);
+		} else if (legacyModifiers.flip?.enabled !== false) {
+			collision.push(
+				flip(
+					state => ({
+						...getViewportBoundary(state),
+						...getLegacyOverflowOptions(legacyRef.current.flip?.options),
+					}),
+					[legacyModifiers.flip],
+				),
+			);
+		}
+		if (
+			legacyModifiers.preventOverflow?.enabled !== false &&
+			(!isAutoPlacement || legacyModifiers.preventOverflow)
+		) {
+			collision.push(
+				shift(
+					state => ({
+						limiter: limitShift(),
+						...getViewportBoundary(state),
+						...getLegacyOverflowOptions(legacyRef.current.preventOverflow?.options),
+					}),
+					[legacyModifiers.preventOverflow],
+				),
+			);
+		}
+		return collision;
+	}, [middleware, isAutoPlacement, alignment, legacyModifiers]);
 	const floatingMiddleware = useMemo(
-		() => [floatingOffset(offsetValue), ...positioningMiddleware, arrow({ element: arrowElement })],
-		[offsetValue, positioningMiddleware, arrowElement],
+		() => [
+			legacyModifiers.offset?.enabled === false
+				? floatingOffset(0)
+				: offsetRef.current === undefined
+				? floatingOffset(offsetValue)
+				: legacyOffset(offsetRef),
+			...positioningMiddleware,
+			arrow({ element: arrowElement }),
+			// Keep the marker independent of caller-supplied hide middleware.
+			{ ...hide(getViewportBoundary), name: 'styledUiReferenceHidden' },
+		],
+		[offsetValue, positioningMiddleware, arrowElement, legacyModifiers],
 	);
 
 	const {
@@ -98,9 +153,18 @@ export function usePopover(reference, options) {
 		whileElementsMounted: autoUpdate,
 	});
 
+	useEffect(() => {
+		if (modifiers) {
+			update();
+		}
+	}, [modifiers, update]);
+
+	const referenceHidden = middlewareData.styledUiReferenceHidden?.referenceHidden;
 	return {
 		popperProps: {
 			'data-popper-placement': resolvedPlacement,
+			'data-popper-reference-hidden':
+				referenceHidden === undefined ? undefined : String(referenceHidden),
 			style: { ...floatingStyles, position: resolvedStrategy },
 			ref: refs.setFloating,
 		},
@@ -121,12 +185,6 @@ export function usePopover(reference, options) {
 }
 
 export function Popover(props) {
-	if (hasOwn(props, 'modifiers')) {
-		throw new Error(
-			'Popover no longer supports the Popper "modifiers" prop; use offset or Floating UI middleware instead.',
-		);
-	}
-
 	const {
 		reference,
 		placement,
@@ -137,6 +195,7 @@ export function Popover(props) {
 		children,
 		offset,
 		middleware,
+		modifiers,
 		...restProps
 	} = props;
 	const focusRef = useFocusAwayHandler(reference, onFocusAway);
@@ -145,6 +204,7 @@ export function Popover(props) {
 		strategy,
 		offset: offset ?? (hideArrow ? 0 : 10),
 		middleware,
+		modifiers,
 	});
 
 	const { ref, ...popperRest } = popperProps;
@@ -191,6 +251,14 @@ Popover.propTypes = {
 	]),
 	/** distance in CSS pixels from the reference element */
 	offset: PropTypes.number,
+	/** supported legacy offset, flip, and preventOverflow options; use middleware for custom modifiers */
+	modifiers: PropTypes.arrayOf(
+		PropTypes.shape({
+			name: PropTypes.string.isRequired,
+			enabled: PropTypes.bool,
+			options: PropTypes.object,
+		}),
+	),
 	/** Floating UI middleware that replaces the default collision handling */
 	middleware: PropTypes.arrayOf(
 		PropTypes.shape({
