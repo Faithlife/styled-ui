@@ -33,10 +33,11 @@ const switchVariants = variant({
 	},
 });
 
-export const Switch = styled(UtilityButton).attrs(({ isChecked }) => ({
+export const Switch = styled(UtilityButton).attrs(({ isChecked, variant = 'switch' }) => ({
 	type: 'button',
 	role: 'switch',
 	'aria-checked': isChecked,
+	variant,
 }))`
 	--track-width: 28px;
 	--track-height: 16px;

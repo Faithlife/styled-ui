@@ -29,33 +29,67 @@ export const Collapse = forwardClassRef(
 		static propTypes = propTypes;
 		static defaultProps = defaultProps;
 
+		nodeRef = React.createRef();
+		refTarget = null;
+		refCallback = null;
+
 		state = {
 			height: null,
 		};
 
-		onEntering = (node, isAppearing) => {
+		getRef = forwardedRef => {
+			if (this.refCallback === null || this.refTarget !== forwardedRef) {
+				this.refTarget = forwardedRef;
+				this.refCallback = node => {
+					this.nodeRef.current = node;
+
+					if (typeof forwardedRef === 'function') {
+						const cleanup = forwardedRef(node);
+						if (node !== null && typeof cleanup === 'function') {
+							return () => {
+								if (this.nodeRef.current === node) {
+									this.nodeRef.current = null;
+								}
+								cleanup();
+							};
+						}
+					} else if (forwardedRef) {
+						forwardedRef.current = node;
+					}
+				};
+			}
+
+			return this.refCallback;
+		};
+
+		onEntering = isAppearing => {
+			const node = this.nodeRef.current;
 			this.setState({ height: getHeight(node) });
 			this.props.onEntering(node, isAppearing);
 		};
 
-		onEntered = (node, isAppearing) => {
+		onEntered = isAppearing => {
+			const node = this.nodeRef.current;
 			this.setState({ height: null });
 			this.props.onEntered(node, isAppearing);
 		};
 
-		onExit = node => {
+		onExit = () => {
+			const node = this.nodeRef.current;
 			this.setState({ height: getHeight(node) });
 			this.props.onExit(node);
 		};
 
-		onExiting = node => {
+		onExiting = () => {
+			const node = this.nodeRef.current;
 			// getting this variable triggers a reflow
 			const _unused = node.offsetHeight; // eslint-disable-line
 			this.setState({ height: 0 });
 			this.props.onExiting(node);
 		};
 
-		onExited = node => {
+		onExited = () => {
+			const node = this.nodeRef.current;
 			this.setState({ height: null });
 			this.props.onExited(node);
 		};
@@ -85,13 +119,14 @@ export const Collapse = forwardClassRef(
 
 			return (
 				<Transition
+					nodeRef={this.nodeRef}
 					mountOnEnter={mountOnEnter}
 					unmountOnExit={unmountOnExit}
 					appear={appear}
 					enter={enter}
 					exit={exit}
 					timeout={timeout}
-					onEnter={onEnter}
+					onEnter={isAppearing => onEnter(this.nodeRef.current, isAppearing)}
 					in={isOpen}
 					onEntering={this.onEntering}
 					onEntered={this.onEntered}
@@ -106,7 +141,7 @@ export const Collapse = forwardClassRef(
 								{...otherProps}
 								transitionStatus={status}
 								style={{ ...otherProps.style, ...style }}
-								ref={forwardedRef}
+								ref={this.getRef(forwardedRef)}
 								display={status === TransitionStatuses.EXITED ? 'none' : undefined}
 								position={
 									status === TransitionStatuses.ENTERING || status === TransitionStatuses.EXITING

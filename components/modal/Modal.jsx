@@ -14,9 +14,9 @@ export const Modal = ({
 	container: containerProp,
 	onClose,
 	children,
-	contentPadding,
+	contentPadding = 5,
 	fullscreen,
-	zIndex,
+	zIndex = 1050,
 	allowBackgroundScrolling,
 	ignoreClickOnBackdrop,
 	...props

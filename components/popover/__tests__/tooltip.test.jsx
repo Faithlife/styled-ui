@@ -22,6 +22,32 @@ describe('Tooltip', () => {
 		expect(Tooltip).toBeTruthy();
 	});
 
+	it('forwards supported legacy modifiers when a touch tooltip opens', async () => {
+		window.matchMedia.mockReturnValueOnce({ matches: true });
+		render(
+			<Tooltip
+				toggleOnClick
+				placement="bottom"
+				content="Billing help"
+				modifiers={[{ name: 'preventOverflow', options: { padding: 12 } }]}
+				data-testid="billing-tooltip"
+			>
+				{'Explain billing'}
+			</Tooltip>,
+		);
+
+		await userEvent.click(screen.getByText('Explain billing'));
+
+		expect(await screen.findByText('Billing help')).toBeVisible();
+		await waitFor(() =>
+			expect(screen.getByTestId('billing-tooltip')).toHaveAttribute(
+				'data-popper-placement',
+				'bottom',
+			),
+		);
+		expect(screen.getByTestId('billing-tooltip')).not.toHaveAttribute('modifiers');
+	});
+
 	it.skip('shows children', async () => {
 		expect.hasAssertions();
 

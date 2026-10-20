@@ -389,7 +389,7 @@ const Thumb = React.memo(
 						reference={ref.current}
 						placement="top"
 						container="body"
-						modifiers={[{ name: 'offset', options: { offset: [0, 21] } }]}
+						offset={21}
 					>
 						{`${label}`}
 					</Popover>

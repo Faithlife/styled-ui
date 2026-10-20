@@ -6,13 +6,17 @@ import { WellPreview } from './image-well-preview';
 import { RemoveIcon, CameraIcon, SelectCamera } from './image-well-icons';
 import { DefaultThemeProvider } from '../DefaultThemeProvider';
 
+const defaultLocalizedResources = {
+	selectText: '+ Add Image',
+};
+
 const ImageWell = ({
 	children,
 	previewUrl,
 	fitPreviewToSquare,
 	onSelectImage,
 	onRemoveImage,
-	localizedResources,
+	localizedResources = defaultLocalizedResources,
 	...props
 }) => {
 	const handleIconClick = (event, callback) => {
@@ -95,9 +99,7 @@ ImageWell.propTypes = {
 };
 
 ImageWell.defaultProps = {
-	localizedResources: {
-		selectText: '+ Add Image',
-	},
+	localizedResources: defaultLocalizedResources,
 };
 
 export { ImageWell };

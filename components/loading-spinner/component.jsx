@@ -6,7 +6,8 @@ import { Spinner as StyledSpinner } from './styled';
 
 /** Loading spinner, frequently displayed as a placeholder when loading data */
 export function LoadingSpinner({ variant: propsVariant, small, medium, large, ...props }) {
-	const variant = getVariation(propsVariant, { small, medium, large }) ?? undefined;
+	const variant =
+		getVariation(propsVariant, { small, medium, large }) ?? StyledSpinner.defaultProps.variant;
 
 	return <StyledSpinner variant={variant} {...props} />;
 }

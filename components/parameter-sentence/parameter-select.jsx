@@ -12,7 +12,7 @@ export function ParameterSelect({
 	onItemSelect,
 	accessibilityLabel,
 	useNativeSelect,
-	width,
+	width = '180px',
 	...otherStyleProps
 }) {
 	const [isOpen, setIsOpen] = useState(false);

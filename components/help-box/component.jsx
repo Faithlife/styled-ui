@@ -27,7 +27,7 @@ export function HelpBox({
 	...helpBoxProps
 }) {
 	const selectedVariant =
-		getVariation(variant, { primary, success, danger, warning, minor }) ?? undefined;
+		getVariation(variant, { primary, success, danger, warning, minor }) ?? 'primary';
 
 	return (
 		<DefaultThemeProvider>

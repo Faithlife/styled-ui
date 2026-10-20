@@ -10,7 +10,7 @@ export function Radio({
 	onClick,
 	title,
 	isChecked,
-	type,
+	type = 'button',
 	children,
 	disableAutoBlur,
 	disabled,

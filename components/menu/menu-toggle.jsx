@@ -10,8 +10,8 @@ import * as Styled from './styled';
 export function MenuToggle({
 	hideCaret,
 	hideCarrot,
-	size,
-	variant,
+	size = 'small',
+	variant = 'primary',
 	disabled,
 	children,
 	...buttonProps

@@ -1,5 +1,14 @@
 const newRules = [
 	{
+		test: /\.js$/,
+		include: /node_modules[\\/]@floating-ui[\\/]/,
+		loader: require.resolve('babel-loader'),
+		options: {
+			babelrc: false,
+			presets: [[require.resolve('@babel/preset-env'), { modules: false }]],
+		},
+	},
+	{
 		test: /\.svg$/,
 		use: [
 			{

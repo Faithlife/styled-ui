@@ -13,6 +13,8 @@ If you want to use the [components](https://react-select.com/components) prop of
 import { Select, reactSelectComponents, reactSelectFunctions } from '@faithlife/styled-ui/text-input';
 ```
 
+In v7 these exports come from React Select v5. In particular, use `reactSelectComponents.Input` for custom inputs rather than an Input from a separate v3 dependency. Preserve the supplied props/ref when adding attributes such as `autoComplete`. Inputs have the accessible role `combobox`, including non-searchable selects; tests should query that role rather than `textbox`.
+
 ### Single select
 
 ```react
@@ -162,6 +164,19 @@ state: { selection: [], pendingSelectedValues: [{value: 'Texas', label: 'Texas'}
 ```
 
 ### Async select
+
+`AsyncSelect` and `AsyncCreatableSelect` accept either callback-style `loadOptions(inputValue, callback)` or a loader returning a promise of options. If a loader does both, only its first completion is used. `debounceInterval` delays requests until typing pauses; `0` disables the delay.
+
+Inline loaders can change identity on parent renders without dropping queued or in-flight requests. Queued requests use the latest loader and its captured data; already-started requests finish using the loader that started them. Changing the loader alone does not reload completed/cached options: issue a new query, change `cacheOptions` to invalidate the cache, or remount for new default options. Changing the debounce interval or removing the loader cancels and settles pending work; unmounting cancels without updating the unmounted component.
+
+Failed current requests (including synchronous throws) settle loading and call `onLoadError(error, inputValue)` once. This optional **synchronous** callback should report the failure using your application's error UI. Without it, errors are explicitly reported with `console.error(error)`; no success-shaped option array is returned. Errors thrown by the reporter are logged as well, without leaving loading unsettled. Obsolete or unmounted requests do not report new failures. For example:
+
+```jsx
+<AsyncSelect
+	loadOptions={search}
+	onLoadError={(error, inputValue) => showSearchError(error, inputValue)}
+/>
+```
 
 ```react
 showSource: true
